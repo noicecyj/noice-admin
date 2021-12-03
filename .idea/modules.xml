@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/cyj-auth/cyj-auth.iml" filepath="$PROJECT_DIR$/cyj-auth/cyj-auth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cyj-common/cyj-common.iml" filepath="$PROJECT_DIR$/cyj-common/cyj-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cyj-dictionary/cyj-dictionary.iml" filepath="$PROJECT_DIR$/cyj-dictionary/cyj-dictionary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cyj-discovery/cyj-discovery.iml" filepath="$PROJECT_DIR$/cyj-discovery/cyj-discovery.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cyj-entity-creater/cyj-entity-creater.iml" filepath="$PROJECT_DIR$/cyj-entity-creater/cyj-entity-creater.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cyj-log/cyj-log.iml" filepath="$PROJECT_DIR$/cyj-log/cyj-log.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cyj-query/cyj-query.iml" filepath="$PROJECT_DIR$/cyj-query/cyj-query.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cyj-user/cyj-user.iml" filepath="$PROJECT_DIR$/cyj-user/cyj-user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cyj-workflow/cyj-workflow.iml" filepath="$PROJECT_DIR$/cyj-workflow/cyj-workflow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/noice-admin.iml" filepath="$PROJECT_DIR$/.idea/noice-admin.iml" />
+    </modules>
+  </component>
+</project>
