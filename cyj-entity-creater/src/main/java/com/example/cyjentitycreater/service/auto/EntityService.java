@@ -1,7 +1,6 @@
 package com.example.cyjentitycreater.service.auto;
 
 import com.example.cyjentitycreater.entity.auto.po.EntityPO;
-import com.example.cyjentitycreater.entity.auto.vo.EntityVO;
 import com.querydsl.core.QueryResults;
 
 import java.util.List;
@@ -19,7 +18,7 @@ public interface EntityService {
 
         EntityPO updateOne(EntityPO po);
 
-        QueryResults<EntityVO> entityPage(Integer pageNumber, String pid);
+        QueryResults<EntityPO> entityPage(Integer pageNumber, String pid);
 
         EntityPO findOneById(String id);
 

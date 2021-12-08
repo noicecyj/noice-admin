@@ -4,13 +4,9 @@ import com.example.cyjentitycreater.dao.auto.EntityNameDao;
 import com.example.cyjentitycreater.entity.auto.po.EntityNamePO;
 import com.example.cyjentitycreater.entity.auto.po.QEntityNamePO;
 import com.example.cyjentitycreater.entity.auto.po.QEntityPO;
-import com.example.cyjentitycreater.entity.auto.vo.EntityNameVO;
 import com.example.cyjentitycreater.service.BaseService;
 import com.example.cyjentitycreater.service.auto.EntityNameService;
 import com.querydsl.core.QueryResults;
-import com.querydsl.core.types.Predicate;
-import com.querydsl.core.types.Projections;
-import com.querydsl.core.types.QBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,8 +37,7 @@ public class EntityNameServiceImpl extends BaseService implements EntityNameServ
         @Override
         public void deleteOne(String id) {
                 entityNameDao.deleteById(id);
-                QEntityPO qEntityPO = QEntityPO.entityPO;
-                queryFactory.delete(qEntityPO).where(qEntityPO.pid.eq(id));
+                queryFactory.delete(QEntityPO.entityPO).where(QEntityPO.entityPO.pid.eq(id));
         }
 
         @Override
@@ -51,20 +46,14 @@ public class EntityNameServiceImpl extends BaseService implements EntityNameServ
         }
 
         @Override
-        public QueryResults<EntityNameVO> entityNamePage(Integer pageNumber) {
-                QEntityNamePO qEntityNamePO = QEntityNamePO.entityNamePO;
-                QBean<EntityNameVO> qBean = Projections.bean(EntityNameVO.class,
-                        qEntityNamePO.id,
-                        qEntityNamePO.pid,
-                        qEntityNamePO.appId,
-                        qEntityNamePO.entityName,
-                        qEntityNamePO.entityCode,
-                        qEntityNamePO.entityType,
-                        qEntityNamePO.entityStatus,
-                        qEntityNamePO.sortCode
-                );
-                Predicate predicate = qEntityNamePO.sortCode.isNotNull();
-                return queryFactory.select(qBean).from(qEntityNamePO).where(predicate).offset(pageNumber).orderBy(qEntityNamePO.sortCode.asc()).limit(8).fetchResults();
+        public QueryResults<EntityNamePO> entityNamePage(Integer pageNumber) {
+                return queryFactory
+                        .selectFrom(QEntityNamePO.entityNamePO)
+                        .where(QEntityNamePO.entityNamePO.sortCode.isNotNull())
+                        .offset(pageNumber)
+                        .orderBy(QEntityNamePO.entityNamePO.sortCode.asc())
+                        .limit(8)
+                        .fetchResults();
         }
 
         @Override
@@ -74,7 +63,10 @@ public class EntityNameServiceImpl extends BaseService implements EntityNameServ
 
         @Override
         public List<EntityNamePO> findListByPid(String id) {
-                return queryFactory.selectFrom(QEntityNamePO.entityNamePO).where(QEntityNamePO.entityNamePO.pid.eq(id)).fetch();
+                return queryFactory
+                        .selectFrom(QEntityNamePO.entityNamePO)
+                        .where(QEntityNamePO.entityNamePO.pid.eq(id))
+                        .fetch();
         }
 
 }

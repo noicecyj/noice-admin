@@ -1,7 +1,6 @@
 package com.example.cyjentitycreater.service.auto;
 
 import com.example.cyjentitycreater.entity.auto.po.AppServicePO;
-import com.example.cyjentitycreater.entity.auto.vo.AppServiceVO;
 import com.querydsl.core.QueryResults;
 
 /**
@@ -17,7 +16,7 @@ public interface AppServiceService {
 
         AppServicePO updateOne(AppServicePO po);
 
-        QueryResults<AppServiceVO> findAll(AppServiceVO vo);
+        QueryResults<AppServicePO> findAll(Integer pageNumber);
 
         AppServicePO findOneById(String id);
 

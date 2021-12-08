@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author 曹元杰
@@ -29,6 +30,6 @@ public interface EntityNameCustomController {
         @Operation(summary = "创建表格与表单")
         @InterFaceMapping(api = "entityCreateApi")
         @PostMapping(value = "findDataTableAndFormByName")
-        ResultVO findDataTableAndFormByName(@RequestBody CreateVO createVO);
+        ResultVO findDataTableAndFormByName(@RequestParam("name") String name);
 
 }

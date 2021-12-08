@@ -5,7 +5,6 @@ import com.example.cyjcommon.utils.VoPoConverter;
 import com.example.cyjentitycreater.controller.auto.AppServiceController;
 import com.example.cyjentitycreater.entity.auto.dto.AppServiceDTO;
 import com.example.cyjentitycreater.entity.auto.po.AppServicePO;
-import com.example.cyjentitycreater.entity.auto.vo.AppServiceVO;
 import com.example.cyjentitycreater.service.auto.AppServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,8 +29,8 @@ public class AppServiceControllerImpl implements AppServiceController {
         }
 
         @Override
-        public ResultVO appServicePage(AppServiceVO vo) {
-                return ResultVO.success(appServiceService.findAll(vo));
+        public ResultVO appServicePage(Integer pageNumber) {
+                return ResultVO.success(appServiceService.findAll(pageNumber));
         }
 
         @Override

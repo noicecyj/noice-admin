@@ -3,7 +3,6 @@ package com.example.cyjentitycreater.controller.auto;
 import com.example.cyjcommon.annotation.InterFaceMapping;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.entity.auto.dto.EntityNameDTO;
-import com.example.cyjentitycreater.entity.auto.vo.EntityNameVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.PostMapping;

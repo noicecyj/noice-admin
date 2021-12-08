@@ -5,12 +5,10 @@ import com.example.cyjcommon.utils.VoPoConverter;
 import com.example.cyjentitycreater.controller.auto.EntityController;
 import com.example.cyjentitycreater.entity.auto.dto.EntityDTO;
 import com.example.cyjentitycreater.entity.auto.po.EntityPO;
-import com.example.cyjentitycreater.entity.auto.vo.EntityVO;
 import com.example.cyjentitycreater.service.auto.EntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -42,7 +40,7 @@ public class EntityControllerImpl implements EntityController {
 
         @Override
         public ResultVO entityPage(Integer pageNumber, String pid) {
-                return ResultVO.success(entityService.entityPage(pageNumber,pid));
+                return ResultVO.success(entityService.entityPage(pageNumber, pid));
         }
 
         @Override
