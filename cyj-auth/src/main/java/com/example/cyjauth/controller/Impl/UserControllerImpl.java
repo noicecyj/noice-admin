@@ -1,10 +1,10 @@
 package com.example.cyjauth.controller.Impl;
 
 import com.example.cyjauth.controller.UserController;
-import com.example.cyjauth.entity.po.AuthorityPO;
 import com.example.cyjauth.entity.po.RolePO;
 import com.example.cyjauth.entity.po.UserPO;
 import com.example.cyjauth.service.Impl.UserServiceImpl;
+import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjcommon.utils.VoPoConverter;
 import org.springframework.beans.factory.annotation.Autowired;

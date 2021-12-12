@@ -788,8 +788,8 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 List<EntityPO> entityDTOList = entityService.findListByPid(dto.getId());
                 List<EntityPO> entityVOList = entityService.findListByPid(vo.getId());
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("dataTable",entityDTOList);
-                jsonObject.put("dataForm",entityVOList);
+                jsonObject.put("dataTable", entityDTOList);
+                jsonObject.put("dataForm", entityVOList);
                 return jsonObject;
         }
 

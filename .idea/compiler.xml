@@ -13,8 +13,8 @@
         <module name="cyj-dictionary" />
         <module name="cyj-common" />
         <module name="cyj-query" />
-        <module name="cyj-user" />
         <module name="cyj-entity-creater" />
+        <module name="cyj-user" />
         <module name="cyj-workflow" />
       </profile>
     </annotationProcessing>

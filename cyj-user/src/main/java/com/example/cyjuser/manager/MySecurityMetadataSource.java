@@ -3,8 +3,9 @@ package com.example.cyjuser.manager;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.example.cyjuser.entity.po.AuthorityPO;
-import com.example.cyjuser.service.AuthorityService;
+import com.example.cyjcommon.entity.po.AuthorityPO;
+import com.example.cyjcommon.service.AuthorityService;
+import com.example.cyjcommon.service.Impl.AuthorityServiceImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -31,11 +32,11 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class MySecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
-        private AuthorityService authorityService;
+        private AuthorityServiceImpl authorityService;
         private StringRedisTemplate redisTemplate;
 
         @Autowired
-        public void setAuthorityService(AuthorityService authorityService) {
+        public void setAuthorityService(AuthorityServiceImpl authorityService) {
                 this.authorityService = authorityService;
         }
 

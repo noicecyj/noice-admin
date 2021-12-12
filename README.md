@@ -1,7 +1,5 @@
 # noice-admin/noice-admin
 
-
-
 ## Getting Started
 
 Download links:
@@ -9,8 +7,6 @@ Download links:
 SSH clone URL: ssh://git@git.jetbrains.space/noicecyj/noice-admin/noice-admin.git
 
 HTTPS clone URL: https://git.jetbrains.space/noicecyj/noice-admin/noice-admin.git
-
-
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 

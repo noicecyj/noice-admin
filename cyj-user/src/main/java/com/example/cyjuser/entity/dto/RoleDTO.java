@@ -1,5 +1,6 @@
 package com.example.cyjuser.entity.dto;
 
+import com.example.cyjcommon.entity.dto.AuthorityDTO;
 import lombok.Data;
 
 import java.io.Serializable;
