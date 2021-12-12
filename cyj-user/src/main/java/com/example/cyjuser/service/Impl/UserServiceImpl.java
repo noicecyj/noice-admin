@@ -1,5 +1,6 @@
 package com.example.cyjuser.service.Impl;
 
+import com.example.cyjcommon.service.Impl.BaseService;
 import com.example.cyjuser.dao.UserDao;
 import com.example.cyjuser.entity.bo.AuthUserDetails;
 import com.example.cyjuser.entity.po.UserPO;

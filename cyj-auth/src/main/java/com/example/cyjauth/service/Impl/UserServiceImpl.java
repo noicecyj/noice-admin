@@ -3,6 +3,7 @@ package com.example.cyjauth.service.Impl;
 import com.example.cyjauth.dao.UserDao;
 import com.example.cyjauth.entity.po.UserPO;
 import com.example.cyjauth.service.UserService;
+import com.example.cyjcommon.service.Impl.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

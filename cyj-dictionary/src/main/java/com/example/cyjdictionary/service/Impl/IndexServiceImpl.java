@@ -1,5 +1,6 @@
 package com.example.cyjdictionary.service.Impl;
 
+import com.example.cyjcommon.service.Impl.BaseService;
 import com.example.cyjdictionary.dao.IndexDao;
 import com.example.cyjdictionary.entity.po.CatalogPO;
 import com.example.cyjdictionary.entity.po.DictionaryPO;

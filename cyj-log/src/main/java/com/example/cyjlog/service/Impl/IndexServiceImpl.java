@@ -1,5 +1,6 @@
 package com.example.cyjlog.service.Impl;
 
+import com.example.cyjcommon.service.Impl.BaseService;
 import com.example.cyjlog.dao.IndexDao;
 import com.example.cyjlog.dao.LogDao;
 import com.example.cyjlog.entity.po.LogPO;

@@ -1,5 +1,6 @@
 package com.example.cyjquery.service.Impl;
 
+import com.example.cyjcommon.service.Impl.BaseService;
 import com.example.cyjquery.dao.SqlDao;
 import com.example.cyjquery.entity.po.SqlPO;
 import com.example.cyjquery.service.SqlService;

@@ -3,6 +3,7 @@ package com.example.cyjdiscovery;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @author 曹元杰
@@ -11,6 +12,7 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
  */
 @SpringBootApplication
 @EnableEurekaServer
+@ComponentScan(value="com.example.cyjcommon")
 public class CyjDiscoveryApplication {
 
         public static void main(String[] args) {

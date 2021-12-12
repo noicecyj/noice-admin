@@ -2,6 +2,7 @@ package com.example.cyjworkflow;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @author 曹元杰
@@ -9,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 2020/1/21 14:46
  */
 @SpringBootApplication
+@ComponentScan(value="com.example.cyjcommon")
 public class CyjWorkflowApplication {
 
         public static void main(String[] args) {

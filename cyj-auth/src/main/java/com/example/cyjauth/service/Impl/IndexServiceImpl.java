@@ -1,6 +1,7 @@
 package com.example.cyjauth.service.Impl;
 
 import com.example.cyjauth.service.IndexService;
+import com.example.cyjcommon.service.Impl.BaseService;
 import org.springframework.stereotype.Service;
 
 /**

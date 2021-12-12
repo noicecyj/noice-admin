@@ -1,11 +1,11 @@
 package com.example.cyjentitycreater.service.custom.Impl;
 
+import com.example.cyjcommon.service.Impl.BaseService;
 import com.example.cyjcommon.utils.CommonUtils;
 import com.example.cyjentitycreater.api.DictionaryApiService;
 import com.example.cyjentitycreater.dao.custom.AppServiceCustomDao;
 import com.example.cyjentitycreater.entity.auto.po.AppServicePO;
 import com.example.cyjentitycreater.entity.custom.dto.DictionaryDTO;
-import com.example.cyjentitycreater.service.BaseService;
 import com.example.cyjentitycreater.service.custom.AppServiceCustomService;
 import com.example.cyjentitycreater.utils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +86,7 @@ public class AppServiceCustomServiceImpl extends BaseService implements AppServi
                 sb.append("@SpringBootApplication\r\n");
                 sb.append("@EnableEurekaClient\r\n");
                 sb.append("@EnableFeignClients\r\n");
+                sb.append("@ComponentScan(value=\"com.example.cyjcommon\")\r\n");
                 sb.append("public class ").append(AppName).append("Application {\r\n");
                 sb.append("\r\n");
                 sb.append("    public static void main(String[] args) {\r\n");
