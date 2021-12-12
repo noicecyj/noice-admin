@@ -266,3 +266,5 @@
 /cyj-entity-creater/target/classes/com/example/cyjentitycreater/entity/auto/po/QEntityPO.class
 /cyj-entity-creater/target/classes/com/example/cyjentitycreater/api/QueryApiService.class
 /cyj-entity-creater/target/classes/com/example/cyjentitycreater/config/ServerLogAppender.class
+/cyj-entity-creater/target/test-classes/com/example/cyjentitycreater/CyjEntityCreaterApplicationTests.class
+/cyj-user/target/test-classes/com/example/cyjuser/CyjUserApplicationTests.class
