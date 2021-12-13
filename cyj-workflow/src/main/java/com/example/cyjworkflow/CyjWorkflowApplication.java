@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @date 2020/1/21 14:46
  */
 @SpringBootApplication
-@ComponentScan(value="com.example.cyjcommon")
+@ComponentScan(value="com.example")
 public class CyjWorkflowApplication {
 
         public static void main(String[] args) {

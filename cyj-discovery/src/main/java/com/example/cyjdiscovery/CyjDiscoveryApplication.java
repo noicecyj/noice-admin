@@ -12,7 +12,6 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @EnableEurekaServer
-@ComponentScan(value="com.example.cyjcommon")
 public class CyjDiscoveryApplication {
 
         public static void main(String[] args) {

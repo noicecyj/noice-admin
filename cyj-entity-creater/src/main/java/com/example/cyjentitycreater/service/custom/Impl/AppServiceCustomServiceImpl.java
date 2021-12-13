@@ -86,7 +86,9 @@ public class AppServiceCustomServiceImpl extends BaseService implements AppServi
                 sb.append("@SpringBootApplication\r\n");
                 sb.append("@EnableEurekaClient\r\n");
                 sb.append("@EnableFeignClients\r\n");
-                sb.append("@ComponentScan(value=\"com.example.cyjcommon\")\r\n");
+                sb.append("@EnableJpaRepositories(value = \"com.example\")\r\n");
+                sb.append("@EntityScan(value = \"com.example\")\r\n");
+                sb.append("@ComponentScan(value=\"com.example\")\r\n");
                 sb.append("public class ").append(AppName).append("Application {\r\n");
                 sb.append("\r\n");
                 sb.append("    public static void main(String[] args) {\r\n");
