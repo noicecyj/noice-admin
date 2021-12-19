@@ -1,8 +1,9 @@
 package com.example.cyjentitycreater.dao.custom;
 
 import com.example.cyjentitycreater.entity.auto.po.EntityPO;
-import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
 
 /**
  * @author 曹元杰
@@ -11,7 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface EntityCustomDao extends JpaRepository<EntityPO, String> {
 
-        @Operation(summary = "删除实体")
-        void deleteByPid(String pid);
+        List<EntityPO> findEntityPOByPidAndPropertyDisplayEquals(String pid, String display);
 
 }

@@ -30,6 +30,6 @@ public interface EntityNameCustomController {
         @Operation(summary = "创建表格与表单")
         @InterFaceMapping(api = "entityCreateApi")
         @PostMapping(value = "findDataTableAndFormByName")
-        ResultVO findDataTableAndFormByName(@RequestParam("name") String name);
+        ResultVO findDataTableAndFormByName(@RequestParam("entityCode") String entityCode);
 
 }

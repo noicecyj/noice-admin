@@ -1,0 +1,45 @@
+{
+  "vite": true,
+  "plugins": [
+    [
+      "build-plugin-fusion",
+      {
+        "themePackage": "@alifd/theme-design-pro"
+      }
+    ],
+    [
+      "build-plugin-moment-locales",
+      {
+        "locales": [
+          "zh-cn"
+        ]
+      }
+    ]
+  ],
+  "proxy": {
+    "/entityCreateApi": {
+      "enable": true,
+      "target": "http://127.0.0.1:8090/cyj-entity-creater"
+    },
+    "/dictionaryApi": {
+      "enable": true,
+      "target": "http://127.0.0.1:8090/cyj-dictionary"
+    },
+    "/logApi": {
+      "enable": true,
+      "target": "http://127.0.0.1:8090/cyj-log"
+    },
+    "/authApi": {
+      "enable": true,
+      "target": "http://127.0.0.1:8090/cyj-auth"
+    },
+    "/userApi": {
+      "enable": true,
+      "target": "http://127.0.0.1:8090/cyj-user"
+    },
+    "/sqlApi": {
+      "enable": true,
+      "target": "http://127.0.0.1:8090/cyj-query"
+    }
+  }
+}

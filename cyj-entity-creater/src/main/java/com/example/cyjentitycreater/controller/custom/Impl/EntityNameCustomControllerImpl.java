@@ -46,8 +46,8 @@ public class EntityNameCustomControllerImpl implements EntityNameCustomControlle
         }
 
         @Override
-        public ResultVO findDataTableAndFormByName(String name) {
-                return ResultVO.success(entityNameCustomService.findDataTableAndFormByName(name));
+        public ResultVO findDataTableAndFormByName(String entityCode) {
+                return ResultVO.success(entityNameCustomService.findDataTableAndFormByName(entityCode));
         }
 
 }

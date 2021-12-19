@@ -2,6 +2,7 @@ package com.example.cyjentitycreater.service.custom.Impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.cyjcommon.service.Impl.BaseService;
+import com.example.cyjentitycreater.dao.custom.EntityCustomDao;
 import com.example.cyjentitycreater.dao.custom.EntityNameCustomDao;
 import com.example.cyjentitycreater.entity.auto.po.AppServicePO;
 import com.example.cyjentitycreater.entity.auto.po.EntityNamePO;
@@ -30,9 +31,10 @@ import java.util.stream.Collectors;
 public class EntityNameCustomServiceImpl extends BaseService implements EntityNameCustomService {
 
         private EntityNameService entityNameService;
+        private EntityService entityService;
         private EntityNameCustomDao entityNameCustomDao;
         private AppServiceService appServiceService;
-        private EntityService entityService;
+        private EntityCustomDao entityCustomDao;
 
         @Autowired
         public void setEntityNameService(EntityNameService entityNameService) {
@@ -42,6 +44,11 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         @Autowired
         public void setEntityNameCustomDao(EntityNameCustomDao entityNameCustomDao) {
                 this.entityNameCustomDao = entityNameCustomDao;
+        }
+
+        @Autowired
+        public void setEntityCustomDao(EntityCustomDao entityCustomDao) {
+                this.entityCustomDao = entityCustomDao;
         }
 
         @Autowired
@@ -783,13 +790,11 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
 
         @Override
         public JSONObject findDataTableAndFormByName(String entityCode) {
-                EntityNamePO dto = entityNameCustomDao.findEntityNamePOByEntityCodeAndEntityType(entityCode, "DTO");
-                EntityNamePO vo = entityNameCustomDao.findEntityNamePOByEntityCodeAndEntityType(entityCode, "VO");
-                List<EntityPO> entityDTOList = entityService.findListByPid(dto.getId());
-                List<EntityPO> entityVOList = entityService.findListByPid(vo.getId());
+                EntityNamePO po = entityNameCustomDao.findEntityNamePOByEntityCodeAndEntityType(entityCode, "PO");
+                List<EntityPO> entityPOList = entityCustomDao.findEntityPOByPidAndPropertyDisplayEquals(po.getId(),"1");
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("dataTable", entityDTOList);
-                jsonObject.put("dataForm", entityVOList);
+                jsonObject.put("dataTable", entityPOList);
+                jsonObject.put("dataForm", entityPOList);
                 return jsonObject;
         }
 
