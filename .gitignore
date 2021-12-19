@@ -6,6 +6,7 @@
 /cyj-query/target/classes/application.yml
 /cyj-user/target/classes/application.yml
 /cyj-workflow/target/classes/application.yml
+cyj-discovery/cyj-discovery.log
 /cyj-auth/target/classes/com/example/cyjauth/listener/ApplicationStartupRunner.class
 /cyj-dictionary/target/classes/com/example/cyjdictionary/listener/ApplicationStartupRunner.class
 /cyj-log/target/classes/com/example/cyjlog/listener/ApplicationStartupRunner.class
