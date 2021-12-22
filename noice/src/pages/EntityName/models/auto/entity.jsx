@@ -56,7 +56,7 @@ export default {
     },
     async entityDelete(data) {
       await entityService.entityDelete(data.record);
-      this.entityPage(data.entityCurrent, data.pid);
+      await this.entityPage(data.entityCurrent, data.pid);
       const payload = {
         entityVisible: false,
       };
@@ -64,7 +64,7 @@ export default {
     },
     async entitySave(data) {
       await entityService.entitySave(data.entityFormData);
-      this.entityPage(data.entityCurrent, data.pid);
+      await this.entityPage(data.entityCurrent, data.pid);
       const payload = {
         entityVisible: false,
       };
@@ -78,7 +78,7 @@ export default {
     },
     async findDataTableAndFormByName(pid) {
       const data = await initService.findDataTableAndFormByName('entity');
-      this.entityPage(1, pid);
+      await this.entityPage(1, pid);
       const payload = {
         entityTable: data.dataTable,
         entityForm: data.dataForm,
@@ -86,8 +86,8 @@ export default {
       dispatch.entity.setState(payload);
     },
     async onRowClick(selected, record) {
-      this.findDataTableAndFormByName(record.id);
-      this.entityPage(1, record.id);
+      await this.findDataTableAndFormByName(record.id);
+      await this.entityPage(1, record.id);
       const payload = {
         divVisible: selected,
         entityNameId: record.id,

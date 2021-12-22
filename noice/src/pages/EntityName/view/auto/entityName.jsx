@@ -4,16 +4,13 @@ import React, { useEffect } from 'react';
 import pageStore from '@/pages/EntityName/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
-import CustomEntityName from '@/pages/EntityName/view/custom/entityName';
 import styles from '@/pages/EntityName/index.module.scss';
 
 const { Cell } = ResponsiveGrid;
 
 function EntityName() {
   const [entityNameState, entityNameDispatchers] = pageStore.useModel('entityName');
-  const [customEntityNameState, customEntityNameDispatchers] = pageStore.useModel('customEntityName');
   const [entityState, entityDispatchers] = pageStore.useModel('entity');
-  const [customEntityState, customEntityDispatchers] = pageStore.useModel('customEntity');
 
   useEffect(() => {
     entityNameDispatchers.findDataTableAndFormByName();
@@ -46,7 +43,7 @@ function EntityName() {
       <Cell colSpan={12}>
         <div className={styles.Main}>
           <div className={styles.add}>
-            <Button type="primary" onClick={() => entityNameDispatchers.entityNameEdit()}> 添加菜单 </Button>
+            <Button type="primary" onClick={() => entityNameDispatchers.entityNameEdit()}> 添加 </Button>
           </div>
           <DataTableTemple
             visibleLoading={entityNameState.entityNameLoadingVisible}
@@ -67,10 +64,10 @@ function EntityName() {
         </div>
       </Cell>
       <DataFormTemple
-        title="菜单"
+        title={entityNameState.entityNameTitle}
         visibleDialog={entityNameState.entityNameVisible}
         onClose={() => entityNameDispatchers.setState({ entityNameVisible: false })}
-        items={entityNameState.entityNameFormItem}
+        items={entityNameState.entityNameForm}
         dispatchers={(value) => entityNameDispatchers.setDataForm(value)}
         onOk={() => entityNameDispatchers.entityNameSave({
           ...entityNameState.entityNameFormData,
@@ -78,10 +75,6 @@ function EntityName() {
         })}
         formDataValue={entityNameState.entityNameFormData}
       />
-      {/* <CustomEntityName
-        entityNameState={entityNameState}
-        entityNameDispatchers={entityNameDispatchers}
-      /> */}
     </ResponsiveGrid>
   );
 }

@@ -33,58 +33,58 @@ function DataForm(props) {
         onChange={(value) => dispatchers(value)}
       >
         {items.map((item) => {
-          if (item.type === 'Input' || item.type == null) {
-            if (item.required === 'true') {
+          if (item.propertyMode === 'Input' || item.propertyMode == null) {
+            if (item.propertyRequired === 'true') {
               return (
-                <FormItem label={`${item.label}：`} required key={item.id}>
-                  <Input id={item.name} name={item.name} />
+                <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
+                  <Input id={item.propertyCode} name={item.propertyCode} placeholder={`请输入${item.propertyLabel}`} />
                 </FormItem>
               );
             } else {
               return (
-                <FormItem label={`${item.label}：`} key={item.id}>
-                  <Input id={item.name} name={item.name} />
+                <FormItem label={`${item.propertyLabel}`} key={item.id}>
+                  <Input id={item.propertyCode} name={item.propertyCode} placeholder={`请输入${item.propertyLabel}`} />
                 </FormItem>
               );
             }
-          } else if (item.type === 'Password' || item.type == null) {
-            if (item.required === 'true') {
+          } else if (item.propertyMode === 'Password' || item.propertyMode == null) {
+            if (item.propertyRequired === 'true') {
               return (
-                <FormItem label={`${item.label}：`} required key={item.id}>
-                  <Input.Password id={item.name} name={item.name} />
+                <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
+                  <Input.Password id={item.propertyCode} name={item.propertyCode} placeholder={`请输入${item.propertyLabel}`} />
                 </FormItem>
               );
             } else {
               return (
-                <FormItem label={`${item.label}：`} key={item.id}>
-                  <Input.Password id={item.name} name={item.name} />
+                <FormItem label={`${item.propertyLabel}`} key={item.id}>
+                  <Input.Password id={item.propertyCode} name={item.propertyCode} placeholder={`请输入${item.propertyLabel}`} />
                 </FormItem>
               );
             }
-          } else if (item.type === 'TextArea' || item.type == null) {
-            if (item.required === 'true') {
+          } else if (item.propertyMode === 'TextArea' || item.propertyMode == null) {
+            if (item.propertyRequired === 'true') {
               return (
-                <FormItem label={`${item.label}：`} required key={item.id}>
-                  <Input.TextArea id={item.name} name={item.name} />
+                <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
+                  <Input.TextArea id={item.propertyCode} name={item.propertyCode} placeholder={`请输入${item.propertyLabel}`} />
                 </FormItem>
               );
             } else {
               return (
-                <FormItem label={`${item.label}：`} key={item.id}>
-                  <Input.TextArea id={item.name} name={item.name} />
+                <FormItem label={`${item.propertyLabel}`} key={item.id}>
+                  <Input.TextArea id={item.propertyCode} name={item.propertyCode} placeholder={`请输入${item.propertyLabel}`} />
                 </FormItem>
               );
             }
-          } else if (item.type === 'Select') {
-            if (item.dataSource != null) {
-              if (item.required === 'true') {
+          } else if (item.propertyMode === 'Select') {
+            if (item.propertyDataSource != null) {
+              if (item.propertyRequired === 'true') {
                 return (
-                  <FormItem label={`${item.label}：`} required key={item.id}>
+                  <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
                     <Select
-                      id={item.name}
-                      name={item.name}
+                      id={item.propertyCode}
+                      name={item.propertyCode}
                       filterLocal={false}
-                      dataSource={item.dataSource}
+                      dataSource={item.propertyDataSource}
                       style={{ width: 300 }}
                       mode={item.mode}
                       defaultValue={item.defaultValue != null ? item.defaultValue : null}
@@ -93,12 +93,12 @@ function DataForm(props) {
                 );
               } else {
                 return (
-                  <FormItem label={`${item.label}：`} key={item.id}>
+                  <FormItem label={`${item.propertyLabel}`} key={item.id}>
                     <Select
-                      id={item.name}
-                      name={item.name}
+                      id={item.propertyCode}
+                      name={item.propertyCode}
                       filterLocal={false}
-                      dataSource={item.dataSource}
+                      dataSource={item.propertyDataSource}
                       style={{ width: 300 }}
                       mode={item.mode}
                       defaultValue={item.defaultValue != null ? item.defaultValue : null}
@@ -108,10 +108,10 @@ function DataForm(props) {
               }
             } else {
               return (
-                <FormItem label={`${item.label}：`} key={item.id}>
+                <FormItem label={`${item.propertyLabel}`} key={item.id}>
                   <Select
-                    id={item.name}
-                    name={item.name}
+                    id={item.propertyCode}
+                    name={item.propertyCode}
                     filterLocal={false}
                     style={{ width: 414 }}
                     mode={item.mode}
@@ -120,7 +120,7 @@ function DataForm(props) {
                 </FormItem>
               );
             }
-          } else if (item.type === 'ReactJson') {
+          } else if (item.propertyMode === 'ReactJson') {
             let jsonObj = {};
             if (formDataValue.jsonData) {
               jsonObj = JSON.parse(formDataValue.jsonData);
@@ -128,7 +128,7 @@ function DataForm(props) {
             return (
               <ReactJson
                 src={jsonObj}
-                name={item.name}
+                name={item.propertyCode}
                 key={item.id}
                 onAdd={(add) => {
                   dispatchers({ ...formDataValue, jsonData: JSON.stringify(add.updated_src) });
@@ -141,127 +141,147 @@ function DataForm(props) {
                 }}
               />
             );
-          } else if (item.type === 'NumberPicker' || item.type == null) {
-            if (item.required === 'true') {
+          } else if (item.propertyMode === 'NumberPicker' || item.propertyMode == null) {
+            if (item.propertyRequired === 'true') {
               return (
-                <FormItem label={`${item.label}：`} required key={item.id}>
-                  <NumberPicker id={item.name} name={item.name} min={1} max={10} />
+                <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
+                  <NumberPicker id={item.propertyCode} name={item.propertyCode} min={1} max={10} />
                 </FormItem>
               );
             } else {
               return (
-                <FormItem label={`${item.label}：`} key={item.id}>
-                  <NumberPicker id={item.name} name={item.name} min={1} max={10} />
+                <FormItem label={`${item.propertyLabel}`} key={item.id}>
+                  <NumberPicker id={item.propertyCode} name={item.propertyCode} min={1} max={10} />
                 </FormItem>
               );
             }
-          } else if (item.type === 'Switch' || item.type == null) {
-            if (item.required === 'true') {
+          } else if (item.propertyMode === 'Switch' || item.propertyMode == null) {
+            if (item.propertyRequired === 'true') {
               return (
-                <FormItem label={`${item.label}：`} required key={item.id}>
-                  <Switch id={item.name} name={item.name} defaultChecked />
+                <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
+                  <Switch id={item.propertyCode} name={item.propertyCode} defaultChecked />
                 </FormItem>
               );
             } else {
               return (
-                <FormItem label={`${item.label}：`} key={item.id}>
-                  <Switch id={item.name} name={item.name} defaultChecked />
+                <FormItem label={`${item.propertyLabel}`} key={item.id}>
+                  <Switch id={item.propertyCode} name={item.propertyCode} defaultChecked />
                 </FormItem>
               );
             }
-          } else if (item.type === 'Range' || item.type == null) {
-            if (item.required === 'true') {
+          } else if (item.propertyMode === 'Range' || item.propertyMode == null) {
+            if (item.propertyRequired === 'true') {
               return (
-                <FormItem label={`${item.label}：`} required key={item.id}>
-                  <Range id={item.name} name={item.name} defaultValue={0} scales={[0, 100]} marks={[0, 100]} />
+                <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
+                  <Range id={item.propertyCode} name={item.propertyCode} defaultValue={0} scales={[0, 100]} marks={[0, 100]} />
                 </FormItem>
               );
             } else {
               return (
-                <FormItem label={`${item.label}：`} key={item.id}>
-                  <Range id={item.name} name={item.name} defaultValue={0} scales={[0, 100]} marks={[0, 100]} />
+                <FormItem label={`${item.propertyLabel}`} key={item.id}>
+                  <Range id={item.propertyCode} name={item.propertyCode} defaultValue={0} scales={[0, 100]} marks={[0, 100]} />
                 </FormItem>
               );
             }
-          } else if (item.type === 'DatePicker' || item.type == null) {
-            if (item.required === 'true') {
+          } else if (item.propertyMode === 'DatePicker' || item.propertyMode == null) {
+            if (item.propertyRequired === 'true') {
               return (
-                <FormItem label={`${item.label}：`} required key={item.id}>
-                  <DatePicker id={item.name} name={item.name} />
+                <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
+                  <DatePicker id={item.propertyCode} name={item.propertyCode} />
                 </FormItem>
               );
             } else {
               return (
-                <FormItem label={`${item.label}：`} key={item.id}>
-                  <DatePicker id={item.name} name={item.name} />
+                <FormItem label={`${item.propertyLabel}`} key={item.id}>
+                  <DatePicker id={item.propertyCode} name={item.propertyCode} />
                 </FormItem>
               );
             }
-          } else if (item.type === 'RangePicker' || item.type == null) {
-            if (item.required === 'true') {
+          } else if (item.propertyMode === 'RangePicker' || item.propertyMode == null) {
+            if (item.propertyRequired === 'true') {
               return (
-                <FormItem label={`${item.label}：`} required key={item.id}>
-                  <RangePicker id={item.name} name={item.name} />
+                <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
+                  <RangePicker id={item.propertyCode} name={item.propertyCode} />
                 </FormItem>
               );
             } else {
               return (
-                <FormItem label={`${item.label}：`} key={item.id}>
-                  <RangePicker id={item.name} name={item.name} />
+                <FormItem label={`${item.propertyLabel}`} key={item.id}>
+                  <RangePicker id={item.propertyCode} name={item.propertyCode} />
                 </FormItem>
               );
             }
-          } else if (item.type === 'TimePicker' || item.type == null) {
-            if (item.required === 'true') {
+          } else if (item.propertyMode === 'TimePicker' || item.propertyMode == null) {
+            if (item.propertyRequired === 'true') {
               return (
-                <FormItem label={`${item.label}：`} required key={item.id}>
-                  <TimePicker id={item.name} name={item.name} />
+                <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
+                  <TimePicker id={item.propertyCode} name={item.propertyCode} />
                 </FormItem>
               );
             } else {
               return (
-                <FormItem label={`${item.label}：`} key={item.id}>
-                  <TimePicker id={item.name} name={item.name} />
+                <FormItem label={`${item.propertyLabel}`} key={item.id}>
+                  <TimePicker id={item.propertyCode} name={item.propertyCode} />
                 </FormItem>
               );
             }
-          } else if (item.type === 'Checkbox' || item.type == null) {
-            if (item.required === 'true') {
+          } else if (item.propertyMode === 'Checkbox' || item.propertyMode == null) {
+            if (item.propertyRequired === 'true') {
               return (
-                <FormItem label={`${item.label}：`} required key={item.id}>
-                  <CheckboxGroup id={item.name} name={item.name} dataSource={item.dataSource} direction={item.direction} />
+                <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
+                  <CheckboxGroup
+                    id={item.propertyCode}
+                    name={item.propertyCode}
+                    dataSource={item.propertyDataSource}
+                    direction={item.propertyDirection}
+                  />
                 </FormItem>
               );
             } else {
               return (
-                <FormItem label={`${item.label}：`} key={item.id}>
-                  <CheckboxGroup id={item.name} name={item.name} dataSource={item.dataSource} direction={item.direction} />
+                <FormItem label={`${item.propertyLabel}`} key={item.id}>
+                  <CheckboxGroup
+                    id={item.propertyCode}
+                    name={item.propertyCode}
+                    dataSource={item.propertyDataSource}
+                    direction={item.propertyDirection}
+                  />
                 </FormItem>
               );
             }
-          } else if (item.type === 'Radio' || item.type == null) {
-            if (item.required === 'true') {
+          } else if (item.propertyMode === 'Radio' || item.propertyMode == null) {
+            if (item.propertyRequired === 'true') {
               return (
-                <FormItem label={`${item.label}：`} required key={item.id}>
-                  <RadioGroup id={item.name} name={item.name} dataSource={item.dataSource} direction={item.direction} />
+                <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
+                  <RadioGroup
+                    id={item.propertyCode}
+                    name={item.propertyCode}
+                    dataSource={item.propertyDataSource}
+                    direction={item.propertyDirection}
+                  />
                 </FormItem>
               );
             } else {
               return (
-                <FormItem label={`${item.label}：`} key={item.id}>
-                  <RadioGroup id={item.name} name={item.name} dataSource={item.dataSource} direction={item.direction} />
+                <FormItem label={`${item.propertyLabel}`} key={item.id}>
+                  <RadioGroup
+                    id={item.propertyCode}
+                    name={item.propertyCode}
+                    dataSource={item.propertyDataSource}
+                    direction={item.propertyDirection}
+                  />
                 </FormItem>
               );
             }
           } else {
             return (
-              <FormItem label={`${item.label}：`} key={item.id}>
-                <Input id={item.name} name={item.name} />
+              <FormItem label={`${item.propertyLabel}`} key={item.id}>
+                <Input id={item.propertyCode} name={item.propertyCode} />
               </FormItem>
             );
           }
         })}
-        <FormItem label="排序代码：" required requiredMessage="请输入排序代码" >
+        <FormItem label="排序代码" required requiredMessage="请输入排序代码" >
           <Input id="sortCode" name="sortCode" placeholder="请输入排序代码" />
         </FormItem>
         <FormItem >

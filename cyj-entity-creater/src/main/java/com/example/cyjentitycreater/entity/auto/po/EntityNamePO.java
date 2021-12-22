@@ -46,7 +46,7 @@ public class EntityNamePO implements Serializable {
         @Column(name = "entity_type")
         private String entityType;
         @Column(name = "entity_status")
-        private Integer entityStatus;
+        private String entityStatus;
         @Column(name = "sort_code")
         private String sortCode;
 

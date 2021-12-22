@@ -50,7 +50,7 @@ public class EntityNameServiceImpl extends BaseService implements EntityNameServ
                 return queryFactory
                         .selectFrom(QEntityNamePO.entityNamePO)
                         .where(QEntityNamePO.entityNamePO.sortCode.isNotNull())
-                        .offset(pageNumber)
+                        .offset(pageNumber - 1)
                         .orderBy(QEntityNamePO.entityNamePO.sortCode.asc())
                         .limit(8)
                         .fetchResults();

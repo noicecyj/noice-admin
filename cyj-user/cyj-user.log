@@ -668,3 +668,519 @@ Caused by: com.netflix.client.ClientException: Load balancer does not have avail
 2021-12-19 20:33:44.166 [http-nio-8090-exec-8] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
 2021-12-19 20:33:44.505 [http-nio-8090-exec-9] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
 2021-12-19 20:35:00.254 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 20:40:00.261 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 20:45:00.270 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 20:50:00.273 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 20:55:00.277 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 20:55:32.547 [http-nio-8090-exec-10] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 20:55:32.686 [http-nio-8090-exec-2] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 20:55:32.898 [http-nio-8090-exec-3] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 20:55:33.074 [http-nio-8090-exec-1] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 20:55:38.216 [http-nio-8090-exec-4] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 20:55:39.396 [http-nio-8090-exec-5] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 20:55:39.475 [http-nio-8090-exec-6] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 20:55:39.537 [http-nio-8090-exec-7] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 20:55:39.636 [http-nio-8090-exec-8] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 20:55:45.228 [http-nio-8090-exec-9] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 20:55:45.471 [http-nio-8090-exec-10] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 20:55:45.472 [http-nio-8090-exec-2] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 20:55:45.562 [http-nio-8090-exec-3] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 20:55:52.529 [http-nio-8090-exec-1] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 20:55:52.577 [http-nio-8090-exec-4] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 20:55:52.787 [http-nio-8090-exec-5] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 20:55:52.880 [http-nio-8090-exec-6] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 20:56:37.433 [http-nio-8090-exec-7] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 20:56:37.490 [http-nio-8090-exec-8] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 20:56:37.632 [http-nio-8090-exec-9] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 20:56:37.715 [http-nio-8090-exec-10] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 20:56:41.224 [http-nio-8090-exec-2] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 20:56:41.301 [http-nio-8090-exec-3] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 20:56:41.419 [http-nio-8090-exec-1] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 20:56:41.491 [http-nio-8090-exec-4] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 20:56:46.912 [http-nio-8090-exec-5] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 20:56:46.979 [http-nio-8090-exec-6] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 20:56:47.245 [http-nio-8090-exec-7] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 20:56:47.338 [http-nio-8090-exec-8] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 20:56:50.180 [http-nio-8090-exec-9] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 20:56:50.245 [http-nio-8090-exec-10] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 20:56:50.383 [http-nio-8090-exec-2] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 20:56:50.453 [http-nio-8090-exec-3] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 20:56:56.326 [http-nio-8090-exec-1] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 20:56:56.391 [http-nio-8090-exec-4] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 20:56:56.648 [http-nio-8090-exec-5] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 20:56:56.715 [http-nio-8090-exec-6] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 20:57:07.547 [http-nio-8090-exec-7] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findEntityNameById
+2021-12-19 20:57:22.193 [http-nio-8090-exec-8] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 20:57:22.252 [http-nio-8090-exec-9] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 20:57:22.403 [http-nio-8090-exec-10] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 20:57:22.481 [http-nio-8090-exec-2] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 20:57:28.364 [http-nio-8090-exec-3] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findEntityNameById
+2021-12-19 21:00:00.285 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 21:03:56.187 [http-nio-8090-exec-1] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 21:03:56.192 [http-nio-8090-exec-4] INFO  org.apache.coyote.http11.Http11Processor - Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+java.lang.IllegalArgumentException: Invalid character found in the request target [/cyj-entity-creater/entityCreateApi/entityPage?pageNumber=1&pid=%7B%22error%22:%7B%22global%22:%7B%22error%22:null,%22value%22:false%7D,%22models%22:%7B%22loading%22:%7B%22error%22:null,%22value%22:false%7D,%22login%22:%7B%22error%22:null,%22value%22:false%7D,%22user%22:%7B%22error%22:null,%22value%22:false%7D,%22catalog%22:%7B%22error%22:null,%22value%22:false%7D,%22customCatalog%22:%7B%22error%22:null,%22value%22:false%7D,%22dictionary%22:%7B%22error%22:null,%22value%22:false%7D,%22customDictionary%22:%7B%22error%22:null,%22value%22:false%7D,%22entityName%22:%7B%22error%22:null,%22value%22:false%7D,%22customEntityName%22:%7B%22error%22:null,%22value%22:false%7D,%22entity%22:%7B%22error%22:null,%22value%22:false%7D,%22customEntity%22:%7B%22error%22:null,%22value%22:false%7D%7D,%22effects%22:%7B%22loading%22:%7B%7D,%22login%22:%7B%22login%22:%7B%22error%22:null,%22value%22:false%7D,%22setDataForm%22:%7B%22error%22:null,%22value%22:false%7D%7D,%22user%22:%7B%7D,%22catalog%22:%7B%22catalogPage%22:%7B%22error%22:null,%22value%22:false%7D,%22catalogEdit%22:%7B%22error%22:null,%22value%22:false%7D,%22catalogDelete%22:%7B%22error%22:null,%22value%22:false%7D,%22catalogSave%22:%7B%22error%22:null,%22value%22:false%7D,%22setDataForm%22:%7B%22error%22:null,%22value%22:false%7D,%22findDataTableAndFormByName%22:%7B%22error%22:null,%22value%22:false%7D%7D,%22customCatalog%22:%7B%22findCatalogByValue%22:%7B%22error%22:null,%22value%22:false%7D%7D,%22dictionary%22:%7B%22dictionaryPage%22:%7B%22error%22:null,%22value%22:false%7D,%22dictionaryEdit%22:%7B%22error%22:null,%22value%22:false%7D,%22dictionaryDelete%22:%7B%22error%22:null,%22value%22:false%7D,%22dictionarySave%22:%7B%22error%22:null,%22value%22:false%7D,%22setDataForm%22:%7B%22error%22:null,%22value%22:false%7D,%22onRowClick%22:%7B%22error%22:null,%22value%22:false%7D%7D,%22customDictionary%22:%7B%22findCatalogByValue%22:%7B%22error%22:null,%22value%22:false%7D%7D,%22entityName%22:%7B%22entityNamePage%22:%7B%22error%22:null,%22value%22:false%7D,%22entityNameEdit%22:%7B%22error%22:null,%22value%22:false%7D,%22entityNameDelete%22:%7B%22error%22:null,%22value%22:false%7D,%22entityNameSave%22:%7B%22error%22:null,%22value%22:false%7D,%22setDataForm%22:%7B%22error%22:null,%22value%22:false%7D,%22findDataTableAndFormByName%22:%7B%22error%22:null,%22value%22:false%7D%7D,%22customEntityName%22:%7B%22findCatalogByValue%22:%7B%22error%22:null,%22value%22:false%7D,%22createEntityFile%22:%7B%22error%22:null,%22value%22:false%7D,%22createComponentFile%22:%7B%22error%22:null,%22value%22:false%7D,%22chooseEntityFile%22:%7B%22error%22:null,%22value%22:false%7D,%22chooseFountEntityFile%22:%7B%22error%22:null,%22value%22:false%7D%7D,%22entity%22:%7B%22entityPage%22:%7B%22error%22:null,%22value%22:false%7D,%22entityEdit%22:%7B%22error%22:null,%22value%22:false%7D,%22entityDelete%22:%7B%22error%22:null,%22value%22:false%7D,%22entitySave%22:%7B%22error%22:null,%22value%22:false%7D,%22setDataForm%22:%7B%22error%22:null,%22value%22:false%7D,%22findDataTableAndFormByName%22:%7B%22error%22:null,%22value%22:false%7D,%22onRowClick%22:%7B%22error%22:null,%22value%22:false%7D%7D,%22customEntity%22:%7B%22findCatalogByValue%22:%7B%22error%22:null,%22value%22:false%7D,%22upEntity%22:%7B%22error%22:null,%22value%22:false%7D,%22downEntity%22:%7B%22error%22:null,%22value%22:false%7D%7D%7D%7D,%22loading%22:%7B%22global%22:true,%22models%22:%7B%22error%22:false,%22login%22:false,%22user%22:false,%22catalog%22:false,%22customCatalog%22:false,%22dictionary%22:false,%22customDictionary%22:false,%22entityName%22:false,%22customEntityName%22:false,%22entity%22:true,%22customEntity%22:false%7D,%22effects%22:%7B%22error%22:%7B%7D,%22login%22:%7B%22login%22:false,%22setDataForm%22:false%7D,%22user%22:%7B%7D,%22catalog%22:%7B%22catalogPage%22:false,%22catalogEdit%22:false,%22catalogDelete%22:false,%22catalogSave%22:false,%22setDataForm%22:false,%22findDataTableAndFormByName%22:false%7D,%22customCatalog%22:%7B%22findCatalogByValue%22:false%7D,%22dictionary%22:%7B%22dictionaryPage%22:false,%22dictionaryEdit%22:false,%22dictionaryDelete%22:false,%22dictionarySave%22:false,%22setDataForm%22:false,%22onRowClick%22:false%7D,%22customDictionary%22:%7B%22findCatalogByValue%22:false%7D,%22entityName%22:%7B%22entityNamePage%22:false,%22entityNameEdit%22:false,%22entityNameDelete%22:false,%22entityNameSave%22:false,%22setDataForm%22:false,%22findDataTableAndFormByName%22:false%7D,%22customEntityName%22:%7B%22findCatalogByValue%22:false,%22createEntityFile%22:false,%22createComponentFile%22:false,%22chooseEntityFile%22:false,%22chooseFountEntityFile%22:false%7D,%22entity%22:%7B%22entityPage%22:true,%22entityEdit%22:false,%22entityDelete%22:false,%22entitySave%22:false,%22setDataForm%22:false,%22findDataTableAndFormByName%22:true,%22onRowClick%22:true%7D,%22customEntity%22:%7B%22findCatalogByValue%22:false,%22upEntity%22:false,%22downEntity%22:false%7D%7D%7D,%22entityName%22:%7B%22entityNameTableData%22:[%7B%22id%22:%221b6e7b0d-8758-4de0-a80f-b54505ac9e91%22,%22pid%22:null,%22appId%22:%22b6f85556-5ee8-4eab-a729-ba3f1d3d137b%22,%22entityName%22:%22%E6%9C%8D%E5%8A%A1%22,%22entityCode%22:%22app_service%22,%22entityType%22:%22PO%22,%22entityStatus%22:1,%22sortCode%22:%220100%22%7D,%7B%22id%22:%221b6e7b0d-8758-4de0-a80f-b54505ac9e9d%22,%22pid%22:null,%22appId%22:%22b6f85556-5ee8-4eab-a729-ba3f1d3d137b%22,%22entityName%22:%22%E5%AE%9E%E4%BD%93%22,%22entityCode%22:%22entity_name%22,%22entityType%22:%22PO%22,%22entityStatus%22:1,%22sortCode%22:%220100%22%7D],%22entityNameTitle%22:%22%E7%BC%96%E8%BE%91%22,%22entityNameVisible%22:false,%22entityNameFormData%22:%7B%22id%22:%221b6e7b0d-8758-4de0-a80f-b54505ac9e91%22,%22pid%22:null,%22appId%22:%22b6f85556-5ee8-4eab-a729-ba3f1d3d137b%22,%22entityName%22:%22%E6%9C%8D%E5%8A%A1%22,%22entityCode%22:%22app_service%22,%22entityType%22:%22PO%22,%22entityStatus%22:1,%22sortCode%22:%220100%22%7D,%22entityNameLoadingVisible%22:false,%22entityNameTotal%22:3,%22entityNameCurrent%22:1,%22entityNameFormItem%22:[],%22entityNameForm%22:[%7B%22id%22:%22f9d4396b-d078-4829-9416-f3fe2a8d30e9%22,%22pid%22:%221b6e7b0d-8758-4de0-a80f-b54505ac9e9d%22,%22propertyCode%22:%22entityName%22,%22propertyType%22:%22String%22,%22propertyLabel%22:%22%E5%AE%9E%E4%BD%93%E5%90%8D%E7%A7%B0%22,%22propertyWidth%22:null,%22propertyMode%22:null,%22propertyDirection%22:null,%22propertyRequired%22:null,%22propertyDataSourceType%22:null,%22propertyDataSource%22:null,%22propertyDefaultValue%22:null,%22propertyDisplay%22:%221%22,%22sortCode%22:%220070%22%7D,%7B%22id%22:%22f9d71190-2b10-4697-a44f-e547db7a8823%22,%22pid%22:%221b6e7b0d-8758-4de0-a80f-b54505ac9e9d%22,%22propertyCode%22:%22entityCode%22,%22propertyType%22:%22String%22,%22propertyLabel%22:%22%E5%AE%9E%E4%BD%93%E7%BC%96%E7%A0%81%22,%22propertyWidth%22:null,%22propertyMode%22:null,%22propertyDirection%22:null,%22propertyRequired%22:null,%22propertyDataSourceType%22:null,%22propertyDataSource%22:null,%22propertyDefaultValue%22:null,%22propertyDisplay%22:%221%22,%22sortCode%22:%220060%22%7D,%7B%22id%22:%22fcd7d815-7dff-4b93-a9c3-c90c4c2837d5%22,%22pid%22:%221b6e7b0d-8758-4de0-a80f-b54505ac9e9d%22,%22propertyCode%22:%22entityType%22,%22propertyType%22:%22String%22,%22propertyLabel%22:%22%E5%AE%9E%E4%BD%93%E7%B1%BB%E5%9E%8B%22,%22propertyWidth%22:null,%22propertyMode%22:null,%22propertyDirection%22:null,%22propertyRequired%22:null,%22propertyDataSourceType%22:null,%22propertyDataSource%22:null,%22propertyDefaultValue%22:null,%22propertyDisplay%22:%221%22,%22sortCode%22:%220010%22%7D,%7B%22id%22:%22ff4f3a54-0666-4016-9136-f408c1d65973%22,%22pid%22:%221b6e7b0d-8758-4de0-a80f-b54505ac9e9d%22,%22propertyCode%22:%22entityStatus%22,%22propertyType%22:%22Integer%22,%22propertyLabel%22:%22%E5%AE%9E%E4%BD%93%E7%8A%B6%E6%80%81%22,%22propertyWidth%22:null,%22propertyMode%22:null,%22propertyDirection%22:null,%22propertyRequired%22:null,%22propertyDataSourceType%22:null,%22propertyDataSource%22:null,%22propertyDefaultValue%22:null,%22propertyDisplay%22:%221%22,%22sortCode%22:%220010%22%7D],%22entityNameTable%22:[%7B%22id%22:%22f9d4396b-d078-4829-9416-f3fe2a8d30e9%22,%22pid%22:%221b6e7b0d-8758-4de0-a80f-b54505ac9...]. The valid characters are defined in RFC 7230 and RFC 3986
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:490)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:261)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:888)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1597)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+2021-12-19 21:05:00.288 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 21:10:00.292 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 21:15:00.303 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 21:20:00.312 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 21:25:00.313 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 21:30:00.317 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 21:32:37.960 [http-nio-8090-exec-5] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 21:32:38.009 [http-nio-8090-exec-6] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 21:35:00.332 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 21:40:00.340 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 21:45:00.344 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 21:45:22.362 [http-nio-8090-exec-7] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 21:46:24.275 [http-nio-8090-exec-8] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 21:46:24.287 [http-nio-8090-exec-8] WARN  o.s.c.netflix.zuul.filters.post.SendErrorFilter - Error during filtering
+com.netflix.zuul.exception.ZuulException: Forwarding error
+	at org.springframework.cloud.netflix.zuul.filters.route.RibbonRoutingFilter.handleException(RibbonRoutingFilter.java:198)
+	at org.springframework.cloud.netflix.zuul.filters.route.RibbonRoutingFilter.forward(RibbonRoutingFilter.java:173)
+	at org.springframework.cloud.netflix.zuul.filters.route.RibbonRoutingFilter.run(RibbonRoutingFilter.java:119)
+	at com.netflix.zuul.ZuulFilter.runFilter(ZuulFilter.java:117)
+	at com.netflix.zuul.FilterProcessor.processZuulFilter(FilterProcessor.java:193)
+	at com.netflix.zuul.FilterProcessor.runFilters(FilterProcessor.java:157)
+	at com.netflix.zuul.FilterProcessor.route(FilterProcessor.java:118)
+	at com.netflix.zuul.ZuulRunner.route(ZuulRunner.java:96)
+	at com.netflix.zuul.http.ZuulServlet.route(ZuulServlet.java:116)
+	at com.netflix.zuul.http.ZuulServlet.service(ZuulServlet.java:81)
+	at org.springframework.web.servlet.mvc.ServletWrappingController.handleRequestInternal(ServletWrappingController.java:166)
+	at org.springframework.cloud.netflix.zuul.web.ZuulController.handleRequest(ZuulController.java:45)
+	at org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter.handle(SimpleControllerHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:652)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.example.cyjuser.filter.MyFilterSecurityInterceptor.doFilter(MyFilterSecurityInterceptor.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:320)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:126)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:90)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at com.example.cyjuser.filter.MyFilterSecurityInterceptor.invoke(MyFilterSecurityInterceptor.java:66)
+	at com.example.cyjuser.filter.MyFilterSecurityInterceptor.doFilter(MyFilterSecurityInterceptor.java:57)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:118)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:137)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:111)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:158)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:200)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at com.example.cyjuser.filter.JWTAuthenticationFilter.doFilterInternal(JWTAuthenticationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:92)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:92)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:77)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at com.example.cyjuser.filter.WebSecurityCorsFilter.doFilter(WebSecurityCorsFilter.java:25)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:888)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1597)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: com.netflix.client.ClientException: Load balancer does not have available server for client: cyj-entity-creater
+	at com.netflix.loadbalancer.LoadBalancerContext.getServerFromLoadBalancer(LoadBalancerContext.java:483)
+	at com.netflix.loadbalancer.reactive.LoadBalancerCommand$1.call(LoadBalancerCommand.java:184)
+	at com.netflix.loadbalancer.reactive.LoadBalancerCommand$1.call(LoadBalancerCommand.java:180)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeConcatMap.call(OnSubscribeConcatMap.java:94)
+	at rx.internal.operators.OnSubscribeConcatMap.call(OnSubscribeConcatMap.java:42)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OperatorRetryWithPredicate$SourceSubscriber$1.call(OperatorRetryWithPredicate.java:127)
+	at rx.internal.schedulers.TrampolineScheduler$InnerCurrentThreadScheduler.enqueue(TrampolineScheduler.java:73)
+	at rx.internal.schedulers.TrampolineScheduler$InnerCurrentThreadScheduler.schedule(TrampolineScheduler.java:52)
+	at rx.internal.operators.OperatorRetryWithPredicate$SourceSubscriber.onNext(OperatorRetryWithPredicate.java:79)
+	at rx.internal.operators.OperatorRetryWithPredicate$SourceSubscriber.onNext(OperatorRetryWithPredicate.java:45)
+	at rx.internal.util.ScalarSynchronousObservable$WeakSingleProducer.request(ScalarSynchronousObservable.java:276)
+	at rx.Subscriber.setProducer(Subscriber.java:209)
+	at rx.internal.util.ScalarSynchronousObservable$JustOnSubscribe.call(ScalarSynchronousObservable.java:138)
+	at rx.internal.util.ScalarSynchronousObservable$JustOnSubscribe.call(ScalarSynchronousObservable.java:129)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.Observable.subscribe(Observable.java:10423)
+	at rx.Observable.subscribe(Observable.java:10390)
+	at rx.observables.BlockingObservable.blockForSingle(BlockingObservable.java:443)
+	at rx.observables.BlockingObservable.single(BlockingObservable.java:340)
+	at com.netflix.client.AbstractLoadBalancerAwareClient.executeWithLoadBalancer(AbstractLoadBalancerAwareClient.java:112)
+	at org.springframework.cloud.netflix.zuul.filters.route.support.AbstractRibbonCommand.run(AbstractRibbonCommand.java:221)
+	at org.springframework.cloud.netflix.zuul.filters.route.support.AbstractRibbonCommand.run(AbstractRibbonCommand.java:55)
+	at com.netflix.hystrix.HystrixCommand$2.call(HystrixCommand.java:302)
+	at com.netflix.hystrix.HystrixCommand$2.call(HystrixCommand.java:298)
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:46)
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:35)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:51)
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:35)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:51)
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:35)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeMap.call(OnSubscribeMap.java:48)
+	at rx.internal.operators.OnSubscribeMap.call(OnSubscribeMap.java:33)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:51)
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:35)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.Observable.subscribe(Observable.java:10423)
+	at rx.Observable.subscribe(Observable.java:10390)
+	at rx.internal.operators.BlockingOperatorToFuture.toFuture(BlockingOperatorToFuture.java:51)
+	at rx.observables.BlockingObservable.toFuture(BlockingObservable.java:410)
+	at com.netflix.hystrix.HystrixCommand.queue(HystrixCommand.java:378)
+	at com.netflix.hystrix.HystrixCommand.execute(HystrixCommand.java:344)
+	at org.springframework.cloud.netflix.zuul.filters.route.RibbonRoutingFilter.forward(RibbonRoutingFilter.java:167)
+	... 102 common frames omitted
+2021-12-19 21:46:36.885 [http-nio-8090-exec-9] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 21:46:36.889 [http-nio-8090-exec-9] WARN  o.s.c.netflix.zuul.filters.post.SendErrorFilter - Error during filtering
+com.netflix.zuul.exception.ZuulException: Forwarding error
+	at org.springframework.cloud.netflix.zuul.filters.route.RibbonRoutingFilter.handleException(RibbonRoutingFilter.java:198)
+	at org.springframework.cloud.netflix.zuul.filters.route.RibbonRoutingFilter.forward(RibbonRoutingFilter.java:173)
+	at org.springframework.cloud.netflix.zuul.filters.route.RibbonRoutingFilter.run(RibbonRoutingFilter.java:119)
+	at com.netflix.zuul.ZuulFilter.runFilter(ZuulFilter.java:117)
+	at com.netflix.zuul.FilterProcessor.processZuulFilter(FilterProcessor.java:193)
+	at com.netflix.zuul.FilterProcessor.runFilters(FilterProcessor.java:157)
+	at com.netflix.zuul.FilterProcessor.route(FilterProcessor.java:118)
+	at com.netflix.zuul.ZuulRunner.route(ZuulRunner.java:96)
+	at com.netflix.zuul.http.ZuulServlet.route(ZuulServlet.java:116)
+	at com.netflix.zuul.http.ZuulServlet.service(ZuulServlet.java:81)
+	at org.springframework.web.servlet.mvc.ServletWrappingController.handleRequestInternal(ServletWrappingController.java:166)
+	at org.springframework.cloud.netflix.zuul.web.ZuulController.handleRequest(ZuulController.java:45)
+	at org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter.handle(SimpleControllerHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:652)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.example.cyjuser.filter.MyFilterSecurityInterceptor.doFilter(MyFilterSecurityInterceptor.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:320)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:126)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:90)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at com.example.cyjuser.filter.MyFilterSecurityInterceptor.invoke(MyFilterSecurityInterceptor.java:66)
+	at com.example.cyjuser.filter.MyFilterSecurityInterceptor.doFilter(MyFilterSecurityInterceptor.java:57)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:118)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:137)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:111)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:158)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:200)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at com.example.cyjuser.filter.JWTAuthenticationFilter.doFilterInternal(JWTAuthenticationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:92)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:92)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:77)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at com.example.cyjuser.filter.WebSecurityCorsFilter.doFilter(WebSecurityCorsFilter.java:25)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:888)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1597)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: com.netflix.client.ClientException: Load balancer does not have available server for client: cyj-entity-creater
+	at com.netflix.loadbalancer.LoadBalancerContext.getServerFromLoadBalancer(LoadBalancerContext.java:483)
+	at com.netflix.loadbalancer.reactive.LoadBalancerCommand$1.call(LoadBalancerCommand.java:184)
+	at com.netflix.loadbalancer.reactive.LoadBalancerCommand$1.call(LoadBalancerCommand.java:180)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeConcatMap.call(OnSubscribeConcatMap.java:94)
+	at rx.internal.operators.OnSubscribeConcatMap.call(OnSubscribeConcatMap.java:42)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OperatorRetryWithPredicate$SourceSubscriber$1.call(OperatorRetryWithPredicate.java:127)
+	at rx.internal.schedulers.TrampolineScheduler$InnerCurrentThreadScheduler.enqueue(TrampolineScheduler.java:73)
+	at rx.internal.schedulers.TrampolineScheduler$InnerCurrentThreadScheduler.schedule(TrampolineScheduler.java:52)
+	at rx.internal.operators.OperatorRetryWithPredicate$SourceSubscriber.onNext(OperatorRetryWithPredicate.java:79)
+	at rx.internal.operators.OperatorRetryWithPredicate$SourceSubscriber.onNext(OperatorRetryWithPredicate.java:45)
+	at rx.internal.util.ScalarSynchronousObservable$WeakSingleProducer.request(ScalarSynchronousObservable.java:276)
+	at rx.Subscriber.setProducer(Subscriber.java:209)
+	at rx.internal.util.ScalarSynchronousObservable$JustOnSubscribe.call(ScalarSynchronousObservable.java:138)
+	at rx.internal.util.ScalarSynchronousObservable$JustOnSubscribe.call(ScalarSynchronousObservable.java:129)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.Observable.subscribe(Observable.java:10423)
+	at rx.Observable.subscribe(Observable.java:10390)
+	at rx.observables.BlockingObservable.blockForSingle(BlockingObservable.java:443)
+	at rx.observables.BlockingObservable.single(BlockingObservable.java:340)
+	at com.netflix.client.AbstractLoadBalancerAwareClient.executeWithLoadBalancer(AbstractLoadBalancerAwareClient.java:112)
+	at org.springframework.cloud.netflix.zuul.filters.route.support.AbstractRibbonCommand.run(AbstractRibbonCommand.java:221)
+	at org.springframework.cloud.netflix.zuul.filters.route.support.AbstractRibbonCommand.run(AbstractRibbonCommand.java:55)
+	at com.netflix.hystrix.HystrixCommand$2.call(HystrixCommand.java:302)
+	at com.netflix.hystrix.HystrixCommand$2.call(HystrixCommand.java:298)
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:46)
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:35)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:51)
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:35)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:51)
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:35)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeMap.call(OnSubscribeMap.java:48)
+	at rx.internal.operators.OnSubscribeMap.call(OnSubscribeMap.java:33)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:51)
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:35)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.Observable.subscribe(Observable.java:10423)
+	at rx.Observable.subscribe(Observable.java:10390)
+	at rx.internal.operators.BlockingOperatorToFuture.toFuture(BlockingOperatorToFuture.java:51)
+	at rx.observables.BlockingObservable.toFuture(BlockingObservable.java:410)
+	at com.netflix.hystrix.HystrixCommand.queue(HystrixCommand.java:378)
+	at com.netflix.hystrix.HystrixCommand.execute(HystrixCommand.java:344)
+	at org.springframework.cloud.netflix.zuul.filters.route.RibbonRoutingFilter.forward(RibbonRoutingFilter.java:167)
+	... 102 common frames omitted
+2021-12-19 21:47:28.114 [http-nio-8090-exec-2] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 21:47:28.319 [http-nio-8090-exec-3] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 21:48:07.633 [http-nio-8090-exec-4] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 21:48:07.697 [http-nio-8090-exec-1] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 21:49:11.805 [http-nio-8090-exec-5] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 21:49:11.863 [http-nio-8090-exec-6] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 21:49:23.085 [http-nio-8090-exec-7] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 21:49:23.147 [http-nio-8090-exec-8] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 21:50:00.348 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 21:54:41.911 [http-nio-8090-exec-9] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 21:54:42.203 [http-nio-8090-exec-10] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 21:55:00.360 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 21:57:57.063 [http-nio-8090-exec-2] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findEntityNameById
+2021-12-19 22:00:00.362 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 22:02:08.079 [http-nio-8090-exec-3] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findEntityNameById
+2021-12-19 22:02:12.571 [http-nio-8090-exec-4] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 22:02:12.638 [http-nio-8090-exec-1] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 22:02:21.838 [http-nio-8090-exec-5] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findEntityNameById
+2021-12-19 22:04:18.441 [http-nio-8090-exec-6] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findEntityNameById
+2021-12-19 22:04:58.431 [http-nio-8090-exec-7] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 22:04:58.498 [http-nio-8090-exec-8] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 22:05:00.383 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 22:05:01.029 [http-nio-8090-exec-9] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findEntityNameById
+2021-12-19 22:10:00.389 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 22:13:37.398 [http-nio-8090-exec-10] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findDataTableAndFormByName
+2021-12-19 22:13:37.494 [http-nio-8090-exec-2] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/entityNamePage
+2021-12-19 22:13:39.294 [http-nio-8090-exec-3] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findEntityNameById
+2021-12-19 22:15:00.393 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 22:20:00.394 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 22:25:00.401 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 22:30:00.413 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 22:35:00.417 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 22:40:00.426 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 22:40:41.007 [http-nio-8090-exec-4] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findEntityNameById
+2021-12-19 22:40:46.608 [http-nio-8090-exec-1] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findEntityNameById
+2021-12-19 22:43:06.587 [http-nio-8090-exec-5] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findEntityNameById
+2021-12-19 22:45:00.439 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 22:50:00.446 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 22:55:00.448 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 23:00:00.456 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 23:05:00.463 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 23:10:00.485 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 23:15:00.489 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-19 23:15:33.161 [http-nio-8090-exec-6] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findEntityNameById
+2021-12-19 23:15:35.879 [http-nio-8090-exec-7] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findEntityNameById
+2021-12-19 23:15:38.218 [http-nio-8090-exec-8] INFO  com.example.cyjuser.config.LoggerFilter - LogFilter.method=POST,url=http://127.0.0.1:8090/cyj-entity-creater/entityCreateApi/findEntityNameById

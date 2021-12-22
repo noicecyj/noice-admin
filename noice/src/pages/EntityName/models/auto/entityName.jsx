@@ -7,12 +7,12 @@ export default {
 
   state: {
     entityNameTableData: [],
+    entityNameTitle: '添加',
     entityNameVisible: false,
     entityNameFormData: {},
     entityNameLoadingVisible: true,
     entityNameTotal: 0,
     entityNameCurrent: 1,
-    entityNameFormItem: [],
     entityNameForm: [],
     entityNameTable: [],
   },
@@ -42,12 +42,14 @@ export default {
         };
         const payload = {
           entityNameFormData: fromData,
+          entityNameTitle: '编辑',
           entityNameVisible: true,
         };
         dispatch.entityName.setState(payload);
       } else {
         const payload = {
           entityNameFormData: {},
+          entityNameTitle: '添加',
           entityNameVisible: true,
         };
         dispatch.entityName.setState(payload);
@@ -55,7 +57,7 @@ export default {
     },
     async entityNameDelete(data) {
       await entityNameService.entityNameDelete(data.record.id);
-      this.entityNamePage(data.data.pageNumber);
+      await this.entityNamePage(data.data.pageNumber);
       const payload = {
         entityNameVisible: false,
       };
@@ -63,7 +65,7 @@ export default {
     },
     async entityNameSave(data) {
       await entityNameService.entityNameSave(data.entityNameFormData);
-      this.entityNamePage(data.entityNameCurrent);
+      await this.entityNamePage(data.entityNameCurrent);
       const payload = {
         entityNameVisible: false,
       };
@@ -77,12 +79,12 @@ export default {
     },
     async findDataTableAndFormByName() {
       const ret = await initService.findDataTableAndFormByName('entity_name');
+      await this.entityNamePage(1);
       const payload = {
         entityNameTable: ret.data.dataTable,
         entityNameForm: ret.data.dataForm,
       };
       dispatch.entityName.setState(payload);
-      this.entityNamePage(1);
     },
   }),
 };
