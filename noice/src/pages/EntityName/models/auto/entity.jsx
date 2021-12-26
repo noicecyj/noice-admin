@@ -12,7 +12,6 @@ export default {
     entityLoadingVisible: true,
     entityTotal: 0,
     entityCurrent: 1,
-    entityFormItem: [],
     entityForm: [],
     entityTable: [],
     divVisible: false,
@@ -26,11 +25,13 @@ export default {
   },
 
   effects: (dispatch) => ({
-    async entityPage(entityCurrent, pid) {
-      const dataRes = await entityService.entityPage(entityCurrent, pid);
+    async entityPage(data) {
+      const dataRes = await entityService.entityPage(data.entityCurrent, data.pid);
+      console.log(dataRes);
       const payload = {
-        entityTotal: dataRes.data.totalElements,
-        entityCurrent,
+        entityTableData: dataRes.data.results,
+        entityTotal: dataRes.data.total,
+        entityCurrent: data.entityCurrent,
         entityLoadingVisible: false,
       };
       dispatch.entity.setState(payload);
@@ -56,7 +57,7 @@ export default {
     },
     async entityDelete(data) {
       await entityService.entityDelete(data.record);
-      await this.entityPage(data.entityCurrent, data.pid);
+      await this.entityPage({ entityCurrent: data.entityCurrent, pid: data.pid });
       const payload = {
         entityVisible: false,
       };
@@ -64,7 +65,7 @@ export default {
     },
     async entitySave(data) {
       await entityService.entitySave(data.entityFormData);
-      await this.entityPage(data.entityCurrent, data.pid);
+      await this.entityPage({ entityCurrent: data.entityCurrent, pid: data.pid });
       const payload = {
         entityVisible: false,
       };
@@ -77,20 +78,20 @@ export default {
       dispatch.entity.setState(payload);
     },
     async findDataTableAndFormByName(pid) {
-      const data = await initService.findDataTableAndFormByName('entity');
-      await this.entityPage(1, pid);
+      const ret = await initService.findDataTableAndFormByName('entity');
+      await this.entityPage({ entityCurrent: 1, pid });
       const payload = {
-        entityTable: data.dataTable,
-        entityForm: data.dataForm,
+        entityTable: ret.data.dataTable,
+        entityForm: ret.data.dataForm,
       };
       dispatch.entity.setState(payload);
     },
-    async onRowClick(selected, record) {
-      await this.findDataTableAndFormByName(record.id);
-      await this.entityPage(1, record.id);
+    async onRowClick(data) {
+      await this.findDataTableAndFormByName(data.record.id);
+      await this.entityPage({ entityCurrent: 1, pid: data.record.id });
       const payload = {
-        divVisible: selected,
-        entityNameId: record.id,
+        divVisible: data.selected,
+        entityNameId: data.record.id,
         entityVisible: false,
       };
       dispatch.entity.setState(payload);

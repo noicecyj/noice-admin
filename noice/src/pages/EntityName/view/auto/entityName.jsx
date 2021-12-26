@@ -56,7 +56,7 @@ function EntityName() {
             rowSelection={{
               mode: 'single',
               onSelect: (selected, record) => {
-                entityDispatchers.onRowClick(selected, record);
+                entityDispatchers.onRowClick({ selected, record });
               },
             }}
             pageRender={entityNameRender}
@@ -70,7 +70,7 @@ function EntityName() {
         items={entityNameState.entityNameForm}
         dispatchers={(value) => entityNameDispatchers.setDataForm(value)}
         onOk={() => entityNameDispatchers.entityNameSave({
-          ...entityNameState.entityNameFormData,
+          entityNameFormData: entityNameState.entityNameFormData,
           pageNumber: entityNameState.entityNameCurrent,
         })}
         formDataValue={entityNameState.entityNameFormData}

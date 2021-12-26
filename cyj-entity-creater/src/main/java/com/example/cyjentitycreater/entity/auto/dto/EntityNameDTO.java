@@ -18,7 +18,7 @@ public class EntityNameDTO implements Serializable {
         private String entityName;
         private String entityCode;
         private String entityType;
-        private Integer entityStatus;
+        private String entityStatus;
         private String sortCode;
 
 }

@@ -65,7 +65,7 @@ export default {
     },
     async entityNameSave(data) {
       await entityNameService.entityNameSave(data.entityNameFormData);
-      await this.entityNamePage(data.entityNameCurrent);
+      await this.entityNamePage(data.pageNumber);
       const payload = {
         entityNameVisible: false,
       };

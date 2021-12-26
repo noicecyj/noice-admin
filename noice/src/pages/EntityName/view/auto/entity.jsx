@@ -4,12 +4,10 @@ import React, { useEffect } from 'react';
 import pageStore from '@/pages/EntityName/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
-import CustomEntity from '@/pages/EntityName/view/custom/entity';
 import styles from '@/pages/EntityName/index.module.scss';
 
 function Entity() {
   const [entityState, entityDispatchers] = pageStore.useModel('entity');
-  const [customEntityState, customEntityDispatchers] = pageStore.useModel('customEntity');
 
   const entityRender = (value, index, record) => {
     return (
@@ -49,7 +47,7 @@ function Entity() {
             dataSource={entityState.entityTableData}
             items={entityState.entityTable}
             total={entityState.entityTotal}
-            getPage={(entityCurrent) => entityDispatchers.entityPage(entityCurrent, entityState.entityNameId)}
+            getPage={(entityCurrent) => entityDispatchers.entityPage({ entityCurrent, pid: entityState.entityNameId })}
             pageRender={entityRender}
           />
         </div>
@@ -58,7 +56,7 @@ function Entity() {
         title="菜单"
         visibleDialog={entityState.entityVisible}
         onClose={() => entityDispatchers.setState({ entityVisible: false })}
-        items={entityState.entityFormItem}
+        items={entityState.entityForm}
         dispatchers={(value) => entityDispatchers.setDataForm(value)}
         onOk={() => entityDispatchers.entitySave({
           entityFormData: entityState.entityFormData,
@@ -66,10 +64,6 @@ function Entity() {
         })}
         formDataValue={entityState.entityFormData}
       />
-      {/* <CustomEntity
-        entityState={entityState}
-        entityDispatchers={entityDispatchers}
-      /> */}
     </div>
   );
 }
