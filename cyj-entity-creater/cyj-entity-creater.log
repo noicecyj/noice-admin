@@ -1620,3 +1620,6 @@ java.lang.NullPointerException: null
 2021-12-26 22:45:56.634 [http-nio-8020-exec-1] INFO  com.example.cyjcommon.service.Impl.BaseService - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-dictionary\src\main\java\com\example\cyjdictionary/controller/custom/Impl/DictionaryCustomControllerImpl.java
 2021-12-26 22:47:17.153 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
 2021-12-26 22:52:17.155 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-26 22:57:17.172 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-26 23:02:17.179 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2021-12-26 23:07:17.181 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration

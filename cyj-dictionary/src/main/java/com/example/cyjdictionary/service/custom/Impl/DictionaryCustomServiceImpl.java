@@ -1,35 +1,29 @@
-package com.example.cyjdictionary.service.Impl;
+package com.example.cyjdictionary.service.custom.Impl;
 
 import com.example.cyjcommon.service.Impl.BaseService;
-import com.example.cyjdictionary.dao.IndexDao;
-import com.example.cyjdictionary.entity.po.CatalogPO;
-import com.example.cyjdictionary.entity.po.DictionaryPO;
-import com.example.cyjdictionary.entity.po.QCatalogPO;
-import com.example.cyjdictionary.entity.po.QDictionaryPO;
-import com.example.cyjdictionary.service.IndexService;
+import com.example.cyjdictionary.entity.auto.po.CatalogPO;
+import com.example.cyjdictionary.entity.auto.po.DictionaryPO;
+import com.example.cyjdictionary.entity.auto.po.QCatalogPO;
+import com.example.cyjdictionary.entity.auto.po.QDictionaryPO;
+import com.example.cyjdictionary.service.custom.DictionaryCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
  * @author 曹元杰
  * @version 1.0
- * @date 2020-09-13
+ * @date 2021-12-26
  */
 @Service
-public class IndexServiceImpl extends BaseService implements IndexService {
-
-        private IndexDao indexDao;
-
-        @Autowired
-        public void setIndexDao(IndexDao indexDao) {
-                this.indexDao = indexDao;
-        }
+@Transactional(rollbackFor = Exception.class)
+public class DictionaryCustomServiceImpl extends BaseService implements DictionaryCustomService {
 
         @Override
         public List<DictionaryPO> findCatalogByName(String name) {
@@ -75,15 +69,6 @@ public class IndexServiceImpl extends BaseService implements IndexService {
                         .orderBy(qDictionary.sortCode.asc()).fetchOne();
         }
 
-        @Override
-        public Page<CatalogPO> findAllByCatalogNameContainsOrCatalogValueContains(String catalogName,
-                                                                                  String catalogValue,
-                                                                                  Integer pageNumber,
-                                                                                  Integer pageSize,
-                                                                                  String sortCode) {
-                Sort sort = Sort.by(sortCode);
-                Pageable pageable = PageRequest.of(pageNumber, pageSize, sort);
-                return indexDao.findAllByCatalogNameContainsOrCatalogValueContains(catalogName, catalogValue, pageable);
-        }
+
 
 }
