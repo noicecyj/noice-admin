@@ -791,7 +791,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         @Override
         public JSONObject findDataTableAndFormByName(String entityCode) {
                 EntityNamePO po = entityNameCustomDao.findEntityNamePOByEntityCodeAndEntityType(entityCode, "PO");
-                List<EntityPO> entityPOList = entityCustomDao.findEntityPOByPidAndPropertyDisplayEquals(po.getId(),"是");
+                List<EntityPO> entityPOList = entityCustomDao.findEntityPOByPidAndPropertyDisplayEquals(po.getId(), "是");
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("dataTable", entityPOList);
                 jsonObject.put("dataForm", entityPOList);
