@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { Button, Dialog } from '@alifd/next';
-import React, { useEffect } from 'react';
+import React from 'react';
 import pageStore from '@/pages/EntityName/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
@@ -35,18 +35,22 @@ function Entity() {
       <Dialog
         visible={entityState.divVisible}
         footer={false}
-        onClose={() => entityDispatchers.setState({ divVisible: false })}
+        onClose={() => entityDispatchers.setState({
+          divVisible: false,
+          entityNameId: '',
+        })}
         style={{ width: '90%' }}
       >
         <div className={styles.Main}>
           <div className={styles.add}>
-            <Button type="primary" onClick={() => entityDispatchers.entityEdit()}> 添加菜单 </Button>
+            <Button type="primary" onClick={() => entityDispatchers.entityEdit()}> 添加 </Button>
           </div>
           <DataTableTemple
             visibleLoading={entityState.entityLoadingVisible}
             dataSource={entityState.entityTableData}
             items={entityState.entityTable}
             total={entityState.entityTotal}
+            primaryKey="id"
             getPage={(entityCurrent) => entityDispatchers.entityPage({ entityCurrent, pid: entityState.entityNameId })}
             pageRender={entityRender}
           />

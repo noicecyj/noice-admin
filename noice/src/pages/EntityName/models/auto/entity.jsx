@@ -27,7 +27,6 @@ export default {
   effects: (dispatch) => ({
     async entityPage(data) {
       const dataRes = await entityService.entityPage(data.entityCurrent, data.pid);
-      console.log(dataRes);
       const payload = {
         entityTableData: dataRes.data.results,
         entityTotal: dataRes.data.total,

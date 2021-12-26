@@ -58,7 +58,9 @@ function EntityName() {
               onSelect: (selected, record) => {
                 entityDispatchers.onRowClick({ selected, record });
               },
+              selectedRowKeys: entityState.entityNameId,
             }}
+            primaryKey="id"
             pageRender={entityNameRender}
           />
         </div>

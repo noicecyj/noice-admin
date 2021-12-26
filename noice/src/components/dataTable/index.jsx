@@ -5,7 +5,7 @@ import styles from './index.module.scss';
 
 function DataTable(props) {
   const loadingStyle = { width: '100%' };
-  const { items, pageRender, operationRender, dataSource, rowSelection, total, getPage, visibleLoading } = props;
+  const { items, pageRender, operationRender, dataSource, rowSelection, primaryKey, total, getPage, visibleLoading } = props;
   return (
     <Loading
       tip="加载中..."
@@ -17,6 +17,7 @@ function DataTable(props) {
         className={styles.Table}
         dataSource={dataSource}
         rowSelection={rowSelection}
+        primaryKey={primaryKey}
       >
         {items.length === 0 ? null : items.map((item, index) => {
           if (item.propertyType === 'customOperation') {
