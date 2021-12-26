@@ -55,7 +55,7 @@ export default {
       }
     },
     async entityDelete(data) {
-      await entityService.entityDelete(data.record);
+      await entityService.entityDelete(data.record.id);
       await this.entityPage({ entityCurrent: data.entityCurrent, pid: data.pid });
       const payload = {
         entityVisible: false,
@@ -63,7 +63,7 @@ export default {
       dispatch.entity.setState(payload);
     },
     async entitySave(data) {
-      await entityService.entitySave(data.entityFormData);
+      await entityService.entitySave({ ...data.entityFormData, pid: data.pid });
       await this.entityPage({ entityCurrent: data.entityCurrent, pid: data.pid });
       const payload = {
         entityVisible: false,

@@ -63,6 +63,7 @@ function Entity() {
         items={entityState.entityForm}
         dispatchers={(value) => entityDispatchers.setDataForm(value)}
         onOk={() => entityDispatchers.entitySave({
+          pid: entityState.entityNameId,
           entityFormData: entityState.entityFormData,
           entityCurrent: entityState.entityCurrent,
         })}

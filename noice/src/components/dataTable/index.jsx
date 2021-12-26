@@ -22,7 +22,7 @@ function DataTable(props) {
         {items.length === 0 ? null : items.map((item, index) => {
           if (item.propertyType === 'customOperation') {
             return (<Table.Column
-              style={item.propertyDisplay === '0'}
+              style={item.propertyDisplay === '否'}
               title={item.propertyLabel}
               dataIndex={item.propertyCode}
               width={item.propertyWidth != null ? item.propertyWidth : null}
@@ -32,7 +32,7 @@ function DataTable(props) {
             />);
           }
           return (<Table.Column
-            hidden={item.propertyDisplay === '0'}
+            hidden={item.propertyDisplay === '否'}
             title={item.propertyLabel}
             dataIndex={item.propertyCode}
             width={item.propertyWidth != null ? item.propertyWidth : null}
