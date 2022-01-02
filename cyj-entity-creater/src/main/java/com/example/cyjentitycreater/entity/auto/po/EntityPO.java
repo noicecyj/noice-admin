@@ -39,6 +39,8 @@ public class EntityPO implements Serializable {
         private String pid;
         @Column(name = "property_code")
         private String propertyCode;
+        @Column(name = "property_name")
+        private String propertyName;
         @Column(name = "property_type")
         private String propertyType;
         @Column(name = "property_label")
@@ -59,6 +61,8 @@ public class EntityPO implements Serializable {
         private String propertyDefaultValue;
         @Column(name = "property_display")
         private String propertyDisplay;
+        @Column(name = "status")
+        private String status;
         @Column(name = "sort_code")
         private String sortCode;
 

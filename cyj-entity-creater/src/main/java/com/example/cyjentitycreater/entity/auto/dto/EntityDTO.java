@@ -2,6 +2,7 @@ package com.example.cyjentitycreater.entity.auto.dto;
 
 import lombok.Data;
 
+import javax.persistence.Column;
 import java.io.Serializable;
 
 /**
@@ -15,6 +16,7 @@ public class EntityDTO implements Serializable {
         private String id;
         private String pid;
         private String propertyCode;
+        private String propertyName;
         private String propertyType;
         private String propertyLabel;
         private String propertyWidth;
@@ -25,6 +27,7 @@ public class EntityDTO implements Serializable {
         private String propertyDataSource;
         private String propertyDefaultValue;
         private String propertyDisplay;
+        private String status;
         private String sortCode;
 
 }

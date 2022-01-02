@@ -1,16 +1,10 @@
 package com.example.cyjdictionary.service.custom.Impl;
 
 import com.example.cyjcommon.service.Impl.BaseService;
-import com.example.cyjdictionary.entity.auto.po.CatalogPO;
 import com.example.cyjdictionary.entity.auto.po.DictionaryPO;
 import com.example.cyjdictionary.entity.auto.po.QCatalogPO;
 import com.example.cyjdictionary.entity.auto.po.QDictionaryPO;
 import com.example.cyjdictionary.service.custom.DictionaryCustomService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -68,7 +62,6 @@ public class DictionaryCustomServiceImpl extends BaseService implements Dictiona
                         .where(qCatalogPO.catalogValue.eq(value).and(qDictionary.dictionaryName.eq(value2)))
                         .orderBy(qDictionary.sortCode.asc()).fetchOne();
         }
-
 
 
 }

@@ -37,13 +37,13 @@ function DataForm(props) {
             if (item.propertyRequired === '是') {
               return (
                 <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
-                  <Input id={item.propertyCode} name={item.propertyCode} placeholder={`请输入${item.propertyLabel}`} />
+                  <Input id={item.propertyCode} name={item.propertyName} placeholder={`请输入${item.propertyLabel}`} />
                 </FormItem>
               );
             } else {
               return (
                 <FormItem label={`${item.propertyLabel}`} key={item.id}>
-                  <Input id={item.propertyCode} name={item.propertyCode} placeholder={`请输入${item.propertyLabel}`} />
+                  <Input id={item.propertyCode} name={item.propertyName} placeholder={`请输入${item.propertyLabel}`} />
                 </FormItem>
               );
             }
@@ -51,13 +51,13 @@ function DataForm(props) {
             if (item.propertyRequired === '是') {
               return (
                 <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
-                  <Input.Password id={item.propertyCode} name={item.propertyCode} placeholder={`请输入${item.propertyLabel}`} />
+                  <Input.Password id={item.propertyCode} name={item.propertyName} placeholder={`请输入${item.propertyLabel}`} />
                 </FormItem>
               );
             } else {
               return (
                 <FormItem label={`${item.propertyLabel}`} key={item.id}>
-                  <Input.Password id={item.propertyCode} name={item.propertyCode} placeholder={`请输入${item.propertyLabel}`} />
+                  <Input.Password id={item.propertyCode} name={item.propertyName} placeholder={`请输入${item.propertyLabel}`} />
                 </FormItem>
               );
             }
@@ -65,13 +65,13 @@ function DataForm(props) {
             if (item.propertyRequired === '是') {
               return (
                 <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
-                  <Input.TextArea id={item.propertyCode} name={item.propertyCode} placeholder={`请输入${item.propertyLabel}`} />
+                  <Input.TextArea id={item.propertyCode} name={item.propertyName} placeholder={`请输入${item.propertyLabel}`} />
                 </FormItem>
               );
             } else {
               return (
                 <FormItem label={`${item.propertyLabel}`} key={item.id}>
-                  <Input.TextArea id={item.propertyCode} name={item.propertyCode} placeholder={`请输入${item.propertyLabel}`} />
+                  <Input.TextArea id={item.propertyCode} name={item.propertyName} placeholder={`请输入${item.propertyLabel}`} />
                 </FormItem>
               );
             }
@@ -82,7 +82,7 @@ function DataForm(props) {
                   <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
                     <Select
                       id={item.propertyCode}
-                      name={item.propertyCode}
+                      name={item.propertyName}
                       filterLocal={false}
                       dataSource={item.propertyDataSource}
                       style={{ width: 300 }}
@@ -96,7 +96,7 @@ function DataForm(props) {
                   <FormItem label={`${item.propertyLabel}`} key={item.id}>
                     <Select
                       id={item.propertyCode}
-                      name={item.propertyCode}
+                      name={item.propertyName}
                       filterLocal={false}
                       dataSource={item.propertyDataSource}
                       style={{ width: 300 }}
@@ -111,7 +111,7 @@ function DataForm(props) {
                 <FormItem label={`${item.propertyLabel}`} key={item.id}>
                   <Select
                     id={item.propertyCode}
-                    name={item.propertyCode}
+                    name={item.propertyName}
                     filterLocal={false}
                     style={{ width: 414 }}
                     mode={item.mode}
@@ -145,13 +145,13 @@ function DataForm(props) {
             if (item.propertyRequired === '是') {
               return (
                 <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
-                  <NumberPicker id={item.propertyCode} name={item.propertyCode} min={1} max={10} />
+                  <NumberPicker id={item.propertyCode} name={item.propertyName} min={1} max={10} />
                 </FormItem>
               );
             } else {
               return (
                 <FormItem label={`${item.propertyLabel}`} key={item.id}>
-                  <NumberPicker id={item.propertyCode} name={item.propertyCode} min={1} max={10} />
+                  <NumberPicker id={item.propertyCode} name={item.propertyName} min={1} max={10} />
                 </FormItem>
               );
             }
@@ -159,13 +159,13 @@ function DataForm(props) {
             if (item.propertyRequired === '是') {
               return (
                 <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
-                  <Switch id={item.propertyCode} name={item.propertyCode} defaultChecked />
+                  <Switch id={item.propertyCode} name={item.propertyName} defaultChecked />
                 </FormItem>
               );
             } else {
               return (
                 <FormItem label={`${item.propertyLabel}`} key={item.id}>
-                  <Switch id={item.propertyCode} name={item.propertyCode} defaultChecked />
+                  <Switch id={item.propertyCode} name={item.propertyName} defaultChecked />
                 </FormItem>
               );
             }
@@ -173,13 +173,13 @@ function DataForm(props) {
             if (item.propertyRequired === '是') {
               return (
                 <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
-                  <Range id={item.propertyCode} name={item.propertyCode} defaultValue={0} scales={[0, 100]} marks={[0, 100]} />
+                  <Range id={item.propertyCode} name={item.propertyName} defaultValue={0} scales={[0, 100]} marks={[0, 100]} />
                 </FormItem>
               );
             } else {
               return (
                 <FormItem label={`${item.propertyLabel}`} key={item.id}>
-                  <Range id={item.propertyCode} name={item.propertyCode} defaultValue={0} scales={[0, 100]} marks={[0, 100]} />
+                  <Range id={item.propertyCode} name={item.propertyName} defaultValue={0} scales={[0, 100]} marks={[0, 100]} />
                 </FormItem>
               );
             }
@@ -187,13 +187,13 @@ function DataForm(props) {
             if (item.propertyRequired === '是') {
               return (
                 <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
-                  <DatePicker id={item.propertyCode} name={item.propertyCode} />
+                  <DatePicker id={item.propertyCode} name={item.propertyName} />
                 </FormItem>
               );
             } else {
               return (
                 <FormItem label={`${item.propertyLabel}`} key={item.id}>
-                  <DatePicker id={item.propertyCode} name={item.propertyCode} />
+                  <DatePicker id={item.propertyCode} name={item.propertyName} />
                 </FormItem>
               );
             }
@@ -201,13 +201,13 @@ function DataForm(props) {
             if (item.propertyRequired === '是') {
               return (
                 <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
-                  <RangePicker id={item.propertyCode} name={item.propertyCode} />
+                  <RangePicker id={item.propertyCode} name={item.propertyName} />
                 </FormItem>
               );
             } else {
               return (
                 <FormItem label={`${item.propertyLabel}`} key={item.id}>
-                  <RangePicker id={item.propertyCode} name={item.propertyCode} />
+                  <RangePicker id={item.propertyCode} name={item.propertyName} />
                 </FormItem>
               );
             }
@@ -215,13 +215,13 @@ function DataForm(props) {
             if (item.propertyRequired === '是') {
               return (
                 <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
-                  <TimePicker id={item.propertyCode} name={item.propertyCode} />
+                  <TimePicker id={item.propertyCode} name={item.propertyName} />
                 </FormItem>
               );
             } else {
               return (
                 <FormItem label={`${item.propertyLabel}`} key={item.id}>
-                  <TimePicker id={item.propertyCode} name={item.propertyCode} />
+                  <TimePicker id={item.propertyCode} name={item.propertyName} />
                 </FormItem>
               );
             }
@@ -231,7 +231,7 @@ function DataForm(props) {
                 <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
                   <CheckboxGroup
                     id={item.propertyCode}
-                    name={item.propertyCode}
+                    name={item.propertyName}
                     dataSource={item.propertyDataSource}
                     direction={item.propertyDirection}
                   />
@@ -242,7 +242,7 @@ function DataForm(props) {
                 <FormItem label={`${item.propertyLabel}`} key={item.id}>
                   <CheckboxGroup
                     id={item.propertyCode}
-                    name={item.propertyCode}
+                    name={item.propertyName}
                     dataSource={item.propertyDataSource}
                     direction={item.propertyDirection}
                   />
@@ -255,7 +255,7 @@ function DataForm(props) {
                 <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
                   <RadioGroup
                     id={item.propertyCode}
-                    name={item.propertyCode}
+                    name={item.propertyName}
                     dataSource={item.propertyDataSource}
                     direction={item.propertyDirection}
                   />
@@ -266,7 +266,7 @@ function DataForm(props) {
                 <FormItem label={`${item.propertyLabel}`} key={item.id}>
                   <RadioGroup
                     id={item.propertyCode}
-                    name={item.propertyCode}
+                    name={item.propertyName}
                     dataSource={item.propertyDataSource}
                     direction={item.propertyDirection}
                   />
@@ -276,11 +276,14 @@ function DataForm(props) {
           } else {
             return (
               <FormItem label={`${item.propertyLabel}`} key={item.id}>
-                <Input id={item.propertyCode} name={item.propertyCode} />
+                <Input id={item.propertyCode} name={item.propertyName} />
               </FormItem>
             );
           }
         })}
+        <FormItem label="状态" required requiredMessage="请输入状态" >
+          <Input id="status" name="status" placeholder="请输入状态" />
+        </FormItem>
         <FormItem label="排序代码" required requiredMessage="请输入排序代码" >
           <Input id="sortCode" name="sortCode" placeholder="请输入排序代码" />
         </FormItem>

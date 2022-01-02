@@ -45,8 +45,8 @@ public class EntityNamePO implements Serializable {
         private String entityCode;
         @Column(name = "entity_type")
         private String entityType;
-        @Column(name = "entity_status")
-        private String entityStatus;
+        @Column(name = "status")
+        private String status;
         @Column(name = "sort_code")
         private String sortCode;
 

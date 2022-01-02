@@ -24,7 +24,7 @@ function DataTable(props) {
             return (<Table.Column
               style={item.propertyDisplay === '否'}
               title={item.propertyLabel}
-              dataIndex={item.propertyCode}
+              dataIndex={item.propertyName}
               width={item.propertyWidth != null ? item.propertyWidth : null}
               align="right"
               cell={operationRender}
@@ -34,11 +34,17 @@ function DataTable(props) {
           return (<Table.Column
             hidden={item.propertyDisplay === '否'}
             title={item.propertyLabel}
-            dataIndex={item.propertyCode}
+            dataIndex={item.propertyName}
             width={item.propertyWidth != null ? item.propertyWidth : null}
             key={index}
           />);
         })}
+        <Table.Column
+          title="状态"
+          dataIndex="status"
+          width="80px"
+          key="status"
+        />
         <Table.Column
           title="操作"
           align="right"
