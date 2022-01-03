@@ -32,16 +32,6 @@ const asideMenuConfig = [
         path: '/admin/sql',
       },
       {
-        name: '表单管理',
-        icon: '',
-        path: '/admin/dataform',
-      },
-      {
-        name: '表格管理',
-        icon: '',
-        path: '/admin/dataTable',
-      },
-      {
         name: '服务管理',
         icon: '',
         path: '/admin/appService',

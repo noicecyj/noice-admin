@@ -5,8 +5,6 @@ import LoginPage from '@/pages/Login';
 import CatalogPage from '@/pages/Catalog';
 import EntityNamePage from '@/pages/EntityName';
 // import LogPage from '@/pages/Log';
-// import DataFormPage from '@/pages/DataForm';
-// import DataTablePage from '@/pages/DataTable';
 // import AppServicePage from '@/pages/AppService';
 // import UserPage from '@/pages/User';
 // import RolePage from '@/pages/Role';
@@ -32,14 +30,6 @@ const routerConfig = [
       // {
       //   path: '/log',
       //   component: LogPage,
-      // },
-      // {
-      //   path: '/dataform',
-      //   component: DataFormPage,
-      // },
-      // {
-      //   path: '/dataTable',
-      //   component: DataTablePage,
       // },
       // {
       //   path: '/appService',

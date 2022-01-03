@@ -37,13 +37,23 @@ function DataForm(props) {
             if (item.propertyRequired === '是') {
               return (
                 <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
-                  <Input id={item.propertyCode} name={item.propertyName} placeholder={`请输入${item.propertyLabel}`} />
+                  <Input
+                    id={item.propertyCode}
+                    name={item.propertyName}
+                    placeholder={`请输入${item.propertyLabel}`}
+                    defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
+                  />
                 </FormItem>
               );
             } else {
               return (
                 <FormItem label={`${item.propertyLabel}`} key={item.id}>
-                  <Input id={item.propertyCode} name={item.propertyName} placeholder={`请输入${item.propertyLabel}`} />
+                  <Input
+                    id={item.propertyCode}
+                    name={item.propertyName}
+                    placeholder={`请输入${item.propertyLabel}`}
+                    defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
+                  />
                 </FormItem>
               );
             }
@@ -65,13 +75,23 @@ function DataForm(props) {
             if (item.propertyRequired === '是') {
               return (
                 <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
-                  <Input.TextArea id={item.propertyCode} name={item.propertyName} placeholder={`请输入${item.propertyLabel}`} />
+                  <Input.TextArea
+                    id={item.propertyCode}
+                    name={item.propertyName}
+                    placeholder={`请输入${item.propertyLabel}`}
+                    defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
+                  />
                 </FormItem>
               );
             } else {
               return (
                 <FormItem label={`${item.propertyLabel}`} key={item.id}>
-                  <Input.TextArea id={item.propertyCode} name={item.propertyName} placeholder={`请输入${item.propertyLabel}`} />
+                  <Input.TextArea
+                    id={item.propertyCode}
+                    name={item.propertyName}
+                    placeholder={`请输入${item.propertyLabel}`}
+                    defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
+                  />
                 </FormItem>
               );
             }
@@ -85,9 +105,9 @@ function DataForm(props) {
                       name={item.propertyName}
                       filterLocal={false}
                       dataSource={item.propertyDataSource}
-                      style={{ width: 300 }}
+                      style={{ width: 414 }}
                       mode={item.mode}
-                      defaultValue={item.defaultValue != null ? item.defaultValue : null}
+                      defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
                     />
                   </FormItem>
                 );
@@ -99,9 +119,9 @@ function DataForm(props) {
                       name={item.propertyName}
                       filterLocal={false}
                       dataSource={item.propertyDataSource}
-                      style={{ width: 300 }}
+                      style={{ width: 414 }}
                       mode={item.mode}
-                      defaultValue={item.defaultValue != null ? item.defaultValue : null}
+                      defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
                     />
                   </FormItem>
                 );
@@ -115,7 +135,7 @@ function DataForm(props) {
                     filterLocal={false}
                     style={{ width: 414 }}
                     mode={item.mode}
-                    defaultValue={item.defaultValue != null ? item.defaultValue : null}
+                    defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
                   />
                 </FormItem>
               );
@@ -145,13 +165,25 @@ function DataForm(props) {
             if (item.propertyRequired === '是') {
               return (
                 <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
-                  <NumberPicker id={item.propertyCode} name={item.propertyName} min={1} max={10} />
+                  <NumberPicker
+                    id={item.propertyCode}
+                    name={item.propertyName}
+                    min={1}
+                    max={10}
+                    defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
+                  />
                 </FormItem>
               );
             } else {
               return (
                 <FormItem label={`${item.propertyLabel}`} key={item.id}>
-                  <NumberPicker id={item.propertyCode} name={item.propertyName} min={1} max={10} />
+                  <NumberPicker
+                    id={item.propertyCode}
+                    name={item.propertyName}
+                    min={1}
+                    max={10}
+                    defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
+                  />
                 </FormItem>
               );
             }
@@ -159,13 +191,23 @@ function DataForm(props) {
             if (item.propertyRequired === '是') {
               return (
                 <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
-                  <Switch id={item.propertyCode} name={item.propertyName} defaultChecked />
+                  <Switch
+                    id={item.propertyCode}
+                    name={item.propertyName}
+                    defaultChecked
+                    defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
+                  />
                 </FormItem>
               );
             } else {
               return (
                 <FormItem label={`${item.propertyLabel}`} key={item.id}>
-                  <Switch id={item.propertyCode} name={item.propertyName} defaultChecked />
+                  <Switch
+                    id={item.propertyCode}
+                    name={item.propertyName}
+                    defaultChecked
+                    defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
+                  />
                 </FormItem>
               );
             }
@@ -276,16 +318,20 @@ function DataForm(props) {
           } else {
             return (
               <FormItem label={`${item.propertyLabel}`} key={item.id}>
-                <Input id={item.propertyCode} name={item.propertyName} />
+                <Input
+                  id={item.propertyCode}
+                  name={item.propertyName}
+                  defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
+                />
               </FormItem>
             );
           }
         })}
         <FormItem label="状态" required requiredMessage="请输入状态" >
-          <Input id="status" name="status" placeholder="请输入状态" />
+          <Input id="status" name="status" placeholder="请输入状态" defaultValue="有效" />
         </FormItem>
         <FormItem label="排序代码" required requiredMessage="请输入排序代码" >
-          <Input id="sortCode" name="sortCode" placeholder="请输入排序代码" />
+          <Input id="sortCode" name="sortCode" placeholder="请输入排序代码" defaultValue="0010" />
         </FormItem>
         <FormItem >
           <Form.Submit

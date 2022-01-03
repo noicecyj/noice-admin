@@ -645,8 +645,8 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 List<EntityCustomDTO> entityCustomDTOList = new ArrayList<>();
                 for (EntityPO entityPO : entityPOList) {
                         EntityCustomDTO entityCustomDTO = new EntityCustomDTO();
+                        VoPoConverter.copyProperties(entityPO, entityCustomDTO);
                         if (StringUtils.isNotEmpty(entityPO.getPropertyDataSourceType())) {
-                                VoPoConverter.copyProperties(entityPO, entityCustomDTO);
                                 List<DictionaryDTO> dictionaryDTOList = dictionaryApiService
                                         .findCatalogByValue(entityCustomDTO.getPropertyDataSourceType());
                                 List<Map<String, String>> mapList = new ArrayList<>();
