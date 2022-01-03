@@ -1,9 +1,7 @@
 package com.example.cyjdictionary.controller.auto.Impl;
 
 import com.example.cyjcommon.utils.ResultVO;
-import com.example.cyjcommon.utils.VoPoConverter;
 import com.example.cyjdictionary.controller.auto.CatalogController;
-import com.example.cyjdictionary.entity.auto.dto.CatalogDTO;
 import com.example.cyjdictionary.entity.auto.po.CatalogPO;
 import com.example.cyjdictionary.service.auto.CatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +32,7 @@ public class CatalogControllerImpl implements CatalogController {
         }
 
         @Override
-        public ResultVO catalogSave(CatalogDTO dto) {
-                CatalogPO po = new CatalogPO();
-                VoPoConverter.copyProperties(dto, po);
+        public ResultVO catalogSave(CatalogPO po) {
                 if (po.getId() == null) {
                         return ResultVO.success(catalogService.addOne(po));
                 }

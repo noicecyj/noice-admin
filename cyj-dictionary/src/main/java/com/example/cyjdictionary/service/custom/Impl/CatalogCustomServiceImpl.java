@@ -2,6 +2,7 @@ package com.example.cyjdictionary.service.custom.Impl;
 
 import com.example.cyjcommon.service.Impl.BaseService;
 import com.example.cyjdictionary.dao.auto.CatalogDao;
+import com.example.cyjdictionary.dao.custom.CatalogCustomDao;
 import com.example.cyjdictionary.entity.auto.po.CatalogPO;
 import com.example.cyjdictionary.service.custom.CatalogCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = Exception.class)
 public class CatalogCustomServiceImpl extends BaseService implements CatalogCustomService {
 
-        private CatalogDao catalogDao;
+        private CatalogCustomDao catalogCustomDao;
 
         @Autowired
-        public void setCatalogDao(CatalogDao catalogDao) {
-                this.catalogDao = catalogDao;
+        public void setCatalogCustomDao(CatalogCustomDao catalogCustomDao) {
+                this.catalogCustomDao = catalogCustomDao;
         }
 
         @Override
@@ -36,7 +37,7 @@ public class CatalogCustomServiceImpl extends BaseService implements CatalogCust
                                                                                   String sortCode) {
                 Sort sort = Sort.by(sortCode);
                 Pageable pageable = PageRequest.of(pageNumber, pageSize, sort);
-                return catalogDao.findAllByCatalogNameContainsOrCatalogValueContains(catalogName, catalogValue, pageable);
+                return catalogCustomDao.findAllByCatalogNameContainsOrCatalogValueContains(catalogName, catalogValue, pageable);
         }
 
 }

@@ -277,6 +277,8 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                         sb.append("        @Column(name = \"").append(entityPO.getPropertyCode()).append("\")\r\n");
                         sb.append("        private ").append(entityPO.getPropertyType()).append(" ").append(BeanUtils.underline2Camel(entityPO.getPropertyCode())).append(";\r\n");
                 });
+                sb.append("        @Column(name = \"status\")\r\n");
+                sb.append("        private String status;\r\n");
                 sb.append("        @Column(name = \"sort_code\")\r\n");
                 sb.append("        private String sortCode;\r\n");
                 sb.append("\r\n");
@@ -517,7 +519,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 sb.append("package ").append(poControllerPath).append("Impl;\r\n");
                 sb.append("\r\n");
                 sb.append("import com.example.cyjcommon.utils.ResultVO;\r\n");
-                sb.append("import com.example.cyjcommon.utils.VoPoConverter;\r\n");
                 sb.append("import ").append(poControllerPath).append(poName).append("Controller;\r\n");
                 sb.append("import ").append(poPath).append(poName).append("PO;\r\n");
                 sb.append("import ").append(poServicePath).append(poName).append("Service;\r\n");

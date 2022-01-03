@@ -2,7 +2,7 @@ package com.example.cyjdictionary.controller.auto;
 
 import com.example.cyjcommon.annotation.InterFaceMapping;
 import com.example.cyjcommon.utils.ResultVO;
-import com.example.cyjdictionary.entity.auto.dto.CatalogDTO;
+import com.example.cyjdictionary.entity.auto.po.CatalogPO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +25,7 @@ public interface CatalogController {
         @Operation(summary = "保存Catalog")
         @InterFaceMapping(api = "dictionaryApi")
         @PostMapping(value = "catalogSave")
-        ResultVO catalogSave(@RequestBody CatalogDTO dto);
+        ResultVO catalogSave(@RequestBody CatalogPO po);
 
         @Operation(summary = "删除Catalog")
         @InterFaceMapping(api = "dictionaryApi")

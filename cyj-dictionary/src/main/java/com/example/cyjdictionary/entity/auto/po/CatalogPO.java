@@ -41,6 +41,8 @@ public class CatalogPO implements Serializable {
         private String description;
         @Column(name = "catalog_value")
         private String catalogValue;
+        @Column(name = "status")
+        private String status;
         @Column(name = "sort_code")
         private String sortCode;
 

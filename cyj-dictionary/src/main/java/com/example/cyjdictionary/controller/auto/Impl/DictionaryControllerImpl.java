@@ -1,9 +1,7 @@
 package com.example.cyjdictionary.controller.auto.Impl;
 
 import com.example.cyjcommon.utils.ResultVO;
-import com.example.cyjcommon.utils.VoPoConverter;
 import com.example.cyjdictionary.controller.auto.DictionaryController;
-import com.example.cyjdictionary.entity.auto.dto.DictionaryDTO;
 import com.example.cyjdictionary.entity.auto.po.DictionaryPO;
 import com.example.cyjdictionary.service.auto.DictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author 曹元杰
  * @version 1.0
- * @date 2021-12-26
+ * @date 2022-01-04
  */
 @CrossOrigin
 @RestController
@@ -34,9 +32,7 @@ public class DictionaryControllerImpl implements DictionaryController {
         }
 
         @Override
-        public ResultVO dictionarySave(DictionaryDTO dto) {
-                DictionaryPO po = new DictionaryPO();
-                VoPoConverter.copyProperties(dto, po);
+        public ResultVO dictionarySave(DictionaryPO po) {
                 if (po.getId() == null) {
                         return ResultVO.success(dictionaryService.addOne(po));
                 }

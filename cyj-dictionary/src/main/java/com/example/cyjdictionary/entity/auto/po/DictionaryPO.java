@@ -18,7 +18,7 @@ import java.util.Objects;
 /**
  * @author 曹元杰
  * @version 1.0
- * @date 2021-12-26
+ * @date 2022-01-04
  */
 @Entity
 @Table(name = DictionaryPO.T_DICTIONARY)
@@ -41,6 +41,8 @@ public class DictionaryPO implements Serializable {
         private String dictionaryValue;
         @Column(name = "pid")
         private String pid;
+        @Column(name = "status")
+        private String status;
         @Column(name = "sort_code")
         private String sortCode;
 
