@@ -2,23 +2,31 @@ package com.example.cyjentitycreater.service.custom.Impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.cyjcommon.service.Impl.BaseService;
+import com.example.cyjcommon.utils.VoPoConverter;
+import com.example.cyjentitycreater.api.DictionaryApiService;
 import com.example.cyjentitycreater.dao.custom.EntityCustomDao;
 import com.example.cyjentitycreater.dao.custom.EntityNameCustomDao;
 import com.example.cyjentitycreater.entity.auto.po.AppServicePO;
 import com.example.cyjentitycreater.entity.auto.po.EntityNamePO;
 import com.example.cyjentitycreater.entity.auto.po.EntityPO;
+import com.example.cyjentitycreater.entity.custom.dto.DictionaryDTO;
+import com.example.cyjentitycreater.entity.custom.dto.EntityCustomDTO;
 import com.example.cyjentitycreater.service.auto.AppServiceService;
 import com.example.cyjentitycreater.service.auto.EntityNameService;
 import com.example.cyjentitycreater.service.auto.EntityService;
 import com.example.cyjentitycreater.service.custom.EntityNameCustomService;
 import com.example.cyjentitycreater.utils.BeanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 曹元杰
@@ -34,6 +42,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         private EntityNameCustomDao entityNameCustomDao;
         private AppServiceService appServiceService;
         private EntityCustomDao entityCustomDao;
+        private DictionaryApiService dictionaryApiService;
 
         @Autowired
         public void setEntityNameService(EntityNameService entityNameService) {
@@ -58,6 +67,11 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         @Autowired
         public void setAppServiceService(AppServiceService appServiceService) {
                 this.appServiceService = appServiceService;
+        }
+
+        @Autowired
+        public void setDictionaryApiService(DictionaryApiService dictionaryApiService) {
+                this.dictionaryApiService = dictionaryApiService;
         }
 
         @Override
@@ -97,7 +111,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         private void createJavaFile(EntityNamePO po, List<EntityPO> poList, String underPoName, String poName, String appPath, String appApi) {
                 try {
                         createJavaFile(appPath + "/entity/auto/po", poGenerate(po, poList, poName, appPath));
-                        createJavaFile(appPath + "/entity/auto/dto", dtoGenerate(poList, poName, appPath));
                         createJavaFile(appPath + "/dao/auto", daoGenerate(poName, appPath));
                         createJavaFile(appPath + "/dao/custom", daoCustomGenerate(poName, appPath));
                         createJavaFile(appPath + "/service/auto", serviceGenerate(poName, appPath));
@@ -285,39 +298,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 return new String[]{entityData, poName + "PO.java"};
         }
 
-        public String[] dtoGenerate(List<EntityPO> poList, String poName, String appPath) {
-                StringBuilder sb = new StringBuilder();
-                String[] poPathArr = appPath.split("java");
-                String poPath = poPathArr[1].substring(1).replaceAll("\\\\", ".") + ".entity";
-                sb.append("package ").append(poPath).append(".auto.dto;\r\n");
-                sb.append("\r\n");
-                sb.append("import lombok.Data;\r\n");
-                sb.append("\r\n");
-                sb.append("import java.io.Serializable;\r\n");
-                if (BeanUtils.ifDate(poList)) {
-                        sb.append("import java.sql.Date;\r\n");
-                }
-                if (BeanUtils.ifTimestamp(poList)) {
-                        sb.append("import java.sql.Timestamp;\r\n");
-                }
-                sb.append("\r\n");
-                sb.append("/**\r\n");
-                sb.append(" * @author 曹元杰\r\n");
-                sb.append(" * @version 1.0\r\n");
-                sb.append(" * @date ").append(LocalDate.now()).append("\r\n");
-                sb.append(" */\r\n");
-                sb.append("@Data\r\n");
-                sb.append("public class ").append(poName).append("DTO implements Serializable {\r\n");
-                sb.append("\r\n");
-                sb.append("        private String id;\r\n");
-                poList.forEach(entityPO -> sb.append("        private ").append(entityPO.getPropertyType()).append(" ").append(BeanUtils.underline2Camel(entityPO.getPropertyCode())).append(";\r\n"));
-                sb.append("        private String sortCode;\r\n");
-                sb.append("\r\n");
-                sb.append("}");
-                String entityData = sb.toString();
-                return new String[]{entityData, poName + "DTO.java"};
-        }
-
         public String[] daoGenerate(String poName, String appPath) {
                 StringBuilder sb = new StringBuilder();
                 String[] PathArr = appPath.split("java");
@@ -476,14 +456,15 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 StringBuilder sb = new StringBuilder();
                 String[] PathArr = appPath.split("java");
                 String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
-                String dtoPath = packetPath + ".entity.auto.dto.";
+                //entity路径
+                String poPath = packetPath + ".entity.auto.po.";
                 //controller路径
                 String poControllerPath = packetPath + ".controller.auto;\r\n";
                 sb.append("package ").append(poControllerPath);
                 sb.append("\r\n");
                 sb.append("import com.example.cyjcommon.annotation.InterFaceMapping;\r\n");
                 sb.append("import com.example.cyjcommon.utils.ResultVO;\r\n");
-                sb.append("import ").append(dtoPath).append(poName).append("DTO;\r\n");
+                sb.append("import ").append(poPath).append(poName).append("PO;\r\n");
                 sb.append("import io.swagger.v3.oas.annotations.Operation;\r\n");
                 sb.append("import io.swagger.v3.oas.annotations.tags.Tag;\r\n");
                 sb.append("import org.springframework.web.bind.annotation.PostMapping;\r\n");
@@ -506,7 +487,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 sb.append("        @Operation(summary = \"保存").append(poName).append("\")\r\n");
                 sb.append("        @InterFaceMapping(api = \"").append(appApi).append("\")\r\n");
                 sb.append("        @PostMapping(value = \"").append(underPoName).append("Save\")\r\n");
-                sb.append("        ResultVO ").append(underPoName).append("Save(@RequestBody ").append(poName).append("DTO dto);\r\n");
+                sb.append("        ResultVO ").append(underPoName).append("Save(@RequestBody ").append(poName).append("PO po);\r\n");
                 sb.append("\r\n");
                 sb.append("        @Operation(summary = \"删除").append(poName).append("\")\r\n");
                 sb.append("        @InterFaceMapping(api = \"").append(appApi).append("\")\r\n");
@@ -529,7 +510,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
                 //entity路径
                 String poPath = packetPath + ".entity.auto.po.";
-                String dtoPath = packetPath + ".entity.auto.dto.";
                 //serviceImpl路径
                 String poServicePath = packetPath + ".service.auto.";
                 //controller路径
@@ -539,7 +519,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 sb.append("import com.example.cyjcommon.utils.ResultVO;\r\n");
                 sb.append("import com.example.cyjcommon.utils.VoPoConverter;\r\n");
                 sb.append("import ").append(poControllerPath).append(poName).append("Controller;\r\n");
-                sb.append("import ").append(dtoPath).append(poName).append("DTO;\r\n");
                 sb.append("import ").append(poPath).append(poName).append("PO;\r\n");
                 sb.append("import ").append(poServicePath).append(poName).append("Service;\r\n");
                 sb.append("import org.springframework.beans.factory.annotation.Autowired;\r\n");
@@ -570,9 +549,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 sb.append("        }\r\n");
                 sb.append("\r\n");
                 sb.append("        @Override\r\n");
-                sb.append("        public ResultVO ").append(underPoName).append("Save(").append(poName).append("DTO dto) {\r\n");
-                sb.append("                ").append(poName).append("PO po = new ").append(poName).append("PO();\r\n");
-                sb.append("                VoPoConverter.copyProperties(dto, po);\r\n");
+                sb.append("        public ResultVO ").append(underPoName).append("Save(").append(poName).append("PO po) {\r\n");
                 sb.append("                if (po.getId() == null) {\r\n");
                 sb.append("                        return ResultVO.success(").append(underPoName).append("Service.addOne(po));\r\n");
                 sb.append("                }\r\n");
@@ -665,9 +642,27 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         public JSONObject findDataTableAndFormByName(String entityCode) {
                 EntityNamePO po = entityNameCustomDao.findEntityNamePOByEntityCodeAndEntityType(entityCode, "PO");
                 List<EntityPO> entityPOList = entityCustomDao.findEntityPOByPidAndPropertyDisplayEquals(po.getId(), "是");
+                List<EntityCustomDTO> entityCustomDTOList = new ArrayList<>();
+                for (EntityPO entityPO : entityPOList) {
+                        EntityCustomDTO entityCustomDTO = new EntityCustomDTO();
+                        if (StringUtils.isNotEmpty(entityPO.getPropertyDataSourceType())) {
+                                VoPoConverter.copyProperties(entityPO, entityCustomDTO);
+                                List<DictionaryDTO> dictionaryDTOList = dictionaryApiService
+                                        .findCatalogByValue(entityCustomDTO.getPropertyDataSourceType());
+                                List<Map<String, String>> mapList = new ArrayList<>();
+                                for (DictionaryDTO dto : dictionaryDTOList) {
+                                        Map<String, String> map = new HashMap<>();
+                                        map.put("label", dto.getDictionaryName());
+                                        map.put("value", dto.getDictionaryValue());
+                                        mapList.add(map);
+                                }
+                                entityCustomDTO.setPropertyDataSource(mapList);
+                        }
+                        entityCustomDTOList.add(entityCustomDTO);
+                }
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("dataTable", entityPOList);
-                jsonObject.put("dataForm", entityPOList);
+                jsonObject.put("dataTable", entityCustomDTOList);
+                jsonObject.put("dataForm", entityCustomDTOList);
                 return jsonObject;
         }
 

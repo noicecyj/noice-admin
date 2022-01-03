@@ -2,7 +2,7 @@ package com.example.cyjentitycreater.controller.auto;
 
 import com.example.cyjcommon.annotation.InterFaceMapping;
 import com.example.cyjcommon.utils.ResultVO;
-import com.example.cyjentitycreater.entity.auto.dto.EntityNameDTO;
+import com.example.cyjentitycreater.entity.auto.po.EntityNamePO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +20,7 @@ public interface EntityNameController {
         @Operation(summary = "保存EntityName")
         @InterFaceMapping(api = "entityCreateApi")
         @PostMapping(value = "entityNameSave")
-        ResultVO entityNameSave(@RequestBody EntityNameDTO dto);
+        ResultVO entityNameSave(@RequestBody EntityNamePO po);
 
         @Operation(summary = "查询所有EntityName")
         @InterFaceMapping(api = "entityCreateApi")

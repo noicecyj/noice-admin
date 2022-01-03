@@ -2,7 +2,7 @@ package com.example.cyjentitycreater.controller.auto;
 
 import com.example.cyjcommon.annotation.InterFaceMapping;
 import com.example.cyjcommon.utils.ResultVO;
-import com.example.cyjentitycreater.entity.auto.dto.AppServiceDTO;
+import com.example.cyjentitycreater.entity.auto.po.AppServicePO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +25,7 @@ public interface AppServiceController {
         @Operation(summary = "保存AppService")
         @InterFaceMapping(api = "entityCreateApi")
         @PostMapping(value = "appServiceSave")
-        ResultVO appServiceSave(@RequestBody AppServiceDTO dto);
+        ResultVO appServiceSave(@RequestBody AppServicePO po);
 
         @Operation(summary = "删除AppService")
         @InterFaceMapping(api = "entityCreateApi")

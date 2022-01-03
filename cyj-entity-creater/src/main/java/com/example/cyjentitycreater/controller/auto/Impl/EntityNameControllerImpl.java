@@ -1,9 +1,7 @@
 package com.example.cyjentitycreater.controller.auto.Impl;
 
 import com.example.cyjcommon.utils.ResultVO;
-import com.example.cyjcommon.utils.VoPoConverter;
 import com.example.cyjentitycreater.controller.auto.EntityNameController;
-import com.example.cyjentitycreater.entity.auto.dto.EntityNameDTO;
 import com.example.cyjentitycreater.entity.auto.po.EntityNamePO;
 import com.example.cyjentitycreater.service.auto.EntityNameService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +27,7 @@ public class EntityNameControllerImpl implements EntityNameController {
         }
 
         @Override
-        public ResultVO entityNameSave(EntityNameDTO dto) {
-                EntityNamePO po = new EntityNamePO();
-                VoPoConverter.copyProperties(dto, po);
+        public ResultVO entityNameSave(EntityNamePO po) {
                 if (po.getId() == null) {
                         return ResultVO.success(entityNameService.addOne(po));
                 }

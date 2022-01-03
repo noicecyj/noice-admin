@@ -55,8 +55,6 @@ public class EntityPO implements Serializable {
         private String propertyRequired;
         @Column(name = "property_data_source_type")
         private String propertyDataSourceType;
-        @Column(name = "property_data_source")
-        private String propertyDataSource;
         @Column(name = "property_default_value")
         private String propertyDefaultValue;
         @Column(name = "property_display")

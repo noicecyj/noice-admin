@@ -230,3 +230,12 @@
 2022-01-02 23:32:50.550 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 3ms
 2022-01-02 23:33:50.557 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 6ms
 2022-01-02 23:34:50.565 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 8ms
+2022-01-02 23:35:32.232 [SpringContextShutdownHook] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Unregistering application CYJ-DISCOVERY with eureka with status DOWN
+2022-01-02 23:35:32.287 [http-nio-8761-exec-10] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Registered instance CYJ-AUTH/host.docker.internal:cyj-auth:8100 with status DOWN (replication=false)
+2022-01-02 23:35:32.331 [http-nio-8761-exec-1] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Registered instance CYJ-USER/host.docker.internal:cyj-user:8090 with status DOWN (replication=false)
+2022-01-02 23:35:32.377 [http-nio-8761-exec-3] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Registered instance CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 with status DOWN (replication=false)
+2022-01-02 23:35:32.500 [SpringContextShutdownHook] INFO  com.netflix.eureka.DefaultEurekaServerContext - Shutting down ...
+2022-01-02 23:35:32.508 [SpringContextShutdownHook] INFO  com.netflix.eureka.DefaultEurekaServerContext - Shut down
+2022-01-02 23:35:32.516 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2022-01-02 23:35:32.521 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+2022-01-02 23:35:32.521 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient

@@ -1,9 +1,7 @@
 package com.example.cyjentitycreater.controller.auto.Impl;
 
 import com.example.cyjcommon.utils.ResultVO;
-import com.example.cyjcommon.utils.VoPoConverter;
 import com.example.cyjentitycreater.controller.auto.AppServiceController;
-import com.example.cyjentitycreater.entity.auto.dto.AppServiceDTO;
 import com.example.cyjentitycreater.entity.auto.po.AppServicePO;
 import com.example.cyjentitycreater.service.auto.AppServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +32,7 @@ public class AppServiceControllerImpl implements AppServiceController {
         }
 
         @Override
-        public ResultVO appServiceSave(AppServiceDTO dto) {
-                AppServicePO po = new AppServicePO();
-                VoPoConverter.copyProperties(dto, po);
+        public ResultVO appServiceSave(AppServicePO po) {
                 if (po.getId() == null) {
                         return ResultVO.success(appServiceService.addOne(po));
                 }
