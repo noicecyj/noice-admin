@@ -29,6 +29,8 @@ public class QCatalogPO extends EntityPathBase<CatalogPO> {
 
     public final StringPath sortCode = createString("sortCode");
 
+    public final StringPath status = createString("status");
+
     public QCatalogPO(String variable) {
         super(CatalogPO.class, forVariable(variable));
     }

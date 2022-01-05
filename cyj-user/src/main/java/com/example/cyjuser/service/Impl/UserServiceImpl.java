@@ -24,8 +24,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = Exception.class)
 public class UserServiceImpl extends BaseService implements UserService, UserDetailsService {
 
-        @Value("${security.loginAfterTime}")
-        private Integer loginAfterTime;
         private StringRedisTemplate redisTemplate;
         private UserDao userDao;
 
@@ -50,7 +48,7 @@ public class UserServiceImpl extends BaseService implements UserService, UserDet
                 String value = redisTemplate.opsForValue().get(flagKey);
                 if (StringUtils.isNotBlank(value)) {
                         //超过限制次数
-                        throw new UsernameNotFoundException("登录错误次数超过限制，请" + loginAfterTime + "分钟后再试");
+                        throw new UsernameNotFoundException("登录错误次数超过限制");
                 }
                 //查询用户信息
                 UserPO po = findAuthUserByUsername(username);

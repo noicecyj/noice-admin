@@ -46,9 +46,9 @@ public class AppServiceServiceImpl extends BaseService implements AppServiceServ
                 return queryFactory
                         .selectFrom(QAppServicePO.appServicePO)
                         .where(QAppServicePO.appServicePO.sortCode.isNotNull())
-                        .offset(pageNumber)
+                        .offset((pageNumber - 1) * 10L)
                         .orderBy(QAppServicePO.appServicePO.sortCode.asc())
-                        .limit(8)
+                        .limit(10)
                         .fetchResults();
         }
 

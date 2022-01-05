@@ -29,6 +29,8 @@ public class QDictionaryPO extends EntityPathBase<DictionaryPO> {
 
     public final StringPath sortCode = createString("sortCode");
 
+    public final StringPath status = createString("status");
+
     public QDictionaryPO(String variable) {
         super(DictionaryPO.class, forVariable(variable));
     }

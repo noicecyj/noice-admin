@@ -1,26 +1,273 @@
-2022-01-04 00:00:02.637 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 9ms
-2022-01-04 00:01:02.637 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 0ms
-2022-01-04 00:02:02.402 [Eureka-PeerNodesUpdater] WARN  com.netflix.eureka.cluster.PeerEurekaNodes - The replica size seems to be empty. Check the route 53 DNS Registry
-2022-01-04 00:02:02.645 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 8ms
-2022-01-04 00:03:02.663 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 17ms
-2022-01-04 00:04:02.664 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 0ms
-2022-01-04 00:05:02.674 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 9ms
-2022-01-04 00:06:02.676 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 2ms
-2022-01-04 00:07:02.682 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 5ms
-2022-01-04 00:08:02.683 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 0ms
-2022-01-04 00:09:02.684 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 1ms
-2022-01-04 00:09:44.105 [http-nio-8761-exec-2] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Registered instance CYJ-DICTIONARY/host.docker.internal:cyj-dictionary:8030 with status DOWN (replication=false)
-2022-01-04 00:09:47.531 [http-nio-8761-exec-1] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Cancelled instance CYJ-DICTIONARY/host.docker.internal:cyj-dictionary:8030 (replication=false)
-2022-01-04 00:10:02.697 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 12ms
-2022-01-04 00:11:02.701 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 3ms
-2022-01-04 00:11:36.577 [http-nio-8761-exec-3] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Registered instance CYJ-DICTIONARY/host.docker.internal:cyj-dictionary:8030 with status UP (replication=false)
-2022-01-04 00:12:02.412 [Eureka-PeerNodesUpdater] WARN  com.netflix.eureka.cluster.PeerEurekaNodes - The replica size seems to be empty. Check the route 53 DNS Registry
-2022-01-04 00:12:02.412 [ReplicaAwareInstanceRegistry - RenewalThresholdUpdater] INFO  c.n.eureka.registry.PeerAwareInstanceRegistryImpl - Current renewal threshold is : 8
-2022-01-04 00:12:02.708 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 6ms
-2022-01-04 00:13:02.714 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 6ms
-2022-01-04 00:14:02.717 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 2ms
-2022-01-04 00:15:02.726 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 9ms
-2022-01-04 00:16:02.730 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 3ms
-2022-01-04 00:17:02.733 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 3ms
-2022-01-04 00:18:02.742 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 8ms
-2022-01-04 00:19:02.750 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 8ms
+2022-01-05 22:30:13.609 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2022-01-05 22:30:14.359 [main] INFO  com.example.cyjdiscovery.CyjDiscoveryApplication - The following profiles are active: dev
+2022-01-05 22:30:15.040 [main] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2022-01-05 22:30:15.131 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=c8e55742-bb71-3a72-be02-b28b51f08dbd
+2022-01-05 22:30:15.393 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8761 (http)
+2022-01-05 22:30:15.404 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8761"]
+2022-01-05 22:30:15.404 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-01-05 22:30:15.404 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
+2022-01-05 22:30:15.490 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-01-05 22:30:15.490 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1108 ms
+2022-01-05 22:30:15.636 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-discovery/target/classes/config.properties]
+2022-01-05 22:30:15.647 [main] INFO  com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@5292ceca
+2022-01-05 22:30:15.945 [main] INFO  c.s.j.server.impl.application.WebApplicationImpl - Initiating Jersey application, version 'Jersey: 1.19.4 05/24/2017 03:20 PM'
+2022-01-05 22:30:16.005 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON encoding codec LegacyJacksonJson
+2022-01-05 22:30:16.005 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON decoding codec LegacyJacksonJson
+2022-01-05 22:30:16.104 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML encoding codec XStreamXml
+2022-01-05 22:30:16.104 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML decoding codec XStreamXml
+2022-01-05 22:30:16.442 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-discovery/target/classes/config.properties]
+2022-01-05 22:30:16.574 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2022-01-05 22:30:17.489 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses Jersey
+2022-01-05 22:30:17.519 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2022-01-05 22:30:17.560 [main] INFO  o.s.cloud.netflix.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2022-01-05 22:30:17.590 [main] INFO  com.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2022-01-05 22:30:17.590 [main] INFO  com.netflix.discovery.DiscoveryClient - Client configured to neither register nor query for data.
+2022-01-05 22:30:17.600 [main] INFO  com.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1641393017600 with initial instances count: 0
+2022-01-05 22:30:17.631 [main] INFO  com.netflix.eureka.DefaultEurekaServerContext - Initializing ...
+2022-01-05 22:30:17.631 [main] WARN  com.netflix.eureka.cluster.PeerEurekaNodes - The replica size seems to be empty. Check the route 53 DNS Registry
+2022-01-05 22:30:17.651 [main] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Finished initializing remote region registries. All known remote regions: []
+2022-01-05 22:30:17.651 [main] INFO  com.netflix.eureka.DefaultEurekaServerContext - Initialized
+2022-01-05 22:30:17.661 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-01-05 22:30:17.711 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application CYJ-DISCOVERY with eureka with status UP
+2022-01-05 22:30:17.721 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8761"]
+2022-01-05 22:30:17.721 [Thread-20] INFO  o.s.c.netflix.eureka.server.EurekaServerBootstrap - Setting the eureka configuration..
+2022-01-05 22:30:17.722 [Thread-20] INFO  o.s.c.netflix.eureka.server.EurekaServerBootstrap - Eureka data center value eureka.datacenter is not set, defaulting to default
+2022-01-05 22:30:17.722 [Thread-20] INFO  o.s.c.netflix.eureka.server.EurekaServerBootstrap - Eureka environment value eureka.environment is not set, defaulting to test
+2022-01-05 22:30:17.732 [Thread-20] INFO  o.s.c.netflix.eureka.server.EurekaServerBootstrap - isAws returned false
+2022-01-05 22:30:17.732 [Thread-20] INFO  o.s.c.netflix.eureka.server.EurekaServerBootstrap - Initialized server context
+2022-01-05 22:30:17.732 [Thread-20] INFO  c.n.eureka.registry.PeerAwareInstanceRegistryImpl - Got 1 instances from neighboring DS node
+2022-01-05 22:30:17.732 [Thread-20] INFO  c.n.eureka.registry.PeerAwareInstanceRegistryImpl - Renew threshold is: 1
+2022-01-05 22:30:17.732 [Thread-20] INFO  c.n.eureka.registry.PeerAwareInstanceRegistryImpl - Changing status to UP
+2022-01-05 22:30:17.743 [Thread-20] INFO  o.s.c.n.e.s.EurekaServerInitializerConfiguration - Started Eureka Server
+2022-01-05 22:30:17.748 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8761 (http) with context path ''
+2022-01-05 22:30:17.748 [main] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8761
+2022-01-05 22:30:18.008 [main] INFO  com.example.cyjdiscovery.CyjDiscoveryApplication - Started CyjDiscoveryApplication in 5.165 seconds (JVM running for 6.767)
+2022-01-05 22:30:18.567 [RMI TCP Connection(1)-192.168.1.4] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-01-05 22:30:18.567 [RMI TCP Connection(1)-192.168.1.4] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2022-01-05 22:30:18.567 [RMI TCP Connection(1)-192.168.1.4] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2022-01-05 22:31:17.741 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 0ms
+2022-01-05 22:32:17.746 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 5ms
+2022-01-05 22:32:41.857 [http-nio-8761-exec-2] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Registered instance CYJ-AUTH/host.docker.internal:cyj-auth:8100 with status UP (replication=false)
+2022-01-05 22:32:46.391 [http-nio-8761-exec-5] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Registered instance CYJ-USER/host.docker.internal:cyj-user:8090 with status UP (replication=false)
+2022-01-05 22:33:17.581 [http-nio-8761-exec-10] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Registered instance CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 with status UP (replication=false)
+2022-01-05 22:33:17.755 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 9ms
+2022-01-05 22:34:17.755 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 0ms
+2022-01-05 22:35:17.764 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 9ms
+2022-01-05 22:36:17.767 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 2ms
+2022-01-05 22:37:17.777 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 10ms
+2022-01-05 22:38:17.783 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 5ms
+2022-01-05 22:39:17.790 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 6ms
+2022-01-05 22:40:17.650 [Eureka-PeerNodesUpdater] WARN  com.netflix.eureka.cluster.PeerEurekaNodes - The replica size seems to be empty. Check the route 53 DNS Registry
+2022-01-05 22:40:17.796 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 6ms
+2022-01-05 22:40:50.829 [http-nio-8761-exec-6] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Registered instance CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 with status DOWN (replication=false)
+2022-01-05 22:40:54.298 [http-nio-8761-exec-5] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Cancelled instance CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 (replication=false)
+2022-01-05 22:41:07.924 [http-nio-8761-exec-7] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Registered instance CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 with status UP (replication=false)
+2022-01-05 22:41:17.804 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 7ms
+2022-01-05 22:42:17.805 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 1ms
+2022-01-05 22:43:17.807 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 1ms
+2022-01-05 22:44:17.809 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 1ms
+2022-01-05 22:45:17.659 [ReplicaAwareInstanceRegistry - RenewalThresholdUpdater] INFO  c.n.eureka.registry.PeerAwareInstanceRegistryImpl - Current renewal threshold is : 6
+2022-01-05 22:45:17.819 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 10ms
+2022-01-05 22:46:17.820 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 1ms
+2022-01-05 22:47:17.830 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 10ms
+2022-01-05 22:48:17.840 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 10ms
+2022-01-05 22:49:17.851 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 10ms
+2022-01-05 22:50:17.662 [Eureka-PeerNodesUpdater] WARN  com.netflix.eureka.cluster.PeerEurekaNodes - The replica size seems to be empty. Check the route 53 DNS Registry
+2022-01-05 22:50:17.859 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 7ms
+2022-01-05 22:51:17.868 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 9ms
+2022-01-05 22:52:17.877 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 9ms
+2022-01-05 22:53:17.881 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 3ms
+2022-01-05 22:54:17.886 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 4ms
+2022-01-05 22:55:17.895 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 8ms
+2022-01-05 22:55:35.600 [http-nio-8761-exec-2] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Registered instance CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 with status DOWN (replication=false)
+2022-01-05 22:55:38.939 [http-nio-8761-exec-5] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Cancelled instance CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 (replication=false)
+2022-01-05 22:55:52.713 [http-nio-8761-exec-3] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Registered instance CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 with status UP (replication=false)
+2022-01-05 22:56:17.897 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 2ms
+2022-01-05 22:57:17.906 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 8ms
+2022-01-05 22:58:17.912 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 6ms
+2022-01-05 22:59:17.921 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 8ms
+2022-01-05 23:00:17.665 [Eureka-PeerNodesUpdater] WARN  com.netflix.eureka.cluster.PeerEurekaNodes - The replica size seems to be empty. Check the route 53 DNS Registry
+2022-01-05 23:00:17.665 [ReplicaAwareInstanceRegistry - RenewalThresholdUpdater] INFO  c.n.eureka.registry.PeerAwareInstanceRegistryImpl - Current renewal threshold is : 6
+2022-01-05 23:00:17.931 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 9ms
+2022-01-05 23:01:17.937 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 5ms
+2022-01-05 23:02:17.946 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 8ms
+2022-01-05 23:03:17.948 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 1ms
+2022-01-05 23:04:17.953 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 5ms
+2022-01-05 23:05:17.960 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 6ms
+2022-01-05 23:06:17.962 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 2ms
+2022-01-05 23:07:17.977 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 15ms
+2022-01-05 23:08:05.444 [http-nio-8761-exec-5] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Registered instance CYJ-AUTH/host.docker.internal:cyj-auth:8100 with status DOWN (replication=false)
+2022-01-05 23:08:05.481 [SpringContextShutdownHook] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Unregistering application CYJ-DISCOVERY with eureka with status DOWN
+2022-01-05 23:08:05.535 [http-nio-8761-exec-2] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Registered instance CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 with status DOWN (replication=false)
+2022-01-05 23:08:05.589 [http-nio-8761-exec-6] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Registered instance CYJ-USER/host.docker.internal:cyj-user:8090 with status DOWN (replication=false)
+2022-01-05 23:08:05.844 [SpringContextShutdownHook] INFO  com.netflix.eureka.DefaultEurekaServerContext - Shutting down ...
+2022-01-05 23:08:05.888 [SpringContextShutdownHook] INFO  com.netflix.eureka.DefaultEurekaServerContext - Shut down
+2022-01-05 23:08:05.899 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2022-01-05 23:08:05.903 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+2022-01-05 23:08:05.907 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
+2022-01-05 23:08:09.352 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2022-01-05 23:08:10.009 [main] INFO  com.example.cyjdiscovery.CyjDiscoveryApplication - The following profiles are active: dev
+2022-01-05 23:08:10.544 [main] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2022-01-05 23:08:10.633 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=c8e55742-bb71-3a72-be02-b28b51f08dbd
+2022-01-05 23:08:10.854 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8761 (http)
+2022-01-05 23:08:10.864 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8761"]
+2022-01-05 23:08:10.864 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-01-05 23:08:10.864 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
+2022-01-05 23:08:10.947 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-01-05 23:08:10.947 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 928 ms
+2022-01-05 23:08:11.072 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-discovery/target/classes/config.properties]
+2022-01-05 23:08:11.085 [main] INFO  com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@b606cb6
+2022-01-05 23:08:11.330 [main] INFO  c.s.j.server.impl.application.WebApplicationImpl - Initiating Jersey application, version 'Jersey: 1.19.4 05/24/2017 03:20 PM'
+2022-01-05 23:08:11.381 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON encoding codec LegacyJacksonJson
+2022-01-05 23:08:11.381 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON decoding codec LegacyJacksonJson
+2022-01-05 23:08:11.463 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML encoding codec XStreamXml
+2022-01-05 23:08:11.463 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML decoding codec XStreamXml
+2022-01-05 23:08:11.760 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-discovery/target/classes/config.properties]
+2022-01-05 23:08:11.872 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2022-01-05 23:08:12.732 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses Jersey
+2022-01-05 23:08:12.742 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2022-01-05 23:08:12.783 [main] INFO  o.s.cloud.netflix.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2022-01-05 23:08:12.805 [main] INFO  com.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2022-01-05 23:08:12.805 [main] INFO  com.netflix.discovery.DiscoveryClient - Client configured to neither register nor query for data.
+2022-01-05 23:08:12.805 [main] INFO  com.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1641395292805 with initial instances count: 0
+2022-01-05 23:08:12.836 [main] INFO  com.netflix.eureka.DefaultEurekaServerContext - Initializing ...
+2022-01-05 23:08:12.836 [main] WARN  com.netflix.eureka.cluster.PeerEurekaNodes - The replica size seems to be empty. Check the route 53 DNS Registry
+2022-01-05 23:08:12.846 [main] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Finished initializing remote region registries. All known remote regions: []
+2022-01-05 23:08:12.846 [main] INFO  com.netflix.eureka.DefaultEurekaServerContext - Initialized
+2022-01-05 23:08:12.856 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-01-05 23:08:12.917 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application CYJ-DISCOVERY with eureka with status UP
+2022-01-05 23:08:12.918 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8761"]
+2022-01-05 23:08:12.918 [Thread-18] INFO  o.s.c.netflix.eureka.server.EurekaServerBootstrap - Setting the eureka configuration..
+2022-01-05 23:08:12.918 [Thread-18] INFO  o.s.c.netflix.eureka.server.EurekaServerBootstrap - Eureka data center value eureka.datacenter is not set, defaulting to default
+2022-01-05 23:08:12.918 [Thread-18] INFO  o.s.c.netflix.eureka.server.EurekaServerBootstrap - Eureka environment value eureka.environment is not set, defaulting to test
+2022-01-05 23:08:12.918 [Thread-18] INFO  o.s.c.netflix.eureka.server.EurekaServerBootstrap - isAws returned false
+2022-01-05 23:08:12.918 [Thread-18] INFO  o.s.c.netflix.eureka.server.EurekaServerBootstrap - Initialized server context
+2022-01-05 23:08:12.918 [Thread-18] INFO  c.n.eureka.registry.PeerAwareInstanceRegistryImpl - Got 1 instances from neighboring DS node
+2022-01-05 23:08:12.918 [Thread-18] INFO  c.n.eureka.registry.PeerAwareInstanceRegistryImpl - Renew threshold is: 1
+2022-01-05 23:08:12.918 [Thread-18] INFO  c.n.eureka.registry.PeerAwareInstanceRegistryImpl - Changing status to UP
+2022-01-05 23:08:12.928 [Thread-18] INFO  o.s.c.n.e.s.EurekaServerInitializerConfiguration - Started Eureka Server
+2022-01-05 23:08:12.938 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8761 (http) with context path ''
+2022-01-05 23:08:12.938 [main] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8761
+2022-01-05 23:08:13.067 [http-nio-8761-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-01-05 23:08:13.067 [http-nio-8761-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2022-01-05 23:08:13.078 [http-nio-8761-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 11 ms
+2022-01-05 23:08:13.104 [http-nio-8761-exec-2] WARN  c.netflix.eureka.registry.AbstractInstanceRegistry - DS: Registry: cancel failed because Lease is not registered for: CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020
+2022-01-05 23:08:13.105 [http-nio-8761-exec-2] INFO  com.netflix.eureka.resources.InstanceResource - Not Found (Cancel): CYJ-ENTITY-CREATER - host.docker.internal:cyj-entity-creater:8020
+2022-01-05 23:08:13.105 [http-nio-8761-exec-1] WARN  c.netflix.eureka.registry.AbstractInstanceRegistry - DS: Registry: cancel failed because Lease is not registered for: CYJ-AUTH/host.docker.internal:cyj-auth:8100
+2022-01-05 23:08:13.105 [http-nio-8761-exec-1] INFO  com.netflix.eureka.resources.InstanceResource - Not Found (Cancel): CYJ-AUTH - host.docker.internal:cyj-auth:8100
+2022-01-05 23:08:13.218 [main] INFO  com.example.cyjdiscovery.CyjDiscoveryApplication - Started CyjDiscoveryApplication in 4.627 seconds (JVM running for 5.514)
+2022-01-05 23:08:13.310 [http-nio-8761-exec-3] WARN  c.netflix.eureka.registry.AbstractInstanceRegistry - DS: Registry: cancel failed because Lease is not registered for: CYJ-USER/host.docker.internal:cyj-user:8090
+2022-01-05 23:08:13.310 [http-nio-8761-exec-3] INFO  com.netflix.eureka.resources.InstanceResource - Not Found (Cancel): CYJ-USER - host.docker.internal:cyj-user:8090
+2022-01-05 23:08:28.285 [http-nio-8761-exec-8] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Registered instance CYJ-AUTH/host.docker.internal:cyj-auth:8100 with status UP (replication=false)
+2022-01-05 23:08:31.713 [http-nio-8761-exec-10] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Registered instance CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 with status UP (replication=false)
+2022-01-05 23:08:34.291 [http-nio-8761-exec-2] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Registered instance CYJ-USER/host.docker.internal:cyj-user:8090 with status UP (replication=false)
+2022-01-05 23:09:12.930 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 0ms
+2022-01-05 23:09:17.001 [http-nio-8761-exec-9] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Registered instance CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 with status DOWN (replication=false)
+2022-01-05 23:09:20.364 [http-nio-8761-exec-10] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Cancelled instance CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 (replication=false)
+2022-01-05 23:09:32.369 [http-nio-8761-exec-6] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Registered instance CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 with status UP (replication=false)
+2022-01-05 23:10:12.940 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 10ms
+2022-01-05 23:11:12.944 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 3ms
+2022-01-05 23:12:12.953 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 9ms
+2022-01-05 23:12:43.293 [http-nio-8761-exec-7] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Registered instance CYJ-AUTH/host.docker.internal:cyj-auth:8100 with status DOWN (replication=false)
+2022-01-05 23:12:43.324 [SpringContextShutdownHook] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Unregistering application CYJ-DISCOVERY with eureka with status DOWN
+2022-01-05 23:12:43.375 [http-nio-8761-exec-8] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Registered instance CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 with status DOWN (replication=false)
+2022-01-05 23:12:43.422 [http-nio-8761-exec-10] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Registered instance CYJ-USER/host.docker.internal:cyj-user:8090 with status DOWN (replication=false)
+2022-01-05 23:12:43.663 [SpringContextShutdownHook] INFO  com.netflix.eureka.DefaultEurekaServerContext - Shutting down ...
+2022-01-05 23:12:43.672 [SpringContextShutdownHook] INFO  com.netflix.eureka.DefaultEurekaServerContext - Shut down
+2022-01-05 23:12:43.681 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2022-01-05 23:12:43.686 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+2022-01-05 23:12:43.687 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
+2022-01-05 23:12:48.135 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2022-01-05 23:12:48.795 [main] INFO  com.example.cyjdiscovery.CyjDiscoveryApplication - The following profiles are active: dev
+2022-01-05 23:12:49.344 [main] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2022-01-05 23:12:49.425 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=c8e55742-bb71-3a72-be02-b28b51f08dbd
+2022-01-05 23:12:49.658 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8761 (http)
+2022-01-05 23:12:49.668 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8761"]
+2022-01-05 23:12:49.668 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-01-05 23:12:49.668 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
+2022-01-05 23:12:49.744 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-01-05 23:12:49.744 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 929 ms
+2022-01-05 23:12:49.862 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-discovery/target/classes/config.properties]
+2022-01-05 23:12:49.872 [main] INFO  com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@5292ceca
+2022-01-05 23:12:50.117 [main] INFO  c.s.j.server.impl.application.WebApplicationImpl - Initiating Jersey application, version 'Jersey: 1.19.4 05/24/2017 03:20 PM'
+2022-01-05 23:12:50.173 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON encoding codec LegacyJacksonJson
+2022-01-05 23:12:50.173 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON decoding codec LegacyJacksonJson
+2022-01-05 23:12:50.255 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML encoding codec XStreamXml
+2022-01-05 23:12:50.255 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML decoding codec XStreamXml
+2022-01-05 23:12:50.546 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-discovery/target/classes/config.properties]
+2022-01-05 23:12:50.670 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2022-01-05 23:12:51.574 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses Jersey
+2022-01-05 23:12:51.585 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2022-01-05 23:12:51.626 [main] INFO  o.s.cloud.netflix.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2022-01-05 23:12:51.636 [main] INFO  com.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2022-01-05 23:12:51.646 [main] INFO  com.netflix.discovery.DiscoveryClient - Client configured to neither register nor query for data.
+2022-01-05 23:12:51.647 [main] INFO  com.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1641395571647 with initial instances count: 0
+2022-01-05 23:12:51.677 [main] INFO  com.netflix.eureka.DefaultEurekaServerContext - Initializing ...
+2022-01-05 23:12:51.677 [main] WARN  com.netflix.eureka.cluster.PeerEurekaNodes - The replica size seems to be empty. Check the route 53 DNS Registry
+2022-01-05 23:12:51.687 [main] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Finished initializing remote region registries. All known remote regions: []
+2022-01-05 23:12:51.694 [main] INFO  com.netflix.eureka.DefaultEurekaServerContext - Initialized
+2022-01-05 23:12:51.695 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-01-05 23:12:51.747 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application CYJ-DISCOVERY with eureka with status UP
+2022-01-05 23:12:51.757 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8761"]
+2022-01-05 23:12:51.757 [Thread-19] INFO  o.s.c.netflix.eureka.server.EurekaServerBootstrap - Setting the eureka configuration..
+2022-01-05 23:12:51.757 [Thread-19] INFO  o.s.c.netflix.eureka.server.EurekaServerBootstrap - Eureka data center value eureka.datacenter is not set, defaulting to default
+2022-01-05 23:12:51.757 [Thread-19] INFO  o.s.c.netflix.eureka.server.EurekaServerBootstrap - Eureka environment value eureka.environment is not set, defaulting to test
+2022-01-05 23:12:51.757 [Thread-19] INFO  o.s.c.netflix.eureka.server.EurekaServerBootstrap - isAws returned false
+2022-01-05 23:12:51.757 [Thread-19] INFO  o.s.c.netflix.eureka.server.EurekaServerBootstrap - Initialized server context
+2022-01-05 23:12:51.757 [Thread-19] INFO  c.n.eureka.registry.PeerAwareInstanceRegistryImpl - Got 1 instances from neighboring DS node
+2022-01-05 23:12:51.757 [Thread-19] INFO  c.n.eureka.registry.PeerAwareInstanceRegistryImpl - Renew threshold is: 1
+2022-01-05 23:12:51.757 [Thread-19] INFO  c.n.eureka.registry.PeerAwareInstanceRegistryImpl - Changing status to UP
+2022-01-05 23:12:51.767 [Thread-19] INFO  o.s.c.n.e.s.EurekaServerInitializerConfiguration - Started Eureka Server
+2022-01-05 23:12:51.778 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8761 (http) with context path ''
+2022-01-05 23:12:51.778 [main] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8761
+2022-01-05 23:12:51.887 [http-nio-8761-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-01-05 23:12:51.887 [http-nio-8761-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2022-01-05 23:12:51.892 [http-nio-8761-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 5 ms
+2022-01-05 23:12:51.913 [http-nio-8761-exec-1] WARN  c.netflix.eureka.registry.AbstractInstanceRegistry - DS: Registry: cancel failed because Lease is not registered for: CYJ-AUTH/host.docker.internal:cyj-auth:8100
+2022-01-05 23:12:51.913 [http-nio-8761-exec-1] INFO  com.netflix.eureka.resources.InstanceResource - Not Found (Cancel): CYJ-AUTH - host.docker.internal:cyj-auth:8100
+2022-01-05 23:12:51.963 [http-nio-8761-exec-2] WARN  c.netflix.eureka.registry.AbstractInstanceRegistry - DS: Registry: cancel failed because Lease is not registered for: CYJ-USER/host.docker.internal:cyj-user:8090
+2022-01-05 23:12:51.963 [http-nio-8761-exec-2] INFO  com.netflix.eureka.resources.InstanceResource - Not Found (Cancel): CYJ-USER - host.docker.internal:cyj-user:8090
+2022-01-05 23:12:52.014 [http-nio-8761-exec-3] WARN  c.netflix.eureka.registry.AbstractInstanceRegistry - DS: Registry: cancel failed because Lease is not registered for: CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020
+2022-01-05 23:12:52.014 [http-nio-8761-exec-3] INFO  com.netflix.eureka.resources.InstanceResource - Not Found (Cancel): CYJ-ENTITY-CREATER - host.docker.internal:cyj-entity-creater:8020
+2022-01-05 23:12:52.055 [main] INFO  com.example.cyjdiscovery.CyjDiscoveryApplication - Started CyjDiscoveryApplication in 4.738 seconds (JVM running for 5.556)
+2022-01-05 23:13:06.720 [http-nio-8761-exec-8] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Registered instance CYJ-AUTH/host.docker.internal:cyj-auth:8100 with status UP (replication=false)
+2022-01-05 23:13:10.211 [http-nio-8761-exec-10] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Registered instance CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 with status UP (replication=false)
+2022-01-05 23:13:13.084 [http-nio-8761-exec-5] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Registered instance CYJ-USER/host.docker.internal:cyj-user:8090 with status UP (replication=false)
+2022-01-05 23:13:51.778 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 0ms
+2022-01-05 23:14:51.786 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 7ms
+2022-01-05 23:15:51.786 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 0ms
+2022-01-05 23:16:51.794 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 7ms
+2022-01-05 23:17:51.801 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 7ms
+2022-01-05 23:18:51.810 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 8ms
+2022-01-05 23:19:51.813 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 2ms
+2022-01-05 23:20:51.823 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 10ms
+2022-01-05 23:21:51.828 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 5ms
+2022-01-05 23:22:51.686 [Eureka-PeerNodesUpdater] WARN  com.netflix.eureka.cluster.PeerEurekaNodes - The replica size seems to be empty. Check the route 53 DNS Registry
+2022-01-05 23:22:51.833 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 4ms
+2022-01-05 23:23:51.836 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 2ms
+2022-01-05 23:24:51.844 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 7ms
+2022-01-05 23:25:51.851 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 7ms
+2022-01-05 23:26:51.860 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 8ms
+2022-01-05 23:27:51.703 [ReplicaAwareInstanceRegistry - RenewalThresholdUpdater] INFO  c.n.eureka.registry.PeerAwareInstanceRegistryImpl - Current renewal threshold is : 6
+2022-01-05 23:27:51.864 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 3ms
+2022-01-05 23:28:51.872 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 8ms
+2022-01-05 23:29:51.872 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 0ms
+2022-01-05 23:30:51.881 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 9ms
+2022-01-05 23:31:51.888 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 6ms
+2022-01-05 23:32:51.690 [Eureka-PeerNodesUpdater] WARN  com.netflix.eureka.cluster.PeerEurekaNodes - The replica size seems to be empty. Check the route 53 DNS Registry
+2022-01-05 23:32:51.895 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 6ms
+2022-01-05 23:33:51.903 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 7ms
+2022-01-05 23:34:51.905 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 2ms
+2022-01-05 23:35:51.912 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 7ms
+2022-01-05 23:36:51.924 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 11ms
+2022-01-05 23:37:51.930 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 6ms
+2022-01-05 23:38:51.936 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 5ms
+2022-01-05 23:39:51.942 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 5ms
+2022-01-05 23:40:51.949 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 6ms
+2022-01-05 23:41:51.956 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 7ms
+2022-01-05 23:42:51.698 [Eureka-PeerNodesUpdater] WARN  com.netflix.eureka.cluster.PeerEurekaNodes - The replica size seems to be empty. Check the route 53 DNS Registry
+2022-01-05 23:42:51.708 [ReplicaAwareInstanceRegistry - RenewalThresholdUpdater] INFO  c.n.eureka.registry.PeerAwareInstanceRegistryImpl - Current renewal threshold is : 6
+2022-01-05 23:42:51.965 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 8ms
+2022-01-05 23:43:51.973 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 7ms
+2022-01-05 23:44:51.980 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 7ms
+2022-01-05 23:45:51.986 [Eureka-EvictionTimer] INFO  c.netflix.eureka.registry.AbstractInstanceRegistry - Running the evict task with compensationTime 5ms

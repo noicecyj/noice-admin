@@ -2,10 +2,10 @@ package com.example.cyjentitycreater.service.custom.Impl;
 
 import com.example.cyjcommon.service.Impl.BaseService;
 import com.example.cyjcommon.utils.CommonUtils;
-import com.example.cyjentitycreater.api.DictionaryApiService;
+import com.example.cyjdictionary.entity.auto.po.DictionaryPO;
+import com.example.cyjdictionary.service.custom.DictionaryCustomService;
 import com.example.cyjentitycreater.dao.custom.AppServiceCustomDao;
 import com.example.cyjentitycreater.entity.auto.po.AppServicePO;
-import com.example.cyjentitycreater.entity.custom.dto.DictionaryDTO;
 import com.example.cyjentitycreater.service.custom.AppServiceCustomService;
 import com.example.cyjentitycreater.utils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,23 +26,23 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class)
 public class AppServiceCustomServiceImpl extends BaseService implements AppServiceCustomService {
 
-        private DictionaryApiService dictionaryApiService;
         private AppServiceCustomDao appServiceCustomDao;
-
-        @Autowired
-        public void setDictionaryApiService(DictionaryApiService dictionaryApiService) {
-                this.dictionaryApiService = dictionaryApiService;
-        }
+        private DictionaryCustomService dictionaryCustomService;
 
         @Autowired
         public void setAppServiceCustomDao(AppServiceCustomDao appServiceCustomDao) {
                 this.appServiceCustomDao = appServiceCustomDao;
         }
 
+        @Autowired
+        public void setDictionaryCustomService(DictionaryCustomService dictionaryCustomService) {
+                this.dictionaryCustomService = dictionaryCustomService;
+        }
+
         public void createJavaFile(AppServicePO po) throws IOException {
                 String AppName = BeanUtils.captureName(BeanUtils.underline2Camel2(po.getName()));
-                List<DictionaryDTO> pos = dictionaryApiService.findCatalogByValue("FILE_PATH");
-                HashMap<String, DictionaryDTO> mapPo = CommonUtils.listToMap(pos, "dictionaryName");
+                List<DictionaryPO> pos = dictionaryCustomService.findCatalogByValue("FILE_PATH");
+                HashMap<String, DictionaryPO> mapPo = CommonUtils.listToMap(pos, "dictionaryName");
                 String AppFilePath = mapPo.get("servicePath").getDictionaryValue() + po.getName()
                         + "\\src\\main\\java\\com\\example\\" + AppName;
                 String[] AppResult = appGenerate(po);

@@ -3,7 +3,10 @@ package com.example.cyjentitycreater.service.custom.Impl;
 import com.alibaba.fastjson.JSONObject;
 import com.example.cyjcommon.service.Impl.BaseService;
 import com.example.cyjcommon.utils.VoPoConverter;
-import com.example.cyjentitycreater.api.DictionaryApiService;
+import com.example.cyjdictionary.entity.auto.po.DictionaryPO;
+import com.example.cyjdictionary.service.auto.DictionaryService;
+import com.example.cyjdictionary.service.custom.CatalogCustomService;
+import com.example.cyjdictionary.service.custom.DictionaryCustomService;
 import com.example.cyjentitycreater.dao.custom.EntityCustomDao;
 import com.example.cyjentitycreater.dao.custom.EntityNameCustomDao;
 import com.example.cyjentitycreater.entity.auto.po.AppServicePO;
@@ -37,12 +40,14 @@ import java.util.Map;
 @Transactional(rollbackFor = Exception.class)
 public class EntityNameCustomServiceImpl extends BaseService implements EntityNameCustomService {
 
+        private final static String componentPath = "C:/Users/noice/IdeaProjects/noice-admin/noice/src/pages/";
+
         private EntityNameService entityNameService;
         private EntityService entityService;
         private EntityNameCustomDao entityNameCustomDao;
         private AppServiceService appServiceService;
         private EntityCustomDao entityCustomDao;
-        private DictionaryApiService dictionaryApiService;
+        private DictionaryCustomService dictionaryCustomService;
 
         @Autowired
         public void setEntityNameService(EntityNameService entityNameService) {
@@ -70,8 +75,8 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         }
 
         @Autowired
-        public void setDictionaryApiService(DictionaryApiService dictionaryApiService) {
-                this.dictionaryApiService = dictionaryApiService;
+        public void setDictionaryCustomService(DictionaryCustomService dictionaryCustomService) {
+                this.dictionaryCustomService = dictionaryCustomService;
         }
 
         @Override
@@ -105,26 +110,24 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                         String SubPoName = BeanUtils.captureName(underSubPoName);
                         createJavaFile(subPo, subPoList, underSubPoName, SubPoName, appPath, appApi);
                 });
-
         }
 
         private void createJavaFile(EntityNamePO po, List<EntityPO> poList, String underPoName, String poName, String appPath, String appApi) {
                 try {
                         createJavaFile(appPath + "/entity/auto/po", poGenerate(po, poList, poName, appPath));
                         createJavaFile(appPath + "/dao/auto", daoGenerate(poName, appPath));
-                        createJavaFile(appPath + "/dao/custom", daoCustomGenerate(poName, appPath));
+                        createJavaFile(appPath + "/dao/custom", daoCustomGenerate(poName, appPath),false);
                         createJavaFile(appPath + "/service/auto", serviceGenerate(poName, appPath));
                         createJavaFile(appPath + "/service/auto/Impl", serviceImplGenerate(underPoName, poName, appPath));
-                        createJavaFile(appPath + "/service/custom", serviceCustomGenerate(poName, appPath));
-                        createJavaFile(appPath + "/service/custom/Impl", serviceImplCustomGenerate(poName, appPath));
+                        createJavaFile(appPath + "/service/custom", serviceCustomGenerate(poName, appPath),false);
+                        createJavaFile(appPath + "/service/custom/Impl", serviceImplCustomGenerate(poName, appPath),false);
                         createJavaFile(appPath + "/controller/auto", controllerGenerate(underPoName, poName, appPath, appApi));
                         createJavaFile(appPath + "/controller/auto/Impl", controllerImplGenerate(underPoName, poName, appPath, appApi));
-                        createJavaFile(appPath + "/controller/custom", controllerCustomGenerate(poName, appPath));
-                        createJavaFile(appPath + "/controller/custom/Impl", controllerImplCustomGenerate(poName, appPath, appApi));
+                        createJavaFile(appPath + "/controller/custom", controllerCustomGenerate(poName, appPath),false);
+                        createJavaFile(appPath + "/controller/custom/Impl", controllerImplCustomGenerate(poName, appPath, appApi),false);
                 } catch (IOException e) {
                         e.printStackTrace();
                 }
-
         }
 
         private String[] controllerImplCustomGenerate(String poName, String appPath, String appApi) {
@@ -574,69 +577,45 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
 
         @Override
         public void createComponentFile(String id) {
-//                EntityNamePO po = entityNameCustomService.findOneById(id);
-//                List<DictionaryDTO> pos = dictionaryApiService.findCatalogByValue("FILE_PATH");
-//                String pagePath = CommonUtils.listToMap(pos, "dictionaryName").get("componentPath").getDictionaryValue();
-//                AppServicePO appServicePO = appServiceCustomService.findOneById(po.getAppId());
-//                String componentName = BeanUtils.captureName(BeanUtils.underline2Camel(po.getName()));
-//                String componentPath = pagePath + "/" + componentName;
-//                String[] relEntities = null;
-//                if (StringUtils.isNotEmpty(po.getRelEntity())) {
-//                        String str = po.getRelEntity().substring(po.getRelEntity().indexOf("[") + 1, po.getRelEntity().indexOf("]"));
-//                        relEntities = str.split(",");
-//                }
-//                createJavaFile(componentPath + "/models");
-//                createJavaFile(componentPath + "/services");
-//                createJavaFile(componentPath + "/view");
-//                createJavaFile(componentPath + "/models/custom");
-//                createJavaFile(componentPath + "/services/custom");
-//                createJavaFile(componentPath + "/view/custom");
-//                for (String cho : choose) {
-//                        switch (cho) {
-//                                case "service":
-//                                        createJavaFile(componentPath + "/services/custom", createCustomServiceJsx(po.getName()));
-//                                        createJavaFile(componentPath + "/services", createServiceJsx(po.getName(), appServicePO.getAppApi()));
-//                                        break;
-//                                case "model":
-//                                        createJavaFile(componentPath + "/models/custom", createCustomModelsJsx(po.getName()));
-//                                        createJavaFile(componentPath + "/models", createModelsJsx(po.getName(), po.getFormModelCode(), po.getTableModelCode()));
-//                                        break;
-//                                case "view":
-//                                        createJavaFile(componentPath + "/view/custom", createCustomViewJsx(po.getName()));
-//                                        createJavaFile(componentPath + "/view/custom", createIndexCss());
-//                                        createJavaFile(componentPath + "/view", createViewJsx(po.getName(), relEntities));
-//                                        createJavaFile(componentPath + "/view", createIndexCss());
-//                                        break;
-//                                case "index":
-//                                        createJavaFile(componentPath, createIndexJsx(po, relEntities));
-//                                        createJavaFile(componentPath, createIndexStore(po, relEntities));
-//                                        break;
-//                                default:
-//                                        break;
-//                        }
-//                        if (relEntities != null) {
-//                                for (String relEntity : relEntities) {
-//                                        EntityNamePO subPo = entityNameCustomService.findOneById(relEntity);
-//                                        AppServicePO subAppServicePO = appServiceCustomService.findOneById(subPo.getAppId());
-//                                        switch (cho) {
-//                                                case "service":
-//                                                        createJavaFile(componentPath + "/services/custom", createCustomServiceJsx(subPo.getName()));
-//                                                        createJavaFile(componentPath + "/services", createSubServiceJsx(subPo.getName(), subAppServicePO.getAppApi(), po.getName()));
-//                                                        break;
-//                                                case "model":
-//                                                        createJavaFile(componentPath + "/models/custom", createCustomModelsJsx(subPo.getName()));
-//                                                        createJavaFile(componentPath + "/models", createSubModelsJsx(subPo.getName(), po.getName(), subPo.getFormModelCode(), subPo.getTableModelCode()));
-//                                                        break;
-//                                                case "view":
-//                                                        createJavaFile(componentPath + "/view/custom", createCustomSubViewJsx(subPo.getName(), po.getName()));
-//                                                        createJavaFile(componentPath + "/view", createSubViewJsx(subPo.getName(), po.getName()));
-//                                                        break;
-//                                                default:
-//                                                        break;
-//                                        }
-//                                }
-//                        }
-//                }
+                //获取实例po
+                EntityNamePO po = entityNameService.findOneById(id);
+                if (po == null) {
+                        return;
+                }
+                List<EntityPO> poList = entityService.findListByPid(po.getId());
+                //驼峰名
+                String underPoName = BeanUtils.underline2Camel(po.getEntityCode());
+                //文件名
+                String poName = BeanUtils.captureName(underPoName);
+
+                AppServicePO appServicePO = appServiceService.findOneById(po.getAppId());
+                if (appServicePO == null) {
+                        return;
+                }
+                //服务路径
+                String appPath = appServicePO.getAppPath();
+                //服务接口
+                String appApi = appServicePO.getAppApi();
+                createComponentFile(po, poList, underPoName, poName, appPath, appApi);
+                List<EntityNamePO> entityNamePOList = entityNameService.findListByPid(po.getId());
+                entityNamePOList.forEach(subPo -> {
+                        List<EntityPO> subPoList = entityService.findListByPid(subPo.getId());
+                        //驼峰名
+                        String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
+                        //文件名
+                        String SubPoName = BeanUtils.captureName(underSubPoName);
+                        createComponentFile(subPo, subPoList, underSubPoName, SubPoName, appPath, appApi);
+                });
+        }
+
+        private void createComponentFile(EntityNamePO po, List<EntityPO> poList, String underPoName, String poName, String appPath, String appApi) {
+                try {
+                        createJavaFile(componentPath + poName + "/index.jsx", poGenerate(po, poList, poName, appPath));
+                        createJavaFile(componentPath + poName + "/index.module.scss", poGenerate(po, poList, poName, appPath));
+                        createJavaFile(componentPath + poName + "/store.js", poGenerate(po, poList, poName, appPath));
+                } catch (IOException e) {
+                        e.printStackTrace();
+                }
         }
 
         @Override
@@ -648,13 +627,13 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                         EntityCustomDTO entityCustomDTO = new EntityCustomDTO();
                         VoPoConverter.copyProperties(entityPO, entityCustomDTO);
                         if (StringUtils.isNotEmpty(entityPO.getPropertyDataSourceType())) {
-                                List<DictionaryDTO> dictionaryDTOList = dictionaryApiService
+                                List<DictionaryPO> dictionaryDTOList = dictionaryCustomService
                                         .findCatalogByValue(entityCustomDTO.getPropertyDataSourceType());
                                 List<Map<String, String>> mapList = new ArrayList<>();
-                                for (DictionaryDTO dto : dictionaryDTOList) {
+                                for (DictionaryPO dictionaryPO : dictionaryDTOList) {
                                         Map<String, String> map = new HashMap<>();
-                                        map.put("label", dto.getDictionaryName());
-                                        map.put("value", dto.getDictionaryValue());
+                                        map.put("label", dictionaryPO.getDictionaryName());
+                                        map.put("value", dictionaryPO.getDictionaryValue());
                                         mapList.add(map);
                                 }
                                 entityCustomDTO.setPropertyDataSource(mapList);
@@ -667,351 +646,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 return jsonObject;
         }
 
-
-//
-//        private String[] entitySubGenerate(EntityNamePO subPo, String subFileName, String appPath) {
-//                return entityGenerate(subPo, subFileName, appPath);
-//        }
-//
-
-//
-//        private String[] daoSubGenerate(String subFileName, String appPath) {
-//                StringBuilder sb = new StringBuilder();
-//                String[] PathArr = appPath.split("java");
-//                String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
-//                //entity路径
-//                String poPath = packetPath + ".entity";
-//                //dao路径
-//                String poDaoPath = packetPath + ".dao";
-//                sb.append("package ").append(poDaoPath).append(";\r\n");
-//                sb.append("\r\n");
-//                sb.append("import ").append(poPath).append(".po.").append(subFileName).append("PO;\r\n");
-//                sb.append("import io.swagger.v3.oas.annotations.Operation;\r\n");
-//                sb.append("import org.springframework.data.jpa.repository.JpaRepository;\r\n");
-//                sb.append("\r\n");
-//                generateAuthor(sb);
-//                sb.append("public interface ").append(subFileName).append("Dao extends JpaRepository<").append(subFileName).append("PO, String> {\r\n");
-//                sb.append("\r\n");
-//                sb.append("        @Operation(summary = \"删除实体\")\r\n");
-//                sb.append("        void deleteByPid(String pid);\r\n");
-//                sb.append("\r\n");
-//                sb.append("}\r\n");
-//                String entityDaoData = sb.toString();
-//                return new String[]{entityDaoData, subFileName + "Dao.java"};
-//        }
-//
-
-//
-//        private String[] serviceSubGenerate(String subFileName, String appPath) {
-//                StringBuilder sb = new StringBuilder();
-//                String[] PathArr = appPath.split("java");
-//                String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
-//                //entity路径
-//                String poPath = packetPath + ".entity";
-//                //service路径
-//                String poServicePath = packetPath + ".service";
-//                sb.append("package ").append(poServicePath).append(";\r\n");
-//                sb.append("\r\n");
-//                sb.append("import ").append(poPath).append(".po.").append(subFileName).append("PO;\r\n");
-//                sb.append("import org.springframework.data.domain.Page;");
-//                sb.append("\r\n");
-//                sb.append("import java.util.List;\r\n");
-//                generateAuthor(sb);
-//                sb.append("public interface ").append(subFileName).append("Service {\r\n");
-//                sb.append("\r\n");
-//                sb.append("        ").append(subFileName).append("PO addOne(").append(subFileName).append("PO po);\r\n");
-//                sb.append("        void deleteOne(String id);\r\n");
-//                sb.append("        ").append(subFileName).append("PO updateOne(").append(subFileName).append("PO po);\r\n");
-//                sb.append("        Page<").append(subFileName).append("PO> findAll(String id, Integer pageNumber, Integer pageSize, String sortCode);\r\n");
-//                sb.append("        List<").append(subFileName).append("PO> findListById(String id);\r\n");
-//                sb.append("        ").append(subFileName).append("PO findOneById(String id);\r\n");
-//                sb.append("\r\n");
-//                sb.append("}\r\n");
-//                String entityServiceData = sb.toString();
-//                return new String[]{entityServiceData, subFileName + "Service.java"};
-//        }
-//
-
-//
-//        private String[] serviceImplSubGenerate(String underSubFileName, String subFileName, String underFileName, String fileName, String appPath) {
-//                StringBuilder sb = new StringBuilder();
-//                String[] PathArr = appPath.split("java");
-//                String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
-//                //entity路径
-//                String poPath = packetPath + ".entity";
-//                //dao路径
-//                String poDaoPath = packetPath + ".dao";
-//                //service路径
-//                String poServicePath = packetPath + ".service";
-//                //serviceImpl路径
-//                String poServiceImplPath = poServicePath + ".Impl";
-//                sb.append("package ").append(poServiceImplPath).append(";\r\n");
-//                sb.append("\r\n");
-//                sb.append("import com.example.cyjcommon.utils.CommonUtils;\r\n");
-//                sb.append("import ").append(poDaoPath).append(".").append(subFileName).append("Dao;\r\n");
-//                sb.append("import ").append(poPath).append(".po.").append(subFileName).append("PO;\r\n");
-//                sb.append("import ").append(poPath).append(".po.Q").append(subFileName).append("PO;\r\n");
-//                sb.append("import ").append(poPath).append(".po.Q").append(fileName).append("PO;\r\n");
-//                sb.append("import ").append(poServicePath).append(".").append(subFileName).append("Service;\r\n");
-//                sb.append("import org.springframework.beans.factory.annotation.Autowired;\r\n");
-//                sb.append("import org.springframework.data.domain.Page;\r\n");
-//                sb.append("import org.springframework.data.domain.PageImpl;\r\n");
-//                sb.append("import org.springframework.data.domain.PageRequest;\r\n");
-//                sb.append("import org.springframework.data.domain.Pageable;\r\n");
-//                sb.append("import org.springframework.data.domain.Sort;\r\n");
-//                sb.append("import org.springframework.stereotype.Service;\r\n");
-//                sb.append("import org.springframework.transaction.annotation.Transactional;\r\n");
-//                sb.append("\r\n");
-//                sb.append("import java.util.List;\r\n");
-//                generateAuthor(sb);
-//                sb.append("\r\n");
-//                sb.append("@Service\r\n");
-//                sb.append("@Transactional(rollbackFor = Exception.class)\r\n");
-//                sb.append("public class ").append(subFileName).append("ServiceImpl extends BaseService implements ").append(subFileName).append("Service {\r\n");
-//                sb.append("\r\n");
-//                sb.append("        private ").append(subFileName).append("Dao ").append(underSubFileName).append("Dao;\r\n");
-//                sb.append("\r\n");
-//                sb.append("        @Autowired\r\n");
-//                sb.append("        public void set").append(subFileName).append("Dao(").append(subFileName).append("Dao ").append(underSubFileName).append("Dao) {\r\n");
-//                sb.append("                this.").append(underSubFileName).append("Dao = ").append(underSubFileName).append("Dao;\r\n");
-//                sb.append("        }\r\n");
-//                sb.append("\r\n");
-//                sb.append("        @Override\r\n");
-//                sb.append("        public ").append(subFileName).append("PO addOne(").append(subFileName).append("PO po) {\r\n");
-//                sb.append("                return ").append(underSubFileName).append("Dao.save(po);\r\n");
-//                sb.append("        }\r\n");
-//                sb.append("\r\n");
-//                sb.append("        @Override\r\n");
-//                sb.append("        public void deleteOne(String id) {\r\n");
-//                sb.append("                ").append(underSubFileName).append("Dao.deleteById(id);\r\n");
-//                sb.append("        }\r\n");
-//                sb.append("\r\n");
-//                sb.append("        @Override\r\n");
-//                sb.append("        public ").append(subFileName).append("PO updateOne(").append(subFileName).append("PO po) {\r\n");
-//                sb.append("                return ").append(underSubFileName).append("Dao.saveAndFlush(po);\r\n");
-//                sb.append("        }\r\n");
-//                sb.append("\r\n");
-//                sb.append("        @Override\r\n");
-//                sb.append("        public Page<").append(subFileName).append("PO> findAll(String id, Integer pageNumber, Integer pageSize, String sortCode) {\r\n");
-//                sb.append("                Sort sort = Sort.by(sortCode);\r\n");
-//                sb.append("                Pageable pageable = PageRequest.of(pageNumber - 1, pageSize, sort);\r\n");
-//                sb.append("                List<").append(subFileName).append("PO> poList = findListById(id);\r\n");
-//                sb.append("                List<").append(subFileName).append("PO> poPage = CommonUtils.page(poList, pageSize, pageNumber);\r\n");
-//                sb.append("                return new PageImpl<>(poPage, pageable, poList.size());\r\n");
-//                sb.append("        }\r\n");
-//                sb.append("\r\n");
-//                sb.append("        @Override\r\n");
-//                sb.append("        public List<").append(subFileName).append("PO> findListById(String id) {\r\n");
-//                sb.append("                Q").append(fileName).append("PO q").append(fileName).append("PO = Q").append(fileName).append("PO.").append(underFileName).append("PO;\r\n");
-//                sb.append("                Q").append(subFileName).append("PO q").append(subFileName).append("PO = Q").append(subFileName).append("PO.").append(underSubFileName).append("PO;\r\n");
-//                sb.append("                return queryFactory.selectFrom(q").append(subFileName).append("PO)\r\n");
-//                sb.append("                        .innerJoin(q").append(fileName).append("PO)\r\n");
-//                sb.append("                        .on(q").append(subFileName).append("PO.pid.eq(q").append(fileName).append("PO.id))\r\n");
-//                sb.append("                        .where(q").append(fileName).append("PO.id.eq(id))\r\n");
-//                sb.append("                        .orderBy(q").append(subFileName).append("PO.sortCode.asc()).fetch();\r\n");
-//                sb.append("        }\r\n");
-//                sb.append("\r\n");
-//                sb.append("        @Override\r\n");
-//                sb.append("        public ").append(subFileName).append("PO findOneById(String id) {\r\n");
-//                sb.append("                if (").append(underSubFileName).append("Dao.findById(id).isPresent()) {\r\n");
-//                sb.append("                        return ").append(underSubFileName).append("Dao.findById(id).get();\r\n");
-//                sb.append("                }\r\n");
-//                sb.append("                return null;\r\n");
-//                sb.append("        }\r\n");
-//                sb.append("\r\n");
-//                sb.append("}\r\n");
-//                String entityServiceImplData = sb.toString();
-//                return new String[]{entityServiceImplData, subFileName + "ServiceImpl.java"};
-//        }
-//
-
-//
-//        private String[] controllerSubGenerate(String underSubFileName, String subFileName, String appPath, String appApi) {
-//                StringBuilder sb = new StringBuilder();
-//                String[] PathArr = appPath.split("java");
-//                String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
-//                //controller路径
-//                String poControllerPath = packetPath + ".controller";
-//                sb.append("package ").append(poControllerPath).append(";\r\n");
-//                sb.append("\r\n");
-//                sb.append("import com.example.cyjcommon.annotation.InterFaceMapping;\r\n");
-//                sb.append("import com.example.cyjcommon.utils.ResultVO;\r\n");
-//                sb.append("import io.swagger.v3.oas.annotations.Operation;\r\n");
-//                sb.append("import io.swagger.v3.oas.annotations.tags.Tag;\r\n");
-//                sb.append("import org.springframework.web.bind.annotation.PostMapping;\r\n");
-//                sb.append("import org.springframework.web.bind.annotation.RequestBody;\r\n");
-//                sb.append("import org.springframework.web.bind.annotation.RequestParam;\r\n");
-//                sb.append("\r\n");
-//                sb.append("import java.util.Map;\r\n");
-//                sb.append("\r\n");
-//                generateAuthor(sb);
-//                sb.append("@Tag(name = \"").append(subFileName).append("\")\r\n");
-//                sb.append("public interface ").append(subFileName).append("Controller {\r\n");
-//                sb.append("\r\n");
-//                sb.append("        @Operation(summary = \"查询所有").append(subFileName).append("\")\r\n");
-//                sb.append("        @InterFaceMapping(api = \"").append(appApi).append("\")\r\n");
-//                sb.append("        @PostMapping(value = \"").append(underSubFileName).append("Page\")\r\n");
-//                sb.append("        ResultVO ").append(underSubFileName).append("FindAll(@RequestParam(\"id\") String id,\r\n");
-//                sb.append("                                 @RequestParam(\"pageNumber\") Integer pageNumber,\r\n");
-//                sb.append("                                 @RequestParam(\"pageSize\") Integer pageSize,\r\n");
-//                sb.append("                                 @RequestParam(\"sortCode\") String sortCode);\r\n");
-//                sb.append("\r\n");
-//                sb.append("        @Operation(summary = \"保存").append(subFileName).append("\")\r\n");
-//                sb.append("        @InterFaceMapping(api = \"").append(appApi).append("\")\r\n");
-//                sb.append("        @PostMapping(value = \"").append(underSubFileName).append("Save\")\r\n");
-//                sb.append("        ResultVO ").append(underSubFileName).append("Save(@RequestBody Map<String, Object> vo);\r\n");
-//                sb.append("\r\n");
-//                sb.append("        @Operation(summary = \"删除").append(subFileName).append("\")\r\n");
-//                sb.append("        @InterFaceMapping(api = \"").append(appApi).append("\")\r\n");
-//                sb.append("        @PostMapping(value = \"").append(underSubFileName).append("Delete\")\r\n");
-//                sb.append("        void ").append(underSubFileName).append("Delete(@RequestParam(\"id\") String id);\r\n");
-//                sb.append("\r\n");
-//                sb.append("        @Operation(summary = \"根据ID查询").append(subFileName).append("\")\r\n");
-//                sb.append("        @InterFaceMapping(api = \"").append(appApi).append("\")\r\n");
-//                sb.append("        @PostMapping(value = \"find").append(subFileName).append("ById\")\r\n");
-//                sb.append("        ResultVO find").append(subFileName).append("ById(@RequestParam(\"id\") String id);\r\n");
-//                sb.append("\r\n");
-//                sb.append("}\r\n");
-//                String entityControllerData = sb.toString();
-//                return new String[]{entityControllerData, subFileName + "Controller.java"};
-//        }
-//
-//        public String[] controllerImplGenerate(String underFileName, String fileName, String appPath, String appApi) {
-//                StringBuilder sb = new StringBuilder();
-//                String[] PathArr = appPath.split("java");
-//                String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
-//                //entity路径
-//                String poPath = packetPath + ".entity";
-//                //serviceImpl路径
-//                String poServicePath = packetPath + ".service";
-//                //controller路径
-//                String poControllerPath = packetPath + ".controller";
-//                sb.append("package ").append(poControllerPath).append(".Impl;\r\n");
-//                sb.append("\r\n");
-//                sb.append("import com.example.cyjcommon.utils.ResultVO;\r\n");
-//                sb.append("import com.example.cyjcommon.utils.VoPoConverter;\r\n");
-//                sb.append("import ").append(poControllerPath).append(".").append(fileName).append("Controller;\r\n");
-//                sb.append("import ").append(poPath).append(".po.").append(fileName).append("PO;\r\n");
-//                sb.append("import ").append(poServicePath).append(".").append(fileName).append("Service;\r\n");
-//                sb.append("import org.springframework.beans.factory.annotation.Autowired;\r\n");
-//                sb.append("import org.springframework.web.bind.annotation.CrossOrigin;\r\n");
-//                sb.append("import org.springframework.web.bind.annotation.RequestMapping;\r\n");
-//                sb.append("import org.springframework.web.bind.annotation.RestController;\r\n");
-//                sb.append("\r\n");
-//                sb.append("import java.util.Map;\r\n");
-//                sb.append("\r\n");
-//                generateAuthor(sb);
-//                sb.append("@CrossOrigin\r\n");
-//                sb.append("@RestController\r\n");
-//                sb.append("@RequestMapping(value = \"").append(appApi).append("\")\r\n");
-//                sb.append("public class ").append(fileName).append("ControllerImpl implements ").append(fileName).append("Controller {\r\n");
-//                sb.append("\r\n");
-//                sb.append("        private ").append(fileName).append("Service ").append(underFileName).append("Service;\r\n");
-//                sb.append("\r\n");
-//                sb.append("        @Autowired\r\n");
-//                sb.append("        public void set").append(fileName).append("Service(").append(fileName).append("Service ").append(underFileName).append("Service) {\r\n");
-//                sb.append("                this.").append(underFileName).append("Service = ").append(underFileName).append("Service;\r\n");
-//                sb.append("        }\r\n");
-//                sb.append("\r\n");
-//                sb.append("        @Override\r\n");
-//                sb.append("        public ResultVO ").append(underFileName).append("FindAll(Integer pageNumber, Integer pageSize, String sortCode) {\r\n");
-//                sb.append("                return ResultVO.success(").append(underFileName).append("Service.findAll(pageNumber - 1, pageSize, sortCode));\r\n");
-//                sb.append("        }\r\n");
-//                sb.append("\r\n");
-//                sb.append("        @Override\r\n");
-//                sb.append("        public ResultVO ").append(underFileName).append("Save").append("(Map<String, Object> vo) {\r\n");
-//                sb.append("                ").append(fileName).append("PO po = new ").append(fileName).append("PO();\r\n");
-//                sb.append("                VoPoConverter.copyProperties(vo, po);\r\n");
-//                sb.append("                if (po.getId() == null) {\r\n");
-//                sb.append("                        return ResultVO.success(").append(underFileName).append("Service.addOne(po));\r\n");
-//                sb.append("                }\r\n");
-//                sb.append("                return ResultVO.success(").append(underFileName).append("Service.updateOne(po));\r\n");
-//                sb.append("        }\r\n");
-//                sb.append("\r\n");
-//                sb.append("        @Override\r\n");
-//                sb.append("        public void ").append(underFileName).append("Delete(String id) {\r\n");
-//                sb.append("                ").append(underFileName).append("Service.deleteOne(id);\r\n");
-//                sb.append("        }\r\n");
-//                sb.append("\r\n");
-//                sb.append("        @Override\r\n");
-//                sb.append("        public ResultVO find").append(fileName).append("ById(String id) {\r\n");
-//                sb.append("                return ResultVO.success(").append(underFileName).append("Service.findOneById(id));\r\n");
-//                sb.append("        }\r\n");
-//                sb.append("\r\n");
-//                sb.append("}\r\n");
-//                String entityControllerImplData = sb.toString();
-//                return new String[]{entityControllerImplData, fileName + "ControllerImpl.java"};
-//        }
-//
-//        private String[] controllerImplSubGenerate(String underSubFileName, String subFileName, String appPath, String appApi) {
-//                StringBuilder sb = new StringBuilder();
-//                String[] PathArr = appPath.split("java");
-//                String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
-//                //entity路径
-//                String poPath = packetPath + ".entity";
-//                //serviceImpl路径
-//                String poServicePath = packetPath + ".service";
-//                //controller路径
-//                String poControllerPath = packetPath + ".controller";
-//                sb.append("package ").append(poControllerPath).append(".Impl;\r\n");
-//                sb.append("\r\n");
-//                sb.append("import com.example.cyjcommon.utils.ResultVO;\r\n");
-//                sb.append("import com.example.cyjcommon.utils.VoPoConverter;\r\n");
-//                sb.append("import ").append(poControllerPath).append(".").append(subFileName).append("Controller;\r\n");
-//                sb.append("import ").append(poPath).append(".po.").append(subFileName).append("PO;\r\n");
-//                sb.append("import ").append(poServicePath).append(".").append(subFileName).append("Service;\r\n");
-//                sb.append("import org.springframework.beans.factory.annotation.Autowired;\r\n");
-//                sb.append("import org.springframework.web.bind.annotation.CrossOrigin;\r\n");
-//                sb.append("import org.springframework.web.bind.annotation.RequestMapping;\r\n");
-//                sb.append("import org.springframework.web.bind.annotation.RestController;\r\n");
-//                sb.append("\r\n");
-//                sb.append("import java.util.Map;\r\n");
-//                sb.append("\r\n");
-//                generateAuthor(sb);
-//                sb.append("@CrossOrigin\r\n");
-//                sb.append("@RestController\r\n");
-//                sb.append("@RequestMapping(value = \"").append(appApi).append("\")\r\n");
-//                sb.append("public class ").append(subFileName).append("ControllerImpl implements ").append(subFileName).append("Controller {\r\n");
-//                sb.append("\r\n");
-//                sb.append("        private ").append(subFileName).append("Service ").append(underSubFileName).append("Service;\r\n");
-//                sb.append("\r\n");
-//                sb.append("        @Autowired\r\n");
-//                sb.append("        public void set").append(subFileName).append("Service(").append(subFileName).append("Service ").append(underSubFileName).append("Service) {\r\n");
-//                sb.append("                this.").append(underSubFileName).append("Service = ").append(underSubFileName).append("Service;\r\n");
-//                sb.append("        }\r\n");
-//                sb.append("\r\n");
-//                sb.append("        @Override\r\n");
-//                sb.append("        public ResultVO ").append(underSubFileName).append("FindAll(String id, Integer pageNumber, Integer pageSize, String sortCode) {\r\n");
-//                sb.append("                return ResultVO.success(").append(underSubFileName).append("Service.findAll(id, pageNumber, pageSize, sortCode));\r\n");
-//                sb.append("        }\r\n");
-//                sb.append("\r\n");
-//                sb.append("        @Override\r\n");
-//                sb.append("        public ResultVO ").append(underSubFileName).append("Save").append("(Map<String, Object> vo) {\r\n");
-//                sb.append("                ").append(subFileName).append("PO po = new ").append(subFileName).append("PO();\r\n");
-//                sb.append("                VoPoConverter.copyProperties(vo, po);\r\n");
-//                sb.append("                if (po.getId() == null) {\r\n");
-//                sb.append("                        return ResultVO.success(").append(underSubFileName).append("Service.addOne(po));\r\n");
-//                sb.append("                }\r\n");
-//                sb.append("                return ResultVO.success(").append(underSubFileName).append("Service.updateOne(po));\r\n");
-//                sb.append("        }\r\n");
-//                sb.append("\r\n");
-//                sb.append("        @Override\r\n");
-//                sb.append("        public void ").append(underSubFileName).append("Delete(String id) {\r\n");
-//                sb.append("                ").append(underSubFileName).append("Service.deleteOne(id);\r\n");
-//                sb.append("        }\r\n");
-//                sb.append("\r\n");
-//                sb.append("        @Override\r\n");
-//                sb.append("        public ResultVO find").append(subFileName).append("ById(String id) {\r\n");
-//                sb.append("                return ResultVO.success(").append(underSubFileName).append("Service.findOneById(id));\r\n");
-//                sb.append("        }\r\n");
-//                sb.append("\r\n");
-//                sb.append("}\r\n");
-//                String entityControllerImplData = sb.toString();
-//                return new String[]{entityControllerImplData, subFileName + "ControllerImpl.java"};
-//        }
-//
-//
-//
 //        private String[] createCustomSubViewJsx(String subEntityName, String entityName) {
 //                StringBuilder sb = new StringBuilder();
 //                String underComponentName = BeanUtils.underline2Camel(subEntityName);

@@ -45,7 +45,7 @@ public class BaseService {
          * @param path   路径
          * @param result 内容
          */
-        public void createJavaFile(String path, String[] result) throws IOException {
+        public void createJavaFile(String path, String[] result, boolean reWrite) throws IOException {
                 File file = new File(path);
                 File file2 = new File(path + "/" + result[1]);
                 //如果文件不存在，创建一个文件
@@ -55,19 +55,25 @@ public class BaseService {
                 if (file2.createNewFile()) {
                         logger.info("生成文件,路径为：{}", path + "/" + result[1]);
                 }
-                FileWriter fw = null;
-                BufferedWriter bw = null;
-                try {
-                        fw = new FileWriter(file2);
-                        bw = new BufferedWriter(fw);
-                        bw.write(result[0]);
-                } catch (IOException e) {
-                        e.printStackTrace();
-                } finally {
-                        assert bw != null;
-                        bw.close();
-                        fw.close();
+                if (reWrite) {
+                        FileWriter fw = null;
+                        BufferedWriter bw = null;
+                        try {
+                                fw = new FileWriter(file2);
+                                bw = new BufferedWriter(fw);
+                                bw.write(result[0]);
+                        } catch (IOException e) {
+                                e.printStackTrace();
+                        } finally {
+                                assert bw != null;
+                                bw.close();
+                                fw.close();
+                        }
                 }
+        }
+
+        public void createJavaFile(String path, String[] result) throws IOException {
+                createJavaFile(path, result, true);
         }
 
         /**

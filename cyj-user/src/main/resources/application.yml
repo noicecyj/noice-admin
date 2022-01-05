@@ -31,29 +31,3 @@ spring:
     url: jdbc:mysql://localhost:3306/data_user?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: root
     password: 68762306
-  cloud:
-    stream:
-      bindings:
-        greetingChannel:
-          destination: greetings
-security:
-  loginAfterTime: 10
-  loginTimeLimit: 10
-#feign的配置，连接超时及读取超时配置
-feign:
-  client:
-    default-config: my-config
-    config:
-      my-config:
-        connectTimeout: 6000000
-        readTimeout: 6000000
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 4000000000
-ribbon:
-  ReadTimeout: 6000000
-  ConnectTimeout: 6000000

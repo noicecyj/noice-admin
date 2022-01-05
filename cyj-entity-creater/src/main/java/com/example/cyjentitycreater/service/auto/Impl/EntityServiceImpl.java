@@ -49,9 +49,9 @@ public class EntityServiceImpl extends BaseService implements EntityService {
                         .selectFrom(QEntityPO.entityPO)
                         .where(QEntityPO.entityPO.pid.eq(pid)
                                 .and(QEntityPO.entityPO.sortCode.isNotNull()))
-                        .offset(pageNumber - 1)
+                        .offset((pageNumber - 1) * 10L)
                         .orderBy(QEntityPO.entityPO.sortCode.asc())
-                        .limit(8)
+                        .limit(10)
                         .fetchResults();
         }
 

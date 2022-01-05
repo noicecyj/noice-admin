@@ -1,4 +1,975 @@
-2022-01-04 00:01:42.854 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2022-01-04 00:06:42.864 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2022-01-04 00:11:42.874 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2022-01-04 00:16:42.878 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2022-01-05 22:33:10.433 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2022-01-05 22:33:11.146 [main] INFO  c.e.cyjentitycreater.CyjEntityCreaterApplication - No active profile set, falling back to default profiles: default
+2022-01-05 22:33:11.674 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-01-05 22:33:11.674 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-01-05 22:33:11.821 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 128ms. Found 11 JPA repository interfaces.
+2022-01-05 22:33:12.098 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-01-05 22:33:12.108 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-01-05 22:33:12.180 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.auto.AppServiceDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 22:33:12.180 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.auto.EntityDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 22:33:12.180 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.auto.EntityNameDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 22:33:12.180 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.custom.AppServiceCustomDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 22:33:12.180 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.custom.EntityCustomDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 22:33:12.180 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.custom.EntityNameCustomDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 22:33:12.180 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 15ms. Found 0 Redis repository interfaces.
+2022-01-05 22:33:12.273 [main] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2022-01-05 22:33:12.395 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=58851207-cf30-33e1-93a2-c3ecefbeeffb
+2022-01-05 22:33:12.698 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8020 (http)
+2022-01-05 22:33:12.708 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8020"]
+2022-01-05 22:33:12.708 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-01-05 22:33:12.708 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
+2022-01-05 22:33:12.831 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-01-05 22:33:12.831 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1665 ms
+2022-01-05 22:33:12.905 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2022-01-05 22:33:12.915 [main] INFO  com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@65be88ae
+2022-01-05 22:33:13.138 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-01-05 22:33:13.189 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.27.Final
+2022-01-05 22:33:13.313 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-01-05 22:33:13.416 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-01-05 22:33:13.436 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-01-05 22:33:13.460 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2022-01-05 22:33:14.136 [main] INFO  o.h.e.t.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-01-05 22:33:14.146 [main] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-01-05 22:33:14.829 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2022-01-05 22:33:14.946 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-01-05 22:33:15.019 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2022-01-05 22:33:16.077 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-01-05 22:33:16.580 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses Jersey
+2022-01-05 22:33:16.600 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2022-01-05 22:33:16.709 [main] INFO  o.s.cloud.netflix.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2022-01-05 22:33:16.739 [main] INFO  com.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2022-01-05 22:33:16.857 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON encoding codec LegacyJacksonJson
+2022-01-05 22:33:16.857 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON decoding codec LegacyJacksonJson
+2022-01-05 22:33:16.962 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML encoding codec XStreamXml
+2022-01-05 22:33:16.962 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML decoding codec XStreamXml
+2022-01-05 22:33:17.176 [main] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2022-01-05 22:33:17.349 [main] INFO  com.netflix.discovery.DiscoveryClient - Disable delta property : false
+2022-01-05 22:33:17.349 [main] INFO  com.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2022-01-05 22:33:17.349 [main] INFO  com.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2022-01-05 22:33:17.349 [main] INFO  com.netflix.discovery.DiscoveryClient - Application is null : false
+2022-01-05 22:33:17.349 [main] INFO  com.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2022-01-05 22:33:17.349 [main] INFO  com.netflix.discovery.DiscoveryClient - Application version is -1: true
+2022-01-05 22:33:17.349 [main] INFO  com.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2022-01-05 22:33:17.531 [main] INFO  com.netflix.discovery.DiscoveryClient - The response status is 200
+2022-01-05 22:33:17.531 [main] INFO  com.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2022-01-05 22:33:17.540 [main] INFO  com.netflix.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2022-01-05 22:33:17.540 [main] INFO  com.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1641393197540 with initial instances count: 2
+2022-01-05 22:33:17.540 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application CYJ-ENTITY-CREATER with eureka with status UP
+2022-01-05 22:33:17.540 [main] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1641393197540, current=UP, previous=STARTING]
+2022-01-05 22:33:17.540 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8020"]
+2022-01-05 22:33:17.540 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020: registering service...
+2022-01-05 22:33:17.571 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8020 (http) with context path ''
+2022-01-05 22:33:17.571 [main] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8020
+2022-01-05 22:33:17.581 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 - registration status: 204
+2022-01-05 22:33:17.827 [main] INFO  c.e.cyjentitycreater.CyjEntityCreaterApplication - Started CyjEntityCreaterApplication in 8.406 seconds (JVM running for 9.938)
+2022-01-05 22:33:18.187 [main] INFO  com.netflix.config.ChainedDynamicProperty - Flipping property: cyj-dictionary.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2022-01-05 22:33:18.218 [main] INFO  com.netflix.util.concurrent.ShutdownEnabledTimer - Shutdown hook installed for: NFLoadBalancer-PingTimer-cyj-dictionary
+2022-01-05 22:33:18.218 [main] INFO  com.netflix.loadbalancer.BaseLoadBalancer - Client: cyj-dictionary instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=cyj-dictionary,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+2022-01-05 22:33:18.229 [main] INFO  c.n.loadbalancer.DynamicServerListLoadBalancer - Using serverListUpdater PollingServerListUpdater
+2022-01-05 22:33:18.229 [main] INFO  c.n.loadbalancer.DynamicServerListLoadBalancer - DynamicServerListLoadBalancer for client cyj-dictionary initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=cyj-dictionary,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList@5bc971ef
+2022-01-05 22:33:18.874 [RMI TCP Connection(5)-192.168.1.4] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-01-05 22:33:18.874 [RMI TCP Connection(5)-192.168.1.4] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2022-01-05 22:33:18.885 [RMI TCP Connection(5)-192.168.1.4] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 11 ms
+2022-01-05 22:34:32.232 [http-nio-8020-exec-3] INFO  org.dozer.config.GlobalSettings - Trying to find Dozer configuration file: dozer.properties
+2022-01-05 22:34:32.238 [http-nio-8020-exec-3] WARN  org.dozer.config.GlobalSettings - Dozer configuration file not found: dozer.properties.  Using defaults for all Dozer global properties.
+2022-01-05 22:34:32.241 [http-nio-8020-exec-3] INFO  org.dozer.DozerInitializer - Initializing Dozer. Version: 5.5.0, Thread Name: http-nio-8020-exec-3
+2022-01-05 22:34:32.245 [http-nio-8020-exec-3] INFO  org.dozer.jmx.JMXPlatformImpl - Dozer JMX MBean [org.dozer.jmx:type=DozerStatisticsController] auto registered with the Platform MBean Server
+2022-01-05 22:34:32.247 [http-nio-8020-exec-3] INFO  org.dozer.jmx.JMXPlatformImpl - Dozer JMX MBean [org.dozer.jmx:type=DozerAdminController] auto registered with the Platform MBean Server
+2022-01-05 22:34:32.249 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:34:32.337 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:34:32.339 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:37:57.244 [http-nio-8020-exec-4] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:37:57.250 [http-nio-8020-exec-4] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:37:57.252 [http-nio-8020-exec-4] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:38:13.800 [http-nio-8020-exec-7] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:38:13.800 [http-nio-8020-exec-7] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:38:13.810 [http-nio-8020-exec-7] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:38:13.810 [http-nio-8020-exec-7] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:38:13.822 [http-nio-8020-exec-7] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:38:13.822 [http-nio-8020-exec-7] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:38:13.822 [http-nio-8020-exec-7] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:38:13.832 [http-nio-8020-exec-7] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:38:13.832 [http-nio-8020-exec-7] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:38:13.842 [http-nio-8020-exec-7] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:38:13.853 [http-nio-8020-exec-7] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:38:17.360 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2022-01-05 22:38:35.405 [http-nio-8020-exec-10] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:38:35.405 [http-nio-8020-exec-10] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:38:35.416 [http-nio-8020-exec-10] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:38:35.417 [http-nio-8020-exec-10] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:38:35.417 [http-nio-8020-exec-10] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:38:35.417 [http-nio-8020-exec-10] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:38:35.417 [http-nio-8020-exec-10] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:38:35.427 [http-nio-8020-exec-10] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:38:35.428 [http-nio-8020-exec-10] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:38:35.428 [http-nio-8020-exec-10] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:38:35.428 [http-nio-8020-exec-10] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:40:50.811 [Thread-26] INFO  com.netflix.loadbalancer.PollingServerListUpdater - Shutting down the Executor Pool for PollingServerListUpdater
+2022-01-05 22:40:50.814 [SpringContextShutdownHook] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Unregistering application CYJ-ENTITY-CREATER with eureka with status DOWN
+2022-01-05 22:40:50.814 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1641393650814, current=DOWN, previous=UP]
+2022-01-05 22:40:50.814 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020: registering service...
+2022-01-05 22:40:50.829 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 - registration status: 204
+2022-01-05 22:40:51.042 [SpringContextShutdownHook] INFO  com.netflix.util.concurrent.ShutdownEnabledTimer - Shutdown hook removed for: NFLoadBalancer-PingTimer-cyj-dictionary
+2022-01-05 22:40:51.043 [SpringContextShutdownHook] INFO  com.netflix.util.concurrent.ShutdownEnabledTimer - Exception caught (might be ok if at shutdown)
+java.lang.IllegalStateException: Shutdown in progress
+	at java.lang.ApplicationShutdownHooks.remove(ApplicationShutdownHooks.java:82)
+	at java.lang.Runtime.removeShutdownHook(Runtime.java:239)
+	at com.netflix.util.concurrent.ShutdownEnabledTimer.cancel(ShutdownEnabledTimer.java:70)
+	at com.netflix.loadbalancer.BaseLoadBalancer.cancelPingTask(BaseLoadBalancer.java:632)
+	at com.netflix.loadbalancer.BaseLoadBalancer.shutdown(BaseLoadBalancer.java:883)
+	at com.netflix.loadbalancer.DynamicServerListLoadBalancer.shutdown(DynamicServerListLoadBalancer.java:285)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.invokeCustomDestroyMethod(DisposableBeanAdapter.java:339)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:273)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1092)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1085)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1061)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1030)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:979)
+	at org.springframework.cloud.context.named.NamedContextFactory.destroy(NamedContextFactory.java:93)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:258)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1092)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1085)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1061)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1030)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:170)
+	at org.springframework.context.support.AbstractApplicationContext$1.run(AbstractApplicationContext.java:949)
+2022-01-05 22:40:51.240 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2022-01-05 22:40:51.247 [SpringContextShutdownHook] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-01-05 22:40:51.247 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2022-01-05 22:40:51.259 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2022-01-05 22:40:51.260 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+2022-01-05 22:40:54.277 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Unregistering ...
+2022-01-05 22:40:54.298 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 - deregister  status: 200
+2022-01-05 22:40:54.309 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
+2022-01-05 22:41:00.830 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2022-01-05 22:41:01.503 [main] INFO  c.e.cyjentitycreater.CyjEntityCreaterApplication - No active profile set, falling back to default profiles: default
+2022-01-05 22:41:02.022 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-01-05 22:41:02.022 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-01-05 22:41:02.145 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 118ms. Found 11 JPA repository interfaces.
+2022-01-05 22:41:02.432 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-01-05 22:41:02.432 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-01-05 22:41:02.510 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.auto.AppServiceDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 22:41:02.510 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.auto.EntityDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 22:41:02.510 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.auto.EntityNameDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 22:41:02.510 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.custom.AppServiceCustomDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 22:41:02.510 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.custom.EntityCustomDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 22:41:02.520 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.custom.EntityNameCustomDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 22:41:02.520 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 15ms. Found 0 Redis repository interfaces.
+2022-01-05 22:41:02.604 [main] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2022-01-05 22:41:02.738 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=58851207-cf30-33e1-93a2-c3ecefbeeffb
+2022-01-05 22:41:03.030 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8020 (http)
+2022-01-05 22:41:03.030 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8020"]
+2022-01-05 22:41:03.030 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-01-05 22:41:03.030 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
+2022-01-05 22:41:03.151 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-01-05 22:41:03.151 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1628 ms
+2022-01-05 22:41:03.223 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2022-01-05 22:41:03.233 [main] INFO  com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@7302ff13
+2022-01-05 22:41:03.459 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-01-05 22:41:03.504 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.27.Final
+2022-01-05 22:41:03.642 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-01-05 22:41:03.747 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-01-05 22:41:03.768 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-01-05 22:41:03.788 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2022-01-05 22:41:04.486 [main] INFO  o.h.e.t.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-01-05 22:41:04.497 [main] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-01-05 22:41:05.190 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2022-01-05 22:41:05.295 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-01-05 22:41:05.377 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2022-01-05 22:41:06.447 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-01-05 22:41:06.940 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses Jersey
+2022-01-05 22:41:06.971 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2022-01-05 22:41:07.073 [main] INFO  o.s.cloud.netflix.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2022-01-05 22:41:07.104 [main] INFO  com.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2022-01-05 22:41:07.227 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON encoding codec LegacyJacksonJson
+2022-01-05 22:41:07.227 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON decoding codec LegacyJacksonJson
+2022-01-05 22:41:07.326 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML encoding codec XStreamXml
+2022-01-05 22:41:07.326 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML decoding codec XStreamXml
+2022-01-05 22:41:07.541 [main] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2022-01-05 22:41:07.723 [main] INFO  com.netflix.discovery.DiscoveryClient - Disable delta property : false
+2022-01-05 22:41:07.723 [main] INFO  com.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2022-01-05 22:41:07.723 [main] INFO  com.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2022-01-05 22:41:07.723 [main] INFO  com.netflix.discovery.DiscoveryClient - Application is null : false
+2022-01-05 22:41:07.723 [main] INFO  com.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2022-01-05 22:41:07.723 [main] INFO  com.netflix.discovery.DiscoveryClient - Application version is -1: true
+2022-01-05 22:41:07.723 [main] INFO  com.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2022-01-05 22:41:07.872 [main] INFO  com.netflix.discovery.DiscoveryClient - The response status is 200
+2022-01-05 22:41:07.883 [main] INFO  com.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2022-01-05 22:41:07.883 [main] INFO  com.netflix.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2022-01-05 22:41:07.883 [main] INFO  com.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1641393667883 with initial instances count: 2
+2022-01-05 22:41:07.883 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application CYJ-ENTITY-CREATER with eureka with status UP
+2022-01-05 22:41:07.883 [main] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1641393667883, current=UP, previous=STARTING]
+2022-01-05 22:41:07.883 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8020"]
+2022-01-05 22:41:07.883 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020: registering service...
+2022-01-05 22:41:07.914 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8020 (http) with context path ''
+2022-01-05 22:41:07.914 [main] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8020
+2022-01-05 22:41:07.924 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 - registration status: 204
+2022-01-05 22:41:08.172 [main] INFO  c.e.cyjentitycreater.CyjEntityCreaterApplication - Started CyjEntityCreaterApplication in 8.252 seconds (JVM running for 9.38)
+2022-01-05 22:41:08.549 [main] INFO  com.netflix.config.ChainedDynamicProperty - Flipping property: cyj-dictionary.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2022-01-05 22:41:08.580 [main] INFO  com.netflix.util.concurrent.ShutdownEnabledTimer - Shutdown hook installed for: NFLoadBalancer-PingTimer-cyj-dictionary
+2022-01-05 22:41:08.580 [main] INFO  com.netflix.loadbalancer.BaseLoadBalancer - Client: cyj-dictionary instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=cyj-dictionary,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+2022-01-05 22:41:08.591 [main] INFO  c.n.loadbalancer.DynamicServerListLoadBalancer - Using serverListUpdater PollingServerListUpdater
+2022-01-05 22:41:08.591 [main] INFO  c.n.loadbalancer.DynamicServerListLoadBalancer - DynamicServerListLoadBalancer for client cyj-dictionary initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=cyj-dictionary,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList@3f31ff7a
+2022-01-05 22:41:09.169 [RMI TCP Connection(7)-192.168.1.4] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-01-05 22:41:09.169 [RMI TCP Connection(7)-192.168.1.4] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2022-01-05 22:41:09.169 [RMI TCP Connection(7)-192.168.1.4] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2022-01-05 22:43:22.927 [http-nio-8020-exec-1] INFO  org.dozer.config.GlobalSettings - Trying to find Dozer configuration file: dozer.properties
+2022-01-05 22:43:22.935 [http-nio-8020-exec-1] WARN  org.dozer.config.GlobalSettings - Dozer configuration file not found: dozer.properties.  Using defaults for all Dozer global properties.
+2022-01-05 22:43:22.938 [http-nio-8020-exec-1] INFO  org.dozer.DozerInitializer - Initializing Dozer. Version: 5.5.0, Thread Name: http-nio-8020-exec-1
+2022-01-05 22:43:22.941 [http-nio-8020-exec-1] INFO  org.dozer.jmx.JMXPlatformImpl - Dozer JMX MBean [org.dozer.jmx:type=DozerStatisticsController] auto registered with the Platform MBean Server
+2022-01-05 22:43:22.943 [http-nio-8020-exec-1] INFO  org.dozer.jmx.JMXPlatformImpl - Dozer JMX MBean [org.dozer.jmx:type=DozerAdminController] auto registered with the Platform MBean Server
+2022-01-05 22:43:22.944 [http-nio-8020-exec-1] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:43:23.064 [http-nio-8020-exec-1] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:43:23.068 [http-nio-8020-exec-1] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:43:24.664 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:43:24.668 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:43:24.673 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:43:24.677 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:43:24.682 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:43:24.683 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:43:24.683 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:43:24.693 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:43:24.693 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:43:24.693 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:43:24.693 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:46:07.736 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2022-01-05 22:51:07.752 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2022-01-05 22:55:35.587 [Thread-24] INFO  com.netflix.loadbalancer.PollingServerListUpdater - Shutting down the Executor Pool for PollingServerListUpdater
+2022-01-05 22:55:35.588 [SpringContextShutdownHook] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Unregistering application CYJ-ENTITY-CREATER with eureka with status DOWN
+2022-01-05 22:55:35.589 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1641394535589, current=DOWN, previous=UP]
+2022-01-05 22:55:35.589 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020: registering service...
+2022-01-05 22:55:35.600 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 - registration status: 204
+2022-01-05 22:55:35.767 [SpringContextShutdownHook] INFO  com.netflix.util.concurrent.ShutdownEnabledTimer - Shutdown hook removed for: NFLoadBalancer-PingTimer-cyj-dictionary
+2022-01-05 22:55:35.767 [SpringContextShutdownHook] INFO  com.netflix.util.concurrent.ShutdownEnabledTimer - Exception caught (might be ok if at shutdown)
+java.lang.IllegalStateException: Shutdown in progress
+	at java.lang.ApplicationShutdownHooks.remove(ApplicationShutdownHooks.java:82)
+	at java.lang.Runtime.removeShutdownHook(Runtime.java:239)
+	at com.netflix.util.concurrent.ShutdownEnabledTimer.cancel(ShutdownEnabledTimer.java:70)
+	at com.netflix.loadbalancer.BaseLoadBalancer.cancelPingTask(BaseLoadBalancer.java:632)
+	at com.netflix.loadbalancer.BaseLoadBalancer.shutdown(BaseLoadBalancer.java:883)
+	at com.netflix.loadbalancer.DynamicServerListLoadBalancer.shutdown(DynamicServerListLoadBalancer.java:285)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.invokeCustomDestroyMethod(DisposableBeanAdapter.java:339)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:273)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1092)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1085)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1061)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1030)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:979)
+	at org.springframework.cloud.context.named.NamedContextFactory.destroy(NamedContextFactory.java:93)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:258)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1092)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1085)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1061)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1030)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:170)
+	at org.springframework.context.support.AbstractApplicationContext$1.run(AbstractApplicationContext.java:949)
+2022-01-05 22:55:35.902 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2022-01-05 22:55:35.907 [SpringContextShutdownHook] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-01-05 22:55:35.911 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2022-01-05 22:55:35.919 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2022-01-05 22:55:35.919 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+2022-01-05 22:55:38.929 [DiscoveryClient-1] WARN  com.netflix.discovery.TimedSupervisorTask - task supervisor shutting down, can't accept the task
+2022-01-05 22:55:38.929 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Unregistering ...
+2022-01-05 22:55:38.939 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 - deregister  status: 200
+2022-01-05 22:55:38.950 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
+2022-01-05 22:55:45.669 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2022-01-05 22:55:46.353 [main] INFO  c.e.cyjentitycreater.CyjEntityCreaterApplication - No active profile set, falling back to default profiles: default
+2022-01-05 22:55:46.877 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-01-05 22:55:46.877 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-01-05 22:55:46.989 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 111ms. Found 11 JPA repository interfaces.
+2022-01-05 22:55:47.267 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-01-05 22:55:47.267 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-01-05 22:55:47.287 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.auto.AppServiceDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 22:55:47.287 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.auto.EntityDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 22:55:47.287 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.auto.EntityNameDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 22:55:47.287 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.custom.AppServiceCustomDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 22:55:47.287 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.custom.EntityCustomDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 22:55:47.287 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.custom.EntityNameCustomDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 22:55:47.287 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 15ms. Found 0 Redis repository interfaces.
+2022-01-05 22:55:47.454 [main] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2022-01-05 22:55:47.579 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=58851207-cf30-33e1-93a2-c3ecefbeeffb
+2022-01-05 22:55:47.883 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8020 (http)
+2022-01-05 22:55:47.893 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8020"]
+2022-01-05 22:55:47.894 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-01-05 22:55:47.894 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
+2022-01-05 22:55:47.999 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-01-05 22:55:47.999 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1625 ms
+2022-01-05 22:55:48.071 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2022-01-05 22:55:48.081 [main] INFO  com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@3daf03d8
+2022-01-05 22:55:48.315 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-01-05 22:55:48.375 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.27.Final
+2022-01-05 22:55:48.537 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-01-05 22:55:48.662 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-01-05 22:55:48.673 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-01-05 22:55:48.693 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2022-01-05 22:55:49.364 [main] INFO  o.h.e.t.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-01-05 22:55:49.374 [main] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-01-05 22:55:50.045 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2022-01-05 22:55:50.148 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-01-05 22:55:50.232 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2022-01-05 22:55:51.256 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-01-05 22:55:51.760 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses Jersey
+2022-01-05 22:55:51.780 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2022-01-05 22:55:51.891 [main] INFO  o.s.cloud.netflix.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2022-01-05 22:55:51.914 [main] INFO  com.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2022-01-05 22:55:52.032 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON encoding codec LegacyJacksonJson
+2022-01-05 22:55:52.032 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON decoding codec LegacyJacksonJson
+2022-01-05 22:55:52.137 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML encoding codec XStreamXml
+2022-01-05 22:55:52.137 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML decoding codec XStreamXml
+2022-01-05 22:55:52.338 [main] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2022-01-05 22:55:52.514 [main] INFO  com.netflix.discovery.DiscoveryClient - Disable delta property : false
+2022-01-05 22:55:52.514 [main] INFO  com.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2022-01-05 22:55:52.514 [main] INFO  com.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2022-01-05 22:55:52.514 [main] INFO  com.netflix.discovery.DiscoveryClient - Application is null : false
+2022-01-05 22:55:52.514 [main] INFO  com.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2022-01-05 22:55:52.514 [main] INFO  com.netflix.discovery.DiscoveryClient - Application version is -1: true
+2022-01-05 22:55:52.514 [main] INFO  com.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2022-01-05 22:55:52.661 [main] INFO  com.netflix.discovery.DiscoveryClient - The response status is 200
+2022-01-05 22:55:52.672 [main] INFO  com.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2022-01-05 22:55:52.672 [main] INFO  com.netflix.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2022-01-05 22:55:52.672 [main] INFO  com.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1641394552672 with initial instances count: 3
+2022-01-05 22:55:52.672 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application CYJ-ENTITY-CREATER with eureka with status UP
+2022-01-05 22:55:52.672 [main] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1641394552672, current=UP, previous=STARTING]
+2022-01-05 22:55:52.672 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8020"]
+2022-01-05 22:55:52.682 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020: registering service...
+2022-01-05 22:55:52.702 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8020 (http) with context path ''
+2022-01-05 22:55:52.702 [main] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8020
+2022-01-05 22:55:52.713 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 - registration status: 204
+2022-01-05 22:55:52.964 [main] INFO  c.e.cyjentitycreater.CyjEntityCreaterApplication - Started CyjEntityCreaterApplication in 8.196 seconds (JVM running for 9.276)
+2022-01-05 22:55:53.303 [main] INFO  com.netflix.config.ChainedDynamicProperty - Flipping property: cyj-dictionary.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2022-01-05 22:55:53.321 [main] INFO  com.netflix.util.concurrent.ShutdownEnabledTimer - Shutdown hook installed for: NFLoadBalancer-PingTimer-cyj-dictionary
+2022-01-05 22:55:53.332 [main] INFO  com.netflix.loadbalancer.BaseLoadBalancer - Client: cyj-dictionary instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=cyj-dictionary,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+2022-01-05 22:55:53.339 [main] INFO  c.n.loadbalancer.DynamicServerListLoadBalancer - Using serverListUpdater PollingServerListUpdater
+2022-01-05 22:55:53.342 [main] INFO  c.n.loadbalancer.DynamicServerListLoadBalancer - DynamicServerListLoadBalancer for client cyj-dictionary initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=cyj-dictionary,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList@5194394
+2022-01-05 22:55:54.025 [RMI TCP Connection(3)-192.168.1.4] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-01-05 22:55:54.025 [RMI TCP Connection(3)-192.168.1.4] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2022-01-05 22:55:54.040 [RMI TCP Connection(3)-192.168.1.4] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 15 ms
+2022-01-05 22:56:28.670 [http-nio-8020-exec-1] INFO  org.dozer.config.GlobalSettings - Trying to find Dozer configuration file: dozer.properties
+2022-01-05 22:56:28.670 [http-nio-8020-exec-1] WARN  org.dozer.config.GlobalSettings - Dozer configuration file not found: dozer.properties.  Using defaults for all Dozer global properties.
+2022-01-05 22:56:28.670 [http-nio-8020-exec-1] INFO  org.dozer.DozerInitializer - Initializing Dozer. Version: 5.5.0, Thread Name: http-nio-8020-exec-1
+2022-01-05 22:56:28.681 [http-nio-8020-exec-1] INFO  org.dozer.jmx.JMXPlatformImpl - Dozer JMX MBean [org.dozer.jmx:type=DozerStatisticsController] auto registered with the Platform MBean Server
+2022-01-05 22:56:28.681 [http-nio-8020-exec-1] INFO  org.dozer.jmx.JMXPlatformImpl - Dozer JMX MBean [org.dozer.jmx:type=DozerAdminController] auto registered with the Platform MBean Server
+2022-01-05 22:56:28.681 [http-nio-8020-exec-1] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:56:28.785 [http-nio-8020-exec-1] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:56:28.790 [http-nio-8020-exec-1] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:56:30.404 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:56:30.404 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:56:30.415 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:56:30.415 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:56:30.425 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:56:30.425 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:56:30.425 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:56:30.437 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:56:30.437 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:56:30.437 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:56:30.447 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:57:23.639 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:57:23.642 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:57:23.653 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:57:24.662 [http-nio-8020-exec-5] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:57:24.666 [http-nio-8020-exec-5] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:57:24.670 [http-nio-8020-exec-5] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:57:24.673 [http-nio-8020-exec-5] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:57:24.674 [http-nio-8020-exec-5] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:57:24.676 [http-nio-8020-exec-5] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:57:24.676 [http-nio-8020-exec-5] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:57:24.680 [http-nio-8020-exec-5] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:57:24.681 [http-nio-8020-exec-5] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:57:24.681 [http-nio-8020-exec-5] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:57:24.681 [http-nio-8020-exec-5] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:59:22.636 [http-nio-8020-exec-9] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:59:22.637 [http-nio-8020-exec-9] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:59:22.639 [http-nio-8020-exec-9] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:59:24.901 [http-nio-8020-exec-1] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:59:24.901 [http-nio-8020-exec-1] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:59:24.912 [http-nio-8020-exec-1] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:59:24.912 [http-nio-8020-exec-1] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:59:24.912 [http-nio-8020-exec-1] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:59:24.912 [http-nio-8020-exec-1] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:59:24.912 [http-nio-8020-exec-1] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:59:24.922 [http-nio-8020-exec-1] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:59:24.922 [http-nio-8020-exec-1] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:59:24.922 [http-nio-8020-exec-1] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 22:59:24.922 [http-nio-8020-exec-1] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:00:52.522 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2022-01-05 23:05:52.530 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2022-01-05 23:08:05.526 [Thread-25] INFO  com.netflix.loadbalancer.PollingServerListUpdater - Shutting down the Executor Pool for PollingServerListUpdater
+2022-01-05 23:08:05.526 [SpringContextShutdownHook] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Unregistering application CYJ-ENTITY-CREATER with eureka with status DOWN
+2022-01-05 23:08:05.527 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1641395285527, current=DOWN, previous=UP]
+2022-01-05 23:08:05.527 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020: registering service...
+2022-01-05 23:08:05.537 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 - registration status: 204
+2022-01-05 23:08:05.876 [SpringContextShutdownHook] INFO  com.netflix.util.concurrent.ShutdownEnabledTimer - Shutdown hook removed for: NFLoadBalancer-PingTimer-cyj-dictionary
+2022-01-05 23:08:05.880 [SpringContextShutdownHook] INFO  com.netflix.util.concurrent.ShutdownEnabledTimer - Exception caught (might be ok if at shutdown)
+java.lang.IllegalStateException: Shutdown in progress
+	at java.lang.ApplicationShutdownHooks.remove(ApplicationShutdownHooks.java:82)
+	at java.lang.Runtime.removeShutdownHook(Runtime.java:239)
+	at com.netflix.util.concurrent.ShutdownEnabledTimer.cancel(ShutdownEnabledTimer.java:70)
+	at com.netflix.loadbalancer.BaseLoadBalancer.cancelPingTask(BaseLoadBalancer.java:632)
+	at com.netflix.loadbalancer.BaseLoadBalancer.shutdown(BaseLoadBalancer.java:883)
+	at com.netflix.loadbalancer.DynamicServerListLoadBalancer.shutdown(DynamicServerListLoadBalancer.java:285)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.invokeCustomDestroyMethod(DisposableBeanAdapter.java:339)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:273)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1092)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1085)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1061)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1030)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:979)
+	at org.springframework.cloud.context.named.NamedContextFactory.destroy(NamedContextFactory.java:93)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:258)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1092)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1085)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1061)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1030)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:170)
+	at org.springframework.context.support.AbstractApplicationContext$1.run(AbstractApplicationContext.java:949)
+2022-01-05 23:08:06.002 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2022-01-05 23:08:06.009 [SpringContextShutdownHook] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-01-05 23:08:06.009 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2022-01-05 23:08:06.025 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2022-01-05 23:08:06.026 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+2022-01-05 23:08:09.035 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Unregistering ...
+2022-01-05 23:08:13.112 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 - deregister  status: 404
+2022-01-05 23:08:13.115 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
+2022-01-05 23:08:21.160 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2022-01-05 23:08:22.265 [main] INFO  c.e.cyjentitycreater.CyjEntityCreaterApplication - No active profile set, falling back to default profiles: default
+2022-01-05 23:08:23.388 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-01-05 23:08:23.390 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-01-05 23:08:23.590 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 193ms. Found 11 JPA repository interfaces.
+2022-01-05 23:08:24.018 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-01-05 23:08:24.018 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-01-05 23:08:24.131 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.auto.AppServiceDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 23:08:24.131 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.auto.EntityDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 23:08:24.131 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.auto.EntityNameDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 23:08:24.131 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.custom.AppServiceCustomDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 23:08:24.131 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.custom.EntityCustomDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 23:08:24.131 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.custom.EntityNameCustomDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 23:08:24.131 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 25ms. Found 0 Redis repository interfaces.
+2022-01-05 23:08:24.279 [main] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2022-01-05 23:08:24.460 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=58851207-cf30-33e1-93a2-c3ecefbeeffb
+2022-01-05 23:08:24.858 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8020 (http)
+2022-01-05 23:08:24.870 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8020"]
+2022-01-05 23:08:24.870 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-01-05 23:08:24.870 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
+2022-01-05 23:08:25.006 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-01-05 23:08:25.006 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2705 ms
+2022-01-05 23:08:25.110 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2022-01-05 23:08:25.123 [main] INFO  com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@70997a94
+2022-01-05 23:08:25.573 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-01-05 23:08:25.640 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.27.Final
+2022-01-05 23:08:25.805 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-01-05 23:08:25.945 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-01-05 23:08:25.955 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-01-05 23:08:25.976 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2022-01-05 23:08:26.984 [main] INFO  o.h.e.t.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-01-05 23:08:26.993 [main] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-01-05 23:08:27.961 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2022-01-05 23:08:28.121 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-01-05 23:08:28.226 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2022-01-05 23:08:29.792 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-01-05 23:08:30.604 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses Jersey
+2022-01-05 23:08:30.624 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2022-01-05 23:08:30.739 [main] INFO  o.s.cloud.netflix.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2022-01-05 23:08:30.772 [main] INFO  com.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2022-01-05 23:08:30.917 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON encoding codec LegacyJacksonJson
+2022-01-05 23:08:30.917 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON decoding codec LegacyJacksonJson
+2022-01-05 23:08:31.026 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML encoding codec XStreamXml
+2022-01-05 23:08:31.026 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML decoding codec XStreamXml
+2022-01-05 23:08:31.273 [main] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2022-01-05 23:08:31.482 [main] INFO  com.netflix.discovery.DiscoveryClient - Disable delta property : false
+2022-01-05 23:08:31.482 [main] INFO  com.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2022-01-05 23:08:31.482 [main] INFO  com.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2022-01-05 23:08:31.482 [main] INFO  com.netflix.discovery.DiscoveryClient - Application is null : false
+2022-01-05 23:08:31.482 [main] INFO  com.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2022-01-05 23:08:31.482 [main] INFO  com.netflix.discovery.DiscoveryClient - Application version is -1: true
+2022-01-05 23:08:31.482 [main] INFO  com.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2022-01-05 23:08:31.661 [main] INFO  com.netflix.discovery.DiscoveryClient - The response status is 200
+2022-01-05 23:08:31.671 [main] INFO  com.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2022-01-05 23:08:31.671 [main] INFO  com.netflix.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2022-01-05 23:08:31.671 [main] INFO  com.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1641395311671 with initial instances count: 1
+2022-01-05 23:08:31.671 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application CYJ-ENTITY-CREATER with eureka with status UP
+2022-01-05 23:08:31.671 [main] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1641395311671, current=UP, previous=STARTING]
+2022-01-05 23:08:31.671 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8020"]
+2022-01-05 23:08:31.681 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020: registering service...
+2022-01-05 23:08:31.703 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8020 (http) with context path ''
+2022-01-05 23:08:31.703 [main] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8020
+2022-01-05 23:08:31.713 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 - registration status: 204
+2022-01-05 23:08:32.009 [main] INFO  c.e.cyjentitycreater.CyjEntityCreaterApplication - Started CyjEntityCreaterApplication in 12.054 seconds (JVM running for 13.415)
+2022-01-05 23:08:32.481 [main] INFO  com.netflix.config.ChainedDynamicProperty - Flipping property: cyj-dictionary.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2022-01-05 23:08:32.528 [main] INFO  com.netflix.util.concurrent.ShutdownEnabledTimer - Shutdown hook installed for: NFLoadBalancer-PingTimer-cyj-dictionary
+2022-01-05 23:08:32.528 [main] INFO  com.netflix.loadbalancer.BaseLoadBalancer - Client: cyj-dictionary instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=cyj-dictionary,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+2022-01-05 23:08:32.543 [main] INFO  c.n.loadbalancer.DynamicServerListLoadBalancer - Using serverListUpdater PollingServerListUpdater
+2022-01-05 23:08:32.543 [main] INFO  c.n.loadbalancer.DynamicServerListLoadBalancer - DynamicServerListLoadBalancer for client cyj-dictionary initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=cyj-dictionary,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList@7ec16640
+2022-01-05 23:08:32.952 [RMI TCP Connection(7)-192.168.1.4] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-01-05 23:08:32.952 [RMI TCP Connection(7)-192.168.1.4] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2022-01-05 23:08:32.962 [RMI TCP Connection(7)-192.168.1.4] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 10 ms
+2022-01-05 23:09:16.994 [Thread-35] INFO  com.netflix.loadbalancer.PollingServerListUpdater - Shutting down the Executor Pool for PollingServerListUpdater
+2022-01-05 23:09:16.995 [SpringContextShutdownHook] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Unregistering application CYJ-ENTITY-CREATER with eureka with status DOWN
+2022-01-05 23:09:16.995 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1641395356995, current=DOWN, previous=UP]
+2022-01-05 23:09:16.996 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020: registering service...
+2022-01-05 23:09:17.001 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 - registration status: 204
+2022-01-05 23:09:17.186 [SpringContextShutdownHook] INFO  com.netflix.util.concurrent.ShutdownEnabledTimer - Shutdown hook removed for: NFLoadBalancer-PingTimer-cyj-dictionary
+2022-01-05 23:09:17.186 [SpringContextShutdownHook] INFO  com.netflix.util.concurrent.ShutdownEnabledTimer - Exception caught (might be ok if at shutdown)
+java.lang.IllegalStateException: Shutdown in progress
+	at java.lang.ApplicationShutdownHooks.remove(ApplicationShutdownHooks.java:82)
+	at java.lang.Runtime.removeShutdownHook(Runtime.java:239)
+	at com.netflix.util.concurrent.ShutdownEnabledTimer.cancel(ShutdownEnabledTimer.java:70)
+	at com.netflix.loadbalancer.BaseLoadBalancer.cancelPingTask(BaseLoadBalancer.java:632)
+	at com.netflix.loadbalancer.BaseLoadBalancer.shutdown(BaseLoadBalancer.java:883)
+	at com.netflix.loadbalancer.DynamicServerListLoadBalancer.shutdown(DynamicServerListLoadBalancer.java:285)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.invokeCustomDestroyMethod(DisposableBeanAdapter.java:339)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:273)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1092)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1085)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1061)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1030)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:979)
+	at org.springframework.cloud.context.named.NamedContextFactory.destroy(NamedContextFactory.java:93)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:258)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1092)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1085)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1061)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1030)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:170)
+	at org.springframework.context.support.AbstractApplicationContext$1.run(AbstractApplicationContext.java:949)
+2022-01-05 23:09:17.325 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2022-01-05 23:09:17.333 [SpringContextShutdownHook] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-01-05 23:09:17.338 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2022-01-05 23:09:17.341 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2022-01-05 23:09:17.341 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+2022-01-05 23:09:20.354 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Unregistering ...
+2022-01-05 23:09:20.364 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 - deregister  status: 200
+2022-01-05 23:09:20.375 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
+2022-01-05 23:09:25.303 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2022-01-05 23:09:25.973 [main] INFO  c.e.cyjentitycreater.CyjEntityCreaterApplication - No active profile set, falling back to default profiles: default
+2022-01-05 23:09:26.511 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-01-05 23:09:26.512 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-01-05 23:09:26.638 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 127ms. Found 11 JPA repository interfaces.
+2022-01-05 23:09:26.918 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-01-05 23:09:26.918 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-01-05 23:09:26.997 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.auto.AppServiceDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 23:09:26.997 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.auto.EntityDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 23:09:26.997 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.auto.EntityNameDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 23:09:26.997 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.custom.AppServiceCustomDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 23:09:26.997 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.custom.EntityCustomDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 23:09:26.997 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.custom.EntityNameCustomDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 23:09:26.997 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 15ms. Found 0 Redis repository interfaces.
+2022-01-05 23:09:27.089 [main] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2022-01-05 23:09:27.207 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=58851207-cf30-33e1-93a2-c3ecefbeeffb
+2022-01-05 23:09:27.503 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8020 (http)
+2022-01-05 23:09:27.513 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8020"]
+2022-01-05 23:09:27.513 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-01-05 23:09:27.513 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
+2022-01-05 23:09:27.622 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-01-05 23:09:27.622 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1638 ms
+2022-01-05 23:09:27.697 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2022-01-05 23:09:27.707 [main] INFO  com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@70997a94
+2022-01-05 23:09:27.928 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-01-05 23:09:27.977 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.27.Final
+2022-01-05 23:09:28.111 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-01-05 23:09:28.223 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-01-05 23:09:28.243 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-01-05 23:09:28.264 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2022-01-05 23:09:28.935 [main] INFO  o.h.e.t.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-01-05 23:09:28.946 [main] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-01-05 23:09:29.610 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2022-01-05 23:09:29.730 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-01-05 23:09:29.802 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2022-01-05 23:09:30.881 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-01-05 23:09:31.381 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses Jersey
+2022-01-05 23:09:31.401 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2022-01-05 23:09:31.514 [main] INFO  o.s.cloud.netflix.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2022-01-05 23:09:31.540 [main] INFO  com.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2022-01-05 23:09:31.654 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON encoding codec LegacyJacksonJson
+2022-01-05 23:09:31.654 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON decoding codec LegacyJacksonJson
+2022-01-05 23:09:31.757 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML encoding codec XStreamXml
+2022-01-05 23:09:31.757 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML decoding codec XStreamXml
+2022-01-05 23:09:31.975 [main] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2022-01-05 23:09:32.150 [main] INFO  com.netflix.discovery.DiscoveryClient - Disable delta property : false
+2022-01-05 23:09:32.150 [main] INFO  com.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2022-01-05 23:09:32.150 [main] INFO  com.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2022-01-05 23:09:32.150 [main] INFO  com.netflix.discovery.DiscoveryClient - Application is null : false
+2022-01-05 23:09:32.150 [main] INFO  com.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2022-01-05 23:09:32.150 [main] INFO  com.netflix.discovery.DiscoveryClient - Application version is -1: true
+2022-01-05 23:09:32.150 [main] INFO  com.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2022-01-05 23:09:32.316 [main] INFO  com.netflix.discovery.DiscoveryClient - The response status is 200
+2022-01-05 23:09:32.328 [main] INFO  com.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2022-01-05 23:09:32.328 [main] INFO  com.netflix.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2022-01-05 23:09:32.328 [main] INFO  com.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1641395372328 with initial instances count: 2
+2022-01-05 23:09:32.328 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application CYJ-ENTITY-CREATER with eureka with status UP
+2022-01-05 23:09:32.328 [main] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1641395372328, current=UP, previous=STARTING]
+2022-01-05 23:09:32.328 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8020"]
+2022-01-05 23:09:32.328 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020: registering service...
+2022-01-05 23:09:32.359 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8020 (http) with context path ''
+2022-01-05 23:09:32.359 [main] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8020
+2022-01-05 23:09:32.369 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 - registration status: 204
+2022-01-05 23:09:32.623 [main] INFO  c.e.cyjentitycreater.CyjEntityCreaterApplication - Started CyjEntityCreaterApplication in 8.234 seconds (JVM running for 9.519)
+2022-01-05 23:09:32.960 [main] INFO  com.netflix.config.ChainedDynamicProperty - Flipping property: cyj-dictionary.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2022-01-05 23:09:32.981 [main] INFO  com.netflix.util.concurrent.ShutdownEnabledTimer - Shutdown hook installed for: NFLoadBalancer-PingTimer-cyj-dictionary
+2022-01-05 23:09:32.981 [main] INFO  com.netflix.loadbalancer.BaseLoadBalancer - Client: cyj-dictionary instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=cyj-dictionary,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+2022-01-05 23:09:32.998 [main] INFO  c.n.loadbalancer.DynamicServerListLoadBalancer - Using serverListUpdater PollingServerListUpdater
+2022-01-05 23:09:33.001 [main] INFO  c.n.loadbalancer.DynamicServerListLoadBalancer - DynamicServerListLoadBalancer for client cyj-dictionary initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=cyj-dictionary,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList@7ec16640
+2022-01-05 23:09:33.329 [RMI TCP Connection(1)-192.168.1.4] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-01-05 23:09:33.329 [RMI TCP Connection(1)-192.168.1.4] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2022-01-05 23:09:33.340 [RMI TCP Connection(1)-192.168.1.4] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 11 ms
+2022-01-05 23:09:39.643 [http-nio-8020-exec-1] INFO  org.dozer.config.GlobalSettings - Trying to find Dozer configuration file: dozer.properties
+2022-01-05 23:09:39.647 [http-nio-8020-exec-1] WARN  org.dozer.config.GlobalSettings - Dozer configuration file not found: dozer.properties.  Using defaults for all Dozer global properties.
+2022-01-05 23:09:39.647 [http-nio-8020-exec-1] INFO  org.dozer.DozerInitializer - Initializing Dozer. Version: 5.5.0, Thread Name: http-nio-8020-exec-1
+2022-01-05 23:09:39.647 [http-nio-8020-exec-1] INFO  org.dozer.jmx.JMXPlatformImpl - Dozer JMX MBean [org.dozer.jmx:type=DozerStatisticsController] auto registered with the Platform MBean Server
+2022-01-05 23:09:39.647 [http-nio-8020-exec-1] INFO  org.dozer.jmx.JMXPlatformImpl - Dozer JMX MBean [org.dozer.jmx:type=DozerAdminController] auto registered with the Platform MBean Server
+2022-01-05 23:09:39.647 [http-nio-8020-exec-1] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:09:39.727 [http-nio-8020-exec-1] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:09:39.730 [http-nio-8020-exec-1] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:10:34.669 [http-nio-8020-exec-2] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:10:34.682 [http-nio-8020-exec-2] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:10:34.683 [http-nio-8020-exec-2] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:10:34.683 [http-nio-8020-exec-2] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:10:34.683 [http-nio-8020-exec-2] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:10:34.683 [http-nio-8020-exec-2] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:10:34.683 [http-nio-8020-exec-2] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:10:34.694 [http-nio-8020-exec-2] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:10:34.695 [http-nio-8020-exec-2] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:10:34.697 [http-nio-8020-exec-2] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:10:34.698 [http-nio-8020-exec-2] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:10:38.963 [http-nio-8020-exec-6] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:10:38.963 [http-nio-8020-exec-6] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:10:38.985 [http-nio-8020-exec-6] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:10:38.985 [http-nio-8020-exec-6] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:10:38.994 [http-nio-8020-exec-6] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:10:38.994 [http-nio-8020-exec-6] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:10:38.994 [http-nio-8020-exec-6] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:10:38.994 [http-nio-8020-exec-6] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:10:38.994 [http-nio-8020-exec-6] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:10:38.994 [http-nio-8020-exec-6] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:10:39.004 [http-nio-8020-exec-6] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:12:43.364 [Thread-25] INFO  com.netflix.loadbalancer.PollingServerListUpdater - Shutting down the Executor Pool for PollingServerListUpdater
+2022-01-05 23:12:43.364 [SpringContextShutdownHook] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Unregistering application CYJ-ENTITY-CREATER with eureka with status DOWN
+2022-01-05 23:12:43.364 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1641395563364, current=DOWN, previous=UP]
+2022-01-05 23:12:43.364 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020: registering service...
+2022-01-05 23:12:43.376 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 - registration status: 204
+2022-01-05 23:12:43.700 [SpringContextShutdownHook] INFO  com.netflix.util.concurrent.ShutdownEnabledTimer - Shutdown hook removed for: NFLoadBalancer-PingTimer-cyj-dictionary
+2022-01-05 23:12:43.704 [SpringContextShutdownHook] INFO  com.netflix.util.concurrent.ShutdownEnabledTimer - Exception caught (might be ok if at shutdown)
+java.lang.IllegalStateException: Shutdown in progress
+	at java.lang.ApplicationShutdownHooks.remove(ApplicationShutdownHooks.java:82)
+	at java.lang.Runtime.removeShutdownHook(Runtime.java:239)
+	at com.netflix.util.concurrent.ShutdownEnabledTimer.cancel(ShutdownEnabledTimer.java:70)
+	at com.netflix.loadbalancer.BaseLoadBalancer.cancelPingTask(BaseLoadBalancer.java:632)
+	at com.netflix.loadbalancer.BaseLoadBalancer.shutdown(BaseLoadBalancer.java:883)
+	at com.netflix.loadbalancer.DynamicServerListLoadBalancer.shutdown(DynamicServerListLoadBalancer.java:285)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.invokeCustomDestroyMethod(DisposableBeanAdapter.java:339)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:273)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1092)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1085)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1061)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1030)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:979)
+	at org.springframework.cloud.context.named.NamedContextFactory.destroy(NamedContextFactory.java:93)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:258)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1092)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1085)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1061)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1030)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:170)
+	at org.springframework.context.support.AbstractApplicationContext$1.run(AbstractApplicationContext.java:949)
+2022-01-05 23:12:43.934 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2022-01-05 23:12:43.934 [SpringContextShutdownHook] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-01-05 23:12:43.945 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2022-01-05 23:12:43.945 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2022-01-05 23:12:43.945 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+2022-01-05 23:12:46.954 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Unregistering ...
+2022-01-05 23:12:50.995 [SpringContextShutdownHook] INFO  c.n.d.s.t.decorator.RedirectingEurekaHttpClient - Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:8761/eureka/} exception=java.net.ConnectException: Connection refused: connect stacktrace=com.sun.jersey.api.client.ClientHandlerException: java.net.ConnectException: Connection refused: connect
+	at com.sun.jersey.client.apache4.ApacheHttpClient4Handler.handle(ApacheHttpClient4Handler.java:187)
+	at com.sun.jersey.api.client.filter.GZIPContentEncodingFilter.handle(GZIPContentEncodingFilter.java:123)
+	at com.netflix.discovery.EurekaIdentityHeaderFilter.handle(EurekaIdentityHeaderFilter.java:27)
+	at com.sun.jersey.api.client.Client.handle(Client.java:652)
+	at com.sun.jersey.api.client.WebResource.handle(WebResource.java:682)
+	at com.sun.jersey.api.client.WebResource.access$200(WebResource.java:74)
+	at com.sun.jersey.api.client.WebResource$Builder.delete(WebResource.java:591)
+	at com.netflix.discovery.shared.transport.jersey.AbstractJerseyEurekaHttpClient.cancel(AbstractJerseyEurekaHttpClient.java:77)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.MetricsCollectingEurekaHttpClient.execute(MetricsCollectingEurekaHttpClient.java:73)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:91)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.DiscoveryClient.unregister(DiscoveryClient.java:972)
+	at com.netflix.discovery.DiscoveryClient.shutdown(DiscoveryClient.java:948)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleElement.invoke(InitDestroyAnnotationBeanPostProcessor.java:389)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:347)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:177)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:242)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.run(DisposableBeanAdapter.java:235)
+	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.destroy(GenericScope.java:403)
+	at org.springframework.cloud.context.scope.GenericScope.destroy(GenericScope.java:142)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:258)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1092)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1085)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1061)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1030)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:170)
+	at org.springframework.context.support.AbstractApplicationContext$1.run(AbstractApplicationContext.java:949)
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:607)
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:121)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180)
+	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:144)
+	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:134)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:605)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:440)
+	at org.apache.http.impl.client.AbstractHttpClient.doExecute(AbstractHttpClient.java:835)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:118)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:56)
+	at com.sun.jersey.client.apache4.ApacheHttpClient4Handler.handle(ApacheHttpClient4Handler.java:173)
+	... 42 more
+
+2022-01-05 23:12:50.995 [SpringContextShutdownHook] WARN  c.n.d.s.t.decorator.RetryableEurekaHttpClient - Request execution failed with message: java.net.ConnectException: Connection refused: connect
+2022-01-05 23:12:52.014 [SpringContextShutdownHook] INFO  c.n.d.s.t.decorator.RetryableEurekaHttpClient - Request execution succeeded on retry #1
+2022-01-05 23:12:52.014 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 - deregister  status: 404
+2022-01-05 23:12:52.014 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
+2022-01-05 23:13:00.017 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2022-01-05 23:13:01.080 [main] INFO  c.e.cyjentitycreater.CyjEntityCreaterApplication - No active profile set, falling back to default profiles: default
+2022-01-05 23:13:02.234 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-01-05 23:13:02.234 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-01-05 23:13:02.491 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 234ms. Found 11 JPA repository interfaces.
+2022-01-05 23:13:02.916 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-01-05 23:13:02.918 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-01-05 23:13:03.011 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.auto.AppServiceDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 23:13:03.011 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.auto.EntityDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 23:13:03.011 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.auto.EntityNameDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 23:13:03.011 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.custom.AppServiceCustomDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 23:13:03.011 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.custom.EntityCustomDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 23:13:03.011 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjentitycreater.dao.custom.EntityNameCustomDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-05 23:13:03.011 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 18ms. Found 0 Redis repository interfaces.
+2022-01-05 23:13:03.145 [main] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2022-01-05 23:13:03.325 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=e7ab6d8d-4b26-3bd5-98a7-c0bf296617bf
+2022-01-05 23:13:03.732 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8020 (http)
+2022-01-05 23:13:03.743 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8020"]
+2022-01-05 23:13:03.743 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-01-05 23:13:03.743 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
+2022-01-05 23:13:03.979 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-01-05 23:13:03.979 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2867 ms
+2022-01-05 23:13:04.115 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2022-01-05 23:13:04.126 [main] INFO  com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@413d2cd1
+2022-01-05 23:13:04.405 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-01-05 23:13:04.471 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.27.Final
+2022-01-05 23:13:04.630 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-01-05 23:13:04.784 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-01-05 23:13:04.805 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-01-05 23:13:04.833 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2022-01-05 23:13:05.779 [main] INFO  o.h.e.t.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-01-05 23:13:05.790 [main] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-01-05 23:13:06.763 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2022-01-05 23:13:06.932 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-01-05 23:13:07.033 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2022-01-05 23:13:08.458 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-01-05 23:13:09.137 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses Jersey
+2022-01-05 23:13:09.157 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2022-01-05 23:13:09.278 [main] INFO  o.s.cloud.netflix.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2022-01-05 23:13:09.309 [main] INFO  com.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2022-01-05 23:13:09.455 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON encoding codec LegacyJacksonJson
+2022-01-05 23:13:09.455 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON decoding codec LegacyJacksonJson
+2022-01-05 23:13:09.555 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML encoding codec XStreamXml
+2022-01-05 23:13:09.555 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML decoding codec XStreamXml
+2022-01-05 23:13:09.825 [main] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2022-01-05 23:13:10.025 [main] INFO  com.netflix.discovery.DiscoveryClient - Disable delta property : false
+2022-01-05 23:13:10.025 [main] INFO  com.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2022-01-05 23:13:10.025 [main] INFO  com.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2022-01-05 23:13:10.025 [main] INFO  com.netflix.discovery.DiscoveryClient - Application is null : false
+2022-01-05 23:13:10.025 [main] INFO  com.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2022-01-05 23:13:10.025 [main] INFO  com.netflix.discovery.DiscoveryClient - Application version is -1: true
+2022-01-05 23:13:10.025 [main] INFO  com.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2022-01-05 23:13:10.128 [main] INFO  com.netflix.discovery.DiscoveryClient - The response status is 200
+2022-01-05 23:13:10.128 [main] INFO  com.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2022-01-05 23:13:10.138 [main] INFO  com.netflix.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2022-01-05 23:13:10.138 [main] INFO  com.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1641395590138 with initial instances count: 0
+2022-01-05 23:13:10.138 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application CYJ-ENTITY-CREATER with eureka with status UP
+2022-01-05 23:13:10.138 [main] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1641395590138, current=UP, previous=STARTING]
+2022-01-05 23:13:10.138 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8020"]
+2022-01-05 23:13:10.138 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020: registering service...
+2022-01-05 23:13:10.170 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8020 (http) with context path ''
+2022-01-05 23:13:10.170 [main] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8020
+2022-01-05 23:13:10.212 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/host.docker.internal:cyj-entity-creater:8020 - registration status: 204
+2022-01-05 23:13:10.504 [main] INFO  c.e.cyjentitycreater.CyjEntityCreaterApplication - Started CyjEntityCreaterApplication in 11.693 seconds (JVM running for 12.789)
+2022-01-05 23:13:10.991 [RMI TCP Connection(3)-192.168.1.4] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-01-05 23:13:10.995 [RMI TCP Connection(3)-192.168.1.4] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2022-01-05 23:13:11.014 [RMI TCP Connection(3)-192.168.1.4] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 19 ms
+2022-01-05 23:13:40.141 [DiscoveryClient-CacheRefreshExecutor-0] INFO  com.netflix.discovery.DiscoveryClient - Disable delta property : false
+2022-01-05 23:13:40.142 [DiscoveryClient-CacheRefreshExecutor-0] INFO  com.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2022-01-05 23:13:40.142 [DiscoveryClient-CacheRefreshExecutor-0] INFO  com.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2022-01-05 23:13:40.142 [DiscoveryClient-CacheRefreshExecutor-0] INFO  com.netflix.discovery.DiscoveryClient - Application is null : false
+2022-01-05 23:13:40.142 [DiscoveryClient-CacheRefreshExecutor-0] INFO  com.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2022-01-05 23:13:40.142 [DiscoveryClient-CacheRefreshExecutor-0] INFO  com.netflix.discovery.DiscoveryClient - Application version is -1: false
+2022-01-05 23:13:40.142 [DiscoveryClient-CacheRefreshExecutor-0] INFO  com.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2022-01-05 23:13:40.179 [DiscoveryClient-CacheRefreshExecutor-0] INFO  com.netflix.discovery.DiscoveryClient - The response status is 200
+2022-01-05 23:13:51.485 [http-nio-8020-exec-2] INFO  org.dozer.config.GlobalSettings - Trying to find Dozer configuration file: dozer.properties
+2022-01-05 23:13:51.485 [http-nio-8020-exec-2] WARN  org.dozer.config.GlobalSettings - Dozer configuration file not found: dozer.properties.  Using defaults for all Dozer global properties.
+2022-01-05 23:13:51.485 [http-nio-8020-exec-2] INFO  org.dozer.DozerInitializer - Initializing Dozer. Version: 5.5.0, Thread Name: http-nio-8020-exec-2
+2022-01-05 23:13:51.485 [http-nio-8020-exec-2] INFO  org.dozer.jmx.JMXPlatformImpl - Dozer JMX MBean [org.dozer.jmx:type=DozerStatisticsController] auto registered with the Platform MBean Server
+2022-01-05 23:13:51.485 [http-nio-8020-exec-2] INFO  org.dozer.jmx.JMXPlatformImpl - Dozer JMX MBean [org.dozer.jmx:type=DozerAdminController] auto registered with the Platform MBean Server
+2022-01-05 23:13:51.485 [http-nio-8020-exec-2] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:13:51.549 [http-nio-8020-exec-2] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:13:51.559 [http-nio-8020-exec-2] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:13:53.199 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:13:53.204 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:13:53.213 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:13:53.216 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:13:53.216 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:13:53.216 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:13:53.216 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:13:53.227 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:13:53.227 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:13:53.238 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:13:53.239 [http-nio-8020-exec-3] INFO  org.dozer.DozerBeanMapper - Initializing a new instance of dozer bean mapper.
+2022-01-05 23:18:10.033 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2022-01-05 23:23:10.041 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2022-01-05 23:28:10.044 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2022-01-05 23:33:10.055 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2022-01-05 23:33:55.618 [lettuce-nioEventLoop-4-1] INFO  io.lettuce.core.protocol.CommandHandler - null Unexpected exception during request: java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:379)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:253)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1134)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:350)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:719)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:655)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:581)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:493)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+2022-01-05 23:33:55.735 [lettuce-eventExecutorLoop-1-3] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost/127.0.0.1:6379
+2022-01-05 23:33:57.790 [lettuce-nioEventLoop-4-2] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:34:02.025 [lettuce-eventExecutorLoop-1-6] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:34:04.056 [lettuce-nioEventLoop-4-5] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:34:08.327 [lettuce-eventExecutorLoop-1-8] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:34:10.368 [lettuce-nioEventLoop-4-8] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:34:15.427 [lettuce-eventExecutorLoop-1-4] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:34:17.457 [lettuce-nioEventLoop-4-3] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:34:22.631 [lettuce-eventExecutorLoop-1-6] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:34:24.663 [lettuce-nioEventLoop-4-5] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:34:28.827 [lettuce-eventExecutorLoop-1-7] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:34:30.848 [lettuce-nioEventLoop-4-6] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:34:39.126 [lettuce-eventExecutorLoop-1-1] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:34:41.167 [lettuce-nioEventLoop-4-7] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:34:57.630 [lettuce-eventExecutorLoop-1-8] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:34:59.654 [lettuce-nioEventLoop-4-8] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:35:29.729 [lettuce-eventExecutorLoop-1-2] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:35:31.762 [lettuce-nioEventLoop-4-1] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:36:01.828 [lettuce-eventExecutorLoop-1-3] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:36:03.854 [lettuce-nioEventLoop-4-2] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:36:33.926 [lettuce-eventExecutorLoop-1-4] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:36:35.951 [lettuce-nioEventLoop-4-3] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:37:06.028 [lettuce-eventExecutorLoop-1-5] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:37:08.058 [lettuce-nioEventLoop-4-4] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:37:38.126 [lettuce-eventExecutorLoop-1-6] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:37:40.147 [lettuce-nioEventLoop-4-5] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:38:10.069 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2022-01-05 23:38:10.232 [lettuce-eventExecutorLoop-1-7] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:38:12.263 [lettuce-nioEventLoop-4-6] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:38:42.329 [lettuce-eventExecutorLoop-1-1] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:38:44.367 [lettuce-nioEventLoop-4-7] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:39:14.428 [lettuce-eventExecutorLoop-1-8] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:39:16.454 [lettuce-nioEventLoop-4-8] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:39:46.525 [lettuce-eventExecutorLoop-1-2] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:39:48.569 [lettuce-nioEventLoop-4-1] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:40:18.631 [lettuce-eventExecutorLoop-1-3] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:40:20.666 [lettuce-nioEventLoop-4-2] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:40:50.732 [lettuce-eventExecutorLoop-1-4] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:40:52.757 [lettuce-nioEventLoop-4-3] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:41:22.832 [lettuce-eventExecutorLoop-1-5] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:41:24.862 [lettuce-nioEventLoop-4-4] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:41:54.927 [lettuce-eventExecutorLoop-1-6] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:41:56.962 [lettuce-nioEventLoop-4-5] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:42:27.029 [lettuce-eventExecutorLoop-1-7] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:42:29.063 [lettuce-nioEventLoop-4-6] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:42:59.129 [lettuce-eventExecutorLoop-1-1] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:43:01.163 [lettuce-nioEventLoop-4-7] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:43:10.078 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2022-01-05 23:43:31.229 [lettuce-eventExecutorLoop-1-8] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:43:33.259 [lettuce-nioEventLoop-4-8] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:44:03.328 [lettuce-eventExecutorLoop-1-2] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:44:05.359 [lettuce-nioEventLoop-4-1] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:44:35.429 [lettuce-eventExecutorLoop-1-3] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:44:37.444 [lettuce-nioEventLoop-4-2] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:45:07.529 [lettuce-eventExecutorLoop-1-4] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:45:09.559 [lettuce-nioEventLoop-4-3] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:45:39.631 [lettuce-eventExecutorLoop-1-5] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:45:41.659 [lettuce-nioEventLoop-4-4] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:46:11.726 [lettuce-eventExecutorLoop-1-6] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2022-01-05 23:46:13.749 [lettuce-nioEventLoop-4-5] WARN  io.lettuce.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2022-01-05 23:46:43.835 [lettuce-eventExecutorLoop-1-7] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
