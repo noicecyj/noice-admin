@@ -1,0 +1,76 @@
+2022-01-06 21:38:26.530 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2022-01-06 21:38:27.843 [main] INFO  com.example.cyjuser.CyjUserApplication - No active profile set, falling back to default profiles: default
+2022-01-06 21:38:28.675 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-01-06 21:38:28.675 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-01-06 21:38:28.805 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 116ms. Found 3 JPA repository interfaces.
+2022-01-06 21:38:29.243 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-01-06 21:38:29.243 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-01-06 21:38:29.344 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjuser.dao.RoleDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-06 21:38:29.344 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.cyjuser.dao.UserDao. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2022-01-06 21:38:29.344 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 15ms. Found 0 Redis repository interfaces.
+2022-01-06 21:38:29.506 [main] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2022-01-06 21:38:29.527 [main] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'hystrix.stream' contains invalid characters, please migrate to a valid format.
+2022-01-06 21:38:29.749 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=b382f06b-722c-3b05-996c-da1deea436eb
+2022-01-06 21:38:30.348 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8090 (http)
+2022-01-06 21:38:30.367 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8090"]
+2022-01-06 21:38:30.367 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-01-06 21:38:30.367 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
+2022-01-06 21:38:30.567 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-01-06 21:38:30.567 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2692 ms
+2022-01-06 21:38:30.677 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-user/target/classes/config.properties]
+2022-01-06 21:38:30.700 [main] INFO  com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@14b31e37
+2022-01-06 21:38:30.913 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-01-06 21:38:31.077 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-01-06 21:38:31.145 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.27.Final
+2022-01-06 21:38:31.413 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-01-06 21:38:31.606 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-01-06 21:38:31.625 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-01-06 21:38:31.647 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2022-01-06 21:38:32.940 [main] INFO  o.h.e.t.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-01-06 21:38:33.090 [main] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-01-06 21:38:34.279 [main] WARN  c.e.cyjuser.filter.MyFilterSecurityInterceptor - Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2022-01-06 21:38:34.399 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses Jersey
+2022-01-06 21:38:34.987 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-user/target/classes/config.properties]
+2022-01-06 21:38:35.097 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2022-01-06 21:38:35.965 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-01-06 21:38:36.302 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: any request, [com.example.cyjuser.filter.WebSecurityCorsFilter@3efd3302, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@531292ed, org.springframework.security.web.context.SecurityContextPersistenceFilter@b0c4905, org.springframework.security.web.header.HeaderWriterFilter@5f1c406e, org.springframework.web.filter.CorsFilter@41538150, org.springframework.security.web.authentication.logout.LogoutFilter@65b7678a, com.example.cyjuser.filter.JWTAuthenticationFilter@1360ef8d, com.example.cyjuser.filter.MyUsernamePasswordAuthenticationFilter@44d2bbc0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4a9f0360, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7d1cfe97, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@310cc4d, org.springframework.security.web.session.SessionManagementFilter@62ec4146, org.springframework.security.web.access.ExceptionTranslationFilter@444ebefd, com.example.cyjuser.filter.MyFilterSecurityInterceptor@1ee22768, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@36f438f1]
+2022-01-06 21:38:36.414 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2022-01-06 21:38:36.605 [main] INFO  o.s.cloud.netflix.zuul.ZuulFilterInitializer - Starting filter initializer
+2022-01-06 21:38:36.691 [main] INFO  o.s.cloud.netflix.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2022-01-06 21:38:36.723 [main] INFO  com.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2022-01-06 21:38:36.769 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON encoding codec LegacyJacksonJson
+2022-01-06 21:38:36.769 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON decoding codec LegacyJacksonJson
+2022-01-06 21:38:36.886 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML encoding codec XStreamXml
+2022-01-06 21:38:36.886 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML decoding codec XStreamXml
+2022-01-06 21:38:37.104 [main] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2022-01-06 21:38:37.291 [main] INFO  com.netflix.discovery.DiscoveryClient - Disable delta property : false
+2022-01-06 21:38:37.291 [main] INFO  com.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2022-01-06 21:38:37.291 [main] INFO  com.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2022-01-06 21:38:37.291 [main] INFO  com.netflix.discovery.DiscoveryClient - Application is null : false
+2022-01-06 21:38:37.291 [main] INFO  com.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2022-01-06 21:38:37.291 [main] INFO  com.netflix.discovery.DiscoveryClient - Application version is -1: true
+2022-01-06 21:38:37.291 [main] INFO  com.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2022-01-06 21:38:37.387 [main] INFO  com.netflix.discovery.DiscoveryClient - The response status is 200
+2022-01-06 21:38:37.400 [main] INFO  com.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2022-01-06 21:38:37.403 [main] INFO  com.netflix.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2022-01-06 21:38:37.408 [main] INFO  com.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1641476317407 with initial instances count: 0
+2022-01-06 21:38:37.408 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application CYJ-USER with eureka with status UP
+2022-01-06 21:38:37.408 [main] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1641476317408, current=UP, previous=STARTING]
+2022-01-06 21:38:37.408 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8090"]
+2022-01-06 21:38:37.408 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-USER/host.docker.internal:cyj-user:8090: registering service...
+2022-01-06 21:38:37.434 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8090 (http) with context path ''
+2022-01-06 21:38:37.444 [main] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8090
+2022-01-06 21:38:37.470 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-USER/host.docker.internal:cyj-user:8090 - registration status: 204
+2022-01-06 21:38:37.709 [main] INFO  com.example.cyjuser.CyjUserApplication - Started CyjUserApplication in 12.679 seconds (JVM running for 14.323)
+2022-01-06 21:38:38.422 [RMI TCP Connection(2)-192.168.1.4] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-01-06 21:38:38.422 [RMI TCP Connection(2)-192.168.1.4] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2022-01-06 21:38:38.434 [RMI TCP Connection(2)-192.168.1.4] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 12 ms
+2022-01-06 21:39:07.409 [DiscoveryClient-CacheRefreshExecutor-0] INFO  com.netflix.discovery.DiscoveryClient - Disable delta property : false
+2022-01-06 21:39:07.409 [DiscoveryClient-CacheRefreshExecutor-0] INFO  com.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2022-01-06 21:39:07.409 [DiscoveryClient-CacheRefreshExecutor-0] INFO  com.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2022-01-06 21:39:07.409 [DiscoveryClient-CacheRefreshExecutor-0] INFO  com.netflix.discovery.DiscoveryClient - Application is null : false
+2022-01-06 21:39:07.409 [DiscoveryClient-CacheRefreshExecutor-0] INFO  com.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2022-01-06 21:39:07.409 [DiscoveryClient-CacheRefreshExecutor-0] INFO  com.netflix.discovery.DiscoveryClient - Application version is -1: false
+2022-01-06 21:39:07.409 [DiscoveryClient-CacheRefreshExecutor-0] INFO  com.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2022-01-06 21:39:07.440 [DiscoveryClient-CacheRefreshExecutor-0] INFO  com.netflix.discovery.DiscoveryClient - The response status is 200
+2022-01-06 21:43:37.301 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
