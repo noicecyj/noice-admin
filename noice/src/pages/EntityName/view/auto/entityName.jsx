@@ -8,13 +8,15 @@ import styles from '@/pages/EntityName/index.module.scss';
 
 const { Cell } = ResponsiveGrid;
 
-function EntityName() {
+function EntityName(props) {
+  const { custom } = props;
   const [entityNameState, entityNameDispatchers] = pageStore.useModel('entityName');
   const [entityState, entityDispatchers] = pageStore.useModel('entity');
 
   useEffect(() => {
     entityNameDispatchers.findDataTableAndFormByName();
-  }, [entityNameDispatchers]);
+    console.log(custom);
+  }, [entityNameDispatchers, custom]);
 
   const entityNameRender = (value, index, record) => {
     return (
@@ -45,6 +47,7 @@ function EntityName() {
           <div className={styles.add}>
             <Button type="primary" onClick={() => entityNameDispatchers.entityNameEdit()}> 添加 </Button>
           </div>
+          {custom}
           <DataTableTemple
             visibleLoading={entityNameState.entityNameLoadingVisible}
             dataSource={entityNameState.entityNameTableData}

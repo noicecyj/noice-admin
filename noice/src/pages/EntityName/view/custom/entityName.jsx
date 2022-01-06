@@ -7,26 +7,17 @@ import styles from '@/pages/EntityName/index.module.scss';
 const FormItem = Form.Item;
 const { Group: CheckboxGroup } = Checkbox;
 
-function CustomEntityName(props) {
-  const { entityNameState, entityNameDispatchers } = props;
+function CustomEntityName() {
   const [customEntityNameState, customEntityNameDispatchers] = pageStore.useModel('customEntityName');
-  const formItemLayout = {
-    labelCol: {
-      fixedSpan: 6,
-    },
-    wrapperCol: {
-      span: 40,
-    },
-  };
 
   useEffect(() => {
-    customEntityNameDispatchers.findCatalogByValue('LEVEL_ENTITY_TYPE');
-    customEntityNameDispatchers.findCatalogByValue('LEVEL_ENTITY_TYPE_FOUNT');
+
   }, [customEntityNameDispatchers]);
 
   return (
     <div>
-      <Dialog
+      <Button type="primary"> 生成代码 </Button>
+      {/* <Dialog
         title="选择生成类"
         visible={customEntityNameState.chooseVisible}
         onOk={() => customEntityNameDispatchers.createEntityFile({
@@ -81,7 +72,7 @@ function CustomEntityName(props) {
             />
           </FormItem>
         </Form>
-      </Dialog>
+      </Dialog> */}
     </div>
   );
 }
