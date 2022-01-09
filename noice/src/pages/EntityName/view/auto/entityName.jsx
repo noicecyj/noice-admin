@@ -5,24 +5,31 @@ import pageStore from '@/pages/EntityName/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
 import styles from '@/pages/EntityName/index.module.scss';
+import EntityNameCustom from '@/pages/EntityName/view/custom/entityName';
 
 const { Cell } = ResponsiveGrid;
 
-function EntityName(props) {
-  const { custom } = props;
+function EntityName() {
   const [entityNameState, entityNameDispatchers] = pageStore.useModel('entityName');
   const [entityState, entityDispatchers] = pageStore.useModel('entity');
 
   useEffect(() => {
     entityNameDispatchers.findDataTableAndFormByName();
-    console.log(custom);
-  }, [entityNameDispatchers, custom]);
+  }, [entityNameDispatchers]);
 
   const entityNameRender = (value, index, record) => {
     return (
       <div className={styles.opt}>
         <Button type="primary" size="small" onClick={() => entityNameDispatchers.entityNameEdit(record)} > 编辑 </Button>
         <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning > 删除 </Button>
+      </div>
+    );
+  };
+
+  const entityNameCustomRender = (value, index, record) => {
+    return (
+      <div className={styles.opt}>
+        <EntityNameCustom />
       </div>
     );
   };
@@ -47,7 +54,6 @@ function EntityName(props) {
           <div className={styles.add}>
             <Button type="primary" onClick={() => entityNameDispatchers.entityNameEdit()}> 添加 </Button>
           </div>
-          {custom}
           <DataTableTemple
             visibleLoading={entityNameState.entityNameLoadingVisible}
             dataSource={entityNameState.entityNameTableData}
@@ -65,6 +71,7 @@ function EntityName(props) {
             }}
             primaryKey="id"
             pageRender={entityNameRender}
+            operationRender={entityNameCustomRender}
           />
         </div>
       </Cell>

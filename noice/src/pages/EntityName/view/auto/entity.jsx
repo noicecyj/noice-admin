@@ -5,6 +5,7 @@ import pageStore from '@/pages/EntityName/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
 import styles from '@/pages/EntityName/index.module.scss';
+import EntityCustom from '@/pages/EntityName/view/custom/entity';
 
 function Entity() {
   const [entityState, entityDispatchers] = pageStore.useModel('entity');
@@ -44,6 +45,7 @@ function Entity() {
         <div className={styles.Main}>
           <div className={styles.add}>
             <Button type="primary" onClick={() => entityDispatchers.entityEdit()}> 添加 </Button>
+            <EntityCustom />
           </div>
           <DataTableTemple
             visibleLoading={entityState.entityLoadingVisible}

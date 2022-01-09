@@ -20,17 +20,6 @@ function DataTable(props) {
         primaryKey={primaryKey}
       >
         {items.length === 0 ? null : items.map((item, index) => {
-          if (item.propertyType === 'customOperation') {
-            return (<Table.Column
-              style={item.propertyDisplay === '否'}
-              title={item.propertyLabel}
-              dataIndex={item.propertyName}
-              width={item.propertyWidth != null ? item.propertyWidth : null}
-              align="right"
-              cell={operationRender}
-              key={index}
-            />);
-          }
           return (<Table.Column
             hidden={item.propertyDisplay === '否'}
             title={item.propertyLabel}
@@ -39,6 +28,14 @@ function DataTable(props) {
             key={index}
           />);
         })}
+        <Table.Column
+          hidden={operationRender === undefined}
+          title="自定义操作"
+          align="right"
+          key="operationRender"
+          width="160px"
+          cell={operationRender}
+        />
         <Table.Column
           title="状态"
           dataIndex="status"
