@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { ResponsiveGrid, Button, Dialog } from '@alifd/next';
 import React, { useEffect } from 'react';
 import pageStore from '@/pages/EntityName/store';

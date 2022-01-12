@@ -1,10 +1,8 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import pageStore from '@/pages/EntityName/store';
-import { Dialog, Form, Checkbox, Button, Select } from '@alifd/next';
+import { Dialog, Form, Button, Select } from '@alifd/next';
 
 const FormItem = Form.Item;
-const { Group: CheckboxGroup } = Checkbox;
 const formItemLayout = {
   labelCol: {
     fixedSpan: 6,
@@ -15,11 +13,11 @@ const formItemLayout = {
 };
 
 function CustomEntityName(props) {
+  // eslint-disable-next-line no-unused-vars
   const { value, index, record } = props;
   const [customEntityNameState, customEntityNameDispatchers] = pageStore.useModel('customEntityName');
 
   useEffect(() => {
-
   }, [customEntityNameDispatchers]);
 
   return (
