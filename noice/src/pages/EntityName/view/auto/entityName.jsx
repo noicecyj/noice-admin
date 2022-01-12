@@ -29,7 +29,7 @@ function EntityName() {
   const entityNameCustomRender = (value, index, record) => {
     return (
       <div className={styles.opt}>
-        <EntityNameCustom />
+        <EntityNameCustom value={value} index={index} record={record} />
       </div>
     );
   };

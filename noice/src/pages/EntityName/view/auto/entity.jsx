@@ -18,6 +18,14 @@ function Entity() {
       </div>);
   };
 
+  const entityCustomRender = (value, index, record) => {
+    return (
+      <div className={styles.opt}>
+        <EntityCustom value={value} index={index} record={record} />
+      </div>
+    );
+  };
+
   const deleteConfirm = (record) => {
     Dialog.confirm({
       title: '删除',
@@ -45,7 +53,6 @@ function Entity() {
         <div className={styles.Main}>
           <div className={styles.add}>
             <Button type="primary" onClick={() => entityDispatchers.entityEdit()}> 添加 </Button>
-            <EntityCustom />
           </div>
           <DataTableTemple
             visibleLoading={entityState.entityLoadingVisible}
@@ -55,6 +62,7 @@ function Entity() {
             primaryKey="id"
             getPage={(entityCurrent) => entityDispatchers.entityPage({ entityCurrent, pid: entityState.entityNameId })}
             pageRender={entityRender}
+            // operationRender={entityCustomRender}
           />
         </div>
       </Dialog>

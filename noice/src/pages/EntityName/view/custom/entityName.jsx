@@ -2,7 +2,6 @@
 import React, { useEffect } from 'react';
 import pageStore from '@/pages/EntityName/store';
 import { Dialog, Form, Checkbox, Button, Select } from '@alifd/next';
-import styles from '@/pages/EntityName/index.module.scss';
 
 const FormItem = Form.Item;
 const { Group: CheckboxGroup } = Checkbox;
@@ -15,7 +14,8 @@ const formItemLayout = {
   },
 };
 
-function CustomEntityName() {
+function CustomEntityName(props) {
+  const { value, index, record } = props;
   const [customEntityNameState, customEntityNameDispatchers] = pageStore.useModel('customEntityName');
 
   useEffect(() => {
@@ -37,7 +37,7 @@ function CustomEntityName() {
           style={{ width: '100%' }}
           {...formItemLayout}
           value={customEntityNameState.chooseFormData}
-          onChange={(value) => customEntityNameDispatchers.setState({ chooseFormData: value })}
+          onChange={(data) => customEntityNameDispatchers.setState({ chooseFormData: data })}
         >
           <FormItem label="选择生成：" requiredMessage="请选择生成类" >
             <Select />
