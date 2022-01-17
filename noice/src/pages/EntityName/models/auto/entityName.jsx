@@ -6,8 +6,8 @@ export default {
   namespace: 'entityName',
 
   state: {
-    entityNameTableData: [],
     entityNameTitle: '添加',
+    entityNameTableData: [],
     entityNameVisible: false,
     entityNameFormData: {},
     entityNameLoadingVisible: true,
@@ -15,6 +15,7 @@ export default {
     entityNameCurrent: 1,
     entityNameForm: [],
     entityNameTable: [],
+    entityNameId: '',
   },
 
   reducers: {

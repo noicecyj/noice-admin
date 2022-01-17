@@ -4,15 +4,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.cyjcommon.service.Impl.BaseService;
 import com.example.cyjcommon.utils.VoPoConverter;
 import com.example.cyjdictionary.entity.auto.po.DictionaryPO;
-import com.example.cyjdictionary.service.auto.DictionaryService;
-import com.example.cyjdictionary.service.custom.CatalogCustomService;
 import com.example.cyjdictionary.service.custom.DictionaryCustomService;
 import com.example.cyjentitycreater.dao.custom.EntityCustomDao;
 import com.example.cyjentitycreater.dao.custom.EntityNameCustomDao;
 import com.example.cyjentitycreater.entity.auto.po.AppServicePO;
 import com.example.cyjentitycreater.entity.auto.po.EntityNamePO;
 import com.example.cyjentitycreater.entity.auto.po.EntityPO;
-import com.example.cyjentitycreater.entity.custom.dto.DictionaryDTO;
 import com.example.cyjentitycreater.entity.custom.dto.EntityCustomDTO;
 import com.example.cyjentitycreater.service.auto.AppServiceService;
 import com.example.cyjentitycreater.service.auto.EntityNameService;
@@ -91,7 +88,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 String underPoName = BeanUtils.underline2Camel(po.getEntityCode());
                 //文件名
                 String poName = BeanUtils.captureName(underPoName);
-
                 AppServicePO appServicePO = appServiceService.findOneById(po.getAppId());
                 if (appServicePO == null) {
                         return;
@@ -116,15 +112,15 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 try {
                         createJavaFile(appPath + "/entity/auto/po", poGenerate(po, poList, poName, appPath));
                         createJavaFile(appPath + "/dao/auto", daoGenerate(poName, appPath));
-                        createJavaFile(appPath + "/dao/custom", daoCustomGenerate(poName, appPath),false);
+                        createJavaFile(appPath + "/dao/custom", daoCustomGenerate(poName, appPath), false);
                         createJavaFile(appPath + "/service/auto", serviceGenerate(poName, appPath));
                         createJavaFile(appPath + "/service/auto/Impl", serviceImplGenerate(underPoName, poName, appPath));
-                        createJavaFile(appPath + "/service/custom", serviceCustomGenerate(poName, appPath),false);
-                        createJavaFile(appPath + "/service/custom/Impl", serviceImplCustomGenerate(poName, appPath),false);
+                        createJavaFile(appPath + "/service/custom", serviceCustomGenerate(poName, appPath), false);
+                        createJavaFile(appPath + "/service/custom/Impl", serviceImplCustomGenerate(poName, appPath), false);
                         createJavaFile(appPath + "/controller/auto", controllerGenerate(underPoName, poName, appPath, appApi));
                         createJavaFile(appPath + "/controller/auto/Impl", controllerImplGenerate(underPoName, poName, appPath, appApi));
-                        createJavaFile(appPath + "/controller/custom", controllerCustomGenerate(poName, appPath),false);
-                        createJavaFile(appPath + "/controller/custom/Impl", controllerImplCustomGenerate(poName, appPath, appApi),false);
+                        createJavaFile(appPath + "/controller/custom", controllerCustomGenerate(poName, appPath), false);
+                        createJavaFile(appPath + "/controller/custom/Impl", controllerImplCustomGenerate(poName, appPath, appApi), false);
                 } catch (IOException e) {
                         e.printStackTrace();
                 }
@@ -577,45 +573,747 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
 
         @Override
         public void createComponentFile(String id) {
-                //获取实例po
-                EntityNamePO po = entityNameService.findOneById(id);
-                if (po == null) {
-                        return;
-                }
-                List<EntityPO> poList = entityService.findListByPid(po.getId());
-                //驼峰名
-                String underPoName = BeanUtils.underline2Camel(po.getEntityCode());
-                //文件名
-                String poName = BeanUtils.captureName(underPoName);
-
-                AppServicePO appServicePO = appServiceService.findOneById(po.getAppId());
-                if (appServicePO == null) {
-                        return;
-                }
-                //服务路径
-                String appPath = appServicePO.getAppPath();
-                //服务接口
-                String appApi = appServicePO.getAppApi();
-                createComponentFile(po, poList, underPoName, poName, appPath, appApi);
-                List<EntityNamePO> entityNamePOList = entityNameService.findListByPid(po.getId());
-                entityNamePOList.forEach(subPo -> {
-                        List<EntityPO> subPoList = entityService.findListByPid(subPo.getId());
-                        //驼峰名
-                        String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
-                        //文件名
-                        String SubPoName = BeanUtils.captureName(underSubPoName);
-                        createComponentFile(subPo, subPoList, underSubPoName, SubPoName, appPath, appApi);
-                });
-        }
-
-        private void createComponentFile(EntityNamePO po, List<EntityPO> poList, String underPoName, String poName, String appPath, String appApi) {
                 try {
-                        createJavaFile(componentPath + poName + "/index.jsx", poGenerate(po, poList, poName, appPath));
-                        createJavaFile(componentPath + poName + "/index.module.scss", poGenerate(po, poList, poName, appPath));
-                        createJavaFile(componentPath + poName + "/store.js", poGenerate(po, poList, poName, appPath));
+                        //获取实例po
+                        EntityNamePO po = entityNameService.findOneById(id);
+                        if (po == null) {
+                                return;
+                        }
+                        //驼峰名
+                        String underPoName = BeanUtils.underline2Camel(po.getEntityCode());
+                        //文件名
+                        String poName = BeanUtils.captureName(underPoName);
+                        AppServicePO appServicePO = appServiceService.findOneById(po.getAppId());
+                        if (appServicePO == null) {
+                                return;
+                        }
+                        //服务接口
+                        String appApi = appServicePO.getAppApi();
+                        List<EntityNamePO> entityNamePOList = entityNameService.findListByPid(po.getId());
+                        createComponentFile(appApi, entityNamePOList, po, underPoName, poName);
+                        entityNamePOList.forEach(subPo -> {
+                                //驼峰名
+                                String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
+                                //文件名
+                                String subPoName = BeanUtils.captureName(underSubPoName);
+                                createSubComponentFile(appApi, subPo, poName, underPoName, underSubPoName, subPoName);
+                        });
+                        createJavaFile(componentPath + poName + "/index.jsx", indexGenerate(entityNamePOList, underPoName, poName));
+                        createJavaFile(componentPath + poName + "/store.js", storeGenerate(entityNamePOList, underPoName, poName));
+                        createJavaFile(componentPath + poName + "/index.module.scss", indexModuleScssGenerate());
                 } catch (IOException e) {
                         e.printStackTrace();
                 }
+        }
+
+        private void createComponentFile(String appApi, List<EntityNamePO> entityNamePOList, EntityNamePO po, String underPoName, String poName) {
+                try {
+                        createJavaFile(componentPath + poName + "/view/auto/" + underPoName + ".jsx", viewAutoGenerate(entityNamePOList, underPoName, poName));
+                        createJavaFile(componentPath + poName + "/view/custom/" + underPoName + ".jsx", viewCustomGenerate(underPoName, poName));
+                        createJavaFile(componentPath + poName + "/services/auto/" + underPoName + ".jsx", servicesAutoGenerate(appApi, underPoName, poName));
+                        createJavaFile(componentPath + poName + "/services/custom/" + underPoName + ".jsx", servicesCustomGenerate(poName));
+                        createJavaFile(componentPath + poName + "/models/auto/" + underPoName + ".jsx", modelsAutoGenerate(po, underPoName, poName));
+                        createJavaFile(componentPath + poName + "/models/custom/" + underPoName + ".jsx", modelsCustomGenerate(underPoName, poName));
+                } catch (IOException e) {
+                        e.printStackTrace();
+                }
+        }
+
+        private void createSubComponentFile(String appApi, EntityNamePO subPo, String poName, String underPoName, String underSubPoName, String subPoName) {
+                try {
+                        createJavaFile(componentPath + subPoName + "/view/auto/" + underSubPoName + ".jsx", viewSubAutoGenerate(poName, underPoName, underSubPoName, subPoName));
+                        createJavaFile(componentPath + subPoName + "/view/custom/" + underSubPoName + ".jsx", viewCustomGenerate(underSubPoName, subPoName));
+                        createJavaFile(componentPath + subPoName + "/services/auto/" + underSubPoName + ".jsx", servicesSubAutoGenerate(appApi, underSubPoName, subPoName));
+                        createJavaFile(componentPath + subPoName + "/services/custom/" + underSubPoName + ".jsx", servicesCustomGenerate(subPoName));
+                        createJavaFile(componentPath + subPoName + "/models/auto/" + underSubPoName + ".jsx", modelsSubAutoGenerate(subPo, poName, underPoName, underSubPoName, subPoName));
+                        createJavaFile(componentPath + subPoName + "/models/custom/" + underSubPoName + ".jsx", modelsCustomGenerate(underSubPoName, subPoName));
+                } catch (IOException e) {
+                        e.printStackTrace();
+                }
+        }
+
+        private String[] modelsSubAutoGenerate(EntityNamePO subPo, String poName, String underPoName, String underSubPoName, String subPoName) {
+                String viewData = "import " + underSubPoName + "Service from '@/pages/" + poName + "/services/auto/" + underSubPoName + "';\r\n" +
+                        "import initService from '@/services/init';\r\n" +
+                        "\r\n" +
+                        "export default {\r\n" +
+                        "\r\n" +
+                        "  namespace: '" + underSubPoName + "',\r\n" +
+                        "\r\n" +
+                        "  state: {\r\n" +
+                        "    " + underSubPoName + "TableData: [],\r\n" +
+                        "    " + underSubPoName + "FormData: {},\r\n" +
+                        "    " + underSubPoName + "LoadingVisible: true,\r\n" +
+                        "    " + underSubPoName + "Total: 0,\r\n" +
+                        "    " + underSubPoName + "Current: 1,\r\n" +
+                        "    " + underSubPoName + "Form: [],\r\n" +
+                        "    " + underSubPoName + "Table: [],\r\n" +
+                        "    " + underSubPoName + "Id: '',\r\n" +
+                        "    " + underSubPoName + "Visible: false,\r\n" +
+                        "    divVisible: false,\r\n" +
+                        "    " + underPoName + "Id: '',\r\n" +
+                        "  },\r\n" +
+                        "\r\n" +
+                        "  reducers: {\r\n" +
+                        "    setState(prevState, payload) {\r\n" +
+                        "      return { ...prevState, ...payload };\r\n" +
+                        "    },\r\n" +
+                        "  },\r\n" +
+                        "\r\n" +
+                        "  effects: (dispatch) => ({\r\n" +
+                        "    async " + underSubPoName + "Page(data) {\r\n" +
+                        "      const dataRes = await " + underSubPoName + "Service." + underSubPoName + "Page(data." + underSubPoName + "Current, data.pid);\r\n" +
+                        "      const payload = {\r\n" +
+                        "        " + underSubPoName + "TableData: dataRes.data.results,\r\n" +
+                        "        " + underSubPoName + "Total: dataRes.data.total,\r\n" +
+                        "        " + underSubPoName + "Current: data." + underSubPoName + "Current,\r\n" +
+                        "        " + underSubPoName + "LoadingVisible: false,\r\n" +
+                        "      };\r\n" +
+                        "      dispatch." + underSubPoName + ".setState(payload);\r\n" +
+                        "    },\r\n" +
+                        "    async " + underSubPoName + "Edit(data) {\r\n" +
+                        "      if (data) {\r\n" +
+                        "        const " + underSubPoName + " = await " + underSubPoName + "Service.find" + subPoName + "ById(data.id);\r\n" +
+                        "        const fromData = {\r\n" +
+                        "          ..." + underSubPoName + ".data,\r\n" +
+                        "        };\r\n" +
+                        "        const payload = {\r\n" +
+                        "          " + underSubPoName + "FormData: fromData,\r\n" +
+                        "          " + underSubPoName + "Visible: true,\r\n" +
+                        "        };\r\n" +
+                        "        dispatch." + underSubPoName + ".setState(payload);\r\n" +
+                        "      } else {\r\n" +
+                        "        const payload = {\r\n" +
+                        "          " + underSubPoName + "FormData: {},\r\n" +
+                        "          " + underSubPoName + "Visible: true,\r\n" +
+                        "        };\r\n" +
+                        "        dispatch." + underSubPoName + ".setState(payload);\r\n" +
+                        "      }\r\n" +
+                        "    },\r\n" +
+                        "    async " + underSubPoName + "Delete(data) {\r\n" +
+                        "      await " + underSubPoName + "Service." + underSubPoName + "Delete(data.record.id);\r\n" +
+                        "      await this." + underSubPoName + "Page({ " + underSubPoName + "Current: data.data.pageNumber, pid: data.data.pid });\r\n" +
+                        "      const payload = {\r\n" +
+                        "        " + underSubPoName + "Visible: false,\r\n" +
+                        "      };\r\n" +
+                        "      dispatch." + underSubPoName + ".setState(payload);\r\n" +
+                        "    },\r\n" +
+                        "    async " + underSubPoName + "Save(data) {\r\n" +
+                        "      await " + underSubPoName + "Service." + underSubPoName + "Save({ ...data." + underSubPoName + "FormData, pid: data.pid });\r\n" +
+                        "      await this." + underSubPoName + "Page({ " + underSubPoName + "Current: data.pageNumber, pid: data.pid });\r\n" +
+                        "      const payload = {\r\n" +
+                        "        " + underSubPoName + "Visible: false,\r\n" +
+                        "      };\r\n" +
+                        "      dispatch." + underSubPoName + ".setState(payload);\r\n" +
+                        "    },\r\n" +
+                        "    setDataForm(data) {\r\n" +
+                        "      const payload = {\r\n" +
+                        "        " + underSubPoName + "FormData: data,\r\n" +
+                        "      };\r\n" +
+                        "      dispatch." + underSubPoName + ".setState(payload);\r\n" +
+                        "    },\r\n" +
+                        "    async findDataTableAndFormByName(pid) {\r\n" +
+                        "      const ret = await initService.findDataTableAndFormByName('" + subPo.getEntityCode() + "');\r\n" +
+                        "      await this." + underSubPoName + "Page({ " + underSubPoName + "Current: 1, pid });\r\n" +
+                        "      const payload = {\r\n" +
+                        "        " + underSubPoName + "Table: ret.data.dataTable,\r\n" +
+                        "        " + underSubPoName + "Form: ret.data.dataForm,\r\n" +
+                        "      };\r\n" +
+                        "      dispatch." + underSubPoName + ".setState(payload);\r\n" +
+                        "    },\r\n" +
+                        "    async onRowClick(data) {\r\n" +
+                        "      await this.findDataTableAndFormByName(data.record.id);\r\n" +
+                        "      await this." + underSubPoName + "Page({ " + underSubPoName + "Current: 1, pid: data.record.id });\r\n" +
+                        "      const payload = {\r\n" +
+                        "        divVisible: data.selected,\r\n" +
+                        "        " + underPoName + "Id: data.record.id,\r\n" +
+                        "        " + underSubPoName + "Visible: false,\r\n" +
+                        "      };\r\n" +
+                        "      dispatch." + underSubPoName + ".setState(payload);\r\n" +
+                        "    },\r\n" +
+                        "  }),\r\n" +
+                        "};\r\n" +
+                        "\r\n";
+                return new String[]{viewData, underSubPoName + ".jsx"};
+        }
+
+
+        private String[] servicesSubAutoGenerate(String appApi, String underSubPoName, String subPoName) {
+                String viewData = "import { request } from 'ice';\r\n" +
+                        "\r\n" +
+                        "export default {\r\n" +
+                        "  " + underSubPoName + "Page(pageNumber) {\r\n" +
+                        "    return request({\r\n" +
+                        "      url: '/" + appApi + "/" + underSubPoName + "Page',\r\n" +
+                        "      method: 'post',\r\n" +
+                        "      params: {\r\n" +
+                        "        pageNumber,\r\n" +
+                        "        pid,\r\n" +
+                        "      },\r\n" +
+                        "    });\r\n" +
+                        "  },\r\n" +
+                        "  " + underSubPoName + "Save(data) {\r\n" +
+                        "    return request({\r\n" +
+                        "      url: '/" + appApi + "/" + underSubPoName + "Save',\r\n" +
+                        "      method: 'post',\r\n" +
+                        "      data,\r\n" +
+                        "    });\r\n" +
+                        "  },\r\n" +
+                        "  " + underSubPoName + "Delete(id) {\r\n" +
+                        "    return request({\r\n" +
+                        "      url: '/" + appApi + "/" + underSubPoName + "Delete',\r\n" +
+                        "      method: 'post',\r\n" +
+                        "      params: {\r\n" +
+                        "        id,\r\n" +
+                        "      },\r\n" +
+                        "    });\r\n" +
+                        "  },\r\n" +
+                        "  find" + subPoName + "ById(id) {\r\n" +
+                        "    return request({\r\n" +
+                        "      url: '/" + appApi + "/find" + subPoName + "ById',\r\n" +
+                        "      method: 'post',\r\n" +
+                        "      params: {\r\n" +
+                        "        id,\r\n" +
+                        "      },\r\n" +
+                        "    });\r\n" +
+                        "  },\r\n" +
+                        "};\r\n" +
+                        "\r\n";
+                return new String[]{viewData, underSubPoName + ".jsx"};
+        }
+
+
+        private String[] viewSubAutoGenerate(String poName, String underPoName, String underSubPoName, String subPoName) {
+                String viewData = "import { Button, Dialog } from '@alifd/next';\r\n" +
+                        "import React from 'react';\r\n" +
+                        "import pageStore from '@/pages/" + poName + "/store';\r\n" +
+                        "import DataFormTemple from '@/components/dataForm';\r\n" +
+                        "import DataTableTemple from '@/components/dataTable';\r\n" +
+                        "import styles from '@/pages/" + poName + "/index.module.scss';\r\n" +
+                        "import " + subPoName + "Custom from '@/pages/" + poName + "/view/custom/" + underSubPoName + "';\r\n" +
+                        "\r\n" +
+                        "function " + subPoName + "() {\r\n" +
+                        "  const [" + underSubPoName + "State, " + underSubPoName + "Dispatchers] = pageStore.useModel('" + underSubPoName + "');\r\n" +
+                        "\r\n" +
+                        "  const " + underSubPoName + "Render = (value, index, record) => {\r\n" +
+                        "    return (\r\n" +
+                        "      <div className={styles.opt}>\r\n" +
+                        "        <Button type=\"primary\" size=\"small\" onClick={() => " + underSubPoName + "Dispatchers." + underSubPoName + "Edit(record)} > 编辑 </Button>\r\n" +
+                        "        <Button type=\"primary\" size=\"small\" onClick={() => deleteConfirm(record)} warning > 删除 </Button>\r\n" +
+                        "      </div>\r\n" +
+                        "    );\r\n" +
+                        "  };\r\n" +
+                        "\r\n" +
+                        "  const " + underSubPoName + "CustomRender = (value, index, record) => {\r\n" +
+                        "    return (\r\n" +
+                        "      <div className={styles.opt}>\r\n" +
+                        "        <" + subPoName + "Custom value={value} index={index} record={record} />\r\n" +
+                        "      </div>\r\n" +
+                        "    );\r\n" +
+                        "  };\r\n" +
+                        "\r\n" +
+                        "  const deleteConfirm = (record) => {\r\n" +
+                        "    Dialog.confirm({\r\n" +
+                        "      title: '删除',\r\n" +
+                        "      content: '是否确认删除',\r\n" +
+                        "      onOk: () => " + underSubPoName + "Dispatchers." + underSubPoName + "Delete({\r\n" +
+                        "        record,\r\n" +
+                        "        data: {\r\n" +
+                        "          pageNumber: " + underSubPoName + "State." + underSubPoName + "Current,\r\n" +
+                        "          pid: " + underSubPoName + "State." + underSubPoName + "NameId,\r\n" +
+                        "        },\r\n" +
+                        "      }),\r\n" +
+                        "    });\r\n" +
+                        "  };\r\n" +
+                        "\r\n" +
+                        "  return (\r\n" +
+                        "    <div>\r\n" +
+                        "      <Dialog\r\n" +
+                        "        visible={" + underSubPoName + "State.divVisible}\r\n" +
+                        "        footer={false}\r\n" +
+                        "        onClose={() => " + underSubPoName + "Dispatchers.setState({\r\n" +
+                        "          divVisible: false,\r\n" +
+                        "          " + underPoName + "Id: '',\r\n" +
+                        "        })}\r\n" +
+                        "        style={{ width: '90%' }}\r\n" +
+                        "      >\r\n" +
+                        "        <div className={styles.Main}>\r\n" +
+                        "          <div className={styles.add}>\r\n" +
+                        "            <Button type=\"primary\" onClick={() => " + underSubPoName + "Dispatchers." + underSubPoName + "Edit()}> 添加 </Button>\r\n" +
+                        "          </div>\r\n" +
+                        "          <DataTableTemple\r\n" +
+                        "            visibleLoading={" + underSubPoName + "State." + underSubPoName + "LoadingVisible}\r\n" +
+                        "            dataSource={" + underSubPoName + "State." + underSubPoName + "TableData}\r\n" +
+                        "            items={" + underSubPoName + "State." + underSubPoName + "Table}\r\n" +
+                        "            total={" + underSubPoName + "State." + underSubPoName + "Total}\r\n" +
+                        "            primaryKey=\"id\"\r\n" +
+                        "            getPage={(" + underSubPoName + "Current) => " + underSubPoName + "Dispatchers." + underSubPoName + "Page({ " + underSubPoName + "Current, pid: " + underSubPoName + "State." + underSubPoName + "NameId })}\r\n" +
+                        "            pageRender={" + underSubPoName + "Render}\r\n" +
+                        "            operationRender={" + underSubPoName + "CustomRender}\r\n" +
+                        "          />\r\n" +
+                        "        </div>\r\n" +
+                        "      </Dialog>\r\n" +
+                        "      <DataFormTemple\r\n" +
+                        "        title=\"菜单\"\r\n" +
+                        "        visibleDialog={" + underSubPoName + "State." + underSubPoName + "Visible}\r\n" +
+                        "        onClose={() => " + underSubPoName + "Dispatchers.setState({ " + underSubPoName + "Visible: false })}\r\n" +
+                        "        items={" + underSubPoName + "State." + underSubPoName + "Form}\r\n" +
+                        "        dispatchers={(value) => " + underSubPoName + "Dispatchers.setDataForm(value)}\r\n" +
+                        "        onOk={() => " + underSubPoName + "Dispatchers." + underSubPoName + "Save({\r\n" +
+                        "          " + underSubPoName + "FormData: " + underSubPoName + "State." + underSubPoName + "FormData,\r\n" +
+                        "          pageNumber: " + underSubPoName + "State." + underSubPoName + "Current,\r\n" +
+                        "          pid: " + underSubPoName + "State." + underPoName + "Id,\r\n" +
+                        "        })}\r\n" +
+                        "        formDataValue={" + underSubPoName + "State." + underSubPoName + "FormData}\r\n" +
+                        "      />\r\n" +
+                        "    </div>\r\n" +
+                        "  );\r\n" +
+                        "}\r\n" +
+                        "\r\n" +
+                        "export default " + subPoName + ";\r\n" +
+                        "\r\n";
+                return new String[]{viewData, underSubPoName + ".jsx"};
+        }
+
+        private String[] modelsCustomGenerate(String underPoName, String poName) {
+                String viewData = "import custom" + poName + "Services from '../../services/custom/" + underPoName + "';\r\n" +
+                        "import initService from '@/services/init';\r\n" +
+                        "\r\n" +
+                        "export default {\r\n" +
+                        "\r\n" +
+                        "  namespace: 'custom" + poName + "',\r\n" +
+                        "\r\n" +
+                        "  state: {\r\n" +
+                        "\r\n" +
+                        "  },\r\n" +
+                        "\r\n" +
+                        "  reducers: {\r\n" +
+                        "    setState(prevState, payload) {\r\n" +
+                        "      return { ...prevState, ...payload };\r\n" +
+                        "    },\r\n" +
+                        "  },\r\n" +
+                        "\r\n" +
+                        "  effects: (dispatch) => ({\r\n" +
+                        "\r\n" +
+                        "  }),\r\n" +
+                        "};\r\n" +
+                        "\r\n";
+                return new String[]{viewData, underPoName + ".jsx"};
+        }
+
+        private String[] modelsAutoGenerate(EntityNamePO po, String underPoName, String poName) {
+                String viewData = "import " + underPoName + "Service from '@/pages/" + poName + "/services/auto/" + underPoName + "';\r\n" +
+                        "import initService from '@/services/init';\r\n" +
+                        "\r\n" +
+                        "export default {\r\n" +
+                        "\r\n" +
+                        "  namespace: '" + underPoName + "',\r\n" +
+                        "\r\n" +
+                        "  state: {\r\n" +
+                        "    " + underPoName + "Title: '添加',\r\n" +
+                        "    " + underPoName + "TableData: [],\r\n" +
+                        "    " + underPoName + "Visible: false,\r\n" +
+                        "    " + underPoName + "FormData: {},\r\n" +
+                        "    " + underPoName + "LoadingVisible: true,\r\n" +
+                        "    " + underPoName + "Total: 0,\r\n" +
+                        "    " + underPoName + "Current: 1,\r\n" +
+                        "    " + underPoName + "Form: [],\r\n" +
+                        "    " + underPoName + "Table: [],\r\n" +
+                        "    " + underPoName + "Id: '',\r\n" +
+                        "  },\r\n" +
+                        "\r\n" +
+                        "  reducers: {\r\n" +
+                        "    setState(prevState, payload) {\r\n" +
+                        "      return { ...prevState, ...payload };\r\n" +
+                        "    },\r\n" +
+                        "  },\r\n" +
+                        "\r\n" +
+                        "  effects: (dispatch) => ({\r\n" +
+                        "    async " + underPoName + "Page(" + underPoName + "Current) {\r\n" +
+                        "      const dataRes = await " + underPoName + "Service." + underPoName + "Page(" + underPoName + "Current);\r\n" +
+                        "      const payload = {\r\n" +
+                        "        " + underPoName + "TableData: dataRes.data.results,\r\n" +
+                        "        " + underPoName + "Total: dataRes.data.total,\r\n" +
+                        "        " + underPoName + "Current,\r\n" +
+                        "        " + underPoName + "LoadingVisible: false,\r\n" +
+                        "      };\r\n" +
+                        "      dispatch." + underPoName + ".setState(payload);\r\n" +
+                        "    },\r\n" +
+                        "    async " + underPoName + "Edit(data) {\r\n" +
+                        "      if (data) {\r\n" +
+                        "        const " + underPoName + " = await " + underPoName + "Service.find" + poName + "ById(data.id);\r\n" +
+                        "        const fromData = {\r\n" +
+                        "          ..." + underPoName + ".data,\r\n" +
+                        "        };\r\n" +
+                        "        const payload = {\r\n" +
+                        "          " + underPoName + "FormData: fromData,\r\n" +
+                        "          " + underPoName + "Title: '编辑',\r\n" +
+                        "          " + underPoName + "Visible: true,\r\n" +
+                        "        };\r\n" +
+                        "        dispatch." + underPoName + ".setState(payload);\r\n" +
+                        "      } else {\r\n" +
+                        "        const payload = {\r\n" +
+                        "          " + underPoName + "FormData: {},\r\n" +
+                        "          " + underPoName + "Title: '添加',\r\n" +
+                        "          " + underPoName + "Visible: true,\r\n" +
+                        "        };\r\n" +
+                        "        dispatch." + underPoName + ".setState(payload);\r\n" +
+                        "      }\r\n" +
+                        "    },\r\n" +
+                        "    async " + underPoName + "Delete(data) {\r\n" +
+                        "      await " + underPoName + "Service." + underPoName + "Delete(data.record.id);\r\n" +
+                        "      await this." + underPoName + "Page(data.data.pageNumber);\r\n" +
+                        "      const payload = {\r\n" +
+                        "        " + underPoName + "Visible: false,\r\n" +
+                        "      };\r\n" +
+                        "      dispatch." + underPoName + ".setState(payload);\r\n" +
+                        "    },\r\n" +
+                        "    async " + underPoName + "Save(data) {\r\n" +
+                        "      await " + underPoName + "Service." + underPoName + "Save(data." + underPoName + "FormData);\r\n" +
+                        "      await this." + underPoName + "Page(data.pageNumber);\r\n" +
+                        "      const payload = {\r\n" +
+                        "        " + underPoName + "Visible: false,\r\n" +
+                        "      };\r\n" +
+                        "      dispatch." + underPoName + ".setState(payload);\r\n" +
+                        "    },\r\n" +
+                        "    setDataForm(data) {\r\n" +
+                        "      const payload = {\r\n" +
+                        "        " + underPoName + "FormData: data,\r\n" +
+                        "      };\r\n" +
+                        "      dispatch." + underPoName + ".setState(payload);\r\n" +
+                        "    },\r\n" +
+                        "    async findDataTableAndFormByName() {\r\n" +
+                        "      const ret = await initService.findDataTableAndFormByName('" + po.getEntityCode() + "');\r\n" +
+                        "      await this." + underPoName + "Page(1);\r\n" +
+                        "      const payload = {\r\n" +
+                        "        " + underPoName + "Table: ret.data.dataTable,\r\n" +
+                        "        " + underPoName + "Form: ret.data.dataForm,\r\n" +
+                        "      };\r\n" +
+                        "      dispatch." + underPoName + ".setState(payload);\r\n" +
+                        "    },\r\n" +
+                        "  }),\r\n" +
+                        "};\r\n" +
+                        "\r\n";
+                return new String[]{viewData, underPoName + ".jsx"};
+        }
+
+        private String[] servicesCustomGenerate(String underPoName) {
+                String viewData = "import { request } from 'ice';\r\n" +
+                        "export default {\r\n" +
+                        "\r\n" +
+                        "};\r\n" +
+                        "\r\n";
+                return new String[]{viewData, underPoName + ".jsx"};
+        }
+
+        private String[] servicesAutoGenerate(String appApi, String underPoName, String poName) {
+                String viewData = "import { request } from 'ice';\r\n" +
+                        "\r\n" +
+                        "export default {\r\n" +
+                        "  " + underPoName + "Page(pageNumber) {\r\n" +
+                        "    return request({\r\n" +
+                        "      url: '/" + appApi + "/" + underPoName + "Page',\r\n" +
+                        "      method: 'post',\r\n" +
+                        "      params: {\r\n" +
+                        "        pageNumber,\r\n" +
+                        "      },\r\n" +
+                        "    });\r\n" +
+                        "  },\r\n" +
+                        "  " + underPoName + "Save(data) {\r\n" +
+                        "    return request({\r\n" +
+                        "      url: '/" + appApi + "/" + underPoName + "Save',\r\n" +
+                        "      method: 'post',\r\n" +
+                        "      data,\r\n" +
+                        "    });\r\n" +
+                        "  },\r\n" +
+                        "  " + underPoName + "Delete(id) {\r\n" +
+                        "    return request({\r\n" +
+                        "      url: '/" + appApi + "/" + underPoName + "Delete',\r\n" +
+                        "      method: 'post',\r\n" +
+                        "      params: {\r\n" +
+                        "        id,\r\n" +
+                        "      },\r\n" +
+                        "    });\r\n" +
+                        "  },\r\n" +
+                        "  find" + poName + "ById(id) {\r\n" +
+                        "    return request({\r\n" +
+                        "      url: '/" + appApi + "/find" + poName + "ById',\r\n" +
+                        "      method: 'post',\r\n" +
+                        "      params: {\r\n" +
+                        "        id,\r\n" +
+                        "      },\r\n" +
+                        "    });\r\n" +
+                        "  },\r\n" +
+                        "};\r\n" +
+                        "\r\n";
+                return new String[]{viewData, underPoName + ".jsx"};
+        }
+
+        private String[] viewCustomGenerate(String underPoName, String poName) {
+                String viewData = "import React, { useEffect } from 'react';\r\n" +
+                        "import pageStore from '@/pages/" + poName + "/store';\r\n" +
+                        "\r\n" +
+                        "const FormItem = Form.Item;\r\n" +
+                        "const formItemLayout = {\r\n" +
+                        "  labelCol: {\r\n" +
+                        "    fixedSpan: 6,\r\n" +
+                        "  },\r\n" +
+                        "  wrapperCol: {\r\n" +
+                        "    span: 40,\r\n" +
+                        "  },\r\n" +
+                        "};\r\n" +
+                        "\r\n" +
+                        "function Custom" + poName + "(props) {\r\n" +
+                        "  // eslint-disable-next-line no-unused-vars\r\n" +
+                        "  const { value, index, record } = props;\r\n" +
+                        "  const [custom" + poName + "State, custom" + poName + "Dispatchers] = pageStore.useModel('custom" + poName + "');\r\n" +
+                        "\r\n" +
+                        "  useEffect(() => {\r\n" +
+                        "  }, [custom" + poName + "Dispatchers]);\r\n" +
+                        "\r\n" +
+                        "  return (\r\n" +
+                        "    <>\r\n" +
+                        "    </>\r\n" +
+                        "  );\r\n" +
+                        "}\r\n" +
+                        "\r\n" +
+                        "export default Custom" + poName + ";\r\n" +
+                        "\r\n";
+                return new String[]{viewData, underPoName + ".jsx"};
+        }
+
+        private String[] viewAutoGenerate(List<EntityNamePO> entityNamePOList, String underPoName, String poName) {
+                StringBuilder sb = new StringBuilder();
+                sb.append("import { ResponsiveGrid, Button, Dialog } from '@alifd/next';\r\n");
+                sb.append("import React, { useEffect } from 'react';\r\n");
+                sb.append("import pageStore from '@/pages/").append(poName).append("/store';\r\n");
+                sb.append("import DataFormTemple from '@/components/dataForm';\r\n");
+                sb.append("import DataTableTemple from '@/components/dataTable';\r\n");
+                sb.append("import styles from '@/pages/").append(poName).append("/index.module.scss';\r\n");
+                sb.append("import ").append(poName).append("Custom from '@/pages/").append(poName).append("/view/custom/").append(underPoName).append("';\r\n");
+                sb.append("\r\n");
+                sb.append("const { Cell } = ResponsiveGrid;\r\n");
+                sb.append("\r\n");
+                sb.append("function ").append(poName).append("() {\r\n");
+                sb.append("  const [").append(underPoName).append("State, ").append(underPoName).append("Dispatchers] = pageStore.useModel('").append(underPoName).append("');\r\n");
+                entityNamePOList.forEach(subPo -> {
+                        //驼峰名
+                        String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
+                        sb.append("  const ").append(underSubPoName).append("Dispatchers = pageStore.useModelDispatchers('").append(underSubPoName).append("');\r\n");
+                });
+                sb.append("\r\n");
+                sb.append("  useEffect(() => {\r\n");
+                sb.append("    ").append(underPoName).append("Dispatchers.findDataTableAndFormByName();\r\n");
+                sb.append("  }, [").append(underPoName).append("Dispatchers]);\r\n");
+                sb.append("\r\n");
+                sb.append("  const ").append(underPoName).append("Render = (value, index, record) => {\r\n");
+                sb.append("    return (\r\n");
+                sb.append("      <div className={styles.opt}>\r\n");
+                sb.append("        <Button type=\"primary\" size=\"small\" onClick={() => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Edit(record)} > 编辑 </Button>\r\n");
+                sb.append("        <Button type=\"primary\" size=\"small\" onClick={() => deleteConfirm(record)} warning > 删除 </Button>\r\n");
+                sb.append("      </div>\r\n");
+                sb.append("    );\r\n");
+                sb.append("  };\r\n");
+                sb.append("\r\n");
+                sb.append("  const ").append(underPoName).append("CustomRender = (value, index, record) => {\r\n");
+                sb.append("    return (\r\n");
+                sb.append("      <div className={styles.opt}>\r\n");
+                sb.append("        <").append(poName).append("Custom value={value} index={index} record={record} />\r\n");
+                entityNamePOList.forEach(subPo -> {
+                        //驼峰名
+                        String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
+                        //文件名
+                        String subPoName = BeanUtils.captureName(underSubPoName);
+                        sb.append("        <").append(subPoName).append("Custom value={value} index={index} record={record} />\r\n");
+                });
+                sb.append("      </div>\r\n");
+                sb.append("    );\r\n");
+                sb.append("  };\r\n");
+                sb.append("\r\n");
+                sb.append("  const deleteConfirm = (record) => {\r\n");
+                sb.append("    Dialog.confirm({\r\n");
+                sb.append("      title: '删除',\r\n");
+                sb.append("      content: '是否确认删除',\r\n");
+                sb.append("      onOk: () => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Delete({\r\n");
+                sb.append("        record,\r\n");
+                sb.append("        data: {\r\n");
+                sb.append("          pageNumber: ").append(underPoName).append("State.").append(underPoName).append("Current,\r\n");
+                sb.append("        },\r\n");
+                sb.append("      }),\r\n");
+                sb.append("    });\r\n");
+                sb.append("  };\r\n");
+                sb.append("\r\n");
+                sb.append("  return (\r\n");
+                sb.append("    <ResponsiveGrid gap={20}>\r\n");
+                sb.append("      <Cell colSpan={12}>\r\n");
+                sb.append("        <div className={styles.Main}>\r\n");
+                sb.append("          <div className={styles.add}>\r\n");
+                sb.append("            <Button type=\"primary\" onClick={() => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Edit()}> 添加 </Button>\r\n");
+                sb.append("          </div>\r\n");
+                sb.append("          <DataTableTemple\r\n");
+                sb.append("            visibleLoading={").append(underPoName).append("State.").append(underPoName).append("LoadingVisible}\r\n");
+                sb.append("            dataSource={").append(underPoName).append("State.").append(underPoName).append("TableData}\r\n");
+                sb.append("            items={").append(underPoName).append("State.").append(underPoName).append("Table}\r\n");
+                sb.append("            total={").append(underPoName).append("State.").append(underPoName).append("Total}\r\n");
+                sb.append("            getPage={(").append(underPoName).append("Current) => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Page({\r\n");
+                sb.append("              pageNumber: ").append(underPoName).append("Current,\r\n");
+                sb.append("            })}\r\n");
+                sb.append("            rowSelection={{\r\n");
+                sb.append("              mode: 'single',\r\n");
+                sb.append("              onSelect: (selected, record) => {\r\n");
+                sb.append("                ").append(underPoName).append("Dispatchers.setState({ ").append(underPoName).append("Id: record.id });\r\n");
+                entityNamePOList.forEach(subPo -> {
+                        //驼峰名
+                        String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
+                        sb.append("                ").append(underSubPoName).append("Dispatchers.onRowClick({ selected, record });\r\n");
+                });
+                sb.append("              },\r\n");
+                sb.append("              selectedRowKeys: [").append(underPoName).append("State.").append(underPoName).append("Id],\r\n");
+                sb.append("            }}\r\n");
+                sb.append("            primaryKey=\"id\"\r\n");
+                sb.append("            pageRender={").append(underPoName).append("Render}\r\n");
+                sb.append("            operationRender={").append(underPoName).append("CustomRender}\r\n");
+                sb.append("          />\r\n");
+                sb.append("        </div>\r\n");
+                sb.append("      </Cell>\r\n");
+                sb.append("      <DataFormTemple\r\n");
+                sb.append("        title={").append(underPoName).append("State.").append(underPoName).append("Title}\r\n");
+                sb.append("        visibleDialog={").append(underPoName).append("State.").append(underPoName).append("Visible}\r\n");
+                sb.append("        onClose={() => ").append(underPoName).append("Dispatchers.setState({ ").append(underPoName).append("Visible: false })}\r\n");
+                sb.append("        items={").append(underPoName).append("State.").append(underPoName).append("Form}\r\n");
+                sb.append("        dispatchers={(value) => ").append(underPoName).append("Dispatchers.setDataForm(value)}\r\n");
+                sb.append("        onOk={() => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Save({\r\n");
+                sb.append("          ").append(underPoName).append("FormData: ").append(underPoName).append("State.").append(underPoName).append("FormData,\r\n");
+                sb.append("          pageNumber: ").append(underPoName).append("State.").append(underPoName).append("Current,\r\n");
+                sb.append("        })}\r\n");
+                sb.append("        formDataValue={").append(underPoName).append("State.").append(underPoName).append("FormData}\r\n");
+                sb.append("      />\r\n");
+                sb.append("    </ResponsiveGrid>\r\n");
+                sb.append("  );\r\n");
+                sb.append("}\r\n");
+                sb.append("\r\n");
+                sb.append("export default ").append(poName).append(";\r\n");
+                sb.append("\r\n");
+                String viewData = sb.toString();
+                return new String[]{viewData, underPoName + ".jsx"};
+        }
+
+        private String[] storeGenerate(List<EntityNamePO> entityNamePOList, String underPoName, String poName) {
+                StringBuilder sb = new StringBuilder();
+                sb.append("import { createStore } from 'ice';\r\n");
+                sb.append("import ").append(underPoName).append(" from './models/auto/").append(underPoName).append("';\r\n");
+                sb.append("import custom").append(poName).append(" from './models/custom/").append(underPoName).append("';\r\n");
+                entityNamePOList.forEach(subPo -> {
+                        //驼峰名
+                        String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
+                        //文件名
+                        String subPoName = BeanUtils.captureName(underSubPoName);
+                        sb.append("import ").append(underSubPoName).append(" from './models/auto/").append(underSubPoName).append("';\r\n");
+                        sb.append("import custom").append(subPoName).append(" from './models/custom/").append(underSubPoName).append("';\r\n");
+                });
+                sb.append("\r\n");
+                sb.append("const store = createStore({\r\n");
+                sb.append("  ").append(underPoName).append(",\r\n");
+                sb.append("  custom").append(poName).append(",\r\n");
+                entityNamePOList.forEach(subPo -> {
+                        //驼峰名
+                        String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
+                        //文件名
+                        String subPoName = BeanUtils.captureName(underSubPoName);
+                        sb.append("  ").append(underSubPoName).append(",\r\n");
+                        sb.append("  custom").append(subPoName).append(",\r\n");
+                });
+                sb.append("});\r\n");
+                sb.append("\r\n");
+                sb.append("export default store;\r\n");
+                sb.append("\r\n");
+                String viewData = sb.toString();
+                return new String[]{viewData, "store.js"};
+        }
+
+        private String[] indexModuleScssGenerate() {
+                String css = "@import \"~@alifd/next/variables.scss\";\r\n" +
+                        "\r\n" +
+                        ".icon {\r\n" +
+                        "  color: #999\r\n" +
+                        "}\r\n" +
+                        "\r\n" +
+                        ".searchIcon {\r\n" +
+                        "  margin-right: 5px;\r\n" +
+                        "  color: #999;\r\n" +
+                        "}\r\n" +
+                        "\r\n" +
+                        ".Operation {\r\n" +
+                        "  padding: 10px 10px 5px;\r\n" +
+                        "  border-bottom: 1px dashed #eee;\r\n" +
+                        "\r\n" +
+                        "  .btns {\r\n" +
+                        "    margin-top: 14px;\r\n" +
+                        "    button {\r\n" +
+                        "      margin-left: 10px;\r\n" +
+                        "    }\r\n" +
+                        "  }\r\n" +
+                        "}\r\n" +
+                        "\r\n" +
+                        ".Main {\r\n" +
+                        "  padding: 15px 10px;\r\n" +
+                        "  .add {\r\n" +
+                        "    padding-bottom: 15px;\r\n" +
+                        "    button {\r\n" +
+                        "      margin-right: 10px;\r\n" +
+                        "    }\r\n" +
+                        "  }\r\n" +
+                        "\r\n" +
+                        "  .opt {\r\n" +
+                        "    button {\r\n" +
+                        "      margin-right: 5px;\r\n" +
+                        "    }\r\n" +
+                        "  }\r\n" +
+                        "\r\n" +
+                        "  .total {\r\n" +
+                        "    color: #4A5B6D;\r\n" +
+                        "    font-size: 12px;\r\n" +
+                        "    span {\r\n" +
+                        "      padding:0 3px;\r\n" +
+                        "      color: #5584FF;\r\n" +
+                        "    }\r\n" +
+                        "  }\r\n" +
+                        "}";
+                return new String[]{css, "index.module.scss"};
+        }
+
+        private String[] indexGenerate(List<EntityNamePO> entityNamePOList, String underPoName, String poName) {
+                StringBuilder sb = new StringBuilder();
+                sb.append("import React from 'react';\r\n");
+                sb.append("import ").append(poName).append(" from '@/pages/").append(poName).append("/view/auto/").append(underPoName).append("';\r\n");
+                entityNamePOList.forEach(subPo -> {
+                        //驼峰名
+                        String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
+                        //文件名
+                        String subPoName = BeanUtils.captureName(underSubPoName);
+                        sb.append("import ").append(subPoName).append(" from '@/pages/").append(poName).append("/view/auto/").append(underSubPoName).append("';\r\n");
+                });
+                sb.append("\r\n");
+                sb.append("function ").append(poName).append("Page() {\r\n");
+                sb.append("  return (\r\n");
+                sb.append("    <div>\r\n");
+                sb.append("      <").append(poName).append(" />\r\n");
+                entityNamePOList.forEach(subPo -> {
+                        //驼峰名
+                        String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
+                        //文件名
+                        String subPoName = BeanUtils.captureName(underSubPoName);
+                        sb.append("      <").append(subPoName).append(" />\r\n");
+                });
+                sb.append("      <Entity />\r\n");
+                sb.append("    </div>\r\n");
+                sb.append("  );\r\n");
+                sb.append("}\r\n");
+                sb.append("\r\n");
+                sb.append("export default ").append(poName).append("Page;\r\n");
+                sb.append("\r\n");
+                String viewData = sb.toString();
+                return new String[]{viewData, "index.jsx"};
         }
 
         @Override
@@ -645,885 +1343,5 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 jsonObject.put("dataForm", entityCustomDTOList);
                 return jsonObject;
         }
-
-//        private String[] createCustomSubViewJsx(String subEntityName, String entityName) {
-//                StringBuilder sb = new StringBuilder();
-//                String underComponentName = BeanUtils.underline2Camel(subEntityName);
-//                String ComponentName = BeanUtils.captureName(underComponentName);
-//                String underEntityName = BeanUtils.underline2Camel(entityName);
-//                String EntityName = BeanUtils.captureName(underEntityName);
-//                sb.append("/* eslint-disable no-unused-vars */\r\n");
-//                sb.append("import React, { useEffect } from 'react';\r\n");
-//                sb.append("import pageStore from '@/pages/").append(EntityName).append("/store';\r\n");
-//                sb.append("import styles from './index.module.scss';\r\n");
-//                sb.append("\r\n");
-//                sb.append("function Custom").append(ComponentName).append("(props) {\r\n");
-//                sb.append("  const { ").append(underComponentName).append("State, ").append(underComponentName).append("Dispatchers } = props;\r\n");
-//                sb.append("  const [custom").append(ComponentName).append("State, custom").append(ComponentName).append("Dispatchers] = pageStore.useModel('custom").append(ComponentName).append("');\r\n");
-//                sb.append("  const formItemLayout = {\r\n");
-//                sb.append("    labelCol: {\r\n");
-//                sb.append("      fixedSpan: 6,\r\n");
-//                sb.append("    },\r\n");
-//                sb.append("    wrapperCol: {\r\n");
-//                sb.append("      span: 40,\r\n");
-//                sb.append("    },\r\n");
-//                sb.append("  };\r\n");
-//                sb.append("\r\n");
-//                sb.append("  return (\r\n");
-//                sb.append("    <div />\r\n");
-//                sb.append("  );\r\n");
-//                sb.append("}\r\n");
-//                sb.append("\r\n");
-//                sb.append("export default Custom").append(ComponentName).append(";\r\n");
-//                String viewData = sb.toString();
-//                return new String[]{viewData, underComponentName + ".jsx"};
-//        }
-//
-//        private String[] createSubViewJsx(String subEntityName, String entityName) {
-//                StringBuilder sb = new StringBuilder();
-//                String underComponentName = BeanUtils.underline2Camel(subEntityName);
-//                String ComponentName = BeanUtils.captureName(underComponentName);
-//                String underEntityName = BeanUtils.underline2Camel(entityName);
-//                String EntityName = BeanUtils.captureName(underEntityName);
-//                sb.append("/* eslint-disable no-unused-vars */\r\n");
-//                sb.append("import { Button, Dialog } from '@alifd/next';\r\n");
-//                sb.append("import React from 'react';\r\n");
-//                sb.append("import pageStore from '@/pages/").append(EntityName).append("/store';\r\n");
-//                sb.append("import DataFormTemple from '@/components/dataForm';\r\n");
-//                sb.append("import DataTableTemple from '@/components/dataTable';\r\n");
-//                sb.append("import Custom").append(ComponentName).append(" from '@/pages/").append(EntityName).append("/view/custom/").append(underComponentName).append("';\r\n");
-//                sb.append("import styles from './index.module.scss';\r\n");
-//                sb.append("\r\n");
-//                sb.append("function ").append(ComponentName).append("() {\r\n");
-//                sb.append("  const [").append(underComponentName).append("State, ").append(underComponentName).append("Dispatchers] = pageStore.useModel('").append(underComponentName).append("');\r\n");
-//                sb.append("  const [custom").append(ComponentName).append("State, custom").append(ComponentName).append("Dispatchers] = pageStore.useModel('custom").append(ComponentName).append("');\r\n");
-//                sb.append("\r\n");
-//                sb.append("  const ").append(underComponentName).append("PageRender = (value, index, record) => {\r\n");
-//                sb.append("    return (\r\n");
-//                sb.append("      <div className={styles.opt}>\r\n");
-//                sb.append("        <Button type=\"primary\" size=\"small\" onClick={() => ").append(underComponentName).append("Dispatchers.").append(underComponentName).append("Edit(record)} > 编辑 </Button>\r\n");
-//                sb.append("        <Button type=\"primary\" size=\"small\" onClick={() => deleteConfirm(record)} warning > 删除 </Button>\r\n");
-//                sb.append("      </div>\r\n");
-//                sb.append("    );\r\n");
-//                sb.append("  };\r\n");
-//                sb.append("\r\n");
-//                sb.append("  const deleteConfirm = (record) => {\r\n");
-//                sb.append("    Dialog.confirm({\r\n");
-//                sb.append("      title: '删除',\r\n");
-//                sb.append("      content: '是否确认删除',\r\n");
-//                sb.append("      onOk: () => ").append(underComponentName).append("Dispatchers.").append(underComponentName).append("Delete({\r\n");
-//                sb.append("        record,\r\n");
-//                sb.append("        ").append(underComponentName).append("Current: ").append(underComponentName).append("State.").append(underComponentName).append("Current,\r\n");
-//                sb.append("        ").append(underComponentName).append("Table: ").append(underComponentName).append("State.").append(underComponentName).append("Table,\r\n");
-//                sb.append("        ").append(underComponentName).append("Form: ").append(underComponentName).append("State.").append(underComponentName).append("Form,\r\n");
-//                sb.append("        ").append(underEntityName).append("Id: ").append(underComponentName).append("State.").append(underEntityName).append("Id,\r\n");
-//                sb.append("      }),\r\n");
-//                sb.append("    });\r\n");
-//                sb.append("  };\r\n");
-//                sb.append("\r\n");
-//                sb.append("  const ").append(underComponentName).append("OperationRender = (value, index, record) => {\r\n");
-//                sb.append("    return (\r\n");
-//                sb.append("      <div className={styles.opt} />\r\n");
-//                sb.append("    );\r\n");
-//                sb.append("  };\r\n");
-//                sb.append("\r\n");
-//                sb.append("  return (\r\n");
-//                sb.append("    <div>\r\n");
-//                sb.append("      <Dialog\r\n");
-//                sb.append("        visible={").append(underComponentName).append("State.divVisible}\r\n");
-//                sb.append("        footer={false}\r\n");
-//                sb.append("        onClose={() => ").append(underComponentName).append("Dispatchers.setState({ divVisible: false })}\r\n");
-//                sb.append("        style={{ width: '90%' }}\r\n");
-//                sb.append("      >\r\n");
-//                sb.append("        <div className={styles.Main}>\r\n");
-//                sb.append("          <div className={styles.add}>\r\n");
-//                sb.append("            <Button type=\"primary\" onClick={() => ").append(underComponentName).append("Dispatchers.").append(underComponentName).append("Edit()}> 添加菜单 </Button>\r\n");
-//                sb.append("          </div>\r\n");
-//                sb.append("          <DataTableTemple\r\n");
-//                sb.append("            visibleLoading={").append(underComponentName).append("State.").append(underComponentName).append("LoadingVisible}\r\n");
-//                sb.append("            dataSource={").append(underComponentName).append("State.").append(underComponentName).append("TableData}\r\n");
-//                sb.append("            items={").append(underComponentName).append("State.").append(underComponentName).append("Table}\r\n");
-//                sb.append("            total={").append(underComponentName).append("State.").append(underComponentName).append("Total}\r\n");
-//                sb.append("            getPage={(").append(underComponentName).append("Current) => ").append(underComponentName).append("Dispatchers.").append(underComponentName).append("Page({\r\n");
-//                sb.append("              ").append(underComponentName).append("Current,\r\n");
-//                sb.append("              ").append(underComponentName).append("Table: ").append(underComponentName).append("State.").append(underComponentName).append("Table,\r\n");
-//                sb.append("              ").append(underComponentName).append("Form: ").append(underComponentName).append("State.").append(underComponentName).append("Form,\r\n");
-//                sb.append("              ").append(underEntityName).append("Id: ").append(underComponentName).append("State.").append(underEntityName).append("Id,\r\n");
-//                sb.append("            })}\r\n");
-//                sb.append("            operationRender={").append(underComponentName).append("OperationRender}\r\n");
-//                sb.append("            pageRender={").append(underComponentName).append("PageRender}\r\n");
-//                sb.append("          />\r\n");
-//                sb.append("        </div>\r\n");
-//                sb.append("      </Dialog>\r\n");
-//                sb.append("      <DataFormTemple\r\n");
-//                sb.append("        title=\"菜单\"\r\n");
-//                sb.append("        visibleDialog={").append(underComponentName).append("State.").append(underComponentName).append("Visible}\r\n");
-//                sb.append("        onClose={() => ").append(underComponentName).append("Dispatchers.setState({ ").append(underComponentName).append("Visible: false })}\r\n");
-//                sb.append("        items={").append(underComponentName).append("State.").append(underComponentName).append("FormItem}\r\n");
-//                sb.append("        dispatchers={(value) => ").append(underComponentName).append("Dispatchers.setDataForm(value)}\r\n");
-//                sb.append("        onOk={() => ").append(underComponentName).append("Dispatchers.").append(underComponentName).append("Save({\r\n");
-//                sb.append("          ").append(underComponentName).append("FormData: ").append(underComponentName).append("State.").append(underComponentName).append("FormData,\r\n");
-//                sb.append("          ").append(underComponentName).append("Current: ").append(underComponentName).append("State.").append(underComponentName).append("Current,\r\n");
-//                sb.append("          ").append(underComponentName).append("Table: ").append(underComponentName).append("State.").append(underComponentName).append("Table,\r\n");
-//                sb.append("          ").append(underComponentName).append("Form: ").append(underComponentName).append("State.").append(underComponentName).append("Form,\r\n");
-//                sb.append("          ").append(underEntityName).append("Id: ").append(underComponentName).append("State.").append(underEntityName).append("Id,\r\n");
-//                sb.append("        })}\r\n");
-//                sb.append("        formDataValue={").append(underComponentName).append("State.").append(underComponentName).append("FormData}\r\n");
-//                sb.append("      />\r\n");
-//                sb.append("      <Custom").append(ComponentName).append("\r\n");
-//                sb.append("        ").append(underComponentName).append("State={").append(underComponentName).append("State}\r\n");
-//                sb.append("        ").append(underComponentName).append("Dispatchers={").append(underComponentName).append("Dispatchers}\r\n");
-//                sb.append("      />\r\n");
-//                sb.append("    </div>\r\n");
-//                sb.append("  );\r\n");
-//                sb.append("}\r\n");
-//                sb.append("\r\n");
-//                sb.append("export default ").append(ComponentName).append(";\r\n");
-//                String viewData = sb.toString();
-//                return new String[]{viewData, underComponentName + ".jsx"};
-//        }
-//
-//        private String[] createSubModelsJsx(String subEntityName, String entityName, String form, String table) {
-//                StringBuilder sb = new StringBuilder();
-//                String underComponentName = BeanUtils.underline2Camel(subEntityName);
-//                String ComponentName = BeanUtils.captureName(underComponentName);
-//                String underEntityName = BeanUtils.underline2Camel(entityName);
-//                sb.append("import ").append(underComponentName).append("Service from '../services/").append(underComponentName).append("';\r\n");
-//                sb.append("import initService from '@/services/init';\r\n");
-//                sb.append("\r\n");
-//                sb.append("export default {\r\n");
-//                sb.append("\r\n");
-//                sb.append("  namespace: '").append(underComponentName).append("',\r\n");
-//                sb.append("\r\n");
-//                sb.append("  state: {\r\n");
-//                sb.append("    ").append(underComponentName).append("TableData: [],\r\n");
-//                sb.append("    ").append(underComponentName).append("Visible: false,\r\n");
-//                sb.append("    ").append(underComponentName).append("FormData: {},\r\n");
-//                sb.append("    ").append(underComponentName).append("LoadingVisible: true,\r\n");
-//                sb.append("    ").append(underComponentName).append("Total: 0,\r\n");
-//                sb.append("    ").append(underComponentName).append("Current: 1,\r\n");
-//                sb.append("    ").append(underComponentName).append("FormItem: [],\r\n");
-//                sb.append("    ").append(form).append(": [],\r\n");
-//                sb.append("    ").append(table).append(": [],\r\n");
-//                sb.append("    divVisible: false,\r\n");
-//                sb.append("    ").append(underEntityName).append("Id: '',\r\n");
-//                sb.append("  },\r\n");
-//                sb.append("\r\n");
-//                sb.append("  reducers: {\r\n");
-//                sb.append("    setState(prevState, payload) {\r\n");
-//                sb.append("      return { ...prevState, ...payload };\r\n");
-//                sb.append("    },\r\n");
-//                sb.append("  },\r\n");
-//                sb.append("\r\n");
-//                sb.append("  effects: (dispatch) => ({\r\n");
-//                sb.append("    async ").append(underComponentName).append("Page(data) {\r\n");
-//                sb.append("      const dataRes = await ").append(underComponentName).append("Service.").append(underComponentName).append("Page(data.").append(underEntityName).append("Id, data.").append(underComponentName).append("Current);\r\n");
-//                sb.append("      const transformData = await initService.transformData(dataRes.data.content, data.").append(underComponentName).append("Table, data.").append(underComponentName).append("Form);\r\n");
-//                sb.append("      const payload = {\r\n");
-//                sb.append("        ").append(underComponentName).append("Total: dataRes.data.totalElements,\r\n");
-//                sb.append("        ").append(underComponentName).append("FormItem: transformData.data.objectForm,\r\n");
-//                sb.append("        ").append(underComponentName).append("TableData: transformData.data.objectList,\r\n");
-//                sb.append("        ").append(underComponentName).append("Current: data.").append(underComponentName).append("Current,\r\n");
-//                sb.append("        ").append(underComponentName).append("LoadingVisible: false,\r\n");
-//                sb.append("      };\r\n");
-//                sb.append("      dispatch.").append(underComponentName).append(".setState(payload);\r\n");
-//                sb.append("    },\r\n");
-//                sb.append("    async ").append(underComponentName).append("Edit(data) {\r\n");
-//                sb.append("      if (data) {\r\n");
-//                sb.append("        const ").append(underComponentName).append(" = await ").append(underComponentName).append("Service.find").append(ComponentName).append("ById(data.id);\r\n");
-//                sb.append("        const fromData = {\r\n");
-//                sb.append("          ...").append(underComponentName).append(".data,\r\n");
-//                sb.append("        };\r\n");
-//                sb.append("        const payload = {\r\n");
-//                sb.append("          ").append(underComponentName).append("FormData: fromData,\r\n");
-//                sb.append("          ").append(underComponentName).append("Visible: true,\r\n");
-//                sb.append("        };\r\n");
-//                sb.append("        dispatch.").append(underComponentName).append(".setState(payload);\r\n");
-//                sb.append("      } else {\r\n");
-//                sb.append("        const payload = {\r\n");
-//                sb.append("          ").append(underComponentName).append("FormData: {},\r\n");
-//                sb.append("          ").append(underComponentName).append("Visible: true,\r\n");
-//                sb.append("        };\r\n");
-//                sb.append("        dispatch.").append(underComponentName).append(".setState(payload);\r\n");
-//                sb.append("      }\r\n");
-//                sb.append("    },\r\n");
-//                sb.append("    async ").append(underComponentName).append("Delete(data) {\r\n");
-//                sb.append("      await ").append(underComponentName).append("Service.").append(underComponentName).append("Delete(data.record);\r\n");
-//                sb.append("      this.").append(underComponentName).append("Page({\r\n");
-//                sb.append("        ").append(underComponentName).append("Current: data.").append(underComponentName).append("Current,\r\n");
-//                sb.append("        ").append(underComponentName).append("Table: data.").append(underComponentName).append("Table,\r\n");
-//                sb.append("        ").append(underComponentName).append("Form: data.").append(underComponentName).append("Form,\r\n");
-//                sb.append("        ").append(underEntityName).append("Id: data.").append(underEntityName).append("Id,\r\n");
-//                sb.append("      });\r\n");
-//                sb.append("      const payload = {\r\n");
-//                sb.append("        ").append(underComponentName).append("Visible: false,\r\n");
-//                sb.append("      };\r\n");
-//                sb.append("      dispatch.").append(underComponentName).append(".setState(payload);\r\n");
-//                sb.append("    },\r\n");
-//                sb.append("    async ").append(underComponentName).append("Save(data) {\r\n");
-//                sb.append("      await ").append(underComponentName).append("Service.").append(underComponentName).append("Save(data.").append(underEntityName).append("Id, data.").append(underComponentName).append("FormData);\r\n");
-//                sb.append("      this.").append(underComponentName).append("Page({\r\n");
-//                sb.append("        ").append(underComponentName).append("Current: data.").append(underComponentName).append("Current,\r\n");
-//                sb.append("        ").append(underComponentName).append("Table: data.").append(underComponentName).append("Table,\r\n");
-//                sb.append("        ").append(underComponentName).append("Form: data.").append(underComponentName).append("Form,\r\n");
-//                sb.append("        ").append(underEntityName).append("Id: data.").append(underEntityName).append("Id,\r\n");
-//                sb.append("      });\r\n");
-//                sb.append("      const payload = {\r\n");
-//                sb.append("        ").append(underComponentName).append("Visible: false,\r\n");
-//                sb.append("      };\r\n");
-//                sb.append("      dispatch.").append(underComponentName).append(".setState(payload);\r\n");
-//                sb.append("    },\r\n");
-//                sb.append("    setDataForm(data) {\r\n");
-//                sb.append("      const payload = {\r\n");
-//                sb.append("        ").append(underComponentName).append("FormData: data,\r\n");
-//                sb.append("      };\r\n");
-//                sb.append("      dispatch.").append(underComponentName).append(".setState(payload);\r\n");
-//                sb.append("    },\r\n");
-//                sb.append("    async onRowClick(data) {\r\n");
-//                sb.append("      const dataFormRes = await initService.findDataFormByName('").append(form).append("');\r\n");
-//                sb.append("      const dataTableRes = await initService.findDataTableByName('").append(table).append("');\r\n");
-//                sb.append("      const payload = {\r\n");
-//                sb.append("        divVisible: data.selected,\r\n");
-//                sb.append("        ").append(underComponentName).append("Table: dataTableRes.data,\r\n");
-//                sb.append("        ").append(underComponentName).append("Form: dataFormRes.data,\r\n");
-//                sb.append("        ").append(underEntityName).append("Id: data.record.id,\r\n");
-//                sb.append("      };\r\n");
-//                sb.append("      dispatch.").append(underComponentName).append(".setState(payload);\r\n");
-//                sb.append("      this.").append(underComponentName).append("Page({\r\n");
-//                sb.append("        ").append(underComponentName).append("Current: 1,\r\n");
-//                sb.append("        ").append(underComponentName).append("Table: dataTableRes.data,\r\n");
-//                sb.append("        ").append(underComponentName).append("Form: dataFormRes.data,\r\n");
-//                sb.append("        ").append(underEntityName).append("Id: data.record.id,\r\n");
-//                sb.append("      });\r\n");
-//                sb.append("    },\r\n");
-//                sb.append("  }),\r\n");
-//                sb.append("};\r\n");
-//                String modelData = sb.toString();
-//                return new String[]{modelData, underComponentName + ".jsx"};
-//        }
-//
-//        private String[] createCustomViewJsx(String entityName) {
-//                StringBuilder sb = new StringBuilder();
-//                String underComponentName = BeanUtils.underline2Camel(entityName);
-//                String ComponentName = BeanUtils.captureName(underComponentName);
-//                sb.append("/* eslint-disable no-unused-vars */\r\n");
-//                sb.append("import React, { useEffect } from 'react';\r\n");
-//                sb.append("import pageStore from '@/pages/").append(ComponentName).append("/store';\r\n");
-//                sb.append("import styles from './index.module.scss';\r\n");
-//                sb.append("\r\n");
-//                sb.append("function Custom").append(ComponentName).append("(props) {\r\n");
-//                sb.append("  const { ").append(underComponentName).append("State, ").append(underComponentName).append("Dispatchers } = props;\r\n");
-//                sb.append("  const [custom").append(ComponentName).append("State, custom").append(ComponentName).append("Dispatchers] = pageStore.useModel('custom").append(ComponentName).append("');\r\n");
-//                sb.append("  const formItemLayout = {\r\n");
-//                sb.append("    labelCol: {\r\n");
-//                sb.append("      fixedSpan: 6,\r\n");
-//                sb.append("    },\r\n");
-//                sb.append("    wrapperCol: {\r\n");
-//                sb.append("      span: 40,\r\n");
-//                sb.append("    },\r\n");
-//                sb.append("  };\r\n");
-//                sb.append("\r\n");
-//                sb.append("  return (\r\n");
-//                sb.append("    <div />\r\n");
-//                sb.append("  );\r\n");
-//                sb.append("}\r\n");
-//                sb.append("\r\n");
-//                sb.append("export default Custom").append(ComponentName).append(";\r\n");
-//                String viewData = sb.toString();
-//                return new String[]{viewData, underComponentName + ".jsx"};
-//        }
-//
-//        private String[] createModelsJsx(String entityName, String form, String table) {
-//                StringBuilder sb = new StringBuilder();
-//                String underComponentName = BeanUtils.underline2Camel(entityName);
-//                String ComponentName = BeanUtils.captureName(underComponentName);
-//                sb.append("import ").append(underComponentName).append("Service from '../services/").append(underComponentName).append("';\r\n");
-//                sb.append("import initService from '@/services/init';\r\n");
-//                sb.append("\r\n");
-//                sb.append("export default {\r\n");
-//                sb.append("\r\n");
-//                sb.append("  namespace: '").append(underComponentName).append("',\r\n");
-//                sb.append("\r\n");
-//                sb.append("  state: {\r\n");
-//                sb.append("    ").append(underComponentName).append("TableData: [],\r\n");
-//                sb.append("    ").append(underComponentName).append("Visible: false,\r\n");
-//                sb.append("    ").append(underComponentName).append("FormData: {},\r\n");
-//                sb.append("    ").append(underComponentName).append("LoadingVisible: true,\r\n");
-//                sb.append("    ").append(underComponentName).append("Total: 0,\r\n");
-//                sb.append("    ").append(underComponentName).append("Current: 1,\r\n");
-//                sb.append("    ").append(underComponentName).append("FormItem: [],\r\n");
-//                sb.append("    ").append(form).append(": [],\r\n");
-//                sb.append("    ").append(table).append(": [],\r\n");
-//                sb.append("  },\r\n");
-//                sb.append("\r\n");
-//                sb.append("  reducers: {\r\n");
-//                sb.append("    setState(prevState, payload) {\r\n");
-//                sb.append("      return { ...prevState, ...payload };\r\n");
-//                sb.append("    },\r\n");
-//                sb.append("  },\r\n");
-//                sb.append("\r\n");
-//                sb.append("  effects: (dispatch) => ({\r\n");
-//                sb.append("    async ").append(underComponentName).append("Page(data) {\r\n");
-//                sb.append("      const dataRes = await ").append(underComponentName).append("Service.").append(underComponentName).append("Page(data.").append(underComponentName).append("Current);\r\n");
-//                sb.append("      const transformData = await initService.transformData(dataRes.data.content, data.").append(underComponentName).append("Table, data.").append(underComponentName).append("Form);\r\n");
-//                sb.append("      const payload = {\r\n");
-//                sb.append("        ").append(underComponentName).append("Total: dataRes.data.totalElements,\r\n");
-//                sb.append("        ").append(underComponentName).append("FormItem: transformData.data.objectForm,\r\n");
-//                sb.append("        ").append(underComponentName).append("TableData: transformData.data.objectList,\r\n");
-//                sb.append("        ").append(underComponentName).append("Current: data.").append(underComponentName).append("Current,\r\n");
-//                sb.append("        ").append(underComponentName).append("LoadingVisible: false,\r\n");
-//                sb.append("      };\r\n");
-//                sb.append("      dispatch.").append(underComponentName).append(".setState(payload);\r\n");
-//                sb.append("    },\r\n");
-//                sb.append("    async ").append(underComponentName).append("Edit(data) {\r\n");
-//                sb.append("      if (data) {\r\n");
-//                sb.append("        const ").append(underComponentName).append(" = await ").append(underComponentName).append("Service.find").append(ComponentName).append("ById(data.id);\r\n");
-//                sb.append("        const fromData = {\r\n");
-//                sb.append("          ...").append(underComponentName).append(".data,\r\n");
-//                sb.append("        };\r\n");
-//                sb.append("        const payload = {\r\n");
-//                sb.append("          ").append(underComponentName).append("FormData: fromData,\r\n");
-//                sb.append("          ").append(underComponentName).append("Visible: true,\r\n");
-//                sb.append("        };\r\n");
-//                sb.append("        dispatch.").append(underComponentName).append(".setState(payload);\r\n");
-//                sb.append("      } else {\r\n");
-//                sb.append("        const payload = {\r\n");
-//                sb.append("          ").append(underComponentName).append("FormData: {},\r\n");
-//                sb.append("          ").append(underComponentName).append("Visible: true,\r\n");
-//                sb.append("        };\r\n");
-//                sb.append("        dispatch.").append(underComponentName).append(".setState(payload);\r\n");
-//                sb.append("      }\r\n");
-//                sb.append("    },\r\n");
-//                sb.append("    async ").append(underComponentName).append("Delete(data) {\r\n");
-//                sb.append("      await ").append(underComponentName).append("Service.").append(underComponentName).append("Delete(data.record);\r\n");
-//                sb.append("      this.").append(underComponentName).append("Page({\r\n");
-//                sb.append("        ").append(underComponentName).append("Current: data.").append(underComponentName).append("Current,\r\n");
-//                sb.append("        ").append(underComponentName).append("Table: data.").append(underComponentName).append("Table,\r\n");
-//                sb.append("        ").append(underComponentName).append("Form: data.").append(underComponentName).append("Form,\r\n");
-//                sb.append("      });\r\n");
-//                sb.append("      const payload = {\r\n");
-//                sb.append("        ").append(underComponentName).append("Visible: false,\r\n");
-//                sb.append("      };\r\n");
-//                sb.append("      dispatch.").append(underComponentName).append(".setState(payload);\r\n");
-//                sb.append("    },\r\n");
-//                sb.append("    async ").append(underComponentName).append("Save(data) {\r\n");
-//                sb.append("      await ").append(underComponentName).append("Service.").append(underComponentName).append("Save(data.").append(underComponentName).append("FormData);\r\n");
-//                sb.append("      this.").append(underComponentName).append("Page({\r\n");
-//                sb.append("        ").append(underComponentName).append("Current: data.").append(underComponentName).append("Current,\r\n");
-//                sb.append("        ").append(underComponentName).append("Table: data.").append(underComponentName).append("Table,\r\n");
-//                sb.append("        ").append(underComponentName).append("Form: data.").append(underComponentName).append("Form,\r\n");
-//                sb.append("      });\r\n");
-//                sb.append("      const payload = {\r\n");
-//                sb.append("        ").append(underComponentName).append("Visible: false,\r\n");
-//                sb.append("      };\r\n");
-//                sb.append("      dispatch.").append(underComponentName).append(".setState(payload);\r\n");
-//                sb.append("    },\r\n");
-//                sb.append("    setDataForm(data) {\r\n");
-//                sb.append("      const payload = {\r\n");
-//                sb.append("        ").append(underComponentName).append("FormData: data,\r\n");
-//                sb.append("      };\r\n");
-//                sb.append("      dispatch.").append(underComponentName).append(".setState(payload);\r\n");
-//                sb.append("    },\r\n");
-//                sb.append("    async findDataTableAndFormByName() {\r\n");
-//                sb.append("      const dataTableRes = await initService.findDataTableByName('").append(underComponentName).append("Table');\r\n");
-//                sb.append("      const dataFormRes = await initService.findDataFormByName('").append(underComponentName).append("Form');\r\n");
-//                sb.append("      this.").append(underComponentName).append("Page({\r\n");
-//                sb.append("        ").append(underComponentName).append("Current: 1,\r\n");
-//                sb.append("        ").append(underComponentName).append("Table: dataTableRes.data,\r\n");
-//                sb.append("        ").append(underComponentName).append("Form: dataFormRes.data,\r\n");
-//                sb.append("      });\r\n");
-//                sb.append("      const payload = {\r\n");
-//                sb.append("        ").append(underComponentName).append("Table: dataTableRes.data,\r\n");
-//                sb.append("        ").append(underComponentName).append("Form: dataFormRes.data,\r\n");
-//                sb.append("      };\r\n");
-//                sb.append("      dispatch.").append(underComponentName).append(".setState(payload);\r\n");
-//                sb.append("    },\r\n");
-//                sb.append("  }),\r\n");
-//                sb.append("};\r\n");
-//                String modelData = sb.toString();
-//                return new String[]{modelData, underComponentName + ".jsx"};
-//        }
-//
-//        private String[] createServiceJsx(String entityName, String appApi) {
-//                StringBuilder sb = new StringBuilder();
-//                String underComponentName = BeanUtils.underline2Camel(entityName);
-//                String ComponentName = BeanUtils.captureName(underComponentName);
-//                sb.append("import { request } from 'ice';\r\n");
-//                sb.append("\r\n");
-//                sb.append("export default {\r\n");
-//                sb.append("  ").append(underComponentName).append("Page(value) {\r\n");
-//                sb.append("    return request({\r\n");
-//                sb.append("      url: '/").append(appApi).append("/").append(underComponentName).append("Page',\r\n");
-//                sb.append("      method: 'post',\r\n");
-//                sb.append("      params: {\r\n");
-//                sb.append("        pageNumber: value,\r\n");
-//                sb.append("        pageSize: 8,\r\n");
-//                sb.append("        sortCode: 'sortCode',\r\n");
-//                sb.append("      },\r\n");
-//                sb.append("    });\r\n");
-//                sb.append("  },\r\n");
-//                sb.append("  ").append(underComponentName).append("Save(data) {\r\n");
-//                sb.append("    return request({\r\n");
-//                sb.append("      url: '/").append(appApi).append("/").append(underComponentName).append("Save',\r\n");
-//                sb.append("      method: 'post',\r\n");
-//                sb.append("      data,\r\n");
-//                sb.append("    });\r\n");
-//                sb.append("  },\r\n");
-//                sb.append("  ").append(underComponentName).append("Delete(record) {\r\n");
-//                sb.append("    return request({\r\n");
-//                sb.append("      url: '/").append(appApi).append("/").append(underComponentName).append("Delete',\r\n");
-//                sb.append("      method: 'post',\r\n");
-//                sb.append("      params: {\r\n");
-//                sb.append("        id: record.id,\r\n");
-//                sb.append("      },\r\n");
-//                sb.append("    });\r\n");
-//                sb.append("  },\r\n");
-//                sb.append("  find").append(ComponentName).append("ById(id) {\r\n");
-//                sb.append("    return request({\r\n");
-//                sb.append("      url: '/").append(appApi).append("/find").append(ComponentName).append("ById',\r\n");
-//                sb.append("      method: 'post',\r\n");
-//                sb.append("      params: {\r\n");
-//                sb.append("        id,\r\n");
-//                sb.append("      },\r\n");
-//                sb.append("    });\r\n");
-//                sb.append("  },\r\n");
-//                sb.append("};\r\n");
-//                String serviceData = sb.toString();
-//                return new String[]{serviceData, underComponentName + ".jsx"};
-//        }
-//
-//        private String[] createSubServiceJsx(String subEntityName, String appApi, String entityName) {
-//                StringBuilder sb = new StringBuilder();
-//                String underComponentName = BeanUtils.underline2Camel(subEntityName);
-//                String ComponentName = BeanUtils.captureName(underComponentName);
-//                String underEntityName = BeanUtils.underline2Camel(entityName);
-//                sb.append("import { request } from 'ice';\r\n");
-//                sb.append("\r\n");
-//                sb.append("export default {\r\n");
-//                sb.append("  ").append(underComponentName).append("Page(id, value) {\r\n");
-//                sb.append("    return request({\r\n");
-//                sb.append("      url: '/").append(appApi).append("/").append(underComponentName).append("Page',\r\n");
-//                sb.append("      method: 'post',\r\n");
-//                sb.append("      params: {\r\n");
-//                sb.append("        id,\r\n");
-//                sb.append("        pageNumber: value,\r\n");
-//                sb.append("        pageSize: 8,\r\n");
-//                sb.append("        sortCode: 'sortCode',\r\n");
-//                sb.append("      },\r\n");
-//                sb.append("    });\r\n");
-//                sb.append("  },\r\n");
-//                sb.append("  ").append(underComponentName).append("Save(").append(underEntityName).append("Id, ").append(underComponentName).append("FormData) {\r\n");
-//                sb.append("    return request({\r\n");
-//                sb.append("      url: '/").append(appApi).append("/").append(underComponentName).append("Save',\r\n");
-//                sb.append("      method: 'post',\r\n");
-//                sb.append("      data: { ...").append(underComponentName).append("FormData, pid: ").append(underEntityName).append("Id },\r\n");
-//                sb.append("    });\r\n");
-//                sb.append("  },\r\n");
-//                sb.append("  ").append(underComponentName).append("Delete(record) {\r\n");
-//                sb.append("    return request({\r\n");
-//                sb.append("      url: '/").append(appApi).append("/").append(underComponentName).append("Delete',\r\n");
-//                sb.append("      method: 'post',\r\n");
-//                sb.append("      params: {\r\n");
-//                sb.append("        id: record.id,\r\n");
-//                sb.append("      },\r\n");
-//                sb.append("    });\r\n");
-//                sb.append("  },\r\n");
-//                sb.append("  find").append(ComponentName).append("ById(id) {\r\n");
-//                sb.append("    return request({\r\n");
-//                sb.append("      url: '/").append(appApi).append("/find").append(ComponentName).append("ById',\r\n");
-//                sb.append("      method: 'post',\r\n");
-//                sb.append("      params: {\r\n");
-//                sb.append("        id,\r\n");
-//                sb.append("      },\r\n");
-//                sb.append("    });\r\n");
-//                sb.append("  },\r\n");
-//                sb.append("};\r\n");
-//                String serviceData = sb.toString();
-//                return new String[]{serviceData, underComponentName + ".jsx"};
-//        }
-//
-//        private String[] createCustomServiceJsx(String entityName) {
-//                StringBuilder sb = new StringBuilder();
-//                String underComponentName = BeanUtils.underline2Camel(entityName);
-//                sb.append("import { request } from 'ice';\r\n");
-//                sb.append("\r\n");
-//                sb.append("export default {\r\n");
-//                sb.append("\r\n");
-//                sb.append("};\r\n");
-//                String customData = sb.toString();
-//                return new String[]{customData, underComponentName + ".jsx"};
-//        }
-//
-//        private String[] createCustomModelsJsx(String entityName) {
-//                StringBuilder sb = new StringBuilder();
-//                String underComponentName = BeanUtils.underline2Camel(entityName);
-//                String ComponentName = BeanUtils.captureName(underComponentName);
-//                sb.append("import custom").append(ComponentName).append("Services from '../../services/custom/").append(underComponentName).append("';\r\n");
-//                sb.append("import initService from '@/services/init';\r\n");
-//                sb.append("\r\n");
-//                sb.append("export default {\r\n");
-//                sb.append("\r\n");
-//                sb.append("  namespace: 'custom").append(ComponentName).append("',\r\n");
-//                sb.append("\r\n");
-//                sb.append("  state: {\r\n");
-//                sb.append("\r\n");
-//                sb.append("  },\r\n");
-//                sb.append("\r\n");
-//                sb.append("  reducers: {\r\n");
-//                sb.append("    setState(prevState, payload) {\r\n");
-//                sb.append("      return { ...prevState, ...payload };\r\n");
-//                sb.append("    },\r\n");
-//                sb.append("  },\r\n");
-//                sb.append("\r\n");
-//                sb.append("  effects: (dispatch) => ({\r\n");
-//                sb.append("    findCatalogByValue(data) {\r\n");
-//                sb.append("      initService.findCatalogByValue(data).then((res) => {\r\n");
-//                sb.append("        const formArr = [];\r\n");
-//                sb.append("        res.forEach((item) => {\r\n");
-//                sb.append("          formArr.push({\r\n");
-//                sb.append("            label: item.dictionaryName,\r\n");
-//                sb.append("            value: item.dictionaryValue,\r\n");
-//                sb.append("          });\r\n");
-//                sb.append("        });\r\n");
-//                sb.append("        const payload = JSON.parse(JSON.stringify({\r\n");
-//                sb.append("          data: formArr,\r\n");
-//                sb.append("        }).replace(/data/g, data));\r\n");
-//                sb.append("        dispatch.custom").append(ComponentName).append(".setState(payload);\r\n");
-//                sb.append("      });\r\n");
-//                sb.append("    },\r\n");
-//                sb.append("  }),\r\n");
-//                sb.append("};\r\n");
-//                String customData = sb.toString();
-//                return new String[]{customData, underComponentName + ".jsx"};
-//        }
-//
-//        private String[] createViewJsx(String entityName, String[] relEntities) {
-//                StringBuilder sb = new StringBuilder();
-//                String underComponentName = BeanUtils.underline2Camel(entityName);
-//                String ComponentName = BeanUtils.captureName(underComponentName);
-//                sb.append("/* eslint-disable no-unused-vars */\r\n");
-//                sb.append("import { ResponsiveGrid, Button, Dialog } from '@alifd/next';\r\n");
-//                sb.append("import React, { useEffect } from 'react';\r\n");
-//                sb.append("import pageStore from '@/pages/").append(ComponentName).append("/store';\r\n");
-//                sb.append("import DataFormTemple from '@/components/dataForm';\r\n");
-//                sb.append("import DataTableTemple from '@/components/dataTable';\r\n");
-//                sb.append("import Custom").append(ComponentName).append(" from '@/pages/").append(ComponentName).append("/view/custom/").append(underComponentName).append("';\r\n");
-//                sb.append("import styles from './index.module.scss';\r\n");
-//                sb.append("\r\n");
-//                sb.append("const { Cell } = ResponsiveGrid;\r\n");
-//                sb.append("\r\n");
-//                sb.append("function ").append(ComponentName).append("() {\r\n");
-//                sb.append("  const [").append(underComponentName).append("State, ").append(underComponentName).append("Dispatchers] = pageStore.useModel('").append(underComponentName).append("');\r\n");
-//                sb.append("  const [custom").append(ComponentName).append("State, custom").append(ComponentName).append("Dispatchers] = pageStore.useModel('custom").append(ComponentName).append("');\r\n");
-//                if (relEntities != null) {
-//                        for (String relEntity : relEntities) {
-//                                EntityNamePO relPo = entityNameCustomService.findOneById(relEntity);
-//                                String underRelEntity = BeanUtils.underline2Camel(relPo.getName());
-//                                String RelEntity = BeanUtils.captureName(underRelEntity);
-//                                sb.append("  const [").append(underRelEntity).append("State, ").append(underRelEntity).append("Dispatchers] = pageStore.useModel('").append(underRelEntity).append("');\r\n");
-//                                sb.append("  const [custom").append(RelEntity).append("State, custom").append(RelEntity).append("Dispatchers] = pageStore.useModel('custom").append(RelEntity).append("');\r\n");
-//                        }
-//                }
-//                sb.append("\r\n");
-//                sb.append("  useEffect(() => {\r\n");
-//                sb.append("    ").append(underComponentName).append("Dispatchers.findDataTableAndFormByName();\r\n");
-//                sb.append("  }, [").append(underComponentName).append("Dispatchers]);\r\n");
-//                sb.append("\r\n");
-//                sb.append("  const ").append(underComponentName).append("PageRender = (value, index, record) => {\r\n");
-//                sb.append("    return (\r\n");
-//                sb.append("      <div className={styles.opt}>\r\n");
-//                sb.append("        <Button type=\"primary\" size=\"small\" onClick={() => ").append(underComponentName).append("Dispatchers.").append(underComponentName).append("Edit(record)} > 编辑 </Button>\r\n");
-//                sb.append("        <Button type=\"primary\" size=\"small\" onClick={() => deleteConfirm(record)} warning > 删除 </Button>\r\n");
-//                sb.append("      </div>\r\n");
-//                sb.append("    );\r\n");
-//                sb.append("  };\r\n");
-//                sb.append("\r\n");
-//                sb.append("  const deleteConfirm = (record) => {\r\n");
-//                sb.append("    Dialog.confirm({\r\n");
-//                sb.append("      title: '删除',\r\n");
-//                sb.append("      content: '是否确认删除',\r\n");
-//                sb.append("      onOk: () => ").append(underComponentName).append("Dispatchers.").append(underComponentName).append("Delete({\r\n");
-//                sb.append("        record,\r\n");
-//                sb.append("        ").append(underComponentName).append("Current: ").append(underComponentName).append("State.").append(underComponentName).append("Current,\r\n");
-//                sb.append("        ").append(underComponentName).append("Table: ").append(underComponentName).append("State.").append(underComponentName).append("Table,\r\n");
-//                sb.append("        ").append(underComponentName).append("Form: ").append(underComponentName).append("State.").append(underComponentName).append("Form,\r\n");
-//                sb.append("      }),\r\n");
-//                sb.append("    });\r\n");
-//                sb.append("  };\r\n");
-//                sb.append("\r\n");
-//                sb.append("  const ").append(underComponentName).append("OperationRender = (value, index, record) => {\r\n");
-//                sb.append("    return (\r\n");
-//                sb.append("      <div className={styles.opt} />\r\n");
-//                sb.append("    );\r\n");
-//                sb.append("  };\r\n");
-//                sb.append("\r\n");
-//                sb.append("  return (\r\n");
-//                sb.append("    <ResponsiveGrid gap={20}>\r\n");
-//                sb.append("      <Cell colSpan={12}>\r\n");
-//                sb.append("        <div className={styles.Main}>\r\n");
-//                sb.append("          <div className={styles.add}>\r\n");
-//                sb.append("            <Button type=\"primary\" onClick={() => ").append(underComponentName).append("Dispatchers.").append(underComponentName).append("Edit()}> 添加菜单 </Button>\r\n");
-//                sb.append("          </div>\r\n");
-//                sb.append("          <DataTableTemple\r\n");
-//                sb.append("            visibleLoading={").append(underComponentName).append("State.").append(underComponentName).append("LoadingVisible}\r\n");
-//                sb.append("            dataSource={").append(underComponentName).append("State.").append(underComponentName).append("TableData}\r\n");
-//                sb.append("            items={").append(underComponentName).append("State.").append(underComponentName).append("Table}\r\n");
-//                sb.append("            total={").append(underComponentName).append("State.").append(underComponentName).append("Total}\r\n");
-//                sb.append("            getPage={(").append(underComponentName).append("Current) => ").append(underComponentName).append("Dispatchers.").append(underComponentName).append("Page({\r\n");
-//                sb.append("              ").append(underComponentName).append("Current,\r\n");
-//                sb.append("              ").append(underComponentName).append("Table: ").append(underComponentName).append("State.").append(underComponentName).append("Table,\r\n");
-//                sb.append("              ").append(underComponentName).append("Form: ").append(underComponentName).append("State.").append(underComponentName).append("Form,\r\n");
-//                sb.append("            })}\r\n");
-//                if (relEntities != null) {
-//                        sb.append("            rowSelection={{\r\n");
-//                        sb.append("              mode: 'single',\r\n");
-//                        sb.append("              onSelect: (selected, record) => {\r\n");
-//                        for (String relEntity : relEntities) {
-//                                EntityNamePO relPo = entityNameCustomService.findOneById(relEntity);
-//                                String underRelEntity = BeanUtils.underline2Camel(relPo.getName());
-//                                sb.append("                ").append(underRelEntity).append("Dispatchers.onRowClick({ selected, record });\r\n");
-//                        }
-//                        sb.append("              },\r\n");
-//                        sb.append("            }}\r\n");
-//                }
-//                sb.append("            operationRender={").append(underComponentName).append("OperationRender}\r\n");
-//                sb.append("            pageRender={").append(underComponentName).append("PageRender}\r\n");
-//                sb.append("          />\r\n");
-//                sb.append("        </div>\r\n");
-//                sb.append("      </Cell>\r\n");
-//                sb.append("      <DataFormTemple\r\n");
-//                sb.append("        title=\"菜单\"\r\n");
-//                sb.append("        visibleDialog={").append(underComponentName).append("State.").append(underComponentName).append("Visible}\r\n");
-//                sb.append("        onClose={() => ").append(underComponentName).append("Dispatchers.setState({ ").append(underComponentName).append("Visible: false })}\r\n");
-//                sb.append("        items={").append(underComponentName).append("State.").append(underComponentName).append("FormItem}\r\n");
-//                sb.append("        dispatchers={(value) => ").append(underComponentName).append("Dispatchers.setDataForm(value)}\r\n");
-//                sb.append("        onOk={() => ").append(underComponentName).append("Dispatchers.").append(underComponentName).append("Save({\r\n");
-//                sb.append("          ").append(underComponentName).append("FormData: ").append(underComponentName).append("State.").append(underComponentName).append("FormData,\r\n");
-//                sb.append("          ").append(underComponentName).append("Current: ").append(underComponentName).append("State.").append(underComponentName).append("Current,\r\n");
-//                sb.append("          ").append(underComponentName).append("Table: ").append(underComponentName).append("State.").append(underComponentName).append("Table,\r\n");
-//                sb.append("          ").append(underComponentName).append("Form: ").append(underComponentName).append("State.").append(underComponentName).append("Form,\r\n");
-//                sb.append("        })}\r\n");
-//                sb.append("        formDataValue={").append(underComponentName).append("State.").append(underComponentName).append("FormData}\r\n");
-//                sb.append("      />\r\n");
-//                sb.append("      <Custom").append(ComponentName).append("\r\n");
-//                sb.append("        ").append(underComponentName).append("State={").append(underComponentName).append("State}\r\n");
-//                sb.append("        ").append(underComponentName).append("Dispatchers={").append(underComponentName).append("Dispatchers}\r\n");
-//                sb.append("      />\r\n");
-//                sb.append("    </ResponsiveGrid>\r\n");
-//                sb.append("  );\r\n");
-//                sb.append("}\r\n");
-//                sb.append("\r\n");
-//                sb.append("export default ").append(ComponentName).append(";\r\n");
-//                String viewData = sb.toString();
-//                return new String[]{viewData, underComponentName + ".jsx"};
-//        }
-//
-//        private String[] createIndexJsx(EntityNamePO po, String[] relEntities) {
-//                StringBuilder sb = new StringBuilder();
-//                String underComponentName = BeanUtils.underline2Camel(po.getName());
-//                String ComponentName = BeanUtils.captureName(underComponentName);
-//                sb.append("import React from 'react';\r\n");
-//                sb.append("import ").append(ComponentName).append(" from '@/pages/").append(ComponentName).append("/view/").append(underComponentName).append("';\r\n");
-//                if (relEntities != null) {
-//                        for (String relEntity : relEntities) {
-//                                EntityNamePO relPo = entityNameCustomService.findOneById(relEntity);
-//                                String underRelEntity = BeanUtils.underline2Camel(relPo.getName());
-//                                String RelEntity = BeanUtils.captureName(underRelEntity);
-//                                sb.append("import ").append(RelEntity).append(" from '@/pages/").append(ComponentName).append("/view/").append(underRelEntity).append("';\r\n");
-//                        }
-//                }
-//                sb.append("\r\n");
-//                sb.append("function ").append(ComponentName).append("Page() {\r\n");
-//                sb.append("  return (\r\n");
-//                sb.append("    <div>\r\n");
-//                sb.append("      <").append(ComponentName).append(" />\r\n");
-//                if (relEntities != null) {
-//                        for (String relEntity : relEntities) {
-//                                EntityNamePO relPo = entityNameCustomService.findOneById(relEntity);
-//                                String underRelEntity = BeanUtils.underline2Camel(relPo.getName());
-//                                String RelEntity = BeanUtils.captureName(underRelEntity);
-//                                sb.append("      <").append(RelEntity).append(" />\r\n");
-//                        }
-//                }
-//                sb.append("    </div>\r\n");
-//                sb.append("  );\r\n");
-//                sb.append("}\r\n");
-//                sb.append("\r\n");
-//                sb.append("export default ").append(ComponentName).append("Page;\r\n");
-//                String indexData = sb.toString();
-//                return new String[]{indexData, "index.jsx"};
-//        }
-//
-//        private String[] createIndexStore(EntityNamePO po, String[] relEntities) {
-//                StringBuilder sb = new StringBuilder();
-//                String underComponentName = BeanUtils.underline2Camel(po.getName());
-//                String ComponentName = BeanUtils.captureName(underComponentName);
-//                sb.append("import { createStore } from 'ice';\r\n");
-//                sb.append("import ").append(underComponentName).append(" from './models/").append(underComponentName).append("';\r\n");
-//                sb.append("import custom").append(ComponentName).append(" from './models/custom/").append(underComponentName).append("';\r\n");
-//                if (relEntities != null) {
-//                        for (String relEntity : relEntities) {
-//                                EntityNamePO relPo = entityNameCustomService.findOneById(relEntity);
-//                                String underRelEntity = BeanUtils.underline2Camel(relPo.getName());
-//                                String RelEntity = BeanUtils.captureName(underRelEntity);
-//                                sb.append("import ").append(underRelEntity).append(" from './models/").append(underRelEntity).append("';\r\n");
-//                                sb.append("import custom").append(RelEntity).append(" from './models/custom/").append(underRelEntity).append("';\r\n");
-//                        }
-//                }
-//                sb.append("\r\n");
-//                sb.append("const store = createStore({\r\n");
-//                sb.append("  ").append(underComponentName).append(",\r\n");
-//                sb.append("  custom").append(ComponentName).append(",\r\n");
-//                if (relEntities != null) {
-//                        for (String relEntity : relEntities) {
-//                                EntityNamePO relPo = entityNameCustomService.findOneById(relEntity);
-//                                String underRelEntity = BeanUtils.underline2Camel(relPo.getName());
-//                                String RelEntity = BeanUtils.captureName(underRelEntity);
-//                                sb.append("  ").append(underRelEntity).append(",\r\n");
-//                                sb.append("  custom").append(RelEntity).append(",\r\n");
-//                        }
-//                }
-//                sb.append("});\r\n");
-//                sb.append("\r\n");
-//                sb.append("export default store;\r\n");
-//                String storeData = sb.toString();
-//                return new String[]{storeData, "store.js"};
-//        }
-//
-//        private String[] createIndexCss() {
-//                String css = "@import \"~@alifd/next/variables.scss\";\r\n" +
-//                        "\r\n" +
-//                        ".icon {\r\n" +
-//                        "  color: #999\r\n" +
-//                        "}\r\n" +
-//                        "\r\n" +
-//                        ".searchIcon {\r\n" +
-//                        "  margin-right: 5px;\r\n" +
-//                        "  color: #999;\r\n" +
-//                        "}\r\n" +
-//                        "\r\n" +
-//                        ".Operation {\r\n" +
-//                        "  padding: 10px 10px 5px;\r\n" +
-//                        "  border-bottom: 1px dashed #eee;\r\n" +
-//                        "\r\n" +
-//                        "  .btns {\r\n" +
-//                        "    margin-top: 14px;\r\n" +
-//                        "    button {\r\n" +
-//                        "      margin-left: 10px;\r\n" +
-//                        "    }\r\n" +
-//                        "  }\r\n" +
-//                        "}\r\n" +
-//                        "\r\n" +
-//                        ".Main {\r\n" +
-//                        "  padding: 15px 10px;\r\n" +
-//                        "  .add {\r\n" +
-//                        "    padding-bottom: 15px;\r\n" +
-//                        "    button {\r\n" +
-//                        "      margin-right: 10px;\r\n" +
-//                        "    }\r\n" +
-//                        "  }\r\n" +
-//                        "\r\n" +
-//                        "  .opt {\r\n" +
-//                        "    button {\r\n" +
-//                        "      margin-right: 5px;\r\n" +
-//                        "    }\r\n" +
-//                        "  }\r\n" +
-//                        "\r\n" +
-//                        "  .total {\r\n" +
-//                        "    color: #4A5B6D;\r\n" +
-//                        "    font-size: 12px;\r\n" +
-//                        "    span {\r\n" +
-//                        "      padding:0 3px;\r\n" +
-//                        "      color: #5584FF;\r\n" +
-//                        "    }\r\n" +
-//                        "  }\r\n" +
-//                        "}";
-//                return new String[]{css, "index.module.scss"};
-//        }
-//
-//        public void generateAuthor(StringBuilder sb) {
-//                LocalDate localDate = LocalDate.now();
-//                sb.append("/**\r\n");
-//                sb.append(" * @author 曹元杰\r\n");
-//                sb.append(" * @version 1.0\r\n");
-//                sb.append(" * @date ").append(localDate).append("\r\n");
-//                sb.append(" */\r\n");
-//        }
-//
-//        public void generateClass(EntityNamePO po, StringBuilder sb, String fileName) {
-//                sb.append("@Entity\r\n");
-//                sb.append("@Table(name = ").append(fileName).append("PO.T_").append(po.getName().toUpperCase()).append(")\r\n");
-//                sb.append("@Getter\r\n");
-//                sb.append("@Setter\r\n");
-//                sb.append("@ToString\r\n");
-//                sb.append("@RequiredArgsConstructor\r\n");
-//                sb.append("@GenericGenerator(name = \"uuid2\", strategy = \"org.hibernate.id.UUIDGenerator\")\r\n");
-//                sb.append("public class ").append(fileName).append("PO implements Serializable {\r\n");
-//                sb.append("\r\n");
-//                sb.append("        static final String T_").append(po.getName().toUpperCase()).append(" = \"t_").append(po.getName()).append("\";\r\n");
-//                sb.append("\r\n");
-//        }
-//
-//        public void generatePackage(List<EntityPO> poList, String appPath, StringBuilder sb) {
-//                //pojo路径
-//                String[] poPathArr = appPath.split("java");
-//                String poPath = poPathArr[1].substring(1).replaceAll("\\\\", ".") + ".entity";
-//                sb.append("package ").append(poPath).append(".po;\r\n");
-//                sb.append("\r\n");
-//                sb.append("import lombok.Getter;\r\n");
-//                sb.append("import lombok.RequiredArgsConstructor;\r\n");
-//                sb.append("import lombok.Setter;\r\n");
-//                sb.append("import lombok.ToString;\r\n");
-//                sb.append("import org.hibernate.Hibernate;\r\n");
-//                sb.append("import org.hibernate.annotations.GenericGenerator;\r\n");
-//                sb.append("\r\n");
-//                sb.append("import javax.persistence.Column;\r\n");
-//                sb.append("import javax.persistence.Entity;\r\n");
-//                sb.append("import javax.persistence.GeneratedValue;\r\n");
-//                sb.append("import javax.persistence.Id;\r\n");
-//                sb.append("import javax.persistence.Table;\r\n");
-//                sb.append("import java.io.Serializable;\r\n");
-//                if (BeanUtils.ifDate(poList)) {
-//                        sb.append("import java.sql.Date;\r\n");
-//                }
-//                if (BeanUtils.ifTimestamp(poList)) {
-//                        sb.append("import java.sql.Timestamp;\r\n");
-//                }
-//                sb.append("import java.util.Objects;\r\n");
-//                sb.append("\r\n");
-//                generateAuthor(sb);
-//        }
-//
-//        public void generateOverride(StringBuilder sb, String fileName) {
-//                sb.append("\r\n");
-//                sb.append("        @Override\r\n");
-//                sb.append("        public boolean equals(Object o) {\r\n");
-//                sb.append("                if (this == o) return true;\r\n");
-//                sb.append("                if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;\r\n");
-//                sb.append("                ").append(fileName).append("PO that = (").append(fileName).append("PO) o;\r\n");
-//                sb.append("                return Objects.equals(id, that.id);\r\n");
-//                sb.append("        }\r\n");
-//                sb.append("\r\n");
-//                sb.append("        @Override\r\n");
-//                sb.append("        public int hashCode() {\r\n");
-//                sb.append("                return 0;\r\n");
-//                sb.append("        }\r\n");
-//                sb.append("\r\n");
-//                sb.append("}");
-//        }
-//
-//        public void generateEntity(List<EntityPO> poList, StringBuilder sb) {
-//                for (EntityPO entityPO : poList) {
-//                        String idValue = "id";
-//                        if (entityPO.getEntityName().equals(idValue)) {
-//                                sb.append("        @Id\r\n");
-//                                sb.append("        @GeneratedValue(generator = \"uuid2\")\r\n");
-//                                sb.append("        @Column(name = \"").append(entityPO.getEntityName()).append("\", length = 36)\r\n");
-//                        } else {
-//                                sb.append("        @Column(name = \"").append(entityPO.getEntityName()).append("\")\r\n");
-//                        }
-//                        sb.append("        private ").append(entityPO.getEntityProperty()).append(" ").append(BeanUtils.underline2Camel(entityPO.getEntityName())).append(";\r\n");
-//                }
-//        }
 
 }

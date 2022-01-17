@@ -7,15 +7,15 @@ export default {
 
   state: {
     entityTableData: [],
-    entityVisible: false,
     entityFormData: {},
     entityLoadingVisible: true,
     entityTotal: 0,
     entityCurrent: 1,
     entityForm: [],
     entityTable: [],
-    divVisible: false,
     entityNameId: '',
+    entityVisible: false,
+    divVisible: false,
   },
 
   reducers: {
@@ -56,7 +56,7 @@ export default {
     },
     async entityDelete(data) {
       await entityService.entityDelete(data.record.id);
-      await this.entityPage({ entityCurrent: data.entityCurrent, pid: data.pid });
+      await this.entityPage({ entityCurrent: data.data.pageNumber, pid: data.data.pid });
       const payload = {
         entityVisible: false,
       };
@@ -64,7 +64,7 @@ export default {
     },
     async entitySave(data) {
       await entityService.entitySave({ ...data.entityFormData, pid: data.pid });
-      await this.entityPage({ entityCurrent: data.entityCurrent, pid: data.pid });
+      await this.entityPage({ entityCurrent: data.pageNumber, pid: data.pid });
       const payload = {
         entityVisible: false,
       };

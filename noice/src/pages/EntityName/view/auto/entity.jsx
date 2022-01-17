@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { Button, Dialog } from '@alifd/next';
 import React from 'react';
 import pageStore from '@/pages/EntityName/store';
@@ -15,7 +14,8 @@ function Entity() {
       <div className={styles.opt}>
         <Button type="primary" size="small" onClick={() => entityDispatchers.entityEdit(record)} > 编辑 </Button>
         <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning > 删除 </Button>
-      </div>);
+      </div>
+    );
   };
 
   const entityCustomRender = (value, index, record) => {
@@ -32,9 +32,10 @@ function Entity() {
       content: '是否确认删除',
       onOk: () => entityDispatchers.entityDelete({
         record,
-        entityCurrent: entityState.entityCurrent,
-        entityTable: entityState.entityTable,
-        pid: entityState.entityNameId,
+        data: {
+          pageNumber: entityState.entityCurrent,
+          pid: entityState.entityNameId,
+        },
       }),
     });
   };
@@ -62,7 +63,7 @@ function Entity() {
             primaryKey="id"
             getPage={(entityCurrent) => entityDispatchers.entityPage({ entityCurrent, pid: entityState.entityNameId })}
             pageRender={entityRender}
-            // operationRender={entityCustomRender}
+            operationRender={entityCustomRender}
           />
         </div>
       </Dialog>
@@ -73,9 +74,9 @@ function Entity() {
         items={entityState.entityForm}
         dispatchers={(value) => entityDispatchers.setDataForm(value)}
         onOk={() => entityDispatchers.entitySave({
-          pid: entityState.entityNameId,
           entityFormData: entityState.entityFormData,
-          entityCurrent: entityState.entityCurrent,
+          pageNumber: entityState.entityCurrent,
+          pid: entityState.entityNameId,
         })}
         formDataValue={entityState.entityFormData}
       />
