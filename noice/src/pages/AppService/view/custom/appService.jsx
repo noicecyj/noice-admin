@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import pageStore from '@/pages/AppService/store';
 
-function AppServiceCustom() {
+const formItemLayout = {
+  labelCol: {
+    fixedSpan: 6,
+  },
+  wrapperCol: {
+    span: 40,
+  },
+};
+
+function CustomAppService(props) {
+  // eslint-disable-next-line no-unused-vars
+  const { value, index, record } = props;
+  const [customAppServiceState, customAppServiceDispatchers] = pageStore.useModel('customAppService');
+
+  useEffect(() => {
+  }, [customAppServiceDispatchers]);
+
   return (
-    <div>
-      AppServiceCustom
-    </div>
+    <>
+    </>
   );
 }
 
-export default AppServiceCustom;
+export default CustomAppService;

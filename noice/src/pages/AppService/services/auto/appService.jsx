@@ -1,27 +1,15 @@
 import { request } from 'ice';
 
 export default {
-  /**
-   * 数据
-   *
-   * @param {*} value
-   * @return {*}
-   */
-  appServicePage(value) {
+  appServicePage(pageNumber) {
     return request({
       url: '/entityCreateApi/appServicePage',
       method: 'post',
       params: {
-        pageNumber: value,
+        pageNumber,
       },
     });
   },
-  /**
-   * 保存
-   *
-   * @param {*} appServiceFormData
-   * @return {*}
-   */
   appServiceSave(data) {
     return request({
       url: '/entityCreateApi/appServiceSave',
@@ -29,27 +17,15 @@ export default {
       data,
     });
   },
-  /**
-   * 删除
-   *
-   * @param {*} record
-   * @return {*}
-   */
-  appServiceDelete(record) {
+  appServiceDelete(id) {
     return request({
       url: '/entityCreateApi/appServiceDelete',
       method: 'post',
       params: {
-        id: record.id,
+        id,
       },
     });
   },
-  /**
-   * 根据ID查询
-   *
-   * @param {*} id
-   * @return {*}
-   */
   findAppServiceById(id) {
     return request({
       url: '/entityCreateApi/findAppServiceById',

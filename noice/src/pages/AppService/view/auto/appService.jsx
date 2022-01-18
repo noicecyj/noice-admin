@@ -3,8 +3,8 @@ import React, { useEffect } from 'react';
 import pageStore from '@/pages/AppService/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
+import styles from '@/pages/AppService/index.module.scss';
 import AppServiceCustom from '@/pages/AppService/view/custom/appService';
-import styles from './index.module.scss';
 
 const { Cell } = ResponsiveGrid;
 
@@ -24,13 +24,23 @@ function AppService() {
     );
   };
 
+  const appServiceCustomRender = (value, index, record) => {
+    return (
+      <div className={styles.opt}>
+        <AppServiceCustom value={value} index={index} record={record} />
+      </div>
+    );
+  };
+
   const deleteConfirm = (record) => {
     Dialog.confirm({
       title: '删除',
       content: '是否确认删除',
       onOk: () => appServiceDispatchers.appServiceDelete({
         record,
-        appServiceCurrent: appServiceState.appServiceCurrent,
+        data: {
+          pageNumber: appServiceState.appServiceCurrent,
+        },
       }),
     });
   };
@@ -40,33 +50,40 @@ function AppService() {
       <Cell colSpan={12}>
         <div className={styles.Main}>
           <div className={styles.add}>
-            <Button type="primary" onClick={() => appServiceDispatchers.appServiceEdit()}> 添加菜单 </Button>
+            <Button type="primary" onClick={() => appServiceDispatchers.appServiceEdit()}> 添加 </Button>
           </div>
           <DataTableTemple
             visibleLoading={appServiceState.appServiceLoadingVisible}
             dataSource={appServiceState.appServiceTableData}
             items={appServiceState.appServiceTable}
             total={appServiceState.appServiceTotal}
-            getPage={(appServiceCurrent) => appServiceDispatchers.appServicePage(appServiceCurrent)}
+            getPage={(appServiceCurrent) => appServiceDispatchers.appServicePage({
+              pageNumber: appServiceCurrent,
+            })}
+            rowSelection={{
+              mode: 'single',
+              onSelect: (selected, record) => {
+                appServiceDispatchers.setState({ appServiceId: record.id });
+              },
+              selectedRowKeys: [appServiceState.appServiceId],
+            }}
+            primaryKey="id"
             pageRender={appServiceRender}
+            operationRender={appServiceCustomRender}
           />
         </div>
       </Cell>
       <DataFormTemple
-        title="菜单"
+        title={appServiceState.appServiceTitle}
         visibleDialog={appServiceState.appServiceVisible}
         onClose={() => appServiceDispatchers.setState({ appServiceVisible: false })}
-        items={appServiceState.appServiceFormItem}
+        items={appServiceState.appServiceForm}
         dispatchers={(value) => appServiceDispatchers.setDataForm(value)}
         onOk={() => appServiceDispatchers.appServiceSave({
           appServiceFormData: appServiceState.appServiceFormData,
-          appServiceCurrent: appServiceState.appServiceCurrent,
+          pageNumber: appServiceState.appServiceCurrent,
         })}
         formDataValue={appServiceState.appServiceFormData}
-      />
-      <AppServiceCustom
-        appServiceState={appServiceState}
-        appServiceDispatchers={appServiceDispatchers}
       />
     </ResponsiveGrid>
   );

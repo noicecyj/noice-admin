@@ -896,7 +896,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 return new String[]{viewData, underSubPoName + ".jsx"};
         }
 
-        private String[] modelsCustomGenerate(String poName, String underPoName) {
+        private String[] modelsCustomGenerate(String underPoName, String poName) {
                 String viewData = "import custom" + poName + "Services from '../../services/custom/" + underPoName + "';\r\n" +
                         "import initService from '@/services/init';\r\n" +
                         "\r\n" +
@@ -1070,7 +1070,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 String viewData = "import React, { useEffect } from 'react';\r\n" +
                         "import pageStore from '@/pages/" + poName + "/store';\r\n" +
                         "\r\n" +
-                        "const FormItem = Form.Item;\r\n" +
                         "const formItemLayout = {\r\n" +
                         "  labelCol: {\r\n" +
                         "    fixedSpan: 6,\r\n" +
@@ -1102,7 +1101,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 String viewData = "import React, { useEffect } from 'react';\r\n" +
                         "import pageStore from '@/pages/" + poName + "/store';\r\n" +
                         "\r\n" +
-                        "const FormItem = Form.Item;\r\n" +
                         "const formItemLayout = {\r\n" +
                         "  labelCol: {\r\n" +
                         "    fixedSpan: 6,\r\n" +
