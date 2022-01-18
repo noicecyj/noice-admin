@@ -1,9 +1,9 @@
-import customCatalogServices from '../../services/custom/catalog';
+import customcatalogServices from '../../services/custom/Catalog';
 import initService from '@/services/init';
 
 export default {
 
-  namespace: 'customCatalog',
+  namespace: 'customcatalog',
 
   state: {
 
@@ -16,20 +16,6 @@ export default {
   },
 
   effects: (dispatch) => ({
-    findCatalogByValue(data) {
-      initService.findCatalogByValue(data).then((res) => {
-        const formArr = [];
-        res.forEach((item) => {
-          formArr.push({
-            label: item.dictionaryName,
-            value: item.dictionaryValue,
-          });
-        });
-        const payload = JSON.parse(JSON.stringify({
-          data: formArr,
-        }).replace(/data/g, data));
-        dispatch.customCatalog.setState(payload);
-      });
-    },
+
   }),
 };

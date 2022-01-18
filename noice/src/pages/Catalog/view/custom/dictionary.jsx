@@ -1,22 +1,27 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import pageStore from '@/pages/Catalog/store';
-import styles from './index.module.scss';
+
+const FormItem = Form.Item;
+const formItemLayout = {
+  labelCol: {
+    fixedSpan: 6,
+  },
+  wrapperCol: {
+    span: 40,
+  },
+};
 
 function CustomDictionary(props) {
-  const { dictionaryState, dictionaryDispatchers } = props;
-  const [customDictionaryState, customDictionaryDispatchers] = pageStore.useModel('customDictionary');
-  const formItemLayout = {
-    labelCol: {
-      fixedSpan: 6,
-    },
-    wrapperCol: {
-      span: 40,
-    },
-  };
+  // eslint-disable-next-line no-unused-vars
+  const { value, index, record } = props;
+  const [customDictionaryState, customDictionaryDispatchers] = pageStore.useModel('customCatalog');
+
+  useEffect(() => {
+  }, [customDictionaryDispatchers]);
 
   return (
-    <div />
+    <>
+    </>
   );
 }
 

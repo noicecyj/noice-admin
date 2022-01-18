@@ -1,22 +1,27 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import pageStore from '@/pages/Catalog/store';
-import styles from './index.module.scss';
+
+const FormItem = Form.Item;
+const formItemLayout = {
+  labelCol: {
+    fixedSpan: 6,
+  },
+  wrapperCol: {
+    span: 40,
+  },
+};
 
 function CustomCatalog(props) {
-  const { catalogState, catalogDispatchers } = props;
+  // eslint-disable-next-line no-unused-vars
+  const { value, index, record } = props;
   const [customCatalogState, customCatalogDispatchers] = pageStore.useModel('customCatalog');
-  const formItemLayout = {
-    labelCol: {
-      fixedSpan: 6,
-    },
-    wrapperCol: {
-      span: 40,
-    },
-  };
+
+  useEffect(() => {
+  }, [customCatalogDispatchers]);
 
   return (
-    <div />
+    <>
+    </>
   );
 }
 

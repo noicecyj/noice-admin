@@ -1,6 +1,6 @@
 import React from 'react';
-import Catalog from '@/pages/Catalog/view/catalog';
-import Dictionary from '@/pages/Catalog/view/dictionary';
+import Catalog from '@/pages/Catalog/view/auto/catalog';
+import Dictionary from '@/pages/Catalog/view/auto/dictionary';
 
 function CatalogPage() {
   return (
