@@ -598,9 +598,9 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                                 String subPoName = BeanUtils.captureName(underSubPoName);
                                 createSubComponentFile(appApi, subPo, poName, underPoName, underSubPoName, subPoName);
                         });
-                        createJavaFile(componentPath + poName + "/index.jsx", indexGenerate(entityNamePOList, underPoName, poName));
-                        createJavaFile(componentPath + poName + "/store.js", storeGenerate(entityNamePOList, underPoName, poName));
-                        createJavaFile(componentPath + poName + "/index.module.scss", indexModuleScssGenerate());
+                        createJavaFile(componentPath + poName, indexGenerate(entityNamePOList, underPoName, poName));
+                        createJavaFile(componentPath + poName, storeGenerate(entityNamePOList, underPoName, poName));
+                        createJavaFile(componentPath + poName, indexModuleScssGenerate());
                 } catch (IOException e) {
                         e.printStackTrace();
                 }
@@ -608,12 +608,12 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
 
         private void createComponentFile(String appApi, List<EntityNamePO> entityNamePOList, EntityNamePO po, String underPoName, String poName) {
                 try {
-                        createJavaFile(componentPath + poName + "/view/auto/" + underPoName + ".jsx", viewAutoGenerate(entityNamePOList, underPoName, poName));
-                        createJavaFile(componentPath + poName + "/view/custom/" + underPoName + ".jsx", viewCustomGenerate(underPoName, poName));
-                        createJavaFile(componentPath + poName + "/services/auto/" + underPoName + ".jsx", servicesAutoGenerate(appApi, underPoName, poName));
-                        createJavaFile(componentPath + poName + "/services/custom/" + underPoName + ".jsx", servicesCustomGenerate(poName));
-                        createJavaFile(componentPath + poName + "/models/auto/" + underPoName + ".jsx", modelsAutoGenerate(po, underPoName, poName));
-                        createJavaFile(componentPath + poName + "/models/custom/" + underPoName + ".jsx", modelsCustomGenerate(underPoName, poName));
+                        createJavaFile(componentPath + poName + "/view/auto", viewAutoGenerate(entityNamePOList, underPoName, poName));
+                        createJavaFile(componentPath + poName + "/view/custom", viewCustomGenerate(underPoName, poName));
+                        createJavaFile(componentPath + poName + "/services/auto", servicesAutoGenerate(appApi, underPoName, poName));
+                        createJavaFile(componentPath + poName + "/services/custom", servicesCustomGenerate(underPoName));
+                        createJavaFile(componentPath + poName + "/models/auto", modelsAutoGenerate(po, underPoName, poName));
+                        createJavaFile(componentPath + poName + "/models/custom", modelsCustomGenerate(underPoName, poName));
                 } catch (IOException e) {
                         e.printStackTrace();
                 }
@@ -621,12 +621,12 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
 
         private void createSubComponentFile(String appApi, EntityNamePO subPo, String poName, String underPoName, String underSubPoName, String subPoName) {
                 try {
-                        createJavaFile(componentPath + subPoName + "/view/auto/" + underSubPoName + ".jsx", viewSubAutoGenerate(poName, underPoName, underSubPoName, subPoName));
-                        createJavaFile(componentPath + subPoName + "/view/custom/" + underSubPoName + ".jsx", viewCustomGenerate(underSubPoName, subPoName));
-                        createJavaFile(componentPath + subPoName + "/services/auto/" + underSubPoName + ".jsx", servicesSubAutoGenerate(appApi, underSubPoName, subPoName));
-                        createJavaFile(componentPath + subPoName + "/services/custom/" + underSubPoName + ".jsx", servicesCustomGenerate(subPoName));
-                        createJavaFile(componentPath + subPoName + "/models/auto/" + underSubPoName + ".jsx", modelsSubAutoGenerate(subPo, poName, underPoName, underSubPoName, subPoName));
-                        createJavaFile(componentPath + subPoName + "/models/custom/" + underSubPoName + ".jsx", modelsCustomGenerate(underSubPoName, subPoName));
+                        createJavaFile(componentPath + poName + "/view/auto", viewSubAutoGenerate(poName, underPoName, underSubPoName, subPoName));
+                        createJavaFile(componentPath + poName + "/view/custom", viewSubCustomGenerate(poName, underSubPoName, subPoName));
+                        createJavaFile(componentPath + poName + "/services/auto", servicesSubAutoGenerate(appApi, underSubPoName, subPoName));
+                        createJavaFile(componentPath + poName + "/services/custom", servicesCustomGenerate(underSubPoName));
+                        createJavaFile(componentPath + poName + "/models/auto", modelsSubAutoGenerate(subPo, poName, underPoName, underSubPoName, subPoName));
+                        createJavaFile(componentPath + poName + "/models/custom", modelsSubCustomGenerate(underSubPoName, subPoName));
                 } catch (IOException e) {
                         e.printStackTrace();
                 }
@@ -648,7 +648,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                         "    " + underSubPoName + "Current: 1,\r\n" +
                         "    " + underSubPoName + "Form: [],\r\n" +
                         "    " + underSubPoName + "Table: [],\r\n" +
-                        "    " + underSubPoName + "Id: '',\r\n" +
                         "    " + underSubPoName + "Visible: false,\r\n" +
                         "    divVisible: false,\r\n" +
                         "    " + underPoName + "Id: '',\r\n" +
@@ -732,8 +731,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                         "      dispatch." + underSubPoName + ".setState(payload);\r\n" +
                         "    },\r\n" +
                         "  }),\r\n" +
-                        "};\r\n" +
-                        "\r\n";
+                        "};\r\n";
                 return new String[]{viewData, underSubPoName + ".jsx"};
         }
 
@@ -742,7 +740,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 String viewData = "import { request } from 'ice';\r\n" +
                         "\r\n" +
                         "export default {\r\n" +
-                        "  " + underSubPoName + "Page(pageNumber) {\r\n" +
+                        "  " + underSubPoName + "Page(pageNumber, pid) {\r\n" +
                         "    return request({\r\n" +
                         "      url: '/" + appApi + "/" + underSubPoName + "Page',\r\n" +
                         "      method: 'post',\r\n" +
@@ -777,8 +775,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                         "      },\r\n" +
                         "    });\r\n" +
                         "  },\r\n" +
-                        "};\r\n" +
-                        "\r\n";
+                        "};\r\n";
                 return new String[]{viewData, underSubPoName + ".jsx"};
         }
 
@@ -870,12 +867,36 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                         "  );\r\n" +
                         "}\r\n" +
                         "\r\n" +
-                        "export default " + subPoName + ";\r\n" +
-                        "\r\n";
+                        "export default " + subPoName + ";\r\n";
                 return new String[]{viewData, underSubPoName + ".jsx"};
         }
 
-        private String[] modelsCustomGenerate(String underPoName, String poName) {
+        private String[] modelsSubCustomGenerate(String underSubPoName, String subPoName) {
+                String viewData = "import custom" + subPoName + "Services from '../../services/custom/" + underSubPoName + "';\r\n" +
+                        "import initService from '@/services/init';\r\n" +
+                        "\r\n" +
+                        "export default {\r\n" +
+                        "\r\n" +
+                        "  namespace: 'custom" + subPoName + "',\r\n" +
+                        "\r\n" +
+                        "  state: {\r\n" +
+                        "\r\n" +
+                        "  },\r\n" +
+                        "\r\n" +
+                        "  reducers: {\r\n" +
+                        "    setState(prevState, payload) {\r\n" +
+                        "      return { ...prevState, ...payload };\r\n" +
+                        "    },\r\n" +
+                        "  },\r\n" +
+                        "\r\n" +
+                        "  effects: (dispatch) => ({\r\n" +
+                        "\r\n" +
+                        "  }),\r\n" +
+                        "};\r\n";
+                return new String[]{viewData, underSubPoName + ".jsx"};
+        }
+
+        private String[] modelsCustomGenerate(String poName, String underPoName) {
                 String viewData = "import custom" + poName + "Services from '../../services/custom/" + underPoName + "';\r\n" +
                         "import initService from '@/services/init';\r\n" +
                         "\r\n" +
@@ -896,8 +917,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                         "  effects: (dispatch) => ({\r\n" +
                         "\r\n" +
                         "  }),\r\n" +
-                        "};\r\n" +
-                        "\r\n";
+                        "};\r\n";
                 return new String[]{viewData, underPoName + ".jsx"};
         }
 
@@ -992,8 +1012,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                         "      dispatch." + underPoName + ".setState(payload);\r\n" +
                         "    },\r\n" +
                         "  }),\r\n" +
-                        "};\r\n" +
-                        "\r\n";
+                        "};\r\n";
                 return new String[]{viewData, underPoName + ".jsx"};
         }
 
@@ -1001,8 +1020,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 String viewData = "import { request } from 'ice';\r\n" +
                         "export default {\r\n" +
                         "\r\n" +
-                        "};\r\n" +
-                        "\r\n";
+                        "};\r\n";
                 return new String[]{viewData, underPoName + ".jsx"};
         }
 
@@ -1044,9 +1062,40 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                         "      },\r\n" +
                         "    });\r\n" +
                         "  },\r\n" +
-                        "};\r\n" +
-                        "\r\n";
+                        "};\r\n";
                 return new String[]{viewData, underPoName + ".jsx"};
+        }
+
+        private String[] viewSubCustomGenerate(String poName, String underSubPoName, String subPoName) {
+                String viewData = "import React, { useEffect } from 'react';\r\n" +
+                        "import pageStore from '@/pages/" + poName + "/store';\r\n" +
+                        "\r\n" +
+                        "const FormItem = Form.Item;\r\n" +
+                        "const formItemLayout = {\r\n" +
+                        "  labelCol: {\r\n" +
+                        "    fixedSpan: 6,\r\n" +
+                        "  },\r\n" +
+                        "  wrapperCol: {\r\n" +
+                        "    span: 40,\r\n" +
+                        "  },\r\n" +
+                        "};\r\n" +
+                        "\r\n" +
+                        "function Custom" + subPoName + "(props) {\r\n" +
+                        "  // eslint-disable-next-line no-unused-vars\r\n" +
+                        "  const { value, index, record } = props;\r\n" +
+                        "  const [custom" + subPoName + "State, custom" + subPoName + "Dispatchers] = pageStore.useModel('custom" + poName + "');\r\n" +
+                        "\r\n" +
+                        "  useEffect(() => {\r\n" +
+                        "  }, [custom" + subPoName + "Dispatchers]);\r\n" +
+                        "\r\n" +
+                        "  return (\r\n" +
+                        "    <>\r\n" +
+                        "    </>\r\n" +
+                        "  );\r\n" +
+                        "}\r\n" +
+                        "\r\n" +
+                        "export default Custom" + subPoName + ";\r\n";
+                return new String[]{viewData, underSubPoName + ".jsx"};
         }
 
         private String[] viewCustomGenerate(String underPoName, String poName) {
@@ -1077,8 +1126,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                         "  );\r\n" +
                         "}\r\n" +
                         "\r\n" +
-                        "export default Custom" + poName + ";\r\n" +
-                        "\r\n";
+                        "export default Custom" + poName + ";\r\n";
                 return new String[]{viewData, underPoName + ".jsx"};
         }
 
@@ -1119,13 +1167,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 sb.append("    return (\r\n");
                 sb.append("      <div className={styles.opt}>\r\n");
                 sb.append("        <").append(poName).append("Custom value={value} index={index} record={record} />\r\n");
-                entityNamePOList.forEach(subPo -> {
-                        //驼峰名
-                        String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
-                        //文件名
-                        String subPoName = BeanUtils.captureName(underSubPoName);
-                        sb.append("        <").append(subPoName).append("Custom value={value} index={index} record={record} />\r\n");
-                });
                 sb.append("      </div>\r\n");
                 sb.append("    );\r\n");
                 sb.append("  };\r\n");
@@ -1193,7 +1234,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 sb.append("}\r\n");
                 sb.append("\r\n");
                 sb.append("export default ").append(poName).append(";\r\n");
-                sb.append("\r\n");
                 String viewData = sb.toString();
                 return new String[]{viewData, underPoName + ".jsx"};
         }
@@ -1226,7 +1266,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 sb.append("});\r\n");
                 sb.append("\r\n");
                 sb.append("export default store;\r\n");
-                sb.append("\r\n");
                 String viewData = sb.toString();
                 return new String[]{viewData, "store.js"};
         }
@@ -1278,7 +1317,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                         "      color: #5584FF;\r\n" +
                         "    }\r\n" +
                         "  }\r\n" +
-                        "}";
+                        "}\r\n";
                 return new String[]{css, "index.module.scss"};
         }
 
@@ -1305,13 +1344,11 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                         String subPoName = BeanUtils.captureName(underSubPoName);
                         sb.append("      <").append(subPoName).append(" />\r\n");
                 });
-                sb.append("      <Entity />\r\n");
                 sb.append("    </div>\r\n");
                 sb.append("  );\r\n");
                 sb.append("}\r\n");
                 sb.append("\r\n");
                 sb.append("export default ").append(poName).append("Page;\r\n");
-                sb.append("\r\n");
                 String viewData = sb.toString();
                 return new String[]{viewData, "index.jsx"};
         }

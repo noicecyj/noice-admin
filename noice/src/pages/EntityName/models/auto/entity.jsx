@@ -13,9 +13,9 @@ export default {
     entityCurrent: 1,
     entityForm: [],
     entityTable: [],
-    entityNameId: '',
     entityVisible: false,
     divVisible: false,
+    entityNameId: '',
   },
 
   reducers: {
