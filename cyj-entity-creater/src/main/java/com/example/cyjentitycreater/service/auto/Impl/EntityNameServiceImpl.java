@@ -61,12 +61,4 @@ public class EntityNameServiceImpl extends BaseService implements EntityNameServ
                 return entityNameDao.findById(id).orElse(null);
         }
 
-        @Override
-        public List<EntityNamePO> findListByPid(String id) {
-                return queryFactory
-                        .selectFrom(QEntityNamePO.entityNamePO)
-                        .where(QEntityNamePO.entityNamePO.pid.eq(id))
-                        .fetch();
-        }
-
 }

@@ -23,7 +23,7 @@
     },
     "/dictionaryApi": {
       "enable": true,
-      "target": "http://127.0.0.1:8090/cyj-dictionary"
+      "target": "http://127.0.0.1:8090/cyj-entity-creater"
     },
     "/logApi": {
       "enable": true,

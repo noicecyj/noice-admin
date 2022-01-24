@@ -47,8 +47,7 @@ public class EntityServiceImpl extends BaseService implements EntityService {
         public QueryResults<EntityPO> entityPage(Integer pageNumber, String pid) {
                 return queryFactory
                         .selectFrom(QEntityPO.entityPO)
-                        .where(QEntityPO.entityPO.pid.eq(pid)
-                                .and(QEntityPO.entityPO.sortCode.isNotNull()))
+                        .where(QEntityPO.entityPO.pid.eq(pid).and(QEntityPO.entityPO.sortCode.isNotNull()))
                         .offset((pageNumber - 1) * 10L)
                         .orderBy(QEntityPO.entityPO.sortCode.asc())
                         .limit(10)

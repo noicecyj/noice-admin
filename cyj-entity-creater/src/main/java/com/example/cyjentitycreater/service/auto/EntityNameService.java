@@ -22,6 +22,4 @@ public interface EntityNameService {
 
         EntityNamePO findOneById(String id);
 
-        List<EntityNamePO> findListByPid(String id);
-
 }
