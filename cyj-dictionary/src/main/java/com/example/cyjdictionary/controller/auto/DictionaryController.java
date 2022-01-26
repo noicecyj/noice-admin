@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * @author 曹元杰
  * @version 1.0
- * @date 2022-01-04
+ * @date 2022-01-27
  */
 @Tag(name = "Dictionary")
 public interface DictionaryController {
@@ -20,7 +20,7 @@ public interface DictionaryController {
         @Operation(summary = "查询所有Dictionary")
         @InterFaceMapping(api = "dictionaryApi")
         @PostMapping(value = "dictionaryPage")
-        ResultVO dictionaryPage(@RequestParam("pageNumber") Integer pageNumber);
+        ResultVO dictionaryPage(@RequestParam("pageNumber") Integer pageNumber, @RequestParam("pid") String pid);
 
         @Operation(summary = "保存Dictionary")
         @InterFaceMapping(api = "dictionaryApi")

@@ -16,6 +16,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
+          <factory-entry name="cyj-dictionary" value="e77b7bdc-7575-476c-8b51-35b16732a4f0" />
           <factory-entry name="entityManagerFactory" value="e77b7bdc-7575-476c-8b51-35b16732a4f0" />
         </datasource-mapping>
         <naming-strategy-map />

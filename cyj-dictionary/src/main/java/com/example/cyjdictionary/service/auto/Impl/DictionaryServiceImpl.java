@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * @author 曹元杰
  * @version 1.0
- * @date 2022-01-04
+ * @date 2022-01-27
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -42,19 +44,27 @@ public class DictionaryServiceImpl extends BaseService implements DictionaryServ
         }
 
         @Override
-        public QueryResults<DictionaryPO> findAll(Integer pageNumber) {
+        public QueryResults<DictionaryPO> findAll(Integer pageNumber, String pid) {
                 return queryFactory
                         .selectFrom(QDictionaryPO.dictionaryPO)
-                        .where(QDictionaryPO.dictionaryPO.sortCode.isNotNull())
-                        .offset(pageNumber - 1)
+                        .where(QDictionaryPO.dictionaryPO.pid.eq(pid).and(QDictionaryPO.dictionaryPO.sortCode.isNotNull()))
+                        .offset((pageNumber - 1) * 10L)
                         .orderBy(QDictionaryPO.dictionaryPO.sortCode.asc())
-                        .limit(8)
+                        .limit(10)
                         .fetchResults();
         }
 
         @Override
         public DictionaryPO findOneById(String id) {
                 return dictionaryDao.findById(id).orElse(null);
+        }
+
+        @Override
+        public List<DictionaryPO> findListByPid(String id) {
+                return queryFactory
+                        .selectFrom(QDictionaryPO.dictionaryPO)
+                        .where(QDictionaryPO.dictionaryPO.pid.eq(id))
+                        .fetch();
         }
 
 }

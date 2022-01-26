@@ -425,6 +425,8 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 sb.append("import ").append(poPath).append(poName).append("PO;\r\n");
                 sb.append("import com.querydsl.core.QueryResults;");
                 sb.append("\r\n");
+                sb.append("import java.util.List;\r\n");
+                sb.append("\r\n");
                 sb.append("/**\r\n");
                 sb.append(" * @author 曹元杰\r\n");
                 sb.append(" * @version 1.0\r\n");
@@ -542,6 +544,8 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 sb.append("import org.springframework.stereotype.Service;\r\n");
                 sb.append("import org.springframework.transaction.annotation.Transactional;\r\n");
                 sb.append("\r\n");
+                sb.append("import java.util.List;\r\n");
+                sb.append("\r\n");
                 sb.append("/**\r\n");
                 sb.append(" * @author 曹元杰\r\n");
                 sb.append(" * @version 1.0\r\n");
@@ -574,7 +578,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 sb.append("        }\r\n");
                 sb.append("\r\n");
                 sb.append("        @Override\r\n");
-                sb.append("        public QueryResults<EntityPO> ").append(underPoName).append("Page(Integer pageNumber, String pid) {\r\n");
+                sb.append("        public QueryResults<").append(poName).append("PO> findAll(Integer pageNumber, String pid) {\r\n");
                 sb.append("                return queryFactory\r\n");
                 sb.append("                        .selectFrom(Q").append(poName).append("PO.").append(underPoName).append("PO)\r\n");
                 sb.append("                        .where(Q").append(poName).append("PO.").append(underPoName).append("PO.pid.eq(pid).and(Q").append(poName).append("PO.").append(underPoName).append("PO.sortCode.isNotNull()))\r\n");
@@ -720,7 +724,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 return new String[]{entityControllerImplData, poName + "ControllerImpl.java"};
         }
 
-        private String[] controllerImplSubGenerate(String underPoName, String poName, String appPath, String appApi) {
+        private String[] controllerSubGenerate(String underPoName, String poName, String appPath, String appApi) {
                 StringBuilder sb = new StringBuilder();
                 String[] PathArr = appPath.split("java");
                 String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
@@ -772,7 +776,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 return new String[]{entityControllerData, poName + "Controller.java"};
         }
 
-        private String[] controllerSubGenerate(String underPoName, String poName, String appPath, String appApi) {
+        private String[] controllerImplSubGenerate(String underPoName, String poName, String appPath, String appApi) {
                 StringBuilder sb = new StringBuilder();
                 String[] PathArr = appPath.split("java");
                 String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");

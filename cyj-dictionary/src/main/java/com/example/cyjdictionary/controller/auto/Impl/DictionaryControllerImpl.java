@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author 曹元杰
  * @version 1.0
- * @date 2022-01-04
+ * @date 2022-01-27
  */
 @CrossOrigin
 @RestController
@@ -27,8 +27,8 @@ public class DictionaryControllerImpl implements DictionaryController {
         }
 
         @Override
-        public ResultVO dictionaryPage(Integer pageNumber) {
-                return ResultVO.success(dictionaryService.findAll(pageNumber));
+        public ResultVO dictionaryPage(Integer pageNumber, String pid) {
+                return ResultVO.success(dictionaryService.findAll(pageNumber, pid));
         }
 
         @Override

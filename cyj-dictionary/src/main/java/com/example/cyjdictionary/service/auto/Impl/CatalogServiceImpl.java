@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * @author 曹元杰
  * @version 1.0
- * @date 2021-12-26
+ * @date 2022-01-27
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -46,9 +46,9 @@ public class CatalogServiceImpl extends BaseService implements CatalogService {
                 return queryFactory
                         .selectFrom(QCatalogPO.catalogPO)
                         .where(QCatalogPO.catalogPO.sortCode.isNotNull())
-                        .offset(pageNumber - 1)
+                        .offset((pageNumber - 1) * 10L)
                         .orderBy(QCatalogPO.catalogPO.sortCode.asc())
-                        .limit(8)
+                        .limit(10)
                         .fetchResults();
         }
 
