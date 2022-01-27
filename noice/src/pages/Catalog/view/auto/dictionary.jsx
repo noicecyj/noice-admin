@@ -61,7 +61,7 @@ function Dictionary() {
             items={dictionaryState.dictionaryTable}
             total={dictionaryState.dictionaryTotal}
             primaryKey="id"
-            getPage={(dictionaryCurrent) => dictionaryDispatchers.dictionaryPage({ dictionaryCurrent, pid: dictionaryState.dictionaryNameId })}
+            getPage={(dictionaryCurrent) => dictionaryDispatchers.dictionaryPage({ dictionaryCurrent, pid: dictionaryState.catalogId })}
             pageRender={dictionaryRender}
             operationRender={dictionaryCustomRender}
           />

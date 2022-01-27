@@ -1,9 +1,9 @@
-import customcatalogServices from '../../services/custom/Catalog';
+import customCatalogServices from '../../services/custom/catalog';
 import initService from '@/services/init';
 
 export default {
 
-  namespace: 'customcatalog',
+  namespace: 'customCatalog',
 
   state: {
 
