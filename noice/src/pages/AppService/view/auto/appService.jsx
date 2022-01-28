@@ -69,7 +69,7 @@ function AppService() {
             }}
             primaryKey="id"
             pageRender={appServiceRender}
-            operationRender={appServiceCustomRender}
+            operationRender={appServiceState.customType ? appServiceCustomRender : null}
           />
         </div>
       </Cell>

@@ -1,9 +1,9 @@
 package com.example.cyjentitycreater.service.auto.Impl;
 
-import com.example.cyjcommon.service.Impl.BaseService;
 import com.example.cyjentitycreater.dao.auto.AppServiceDao;
 import com.example.cyjentitycreater.entity.auto.po.AppServicePO;
 import com.example.cyjentitycreater.entity.auto.po.QAppServicePO;
+import com.example.cyjcommon.service.Impl.BaseService;
 import com.example.cyjentitycreater.service.auto.AppServiceService;
 import com.querydsl.core.QueryResults;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * @author 曹元杰
  * @version 1.0
- * @date 2021-10-16
+ * @date 2022-01-28
  */
 @Service
 @Transactional(rollbackFor = Exception.class)

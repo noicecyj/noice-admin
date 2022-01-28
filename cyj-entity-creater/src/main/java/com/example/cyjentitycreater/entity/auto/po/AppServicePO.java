@@ -18,7 +18,7 @@ import java.util.Objects;
 /**
  * @author 曹元杰
  * @version 1.0
- * @date 2021-10-16
+ * @date 2022-01-28
  */
 @Entity
 @Table(name = AppServicePO.T_APP_SERVICE)
@@ -35,14 +35,16 @@ public class AppServicePO implements Serializable {
         @GeneratedValue(generator = "uuid2")
         @Column(name = "id", length = 36)
         private String id;
-        @Column(name = "name")
-        private String name;
         @Column(name = "app_api")
         private String appApi;
         @Column(name = "app_port")
         private String appPort;
+        @Column(name = "name")
+        private String name;
         @Column(name = "app_path")
         private String appPath;
+        @Column(name = "status")
+        private String status;
         @Column(name = "sort_code")
         private String sortCode;
 

@@ -16,6 +16,7 @@ export default {
     appServiceForm: [],
     appServiceTable: [],
     appServiceId: '',
+    customType: false,
   },
 
   reducers: {
