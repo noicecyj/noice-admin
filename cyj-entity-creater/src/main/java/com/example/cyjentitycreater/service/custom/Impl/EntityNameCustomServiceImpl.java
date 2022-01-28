@@ -922,6 +922,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                         "    " + underSubPoName + "Visible: false,\r\n" +
                         "    divVisible: false,\r\n" +
                         "    " + underPoName + "Id: '',\r\n" +
+                        "    customType: false,\r\n" +
                         "  },\r\n" +
                         "\r\n" +
                         "  reducers: {\r\n" +
@@ -1117,7 +1118,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                         "            primaryKey=\"id\"\r\n" +
                         "            getPage={(" + underSubPoName + "Current) => " + underSubPoName + "Dispatchers." + underSubPoName + "Page({ " + underSubPoName + "Current, pid: " + underSubPoName + "State." + underPoName + "Id })}\r\n" +
                         "            pageRender={" + underSubPoName + "Render}\r\n" +
-                        "            operationRender={" + underSubPoName + "CustomRender}\r\n" +
+                        "            operationRender={" + underSubPoName + "State.customType ? " + underSubPoName + "CustomRender : null}\r\n" +
                         "          />\r\n" +
                         "        </div>\r\n" +
                         "      </Dialog>\r\n" +
@@ -1211,6 +1212,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                         "    " + underPoName + "Form: [],\r\n" +
                         "    " + underPoName + "Table: [],\r\n" +
                         "    " + underPoName + "Id: '',\r\n" +
+                        "    customType: false,\r\n" +
                         "  },\r\n" +
                         "\r\n" +
                         "  reducers: {\r\n" +
@@ -1482,7 +1484,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 sb.append("            }}\r\n");
                 sb.append("            primaryKey=\"id\"\r\n");
                 sb.append("            pageRender={").append(underPoName).append("Render}\r\n");
-                sb.append("            operationRender={").append(underPoName).append("CustomRender}\r\n");
+                sb.append("            operationRender={").append(underPoName).append("State.customType ? ").append(underPoName).append("CustomRender : null}\r\n");
                 sb.append("          />\r\n");
                 sb.append("        </div>\r\n");
                 sb.append("      </Cell>\r\n");
