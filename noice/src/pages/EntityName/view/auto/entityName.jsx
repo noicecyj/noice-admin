@@ -71,7 +71,7 @@ function EntityName() {
             }}
             primaryKey="id"
             pageRender={entityNameRender}
-            operationRender={entityNameCustomRender}
+            operationRender={entityNameState.customType ? entityNameCustomRender : null}
           />
         </div>
       </Cell>

@@ -16,6 +16,7 @@ export default {
     entityVisible: false,
     divVisible: false,
     entityNameId: '',
+    customType: false,
   },
 
   reducers: {

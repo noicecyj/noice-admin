@@ -5,7 +5,7 @@ import LoginPage from '@/pages/Login';
 import CatalogPage from '@/pages/Catalog';
 import EntityNamePage from '@/pages/EntityName';
 // import LogPage from '@/pages/Log';
-// import AppServicePage from '@/pages/AppService';
+import AppServicePage from '@/pages/AppService';
 // import UserPage from '@/pages/User';
 // import RolePage from '@/pages/Role';
 // import ApiPage from '@/pages/Api';
@@ -31,10 +31,10 @@ const routerConfig = [
       //   path: '/log',
       //   component: LogPage,
       // },
-      // {
-      //   path: '/appService',
-      //   component: AppServicePage,
-      // },
+      {
+        path: '/appService',
+        component: AppServicePage,
+      },
     ],
   },
   {

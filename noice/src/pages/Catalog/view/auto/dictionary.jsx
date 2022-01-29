@@ -63,7 +63,7 @@ function Dictionary() {
             primaryKey="id"
             getPage={(dictionaryCurrent) => dictionaryDispatchers.dictionaryPage({ dictionaryCurrent, pid: dictionaryState.catalogId })}
             pageRender={dictionaryRender}
-            operationRender={dictionaryCustomRender}
+            operationRender={dictionaryState.customType ? dictionaryCustomRender : null}
           />
         </div>
       </Dialog>

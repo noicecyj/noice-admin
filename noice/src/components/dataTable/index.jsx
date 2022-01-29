@@ -6,6 +6,7 @@ import styles from './index.module.scss';
 function DataTable(props) {
   const loadingStyle = { width: '100%' };
   const { items, pageRender, operationRender, dataSource, rowSelection, primaryKey, total, getPage, visibleLoading } = props;
+  console.log(operationRender);
   return (
     <Loading
       tip="加载中..."
@@ -28,14 +29,13 @@ function DataTable(props) {
             key={index}
           />);
         })}
-        <Table.Column
-          hidden={operationRender === undefined}
+        {operationRender !== null && <Table.Column
           title="自定义操作"
           align="right"
           key="operationRender"
           width="160px"
           cell={operationRender}
-        />
+        />}
         <Table.Column
           title="状态"
           dataIndex="status"

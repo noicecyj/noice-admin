@@ -71,7 +71,7 @@ function Catalog() {
             }}
             primaryKey="id"
             pageRender={catalogRender}
-            operationRender={catalogCustomRender}
+            operationRender={catalogState.customType ? catalogCustomRender : null}
           />
         </div>
       </Cell>

@@ -16,6 +16,7 @@ export default {
     dictionaryVisible: false,
     divVisible: false,
     catalogId: '',
+    customType: false,
   },
 
   reducers: {

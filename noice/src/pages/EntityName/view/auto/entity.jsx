@@ -63,7 +63,7 @@ function Entity() {
             primaryKey="id"
             getPage={(entityCurrent) => entityDispatchers.entityPage({ entityCurrent, pid: entityState.entityNameId })}
             pageRender={entityRender}
-            operationRender={entityCustomRender}
+            operationRender={entityState.customType ? entityCustomRender : null}
           />
         </div>
       </Dialog>

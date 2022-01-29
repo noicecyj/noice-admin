@@ -16,6 +16,7 @@ export default {
     catalogForm: [],
     catalogTable: [],
     catalogId: '',
+    customType: false,
   },
 
   reducers: {

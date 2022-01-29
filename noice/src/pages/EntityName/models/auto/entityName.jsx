@@ -16,6 +16,7 @@ export default {
     entityNameForm: [],
     entityNameTable: [],
     entityNameId: '',
+    customType: true,
   },
 
   reducers: {
