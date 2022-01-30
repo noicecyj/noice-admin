@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-
 /**
  * @author 曹元杰
  * @version 1.0
@@ -31,17 +29,8 @@ public class EntityNameCustomControllerImpl implements EntityNameCustomControlle
 
     @Override
     public ResultVO createEntity(@RequestBody CreateVO createVO) {
-        try {
-            entityNameCustomService.generateJavaFile(createVO.getId());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return ResultVO.success();
-    }
-
-    @Override
-    public ResultVO createComponentFile(@RequestBody CreateVO createVO) {
-        entityNameCustomService.createComponentFile(createVO.getId());
+        entityNameCustomService.generateJavaFile(createVO.getId(), createVO.isReWaite());
+        entityNameCustomService.createComponentFile(createVO.getId(), createVO.isReWaite());
         return ResultVO.success();
     }
 

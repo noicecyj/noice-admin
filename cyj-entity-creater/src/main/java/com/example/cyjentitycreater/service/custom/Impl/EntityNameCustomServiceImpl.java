@@ -92,7 +92,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
     }
 
     @Override
-    public void generateJavaFile(String id) {
+    public void generateJavaFile(String id, boolean isReWaite) {
         //获取实例po
         EntityNamePO po = entityNameService.findOneById(id);
         if (po == null) {
@@ -111,7 +111,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         String appPath = appServicePO.getAppPath();
         //服务接口
         String appApi = appServicePO.getAppApi();
-        createJavaFile(po, poList, underPoName, poName, appPath, appApi);
+        createJavaFile(po, poList, underPoName, poName, appPath, appApi, isReWaite);
         List<EntityNamePO> entityNamePOList = entityNameCustomService.findListByPid(po.getId());
         entityNamePOList.forEach(subPo -> {
             List<EntityPO> subPoList = entityService.findListByPid(subPo.getId());
@@ -119,21 +119,22 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
             String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
             //文件名
             String SubPoName = BeanUtils.captureName(underSubPoName);
-            createSubJavaFile(subPo, subPoList, underSubPoName, SubPoName, appPath, appApi);
+            createSubJavaFile(subPo, subPoList, underSubPoName, SubPoName, appPath, appApi, isReWaite);
         });
     }
 
-    private void createJavaFile(EntityNamePO po, List<EntityPO> poList, String underPoName, String poName, String appPath, String appApi) {
+    private void createJavaFile(EntityNamePO po, List<EntityPO> poList, String underPoName, String poName,
+                                String appPath, String appApi, boolean isReWaite) {
         try {
-            createJavaFile(appPath + "/entity/auto/po", poGenerate(po, poList, poName, appPath));
-            createJavaFile(appPath + "/dao/auto", daoGenerate(poName, appPath));
+            createJavaFile(appPath + "/entity/auto/po", poGenerate(po, poList, poName, appPath), isReWaite);
+            createJavaFile(appPath + "/dao/auto", daoGenerate(poName, appPath), isReWaite);
             createJavaFile(appPath + "/dao/custom", daoCustomGenerate(poName, appPath), false);
-            createJavaFile(appPath + "/service/auto", serviceGenerate(poName, appPath));
-            createJavaFile(appPath + "/service/auto/Impl", serviceImplGenerate(underPoName, poName, appPath));
+            createJavaFile(appPath + "/service/auto", serviceGenerate(poName, appPath), isReWaite);
+            createJavaFile(appPath + "/service/auto/Impl", serviceImplGenerate(underPoName, poName, appPath), isReWaite);
             createJavaFile(appPath + "/service/custom", serviceCustomGenerate(poName, appPath), false);
             createJavaFile(appPath + "/service/custom/Impl", serviceImplCustomGenerate(poName, appPath), false);
-            createJavaFile(appPath + "/controller/auto", controllerGenerate(underPoName, poName, appPath, appApi));
-            createJavaFile(appPath + "/controller/auto/Impl", controllerImplGenerate(underPoName, poName, appPath, appApi));
+            createJavaFile(appPath + "/controller/auto", controllerGenerate(underPoName, poName, appPath, appApi), isReWaite);
+            createJavaFile(appPath + "/controller/auto/Impl", controllerImplGenerate(underPoName, poName, appPath, appApi), isReWaite);
             createJavaFile(appPath + "/controller/custom", controllerCustomGenerate(poName, appPath), false);
             createJavaFile(appPath + "/controller/custom/Impl", controllerImplCustomGenerate(poName, appPath, appApi), false);
         } catch (IOException e) {
@@ -141,17 +142,17 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         }
     }
 
-    private void createSubJavaFile(EntityNamePO po, List<EntityPO> poList, String underPoName, String poName, String appPath, String appApi) {
+    private void createSubJavaFile(EntityNamePO po, List<EntityPO> poList, String underPoName, String poName, String appPath, String appApi, boolean isReWaite) {
         try {
-            createJavaFile(appPath + "/entity/auto/po", poGenerate(po, poList, poName, appPath));
-            createJavaFile(appPath + "/dao/auto", daoGenerate(poName, appPath));
+            createJavaFile(appPath + "/entity/auto/po", poGenerate(po, poList, poName, appPath), isReWaite);
+            createJavaFile(appPath + "/dao/auto", daoGenerate(poName, appPath), isReWaite);
             createJavaFile(appPath + "/dao/custom", daoCustomGenerate(poName, appPath), false);
-            createJavaFile(appPath + "/service/auto", serviceSubGenerate(poName, appPath));
-            createJavaFile(appPath + "/service/auto/Impl", serviceImplSubGenerate(underPoName, poName, appPath));
+            createJavaFile(appPath + "/service/auto", serviceSubGenerate(poName, appPath), isReWaite);
+            createJavaFile(appPath + "/service/auto/Impl", serviceImplSubGenerate(underPoName, poName, appPath), isReWaite);
             createJavaFile(appPath + "/service/custom", serviceCustomGenerate(poName, appPath), false);
             createJavaFile(appPath + "/service/custom/Impl", serviceImplCustomGenerate(poName, appPath), false);
-            createJavaFile(appPath + "/controller/auto", controllerSubGenerate(underPoName, poName, appPath, appApi));
-            createJavaFile(appPath + "/controller/auto/Impl", controllerImplSubGenerate(underPoName, poName, appPath, appApi));
+            createJavaFile(appPath + "/controller/auto", controllerSubGenerate(underPoName, poName, appPath, appApi), isReWaite);
+            createJavaFile(appPath + "/controller/auto/Impl", controllerImplSubGenerate(underPoName, poName, appPath, appApi), isReWaite);
             createJavaFile(appPath + "/controller/custom", controllerCustomGenerate(poName, appPath), false);
             createJavaFile(appPath + "/controller/custom/Impl", controllerImplCustomGenerate(poName, appPath, appApi), false);
         } catch (IOException e) {
@@ -843,7 +844,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
     }
 
     @Override
-    public void createComponentFile(String id) {
+    public void createComponentFile(String id, boolean isReWaite) {
         try {
             //获取实例po
             EntityNamePO po = entityNameService.findOneById(id);
@@ -861,13 +862,13 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
             //服务接口
             String appApi = appServicePO.getAppApi();
             List<EntityNamePO> entityNamePOList = entityNameCustomService.findListByPid(po.getId());
-            createComponentFile(appApi, entityNamePOList, po, underPoName, poName);
+            createComponentFile(appApi, entityNamePOList, po, underPoName, poName, isReWaite);
             entityNamePOList.forEach(subPo -> {
                 //驼峰名
                 String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
                 //文件名
                 String subPoName = BeanUtils.captureName(underSubPoName);
-                createSubComponentFile(appApi, subPo, poName, underPoName, underSubPoName, subPoName);
+                createSubComponentFile(appApi, subPo, poName, underPoName, underSubPoName, subPoName, isReWaite);
             });
             createJavaFile(componentPath + poName, indexGenerate(entityNamePOList, underPoName, poName));
             createJavaFile(componentPath + poName, storeGenerate(entityNamePOList, underPoName, poName));
@@ -877,27 +878,27 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         }
     }
 
-    private void createComponentFile(String appApi, List<EntityNamePO> entityNamePOList, EntityNamePO po, String underPoName, String poName) {
+    private void createComponentFile(String appApi, List<EntityNamePO> entityNamePOList, EntityNamePO po, String underPoName, String poName, boolean isReWaite) {
         try {
-            createJavaFile(componentPath + poName + "/view/auto", viewAutoGenerate(entityNamePOList, underPoName, poName));
-            createJavaFile(componentPath + poName + "/view/custom", viewCustomGenerate(underPoName, poName));
-            createJavaFile(componentPath + poName + "/services/auto", servicesAutoGenerate(appApi, underPoName, poName));
-            createJavaFile(componentPath + poName + "/services/custom", servicesCustomGenerate(underPoName));
-            createJavaFile(componentPath + poName + "/models/auto", modelsAutoGenerate(po, underPoName, poName));
-            createJavaFile(componentPath + poName + "/models/custom", modelsCustomGenerate(underPoName, poName));
+            createJavaFile(componentPath + poName + "/view/auto", viewAutoGenerate(entityNamePOList, underPoName, poName), isReWaite);
+            createJavaFile(componentPath + poName + "/view/custom", viewCustomGenerate(underPoName, poName), false);
+            createJavaFile(componentPath + poName + "/services/auto", servicesAutoGenerate(appApi, underPoName, poName), isReWaite);
+            createJavaFile(componentPath + poName + "/services/custom", servicesCustomGenerate(underPoName), false);
+            createJavaFile(componentPath + poName + "/models/auto", modelsAutoGenerate(po, underPoName, poName), isReWaite);
+            createJavaFile(componentPath + poName + "/models/custom", modelsCustomGenerate(underPoName, poName), false);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void createSubComponentFile(String appApi, EntityNamePO subPo, String poName, String underPoName, String underSubPoName, String subPoName) {
+    private void createSubComponentFile(String appApi, EntityNamePO subPo, String poName, String underPoName, String underSubPoName, String subPoName, boolean isReWaite) {
         try {
-            createJavaFile(componentPath + poName + "/view/auto", viewSubAutoGenerate(poName, underPoName, underSubPoName, subPoName));
-            createJavaFile(componentPath + poName + "/view/custom", viewSubCustomGenerate(poName, underSubPoName, subPoName));
-            createJavaFile(componentPath + poName + "/services/auto", servicesSubAutoGenerate(appApi, underSubPoName, subPoName));
-            createJavaFile(componentPath + poName + "/services/custom", servicesCustomGenerate(underSubPoName));
-            createJavaFile(componentPath + poName + "/models/auto", modelsSubAutoGenerate(subPo, poName, underPoName, underSubPoName, subPoName));
-            createJavaFile(componentPath + poName + "/models/custom", modelsSubCustomGenerate(underSubPoName, subPoName));
+            createJavaFile(componentPath + poName + "/view/auto", viewSubAutoGenerate(poName, underPoName, underSubPoName, subPoName), isReWaite);
+            createJavaFile(componentPath + poName + "/view/custom", viewSubCustomGenerate(poName, underSubPoName, subPoName), false);
+            createJavaFile(componentPath + poName + "/services/auto", servicesSubAutoGenerate(appApi, underSubPoName, subPoName), isReWaite);
+            createJavaFile(componentPath + poName + "/services/custom", servicesCustomGenerate(underSubPoName), false);
+            createJavaFile(componentPath + poName + "/models/auto", modelsSubAutoGenerate(subPo, poName, underPoName, underSubPoName, subPoName), isReWaite);
+            createJavaFile(componentPath + poName + "/models/custom", modelsSubCustomGenerate(underSubPoName, subPoName), false);
         } catch (IOException e) {
             e.printStackTrace();
         }

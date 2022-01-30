@@ -22,11 +22,6 @@ public interface EntityNameCustomController {
     @PostMapping(value = "createEntity")
     ResultVO createEntity(@RequestBody CreateVO createVO);
 
-    @Operation(summary = "生成组件文件")
-    @InterFaceMapping(api = "entityCreateApi")
-    @PostMapping(value = "createComponentFile")
-    ResultVO createComponentFile(@RequestBody CreateVO createVO);
-
     @Operation(summary = "创建表格与表单")
     @InterFaceMapping(api = "entityCreateApi")
     @PostMapping(value = "findDataTableAndFormByName")
