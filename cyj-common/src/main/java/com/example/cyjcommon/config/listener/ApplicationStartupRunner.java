@@ -20,55 +20,55 @@ import java.util.Map;
 @Component
 public class ApplicationStartupRunner implements CommandLineRunner {
 
-        @Value("${spring.application.name}")
-        private String appName;
-        private ApplicationContext applicationContext;
-        private AuthorityService authorityService;
+    @Value("${spring.application.name}")
+    private String appName;
+    private ApplicationContext applicationContext;
+    private AuthorityService authorityService;
 
-        @Autowired
-        public void setAuthorityService(AuthorityService authorityService) {
-                this.authorityService = authorityService;
-        }
+    @Autowired
+    public void setAuthorityService(AuthorityService authorityService) {
+        this.authorityService = authorityService;
+    }
 
-        @Autowired
-        public void setApplicationContext(ApplicationContext applicationContext) {
-                this.applicationContext = applicationContext;
-        }
+    @Autowired
+    public void setApplicationContext(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+    }
 
-        @Override
-        public void run(String... args) {
-                interFaceHandler();
-        }
+    @Override
+    public void run(String... args) {
+        interFaceHandler();
+    }
 
-        private void interFaceHandler() {
-                Map<String, Object> Tag = applicationContext.getBeansWithAnnotation(io.swagger.v3.oas.annotations.tags.Tag.class);
-                for (Map.Entry<String, Object> entry : Tag.entrySet()) {
-                        Method[] methods = ReflectionUtils.getAllDeclaredMethods(entry.getValue().getClass());
-                        for (Method method : methods) {
-                                InterFaceMapping interFaceMapping = AnnotationUtils.findAnnotation(method, InterFaceMapping.class);
-                                if (interFaceMapping != null) {
-                                        AuthorityDTO dto = new AuthorityDTO();
-                                        dto.setAppApi(interFaceMapping.api());
-                                        dto.setVersion(interFaceMapping.version());
-                                        Operation operation = AnnotationUtils.findAnnotation(method, Operation.class);
-                                        PostMapping postMapping = AnnotationUtils.findAnnotation(method, PostMapping.class);
-                                        GetMapping getMapping = AnnotationUtils.findAnnotation(method, GetMapping.class);
-                                        if (operation != null) {
-                                                dto.setName(operation.summary());
-                                        }
-                                        if (postMapping != null) {
-                                                dto.setPath(postMapping.path()[0]);
-                                                dto.setMethod("POST");
-                                        }
-                                        if (getMapping != null) {
-                                                dto.setPath(getMapping.path()[0]);
-                                                dto.setMethod("GET");
-                                        }
-                                        dto.setAppService(appName);
-                                        authorityService.InterFaceMethod(dto);
-                                }
-                        }
+    private void interFaceHandler() {
+        Map<String, Object> Tag = applicationContext.getBeansWithAnnotation(io.swagger.v3.oas.annotations.tags.Tag.class);
+        for (Map.Entry<String, Object> entry : Tag.entrySet()) {
+            Method[] methods = ReflectionUtils.getAllDeclaredMethods(entry.getValue().getClass());
+            for (Method method : methods) {
+                InterFaceMapping interFaceMapping = AnnotationUtils.findAnnotation(method, InterFaceMapping.class);
+                if (interFaceMapping != null) {
+                    AuthorityDTO dto = new AuthorityDTO();
+                    dto.setAppApi(interFaceMapping.api());
+                    dto.setVersion(interFaceMapping.version());
+                    Operation operation = AnnotationUtils.findAnnotation(method, Operation.class);
+                    PostMapping postMapping = AnnotationUtils.findAnnotation(method, PostMapping.class);
+                    GetMapping getMapping = AnnotationUtils.findAnnotation(method, GetMapping.class);
+                    if (operation != null) {
+                        dto.setName(operation.summary());
+                    }
+                    if (postMapping != null) {
+                        dto.setPath(postMapping.path()[0]);
+                        dto.setMethod("POST");
+                    }
+                    if (getMapping != null) {
+                        dto.setPath(getMapping.path()[0]);
+                        dto.setMethod("GET");
+                    }
+                    dto.setAppService(appName);
+                    authorityService.InterFaceMethod(dto);
                 }
+            }
         }
+    }
 
 }

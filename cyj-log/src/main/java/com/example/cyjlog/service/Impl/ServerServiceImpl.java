@@ -19,41 +19,41 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServerServiceImpl extends BaseService implements ServerService {
 
-        private ServerDao serverDao;
+    private ServerDao serverDao;
 
-        @Autowired
-        public void setServerDao(ServerDao serverDao) {
-                this.serverDao = serverDao;
-        }
+    @Autowired
+    public void setServerDao(ServerDao serverDao) {
+        this.serverDao = serverDao;
+    }
 
-        @Override
-        public ServerPO addOne(ServerPO po) {
-                return serverDao.save(po);
-        }
+    @Override
+    public ServerPO addOne(ServerPO po) {
+        return serverDao.save(po);
+    }
 
-        @Override
-        public void deleteOne(String id) {
-                serverDao.deleteById(id);
-        }
+    @Override
+    public void deleteOne(String id) {
+        serverDao.deleteById(id);
+    }
 
-        @Override
-        public ServerPO updateOne(ServerPO po) {
-                return serverDao.saveAndFlush(po);
-        }
+    @Override
+    public ServerPO updateOne(ServerPO po) {
+        return serverDao.saveAndFlush(po);
+    }
 
-        @Override
-        public Page<ServerPO> findAll(Integer pageNumber, Integer pageSize, String sortCode) {
-                Sort sort = Sort.by(sortCode);
-                Pageable pageable = PageRequest.of(pageNumber, pageSize, sort);
-                return serverDao.findAll(pageable);
-        }
+    @Override
+    public Page<ServerPO> findAll(Integer pageNumber, Integer pageSize, String sortCode) {
+        Sort sort = Sort.by(sortCode);
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, sort);
+        return serverDao.findAll(pageable);
+    }
 
-        @Override
-        public ServerPO findOneById(String id) {
-                if (serverDao.findById(id).isPresent()) {
-                        return serverDao.findById(id).get();
-                }
-                return null;
+    @Override
+    public ServerPO findOneById(String id) {
+        if (serverDao.findById(id).isPresent()) {
+            return serverDao.findById(id).get();
         }
+        return null;
+    }
 
 }

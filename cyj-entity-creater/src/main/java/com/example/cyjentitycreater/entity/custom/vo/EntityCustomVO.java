@@ -12,16 +12,16 @@ import java.io.Serializable;
 @Data
 public class EntityCustomVO implements Serializable {
 
-        private String id;
-        private String propertyCode;
-        private String propertyType;
-        private String propertyLabel;
-        private String propertyWidth;
-        private String propertyMode;
-        private String propertyRequired;
-        private String propertyDataSourceType;
-        private String propertyDataSource;
-        private String propertyDefaultValue;
-        private Integer pageNumber;
+    private String id;
+    private String propertyCode;
+    private String propertyType;
+    private String propertyLabel;
+    private String propertyWidth;
+    private String propertyMode;
+    private String propertyRequired;
+    private String propertyDataSourceType;
+    private String propertyDataSource;
+    private String propertyDefaultValue;
+    private Integer pageNumber;
 
 }

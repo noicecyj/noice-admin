@@ -1,7 +1,6 @@
 package com.example.cyjdictionary.service.custom.Impl;
 
 import com.example.cyjcommon.service.Impl.BaseService;
-import com.example.cyjdictionary.dao.auto.CatalogDao;
 import com.example.cyjdictionary.dao.custom.CatalogCustomDao;
 import com.example.cyjdictionary.entity.auto.po.CatalogPO;
 import com.example.cyjdictionary.service.custom.CatalogCustomService;
@@ -22,22 +21,22 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = Exception.class)
 public class CatalogCustomServiceImpl extends BaseService implements CatalogCustomService {
 
-        private CatalogCustomDao catalogCustomDao;
+    private CatalogCustomDao catalogCustomDao;
 
-        @Autowired
-        public void setCatalogCustomDao(CatalogCustomDao catalogCustomDao) {
-                this.catalogCustomDao = catalogCustomDao;
-        }
+    @Autowired
+    public void setCatalogCustomDao(CatalogCustomDao catalogCustomDao) {
+        this.catalogCustomDao = catalogCustomDao;
+    }
 
-        @Override
-        public Page<CatalogPO> findAllByCatalogNameContainsOrCatalogValueContains(String catalogName,
-                                                                                  String catalogValue,
-                                                                                  Integer pageNumber,
-                                                                                  Integer pageSize,
-                                                                                  String sortCode) {
-                Sort sort = Sort.by(sortCode);
-                Pageable pageable = PageRequest.of(pageNumber, pageSize, sort);
-                return catalogCustomDao.findAllByCatalogNameContainsOrCatalogValueContains(catalogName, catalogValue, pageable);
-        }
+    @Override
+    public Page<CatalogPO> findAllByCatalogNameContainsOrCatalogValueContains(String catalogName,
+                                                                              String catalogValue,
+                                                                              Integer pageNumber,
+                                                                              Integer pageSize,
+                                                                              String sortCode) {
+        Sort sort = Sort.by(sortCode);
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, sort);
+        return catalogCustomDao.findAllByCatalogNameContainsOrCatalogValueContains(catalogName, catalogValue, pageable);
+    }
 
 }

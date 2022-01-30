@@ -10,6 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface EntityNameCustomDao extends JpaRepository<EntityNamePO, String> {
 
-        EntityNamePO findEntityNamePOByEntityCodeAndEntityType(String entityCode, String entityType);
+    EntityNamePO findEntityNamePOByEntityCodeAndEntityType(String entityCode, String entityType);
 
 }

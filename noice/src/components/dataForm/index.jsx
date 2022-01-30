@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactJson from 'react-json-view';
-import { Form, Input, Select, NumberPicker, Switch, Range, DatePicker, TimePicker, Checkbox, Radio, Dialog } from '@alifd/next';
+import {Checkbox, DatePicker, Dialog, Form, Input, NumberPicker, Radio, Range, Select, Switch, TimePicker} from '@alifd/next';
 
 const FormItem = Form.Item;
-const { RangePicker } = DatePicker;
-const { Group: CheckboxGroup } = Checkbox;
-const { Group: RadioGroup } = Radio;
+const {RangePicker} = DatePicker;
+const {Group: CheckboxGroup} = Checkbox;
+const {Group: RadioGroup} = Radio;
 const formItemLayout = {
   labelCol: {
     fixedSpan: 6,
@@ -16,7 +16,7 @@ const formItemLayout = {
 };
 
 function DataForm(props) {
-  const { items, dispatchers, onOk, formDataValue, title, visibleDialog, onClose } = props;
+  const {items, dispatchers, onOk, formDataValue, title, visibleDialog, onClose} = props;
 
   return (
     <Dialog
@@ -24,10 +24,10 @@ function DataForm(props) {
       visible={visibleDialog}
       footer={false}
       onClose={onClose}
-      style={{ width: '30%' }}
+      style={{width: '30%'}}
     >
       <Form
-        style={{ width: '100%' }}
+        style={{width: '100%'}}
         {...formItemLayout}
         value={formDataValue}
         onChange={(value) => dispatchers(value)}
@@ -61,13 +61,13 @@ function DataForm(props) {
             if (item.propertyRequired === '是') {
               return (
                 <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
-                  <Input.Password id={item.propertyCode} name={item.propertyName} placeholder={`请输入${item.propertyLabel}`} />
+                  <Input.Password id={item.propertyCode} name={item.propertyName} placeholder={`请输入${item.propertyLabel}`}/>
                 </FormItem>
               );
             } else {
               return (
                 <FormItem label={`${item.propertyLabel}`} key={item.id}>
-                  <Input.Password id={item.propertyCode} name={item.propertyName} placeholder={`请输入${item.propertyLabel}`} />
+                  <Input.Password id={item.propertyCode} name={item.propertyName} placeholder={`请输入${item.propertyLabel}`}/>
                 </FormItem>
               );
             }
@@ -105,7 +105,7 @@ function DataForm(props) {
                       name={item.propertyName}
                       filterLocal={false}
                       dataSource={item.propertyDataSource}
-                      style={{ width: 414 }}
+                      style={{width: 414}}
                       mode={item.mode}
                       defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
                     />
@@ -119,7 +119,7 @@ function DataForm(props) {
                       name={item.propertyName}
                       filterLocal={false}
                       dataSource={item.propertyDataSource}
-                      style={{ width: 414 }}
+                      style={{width: 414}}
                       mode={item.mode}
                       defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
                     />
@@ -133,7 +133,7 @@ function DataForm(props) {
                     id={item.propertyCode}
                     name={item.propertyName}
                     filterLocal={false}
-                    style={{ width: 414 }}
+                    style={{width: 414}}
                     mode={item.mode}
                     defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
                   />
@@ -151,13 +151,13 @@ function DataForm(props) {
                 name={item.propertyCode}
                 key={item.id}
                 onAdd={(add) => {
-                  dispatchers({ ...formDataValue, jsonData: JSON.stringify(add.updated_src) });
+                  dispatchers({...formDataValue, jsonData: JSON.stringify(add.updated_src)});
                 }}
                 onEdit={(edit) => {
-                  dispatchers({ ...formDataValue, jsonData: JSON.stringify(edit.updated_src) });
+                  dispatchers({...formDataValue, jsonData: JSON.stringify(edit.updated_src)});
                 }}
                 onDelete={(deleteCont) => {
-                  dispatchers({ ...formDataValue, jsonData: JSON.stringify(deleteCont.updated_src) });
+                  dispatchers({...formDataValue, jsonData: JSON.stringify(deleteCont.updated_src)});
                 }}
               />
             );
@@ -215,13 +215,13 @@ function DataForm(props) {
             if (item.propertyRequired === '是') {
               return (
                 <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
-                  <Range id={item.propertyCode} name={item.propertyName} defaultValue={0} scales={[0, 100]} marks={[0, 100]} />
+                  <Range id={item.propertyCode} name={item.propertyName} defaultValue={0} scales={[0, 100]} marks={[0, 100]}/>
                 </FormItem>
               );
             } else {
               return (
                 <FormItem label={`${item.propertyLabel}`} key={item.id}>
-                  <Range id={item.propertyCode} name={item.propertyName} defaultValue={0} scales={[0, 100]} marks={[0, 100]} />
+                  <Range id={item.propertyCode} name={item.propertyName} defaultValue={0} scales={[0, 100]} marks={[0, 100]}/>
                 </FormItem>
               );
             }
@@ -229,13 +229,13 @@ function DataForm(props) {
             if (item.propertyRequired === '是') {
               return (
                 <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
-                  <DatePicker id={item.propertyCode} name={item.propertyName} />
+                  <DatePicker id={item.propertyCode} name={item.propertyName}/>
                 </FormItem>
               );
             } else {
               return (
                 <FormItem label={`${item.propertyLabel}`} key={item.id}>
-                  <DatePicker id={item.propertyCode} name={item.propertyName} />
+                  <DatePicker id={item.propertyCode} name={item.propertyName}/>
                 </FormItem>
               );
             }
@@ -243,13 +243,13 @@ function DataForm(props) {
             if (item.propertyRequired === '是') {
               return (
                 <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
-                  <RangePicker id={item.propertyCode} name={item.propertyName} />
+                  <RangePicker id={item.propertyCode} name={item.propertyName}/>
                 </FormItem>
               );
             } else {
               return (
                 <FormItem label={`${item.propertyLabel}`} key={item.id}>
-                  <RangePicker id={item.propertyCode} name={item.propertyName} />
+                  <RangePicker id={item.propertyCode} name={item.propertyName}/>
                 </FormItem>
               );
             }
@@ -257,13 +257,13 @@ function DataForm(props) {
             if (item.propertyRequired === '是') {
               return (
                 <FormItem label={`${item.propertyLabel}`} required requiredMessage={`请输入${item.propertyLabel}`} key={item.id}>
-                  <TimePicker id={item.propertyCode} name={item.propertyName} />
+                  <TimePicker id={item.propertyCode} name={item.propertyName}/>
                 </FormItem>
               );
             } else {
               return (
                 <FormItem label={`${item.propertyLabel}`} key={item.id}>
-                  <TimePicker id={item.propertyCode} name={item.propertyName} />
+                  <TimePicker id={item.propertyCode} name={item.propertyName}/>
                 </FormItem>
               );
             }
@@ -327,13 +327,13 @@ function DataForm(props) {
             );
           }
         })}
-        <FormItem label="状态" required requiredMessage="请输入状态" >
-          <Input id="status" name="status" placeholder="请输入状态" defaultValue="有效" />
+        <FormItem label="状态" required requiredMessage="请输入状态">
+          <Input id="status" name="status" placeholder="请输入状态" defaultValue="有效"/>
         </FormItem>
-        <FormItem label="排序代码" required requiredMessage="请输入排序代码" >
-          <Input id="sortCode" name="sortCode" placeholder="请输入排序代码" defaultValue="0010" />
+        <FormItem label="排序代码" required requiredMessage="请输入排序代码">
+          <Input id="sortCode" name="sortCode" placeholder="请输入排序代码" defaultValue="0010"/>
         </FormItem>
-        <FormItem >
+        <FormItem>
           <Form.Submit
             validate
             type="primary"
@@ -342,10 +342,10 @@ function DataForm(props) {
                 onOk();
               }
             }}
-            style={{ marginRight: 10 }}
+            style={{marginRight: 10}}
           >确定
           </Form.Submit>
-          <Form.Reset >重置</Form.Reset>
+          <Form.Reset>重置</Form.Reset>
         </FormItem>
       </Form>
     </Dialog>

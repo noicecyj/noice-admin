@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 /**
  * @author 曹元杰
  * @version 1.0
@@ -22,43 +20,43 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class)
 public class EntityNameServiceImpl extends BaseService implements EntityNameService {
 
-        private EntityNameDao entityNameDao;
+    private EntityNameDao entityNameDao;
 
-        @Autowired
-        public void setEntityNameDao(EntityNameDao entityNameDao) {
-                this.entityNameDao = entityNameDao;
-        }
+    @Autowired
+    public void setEntityNameDao(EntityNameDao entityNameDao) {
+        this.entityNameDao = entityNameDao;
+    }
 
-        @Override
-        public EntityNamePO addOne(EntityNamePO po) {
-                return entityNameDao.save(po);
-        }
+    @Override
+    public EntityNamePO addOne(EntityNamePO po) {
+        return entityNameDao.save(po);
+    }
 
-        @Override
-        public void deleteOne(String id) {
-                entityNameDao.deleteById(id);
-                queryFactory.delete(QEntityPO.entityPO).where(QEntityPO.entityPO.pid.eq(id));
-        }
+    @Override
+    public void deleteOne(String id) {
+        entityNameDao.deleteById(id);
+        queryFactory.delete(QEntityPO.entityPO).where(QEntityPO.entityPO.pid.eq(id));
+    }
 
-        @Override
-        public EntityNamePO updateOne(EntityNamePO po) {
-                return entityNameDao.saveAndFlush(po);
-        }
+    @Override
+    public EntityNamePO updateOne(EntityNamePO po) {
+        return entityNameDao.saveAndFlush(po);
+    }
 
-        @Override
-        public QueryResults<EntityNamePO> entityNamePage(Integer pageNumber) {
-                return queryFactory
-                        .selectFrom(QEntityNamePO.entityNamePO)
-                        .where(QEntityNamePO.entityNamePO.sortCode.isNotNull())
-                        .offset((pageNumber - 1) * 10L)
-                        .orderBy(QEntityNamePO.entityNamePO.sortCode.asc())
-                        .limit(10)
-                        .fetchResults();
-        }
+    @Override
+    public QueryResults<EntityNamePO> entityNamePage(Integer pageNumber) {
+        return queryFactory
+                .selectFrom(QEntityNamePO.entityNamePO)
+                .where(QEntityNamePO.entityNamePO.sortCode.isNotNull())
+                .offset((pageNumber - 1) * 10L)
+                .orderBy(QEntityNamePO.entityNamePO.sortCode.asc())
+                .limit(10)
+                .fetchResults();
+    }
 
-        @Override
-        public EntityNamePO findOneById(String id) {
-                return entityNameDao.findById(id).orElse(null);
-        }
+    @Override
+    public EntityNamePO findOneById(String id) {
+        return entityNameDao.findById(id).orElse(null);
+    }
 
 }

@@ -17,24 +17,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Tag(name = "Entity")
 public interface EntityController {
 
-        @Operation(summary = "保存Entity")
-        @InterFaceMapping(api = "entityCreateApi")
-        @PostMapping(value = "entitySave")
-        ResultVO entitySave(@RequestBody EntityPO po);
+    @Operation(summary = "保存Entity")
+    @InterFaceMapping(api = "entityCreateApi")
+    @PostMapping(value = "entitySave")
+    ResultVO entitySave(@RequestBody EntityPO po);
 
-        @Operation(summary = "查询所有Entity")
-        @InterFaceMapping(api = "entityCreateApi")
-        @PostMapping(value = "entityPage")
-        ResultVO entityPage(@RequestParam("pageNumber") Integer pageNumber, @RequestParam("pid") String pid);
+    @Operation(summary = "查询所有Entity")
+    @InterFaceMapping(api = "entityCreateApi")
+    @PostMapping(value = "entityPage")
+    ResultVO entityPage(@RequestParam("pageNumber") Integer pageNumber, @RequestParam("pid") String pid);
 
-        @Operation(summary = "删除Entity")
-        @InterFaceMapping(api = "entityCreateApi")
-        @PostMapping(value = "entityDelete")
-        void entityDelete(@RequestParam("id") String id);
+    @Operation(summary = "删除Entity")
+    @InterFaceMapping(api = "entityCreateApi")
+    @PostMapping(value = "entityDelete")
+    void entityDelete(@RequestParam("id") String id);
 
-        @Operation(summary = "根据ID查询Entity")
-        @InterFaceMapping(api = "entityCreateApi")
-        @PostMapping(value = "findEntityById")
-        ResultVO findEntityById(@RequestParam("id") String id);
+    @Operation(summary = "根据ID查询Entity")
+    @InterFaceMapping(api = "entityCreateApi")
+    @PostMapping(value = "findEntityById")
+    ResultVO findEntityById(@RequestParam("id") String id);
 
 }

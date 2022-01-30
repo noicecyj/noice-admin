@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Tag(name = "自定义相关接口")
 public interface IndexController {
 
-        @Operation(summary = "退出登录")
-        @InterFaceMapping(api = "authApi")
-        @GetMapping(value = "exit")
-        String exit(@RequestParam("userName") String userName);
+    @Operation(summary = "退出登录")
+    @InterFaceMapping(api = "authApi")
+    @GetMapping(value = "exit")
+    String exit(@RequestParam("userName") String userName);
 
-        @Operation(summary = "设置密码")
-        @InterFaceMapping(api = "authApi")
-        @PostMapping(value = "setPassword")
-        Boolean setPassword(@RequestBody PasswordVO passwordVO);
+    @Operation(summary = "设置密码")
+    @InterFaceMapping(api = "authApi")
+    @PostMapping(value = "setPassword")
+    Boolean setPassword(@RequestBody PasswordVO passwordVO);
 
 }

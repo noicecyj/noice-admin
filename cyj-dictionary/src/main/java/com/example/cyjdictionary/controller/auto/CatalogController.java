@@ -17,24 +17,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Tag(name = "Catalog")
 public interface CatalogController {
 
-        @Operation(summary = "查询所有Catalog")
-        @InterFaceMapping(api = "dictionaryApi")
-        @PostMapping(value = "catalogPage")
-        ResultVO catalogPage(@RequestParam("pageNumber") Integer pageNumber);
+    @Operation(summary = "查询所有Catalog")
+    @InterFaceMapping(api = "dictionaryApi")
+    @PostMapping(value = "catalogPage")
+    ResultVO catalogPage(@RequestParam("pageNumber") Integer pageNumber);
 
-        @Operation(summary = "保存Catalog")
-        @InterFaceMapping(api = "dictionaryApi")
-        @PostMapping(value = "catalogSave")
-        ResultVO catalogSave(@RequestBody CatalogPO po);
+    @Operation(summary = "保存Catalog")
+    @InterFaceMapping(api = "dictionaryApi")
+    @PostMapping(value = "catalogSave")
+    ResultVO catalogSave(@RequestBody CatalogPO po);
 
-        @Operation(summary = "删除Catalog")
-        @InterFaceMapping(api = "dictionaryApi")
-        @PostMapping(value = "catalogDelete")
-        void catalogDelete(@RequestParam("id") String id);
+    @Operation(summary = "删除Catalog")
+    @InterFaceMapping(api = "dictionaryApi")
+    @PostMapping(value = "catalogDelete")
+    void catalogDelete(@RequestParam("id") String id);
 
-        @Operation(summary = "根据ID查询Catalog")
-        @InterFaceMapping(api = "dictionaryApi")
-        @PostMapping(value = "findCatalogById")
-        ResultVO findCatalogById(@RequestParam("id") String id);
+    @Operation(summary = "根据ID查询Catalog")
+    @InterFaceMapping(api = "dictionaryApi")
+    @PostMapping(value = "findCatalogById")
+    ResultVO findCatalogById(@RequestParam("id") String id);
 
 }

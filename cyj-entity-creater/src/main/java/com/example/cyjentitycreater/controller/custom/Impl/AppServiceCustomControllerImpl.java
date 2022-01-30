@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "entityCreateApi")
 public class AppServiceCustomControllerImpl implements AppServiceCustomController {
 
-        @Override
-        public ResultVO createAppFile(CreateVO createVO) {
-                return null;
-        }
+    @Override
+    public ResultVO createAppFile(CreateVO createVO) {
+        return null;
+    }
 }

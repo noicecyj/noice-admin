@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import pageStore from '@/pages/EntityName/store';
 
 const formItemLayout = {
@@ -12,7 +12,7 @@ const formItemLayout = {
 };
 
 function CustomEntity(props) {
-  const { value, index, record } = props;
+  const {value, index, record} = props;
   const [customEntityState, customEntityDispatchers] = pageStore.useModel('customEntity');
 
   useEffect(() => {

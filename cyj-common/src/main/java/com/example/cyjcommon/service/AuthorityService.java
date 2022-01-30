@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface AuthorityService {
 
-        List<AuthorityPO> findRoleAndAuthority();
+    List<AuthorityPO> findRoleAndAuthority();
 
-        void InterFaceMethod(AuthorityDTO dto);
+    void InterFaceMethod(AuthorityDTO dto);
 }

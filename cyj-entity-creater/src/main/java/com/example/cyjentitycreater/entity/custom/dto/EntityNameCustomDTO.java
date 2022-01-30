@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Data
 public class EntityNameCustomDTO implements Serializable {
 
-        private String id;
+    private String id;
 
 
 }

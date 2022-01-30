@@ -11,11 +11,11 @@ import org.springframework.data.domain.Page;
  */
 public interface CatalogCustomService {
 
-        @Operation(summary = "根据名称和代号进行模糊查询")
-        Page<CatalogPO> findAllByCatalogNameContainsOrCatalogValueContains(String catalogName,
-                                                                           String catalogValue,
-                                                                           Integer pageNumber,
-                                                                           Integer pageSize,
-                                                                           String sortCode);
+    @Operation(summary = "根据名称和代号进行模糊查询")
+    Page<CatalogPO> findAllByCatalogNameContainsOrCatalogValueContains(String catalogName,
+                                                                       String catalogValue,
+                                                                       Integer pageNumber,
+                                                                       Integer pageSize,
+                                                                       String sortCode);
 
 }

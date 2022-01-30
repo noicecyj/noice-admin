@@ -20,27 +20,27 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class)
 public class AuthorityServiceImpl extends BaseService implements AuthorityService {
 
-        private AuthorityDao authorityDao;
+    private AuthorityDao authorityDao;
 
-        @Autowired
-        public void setAuthorityDao(AuthorityDao authorityDao) {
-                this.authorityDao = authorityDao;
-        }
+    @Autowired
+    public void setAuthorityDao(AuthorityDao authorityDao) {
+        this.authorityDao = authorityDao;
+    }
 
-        @Override
-        public List<AuthorityPO> findRoleAndAuthority() {
-                return authorityDao.findAllByStatusEquals(1);
-        }
+    @Override
+    public List<AuthorityPO> findRoleAndAuthority() {
+        return authorityDao.findAllByStatusEquals(1);
+    }
 
-        @Override
-        public void InterFaceMethod(AuthorityDTO dto) {
-                AuthorityPO po = authorityDao.findByPathAndName(dto.getPath(), dto.getName());
-                if (po == null) {
-                        AuthorityPO insertPo = new AuthorityPO();
-                        VoPoConverter.copyProperties(dto, insertPo);
-                        insertPo.setSortCode("0010");
-                        authorityDao.save(insertPo);
-                }
+    @Override
+    public void InterFaceMethod(AuthorityDTO dto) {
+        AuthorityPO po = authorityDao.findByPathAndName(dto.getPath(), dto.getName());
+        if (po == null) {
+            AuthorityPO insertPo = new AuthorityPO();
+            VoPoConverter.copyProperties(dto, insertPo);
+            insertPo.setSortCode("0010");
+            authorityDao.save(insertPo);
         }
+    }
 
 }

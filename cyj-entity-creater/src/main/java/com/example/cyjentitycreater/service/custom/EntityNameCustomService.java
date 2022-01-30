@@ -13,12 +13,12 @@ import java.util.List;
  */
 public interface EntityNameCustomService {
 
-        List<EntityNamePO> findListByPid(String id);
+    List<EntityNamePO> findListByPid(String id);
 
-        void generateJavaFile(String id) throws IOException;
+    void generateJavaFile(String id) throws IOException;
 
-        void createComponentFile(String id);
+    void createComponentFile(String id);
 
-        JSONObject findDataTableAndFormByName(String entityCode);
+    JSONObject findDataTableAndFormByName(String entityCode);
 
 }

@@ -13,12 +13,12 @@ import java.io.Serializable;
 @Data
 public class AppServiceCustomDTO implements Serializable {
 
-        private String id;
-        private String name;
-        private String appApi;
-        private String appPort;
-        private String appPath;
-        private String sortCode;
-        private Integer pageNumber;
+    private String id;
+    private String name;
+    private String appApi;
+    private String appPort;
+    private String appPath;
+    private String sortCode;
+    private Integer pageNumber;
 
 }

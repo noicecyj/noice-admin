@@ -21,50 +21,50 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class)
 public class EntityServiceImpl extends BaseService implements EntityService {
 
-        private EntityDao entityDao;
+    private EntityDao entityDao;
 
-        @Autowired
-        public void setEntityDao(EntityDao entityDao) {
-                this.entityDao = entityDao;
-        }
+    @Autowired
+    public void setEntityDao(EntityDao entityDao) {
+        this.entityDao = entityDao;
+    }
 
-        @Override
-        public EntityPO addOne(EntityPO po) {
-                return entityDao.save(po);
-        }
+    @Override
+    public EntityPO addOne(EntityPO po) {
+        return entityDao.save(po);
+    }
 
-        @Override
-        public void deleteOne(String id) {
-                entityDao.deleteById(id);
-        }
+    @Override
+    public void deleteOne(String id) {
+        entityDao.deleteById(id);
+    }
 
-        @Override
-        public EntityPO updateOne(EntityPO po) {
-                return entityDao.saveAndFlush(po);
-        }
+    @Override
+    public EntityPO updateOne(EntityPO po) {
+        return entityDao.saveAndFlush(po);
+    }
 
-        @Override
-        public QueryResults<EntityPO> entityPage(Integer pageNumber, String pid) {
-                return queryFactory
-                        .selectFrom(QEntityPO.entityPO)
-                        .where(QEntityPO.entityPO.pid.eq(pid).and(QEntityPO.entityPO.sortCode.isNotNull()))
-                        .offset((pageNumber - 1) * 10L)
-                        .orderBy(QEntityPO.entityPO.sortCode.asc())
-                        .limit(10)
-                        .fetchResults();
-        }
+    @Override
+    public QueryResults<EntityPO> entityPage(Integer pageNumber, String pid) {
+        return queryFactory
+                .selectFrom(QEntityPO.entityPO)
+                .where(QEntityPO.entityPO.pid.eq(pid).and(QEntityPO.entityPO.sortCode.isNotNull()))
+                .offset((pageNumber - 1) * 10L)
+                .orderBy(QEntityPO.entityPO.sortCode.asc())
+                .limit(10)
+                .fetchResults();
+    }
 
-        @Override
-        public EntityPO findOneById(String id) {
-                return entityDao.findById(id).orElse(null);
-        }
+    @Override
+    public EntityPO findOneById(String id) {
+        return entityDao.findById(id).orElse(null);
+    }
 
-        @Override
-        public List<EntityPO> findListByPid(String id) {
-                return queryFactory
-                        .selectFrom(QEntityPO.entityPO)
-                        .where(QEntityPO.entityPO.pid.eq(id))
-                        .fetch();
-        }
+    @Override
+    public List<EntityPO> findListByPid(String id) {
+        return queryFactory
+                .selectFrom(QEntityPO.entityPO)
+                .where(QEntityPO.entityPO.pid.eq(id))
+                .fetch();
+    }
 
 }

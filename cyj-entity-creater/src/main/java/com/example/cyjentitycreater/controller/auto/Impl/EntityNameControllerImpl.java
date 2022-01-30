@@ -19,34 +19,34 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "entityCreateApi")
 public class EntityNameControllerImpl implements EntityNameController {
 
-        private EntityNameService entityNameService;
+    private EntityNameService entityNameService;
 
-        @Autowired
-        public void setEntityNameService(EntityNameService entityNameService) {
-                this.entityNameService = entityNameService;
-        }
+    @Autowired
+    public void setEntityNameService(EntityNameService entityNameService) {
+        this.entityNameService = entityNameService;
+    }
 
-        @Override
-        public ResultVO entityNameSave(EntityNamePO po) {
-                if (po.getId() == null) {
-                        return ResultVO.success(entityNameService.addOne(po));
-                }
-                return ResultVO.success(entityNameService.updateOne(po));
+    @Override
+    public ResultVO entityNameSave(EntityNamePO po) {
+        if (po.getId() == null) {
+            return ResultVO.success(entityNameService.addOne(po));
         }
+        return ResultVO.success(entityNameService.updateOne(po));
+    }
 
-        @Override
-        public ResultVO entityNamePage(Integer pageNumber) {
-                return ResultVO.success(entityNameService.entityNamePage(pageNumber));
-        }
+    @Override
+    public ResultVO entityNamePage(Integer pageNumber) {
+        return ResultVO.success(entityNameService.entityNamePage(pageNumber));
+    }
 
-        @Override
-        public void entityNameDelete(String id) {
-                entityNameService.deleteOne(id);
-        }
+    @Override
+    public void entityNameDelete(String id) {
+        entityNameService.deleteOne(id);
+    }
 
-        @Override
-        public ResultVO findEntityNameById(String id) {
-                return ResultVO.success(entityNameService.findOneById(id));
-        }
+    @Override
+    public ResultVO findEntityNameById(String id) {
+        return ResultVO.success(entityNameService.findOneById(id));
+    }
 
 }

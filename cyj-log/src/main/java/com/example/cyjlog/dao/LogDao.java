@@ -12,12 +12,12 @@ import java.util.List;
  */
 public interface LogDao extends JpaRepository<LogPO, String> {
 
-        /**
-         * 根据端口查询日志
-         *
-         * @param port 端口
-         * @return 日志数据
-         */
-        List<LogPO> findAllByAppPortOrderByCreateDate(String port);
+    /**
+     * 根据端口查询日志
+     *
+     * @param port 端口
+     * @return 日志数据
+     */
+    List<LogPO> findAllByAppPortOrderByCreateDate(String port);
 
 }

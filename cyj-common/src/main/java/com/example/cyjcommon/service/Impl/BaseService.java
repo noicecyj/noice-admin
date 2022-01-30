@@ -22,72 +22,71 @@ import java.io.IOException;
 @Service
 public class BaseService {
 
-        private final Logger logger = LoggerFactory.getLogger(BaseService.class);
+    private final Logger logger = LoggerFactory.getLogger(BaseService.class);
 
-        @PersistenceContext
-        protected EntityManager entityManager;
+    @PersistenceContext
+    protected EntityManager entityManager;
+    protected JPAQueryFactory queryFactory;
 
-        @Autowired
-        public void setEntityManager(EntityManager entityManager) {
-                this.entityManager = entityManager;
+    @Autowired
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
+    @PostConstruct
+    public void init() {
+        queryFactory = new JPAQueryFactory(entityManager);
+    }
+
+    /**
+     * 生成文件
+     *
+     * @param path   路径
+     * @param result 内容
+     */
+    public void createJavaFile(String path, String[] result, boolean reWrite) throws IOException {
+        File file = new File(path);
+        File file2 = new File(path + "/" + result[1]);
+        //如果文件不存在，创建一个文件
+        if (file.mkdirs()) {
+            logger.info("生成路径文件夹");
         }
-
-        protected JPAQueryFactory queryFactory;
-
-        @PostConstruct
-        public void init() {
-                queryFactory = new JPAQueryFactory(entityManager);
+        if (file2.createNewFile()) {
+            logger.info("生成文件,路径为：{}", path + "/" + result[1]);
         }
-
-        /**
-         * 生成文件
-         *
-         * @param path   路径
-         * @param result 内容
-         */
-        public void createJavaFile(String path, String[] result, boolean reWrite) throws IOException {
-                File file = new File(path);
-                File file2 = new File(path + "/" + result[1]);
-                //如果文件不存在，创建一个文件
-                if (file.mkdirs()) {
-                        logger.info("生成路径文件夹");
-                }
-                if (file2.createNewFile()) {
-                        logger.info("生成文件,路径为：{}", path + "/" + result[1]);
-                }
-                if (reWrite) {
-                        FileWriter fw = null;
-                        BufferedWriter bw = null;
-                        try {
-                                fw = new FileWriter(file2);
-                                bw = new BufferedWriter(fw);
-                                bw.write(result[0]);
-                        } catch (IOException e) {
-                                e.printStackTrace();
-                        } finally {
-                                assert bw != null;
-                                bw.close();
-                                fw.close();
-                        }
-                }
+        if (reWrite) {
+            FileWriter fw = null;
+            BufferedWriter bw = null;
+            try {
+                fw = new FileWriter(file2);
+                bw = new BufferedWriter(fw);
+                bw.write(result[0]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                assert bw != null;
+                bw.close();
+                fw.close();
+            }
         }
+    }
 
-        public void createJavaFile(String path, String[] result) throws IOException {
-                createJavaFile(path, result, true);
-        }
+    public void createJavaFile(String path, String[] result) throws IOException {
+        createJavaFile(path, result, true);
+    }
 
-        /**
-         * 生成文件夹
-         *
-         * @param path 路径
-         */
-        public void createJavaFile(String path) {
-                File file = new File(path);
-                if (!file.exists()) {
-                        if (file.mkdirs()) {
-                                logger.info("生成文件夹,路径为：{}", path);
-                        }
-                }
+    /**
+     * 生成文件夹
+     *
+     * @param path 路径
+     */
+    public void createJavaFile(String path) {
+        File file = new File(path);
+        if (!file.exists()) {
+            if (file.mkdirs()) {
+                logger.info("生成文件夹,路径为：{}", path);
+            }
         }
+    }
 
 }

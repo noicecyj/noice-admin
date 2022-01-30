@@ -15,12 +15,12 @@ import java.util.Set;
 @Data
 public class RoleDTO implements Serializable {
 
-        private String id;
-        private String name;
-        private String value;
-        private String description;
-        private Integer status;
-        private String sortCode;
-        private Set<AuthorityDTO> authority = new HashSet<>();
+    private String id;
+    private String name;
+    private String value;
+    private String description;
+    private Integer status;
+    private String sortCode;
+    private Set<AuthorityDTO> authority = new HashSet<>();
 
 }

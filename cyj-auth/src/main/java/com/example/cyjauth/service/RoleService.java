@@ -11,19 +11,19 @@ import org.springframework.data.domain.Page;
  */
 public interface RoleService {
 
-        @Operation(summary = "添加实体")
-        RolePO addOne(RolePO po);
+    @Operation(summary = "添加实体")
+    RolePO addOne(RolePO po);
 
-        @Operation(summary = "删除实体")
-        void deleteOne(String id);
+    @Operation(summary = "删除实体")
+    void deleteOne(String id);
 
-        @Operation(summary = "更新实体")
-        RolePO updateOne(RolePO po);
+    @Operation(summary = "更新实体")
+    RolePO updateOne(RolePO po);
 
-        @Operation(summary = "查找所有实体(分页排序)")
-        Page<RolePO> findAll(Integer pageNumber, Integer pageSize, String sortCode);
+    @Operation(summary = "查找所有实体(分页排序)")
+    Page<RolePO> findAll(Integer pageNumber, Integer pageSize, String sortCode);
 
-        @Operation(summary = "查找实体")
-        RolePO findOneById(String id);
+    @Operation(summary = "查找实体")
+    RolePO findOneById(String id);
 
 }

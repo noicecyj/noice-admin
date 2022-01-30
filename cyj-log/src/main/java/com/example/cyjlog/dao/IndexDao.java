@@ -10,12 +10,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface IndexDao extends JpaRepository<ServerPO, String> {
 
-        /**
-         * 根据名称查询服务
-         *
-         * @param name 名称
-         * @return 服务
-         */
-        ServerPO findByServerName(String name);
+    /**
+     * 根据名称查询服务
+     *
+     * @param name 名称
+     * @return 服务
+     */
+    ServerPO findByServerName(String name);
 
 }

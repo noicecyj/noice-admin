@@ -22,32 +22,32 @@ import java.io.IOException;
 @RequestMapping(value = "entityCreateApi")
 public class EntityNameCustomControllerImpl implements EntityNameCustomController {
 
-        private EntityNameCustomService entityNameCustomService;
+    private EntityNameCustomService entityNameCustomService;
 
-        @Autowired
-        public void setEntityNameCustomService(EntityNameCustomService entityNameCustomService) {
-                this.entityNameCustomService = entityNameCustomService;
-        }
+    @Autowired
+    public void setEntityNameCustomService(EntityNameCustomService entityNameCustomService) {
+        this.entityNameCustomService = entityNameCustomService;
+    }
 
-        @Override
-        public ResultVO createEntity(@RequestBody CreateVO createVO) {
-                try {
-                        entityNameCustomService.generateJavaFile(createVO.getId());
-                } catch (IOException e) {
-                        e.printStackTrace();
-                }
-                return ResultVO.success();
+    @Override
+    public ResultVO createEntity(@RequestBody CreateVO createVO) {
+        try {
+            entityNameCustomService.generateJavaFile(createVO.getId());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return ResultVO.success();
+    }
 
-        @Override
-        public ResultVO createComponentFile(@RequestBody CreateVO createVO) {
-                entityNameCustomService.createComponentFile(createVO.getId());
-                return ResultVO.success();
-        }
+    @Override
+    public ResultVO createComponentFile(@RequestBody CreateVO createVO) {
+        entityNameCustomService.createComponentFile(createVO.getId());
+        return ResultVO.success();
+    }
 
-        @Override
-        public ResultVO findDataTableAndFormByName(String entityCode) {
-                return ResultVO.success(entityNameCustomService.findDataTableAndFormByName(entityCode));
-        }
+    @Override
+    public ResultVO findDataTableAndFormByName(String entityCode) {
+        return ResultVO.success(entityNameCustomService.findDataTableAndFormByName(entityCode));
+    }
 
 }

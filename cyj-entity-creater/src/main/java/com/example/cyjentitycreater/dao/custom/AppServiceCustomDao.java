@@ -10,6 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface AppServiceCustomDao extends JpaRepository<AppServicePO, String> {
 
-        AppServicePO findAppServicePOByName(String name);
+    AppServicePO findAppServicePOByName(String name);
 
 }

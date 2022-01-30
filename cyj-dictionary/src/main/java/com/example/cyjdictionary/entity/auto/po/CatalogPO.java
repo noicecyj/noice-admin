@@ -29,34 +29,34 @@ import java.util.Objects;
 @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
 public class CatalogPO implements Serializable {
 
-        static final String T_CATALOG = "t_catalog";
+    static final String T_CATALOG = "t_catalog";
 
-        @Id
-        @GeneratedValue(generator = "uuid2")
-        @Column(name = "id", length = 36)
-        private String id;
-        @Column(name = "catalog_name")
-        private String catalogName;
-        @Column(name = "description")
-        private String description;
-        @Column(name = "catalog_value")
-        private String catalogValue;
-        @Column(name = "status")
-        private String status;
-        @Column(name = "sort_code")
-        private String sortCode;
+    @Id
+    @GeneratedValue(generator = "uuid2")
+    @Column(name = "id", length = 36)
+    private String id;
+    @Column(name = "catalog_name")
+    private String catalogName;
+    @Column(name = "description")
+    private String description;
+    @Column(name = "catalog_value")
+    private String catalogValue;
+    @Column(name = "status")
+    private String status;
+    @Column(name = "sort_code")
+    private String sortCode;
 
-        @Override
-        public boolean equals(Object o) {
-                if (this == o) return true;
-                if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-                CatalogPO that = (CatalogPO) o;
-                return Objects.equals(id, that.id);
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        CatalogPO that = (CatalogPO) o;
+        return Objects.equals(id, that.id);
+    }
 
-        @Override
-        public int hashCode() {
-                return 0;
-        }
+    @Override
+    public int hashCode() {
+        return 0;
+    }
 
 }

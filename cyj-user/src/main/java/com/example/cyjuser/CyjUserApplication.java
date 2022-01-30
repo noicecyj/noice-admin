@@ -22,15 +22,15 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableZuulProxy
 @EnableJpaRepositories(value = "com.example")
 @EntityScan(value = "com.example")
-@ComponentScan(value="com.example")
+@ComponentScan(value = "com.example")
 public class CyjUserApplication {
 
-        public static void main(String[] args) {
-                SpringApplication springApplication = new SpringApplication(CyjUserApplication.class);
-                ConfigurableApplicationContext configurableApplicationContext = springApplication.run(args);
-                // 将Context设置到SpringUtil中
-                SpringUtil.setApplicationContext(configurableApplicationContext);
-        }
+    public static void main(String[] args) {
+        SpringApplication springApplication = new SpringApplication(CyjUserApplication.class);
+        ConfigurableApplicationContext configurableApplicationContext = springApplication.run(args);
+        // 将Context设置到SpringUtil中
+        SpringUtil.setApplicationContext(configurableApplicationContext);
+    }
 
 
 }

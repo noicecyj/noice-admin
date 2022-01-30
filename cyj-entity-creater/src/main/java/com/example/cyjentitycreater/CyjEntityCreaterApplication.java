@@ -21,7 +21,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan(value = "com.example")
 public class CyjEntityCreaterApplication {
 
-        public static void main(String[] args) {
-                SpringApplication.run(CyjEntityCreaterApplication.class, args);
-        }
+    public static void main(String[] args) {
+        SpringApplication.run(CyjEntityCreaterApplication.class, args);
+    }
 }

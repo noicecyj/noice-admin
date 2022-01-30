@@ -12,8 +12,8 @@ import java.util.List;
  */
 public interface AuthorityDao extends JpaRepository<AuthorityPO, String> {
 
-        List<AuthorityPO> findAllByStatusEquals(Integer status);
+    List<AuthorityPO> findAllByStatusEquals(Integer status);
 
-        AuthorityPO findByPathAndName(String path, String name);
+    AuthorityPO findByPathAndName(String path, String name);
 
 }

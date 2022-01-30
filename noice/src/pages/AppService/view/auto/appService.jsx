@@ -1,12 +1,12 @@
-import { ResponsiveGrid, Button, Dialog } from '@alifd/next';
-import React, { useEffect } from 'react';
+import {Button, Dialog, ResponsiveGrid} from '@alifd/next';
+import React, {useEffect} from 'react';
 import pageStore from '@/pages/AppService/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
 import styles from '@/pages/AppService/index.module.scss';
 import AppServiceCustom from '@/pages/AppService/view/custom/appService';
 
-const { Cell } = ResponsiveGrid;
+const {Cell} = ResponsiveGrid;
 
 function AppService() {
   const [appServiceState, appServiceDispatchers] = pageStore.useModel('appService');
@@ -18,8 +18,8 @@ function AppService() {
   const appServiceRender = (value, index, record) => {
     return (
       <div className={styles.opt}>
-        <Button type="primary" size="small" onClick={() => appServiceDispatchers.appServiceEdit(record)} > 编辑 </Button>
-        <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning > 删除 </Button>
+        <Button type="primary" size="small" onClick={() => appServiceDispatchers.appServiceEdit(record)}> 编辑 </Button>
+        <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning> 删除 </Button>
       </div>
     );
   };
@@ -27,7 +27,7 @@ function AppService() {
   const appServiceCustomRender = (value, index, record) => {
     return (
       <div className={styles.opt}>
-        <AppServiceCustom value={value} index={index} record={record} />
+        <AppServiceCustom value={value} index={index} record={record}/>
       </div>
     );
   };
@@ -63,7 +63,7 @@ function AppService() {
             rowSelection={{
               mode: 'single',
               onSelect: (selected, record) => {
-                appServiceDispatchers.setState({ appServiceId: record.id });
+                appServiceDispatchers.setState({appServiceId: record.id});
               },
               selectedRowKeys: [appServiceState.appServiceId],
             }}
@@ -76,7 +76,7 @@ function AppService() {
       <DataFormTemple
         title={appServiceState.appServiceTitle}
         visibleDialog={appServiceState.appServiceVisible}
-        onClose={() => appServiceDispatchers.setState({ appServiceVisible: false })}
+        onClose={() => appServiceDispatchers.setState({appServiceVisible: false})}
         items={appServiceState.appServiceForm}
         dispatchers={(value) => appServiceDispatchers.setDataForm(value)}
         onOk={() => appServiceDispatchers.appServiceSave({

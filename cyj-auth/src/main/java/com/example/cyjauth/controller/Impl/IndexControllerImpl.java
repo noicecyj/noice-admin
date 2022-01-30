@@ -27,43 +27,43 @@ import java.util.Optional;
 @RequestMapping(value = "authApi")
 public class IndexControllerImpl implements IndexController {
 
-        private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        private StringRedisTemplate stringRedisTemplate;
-        private UserDao userDao;
+    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    private StringRedisTemplate stringRedisTemplate;
+    private UserDao userDao;
 
-        @Autowired
-        public void setUserDao(UserDao userDao) {
-                this.userDao = userDao;
-        }
+    @Autowired
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
-        @Autowired
-        public void setStringRedisTemplate(StringRedisTemplate stringRedisTemplate) {
-                this.stringRedisTemplate = stringRedisTemplate;
-        }
+    @Autowired
+    public void setStringRedisTemplate(StringRedisTemplate stringRedisTemplate) {
+        this.stringRedisTemplate = stringRedisTemplate;
+    }
 
-        @Override
-        public String exit(@RequestParam("userName") String userName) {
-                String token = stringRedisTemplate.opsForValue().get("token_" + userName);
-                if (StringUtils.isBlank(token)) {
-                        return ResultVO.failure(ResultCode.UNAUTHORIZED).getMsg();
-                }
-                stringRedisTemplate.delete("token_" + userName);
-                return ResultVO.success().getMsg();
+    @Override
+    public String exit(@RequestParam("userName") String userName) {
+        String token = stringRedisTemplate.opsForValue().get("token_" + userName);
+        if (StringUtils.isBlank(token)) {
+            return ResultVO.failure(ResultCode.UNAUTHORIZED).getMsg();
         }
+        stringRedisTemplate.delete("token_" + userName);
+        return ResultVO.success().getMsg();
+    }
 
-        @Override
-        public Boolean setPassword(PasswordVO passwordVO) {
-                if (passwordVO.getCheckPassword().equals(passwordVO.getNewPassword())) {
-                        Optional<UserPO> po = userDao.findById(passwordVO.getId());
-                        if (po.isPresent()) {
-                                UserPO user = po.get();
-                                String hash = encoder.encode(user.getPassword());
-                                user.setPassword(hash);
-                                userDao.save(user);
-                                return true;
-                        }
-                }
-                return false;
+    @Override
+    public Boolean setPassword(PasswordVO passwordVO) {
+        if (passwordVO.getCheckPassword().equals(passwordVO.getNewPassword())) {
+            Optional<UserPO> po = userDao.findById(passwordVO.getId());
+            if (po.isPresent()) {
+                UserPO user = po.get();
+                String hash = encoder.encode(user.getPassword());
+                user.setPassword(hash);
+                userDao.save(user);
+                return true;
+            }
         }
+        return false;
+    }
 
 }

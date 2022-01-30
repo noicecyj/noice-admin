@@ -22,36 +22,36 @@ import java.util.Map;
 @RequestMapping(value = "authApi")
 public class RoleControllerImpl implements RoleController {
 
-        private RoleServiceImpl roleService;
+    private RoleServiceImpl roleService;
 
-        @Autowired
-        public void setRoleService(RoleServiceImpl roleService) {
-                this.roleService = roleService;
-        }
+    @Autowired
+    public void setRoleService(RoleServiceImpl roleService) {
+        this.roleService = roleService;
+    }
 
-        @Override
-        public ResultVO roleFindAll(Integer pageNumber, Integer pageSize, String sortCode) {
-                return ResultVO.success(roleService.findAll(pageNumber - 1, pageSize, sortCode));
-        }
+    @Override
+    public ResultVO roleFindAll(Integer pageNumber, Integer pageSize, String sortCode) {
+        return ResultVO.success(roleService.findAll(pageNumber - 1, pageSize, sortCode));
+    }
 
-        @Override
-        public ResultVO roleSave(Map<String, Object> vo) {
-                RolePO po = new RolePO();
-                VoPoConverter.copyProperties(vo, po);
-                if (po.getId() == null) {
-                        return ResultVO.success(roleService.addOne(po));
-                }
-                return ResultVO.success(roleService.updateOne(po));
+    @Override
+    public ResultVO roleSave(Map<String, Object> vo) {
+        RolePO po = new RolePO();
+        VoPoConverter.copyProperties(vo, po);
+        if (po.getId() == null) {
+            return ResultVO.success(roleService.addOne(po));
         }
+        return ResultVO.success(roleService.updateOne(po));
+    }
 
-        @Override
-        public void roleDelete(String id) {
-                roleService.deleteOne(id);
-        }
+    @Override
+    public void roleDelete(String id) {
+        roleService.deleteOne(id);
+    }
 
-        @Override
-        public ResultVO findRoleById(String id) {
-                return ResultVO.success(roleService.findOneById(id));
-        }
+    @Override
+    public ResultVO findRoleById(String id) {
+        return ResultVO.success(roleService.findOneById(id));
+    }
 
 }

@@ -19,21 +19,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "dictionaryApi")
 public class CatalogCustomControllerImpl implements CatalogCustomController {
 
-        private CatalogCustomService catalogCustomService;
+    private CatalogCustomService catalogCustomService;
 
-        @Autowired
-        public void setCatalogCustomService(CatalogCustomService catalogCustomService) {
-                this.catalogCustomService = catalogCustomService;
-        }
+    @Autowired
+    public void setCatalogCustomService(CatalogCustomService catalogCustomService) {
+        this.catalogCustomService = catalogCustomService;
+    }
 
-        @Override
-        public ResultVO findAllByCatalogNameContainsOrCatalogValueContains(@RequestParam("catalogName") String catalogName,
-                                                                           @RequestParam("catalogValue") String catalogValue,
-                                                                           @RequestParam("pageNumber") Integer pageNumber,
-                                                                           @RequestParam("pageSize") Integer pageSize,
-                                                                           @RequestParam("sortCode") String sortCode) {
-                return ResultVO.success(catalogCustomService
-                        .findAllByCatalogNameContainsOrCatalogValueContains(catalogName, catalogValue, pageNumber - 1, pageSize, sortCode));
-        }
+    @Override
+    public ResultVO findAllByCatalogNameContainsOrCatalogValueContains(@RequestParam("catalogName") String catalogName,
+                                                                       @RequestParam("catalogValue") String catalogValue,
+                                                                       @RequestParam("pageNumber") Integer pageNumber,
+                                                                       @RequestParam("pageSize") Integer pageSize,
+                                                                       @RequestParam("sortCode") String sortCode) {
+        return ResultVO.success(catalogCustomService
+                .findAllByCatalogNameContainsOrCatalogValueContains(catalogName, catalogValue, pageNumber - 1, pageSize, sortCode));
+    }
 
 }

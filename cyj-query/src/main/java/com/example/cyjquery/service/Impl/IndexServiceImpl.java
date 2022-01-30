@@ -19,35 +19,35 @@ import java.util.Map;
 @Service
 public class IndexServiceImpl implements IndexService {
 
-        @PersistenceContext
-        EntityManager em;
+    @PersistenceContext
+    EntityManager em;
 
-        @Override
-        public List<Map<String, Object>> queryBySql(String sql) {
-                Query query = em.createNativeQuery(sql);
-                @SuppressWarnings("unchecked")
-                List<Map<String, Object>> list = query.unwrap(NativeQueryImpl.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).list();
-                return list;
-        }
+    @Override
+    public List<Map<String, Object>> queryBySql(String sql) {
+        Query query = em.createNativeQuery(sql);
+        @SuppressWarnings("unchecked")
+        List<Map<String, Object>> list = query.unwrap(NativeQueryImpl.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).list();
+        return list;
+    }
 
-        @Override
-        public void excuteSql(String sql) {
-                Query query = em.createNativeQuery(sql);
-                query.executeUpdate();
-        }
+    @Override
+    public void excuteSql(String sql) {
+        Query query = em.createNativeQuery(sql);
+        query.executeUpdate();
+    }
 
-        @Override
-        public List<Map<String, Object>> findAllSql(String tableName) {
-                String sql = "select * from " + tableName + " where 1=1";
-                return queryBySql(sql);
-        }
+    @Override
+    public List<Map<String, Object>> findAllSql(String tableName) {
+        String sql = "select * from " + tableName + " where 1=1";
+        return queryBySql(sql);
+    }
 
-        @Override
-        public Object findSqlById(String tableName, String id) {
-                String sql = String.format("select * from %s where id = ?", tableName);
-                Query query = em.createNativeQuery(sql);
-                query.setParameter(1, id);
-                return query.unwrap(NativeQueryImpl.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).getSingleResult();
-        }
+    @Override
+    public Object findSqlById(String tableName, String id) {
+        String sql = String.format("select * from %s where id = ?", tableName);
+        Query query = em.createNativeQuery(sql);
+        query.setParameter(1, id);
+        return query.unwrap(NativeQueryImpl.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).getSingleResult();
+    }
 
 }

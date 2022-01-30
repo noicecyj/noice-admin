@@ -29,41 +29,41 @@ import java.util.Objects;
 @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
 public class AuthorityPO implements Serializable {
 
-        static final String T_AUTHORITY = "t_authority";
+    static final String T_AUTHORITY = "t_authority";
 
-        @Id
-        @GeneratedValue(generator = "uuid2")
-        @Column(name = "id", length = 36)
-        private String id;
-        @Column(name = "name")
-        private String name;
-        @Column(name = "path")
-        private String path;
-        @Column(name = "status")
-        private Integer status;
-        @Column(name = "method")
-        private String method;
-        @Column(name = "description")
-        private String description;
-        @Column(name = "app_api")
-        private String appApi;
-        @Column(name = "app_service")
-        private String appService;
-        @Column(name = "version")
-        private String version;
-        @Column(name = "sort_code")
-        private String sortCode;
+    @Id
+    @GeneratedValue(generator = "uuid2")
+    @Column(name = "id", length = 36)
+    private String id;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "path")
+    private String path;
+    @Column(name = "status")
+    private Integer status;
+    @Column(name = "method")
+    private String method;
+    @Column(name = "description")
+    private String description;
+    @Column(name = "app_api")
+    private String appApi;
+    @Column(name = "app_service")
+    private String appService;
+    @Column(name = "version")
+    private String version;
+    @Column(name = "sort_code")
+    private String sortCode;
 
-        @Override
-        public boolean equals(Object o) {
-                if (this == o) return true;
-                if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-                AuthorityPO that = (AuthorityPO) o;
-                return Objects.equals(id, that.id);
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        AuthorityPO that = (AuthorityPO) o;
+        return Objects.equals(id, that.id);
+    }
 
-        @Override
-        public int hashCode() {
-                return 0;
-        }
+    @Override
+    public int hashCode() {
+        return 0;
+    }
 }

@@ -11,17 +11,17 @@ import org.springframework.security.core.GrantedAuthority;
 @Data
 public class AuthGrantedAuthority implements GrantedAuthority {
 
-        private String url;
-        private String method;
+    private String url;
+    private String method;
 
-        public AuthGrantedAuthority(String url, String method) {
-                this.url = url;
-                this.method = method;
-        }
+    public AuthGrantedAuthority(String url, String method) {
+        this.url = url;
+        this.method = method;
+    }
 
-        @Override
-        public String getAuthority() {
-                return this.url + ";" + this.method;
-        }
+    @Override
+    public String getAuthority() {
+        return this.url + ";" + this.method;
+    }
 
 }

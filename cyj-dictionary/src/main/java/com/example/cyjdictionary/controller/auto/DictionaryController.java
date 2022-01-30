@@ -17,24 +17,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Tag(name = "Dictionary")
 public interface DictionaryController {
 
-        @Operation(summary = "查询所有Dictionary")
-        @InterFaceMapping(api = "dictionaryApi")
-        @PostMapping(value = "dictionaryPage")
-        ResultVO dictionaryPage(@RequestParam("pageNumber") Integer pageNumber, @RequestParam("pid") String pid);
+    @Operation(summary = "查询所有Dictionary")
+    @InterFaceMapping(api = "dictionaryApi")
+    @PostMapping(value = "dictionaryPage")
+    ResultVO dictionaryPage(@RequestParam("pageNumber") Integer pageNumber, @RequestParam("pid") String pid);
 
-        @Operation(summary = "保存Dictionary")
-        @InterFaceMapping(api = "dictionaryApi")
-        @PostMapping(value = "dictionarySave")
-        ResultVO dictionarySave(@RequestBody DictionaryPO po);
+    @Operation(summary = "保存Dictionary")
+    @InterFaceMapping(api = "dictionaryApi")
+    @PostMapping(value = "dictionarySave")
+    ResultVO dictionarySave(@RequestBody DictionaryPO po);
 
-        @Operation(summary = "删除Dictionary")
-        @InterFaceMapping(api = "dictionaryApi")
-        @PostMapping(value = "dictionaryDelete")
-        void dictionaryDelete(@RequestParam("id") String id);
+    @Operation(summary = "删除Dictionary")
+    @InterFaceMapping(api = "dictionaryApi")
+    @PostMapping(value = "dictionaryDelete")
+    void dictionaryDelete(@RequestParam("id") String id);
 
-        @Operation(summary = "根据ID查询Dictionary")
-        @InterFaceMapping(api = "dictionaryApi")
-        @PostMapping(value = "findDictionaryById")
-        ResultVO findDictionaryById(@RequestParam("id") String id);
+    @Operation(summary = "根据ID查询Dictionary")
+    @InterFaceMapping(api = "dictionaryApi")
+    @PostMapping(value = "findDictionaryById")
+    ResultVO findDictionaryById(@RequestParam("id") String id);
 
 }

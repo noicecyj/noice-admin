@@ -9,6 +9,6 @@ import com.example.cyjuser.entity.po.UserPO;
  */
 public interface UserService {
 
-        UserPO findAuthUserByUsername(String username);
+    UserPO findAuthUserByUsername(String username);
 
 }

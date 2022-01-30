@@ -29,34 +29,34 @@ import java.util.Objects;
 @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
 public class DictionaryPO implements Serializable {
 
-        static final String T_DICTIONARY = "t_dictionary";
+    static final String T_DICTIONARY = "t_dictionary";
 
-        @Id
-        @GeneratedValue(generator = "uuid2")
-        @Column(name = "id", length = 36)
-        private String id;
-        @Column(name = "dictionary_name")
-        private String dictionaryName;
-        @Column(name = "dictionary_value")
-        private String dictionaryValue;
-        @Column(name = "pid")
-        private String pid;
-        @Column(name = "status")
-        private String status;
-        @Column(name = "sort_code")
-        private String sortCode;
+    @Id
+    @GeneratedValue(generator = "uuid2")
+    @Column(name = "id", length = 36)
+    private String id;
+    @Column(name = "dictionary_name")
+    private String dictionaryName;
+    @Column(name = "dictionary_value")
+    private String dictionaryValue;
+    @Column(name = "pid")
+    private String pid;
+    @Column(name = "status")
+    private String status;
+    @Column(name = "sort_code")
+    private String sortCode;
 
-        @Override
-        public boolean equals(Object o) {
-                if (this == o) return true;
-                if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-                DictionaryPO that = (DictionaryPO) o;
-                return Objects.equals(id, that.id);
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        DictionaryPO that = (DictionaryPO) o;
+        return Objects.equals(id, that.id);
+    }
 
-        @Override
-        public int hashCode() {
-                return 0;
-        }
+    @Override
+    public int hashCode() {
+        return 0;
+    }
 
 }

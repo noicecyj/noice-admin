@@ -12,10 +12,10 @@ import java.io.Serializable;
 @Data
 public class DictionaryDTO implements Serializable {
 
-        private String id;
-        private String pid;
-        private String dictionaryName;
-        private String dictionaryValue;
-        private String sortCode;
+    private String id;
+    private String pid;
+    private String dictionaryName;
+    private String dictionaryValue;
+    private String sortCode;
 
 }

@@ -1,4 +1,4 @@
-import { runApp } from 'ice';
+import {runApp} from 'ice';
 import cookie from 'react-cookies';
 
 const appConfig = {
@@ -16,7 +16,7 @@ const appConfig = {
           // 发送请求前：可以对 RequestConfig 做一些统一处理
           if (config.url !== '/userApi/v1/login') {
             // eslint-disable-next-line no-param-reassign
-            config.headers = { Authorization: `Bearer ${cookie.load('token')}` };
+            config.headers = {Authorization: `Bearer ${cookie.load('token')}`};
           }
           return config;
         },

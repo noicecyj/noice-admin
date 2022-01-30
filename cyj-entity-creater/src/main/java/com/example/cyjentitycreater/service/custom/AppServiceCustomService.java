@@ -9,6 +9,6 @@ import com.example.cyjentitycreater.entity.auto.po.AppServicePO;
  */
 public interface AppServiceCustomService {
 
-        AppServicePO findOneByName(String name);
+    AppServicePO findOneByName(String name);
 
 }

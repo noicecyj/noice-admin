@@ -1,12 +1,11 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
-import { Table, Box, Pagination, Loading } from '@alifd/next';
+import {Box, Loading, Pagination, Table} from '@alifd/next';
 import styles from './index.module.scss';
 
 function DataTable(props) {
-  const loadingStyle = { width: '100%' };
-  const { items, pageRender, operationRender, dataSource, rowSelection, primaryKey, total, getPage, visibleLoading } = props;
-  console.log(operationRender);
+  const loadingStyle = {width: '100%'};
+  const {items, pageRender, operationRender, dataSource, rowSelection, primaryKey, total, getPage, visibleLoading} = props;
   return (
     <Loading
       tip="加载中..."
@@ -56,7 +55,7 @@ function DataTable(props) {
         align="center"
         justify="space-between"
       >
-        <div className={styles.total}> 共 <span>{total}</span> 条 </div>
+        <div className={styles.total}> 共 <span>{total}</span> 条</div>
         <Pagination
           onChange={(current) => getPage(current)}
           type="simple"

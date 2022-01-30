@@ -12,16 +12,16 @@ import java.util.List;
  */
 public interface EntityService {
 
-        EntityPO addOne(EntityPO po);
+    EntityPO addOne(EntityPO po);
 
-        void deleteOne(String id);
+    void deleteOne(String id);
 
-        EntityPO updateOne(EntityPO po);
+    EntityPO updateOne(EntityPO po);
 
-        QueryResults<EntityPO> entityPage(Integer pageNumber, String pid);
+    QueryResults<EntityPO> entityPage(Integer pageNumber, String pid);
 
-        EntityPO findOneById(String id);
+    EntityPO findOneById(String id);
 
-        List<EntityPO> findListByPid(String id);
+    List<EntityPO> findListByPid(String id);
 
 }

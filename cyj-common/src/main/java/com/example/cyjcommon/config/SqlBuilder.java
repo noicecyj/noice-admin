@@ -7,18 +7,18 @@ package com.example.cyjcommon.config;
  */
 public class SqlBuilder {
 
-        public static String buildInsertSql() {
-                return "INSERT INTO " + "t_server_log" + " (" +
-                        "id" + ", " +
-                        "app_port" + ", " +
-                        "class" + ", " +
-                        "classpath" + ", " +
-                        "method" + ", " +
-                        "thread_name" + ", " +
-                        "msg_level" + ", " +
-                        "msg" + ", " +
-                        "create_date" + ") " +
-                        "VALUES (?, ?, ? ,?, ?, ?, ?, ?, ?)";
-        }
+    public static String buildInsertSql() {
+        return "INSERT INTO " + "t_server_log" + " (" +
+                "id" + ", " +
+                "app_port" + ", " +
+                "class" + ", " +
+                "classpath" + ", " +
+                "method" + ", " +
+                "thread_name" + ", " +
+                "msg_level" + ", " +
+                "msg" + ", " +
+                "create_date" + ") " +
+                "VALUES (?, ?, ? ,?, ?, ?, ?, ?, ?)";
+    }
 
 }

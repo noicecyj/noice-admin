@@ -14,18 +14,18 @@ import java.lang.annotation.Target;
 @Mapping
 public @interface InterFaceMapping {
 
-        String name() default "";
+    String name() default "";
 
-        String path() default "";
+    String path() default "";
 
-        String method() default "";
+    String method() default "";
 
-        String api() default "";
+    String api() default "";
 
-        String service() default "";
+    String service() default "";
 
-        String description() default "";
+    String description() default "";
 
-        String version() default "1.0";
+    String version() default "1.0";
 
 }

@@ -36,37 +36,37 @@ import java.util.Set;
 @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
 public class RolePO implements Serializable {
 
-        static final String T_ROLE = "t_role";
+    static final String T_ROLE = "t_role";
 
-        @Id
-        @GeneratedValue(generator = "uuid2")
-        @Column(name = "id", length = 36)
-        private String id;
-        @Column(name = "name")
-        private String name;
-        @Column(name = "value")
-        private String value;
-        @Column(name = "description")
-        private String description;
-        @Column(name = "status")
-        private Integer status;
-        @Column(name = "sort_code")
-        private String sortCode;
-        @JsonIgnore
-        @ManyToMany(targetEntity = AuthorityPO.class, fetch = FetchType.EAGER)
-        @BatchSize(size = 20)
-        private Set<AuthorityPO> authority = new HashSet<>();
+    @Id
+    @GeneratedValue(generator = "uuid2")
+    @Column(name = "id", length = 36)
+    private String id;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "value")
+    private String value;
+    @Column(name = "description")
+    private String description;
+    @Column(name = "status")
+    private Integer status;
+    @Column(name = "sort_code")
+    private String sortCode;
+    @JsonIgnore
+    @ManyToMany(targetEntity = AuthorityPO.class, fetch = FetchType.EAGER)
+    @BatchSize(size = 20)
+    private Set<AuthorityPO> authority = new HashSet<>();
 
-        @Override
-        public boolean equals(Object o) {
-                if (this == o) return true;
-                if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-                RolePO rolePO = (RolePO) o;
-                return Objects.equals(id, rolePO.id);
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        RolePO rolePO = (RolePO) o;
+        return Objects.equals(id, rolePO.id);
+    }
 
-        @Override
-        public int hashCode() {
-                return 0;
-        }
+    @Override
+    public int hashCode() {
+        return 0;
+    }
 }

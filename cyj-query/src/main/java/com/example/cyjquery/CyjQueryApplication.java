@@ -18,11 +18,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableFeignClients
 @EnableJpaRepositories(value = "com.example")
 @EntityScan(value = "com.example")
-@ComponentScan(value="com.example")
+@ComponentScan(value = "com.example")
 public class CyjQueryApplication {
 
-        public static void main(String[] args) {
-                SpringApplication.run(CyjQueryApplication.class, args);
-        }
+    public static void main(String[] args) {
+        SpringApplication.run(CyjQueryApplication.class, args);
+    }
 
 }

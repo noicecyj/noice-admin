@@ -25,40 +25,40 @@ import java.util.Set;
 @RequestMapping(value = "authApi")
 public class UserControllerImpl implements UserController {
 
-        private UserServiceImpl userService;
+    private UserServiceImpl userService;
 
-        @Autowired
-        public void setUserService(UserServiceImpl userService) {
-                this.userService = userService;
-        }
+    @Autowired
+    public void setUserService(UserServiceImpl userService) {
+        this.userService = userService;
+    }
 
-        @Override
-        public ResultVO userFindAll(Integer pageNumber, Integer pageSize, String sortCode) {
-                return ResultVO.success(userService.findAll(pageNumber - 1, pageSize, sortCode));
-        }
+    @Override
+    public ResultVO userFindAll(Integer pageNumber, Integer pageSize, String sortCode) {
+        return ResultVO.success(userService.findAll(pageNumber - 1, pageSize, sortCode));
+    }
 
-        @Override
-        public ResultVO userSave(Map<String, Object> vo) {
-                UserPO po = userService.findOneById(vo.get("id").toString());
-                Set<RolePO> role = po.getRole();
-                Set<AuthorityPO> authority = po.getAuthority();
-                VoPoConverter.copyProperties(vo, po);
-                po.setRole(role);
-                po.setAuthority(authority);
-                if (po.getId() == null) {
-                        return ResultVO.success(userService.addOne(po));
-                }
-                return ResultVO.success(userService.updateOne(po));
+    @Override
+    public ResultVO userSave(Map<String, Object> vo) {
+        UserPO po = userService.findOneById(vo.get("id").toString());
+        Set<RolePO> role = po.getRole();
+        Set<AuthorityPO> authority = po.getAuthority();
+        VoPoConverter.copyProperties(vo, po);
+        po.setRole(role);
+        po.setAuthority(authority);
+        if (po.getId() == null) {
+            return ResultVO.success(userService.addOne(po));
         }
+        return ResultVO.success(userService.updateOne(po));
+    }
 
-        @Override
-        public void userDelete(String id) {
-                userService.deleteOne(id);
-        }
+    @Override
+    public void userDelete(String id) {
+        userService.deleteOne(id);
+    }
 
-        @Override
-        public ResultVO findUserById(String id) {
-                return ResultVO.success(userService.findOneById(id));
-        }
+    @Override
+    public ResultVO findUserById(String id) {
+        return ResultVO.success(userService.findOneById(id));
+    }
 
 }

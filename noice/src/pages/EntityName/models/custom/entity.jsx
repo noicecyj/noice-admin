@@ -5,13 +5,11 @@ export default {
 
   namespace: 'customEntity',
 
-  state: {
-
-  },
+  state: {},
 
   reducers: {
     setState(prevState, payload) {
-      return { ...prevState, ...payload };
+      return {...prevState, ...payload};
     },
   },
 
@@ -35,14 +33,14 @@ export default {
       customEntityServices.upEntity(data.record.id).then(() => {
         dispatch.entity.entityPage(data.record.pid, data.entityCurrent);
       });
-      const payload = { entityVisible: false };
+      const payload = {entityVisible: false};
       dispatch.entity.setState(payload);
     },
     downEntity(data) {
       customEntityServices.downEntity(data.record.id).then(() => {
         dispatch.entity.entityPage(data.record.pid, data.entityCurrent);
       });
-      const payload = { entityVisible: false };
+      const payload = {entityVisible: false};
       dispatch.entity.setState(payload);
     },
   }),

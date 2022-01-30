@@ -1,12 +1,12 @@
-import { ResponsiveGrid, Button, Dialog } from '@alifd/next';
-import React, { useEffect } from 'react';
+import {Button, Dialog, ResponsiveGrid} from '@alifd/next';
+import React, {useEffect} from 'react';
 import pageStore from '@/pages/EntityName/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
 import styles from '@/pages/EntityName/index.module.scss';
 import EntityNameCustom from '@/pages/EntityName/view/custom/entityName';
 
-const { Cell } = ResponsiveGrid;
+const {Cell} = ResponsiveGrid;
 
 function EntityName() {
   const [entityNameState, entityNameDispatchers] = pageStore.useModel('entityName');
@@ -19,8 +19,8 @@ function EntityName() {
   const entityNameRender = (value, index, record) => {
     return (
       <div className={styles.opt}>
-        <Button type="primary" size="small" onClick={() => entityNameDispatchers.entityNameEdit(record)} > 编辑 </Button>
-        <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning > 删除 </Button>
+        <Button type="primary" size="small" onClick={() => entityNameDispatchers.entityNameEdit(record)}> 编辑 </Button>
+        <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning> 删除 </Button>
       </div>
     );
   };
@@ -28,7 +28,7 @@ function EntityName() {
   const entityNameCustomRender = (value, index, record) => {
     return (
       <div className={styles.opt}>
-        <EntityNameCustom value={value} index={index} record={record} />
+        <EntityNameCustom value={value} index={index} record={record}/>
       </div>
     );
   };
@@ -64,8 +64,8 @@ function EntityName() {
             rowSelection={{
               mode: 'single',
               onSelect: (selected, record) => {
-                entityNameDispatchers.setState({ entityNameId: record.id });
-                entityDispatchers.onRowClick({ selected, record });
+                entityNameDispatchers.setState({entityNameId: record.id});
+                entityDispatchers.onRowClick({selected, record});
               },
               selectedRowKeys: [entityNameState.entityNameId],
             }}
@@ -78,7 +78,7 @@ function EntityName() {
       <DataFormTemple
         title={entityNameState.entityNameTitle}
         visibleDialog={entityNameState.entityNameVisible}
-        onClose={() => entityNameDispatchers.setState({ entityNameVisible: false })}
+        onClose={() => entityNameDispatchers.setState({entityNameVisible: false})}
         items={entityNameState.entityNameForm}
         dispatchers={(value) => entityNameDispatchers.setDataForm(value)}
         onOk={() => entityNameDispatchers.entityNameSave({

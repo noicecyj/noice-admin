@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Tag(name = "AppService")
 public interface AppServiceCustomController {
 
-        @Operation(summary = "生成服务文件")
-        @InterFaceMapping(api = "entityCreateApi")
-        @PostMapping(value = "createAppFile")
-        ResultVO createAppFile(@RequestBody CreateVO createVO);
+    @Operation(summary = "生成服务文件")
+    @InterFaceMapping(api = "entityCreateApi")
+    @PostMapping(value = "createAppFile")
+    ResultVO createAppFile(@RequestBody CreateVO createVO);
 
 }

@@ -1,12 +1,12 @@
-import { ResponsiveGrid, Button, Dialog } from '@alifd/next';
-import React, { useEffect } from 'react';
+import {Button, Dialog, ResponsiveGrid} from '@alifd/next';
+import React, {useEffect} from 'react';
 import pageStore from '@/pages/Catalog/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
 import styles from '@/pages/Catalog/index.module.scss';
 import CatalogCustom from '@/pages/Catalog/view/custom/catalog';
 
-const { Cell } = ResponsiveGrid;
+const {Cell} = ResponsiveGrid;
 
 function Catalog() {
   const [catalogState, catalogDispatchers] = pageStore.useModel('catalog');
@@ -19,8 +19,8 @@ function Catalog() {
   const catalogRender = (value, index, record) => {
     return (
       <div className={styles.opt}>
-        <Button type="primary" size="small" onClick={() => catalogDispatchers.catalogEdit(record)} > 编辑 </Button>
-        <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning > 删除 </Button>
+        <Button type="primary" size="small" onClick={() => catalogDispatchers.catalogEdit(record)}> 编辑 </Button>
+        <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning> 删除 </Button>
       </div>
     );
   };
@@ -28,7 +28,7 @@ function Catalog() {
   const catalogCustomRender = (value, index, record) => {
     return (
       <div className={styles.opt}>
-        <CatalogCustom value={value} index={index} record={record} />
+        <CatalogCustom value={value} index={index} record={record}/>
       </div>
     );
   };
@@ -64,8 +64,8 @@ function Catalog() {
             rowSelection={{
               mode: 'single',
               onSelect: (selected, record) => {
-                catalogDispatchers.setState({ catalogId: record.id });
-                dictionaryDispatchers.onRowClick({ selected, record });
+                catalogDispatchers.setState({catalogId: record.id});
+                dictionaryDispatchers.onRowClick({selected, record});
               },
               selectedRowKeys: [catalogState.catalogId],
             }}
@@ -78,7 +78,7 @@ function Catalog() {
       <DataFormTemple
         title={catalogState.catalogTitle}
         visibleDialog={catalogState.catalogVisible}
-        onClose={() => catalogDispatchers.setState({ catalogVisible: false })}
+        onClose={() => catalogDispatchers.setState({catalogVisible: false})}
         items={catalogState.catalogForm}
         dispatchers={(value) => catalogDispatchers.setDataForm(value)}
         onOk={() => catalogDispatchers.catalogSave({

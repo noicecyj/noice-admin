@@ -17,19 +17,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Tag(name = "EntityName")
 public interface EntityNameCustomController {
 
-        @Operation(summary = "生成实体类文件")
-        @InterFaceMapping(api = "entityCreateApi")
-        @PostMapping(value = "createEntity")
-        ResultVO createEntity(@RequestBody CreateVO createVO);
+    @Operation(summary = "生成实体类文件")
+    @InterFaceMapping(api = "entityCreateApi")
+    @PostMapping(value = "createEntity")
+    ResultVO createEntity(@RequestBody CreateVO createVO);
 
-        @Operation(summary = "生成组件文件")
-        @InterFaceMapping(api = "entityCreateApi")
-        @PostMapping(value = "createComponentFile")
-        ResultVO createComponentFile(@RequestBody CreateVO createVO);
+    @Operation(summary = "生成组件文件")
+    @InterFaceMapping(api = "entityCreateApi")
+    @PostMapping(value = "createComponentFile")
+    ResultVO createComponentFile(@RequestBody CreateVO createVO);
 
-        @Operation(summary = "创建表格与表单")
-        @InterFaceMapping(api = "entityCreateApi")
-        @PostMapping(value = "findDataTableAndFormByName")
-        ResultVO findDataTableAndFormByName(@RequestParam("entityCode") String entityCode);
+    @Operation(summary = "创建表格与表单")
+    @InterFaceMapping(api = "entityCreateApi")
+    @PostMapping(value = "findDataTableAndFormByName")
+    ResultVO findDataTableAndFormByName(@RequestParam("entityCode") String entityCode);
 
 }

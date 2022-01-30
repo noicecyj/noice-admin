@@ -19,37 +19,37 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "sqlApi")
 public class IndexControllerImpl implements IndexController {
 
-        private IndexServiceImpl indexService;
+    private IndexServiceImpl indexService;
 
-        @Autowired
-        public void setIndexService(IndexServiceImpl indexService) {
-                this.indexService = indexService;
-        }
+    @Autowired
+    public void setIndexService(IndexServiceImpl indexService) {
+        this.indexService = indexService;
+    }
 
-        @Override
-        public ResultVO doSql(@RequestParam("sqlStr") String sqlStr,
-                              @RequestParam("sqlType") String sqlType) {
-                String query = "查询";
-                try {
-                        if (query.equals(sqlType)) {
-                                return ResultVO.success(indexService.queryBySql(sqlStr));
-                        } else {
-                                indexService.excuteSql(sqlStr);
-                                return ResultVO.success();
-                        }
-                } catch (Exception e) {
-                        return ResultVO.failure(e.getCause().getCause());
-                }
+    @Override
+    public ResultVO doSql(@RequestParam("sqlStr") String sqlStr,
+                          @RequestParam("sqlType") String sqlType) {
+        String query = "查询";
+        try {
+            if (query.equals(sqlType)) {
+                return ResultVO.success(indexService.queryBySql(sqlStr));
+            } else {
+                indexService.excuteSql(sqlStr);
+                return ResultVO.success();
+            }
+        } catch (Exception e) {
+            return ResultVO.failure(e.getCause().getCause());
         }
+    }
 
-        @Override
-        public ResultVO doFindAllSql(@RequestParam("tableName") String tableName) {
-                return ResultVO.success(indexService.findAllSql(tableName));
-        }
+    @Override
+    public ResultVO doFindAllSql(@RequestParam("tableName") String tableName) {
+        return ResultVO.success(indexService.findAllSql(tableName));
+    }
 
-        @Override
-        public ResultVO doFindSqlById(@RequestParam("tableName") String tableName, @RequestParam("id") String id) {
-                return ResultVO.success(indexService.findSqlById(tableName, id));
-        }
+    @Override
+    public ResultVO doFindSqlById(@RequestParam("tableName") String tableName, @RequestParam("id") String id) {
+        return ResultVO.success(indexService.findSqlById(tableName, id));
+    }
 
 }

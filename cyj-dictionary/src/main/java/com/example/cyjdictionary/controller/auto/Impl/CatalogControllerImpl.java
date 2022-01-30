@@ -19,34 +19,34 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "dictionaryApi")
 public class CatalogControllerImpl implements CatalogController {
 
-        private CatalogService catalogService;
+    private CatalogService catalogService;
 
-        @Autowired
-        public void setCatalogService(CatalogService catalogService) {
-                this.catalogService = catalogService;
-        }
+    @Autowired
+    public void setCatalogService(CatalogService catalogService) {
+        this.catalogService = catalogService;
+    }
 
-        @Override
-        public ResultVO catalogPage(Integer pageNumber) {
-                return ResultVO.success(catalogService.findAll(pageNumber));
-        }
+    @Override
+    public ResultVO catalogPage(Integer pageNumber) {
+        return ResultVO.success(catalogService.findAll(pageNumber));
+    }
 
-        @Override
-        public ResultVO catalogSave(CatalogPO po) {
-                if (po.getId() == null) {
-                        return ResultVO.success(catalogService.addOne(po));
-                }
-                return ResultVO.success(catalogService.updateOne(po));
+    @Override
+    public ResultVO catalogSave(CatalogPO po) {
+        if (po.getId() == null) {
+            return ResultVO.success(catalogService.addOne(po));
         }
+        return ResultVO.success(catalogService.updateOne(po));
+    }
 
-        @Override
-        public void catalogDelete(String id) {
-                catalogService.deleteOne(id);
-        }
+    @Override
+    public void catalogDelete(String id) {
+        catalogService.deleteOne(id);
+    }
 
-        @Override
-        public ResultVO findCatalogById(String id) {
-                return ResultVO.success(catalogService.findOneById(id));
-        }
+    @Override
+    public ResultVO findCatalogById(String id) {
+        return ResultVO.success(catalogService.findOneById(id));
+    }
 
 }

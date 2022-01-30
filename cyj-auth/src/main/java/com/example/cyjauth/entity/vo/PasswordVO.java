@@ -12,8 +12,8 @@ import java.io.Serializable;
 @Data
 public class PasswordVO implements Serializable {
 
-        private String id;
-        private String newPassword;
-        private String checkPassword;
+    private String id;
+    private String newPassword;
+    private String checkPassword;
 
 }

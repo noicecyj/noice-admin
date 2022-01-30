@@ -19,49 +19,49 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class)
 public class DictionaryCustomServiceImpl extends BaseService implements DictionaryCustomService {
 
-        @Override
-        public List<DictionaryPO> findCatalogByName(String name) {
-                QDictionaryPO qDictionary = QDictionaryPO.dictionaryPO;
-                QCatalogPO qCatalogPO = QCatalogPO.catalogPO;
-                return queryFactory.selectFrom(qDictionary)
-                        .innerJoin(qCatalogPO)
-                        .on(qDictionary.pid.eq(qCatalogPO.id))
-                        .where(qCatalogPO.catalogName.eq(name))
-                        .orderBy(qDictionary.sortCode.asc()).fetch();
-        }
+    @Override
+    public List<DictionaryPO> findCatalogByName(String name) {
+        QDictionaryPO qDictionary = QDictionaryPO.dictionaryPO;
+        QCatalogPO qCatalogPO = QCatalogPO.catalogPO;
+        return queryFactory.selectFrom(qDictionary)
+                .innerJoin(qCatalogPO)
+                .on(qDictionary.pid.eq(qCatalogPO.id))
+                .where(qCatalogPO.catalogName.eq(name))
+                .orderBy(qDictionary.sortCode.asc()).fetch();
+    }
 
-        @Override
-        public List<DictionaryPO> findCatalogByValue(String value) {
-                QDictionaryPO qDictionary = QDictionaryPO.dictionaryPO;
-                QCatalogPO qCatalogPO = QCatalogPO.catalogPO;
-                return queryFactory.selectFrom(qDictionary)
-                        .innerJoin(qCatalogPO)
-                        .on(qDictionary.pid.eq(qCatalogPO.id))
-                        .where(qCatalogPO.catalogValue.eq(value))
-                        .orderBy(qDictionary.sortCode.asc()).fetch();
-        }
+    @Override
+    public List<DictionaryPO> findCatalogByValue(String value) {
+        QDictionaryPO qDictionary = QDictionaryPO.dictionaryPO;
+        QCatalogPO qCatalogPO = QCatalogPO.catalogPO;
+        return queryFactory.selectFrom(qDictionary)
+                .innerJoin(qCatalogPO)
+                .on(qDictionary.pid.eq(qCatalogPO.id))
+                .where(qCatalogPO.catalogValue.eq(value))
+                .orderBy(qDictionary.sortCode.asc()).fetch();
+    }
 
-        @Override
-        public DictionaryPO findDictionaryByCatalogValueAndDictionaryKey(String value, String key) {
-                QDictionaryPO qDictionary = QDictionaryPO.dictionaryPO;
-                QCatalogPO qCatalogPO = QCatalogPO.catalogPO;
-                return queryFactory.selectFrom(qDictionary)
-                        .innerJoin(qCatalogPO)
-                        .on(qDictionary.pid.eq(qCatalogPO.id))
-                        .where(qCatalogPO.catalogValue.eq(value).and(qDictionary.dictionaryValue.eq(key)))
-                        .orderBy(qDictionary.sortCode.asc()).fetchOne();
-        }
+    @Override
+    public DictionaryPO findDictionaryByCatalogValueAndDictionaryKey(String value, String key) {
+        QDictionaryPO qDictionary = QDictionaryPO.dictionaryPO;
+        QCatalogPO qCatalogPO = QCatalogPO.catalogPO;
+        return queryFactory.selectFrom(qDictionary)
+                .innerJoin(qCatalogPO)
+                .on(qDictionary.pid.eq(qCatalogPO.id))
+                .where(qCatalogPO.catalogValue.eq(value).and(qDictionary.dictionaryValue.eq(key)))
+                .orderBy(qDictionary.sortCode.asc()).fetchOne();
+    }
 
-        @Override
-        public DictionaryPO findDictionaryByCatalogValueAndDictionaryValue(String value, String value2) {
-                QDictionaryPO qDictionary = QDictionaryPO.dictionaryPO;
-                QCatalogPO qCatalogPO = QCatalogPO.catalogPO;
-                return queryFactory.selectFrom(qDictionary)
-                        .innerJoin(qCatalogPO)
-                        .on(qDictionary.pid.eq(qCatalogPO.id))
-                        .where(qCatalogPO.catalogValue.eq(value).and(qDictionary.dictionaryName.eq(value2)))
-                        .orderBy(qDictionary.sortCode.asc()).fetchOne();
-        }
+    @Override
+    public DictionaryPO findDictionaryByCatalogValueAndDictionaryValue(String value, String value2) {
+        QDictionaryPO qDictionary = QDictionaryPO.dictionaryPO;
+        QCatalogPO qCatalogPO = QCatalogPO.catalogPO;
+        return queryFactory.selectFrom(qDictionary)
+                .innerJoin(qCatalogPO)
+                .on(qDictionary.pid.eq(qCatalogPO.id))
+                .where(qCatalogPO.catalogValue.eq(value).and(qDictionary.dictionaryName.eq(value2)))
+                .orderBy(qDictionary.sortCode.asc()).fetchOne();
+    }
 
 
 }

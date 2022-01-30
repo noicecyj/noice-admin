@@ -4,7 +4,7 @@ import AppService from '@/pages/AppService/view/auto/appService';
 function AppServicePage() {
   return (
     <div>
-      <AppService />
+      <AppService/>
     </div>
   );
 }

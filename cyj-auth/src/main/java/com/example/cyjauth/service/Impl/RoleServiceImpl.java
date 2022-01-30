@@ -21,41 +21,41 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = Exception.class)
 public class RoleServiceImpl extends BaseService implements RoleService {
 
-        private RoleDao roleDao;
+    private RoleDao roleDao;
 
-        @Autowired
-        public void setRoleDao(RoleDao roleDao) {
-                this.roleDao = roleDao;
-        }
+    @Autowired
+    public void setRoleDao(RoleDao roleDao) {
+        this.roleDao = roleDao;
+    }
 
-        @Override
-        public RolePO addOne(RolePO po) {
-                return roleDao.save(po);
-        }
+    @Override
+    public RolePO addOne(RolePO po) {
+        return roleDao.save(po);
+    }
 
-        @Override
-        public void deleteOne(String id) {
-                roleDao.deleteById(id);
-        }
+    @Override
+    public void deleteOne(String id) {
+        roleDao.deleteById(id);
+    }
 
-        @Override
-        public RolePO updateOne(RolePO po) {
-                return roleDao.saveAndFlush(po);
-        }
+    @Override
+    public RolePO updateOne(RolePO po) {
+        return roleDao.saveAndFlush(po);
+    }
 
-        @Override
-        public Page<RolePO> findAll(Integer pageNumber, Integer pageSize, String sortCode) {
-                Sort sort = Sort.by(sortCode);
-                Pageable pageable = PageRequest.of(pageNumber, pageSize, sort);
-                return roleDao.findAll(pageable);
-        }
+    @Override
+    public Page<RolePO> findAll(Integer pageNumber, Integer pageSize, String sortCode) {
+        Sort sort = Sort.by(sortCode);
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, sort);
+        return roleDao.findAll(pageable);
+    }
 
-        @Override
-        public RolePO findOneById(String id) {
-                if (roleDao.findById(id).isPresent()) {
-                        return roleDao.findById(id).get();
-                }
-                return null;
+    @Override
+    public RolePO findOneById(String id) {
+        if (roleDao.findById(id).isPresent()) {
+            return roleDao.findById(id).get();
         }
+        return null;
+    }
 
 }

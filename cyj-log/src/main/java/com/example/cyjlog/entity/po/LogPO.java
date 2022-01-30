@@ -25,38 +25,38 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class LogPO {
 
-        static final String T_LOG = "t_server_log";
+    static final String T_LOG = "t_server_log";
 
-        @Id
-        @Column(name = "id")
-        private String id;
-        @Column(name = "app_port")
-        private String appPort;
-        @Column(name = "class")
-        private String className;
-        @Column(name = "classpath")
-        private String classpath;
-        @Column(name = "method")
-        private String method;
-        @Column(name = "thread_name")
-        private String threadName;
-        @Column(name = "msg_level")
-        private String msgLevel;
-        @Column(name = "msg")
-        private String msg;
-        @Column(name = "create_date")
-        private String createDate;
+    @Id
+    @Column(name = "id")
+    private String id;
+    @Column(name = "app_port")
+    private String appPort;
+    @Column(name = "class")
+    private String className;
+    @Column(name = "classpath")
+    private String classpath;
+    @Column(name = "method")
+    private String method;
+    @Column(name = "thread_name")
+    private String threadName;
+    @Column(name = "msg_level")
+    private String msgLevel;
+    @Column(name = "msg")
+    private String msg;
+    @Column(name = "create_date")
+    private String createDate;
 
-        @Override
-        public boolean equals(Object o) {
-                if (this == o) return true;
-                if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-                LogPO logPO = (LogPO) o;
-                return Objects.equals(id, logPO.id);
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        LogPO logPO = (LogPO) o;
+        return Objects.equals(id, logPO.id);
+    }
 
-        @Override
-        public int hashCode() {
-                return 0;
-        }
+    @Override
+    public int hashCode() {
+        return 0;
+    }
 }

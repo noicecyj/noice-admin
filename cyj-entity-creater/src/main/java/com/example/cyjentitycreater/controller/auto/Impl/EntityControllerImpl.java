@@ -19,34 +19,34 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "entityCreateApi")
 public class EntityControllerImpl implements EntityController {
 
-        private EntityService entityService;
+    private EntityService entityService;
 
-        @Autowired
-        public void setEntityService(EntityService entityService) {
-                this.entityService = entityService;
-        }
+    @Autowired
+    public void setEntityService(EntityService entityService) {
+        this.entityService = entityService;
+    }
 
-        @Override
-        public ResultVO entitySave(EntityPO po) {
-                if (po.getId() == null) {
-                        return ResultVO.success(entityService.addOne(po));
-                }
-                return ResultVO.success(entityService.updateOne(po));
+    @Override
+    public ResultVO entitySave(EntityPO po) {
+        if (po.getId() == null) {
+            return ResultVO.success(entityService.addOne(po));
         }
+        return ResultVO.success(entityService.updateOne(po));
+    }
 
-        @Override
-        public ResultVO entityPage(Integer pageNumber, String pid) {
-                return ResultVO.success(entityService.entityPage(pageNumber, pid));
-        }
+    @Override
+    public ResultVO entityPage(Integer pageNumber, String pid) {
+        return ResultVO.success(entityService.entityPage(pageNumber, pid));
+    }
 
-        @Override
-        public void entityDelete(String id) {
-                entityService.deleteOne(id);
-        }
+    @Override
+    public void entityDelete(String id) {
+        entityService.deleteOne(id);
+    }
 
-        @Override
-        public ResultVO findEntityById(String id) {
-                return ResultVO.success(entityService.findOneById(id));
-        }
+    @Override
+    public ResultVO findEntityById(String id) {
+        return ResultVO.success(entityService.findOneById(id));
+    }
 
 }

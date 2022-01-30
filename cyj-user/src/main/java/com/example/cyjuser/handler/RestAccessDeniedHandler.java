@@ -17,9 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 
 public class RestAccessDeniedHandler implements AccessDeniedHandler {
 
-        @Override
-        public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) {
-                ResponseUtil.out(response, ResultVO.success(ResultCode.DENY).toString());
-        }
+    @Override
+    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) {
+        ResponseUtil.out(response, ResultVO.success(ResultCode.DENY).toString());
+    }
 
 }

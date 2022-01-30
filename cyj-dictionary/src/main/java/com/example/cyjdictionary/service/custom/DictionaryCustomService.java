@@ -11,11 +11,11 @@ import java.util.List;
  */
 public interface DictionaryCustomService {
 
-        List<DictionaryPO> findCatalogByName(String name);
+    List<DictionaryPO> findCatalogByName(String name);
 
-        List<DictionaryPO> findCatalogByValue(String value);
+    List<DictionaryPO> findCatalogByValue(String value);
 
-        DictionaryPO findDictionaryByCatalogValueAndDictionaryKey(String value, String key);
+    DictionaryPO findDictionaryByCatalogValueAndDictionaryKey(String value, String key);
 
-        DictionaryPO findDictionaryByCatalogValueAndDictionaryValue(String value, String value2);
+    DictionaryPO findDictionaryByCatalogValueAndDictionaryValue(String value, String value2);
 }

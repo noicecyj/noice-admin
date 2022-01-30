@@ -19,34 +19,34 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "dictionaryApi")
 public class DictionaryControllerImpl implements DictionaryController {
 
-        private DictionaryService dictionaryService;
+    private DictionaryService dictionaryService;
 
-        @Autowired
-        public void setDictionaryService(DictionaryService dictionaryService) {
-                this.dictionaryService = dictionaryService;
-        }
+    @Autowired
+    public void setDictionaryService(DictionaryService dictionaryService) {
+        this.dictionaryService = dictionaryService;
+    }
 
-        @Override
-        public ResultVO dictionaryPage(Integer pageNumber, String pid) {
-                return ResultVO.success(dictionaryService.findAll(pageNumber, pid));
-        }
+    @Override
+    public ResultVO dictionaryPage(Integer pageNumber, String pid) {
+        return ResultVO.success(dictionaryService.findAll(pageNumber, pid));
+    }
 
-        @Override
-        public ResultVO dictionarySave(DictionaryPO po) {
-                if (po.getId() == null) {
-                        return ResultVO.success(dictionaryService.addOne(po));
-                }
-                return ResultVO.success(dictionaryService.updateOne(po));
+    @Override
+    public ResultVO dictionarySave(DictionaryPO po) {
+        if (po.getId() == null) {
+            return ResultVO.success(dictionaryService.addOne(po));
         }
+        return ResultVO.success(dictionaryService.updateOne(po));
+    }
 
-        @Override
-        public void dictionaryDelete(String id) {
-                dictionaryService.deleteOne(id);
-        }
+    @Override
+    public void dictionaryDelete(String id) {
+        dictionaryService.deleteOne(id);
+    }
 
-        @Override
-        public ResultVO findDictionaryById(String id) {
-                return ResultVO.success(dictionaryService.findOneById(id));
-        }
+    @Override
+    public ResultVO findDictionaryById(String id) {
+        return ResultVO.success(dictionaryService.findOneById(id));
+    }
 
 }

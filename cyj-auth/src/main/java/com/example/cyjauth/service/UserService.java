@@ -12,19 +12,19 @@ import org.springframework.data.domain.Page;
  */
 public interface UserService {
 
-        @Operation(summary = "添加实体")
-        UserPO addOne(UserPO po);
+    @Operation(summary = "添加实体")
+    UserPO addOne(UserPO po);
 
-        @Operation(summary = "删除实体")
-        void deleteOne(String id);
+    @Operation(summary = "删除实体")
+    void deleteOne(String id);
 
-        @Operation(summary = "更新实体")
-        UserPO updateOne(UserPO po);
+    @Operation(summary = "更新实体")
+    UserPO updateOne(UserPO po);
 
-        @Operation(summary = "查找所有实体(分页排序)")
-        Page<UserPO> findAll(Integer pageNumber, Integer pageSize, String sortCode);
+    @Operation(summary = "查找所有实体(分页排序)")
+    Page<UserPO> findAll(Integer pageNumber, Integer pageSize, String sortCode);
 
-        @Operation(summary = "查找实体")
-        UserPO findOneById(String id);
+    @Operation(summary = "查找实体")
+    UserPO findOneById(String id);
 
 }

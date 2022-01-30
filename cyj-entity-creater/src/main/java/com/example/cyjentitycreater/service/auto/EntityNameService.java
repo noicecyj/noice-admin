@@ -3,8 +3,6 @@ package com.example.cyjentitycreater.service.auto;
 import com.example.cyjentitycreater.entity.auto.po.EntityNamePO;
 import com.querydsl.core.QueryResults;
 
-import java.util.List;
-
 /**
  * @author 曹元杰
  * @version 1.0
@@ -12,14 +10,14 @@ import java.util.List;
  */
 public interface EntityNameService {
 
-        EntityNamePO addOne(EntityNamePO po);
+    EntityNamePO addOne(EntityNamePO po);
 
-        void deleteOne(String id);
+    void deleteOne(String id);
 
-        EntityNamePO updateOne(EntityNamePO po);
+    EntityNamePO updateOne(EntityNamePO po);
 
-        QueryResults<EntityNamePO> entityNamePage(Integer pageNumber);
+    QueryResults<EntityNamePO> entityNamePage(Integer pageNumber);
 
-        EntityNamePO findOneById(String id);
+    EntityNamePO findOneById(String id);
 
 }

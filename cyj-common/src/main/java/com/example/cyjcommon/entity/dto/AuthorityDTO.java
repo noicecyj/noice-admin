@@ -12,15 +12,15 @@ import java.io.Serializable;
 @Data
 public class AuthorityDTO implements Serializable {
 
-        private String id;
-        private String name;
-        private String path;
-        private Integer status;
-        private String method;
-        private String description;
-        private String appApi;
-        private String appService;
-        private String version;
-        private String sortCode;
+    private String id;
+    private String name;
+    private String path;
+    private Integer status;
+    private String method;
+    private String description;
+    private String appApi;
+    private String appService;
+    private String version;
+    private String sortCode;
 
 }

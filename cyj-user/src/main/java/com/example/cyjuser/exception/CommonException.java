@@ -8,13 +8,13 @@ import lombok.EqualsAndHashCode;
 @Data
 public class CommonException extends Exception {
 
-        private static final long serialVersionUID = 1L;
-        private int exceptionCode;
-        private String message;
+    private static final long serialVersionUID = 1L;
+    private int exceptionCode;
+    private String message;
 
-        public CommonException(ResultCode resultCode) {
-                this.exceptionCode = resultCode.code();
-                this.message = resultCode.message();
-        }
+    public CommonException(ResultCode resultCode) {
+        this.exceptionCode = resultCode.code();
+        this.message = resultCode.message();
+    }
 
 }

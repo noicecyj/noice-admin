@@ -18,22 +18,22 @@ import java.util.List;
 @FeignClient(name = "cyj-dictionary")
 public interface DictionaryApiService {
 
-        /**
-         * 根据目录名称查询字典
-         *
-         * @param name 目录名称
-         * @return 返回结果
-         */
-        @PostMapping(value = "/dictionaryApi/findCatalogByName")
-        List<DictionaryDTO> findCatalogByName(@RequestParam("name") String name);
+    /**
+     * 根据目录名称查询字典
+     *
+     * @param name 目录名称
+     * @return 返回结果
+     */
+    @PostMapping(value = "/dictionaryApi/findCatalogByName")
+    List<DictionaryDTO> findCatalogByName(@RequestParam("name") String name);
 
-        /**
-         * 根据目录值查询字典
-         *
-         * @param value 目录值
-         * @return 返回结果
-         */
-        @PostMapping(value = "/dictionaryApi/findCatalogByValue")
-        List<DictionaryDTO> findCatalogByValue(@RequestParam("value") String value);
+    /**
+     * 根据目录值查询字典
+     *
+     * @param value 目录值
+     * @return 返回结果
+     */
+    @PostMapping(value = "/dictionaryApi/findCatalogByValue")
+    List<DictionaryDTO> findCatalogByValue(@RequestParam("value") String value);
 
 }
