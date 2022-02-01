@@ -1,9 +1,9 @@
 package com.example.cyjentitycreater.service.auto.Impl;
 
-import com.example.cyjcommon.service.Impl.BaseService;
 import com.example.cyjentitycreater.dao.auto.EntityDao;
 import com.example.cyjentitycreater.entity.auto.po.EntityPO;
 import com.example.cyjentitycreater.entity.auto.po.QEntityPO;
+import com.example.cyjcommon.service.Impl.BaseService;
 import com.example.cyjentitycreater.service.auto.EntityService;
 import com.querydsl.core.QueryResults;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * @author 曹元杰
  * @version 1.0
- * @date 2021-02-02
+ * @date 2022-02-01
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -44,7 +44,7 @@ public class EntityServiceImpl extends BaseService implements EntityService {
     }
 
     @Override
-    public QueryResults<EntityPO> entityPage(Integer pageNumber, String pid) {
+    public QueryResults<EntityPO> findAll(Integer pageNumber, String pid) {
         return queryFactory
                 .selectFrom(QEntityPO.entityPO)
                 .where(QEntityPO.entityPO.pid.eq(pid).and(QEntityPO.entityPO.sortCode.isNotNull()))

@@ -12,20 +12,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * @author 曹元杰
  * @version 1.0
- * @date 2021-02-02
+ * @date 2022-02-01
  */
 @Tag(name = "EntityName")
 public interface EntityNameController {
-
-    @Operation(summary = "保存EntityName")
-    @InterFaceMapping(api = "entityCreateApi")
-    @PostMapping(value = "entityNameSave")
-    ResultVO entityNameSave(@RequestBody EntityNamePO po);
 
     @Operation(summary = "查询所有EntityName")
     @InterFaceMapping(api = "entityCreateApi")
     @PostMapping(value = "entityNamePage")
     ResultVO entityNamePage(@RequestParam("pageNumber") Integer pageNumber);
+
+    @Operation(summary = "保存EntityName")
+    @InterFaceMapping(api = "entityCreateApi")
+    @PostMapping(value = "entityNameSave")
+    ResultVO entityNameSave(@RequestBody EntityNamePO po);
 
     @Operation(summary = "删除EntityName")
     @InterFaceMapping(api = "entityCreateApi")

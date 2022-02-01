@@ -1,10 +1,9 @@
 package com.example.cyjentitycreater.service.auto.Impl;
 
-import com.example.cyjcommon.service.Impl.BaseService;
 import com.example.cyjentitycreater.dao.auto.EntityNameDao;
 import com.example.cyjentitycreater.entity.auto.po.EntityNamePO;
 import com.example.cyjentitycreater.entity.auto.po.QEntityNamePO;
-import com.example.cyjentitycreater.entity.auto.po.QEntityPO;
+import com.example.cyjcommon.service.Impl.BaseService;
 import com.example.cyjentitycreater.service.auto.EntityNameService;
 import com.querydsl.core.QueryResults;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * @author 曹元杰
  * @version 1.0
- * @date 2021-02-02
+ * @date 2022-02-01
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -35,7 +34,6 @@ public class EntityNameServiceImpl extends BaseService implements EntityNameServ
     @Override
     public void deleteOne(String id) {
         entityNameDao.deleteById(id);
-        queryFactory.delete(QEntityPO.entityPO).where(QEntityPO.entityPO.pid.eq(id));
     }
 
     @Override
@@ -44,7 +42,7 @@ public class EntityNameServiceImpl extends BaseService implements EntityNameServ
     }
 
     @Override
-    public QueryResults<EntityNamePO> entityNamePage(Integer pageNumber) {
+    public QueryResults<EntityNamePO> findAll(Integer pageNumber) {
         return queryFactory
                 .selectFrom(QEntityNamePO.entityNamePO)
                 .where(QEntityNamePO.entityNamePO.sortCode.isNotNull())

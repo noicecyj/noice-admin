@@ -18,7 +18,7 @@ import java.util.Objects;
 /**
  * @author 曹元杰
  * @version 1.0
- * @date 2021-10-16
+ * @date 2022-02-01
  */
 @Entity
 @Table(name = EntityPO.T_ENTITY)
@@ -39,8 +39,6 @@ public class EntityPO implements Serializable {
     private String pid;
     @Column(name = "property_code")
     private String propertyCode;
-    @Column(name = "property_name")
-    private String propertyName;
     @Column(name = "property_type")
     private String propertyType;
     @Column(name = "property_label")
@@ -59,6 +57,8 @@ public class EntityPO implements Serializable {
     private String propertyDefaultValue;
     @Column(name = "property_display")
     private String propertyDisplay;
+    @Column(name = "property_name")
+    private String propertyName;
     @Column(name = "status")
     private String status;
     @Column(name = "sort_code")
