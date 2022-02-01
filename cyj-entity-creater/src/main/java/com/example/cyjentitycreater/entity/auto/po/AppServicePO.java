@@ -18,7 +18,7 @@ import java.util.Objects;
 /**
  * @author 曹元杰
  * @version 1.0
- * @date 2022-01-28
+ * @date 2022-02-01
  */
 @Entity
 @Table(name = AppServicePO.T_APP_SERVICE)

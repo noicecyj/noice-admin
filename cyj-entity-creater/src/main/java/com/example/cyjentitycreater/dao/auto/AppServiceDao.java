@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * @author 曹元杰
  * @version 1.0
- * @date 2022-01-28
+ * @date 2022-02-01
  */
 public interface AppServiceDao extends JpaRepository<AppServicePO, String> {
 }

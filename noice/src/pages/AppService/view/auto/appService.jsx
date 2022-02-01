@@ -1,4 +1,4 @@
-import { Button, Dialog, ResponsiveGrid } from '@alifd/next';
+import { ResponsiveGrid, Button, Dialog } from '@alifd/next';
 import React, { useEffect } from 'react';
 import pageStore from '@/pages/AppService/store';
 import DataFormTemple from '@/components/dataForm';
@@ -18,8 +18,8 @@ function AppService() {
   const appServiceRender = (value, index, record) => {
     return (
       <div className={styles.opt}>
-        <Button type="primary" size="small" onClick={() => appServiceDispatchers.appServiceEdit(record)}> 编辑 </Button>
-        <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning> 删除 </Button>
+        <Button type="primary" size="small" onClick={() => appServiceDispatchers.appServiceEdit(record)} > 编辑 </Button>
+        <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning > 删除 </Button>
       </div>
     );
   };
@@ -65,7 +65,8 @@ function AppService() {
               onSelect: (selected, record) => {
                 appServiceDispatchers.setState({ appServiceId: record.id });
               },
-              selectedRowKeys: [appServiceState.appServiceId],
+              selectedRowKeys: [
+              ],
             }}
             primaryKey="id"
             pageRender={appServiceRender}
