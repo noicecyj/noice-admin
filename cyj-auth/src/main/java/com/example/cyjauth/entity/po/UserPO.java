@@ -51,7 +51,7 @@ public class UserPO implements Serializable {
     @Column(name = "phone")
     private String phone;
     @Column(name = "status")
-    private Integer status;
+    private String status;
     @Column(name = "sort_code")
     private String sortCode;
     @JsonIgnore

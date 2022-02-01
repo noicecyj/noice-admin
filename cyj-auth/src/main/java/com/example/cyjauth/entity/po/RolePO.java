@@ -49,7 +49,7 @@ public class RolePO implements Serializable {
     @Column(name = "description")
     private String description;
     @Column(name = "status")
-    private Integer status;
+    private String status;
     @Column(name = "sort_code")
     private String sortCode;
     @JsonIgnore
