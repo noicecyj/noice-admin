@@ -10,7 +10,7 @@ const { Cell } = ResponsiveGrid;
 
 function EntityName() {
   const [entityNameState, entityNameDispatchers] = pageStore.useModel('entityName');
-  const entityDispatchers = pageStore.useModelDispatchers('entity');
+  const [entityState, entityDispatchers] = pageStore.useModel('entity');
 
   useEffect(() => {
     entityNameDispatchers.findDataTableAndFormByName();
@@ -67,7 +67,9 @@ function EntityName() {
                 entityNameDispatchers.setState({ entityNameId: record.id });
                 entityDispatchers.onRowClick({ selected, record });
               },
-              selectedRowKeys: [entityNameState.entityNameId],
+              selectedRowKeys: [
+                entityState.entityNameId,
+              ],
             }}
             primaryKey="id"
             pageRender={entityNameRender}

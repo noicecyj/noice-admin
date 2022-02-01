@@ -1413,7 +1413,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         entityNamePOList.forEach(subPo -> {
             //驼峰名
             String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
-            sb.append("  const ").append(underSubPoName).append("Dispatchers = pageStore.useModelDispatchers('").append(underSubPoName).append("');\r\n");
+            sb.append("  const [").append(underSubPoName).append("State, ").append(underSubPoName).append("Dispatchers] = pageStore.useModel('").append(underSubPoName).append("');\r\n");
         });
         sb.append("\r\n");
         sb.append("  useEffect(() => {\r\n");
@@ -1475,7 +1475,13 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
             sb.append("                ").append(underSubPoName).append("Dispatchers.onRowClick({ selected, record });\r\n");
         });
         sb.append("              },\r\n");
-        sb.append("              selectedRowKeys: [").append(underPoName).append("State.").append(underPoName).append("Id],\r\n");
+        sb.append("              selectedRowKeys: [\r\n");
+        entityNamePOList.forEach(subPo -> {
+            //驼峰名
+            String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
+            sb.append("                ").append(underSubPoName).append("State.").append(underPoName).append("Id,\r\n");
+        });
+        sb.append("              ],\r\n");
         sb.append("            }}\r\n");
         sb.append("            primaryKey=\"id\"\r\n");
         sb.append("            pageRender={").append(underPoName).append("Render}\r\n");
