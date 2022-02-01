@@ -1,4 +1,4 @@
-import { Button, Dialog, ResponsiveGrid } from '@alifd/next';
+import { ResponsiveGrid, Button, Dialog } from '@alifd/next';
 import React, { useEffect } from 'react';
 import pageStore from '@/pages/EntityName/store';
 import DataFormTemple from '@/components/dataForm';
@@ -19,8 +19,8 @@ function EntityName() {
   const entityNameRender = (value, index, record) => {
     return (
       <div className={styles.opt}>
-        <Button type="primary" size="small" onClick={() => entityNameDispatchers.entityNameEdit(record)}> 编辑 </Button>
-        <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning> 删除 </Button>
+        <Button type="primary" size="small" onClick={() => entityNameDispatchers.entityNameEdit(record)} > 编辑 </Button>
+        <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning > 删除 </Button>
       </div>
     );
   };
@@ -78,10 +78,7 @@ function EntityName() {
       <DataFormTemple
         title={entityNameState.entityNameTitle}
         visibleDialog={entityNameState.entityNameVisible}
-        onClose={() => entityNameDispatchers.setState({
-          entityNameVisible: false,
-          entityNameId: '',
-        })}
+        onClose={() => entityNameDispatchers.setState({ entityNameVisible: false })}
         items={entityNameState.entityNameForm}
         dispatchers={(value) => entityNameDispatchers.setDataForm(value)}
         onOk={() => entityNameDispatchers.entityNameSave({

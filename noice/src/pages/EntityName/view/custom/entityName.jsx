@@ -6,7 +6,6 @@ function CustomEntityName(props) {
   // eslint-disable-next-line no-unused-vars
   const { value, index, record } = props;
   const [customEntityNameState, customEntityNameDispatchers] = pageStore.useModel('customEntityName');
-  const [entityNameState, entityNameDispatchers] = pageStore.useModel('entityName');
 
   return (
     <>
@@ -14,7 +13,7 @@ function CustomEntityName(props) {
         type="normal"
         size="small"
         onClick={() => customEntityNameDispatchers.createEntityFile({
-          id: entityNameState.entityNameId, isReWaite: true,
+          id: record.id,
         })}
       > 生成代码
       </Button>

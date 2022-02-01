@@ -1,5 +1,4 @@
 import customEntityNameServices from '../../services/custom/entityName';
-import initService from '@/services/init';
 import { Message } from '@alifd/next';
 
 export default {
