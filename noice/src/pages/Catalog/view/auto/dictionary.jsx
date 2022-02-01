@@ -12,8 +12,8 @@ function Dictionary() {
   const dictionaryRender = (value, index, record) => {
     return (
       <div className={styles.opt}>
-        <Button type="primary" size="small" onClick={() => dictionaryDispatchers.dictionaryEdit(record)}> 编辑 </Button>
-        <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning> 删除 </Button>
+        <Button type="primary" size="small" onClick={() => dictionaryDispatchers.dictionaryEdit(record)} > 编辑 </Button>
+        <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning > 删除 </Button>
       </div>
     );
   };

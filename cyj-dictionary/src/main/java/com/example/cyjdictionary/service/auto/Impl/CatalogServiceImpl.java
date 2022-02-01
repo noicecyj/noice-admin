@@ -1,9 +1,9 @@
 package com.example.cyjdictionary.service.auto.Impl;
 
-import com.example.cyjcommon.service.Impl.BaseService;
 import com.example.cyjdictionary.dao.auto.CatalogDao;
 import com.example.cyjdictionary.entity.auto.po.CatalogPO;
 import com.example.cyjdictionary.entity.auto.po.QCatalogPO;
+import com.example.cyjcommon.service.Impl.BaseService;
 import com.example.cyjdictionary.service.auto.CatalogService;
 import com.querydsl.core.QueryResults;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * @author 曹元杰
  * @version 1.0
- * @date 2022-01-27
+ * @date 2022-02-01
  */
 @Service
 @Transactional(rollbackFor = Exception.class)

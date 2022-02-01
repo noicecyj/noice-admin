@@ -1,4 +1,4 @@
-import { Button, Dialog, ResponsiveGrid } from '@alifd/next';
+import { ResponsiveGrid, Button, Dialog } from '@alifd/next';
 import React, { useEffect } from 'react';
 import pageStore from '@/pages/Catalog/store';
 import DataFormTemple from '@/components/dataForm';
@@ -10,7 +10,7 @@ const { Cell } = ResponsiveGrid;
 
 function Catalog() {
   const [catalogState, catalogDispatchers] = pageStore.useModel('catalog');
-  const dictionaryDispatchers = pageStore.useModelDispatchers('dictionary');
+  const [dictionaryState, dictionaryDispatchers] = pageStore.useModel('dictionary');
 
   useEffect(() => {
     catalogDispatchers.findDataTableAndFormByName();
@@ -19,8 +19,8 @@ function Catalog() {
   const catalogRender = (value, index, record) => {
     return (
       <div className={styles.opt}>
-        <Button type="primary" size="small" onClick={() => catalogDispatchers.catalogEdit(record)}> 编辑 </Button>
-        <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning> 删除 </Button>
+        <Button type="primary" size="small" onClick={() => catalogDispatchers.catalogEdit(record)} > 编辑 </Button>
+        <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning > 删除 </Button>
       </div>
     );
   };
@@ -67,7 +67,9 @@ function Catalog() {
                 catalogDispatchers.setState({ catalogId: record.id });
                 dictionaryDispatchers.onRowClick({ selected, record });
               },
-              selectedRowKeys: [catalogState.catalogId],
+              selectedRowKeys: [
+                dictionaryState.catalogId,
+              ],
             }}
             primaryKey="id"
             pageRender={catalogRender}
