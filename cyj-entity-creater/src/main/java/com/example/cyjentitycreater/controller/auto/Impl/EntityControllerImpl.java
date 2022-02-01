@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author 曹元杰
  * @version 1.0
- * @date 2021-02-02
+ * @date 2022-02-01
  */
 @CrossOrigin
 @RestController
@@ -27,16 +27,16 @@ public class EntityControllerImpl implements EntityController {
     }
 
     @Override
+    public ResultVO entityPage(Integer pageNumber, String pid) {
+        return ResultVO.success(entityService.findAll(pageNumber, pid));
+    }
+
+    @Override
     public ResultVO entitySave(EntityPO po) {
         if (po.getId() == null) {
             return ResultVO.success(entityService.addOne(po));
         }
         return ResultVO.success(entityService.updateOne(po));
-    }
-
-    @Override
-    public ResultVO entityPage(Integer pageNumber, String pid) {
-        return ResultVO.success(entityService.entityPage(pageNumber, pid));
     }
 
     @Override
