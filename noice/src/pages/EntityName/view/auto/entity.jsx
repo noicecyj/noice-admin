@@ -12,8 +12,8 @@ function Entity() {
   const entityRender = (value, index, record) => {
     return (
       <div className={styles.opt}>
-        <Button type="primary" size="small" onClick={() => entityDispatchers.entityEdit(record)}> 编辑 </Button>
-        <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning> 删除 </Button>
+        <Button type="primary" size="small" onClick={() => entityDispatchers.entityEdit(record)} > 编辑 </Button>
+        <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning > 删除 </Button>
       </div>
     );
   };
@@ -70,10 +70,7 @@ function Entity() {
       <DataFormTemple
         title="菜单"
         visibleDialog={entityState.entityVisible}
-        onClose={() => entityDispatchers.setState({
-          entityVisible: false,
-          entityNameId: '',
-        })}
+        onClose={() => entityDispatchers.setState({ entityVisible: false })}
         items={entityState.entityForm}
         dispatchers={(value) => entityDispatchers.setDataForm(value)}
         onOk={() => entityDispatchers.entitySave({
