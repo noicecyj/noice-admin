@@ -6,7 +6,7 @@ export default {
 
   reducers: {
     setState(prevState, payload) {
-      return {...prevState, ...payload};
+      return { ...prevState, ...payload };
     },
   },
 

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import pageStore from '@/pages/AppService/store';
 
 const formItemLayout = {
@@ -12,7 +12,7 @@ const formItemLayout = {
 
 function CustomAppService(props) {
   // eslint-disable-next-line no-unused-vars
-  const {value, index, record} = props;
+  const { value, index, record } = props;
   const [customAppServiceState, customAppServiceDispatchers] = pageStore.useModel('customAppService');
 
   useEffect(() => {

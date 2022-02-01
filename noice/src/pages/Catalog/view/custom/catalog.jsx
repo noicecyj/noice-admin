@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import pageStore from '@/pages/Catalog/store';
 
 const formItemLayout = {
@@ -12,7 +12,7 @@ const formItemLayout = {
 
 function CustomCatalog(props) {
   // eslint-disable-next-line no-unused-vars
-  const {value, index, record} = props;
+  const { value, index, record } = props;
   const [customCatalogState, customCatalogDispatchers] = pageStore.useModel('customCatalog');
 
   useEffect(() => {

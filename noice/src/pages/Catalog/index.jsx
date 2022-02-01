@@ -5,8 +5,8 @@ import Dictionary from '@/pages/Catalog/view/auto/dictionary';
 function CatalogPage() {
   return (
     <div>
-      <Catalog/>
-      <Dictionary/>
+      <Catalog />
+      <Dictionary />
     </div>
   );
 }

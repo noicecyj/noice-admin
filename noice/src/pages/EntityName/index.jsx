@@ -5,8 +5,8 @@ import Entity from '@/pages/EntityName/view/auto/entity';
 function EntityNamePage() {
   return (
     <div>
-      <EntityName/>
-      <Entity/>
+      <EntityName />
+      <Entity />
     </div>
   );
 }

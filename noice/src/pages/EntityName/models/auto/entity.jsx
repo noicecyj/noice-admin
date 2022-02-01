@@ -21,7 +21,7 @@ export default {
 
   reducers: {
     setState(prevState, payload) {
-      return {...prevState, ...payload};
+      return { ...prevState, ...payload };
     },
   },
 
@@ -57,15 +57,15 @@ export default {
     },
     async entityDelete(data) {
       await entityService.entityDelete(data.record.id);
-      await this.entityPage({entityCurrent: data.data.pageNumber, pid: data.data.pid});
+      await this.entityPage({ entityCurrent: data.data.pageNumber, pid: data.data.pid });
       const payload = {
         entityVisible: false,
       };
       dispatch.entity.setState(payload);
     },
     async entitySave(data) {
-      await entityService.entitySave({...data.entityFormData, pid: data.pid});
-      await this.entityPage({entityCurrent: data.pageNumber, pid: data.pid});
+      await entityService.entitySave({ ...data.entityFormData, pid: data.pid });
+      await this.entityPage({ entityCurrent: data.pageNumber, pid: data.pid });
       const payload = {
         entityVisible: false,
       };
@@ -79,7 +79,7 @@ export default {
     },
     async findDataTableAndFormByName(pid) {
       const ret = await initService.findDataTableAndFormByName('entity');
-      await this.entityPage({entityCurrent: 1, pid});
+      await this.entityPage({ entityCurrent: 1, pid });
       const payload = {
         entityTable: ret.data.dataTable,
         entityForm: ret.data.dataForm,
@@ -88,7 +88,7 @@ export default {
     },
     async onRowClick(data) {
       await this.findDataTableAndFormByName(data.record.id);
-      await this.entityPage({entityCurrent: 1, pid: data.record.id});
+      await this.entityPage({ entityCurrent: 1, pid: data.record.id });
       const payload = {
         divVisible: data.selected,
         entityNameId: data.record.id,

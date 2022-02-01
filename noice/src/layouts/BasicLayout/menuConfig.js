@@ -67,4 +67,4 @@ const asideMenuConfig = [
   },
 ];
 
-export {headerMenuConfig, asideMenuConfig};
+export { headerMenuConfig, asideMenuConfig };

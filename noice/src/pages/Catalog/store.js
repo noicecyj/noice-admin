@@ -1,4 +1,4 @@
-import {createStore} from 'ice';
+import { createStore } from 'ice';
 import catalog from './models/auto/catalog';
 import customCatalog from './models/custom/catalog';
 import dictionary from './models/auto/dictionary';

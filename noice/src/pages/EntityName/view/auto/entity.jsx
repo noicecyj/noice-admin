@@ -1,4 +1,4 @@
-import {Button, Dialog} from '@alifd/next';
+import { Button, Dialog } from '@alifd/next';
 import React from 'react';
 import pageStore from '@/pages/EntityName/store';
 import DataFormTemple from '@/components/dataForm';
@@ -21,7 +21,7 @@ function Entity() {
   const entityCustomRender = (value, index, record) => {
     return (
       <div className={styles.opt}>
-        <EntityCustom value={value} index={index} record={record}/>
+        <EntityCustom value={value} index={index} record={record} />
       </div>
     );
   };
@@ -49,7 +49,7 @@ function Entity() {
           divVisible: false,
           entityNameId: '',
         })}
-        style={{width: '90%'}}
+        style={{ width: '90%' }}
       >
         <div className={styles.Main}>
           <div className={styles.add}>
@@ -61,7 +61,7 @@ function Entity() {
             items={entityState.entityTable}
             total={entityState.entityTotal}
             primaryKey="id"
-            getPage={(entityCurrent) => entityDispatchers.entityPage({entityCurrent, pid: entityState.entityNameId})}
+            getPage={(entityCurrent) => entityDispatchers.entityPage({ entityCurrent, pid: entityState.entityNameId })}
             pageRender={entityRender}
             operationRender={entityState.customType ? entityCustomRender : null}
           />
@@ -70,7 +70,7 @@ function Entity() {
       <DataFormTemple
         title="菜单"
         visibleDialog={entityState.entityVisible}
-        onClose={() => entityDispatchers.setState({entityVisible: false})}
+        onClose={() => entityDispatchers.setState({ entityVisible: false })}
         items={entityState.entityForm}
         dispatchers={(value) => entityDispatchers.setDataForm(value)}
         onOk={() => entityDispatchers.entitySave({

@@ -1,11 +1,11 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
-import {Box, Loading, Pagination, Table} from '@alifd/next';
+import { Box, Loading, Pagination, Table } from '@alifd/next';
 import styles from './index.module.scss';
 
 function DataTable(props) {
-  const loadingStyle = {width: '100%'};
-  const {items, pageRender, operationRender, dataSource, rowSelection, primaryKey, total, getPage, visibleLoading} = props;
+  const loadingStyle = { width: '100%' };
+  const { items, pageRender, operationRender, dataSource, rowSelection, primaryKey, total, getPage, visibleLoading } = props;
   return (
     <Loading
       tip="加载中..."

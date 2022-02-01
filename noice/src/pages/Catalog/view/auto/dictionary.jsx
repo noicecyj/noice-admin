@@ -1,4 +1,4 @@
-import {Button, Dialog} from '@alifd/next';
+import { Button, Dialog } from '@alifd/next';
 import React from 'react';
 import pageStore from '@/pages/Catalog/store';
 import DataFormTemple from '@/components/dataForm';
@@ -21,7 +21,7 @@ function Dictionary() {
   const dictionaryCustomRender = (value, index, record) => {
     return (
       <div className={styles.opt}>
-        <DictionaryCustom value={value} index={index} record={record}/>
+        <DictionaryCustom value={value} index={index} record={record} />
       </div>
     );
   };
@@ -49,7 +49,7 @@ function Dictionary() {
           divVisible: false,
           catalogId: '',
         })}
-        style={{width: '90%'}}
+        style={{ width: '90%' }}
       >
         <div className={styles.Main}>
           <div className={styles.add}>
@@ -61,7 +61,7 @@ function Dictionary() {
             items={dictionaryState.dictionaryTable}
             total={dictionaryState.dictionaryTotal}
             primaryKey="id"
-            getPage={(dictionaryCurrent) => dictionaryDispatchers.dictionaryPage({dictionaryCurrent, pid: dictionaryState.catalogId})}
+            getPage={(dictionaryCurrent) => dictionaryDispatchers.dictionaryPage({ dictionaryCurrent, pid: dictionaryState.catalogId })}
             pageRender={dictionaryRender}
             operationRender={dictionaryState.customType ? dictionaryCustomRender : null}
           />
@@ -70,7 +70,7 @@ function Dictionary() {
       <DataFormTemple
         title="菜单"
         visibleDialog={dictionaryState.dictionaryVisible}
-        onClose={() => dictionaryDispatchers.setState({dictionaryVisible: false})}
+        onClose={() => dictionaryDispatchers.setState({ dictionaryVisible: false })}
         items={dictionaryState.dictionaryForm}
         dispatchers={(value) => dictionaryDispatchers.setDataForm(value)}
         onOk={() => dictionaryDispatchers.dictionarySave({
