@@ -70,7 +70,10 @@ function Entity() {
       <DataFormTemple
         title="菜单"
         visibleDialog={entityState.entityVisible}
-        onClose={() => entityDispatchers.setState({ entityVisible: false })}
+        onClose={() => entityDispatchers.setState({
+          entityVisible: false,
+          entityNameId: '',
+        })}
         items={entityState.entityForm}
         dispatchers={(value) => entityDispatchers.setDataForm(value)}
         onOk={() => entityDispatchers.entitySave({

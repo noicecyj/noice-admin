@@ -13,6 +13,5 @@ import java.io.Serializable;
 public class CreateVO implements Serializable {
 
     private String id;
-    private boolean isReWaite;
 
 }

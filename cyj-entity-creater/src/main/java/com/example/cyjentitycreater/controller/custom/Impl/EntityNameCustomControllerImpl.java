@@ -29,8 +29,8 @@ public class EntityNameCustomControllerImpl implements EntityNameCustomControlle
 
     @Override
     public ResultVO createEntity(@RequestBody CreateVO createVO) {
-        entityNameCustomService.generateJavaFile(createVO.getId(), createVO.isReWaite());
-        entityNameCustomService.createComponentFile(createVO.getId(), createVO.isReWaite());
+        entityNameCustomService.generateJavaFile(createVO.getId());
+        entityNameCustomService.createComponentFile(createVO.getId());
         return ResultVO.success();
     }
 

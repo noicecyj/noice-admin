@@ -15,9 +15,9 @@ public interface EntityNameCustomService {
 
     List<EntityNamePO> findListByPid(String id);
 
-    void generateJavaFile(String id, boolean isReWaite);
+    void generateJavaFile(String id);
 
-    void createComponentFile(String id, boolean isReWaite);
+    void createComponentFile(String id);
 
     JSONObject findDataTableAndFormByName(String entityCode);
 

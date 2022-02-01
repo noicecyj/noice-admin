@@ -78,7 +78,10 @@ function EntityName() {
       <DataFormTemple
         title={entityNameState.entityNameTitle}
         visibleDialog={entityNameState.entityNameVisible}
-        onClose={() => entityNameDispatchers.setState({ entityNameVisible: false })}
+        onClose={() => entityNameDispatchers.setState({
+          entityNameVisible: false,
+          entityNameId: '',
+        })}
         items={entityNameState.entityNameForm}
         dispatchers={(value) => entityNameDispatchers.setDataForm(value)}
         onOk={() => entityNameDispatchers.entityNameSave({
