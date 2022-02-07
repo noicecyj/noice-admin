@@ -53,6 +53,7 @@ public class BaseService {
         }
         if (file2.createNewFile()) {
             logger.info("生成文件,路径为：{}", path + "/" + result[1]);
+            reWrite = true;
         }
         if (reWrite) {
             FileWriter fw = null;
