@@ -4,7 +4,7 @@ import LoginPage from '@/pages/Login';
 // import MenuPagePage from '@/pages/MenuPage';
 import CatalogPage from '@/pages/Catalog';
 import EntityNamePage from '@/pages/EntityName';
-// import LogPage from '@/pages/Log';
+import SqlPage from '@/pages/Sql';
 import AppServicePage from '@/pages/AppService';
 // import UserPage from '@/pages/User';
 // import RolePage from '@/pages/Role';
@@ -27,10 +27,10 @@ const routerConfig = [
         path: '/entitycreater',
         component: EntityNamePage,
       },
-      // {
-      //   path: '/log',
-      //   component: LogPage,
-      // },
+      {
+        path: '/sql',
+        component: SqlPage,
+      },
       {
         path: '/appService',
         component: AppServicePage,
