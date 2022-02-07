@@ -6,8 +6,8 @@ import CatalogPage from '@/pages/Catalog';
 import EntityNamePage from '@/pages/EntityName';
 import SqlPage from '@/pages/Sql';
 import AppServicePage from '@/pages/AppService';
-// import UserPage from '@/pages/User';
-// import RolePage from '@/pages/Role';
+import UserPage from '@/pages/User';
+import RolePage from '@/pages/Role';
 // import ApiPage from '@/pages/Api';
 
 const routerConfig = [
@@ -41,14 +41,14 @@ const routerConfig = [
     path: '/auth',
     component: BasicLayout,
     children: [
-      // {
-      //   path: '/user',
-      //   component: UserPage,
-      // },
-      // {
-      //   path: '/role',
-      //   component: RolePage,
-      // },
+      {
+        path: '/user',
+        component: UserPage,
+      },
+      {
+        path: '/role',
+        component: RolePage,
+      },
       // {
       //   path: '/api',
       //   component: ApiPage,
