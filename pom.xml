@@ -32,7 +32,6 @@
         <module>cyj-discovery</module>
         <module>cyj-entity-creater</module>
         <module>cyj-dictionary</module>
-        <module>cyj-log</module>
         <module>cyj-workflow</module>
         <module>cyj-query</module>
         <module>cyj-user</module>

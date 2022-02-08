@@ -60,14 +60,6 @@ function User() {
             getPage={(userCurrent) => userDispatchers.userPage({
               pageNumber: userCurrent,
             })}
-            rowSelection={{
-              mode: 'single',
-              onSelect: (selected, record) => {
-                userDispatchers.setState({ userId: record.id });
-              },
-              selectedRowKeys: [
-              ],
-            }}
             primaryKey="id"
             pageRender={userRender}
             operationRender={userState.customType ? userCustomRender : null}

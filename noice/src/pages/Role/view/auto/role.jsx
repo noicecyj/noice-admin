@@ -60,14 +60,6 @@ function Role() {
             getPage={(roleCurrent) => roleDispatchers.rolePage({
               pageNumber: roleCurrent,
             })}
-            rowSelection={{
-              mode: 'single',
-              onSelect: (selected, record) => {
-                roleDispatchers.setState({ roleId: record.id });
-              },
-              selectedRowKeys: [
-              ],
-            }}
             primaryKey="id"
             pageRender={roleRender}
             operationRender={roleState.customType ? roleCustomRender : null}
