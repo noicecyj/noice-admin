@@ -60,14 +60,6 @@ function Sql() {
             getPage={(sqlCurrent) => sqlDispatchers.sqlPage({
               pageNumber: sqlCurrent,
             })}
-            rowSelection={{
-              mode: 'single',
-              onSelect: (selected, record) => {
-                sqlDispatchers.setState({ sqlId: record.id });
-              },
-              selectedRowKeys: [
-              ],
-            }}
             primaryKey="id"
             pageRender={sqlRender}
             operationRender={sqlState.customType ? sqlCustomRender : null}
