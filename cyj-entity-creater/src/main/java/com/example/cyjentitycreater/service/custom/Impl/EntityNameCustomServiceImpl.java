@@ -1465,24 +1465,26 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("            getPage={(").append(underPoName).append("Current) => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Page({\r\n");
         sb.append("              pageNumber: ").append(underPoName).append("Current,\r\n");
         sb.append("            })}\r\n");
-        sb.append("            rowSelection={{\r\n");
-        sb.append("              mode: 'single',\r\n");
-        sb.append("              onSelect: (selected, record) => {\r\n");
-        sb.append("                ").append(underPoName).append("Dispatchers.setState({ ").append(underPoName).append("Id: record.id });\r\n");
-        entityNamePOList.forEach(subPo -> {
-            //驼峰名
-            String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
-            sb.append("                ").append(underSubPoName).append("Dispatchers.onRowClick({ selected, record });\r\n");
-        });
-        sb.append("              },\r\n");
-        sb.append("              selectedRowKeys: [\r\n");
-        entityNamePOList.forEach(subPo -> {
-            //驼峰名
-            String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
-            sb.append("                ").append(underSubPoName).append("State.").append(underPoName).append("Id,\r\n");
-        });
-        sb.append("              ],\r\n");
-        sb.append("            }}\r\n");
+        if (entityNamePOList.size() != 0) {
+            sb.append("            rowSelection={{\r\n");
+            sb.append("              mode: 'single',\r\n");
+            sb.append("              onSelect: (selected, record) => {\r\n");
+            sb.append("                ").append(underPoName).append("Dispatchers.setState({ ").append(underPoName).append("Id: record.id });\r\n");
+            entityNamePOList.forEach(subPo -> {
+                //驼峰名
+                String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
+                sb.append("                ").append(underSubPoName).append("Dispatchers.onRowClick({ selected, record });\r\n");
+            });
+            sb.append("              },\r\n");
+            sb.append("              selectedRowKeys: [\r\n");
+            entityNamePOList.forEach(subPo -> {
+                //驼峰名
+                String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
+                sb.append("                ").append(underSubPoName).append("State.").append(underPoName).append("Id,\r\n");
+            });
+            sb.append("              ],\r\n");
+            sb.append("            }}\r\n");
+        }
         sb.append("            primaryKey=\"id\"\r\n");
         sb.append("            pageRender={").append(underPoName).append("Render}\r\n");
         sb.append("            operationRender={").append(underPoName).append("State.customType ? ").append(underPoName).append("CustomRender : null}\r\n");

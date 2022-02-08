@@ -7,11 +7,6 @@ const asideMenuConfig = [
     path: '/admin',
     children: [
       {
-        name: '菜单管理',
-        icon: '',
-        path: '/admin/pagemenu',
-      },
-      {
         name: '数据字典',
         icon: '',
         path: '/admin/catalog',
@@ -20,11 +15,6 @@ const asideMenuConfig = [
         name: '实体生成器',
         icon: '',
         path: '/admin/entitycreater',
-      },
-      {
-        name: '日志管理',
-        icon: '',
-        path: '/admin/log',
       },
       {
         name: 'sql查询器',
@@ -57,11 +47,6 @@ const asideMenuConfig = [
         name: '接口管理',
         icon: '',
         path: '/auth/api',
-      },
-      {
-        name: '功能管理',
-        icon: '',
-        path: '/auth/pagefunction',
       },
     ],
   },

@@ -25,9 +25,9 @@
       "enable": true,
       "target": "http://127.0.0.1:8090/cyj-entity-creater"
     },
-    "/logApi": {
+    "/sqlApi": {
       "enable": true,
-      "target": "http://127.0.0.1:8090/cyj-log"
+      "target": "http://127.0.0.1:8090/cyj-entity-creater"
     },
     "/authApi": {
       "enable": true,
@@ -36,10 +36,6 @@
     "/userApi": {
       "enable": true,
       "target": "http://127.0.0.1:8090/cyj-user"
-    },
-    "/sqlApi": {
-      "enable": true,
-      "target": "http://127.0.0.1:8090/cyj-entity-creater"
     }
   }
 }

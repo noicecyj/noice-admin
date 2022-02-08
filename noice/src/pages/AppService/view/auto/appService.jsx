@@ -60,14 +60,6 @@ function AppService() {
             getPage={(appServiceCurrent) => appServiceDispatchers.appServicePage({
               pageNumber: appServiceCurrent,
             })}
-            rowSelection={{
-              mode: 'single',
-              onSelect: (selected, record) => {
-                appServiceDispatchers.setState({ appServiceId: record.id });
-              },
-              selectedRowKeys: [
-              ],
-            }}
             primaryKey="id"
             pageRender={appServiceRender}
             operationRender={appServiceState.customType ? appServiceCustomRender : null}

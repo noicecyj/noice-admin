@@ -9,7 +9,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="cyj-auth" />
         <module name="cyj-discovery" />
-        <module name="cyj-log" />
         <module name="cyj-dictionary" />
         <module name="cyj-common" />
         <module name="cyj-query" />
