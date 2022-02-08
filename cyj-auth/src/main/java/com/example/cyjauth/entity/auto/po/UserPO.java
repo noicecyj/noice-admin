@@ -35,6 +35,14 @@ public class UserPO implements Serializable {
     @GeneratedValue(generator = "uuid2")
     @Column(name = "id", length = 36)
     private String id;
+    @Column(name = "password")
+    private String password;
+    @Column(name = "user_name")
+    private String userName;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "phone")
+    private String phone;
     @Column(name = "status")
     private String status;
     @Column(name = "sort_code")
