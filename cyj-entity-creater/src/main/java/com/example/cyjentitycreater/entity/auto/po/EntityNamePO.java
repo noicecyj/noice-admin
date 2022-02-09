@@ -37,8 +37,6 @@ public class EntityNamePO implements Serializable {
     private String id;
     @Column(name = "pid")
     private String pid;
-    @Column(name = "app_id")
-    private String appId;
     @Column(name = "app_name")
     private String appName;
     @Column(name = "entity_name")
