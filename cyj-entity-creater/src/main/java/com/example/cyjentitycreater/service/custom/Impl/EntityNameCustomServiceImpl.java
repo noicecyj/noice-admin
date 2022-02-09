@@ -12,11 +12,12 @@ import com.example.cyjentitycreater.entity.auto.po.EntityNamePO;
 import com.example.cyjentitycreater.entity.auto.po.EntityPO;
 import com.example.cyjentitycreater.entity.auto.po.QEntityNamePO;
 import com.example.cyjentitycreater.entity.custom.dto.EntityCustomDTO;
-import com.example.cyjentitycreater.service.auto.AppServiceService;
 import com.example.cyjentitycreater.service.auto.EntityNameService;
 import com.example.cyjentitycreater.service.auto.EntityService;
+import com.example.cyjentitycreater.service.custom.AppServiceCustomService;
 import com.example.cyjentitycreater.service.custom.EntityNameCustomService;
 import com.example.cyjentitycreater.utils.BeanUtils;
+import com.example.cyjquery.service.custom.SqlCustomService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,8 +45,9 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
     private EntityService entityService;
     private EntityNameCustomDao entityNameCustomDao;
     private EntityCustomDao entityCustomDao;
-    private AppServiceService appServiceService;
+    private AppServiceCustomService appServiceCustomService;
     private DictionaryCustomService dictionaryCustomService;
+    private SqlCustomService sqlCustomService;
 
     @Autowired
     public void setEntityNameService(EntityNameService entityNameService) {
@@ -68,13 +70,18 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
     }
 
     @Autowired
-    public void setAppServiceService(AppServiceService appServiceService) {
-        this.appServiceService = appServiceService;
+    public void setAppServiceCustomService(AppServiceCustomService appServiceCustomService) {
+        this.appServiceCustomService = appServiceCustomService;
     }
 
     @Autowired
     public void setDictionaryCustomService(DictionaryCustomService dictionaryCustomService) {
         this.dictionaryCustomService = dictionaryCustomService;
+    }
+
+    @Autowired
+    public void setSqlCustomService(SqlCustomService sqlCustomService) {
+        this.sqlCustomService = sqlCustomService;
     }
 
     @Override
@@ -97,7 +104,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         String underPoName = BeanUtils.underline2Camel(po.getEntityCode());
         //文件名
         String poName = BeanUtils.captureName(underPoName);
-        AppServicePO appServicePO = appServiceService.findOneById(po.getAppId());
+        AppServicePO appServicePO = appServiceCustomService.findOneByName(po.getAppName());
         if (appServicePO == null) {
             return;
         }
@@ -849,7 +856,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
             String underPoName = BeanUtils.underline2Camel(po.getEntityCode());
             //文件名
             String poName = BeanUtils.captureName(underPoName);
-            AppServicePO appServicePO = appServiceService.findOneById(po.getAppId());
+            AppServicePO appServicePO = appServiceCustomService.findOneByName(po.getAppName());
             if (appServicePO == null) {
                 return;
             }
@@ -1638,14 +1645,28 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
             if (StringUtils.isNotEmpty(entityPO.getPropertyDataSourceType())) {
                 List<DictionaryPO> dictionaryDTOList = dictionaryCustomService
                         .findCatalogByValue(entityCustomDTO.getPropertyDataSourceType());
-                List<Map<String, String>> mapList = new ArrayList<>();
-                for (DictionaryPO dictionaryPO : dictionaryDTOList) {
-                    Map<String, String> map = new HashMap<>();
-                    map.put("label", dictionaryPO.getDictionaryName());
-                    map.put("value", dictionaryPO.getDictionaryValue());
-                    mapList.add(map);
+                if (dictionaryDTOList != null && dictionaryDTOList.size() != 0) {
+                    List<Map<String, String>> mapList = new ArrayList<>();
+                    for (DictionaryPO dictionaryPO : dictionaryDTOList) {
+                        Map<String, String> map = new HashMap<>();
+                        map.put("label", dictionaryPO.getDictionaryName());
+                        map.put("value", dictionaryPO.getDictionaryValue());
+                        mapList.add(map);
+                    }
+                    entityCustomDTO.setPropertyDataSource(mapList);
                 }
-                entityCustomDTO.setPropertyDataSource(mapList);
+                List<Map<String, Object>> dateSourceList = sqlCustomService
+                        .queryBySqlValue(entityCustomDTO.getPropertyDataSourceType());
+                if (dateSourceList != null && dateSourceList.size() != 0) {
+                    List<Map<String, String>> mapList = new ArrayList<>();
+                    for (Map<String, Object> dateSourceMap : dateSourceList) {
+                        Map<String, String> map = new HashMap<>();
+                        map.put("label", dateSourceMap.get("label").toString());
+                        map.put("value", dateSourceMap.get("value").toString());
+                        mapList.add(map);
+                    }
+                    entityCustomDTO.setPropertyDataSource(mapList);
+                }
             }
             entityCustomDTOList.add(entityCustomDTO);
         }

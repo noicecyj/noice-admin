@@ -9,4 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @date 2022-02-07
  */
 public interface SqlCustomDao extends JpaRepository<SqlPO, String> {
+
+    SqlPO findBySqlDescription(String value);
+
 }
