@@ -1,7 +1,6 @@
 import BasicLayout from '@/layouts/BasicLayout';
 import UserLayout from '@/layouts/UserLayout';
 import LoginPage from '@/pages/Login';
-// import MenuPagePage from '@/pages/MenuPage';
 import CatalogPage from '@/pages/Catalog';
 import EntityNamePage from '@/pages/EntityName';
 import SqlPage from '@/pages/Sql';
@@ -15,10 +14,6 @@ const routerConfig = [
     path: '/admin',
     component: BasicLayout,
     children: [
-      // {
-      //   path: '/pagemenu',
-      //   component: MenuPagePage,
-      // },
       {
         path: '/catalog',
         component: CatalogPage,
@@ -49,10 +44,6 @@ const routerConfig = [
         path: '/role',
         component: RolePage,
       },
-      // {
-      //   path: '/api',
-      //   component: ApiPage,
-      // },
     ],
   },
   {

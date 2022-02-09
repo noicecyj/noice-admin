@@ -1,7 +1,6 @@
 const headerMenuConfig = [];
 const asideMenuConfig = [
   {
-
     name: '开发管理',
     icon: 'edit',
     path: '/admin',
@@ -42,11 +41,6 @@ const asideMenuConfig = [
         name: '角色管理',
         icon: '',
         path: '/auth/role',
-      },
-      {
-        name: '接口管理',
-        icon: '',
-        path: '/auth/api',
       },
     ],
   },
