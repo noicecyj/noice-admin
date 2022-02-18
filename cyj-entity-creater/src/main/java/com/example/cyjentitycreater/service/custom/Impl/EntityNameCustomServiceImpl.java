@@ -85,10 +85,10 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
     }
 
     @Override
-    public List<EntityNamePO> findListByPid(String id) {
+    public List<EntityNamePO> findListByParentEntityName(String entityName) {
         return queryFactory
                 .selectFrom(QEntityNamePO.entityNamePO)
-                .where(QEntityNamePO.entityNamePO.pid.eq(id))
+                .where(QEntityNamePO.entityNamePO.parentEntityName.eq(entityName))
                 .fetch();
     }
 
@@ -113,7 +113,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         //服务接口
         String appApi = appServicePO.getAppApi();
         createJavaFile(po, poList, underPoName, poName, appPath, appApi);
-        List<EntityNamePO> entityNamePOList = findListByPid(po.getId());
+        List<EntityNamePO> entityNamePOList = findListByParentEntityName(po.getEntityName());
         entityNamePOList.forEach(subPo -> {
             List<EntityPO> subPoList = entityService.findListByPid(subPo.getId());
             //驼峰名
@@ -862,7 +862,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
             }
             //服务接口
             String appApi = appServicePO.getAppApi();
-            List<EntityNamePO> entityNamePOList = findListByPid(po.getId());
+            List<EntityNamePO> entityNamePOList = findListByParentEntityName(po.getEntityName());
             createComponentFile(appApi, entityNamePOList, po, underPoName, poName);
             entityNamePOList.forEach(subPo -> {
                 //驼峰名
