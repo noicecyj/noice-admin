@@ -18,7 +18,7 @@ import java.util.Objects;
 /**
  * @author 曹元杰
  * @version 1.0
- * @date 2022-02-07
+ * @date 2022-02-18
  */
 @Entity
 @Table(name = EntityNamePO.T_ENTITY_NAME)
@@ -35,6 +35,8 @@ public class EntityNamePO implements Serializable {
     @GeneratedValue(generator = "uuid2")
     @Column(name = "id", length = 36)
     private String id;
+    @Column(name = "parent_entity_name")
+    private String parentEntityName;
     @Column(name = "pid")
     private String pid;
     @Column(name = "app_name")
