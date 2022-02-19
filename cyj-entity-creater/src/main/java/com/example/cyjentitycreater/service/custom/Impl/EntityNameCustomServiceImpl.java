@@ -1099,21 +1099,17 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "        })}\r\n" +
                 "        style={{ width: '90%' }}\r\n" +
                 "      >\r\n" +
-                "        <div className={styles.Main}>\r\n" +
-                "          <div className={styles.add}>\r\n" +
-                "            <Button type=\"primary\" onClick={() => " + underSubPoName + "Dispatchers." + underSubPoName + "Edit()}> 添加 </Button>\r\n" +
-                "          </div>\r\n" +
-                "          <DataTableTemple\r\n" +
-                "            visibleLoading={" + underSubPoName + "State." + underSubPoName + "LoadingVisible}\r\n" +
-                "            dataSource={" + underSubPoName + "State." + underSubPoName + "TableData}\r\n" +
-                "            items={" + underSubPoName + "State." + underSubPoName + "Table}\r\n" +
-                "            total={" + underSubPoName + "State." + underSubPoName + "Total}\r\n" +
-                "            primaryKey=\"id\"\r\n" +
-                "            getPage={(" + underSubPoName + "Current) => " + underSubPoName + "Dispatchers." + underSubPoName + "Page({ " + underSubPoName + "Current, pid: " + underSubPoName + "State." + underPoName + "Id })}\r\n" +
-                "            pageRender={" + underSubPoName + "Render}\r\n" +
-                "            operationRender={" + underSubPoName + "State.customType ? " + underSubPoName + "CustomRender : null}\r\n" +
-                "          />\r\n" +
-                "        </div>\r\n" +
+                "        <DataTableTemple\r\n" +
+                "          edit={() => " + underSubPoName + "Dispatchers." + underSubPoName + "Edit()}\r\n" +
+                "          visibleLoading={" + underSubPoName + "State." + underSubPoName + "LoadingVisible}\r\n" +
+                "          dataSource={" + underSubPoName + "State." + underSubPoName + "TableData}\r\n" +
+                "          items={" + underSubPoName + "State." + underSubPoName + "Table}\r\n" +
+                "          total={" + underSubPoName + "State." + underSubPoName + "Total}\r\n" +
+                "          primaryKey=\"id\"\r\n" +
+                "          getPage={(" + underSubPoName + "Current) => " + underSubPoName + "Dispatchers." + underSubPoName + "Page({ " + underSubPoName + "Current, pid: " + underSubPoName + "State." + underPoName + "Id })}\r\n" +
+                "          pageRender={" + underSubPoName + "Render}\r\n" +
+                "          operationRender={" + underSubPoName + "State.customType ? " + underSubPoName + "CustomRender : null}\r\n" +
+                "        />\r\n" +
                 "      </Dialog>\r\n" +
                 "      <DataFormTemple\r\n" +
                 "        title=\"菜单\"\r\n" +
@@ -1396,15 +1392,13 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
 
     private String[] viewAutoGenerate(List<EntityNamePO> entityNamePOList, String underPoName, String poName) {
         StringBuilder sb = new StringBuilder();
-        sb.append("import { ResponsiveGrid, Button, Dialog } from '@alifd/next';\r\n");
+        sb.append("import { Button, Dialog } from '@alifd/next';\r\n");
         sb.append("import React, { useEffect } from 'react';\r\n");
         sb.append("import pageStore from '@/pages/").append(poName).append("/store';\r\n");
         sb.append("import DataFormTemple from '@/components/dataForm';\r\n");
         sb.append("import DataTableTemple from '@/components/dataTable';\r\n");
         sb.append("import styles from '@/pages/").append(poName).append("/index.module.scss';\r\n");
         sb.append("import ").append(poName).append("Custom from '@/pages/").append(poName).append("/view/custom/").append(underPoName).append("';\r\n");
-        sb.append("\r\n");
-        sb.append("const { Cell } = ResponsiveGrid;\r\n");
         sb.append("\r\n");
         sb.append("function ").append(poName).append("() {\r\n");
         sb.append("  const [").append(underPoName).append("State, ").append(underPoName).append("Dispatchers] = pageStore.useModel('").append(underPoName).append("');\r\n");
@@ -1449,46 +1443,40 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("  };\r\n");
         sb.append("\r\n");
         sb.append("  return (\r\n");
-        sb.append("    <ResponsiveGrid gap={20}>\r\n");
-        sb.append("      <Cell colSpan={12}>\r\n");
-        sb.append("        <div className={styles.Main}>\r\n");
-        sb.append("          <div className={styles.add}>\r\n");
-        sb.append("            <Button type=\"primary\" onClick={() => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Edit()}> 添加 </Button>\r\n");
-        sb.append("          </div>\r\n");
-        sb.append("          <DataTableTemple\r\n");
-        sb.append("            visibleLoading={").append(underPoName).append("State.").append(underPoName).append("LoadingVisible}\r\n");
-        sb.append("            dataSource={").append(underPoName).append("State.").append(underPoName).append("TableData}\r\n");
-        sb.append("            items={").append(underPoName).append("State.").append(underPoName).append("Table}\r\n");
-        sb.append("            total={").append(underPoName).append("State.").append(underPoName).append("Total}\r\n");
-        sb.append("            getPage={(").append(underPoName).append("Current) => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Page({\r\n");
-        sb.append("              pageNumber: ").append(underPoName).append("Current,\r\n");
-        sb.append("            })}\r\n");
+        sb.append("    <>\r\n");
+        sb.append("      <DataTableTemple\r\n");
+        sb.append("        edit={() => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Edit()}\r\n");
+        sb.append("        visibleLoading={").append(underPoName).append("State.").append(underPoName).append("LoadingVisible}\r\n");
+        sb.append("        dataSource={").append(underPoName).append("State.").append(underPoName).append("TableData}\r\n");
+        sb.append("        items={").append(underPoName).append("State.").append(underPoName).append("Table}\r\n");
+        sb.append("        total={").append(underPoName).append("State.").append(underPoName).append("Total}\r\n");
+        sb.append("        getPage={(").append(underPoName).append("Current) => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Page({\r\n");
+        sb.append("          pageNumber: ").append(underPoName).append("Current,\r\n");
+        sb.append("        })}\r\n");
         if (entityNamePOList.size() != 0) {
-            sb.append("            rowSelection={{\r\n");
-            sb.append("              mode: 'single',\r\n");
-            sb.append("              onSelect: (selected, record) => {\r\n");
-            sb.append("                ").append(underPoName).append("Dispatchers.setState({ ").append(underPoName).append("Id: record.id });\r\n");
+            sb.append("        rowSelection={{\r\n");
+            sb.append("          mode: 'single',\r\n");
+            sb.append("          onSelect: (selected, record) => {\r\n");
+            sb.append("            ").append(underPoName).append("Dispatchers.setState({ ").append(underPoName).append("Id: record.id });\r\n");
             entityNamePOList.forEach(subPo -> {
                 //驼峰名
                 String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
-                sb.append("                ").append(underSubPoName).append("Dispatchers.onRowClick({ selected, record });\r\n");
+                sb.append("            ").append(underSubPoName).append("Dispatchers.onRowClick({ selected, record });\r\n");
             });
-            sb.append("              },\r\n");
-            sb.append("              selectedRowKeys: [\r\n");
+            sb.append("          },\r\n");
+            sb.append("          selectedRowKeys: [\r\n");
             entityNamePOList.forEach(subPo -> {
                 //驼峰名
                 String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
-                sb.append("                ").append(underSubPoName).append("State.").append(underPoName).append("Id,\r\n");
+                sb.append("            ").append(underSubPoName).append("State.").append(underPoName).append("Id,\r\n");
             });
-            sb.append("              ],\r\n");
-            sb.append("            }}\r\n");
+            sb.append("          ],\r\n");
+            sb.append("        }}\r\n");
         }
-        sb.append("            primaryKey=\"id\"\r\n");
-        sb.append("            pageRender={").append(underPoName).append("Render}\r\n");
-        sb.append("            operationRender={").append(underPoName).append("State.customType ? ").append(underPoName).append("CustomRender : null}\r\n");
-        sb.append("          />\r\n");
-        sb.append("        </div>\r\n");
-        sb.append("      </Cell>\r\n");
+        sb.append("        primaryKey=\"id\"\r\n");
+        sb.append("        pageRender={").append(underPoName).append("Render}\r\n");
+        sb.append("        operationRender={").append(underPoName).append("State.customType ? ").append(underPoName).append("CustomRender : null}\r\n");
+        sb.append("      />\r\n");
         sb.append("      <DataFormTemple\r\n");
         sb.append("        title={").append(underPoName).append("State.").append(underPoName).append("Title}\r\n");
         sb.append("        visibleDialog={").append(underPoName).append("State.").append(underPoName).append("Visible}\r\n");
@@ -1501,7 +1489,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("        })}\r\n");
         sb.append("        formDataValue={").append(underPoName).append("State.").append(underPoName).append("FormData}\r\n");
         sb.append("      />\r\n");
-        sb.append("    </ResponsiveGrid>\r\n");
+        sb.append("    </>\r\n");
         sb.append("  );\r\n");
         sb.append("}\r\n");
         sb.append("\r\n");
@@ -1636,28 +1624,30 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
             if (StringUtils.isNotEmpty(entityPO.getPropertyDataSourceType())) {
                 List<DictionaryPO> dictionaryDTOList = dictionaryCustomService
                         .findCatalogByValue(entityCustomDTO.getPropertyDataSourceType());
+                List<Map<String, String>> mapList = new ArrayList<>();
+                Map<String, String> mapNull = new HashMap<>();
+                mapNull.put("label", "无");
+                mapNull.put("value", null);
+                mapList.add(mapNull);
                 if (dictionaryDTOList != null && dictionaryDTOList.size() != 0) {
-                    List<Map<String, String>> mapList = new ArrayList<>();
                     for (DictionaryPO dictionaryPO : dictionaryDTOList) {
                         Map<String, String> map = new HashMap<>();
                         map.put("label", dictionaryPO.getDictionaryName());
                         map.put("value", dictionaryPO.getDictionaryValue());
                         mapList.add(map);
                     }
-                    entityCustomDTO.setPropertyDataSource(mapList);
                 }
                 List<Map<String, Object>> dateSourceList = sqlCustomService
                         .queryBySqlValue(entityCustomDTO.getPropertyDataSourceType());
                 if (dateSourceList != null && dateSourceList.size() != 0) {
-                    List<Map<String, String>> mapList = new ArrayList<>();
                     for (Map<String, Object> dateSourceMap : dateSourceList) {
                         Map<String, String> map = new HashMap<>();
                         map.put("label", dateSourceMap.get("label").toString());
                         map.put("value", dateSourceMap.get("value").toString());
                         mapList.add(map);
                     }
-                    entityCustomDTO.setPropertyDataSource(mapList);
                 }
+                entityCustomDTO.setPropertyDataSource(mapList);
             }
             entityCustomDTOList.add(entityCustomDTO);
         }
