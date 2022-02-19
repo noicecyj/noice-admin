@@ -13,8 +13,6 @@ import java.util.List;
  */
 public interface EntityNameCustomService {
 
-    List<EntityNamePO> findListByParentEntityName(String entityName);
-
     void generateJavaFile(String id);
 
     void createComponentFile(String id);

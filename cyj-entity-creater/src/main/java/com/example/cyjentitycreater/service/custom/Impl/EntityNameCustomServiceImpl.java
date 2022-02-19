@@ -10,7 +10,6 @@ import com.example.cyjentitycreater.dao.custom.EntityNameCustomDao;
 import com.example.cyjentitycreater.entity.auto.po.AppServicePO;
 import com.example.cyjentitycreater.entity.auto.po.EntityNamePO;
 import com.example.cyjentitycreater.entity.auto.po.EntityPO;
-import com.example.cyjentitycreater.entity.auto.po.QEntityNamePO;
 import com.example.cyjentitycreater.entity.custom.dto.EntityCustomDTO;
 import com.example.cyjentitycreater.service.auto.EntityNameService;
 import com.example.cyjentitycreater.service.auto.EntityService;
@@ -85,14 +84,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
     }
 
     @Override
-    public List<EntityNamePO> findListByParentEntityName(String entityName) {
-        return queryFactory
-                .selectFrom(QEntityNamePO.entityNamePO)
-                .where(QEntityNamePO.entityNamePO.parentEntityName.eq(entityName))
-                .fetch();
-    }
-
-    @Override
     public void generateJavaFile(String id) {
         //获取实例po
         EntityNamePO po = entityNameService.findOneById(id);
@@ -113,7 +104,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         //服务接口
         String appApi = appServicePO.getAppApi();
         createJavaFile(po, poList, underPoName, poName, appPath, appApi);
-        List<EntityNamePO> entityNamePOList = findListByParentEntityName(po.getEntityName());
+        List<EntityNamePO> entityNamePOList = entityNameCustomDao.findByParentEntityName(po.getEntityCode());
         entityNamePOList.forEach(subPo -> {
             List<EntityPO> subPoList = entityService.findListByPid(subPo.getId());
             //驼峰名
@@ -862,7 +853,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
             }
             //服务接口
             String appApi = appServicePO.getAppApi();
-            List<EntityNamePO> entityNamePOList = findListByParentEntityName(po.getEntityName());
+            List<EntityNamePO> entityNamePOList = entityNameCustomDao.findByParentEntityName(po.getEntityCode());
             createComponentFile(appApi, entityNamePOList, po, underPoName, poName);
             entityNamePOList.forEach(subPo -> {
                 //驼峰名

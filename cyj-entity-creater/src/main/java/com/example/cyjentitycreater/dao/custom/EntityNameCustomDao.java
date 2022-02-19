@@ -3,6 +3,8 @@ package com.example.cyjentitycreater.dao.custom;
 import com.example.cyjentitycreater.entity.auto.po.EntityNamePO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 /**
  * @author 曹元杰
  * @version 1.0
@@ -11,5 +13,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface EntityNameCustomDao extends JpaRepository<EntityNamePO, String> {
 
     EntityNamePO findEntityNamePOByEntityCodeAndEntityType(String entityCode, String entityType);
+
+    List<EntityNamePO> findByParentEntityName(String entityCode);
 
 }
