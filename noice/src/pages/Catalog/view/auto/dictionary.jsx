@@ -51,21 +51,17 @@ function Dictionary() {
         })}
         style={{ width: '90%' }}
       >
-        <div className={styles.Main}>
-          <div className={styles.add}>
-            <Button type="primary" onClick={() => dictionaryDispatchers.dictionaryEdit()}> 添加 </Button>
-          </div>
-          <DataTableTemple
-            visibleLoading={dictionaryState.dictionaryLoadingVisible}
-            dataSource={dictionaryState.dictionaryTableData}
-            items={dictionaryState.dictionaryTable}
-            total={dictionaryState.dictionaryTotal}
-            primaryKey="id"
-            getPage={(dictionaryCurrent) => dictionaryDispatchers.dictionaryPage({ dictionaryCurrent, pid: dictionaryState.catalogId })}
-            pageRender={dictionaryRender}
-            operationRender={dictionaryState.customType ? dictionaryCustomRender : null}
-          />
-        </div>
+        <DataTableTemple
+          edit={() => dictionaryDispatchers.dictionaryEdit()}
+          visibleLoading={dictionaryState.dictionaryLoadingVisible}
+          dataSource={dictionaryState.dictionaryTableData}
+          items={dictionaryState.dictionaryTable}
+          total={dictionaryState.dictionaryTotal}
+          primaryKey="id"
+          getPage={(dictionaryCurrent) => dictionaryDispatchers.dictionaryPage({ dictionaryCurrent, pid: dictionaryState.catalogId })}
+          pageRender={dictionaryRender}
+          operationRender={dictionaryState.customType ? dictionaryCustomRender : null}
+        />
       </Dialog>
       <DataFormTemple
         title="菜单"

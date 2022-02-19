@@ -1,12 +1,10 @@
-import { ResponsiveGrid, Button, Dialog } from '@alifd/next';
+import { Button, Dialog } from '@alifd/next';
 import React, { useEffect } from 'react';
 import pageStore from '@/pages/AppService/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
 import styles from '@/pages/AppService/index.module.scss';
 import AppServiceCustom from '@/pages/AppService/view/custom/appService';
-
-const { Cell } = ResponsiveGrid;
 
 function AppService() {
   const [appServiceState, appServiceDispatchers] = pageStore.useModel('appService');
@@ -46,26 +44,20 @@ function AppService() {
   };
 
   return (
-    <ResponsiveGrid gap={20}>
-      <Cell colSpan={12}>
-        <div className={styles.Main}>
-          <div className={styles.add}>
-            <Button type="primary" onClick={() => appServiceDispatchers.appServiceEdit()}> 添加 </Button>
-          </div>
-          <DataTableTemple
-            visibleLoading={appServiceState.appServiceLoadingVisible}
-            dataSource={appServiceState.appServiceTableData}
-            items={appServiceState.appServiceTable}
-            total={appServiceState.appServiceTotal}
-            getPage={(appServiceCurrent) => appServiceDispatchers.appServicePage({
-              pageNumber: appServiceCurrent,
-            })}
-            primaryKey="id"
-            pageRender={appServiceRender}
-            operationRender={appServiceState.customType ? appServiceCustomRender : null}
-          />
-        </div>
-      </Cell>
+    <>
+      <DataTableTemple
+        edit={() => appServiceDispatchers.appServiceEdit()}
+        visibleLoading={appServiceState.appServiceLoadingVisible}
+        dataSource={appServiceState.appServiceTableData}
+        items={appServiceState.appServiceTable}
+        total={appServiceState.appServiceTotal}
+        getPage={(appServiceCurrent) => appServiceDispatchers.appServicePage({
+          pageNumber: appServiceCurrent,
+        })}
+        primaryKey="id"
+        pageRender={appServiceRender}
+        operationRender={appServiceState.customType ? appServiceCustomRender : null}
+      />
       <DataFormTemple
         title={appServiceState.appServiceTitle}
         visibleDialog={appServiceState.appServiceVisible}
@@ -78,7 +70,7 @@ function AppService() {
         })}
         formDataValue={appServiceState.appServiceFormData}
       />
-    </ResponsiveGrid>
+    </>
   );
 }
 

@@ -1,12 +1,10 @@
-import { ResponsiveGrid, Button, Dialog } from '@alifd/next';
+import { Button, Dialog } from '@alifd/next';
 import React, { useEffect } from 'react';
 import pageStore from '@/pages/Sql/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
 import styles from '@/pages/Sql/index.module.scss';
 import SqlCustom from '@/pages/Sql/view/custom/sql';
-
-const { Cell } = ResponsiveGrid;
 
 function Sql() {
   const [sqlState, sqlDispatchers] = pageStore.useModel('sql');
@@ -46,26 +44,20 @@ function Sql() {
   };
 
   return (
-    <ResponsiveGrid gap={20}>
-      <Cell colSpan={12}>
-        <div className={styles.Main}>
-          <div className={styles.add}>
-            <Button type="primary" onClick={() => sqlDispatchers.sqlEdit()}> 添加 </Button>
-          </div>
-          <DataTableTemple
-            visibleLoading={sqlState.sqlLoadingVisible}
-            dataSource={sqlState.sqlTableData}
-            items={sqlState.sqlTable}
-            total={sqlState.sqlTotal}
-            getPage={(sqlCurrent) => sqlDispatchers.sqlPage({
-              pageNumber: sqlCurrent,
-            })}
-            primaryKey="id"
-            pageRender={sqlRender}
-            operationRender={sqlState.customType ? sqlCustomRender : null}
-          />
-        </div>
-      </Cell>
+    <>
+      <DataTableTemple
+        edit={() => sqlDispatchers.sqlEdit()}
+        visibleLoading={sqlState.sqlLoadingVisible}
+        dataSource={sqlState.sqlTableData}
+        items={sqlState.sqlTable}
+        total={sqlState.sqlTotal}
+        getPage={(sqlCurrent) => sqlDispatchers.sqlPage({
+          pageNumber: sqlCurrent,
+        })}
+        primaryKey="id"
+        pageRender={sqlRender}
+        operationRender={sqlState.customType ? sqlCustomRender : null}
+      />
       <DataFormTemple
         title={sqlState.sqlTitle}
         visibleDialog={sqlState.sqlVisible}
@@ -78,7 +70,7 @@ function Sql() {
         })}
         formDataValue={sqlState.sqlFormData}
       />
-    </ResponsiveGrid>
+    </>
   );
 }
 

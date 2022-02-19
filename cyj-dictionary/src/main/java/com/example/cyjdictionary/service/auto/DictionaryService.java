@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @author 曹元杰
  * @version 1.0
- * @date 2022-02-01
+ * @date 2022-02-20
  */
 public interface DictionaryService {
 

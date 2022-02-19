@@ -1,12 +1,10 @@
-import { ResponsiveGrid, Button, Dialog } from '@alifd/next';
+import { Button, Dialog } from '@alifd/next';
 import React, { useEffect } from 'react';
 import pageStore from '@/pages/Catalog/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
 import styles from '@/pages/Catalog/index.module.scss';
 import CatalogCustom from '@/pages/Catalog/view/custom/catalog';
-
-const { Cell } = ResponsiveGrid;
 
 function Catalog() {
   const [catalogState, catalogDispatchers] = pageStore.useModel('catalog');
@@ -47,36 +45,30 @@ function Catalog() {
   };
 
   return (
-    <ResponsiveGrid gap={20}>
-      <Cell colSpan={12}>
-        <div className={styles.Main}>
-          <div className={styles.add}>
-            <Button type="primary" onClick={() => catalogDispatchers.catalogEdit()}> 添加 </Button>
-          </div>
-          <DataTableTemple
-            visibleLoading={catalogState.catalogLoadingVisible}
-            dataSource={catalogState.catalogTableData}
-            items={catalogState.catalogTable}
-            total={catalogState.catalogTotal}
-            getPage={(catalogCurrent) => catalogDispatchers.catalogPage({
-              pageNumber: catalogCurrent,
-            })}
-            rowSelection={{
-              mode: 'single',
-              onSelect: (selected, record) => {
-                catalogDispatchers.setState({ catalogId: record.id });
-                dictionaryDispatchers.onRowClick({ selected, record });
-              },
-              selectedRowKeys: [
-                dictionaryState.catalogId,
-              ],
-            }}
-            primaryKey="id"
-            pageRender={catalogRender}
-            operationRender={catalogState.customType ? catalogCustomRender : null}
-          />
-        </div>
-      </Cell>
+    <>
+      <DataTableTemple
+        edit={() => catalogDispatchers.catalogEdit()}
+        visibleLoading={catalogState.catalogLoadingVisible}
+        dataSource={catalogState.catalogTableData}
+        items={catalogState.catalogTable}
+        total={catalogState.catalogTotal}
+        getPage={(catalogCurrent) => catalogDispatchers.catalogPage({
+          pageNumber: catalogCurrent,
+        })}
+        rowSelection={{
+          mode: 'single',
+          onSelect: (selected, record) => {
+            catalogDispatchers.setState({ catalogId: record.id });
+            dictionaryDispatchers.onRowClick({ selected, record });
+          },
+          selectedRowKeys: [
+            dictionaryState.catalogId,
+          ],
+        }}
+        primaryKey="id"
+        pageRender={catalogRender}
+        operationRender={catalogState.customType ? catalogCustomRender : null}
+      />
       <DataFormTemple
         title={catalogState.catalogTitle}
         visibleDialog={catalogState.catalogVisible}
@@ -89,7 +81,7 @@ function Catalog() {
         })}
         formDataValue={catalogState.catalogFormData}
       />
-    </ResponsiveGrid>
+    </>
   );
 }
 

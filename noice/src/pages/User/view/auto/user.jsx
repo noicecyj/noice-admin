@@ -1,12 +1,10 @@
-import { ResponsiveGrid, Button, Dialog } from '@alifd/next';
+import { Button, Dialog } from '@alifd/next';
 import React, { useEffect } from 'react';
 import pageStore from '@/pages/User/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
 import styles from '@/pages/User/index.module.scss';
 import UserCustom from '@/pages/User/view/custom/user';
-
-const { Cell } = ResponsiveGrid;
 
 function User() {
   const [userState, userDispatchers] = pageStore.useModel('user');
@@ -46,26 +44,20 @@ function User() {
   };
 
   return (
-    <ResponsiveGrid gap={20}>
-      <Cell colSpan={12}>
-        <div className={styles.Main}>
-          <div className={styles.add}>
-            <Button type="primary" onClick={() => userDispatchers.userEdit()}> 添加 </Button>
-          </div>
-          <DataTableTemple
-            visibleLoading={userState.userLoadingVisible}
-            dataSource={userState.userTableData}
-            items={userState.userTable}
-            total={userState.userTotal}
-            getPage={(userCurrent) => userDispatchers.userPage({
-              pageNumber: userCurrent,
-            })}
-            primaryKey="id"
-            pageRender={userRender}
-            operationRender={userState.customType ? userCustomRender : null}
-          />
-        </div>
-      </Cell>
+    <>
+      <DataTableTemple
+        edit={() => userDispatchers.userEdit()}
+        visibleLoading={userState.userLoadingVisible}
+        dataSource={userState.userTableData}
+        items={userState.userTable}
+        total={userState.userTotal}
+        getPage={(userCurrent) => userDispatchers.userPage({
+          pageNumber: userCurrent,
+        })}
+        primaryKey="id"
+        pageRender={userRender}
+        operationRender={userState.customType ? userCustomRender : null}
+      />
       <DataFormTemple
         title={userState.userTitle}
         visibleDialog={userState.userVisible}
@@ -78,7 +70,7 @@ function User() {
         })}
         formDataValue={userState.userFormData}
       />
-    </ResponsiveGrid>
+    </>
   );
 }
 

@@ -1,12 +1,10 @@
-import { ResponsiveGrid, Button, Dialog } from '@alifd/next';
+import { Button, Dialog } from '@alifd/next';
 import React, { useEffect } from 'react';
 import pageStore from '@/pages/EntityName/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
 import styles from '@/pages/EntityName/index.module.scss';
 import EntityNameCustom from '@/pages/EntityName/view/custom/entityName';
-
-const { Cell } = ResponsiveGrid;
 
 function EntityName() {
   const [entityNameState, entityNameDispatchers] = pageStore.useModel('entityName');
@@ -47,36 +45,30 @@ function EntityName() {
   };
 
   return (
-    <ResponsiveGrid gap={20}>
-      <Cell colSpan={12}>
-        <div className={styles.Main}>
-          <div className={styles.add}>
-            <Button type="primary" onClick={() => entityNameDispatchers.entityNameEdit()}> 添加 </Button>
-          </div>
-          <DataTableTemple
-            visibleLoading={entityNameState.entityNameLoadingVisible}
-            dataSource={entityNameState.entityNameTableData}
-            items={entityNameState.entityNameTable}
-            total={entityNameState.entityNameTotal}
-            getPage={(entityNameCurrent) => entityNameDispatchers.entityNamePage({
-              pageNumber: entityNameCurrent,
-            })}
-            rowSelection={{
-              mode: 'single',
-              onSelect: (selected, record) => {
-                entityNameDispatchers.setState({ entityNameId: record.id });
-                entityDispatchers.onRowClick({ selected, record });
-              },
-              selectedRowKeys: [
-                entityState.entityNameId,
-              ],
-            }}
-            primaryKey="id"
-            pageRender={entityNameRender}
-            operationRender={entityNameState.customType ? entityNameCustomRender : null}
-          />
-        </div>
-      </Cell>
+    <>
+      <DataTableTemple
+        edit={() => entityNameDispatchers.entityNameEdit()}
+        visibleLoading={entityNameState.entityNameLoadingVisible}
+        dataSource={entityNameState.entityNameTableData}
+        items={entityNameState.entityNameTable}
+        total={entityNameState.entityNameTotal}
+        getPage={(entityNameCurrent) => entityNameDispatchers.entityNamePage({
+          pageNumber: entityNameCurrent,
+        })}
+        rowSelection={{
+          mode: 'single',
+          onSelect: (selected, record) => {
+            entityNameDispatchers.setState({ entityNameId: record.id });
+            entityDispatchers.onRowClick({ selected, record });
+          },
+          selectedRowKeys: [
+            entityState.entityNameId,
+          ],
+        }}
+        primaryKey="id"
+        pageRender={entityNameRender}
+        operationRender={entityNameState.customType ? entityNameCustomRender : null}
+      />
       <DataFormTemple
         title={entityNameState.entityNameTitle}
         visibleDialog={entityNameState.entityNameVisible}
@@ -89,7 +81,7 @@ function EntityName() {
         })}
         formDataValue={entityNameState.entityNameFormData}
       />
-    </ResponsiveGrid>
+    </>
   );
 }
 

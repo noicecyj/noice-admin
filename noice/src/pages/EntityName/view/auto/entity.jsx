@@ -51,21 +51,17 @@ function Entity() {
         })}
         style={{ width: '90%' }}
       >
-        <div className={styles.Main}>
-          <div className={styles.add}>
-            <Button type="primary" onClick={() => entityDispatchers.entityEdit()}> 添加 </Button>
-          </div>
-          <DataTableTemple
-            visibleLoading={entityState.entityLoadingVisible}
-            dataSource={entityState.entityTableData}
-            items={entityState.entityTable}
-            total={entityState.entityTotal}
-            primaryKey="id"
-            getPage={(entityCurrent) => entityDispatchers.entityPage({ entityCurrent, pid: entityState.entityNameId })}
-            pageRender={entityRender}
-            operationRender={entityState.customType ? entityCustomRender : null}
-          />
-        </div>
+        <DataTableTemple
+          edit={() => entityDispatchers.entityEdit()}
+          visibleLoading={entityState.entityLoadingVisible}
+          dataSource={entityState.entityTableData}
+          items={entityState.entityTable}
+          total={entityState.entityTotal}
+          primaryKey="id"
+          getPage={(entityCurrent) => entityDispatchers.entityPage({ entityCurrent, pid: entityState.entityNameId })}
+          pageRender={entityRender}
+          operationRender={entityState.customType ? entityCustomRender : null}
+        />
       </Dialog>
       <DataFormTemple
         title="菜单"
