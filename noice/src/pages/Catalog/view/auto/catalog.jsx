@@ -1,10 +1,8 @@
-import { Button, Dialog } from '@alifd/next';
 import React, { useEffect } from 'react';
 import pageStore from '@/pages/Catalog/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
-import styles from '@/pages/Catalog/index.module.scss';
-import CatalogCustom from '@/pages/Catalog/view/custom/catalog';
+import { CustomColumnCatalog } from '@/pages/Catalog/view/custom/catalog';
 
 function Catalog() {
   const [catalogState, catalogDispatchers] = pageStore.useModel('catalog');
@@ -14,40 +12,17 @@ function Catalog() {
     catalogDispatchers.findDataTableAndFormByName();
   }, [catalogDispatchers]);
 
-  const catalogRender = (value, index, record) => {
-    return (
-      <div className={styles.opt}>
-        <Button type="primary" size="small" onClick={() => catalogDispatchers.catalogEdit(record)} > 编辑 </Button>
-        <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning > 删除 </Button>
-      </div>
-    );
-  };
-
-  const catalogCustomRender = (value, index, record) => {
-    return (
-      <div className={styles.opt}>
-        <CatalogCustom value={value} index={index} record={record} />
-      </div>
-    );
-  };
-
-  const deleteConfirm = (record) => {
-    Dialog.confirm({
-      title: '删除',
-      content: '是否确认删除',
-      onOk: () => catalogDispatchers.catalogDelete({
-        record,
-        data: {
-          pageNumber: catalogState.catalogCurrent,
-        },
-      }),
-    });
-  };
-
   return (
     <>
       <DataTableTemple
-        edit={() => catalogDispatchers.catalogEdit()}
+        createItem={() => catalogDispatchers.catalogEdit()}
+        editItem={(record) => catalogDispatchers.catalogEdit(record)}
+        deleteItem={(record) => catalogDispatchers.catalogDelete({
+          record,
+          data: {
+            pageNumber: catalogState.catalogCurrent,
+          },
+        })}
         visibleLoading={catalogState.catalogLoadingVisible}
         dataSource={catalogState.catalogTableData}
         items={catalogState.catalogTable}
@@ -66,8 +41,11 @@ function Catalog() {
           ],
         }}
         primaryKey="id"
-        pageRender={catalogRender}
-        operationRender={catalogState.customType ? catalogCustomRender : null}
+        columnRender={catalogState.customType ? (value, index, record) => {
+          return (
+            <CustomColumnCatalog value={value} index={index} record={record} />
+          );
+        } : null}
       />
       <DataFormTemple
         title={catalogState.catalogTitle}

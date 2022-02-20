@@ -10,7 +10,7 @@ const formItemLayout = {
   },
 };
 
-function CustomDictionary(props) {
+function CustomColumnDictionary(props) {
   // eslint-disable-next-line no-unused-vars
   const { value, index, record } = props;
   const [customDictionaryState, customDictionaryDispatchers] = pageStore.useModel('customCatalog');
@@ -24,4 +24,4 @@ function CustomDictionary(props) {
   );
 }
 
-export default CustomDictionary;
+export { CustomColumnDictionary };

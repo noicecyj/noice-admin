@@ -10,7 +10,7 @@ const formItemLayout = {
   },
 };
 
-function CustomSql(props) {
+function CustomColumnSql(props) {
   // eslint-disable-next-line no-unused-vars
   const { value, index, record } = props;
   const [customSqlState, customSqlDispatchers] = pageStore.useModel('customSql');
@@ -24,4 +24,4 @@ function CustomSql(props) {
   );
 }
 
-export default CustomSql;
+export { CustomColumnSql };

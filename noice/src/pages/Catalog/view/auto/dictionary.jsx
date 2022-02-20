@@ -1,44 +1,12 @@
-import { Button, Dialog } from '@alifd/next';
+import { Dialog } from '@alifd/next';
 import React from 'react';
 import pageStore from '@/pages/Catalog/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
-import styles from '@/pages/Catalog/index.module.scss';
-import DictionaryCustom from '@/pages/Catalog/view/custom/dictionary';
+import { CustomColumnDictionary } from '@/pages/Catalog/view/custom/dictionary';
 
 function Dictionary() {
   const [dictionaryState, dictionaryDispatchers] = pageStore.useModel('dictionary');
-
-  const dictionaryRender = (value, index, record) => {
-    return (
-      <div className={styles.opt}>
-        <Button type="primary" size="small" onClick={() => dictionaryDispatchers.dictionaryEdit(record)} > 编辑 </Button>
-        <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning > 删除 </Button>
-      </div>
-    );
-  };
-
-  const dictionaryCustomRender = (value, index, record) => {
-    return (
-      <div className={styles.opt}>
-        <DictionaryCustom value={value} index={index} record={record} />
-      </div>
-    );
-  };
-
-  const deleteConfirm = (record) => {
-    Dialog.confirm({
-      title: '删除',
-      content: '是否确认删除',
-      onOk: () => dictionaryDispatchers.dictionaryDelete({
-        record,
-        data: {
-          pageNumber: dictionaryState.dictionaryCurrent,
-          pid: dictionaryState.dictionaryNameId,
-        },
-      }),
-    });
-  };
 
   return (
     <div>
@@ -52,15 +20,25 @@ function Dictionary() {
         style={{ width: '90%' }}
       >
         <DataTableTemple
-          edit={() => dictionaryDispatchers.dictionaryEdit()}
+          createItem={() => dictionaryDispatchers.dictionaryEdit()}
+          editItem={(record) => dictionaryDispatchers.dictionaryEdit(record)}
+          deleteItem={(record) => dictionaryDispatchers.dictionaryDelete({
+            record,
+            data: {
+              pageNumber: dictionaryState.dictionaryCurrent,
+            },
+          })}
           visibleLoading={dictionaryState.dictionaryLoadingVisible}
           dataSource={dictionaryState.dictionaryTableData}
           items={dictionaryState.dictionaryTable}
           total={dictionaryState.dictionaryTotal}
           primaryKey="id"
           getPage={(dictionaryCurrent) => dictionaryDispatchers.dictionaryPage({ dictionaryCurrent, pid: dictionaryState.catalogId })}
-          pageRender={dictionaryRender}
-          operationRender={dictionaryState.customType ? dictionaryCustomRender : null}
+          columnRender={entityState.customType ? (value, index, record) => {
+            return (
+              <CustomColumnEntity value={value} index={index} record={record} />
+            );
+          } : null}
         />
       </Dialog>
       <DataFormTemple

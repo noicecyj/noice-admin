@@ -10,7 +10,7 @@ const formItemLayout = {
   },
 };
 
-function CustomCatalog(props) {
+function CustomColumnCatalog(props) {
   // eslint-disable-next-line no-unused-vars
   const { value, index, record } = props;
   const [customCatalogState, customCatalogDispatchers] = pageStore.useModel('customCatalog');
@@ -24,4 +24,4 @@ function CustomCatalog(props) {
   );
 }
 
-export default CustomCatalog;
+export { CustomColumnCatalog };
