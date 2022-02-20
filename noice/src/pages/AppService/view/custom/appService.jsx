@@ -10,7 +10,7 @@ const formItemLayout = {
   },
 };
 
-function CustomAppService(props) {
+function CustomColumnAppService(props) {
   // eslint-disable-next-line no-unused-vars
   const { value, index, record } = props;
   const [customAppServiceState, customAppServiceDispatchers] = pageStore.useModel('customAppService');
@@ -24,4 +24,4 @@ function CustomAppService(props) {
   );
 }
 
-export default CustomAppService;
+export { CustomColumnAppService };

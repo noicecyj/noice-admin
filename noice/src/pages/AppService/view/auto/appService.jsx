@@ -1,10 +1,8 @@
-import { Button, Dialog } from '@alifd/next';
 import React, { useEffect } from 'react';
 import pageStore from '@/pages/AppService/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
-import styles from '@/pages/AppService/index.module.scss';
-import AppServiceCustom from '@/pages/AppService/view/custom/appService';
+import { CustomColumnAppService } from '@/pages/AppService/view/custom/appService';
 
 function AppService() {
   const [appServiceState, appServiceDispatchers] = pageStore.useModel('appService');
@@ -13,40 +11,17 @@ function AppService() {
     appServiceDispatchers.findDataTableAndFormByName();
   }, [appServiceDispatchers]);
 
-  const appServiceRender = (value, index, record) => {
-    return (
-      <div className={styles.opt}>
-        <Button type="primary" size="small" onClick={() => appServiceDispatchers.appServiceEdit(record)} > 编辑 </Button>
-        <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning > 删除 </Button>
-      </div>
-    );
-  };
-
-  const appServiceCustomRender = (value, index, record) => {
-    return (
-      <div className={styles.opt}>
-        <AppServiceCustom value={value} index={index} record={record} />
-      </div>
-    );
-  };
-
-  const deleteConfirm = (record) => {
-    Dialog.confirm({
-      title: '删除',
-      content: '是否确认删除',
-      onOk: () => appServiceDispatchers.appServiceDelete({
-        record,
-        data: {
-          pageNumber: appServiceState.appServiceCurrent,
-        },
-      }),
-    });
-  };
-
   return (
     <>
       <DataTableTemple
-        edit={() => appServiceDispatchers.appServiceEdit()}
+        createItem={() => appServiceDispatchers.appServiceEdit()}
+        editItem={(record) => appServiceDispatchers.appServiceEdit(record)}
+        deleteItem={(record) => appServiceDispatchers.appServiceDelete({
+          record,
+          data: {
+            pageNumber: appServiceState.appServiceCurrent,
+          },
+        })}
         visibleLoading={appServiceState.appServiceLoadingVisible}
         dataSource={appServiceState.appServiceTableData}
         items={appServiceState.appServiceTable}
@@ -55,8 +30,11 @@ function AppService() {
           pageNumber: appServiceCurrent,
         })}
         primaryKey="id"
-        pageRender={appServiceRender}
-        operationRender={appServiceState.customType ? appServiceCustomRender : null}
+        columnRender={appServiceState.customType ? (value, index, record) => {
+          return (
+            <CustomColumnAppService value={value} index={index} record={record} />
+          );
+        } : null}
       />
       <DataFormTemple
         title={appServiceState.appServiceTitle}

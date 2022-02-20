@@ -1319,7 +1319,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "  },\r\n" +
                 "};\r\n" +
                 "\r\n" +
-                "function Custom" + subPoName + "(props) {\r\n" +
+                "function CustomColumn" + subPoName + "(props) {\r\n" +
                 "  // eslint-disable-next-line no-unused-vars\r\n" +
                 "  const { value, index, record } = props;\r\n" +
                 "  const [custom" + subPoName + "State, custom" + subPoName + "Dispatchers] = pageStore.useModel('custom" + poName + "');\r\n" +
@@ -1333,7 +1333,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "  );\r\n" +
                 "}\r\n" +
                 "\r\n" +
-                "export default Custom" + subPoName + ";\r\n";
+                "export { CustomColumn" + subPoName + " };\r\n";
         return new String[]{viewData, underSubPoName + ".jsx"};
     }
 
@@ -1364,7 +1364,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "  );\r\n" +
                 "}\r\n" +
                 "\r\n" +
-                "export { CustomColumn" + poName + "};\r\n";
+                "export { CustomColumn" + poName + " };\r\n";
         return new String[]{viewData, underPoName + ".jsx"};
     }
 
