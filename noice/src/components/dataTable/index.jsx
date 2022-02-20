@@ -1,19 +1,55 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
-import { ResponsiveGrid, Box, Loading, Pagination, Table, Button } from '@alifd/next';
+import { ResponsiveGrid, Box, Loading, Pagination, Table, Button, Dialog } from '@alifd/next';
 import styles from './index.module.scss';
 
 const { Cell } = ResponsiveGrid;
 
 function DataTable(props) {
   const loadingStyle = { width: '100%' };
-  const { items, pageRender, operationRender, dataSource, rowSelection, primaryKey, total, getPage, visibleLoading, edit } = props;
+
+  const {
+    items,
+    columnRender,
+    dataSource,
+    rowSelection,
+    primaryKey,
+    total,
+    getPage,
+    visibleLoading,
+    createItem,
+    deleteItem,
+    editItem,
+  } = props;
+
+  const pageRender = (value, index, record) => {
+    return (
+      <div className={styles.opt}>
+        <Button type="primary" size="small" onClick={() => editItem(record)} > 编辑 </Button>
+        <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning > 删除 </Button>
+      </div>
+    );
+  };
+
+  const deleteConfirm = (record) => {
+    Dialog.confirm({
+      title: '删除',
+      content: '是否确认删除',
+      onOk: (current) => deleteItem({
+        record,
+        data: {
+          pageNumber: current,
+        },
+      }),
+    });
+  };
+
   return (
     <ResponsiveGrid gap={20}>
       <Cell colSpan={12}>
         <div className={styles.Main}>
           <div className={styles.add}>
-            <Button type="primary" onClick={() => edit()}> 添加 </Button>
+            <Button type="primary" onClick={() => createItem()}> 添加 </Button>
           </div>
           <Loading
             tip="加载中..."
@@ -36,12 +72,12 @@ function DataTable(props) {
                   key={index}
                 />);
               })}
-              {operationRender !== null && <Table.Column
+              {columnRender !== null && <Table.Column
                 title="自定义操作"
                 align="right"
-                key="operationRender"
+                key="columnRender"
                 width="160px"
-                cell={operationRender}
+                cell={columnRender}
               />}
               <Table.Column
                 title="状态"
