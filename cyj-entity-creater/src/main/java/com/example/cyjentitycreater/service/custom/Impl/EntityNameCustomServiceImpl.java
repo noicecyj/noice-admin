@@ -1454,8 +1454,8 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("        customMethod2={() => custom").append(poName).append("Dispatchers.customMethod2()}\r\n");
         sb.append("        customMethod3={() => custom").append(poName).append("Dispatchers.customMethod3()}\r\n");
         sb.append("        customMethodName1={custom").append(poName).append("State.customMethodName1}\r\n");
-        sb.append("        customMethodName1={custom").append(poName).append("State.customMethodName1}\r\n");
-        sb.append("        customMethodName1={custom").append(poName).append("State.customMethodName1}\r\n");
+        sb.append("        customMethodName2={custom").append(poName).append("State.customMethodName2}\r\n");
+        sb.append("        customMethodName3={custom").append(poName).append("State.customMethodName3}\r\n");
         sb.append("      />\r\n");
         sb.append("      <DataFormTemple\r\n");
         sb.append("        title={").append(underPoName).append("State.").append(underPoName).append("Title}\r\n");
