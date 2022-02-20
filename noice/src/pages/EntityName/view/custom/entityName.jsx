@@ -2,7 +2,7 @@ import React from 'react';
 import pageStore from '@/pages/EntityName/store';
 import { Button } from '@alifd/next';
 
-function CustomEntityName(props) {
+function CustomColumnEntityName(props) {
   // eslint-disable-next-line no-unused-vars
   const { value, index, record } = props;
   const [customEntityNameState, customEntityNameDispatchers] = pageStore.useModel('customEntityName');
@@ -21,5 +21,5 @@ function CustomEntityName(props) {
   );
 }
 
-export default CustomEntityName;
+export { CustomColumnEntityName };
 

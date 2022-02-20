@@ -1,10 +1,8 @@
-import { Button, Dialog } from '@alifd/next';
 import React, { useEffect } from 'react';
 import pageStore from '@/pages/EntityName/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
-import styles from '@/pages/EntityName/index.module.scss';
-import EntityNameCustom from '@/pages/EntityName/view/custom/entityName';
+import { CustomColumnEntityName } from '@/pages/EntityName/view/custom/entityName';
 
 function EntityName() {
   const [entityNameState, entityNameDispatchers] = pageStore.useModel('entityName');
@@ -14,40 +12,17 @@ function EntityName() {
     entityNameDispatchers.findDataTableAndFormByName();
   }, [entityNameDispatchers]);
 
-  const entityNameRender = (value, index, record) => {
-    return (
-      <div className={styles.opt}>
-        <Button type="primary" size="small" onClick={() => entityNameDispatchers.entityNameEdit(record)} > 编辑 </Button>
-        <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning > 删除 </Button>
-      </div>
-    );
-  };
-
-  const entityNameCustomRender = (value, index, record) => {
-    return (
-      <div className={styles.opt}>
-        <EntityNameCustom value={value} index={index} record={record} />
-      </div>
-    );
-  };
-
-  const deleteConfirm = (record) => {
-    Dialog.confirm({
-      title: '删除',
-      content: '是否确认删除',
-      onOk: () => entityNameDispatchers.entityNameDelete({
-        record,
-        data: {
-          pageNumber: entityNameState.entityNameCurrent,
-        },
-      }),
-    });
-  };
-
   return (
     <>
       <DataTableTemple
-        edit={() => entityNameDispatchers.entityNameEdit()}
+        createItem={() => entityNameDispatchers.entityNameEdit()}
+        editItem={(record) => entityNameDispatchers.entityNameEdit(record)}
+        deleteItem={(record) => entityNameDispatchers.entityNameDelete({
+          record,
+          data: {
+            pageNumber: entityNameState.entityNameCurrent,
+          },
+        })}
         visibleLoading={entityNameState.entityNameLoadingVisible}
         dataSource={entityNameState.entityNameTableData}
         items={entityNameState.entityNameTable}
@@ -66,8 +41,11 @@ function EntityName() {
           ],
         }}
         primaryKey="id"
-        pageRender={entityNameRender}
-        operationRender={entityNameState.customType ? entityNameCustomRender : null}
+        columnRender={(value, index, record) => {
+          return (
+            <CustomColumnEntityName value={value} index={index} record={record} />
+          );
+        }}
       />
       <DataFormTemple
         title={entityNameState.entityNameTitle}
