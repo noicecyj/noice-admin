@@ -9,14 +9,14 @@ function CustomColumnEntityName(props) {
 
   return (
     <>
-      <Button
-        type="normal"
-        size="small"
-        onClick={() => customEntityNameDispatchers.createEntityFile({
-          id: record.id,
-        })}
-      > 生成代码
-      </Button>
+      {
+        record.parentEntityName === null && <Button
+          type="normal"
+          size="small"
+          onClick={() => customEntityNameDispatchers.createEntityFile({ id: record.id })}
+        // eslint-disable-next-line react/jsx-closing-tag-location
+        > 生成代码 </Button>
+      }
     </>
   );
 }
