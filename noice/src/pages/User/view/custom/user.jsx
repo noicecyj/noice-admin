@@ -10,7 +10,7 @@ const formItemLayout = {
   },
 };
 
-function CustomUser(props) {
+function CustomColumnUser(props) {
   // eslint-disable-next-line no-unused-vars
   const { value, index, record } = props;
   const [customUserState, customUserDispatchers] = pageStore.useModel('customUser');
@@ -24,4 +24,4 @@ function CustomUser(props) {
   );
 }
 
-export default CustomUser;
+export { CustomColumnUser };

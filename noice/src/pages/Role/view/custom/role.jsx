@@ -10,7 +10,7 @@ const formItemLayout = {
   },
 };
 
-function CustomRole(props) {
+function CustomColumnRole(props) {
   // eslint-disable-next-line no-unused-vars
   const { value, index, record } = props;
   const [customRoleState, customRoleDispatchers] = pageStore.useModel('customRole');
@@ -24,4 +24,4 @@ function CustomRole(props) {
   );
 }
 
-export default CustomRole;
+export { CustomColumnRole };

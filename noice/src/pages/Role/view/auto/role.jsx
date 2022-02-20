@@ -1,10 +1,8 @@
-import { Button, Dialog } from '@alifd/next';
 import React, { useEffect } from 'react';
 import pageStore from '@/pages/Role/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
-import styles from '@/pages/Role/index.module.scss';
-import RoleCustom from '@/pages/Role/view/custom/role';
+import { CustomColumnRole } from '@/pages/Role/view/custom/role';
 
 function Role() {
   const [roleState, roleDispatchers] = pageStore.useModel('role');
@@ -13,40 +11,17 @@ function Role() {
     roleDispatchers.findDataTableAndFormByName();
   }, [roleDispatchers]);
 
-  const roleRender = (value, index, record) => {
-    return (
-      <div className={styles.opt}>
-        <Button type="primary" size="small" onClick={() => roleDispatchers.roleEdit(record)} > 编辑 </Button>
-        <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning > 删除 </Button>
-      </div>
-    );
-  };
-
-  const roleCustomRender = (value, index, record) => {
-    return (
-      <div className={styles.opt}>
-        <RoleCustom value={value} index={index} record={record} />
-      </div>
-    );
-  };
-
-  const deleteConfirm = (record) => {
-    Dialog.confirm({
-      title: '删除',
-      content: '是否确认删除',
-      onOk: () => roleDispatchers.roleDelete({
-        record,
-        data: {
-          pageNumber: roleState.roleCurrent,
-        },
-      }),
-    });
-  };
-
   return (
     <>
       <DataTableTemple
-        edit={() => roleDispatchers.roleEdit()}
+        createItem={() => roleDispatchers.roleEdit()}
+        editItem={(record) => roleDispatchers.roleEdit(record)}
+        deleteItem={(record) => roleDispatchers.roleDelete({
+          record,
+          data: {
+            pageNumber: roleState.roleCurrent,
+          },
+        })}
         visibleLoading={roleState.roleLoadingVisible}
         dataSource={roleState.roleTableData}
         items={roleState.roleTable}
@@ -55,8 +30,11 @@ function Role() {
           pageNumber: roleCurrent,
         })}
         primaryKey="id"
-        pageRender={roleRender}
-        operationRender={roleState.customType ? roleCustomRender : null}
+        columnRender={roleState.customType ? (value, index, record) => {
+          return (
+            <CustomColumnRole value={value} index={index} record={record} />
+          );
+        } : null}
       />
       <DataFormTemple
         title={roleState.roleTitle}
