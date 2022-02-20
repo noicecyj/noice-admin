@@ -34,9 +34,9 @@ function Dictionary() {
           total={dictionaryState.dictionaryTotal}
           primaryKey="id"
           getPage={(dictionaryCurrent) => dictionaryDispatchers.dictionaryPage({ dictionaryCurrent, pid: dictionaryState.catalogId })}
-          columnRender={entityState.customType ? (value, index, record) => {
+          columnRender={dictionaryState.customType ? (value, index, record) => {
             return (
-              <CustomColumnEntity value={value} index={index} record={record} />
+              <CustomColumnDictionary value={value} index={index} record={record} />
             );
           } : null}
         />
