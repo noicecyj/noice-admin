@@ -41,11 +41,11 @@ function EntityName() {
           ],
         }}
         primaryKey="id"
-        columnRender={(value, index, record) => {
+        columnRender={entityNameState.customType ? (value, index, record) => {
           return (
             <CustomColumnEntityName value={value} index={index} record={record} />
           );
-        }}
+        } : null}
       />
       <DataFormTemple
         title={entityNameState.entityNameTitle}

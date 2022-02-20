@@ -1100,7 +1100,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "        style={{ width: '90%' }}\r\n" +
                 "      >\r\n" +
                 "        <DataTableTemple\r\n" +
-                "          edit={() => " + underSubPoName + "Dispatchers." + underSubPoName + "Edit()}\r\n" +
+                "          editItem={() => " + underSubPoName + "Dispatchers." + underSubPoName + "Edit()}\r\n" +
                 "          visibleLoading={" + underSubPoName + "State." + underSubPoName + "LoadingVisible}\r\n" +
                 "          dataSource={" + underSubPoName + "State." + underSubPoName + "TableData}\r\n" +
                 "          items={" + underSubPoName + "State." + underSubPoName + "Table}\r\n" +
@@ -1372,7 +1372,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "  },\r\n" +
                 "};\r\n" +
                 "\r\n" +
-                "function Custom" + poName + "(props) {\r\n" +
+                "function CustomColumn" + poName + "(props) {\r\n" +
                 "  // eslint-disable-next-line no-unused-vars\r\n" +
                 "  const { value, index, record } = props;\r\n" +
                 "  const [custom" + poName + "State, custom" + poName + "Dispatchers] = pageStore.useModel('custom" + poName + "');\r\n" +
@@ -1386,19 +1386,17 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "  );\r\n" +
                 "}\r\n" +
                 "\r\n" +
-                "export default Custom" + poName + ";\r\n";
+                "export { CustomColumn" + poName + "};\r\n";
         return new String[]{viewData, underPoName + ".jsx"};
     }
 
     private String[] viewAutoGenerate(List<EntityNamePO> entityNamePOList, String underPoName, String poName) {
         StringBuilder sb = new StringBuilder();
-        sb.append("import { Button, Dialog } from '@alifd/next';\r\n");
         sb.append("import React, { useEffect } from 'react';\r\n");
         sb.append("import pageStore from '@/pages/").append(poName).append("/store';\r\n");
         sb.append("import DataFormTemple from '@/components/dataForm';\r\n");
         sb.append("import DataTableTemple from '@/components/dataTable';\r\n");
-        sb.append("import styles from '@/pages/").append(poName).append("/index.module.scss';\r\n");
-        sb.append("import ").append(poName).append("Custom from '@/pages/").append(poName).append("/view/custom/").append(underPoName).append("';\r\n");
+        sb.append("import { CustomColumn").append(poName).append(" } from '@/pages/").append(poName).append("/view/custom/").append(underPoName).append("';\r\n");
         sb.append("\r\n");
         sb.append("function ").append(poName).append("() {\r\n");
         sb.append("  const [").append(underPoName).append("State, ").append(underPoName).append("Dispatchers] = pageStore.useModel('").append(underPoName).append("');\r\n");
@@ -1412,40 +1410,17 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("    ").append(underPoName).append("Dispatchers.findDataTableAndFormByName();\r\n");
         sb.append("  }, [").append(underPoName).append("Dispatchers]);\r\n");
         sb.append("\r\n");
-        sb.append("  const ").append(underPoName).append("Render = (value, index, record) => {\r\n");
-        sb.append("    return (\r\n");
-        sb.append("      <div className={styles.opt}>\r\n");
-        sb.append("        <Button type=\"primary\" size=\"small\" onClick={() => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Edit(record)} > 编辑 </Button>\r\n");
-        sb.append("        <Button type=\"primary\" size=\"small\" onClick={() => deleteConfirm(record)} warning > 删除 </Button>\r\n");
-        sb.append("      </div>\r\n");
-        sb.append("    );\r\n");
-        sb.append("  };\r\n");
-        sb.append("\r\n");
-        sb.append("  const ").append(underPoName).append("CustomRender = (value, index, record) => {\r\n");
-        sb.append("    return (\r\n");
-        sb.append("      <div className={styles.opt}>\r\n");
-        sb.append("        <").append(poName).append("Custom value={value} index={index} record={record} />\r\n");
-        sb.append("      </div>\r\n");
-        sb.append("    );\r\n");
-        sb.append("  };\r\n");
-        sb.append("\r\n");
-        sb.append("  const deleteConfirm = (record) => {\r\n");
-        sb.append("    Dialog.confirm({\r\n");
-        sb.append("      title: '删除',\r\n");
-        sb.append("      content: '是否确认删除',\r\n");
-        sb.append("      onOk: () => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Delete({\r\n");
-        sb.append("        record,\r\n");
-        sb.append("        data: {\r\n");
-        sb.append("          pageNumber: ").append(underPoName).append("State.").append(underPoName).append("Current,\r\n");
-        sb.append("        },\r\n");
-        sb.append("      }),\r\n");
-        sb.append("    });\r\n");
-        sb.append("  };\r\n");
-        sb.append("\r\n");
         sb.append("  return (\r\n");
         sb.append("    <>\r\n");
         sb.append("      <DataTableTemple\r\n");
-        sb.append("        edit={() => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Edit()}\r\n");
+        sb.append("        createItem={() => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Edit()}\r\n");
+        sb.append("        editItem={(record) => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Edit(record)}\r\n");
+        sb.append("        deleteItem={(record) => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Delete({\r\n");
+        sb.append("          record,\r\n");
+        sb.append("          data: {\r\n");
+        sb.append("            pageNumber: ").append(underPoName).append("State.").append(underPoName).append("Current,\r\n");
+        sb.append("          },\r\n");
+        sb.append("        })}\r\n");
         sb.append("        visibleLoading={").append(underPoName).append("State.").append(underPoName).append("LoadingVisible}\r\n");
         sb.append("        dataSource={").append(underPoName).append("State.").append(underPoName).append("TableData}\r\n");
         sb.append("        items={").append(underPoName).append("State.").append(underPoName).append("Table}\r\n");
@@ -1474,8 +1449,11 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
             sb.append("        }}\r\n");
         }
         sb.append("        primaryKey=\"id\"\r\n");
-        sb.append("        pageRender={").append(underPoName).append("Render}\r\n");
-        sb.append("        operationRender={").append(underPoName).append("State.customType ? ").append(underPoName).append("CustomRender : null}\r\n");
+        sb.append("        columnRender={").append(underPoName).append("State.customType ? (value, index, record) => {\r\n");
+        sb.append("          return (\r\n");
+        sb.append("            <CustomColumn").append(poName).append(" value={value} index={index} record={record} />\r\n");
+        sb.append("          );\r\n");
+        sb.append("        } : null}\r\n");
         sb.append("      />\r\n");
         sb.append("      <DataFormTemple\r\n");
         sb.append("        title={").append(underPoName).append("State.").append(underPoName).append("Title}\r\n");
