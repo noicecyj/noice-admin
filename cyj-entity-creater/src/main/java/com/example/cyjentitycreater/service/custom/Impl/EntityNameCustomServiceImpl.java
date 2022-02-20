@@ -1139,9 +1139,9 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "  },\r\n" +
                 "\r\n" +
                 "  effects: (dispatch) => ({\r\n" +
-                "    customMethod1() {},\r\n" +
-                "    customMethod2() {},\r\n" +
-                "    customMethod3() {},\r\n" +
+                "    customMethod1() { },\r\n" +
+                "    customMethod2() { },\r\n" +
+                "    customMethod3() { },\r\n" +
                 "  }),\r\n" +
                 "};\r\n";
         return new String[]{viewData, underSubPoName + ".jsx"};
@@ -1168,9 +1168,9 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "  },\r\n" +
                 "\r\n" +
                 "  effects: (dispatch) => ({\r\n" +
-                "    customMethod1() {},\r\n" +
-                "    customMethod2() {},\r\n" +
-                "    customMethod3() {},\r\n" +
+                "    customMethod1() { },\r\n" +
+                "    customMethod2() { },\r\n" +
+                "    customMethod3() { },\r\n" +
                 "  }),\r\n" +
                 "};\r\n";
         return new String[]{viewData, underPoName + ".jsx"};

@@ -7,6 +7,8 @@ import { CustomColumnAppService } from '@/pages/AppService/view/custom/appServic
 function AppService() {
   const [appServiceState, appServiceDispatchers] = pageStore.useModel('appService');
 
+  const [customAppServiceState, customAppServiceDispatchers] = pageStore.useModel('customAppService');
+
   useEffect(() => {
     appServiceDispatchers.findDataTableAndFormByName();
   }, [appServiceDispatchers]);
@@ -35,6 +37,12 @@ function AppService() {
             <CustomColumnAppService value={value} index={index} record={record} />
           );
         } : null}
+        customMethod1={() => customAppServiceDispatchers.customMethod1()}
+        customMethod2={() => customAppServiceDispatchers.customMethod2()}
+        customMethod3={() => customAppServiceDispatchers.customMethod3()}
+        customMethodName1={customAppServiceState.customMethodName1}
+        customMethodName2={customAppServiceState.customMethodName2}
+        customMethodName3={customAppServiceState.customMethodName3}
       />
       <DataFormTemple
         title={appServiceState.appServiceTitle}

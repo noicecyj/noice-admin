@@ -20,9 +20,9 @@ export default {
   },
 
   effects: (dispatch) => ({
-    customMethod1() {},
-    customMethod2() {},
-    customMethod3() {},
+    customMethod1() { },
+    customMethod2() { },
+    customMethod3() { },
     createEntityFile(data) {
       customEntityNameServices.createEntityFile(data).then((res) => {
         if (res.code === 200) {
