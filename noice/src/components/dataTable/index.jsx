@@ -35,12 +35,7 @@ function DataTable(props) {
     Dialog.confirm({
       title: '删除',
       content: '是否确认删除',
-      onOk: (current) => deleteItem({
-        record,
-        data: {
-          pageNumber: current,
-        },
-      }),
+      onOk: () => deleteItem(record),
     });
   };
 

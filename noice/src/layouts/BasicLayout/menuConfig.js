@@ -25,6 +25,11 @@ const asideMenuConfig = [
         icon: '',
         path: '/admin/appService',
       },
+      {
+        name: '菜单管理',
+        icon: '',
+        path: '/admin/firstMenu',
+      },
     ],
   },
   {

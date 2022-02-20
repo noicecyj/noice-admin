@@ -3,6 +3,7 @@ import UserLayout from '@/layouts/UserLayout';
 import LoginPage from '@/pages/Login';
 import CatalogPage from '@/pages/Catalog';
 import EntityNamePage from '@/pages/EntityName';
+import FirstMenuPage from '@/pages/FirstMenu';
 import SqlPage from '@/pages/Sql';
 import AppServicePage from '@/pages/AppService';
 import UserPage from '@/pages/User';
@@ -29,6 +30,10 @@ const routerConfig = [
       {
         path: '/appService',
         component: AppServicePage,
+      },
+      {
+        path: '/firstMenu',
+        component: FirstMenuPage,
       },
     ],
   },
