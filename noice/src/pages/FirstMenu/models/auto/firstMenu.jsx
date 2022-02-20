@@ -58,7 +58,6 @@ export default {
       }
     },
     async firstMenuDelete(data) {
-      console.log(data);
       await firstMenuService.firstMenuDelete(data.record.id);
       await this.firstMenuPage(data.data.pageNumber);
       const payload = {

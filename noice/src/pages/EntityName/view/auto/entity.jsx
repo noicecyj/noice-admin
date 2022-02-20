@@ -8,6 +8,8 @@ import { CustomColumnEntity } from '@/pages/EntityName/view/custom/entity';
 function Entity() {
   const [entityState, entityDispatchers] = pageStore.useModel('entity');
 
+  const customEntityDispatchers = pageStore.useModelDispatchers('customEntity');
+
   return (
     <div>
       <Dialog
@@ -39,6 +41,9 @@ function Entity() {
               <CustomColumnEntity value={value} index={index} record={record} />
             );
           } : null}
+          customMethod1={() => customEntityDispatchers.customMethod1()}
+          customMethod2={() => customEntityDispatchers.customMethod2()}
+          customMethod3={() => customEntityDispatchers.customMethod3()}
         />
       </Dialog>
       <DataFormTemple

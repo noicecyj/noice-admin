@@ -8,6 +8,8 @@ function EntityName() {
   const [entityNameState, entityNameDispatchers] = pageStore.useModel('entityName');
   const [entityState, entityDispatchers] = pageStore.useModel('entity');
 
+  const customEntityNameDispatchers = pageStore.useModelDispatchers('customEntityName');
+
   useEffect(() => {
     entityNameDispatchers.findDataTableAndFormByName();
   }, [entityNameDispatchers]);
@@ -46,6 +48,9 @@ function EntityName() {
             <CustomColumnEntityName value={value} index={index} record={record} />
           );
         } : null}
+        customMethod1={() => customEntityNameDispatchers.customMethod1()}
+        customMethod2={() => customEntityNameDispatchers.customMethod2()}
+        customMethod3={() => customEntityNameDispatchers.customMethod3()}
       />
       <DataFormTemple
         title={entityNameState.entityNameTitle}
