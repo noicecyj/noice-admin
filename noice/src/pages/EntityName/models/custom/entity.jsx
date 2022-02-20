@@ -4,7 +4,11 @@ export default {
 
   namespace: 'customEntity',
 
-  state: {},
+  state: {
+    customMethodName1: null,
+    customMethodName2: null,
+    customMethodName3: null,
+  },
 
   reducers: {
     setState(prevState, payload) {

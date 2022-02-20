@@ -20,6 +20,9 @@ function DataTable(props) {
     createItem,
     deleteItem,
     editItem,
+    customMethod1,
+    customMethod2,
+    customMethod3,
   } = props;
 
   const pageRender = (value, index, record) => {
@@ -45,6 +48,9 @@ function DataTable(props) {
         <div className={styles.Main}>
           <div className={styles.add}>
             <Button type="primary" onClick={() => createItem()}> 添加 </Button>
+            <Button onClick={() => customMethod1()}> 添加 </Button>
+            <Button onClick={() => customMethod2()}> 添加 </Button>
+            <Button onClick={() => customMethod3()}> 添加 </Button>
           </div>
           <Loading
             tip="加载中..."

@@ -1056,7 +1056,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "function " + subPoName + "() {\r\n" +
                 "  const [" + underSubPoName + "State, " + underSubPoName + "Dispatchers] = pageStore.useModel('" + underSubPoName + "');\r\n" +
                 "\r\n" +
-                "  const custom" + subPoName + "Dispatchers = pageStore.useModelDispatchers('custom" + subPoName + "');\r\n" +
+                "  const [custom" + subPoName + "State, custom" + subPoName + "Dispatchers] = pageStore.useModel('custom" + subPoName + "');\r\n" +
                 "\r\n" +
                 "  return (\r\n" +
                 "    <div>\r\n" +
@@ -1092,6 +1092,9 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "          customMethod1={() => custom" + subPoName + "Dispatchers.customMethod1()}\r\n" +
                 "          customMethod2={() => custom" + subPoName + "Dispatchers.customMethod2()}\r\n" +
                 "          customMethod3={() => custom" + subPoName + "Dispatchers.customMethod3()}\r\n" +
+                "          customMethodName1={custom" + subPoName + "State.customMethodName1}\r\n" +
+                "          customMethodName2={custom" + subPoName + "State.customMethodName2}\r\n" +
+                "          customMethodName3={custom" + subPoName + "State.customMethodName3}\r\n" +
                 "        />\r\n" +
                 "      </Dialog>\r\n" +
                 "      <DataFormTemple\r\n" +
@@ -1124,7 +1127,9 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "  namespace: 'custom" + subPoName + "',\r\n" +
                 "\r\n" +
                 "  state: {\r\n" +
-                "\r\n" +
+                "    customMethodName1: null,\r\n" +
+                "    customMethodName2: null,\r\n" +
+                "    customMethodName3: null,\r\n" +
                 "  },\r\n" +
                 "\r\n" +
                 "  reducers: {\r\n" +
@@ -1151,7 +1156,9 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "  namespace: 'custom" + poName + "',\r\n" +
                 "\r\n" +
                 "  state: {\r\n" +
-                "\r\n" +
+                "    customMethodName1: null,\r\n" +
+                "    customMethodName2: null,\r\n" +
+                "    customMethodName3: null,\r\n" +
                 "  },\r\n" +
                 "\r\n" +
                 "  reducers: {\r\n" +
@@ -1393,7 +1400,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
             sb.append("  const [").append(underSubPoName).append("State, ").append(underSubPoName).append("Dispatchers] = pageStore.useModel('").append(underSubPoName).append("');\r\n");
         });
         sb.append("\r\n");
-        sb.append("  const custom").append(poName).append("Dispatchers = pageStore.useModelDispatchers('custom").append(poName).append("');\r\n");
+        sb.append("  const [custom").append(poName).append("State, custom").append(poName).append("Dispatchers] = pageStore.useModel('custom").append(poName).append("');\r\n");
         sb.append("\r\n");
         sb.append("  useEffect(() => {\r\n");
         sb.append("    ").append(underPoName).append("Dispatchers.findDataTableAndFormByName();\r\n");
@@ -1446,6 +1453,9 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("        customMethod1={() => custom").append(poName).append("Dispatchers.customMethod1()}\r\n");
         sb.append("        customMethod2={() => custom").append(poName).append("Dispatchers.customMethod2()}\r\n");
         sb.append("        customMethod3={() => custom").append(poName).append("Dispatchers.customMethod3()}\r\n");
+        sb.append("        customMethodName1={custom").append(poName).append("State.customMethodName1}\r\n");
+        sb.append("        customMethodName1={custom").append(poName).append("State.customMethodName1}\r\n");
+        sb.append("        customMethodName1={custom").append(poName).append("State.customMethodName1}\r\n");
         sb.append("      />\r\n");
         sb.append("      <DataFormTemple\r\n");
         sb.append("        title={").append(underPoName).append("State.").append(underPoName).append("Title}\r\n");

@@ -8,7 +8,7 @@ function EntityName() {
   const [entityNameState, entityNameDispatchers] = pageStore.useModel('entityName');
   const [entityState, entityDispatchers] = pageStore.useModel('entity');
 
-  const customEntityNameDispatchers = pageStore.useModelDispatchers('customEntityName');
+  const [customEntityNameState, customEntityNameDispatchers] = pageStore.useModel('customEntityName');
 
   useEffect(() => {
     entityNameDispatchers.findDataTableAndFormByName();
@@ -51,6 +51,9 @@ function EntityName() {
         customMethod1={() => customEntityNameDispatchers.customMethod1()}
         customMethod2={() => customEntityNameDispatchers.customMethod2()}
         customMethod3={() => customEntityNameDispatchers.customMethod3()}
+        customMethodName1={customEntityNameState.customMethodName1}
+        customMethodName2={customEntityNameState.customMethodName2}
+        customMethodName3={customEntityNameState.customMethodName3}
       />
       <DataFormTemple
         title={entityNameState.entityNameTitle}

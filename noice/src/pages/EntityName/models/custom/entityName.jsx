@@ -6,6 +6,9 @@ export default {
   namespace: 'customEntityName',
 
   state: {
+    customMethodName1: null,
+    customMethodName2: null,
+    customMethodName3: null,
     chooseVisible: false,
     chooseFormData: {},
   },
