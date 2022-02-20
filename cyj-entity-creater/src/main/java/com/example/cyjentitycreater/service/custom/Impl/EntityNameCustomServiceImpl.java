@@ -1046,47 +1046,15 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
 
 
     private String[] viewSubAutoGenerate(String poName, String underPoName, String underSubPoName, String subPoName) {
-        String viewData = "import { Button, Dialog } from '@alifd/next';\r\n" +
+        String viewData = "import { Dialog } from '@alifd/next';\r\n" +
                 "import React from 'react';\r\n" +
                 "import pageStore from '@/pages/" + poName + "/store';\r\n" +
                 "import DataFormTemple from '@/components/dataForm';\r\n" +
                 "import DataTableTemple from '@/components/dataTable';\r\n" +
-                "import styles from '@/pages/" + poName + "/index.module.scss';\r\n" +
-                "import " + subPoName + "Custom from '@/pages/" + poName + "/view/custom/" + underSubPoName + "';\r\n" +
+                "import { CustomColumn" + subPoName + " } from '@/pages/" + poName + "/view/custom/" + underSubPoName + "';\r\n" +
                 "\r\n" +
                 "function " + subPoName + "() {\r\n" +
                 "  const [" + underSubPoName + "State, " + underSubPoName + "Dispatchers] = pageStore.useModel('" + underSubPoName + "');\r\n" +
-                "\r\n" +
-                "  const " + underSubPoName + "Render = (value, index, record) => {\r\n" +
-                "    return (\r\n" +
-                "      <div className={styles.opt}>\r\n" +
-                "        <Button type=\"primary\" size=\"small\" onClick={() => " + underSubPoName + "Dispatchers." + underSubPoName + "Edit(record)} > 编辑 </Button>\r\n" +
-                "        <Button type=\"primary\" size=\"small\" onClick={() => deleteConfirm(record)} warning > 删除 </Button>\r\n" +
-                "      </div>\r\n" +
-                "    );\r\n" +
-                "  };\r\n" +
-                "\r\n" +
-                "  const " + underSubPoName + "CustomRender = (value, index, record) => {\r\n" +
-                "    return (\r\n" +
-                "      <div className={styles.opt}>\r\n" +
-                "        <" + subPoName + "Custom value={value} index={index} record={record} />\r\n" +
-                "      </div>\r\n" +
-                "    );\r\n" +
-                "  };\r\n" +
-                "\r\n" +
-                "  const deleteConfirm = (record) => {\r\n" +
-                "    Dialog.confirm({\r\n" +
-                "      title: '删除',\r\n" +
-                "      content: '是否确认删除',\r\n" +
-                "      onOk: () => " + underSubPoName + "Dispatchers." + underSubPoName + "Delete({\r\n" +
-                "        record,\r\n" +
-                "        data: {\r\n" +
-                "          pageNumber: " + underSubPoName + "State." + underSubPoName + "Current,\r\n" +
-                "          pid: " + underSubPoName + "State." + underSubPoName + "NameId,\r\n" +
-                "        },\r\n" +
-                "      }),\r\n" +
-                "    });\r\n" +
-                "  };\r\n" +
                 "\r\n" +
                 "  return (\r\n" +
                 "    <div>\r\n" +
@@ -1100,15 +1068,25 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "        style={{ width: '90%' }}\r\n" +
                 "      >\r\n" +
                 "        <DataTableTemple\r\n" +
-                "          editItem={() => " + underSubPoName + "Dispatchers." + underSubPoName + "Edit()}\r\n" +
+                "          createItem={() => " + underSubPoName + "Dispatchers." + underSubPoName + "Edit()}\r\n" +
+                "          editItem={(record) => " + underSubPoName + "Dispatchers." + underSubPoName + "Edit(record)}\r\n" +
+                "          deleteItem={(record) => " + underSubPoName + "Dispatchers." + underSubPoName + "Delete({\r\n" +
+                "            record,\r\n" +
+                "            data: {\r\n" +
+                "              pageNumber: " + underSubPoName + "State." + underSubPoName + "Current,\r\n" +
+                "            },\r\n" +
+                "          })}\r\n" +
                 "          visibleLoading={" + underSubPoName + "State." + underSubPoName + "LoadingVisible}\r\n" +
                 "          dataSource={" + underSubPoName + "State." + underSubPoName + "TableData}\r\n" +
                 "          items={" + underSubPoName + "State." + underSubPoName + "Table}\r\n" +
                 "          total={" + underSubPoName + "State." + underSubPoName + "Total}\r\n" +
                 "          primaryKey=\"id\"\r\n" +
                 "          getPage={(" + underSubPoName + "Current) => " + underSubPoName + "Dispatchers." + underSubPoName + "Page({ " + underSubPoName + "Current, pid: " + underSubPoName + "State." + underPoName + "Id })}\r\n" +
-                "          pageRender={" + underSubPoName + "Render}\r\n" +
-                "          operationRender={" + underSubPoName + "State.customType ? " + underSubPoName + "CustomRender : null}\r\n" +
+                "          columnRender={entityState.customType ? (value, index, record) => {\r\n" +
+                "            return (\r\n" +
+                "              <CustomColumnEntity value={value} index={index} record={record} />\r\n" +
+                "            );\r\n" +
+                "          } : null}\r\n" +
                 "        />\r\n" +
                 "      </Dialog>\r\n" +
                 "      <DataFormTemple\r\n" +

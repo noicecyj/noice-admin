@@ -1,44 +1,12 @@
-import { Button, Dialog } from '@alifd/next';
+import { Dialog } from '@alifd/next';
 import React from 'react';
 import pageStore from '@/pages/EntityName/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
-import styles from '@/pages/EntityName/index.module.scss';
-import EntityCustom from '@/pages/EntityName/view/custom/entity';
+import { CustomColumnEntity } from '@/pages/EntityName/view/custom/entity';
 
 function Entity() {
   const [entityState, entityDispatchers] = pageStore.useModel('entity');
-
-  const entityRender = (value, index, record) => {
-    return (
-      <div className={styles.opt}>
-        <Button type="primary" size="small" onClick={() => entityDispatchers.entityEdit(record)} > 编辑 </Button>
-        <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning > 删除 </Button>
-      </div>
-    );
-  };
-
-  const entityCustomRender = (value, index, record) => {
-    return (
-      <div className={styles.opt}>
-        <EntityCustom value={value} index={index} record={record} />
-      </div>
-    );
-  };
-
-  const deleteConfirm = (record) => {
-    Dialog.confirm({
-      title: '删除',
-      content: '是否确认删除',
-      onOk: () => entityDispatchers.entityDelete({
-        record,
-        data: {
-          pageNumber: entityState.entityCurrent,
-          pid: entityState.entityNameId,
-        },
-      }),
-    });
-  };
 
   return (
     <div>
@@ -52,15 +20,25 @@ function Entity() {
         style={{ width: '90%' }}
       >
         <DataTableTemple
-          edit={() => entityDispatchers.entityEdit()}
+          createItem={() => entityDispatchers.entityEdit()}
+          editItem={(record) => entityDispatchers.entityEdit(record)}
+          deleteItem={(record) => entityDispatchers.entityDelete({
+            record,
+            data: {
+              pageNumber: entityState.entityCurrent,
+            },
+          })}
           visibleLoading={entityState.entityLoadingVisible}
           dataSource={entityState.entityTableData}
           items={entityState.entityTable}
           total={entityState.entityTotal}
           primaryKey="id"
           getPage={(entityCurrent) => entityDispatchers.entityPage({ entityCurrent, pid: entityState.entityNameId })}
-          pageRender={entityRender}
-          operationRender={entityState.customType ? entityCustomRender : null}
+          columnRender={entityState.customType ? (value, index, record) => {
+            return (
+              <CustomColumnEntity value={value} index={index} record={record} />
+            );
+          } : null}
         />
       </Dialog>
       <DataFormTemple

@@ -11,7 +11,7 @@ const formItemLayout = {
   },
 };
 
-function CustomEntity(props) {
+function CustomColumnEntity(props) {
   const { value, index, record } = props;
   const [customEntityState, customEntityDispatchers] = pageStore.useModel('customEntity');
 
@@ -26,4 +26,4 @@ function CustomEntity(props) {
   );
 }
 
-export default CustomEntity;
+export { CustomColumnEntity };
