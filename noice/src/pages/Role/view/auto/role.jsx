@@ -7,6 +7,8 @@ import { CustomColumnRole } from '@/pages/Role/view/custom/role';
 function Role() {
   const [roleState, roleDispatchers] = pageStore.useModel('role');
 
+  const [customRoleState, customRoleDispatchers] = pageStore.useModel('customRole');
+
   useEffect(() => {
     roleDispatchers.findDataTableAndFormByName();
   }, [roleDispatchers]);
@@ -35,6 +37,12 @@ function Role() {
             <CustomColumnRole value={value} index={index} record={record} />
           );
         } : null}
+        customMethod1={() => customRoleDispatchers.customMethod1()}
+        customMethod2={() => customRoleDispatchers.customMethod2()}
+        customMethod3={() => customRoleDispatchers.customMethod3()}
+        customMethodName1={customRoleState.customMethodName1}
+        customMethodName2={customRoleState.customMethodName2}
+        customMethodName3={customRoleState.customMethodName3}
       />
       <DataFormTemple
         title={roleState.roleTitle}

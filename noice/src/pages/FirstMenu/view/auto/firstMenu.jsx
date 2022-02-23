@@ -8,6 +8,8 @@ function FirstMenu() {
   const [firstMenuState, firstMenuDispatchers] = pageStore.useModel('firstMenu');
   const [secondMenuState, secondMenuDispatchers] = pageStore.useModel('secondMenu');
 
+  const [customFirstMenuState, customFirstMenuDispatchers] = pageStore.useModel('customFirstMenu');
+
   useEffect(() => {
     firstMenuDispatchers.findDataTableAndFormByName();
   }, [firstMenuDispatchers]);
@@ -46,6 +48,12 @@ function FirstMenu() {
             <CustomColumnFirstMenu value={value} index={index} record={record} />
           );
         } : null}
+        customMethod1={() => customFirstMenuDispatchers.customMethod1()}
+        customMethod2={() => customFirstMenuDispatchers.customMethod2()}
+        customMethod3={() => customFirstMenuDispatchers.customMethod3()}
+        customMethodName1={customFirstMenuState.customMethodName1}
+        customMethodName2={customFirstMenuState.customMethodName2}
+        customMethodName3={customFirstMenuState.customMethodName3}
       />
       <DataFormTemple
         title={firstMenuState.firstMenuTitle}

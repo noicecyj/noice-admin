@@ -8,6 +8,8 @@ function Catalog() {
   const [catalogState, catalogDispatchers] = pageStore.useModel('catalog');
   const [dictionaryState, dictionaryDispatchers] = pageStore.useModel('dictionary');
 
+  const [customCatalogState, customCatalogDispatchers] = pageStore.useModel('customCatalog');
+
   useEffect(() => {
     catalogDispatchers.findDataTableAndFormByName();
   }, [catalogDispatchers]);
@@ -46,6 +48,12 @@ function Catalog() {
             <CustomColumnCatalog value={value} index={index} record={record} />
           );
         } : null}
+        customMethod1={() => customCatalogDispatchers.customMethod1()}
+        customMethod2={() => customCatalogDispatchers.customMethod2()}
+        customMethod3={() => customCatalogDispatchers.customMethod3()}
+        customMethodName1={customCatalogState.customMethodName1}
+        customMethodName2={customCatalogState.customMethodName2}
+        customMethodName3={customCatalogState.customMethodName3}
       />
       <DataFormTemple
         title={catalogState.catalogTitle}

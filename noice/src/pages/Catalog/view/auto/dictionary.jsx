@@ -8,6 +8,8 @@ import { CustomColumnDictionary } from '@/pages/Catalog/view/custom/dictionary';
 function Dictionary() {
   const [dictionaryState, dictionaryDispatchers] = pageStore.useModel('dictionary');
 
+  const [customDictionaryState, customDictionaryDispatchers] = pageStore.useModel('customDictionary');
+
   return (
     <div>
       <Dialog
@@ -39,6 +41,12 @@ function Dictionary() {
               <CustomColumnDictionary value={value} index={index} record={record} />
             );
           } : null}
+          customMethod1={() => customDictionaryDispatchers.customMethod1()}
+          customMethod2={() => customDictionaryDispatchers.customMethod2()}
+          customMethod3={() => customDictionaryDispatchers.customMethod3()}
+          customMethodName1={customDictionaryState.customMethodName1}
+          customMethodName2={customDictionaryState.customMethodName2}
+          customMethodName3={customDictionaryState.customMethodName3}
         />
       </Dialog>
       <DataFormTemple

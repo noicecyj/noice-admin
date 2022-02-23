@@ -7,6 +7,8 @@ import { CustomColumnSql } from '@/pages/Sql/view/custom/sql';
 function Sql() {
   const [sqlState, sqlDispatchers] = pageStore.useModel('sql');
 
+  const [customSqlState, customSqlDispatchers] = pageStore.useModel('customSql');
+
   useEffect(() => {
     sqlDispatchers.findDataTableAndFormByName();
   }, [sqlDispatchers]);
@@ -35,6 +37,12 @@ function Sql() {
             <CustomColumnSql value={value} index={index} record={record} />
           );
         } : null}
+        customMethod1={() => customSqlDispatchers.customMethod1()}
+        customMethod2={() => customSqlDispatchers.customMethod2()}
+        customMethod3={() => customSqlDispatchers.customMethod3()}
+        customMethodName1={customSqlState.customMethodName1}
+        customMethodName2={customSqlState.customMethodName2}
+        customMethodName3={customSqlState.customMethodName3}
       />
       <DataFormTemple
         title={sqlState.sqlTitle}

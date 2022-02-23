@@ -6,7 +6,9 @@ export default {
   namespace: 'customFirstMenu',
 
   state: {
-
+    customMethodName1: null,
+    customMethodName2: null,
+    customMethodName3: null,
   },
 
   reducers: {
@@ -16,6 +18,8 @@ export default {
   },
 
   effects: (dispatch) => ({
-
+    customMethod1() { },
+    customMethod2() { },
+    customMethod3() { },
   }),
 };

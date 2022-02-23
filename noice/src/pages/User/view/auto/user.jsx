@@ -7,6 +7,8 @@ import { CustomColumnUser } from '@/pages/User/view/custom/user';
 function User() {
   const [userState, userDispatchers] = pageStore.useModel('user');
 
+  const [customUserState, customUserDispatchers] = pageStore.useModel('customUser');
+
   useEffect(() => {
     userDispatchers.findDataTableAndFormByName();
   }, [userDispatchers]);
@@ -35,6 +37,12 @@ function User() {
             <CustomColumnUser value={value} index={index} record={record} />
           );
         } : null}
+        customMethod1={() => customUserDispatchers.customMethod1()}
+        customMethod2={() => customUserDispatchers.customMethod2()}
+        customMethod3={() => customUserDispatchers.customMethod3()}
+        customMethodName1={customUserState.customMethodName1}
+        customMethodName2={customUserState.customMethodName2}
+        customMethodName3={customUserState.customMethodName3}
       />
       <DataFormTemple
         title={userState.userTitle}
