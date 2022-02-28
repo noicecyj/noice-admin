@@ -6,7 +6,7 @@ export default {
   namespace: 'customFirstMenu',
 
   state: {
-    customMethodName1: null,
+    customMethodName1: '生成菜单',
     customMethodName2: null,
     customMethodName3: null,
   },
@@ -18,7 +18,12 @@ export default {
   },
 
   effects: (dispatch) => ({
-    customMethod1() { },
+    /**
+     * 生成菜单
+     */
+    customMethod1() {
+      customFirstMenuServices.createMenu();
+    },
     customMethod2() { },
     customMethod3() { },
   }),
