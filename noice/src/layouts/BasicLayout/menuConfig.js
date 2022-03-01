@@ -40,6 +40,10 @@ const asideMenuConfig = [
         name: '用户管理',
         path: '/auth/user',
       },
+      {
+        name: '权限管理',
+        path: '/auth/authority',
+      },
     ],
   },
 ];

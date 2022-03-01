@@ -3,7 +3,7 @@ import { request } from 'ice';
 export default {
   createMenu() {
     return request({
-      url: '/entityCreateApi/firstMenuPage',
+      url: '/entityCreateApi/createMenu',
       method: 'post',
     });
   },
