@@ -357,3 +357,5 @@ cyj-discovery/cyj-discovery.log
 /cyj-entity-creater/target/classes/com/example/cyjentitycreater/entity/auto/po/SecondMenuPO.class
 /cyj-entity-creater/target/classes/com/example/cyjentitycreater/service/auto/SecondMenuService.class
 /cyj-entity-creater/target/classes/com/example/cyjentitycreater/service/auto/Impl/SecondMenuServiceImpl.class
+/cyj-entity-creater/target/classes/com/example/cyjentitycreater/entity/custom/dto/FirstMenuDTO.class
+/cyj-entity-creater/target/classes/com/example/cyjentitycreater/entity/custom/dto/SecondMenuDTO.class
