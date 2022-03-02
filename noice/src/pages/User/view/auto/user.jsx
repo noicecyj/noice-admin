@@ -28,9 +28,7 @@ function User() {
         dataSource={userState.userTableData}
         items={userState.userTable}
         total={userState.userTotal}
-        getPage={(userCurrent) => userDispatchers.userPage({
-          pageNumber: userCurrent,
-        })}
+        getPage={(userCurrent) => userDispatchers.userPage(userCurrent)}
         primaryKey="id"
         columnRender={userState.customType ? (value, index, record) => {
           return (

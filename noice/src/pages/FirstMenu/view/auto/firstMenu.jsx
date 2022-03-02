@@ -29,9 +29,7 @@ function FirstMenu() {
         dataSource={firstMenuState.firstMenuTableData}
         items={firstMenuState.firstMenuTable}
         total={firstMenuState.firstMenuTotal}
-        getPage={(firstMenuCurrent) => firstMenuDispatchers.firstMenuPage({
-          pageNumber: firstMenuCurrent,
-        })}
+        getPage={(firstMenuCurrent) => firstMenuDispatchers.firstMenuPage(firstMenuCurrent)}
         rowSelection={{
           mode: 'single',
           onSelect: (selected, record) => {

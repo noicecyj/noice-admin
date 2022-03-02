@@ -29,9 +29,7 @@ function EntityName() {
         dataSource={entityNameState.entityNameTableData}
         items={entityNameState.entityNameTable}
         total={entityNameState.entityNameTotal}
-        getPage={(entityNameCurrent) => entityNameDispatchers.entityNamePage({
-          pageNumber: entityNameCurrent,
-        })}
+        getPage={(entityNameCurrent) => entityNameDispatchers.entityNamePage(entityNameCurrent)}
         rowSelection={{
           mode: 'single',
           onSelect: (selected, record) => {

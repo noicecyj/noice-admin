@@ -28,9 +28,7 @@ function AppService() {
         dataSource={appServiceState.appServiceTableData}
         items={appServiceState.appServiceTable}
         total={appServiceState.appServiceTotal}
-        getPage={(appServiceCurrent) => appServiceDispatchers.appServicePage({
-          pageNumber: appServiceCurrent,
-        })}
+        getPage={(appServiceCurrent) => appServiceDispatchers.appServicePage(appServiceCurrent)}
         primaryKey="id"
         columnRender={appServiceState.customType ? (value, index, record) => {
           return (

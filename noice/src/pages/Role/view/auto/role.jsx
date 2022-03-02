@@ -28,9 +28,7 @@ function Role() {
         dataSource={roleState.roleTableData}
         items={roleState.roleTable}
         total={roleState.roleTotal}
-        getPage={(roleCurrent) => roleDispatchers.rolePage({
-          pageNumber: roleCurrent,
-        })}
+        getPage={(roleCurrent) => roleDispatchers.rolePage(roleCurrent)}
         primaryKey="id"
         columnRender={roleState.customType ? (value, index, record) => {
           return (

@@ -29,9 +29,7 @@ function Catalog() {
         dataSource={catalogState.catalogTableData}
         items={catalogState.catalogTable}
         total={catalogState.catalogTotal}
-        getPage={(catalogCurrent) => catalogDispatchers.catalogPage({
-          pageNumber: catalogCurrent,
-        })}
+        getPage={(catalogCurrent) => catalogDispatchers.catalogPage(catalogCurrent)}
         rowSelection={{
           mode: 'single',
           onSelect: (selected, record) => {

@@ -28,9 +28,7 @@ function Sql() {
         dataSource={sqlState.sqlTableData}
         items={sqlState.sqlTable}
         total={sqlState.sqlTotal}
-        getPage={(sqlCurrent) => sqlDispatchers.sqlPage({
-          pageNumber: sqlCurrent,
-        })}
+        getPage={(sqlCurrent) => sqlDispatchers.sqlPage(sqlCurrent)}
         primaryKey="id"
         columnRender={sqlState.customType ? (value, index, record) => {
           return (

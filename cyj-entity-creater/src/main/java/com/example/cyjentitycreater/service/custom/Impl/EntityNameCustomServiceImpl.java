@@ -1421,9 +1421,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("        dataSource={").append(underPoName).append("State.").append(underPoName).append("TableData}\r\n");
         sb.append("        items={").append(underPoName).append("State.").append(underPoName).append("Table}\r\n");
         sb.append("        total={").append(underPoName).append("State.").append(underPoName).append("Total}\r\n");
-        sb.append("        getPage={(").append(underPoName).append("Current) => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Page({\r\n");
-        sb.append("          pageNumber: ").append(underPoName).append("Current,\r\n");
-        sb.append("        })}\r\n");
+        sb.append("        getPage={(").append(underPoName).append("Current) => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Page(").append(underPoName).append("Current)}\r\n");
         if (entityNamePOList.size() != 0) {
             sb.append("        rowSelection={{\r\n");
             sb.append("          mode: 'single',\r\n");
