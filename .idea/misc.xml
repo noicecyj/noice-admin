@@ -9,6 +9,7 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/cyj-log/pom.xml" />
+        <option value="$PROJECT_DIR$/cyj-user/pom.xml" />
       </set>
     </option>
   </component>

@@ -1,6 +1,6 @@
 package com.example.cyjauth.dao.custom;
 
-import com.example.cyjauth.entity.auto.po.UserPO;
+import com.example.cyjauth.entity.custom.po.UserPO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -9,4 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @date 2022-02-07
  */
 public interface UserCustomDao extends JpaRepository<UserPO, String> {
+
+    UserPO findByUserName(String name);
+
 }

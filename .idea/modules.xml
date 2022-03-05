@@ -8,7 +8,6 @@
       <module fileurl="file://$PROJECT_DIR$/cyj-discovery/cyj-discovery.iml" filepath="$PROJECT_DIR$/cyj-discovery/cyj-discovery.iml" />
       <module fileurl="file://$PROJECT_DIR$/cyj-entity-creater/cyj-entity-creater.iml" filepath="$PROJECT_DIR$/cyj-entity-creater/cyj-entity-creater.iml" />
       <module fileurl="file://$PROJECT_DIR$/cyj-query/cyj-query.iml" filepath="$PROJECT_DIR$/cyj-query/cyj-query.iml" />
-      <module fileurl="file://$PROJECT_DIR$/cyj-user/cyj-user.iml" filepath="$PROJECT_DIR$/cyj-user/cyj-user.iml" />
       <module fileurl="file://$PROJECT_DIR$/cyj-workflow/cyj-workflow.iml" filepath="$PROJECT_DIR$/cyj-workflow/cyj-workflow.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/noice-admin.iml" filepath="$PROJECT_DIR$/.idea/noice-admin.iml" />
     </modules>
