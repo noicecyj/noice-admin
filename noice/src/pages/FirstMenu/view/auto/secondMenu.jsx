@@ -28,6 +28,7 @@ function SecondMenu() {
             record,
             data: {
               pageNumber: secondMenuState.secondMenuCurrent,
+              pid: secondMenuState.firstMenuId,
             },
           })}
           visibleLoading={secondMenuState.secondMenuLoadingVisible}

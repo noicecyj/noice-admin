@@ -28,6 +28,7 @@ function Dictionary() {
             record,
             data: {
               pageNumber: dictionaryState.dictionaryCurrent,
+              pid: dictionaryState.catalogId,
             },
           })}
           visibleLoading={dictionaryState.dictionaryLoadingVisible}

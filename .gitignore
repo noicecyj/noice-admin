@@ -406,3 +406,4 @@ cyj-discovery/cyj-discovery.log
 /cyj-auth/target/classes/com/example/cyjauth/entity/custom/po/QUserPO.class
 /cyj-auth/target/classes/com/example/cyjauth/entity/custom/po/RoleCustomPO.class
 /cyj-auth/target/classes/com/example/cyjauth/entity/custom/po/UserCustomPO.class
+/cyj-auth/target/classes/com/example/cyjauth/config/LoggerFilter.class
