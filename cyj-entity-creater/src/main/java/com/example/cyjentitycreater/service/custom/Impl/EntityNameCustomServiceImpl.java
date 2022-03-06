@@ -1051,6 +1051,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "            record,\r\n" +
                 "            data: {\r\n" +
                 "              pageNumber: " + underSubPoName + "State." + underSubPoName + "Current,\r\n" +
+                "              pid: " + underSubPoName + "State." + underPoName + "Id,\r\n" +
                 "            },\r\n" +
                 "          })}\r\n" +
                 "          visibleLoading={" + underSubPoName + "State." + underSubPoName + "LoadingVisible}\r\n" +

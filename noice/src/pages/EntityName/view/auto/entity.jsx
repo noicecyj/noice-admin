@@ -28,6 +28,7 @@ function Entity() {
             record,
             data: {
               pageNumber: entityState.entityCurrent,
+              pid: entityState.entityNameId,
             },
           })}
           visibleLoading={entityState.entityLoadingVisible}
