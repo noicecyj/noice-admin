@@ -1,6 +1,5 @@
 package com.example.cyjentitycreater.controller.custom;
 
-import com.example.cyjcommon.annotation.InterFaceMapping;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.entity.custom.vo.CreateVO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface AppServiceCustomController {
 
     @Operation(summary = "生成服务文件")
-    @InterFaceMapping(api = "entityCreateApi")
     @PostMapping(value = "createAppFile")
     ResultVO createAppFile(@RequestBody CreateVO createVO);
 

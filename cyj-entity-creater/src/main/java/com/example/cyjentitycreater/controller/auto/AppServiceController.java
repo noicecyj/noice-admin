@@ -1,6 +1,5 @@
 package com.example.cyjentitycreater.controller.auto;
 
-import com.example.cyjcommon.annotation.InterFaceMapping;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.entity.auto.po.AppServicePO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -18,22 +17,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface AppServiceController {
 
     @Operation(summary = "查询所有AppService")
-    @InterFaceMapping(api = "entityCreateApi")
     @PostMapping(value = "appServicePage")
     ResultVO appServicePage(@RequestParam("pageNumber") Integer pageNumber);
 
     @Operation(summary = "保存AppService")
-    @InterFaceMapping(api = "entityCreateApi")
     @PostMapping(value = "appServiceSave")
     ResultVO appServiceSave(@RequestBody AppServicePO po);
 
     @Operation(summary = "删除AppService")
-    @InterFaceMapping(api = "entityCreateApi")
     @PostMapping(value = "appServiceDelete")
     void appServiceDelete(@RequestParam("id") String id);
 
     @Operation(summary = "根据ID查询AppService")
-    @InterFaceMapping(api = "entityCreateApi")
     @PostMapping(value = "findAppServiceById")
     ResultVO findAppServiceById(@RequestParam("id") String id);
 

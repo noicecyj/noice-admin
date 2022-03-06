@@ -1,6 +1,5 @@
 package com.example.cyjdictionary.controller.custom;
 
-import com.example.cyjcommon.annotation.InterFaceMapping;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface CatalogCustomController {
 
     @Operation(summary = "根据目录名称或者值模糊查询")
-    @InterFaceMapping(api = "dictionaryApi")
     @PostMapping(value = "findAllByCatalogNameContainsOrCatalogValueContains")
     ResultVO findAllByCatalogNameContainsOrCatalogValueContains(@RequestParam("catalogName") String catalogName,
                                                                 @RequestParam("catalogValue") String catalogValue,
