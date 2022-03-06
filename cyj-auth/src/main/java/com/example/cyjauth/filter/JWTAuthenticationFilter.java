@@ -66,7 +66,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
      * 对token进行解析认证
      */
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) throws CommonException {
-        StringRedisTemplate stringRedisTemplate = SpringUtil.getBean("stringRedisTemplate", StringRedisTemplate.class);
+        StringRedisTemplate stringRedisTemplate = SpringUtil.getBean(StringRedisTemplate.class);
         String token = request.getHeader(SecurityConstant.HEADER);
         if (StringUtils.isNotBlank(token)) {
             // 解析token

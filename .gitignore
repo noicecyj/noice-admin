@@ -397,3 +397,12 @@ cyj-discovery/cyj-discovery.log
 /cyj-auth/target/classes/com/example/cyjauth/entity/custom/po/UserPO.class
 /cyj-auth/target/classes/com/example/cyjauth/filter/WebSecurityCorsFilter.class
 /cyj-common/target/classes/com/example/cyjcommon/service/BaseService.class
+/cyj-auth/target/classes/com/example/cyjauth/entity/custom/po/AuthorityCustomPO.class
+/cyj-auth/target/classes/com/example/cyjauth/entity/custom/po/QAuthorityCustomPO.class
+/cyj-auth/target/classes/com/example/cyjauth/entity/custom/po/QAuthorityPO.class
+/cyj-auth/target/classes/com/example/cyjauth/entity/custom/po/QRoleCustomPO.class
+/cyj-auth/target/classes/com/example/cyjauth/entity/custom/po/QRolePO.class
+/cyj-auth/target/classes/com/example/cyjauth/entity/custom/po/QUserCustomPO.class
+/cyj-auth/target/classes/com/example/cyjauth/entity/custom/po/QUserPO.class
+/cyj-auth/target/classes/com/example/cyjauth/entity/custom/po/RoleCustomPO.class
+/cyj-auth/target/classes/com/example/cyjauth/entity/custom/po/UserCustomPO.class

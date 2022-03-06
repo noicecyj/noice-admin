@@ -16,11 +16,6 @@ zuul:
 spring:
   application:
     name: cyj-auth
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
   jpa:
     generate-ddl: false
     show-sql: false
