@@ -5,7 +5,6 @@ import com.querydsl.core.QueryResults;
 /**
  * @author 曹元杰
  * @version 1.0
- * @date 2022-02-23
  */
 public interface SqlService {
 

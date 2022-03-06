@@ -520,7 +520,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("import ").append(poDaoPath).append(poName).append("Dao;\r\n");
         sb.append("import ").append(poPath).append(poName).append("PO;\r\n");
         sb.append("import ").append(poPath).append("Q").append(poName).append("PO;\r\n");
-        sb.append("import com.example.cyjcommon.service.Impl.BaseService;\r\n");
+        sb.append("import com.example.cyjcommon.service.BaseService;\r\n");
         sb.append("import ").append(poServicePath).append(poName).append("Service;\r\n");
         sb.append("import com.querydsl.core.QueryResults;\r\n");
         sb.append("import org.springframework.beans.factory.annotation.Autowired;\r\n");
