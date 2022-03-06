@@ -32,10 +32,6 @@
     "/authApi": {
       "enable": true,
       "target": "http://127.0.0.1:8090/cyj-auth"
-    },
-    "/userApi": {
-      "enable": true,
-      "target": "http://127.0.0.1:8090/cyj-user"
     }
   }
 }

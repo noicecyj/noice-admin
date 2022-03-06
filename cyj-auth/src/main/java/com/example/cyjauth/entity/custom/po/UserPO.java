@@ -1,6 +1,5 @@
 package com.example.cyjauth.entity.custom.po;
 
-import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

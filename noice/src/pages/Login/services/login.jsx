@@ -4,7 +4,7 @@ export default {
 
   login(data) {
     return request({
-      url: '/userApi/v1/login',
+      url: '/authApi/v1/login',
       method: 'post',
       data,
     });

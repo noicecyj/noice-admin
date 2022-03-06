@@ -3,7 +3,7 @@ package com.example.cyjauth.service.custom.Impl;
 import com.example.cyjauth.dao.custom.AuthorityCustomDao;
 import com.example.cyjauth.entity.custom.po.AuthorityPO;
 import com.example.cyjauth.service.custom.AuthorityCustomService;
-import com.example.cyjcommon.service.Impl.BaseService;
+import com.example.cyjcommon.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

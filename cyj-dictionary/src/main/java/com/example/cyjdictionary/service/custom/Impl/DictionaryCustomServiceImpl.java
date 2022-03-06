@@ -1,6 +1,6 @@
 package com.example.cyjdictionary.service.custom.Impl;
 
-import com.example.cyjcommon.service.Impl.BaseService;
+import com.example.cyjcommon.service.BaseService;
 import com.example.cyjdictionary.entity.auto.po.DictionaryPO;
 import com.example.cyjdictionary.entity.auto.po.QCatalogPO;
 import com.example.cyjdictionary.entity.auto.po.QDictionaryPO;

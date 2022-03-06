@@ -1,4 +1,4 @@
-package com.example.cyjcommon.service.Impl;
+package com.example.cyjcommon.service;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.slf4j.Logger;

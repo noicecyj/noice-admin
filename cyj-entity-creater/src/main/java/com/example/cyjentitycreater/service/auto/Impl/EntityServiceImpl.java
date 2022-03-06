@@ -3,7 +3,7 @@ package com.example.cyjentitycreater.service.auto.Impl;
 import com.example.cyjentitycreater.dao.auto.EntityDao;
 import com.example.cyjentitycreater.entity.auto.po.EntityPO;
 import com.example.cyjentitycreater.entity.auto.po.QEntityPO;
-import com.example.cyjcommon.service.Impl.BaseService;
+import com.example.cyjcommon.service.BaseService;
 import com.example.cyjentitycreater.service.auto.EntityService;
 import com.querydsl.core.QueryResults;
 import org.springframework.beans.factory.annotation.Autowired;

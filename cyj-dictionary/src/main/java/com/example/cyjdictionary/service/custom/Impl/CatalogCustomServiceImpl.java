@@ -1,6 +1,6 @@
 package com.example.cyjdictionary.service.custom.Impl;
 
-import com.example.cyjcommon.service.Impl.BaseService;
+import com.example.cyjcommon.service.BaseService;
 import com.example.cyjdictionary.dao.custom.CatalogCustomDao;
 import com.example.cyjdictionary.entity.auto.po.CatalogPO;
 import com.example.cyjdictionary.service.custom.CatalogCustomService;
