@@ -169,7 +169,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("/**\r\n");
         sb.append(" * @author 曹元杰\r\n");
         sb.append(" * @version 1.0\r\n");
-        sb.append(" * @date ").append(LocalDate.now()).append("\r\n");
         sb.append(" */\r\n");
         sb.append("@CrossOrigin\r\n");
         sb.append("@RestController\r\n");
@@ -194,7 +193,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("/**\r\n");
         sb.append(" * @author 曹元杰\r\n");
         sb.append(" * @version 1.0\r\n");
-        sb.append(" * @date ").append(LocalDate.now()).append("\r\n");
         sb.append(" */\r\n");
         sb.append("@Tag(name = \"").append(poName).append("\")\r\n");
         sb.append("public interface ").append(poName).append("CustomController {\r\n");
@@ -213,7 +211,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         //serviceImpl路径
         sb.append("package ").append(poServicePath).append("Impl;\r\n");
         sb.append("\r\n");
-        sb.append("import com.example.cyjcommon.service.Impl.BaseService;\r\n");
+        sb.append("import com.example.cyjcommon.service.BaseService;\r\n");
         sb.append("import ").append(poServicePath).append(poName).append("CustomService;\r\n");
         sb.append("import org.springframework.stereotype.Service;\r\n");
         sb.append("import org.springframework.transaction.annotation.Transactional;\r\n");
@@ -221,7 +219,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("/**\r\n");
         sb.append(" * @author 曹元杰\r\n");
         sb.append(" * @version 1.0\r\n");
-        sb.append(" * @date ").append(LocalDate.now()).append("\r\n");
         sb.append(" */\r\n");
         sb.append("@Service\r\n");
         sb.append("@Transactional(rollbackFor = Exception.class)\r\n");
@@ -243,7 +240,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("/**\r\n");
         sb.append(" * @author 曹元杰\r\n");
         sb.append(" * @version 1.0\r\n");
-        sb.append(" * @date ").append(LocalDate.now()).append("\r\n");
         sb.append(" */\r\n");
         sb.append("public interface ").append(poName).append("CustomService {\r\n");
         sb.append("\r\n");
@@ -282,7 +278,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("/**\r\n");
         sb.append(" * @author 曹元杰\r\n");
         sb.append(" * @version 1.0\r\n");
-        sb.append(" * @date ").append(LocalDate.now()).append("\r\n");
         sb.append(" */\r\n");
         sb.append("@Entity\r\n");
         sb.append("@Table(name = ").append(poName).append("PO.T_").append(po.getEntityCode().toUpperCase()).append(")\r\n");
@@ -342,7 +337,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("/**\r\n");
         sb.append(" * @author 曹元杰\r\n");
         sb.append(" * @version 1.0\r\n");
-        sb.append(" * @date ").append(LocalDate.now()).append("\r\n");
         sb.append(" */\r\n");
         sb.append("public interface ").append(poName).append("Dao extends JpaRepository<").append(poName).append("PO, String> {\r\n");
         sb.append("}\r\n");
@@ -366,7 +360,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("/**\r\n");
         sb.append(" * @author 曹元杰\r\n");
         sb.append(" * @version 1.0\r\n");
-        sb.append(" * @date ").append(LocalDate.now()).append("\r\n");
         sb.append(" */\r\n");
         sb.append("public interface ").append(poName).append("CustomDao extends JpaRepository<").append(poName).append("PO, String> {\r\n");
         sb.append("}\r\n");
@@ -390,7 +383,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("/**\r\n");
         sb.append(" * @author 曹元杰\r\n");
         sb.append(" * @version 1.0\r\n");
-        sb.append(" * @date ").append(LocalDate.now()).append("\r\n");
         sb.append(" */\r\n");
         sb.append("public interface ").append(poName).append("Service {\r\n");
         sb.append("\r\n");
@@ -423,7 +415,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("/**\r\n");
         sb.append(" * @author 曹元杰\r\n");
         sb.append(" * @version 1.0\r\n");
-        sb.append(" * @date ").append(LocalDate.now()).append("\r\n");
         sb.append(" */\r\n");
         sb.append("public interface ").append(poName).append("Service {\r\n");
         sb.append("\r\n");
@@ -455,7 +446,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("import ").append(poDaoPath).append(poName).append("Dao;\r\n");
         sb.append("import ").append(poPath).append(poName).append("PO;\r\n");
         sb.append("import ").append(poPath).append("Q").append(poName).append("PO;\r\n");
-        sb.append("import com.example.cyjcommon.service.Impl.BaseService;\r\n");
+        sb.append("import com.example.cyjcommon.service.BaseService;\r\n");
         sb.append("import ").append(poServicePath).append(poName).append("Service;\r\n");
         sb.append("import com.querydsl.core.QueryResults;\r\n");
         sb.append("import org.springframework.beans.factory.annotation.Autowired;\r\n");
@@ -465,7 +456,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("/**\r\n");
         sb.append(" * @author 曹元杰\r\n");
         sb.append(" * @version 1.0\r\n");
-        sb.append(" * @date ").append(LocalDate.now()).append("\r\n");
         sb.append(" */\r\n");
         sb.append("@Service\r\n");
         sb.append("@Transactional(rollbackFor = Exception.class)\r\n");
@@ -542,7 +532,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("/**\r\n");
         sb.append(" * @author 曹元杰\r\n");
         sb.append(" * @version 1.0\r\n");
-        sb.append(" * @date ").append(LocalDate.now()).append("\r\n");
         sb.append(" */\r\n");
         sb.append("@Service\r\n");
         sb.append("@Transactional(rollbackFor = Exception.class)\r\n");
@@ -609,7 +598,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         String poControllerPath = packetPath + ".controller.auto;\r\n";
         sb.append("package ").append(poControllerPath);
         sb.append("\r\n");
-        sb.append("import com.example.cyjcommon.annotation.InterFaceMapping;\r\n");
         sb.append("import com.example.cyjcommon.utils.ResultVO;\r\n");
         sb.append("import ").append(poPath).append(poName).append("PO;\r\n");
         sb.append("import io.swagger.v3.oas.annotations.Operation;\r\n");
@@ -621,28 +609,23 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("/**\r\n");
         sb.append(" * @author 曹元杰\r\n");
         sb.append(" * @version 1.0\r\n");
-        sb.append(" * @date ").append(LocalDate.now()).append("\r\n");
         sb.append(" */\r\n");
         sb.append("@Tag(name = \"").append(poName).append("\")\r\n");
         sb.append("public interface ").append(poName).append("Controller {\r\n");
         sb.append("\r\n");
         sb.append("    @Operation(summary = \"查询所有").append(poName).append("\")\r\n");
-        sb.append("    @InterFaceMapping(api = \"").append(appApi).append("\")\r\n");
         sb.append("    @PostMapping(value = \"").append(underPoName).append("Page\")\r\n");
         sb.append("    ResultVO ").append(underPoName).append("Page(@RequestParam(\"pageNumber\") Integer pageNumber);\r\n");
         sb.append("\r\n");
         sb.append("    @Operation(summary = \"保存").append(poName).append("\")\r\n");
-        sb.append("    @InterFaceMapping(api = \"").append(appApi).append("\")\r\n");
         sb.append("    @PostMapping(value = \"").append(underPoName).append("Save\")\r\n");
         sb.append("    ResultVO ").append(underPoName).append("Save(@RequestBody ").append(poName).append("PO po);\r\n");
         sb.append("\r\n");
         sb.append("    @Operation(summary = \"删除").append(poName).append("\")\r\n");
-        sb.append("    @InterFaceMapping(api = \"").append(appApi).append("\")\r\n");
         sb.append("    @PostMapping(value = \"").append(underPoName).append("Delete\")\r\n");
         sb.append("    void ").append(underPoName).append("Delete(@RequestParam(\"id\") String id);\r\n");
         sb.append("\r\n");
         sb.append("    @Operation(summary = \"根据ID查询").append(poName).append("\")\r\n");
-        sb.append("    @InterFaceMapping(api = \"").append(appApi).append("\")\r\n");
         sb.append("    @PostMapping(value = \"find").append(poName).append("ById\")\r\n");
         sb.append("    ResultVO find").append(poName).append("ById(@RequestParam(\"id\") String id);\r\n");
         sb.append("\r\n");
@@ -675,7 +658,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("/**\r\n");
         sb.append(" * @author 曹元杰\r\n");
         sb.append(" * @version 1.0\r\n");
-        sb.append(" * @date ").append(LocalDate.now()).append("\r\n");
         sb.append(" */\r\n");
         sb.append("@CrossOrigin\r\n");
         sb.append("@RestController\r\n");
@@ -727,7 +709,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         String poControllerPath = packetPath + ".controller.auto;\r\n";
         sb.append("package ").append(poControllerPath);
         sb.append("\r\n");
-        sb.append("import com.example.cyjcommon.annotation.InterFaceMapping;\r\n");
         sb.append("import com.example.cyjcommon.utils.ResultVO;\r\n");
         sb.append("import ").append(poPath).append(poName).append("PO;\r\n");
         sb.append("import io.swagger.v3.oas.annotations.Operation;\r\n");
@@ -739,28 +720,23 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("/**\r\n");
         sb.append(" * @author 曹元杰\r\n");
         sb.append(" * @version 1.0\r\n");
-        sb.append(" * @date ").append(LocalDate.now()).append("\r\n");
         sb.append(" */\r\n");
         sb.append("@Tag(name = \"").append(poName).append("\")\r\n");
         sb.append("public interface ").append(poName).append("Controller {\r\n");
         sb.append("\r\n");
         sb.append("    @Operation(summary = \"查询所有").append(poName).append("\")\r\n");
-        sb.append("    @InterFaceMapping(api = \"").append(appApi).append("\")\r\n");
         sb.append("    @PostMapping(value = \"").append(underPoName).append("Page\")\r\n");
         sb.append("    ResultVO ").append(underPoName).append("Page(@RequestParam(\"pageNumber\") Integer pageNumber, @RequestParam(\"pid\") String pid);\r\n");
         sb.append("\r\n");
         sb.append("    @Operation(summary = \"保存").append(poName).append("\")\r\n");
-        sb.append("    @InterFaceMapping(api = \"").append(appApi).append("\")\r\n");
         sb.append("    @PostMapping(value = \"").append(underPoName).append("Save\")\r\n");
         sb.append("    ResultVO ").append(underPoName).append("Save(@RequestBody ").append(poName).append("PO po);\r\n");
         sb.append("\r\n");
         sb.append("    @Operation(summary = \"删除").append(poName).append("\")\r\n");
-        sb.append("    @InterFaceMapping(api = \"").append(appApi).append("\")\r\n");
         sb.append("    @PostMapping(value = \"").append(underPoName).append("Delete\")\r\n");
         sb.append("    void ").append(underPoName).append("Delete(@RequestParam(\"id\") String id);\r\n");
         sb.append("\r\n");
         sb.append("    @Operation(summary = \"根据ID查询").append(poName).append("\")\r\n");
-        sb.append("    @InterFaceMapping(api = \"").append(appApi).append("\")\r\n");
         sb.append("    @PostMapping(value = \"find").append(poName).append("ById\")\r\n");
         sb.append("    ResultVO find").append(poName).append("ById(@RequestParam(\"id\") String id);\r\n");
         sb.append("\r\n");
@@ -793,7 +769,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("/**\r\n");
         sb.append(" * @author 曹元杰\r\n");
         sb.append(" * @version 1.0\r\n");
-        sb.append(" * @date ").append(LocalDate.now()).append("\r\n");
         sb.append(" */\r\n");
         sb.append("@CrossOrigin\r\n");
         sb.append("@RestController\r\n");
