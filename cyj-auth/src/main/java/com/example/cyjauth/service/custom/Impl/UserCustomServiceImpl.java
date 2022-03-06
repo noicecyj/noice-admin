@@ -2,7 +2,7 @@ package com.example.cyjauth.service.custom.Impl;
 
 import com.example.cyjauth.dao.custom.UserCustomDao;
 import com.example.cyjauth.entity.custom.bo.AuthUserDetails;
-import com.example.cyjauth.entity.custom.po.UserPO;
+import com.example.cyjauth.entity.custom.po.UserCustomPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjauth.service.custom.UserCustomService;
 import org.apache.commons.lang3.StringUtils;
@@ -37,7 +37,7 @@ public class UserCustomServiceImpl extends BaseService implements UserCustomServ
     }
 
     @Override
-    public UserPO findAuthUserByUsername(String username) {
+    public UserCustomPO findAuthUserByUsername(String username) {
         return userCustomDao.findByUserName(username);
     }
 
@@ -50,7 +50,7 @@ public class UserCustomServiceImpl extends BaseService implements UserCustomServ
             throw new UsernameNotFoundException("登录错误次数超过限制");
         }
         //查询用户信息
-        UserPO po = findAuthUserByUsername(username);
+        UserCustomPO po = findAuthUserByUsername(username);
         if (null == po) {
             throw new UsernameNotFoundException("当前用户不存在");
         }

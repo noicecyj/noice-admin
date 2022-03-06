@@ -1,6 +1,6 @@
 package com.example.cyjauth.dao.custom;
 
-import com.example.cyjauth.entity.custom.po.AuthorityPO;
+import com.example.cyjauth.entity.custom.po.AuthorityCustomPO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -10,10 +10,10 @@ import java.util.List;
  * @version 1.0
  * @date 2022-03-02
  */
-public interface AuthorityCustomDao extends JpaRepository<AuthorityPO, String> {
+public interface AuthorityCustomDao extends JpaRepository<AuthorityCustomPO, String> {
 
-    List<AuthorityPO> findAllByStatusEquals(String status);
+    List<AuthorityCustomPO> findAllByStatusEquals(String status);
 
-    AuthorityPO findByPathAndName(String path, String name);
+    AuthorityCustomPO findByPathAndName(String path, String name);
 
 }

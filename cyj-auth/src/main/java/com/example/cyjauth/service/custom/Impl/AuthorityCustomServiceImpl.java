@@ -1,7 +1,7 @@
 package com.example.cyjauth.service.custom.Impl;
 
 import com.example.cyjauth.dao.custom.AuthorityCustomDao;
-import com.example.cyjauth.entity.custom.po.AuthorityPO;
+import com.example.cyjauth.entity.custom.po.AuthorityCustomPO;
 import com.example.cyjauth.service.custom.AuthorityCustomService;
 import com.example.cyjcommon.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class AuthorityCustomServiceImpl extends BaseService implements Authority
     }
 
     @Override
-    public List<AuthorityPO> findRoleAndAuthority() {
+    public List<AuthorityCustomPO> findRoleAndAuthority() {
         return authorityCustomDao.findAllByStatusEquals("1");
     }
 

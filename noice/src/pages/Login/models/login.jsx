@@ -28,6 +28,7 @@ export default {
     login(data) {
       loginService.login(data)
         .then((res) => {
+          console.log(res);
           cookie.save('token', res.data.accessToken);
           history.push('/admin');
           Message.success('登录成功');

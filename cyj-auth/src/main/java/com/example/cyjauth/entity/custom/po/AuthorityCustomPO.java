@@ -21,13 +21,13 @@ import java.util.Objects;
  * @date 2021-03-20
  */
 @Entity
-@Table(name = AuthorityPO.T_AUTHORITY)
+@Table(name = AuthorityCustomPO.T_AUTHORITY)
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
 @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-public class AuthorityPO implements Serializable {
+public class AuthorityCustomPO implements Serializable {
 
     static final String T_AUTHORITY = "t_authority";
 
@@ -40,7 +40,7 @@ public class AuthorityPO implements Serializable {
     @Column(name = "path")
     private String path;
     @Column(name = "status")
-    private Integer status;
+    private String status;
     @Column(name = "method")
     private String method;
     @Column(name = "description")
@@ -58,7 +58,7 @@ public class AuthorityPO implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        AuthorityPO that = (AuthorityPO) o;
+        AuthorityCustomPO that = (AuthorityCustomPO) o;
         return Objects.equals(id, that.id);
     }
 

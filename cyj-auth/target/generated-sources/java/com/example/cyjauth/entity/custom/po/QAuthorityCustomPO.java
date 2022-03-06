@@ -1,4 +1,4 @@
-package com.example.cyjauth.entity.auto.po;
+package com.example.cyjauth.entity.custom.po;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -10,14 +10,14 @@ import com.querydsl.core.types.Path;
 
 
 /**
- * QAuthorityPO is a Querydsl query type for AuthorityPO
+ * QAuthorityCustomPO is a Querydsl query type for AuthorityCustomPO
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
-public class QAuthorityPO extends EntityPathBase<AuthorityPO> {
+public class QAuthorityCustomPO extends EntityPathBase<AuthorityCustomPO> {
 
-    private static final long serialVersionUID = 1352568554L;
+    private static final long serialVersionUID = -1050209415L;
 
-    public static final QAuthorityPO authorityPO = new QAuthorityPO("authorityPO");
+    public static final QAuthorityCustomPO authorityCustomPO = new QAuthorityCustomPO("authorityCustomPO");
 
     public final StringPath appApi = createString("appApi");
 
@@ -35,20 +35,20 @@ public class QAuthorityPO extends EntityPathBase<AuthorityPO> {
 
     public final StringPath sortCode = createString("sortCode");
 
-    public final NumberPath<Integer> status = createNumber("status", Integer.class);
+    public final StringPath status = createString("status");
 
     public final StringPath version = createString("version");
 
-    public QAuthorityPO(String variable) {
-        super(AuthorityPO.class, forVariable(variable));
+    public QAuthorityCustomPO(String variable) {
+        super(AuthorityCustomPO.class, forVariable(variable));
     }
 
-    public QAuthorityPO(Path<? extends AuthorityPO> path) {
+    public QAuthorityCustomPO(Path<? extends AuthorityCustomPO> path) {
         super(path.getType(), path.getMetadata());
     }
 
-    public QAuthorityPO(PathMetadata metadata) {
-        super(AuthorityPO.class, metadata);
+    public QAuthorityCustomPO(PathMetadata metadata) {
+        super(AuthorityCustomPO.class, metadata);
     }
 
 }

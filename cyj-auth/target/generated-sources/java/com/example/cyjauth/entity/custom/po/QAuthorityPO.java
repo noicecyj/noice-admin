@@ -1,4 +1,4 @@
-package com.example.cyjauth.entity.auto.po;
+package com.example.cyjauth.entity.custom.po;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -13,9 +13,9 @@ import com.querydsl.core.types.Path;
  * QAuthorityPO is a Querydsl query type for AuthorityPO
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
-public class QAuthorityPO extends EntityPathBase<AuthorityPO> {
+public class QAuthorityPO extends EntityPathBase<AuthorityCustomPO> {
 
-    private static final long serialVersionUID = 1352568554L;
+    private static final long serialVersionUID = -1918742808L;
 
     public static final QAuthorityPO authorityPO = new QAuthorityPO("authorityPO");
 
@@ -40,15 +40,15 @@ public class QAuthorityPO extends EntityPathBase<AuthorityPO> {
     public final StringPath version = createString("version");
 
     public QAuthorityPO(String variable) {
-        super(AuthorityPO.class, forVariable(variable));
+        super(AuthorityCustomPO.class, forVariable(variable));
     }
 
-    public QAuthorityPO(Path<? extends AuthorityPO> path) {
+    public QAuthorityPO(Path<? extends AuthorityCustomPO> path) {
         super(path.getType(), path.getMetadata());
     }
 
     public QAuthorityPO(PathMetadata metadata) {
-        super(AuthorityPO.class, metadata);
+        super(AuthorityCustomPO.class, metadata);
     }
 
 }

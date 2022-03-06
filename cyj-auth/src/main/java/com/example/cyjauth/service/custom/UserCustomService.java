@@ -1,6 +1,6 @@
 package com.example.cyjauth.service.custom;
 
-import com.example.cyjauth.entity.custom.po.UserPO;
+import com.example.cyjauth.entity.custom.po.UserCustomPO;
 
 /**
  * @author 曹元杰
@@ -9,6 +9,6 @@ import com.example.cyjauth.entity.custom.po.UserPO;
  */
 public interface UserCustomService {
 
-    UserPO findAuthUserByUsername(String username);
+    UserCustomPO findAuthUserByUsername(String username);
 
 }

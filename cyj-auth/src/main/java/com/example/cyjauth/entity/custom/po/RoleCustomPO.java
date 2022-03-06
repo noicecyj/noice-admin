@@ -27,47 +27,41 @@ import java.util.Set;
  * @date 2021-03-07
  */
 @Entity
-@Table(name = UserPO.T_USER)
+@Table(name = RoleCustomPO.T_ROLE)
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
 @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-public class UserPO implements Serializable {
+public class RoleCustomPO implements Serializable {
 
-    static final String T_USER = "t_user";
+    static final String T_ROLE = "t_role";
 
     @Id
     @GeneratedValue(generator = "uuid2")
     @Column(name = "id", length = 36)
     private String id;
-    @Column(name = "user_name")
-    private String userName;
-    @Column(name = "password")
-    private String password;
     @Column(name = "name")
     private String name;
-    @Column(name = "phone")
-    private String phone;
+    @Column(name = "value")
+    private String value;
+    @Column(name = "description")
+    private String description;
     @Column(name = "status")
     private String status;
     @Column(name = "sort_code")
     private String sortCode;
     @JsonIgnore
-    @ManyToMany(targetEntity = RolePO.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = AuthorityCustomPO.class, fetch = FetchType.EAGER)
     @BatchSize(size = 20)
-    private Set<RolePO> role = new HashSet<>();
-    @JsonIgnore
-    @ManyToMany(targetEntity = AuthorityPO.class, fetch = FetchType.EAGER)
-    @BatchSize(size = 20)
-    private Set<AuthorityPO> authority = new HashSet<>();
+    private Set<AuthorityCustomPO> authority = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        UserPO userPO = (UserPO) o;
-        return Objects.equals(id, userPO.id);
+        RoleCustomPO roleCustomPO = (RoleCustomPO) o;
+        return Objects.equals(id, roleCustomPO.id);
     }
 
     @Override
