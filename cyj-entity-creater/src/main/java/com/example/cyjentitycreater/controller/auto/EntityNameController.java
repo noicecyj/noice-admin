@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * @author 曹元杰
  * @version 1.0
- * @date 2022-02-20
  */
 @Tag(name = "EntityName")
 public interface EntityNameController {
