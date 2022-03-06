@@ -1,5 +1,6 @@
 package com.example.cyjauth.entity.custom.bo;
 
+import com.example.cyjauth.entity.custom.po.AuthorityPO;
 import com.example.cyjauth.entity.custom.po.UserPO;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

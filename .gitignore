@@ -396,3 +396,4 @@ cyj-discovery/cyj-discovery.log
 /cyj-auth/target/classes/com/example/cyjauth/entity/custom/dto/UserDTO.class
 /cyj-auth/target/classes/com/example/cyjauth/entity/custom/po/UserPO.class
 /cyj-auth/target/classes/com/example/cyjauth/filter/WebSecurityCorsFilter.class
+/cyj-common/target/classes/com/example/cyjcommon/service/BaseService.class
