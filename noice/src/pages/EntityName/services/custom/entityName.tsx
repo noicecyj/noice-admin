@@ -8,11 +8,4 @@ export default {
       data: value,
     });
   },
-  createComponentFile(value) {
-    return request({
-      url: '/entityCreateApi/createComponentFile',
-      method: 'post',
-      data: value,
-    });
-  },
 };

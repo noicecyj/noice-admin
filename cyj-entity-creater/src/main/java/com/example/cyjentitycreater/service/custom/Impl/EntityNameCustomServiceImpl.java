@@ -972,7 +972,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "    },\r\n" +
                 "  }),\r\n" +
                 "};\r\n";
-        return new String[]{viewData, underSubPoName + ".jsx"};
+        return new String[]{viewData, underSubPoName + ".tsx"};
     }
 
 
@@ -1016,7 +1016,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "    });\r\n" +
                 "  },\r\n" +
                 "};\r\n";
-        return new String[]{viewData, underSubPoName + ".jsx"};
+        return new String[]{viewData, underSubPoName + ".tsx"};
     }
 
 
@@ -1091,65 +1091,65 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "}\r\n" +
                 "\r\n" +
                 "export default " + subPoName + ";\r\n";
-        return new String[]{viewData, underSubPoName + ".jsx"};
+        return new String[]{viewData, underSubPoName + ".tsx"};
     }
 
     private String[] modelsSubCustomGenerate(String underSubPoName, String subPoName) {
-        String viewData = "import custom" + subPoName + "Services from '../../services/custom/" + underSubPoName + "';\r\n" +
-                "import initService from '@/services/init';\r\n" +
-                "\r\n" +
-                "export default {\r\n" +
-                "\r\n" +
-                "  namespace: 'custom" + subPoName + "',\r\n" +
-                "\r\n" +
-                "  state: {\r\n" +
-                "    customMethodName1: null,\r\n" +
-                "    customMethodName2: null,\r\n" +
-                "    customMethodName3: null,\r\n" +
-                "  },\r\n" +
-                "\r\n" +
-                "  reducers: {\r\n" +
-                "    setState(prevState, payload) {\r\n" +
-                "      return { ...prevState, ...payload };\r\n" +
-                "    },\r\n" +
-                "  },\r\n" +
-                "\r\n" +
-                "  effects: (dispatch) => ({\r\n" +
-                "    customMethod1() { },\r\n" +
-                "    customMethod2() { },\r\n" +
-                "    customMethod3() { },\r\n" +
-                "  }),\r\n" +
-                "};\r\n";
-        return new String[]{viewData, underSubPoName + ".jsx"};
+        String viewData = "// import custom" + subPoName + "Services from '../../services/custom/" + underSubPoName + "';\r\n" +
+                "// import initService from '@/services/init';\r\n" +
+                "// \r\n" +
+                "// export default {\r\n" +
+                "// \r\n" +
+                "//   namespace: 'custom" + subPoName + "',\r\n" +
+                "// \r\n" +
+                "//   state: {\r\n" +
+                "//     customMethodName1: null,\r\n" +
+                "//     customMethodName2: null,\r\n" +
+                "//     customMethodName3: null,\r\n" +
+                "//   },\r\n" +
+                "// \r\n" +
+                "//   reducers: {\r\n" +
+                "//     setState(prevState, payload) {\r\n" +
+                "//       return { ...prevState, ...payload };\r\n" +
+                "//     },\r\n" +
+                "//   },\r\n" +
+                "// \r\n" +
+                "//   effects: (dispatch) => ({\r\n" +
+                "//     customMethod1() { },\r\n" +
+                "//     customMethod2() { },\r\n" +
+                "//     customMethod3() { },\r\n" +
+                "//   }),\r\n" +
+                "// };\r\n";
+        return new String[]{viewData, underSubPoName + ".tsx"};
     }
 
     private String[] modelsCustomGenerate(String underPoName, String poName) {
-        String viewData = "import custom" + poName + "Services from '../../services/custom/" + underPoName + "';\r\n" +
-                "import initService from '@/services/init';\r\n" +
-                "\r\n" +
-                "export default {\r\n" +
-                "\r\n" +
-                "  namespace: 'custom" + poName + "',\r\n" +
-                "\r\n" +
-                "  state: {\r\n" +
-                "    customMethodName1: null,\r\n" +
-                "    customMethodName2: null,\r\n" +
-                "    customMethodName3: null,\r\n" +
-                "  },\r\n" +
-                "\r\n" +
-                "  reducers: {\r\n" +
-                "    setState(prevState, payload) {\r\n" +
-                "      return { ...prevState, ...payload };\r\n" +
-                "    },\r\n" +
-                "  },\r\n" +
-                "\r\n" +
-                "  effects: (dispatch) => ({\r\n" +
-                "    customMethod1() { },\r\n" +
-                "    customMethod2() { },\r\n" +
-                "    customMethod3() { },\r\n" +
-                "  }),\r\n" +
-                "};\r\n";
-        return new String[]{viewData, underPoName + ".jsx"};
+        String viewData = "// import custom" + poName + "Services from '../../services/custom/" + underPoName + "';\r\n" +
+                "// import initService from '@/services/init';\r\n" +
+                "// \r\n" +
+                "// export default {\r\n" +
+                "// \r\n" +
+                "//   namespace: 'custom" + poName + "',\r\n" +
+                "// \r\n" +
+                "//   state: {\r\n" +
+                "//     customMethodName1: null,\r\n" +
+                "//     customMethodName2: null,\r\n" +
+                "//     customMethodName3: null,\r\n" +
+                "//   },\r\n" +
+                "// \r\n" +
+                "//   reducers: {\r\n" +
+                "//     setState(prevState, payload) {\r\n" +
+                "//       return { ...prevState, ...payload };\r\n" +
+                "//     },\r\n" +
+                "//   },\r\n" +
+                "// \r\n" +
+                "//   effects: (dispatch) => ({\r\n" +
+                "//     customMethod1() { },\r\n" +
+                "//     customMethod2() { },\r\n" +
+                "//     customMethod3() { },\r\n" +
+                "//   }),\r\n" +
+                "// };\r\n";
+        return new String[]{viewData, underPoName + ".tsx"};
     }
 
     private String[] modelsAutoGenerate(EntityNamePO po, String underPoName, String poName) {
@@ -1245,15 +1245,15 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "    },\r\n" +
                 "  }),\r\n" +
                 "};\r\n";
-        return new String[]{viewData, underPoName + ".jsx"};
+        return new String[]{viewData, underPoName + ".tsx"};
     }
 
     private String[] servicesCustomGenerate(String underPoName) {
-        String viewData = "import { request } from 'ice';\r\n" +
-                "export default {\r\n" +
-                "\r\n" +
-                "};\r\n";
-        return new String[]{viewData, underPoName + ".jsx"};
+        String viewData = "// import { request } from 'ice';\r\n" +
+                "// export default {\r\n" +
+                "// \r\n" +
+                "// };\r\n";
+        return new String[]{viewData, underPoName + ".tsx"};
     }
 
     private String[] servicesAutoGenerate(String appApi, String underPoName, String poName) {
@@ -1295,29 +1295,25 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "    });\r\n" +
                 "  },\r\n" +
                 "};\r\n";
-        return new String[]{viewData, underPoName + ".jsx"};
+        return new String[]{viewData, underPoName + ".tsx"};
     }
 
     private String[] viewSubCustomGenerate(String poName, String underSubPoName, String subPoName) {
-        String viewData = "import React, { useEffect } from 'react';\r\n" +
-                "import pageStore from '@/pages/" + poName + "/store';\r\n" +
+        String viewData = "import React from 'react';\r\n" +
+                "// import pageStore from '@/pages/" + poName + "/store';\r\n" +
                 "\r\n" +
-                "const formItemLayout = {\r\n" +
-                "  labelCol: {\r\n" +
-                "    fixedSpan: 6,\r\n" +
-                "  },\r\n" +
-                "  wrapperCol: {\r\n" +
-                "    span: 40,\r\n" +
-                "  },\r\n" +
-                "};\r\n" +
+                "// const formItemLayout = {\r\n" +
+                "//   labelCol: {\r\n" +
+                "//     fixedSpan: 6,\r\n" +
+                "//   },\r\n" +
+                "//   wrapperCol: {\r\n" +
+                "//     span: 40,\r\n" +
+                "//   },\r\n" +
+                "// };\r\n" +
                 "\r\n" +
                 "function CustomColumn" + subPoName + "(props) {\r\n" +
-                "  // eslint-disable-next-line no-unused-vars\r\n" +
-                "  const { value, index, record } = props;\r\n" +
-                "  const [custom" + subPoName + "State, custom" + subPoName + "Dispatchers] = pageStore.useModel('custom" + poName + "');\r\n" +
-                "\r\n" +
-                "  useEffect(() => {\r\n" +
-                "  }, [custom" + subPoName + "Dispatchers]);\r\n" +
+                "//   const { value, index, record } = props;\r\n" +
+                "//   const [custom" + subPoName + "State, custom" + subPoName + "Dispatchers] = pageStore.useModel('custom" + poName + "');\r\n" +
                 "\r\n" +
                 "  return (\r\n" +
                 "    <>\r\n" +
@@ -1326,29 +1322,25 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "}\r\n" +
                 "\r\n" +
                 "export { CustomColumn" + subPoName + " };\r\n";
-        return new String[]{viewData, underSubPoName + ".jsx"};
+        return new String[]{viewData, underSubPoName + ".tsx"};
     }
 
     private String[] viewCustomGenerate(String underPoName, String poName) {
-        String viewData = "import React, { useEffect } from 'react';\r\n" +
-                "import pageStore from '@/pages/" + poName + "/store';\r\n" +
+        String viewData = "import React from 'react';\r\n" +
+                "// import pageStore from '@/pages/" + poName + "/store';\r\n" +
                 "\r\n" +
-                "const formItemLayout = {\r\n" +
-                "  labelCol: {\r\n" +
-                "    fixedSpan: 6,\r\n" +
-                "  },\r\n" +
-                "  wrapperCol: {\r\n" +
-                "    span: 40,\r\n" +
-                "  },\r\n" +
-                "};\r\n" +
-                "\r\n" +
+                "// const formItemLayout = {\r\n" +
+                "//   labelCol: {\r\n" +
+                "//     fixedSpan: 6,\r\n" +
+                "//   },\r\n" +
+                "//   wrapperCol: {\r\n" +
+                "//     span: 40,\r\n" +
+                "//   },\r\n" +
+                "// };\r\n" +
+                "// \r\n" +
                 "function CustomColumn" + poName + "(props) {\r\n" +
-                "  // eslint-disable-next-line no-unused-vars\r\n" +
-                "  const { value, index, record } = props;\r\n" +
-                "  const [custom" + poName + "State, custom" + poName + "Dispatchers] = pageStore.useModel('custom" + poName + "');\r\n" +
-                "\r\n" +
-                "  useEffect(() => {\r\n" +
-                "  }, [custom" + poName + "Dispatchers]);\r\n" +
+                "//   const { value, index, record } = props;\r\n" +
+                "//   const [custom" + poName + "State, custom" + poName + "Dispatchers] = pageStore.useModel('custom" + poName + "');\r\n" +
                 "\r\n" +
                 "  return (\r\n" +
                 "    <>\r\n" +
@@ -1357,7 +1349,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "}\r\n" +
                 "\r\n" +
                 "export { CustomColumn" + poName + " };\r\n";
-        return new String[]{viewData, underPoName + ".jsx"};
+        return new String[]{viewData, underPoName + ".tsx"};
     }
 
     private String[] viewAutoGenerate(List<EntityNamePO> entityNamePOList, String underPoName, String poName) {
@@ -1449,7 +1441,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("\r\n");
         sb.append("export default ").append(poName).append(";\r\n");
         String viewData = sb.toString();
-        return new String[]{viewData, underPoName + ".jsx"};
+        return new String[]{viewData, underPoName + ".tsx"};
     }
 
     private String[] storeGenerate(List<EntityNamePO> entityNamePOList, String underPoName, String poName) {
@@ -1564,7 +1556,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("\r\n");
         sb.append("export default ").append(poName).append("Page;\r\n");
         String viewData = sb.toString();
-        return new String[]{viewData, "index.jsx"};
+        return new String[]{viewData, "index.tsx"};
     }
 
     @Override

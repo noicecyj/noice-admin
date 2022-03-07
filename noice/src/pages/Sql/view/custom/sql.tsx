@@ -1,22 +1,18 @@
-import React, { useEffect } from 'react';
-import pageStore from '@/pages/Sql/store';
+import React from 'react';
+// import pageStore from '@/pages/Sql/store';
 
-const formItemLayout = {
-  labelCol: {
-    fixedSpan: 6,
-  },
-  wrapperCol: {
-    span: 40,
-  },
-};
+// const formItemLayout = {
+//   labelCol: {
+//     fixedSpan: 6,
+//   },
+//   wrapperCol: {
+//     span: 40,
+//   },
+// };
 
 function CustomColumnSql(props) {
-  // eslint-disable-next-line no-unused-vars
-  const { value, index, record } = props;
-  const [customSqlState, customSqlDispatchers] = pageStore.useModel('customSql');
-
-  useEffect(() => {
-  }, [customSqlDispatchers]);
+  // const { value, index, record } = props;
+  // const [customSqlState, customSqlDispatchers] = pageStore.useModel('customSql');
 
   return (
     <>

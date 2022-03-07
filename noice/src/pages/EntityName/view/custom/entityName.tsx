@@ -3,9 +3,8 @@ import pageStore from '@/pages/EntityName/store';
 import { Button } from '@alifd/next';
 
 function CustomColumnEntityName(props) {
-  // eslint-disable-next-line no-unused-vars
-  const { value, index, record } = props;
-  const [customEntityNameState, customEntityNameDispatchers] = pageStore.useModel('customEntityName');
+  const { record } = props;
+  const customEntityNameDispatchers = pageStore.useModelDispatchers('customEntityName');
 
   return (
     <>

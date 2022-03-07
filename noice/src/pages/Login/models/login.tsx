@@ -11,6 +11,7 @@ export default {
     username: '',
     password: '',
     autoLogin: true,
+    token:'',
   },
 
   reducers: {
@@ -29,7 +30,9 @@ export default {
       loginService.login(data)
         .then((res) => {
           console.log(res);
+          // @ts-ignore
           cookie.save('token', res.data.accessToken);
+          // @ts-ignore
           history.push('/admin');
           Message.success('登录成功');
         }).catch(() => {

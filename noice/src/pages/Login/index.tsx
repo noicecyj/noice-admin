@@ -1,6 +1,7 @@
 import React from 'react';
 import { Checkbox, Form, Input, ResponsiveGrid } from '@alifd/next';
 import pageStore from './store';
+// @ts-ignore
 import styles from './index.module.scss';
 
 const FormItem = Form.Item;
