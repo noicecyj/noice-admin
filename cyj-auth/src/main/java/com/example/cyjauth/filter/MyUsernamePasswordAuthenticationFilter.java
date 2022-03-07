@@ -24,7 +24,7 @@ public class MyUsernamePasswordAuthenticationFilter extends AbstractAuthenticati
 
     public MyUsernamePasswordAuthenticationFilter() {
         //指定登陆路径
-        super(new AntPathRequestMatcher("/cyj-auth/authApi/v1/login", "POST"));
+        super(new AntPathRequestMatcher("/authApi/v1/login", "POST"));
     }
 
     @Override

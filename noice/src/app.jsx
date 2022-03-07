@@ -27,6 +27,7 @@ const appConfig = {
       },
       response: {
         onConfig: (response) => {
+          console.log(response);
           return response;
         },
         onError: (error) => {
