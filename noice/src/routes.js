@@ -8,6 +8,7 @@ import SqlPage from '@/pages/Sql';
 import AppServicePage from '@/pages/AppService';
 import UserPage from '@/pages/User';
 import RolePage from '@/pages/Role';
+import AuthorityPage from '@/pages/Authority';
 // import ApiPage from '@/pages/Api';
 
 const routerConfig = [
@@ -48,6 +49,10 @@ const routerConfig = [
       {
         path: '/role',
         component: RolePage,
+      },
+      {
+        path: '/authority',
+        component: AuthorityPage,
       },
     ],
   },
