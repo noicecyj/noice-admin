@@ -28,6 +28,7 @@ import java.util.List;
 public class FirstMenuCustomServiceImpl extends BaseService implements FirstMenuCustomService {
 
     final static String menuPath = "\\src\\layouts\\BasicLayout";
+    final static String routerPath = "\\src";
     final static String PROJECT_PATH = "PROJECT_PATH";
     final static String FRONT_END = "FRONT_END";
 
@@ -57,9 +58,56 @@ public class FirstMenuCustomServiceImpl extends BaseService implements FirstMenu
                     .findDictionaryByCatalogValueAndDictionaryValue(PROJECT_PATH, FRONT_END);
             List<FirstMenuDTO> firstMenuDTOList = getMenu();
             createJavaFile(dictionaryPO.getDictionaryValue() + menuPath, menuGenerate(firstMenuDTOList));
+            createJavaFile(dictionaryPO.getDictionaryValue() + routerPath, routerGenerate(firstMenuDTOList));
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private String[] routerGenerate(List<FirstMenuDTO> firstMenuDTOList) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("import BasicLayout from '@/layouts/BasicLayout';\r\n");
+        sb.append("import UserLayout from '@/layouts/UserLayout';\r\n");
+        sb.append("import LoginPage from '@/pages/Login';\r\n");
+        for (FirstMenuDTO firstMenuDTO : firstMenuDTOList) {
+            for (SecondMenuDTO secondMenuDTO:firstMenuDTO.getSecondMenuDTOList()){
+                sb.append("import ").append(secondMenuDTO.getComponent()).append("Page from '@/pages/").append(secondMenuDTO.getComponent()).append("';\r\n");
+            }
+        }
+        sb.append("\r\n");
+        sb.append("const routerConfig = [\r\n");
+        for (FirstMenuDTO firstMenuDTO : firstMenuDTOList) {
+            sb.append("  {\r\n");
+            sb.append("    path: '").append(firstMenuDTO.getPath()).append("',\r\n");
+            sb.append("    component: ").append(firstMenuDTO.getLayout()).append(",\r\n");
+            sb.append("    children: [\r\n");
+            for (SecondMenuDTO secondMenuDTO:firstMenuDTO.getSecondMenuDTOList()){
+                sb.append("      {\r\n");
+                sb.append("        path: '").append(secondMenuDTO.getPath()).append("',\r\n");
+                sb.append("        component: ").append(secondMenuDTO.getComponent()).append("Page,\r\n");
+                sb.append("      },\r\n");
+            }
+            sb.append("    ],\r\n");
+            sb.append("  },\r\n");
+        }
+        sb.append("  {\r\n");
+        sb.append("    path: '/user',\r\n");
+        sb.append("    component: UserLayout,\r\n");
+        sb.append("    children: [\r\n");
+        sb.append("      {\r\n");
+        sb.append("        path: '/login',\r\n");
+        sb.append("        component: LoginPage,\r\n");
+        sb.append("      },\r\n");
+        sb.append("    ],\r\n");
+        sb.append("  },\r\n");
+        sb.append("  {\r\n");
+        sb.append("    path: '/',\r\n");
+        sb.append("    redirect: '/user/login',\r\n");
+        sb.append("  },\r\n");
+        sb.append("];\r\n");
+        sb.append("export default routerConfig;\r\n");
+        String menuData = sb.toString();
+        return new String[]{menuData, "routes.js"};
     }
 
     @Override

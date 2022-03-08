@@ -1,15 +1,14 @@
 import BasicLayout from '@/layouts/BasicLayout';
 import UserLayout from '@/layouts/UserLayout';
 import LoginPage from '@/pages/Login';
-import CatalogPage from '@/pages/Catalog';
 import EntityNamePage from '@/pages/EntityName';
-import FirstMenuPage from '@/pages/FirstMenu';
+import CatalogPage from '@/pages/Catalog';
 import SqlPage from '@/pages/Sql';
 import AppServicePage from '@/pages/AppService';
-import UserPage from '@/pages/User';
+import FirstMenuPage from '@/pages/FirstMenu';
 import RolePage from '@/pages/Role';
+import UserPage from '@/pages/User';
 import AuthorityPage from '@/pages/Authority';
-// import ApiPage from '@/pages/Api';
 
 const routerConfig = [
   {
@@ -17,12 +16,12 @@ const routerConfig = [
     component: BasicLayout,
     children: [
       {
-        path: '/catalog',
-        component: CatalogPage,
-      },
-      {
         path: '/entitycreater',
         component: EntityNamePage,
+      },
+      {
+        path: '/catalog',
+        component: CatalogPage,
       },
       {
         path: '/sql',
@@ -43,12 +42,12 @@ const routerConfig = [
     component: BasicLayout,
     children: [
       {
-        path: '/user',
-        component: UserPage,
-      },
-      {
         path: '/role',
         component: RolePage,
+      },
+      {
+        path: '/user',
+        component: UserPage,
       },
       {
         path: '/authority',
@@ -68,7 +67,6 @@ const routerConfig = [
   },
   {
     path: '/',
-    // 重定向
     redirect: '/user/login',
   },
 ];
