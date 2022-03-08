@@ -17,7 +17,7 @@ export default {
     },
   },
 
-  effects: (dispatch) => ({
+  effects: () => ({
     /**
      * 生成菜单
      */
