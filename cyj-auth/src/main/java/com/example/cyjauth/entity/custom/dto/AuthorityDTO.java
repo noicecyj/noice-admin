@@ -15,11 +15,11 @@ public class AuthorityDTO implements Serializable {
     private String id;
     private String name;
     private String path;
-    private Integer status;
+    private String status;
     private String method;
     private String description;
     private String appApi;
-    private String appService;
+    private String appName;
     private String version;
     private String sortCode;
 

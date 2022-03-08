@@ -19,9 +19,7 @@ public class QAuthorityCustomPO extends EntityPathBase<AuthorityCustomPO> {
 
     public static final QAuthorityCustomPO authorityCustomPO = new QAuthorityCustomPO("authorityCustomPO");
 
-    public final StringPath appApi = createString("appApi");
-
-    public final StringPath appService = createString("appService");
+    public final StringPath appName = createString("appName");
 
     public final StringPath description = createString("description");
 

@@ -18,7 +18,6 @@ import java.util.Objects;
 /**
  * @author 曹元杰
  * @version 1.0
- * @date 2021-03-20
  */
 @Entity
 @Table(name = AuthorityPO.T_AUTHORITY)
@@ -35,22 +34,20 @@ public class AuthorityPO implements Serializable {
     @GeneratedValue(generator = "uuid2")
     @Column(name = "id", length = 36)
     private String id;
+    @Column(name = "method")
+    private String method;
+    @Column(name = "app_name")
+    private String appName;
+    @Column(name = "version")
+    private String version;
     @Column(name = "name")
     private String name;
+    @Column(name = "description")
+    private String description;
     @Column(name = "path")
     private String path;
     @Column(name = "status")
-    private Integer status;
-    @Column(name = "method")
-    private String method;
-    @Column(name = "description")
-    private String description;
-    @Column(name = "app_api")
-    private String appApi;
-    @Column(name = "app_service")
-    private String appService;
-    @Column(name = "version")
-    private String version;
+    private String status;
     @Column(name = "sort_code")
     private String sortCode;
 
@@ -66,4 +63,5 @@ public class AuthorityPO implements Serializable {
     public int hashCode() {
         return 0;
     }
+
 }

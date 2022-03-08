@@ -19,9 +19,7 @@ public class QAuthorityPO extends EntityPathBase<AuthorityPO> {
 
     public static final QAuthorityPO authorityPO = new QAuthorityPO("authorityPO");
 
-    public final StringPath appApi = createString("appApi");
-
-    public final StringPath appService = createString("appService");
+    public final StringPath appName = createString("appName");
 
     public final StringPath description = createString("description");
 
@@ -35,7 +33,7 @@ public class QAuthorityPO extends EntityPathBase<AuthorityPO> {
 
     public final StringPath sortCode = createString("sortCode");
 
-    public final NumberPath<Integer> status = createNumber("status", Integer.class);
+    public final StringPath status = createString("status");
 
     public final StringPath version = createString("version");
 

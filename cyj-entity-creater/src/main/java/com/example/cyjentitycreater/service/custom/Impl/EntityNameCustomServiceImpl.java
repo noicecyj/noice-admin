@@ -839,7 +839,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
             });
             createJavaFile(componentPath + poName, indexGenerate(entityNamePOList, underPoName, poName));
             createJavaFile(componentPath + poName, storeGenerate(entityNamePOList, underPoName, poName));
-            createJavaFile(componentPath + poName, indexModuleScssGenerate());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -1095,60 +1094,56 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
     }
 
     private String[] modelsSubCustomGenerate(String underSubPoName, String subPoName) {
-        String viewData = "// import custom" + subPoName + "Services from '../../services/custom/" + underSubPoName + "';\r\n" +
-                "// import initService from '@/services/init';\r\n" +
-                "// \r\n" +
-                "// export default {\r\n" +
-                "// \r\n" +
-                "//   namespace: 'custom" + subPoName + "',\r\n" +
-                "// \r\n" +
-                "//   state: {\r\n" +
-                "//     customMethodName1: null,\r\n" +
-                "//     customMethodName2: null,\r\n" +
-                "//     customMethodName3: null,\r\n" +
-                "//   },\r\n" +
-                "// \r\n" +
-                "//   reducers: {\r\n" +
-                "//     setState(prevState, payload) {\r\n" +
-                "//       return { ...prevState, ...payload };\r\n" +
-                "//     },\r\n" +
-                "//   },\r\n" +
-                "// \r\n" +
-                "//   effects: (dispatch) => ({\r\n" +
-                "//     customMethod1() { },\r\n" +
-                "//     customMethod2() { },\r\n" +
-                "//     customMethod3() { },\r\n" +
-                "//   }),\r\n" +
-                "// };\r\n";
+        String viewData =
+                "export default {\r\n" +
+                "\r\n" +
+                "  namespace: 'custom" + subPoName + "',\r\n" +
+                "\r\n" +
+                "  state: {\r\n" +
+                "    customMethodName1: null,\r\n" +
+                "    customMethodName2: null,\r\n" +
+                "    customMethodName3: null,\r\n" +
+                "  },\r\n" +
+                "\r\n" +
+                "  reducers: {\r\n" +
+                "    setState(prevState, payload) {\r\n" +
+                "      return { ...prevState, ...payload };\r\n" +
+                "    },\r\n" +
+                "  },\r\n" +
+                "\r\n" +
+                "  effects: () => ({\r\n" +
+                "    customMethod1() { },\r\n" +
+                "    customMethod2() { },\r\n" +
+                "    customMethod3() { },\r\n" +
+                "  }),\r\n" +
+                "};\r\n";
         return new String[]{viewData, underSubPoName + ".tsx"};
     }
 
     private String[] modelsCustomGenerate(String underPoName, String poName) {
-        String viewData = "// import custom" + poName + "Services from '../../services/custom/" + underPoName + "';\r\n" +
-                "// import initService from '@/services/init';\r\n" +
-                "// \r\n" +
-                "// export default {\r\n" +
-                "// \r\n" +
-                "//   namespace: 'custom" + poName + "',\r\n" +
-                "// \r\n" +
-                "//   state: {\r\n" +
-                "//     customMethodName1: null,\r\n" +
-                "//     customMethodName2: null,\r\n" +
-                "//     customMethodName3: null,\r\n" +
-                "//   },\r\n" +
-                "// \r\n" +
-                "//   reducers: {\r\n" +
-                "//     setState(prevState, payload) {\r\n" +
-                "//       return { ...prevState, ...payload };\r\n" +
-                "//     },\r\n" +
-                "//   },\r\n" +
-                "// \r\n" +
-                "//   effects: (dispatch) => ({\r\n" +
-                "//     customMethod1() { },\r\n" +
-                "//     customMethod2() { },\r\n" +
-                "//     customMethod3() { },\r\n" +
-                "//   }),\r\n" +
-                "// };\r\n";
+        String viewData =
+                "export default {\r\n" +
+                "\r\n" +
+                "  namespace: 'custom" + poName + "',\r\n" +
+                "\r\n" +
+                "  state: {\r\n" +
+                "    customMethodName1: null,\r\n" +
+                "    customMethodName2: null,\r\n" +
+                "    customMethodName3: null,\r\n" +
+                "  },\r\n" +
+                "\r\n" +
+                "  reducers: {\r\n" +
+                "    setState(prevState, payload) {\r\n" +
+                "      return { ...prevState, ...payload };\r\n" +
+                "    },\r\n" +
+                "  },\r\n" +
+                "\r\n" +
+                "  effects: () => ({\r\n" +
+                "    customMethod1() { },\r\n" +
+                "    customMethod2() { },\r\n" +
+                "    customMethod3() { },\r\n" +
+                "  }),\r\n" +
+                "};\r\n";
         return new String[]{viewData, underPoName + ".tsx"};
     }
 
@@ -1473,58 +1468,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("\r\n");
         sb.append("export default store;\r\n");
         String viewData = sb.toString();
-        return new String[]{viewData, "store.js"};
-    }
-
-    private String[] indexModuleScssGenerate() {
-        String css = "@import \"~@alifd/next/variables.scss\";\r\n" +
-                "\r\n" +
-                ".icon {\r\n" +
-                "  color: #999\r\n" +
-                "}\r\n" +
-                "\r\n" +
-                ".searchIcon {\r\n" +
-                "  margin-right: 5px;\r\n" +
-                "  color: #999;\r\n" +
-                "}\r\n" +
-                "\r\n" +
-                ".Operation {\r\n" +
-                "  padding: 10px 10px 5px;\r\n" +
-                "  border-bottom: 1px dashed #eee;\r\n" +
-                "\r\n" +
-                "  .btns {\r\n" +
-                "    margin-top: 14px;\r\n" +
-                "    button {\r\n" +
-                "      margin-left: 10px;\r\n" +
-                "    }\r\n" +
-                "  }\r\n" +
-                "}\r\n" +
-                "\r\n" +
-                ".Main {\r\n" +
-                "  padding: 15px 10px;\r\n" +
-                "  .add {\r\n" +
-                "    padding-bottom: 15px;\r\n" +
-                "    button {\r\n" +
-                "      margin-right: 10px;\r\n" +
-                "    }\r\n" +
-                "  }\r\n" +
-                "\r\n" +
-                "  .opt {\r\n" +
-                "    button {\r\n" +
-                "      margin-right: 5px;\r\n" +
-                "    }\r\n" +
-                "  }\r\n" +
-                "\r\n" +
-                "  .total {\r\n" +
-                "    color: #4A5B6D;\r\n" +
-                "    font-size: 12px;\r\n" +
-                "    span {\r\n" +
-                "      padding:0 3px;\r\n" +
-                "      color: #5584FF;\r\n" +
-                "    }\r\n" +
-                "  }\r\n" +
-                "}\r\n";
-        return new String[]{css, "index.module.scss"};
+        return new String[]{viewData, "store.ts"};
     }
 
     private String[] indexGenerate(List<EntityNamePO> entityNamePOList, String underPoName, String poName) {

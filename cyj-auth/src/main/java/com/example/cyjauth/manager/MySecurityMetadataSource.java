@@ -57,8 +57,8 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
             List<AuthorityCustomPO> authorityCustomPOList = authorityCustomService.findRoleAndAuthority();
             for (AuthorityCustomPO po : authorityCustomPOList) {
                 String path = po.getPath();
-                if (po.getAppService() != null && po.getAppApi() != null) {
-                    path = "/" + po.getAppService() + "/" + po.getAppApi() + "/" + path;
+                if (po.getAppName() != null) {
+                    path = "/" + po.getAppName()  + "/" + path;
                 }
                 String pathMethod = path + " " + po.getMethod();
                 ConfigAttribute configAttribute = new SecurityConfig(pathMethod);
