@@ -1,4 +1,4 @@
-import { createStore } from 'ice';
+import {createStore} from 'ice';
 import firstMenu from './models/auto/firstMenu';
 import customFirstMenu from './models/custom/firstMenu';
 import secondMenu from './models/auto/secondMenu';

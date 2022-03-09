@@ -20,4 +20,4 @@ function CustomColumnSql(props) {
   );
 }
 
-export { CustomColumnSql };
+export {CustomColumnSql};

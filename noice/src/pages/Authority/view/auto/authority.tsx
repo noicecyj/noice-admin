@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import pageStore from '@/pages/Authority/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
-import { CustomColumnAuthority } from '@/pages/Authority/view/custom/authority';
+import {CustomColumnAuthority} from '@/pages/Authority/view/custom/authority';
 
 function Authority() {
   const [authorityState, authorityDispatchers] = pageStore.useModel('authority');
@@ -32,7 +32,7 @@ function Authority() {
         primaryKey="id"
         columnRender={authorityState.customType ? (value, index, record) => {
           return (
-            <CustomColumnAuthority value={value} index={index} record={record} />
+            <CustomColumnAuthority value={value} index={index} record={record}/>
           );
         } : null}
         customMethod1={() => customAuthorityDispatchers.customMethod1()}
@@ -45,7 +45,7 @@ function Authority() {
       <DataFormTemple
         title={authorityState.authorityTitle}
         visibleDialog={authorityState.authorityVisible}
-        onClose={() => authorityDispatchers.setState({ authorityVisible: false })}
+        onClose={() => authorityDispatchers.setState({authorityVisible: false})}
         items={authorityState.authorityForm}
         dispatchers={(value) => authorityDispatchers.setDataForm(value)}
         onOk={() => authorityDispatchers.authoritySave({

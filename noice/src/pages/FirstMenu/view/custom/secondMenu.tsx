@@ -1,22 +1,18 @@
-import React, { useEffect } from 'react';
-import pageStore from '@/pages/FirstMenu/store';
+import React from 'react';
+// import pageStore from '@/pages/FirstMenu/store';
 
-const formItemLayout = {
-  labelCol: {
-    fixedSpan: 6,
-  },
-  wrapperCol: {
-    span: 40,
-  },
-};
+// const formItemLayout = {
+//   labelCol: {
+//     fixedSpan: 6,
+//   },
+//   wrapperCol: {
+//     span: 40,
+//   },
+// };
 
 function CustomColumnSecondMenu(props) {
-  // eslint-disable-next-line no-unused-vars
-  const { value, index, record } = props;
-  const [customSecondMenuState, customSecondMenuDispatchers] = pageStore.useModel('customFirstMenu');
-
-  useEffect(() => {
-  }, [customSecondMenuDispatchers]);
+  // const { value, index, record } = props;
+  // const [customSecondMenuState, customSecondMenuDispatchers] = pageStore.useModel('customFirstMenu');
 
   return (
     <>
@@ -24,4 +20,4 @@ function CustomColumnSecondMenu(props) {
   );
 }
 
-export { CustomColumnSecondMenu };
+export {CustomColumnSecondMenu};

@@ -13,7 +13,7 @@ export default {
 
   reducers: {
     setState(prevState, payload) {
-      return { ...prevState, ...payload };
+      return {...prevState, ...payload};
     },
   },
 
@@ -24,7 +24,9 @@ export default {
     customMethod1() {
       customFirstMenuServices.createMenu();
     },
-    customMethod2() { },
-    customMethod3() { },
+    customMethod2() {
+    },
+    customMethod3() {
+    },
   }),
 };

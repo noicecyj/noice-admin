@@ -1,4 +1,4 @@
-import { createStore } from 'ice';
+import {createStore} from 'ice';
 import user from './models/auto/user';
 import customUser from './models/custom/user';
 

@@ -1,9 +1,9 @@
-import { Dialog } from '@alifd/next';
+import {Dialog} from '@alifd/next';
 import React from 'react';
 import pageStore from '@/pages/EntityName/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
-import { CustomColumnEntity } from '@/pages/EntityName/view/custom/entity';
+import {CustomColumnEntity} from '@/pages/EntityName/view/custom/entity';
 
 function Entity() {
   const [entityState, entityDispatchers] = pageStore.useModel('entity');
@@ -19,7 +19,7 @@ function Entity() {
           divVisible: false,
           entityNameId: '',
         })}
-        style={{ width: '90%' }}
+        style={{width: '90%'}}
       >
         <DataTableTemple
           createItem={() => entityDispatchers.entityEdit()}
@@ -36,10 +36,10 @@ function Entity() {
           items={entityState.entityTable}
           total={entityState.entityTotal}
           primaryKey="id"
-          getPage={(entityCurrent) => entityDispatchers.entityPage({ entityCurrent, pid: entityState.entityNameId })}
+          getPage={(entityCurrent) => entityDispatchers.entityPage({entityCurrent, pid: entityState.entityNameId})}
           columnRender={entityState.customType ? (value, index, record) => {
             return (
-              <CustomColumnEntity value={value} index={index} record={record} />
+              <CustomColumnEntity value={value} index={index} record={record}/>
             );
           } : null}
           customMethod1={() => customEntityDispatchers.customMethod1()}
@@ -53,7 +53,7 @@ function Entity() {
       <DataFormTemple
         title="菜单"
         visibleDialog={entityState.entityVisible}
-        onClose={() => entityDispatchers.setState({ entityVisible: false })}
+        onClose={() => entityDispatchers.setState({entityVisible: false})}
         items={entityState.entityForm}
         dispatchers={(value) => entityDispatchers.setDataForm(value)}
         onOk={() => entityDispatchers.entitySave({

@@ -1,9 +1,9 @@
-import { Dialog } from '@alifd/next';
+import {Dialog} from '@alifd/next';
 import React from 'react';
 import pageStore from '@/pages/Catalog/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
-import { CustomColumnDictionary } from '@/pages/Catalog/view/custom/dictionary';
+import {CustomColumnDictionary} from '@/pages/Catalog/view/custom/dictionary';
 
 function Dictionary() {
   const [dictionaryState, dictionaryDispatchers] = pageStore.useModel('dictionary');
@@ -19,7 +19,7 @@ function Dictionary() {
           divVisible: false,
           catalogId: '',
         })}
-        style={{ width: '90%' }}
+        style={{width: '90%'}}
       >
         <DataTableTemple
           createItem={() => dictionaryDispatchers.dictionaryEdit()}
@@ -36,10 +36,13 @@ function Dictionary() {
           items={dictionaryState.dictionaryTable}
           total={dictionaryState.dictionaryTotal}
           primaryKey="id"
-          getPage={(dictionaryCurrent) => dictionaryDispatchers.dictionaryPage({ dictionaryCurrent, pid: dictionaryState.catalogId })}
+          getPage={(dictionaryCurrent) => dictionaryDispatchers.dictionaryPage({
+            dictionaryCurrent,
+            pid: dictionaryState.catalogId
+          })}
           columnRender={dictionaryState.customType ? (value, index, record) => {
             return (
-              <CustomColumnDictionary value={value} index={index} record={record} />
+              <CustomColumnDictionary value={value} index={index} record={record}/>
             );
           } : null}
           customMethod1={() => customDictionaryDispatchers.customMethod1()}
@@ -53,7 +56,7 @@ function Dictionary() {
       <DataFormTemple
         title="菜单"
         visibleDialog={dictionaryState.dictionaryVisible}
-        onClose={() => dictionaryDispatchers.setState({ dictionaryVisible: false })}
+        onClose={() => dictionaryDispatchers.setState({dictionaryVisible: false})}
         items={dictionaryState.dictionaryForm}
         dispatchers={(value) => dictionaryDispatchers.setDataForm(value)}
         onOk={() => dictionaryDispatchers.dictionarySave({

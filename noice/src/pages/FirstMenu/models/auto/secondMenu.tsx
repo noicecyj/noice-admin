@@ -21,7 +21,7 @@ export default {
 
   reducers: {
     setState(prevState, payload) {
-      return { ...prevState, ...payload };
+      return {...prevState, ...payload};
     },
   },
 
@@ -57,15 +57,15 @@ export default {
     },
     async secondMenuDelete(data) {
       await secondMenuService.secondMenuDelete(data.record.id);
-      await this.secondMenuPage({ secondMenuCurrent: data.data.pageNumber, pid: data.data.pid });
+      await this.secondMenuPage({secondMenuCurrent: data.data.pageNumber, pid: data.data.pid});
       const payload = {
         secondMenuVisible: false,
       };
       dispatch.secondMenu.setState(payload);
     },
     async secondMenuSave(data) {
-      await secondMenuService.secondMenuSave({ ...data.secondMenuFormData, pid: data.pid });
-      await this.secondMenuPage({ secondMenuCurrent: data.pageNumber, pid: data.pid });
+      await secondMenuService.secondMenuSave({...data.secondMenuFormData, pid: data.pid});
+      await this.secondMenuPage({secondMenuCurrent: data.pageNumber, pid: data.pid});
       const payload = {
         secondMenuVisible: false,
       };
@@ -79,7 +79,7 @@ export default {
     },
     async findDataTableAndFormByName(pid) {
       const ret = await initService.findDataTableAndFormByName('second_menu');
-      await this.secondMenuPage({ secondMenuCurrent: 1, pid });
+      await this.secondMenuPage({secondMenuCurrent: 1, pid});
       const payload = {
         secondMenuTable: ret.data.dataTable,
         secondMenuForm: ret.data.dataForm,
@@ -88,7 +88,7 @@ export default {
     },
     async onRowClick(data) {
       await this.findDataTableAndFormByName(data.record.id);
-      await this.secondMenuPage({ secondMenuCurrent: 1, pid: data.record.id });
+      await this.secondMenuPage({secondMenuCurrent: 1, pid: data.record.id});
       const payload = {
         divVisible: data.selected,
         firstMenuId: data.record.id,

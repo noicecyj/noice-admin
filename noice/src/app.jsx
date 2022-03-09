@@ -1,4 +1,4 @@
-import { runApp } from 'ice';
+import {runApp} from 'ice';
 import cookie from 'react-cookies';
 
 const appConfig = {
@@ -17,7 +17,7 @@ const appConfig = {
           console.log(config);
           if (config.url !== '/authApi/v1/login') {
             // eslint-disable-next-line no-param-reassign
-            config.headers = { Authorization: `Bearer ${cookie.load('token')}` };
+            config.headers = {Authorization: `Bearer ${cookie.load('token')}`};
           }
           return config;
         },

@@ -20,4 +20,4 @@ function CustomColumnFirstMenu(props) {
   );
 }
 
-export { CustomColumnFirstMenu };
+export {CustomColumnFirstMenu};

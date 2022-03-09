@@ -20,4 +20,4 @@ function CustomColumnRole(props) {
   );
 }
 
-export { CustomColumnRole };
+export {CustomColumnRole};

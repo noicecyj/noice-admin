@@ -20,4 +20,4 @@ function CustomColumnCatalog(props) {
   );
 }
 
-export { CustomColumnCatalog };
+export {CustomColumnCatalog};

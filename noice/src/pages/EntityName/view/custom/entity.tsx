@@ -20,4 +20,4 @@ function CustomColumnEntity(props) {
   );
 }
 
-export { CustomColumnEntity };
+export {CustomColumnEntity};

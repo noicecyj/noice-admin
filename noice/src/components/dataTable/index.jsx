@@ -1,12 +1,12 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
-import { ResponsiveGrid, Box, Loading, Pagination, Table, Button, Dialog } from '@alifd/next';
+import {Box, Button, Dialog, Loading, Pagination, ResponsiveGrid, Table} from '@alifd/next';
 import styles from './index.module.scss';
 
-const { Cell } = ResponsiveGrid;
+const {Cell} = ResponsiveGrid;
 
 function DataTable(props) {
-  const loadingStyle = { width: '100%' };
+  const loadingStyle = {width: '100%'};
 
   const {
     items,
@@ -31,8 +31,8 @@ function DataTable(props) {
   const pageRender = (value, index, record) => {
     return (
       <div className={styles.opt}>
-        <Button type="primary" size="small" onClick={() => editItem(record)} > 编辑 </Button>
-        <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning > 删除 </Button>
+        <Button type="primary" size="small" onClick={() => editItem(record)}> 编辑 </Button>
+        <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning> 删除 </Button>
       </div>
     );
   };

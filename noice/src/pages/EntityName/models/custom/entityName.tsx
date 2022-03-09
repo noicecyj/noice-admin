@@ -1,5 +1,5 @@
 import customEntityNameServices from '../../services/custom/entityName';
-import { Message } from '@alifd/next';
+import {Message} from '@alifd/next';
 
 export default {
 
@@ -15,14 +15,17 @@ export default {
 
   reducers: {
     setState(prevState, payload) {
-      return { ...prevState, ...payload };
+      return {...prevState, ...payload};
     },
   },
 
   effects: (dispatch) => ({
-    customMethod1() { },
-    customMethod2() { },
-    customMethod3() { },
+    customMethod1() {
+    },
+    customMethod2() {
+    },
+    customMethod3() {
+    },
     createEntityFile(data) {
       customEntityNameServices.createEntityFile(data).then((res) => {
         if (res.code === 200) {

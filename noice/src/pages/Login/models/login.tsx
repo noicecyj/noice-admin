@@ -1,5 +1,5 @@
-import { Message } from '@alifd/next';
-import { history } from 'ice';
+import {Message} from '@alifd/next';
+import {history} from 'ice';
 import cookie from 'react-cookies';
 import loginService from '../services/login';
 
@@ -11,12 +11,12 @@ export default {
     username: '',
     password: '',
     autoLogin: true,
-    token:'',
+    token: '',
   },
 
   reducers: {
     setState(prevState, payload) {
-      return { ...prevState, ...payload };
+      return {...prevState, ...payload};
     },
   },
 
@@ -36,8 +36,8 @@ export default {
           history.push('/admin');
           Message.success('登录成功');
         }).catch(() => {
-          Message.success('登录失败');
-        });
+        Message.success('登录失败');
+      });
     },
 
     setDataForm(data) {

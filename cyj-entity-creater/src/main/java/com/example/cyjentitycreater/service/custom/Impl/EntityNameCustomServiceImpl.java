@@ -23,7 +23,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -894,7 +893,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "\r\n" +
                 "  reducers: {\r\n" +
                 "    setState(prevState, payload) {\r\n" +
-                "      return { ...prevState, ...payload };\r\n" +
+                "      return {...prevState, ...payload};\r\n" +
                 "    },\r\n" +
                 "  },\r\n" +
                 "\r\n" +
@@ -930,15 +929,15 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "    },\r\n" +
                 "    async " + underSubPoName + "Delete(data) {\r\n" +
                 "      await " + underSubPoName + "Service." + underSubPoName + "Delete(data.record.id);\r\n" +
-                "      await this." + underSubPoName + "Page({ " + underSubPoName + "Current: data.data.pageNumber, pid: data.data.pid });\r\n" +
+                "      await this." + underSubPoName + "Page({" + underSubPoName + "Current: data.data.pageNumber, pid: data.data.pid});\r\n" +
                 "      const payload = {\r\n" +
                 "        " + underSubPoName + "Visible: false,\r\n" +
                 "      };\r\n" +
                 "      dispatch." + underSubPoName + ".setState(payload);\r\n" +
                 "    },\r\n" +
                 "    async " + underSubPoName + "Save(data) {\r\n" +
-                "      await " + underSubPoName + "Service." + underSubPoName + "Save({ ...data." + underSubPoName + "FormData, pid: data.pid });\r\n" +
-                "      await this." + underSubPoName + "Page({ " + underSubPoName + "Current: data.pageNumber, pid: data.pid });\r\n" +
+                "      await " + underSubPoName + "Service." + underSubPoName + "Save({...data." + underSubPoName + "FormData, pid: data.pid});\r\n" +
+                "      await this." + underSubPoName + "Page({" + underSubPoName + "Current: data.pageNumber, pid: data.pid});\r\n" +
                 "      const payload = {\r\n" +
                 "        " + underSubPoName + "Visible: false,\r\n" +
                 "      };\r\n" +
@@ -952,7 +951,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "    },\r\n" +
                 "    async findDataTableAndFormByName(pid) {\r\n" +
                 "      const ret = await initService.findDataTableAndFormByName('" + subPo.getEntityCode() + "');\r\n" +
-                "      await this." + underSubPoName + "Page({ " + underSubPoName + "Current: 1, pid });\r\n" +
+                "      await this." + underSubPoName + "Page({" + underSubPoName + "Current: 1, pid});\r\n" +
                 "      const payload = {\r\n" +
                 "        " + underSubPoName + "Table: ret.data.dataTable,\r\n" +
                 "        " + underSubPoName + "Form: ret.data.dataForm,\r\n" +
@@ -961,7 +960,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "    },\r\n" +
                 "    async onRowClick(data) {\r\n" +
                 "      await this.findDataTableAndFormByName(data.record.id);\r\n" +
-                "      await this." + underSubPoName + "Page({ " + underSubPoName + "Current: 1, pid: data.record.id });\r\n" +
+                "      await this." + underSubPoName + "Page({" + underSubPoName + "Current: 1, pid: data.record.id});\r\n" +
                 "      const payload = {\r\n" +
                 "        divVisible: data.selected,\r\n" +
                 "        " + underPoName + "Id: data.record.id,\r\n" +
@@ -976,7 +975,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
 
 
     private String[] servicesSubAutoGenerate(String appApi, String underSubPoName, String subPoName) {
-        String viewData = "import { request } from 'ice';\r\n" +
+        String viewData = "import {request} from 'ice';\r\n" +
                 "\r\n" +
                 "export default {\r\n" +
                 "  " + underSubPoName + "Page(pageNumber, pid) {\r\n" +
@@ -1020,12 +1019,12 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
 
 
     private String[] viewSubAutoGenerate(String poName, String underPoName, String underSubPoName, String subPoName) {
-        String viewData = "import { Dialog } from '@alifd/next';\r\n" +
+        String viewData = "import {Dialog} from '@alifd/next';\r\n" +
                 "import React from 'react';\r\n" +
                 "import pageStore from '@/pages/" + poName + "/store';\r\n" +
                 "import DataFormTemple from '@/components/dataForm';\r\n" +
                 "import DataTableTemple from '@/components/dataTable';\r\n" +
-                "import { CustomColumn" + subPoName + " } from '@/pages/" + poName + "/view/custom/" + underSubPoName + "';\r\n" +
+                "import {CustomColumn" + subPoName + "} from '@/pages/" + poName + "/view/custom/" + underSubPoName + "';\r\n" +
                 "\r\n" +
                 "function " + subPoName + "() {\r\n" +
                 "  const [" + underSubPoName + "State, " + underSubPoName + "Dispatchers] = pageStore.useModel('" + underSubPoName + "');\r\n" +
@@ -1041,7 +1040,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "          divVisible: false,\r\n" +
                 "          " + underPoName + "Id: '',\r\n" +
                 "        })}\r\n" +
-                "        style={{ width: '90%' }}\r\n" +
+                "        style={{width: '90%'}}\r\n" +
                 "      >\r\n" +
                 "        <DataTableTemple\r\n" +
                 "          createItem={() => " + underSubPoName + "Dispatchers." + underSubPoName + "Edit()}\r\n" +
@@ -1058,7 +1057,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "          items={" + underSubPoName + "State." + underSubPoName + "Table}\r\n" +
                 "          total={" + underSubPoName + "State." + underSubPoName + "Total}\r\n" +
                 "          primaryKey=\"id\"\r\n" +
-                "          getPage={(" + underSubPoName + "Current) => " + underSubPoName + "Dispatchers." + underSubPoName + "Page({ " + underSubPoName + "Current, pid: " + underSubPoName + "State." + underPoName + "Id })}\r\n" +
+                "          getPage={(" + underSubPoName + "Current) => " + underSubPoName + "Dispatchers." + underSubPoName + "Page({" + underSubPoName + "Current, pid: " + underSubPoName + "State." + underPoName + "Id})}\r\n" +
                 "          columnRender={" + underSubPoName + "State.customType ? (value, index, record) => {\r\n" +
                 "            return (\r\n" +
                 "              <CustomColumn" + subPoName + " value={value} index={index} record={record} />\r\n" +
@@ -1075,7 +1074,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "      <DataFormTemple\r\n" +
                 "        title=\"菜单\"\r\n" +
                 "        visibleDialog={" + underSubPoName + "State." + underSubPoName + "Visible}\r\n" +
-                "        onClose={() => " + underSubPoName + "Dispatchers.setState({ " + underSubPoName + "Visible: false })}\r\n" +
+                "        onClose={() => " + underSubPoName + "Dispatchers.setState({" + underSubPoName + "Visible: false})}\r\n" +
                 "        items={" + underSubPoName + "State." + underSubPoName + "Form}\r\n" +
                 "        dispatchers={(value) => " + underSubPoName + "Dispatchers.setDataForm(value)}\r\n" +
                 "        onOk={() => " + underSubPoName + "Dispatchers." + underSubPoName + "Save({\r\n" +
@@ -1096,54 +1095,60 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
     private String[] modelsSubCustomGenerate(String underSubPoName, String subPoName) {
         String viewData =
                 "export default {\r\n" +
-                "\r\n" +
-                "  namespace: 'custom" + subPoName + "',\r\n" +
-                "\r\n" +
-                "  state: {\r\n" +
-                "    customMethodName1: null,\r\n" +
-                "    customMethodName2: null,\r\n" +
-                "    customMethodName3: null,\r\n" +
-                "  },\r\n" +
-                "\r\n" +
-                "  reducers: {\r\n" +
-                "    setState(prevState, payload) {\r\n" +
-                "      return { ...prevState, ...payload };\r\n" +
-                "    },\r\n" +
-                "  },\r\n" +
-                "\r\n" +
-                "  effects: () => ({\r\n" +
-                "    customMethod1() { },\r\n" +
-                "    customMethod2() { },\r\n" +
-                "    customMethod3() { },\r\n" +
-                "  }),\r\n" +
-                "};\r\n";
+                        "\r\n" +
+                        "  namespace: 'custom" + subPoName + "',\r\n" +
+                        "\r\n" +
+                        "  state: {\r\n" +
+                        "    customMethodName1: null,\r\n" +
+                        "    customMethodName2: null,\r\n" +
+                        "    customMethodName3: null,\r\n" +
+                        "  },\r\n" +
+                        "\r\n" +
+                        "  reducers: {\r\n" +
+                        "    setState(prevState, payload) {\r\n" +
+                        "      return {...prevState, ...payload};\r\n" +
+                        "    },\r\n" +
+                        "  },\r\n" +
+                        "\r\n" +
+                        "  effects: () => ({\r\n" +
+                        "    customMethod1() {\r\n" +
+                        "    },\r\n" +
+                        "    customMethod2() {\r\n" +
+                        "    },\r\n" +
+                        "    customMethod3() {\r\n" +
+                        "    },\r\n" +
+                        "  }),\r\n" +
+                        "};\r\n";
         return new String[]{viewData, underSubPoName + ".tsx"};
     }
 
     private String[] modelsCustomGenerate(String underPoName, String poName) {
         String viewData =
                 "export default {\r\n" +
-                "\r\n" +
-                "  namespace: 'custom" + poName + "',\r\n" +
-                "\r\n" +
-                "  state: {\r\n" +
-                "    customMethodName1: null,\r\n" +
-                "    customMethodName2: null,\r\n" +
-                "    customMethodName3: null,\r\n" +
-                "  },\r\n" +
-                "\r\n" +
-                "  reducers: {\r\n" +
-                "    setState(prevState, payload) {\r\n" +
-                "      return { ...prevState, ...payload };\r\n" +
-                "    },\r\n" +
-                "  },\r\n" +
-                "\r\n" +
-                "  effects: () => ({\r\n" +
-                "    customMethod1() { },\r\n" +
-                "    customMethod2() { },\r\n" +
-                "    customMethod3() { },\r\n" +
-                "  }),\r\n" +
-                "};\r\n";
+                        "\r\n" +
+                        "  namespace: 'custom" + poName + "',\r\n" +
+                        "\r\n" +
+                        "  state: {\r\n" +
+                        "    customMethodName1: null,\r\n" +
+                        "    customMethodName2: null,\r\n" +
+                        "    customMethodName3: null,\r\n" +
+                        "  },\r\n" +
+                        "\r\n" +
+                        "  reducers: {\r\n" +
+                        "    setState(prevState, payload) {\r\n" +
+                        "      return {...prevState, ...payload};\r\n" +
+                        "    },\r\n" +
+                        "  },\r\n" +
+                        "\r\n" +
+                        "  effects: () => ({\r\n" +
+                        "    customMethod1() {\r\n" +
+                        "    },\r\n" +
+                        "    customMethod2() {\r\n" +
+                        "    },\r\n" +
+                        "    customMethod3() {\r\n" +
+                        "    },\r\n" +
+                        "  }),\r\n" +
+                        "};\r\n";
         return new String[]{viewData, underPoName + ".tsx"};
     }
 
@@ -1171,7 +1176,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "\r\n" +
                 "  reducers: {\r\n" +
                 "    setState(prevState, payload) {\r\n" +
-                "      return { ...prevState, ...payload };\r\n" +
+                "      return {...prevState, ...payload};\r\n" +
                 "    },\r\n" +
                 "  },\r\n" +
                 "\r\n" +
@@ -1244,7 +1249,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
     }
 
     private String[] servicesCustomGenerate(String underPoName) {
-        String viewData = "// import { request } from 'ice';\r\n" +
+        String viewData = "// import {request} from 'ice';\r\n" +
                 "// export default {\r\n" +
                 "// \r\n" +
                 "// };\r\n";
@@ -1252,7 +1257,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
     }
 
     private String[] servicesAutoGenerate(String appApi, String underPoName, String poName) {
-        String viewData = "import { request } from 'ice';\r\n" +
+        String viewData = "import {request} from 'ice';\r\n" +
                 "\r\n" +
                 "export default {\r\n" +
                 "  " + underPoName + "Page(pageNumber) {\r\n" +
@@ -1307,7 +1312,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "// };\r\n" +
                 "\r\n" +
                 "function CustomColumn" + subPoName + "(props) {\r\n" +
-                "//   const { value, index, record } = props;\r\n" +
+                "//   const {value, index, record} = props;\r\n" +
                 "//   const [custom" + subPoName + "State, custom" + subPoName + "Dispatchers] = pageStore.useModel('custom" + poName + "');\r\n" +
                 "\r\n" +
                 "  return (\r\n" +
@@ -1316,7 +1321,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "  );\r\n" +
                 "}\r\n" +
                 "\r\n" +
-                "export { CustomColumn" + subPoName + " };\r\n";
+                "export {CustomColumn" + subPoName + "};\r\n";
         return new String[]{viewData, underSubPoName + ".tsx"};
     }
 
@@ -1334,7 +1339,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "// };\r\n" +
                 "// \r\n" +
                 "function CustomColumn" + poName + "(props) {\r\n" +
-                "//   const { value, index, record } = props;\r\n" +
+                "//   const {value, index, record} = props;\r\n" +
                 "//   const [custom" + poName + "State, custom" + poName + "Dispatchers] = pageStore.useModel('custom" + poName + "');\r\n" +
                 "\r\n" +
                 "  return (\r\n" +
@@ -1343,17 +1348,17 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "  );\r\n" +
                 "}\r\n" +
                 "\r\n" +
-                "export { CustomColumn" + poName + " };\r\n";
+                "export {CustomColumn" + poName + "};\r\n";
         return new String[]{viewData, underPoName + ".tsx"};
     }
 
     private String[] viewAutoGenerate(List<EntityNamePO> entityNamePOList, String underPoName, String poName) {
         StringBuilder sb = new StringBuilder();
-        sb.append("import React, { useEffect } from 'react';\r\n");
+        sb.append("import React, {useEffect} from 'react';\r\n");
         sb.append("import pageStore from '@/pages/").append(poName).append("/store';\r\n");
         sb.append("import DataFormTemple from '@/components/dataForm';\r\n");
         sb.append("import DataTableTemple from '@/components/dataTable';\r\n");
-        sb.append("import { CustomColumn").append(poName).append(" } from '@/pages/").append(poName).append("/view/custom/").append(underPoName).append("';\r\n");
+        sb.append("import {CustomColumn").append(poName).append("} from '@/pages/").append(poName).append("/view/custom/").append(underPoName).append("';\r\n");
         sb.append("\r\n");
         sb.append("function ").append(poName).append("() {\r\n");
         sb.append("  const [").append(underPoName).append("State, ").append(underPoName).append("Dispatchers] = pageStore.useModel('").append(underPoName).append("');\r\n");
@@ -1389,11 +1394,11 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
             sb.append("        rowSelection={{\r\n");
             sb.append("          mode: 'single',\r\n");
             sb.append("          onSelect: (selected, record) => {\r\n");
-            sb.append("            ").append(underPoName).append("Dispatchers.setState({ ").append(underPoName).append("Id: record.id });\r\n");
+            sb.append("            ").append(underPoName).append("Dispatchers.setState({").append(underPoName).append("Id: record.id});\r\n");
             entityNamePOList.forEach(subPo -> {
                 //驼峰名
                 String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
-                sb.append("            ").append(underSubPoName).append("Dispatchers.onRowClick({ selected, record });\r\n");
+                sb.append("            ").append(underSubPoName).append("Dispatchers.onRowClick({selected, record});\r\n");
             });
             sb.append("          },\r\n");
             sb.append("          selectedRowKeys: [\r\n");
@@ -1421,7 +1426,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("      <DataFormTemple\r\n");
         sb.append("        title={").append(underPoName).append("State.").append(underPoName).append("Title}\r\n");
         sb.append("        visibleDialog={").append(underPoName).append("State.").append(underPoName).append("Visible}\r\n");
-        sb.append("        onClose={() => ").append(underPoName).append("Dispatchers.setState({ ").append(underPoName).append("Visible: false })}\r\n");
+        sb.append("        onClose={() => ").append(underPoName).append("Dispatchers.setState({").append(underPoName).append("Visible: false})}\r\n");
         sb.append("        items={").append(underPoName).append("State.").append(underPoName).append("Form}\r\n");
         sb.append("        dispatchers={(value) => ").append(underPoName).append("Dispatchers.setDataForm(value)}\r\n");
         sb.append("        onOk={() => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Save({\r\n");
@@ -1441,7 +1446,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
 
     private String[] storeGenerate(List<EntityNamePO> entityNamePOList, String underPoName, String poName) {
         StringBuilder sb = new StringBuilder();
-        sb.append("import { createStore } from 'ice';\r\n");
+        sb.append("import {createStore} from 'ice';\r\n");
         sb.append("import ").append(underPoName).append(" from './models/auto/").append(underPoName).append("';\r\n");
         sb.append("import custom").append(poName).append(" from './models/custom/").append(underPoName).append("';\r\n");
         entityNamePOList.forEach(subPo -> {

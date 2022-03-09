@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import pageStore from '@/pages/Role/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
-import { CustomColumnRole } from '@/pages/Role/view/custom/role';
+import {CustomColumnRole} from '@/pages/Role/view/custom/role';
 
 function Role() {
   const [roleState, roleDispatchers] = pageStore.useModel('role');
@@ -32,7 +32,7 @@ function Role() {
         primaryKey="id"
         columnRender={roleState.customType ? (value, index, record) => {
           return (
-            <CustomColumnRole value={value} index={index} record={record} />
+            <CustomColumnRole value={value} index={index} record={record}/>
           );
         } : null}
         customMethod1={() => customRoleDispatchers.customMethod1()}
@@ -45,7 +45,7 @@ function Role() {
       <DataFormTemple
         title={roleState.roleTitle}
         visibleDialog={roleState.roleVisible}
-        onClose={() => roleDispatchers.setState({ roleVisible: false })}
+        onClose={() => roleDispatchers.setState({roleVisible: false})}
         items={roleState.roleForm}
         dispatchers={(value) => roleDispatchers.setDataForm(value)}
         onOk={() => roleDispatchers.roleSave({

@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import pageStore from '@/pages/FirstMenu/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
-import { CustomColumnFirstMenu } from '@/pages/FirstMenu/view/custom/firstMenu';
+import {CustomColumnFirstMenu} from '@/pages/FirstMenu/view/custom/firstMenu';
 
 function FirstMenu() {
   const [firstMenuState, firstMenuDispatchers] = pageStore.useModel('firstMenu');
@@ -33,8 +33,8 @@ function FirstMenu() {
         rowSelection={{
           mode: 'single',
           onSelect: (selected, record) => {
-            firstMenuDispatchers.setState({ firstMenuId: record.id });
-            secondMenuDispatchers.onRowClick({ selected, record });
+            firstMenuDispatchers.setState({firstMenuId: record.id});
+            secondMenuDispatchers.onRowClick({selected, record});
           },
           selectedRowKeys: [
             secondMenuState.firstMenuId,
@@ -43,7 +43,7 @@ function FirstMenu() {
         primaryKey="id"
         columnRender={firstMenuState.customType ? (value, index, record) => {
           return (
-            <CustomColumnFirstMenu value={value} index={index} record={record} />
+            <CustomColumnFirstMenu value={value} index={index} record={record}/>
           );
         } : null}
         customMethod1={() => customFirstMenuDispatchers.customMethod1()}
@@ -56,7 +56,7 @@ function FirstMenu() {
       <DataFormTemple
         title={firstMenuState.firstMenuTitle}
         visibleDialog={firstMenuState.firstMenuVisible}
-        onClose={() => firstMenuDispatchers.setState({ firstMenuVisible: false })}
+        onClose={() => firstMenuDispatchers.setState({firstMenuVisible: false})}
         items={firstMenuState.firstMenuForm}
         dispatchers={(value) => firstMenuDispatchers.setDataForm(value)}
         onOk={() => firstMenuDispatchers.firstMenuSave({

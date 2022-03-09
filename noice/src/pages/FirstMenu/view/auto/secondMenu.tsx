@@ -1,9 +1,9 @@
-import { Dialog } from '@alifd/next';
+import {Dialog} from '@alifd/next';
 import React from 'react';
 import pageStore from '@/pages/FirstMenu/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
-import { CustomColumnSecondMenu } from '@/pages/FirstMenu/view/custom/secondMenu';
+import {CustomColumnSecondMenu} from '@/pages/FirstMenu/view/custom/secondMenu';
 
 function SecondMenu() {
   const [secondMenuState, secondMenuDispatchers] = pageStore.useModel('secondMenu');
@@ -19,7 +19,7 @@ function SecondMenu() {
           divVisible: false,
           firstMenuId: '',
         })}
-        style={{ width: '90%' }}
+        style={{width: '90%'}}
       >
         <DataTableTemple
           createItem={() => secondMenuDispatchers.secondMenuEdit()}
@@ -36,10 +36,13 @@ function SecondMenu() {
           items={secondMenuState.secondMenuTable}
           total={secondMenuState.secondMenuTotal}
           primaryKey="id"
-          getPage={(secondMenuCurrent) => secondMenuDispatchers.secondMenuPage({ secondMenuCurrent, pid: secondMenuState.firstMenuId })}
+          getPage={(secondMenuCurrent) => secondMenuDispatchers.secondMenuPage({
+            secondMenuCurrent,
+            pid: secondMenuState.firstMenuId
+          })}
           columnRender={secondMenuState.customType ? (value, index, record) => {
             return (
-              <CustomColumnSecondMenu value={value} index={index} record={record} />
+              <CustomColumnSecondMenu value={value} index={index} record={record}/>
             );
           } : null}
           customMethod1={() => customSecondMenuDispatchers.customMethod1()}
@@ -53,7 +56,7 @@ function SecondMenu() {
       <DataFormTemple
         title="菜单"
         visibleDialog={secondMenuState.secondMenuVisible}
-        onClose={() => secondMenuDispatchers.setState({ secondMenuVisible: false })}
+        onClose={() => secondMenuDispatchers.setState({secondMenuVisible: false})}
         items={secondMenuState.secondMenuForm}
         dispatchers={(value) => secondMenuDispatchers.setDataForm(value)}
         onOk={() => secondMenuDispatchers.secondMenuSave({

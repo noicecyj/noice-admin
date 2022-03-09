@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import pageStore from '@/pages/AppService/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
-import { CustomColumnAppService } from '@/pages/AppService/view/custom/appService';
+import {CustomColumnAppService} from '@/pages/AppService/view/custom/appService';
 
 function AppService() {
   const [appServiceState, appServiceDispatchers] = pageStore.useModel('appService');
@@ -32,7 +32,7 @@ function AppService() {
         primaryKey="id"
         columnRender={appServiceState.customType ? (value, index, record) => {
           return (
-            <CustomColumnAppService value={value} index={index} record={record} />
+            <CustomColumnAppService value={value} index={index} record={record}/>
           );
         } : null}
         customMethod1={() => customAppServiceDispatchers.customMethod1()}
@@ -45,7 +45,7 @@ function AppService() {
       <DataFormTemple
         title={appServiceState.appServiceTitle}
         visibleDialog={appServiceState.appServiceVisible}
-        onClose={() => appServiceDispatchers.setState({ appServiceVisible: false })}
+        onClose={() => appServiceDispatchers.setState({appServiceVisible: false})}
         items={appServiceState.appServiceForm}
         dispatchers={(value) => appServiceDispatchers.setDataForm(value)}
         onOk={() => appServiceDispatchers.appServiceSave({

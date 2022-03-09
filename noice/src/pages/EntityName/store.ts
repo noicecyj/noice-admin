@@ -1,4 +1,4 @@
-import { createStore } from 'ice';
+import {createStore} from 'ice';
 import entityName from './models/auto/entityName';
 import customEntityName from './models/custom/entityName';
 import entity from './models/auto/entity';

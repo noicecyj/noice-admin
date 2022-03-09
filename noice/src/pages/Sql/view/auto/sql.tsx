@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import pageStore from '@/pages/Sql/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
-import { CustomColumnSql } from '@/pages/Sql/view/custom/sql';
+import {CustomColumnSql} from '@/pages/Sql/view/custom/sql';
 
 function Sql() {
   const [sqlState, sqlDispatchers] = pageStore.useModel('sql');
@@ -32,7 +32,7 @@ function Sql() {
         primaryKey="id"
         columnRender={sqlState.customType ? (value, index, record) => {
           return (
-            <CustomColumnSql value={value} index={index} record={record} />
+            <CustomColumnSql value={value} index={index} record={record}/>
           );
         } : null}
         customMethod1={() => customSqlDispatchers.customMethod1()}
@@ -45,7 +45,7 @@ function Sql() {
       <DataFormTemple
         title={sqlState.sqlTitle}
         visibleDialog={sqlState.sqlVisible}
-        onClose={() => sqlDispatchers.setState({ sqlVisible: false })}
+        onClose={() => sqlDispatchers.setState({sqlVisible: false})}
         items={sqlState.sqlForm}
         dispatchers={(value) => sqlDispatchers.setDataForm(value)}
         onOk={() => sqlDispatchers.sqlSave({

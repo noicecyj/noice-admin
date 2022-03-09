@@ -5,8 +5,8 @@ import SecondMenu from '@/pages/FirstMenu/view/auto/secondMenu';
 function FirstMenuPage() {
   return (
     <div>
-      <FirstMenu />
-      <SecondMenu />
+      <FirstMenu/>
+      <SecondMenu/>
     </div>
   );
 }

@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import pageStore from '@/pages/Catalog/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
-import { CustomColumnCatalog } from '@/pages/Catalog/view/custom/catalog';
+import {CustomColumnCatalog} from '@/pages/Catalog/view/custom/catalog';
 
 function Catalog() {
   const [catalogState, catalogDispatchers] = pageStore.useModel('catalog');
@@ -33,8 +33,8 @@ function Catalog() {
         rowSelection={{
           mode: 'single',
           onSelect: (selected, record) => {
-            catalogDispatchers.setState({ catalogId: record.id });
-            dictionaryDispatchers.onRowClick({ selected, record });
+            catalogDispatchers.setState({catalogId: record.id});
+            dictionaryDispatchers.onRowClick({selected, record});
           },
           selectedRowKeys: [
             dictionaryState.catalogId,
@@ -43,7 +43,7 @@ function Catalog() {
         primaryKey="id"
         columnRender={catalogState.customType ? (value, index, record) => {
           return (
-            <CustomColumnCatalog value={value} index={index} record={record} />
+            <CustomColumnCatalog value={value} index={index} record={record}/>
           );
         } : null}
         customMethod1={() => customCatalogDispatchers.customMethod1()}
@@ -56,7 +56,7 @@ function Catalog() {
       <DataFormTemple
         title={catalogState.catalogTitle}
         visibleDialog={catalogState.catalogVisible}
-        onClose={() => catalogDispatchers.setState({ catalogVisible: false })}
+        onClose={() => catalogDispatchers.setState({catalogVisible: false})}
         items={catalogState.catalogForm}
         dispatchers={(value) => catalogDispatchers.setDataForm(value)}
         onOk={() => catalogDispatchers.catalogSave({

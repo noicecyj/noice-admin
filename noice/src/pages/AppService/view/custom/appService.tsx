@@ -20,4 +20,4 @@ function CustomColumnAppService(props) {
   );
 }
 
-export { CustomColumnAppService };
+export {CustomColumnAppService};

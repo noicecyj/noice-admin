@@ -1,4 +1,4 @@
-import { request } from 'ice';
+import {request} from 'ice';
 
 export default {
   authorityPage(pageNumber) {

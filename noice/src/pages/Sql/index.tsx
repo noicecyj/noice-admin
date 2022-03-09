@@ -4,7 +4,7 @@ import Sql from '@/pages/Sql/view/auto/sql';
 function SqlPage() {
   return (
     <div>
-      <Sql />
+      <Sql/>
     </div>
   );
 }

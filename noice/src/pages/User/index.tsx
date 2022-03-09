@@ -4,7 +4,7 @@ import User from '@/pages/User/view/auto/user';
 function UserPage() {
   return (
     <div>
-      <User />
+      <User/>
     </div>
   );
 }

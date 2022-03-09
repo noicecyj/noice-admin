@@ -1,4 +1,4 @@
-import { createStore } from 'ice';
+import {createStore} from 'ice';
 import authority from './models/auto/authority';
 import customAuthority from './models/custom/authority';
 

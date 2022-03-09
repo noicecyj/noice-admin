@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,16 +38,50 @@ public class SqlCustomServiceImpl extends BaseService implements SqlCustomServic
     @Override
     public List<Map<String, Object>> queryBySql(String sql) {
         Query query = em.createNativeQuery(sql);
-        @SuppressWarnings("unchecked")
-        List<Map<String, Object>> list = query.unwrap(NativeQueryImpl.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).list();
-        return list;
+        return query.unwrap(NativeQueryImpl.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).list();
+    }
+
+    @Override
+    public List<Map<String, Object>> queryBySql(String sql, HashMap<String, String> str) {
+        Query query = em.createNativeQuery(sql);
+        for (String value : str.keySet()) {
+            query.setParameter(value, str.get(value));
+        }
+        return query.unwrap(NativeQueryImpl.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).list();
+    }
+
+    @Override
+    public Map<String, Object> queryByOne(String sql, HashMap<String, String> str) {
+        List<Map<String, Object>> resultList = queryBySql(sql,str);
+        if (resultList.size() == 1){
+            return resultList.get(0);
+        }
+        return null;
     }
 
     @Override
     public List<Map<String, Object>> queryBySqlValue(String value) {
         SqlPO sqlPO = sqlCustomDao.findBySqlDescription(value);
-        if (sqlPO != null){
+        if (sqlPO != null) {
             return queryBySql(sqlPO.getSqlStr());
+        }
+        return null;
+    }
+
+    @Override
+    public List<Map<String, Object>> queryBySqlValue(String value, HashMap<String, String> str) {
+        SqlPO sqlPO = sqlCustomDao.findBySqlDescription(value);
+        if (sqlPO != null) {
+            return queryBySql(sqlPO.getSqlStr(), str);
+        }
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> queryBySqlOne(String value, HashMap<String, String> str) {
+        SqlPO sqlPO = sqlCustomDao.findBySqlDescription(value);
+        if (sqlPO != null) {
+            return queryByOne(sqlPO.getSqlStr(), str);
         }
         return null;
     }

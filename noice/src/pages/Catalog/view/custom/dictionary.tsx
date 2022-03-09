@@ -20,4 +20,4 @@ function CustomColumnDictionary(props) {
   );
 }
 
-export { CustomColumnDictionary };
+export {CustomColumnDictionary};

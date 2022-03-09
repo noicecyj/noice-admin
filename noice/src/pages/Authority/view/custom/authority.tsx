@@ -20,4 +20,4 @@ function CustomColumnAuthority(props) {
   );
 }
 
-export { CustomColumnAuthority };
+export {CustomColumnAuthority};

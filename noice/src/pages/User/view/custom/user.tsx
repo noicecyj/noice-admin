@@ -20,4 +20,4 @@ function CustomColumnUser(props) {
   );
 }
 
-export { CustomColumnUser };
+export {CustomColumnUser};

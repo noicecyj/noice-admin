@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import pageStore from '@/pages/EntityName/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
-import { CustomColumnEntityName } from '@/pages/EntityName/view/custom/entityName';
+import {CustomColumnEntityName} from '@/pages/EntityName/view/custom/entityName';
 
 function EntityName() {
   const [entityNameState, entityNameDispatchers] = pageStore.useModel('entityName');
@@ -33,8 +33,8 @@ function EntityName() {
         rowSelection={{
           mode: 'single',
           onSelect: (selected, record) => {
-            entityNameDispatchers.setState({ entityNameId: record.id });
-            entityDispatchers.onRowClick({ selected, record });
+            entityNameDispatchers.setState({entityNameId: record.id});
+            entityDispatchers.onRowClick({selected, record});
           },
           selectedRowKeys: [
             entityState.entityNameId,
@@ -43,7 +43,7 @@ function EntityName() {
         primaryKey="id"
         columnRender={entityNameState.customType ? (value, index, record) => {
           return (
-            <CustomColumnEntityName value={value} index={index} record={record} />
+            <CustomColumnEntityName value={value} index={index} record={record}/>
           );
         } : null}
         customMethod1={() => customEntityNameDispatchers.customMethod1()}
@@ -56,7 +56,7 @@ function EntityName() {
       <DataFormTemple
         title={entityNameState.entityNameTitle}
         visibleDialog={entityNameState.entityNameVisible}
-        onClose={() => entityNameDispatchers.setState({ entityNameVisible: false })}
+        onClose={() => entityNameDispatchers.setState({entityNameVisible: false})}
         items={entityNameState.entityNameForm}
         dispatchers={(value) => entityNameDispatchers.setDataForm(value)}
         onOk={() => entityNameDispatchers.entityNameSave({

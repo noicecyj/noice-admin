@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import pageStore from '@/pages/User/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
-import { CustomColumnUser } from '@/pages/User/view/custom/user';
+import {CustomColumnUser} from '@/pages/User/view/custom/user';
 
 function User() {
   const [userState, userDispatchers] = pageStore.useModel('user');
@@ -32,7 +32,7 @@ function User() {
         primaryKey="id"
         columnRender={userState.customType ? (value, index, record) => {
           return (
-            <CustomColumnUser value={value} index={index} record={record} />
+            <CustomColumnUser value={value} index={index} record={record}/>
           );
         } : null}
         customMethod1={() => customUserDispatchers.customMethod1()}
@@ -45,7 +45,7 @@ function User() {
       <DataFormTemple
         title={userState.userTitle}
         visibleDialog={userState.userVisible}
-        onClose={() => userDispatchers.setState({ userVisible: false })}
+        onClose={() => userDispatchers.setState({userVisible: false})}
         items={userState.userForm}
         dispatchers={(value) => userDispatchers.setDataForm(value)}
         onOk={() => userDispatchers.userSave({
