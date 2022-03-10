@@ -11,7 +11,7 @@ function FirstMenu() {
   const [customFirstMenuState, customFirstMenuDispatchers] = pageStore.useModel('customFirstMenu');
 
   useEffect(() => {
-    firstMenuDispatchers.findDataTableAndFormByName();
+    firstMenuDispatchers.findDataTableAndFormByName().then(r => console.log(r));
   }, [firstMenuDispatchers]);
 
   return (

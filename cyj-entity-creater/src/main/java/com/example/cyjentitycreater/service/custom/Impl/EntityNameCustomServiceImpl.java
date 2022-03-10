@@ -1057,7 +1057,10 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "          items={" + underSubPoName + "State." + underSubPoName + "Table}\r\n" +
                 "          total={" + underSubPoName + "State." + underSubPoName + "Total}\r\n" +
                 "          primaryKey=\"id\"\r\n" +
-                "          getPage={(" + underSubPoName + "Current) => " + underSubPoName + "Dispatchers." + underSubPoName + "Page({" + underSubPoName + "Current, pid: " + underSubPoName + "State." + underPoName + "Id})}\r\n" +
+                "          getPage={(" + underSubPoName + "Current) => " + underSubPoName + "Dispatchers." + underSubPoName + "Page({\r\n" +
+                "            " + underSubPoName + "Current,\r\n" +
+                "            pid: " + underSubPoName + "State." + subPoName + "Id\r\n" +
+                "          })}\r\n" +
                 "          columnRender={" + underSubPoName + "State.customType ? (value, index, record) => {\r\n" +
                 "            return (\r\n" +
                 "              <CustomColumn" + subPoName + " value={value} index={index} record={record}/>\r\n" +
@@ -1371,7 +1374,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("  const [custom").append(poName).append("State, custom").append(poName).append("Dispatchers] = pageStore.useModel('custom").append(poName).append("');\r\n");
         sb.append("\r\n");
         sb.append("  useEffect(() => {\r\n");
-        sb.append("    ").append(underPoName).append("Dispatchers.findDataTableAndFormByName();\r\n");
+        sb.append("    ").append(underPoName).append("Dispatchers.findDataTableAndFormByName().then(r => console.log(r));\r\n");
         sb.append("  }, [").append(underPoName).append("Dispatchers]);\r\n");
         sb.append("\r\n");
         sb.append("  return (\r\n");
