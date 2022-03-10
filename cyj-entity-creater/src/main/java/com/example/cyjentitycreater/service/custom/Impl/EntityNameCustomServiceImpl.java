@@ -1059,7 +1059,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "          primaryKey=\"id\"\r\n" +
                 "          getPage={(" + underSubPoName + "Current) => " + underSubPoName + "Dispatchers." + underSubPoName + "Page({\r\n" +
                 "            " + underSubPoName + "Current,\r\n" +
-                "            pid: " + underSubPoName + "State." + subPoName + "Id\r\n" +
+                "            pid: " + underSubPoName + "State." + underPoName + "Id\r\n" +
                 "          })}\r\n" +
                 "          columnRender={" + underSubPoName + "State.customType ? (value, index, record) => {\r\n" +
                 "            return (\r\n" +

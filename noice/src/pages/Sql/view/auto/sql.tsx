@@ -10,7 +10,7 @@ function Sql() {
   const [customSqlState, customSqlDispatchers] = pageStore.useModel('customSql');
 
   useEffect(() => {
-    sqlDispatchers.findDataTableAndFormByName();
+    sqlDispatchers.findDataTableAndFormByName().then(r => console.log(r));
   }, [sqlDispatchers]);
 
   return (
