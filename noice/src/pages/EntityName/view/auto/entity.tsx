@@ -36,7 +36,10 @@ function Entity() {
           items={entityState.entityTable}
           total={entityState.entityTotal}
           primaryKey="id"
-          getPage={(entityCurrent) => entityDispatchers.entityPage({entityCurrent, pid: entityState.entityNameId})}
+          getPage={(entityCurrent) => entityDispatchers.entityPage({
+            entityCurrent,
+            pid: entityState.entityNameId
+          })}
           columnRender={entityState.customType ? (value, index, record) => {
             return (
               <CustomColumnEntity value={value} index={index} record={record}/>

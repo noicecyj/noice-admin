@@ -10,7 +10,7 @@ function User() {
   const [customUserState, customUserDispatchers] = pageStore.useModel('customUser');
 
   useEffect(() => {
-    userDispatchers.findDataTableAndFormByName();
+    userDispatchers.findDataTableAndFormByName().then(r => console.log(r));
   }, [userDispatchers]);
 
   return (

@@ -11,7 +11,7 @@ function EntityName() {
   const [customEntityNameState, customEntityNameDispatchers] = pageStore.useModel('customEntityName');
 
   useEffect(() => {
-    entityNameDispatchers.findDataTableAndFormByName();
+    entityNameDispatchers.findDataTableAndFormByName().then(r => console.log(r));
   }, [entityNameDispatchers]);
 
   return (

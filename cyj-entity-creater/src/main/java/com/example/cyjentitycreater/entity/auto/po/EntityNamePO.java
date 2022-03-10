@@ -36,8 +36,6 @@ public class EntityNamePO implements Serializable {
     private String id;
     @Column(name = "parent_entity_name")
     private String parentEntityName;
-    @Column(name = "pid")
-    private String pid;
     @Column(name = "app_name")
     private String appName;
     @Column(name = "entity_name")

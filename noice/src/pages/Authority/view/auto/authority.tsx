@@ -10,7 +10,7 @@ function Authority() {
   const [customAuthorityState, customAuthorityDispatchers] = pageStore.useModel('customAuthority');
 
   useEffect(() => {
-    authorityDispatchers.findDataTableAndFormByName();
+    authorityDispatchers.findDataTableAndFormByName().then(r => console.log(r));
   }, [authorityDispatchers]);
 
   return (

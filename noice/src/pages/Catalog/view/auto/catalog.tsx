@@ -11,7 +11,7 @@ function Catalog() {
   const [customCatalogState, customCatalogDispatchers] = pageStore.useModel('customCatalog');
 
   useEffect(() => {
-    catalogDispatchers.findDataTableAndFormByName();
+    catalogDispatchers.findDataTableAndFormByName().then(r => console.log(r));
   }, [catalogDispatchers]);
 
   return (

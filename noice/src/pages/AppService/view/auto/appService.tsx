@@ -10,7 +10,7 @@ function AppService() {
   const [customAppServiceState, customAppServiceDispatchers] = pageStore.useModel('customAppService');
 
   useEffect(() => {
-    appServiceDispatchers.findDataTableAndFormByName();
+    appServiceDispatchers.findDataTableAndFormByName().then(r => console.log(r));
   }, [appServiceDispatchers]);
 
   return (

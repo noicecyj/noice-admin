@@ -10,7 +10,7 @@ function Role() {
   const [customRoleState, customRoleDispatchers] = pageStore.useModel('customRole');
 
   useEffect(() => {
-    roleDispatchers.findDataTableAndFormByName();
+    roleDispatchers.findDataTableAndFormByName().then(r => console.log(r));
   }, [roleDispatchers]);
 
   return (
