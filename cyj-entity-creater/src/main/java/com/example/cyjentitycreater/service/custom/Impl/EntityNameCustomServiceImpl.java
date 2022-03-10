@@ -1060,7 +1060,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "          getPage={(" + underSubPoName + "Current) => " + underSubPoName + "Dispatchers." + underSubPoName + "Page({" + underSubPoName + "Current, pid: " + underSubPoName + "State." + underPoName + "Id})}\r\n" +
                 "          columnRender={" + underSubPoName + "State.customType ? (value, index, record) => {\r\n" +
                 "            return (\r\n" +
-                "              <CustomColumn" + subPoName + " value={value} index={index} record={record} />\r\n" +
+                "              <CustomColumn" + subPoName + " value={value} index={index} record={record}/>\r\n" +
                 "            );\r\n" +
                 "          } : null}\r\n" +
                 "          customMethod1={() => custom" + subPoName + "Dispatchers.customMethod1()}\r\n" +
@@ -1413,7 +1413,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("        primaryKey=\"id\"\r\n");
         sb.append("        columnRender={").append(underPoName).append("State.customType ? (value, index, record) => {\r\n");
         sb.append("          return (\r\n");
-        sb.append("            <CustomColumn").append(poName).append(" value={value} index={index} record={record} />\r\n");
+        sb.append("            <CustomColumn").append(poName).append(" value={value} index={index} record={record}/>\r\n");
         sb.append("          );\r\n");
         sb.append("        } : null}\r\n");
         sb.append("        customMethod1={() => custom").append(poName).append("Dispatchers.customMethod1()}\r\n");
@@ -1491,13 +1491,13 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("function ").append(poName).append("Page() {\r\n");
         sb.append("  return (\r\n");
         sb.append("    <div>\r\n");
-        sb.append("      <").append(poName).append(" />\r\n");
+        sb.append("      <").append(poName).append("/>\r\n");
         entityNamePOList.forEach(subPo -> {
             //驼峰名
             String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
             //文件名
             String subPoName = BeanUtils.captureName(underSubPoName);
-            sb.append("      <").append(subPoName).append(" />\r\n");
+            sb.append("      <").append(subPoName).append("/>\r\n");
         });
         sb.append("    </div>\r\n");
         sb.append("  );\r\n");
