@@ -377,7 +377,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("package ").append(poServicePath);
         sb.append("\r\n");
         sb.append("import ").append(poPath).append(poName).append("PO;\r\n");
-        sb.append("import com.querydsl.core.QueryResults;");
+        sb.append("import com.querydsl.core.QueryResults;\r\n");
         sb.append("\r\n");
         sb.append("/**\r\n");
         sb.append(" * @author 曹元杰\r\n");
@@ -411,7 +411,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("package ").append(poServicePath);
         sb.append("\r\n");
         sb.append("import ").append(poPath).append(poName).append("PO;\r\n");
-        sb.append("import com.querydsl.core.QueryResults;");
+        sb.append("import com.querydsl.core.QueryResults;\r\n");
         sb.append("\r\n");
         sb.append("import java.util.List;\r\n");
         sb.append("\r\n");
