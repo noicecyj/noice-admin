@@ -70,7 +70,7 @@ public class FirstMenuCustomServiceImpl extends BaseService implements FirstMenu
         sb.append("import UserLayout from '@/layouts/UserLayout';\r\n");
         sb.append("import LoginPage from '@/pages/Login';\r\n");
         for (FirstMenuDTO firstMenuDTO : firstMenuDTOList) {
-            for (SecondMenuDTO secondMenuDTO:firstMenuDTO.getSecondMenuDTOList()){
+            for (SecondMenuDTO secondMenuDTO : firstMenuDTO.getSecondMenuDTOList()) {
                 sb.append("import ").append(secondMenuDTO.getComponent()).append("Page from '@/pages/").append(secondMenuDTO.getComponent()).append("';\r\n");
             }
         }
@@ -81,7 +81,7 @@ public class FirstMenuCustomServiceImpl extends BaseService implements FirstMenu
             sb.append("    path: '").append(firstMenuDTO.getPath()).append("',\r\n");
             sb.append("    component: ").append(firstMenuDTO.getLayout()).append(",\r\n");
             sb.append("    children: [\r\n");
-            for (SecondMenuDTO secondMenuDTO:firstMenuDTO.getSecondMenuDTOList()){
+            for (SecondMenuDTO secondMenuDTO : firstMenuDTO.getSecondMenuDTOList()) {
                 sb.append("      {\r\n");
                 sb.append("        path: '").append(secondMenuDTO.getPath()).append("',\r\n");
                 sb.append("        component: ").append(secondMenuDTO.getComponent()).append("Page,\r\n");
@@ -132,7 +132,7 @@ public class FirstMenuCustomServiceImpl extends BaseService implements FirstMenu
             sb.append("    icon: '").append(firstMenuDTO.getIcon()).append("',\r\n");
             sb.append("    path: '").append(firstMenuDTO.getPath()).append("',\r\n");
             sb.append("    children: [\r\n");
-            for (SecondMenuDTO secondMenuDTO:firstMenuDTO.getSecondMenuDTOList()){
+            for (SecondMenuDTO secondMenuDTO : firstMenuDTO.getSecondMenuDTOList()) {
                 sb.append("      {\r\n");
                 sb.append("        name: '").append(secondMenuDTO.getMenuName()).append("',\r\n");
                 sb.append("        path: '").append(firstMenuDTO.getPath()).append(secondMenuDTO.getPath()).append("',\r\n");

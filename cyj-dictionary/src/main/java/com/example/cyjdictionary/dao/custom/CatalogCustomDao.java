@@ -1,9 +1,6 @@
 package com.example.cyjdictionary.dao.custom;
 
 import com.example.cyjdictionary.entity.auto.po.CatalogPO;
-import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

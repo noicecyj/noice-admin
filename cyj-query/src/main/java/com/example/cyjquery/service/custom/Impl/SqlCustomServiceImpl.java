@@ -52,8 +52,8 @@ public class SqlCustomServiceImpl extends BaseService implements SqlCustomServic
 
     @Override
     public Map<String, Object> queryByOne(String sql, HashMap<String, String> str) {
-        List<Map<String, Object>> resultList = queryBySql(sql,str);
-        if (resultList.size() == 1){
+        List<Map<String, Object>> resultList = queryBySql(sql, str);
+        if (resultList.size() == 1) {
             return resultList.get(0);
         }
         return null;

@@ -1,10 +1,6 @@
 package com.example.cyjentitycreater.service.custom;
 
 import com.alibaba.fastjson.JSONObject;
-import com.example.cyjentitycreater.entity.auto.po.EntityNamePO;
-
-import java.io.IOException;
-import java.util.List;
 
 /**
  * @author 曹元杰

@@ -386,9 +386,13 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("public interface ").append(poName).append("Service {\r\n");
         sb.append("\r\n");
         sb.append("    ").append(poName).append("PO addOne(").append(poName).append("PO po);\r\n");
+        sb.append("\r\n");
         sb.append("    void deleteOne(String id);\r\n");
+        sb.append("\r\n");
         sb.append("    ").append(poName).append("PO updateOne(").append(poName).append("PO po);\r\n");
+        sb.append("\r\n");
         sb.append("    QueryResults<").append(poName).append("PO> findAll(Integer pageNumber);\r\n");
+        sb.append("\r\n");
         sb.append("    ").append(poName).append("PO findOneById(String id);\r\n");
         sb.append("\r\n");
         sb.append("}\r\n");
@@ -418,10 +422,15 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("public interface ").append(poName).append("Service {\r\n");
         sb.append("\r\n");
         sb.append("    ").append(poName).append("PO addOne(").append(poName).append("PO po);\r\n");
+        sb.append("\r\n");
         sb.append("    void deleteOne(String id);\r\n");
+        sb.append("\r\n");
         sb.append("    ").append(poName).append("PO updateOne(").append(poName).append("PO po);\r\n");
+        sb.append("\r\n");
         sb.append("    QueryResults<").append(poName).append("PO> findAll(Integer pageNumber, String pid);\r\n");
+        sb.append("\r\n");
         sb.append("    ").append(poName).append("PO findOneById(String id);\r\n");
+        sb.append("\r\n");
         sb.append("    List<").append(poName).append("PO> findListByPid(String id);\r\n");
         sb.append("\r\n");
         sb.append("}\r\n");
@@ -442,10 +451,10 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         //serviceImpl路径
         sb.append("package ").append(poServicePath).append("Impl;\r\n");
         sb.append("\r\n");
+        sb.append("import com.example.cyjcommon.service.BaseService;\r\n");
         sb.append("import ").append(poDaoPath).append(poName).append("Dao;\r\n");
         sb.append("import ").append(poPath).append(poName).append("PO;\r\n");
         sb.append("import ").append(poPath).append("Q").append(poName).append("PO;\r\n");
-        sb.append("import com.example.cyjcommon.service.BaseService;\r\n");
         sb.append("import ").append(poServicePath).append(poName).append("Service;\r\n");
         sb.append("import com.querydsl.core.QueryResults;\r\n");
         sb.append("import org.springframework.beans.factory.annotation.Autowired;\r\n");
