@@ -2,8 +2,8 @@ package com.example.cyjdictionary.service.auto.Impl;
 
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjdictionary.dao.auto.DictionaryDao;
-import com.example.cyjdictionary.entity.auto.po.DictionaryPO;
 import com.example.cyjdictionary.entity.auto.po.QDictionaryPO;
+import com.example.cyjdictionary.entity.auto.po.DictionaryPO;
 import com.example.cyjdictionary.service.auto.DictionaryService;
 import com.querydsl.core.QueryResults;
 import org.springframework.beans.factory.annotation.Autowired;
