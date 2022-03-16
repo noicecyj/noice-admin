@@ -13,6 +13,7 @@ import java.util.List;
 public interface AuthorityCustomService {
 
     List<AuthorityCustomPO> findRoleAndAuthority();
+
     void createAuthority();
 
 }
