@@ -21,22 +21,4 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = Exception.class)
 public class CatalogCustomServiceImpl extends BaseService implements CatalogCustomService {
 
-    private CatalogCustomDao catalogCustomDao;
-
-    @Autowired
-    public void setCatalogCustomDao(CatalogCustomDao catalogCustomDao) {
-        this.catalogCustomDao = catalogCustomDao;
-    }
-
-    @Override
-    public Page<CatalogPO> findAllByCatalogNameContainsOrCatalogValueContains(String catalogName,
-                                                                              String catalogValue,
-                                                                              Integer pageNumber,
-                                                                              Integer pageSize,
-                                                                              String sortCode) {
-        Sort sort = Sort.by(sortCode);
-        Pageable pageable = PageRequest.of(pageNumber, pageSize, sort);
-        return catalogCustomDao.findAllByCatalogNameContainsOrCatalogValueContains(catalogName, catalogValue, pageable);
-    }
-
 }

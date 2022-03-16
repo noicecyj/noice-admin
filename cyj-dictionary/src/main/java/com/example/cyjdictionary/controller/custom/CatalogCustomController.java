@@ -14,12 +14,4 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Tag(name = "Catalog")
 public interface CatalogCustomController {
 
-    @Operation(summary = "根据目录名称或者值模糊查询")
-    @PostMapping(value = "findAllByCatalogNameContainsOrCatalogValueContains")
-    ResultVO findAllByCatalogNameContainsOrCatalogValueContains(@RequestParam("catalogName") String catalogName,
-                                                                @RequestParam("catalogValue") String catalogValue,
-                                                                @RequestParam("pageNumber") Integer pageNumber,
-                                                                @RequestParam("pageSize") Integer pageSize,
-                                                                @RequestParam("sortCode") String sortCode);
-
 }

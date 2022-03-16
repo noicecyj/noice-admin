@@ -13,9 +13,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface CatalogCustomDao extends JpaRepository<CatalogPO, String> {
 
-    @Operation(summary = "根据目录名称进行模糊查询")
-    Page<CatalogPO> findAllByCatalogNameContainsOrCatalogValueContains(String catalogName,
-                                                                       String catalogValue,
-                                                                       Pageable pageable);
-
 }
