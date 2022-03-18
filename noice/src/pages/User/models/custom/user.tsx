@@ -9,6 +9,7 @@ export default {
     dialogVisible: false,
     recordId: '',
     visibleLoading: false,
+    selectRoles: [],
   },
 
   reducers: {
@@ -24,7 +25,7 @@ export default {
     },
     customMethod3() {
     },
-    async openDialog(data) {
+    openDialog(data) {
       dispatch.role.findDataTableAndFormByName();
       const customUser = {
         dialogVisible: true,

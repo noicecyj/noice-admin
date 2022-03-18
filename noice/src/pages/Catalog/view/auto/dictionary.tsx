@@ -13,6 +13,7 @@ function Dictionary() {
   return (
     <div>
       <Dialog
+        v2
         visible={dictionaryState.divVisible}
         footer={false}
         onClose={() => dictionaryDispatchers.setState({

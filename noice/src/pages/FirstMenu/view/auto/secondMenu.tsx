@@ -13,6 +13,7 @@ function SecondMenu() {
   return (
     <div>
       <Dialog
+        v2
         visible={secondMenuState.divVisible}
         footer={false}
         onClose={() => secondMenuDispatchers.setState({

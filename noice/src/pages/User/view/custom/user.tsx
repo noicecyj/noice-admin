@@ -28,8 +28,9 @@ function CustomColumnUser(props) {
         > 角色分配 </Button>
       }
       <Dialog
+        v2
+        title="角色分配"
         visible={customUserState.dialogVisible}
-        footer={false}
         onClose={() => customUserDispatchers.setState({
           dialogVisible: false,
           recordId: '',
@@ -43,6 +44,12 @@ function CustomColumnUser(props) {
           total={roleState.roleTotal}
           getPage={(roleCurrent) => roleDispatchers.rolePage(roleCurrent)}
           primaryKey="id"
+          rowSelection={{
+            onSelect: (selected, record, records) => {
+              console.log(selected, record, records)
+            },
+            selectedRowKeys: customUserState.selectRoles
+          }}
         />
       </Dialog>
 

@@ -1043,6 +1043,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "  return (\r\n" +
                 "    <div>\r\n" +
                 "      <Dialog\r\n" +
+                "        v2\r\n" +
                 "        visible={" + underSubPoName + "State.divVisible}\r\n" +
                 "        footer={false}\r\n" +
                 "        onClose={() => " + underSubPoName + "Dispatchers.setState({\r\n" +

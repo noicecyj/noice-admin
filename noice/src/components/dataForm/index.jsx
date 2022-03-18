@@ -38,6 +38,7 @@ function DataForm(props) {
 
   return (
     <Dialog
+      v2
       title={title}
       visible={visibleDialog}
       footer={false}

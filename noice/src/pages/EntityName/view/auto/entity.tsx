@@ -13,6 +13,7 @@ function Entity() {
   return (
     <div>
       <Dialog
+        v2
         visible={entityState.divVisible}
         footer={false}
         onClose={() => entityDispatchers.setState({
