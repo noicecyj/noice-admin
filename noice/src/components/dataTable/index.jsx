@@ -7,6 +7,7 @@ const {Cell} = ResponsiveGrid;
 
 function DataTable(props) {
   const loadingStyle = {width: '100%'};
+  console.log(props)
 
   const {
     items,
@@ -27,12 +28,13 @@ function DataTable(props) {
     customMethodName2,
     customMethodName3,
   } = props;
-
+  console.log(editItem)
   const pageRender = (value, index, record) => {
     return (
       <div className={styles.opt}>
-        <Button type="primary" size="small" onClick={() => editItem(record)}> 编辑 </Button>
-        <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning> 删除 </Button>
+        {editItem !== null && <Button type="primary" size="small" onClick={() => editItem(record)}> 编辑 </Button>}
+        {deleteItem !== null &&
+          <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning> 删除 </Button>}
       </div>
     );
   };
@@ -50,10 +52,10 @@ function DataTable(props) {
       <Cell colSpan={12}>
         <div className={styles.Main}>
           <div className={styles.add}>
-            <Button type="primary" onClick={() => createItem()}> 添加 </Button>
-            {customMethodName1 !== null && <Button onClick={() => customMethod1()}> {customMethodName1} </Button>}
-            {customMethodName2 !== null && <Button onClick={() => customMethod1()}> {customMethodName2} </Button>}
-            {customMethodName3 !== null && <Button onClick={() => customMethod1()}> {customMethodName3} </Button>}
+            {!!createItem && <Button type="primary" onClick={() => createItem()}> 添加 </Button>}
+            {!!customMethodName1 && <Button onClick={() => customMethod1()}> {customMethodName1} </Button>}
+            {!!customMethodName2 && <Button onClick={() => customMethod1()}> {customMethodName2} </Button>}
+            {!!customMethodName3 && <Button onClick={() => customMethod1()}> {customMethodName3} </Button>}
           </div>
           <Loading
             tip="加载中..."
@@ -76,7 +78,7 @@ function DataTable(props) {
                   key={index}
                 />);
               })}
-              {columnRender !== null && <Table.Column
+              {!!columnRender && <Table.Column
                 title="自定义操作"
                 align="right"
                 key="columnRender"
@@ -89,13 +91,15 @@ function DataTable(props) {
                 width="80px"
                 key="status"
               />
-              <Table.Column
-                title="操作"
-                align="right"
-                key="pageRender"
-                width="160px"
-                cell={pageRender}
-              />
+              {
+                !!editItem && !!deleteItem && <Table.Column
+                  title="操作"
+                  align="right"
+                  key="pageRender"
+                  width="160px"
+                  cell={pageRender}
+                />
+              }
             </Table>
             <Box
               margin={[15, 0, 0, 0]}

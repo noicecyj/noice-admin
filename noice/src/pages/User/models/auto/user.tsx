@@ -16,7 +16,7 @@ export default {
     userForm: [],
     userTable: [],
     userId: '',
-    customType: false,
+    customType: true,
   },
 
   reducers: {

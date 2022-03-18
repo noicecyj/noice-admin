@@ -6,6 +6,9 @@ export default {
     customMethodName1: null,
     customMethodName2: null,
     customMethodName3: null,
+    dialogVisible: false,
+    recordId: '',
+    visibleLoading: false,
   },
 
   reducers: {
@@ -14,12 +17,20 @@ export default {
     },
   },
 
-  effects: () => ({
+  effects: (dispatch) => ({
     customMethod1() {
     },
     customMethod2() {
     },
     customMethod3() {
     },
+    async openDialog(data) {
+      dispatch.role.findDataTableAndFormByName();
+      const customUser = {
+        dialogVisible: true,
+        recordId: data.id,
+      };
+      dispatch.customUser.setState(customUser);
+    }
   }),
 };
