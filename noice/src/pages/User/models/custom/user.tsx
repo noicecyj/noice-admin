@@ -1,3 +1,5 @@
+import userCustromService from '@/pages/User/services/custom/user';
+
 export default {
 
   namespace: 'customUser',
@@ -25,13 +27,23 @@ export default {
     },
     customMethod3() {
     },
-    openDialog(data) {
+    async openDialog(data) {
       dispatch.role.findDataTableAndFormByName();
+      const ret = await userCustromService.getUserRole(data.userId);
       const customUser = {
         dialogVisible: true,
-        recordId: data.id,
+        recordId: data.userId,
+        selectRoles: ret.data,
       };
       dispatch.customUser.setState(customUser);
-    }
+    },
+    async okDialog(data) {
+      await userCustromService.setUserRole(data);
+      const customUser = {
+        dialogVisible: false,
+        selectRoles: [],
+      };
+      dispatch.customUser.setState(customUser);
+    },
   }),
 };

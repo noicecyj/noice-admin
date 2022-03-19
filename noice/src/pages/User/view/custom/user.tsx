@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Dialog} from "@alifd/next";
+import {Box, Button, Dialog} from "@alifd/next";
 import pageStore from '@/pages/User/store';
 import DataTableTemple from "@/components/dataTable";
 
@@ -19,14 +19,20 @@ function CustomColumnUser(props) {
 
   return (
     <>
-      {
+      <Box direction="row" spacing={5}>
         <Button
           type="normal"
           size="small"
-          onClick={() => customUserDispatchers.openDialog({id: record.id})}
+          onClick={() => customUserDispatchers.openDialog({userId: record.id})}
           // eslint-disable-next-line react/jsx-closing-tag-location
         > 角色分配 </Button>
-      }
+        <Button
+          type="normal"
+          size="small"
+          onClick={() => customUserDispatchers.openDialog({userId: record.id})}
+          // eslint-disable-next-line react/jsx-closing-tag-location
+        > 权限分配 </Button>
+      </Box>
       <Dialog
         v2
         title="角色分配"
@@ -34,6 +40,10 @@ function CustomColumnUser(props) {
         onClose={() => customUserDispatchers.setState({
           dialogVisible: false,
           recordId: '',
+        })}
+        onOk={() => customUserDispatchers.okDialog({
+          userId: customUserState.recordId,
+          roleIds: customUserState.selectRoles,
         })}
         style={{width: '90%'}}
       >
@@ -45,10 +55,13 @@ function CustomColumnUser(props) {
           getPage={(roleCurrent) => roleDispatchers.rolePage(roleCurrent)}
           primaryKey="id"
           rowSelection={{
-            onSelect: (selected, record, records) => {
-              console.log(selected, record, records)
+            onChange: (ids, records) => {
+              console.log(ids, records)
+              customUserDispatchers.setState({
+                selectRoles: ids,
+              })
             },
-            selectedRowKeys: customUserState.selectRoles
+            selectedRowKeys: customUserState.selectRoles,
           }}
         />
       </Dialog>

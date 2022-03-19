@@ -1,6 +1,6 @@
 package com.example.cyjauth.dao.custom;
 
-import com.example.cyjauth.entity.auto.po.RolePO;
+import com.example.cyjauth.entity.custom.po.RoleCustomPO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 1.0
  * @date 2022-02-07
  */
-public interface RoleCustomDao extends JpaRepository<RolePO, String> {
+public interface RoleCustomDao extends JpaRepository<RoleCustomPO, String> {
 }

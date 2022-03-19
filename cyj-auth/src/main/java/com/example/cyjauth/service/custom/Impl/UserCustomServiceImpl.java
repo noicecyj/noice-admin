@@ -1,7 +1,9 @@
 package com.example.cyjauth.service.custom.Impl;
 
+import com.example.cyjauth.dao.custom.RoleCustomDao;
 import com.example.cyjauth.dao.custom.UserCustomDao;
 import com.example.cyjauth.entity.custom.bo.AuthUserDetails;
+import com.example.cyjauth.entity.custom.po.RoleCustomPO;
 import com.example.cyjauth.entity.custom.po.UserCustomPO;
 import com.example.cyjauth.service.custom.UserCustomService;
 import com.example.cyjcommon.service.BaseService;
@@ -14,6 +16,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+
 /**
  * @author 曹元杰
  * @version 1.0
@@ -25,6 +31,7 @@ public class UserCustomServiceImpl extends BaseService implements UserCustomServ
 
     private StringRedisTemplate redisTemplate;
     private UserCustomDao userCustomDao;
+    private RoleCustomDao roleCustomDao;
 
     @Autowired
     public void setRedisTemplate(StringRedisTemplate redisTemplate) {
@@ -36,9 +43,48 @@ public class UserCustomServiceImpl extends BaseService implements UserCustomServ
         this.userCustomDao = userCustomDao;
     }
 
+    @Autowired
+    public void setRoleCustomDao(RoleCustomDao roleCustomDao) {
+        this.roleCustomDao = roleCustomDao;
+    }
+
     @Override
     public UserCustomPO findAuthUserByUsername(String username) {
         return userCustomDao.findByUserName(username);
+    }
+
+    @Override
+    public Set<String> getUserRole(String userId) {
+        Optional<UserCustomPO> userCustomPOOptional = userCustomDao.findById(userId);
+        if (userCustomPOOptional.isPresent()) {
+            UserCustomPO userCustomPO = userCustomPOOptional.get();
+            Set<String> roleIds = new HashSet<>();
+            if (userCustomPO.getRole() != null) {
+                for (RoleCustomPO roleCustomPO : userCustomPO.getRole()) {
+                    roleIds.add(roleCustomPO.getId());
+                }
+            }
+            return roleIds;
+        }
+        return null;
+    }
+
+    @Override
+    public void setUserRole(String userId, Set<String> roleIds) {
+        Optional<UserCustomPO> userCustomPOOptional = userCustomDao.findById(userId);
+        if (userCustomPOOptional.isPresent()) {
+            UserCustomPO userCustomPO = userCustomPOOptional.get();
+            Set<RoleCustomPO> roleCustomPOSet = new HashSet<>();
+            for (String roleId : roleIds) {
+                Optional<RoleCustomPO> rolePOOptional = roleCustomDao.findById(roleId);
+                if (rolePOOptional.isPresent()) {
+                    RoleCustomPO roleCustomPO = rolePOOptional.get();
+                    roleCustomPOSet.add(roleCustomPO);
+                }
+            }
+            userCustomPO.setRole(roleCustomPOSet);
+            userCustomDao.saveAndFlush(userCustomPO);
+        }
     }
 
     @Override

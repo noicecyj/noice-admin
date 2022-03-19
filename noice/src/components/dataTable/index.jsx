@@ -32,9 +32,11 @@ function DataTable(props) {
   const pageRender = (value, index, record) => {
     return (
       <div className={styles.opt}>
-        {editItem !== null && <Button type="primary" size="small" onClick={() => editItem(record)}> 编辑 </Button>}
-        {deleteItem !== null &&
-          <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning> 删除 </Button>}
+        <Box direction="row" spacing={5}>
+          {editItem !== null && <Button type="primary" size="small" onClick={() => editItem(record)}> 编辑 </Button>}
+          {deleteItem !== null &&
+            <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning> 删除 </Button>}
+        </Box>
       </div>
     );
   };
@@ -90,6 +92,12 @@ function DataTable(props) {
                 dataIndex="status"
                 width="80px"
                 key="status"
+              />
+              <Table.Column
+                title="排序"
+                dataIndex="sortCode"
+                width="80px"
+                key="sortCode"
               />
               {
                 !!editItem && !!deleteItem && <Table.Column
