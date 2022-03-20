@@ -16,7 +16,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author 曹元杰
@@ -112,10 +114,18 @@ public class FirstMenuCustomServiceImpl extends BaseService implements FirstMenu
 
     @Override
     public List<FirstMenuDTO> getMenu() {
-        List<FirstMenuPO> firstMenuPOList = firstMenuCustomDao.findAll();
+        List<FirstMenuPO> firstMenuPOList = firstMenuCustomDao
+                .findAll()
+                .stream()
+                .sorted(Comparator.comparing(FirstMenuPO::getSortCode))
+                .collect(Collectors.toList());
         List<FirstMenuDTO> firstMenuDTOList = VoPoConverter.copyList(firstMenuPOList, FirstMenuDTO.class);
         for (FirstMenuDTO firstMenuDTO : firstMenuDTOList) {
-            List<SecondMenuPO> secondMenuPOList = secondMenuCustomDao.findByPid(firstMenuDTO.getId());
+            List<SecondMenuPO> secondMenuPOList = secondMenuCustomDao
+                    .findByPid(firstMenuDTO.getId())
+                    .stream()
+                    .sorted(Comparator.comparing(SecondMenuPO::getSortCode))
+                    .collect(Collectors.toList());
             List<SecondMenuDTO> secondMenuDTOList = VoPoConverter.copyList(secondMenuPOList, SecondMenuDTO.class);
             firstMenuDTO.setSecondMenuDTOList(secondMenuDTOList);
         }

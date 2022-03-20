@@ -6,8 +6,8 @@ import CatalogPage from '@/pages/Catalog';
 import SqlPage from '@/pages/Sql';
 import AppServicePage from '@/pages/AppService';
 import FirstMenuPage from '@/pages/FirstMenu';
-import RolePage from '@/pages/Role';
 import UserPage from '@/pages/User';
+import RolePage from '@/pages/Role';
 import AuthorityPage from '@/pages/Authority';
 
 const routerConfig = [
@@ -42,12 +42,12 @@ const routerConfig = [
     component: BasicLayout,
     children: [
       {
-        path: '/role',
-        component: RolePage,
-      },
-      {
         path: '/user',
         component: UserPage,
+      },
+      {
+        path: '/role',
+        component: RolePage,
       },
       {
         path: '/authority',

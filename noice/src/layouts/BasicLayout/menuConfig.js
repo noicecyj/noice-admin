@@ -33,12 +33,12 @@ const asideMenuConfig = [
     path: '/auth',
     children: [
       {
-        name: '角色管理',
-        path: '/auth/role',
-      },
-      {
         name: '用户管理',
         path: '/auth/user',
+      },
+      {
+        name: '角色管理',
+        path: '/auth/role',
       },
       {
         name: '权限管理',
