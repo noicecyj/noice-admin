@@ -17,4 +17,20 @@ export default {
       data,
     });
   },
+  getUserAuthority(userId) {
+    return request({
+      url: '/authApi/getUserAuthority',
+      method: 'post',
+      params: {
+        userId,
+      },
+    });
+  },
+  setUserAuthority(data) {
+    return request({
+      url: '/authApi/setUserAuthority',
+      method: 'post',
+      data,
+    });
+  },
 };

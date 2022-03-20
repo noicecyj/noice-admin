@@ -1,6 +1,5 @@
 package com.example.cyjauth.service.custom;
 
-import com.example.cyjauth.entity.custom.po.RoleCustomPO;
 import com.example.cyjauth.entity.custom.po.UserCustomPO;
 
 import java.util.Set;
@@ -17,5 +16,9 @@ public interface UserCustomService {
     Set<String> getUserRole(String userId);
 
     void setUserRole(String userId, Set<String> roleIds);
+
+    Set<String> getUserAuthority(String userId);
+
+    void setUserAuthority(String userId, Set<String> authorityIds);
 
 }

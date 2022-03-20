@@ -1,4 +1,4 @@
-import userCustromService from '@/pages/User/services/custom/user';
+import userCustomService from '@/pages/User/services/custom/user';
 
 export default {
 
@@ -8,10 +8,13 @@ export default {
     customMethodName1: null,
     customMethodName2: null,
     customMethodName3: null,
-    dialogVisible: false,
     recordId: '',
-    visibleLoading: false,
+    dialogRoleVisible: false,
+    dialogAuthorityVisible: false,
+    visibleRoleLoading: false,
+    visibleAuthorityLoading: false,
     selectRoles: [],
+    selectAuthorities: [],
   },
 
   reducers: {
@@ -27,21 +30,39 @@ export default {
     },
     customMethod3() {
     },
-    async openDialog(data) {
+    async openUserRoleDialog(data) {
       dispatch.role.findDataTableAndFormByName();
-      const ret = await userCustromService.getUserRole(data.userId);
+      const ret = await userCustomService.getUserRole(data.userId);
       const customUser = {
-        dialogVisible: true,
+        dialogRoleVisible: true,
         recordId: data.userId,
         selectRoles: ret.data,
       };
       dispatch.customUser.setState(customUser);
     },
-    async okDialog(data) {
-      await userCustromService.setUserRole(data);
+    async okUserRoleDialog(data) {
+      await userCustomService.setUserRole(data);
       const customUser = {
-        dialogVisible: false,
+        dialogRoleVisible: false,
         selectRoles: [],
+      };
+      dispatch.customUser.setState(customUser);
+    },
+    async openUserAuthorityDialog(data) {
+      dispatch.authority.findDataTableAndFormByName();
+      const ret = await userCustomService.getUserAuthority(data.userId);
+      const customUser = {
+        dialogAuthorityVisible: true,
+        recordId: data.userId,
+        selectAuthorities: ret.data,
+      };
+      dispatch.customUser.setState(customUser);
+    },
+    async okUserAuthorityDialog(data) {
+      await userCustomService.setUserAuthority(data);
+      const customUser = {
+        dialogAuthorityVisible: false,
+        selectAuthorities: [],
       };
       dispatch.customUser.setState(customUser);
     },

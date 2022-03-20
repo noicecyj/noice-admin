@@ -1,5 +1,6 @@
 package com.example.cyjauth.entity.custom.dto;
 
+
 import lombok.Data;
 
 import java.io.Serializable;
@@ -11,9 +12,9 @@ import java.util.Set;
  * @date 2021-03-07
  */
 @Data
-public class UserRoleDTO implements Serializable {
+public class UserAuthorityDTO implements Serializable {
 
     private String userId;
-    private Set<String> roleIds;
+    private Set<String> authorityIds;
 
 }

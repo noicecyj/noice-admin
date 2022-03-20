@@ -16,6 +16,7 @@ function CustomColumnUser(props) {
   const {record} = props;
   const [customUserState, customUserDispatchers] = pageStore.useModel('customUser');
   const [roleState, roleDispatchers] = pageStore.useModel('role');
+  const [authorityState, authorityDispatchers] = pageStore.useModel('authority');
 
   return (
     <>
@@ -23,25 +24,23 @@ function CustomColumnUser(props) {
         <Button
           type="normal"
           size="small"
-          onClick={() => customUserDispatchers.openDialog({userId: record.id})}
-          // eslint-disable-next-line react/jsx-closing-tag-location
+          onClick={() => customUserDispatchers.openUserRoleDialog({userId: record.id})}
         > 角色分配 </Button>
         <Button
           type="normal"
           size="small"
-          onClick={() => customUserDispatchers.openDialog({userId: record.id})}
-          // eslint-disable-next-line react/jsx-closing-tag-location
+          onClick={() => customUserDispatchers.openUserAuthorityDialog({userId: record.id})}
         > 权限分配 </Button>
       </Box>
       <Dialog
         v2
         title="角色分配"
-        visible={customUserState.dialogVisible}
+        visible={customUserState.dialogRoleVisible}
         onClose={() => customUserDispatchers.setState({
-          dialogVisible: false,
+          dialogRoleVisible: false,
           recordId: '',
         })}
-        onOk={() => customUserDispatchers.okDialog({
+        onOk={() => customUserDispatchers.okUserRoleDialog({
           userId: customUserState.recordId,
           roleIds: customUserState.selectRoles,
         })}
@@ -65,7 +64,38 @@ function CustomColumnUser(props) {
           }}
         />
       </Dialog>
-
+      <Dialog
+        v2
+        title="权限分配"
+        visible={customUserState.dialogAuthorityVisible}
+        onClose={() => customUserDispatchers.setState({
+          dialogAuthorityVisible: false,
+          recordId: '',
+        })}
+        onOk={() => customUserDispatchers.okUserAuthorityDialog({
+          userId: customUserState.recordId,
+          authorityIds: customUserState.selectAuthorities,
+        })}
+        style={{width: '90%'}}
+      >
+        <DataTableTemple
+          visibleLoading={authorityState.authorityLoadingVisible}
+          dataSource={authorityState.authorityTableData}
+          items={authorityState.authorityTable}
+          total={authorityState.authorityTotal}
+          getPage={(authorityCurrent) => authorityDispatchers.authorityPage(authorityCurrent)}
+          primaryKey="id"
+          rowSelection={{
+            onChange: (ids, records) => {
+              console.log(ids, records)
+              customUserDispatchers.setState({
+                selectAuthorities: ids,
+              })
+            },
+            selectedRowKeys: customUserState.selectAuthorities,
+          }}
+        />
+      </Dialog>
     </>
   );
 }
