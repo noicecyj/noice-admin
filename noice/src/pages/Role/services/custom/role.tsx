@@ -1,11 +1,11 @@
 import { request } from 'ice';
 export default {
-  getRoleAuthority(userId) {
+  getRoleAuthority(roleId) {
     return request({
       url: '/authApi/getRoleAuthority',
       method: 'post',
       params: {
-        userId,
+        roleId,
       },
     });
   },

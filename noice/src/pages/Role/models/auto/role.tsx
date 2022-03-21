@@ -16,7 +16,7 @@ export default {
     roleForm: [],
     roleTable: [],
     roleId: '',
-    customType: false,
+    customType: true,
   },
 
   reducers: {
