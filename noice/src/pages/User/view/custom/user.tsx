@@ -3,15 +3,6 @@ import {Box, Button, Dialog} from "@alifd/next";
 import pageStore from '@/pages/User/store';
 import DataTableTemple from "@/components/dataTable";
 
-// const formItemLayout = {
-//   labelCol: {
-//     fixedSpan: 6,
-//   },
-//   wrapperCol: {
-//     span: 40,
-//   },
-// };
-
 function CustomColumnUser(props) {
   const {record} = props;
   const [customUserState, customUserDispatchers] = pageStore.useModel('customUser');

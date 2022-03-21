@@ -1,10 +1,10 @@
 package com.example.cyjauth.service.auto.Impl;
 
-import com.example.cyjcommon.service.BaseService;
 import com.example.cyjauth.dao.auto.RoleDao;
 import com.example.cyjauth.entity.auto.po.QRolePO;
 import com.example.cyjauth.entity.auto.po.RolePO;
 import com.example.cyjauth.service.auto.RoleService;
+import com.example.cyjcommon.service.BaseService;
 import com.querydsl.core.QueryResults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

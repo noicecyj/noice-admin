@@ -101,7 +101,7 @@ public class UserCustomServiceImpl extends BaseService implements UserCustomServ
         if (userCustomPOOptional.isPresent()) {
             UserCustomPO userCustomPO = userCustomPOOptional.get();
             Set<String> authorityIds = new HashSet<>();
-            if (userCustomPO.getRole() != null) {
+            if (userCustomPO.getAuthority() != null) {
                 for (AuthorityCustomPO authorityCustomPO : userCustomPO.getAuthority()) {
                     authorityIds.add(authorityCustomPO.getId());
                 }

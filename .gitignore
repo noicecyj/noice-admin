@@ -221,3 +221,4 @@
 /cyj-common/target/classes/com/example/cyjcommon/utils/VoPoConverter.class
 /cyj-auth/target/classes/com/example/cyjauth/filter/WebSecurityCorsFilter.class
 /cyj-auth/target/classes/com/example/cyjauth/entity/custom/dto/UserAuthorityDTO.class
+/log/
