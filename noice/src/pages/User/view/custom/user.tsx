@@ -2,6 +2,7 @@ import React from 'react';
 import {Box, Button, Dialog} from "@alifd/next";
 import pageStore from '@/pages/User/store';
 import DataTableTemple from "@/components/dataTable";
+import DataFormTemple from "@/components/dataForm";
 
 function CustomColumnUser(props) {
   const {record} = props;
@@ -15,6 +16,14 @@ function CustomColumnUser(props) {
         <Button
           type="normal"
           size="small"
+          onClick={() => customUserDispatchers.setState({
+            dialogPasswordVisible: true,
+            recordId: record.id,
+          })}
+        > 重置密码 </Button>
+        <Button
+          type="normal"
+          size="small"
           onClick={() => customUserDispatchers.openUserRoleDialog({userId: record.id})}
         > 角色分配 </Button>
         <Button
@@ -23,6 +32,19 @@ function CustomColumnUser(props) {
           onClick={() => customUserDispatchers.openUserAuthorityDialog({userId: record.id})}
         > 权限分配 </Button>
       </Box>
+      <DataFormTemple
+        title='重置密码'
+        visibleDialog={customUserState.dialogPasswordVisible}
+        onClose={() => customUserDispatchers.setState({dialogPasswordVisible: false})}
+        items={customUserState.passwordForm}
+        dispatchers={(value) => customUserDispatchers.setDataForm(value)}
+        onOk={() => customUserDispatchers.resetPassword({
+          passwordFormData: customUserState.passwordFormData,
+          userId: customUserState.recordId,
+        })}
+        formDataValue={customUserState.passwordFormData}
+        customType={false}
+      />
       <Dialog
         v2
         title="角色分配"

@@ -1,4 +1,5 @@
 import userCustomService from '@/pages/User/services/custom/user';
+import {Message} from '@alifd/next';
 
 export default {
 
@@ -9,6 +10,26 @@ export default {
     customMethodName2: null,
     customMethodName3: null,
     recordId: '',
+    dialogPasswordVisible: false,
+    passwordFormData: {},
+    passwordForm: [
+      {
+        id: '1',
+        propertyMode: 'Password',
+        propertyRequired: '是',
+        propertyLabel: '新密码',
+        propertyCode: 'new_password',
+        propertyName: 'newPassword',
+      },
+      {
+        id: '2',
+        propertyMode: 'Password',
+        propertyRequired: '是',
+        propertyLabel: '确认密码',
+        propertyCode: 'check_password',
+        propertyName: 'checkPassword',
+      },
+    ],
     dialogRoleVisible: false,
     dialogAuthorityVisible: false,
     visibleRoleLoading: false,
@@ -29,6 +50,21 @@ export default {
     customMethod2() {
     },
     customMethod3() {
+    },
+    setDataForm(data) {
+      const payload = {
+        passwordFormData: data,
+      };
+      dispatch.customUser.setState(payload);
+    },
+    async resetPassword(data) {
+      userCustomService.resetPassword(data.userId).then((res) => {
+        if (res.code === 200) {
+          Message.success('生成成功');
+        } else {
+          Message.error('生成失败');
+        }
+      });
     },
     async openUserRoleDialog(data) {
       dispatch.role.findDataTableAndFormByName();

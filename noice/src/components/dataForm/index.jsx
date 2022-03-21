@@ -34,7 +34,8 @@ const dataSource = [
 ];
 
 function DataForm(props) {
-  const {items, dispatchers, onOk, formDataValue, title, visibleDialog, onClose} = props;
+  const {items, dispatchers, onOk, formDataValue, title, visibleDialog, onClose, customType = true} = props;
+  console.log("customType====>",customType);
 
   return (
     <Dialog
@@ -362,19 +363,23 @@ function DataForm(props) {
             );
           }
         })}
-        <FormItem label="状态" required requiredMessage="请输入状态">
-          <Select
-            id="status"
-            name="status"
-            filterLocal={false}
-            style={{width: 414}}
-            dataSource={dataSource}
-            defaultValue="有效"
-          />
-        </FormItem>
-        <FormItem label="排序代码" required requiredMessage="请输入排序代码">
-          <Input id="sortCode" name="sortCode" placeholder="请输入排序代码" defaultValue="0010"/>
-        </FormItem>
+        {
+          customType && <FormItem label="状态" required requiredMessage="请输入状态">
+            <Select
+              id="status"
+              name="status"
+              filterLocal={false}
+              style={{width: 414}}
+              dataSource={dataSource}
+              defaultValue="有效"
+            />
+          </FormItem>
+        }
+        {
+          customType && <FormItem label="排序代码" required requiredMessage="请输入排序代码">
+            <Input id="sortCode" name="sortCode" placeholder="请输入排序代码" defaultValue="0010"/>
+          </FormItem>
+        }
         <FormItem>
           <Form.Submit
             validate
