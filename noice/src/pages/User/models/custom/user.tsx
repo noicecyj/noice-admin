@@ -60,10 +60,16 @@ export default {
     async resetPassword(data) {
       userCustomService.resetPassword(data).then((res) => {
         if (res.code === 200) {
-          Message.success('生成成功');
+          Message.success('重置成功');
         } else {
-          Message.error('生成失败');
+          Message.error('重置失败');
         }
+        const customUser = {
+          recordId: '',
+          dialogPasswordVisible: false,
+          passwordFormData: {},
+        };
+        dispatch.customUser.setState(customUser);
       });
     },
     async openUserRoleDialog(data) {
@@ -77,7 +83,12 @@ export default {
       dispatch.customUser.setState(customUser);
     },
     async okUserRoleDialog(data) {
-      await userCustomService.setUserRole(data);
+      const ret = await userCustomService.setUserRole(data);
+      if (ret.code === 200) {
+        Message.success('分配成功');
+      } else {
+        Message.error('分配失败');
+      }
       const customUser = {
         dialogRoleVisible: false,
         selectRoles: [],
@@ -95,7 +106,12 @@ export default {
       dispatch.customUser.setState(customUser);
     },
     async okUserAuthorityDialog(data) {
-      await userCustomService.setUserAuthority(data);
+      const ret = await userCustomService.setUserAuthority(data);
+      if (ret.code === 200) {
+        Message.success('分配成功');
+      } else {
+        Message.error('分配失败');
+      }
       const customUser = {
         dialogAuthorityVisible: false,
         selectAuthorities: [],

@@ -1,4 +1,5 @@
 import roleCustomService from "@/pages/Role/services/custom/role";
+import {Message} from "@alifd/next";
 
 export default {
 
@@ -38,7 +39,12 @@ export default {
       dispatch.customRole.setState(customRole);
     },
     async okRoleAuthorityDialog(data) {
-      await roleCustomService.setRoleAuthority(data);
+      const ret = await roleCustomService.setRoleAuthority(data);
+      if (ret.code === 200) {
+        Message.success('分配成功');
+      } else {
+        Message.error('分配失败');
+      }
       const customRole = {
         dialogAuthorityVisible: false,
         selectAuthorities: [],

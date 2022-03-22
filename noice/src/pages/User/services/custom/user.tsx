@@ -1,13 +1,11 @@
 import {request} from 'ice';
 
 export default {
-  resetPassword(userId) {
+  resetPassword(data) {
     return request({
       url: '/authApi/resetPassword',
       method: 'post',
-      params: {
-        userId,
-      },
+      data,
     });
   },
   getUserRole(userId) {

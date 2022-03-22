@@ -5,12 +5,14 @@ import com.example.cyjauth.entity.custom.dto.PasswordDTO;
 import com.example.cyjauth.entity.custom.dto.UserAuthorityDTO;
 import com.example.cyjauth.entity.custom.dto.UserRoleDTO;
 import com.example.cyjauth.service.custom.UserCustomService;
+import com.example.cyjcommon.utils.ResultCode;
 import com.example.cyjcommon.utils.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -56,7 +58,8 @@ public class UserCustomControllerImpl implements UserCustomController {
 
     @Override
     public ResultVO resetPassword(PasswordDTO passwordDTO) {
-        return null;
+        userCustomService.resetPassword(passwordDTO.getUserId(), passwordDTO.getNewPassword(), passwordDTO.getCheckPassword());
+        return ResultVO.success();
     }
 
 }

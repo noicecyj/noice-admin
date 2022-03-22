@@ -133,8 +133,7 @@ public class UserCustomServiceImpl extends BaseService implements UserCustomServ
     }
 
     @Override
-    public Map<String,String> resetPassword(String userId, String newPassword, String checkPassword) {
-        Map<String,String> result = new HashMap<>();
+    public void resetPassword(String userId, String newPassword, String checkPassword) {
         if (newPassword.equals(checkPassword)){
             Optional<UserCustomPO> userCustomPOOptional = userCustomDao.findById(userId);
             if (userCustomPOOptional.isPresent()) {
@@ -143,17 +142,8 @@ public class UserCustomServiceImpl extends BaseService implements UserCustomServ
                 String password = passwordEncoder.encode(newPassword);
                 userCustomPO.setPassword(password);
                 userCustomDao.saveAndFlush(userCustomPO);
-                result.put("code","200");
-                result.put("message","密码修改成功");
-            }else {
-                result.put("code","302");
-                result.put("message","用户不存在");
             }
-        }else {
-            result.put("code","301");
-            result.put("message","密码不一致");
         }
-        return result;
     }
 
     @Override

@@ -22,6 +22,6 @@ public interface UserCustomService {
 
     void setUserAuthority(String userId, Set<String> authorityIds);
 
-    Map<String,String> resetPassword(String userId, String newPassword, String checkPassword);
+    void resetPassword(String userId, String newPassword, String checkPassword);
 
 }
