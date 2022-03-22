@@ -35,7 +35,6 @@ const dataSource = [
 
 function DataForm(props) {
   const {items, dispatchers, onOk, formDataValue, title, visibleDialog, onClose, customType = true} = props;
-  console.log("customType====>",customType);
 
   return (
     <Dialog

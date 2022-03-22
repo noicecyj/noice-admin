@@ -58,7 +58,7 @@ export default {
       dispatch.customUser.setState(payload);
     },
     async resetPassword(data) {
-      userCustomService.resetPassword(data.userId).then((res) => {
+      userCustomService.resetPassword(data).then((res) => {
         if (res.code === 200) {
           Message.success('生成成功');
         } else {

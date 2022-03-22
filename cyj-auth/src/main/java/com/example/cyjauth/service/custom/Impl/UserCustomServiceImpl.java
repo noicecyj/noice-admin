@@ -15,10 +15,13 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -127,6 +130,30 @@ public class UserCustomServiceImpl extends BaseService implements UserCustomServ
             userCustomPO.setAuthority(authorityCustomPOSet);
             userCustomDao.saveAndFlush(userCustomPO);
         }
+    }
+
+    @Override
+    public Map<String,String> resetPassword(String userId, String newPassword, String checkPassword) {
+        Map<String,String> result = new HashMap<>();
+        if (newPassword.equals(checkPassword)){
+            Optional<UserCustomPO> userCustomPOOptional = userCustomDao.findById(userId);
+            if (userCustomPOOptional.isPresent()) {
+                UserCustomPO userCustomPO = userCustomPOOptional.get();
+                BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+                String password = passwordEncoder.encode(newPassword);
+                userCustomPO.setPassword(password);
+                userCustomDao.saveAndFlush(userCustomPO);
+                result.put("code","200");
+                result.put("message","密码修改成功");
+            }else {
+                result.put("code","302");
+                result.put("message","用户不存在");
+            }
+        }else {
+            result.put("code","301");
+            result.put("message","密码不一致");
+        }
+        return result;
     }
 
     @Override

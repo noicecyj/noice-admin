@@ -39,7 +39,7 @@ function CustomColumnUser(props) {
         items={customUserState.passwordForm}
         dispatchers={(value) => customUserDispatchers.setDataForm(value)}
         onOk={() => customUserDispatchers.resetPassword({
-          passwordFormData: customUserState.passwordFormData,
+          ...customUserState.passwordFormData,
           userId: customUserState.recordId,
         })}
         formDataValue={customUserState.passwordFormData}

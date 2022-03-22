@@ -1,5 +1,6 @@
 package com.example.cyjauth.controller.custom;
 
+import com.example.cyjauth.entity.custom.dto.PasswordDTO;
 import com.example.cyjauth.entity.custom.dto.UserAuthorityDTO;
 import com.example.cyjauth.entity.custom.dto.UserRoleDTO;
 import com.example.cyjcommon.utils.ResultVO;
@@ -32,5 +33,9 @@ public interface UserCustomController {
     @Operation(summary = "设置用户权限")
     @PostMapping(value = "setUserAuthority")
     ResultVO setUserAuthority(@RequestBody UserAuthorityDTO userAuthorityDTO);
+
+    @Operation(summary = "重置密码")
+    @PostMapping(value = "resetPassword")
+    ResultVO resetPassword(@RequestBody PasswordDTO passwordDTO);
 
 }

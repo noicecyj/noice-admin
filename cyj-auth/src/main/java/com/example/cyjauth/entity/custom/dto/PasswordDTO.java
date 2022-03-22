@@ -3,7 +3,6 @@ package com.example.cyjauth.entity.custom.dto;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Set;
 
 /**
  * @author 曹元杰
@@ -11,9 +10,10 @@ import java.util.Set;
  * @date 2021-03-07
  */
 @Data
-public class UserAuthorityDTO implements Serializable {
+public class PasswordDTO implements Serializable {
 
     private String userId;
-    private Set<String> authorityIds;
+    private String newPassword;
+    private String checkPassword;
 
 }

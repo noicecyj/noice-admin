@@ -2,6 +2,7 @@ package com.example.cyjauth.service.custom;
 
 import com.example.cyjauth.entity.custom.po.UserCustomPO;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -20,5 +21,7 @@ public interface UserCustomService {
     Set<String> getUserAuthority(String userId);
 
     void setUserAuthority(String userId, Set<String> authorityIds);
+
+    Map<String,String> resetPassword(String userId, String newPassword, String checkPassword);
 
 }

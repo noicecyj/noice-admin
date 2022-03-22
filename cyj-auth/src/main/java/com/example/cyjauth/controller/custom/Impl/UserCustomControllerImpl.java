@@ -1,6 +1,7 @@
 package com.example.cyjauth.controller.custom.Impl;
 
 import com.example.cyjauth.controller.custom.UserCustomController;
+import com.example.cyjauth.entity.custom.dto.PasswordDTO;
 import com.example.cyjauth.entity.custom.dto.UserAuthorityDTO;
 import com.example.cyjauth.entity.custom.dto.UserRoleDTO;
 import com.example.cyjauth.service.custom.UserCustomService;
@@ -51,6 +52,11 @@ public class UserCustomControllerImpl implements UserCustomController {
     public ResultVO setUserAuthority(UserAuthorityDTO userAuthorityDTO) {
         userCustomService.setUserAuthority(userAuthorityDTO.getUserId(), userAuthorityDTO.getAuthorityIds());
         return ResultVO.success();
+    }
+
+    @Override
+    public ResultVO resetPassword(PasswordDTO passwordDTO) {
+        return null;
     }
 
 }
