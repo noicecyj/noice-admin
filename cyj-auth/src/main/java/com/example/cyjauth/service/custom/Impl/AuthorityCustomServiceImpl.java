@@ -50,7 +50,7 @@ public class AuthorityCustomServiceImpl extends BaseService implements Authority
 
     @Override
     public List<AuthorityCustomPO> findRoleAndAuthority() {
-        return authorityCustomDao.findAllByStatusEquals("1");
+        return authorityCustomDao.findAllByStatusEquals("有效");
     }
 
     @Override

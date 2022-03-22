@@ -71,8 +71,8 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
             for (int i = 0; i < array.size(); i++) {
                 JSONObject jsonObject = array.getJSONObject(i);
                 String path = jsonObject.getString("path");
-                if (jsonObject.getString("appService") != null && jsonObject.getString("appApi") != null) {
-                    path = "/" + jsonObject.getString("appService") + "/" + jsonObject.getString("appApi") + "/" + path;
+                if (jsonObject.getString("appService") != null) {
+                    path = "/" + jsonObject.getString("appService") + "/" + path;
                 }
                 String pathMethod = path + " " + jsonObject.getString("method");
                 ConfigAttribute configAttribute = new SecurityConfig(pathMethod);
@@ -89,7 +89,7 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
                 return configAttributes;
             }
         }
-        return configAttributes;
+        return null;
     }
 
     @Override
