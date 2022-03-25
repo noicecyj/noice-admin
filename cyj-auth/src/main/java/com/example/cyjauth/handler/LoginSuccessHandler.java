@@ -63,11 +63,11 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
             //清除旧Token
             redisTemplate.delete("token_" + userName);
         }
-        String roleInfosMapPermission = redisTemplate.opsForValue().get("authentication:roleinfos:permissions");
+        String roleInfosMapPermission = redisTemplate.opsForValue().get("authentication:roleinfos:permissions:" + userName);
         if (StringUtils.isBlank(roleInfosMapPermission)) {
             //将角色与权限关系存入redis
             Set<RoleCustomPO> roleInfos = userCustomService.findAuthUserByUsername(userName).getRole();
-            redisTemplate.opsForValue().set("authentication:roleinfos:permissions", JSON.toJSONString(roleInfos), 480, TimeUnit.MINUTES);
+            redisTemplate.opsForValue().set("authentication:roleinfos:permissions:" + userName, JSON.toJSONString(roleInfos), 480, TimeUnit.MINUTES);
         }
         //创建token
         String accessToken = createAccessJwtToken(authUserDetails);

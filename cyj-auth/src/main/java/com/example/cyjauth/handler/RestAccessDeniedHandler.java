@@ -1,5 +1,6 @@
 package com.example.cyjauth.handler;
 
+import com.alibaba.fastjson.JSON;
 import com.example.cyjcommon.utils.ResponseUtil;
 import com.example.cyjcommon.utils.ResultCode;
 import com.example.cyjcommon.utils.ResultVO;
@@ -19,7 +20,7 @@ public class RestAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) {
-        ResponseUtil.out(response, ResultVO.success(ResultCode.DENY).toString());
+        ResponseUtil.out(response, ResultCode.DENY.code().toString());
     }
 
 }

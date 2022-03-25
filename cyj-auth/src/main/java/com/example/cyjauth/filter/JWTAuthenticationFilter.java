@@ -82,9 +82,9 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
                 throw new CommonException(ResultCode.TOKEN_IS_WRONG);
             }
             //获取用户名
-            String username = claims.getSubject();
+            String userName = claims.getSubject();
             //判定token
-            String oldToken = stringRedisTemplate.opsForValue().get("token_" + username);
+            String oldToken = stringRedisTemplate.opsForValue().get("token_" + userName);
             if (StringUtils.isBlank(oldToken)) {
                 throw new CommonException(ResultCode.TOKEN_IS_LOGOUT);
             }
@@ -92,7 +92,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
                 throw new CommonException(ResultCode.TOKEN_IS_INVALID);
             }
             //获取redis中角色与权限关系
-            String roleInfosMapPermission = stringRedisTemplate.opsForValue().get("authentication:roleinfos:permissions");
+            String roleInfosMapPermission = stringRedisTemplate.opsForValue().get("authentication:roleinfos:permissions:" + userName);
             if (StringUtils.isBlank(roleInfosMapPermission)) {
                 throw new CommonException(ResultCode.AUTH_IS_CHANGE);
             }
@@ -116,11 +116,10 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
                                     JSONObject jsonObject = redisDataPer.getJSONObject(z);
                                     //加入权限列表
                                     String path = jsonObject.getString("path");
-                                    if (jsonObject.getString("appService") != null && jsonObject.getString("appApi") != null) {
-                                        path = "/" + jsonObject.getString("appService") + "/" + jsonObject.getString("appApi") + "/" + path;
+                                    if (jsonObject.getString("appName") != null) {
+                                        path = "/" + jsonObject.getString("appName") + "/" + path;
                                     }
-                                    String pathMethod = path + " " + jsonObject.getString("method");
-                                    authorities.add(new AuthGrantedAuthority(pathMethod, jsonObject.getString("method")));
+                                    authorities.add(new AuthGrantedAuthority(path, jsonObject.getString("method")));
                                 }
                             }
                         }
@@ -129,9 +128,9 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
             } else {
                 throw new CommonException(ResultCode.USER_IS_NULL);
             }
-            if (StringUtils.isNotBlank(username)) {
+            if (StringUtils.isNotBlank(userName)) {
                 //此处password不能为null
-                User principal = new User(username, "", authorities);
+                User principal = new User(userName, "", authorities);
                 return new UsernamePasswordAuthenticationToken(principal, null, authorities);
             }
         }

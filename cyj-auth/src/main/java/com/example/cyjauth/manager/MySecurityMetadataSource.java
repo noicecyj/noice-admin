@@ -60,32 +60,31 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
                 if (po.getAppName() != null) {
                     path = "/" + po.getAppName() + "/" + path;
                 }
-                String pathMethod = path + " " + po.getMethod();
-                ConfigAttribute configAttribute = new SecurityConfig(pathMethod);
+                ConfigAttribute configAttribute = new SecurityConfig(path);
                 configAttributes.add(configAttribute);
             }
             //将权限存入redis
-            redisTemplate.opsForValue().set("configAttributes:permissions", JSON.toJSONString(authorityCustomPOList), 480, TimeUnit.MINUTES);
+            redisTemplate.opsForValue().set("configAttributes:permissions",
+                    JSON.toJSONString(authorityCustomPOList), 480, TimeUnit.MINUTES);
         } else {
             JSONArray array = JSONObject.parseArray(redisConfigAttributesPermission);
             for (int i = 0; i < array.size(); i++) {
                 JSONObject jsonObject = array.getJSONObject(i);
                 String path = jsonObject.getString("path");
-                if (jsonObject.getString("appService") != null) {
-                    path = "/" + jsonObject.getString("appService") + "/" + path;
+                if (jsonObject.getString("appName") != null) {
+                    path = "/" + jsonObject.getString("appName") + "/" + path;
                 }
-                String pathMethod = path + " " + jsonObject.getString("method");
-                ConfigAttribute configAttribute = new SecurityConfig(pathMethod);
+                ConfigAttribute configAttribute = new SecurityConfig(path);
                 configAttributes.add(configAttribute);
             }
         }
         //Object中包含用户请求request
         String url = ((FilterInvocation) o).getRequestUrl();
-        String method = ((FilterInvocation) o).getRequest().getMethod();
-        String authPath = url + " " + method;//REST风格  根据方法判断权限
+        String authPath = url.split("\\?")[0];//REST风格  根据方法判断权限
         PathMatcher pathMatcher = new AntPathMatcher();
         for (ConfigAttribute configAttribute : configAttributes) {
-            if (StringUtils.isNotBlank(configAttribute.getAttribute()) && pathMatcher.match(configAttribute.getAttribute(), authPath)) {
+            if (StringUtils.isNotBlank(configAttribute.getAttribute()) &&
+                    pathMatcher.match(configAttribute.getAttribute(), authPath)) {
                 return configAttributes;
             }
         }

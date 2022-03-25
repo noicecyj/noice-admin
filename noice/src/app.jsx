@@ -1,5 +1,6 @@
-import {runApp} from 'ice';
+import {runApp, history} from 'ice';
 import cookie from 'react-cookies';
+
 
 const appConfig = {
   app: {
@@ -28,6 +29,9 @@ const appConfig = {
       response: {
         onConfig: (response) => {
           console.log(response);
+          if (response.data === 402){
+            history.push('/');
+          }
           return response;
         },
         onError: (error) => {
