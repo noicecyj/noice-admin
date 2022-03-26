@@ -8,6 +8,7 @@ import com.example.cyjauth.service.custom.AuthorityCustomService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
@@ -88,7 +89,7 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
                 return configAttributes;
             }
         }
-        return null;
+        throw new AccessDeniedException("鉴权出错");
     }
 
     @Override
