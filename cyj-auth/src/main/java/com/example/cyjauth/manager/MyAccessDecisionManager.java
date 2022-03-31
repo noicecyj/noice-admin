@@ -38,7 +38,7 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
                 }
             } else {
                 //未登录只允许访问 login 页面
-                if ("/v1/login".equals(url)) {
+                if ("/authApi/v1/login".equals(url)) {
                     return;
                 }
             }

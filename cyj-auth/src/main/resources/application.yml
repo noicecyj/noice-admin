@@ -11,8 +11,6 @@ zuul:
   routes: #给服务配置路由
     cyj-entity-creater:
       path: /cyj-entity-creater/**
-    cyj-auth:
-      path: /cyj-auth/**
 spring:
   application:
     name: cyj-auth

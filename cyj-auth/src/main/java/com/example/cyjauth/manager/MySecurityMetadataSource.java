@@ -71,10 +71,7 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
             JSONArray array = JSONObject.parseArray(redisConfigAttributesPermission);
             for (int i = 0; i < array.size(); i++) {
                 JSONObject jsonObject = array.getJSONObject(i);
-                String path = jsonObject.getString("path");
-                if (jsonObject.getString("appName") != null) {
-                    path = "/" + jsonObject.getString("appName") + "/" + path;
-                }
+                String path = "/**/" + jsonObject.getString("path");
                 ConfigAttribute configAttribute = new SecurityConfig(path);
                 configAttributes.add(configAttribute);
             }

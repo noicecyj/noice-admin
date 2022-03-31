@@ -115,10 +115,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
                                 for (int z = 0; z < redisDataPer.size(); z++) {
                                     JSONObject jsonObject = redisDataPer.getJSONObject(z);
                                     //加入权限列表
-                                    String path = jsonObject.getString("path");
-                                    if (jsonObject.getString("appName") != null) {
-                                        path = "/" + jsonObject.getString("appName") + "/" + path;
-                                    }
+                                    String path = "/**/" + jsonObject.getString("path");
                                     authorities.add(new AuthGrantedAuthority(path, jsonObject.getString("method")));
                                 }
                             }
