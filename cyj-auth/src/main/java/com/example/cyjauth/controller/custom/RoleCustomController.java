@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Tag(name = "Role")
 public interface RoleCustomController {
 
-    @Operation(summary = "获取用户权限")
+    @Operation(summary = "获取角色权限")
     @PostMapping(value = "getRoleAuthority")
     ResultVO getRoleAuthority(@RequestParam("roleId") String roleId);
 
-    @Operation(summary = "设置用户权限")
+    @Operation(summary = "设置角色权限")
     @PostMapping(value = "setRoleAuthority")
     ResultVO setRoleAuthority(@RequestBody RoleAuthorityDTO roleAuthorityDTO);
 

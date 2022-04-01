@@ -1,6 +1,7 @@
 package com.example.cyjauth.manager;
 
 import com.example.cyjauth.entity.custom.bo.AuthGrantedAuthority;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.ConfigAttribute;
@@ -9,6 +10,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.stereotype.Service;
+import org.springframework.util.AntPathMatcher;
+import org.springframework.util.PathMatcher;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
@@ -26,6 +29,7 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
         }
         HttpServletRequest request = ((FilterInvocation) object).getHttpRequest();
         String url = null;
+        PathMatcher pathMatcher = new AntPathMatcher();
         for (GrantedAuthority ga : authentication.getAuthorities()) {
             if (ga instanceof AuthGrantedAuthority) {
                 AuthGrantedAuthority urlGrantedAuthority = (AuthGrantedAuthority) ga;
@@ -33,7 +37,8 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
                 String method = urlGrantedAuthority.getMethod();
                 if ("/**".equals(url) && "ALL".equals(method)) {
                     return;
-                } else if (url.contains(request.getRequestURI()) && method.equals(request.getMethod())) {
+                }
+                if (StringUtils.isNotBlank(url) && pathMatcher.match(url, request.getRequestURI())) {
                     return;
                 }
             } else {
