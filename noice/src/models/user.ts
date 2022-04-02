@@ -9,6 +9,7 @@ export default {
 
   reducers: {
     setState(prevState, payload) {
+      console.log(payload);
       return {...prevState, ...payload};
     },
   },

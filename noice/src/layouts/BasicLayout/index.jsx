@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {ConfigProvider, Shell} from '@alifd/next';
 import PageNav from './components/PageNav';
 import Logo from './components/Logo';
+import NameLabel from './components/NameLabel';
+import store from '@/store';
 
 (function () {
   const throttle = function (type, name, obj = window) {
@@ -41,6 +43,7 @@ export default function BasicLayout({children}) {
   };
 
   const [device, setDevice] = useState(getDevice(NaN));
+  const [userState] = store.useModel('user');
 
   if (typeof window !== 'undefined') {
     window.addEventListener('optimizedResize', (e) => {
@@ -67,7 +70,9 @@ export default function BasicLayout({children}) {
             marginRight: 10,
           }}
         />
-        <Shell.Action/>
+        <Shell.Action>
+          <NameLabel name={userState.username}/>
+        </Shell.Action>
         <Shell.Navigation>
           <PageNav/>
         </Shell.Navigation>

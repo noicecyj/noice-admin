@@ -41,8 +41,7 @@ export default {
     },
 
     setDataForm(data) {
-      const payload = data;
-      dispatch.login.setState(payload);
+      dispatch.login.setState(data);
     },
   }),
 };

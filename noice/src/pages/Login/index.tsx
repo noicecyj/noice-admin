@@ -1,6 +1,8 @@
 import React from 'react';
 import {Checkbox, Form, Input, ResponsiveGrid} from '@alifd/next';
 import pageStore from './store';
+import store from '@/store';
+
 // @ts-ignore
 import styles from './index.module.scss';
 
@@ -19,7 +21,7 @@ const accountForm = (
 );
 const LoginPage = () => {
   const [loginState, loginDispatchers] = pageStore.useModel('login');
-  const user = pageStore.useModelDispatchers('user');
+  const user = store.useModelDispatchers('user');
 
   return (
     <ResponsiveGrid gap={20}>
@@ -44,7 +46,7 @@ const LoginPage = () => {
                   type="primary"
                   onClick={() => {
                     loginDispatchers.login(loginState);
-                    user.setState({username: loginState.username, token: loginState.token});
+                    user.setState({username: loginState.username});
                   }}
                   className={styles.submitBtn}
                   validate
