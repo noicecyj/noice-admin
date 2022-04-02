@@ -1053,9 +1053,9 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "        style={{width: '90%'}}\r\n" +
                 "      >\r\n" +
                 "        <DataTableTemple\r\n" +
-                "          createItem={() => " + underSubPoName + "Dispatchers." + underSubPoName + "Edit()}\r\n" +
-                "          editItem={(record) => " + underSubPoName + "Dispatchers." + underSubPoName + "Edit(record)}\r\n" +
-                "          deleteItem={(record) => " + underSubPoName + "Dispatchers." + underSubPoName + "Delete({\r\n" +
+                "          createItem={data => " + underSubPoName + "Dispatchers." + underSubPoName + "Edit(data)}\r\n" +
+                "          editItem={record => " + underSubPoName + "Dispatchers." + underSubPoName + "Edit(record)}\r\n" +
+                "          deleteItem={record => " + underSubPoName + "Dispatchers." + underSubPoName + "Delete({\r\n" +
                 "            record,\r\n" +
                 "            data: {\r\n" +
                 "              pageNumber: " + underSubPoName + "State." + underSubPoName + "Current,\r\n" +
@@ -1067,7 +1067,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "          items={" + underSubPoName + "State." + underSubPoName + "Table}\r\n" +
                 "          total={" + underSubPoName + "State." + underSubPoName + "Total}\r\n" +
                 "          primaryKey=\"id\"\r\n" +
-                "          getPage={(" + underSubPoName + "Current) => " + underSubPoName + "Dispatchers." + underSubPoName + "Page({\r\n" +
+                "          getPage={" + underSubPoName + "Current => " + underSubPoName + "Dispatchers." + underSubPoName + "Page({\r\n" +
                 "            " + underSubPoName + "Current,\r\n" +
                 "            pid: " + underSubPoName + "State." + underPoName + "Id\r\n" +
                 "          })}\r\n" +
@@ -1089,7 +1089,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "        visibleDialog={" + underSubPoName + "State." + underSubPoName + "Visible}\r\n" +
                 "        onClose={() => " + underSubPoName + "Dispatchers.setState({" + underSubPoName + "Visible: false})}\r\n" +
                 "        items={" + underSubPoName + "State." + underSubPoName + "Form}\r\n" +
-                "        dispatchers={(value) => " + underSubPoName + "Dispatchers.setDataForm(value)}\r\n" +
+                "        dispatchers={value => " + underSubPoName + "Dispatchers.setDataForm(value)}\r\n" +
                 "        onOk={() => " + underSubPoName + "Dispatchers." + underSubPoName + "Save({\r\n" +
                 "          " + underSubPoName + "FormData: " + underSubPoName + "State." + underSubPoName + "FormData,\r\n" +
                 "          pageNumber: " + underSubPoName + "State." + underSubPoName + "Current,\r\n" +
@@ -1390,9 +1390,9 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("  return (\r\n");
         sb.append("    <>\r\n");
         sb.append("      <DataTableTemple\r\n");
-        sb.append("        createItem={() => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Edit()}\r\n");
-        sb.append("        editItem={(record) => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Edit(record)}\r\n");
-        sb.append("        deleteItem={(record) => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Delete({\r\n");
+        sb.append("        createItem={data => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Edit(data)}\r\n");
+        sb.append("        editItem={record => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Edit(record)}\r\n");
+        sb.append("        deleteItem={record => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Delete({\r\n");
         sb.append("          record,\r\n");
         sb.append("          data: {\r\n");
         sb.append("            pageNumber: ").append(underPoName).append("State.").append(underPoName).append("Current,\r\n");
@@ -1402,7 +1402,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("        dataSource={").append(underPoName).append("State.").append(underPoName).append("TableData}\r\n");
         sb.append("        items={").append(underPoName).append("State.").append(underPoName).append("Table}\r\n");
         sb.append("        total={").append(underPoName).append("State.").append(underPoName).append("Total}\r\n");
-        sb.append("        getPage={(").append(underPoName).append("Current) => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Page(").append(underPoName).append("Current)}\r\n");
+        sb.append("        getPage={").append(underPoName).append("Current => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Page(").append(underPoName).append("Current)}\r\n");
         if (entityNamePOList.size() != 0) {
             sb.append("        rowSelection={{\r\n");
             sb.append("          mode: 'single',\r\n");
@@ -1441,7 +1441,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("        visibleDialog={").append(underPoName).append("State.").append(underPoName).append("Visible}\r\n");
         sb.append("        onClose={() => ").append(underPoName).append("Dispatchers.setState({").append(underPoName).append("Visible: false})}\r\n");
         sb.append("        items={").append(underPoName).append("State.").append(underPoName).append("Form}\r\n");
-        sb.append("        dispatchers={(value) => ").append(underPoName).append("Dispatchers.setDataForm(value)}\r\n");
+        sb.append("        dispatchers={value => ").append(underPoName).append("Dispatchers.setDataForm(value)}\r\n");
         sb.append("        onOk={() => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Save({\r\n");
         sb.append("          ").append(underPoName).append("FormData: ").append(underPoName).append("State.").append(underPoName).append("FormData,\r\n");
         sb.append("          pageNumber: ").append(underPoName).append("State.").append(underPoName).append("Current,\r\n");

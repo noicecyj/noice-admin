@@ -16,9 +16,9 @@ function AppService() {
   return (
     <>
       <DataTableTemple
-        createItem={() => appServiceDispatchers.appServiceEdit()}
-        editItem={(record) => appServiceDispatchers.appServiceEdit(record)}
-        deleteItem={(record) => appServiceDispatchers.appServiceDelete({
+        createItem={data => appServiceDispatchers.appServiceEdit(data)}
+        editItem={record => appServiceDispatchers.appServiceEdit(record)}
+        deleteItem={record => appServiceDispatchers.appServiceDelete({
           record,
           data: {
             pageNumber: appServiceState.appServiceCurrent,
@@ -28,7 +28,7 @@ function AppService() {
         dataSource={appServiceState.appServiceTableData}
         items={appServiceState.appServiceTable}
         total={appServiceState.appServiceTotal}
-        getPage={(appServiceCurrent) => appServiceDispatchers.appServicePage(appServiceCurrent)}
+        getPage={appServiceCurrent => appServiceDispatchers.appServicePage(appServiceCurrent)}
         primaryKey="id"
         columnRender={appServiceState.customType ? (value, index, record) => {
           return (
@@ -47,7 +47,7 @@ function AppService() {
         visibleDialog={appServiceState.appServiceVisible}
         onClose={() => appServiceDispatchers.setState({appServiceVisible: false})}
         items={appServiceState.appServiceForm}
-        dispatchers={(value) => appServiceDispatchers.setDataForm(value)}
+        dispatchers={value => appServiceDispatchers.setDataForm(value)}
         onOk={() => appServiceDispatchers.appServiceSave({
           appServiceFormData: appServiceState.appServiceFormData,
           pageNumber: appServiceState.appServiceCurrent,

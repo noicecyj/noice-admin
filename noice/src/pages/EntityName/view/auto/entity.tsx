@@ -23,9 +23,9 @@ function Entity() {
         style={{width: '90%'}}
       >
         <DataTableTemple
-          createItem={() => entityDispatchers.entityEdit()}
-          editItem={(record) => entityDispatchers.entityEdit(record)}
-          deleteItem={(record) => entityDispatchers.entityDelete({
+          createItem={data => entityDispatchers.entityEdit(data)}
+          editItem={record => entityDispatchers.entityEdit(record)}
+          deleteItem={record => entityDispatchers.entityDelete({
             record,
             data: {
               pageNumber: entityState.entityCurrent,
@@ -37,7 +37,7 @@ function Entity() {
           items={entityState.entityTable}
           total={entityState.entityTotal}
           primaryKey="id"
-          getPage={(entityCurrent) => entityDispatchers.entityPage({
+          getPage={entityCurrent => entityDispatchers.entityPage({
             entityCurrent,
             pid: entityState.entityNameId
           })}
@@ -59,7 +59,7 @@ function Entity() {
         visibleDialog={entityState.entityVisible}
         onClose={() => entityDispatchers.setState({entityVisible: false})}
         items={entityState.entityForm}
-        dispatchers={(value) => entityDispatchers.setDataForm(value)}
+        dispatchers={value => entityDispatchers.setDataForm(value)}
         onOk={() => entityDispatchers.entitySave({
           entityFormData: entityState.entityFormData,
           pageNumber: entityState.entityCurrent,

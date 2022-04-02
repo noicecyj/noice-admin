@@ -23,9 +23,9 @@ function SecondMenu() {
         style={{width: '90%'}}
       >
         <DataTableTemple
-          createItem={() => secondMenuDispatchers.secondMenuEdit()}
-          editItem={(record) => secondMenuDispatchers.secondMenuEdit(record)}
-          deleteItem={(record) => secondMenuDispatchers.secondMenuDelete({
+          createItem={data => secondMenuDispatchers.secondMenuEdit(data)}
+          editItem={record => secondMenuDispatchers.secondMenuEdit(record)}
+          deleteItem={record => secondMenuDispatchers.secondMenuDelete({
             record,
             data: {
               pageNumber: secondMenuState.secondMenuCurrent,
@@ -37,7 +37,7 @@ function SecondMenu() {
           items={secondMenuState.secondMenuTable}
           total={secondMenuState.secondMenuTotal}
           primaryKey="id"
-          getPage={(secondMenuCurrent) => secondMenuDispatchers.secondMenuPage({
+          getPage={secondMenuCurrent => secondMenuDispatchers.secondMenuPage({
             secondMenuCurrent,
             pid: secondMenuState.firstMenuId
           })}
@@ -59,7 +59,7 @@ function SecondMenu() {
         visibleDialog={secondMenuState.secondMenuVisible}
         onClose={() => secondMenuDispatchers.setState({secondMenuVisible: false})}
         items={secondMenuState.secondMenuForm}
-        dispatchers={(value) => secondMenuDispatchers.setDataForm(value)}
+        dispatchers={value => secondMenuDispatchers.setDataForm(value)}
         onOk={() => secondMenuDispatchers.secondMenuSave({
           secondMenuFormData: secondMenuState.secondMenuFormData,
           pageNumber: secondMenuState.secondMenuCurrent,

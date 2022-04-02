@@ -16,9 +16,9 @@ function User() {
   return (
     <>
       <DataTableTemple
-        createItem={() => userDispatchers.userEdit()}
-        editItem={(record) => userDispatchers.userEdit(record)}
-        deleteItem={(record) => userDispatchers.userDelete({
+        createItem={data => userDispatchers.userEdit(data)}
+        editItem={record => userDispatchers.userEdit(record)}
+        deleteItem={record => userDispatchers.userDelete({
           record,
           data: {
             pageNumber: userState.userCurrent,
@@ -28,7 +28,7 @@ function User() {
         dataSource={userState.userTableData}
         items={userState.userTable}
         total={userState.userTotal}
-        getPage={(userCurrent) => userDispatchers.userPage(userCurrent)}
+        getPage={userCurrent => userDispatchers.userPage(userCurrent)}
         primaryKey="id"
         columnRender={userState.customType ? (value, index, record) => {
           return (
@@ -47,7 +47,7 @@ function User() {
         visibleDialog={userState.userVisible}
         onClose={() => userDispatchers.setState({userVisible: false})}
         items={userState.userForm}
-        dispatchers={(value) => userDispatchers.setDataForm(value)}
+        dispatchers={value => userDispatchers.setDataForm(value)}
         onOk={() => userDispatchers.userSave({
           userFormData: userState.userFormData,
           pageNumber: userState.userCurrent,

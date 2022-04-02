@@ -17,9 +17,9 @@ function Catalog() {
   return (
     <>
       <DataTableTemple
-        createItem={() => catalogDispatchers.catalogEdit()}
-        editItem={(record) => catalogDispatchers.catalogEdit(record)}
-        deleteItem={(record) => catalogDispatchers.catalogDelete({
+        createItem={data => catalogDispatchers.catalogEdit(data)}
+        editItem={record => catalogDispatchers.catalogEdit(record)}
+        deleteItem={record => catalogDispatchers.catalogDelete({
           record,
           data: {
             pageNumber: catalogState.catalogCurrent,
@@ -29,7 +29,7 @@ function Catalog() {
         dataSource={catalogState.catalogTableData}
         items={catalogState.catalogTable}
         total={catalogState.catalogTotal}
-        getPage={(catalogCurrent) => catalogDispatchers.catalogPage(catalogCurrent)}
+        getPage={catalogCurrent => catalogDispatchers.catalogPage(catalogCurrent)}
         rowSelection={{
           mode: 'single',
           onSelect: (selected, record) => {
@@ -58,7 +58,7 @@ function Catalog() {
         visibleDialog={catalogState.catalogVisible}
         onClose={() => catalogDispatchers.setState({catalogVisible: false})}
         items={catalogState.catalogForm}
-        dispatchers={(value) => catalogDispatchers.setDataForm(value)}
+        dispatchers={value => catalogDispatchers.setDataForm(value)}
         onOk={() => catalogDispatchers.catalogSave({
           catalogFormData: catalogState.catalogFormData,
           pageNumber: catalogState.catalogCurrent,

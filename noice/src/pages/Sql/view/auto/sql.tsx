@@ -16,9 +16,9 @@ function Sql() {
   return (
     <>
       <DataTableTemple
-        createItem={() => sqlDispatchers.sqlEdit()}
-        editItem={(record) => sqlDispatchers.sqlEdit(record)}
-        deleteItem={(record) => sqlDispatchers.sqlDelete({
+        createItem={data => sqlDispatchers.sqlEdit(data)}
+        editItem={record => sqlDispatchers.sqlEdit(record)}
+        deleteItem={record => sqlDispatchers.sqlDelete({
           record,
           data: {
             pageNumber: sqlState.sqlCurrent,
@@ -28,7 +28,7 @@ function Sql() {
         dataSource={sqlState.sqlTableData}
         items={sqlState.sqlTable}
         total={sqlState.sqlTotal}
-        getPage={(sqlCurrent) => sqlDispatchers.sqlPage(sqlCurrent)}
+        getPage={sqlCurrent => sqlDispatchers.sqlPage(sqlCurrent)}
         primaryKey="id"
         columnRender={sqlState.customType ? (value, index, record) => {
           return (
@@ -47,7 +47,7 @@ function Sql() {
         visibleDialog={sqlState.sqlVisible}
         onClose={() => sqlDispatchers.setState({sqlVisible: false})}
         items={sqlState.sqlForm}
-        dispatchers={(value) => sqlDispatchers.setDataForm(value)}
+        dispatchers={value => sqlDispatchers.setDataForm(value)}
         onOk={() => sqlDispatchers.sqlSave({
           sqlFormData: sqlState.sqlFormData,
           pageNumber: sqlState.sqlCurrent,

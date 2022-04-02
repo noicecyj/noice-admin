@@ -16,9 +16,9 @@ function Role() {
   return (
     <>
       <DataTableTemple
-        createItem={() => roleDispatchers.roleEdit()}
-        editItem={(record) => roleDispatchers.roleEdit(record)}
-        deleteItem={(record) => roleDispatchers.roleDelete({
+        createItem={data => roleDispatchers.roleEdit(data)}
+        editItem={record => roleDispatchers.roleEdit(record)}
+        deleteItem={record => roleDispatchers.roleDelete({
           record,
           data: {
             pageNumber: roleState.roleCurrent,
@@ -28,7 +28,7 @@ function Role() {
         dataSource={roleState.roleTableData}
         items={roleState.roleTable}
         total={roleState.roleTotal}
-        getPage={(roleCurrent) => roleDispatchers.rolePage(roleCurrent)}
+        getPage={roleCurrent => roleDispatchers.rolePage(roleCurrent)}
         primaryKey="id"
         columnRender={roleState.customType ? (value, index, record) => {
           return (
@@ -47,7 +47,7 @@ function Role() {
         visibleDialog={roleState.roleVisible}
         onClose={() => roleDispatchers.setState({roleVisible: false})}
         items={roleState.roleForm}
-        dispatchers={(value) => roleDispatchers.setDataForm(value)}
+        dispatchers={value => roleDispatchers.setDataForm(value)}
         onOk={() => roleDispatchers.roleSave({
           roleFormData: roleState.roleFormData,
           pageNumber: roleState.roleCurrent,

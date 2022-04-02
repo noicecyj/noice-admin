@@ -16,9 +16,9 @@ function Authority() {
   return (
     <>
       <DataTableTemple
-        createItem={() => authorityDispatchers.authorityEdit()}
-        editItem={(record) => authorityDispatchers.authorityEdit(record)}
-        deleteItem={(record) => authorityDispatchers.authorityDelete({
+        createItem={data => authorityDispatchers.authorityEdit(data)}
+        editItem={record => authorityDispatchers.authorityEdit(record)}
+        deleteItem={record => authorityDispatchers.authorityDelete({
           record,
           data: {
             pageNumber: authorityState.authorityCurrent,
@@ -28,7 +28,7 @@ function Authority() {
         dataSource={authorityState.authorityTableData}
         items={authorityState.authorityTable}
         total={authorityState.authorityTotal}
-        getPage={(authorityCurrent) => authorityDispatchers.authorityPage(authorityCurrent)}
+        getPage={authorityCurrent => authorityDispatchers.authorityPage(authorityCurrent)}
         primaryKey="id"
         columnRender={authorityState.customType ? (value, index, record) => {
           return (
@@ -47,7 +47,7 @@ function Authority() {
         visibleDialog={authorityState.authorityVisible}
         onClose={() => authorityDispatchers.setState({authorityVisible: false})}
         items={authorityState.authorityForm}
-        dispatchers={(value) => authorityDispatchers.setDataForm(value)}
+        dispatchers={value => authorityDispatchers.setDataForm(value)}
         onOk={() => authorityDispatchers.authoritySave({
           authorityFormData: authorityState.authorityFormData,
           pageNumber: authorityState.authorityCurrent,

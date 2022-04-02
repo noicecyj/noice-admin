@@ -17,9 +17,9 @@ function FirstMenu() {
   return (
     <>
       <DataTableTemple
-        createItem={() => firstMenuDispatchers.firstMenuEdit()}
-        editItem={(record) => firstMenuDispatchers.firstMenuEdit(record)}
-        deleteItem={(record) => firstMenuDispatchers.firstMenuDelete({
+        createItem={data => firstMenuDispatchers.firstMenuEdit(data)}
+        editItem={record => firstMenuDispatchers.firstMenuEdit(record)}
+        deleteItem={record => firstMenuDispatchers.firstMenuDelete({
           record,
           data: {
             pageNumber: firstMenuState.firstMenuCurrent,
@@ -29,7 +29,7 @@ function FirstMenu() {
         dataSource={firstMenuState.firstMenuTableData}
         items={firstMenuState.firstMenuTable}
         total={firstMenuState.firstMenuTotal}
-        getPage={(firstMenuCurrent) => firstMenuDispatchers.firstMenuPage(firstMenuCurrent)}
+        getPage={firstMenuCurrent => firstMenuDispatchers.firstMenuPage(firstMenuCurrent)}
         rowSelection={{
           mode: 'single',
           onSelect: (selected, record) => {
@@ -58,7 +58,7 @@ function FirstMenu() {
         visibleDialog={firstMenuState.firstMenuVisible}
         onClose={() => firstMenuDispatchers.setState({firstMenuVisible: false})}
         items={firstMenuState.firstMenuForm}
-        dispatchers={(value) => firstMenuDispatchers.setDataForm(value)}
+        dispatchers={value => firstMenuDispatchers.setDataForm(value)}
         onOk={() => firstMenuDispatchers.firstMenuSave({
           firstMenuFormData: firstMenuState.firstMenuFormData,
           pageNumber: firstMenuState.firstMenuCurrent,

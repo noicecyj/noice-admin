@@ -17,9 +17,9 @@ function EntityName() {
   return (
     <>
       <DataTableTemple
-        createItem={() => entityNameDispatchers.entityNameEdit()}
-        editItem={(record) => entityNameDispatchers.entityNameEdit(record)}
-        deleteItem={(record) => entityNameDispatchers.entityNameDelete({
+        createItem={data => entityNameDispatchers.entityNameEdit(data)}
+        editItem={record => entityNameDispatchers.entityNameEdit(record)}
+        deleteItem={record => entityNameDispatchers.entityNameDelete({
           record,
           data: {
             pageNumber: entityNameState.entityNameCurrent,
@@ -29,7 +29,7 @@ function EntityName() {
         dataSource={entityNameState.entityNameTableData}
         items={entityNameState.entityNameTable}
         total={entityNameState.entityNameTotal}
-        getPage={(entityNameCurrent) => entityNameDispatchers.entityNamePage(entityNameCurrent)}
+        getPage={entityNameCurrent => entityNameDispatchers.entityNamePage(entityNameCurrent)}
         rowSelection={{
           mode: 'single',
           onSelect: (selected, record) => {
@@ -58,7 +58,7 @@ function EntityName() {
         visibleDialog={entityNameState.entityNameVisible}
         onClose={() => entityNameDispatchers.setState({entityNameVisible: false})}
         items={entityNameState.entityNameForm}
-        dispatchers={(value) => entityNameDispatchers.setDataForm(value)}
+        dispatchers={value => entityNameDispatchers.setDataForm(value)}
         onOk={() => entityNameDispatchers.entityNameSave({
           entityNameFormData: entityNameState.entityNameFormData,
           pageNumber: entityNameState.entityNameCurrent,

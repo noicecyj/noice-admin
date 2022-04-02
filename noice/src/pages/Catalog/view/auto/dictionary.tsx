@@ -23,9 +23,9 @@ function Dictionary() {
         style={{width: '90%'}}
       >
         <DataTableTemple
-          createItem={() => dictionaryDispatchers.dictionaryEdit()}
-          editItem={(record) => dictionaryDispatchers.dictionaryEdit(record)}
-          deleteItem={(record) => dictionaryDispatchers.dictionaryDelete({
+          createItem={data => dictionaryDispatchers.dictionaryEdit(data)}
+          editItem={record => dictionaryDispatchers.dictionaryEdit(record)}
+          deleteItem={record => dictionaryDispatchers.dictionaryDelete({
             record,
             data: {
               pageNumber: dictionaryState.dictionaryCurrent,
@@ -37,7 +37,7 @@ function Dictionary() {
           items={dictionaryState.dictionaryTable}
           total={dictionaryState.dictionaryTotal}
           primaryKey="id"
-          getPage={(dictionaryCurrent) => dictionaryDispatchers.dictionaryPage({
+          getPage={dictionaryCurrent => dictionaryDispatchers.dictionaryPage({
             dictionaryCurrent,
             pid: dictionaryState.catalogId
           })}
@@ -59,7 +59,7 @@ function Dictionary() {
         visibleDialog={dictionaryState.dictionaryVisible}
         onClose={() => dictionaryDispatchers.setState({dictionaryVisible: false})}
         items={dictionaryState.dictionaryForm}
-        dispatchers={(value) => dictionaryDispatchers.setDataForm(value)}
+        dispatchers={value => dictionaryDispatchers.setDataForm(value)}
         onOk={() => dictionaryDispatchers.dictionarySave({
           dictionaryFormData: dictionaryState.dictionaryFormData,
           pageNumber: dictionaryState.dictionaryCurrent,
