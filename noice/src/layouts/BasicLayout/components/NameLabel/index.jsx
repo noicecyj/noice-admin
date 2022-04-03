@@ -30,8 +30,6 @@ const NameLabel = (props) => {
       <div className={styles.avatarPopup}>
         <UserProfile {...props} />
         <Menu className={styles.menu}>
-          <Item><Icon size="small" type="account" />个人设置</Item>
-          <Item><Icon size="small" type="set" />系统设置</Item>
           <Item><Icon size="small" type="exit" /><Link to="/">退出</Link></Item>
         </Menu>
       </div>
