@@ -83,6 +83,7 @@ export default {
       const payload = {
         entityTable: ret.data.dataTable,
         entityForm: ret.data.dataForm,
+        customType: ret.data.customType,
       };
       dispatch.entity.setState(payload);
     },

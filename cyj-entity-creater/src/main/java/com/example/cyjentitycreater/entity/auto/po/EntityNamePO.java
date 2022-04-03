@@ -42,6 +42,8 @@ public class EntityNamePO implements Serializable {
     private String entityName;
     @Column(name = "entity_code")
     private String entityCode;
+    @Column(name = "custom_type")
+    private String customType;
     @Column(name = "entity_type")
     private String entityType;
     @Column(name = "status")

@@ -83,6 +83,7 @@ export default {
       const payload = {
         secondMenuTable: ret.data.dataTable,
         secondMenuForm: ret.data.dataForm,
+        customType: ret.data.customType,
       };
       dispatch.secondMenu.setState(payload);
     },

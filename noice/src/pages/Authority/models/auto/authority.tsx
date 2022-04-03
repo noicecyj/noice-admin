@@ -85,6 +85,7 @@ export default {
       const payload = {
         authorityTable: ret.data.dataTable,
         authorityForm: ret.data.dataForm,
+        customType: ret.data.customType,
       };
       dispatch.authority.setState(payload);
     },

@@ -16,7 +16,7 @@ export default {
     entityNameForm: [],
     entityNameTable: [],
     entityNameId: '',
-    customType: true,
+    customType: false,
   },
 
   reducers: {
@@ -85,6 +85,7 @@ export default {
       const payload = {
         entityNameTable: ret.data.dataTable,
         entityNameForm: ret.data.dataForm,
+        customType: ret.data.customType,
       };
       dispatch.entityName.setState(payload);
     },

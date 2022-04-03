@@ -85,6 +85,7 @@ export default {
       const payload = {
         roleTable: ret.data.dataTable,
         roleForm: ret.data.dataForm,
+        customType: ret.data.customType,
       };
       dispatch.role.setState(payload);
     },

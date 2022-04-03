@@ -85,6 +85,7 @@ export default {
       const payload = {
         userTable: ret.data.dataTable,
         userForm: ret.data.dataForm,
+        customType: ret.data.customType,
       };
       dispatch.user.setState(payload);
     },

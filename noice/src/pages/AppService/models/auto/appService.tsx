@@ -85,6 +85,7 @@ export default {
       const payload = {
         appServiceTable: ret.data.dataTable,
         appServiceForm: ret.data.dataForm,
+        customType: ret.data.customType,
       };
       dispatch.appService.setState(payload);
     },

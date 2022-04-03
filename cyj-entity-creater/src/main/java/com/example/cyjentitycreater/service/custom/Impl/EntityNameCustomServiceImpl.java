@@ -964,6 +964,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "      const payload = {\r\n" +
                 "        " + underSubPoName + "Table: ret.data.dataTable,\r\n" +
                 "        " + underSubPoName + "Form: ret.data.dataForm,\r\n" +
+                "        customType: ret.data.customType,\r\n" +
                 "      };\r\n" +
                 "      dispatch." + underSubPoName + ".setState(payload);\r\n" +
                 "    },\r\n" +
@@ -1253,6 +1254,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "      const payload = {\r\n" +
                 "        " + underPoName + "Table: ret.data.dataTable,\r\n" +
                 "        " + underPoName + "Form: ret.data.dataForm,\r\n" +
+                "        customType: ret.data.customType,\r\n" +
                 "      };\r\n" +
                 "      dispatch." + underPoName + ".setState(payload);\r\n" +
                 "    },\r\n" +
@@ -1562,6 +1564,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("dataTable", entityCustomDTOList);
         jsonObject.put("dataForm", entityCustomDTOList);
+        jsonObject.put("customType", "是".equals(po.getCustomType()));
         return jsonObject;
     }
 

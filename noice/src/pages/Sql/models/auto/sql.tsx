@@ -85,6 +85,7 @@ export default {
       const payload = {
         sqlTable: ret.data.dataTable,
         sqlForm: ret.data.dataForm,
+        customType: ret.data.customType,
       };
       dispatch.sql.setState(payload);
     },

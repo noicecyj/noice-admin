@@ -83,6 +83,7 @@ export default {
       const payload = {
         dictionaryTable: ret.data.dataTable,
         dictionaryForm: ret.data.dataForm,
+        customType: ret.data.customType,
       };
       dispatch.dictionary.setState(payload);
     },
