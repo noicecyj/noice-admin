@@ -43,6 +43,7 @@ function Authority() {
         customMethodName3={customAuthorityState.customMethodName3}
       />
       <DataFormTemple
+        formType={authorityState.formType}
         title={authorityState.authorityTitle}
         visibleDialog={authorityState.authorityVisible}
         onClose={() => authorityDispatchers.setState({authorityVisible: false})}

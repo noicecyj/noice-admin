@@ -55,6 +55,7 @@ function SecondMenu() {
         />
       </Dialog>
       <DataFormTemple
+        formType={secondMenuState.formType}
         title="菜单"
         visibleDialog={secondMenuState.secondMenuVisible}
         onClose={() => secondMenuDispatchers.setState({secondMenuVisible: false})}

@@ -54,6 +54,7 @@ function EntityName() {
         customMethodName3={customEntityNameState.customMethodName3}
       />
       <DataFormTemple
+        formType={entityNameState.formType}
         title={entityNameState.entityNameTitle}
         visibleDialog={entityNameState.entityNameVisible}
         onClose={() => entityNameDispatchers.setState({entityNameVisible: false})}

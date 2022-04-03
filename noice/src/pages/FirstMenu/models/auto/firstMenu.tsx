@@ -17,6 +17,7 @@ export default {
     firstMenuTable: [],
     firstMenuId: '',
     customType: false,
+    formType: 'ONE_LIST',
   },
 
   reducers: {

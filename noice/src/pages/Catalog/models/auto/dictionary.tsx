@@ -17,6 +17,7 @@ export default {
     divVisible: false,
     catalogId: '',
     customType: false,
+    formType: 'ONE_LIST',
   },
 
   reducers: {

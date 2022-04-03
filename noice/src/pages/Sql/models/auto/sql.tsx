@@ -17,6 +17,7 @@ export default {
     sqlTable: [],
     sqlId: '',
     customType: false,
+    formType: 'ONE_LIST',
   },
 
   reducers: {

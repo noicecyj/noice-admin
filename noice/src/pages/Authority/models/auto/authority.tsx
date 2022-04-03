@@ -17,6 +17,7 @@ export default {
     authorityTable: [],
     authorityId: '',
     customType: false,
+    formType: 'ONE_LIST',
   },
 
   reducers: {

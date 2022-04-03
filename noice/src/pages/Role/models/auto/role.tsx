@@ -17,6 +17,7 @@ export default {
     roleTable: [],
     roleId: '',
     customType: true,
+    formType: 'ONE_LIST',
   },
 
   reducers: {

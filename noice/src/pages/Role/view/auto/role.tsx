@@ -43,6 +43,7 @@ function Role() {
         customMethodName3={customRoleState.customMethodName3}
       />
       <DataFormTemple
+        formType={roleState.formType}
         title={roleState.roleTitle}
         visibleDialog={roleState.roleVisible}
         onClose={() => roleDispatchers.setState({roleVisible: false})}

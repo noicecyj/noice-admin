@@ -17,6 +17,7 @@ export default {
     divVisible: false,
     firstMenuId: '',
     customType: false,
+    formType: 'ONE_LIST',
   },
 
   reducers: {

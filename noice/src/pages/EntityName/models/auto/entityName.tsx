@@ -17,6 +17,7 @@ export default {
     entityNameTable: [],
     entityNameId: '',
     customType: false,
+    formType: 'ONE_LIST',
   },
 
   reducers: {

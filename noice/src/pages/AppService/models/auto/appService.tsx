@@ -17,6 +17,7 @@ export default {
     appServiceTable: [],
     appServiceId: '',
     customType: true,
+    formType: 'ONE_LIST',
   },
 
   reducers: {

@@ -54,6 +54,7 @@ function Catalog() {
         customMethodName3={customCatalogState.customMethodName3}
       />
       <DataFormTemple
+        formType={catalogState.formType}
         title={catalogState.catalogTitle}
         visibleDialog={catalogState.catalogVisible}
         onClose={() => catalogDispatchers.setState({catalogVisible: false})}

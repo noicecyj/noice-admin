@@ -17,6 +17,7 @@ export default {
     divVisible: false,
     entityNameId: '',
     customType: false,
+    formType: 'ONE_LIST',
   },
 
   reducers: {

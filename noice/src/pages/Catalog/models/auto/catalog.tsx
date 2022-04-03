@@ -17,6 +17,7 @@ export default {
     catalogTable: [],
     catalogId: '',
     customType: false,
+    formType: 'ONE_LIST',
   },
 
   reducers: {

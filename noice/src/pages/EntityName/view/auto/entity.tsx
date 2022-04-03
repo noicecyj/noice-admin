@@ -55,6 +55,7 @@ function Entity() {
         />
       </Dialog>
       <DataFormTemple
+        formType={entityState.formType}
         title="菜单"
         visibleDialog={entityState.entityVisible}
         onClose={() => entityDispatchers.setState({entityVisible: false})}
