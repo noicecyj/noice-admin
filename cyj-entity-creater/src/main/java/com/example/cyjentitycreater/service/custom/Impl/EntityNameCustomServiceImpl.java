@@ -887,6 +887,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "  namespace: '" + underSubPoName + "',\r\n" +
                 "\r\n" +
                 "  state: {\r\n" +
+                "    " + underSubPoName + "Title: '添加',\r\n" +
                 "    " + underSubPoName + "TableData: [],\r\n" +
                 "    " + underSubPoName + "FormData: {},\r\n" +
                 "    " + underSubPoName + "LoadingVisible: true,\r\n" +
@@ -898,7 +899,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "    divVisible: false,\r\n" +
                 "    " + underPoName + "Id: '',\r\n" +
                 "    customType: false,\r\n" +
-                "    formType: 'ONE_LIST'\r\n" +
+                "    formType: 'ONE_LIST',\r\n" +
                 "  },\r\n" +
                 "\r\n" +
                 "  reducers: {\r\n" +
@@ -924,10 +925,10 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "        " + underSubPoName + "Title: '添加',\r\n" +
                 "        " + underSubPoName + "Visible: true,\r\n" +
                 "      };\r\n" +
-                "      dispatch.entityName.setState(payload);\r\n" +
+                "      dispatch." + underSubPoName + ".setState(payload);\r\n" +
                 "    },\r\n" +
                 "    async " + underSubPoName + "Edit(data) {\r\n" +
-                "      const " + underSubPoName + " = await " + underSubPoName + "Service.find" + poName + "ById(data.id);\r\n" +
+                "      const " + underSubPoName + " = await " + underSubPoName + "Service.find" + subPoName + "ById(data.id);\r\n" +
                 "      const fromData = {\r\n" +
                 "        ..." + underSubPoName + ".data,\r\n" +
                 "      };\r\n" +

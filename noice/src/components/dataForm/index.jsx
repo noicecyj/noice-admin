@@ -1,5 +1,17 @@
 import React from 'react';
-import {DatePicker, Dialog, Form, Input, NumberPicker, Range, Select, Switch, TimePicker} from '@alifd/next';
+import {
+  Checkbox,
+  DatePicker,
+  Dialog,
+  Form,
+  Input,
+  NumberPicker,
+  Radio,
+  Range,
+  Select,
+  Switch,
+  TimePicker
+} from '@alifd/next';
 
 const formItemLayout = {
   labelCol: {
@@ -22,7 +34,7 @@ const {Group: CheckboxGroup} = Checkbox;
 
 function DataForm(props) {
   const {items, dispatchers, onOk, formDataValue, title, visibleDialog, onClose, customType, formType} = props;
-  console.log('formDataValue====>',formDataValue)
+  console.log('formDataValue====>', formDataValue)
 
   return (
     <Dialog v2 title={title} visible={visibleDialog} footer={false} onClose={onClose} style={{width: '30%'}}>

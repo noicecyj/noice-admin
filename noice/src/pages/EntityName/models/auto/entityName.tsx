@@ -17,7 +17,7 @@ export default {
     entityNameTable: [],
     entityNameId: '',
     customType: false,
-    formType: 'ONE_LIST',
+    formType: 'ONE_LIST'
   },
 
   reducers: {
@@ -46,7 +46,6 @@ export default {
       dispatch.entityName.setState(payload);
     },
     async entityNameEdit(data) {
-      console.log(data)
       const entityName = await entityNameService.findEntityNameById(data.id);
       const fromData = {
         ...entityName.data,
@@ -83,7 +82,6 @@ export default {
     async findDataTableAndFormByName() {
       const ret = await initService.findDataTableAndFormByName('entity_name');
       await this.entityNamePage(1);
-      console.log(ret.data.customType)
       const payload = {
         entityNameTable: ret.data.dataTable,
         entityNameForm: ret.data.dataForm,
