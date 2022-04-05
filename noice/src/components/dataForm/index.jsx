@@ -34,7 +34,6 @@ const {Group: CheckboxGroup} = Checkbox;
 
 function DataForm(props) {
   const {items, dispatchers, onOk, formDataValue, title, visibleDialog, onClose, customType, formType} = props;
-  console.log('formDataValue====>', formDataValue)
 
   return (
     <Dialog v2 title={title} visible={visibleDialog} footer={false} onClose={onClose} style={{width: '30%'}}>

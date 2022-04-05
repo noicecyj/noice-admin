@@ -57,8 +57,8 @@ function DataTable(props) {
           <div className={styles.add}>
             {!!createItem && <Button type="primary" onClick={() => createItem()}> 添加 </Button>}
             {!!customMethodName1 && <Button onClick={() => customMethod1()}> {customMethodName1} </Button>}
-            {!!customMethodName2 && <Button onClick={() => customMethod1()}> {customMethodName2} </Button>}
-            {!!customMethodName3 && <Button onClick={() => customMethod1()}> {customMethodName3} </Button>}
+            {!!customMethodName2 && <Button onClick={() => customMethod2()}> {customMethodName2} </Button>}
+            {!!customMethodName3 && <Button onClick={() => customMethod3()}> {customMethodName3} </Button>}
           </div>
           <Loading
             tip="加载中..."
