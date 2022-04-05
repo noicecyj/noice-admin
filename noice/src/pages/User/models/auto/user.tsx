@@ -16,7 +16,7 @@ export default {
     userForm: [],
     userTable: [],
     userId: '',
-    customType: true,
+    customType: false,
     formType: 'ONE_LIST',
   },
 
@@ -37,26 +37,25 @@ export default {
       };
       dispatch.user.setState(payload);
     },
+    async userAdd() {
+      const payload = {
+        userFormData: {},
+        userTitle: '添加',
+        userVisible: true,
+      };
+      dispatch.entityName.setState(payload);
+    },
     async userEdit(data) {
-      if (data) {
-        const user = await userService.findUserById(data.id);
-        const fromData = {
-          ...user.data,
-        };
-        const payload = {
-          userFormData: fromData,
-          userTitle: '编辑',
-          userVisible: true,
-        };
-        dispatch.user.setState(payload);
-      } else {
-        const payload = {
-          userFormData: {},
-          userTitle: '添加',
-          userVisible: true,
-        };
-        dispatch.user.setState(payload);
-      }
+      const user = await userService.findUserById(data.id);
+      const fromData = {
+        ...user.data,
+      };
+      const payload = {
+        userFormData: fromData,
+        userTitle: '编辑',
+        userVisible: true,
+      };
+      dispatch.user.setState(payload);
     },
     async userDelete(data) {
       await userService.userDelete(data.record.id);

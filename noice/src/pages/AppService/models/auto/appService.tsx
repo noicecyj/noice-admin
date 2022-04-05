@@ -16,7 +16,7 @@ export default {
     appServiceForm: [],
     appServiceTable: [],
     appServiceId: '',
-    customType: true,
+    customType: false,
     formType: 'ONE_LIST',
   },
 
@@ -37,26 +37,25 @@ export default {
       };
       dispatch.appService.setState(payload);
     },
+    async appServiceAdd() {
+      const payload = {
+        appServiceFormData: {},
+        appServiceTitle: '添加',
+        appServiceVisible: true,
+      };
+      dispatch.entityName.setState(payload);
+    },
     async appServiceEdit(data) {
-      if (data) {
-        const appService = await appServiceService.findAppServiceById(data.id);
-        const fromData = {
-          ...appService.data,
-        };
-        const payload = {
-          appServiceFormData: fromData,
-          appServiceTitle: '编辑',
-          appServiceVisible: true,
-        };
-        dispatch.appService.setState(payload);
-      } else {
-        const payload = {
-          appServiceFormData: {},
-          appServiceTitle: '添加',
-          appServiceVisible: true,
-        };
-        dispatch.appService.setState(payload);
-      }
+      const appService = await appServiceService.findAppServiceById(data.id);
+      const fromData = {
+        ...appService.data,
+      };
+      const payload = {
+        appServiceFormData: fromData,
+        appServiceTitle: '编辑',
+        appServiceVisible: true,
+      };
+      dispatch.appService.setState(payload);
     },
     async appServiceDelete(data) {
       await appServiceService.appServiceDelete(data.record.id);

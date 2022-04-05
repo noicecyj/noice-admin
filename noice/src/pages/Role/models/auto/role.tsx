@@ -16,7 +16,7 @@ export default {
     roleForm: [],
     roleTable: [],
     roleId: '',
-    customType: true,
+    customType: false,
     formType: 'ONE_LIST',
   },
 
@@ -37,26 +37,25 @@ export default {
       };
       dispatch.role.setState(payload);
     },
+    async roleAdd() {
+      const payload = {
+        roleFormData: {},
+        roleTitle: '添加',
+        roleVisible: true,
+      };
+      dispatch.entityName.setState(payload);
+    },
     async roleEdit(data) {
-      if (data) {
-        const role = await roleService.findRoleById(data.id);
-        const fromData = {
-          ...role.data,
-        };
-        const payload = {
-          roleFormData: fromData,
-          roleTitle: '编辑',
-          roleVisible: true,
-        };
-        dispatch.role.setState(payload);
-      } else {
-        const payload = {
-          roleFormData: {},
-          roleTitle: '添加',
-          roleVisible: true,
-        };
-        dispatch.role.setState(payload);
-      }
+      const role = await roleService.findRoleById(data.id);
+      const fromData = {
+        ...role.data,
+      };
+      const payload = {
+        roleFormData: fromData,
+        roleTitle: '编辑',
+        roleVisible: true,
+      };
+      dispatch.role.setState(payload);
     },
     async roleDelete(data) {
       await roleService.roleDelete(data.record.id);

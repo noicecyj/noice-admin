@@ -23,7 +23,7 @@ function SecondMenu() {
         style={{width: '90%'}}
       >
         <DataTableTemple
-          createItem={data => secondMenuDispatchers.secondMenuEdit(data)}
+          createItem={() => secondMenuDispatchers.secondMenuAdd()}
           editItem={record => secondMenuDispatchers.secondMenuEdit(record)}
           deleteItem={record => secondMenuDispatchers.secondMenuDelete({
             record,
@@ -57,7 +57,7 @@ function SecondMenu() {
       <DataFormTemple
         formType={secondMenuState.formType}
         customType={secondMenuState.customType}
-        title="菜单"
+        title={secondMenuState.secondMenuTitle}
         visibleDialog={secondMenuState.secondMenuVisible}
         onClose={() => secondMenuDispatchers.setState({secondMenuVisible: false})}
         items={secondMenuState.secondMenuForm}

@@ -16,7 +16,7 @@ function User() {
   return (
     <>
       <DataTableTemple
-        createItem={data => userDispatchers.userEdit(data)}
+        createItem={() => userDispatchers.userAdd()}
         editItem={record => userDispatchers.userEdit(record)}
         deleteItem={record => userDispatchers.userDelete({
           record,

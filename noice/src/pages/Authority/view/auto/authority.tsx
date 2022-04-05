@@ -16,7 +16,7 @@ function Authority() {
   return (
     <>
       <DataTableTemple
-        createItem={data => authorityDispatchers.authorityEdit(data)}
+        createItem={() => authorityDispatchers.authorityAdd()}
         editItem={record => authorityDispatchers.authorityEdit(record)}
         deleteItem={record => authorityDispatchers.authorityDelete({
           record,

@@ -16,7 +16,7 @@ function AppService() {
   return (
     <>
       <DataTableTemple
-        createItem={data => appServiceDispatchers.appServiceEdit(data)}
+        createItem={() => appServiceDispatchers.appServiceAdd()}
         editItem={record => appServiceDispatchers.appServiceEdit(record)}
         deleteItem={record => appServiceDispatchers.appServiceDelete({
           record,

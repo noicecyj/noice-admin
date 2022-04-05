@@ -17,7 +17,7 @@ function FirstMenu() {
   return (
     <>
       <DataTableTemple
-        createItem={data => firstMenuDispatchers.firstMenuEdit(data)}
+        createItem={() => firstMenuDispatchers.firstMenuAdd()}
         editItem={record => firstMenuDispatchers.firstMenuEdit(record)}
         deleteItem={record => firstMenuDispatchers.firstMenuDelete({
           record,

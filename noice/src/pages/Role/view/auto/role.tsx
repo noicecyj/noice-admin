@@ -16,7 +16,7 @@ function Role() {
   return (
     <>
       <DataTableTemple
-        createItem={data => roleDispatchers.roleEdit(data)}
+        createItem={() => roleDispatchers.roleAdd()}
         editItem={record => roleDispatchers.roleEdit(record)}
         deleteItem={record => roleDispatchers.roleDelete({
           record,

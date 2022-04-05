@@ -37,26 +37,25 @@ export default {
       };
       dispatch.authority.setState(payload);
     },
+    async authorityAdd() {
+      const payload = {
+        authorityFormData: {},
+        authorityTitle: '添加',
+        authorityVisible: true,
+      };
+      dispatch.entityName.setState(payload);
+    },
     async authorityEdit(data) {
-      if (data) {
-        const authority = await authorityService.findAuthorityById(data.id);
-        const fromData = {
-          ...authority.data,
-        };
-        const payload = {
-          authorityFormData: fromData,
-          authorityTitle: '编辑',
-          authorityVisible: true,
-        };
-        dispatch.authority.setState(payload);
-      } else {
-        const payload = {
-          authorityFormData: {},
-          authorityTitle: '添加',
-          authorityVisible: true,
-        };
-        dispatch.authority.setState(payload);
-      }
+      const authority = await authorityService.findAuthorityById(data.id);
+      const fromData = {
+        ...authority.data,
+      };
+      const payload = {
+        authorityFormData: fromData,
+        authorityTitle: '编辑',
+        authorityVisible: true,
+      };
+      dispatch.authority.setState(payload);
     },
     async authorityDelete(data) {
       await authorityService.authorityDelete(data.record.id);

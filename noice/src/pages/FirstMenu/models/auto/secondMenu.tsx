@@ -6,6 +6,7 @@ export default {
   namespace: 'secondMenu',
 
   state: {
+    secondMenuTitle: '添加',
     secondMenuTableData: [],
     secondMenuFormData: {},
     secondMenuLoadingVisible: true,
@@ -37,24 +38,25 @@ export default {
       };
       dispatch.secondMenu.setState(payload);
     },
+    async secondMenuAdd() {
+      const payload = {
+        secondMenuFormData: {},
+        secondMenuTitle: '添加',
+        secondMenuVisible: true,
+      };
+      dispatch.secondMenu.setState(payload);
+    },
     async secondMenuEdit(data) {
-      if (data) {
-        const secondMenu = await secondMenuService.findSecondMenuById(data.id);
-        const fromData = {
-          ...secondMenu.data,
-        };
-        const payload = {
-          secondMenuFormData: fromData,
-          secondMenuVisible: true,
-        };
-        dispatch.secondMenu.setState(payload);
-      } else {
-        const payload = {
-          secondMenuFormData: {},
-          secondMenuVisible: true,
-        };
-        dispatch.secondMenu.setState(payload);
-      }
+      const secondMenu = await secondMenuService.findSecondMenuById(data.id);
+      const fromData = {
+        ...secondMenu.data,
+      };
+      const payload = {
+        secondMenuFormData: fromData,
+        secondMenuTitle: '编辑',
+        secondMenuVisible: true,
+      };
+      dispatch.secondMenu.setState(payload);
     },
     async secondMenuDelete(data) {
       await secondMenuService.secondMenuDelete(data.record.id);

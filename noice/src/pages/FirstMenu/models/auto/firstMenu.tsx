@@ -37,26 +37,25 @@ export default {
       };
       dispatch.firstMenu.setState(payload);
     },
+    async firstMenuAdd() {
+      const payload = {
+        firstMenuFormData: {},
+        firstMenuTitle: '添加',
+        firstMenuVisible: true,
+      };
+      dispatch.entityName.setState(payload);
+    },
     async firstMenuEdit(data) {
-      if (data) {
-        const firstMenu = await firstMenuService.findFirstMenuById(data.id);
-        const fromData = {
-          ...firstMenu.data,
-        };
-        const payload = {
-          firstMenuFormData: fromData,
-          firstMenuTitle: '编辑',
-          firstMenuVisible: true,
-        };
-        dispatch.firstMenu.setState(payload);
-      } else {
-        const payload = {
-          firstMenuFormData: {},
-          firstMenuTitle: '添加',
-          firstMenuVisible: true,
-        };
-        dispatch.firstMenu.setState(payload);
-      }
+      const firstMenu = await firstMenuService.findFirstMenuById(data.id);
+      const fromData = {
+        ...firstMenu.data,
+      };
+      const payload = {
+        firstMenuFormData: fromData,
+        firstMenuTitle: '编辑',
+        firstMenuVisible: true,
+      };
+      dispatch.firstMenu.setState(payload);
     },
     async firstMenuDelete(data) {
       await firstMenuService.firstMenuDelete(data.record.id);
