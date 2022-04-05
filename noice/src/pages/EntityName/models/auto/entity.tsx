@@ -6,6 +6,7 @@ export default {
   namespace: 'entity',
 
   state: {
+    entityTitle: '添加',
     entityTableData: [],
     entityFormData: {},
     entityLoadingVisible: true,
@@ -37,24 +38,25 @@ export default {
       };
       dispatch.entity.setState(payload);
     },
+    async entityAdd() {
+      const payload = {
+        entityFormData: {},
+        entityTitle: '添加',
+        entityVisible: true,
+      };
+      dispatch.entity.setState(payload);
+    },
     async entityEdit(data) {
-      if (data) {
-        const entity = await entityService.findEntityById(data.id);
-        const fromData = {
-          ...entity.data,
-        };
-        const payload = {
-          entityFormData: fromData,
-          entityVisible: true,
-        };
-        dispatch.entity.setState(payload);
-      } else {
-        const payload = {
-          entityFormData: {},
-          entityVisible: true,
-        };
-        dispatch.entity.setState(payload);
-      }
+      const entity = await entityService.findEntityById(data.id);
+      const fromData = {
+        ...entity.data,
+      };
+      const payload = {
+        entityFormData: fromData,
+        entityTitle: '编辑',
+        entityVisible: true,
+      };
+      dispatch.entity.setState(payload);
     },
     async entityDelete(data) {
       await entityService.entityDelete(data.record.id);

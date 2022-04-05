@@ -23,7 +23,7 @@ function Entity() {
         style={{width: '90%'}}
       >
         <DataTableTemple
-          createItem={data => entityDispatchers.entityEdit(data)}
+          createItem={() => entityDispatchers.entityAdd()}
           editItem={record => entityDispatchers.entityEdit(record)}
           deleteItem={record => entityDispatchers.entityDelete({
             record,
@@ -56,7 +56,8 @@ function Entity() {
       </Dialog>
       <DataFormTemple
         formType={entityState.formType}
-        title="菜单"
+        customType={entityState.customType}
+        title={entityState.entityTitle}
         visibleDialog={entityState.entityVisible}
         onClose={() => entityDispatchers.setState({entityVisible: false})}
         items={entityState.entityForm}

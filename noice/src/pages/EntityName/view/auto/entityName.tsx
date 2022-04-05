@@ -17,7 +17,7 @@ function EntityName() {
   return (
     <>
       <DataTableTemple
-        createItem={data => entityNameDispatchers.entityNameEdit(data)}
+        createItem={() => entityNameDispatchers.entityNameAdd()}
         editItem={record => entityNameDispatchers.entityNameEdit(record)}
         deleteItem={record => entityNameDispatchers.entityNameDelete({
           record,
@@ -55,6 +55,7 @@ function EntityName() {
       />
       <DataFormTemple
         formType={entityNameState.formType}
+        customType={entityNameState.customType}
         title={entityNameState.entityNameTitle}
         visibleDialog={entityNameState.entityNameVisible}
         onClose={() => entityNameDispatchers.setState({entityNameVisible: false})}

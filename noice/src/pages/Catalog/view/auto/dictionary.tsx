@@ -56,6 +56,7 @@ function Dictionary() {
       </Dialog>
       <DataFormTemple
         formType={dictionaryState.formType}
+        customType={dictionaryState.customType}
         title="菜单"
         visibleDialog={dictionaryState.dictionaryVisible}
         onClose={() => dictionaryDispatchers.setState({dictionaryVisible: false})}

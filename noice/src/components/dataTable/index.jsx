@@ -28,7 +28,7 @@ function DataTable(props) {
     customMethodName2,
     customMethodName3,
   } = props;
-  console.log(editItem)
+
   const pageRender = (value, index, record) => {
     return (
       <div className={styles.opt}>

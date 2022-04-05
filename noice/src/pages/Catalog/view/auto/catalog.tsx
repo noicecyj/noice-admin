@@ -55,6 +55,7 @@ function Catalog() {
       />
       <DataFormTemple
         formType={catalogState.formType}
+        customType={catalogState.customType}
         title={catalogState.catalogTitle}
         visibleDialog={catalogState.catalogVisible}
         onClose={() => catalogDispatchers.setState({catalogVisible: false})}

@@ -44,6 +44,7 @@ function AppService() {
       />
       <DataFormTemple
         formType={appServiceState.formType}
+        customType={appServiceState.customType}
         title={appServiceState.appServiceTitle}
         visibleDialog={appServiceState.appServiceVisible}
         onClose={() => appServiceDispatchers.setState({appServiceVisible: false})}

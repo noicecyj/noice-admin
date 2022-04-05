@@ -55,6 +55,7 @@ function FirstMenu() {
       />
       <DataFormTemple
         formType={firstMenuState.formType}
+        customType={firstMenuState.customType}
         title={firstMenuState.firstMenuTitle}
         visibleDialog={firstMenuState.firstMenuVisible}
         onClose={() => firstMenuDispatchers.setState({firstMenuVisible: false})}

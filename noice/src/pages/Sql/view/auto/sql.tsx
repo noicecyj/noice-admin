@@ -44,6 +44,7 @@ function Sql() {
       />
       <DataFormTemple
         formType={sqlState.formType}
+        customType={sqlState.customType}
         title={sqlState.sqlTitle}
         visibleDialog={sqlState.sqlVisible}
         onClose={() => sqlDispatchers.setState({sqlVisible: false})}

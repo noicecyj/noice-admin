@@ -37,26 +37,26 @@ export default {
       };
       dispatch.entityName.setState(payload);
     },
+    async entityNameAdd() {
+      const payload = {
+        entityNameFormData: {},
+        entityNameTitle: '添加',
+        entityNameVisible: true,
+      };
+      dispatch.entityName.setState(payload);
+    },
     async entityNameEdit(data) {
-      if (data) {
-        const entityName = await entityNameService.findEntityNameById(data.id);
-        const fromData = {
-          ...entityName.data,
-        };
-        const payload = {
-          entityNameFormData: fromData,
-          entityNameTitle: '编辑',
-          entityNameVisible: true,
-        };
-        dispatch.entityName.setState(payload);
-      } else {
-        const payload = {
-          entityNameFormData: {},
-          entityNameTitle: '添加',
-          entityNameVisible: true,
-        };
-        dispatch.entityName.setState(payload);
-      }
+      console.log(data)
+      const entityName = await entityNameService.findEntityNameById(data.id);
+      const fromData = {
+        ...entityName.data,
+      };
+      const payload = {
+        entityNameFormData: fromData,
+        entityNameTitle: '编辑',
+        entityNameVisible: true,
+      };
+      dispatch.entityName.setState(payload);
     },
     async entityNameDelete(data) {
       await entityNameService.entityNameDelete(data.record.id);
@@ -83,6 +83,7 @@ export default {
     async findDataTableAndFormByName() {
       const ret = await initService.findDataTableAndFormByName('entity_name');
       await this.entityNamePage(1);
+      console.log(ret.data.customType)
       const payload = {
         entityNameTable: ret.data.dataTable,
         entityNameForm: ret.data.dataForm,

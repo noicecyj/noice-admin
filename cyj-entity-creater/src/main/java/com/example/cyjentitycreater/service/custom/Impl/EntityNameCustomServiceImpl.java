@@ -918,24 +918,25 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "      };\r\n" +
                 "      dispatch." + underSubPoName + ".setState(payload);\r\n" +
                 "    },\r\n" +
+                "    async " + underSubPoName + "Add() {\r\n" +
+                "      const payload = {\r\n" +
+                "        " + underSubPoName + "FormData: {},\r\n" +
+                "        " + underSubPoName + "Title: '添加',\r\n" +
+                "        " + underSubPoName + "Visible: true,\r\n" +
+                "      };\r\n" +
+                "      dispatch.entityName.setState(payload);\r\n" +
+                "    },\r\n" +
                 "    async " + underSubPoName + "Edit(data) {\r\n" +
-                "      if (data) {\r\n" +
-                "        const " + underSubPoName + " = await " + underSubPoName + "Service.find" + subPoName + "ById(data.id);\r\n" +
-                "        const fromData = {\r\n" +
-                "          ..." + underSubPoName + ".data,\r\n" +
-                "        };\r\n" +
-                "        const payload = {\r\n" +
-                "          " + underSubPoName + "FormData: fromData,\r\n" +
-                "          " + underSubPoName + "Visible: true,\r\n" +
-                "        };\r\n" +
-                "        dispatch." + underSubPoName + ".setState(payload);\r\n" +
-                "      } else {\r\n" +
-                "        const payload = {\r\n" +
-                "          " + underSubPoName + "FormData: {},\r\n" +
-                "          " + underSubPoName + "Visible: true,\r\n" +
-                "        };\r\n" +
-                "        dispatch." + underSubPoName + ".setState(payload);\r\n" +
-                "      }\r\n" +
+                "      const " + underSubPoName + " = await " + underSubPoName + "Service.find" + poName + "ById(data.id);\r\n" +
+                "      const fromData = {\r\n" +
+                "        ..." + underSubPoName + ".data,\r\n" +
+                "      };\r\n" +
+                "      const payload = {\r\n" +
+                "        " + underSubPoName + "FormData: fromData,\r\n" +
+                "        " + underSubPoName + "Title: '编辑',\r\n" +
+                "        " + underSubPoName + "Visible: true,\r\n" +
+                "      };\r\n" +
+                "      dispatch." + underSubPoName + ".setState(payload);\r\n" +
                 "    },\r\n" +
                 "    async " + underSubPoName + "Delete(data) {\r\n" +
                 "      await " + underSubPoName + "Service." + underSubPoName + "Delete(data.record.id);\r\n" +
@@ -1055,7 +1056,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "        style={{width: '90%'}}\r\n" +
                 "      >\r\n" +
                 "        <DataTableTemple\r\n" +
-                "          createItem={data => " + underSubPoName + "Dispatchers." + underSubPoName + "Edit(data)}\r\n" +
+                "          createItem={() => " + underSubPoName + "Dispatchers." + underSubPoName + "Add()}\r\n" +
                 "          editItem={record => " + underSubPoName + "Dispatchers." + underSubPoName + "Edit(record)}\r\n" +
                 "          deleteItem={record => " + underSubPoName + "Dispatchers." + underSubPoName + "Delete({\r\n" +
                 "            record,\r\n" +
@@ -1087,7 +1088,9 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "        />\r\n" +
                 "      </Dialog>\r\n" +
                 "      <DataFormTemple\r\n" +
-                "        title=\"菜单\"\r\n" +
+                "        formType={" + underSubPoName + "State.formType}\r\n" +
+                "        customType={" + underSubPoName + "State.customType}\r\n" +
+                "        title={" + underSubPoName + "State." + underSubPoName + "Title}\r\n" +
                 "        visibleDialog={" + underSubPoName + "State." + underSubPoName + "Visible}\r\n" +
                 "        onClose={() => " + underSubPoName + "Dispatchers.setState({" + underSubPoName + "Visible: false})}\r\n" +
                 "        items={" + underSubPoName + "State." + underSubPoName + "Form}\r\n" +
@@ -1207,26 +1210,25 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "      };\r\n" +
                 "      dispatch." + underPoName + ".setState(payload);\r\n" +
                 "    },\r\n" +
+                "    async " + underPoName + "Add() {\r\n" +
+                "      const payload = {\r\n" +
+                "        " + underPoName + "FormData: {},\r\n" +
+                "        " + underPoName + "Title: '添加',\r\n" +
+                "        " + underPoName + "Visible: true,\r\n" +
+                "      };\r\n" +
+                "      dispatch.entityName.setState(payload);\r\n" +
+                "    },\r\n" +
                 "    async " + underPoName + "Edit(data) {\r\n" +
-                "      if (data) {\r\n" +
-                "        const " + underPoName + " = await " + underPoName + "Service.find" + poName + "ById(data.id);\r\n" +
-                "        const fromData = {\r\n" +
-                "          ..." + underPoName + ".data,\r\n" +
-                "        };\r\n" +
-                "        const payload = {\r\n" +
-                "          " + underPoName + "FormData: fromData,\r\n" +
-                "          " + underPoName + "Title: '编辑',\r\n" +
-                "          " + underPoName + "Visible: true,\r\n" +
-                "        };\r\n" +
-                "        dispatch." + underPoName + ".setState(payload);\r\n" +
-                "      } else {\r\n" +
-                "        const payload = {\r\n" +
-                "          " + underPoName + "FormData: {},\r\n" +
-                "          " + underPoName + "Title: '添加',\r\n" +
-                "          " + underPoName + "Visible: true,\r\n" +
-                "        };\r\n" +
-                "        dispatch." + underPoName + ".setState(payload);\r\n" +
-                "      }\r\n" +
+                "      const " + underPoName + " = await " + underPoName + "Service.find" + poName + "ById(data.id);\r\n" +
+                "      const fromData = {\r\n" +
+                "        ..." + underPoName + ".data,\r\n" +
+                "      };\r\n" +
+                "      const payload = {\r\n" +
+                "        " + underPoName + "FormData: fromData,\r\n" +
+                "        " + underPoName + "Title: '编辑',\r\n" +
+                "        " + underPoName + "Visible: true,\r\n" +
+                "      };\r\n" +
+                "      dispatch." + underPoName + ".setState(payload);\r\n" +
                 "    },\r\n" +
                 "    async " + underPoName + "Delete(data) {\r\n" +
                 "      await " + underPoName + "Service." + underPoName + "Delete(data.record.id);\r\n" +
@@ -1394,7 +1396,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("  return (\r\n");
         sb.append("    <>\r\n");
         sb.append("      <DataTableTemple\r\n");
-        sb.append("        createItem={data => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Edit(data)}\r\n");
+        sb.append("        createItem={() => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Add()}\r\n");
         sb.append("        editItem={record => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Edit(record)}\r\n");
         sb.append("        deleteItem={record => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Delete({\r\n");
         sb.append("          record,\r\n");
@@ -1441,6 +1443,8 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("        customMethodName3={custom").append(poName).append("State.customMethodName3}\r\n");
         sb.append("      />\r\n");
         sb.append("      <DataFormTemple\r\n");
+        sb.append("        formType={").append(underPoName).append("State.formType}\r\n");
+        sb.append("        customType={").append(underPoName).append("State.customType}\r\n");
         sb.append("        title={").append(underPoName).append("State.").append(underPoName).append("Title}\r\n");
         sb.append("        visibleDialog={").append(underPoName).append("State.").append(underPoName).append("Visible}\r\n");
         sb.append("        onClose={() => ").append(underPoName).append("Dispatchers.setState({").append(underPoName).append("Visible: false})}\r\n");
@@ -1567,7 +1571,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         jsonObject.put("dataTable", entityCustomDTOList);
         jsonObject.put("dataForm", entityCustomDTOList);
         jsonObject.put("customType", "是".equals(po.getCustomType()));
-        jsonObject.put("formType", po.getCustomType());
+        jsonObject.put("formType", po.getFormType());
         return jsonObject;
     }
 
