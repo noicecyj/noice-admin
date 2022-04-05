@@ -1,6 +1,5 @@
 import React from 'react';
-import OneList from '../dataForm/OneList';
-import {Dialog, Form} from '@alifd/next';
+import {DatePicker, Dialog, Form, Input, NumberPicker, Range, Select, Switch, TimePicker} from '@alifd/next';
 
 const formItemLayout = {
   labelCol: {
@@ -11,13 +10,238 @@ const formItemLayout = {
   },
 };
 
+const dataSource = [
+  {value: '有效', label: '有效'},
+  {value: '无效', label: '无效'},
+];
+
+const FormItem = Form.Item;
+const {RangePicker} = DatePicker;
+const {Group: RadioGroup} = Radio;
+const {Group: CheckboxGroup} = Checkbox;
+
 function DataForm(props) {
   const {items, dispatchers, onOk, formDataValue, title, visibleDialog, onClose, customType, formType} = props;
+  console.log('formDataValue====>',formDataValue)
 
   return (
     <Dialog v2 title={title} visible={visibleDialog} footer={false} onClose={onClose} style={{width: '30%'}}>
-      <Form style={{width: '100%'}} {...formItemLayout} value={formDataValue} onChange={(value) => dispatchers(value)}>
-        <OneList items={items} onOk={onOk} customType={customType}/>
+      <Form {...formItemLayout} fullWidth value={formDataValue} onChange={(value) => dispatchers(value)}>
+        {items.map((item, index) => {
+          console.log(index)
+          if (item.propertyMode === 'Input') {
+            return (
+              <FormItem
+                label={`${item.propertyLabel}`}
+                required={item.propertyRequired === '是'}
+                requiredMessage={`请输入${item.propertyLabel}`}
+                key={item.id}>
+                <Input
+                  id={item.propertyCode}
+                  name={item.propertyName}
+                  placeholder={`请输入${item.propertyLabel}`}
+                  defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
+                />
+              </FormItem>
+            )
+          } else if (item.propertyMode === 'Password') {
+            return (
+              <FormItem
+                label={`${item.propertyLabel}`}
+                required={item.propertyRequired === '是'}
+                requiredMessage={`请输入${item.propertyLabel}`}
+                key={item.id}>
+                <Input.Password
+                  id={item.propertyCode}
+                  name={item.propertyName}
+                  placeholder={`请输入${item.propertyLabel}`}
+                />
+              </FormItem>)
+          } else if (item.propertyMode === 'TextArea') {
+            return (
+              <FormItem
+                label={`${item.propertyLabel}`}
+                required={item.propertyRequired === '是'}
+                requiredMessage={`请输入${item.propertyLabel}`}
+                key={item.id}>
+                <Input.TextArea
+                  id={item.propertyCode}
+                  name={item.propertyName}
+                  placeholder={`请输入${item.propertyLabel}`}
+                  defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
+                />
+              </FormItem>)
+          } else if (item.propertyMode === 'Select') {
+            return (
+              <FormItem
+                label={`${item.propertyLabel}`}
+                required={item.propertyRequired === '是'}
+                requiredMessage={`请输入${item.propertyLabel}`}
+                key={item.id}>
+                <Select
+                  id={item.propertyCode}
+                  name={item.propertyName}
+                  filterLocal={false}
+                  dataSource={item.propertyDataSource}
+                  mode={item.mode}
+                  defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
+                />
+              </FormItem>)
+          } else if (item.propertyMode === 'NumberPicker') {
+            return (
+              <FormItem
+                label={`${item.propertyLabel}`}
+                required={item.propertyRequired === '是'}
+                requiredMessage={`请输入${item.propertyLabel}`}
+                key={item.id}>
+                <NumberPicker
+                  id={item.propertyCode}
+                  name={item.propertyName}
+                  min={1}
+                  max={10}
+                  defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
+                />
+              </FormItem>)
+          } else if (item.propertyMode === 'Switch') {
+            return (
+              <FormItem
+                label={`${item.propertyLabel}`}
+                required={item.propertyRequired === '是'}
+                requiredMessage={`请输入${item.propertyLabel}`}
+                key={item.id}>
+                <Switch
+                  id={item.propertyCode}
+                  name={item.propertyName}
+                  defaultChecked
+                  defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
+                />
+              </FormItem>)
+          } else if (item.propertyMode === 'Range') {
+            return (
+              <FormItem
+                label={`${item.propertyLabel}`}
+                required={item.propertyRequired === '是'}
+                requiredMessage={`请输入${item.propertyLabel}`}
+                key={item.id}>
+                <Range
+                  id={item.propertyCode}
+                  name={item.propertyName}
+                  defaultValue={0}
+                  scales={[0, 100]}
+                  marks={[0, 100]}
+                />
+              </FormItem>)
+          } else if (item.propertyMode === 'DatePicker') {
+            return (
+              <FormItem
+                label={`${item.propertyLabel}`}
+                required={item.propertyRequired === '是'}
+                requiredMessage={`请输入${item.propertyLabel}`}
+                key={item.id}>
+                <DatePicker
+                  id={item.propertyCode}
+                  name={item.propertyName}
+                />
+              </FormItem>)
+          } else if (item.propertyMode === 'RangePicker') {
+            return (
+              <FormItem
+                label={`${item.propertyLabel}`}
+                required={item.propertyRequired === '是'}
+                requiredMessage={`请输入${item.propertyLabel}`}
+                key={item.id}>
+                <RangePicker
+                  id={item.propertyCode}
+                  name={item.propertyName}
+                />
+              </FormItem>)
+          } else if (item.propertyMode === 'TimePicker') {
+            return (
+              <FormItem
+                label={`${item.propertyLabel}`}
+                required={item.propertyRequired === '是'}
+                requiredMessage={`请输入${item.propertyLabel}`}
+                key={item.id}>
+                <TimePicker
+                  id={item.propertyCode}
+                  name={item.propertyName}
+                />
+              </FormItem>)
+          } else if (item.propertyMode === 'Checkbox') {
+            return (
+              <FormItem
+                label={`${item.propertyLabel}`}
+                required={item.propertyRequired === '是'}
+                requiredMessage={`请输入${item.propertyLabel}`}
+                key={item.id}>
+                <CheckboxGroup
+                  id={item.propertyCode}
+                  name={item.propertyName}
+                  dataSource={item.propertyDataSource}
+                  direction={item.propertyDirection}
+                />
+              </FormItem>)
+          } else if (item.propertyMode === 'Radio') {
+            return (
+              <FormItem
+                label={`${item.propertyLabel}`}
+                required={item.propertyRequired === '是'}
+                requiredMessage={`请输入${item.propertyLabel}`}
+                key={item.id}>
+                <RadioGroup
+                  id={item.propertyCode}
+                  name={item.propertyName}
+                  dataSource={item.propertyDataSource}
+                  direction={item.propertyDirection}
+                />
+              </FormItem>)
+          } else {
+            return (
+              <FormItem
+                label={`${item.propertyLabel}`}
+                required={item.propertyRequired === '是'}
+                requiredMessage={`请输入${item.propertyLabel}`}
+                key={item.id}>
+                <Input
+                  id={item.propertyCode}
+                  name={item.propertyName}
+                  placeholder={`请输入${item.propertyLabel}`}
+                  defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
+                />
+              </FormItem>)
+          }
+        })}
+        {
+          customType && <FormItem label="状态" required requiredMessage="请输入状态">
+            <Select
+              id="status"
+              name="status"
+              filterLocal={false}
+              dataSource={dataSource}
+              defaultValue="有效"
+            />
+          </FormItem>
+        }
+        {
+          customType && <FormItem label="排序代码" required requiredMessage="请输入排序代码">
+            <Input id="sortCode" name="sortCode" placeholder="请输入排序代码" defaultValue="0010"/>
+          </FormItem>
+        }
+        <FormItem>
+          <Form.Submit
+            validate
+            type="primary"
+            htmlType="submit"
+            onClick={(v, e) => {
+              if (e == null) {
+                onOk();
+              }
+            }}
+            style={{marginRight: 10}}
+          >确定
+          </Form.Submit>
+          <Form.Reset>重置</Form.Reset>
+        </FormItem>
       </Form>
     </Dialog>
   );
