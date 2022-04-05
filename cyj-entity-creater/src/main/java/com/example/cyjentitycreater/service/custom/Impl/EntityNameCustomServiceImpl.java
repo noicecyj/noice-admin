@@ -1191,7 +1191,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "    " + underPoName + "Table: [],\r\n" +
                 "    " + underPoName + "Id: '',\r\n" +
                 "    customType: false,\r\n" +
-                "    formType: 'ONE_LIST'\r\n" +
+                "    formType: 'ONE_LIST',\r\n" +
                 "  },\r\n" +
                 "\r\n" +
                 "  reducers: {\r\n" +
