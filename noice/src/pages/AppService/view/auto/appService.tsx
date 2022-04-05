@@ -30,11 +30,12 @@ function AppService() {
         total={appServiceState.appServiceTotal}
         getPage={appServiceCurrent => appServiceDispatchers.appServicePage(appServiceCurrent)}
         primaryKey="id"
-        columnRender={appServiceState.customType ? (value, index, record) => {
+        customType={appServiceState.customType}
+        columnRender={(value, index, record) => {
           return (
             <CustomColumnAppService value={value} index={index} record={record}/>
           );
-        } : null}
+        }}
         customMethod1={() => customAppServiceDispatchers.customMethod1()}
         customMethod2={() => customAppServiceDispatchers.customMethod2()}
         customMethod3={() => customAppServiceDispatchers.customMethod3()}

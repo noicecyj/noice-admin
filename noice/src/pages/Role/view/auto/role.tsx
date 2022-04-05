@@ -30,11 +30,12 @@ function Role() {
         total={roleState.roleTotal}
         getPage={roleCurrent => roleDispatchers.rolePage(roleCurrent)}
         primaryKey="id"
-        columnRender={roleState.customType ? (value, index, record) => {
+        customType={roleState.customType}
+        columnRender={(value, index, record) => {
           return (
             <CustomColumnRole value={value} index={index} record={record}/>
           );
-        } : null}
+        }}
         customMethod1={() => customRoleDispatchers.customMethod1()}
         customMethod2={() => customRoleDispatchers.customMethod2()}
         customMethod3={() => customRoleDispatchers.customMethod3()}

@@ -23,7 +23,7 @@ function Dictionary() {
         style={{width: '90%'}}
       >
         <DataTableTemple
-          createItem={data => dictionaryDispatchers.dictionaryEdit(data)}
+          createItem={() => dictionaryDispatchers.dictionaryAdd()}
           editItem={record => dictionaryDispatchers.dictionaryEdit(record)}
           deleteItem={record => dictionaryDispatchers.dictionaryDelete({
             record,
@@ -41,11 +41,12 @@ function Dictionary() {
             dictionaryCurrent,
             pid: dictionaryState.catalogId
           })}
-          columnRender={dictionaryState.customType ? (value, index, record) => {
+          customType={dictionaryState.customType}
+          columnRender={(value, index, record) => {
             return (
               <CustomColumnDictionary value={value} index={index} record={record}/>
             );
-          } : null}
+          }}
           customMethod1={() => customDictionaryDispatchers.customMethod1()}
           customMethod2={() => customDictionaryDispatchers.customMethod2()}
           customMethod3={() => customDictionaryDispatchers.customMethod3()}
@@ -57,7 +58,7 @@ function Dictionary() {
       <DataFormTemple
         formType={dictionaryState.formType}
         customType={dictionaryState.customType}
-        title="菜单"
+        title={dictionaryState.dictionaryTitle}
         visibleDialog={dictionaryState.dictionaryVisible}
         onClose={() => dictionaryDispatchers.setState({dictionaryVisible: false})}
         items={dictionaryState.dictionaryForm}

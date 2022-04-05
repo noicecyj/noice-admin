@@ -37,26 +37,25 @@ export default {
       };
       dispatch.catalog.setState(payload);
     },
+    async catalogAdd() {
+      const payload = {
+        catalogFormData: {},
+        catalogTitle: '添加',
+        catalogVisible: true,
+      };
+      dispatch.entityName.setState(payload);
+    },
     async catalogEdit(data) {
-      if (data) {
-        const catalog = await catalogService.findCatalogById(data.id);
-        const fromData = {
-          ...catalog.data,
-        };
-        const payload = {
-          catalogFormData: fromData,
-          catalogTitle: '编辑',
-          catalogVisible: true,
-        };
-        dispatch.catalog.setState(payload);
-      } else {
-        const payload = {
-          catalogFormData: {},
-          catalogTitle: '添加',
-          catalogVisible: true,
-        };
-        dispatch.catalog.setState(payload);
-      }
+      const catalog = await catalogService.findCatalogById(data.id);
+      const fromData = {
+        ...catalog.data,
+      };
+      const payload = {
+        catalogFormData: fromData,
+        catalogTitle: '编辑',
+        catalogVisible: true,
+      };
+      dispatch.catalog.setState(payload);
     },
     async catalogDelete(data) {
       await catalogService.catalogDelete(data.record.id);

@@ -16,7 +16,7 @@ function Sql() {
   return (
     <>
       <DataTableTemple
-        createItem={data => sqlDispatchers.sqlEdit(data)}
+        createItem={() => sqlDispatchers.sqlAdd()}
         editItem={record => sqlDispatchers.sqlEdit(record)}
         deleteItem={record => sqlDispatchers.sqlDelete({
           record,
@@ -30,11 +30,12 @@ function Sql() {
         total={sqlState.sqlTotal}
         getPage={sqlCurrent => sqlDispatchers.sqlPage(sqlCurrent)}
         primaryKey="id"
-        columnRender={sqlState.customType ? (value, index, record) => {
+        customType={sqlState.customType}
+        columnRender={(value, index, record) => {
           return (
             <CustomColumnSql value={value} index={index} record={record}/>
           );
-        } : null}
+        }}
         customMethod1={() => customSqlDispatchers.customMethod1()}
         customMethod2={() => customSqlDispatchers.customMethod2()}
         customMethod3={() => customSqlDispatchers.customMethod3()}

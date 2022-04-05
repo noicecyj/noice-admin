@@ -37,26 +37,25 @@ export default {
       };
       dispatch.sql.setState(payload);
     },
+    async sqlAdd() {
+      const payload = {
+        sqlFormData: {},
+        sqlTitle: '添加',
+        sqlVisible: true,
+      };
+      dispatch.entityName.setState(payload);
+    },
     async sqlEdit(data) {
-      if (data) {
-        const sql = await sqlService.findSqlById(data.id);
-        const fromData = {
-          ...sql.data,
-        };
-        const payload = {
-          sqlFormData: fromData,
-          sqlTitle: '编辑',
-          sqlVisible: true,
-        };
-        dispatch.sql.setState(payload);
-      } else {
-        const payload = {
-          sqlFormData: {},
-          sqlTitle: '添加',
-          sqlVisible: true,
-        };
-        dispatch.sql.setState(payload);
-      }
+      const sql = await sqlService.findSqlById(data.id);
+      const fromData = {
+        ...sql.data,
+      };
+      const payload = {
+        sqlFormData: fromData,
+        sqlTitle: '编辑',
+        sqlVisible: true,
+      };
+      dispatch.sql.setState(payload);
     },
     async sqlDelete(data) {
       await sqlService.sqlDelete(data.record.id);

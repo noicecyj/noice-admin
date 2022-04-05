@@ -43,7 +43,7 @@ export default {
         roleTitle: '添加',
         roleVisible: true,
       };
-      dispatch.entityName.setState(payload);
+      dispatch.role.setState(payload);
     },
     async roleEdit(data) {
       const role = await roleService.findRoleById(data.id);

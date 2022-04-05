@@ -30,11 +30,12 @@ function User() {
         total={userState.userTotal}
         getPage={userCurrent => userDispatchers.userPage(userCurrent)}
         primaryKey="id"
-        columnRender={userState.customType ? (value, index, record) => {
+        customType={userState.customType}
+        columnRender={(value, index, record) => {
           return (
             <CustomColumnUser value={value} index={index} record={record}/>
           );
-        } : null}
+        }}
         customMethod1={() => customUserDispatchers.customMethod1()}
         customMethod2={() => customUserDispatchers.customMethod2()}
         customMethod3={() => customUserDispatchers.customMethod3()}

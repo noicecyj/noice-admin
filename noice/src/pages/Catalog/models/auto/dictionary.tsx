@@ -6,6 +6,7 @@ export default {
   namespace: 'dictionary',
 
   state: {
+    dictionaryTitle: '添加',
     dictionaryTableData: [],
     dictionaryFormData: {},
     dictionaryLoadingVisible: true,
@@ -37,24 +38,25 @@ export default {
       };
       dispatch.dictionary.setState(payload);
     },
+    async dictionaryAdd() {
+      const payload = {
+        dictionaryFormData: {},
+        dictionaryTitle: '添加',
+        dictionaryVisible: true,
+      };
+      dispatch.dictionary.setState(payload);
+    },
     async dictionaryEdit(data) {
-      if (data) {
-        const dictionary = await dictionaryService.findDictionaryById(data.id);
-        const fromData = {
-          ...dictionary.data,
-        };
-        const payload = {
-          dictionaryFormData: fromData,
-          dictionaryVisible: true,
-        };
-        dispatch.dictionary.setState(payload);
-      } else {
-        const payload = {
-          dictionaryFormData: {},
-          dictionaryVisible: true,
-        };
-        dispatch.dictionary.setState(payload);
-      }
+      const dictionary = await dictionaryService.findDictionaryById(data.id);
+      const fromData = {
+        ...dictionary.data,
+      };
+      const payload = {
+        dictionaryFormData: fromData,
+        dictionaryTitle: '编辑',
+        dictionaryVisible: true,
+      };
+      dispatch.dictionary.setState(payload);
     },
     async dictionaryDelete(data) {
       await dictionaryService.dictionaryDelete(data.record.id);

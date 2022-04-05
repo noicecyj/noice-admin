@@ -11,6 +11,7 @@ function DataTable(props) {
 
   const {
     items,
+    customType,
     columnRender,
     dataSource,
     rowSelection,
@@ -80,7 +81,7 @@ function DataTable(props) {
                   key={index}
                 />);
               })}
-              {!!columnRender && <Table.Column
+              {customType && <Table.Column
                 title="自定义操作"
                 align="right"
                 key="columnRender"

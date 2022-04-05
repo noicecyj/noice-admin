@@ -43,7 +43,7 @@ export default {
         firstMenuTitle: '添加',
         firstMenuVisible: true,
       };
-      dispatch.entityName.setState(payload);
+      dispatch.firstMenu.setState(payload);
     },
     async firstMenuEdit(data) {
       const firstMenu = await firstMenuService.findFirstMenuById(data.id);

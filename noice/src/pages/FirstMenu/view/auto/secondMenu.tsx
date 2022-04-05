@@ -41,11 +41,12 @@ function SecondMenu() {
             secondMenuCurrent,
             pid: secondMenuState.firstMenuId
           })}
-          columnRender={secondMenuState.customType ? (value, index, record) => {
+          customType={secondMenuState.customType}
+          columnRender={(value, index, record) => {
             return (
               <CustomColumnSecondMenu value={value} index={index} record={record}/>
             );
-          } : null}
+          }}
           customMethod1={() => customSecondMenuDispatchers.customMethod1()}
           customMethod2={() => customSecondMenuDispatchers.customMethod2()}
           customMethod3={() => customSecondMenuDispatchers.customMethod3()}

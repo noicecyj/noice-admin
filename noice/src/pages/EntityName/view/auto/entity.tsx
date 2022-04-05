@@ -41,11 +41,12 @@ function Entity() {
             entityCurrent,
             pid: entityState.entityNameId
           })}
-          columnRender={entityState.customType ? (value, index, record) => {
+          customType={entityState.customType}
+          columnRender={(value, index, record) => {
             return (
               <CustomColumnEntity value={value} index={index} record={record}/>
             );
-          } : null}
+          }}
           customMethod1={() => customEntityDispatchers.customMethod1()}
           customMethod2={() => customEntityDispatchers.customMethod2()}
           customMethod3={() => customEntityDispatchers.customMethod3()}

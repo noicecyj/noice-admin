@@ -43,7 +43,7 @@ export default {
         userTitle: '添加',
         userVisible: true,
       };
-      dispatch.entityName.setState(payload);
+      dispatch.user.setState(payload);
     },
     async userEdit(data) {
       const user = await userService.findUserById(data.id);

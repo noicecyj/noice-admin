@@ -1075,11 +1075,12 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "            " + underSubPoName + "Current,\r\n" +
                 "            pid: " + underSubPoName + "State." + underPoName + "Id\r\n" +
                 "          })}\r\n" +
-                "          columnRender={" + underSubPoName + "State.customType ? (value, index, record) => {\r\n" +
+                "          customType={" + underSubPoName + "State.customType}\r\n" +
+                "          columnRender={(value, index, record) => {\r\n" +
                 "            return (\r\n" +
                 "              <CustomColumn" + subPoName + " value={value} index={index} record={record}/>\r\n" +
                 "            );\r\n" +
-                "          } : null}\r\n" +
+                "          }}\r\n" +
                 "          customMethod1={() => custom" + subPoName + "Dispatchers.customMethod1()}\r\n" +
                 "          customMethod2={() => custom" + subPoName + "Dispatchers.customMethod2()}\r\n" +
                 "          customMethod3={() => custom" + subPoName + "Dispatchers.customMethod3()}\r\n" +
@@ -1217,7 +1218,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "        " + underPoName + "Title: '添加',\r\n" +
                 "        " + underPoName + "Visible: true,\r\n" +
                 "      };\r\n" +
-                "      dispatch.entityName.setState(payload);\r\n" +
+                "      dispatch." + underPoName + ".setState(payload);\r\n" +
                 "    },\r\n" +
                 "    async " + underPoName + "Edit(data) {\r\n" +
                 "      const " + underPoName + " = await " + underPoName + "Service.find" + poName + "ById(data.id);\r\n" +
@@ -1431,11 +1432,12 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
             sb.append("        }}\r\n");
         }
         sb.append("        primaryKey=\"id\"\r\n");
-        sb.append("        columnRender={").append(underPoName).append("State.customType ? (value, index, record) => {\r\n");
+        sb.append("        customType={").append(underPoName).append("State.customType}\r\n");
+        sb.append("        columnRender={(value, index, record) => {\r\n");
         sb.append("          return (\r\n");
         sb.append("            <CustomColumn").append(poName).append(" value={value} index={index} record={record}/>\r\n");
         sb.append("          );\r\n");
-        sb.append("        } : null}\r\n");
+        sb.append("        }}\r\n");
         sb.append("        customMethod1={() => custom").append(poName).append("Dispatchers.customMethod1()}\r\n");
         sb.append("        customMethod2={() => custom").append(poName).append("Dispatchers.customMethod2()}\r\n");
         sb.append("        customMethod3={() => custom").append(poName).append("Dispatchers.customMethod3()}\r\n");

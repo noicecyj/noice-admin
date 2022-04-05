@@ -43,7 +43,7 @@ export default {
         authorityTitle: '添加',
         authorityVisible: true,
       };
-      dispatch.entityName.setState(payload);
+      dispatch.authority.setState(payload);
     },
     async authorityEdit(data) {
       const authority = await authorityService.findAuthorityById(data.id);

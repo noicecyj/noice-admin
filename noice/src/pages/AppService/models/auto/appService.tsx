@@ -43,7 +43,7 @@ export default {
         appServiceTitle: '添加',
         appServiceVisible: true,
       };
-      dispatch.entityName.setState(payload);
+      dispatch.appService.setState(payload);
     },
     async appServiceEdit(data) {
       const appService = await appServiceService.findAppServiceById(data.id);

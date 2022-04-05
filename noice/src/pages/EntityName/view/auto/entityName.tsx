@@ -41,11 +41,12 @@ function EntityName() {
           ],
         }}
         primaryKey="id"
-        columnRender={entityNameState.customType ? (value, index, record) => {
+        customType={entityNameState.customType}
+        columnRender={(value, index, record) => {
           return (
             <CustomColumnEntityName value={value} index={index} record={record}/>
           );
-        } : null}
+        }}
         customMethod1={() => customEntityNameDispatchers.customMethod1()}
         customMethod2={() => customEntityNameDispatchers.customMethod2()}
         customMethod3={() => customEntityNameDispatchers.customMethod3()}

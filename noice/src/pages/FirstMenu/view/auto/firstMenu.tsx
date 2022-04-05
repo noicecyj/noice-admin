@@ -41,11 +41,12 @@ function FirstMenu() {
           ],
         }}
         primaryKey="id"
-        columnRender={firstMenuState.customType ? (value, index, record) => {
+        customType={firstMenuState.customType}
+        columnRender={(value, index, record) => {
           return (
             <CustomColumnFirstMenu value={value} index={index} record={record}/>
           );
-        } : null}
+        }}
         customMethod1={() => customFirstMenuDispatchers.customMethod1()}
         customMethod2={() => customFirstMenuDispatchers.customMethod2()}
         customMethod3={() => customFirstMenuDispatchers.customMethod3()}

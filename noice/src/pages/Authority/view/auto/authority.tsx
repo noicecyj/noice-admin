@@ -30,11 +30,12 @@ function Authority() {
         total={authorityState.authorityTotal}
         getPage={authorityCurrent => authorityDispatchers.authorityPage(authorityCurrent)}
         primaryKey="id"
-        columnRender={authorityState.customType ? (value, index, record) => {
+        customType={authorityState.customType}
+        columnRender={(value, index, record) => {
           return (
             <CustomColumnAuthority value={value} index={index} record={record}/>
           );
-        } : null}
+        }}
         customMethod1={() => customAuthorityDispatchers.customMethod1()}
         customMethod2={() => customAuthorityDispatchers.customMethod2()}
         customMethod3={() => customAuthorityDispatchers.customMethod3()}

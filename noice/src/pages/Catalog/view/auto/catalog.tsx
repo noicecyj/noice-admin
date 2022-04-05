@@ -17,7 +17,7 @@ function Catalog() {
   return (
     <>
       <DataTableTemple
-        createItem={data => catalogDispatchers.catalogEdit(data)}
+        createItem={() => catalogDispatchers.catalogAdd()}
         editItem={record => catalogDispatchers.catalogEdit(record)}
         deleteItem={record => catalogDispatchers.catalogDelete({
           record,
@@ -41,11 +41,12 @@ function Catalog() {
           ],
         }}
         primaryKey="id"
-        columnRender={catalogState.customType ? (value, index, record) => {
+        customType={catalogState.customType}
+        columnRender={(value, index, record) => {
           return (
             <CustomColumnCatalog value={value} index={index} record={record}/>
           );
-        } : null}
+        }}
         customMethod1={() => customCatalogDispatchers.customMethod1()}
         customMethod2={() => customCatalogDispatchers.customMethod2()}
         customMethod3={() => customCatalogDispatchers.customMethod3()}
