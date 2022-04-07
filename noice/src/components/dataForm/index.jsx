@@ -41,7 +41,6 @@ function DataForm(props) {
     title,
     visibleDialog,
     onClose,
-    customType,
     formType,
   } = props;
 
