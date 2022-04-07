@@ -60,7 +60,7 @@ function FirstMenu() {
         title={firstMenuState.firstMenuTitle}
         visibleDialog={firstMenuState.firstMenuVisible}
         onClose={() => firstMenuDispatchers.setState({firstMenuVisible: false})}
-        items={firstMenuState.firstMenuForm}
+        items={[...firstMenuState.firstMenuForm, ...customFirstMenuState.customFrom]}
         dispatchers={value => firstMenuDispatchers.setDataForm(value)}
         onOk={() => firstMenuDispatchers.firstMenuSave({
           firstMenuFormData: firstMenuState.firstMenuFormData,

@@ -49,7 +49,7 @@ function Authority() {
         title={authorityState.authorityTitle}
         visibleDialog={authorityState.authorityVisible}
         onClose={() => authorityDispatchers.setState({authorityVisible: false})}
-        items={authorityState.authorityForm}
+        items={[...authorityState.authorityForm, ...customAuthorityState.customFrom]}
         dispatchers={value => authorityDispatchers.setDataForm(value)}
         onOk={() => authorityDispatchers.authoritySave({
           authorityFormData: authorityState.authorityFormData,

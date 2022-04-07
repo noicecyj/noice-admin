@@ -49,7 +49,7 @@ function Sql() {
         title={sqlState.sqlTitle}
         visibleDialog={sqlState.sqlVisible}
         onClose={() => sqlDispatchers.setState({sqlVisible: false})}
-        items={sqlState.sqlForm}
+        items={[...sqlState.sqlForm, ...customSqlState.customFrom]}
         dispatchers={value => sqlDispatchers.setDataForm(value)}
         onOk={() => sqlDispatchers.sqlSave({
           sqlFormData: sqlState.sqlFormData,

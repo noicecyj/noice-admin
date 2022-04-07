@@ -49,7 +49,7 @@ function AppService() {
         title={appServiceState.appServiceTitle}
         visibleDialog={appServiceState.appServiceVisible}
         onClose={() => appServiceDispatchers.setState({appServiceVisible: false})}
-        items={appServiceState.appServiceForm}
+        items={[...appServiceState.appServiceForm, ...customAppServiceState.customFrom]}
         dispatchers={value => appServiceDispatchers.setDataForm(value)}
         onOk={() => appServiceDispatchers.appServiceSave({
           appServiceFormData: appServiceState.appServiceFormData,

@@ -49,7 +49,7 @@ function Role() {
         title={roleState.roleTitle}
         visibleDialog={roleState.roleVisible}
         onClose={() => roleDispatchers.setState({roleVisible: false})}
-        items={roleState.roleForm}
+        items={[...roleState.roleForm, ...customRoleState.customFrom]}
         dispatchers={value => roleDispatchers.setDataForm(value)}
         onOk={() => roleDispatchers.roleSave({
           roleFormData: roleState.roleFormData,

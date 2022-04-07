@@ -49,7 +49,7 @@ function User() {
         title={userState.userTitle}
         visibleDialog={userState.userVisible}
         onClose={() => userDispatchers.setState({userVisible: false})}
-        items={userState.userForm}
+        items={[...userState.userForm, ...customUserState.customFrom]}
         dispatchers={value => userDispatchers.setDataForm(value)}
         onOk={() => userDispatchers.userSave({
           userFormData: userState.userFormData,

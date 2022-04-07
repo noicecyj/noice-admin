@@ -61,7 +61,7 @@ function SecondMenu() {
         title={secondMenuState.secondMenuTitle}
         visibleDialog={secondMenuState.secondMenuVisible}
         onClose={() => secondMenuDispatchers.setState({secondMenuVisible: false})}
-        items={secondMenuState.secondMenuForm}
+        items={[...secondMenuState.secondMenuForm, ...customSecondMenuState.customFrom]}
         dispatchers={value => secondMenuDispatchers.setDataForm(value)}
         onOk={() => secondMenuDispatchers.secondMenuSave({
           secondMenuFormData: secondMenuState.secondMenuFormData,

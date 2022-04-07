@@ -43,7 +43,7 @@ export default {
         sqlTitle: '添加',
         sqlVisible: true,
       };
-      dispatch.entityName.setState(payload);
+      dispatch.sql.setState(payload);
     },
     async sqlEdit(data) {
       const sql = await sqlService.findSqlById(data.id);

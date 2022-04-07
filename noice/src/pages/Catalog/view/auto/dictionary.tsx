@@ -61,7 +61,7 @@ function Dictionary() {
         title={dictionaryState.dictionaryTitle}
         visibleDialog={dictionaryState.dictionaryVisible}
         onClose={() => dictionaryDispatchers.setState({dictionaryVisible: false})}
-        items={dictionaryState.dictionaryForm}
+        items={[...dictionaryState.dictionaryForm, ...customDictionaryState.customFrom]}
         dispatchers={value => dictionaryDispatchers.setDataForm(value)}
         onOk={() => dictionaryDispatchers.dictionarySave({
           dictionaryFormData: dictionaryState.dictionaryFormData,

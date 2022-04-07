@@ -43,7 +43,7 @@ export default {
         catalogTitle: '添加',
         catalogVisible: true,
       };
-      dispatch.entityName.setState(payload);
+      dispatch.catalog.setState(payload);
     },
     async catalogEdit(data) {
       const catalog = await catalogService.findCatalogById(data.id);

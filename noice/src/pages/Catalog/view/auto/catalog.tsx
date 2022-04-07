@@ -60,7 +60,7 @@ function Catalog() {
         title={catalogState.catalogTitle}
         visibleDialog={catalogState.catalogVisible}
         onClose={() => catalogDispatchers.setState({catalogVisible: false})}
-        items={catalogState.catalogForm}
+        items={[...catalogState.catalogForm, ...customCatalogState.customFrom]}
         dispatchers={value => catalogDispatchers.setDataForm(value)}
         onOk={() => catalogDispatchers.catalogSave({
           catalogFormData: catalogState.catalogFormData,
