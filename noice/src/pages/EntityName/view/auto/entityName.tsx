@@ -60,7 +60,7 @@ function EntityName() {
         title={entityNameState.entityNameTitle}
         visibleDialog={entityNameState.entityNameVisible}
         onClose={() => entityNameDispatchers.setState({entityNameVisible: false})}
-        items={entityNameState.entityNameForm}
+        items={[...entityNameState.entityNameForm, ...customEntityNameState.customFrom]}
         dispatchers={value => entityNameDispatchers.setDataForm(value)}
         onOk={() => entityNameDispatchers.entityNameSave({
           entityNameFormData: entityNameState.entityNameFormData,

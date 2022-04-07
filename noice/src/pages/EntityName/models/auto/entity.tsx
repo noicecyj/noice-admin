@@ -87,6 +87,7 @@ export default {
         entityTable: ret.data.dataTable,
         entityForm: ret.data.dataForm,
         customType: ret.data.customType,
+        formType: ret.data.formType,
       };
       dispatch.entity.setState(payload);
     },

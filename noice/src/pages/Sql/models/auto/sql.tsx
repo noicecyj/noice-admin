@@ -86,6 +86,7 @@ export default {
         sqlTable: ret.data.dataTable,
         sqlForm: ret.data.dataForm,
         customType: ret.data.customType,
+        formType: ret.data.formType,
       };
       dispatch.sql.setState(payload);
     },

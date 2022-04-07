@@ -8,6 +8,7 @@ export default {
     customMethodName1: '生成权限',
     customMethodName2: null,
     customMethodName3: null,
+    customFrom: [],
   },
 
   reducers: {

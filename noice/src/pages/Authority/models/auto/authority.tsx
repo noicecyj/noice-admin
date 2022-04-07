@@ -86,6 +86,7 @@ export default {
         authorityTable: ret.data.dataTable,
         authorityForm: ret.data.dataForm,
         customType: ret.data.customType,
+        formType: ret.data.formType,
       };
       dispatch.authority.setState(payload);
     },

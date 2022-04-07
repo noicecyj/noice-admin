@@ -86,6 +86,7 @@ export default {
         appServiceTable: ret.data.dataTable,
         appServiceForm: ret.data.dataForm,
         customType: ret.data.customType,
+        formType: ret.data.formType,
       };
       dispatch.appService.setState(payload);
     },

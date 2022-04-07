@@ -86,6 +86,7 @@ export default {
         catalogTable: ret.data.dataTable,
         catalogForm: ret.data.dataForm,
         customType: ret.data.customType,
+        formType: ret.data.formType,
       };
       dispatch.catalog.setState(payload);
     },

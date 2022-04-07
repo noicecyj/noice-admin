@@ -6,6 +6,7 @@ export default {
     customMethodName1: null,
     customMethodName2: null,
     customMethodName3: null,
+    customFrom: [],
   },
 
   reducers: {

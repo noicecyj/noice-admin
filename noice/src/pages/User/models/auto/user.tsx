@@ -86,6 +86,7 @@ export default {
         userTable: ret.data.dataTable,
         userForm: ret.data.dataForm,
         customType: ret.data.customType,
+        formType: ret.data.formType,
       };
       dispatch.user.setState(payload);
     },

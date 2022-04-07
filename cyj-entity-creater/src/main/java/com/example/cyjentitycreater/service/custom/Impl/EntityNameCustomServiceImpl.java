@@ -968,6 +968,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "        " + underSubPoName + "Table: ret.data.dataTable,\r\n" +
                 "        " + underSubPoName + "Form: ret.data.dataForm,\r\n" +
                 "        customType: ret.data.customType,\r\n" +
+                "        formType: ret.data.formType,\r\n" +
                 "      };\r\n" +
                 "      dispatch." + underSubPoName + ".setState(payload);\r\n" +
                 "    },\r\n" +
@@ -1095,7 +1096,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "        title={" + underSubPoName + "State." + underSubPoName + "Title}\r\n" +
                 "        visibleDialog={" + underSubPoName + "State." + underSubPoName + "Visible}\r\n" +
                 "        onClose={() => " + underSubPoName + "Dispatchers.setState({" + underSubPoName + "Visible: false})}\r\n" +
-                "        items={" + underSubPoName + "State." + underSubPoName + "Form}\r\n" +
+                "        items={[..." + underSubPoName + "State." + underSubPoName + "Form, ...custom" + subPoName + "State.customFrom]}\r\n" +
                 "        dispatchers={value => " + underSubPoName + "Dispatchers.setDataForm(value)}\r\n" +
                 "        onOk={() => " + underSubPoName + "Dispatchers." + underSubPoName + "Save({\r\n" +
                 "          " + underSubPoName + "FormData: " + underSubPoName + "State." + underSubPoName + "FormData,\r\n" +
@@ -1122,6 +1123,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                         "    customMethodName1: null,\r\n" +
                         "    customMethodName2: null,\r\n" +
                         "    customMethodName3: null,\r\n" +
+                        "    customFrom: [],\r\n" +
                         "  },\r\n" +
                         "\r\n" +
                         "  reducers: {\r\n" +
@@ -1152,6 +1154,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                         "    customMethodName1: null,\r\n" +
                         "    customMethodName2: null,\r\n" +
                         "    customMethodName3: null,\r\n" +
+                        "    customFrom: [],\r\n" +
                         "  },\r\n" +
                         "\r\n" +
                         "  reducers: {\r\n" +
@@ -1261,6 +1264,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "        " + underPoName + "Table: ret.data.dataTable,\r\n" +
                 "        " + underPoName + "Form: ret.data.dataForm,\r\n" +
                 "        customType: ret.data.customType,\r\n" +
+                "        formType: ret.data.formType,\r\n" +
                 "      };\r\n" +
                 "      dispatch." + underPoName + ".setState(payload);\r\n" +
                 "    },\r\n" +
@@ -1451,7 +1455,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("        title={").append(underPoName).append("State.").append(underPoName).append("Title}\r\n");
         sb.append("        visibleDialog={").append(underPoName).append("State.").append(underPoName).append("Visible}\r\n");
         sb.append("        onClose={() => ").append(underPoName).append("Dispatchers.setState({").append(underPoName).append("Visible: false})}\r\n");
-        sb.append("        items={").append(underPoName).append("State.").append(underPoName).append("Form}\r\n");
+        sb.append("        items={[...").append(underPoName).append("State.").append(underPoName).append("Form, ...custom").append(poName).append("State.customFrom]}\r\n");
         sb.append("        dispatchers={value => ").append(underPoName).append("Dispatchers.setDataForm(value)}\r\n");
         sb.append("        onOk={() => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Save({\r\n");
         sb.append("          ").append(underPoName).append("FormData: ").append(underPoName).append("State.").append(underPoName).append("FormData,\r\n");

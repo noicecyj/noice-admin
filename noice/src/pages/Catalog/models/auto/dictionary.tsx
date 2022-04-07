@@ -87,6 +87,7 @@ export default {
         dictionaryTable: ret.data.dataTable,
         dictionaryForm: ret.data.dataForm,
         customType: ret.data.customType,
+        formType: ret.data.formType,
       };
       dispatch.dictionary.setState(payload);
     },

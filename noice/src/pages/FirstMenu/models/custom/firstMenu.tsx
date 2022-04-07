@@ -9,6 +9,7 @@ export default {
     customMethodName1: '生成菜单',
     customMethodName2: null,
     customMethodName3: null,
+    customFrom: [],
   },
 
   reducers: {

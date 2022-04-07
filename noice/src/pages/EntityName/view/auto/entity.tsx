@@ -61,7 +61,7 @@ function Entity() {
         title={entityState.entityTitle}
         visibleDialog={entityState.entityVisible}
         onClose={() => entityDispatchers.setState({entityVisible: false})}
-        items={entityState.entityForm}
+        items={[...entityState.entityForm, ...customEntityState.customFrom]}
         dispatchers={value => entityDispatchers.setDataForm(value)}
         onOk={() => entityDispatchers.entitySave({
           entityFormData: entityState.entityFormData,
