@@ -1,21 +1,21 @@
 import React from 'react';
-// import pageStore from '@/pages/AppService/store';
-
-// const formItemLayout = {
-//   labelCol: {
-//     fixedSpan: 6,
-//   },
-//   wrapperCol: {
-//     span: 40,
-//   },
-// };
+import pageStore from '@/pages/AppService/store';
+import {Button} from "@alifd/next";
 
 function CustomColumnAppService(props) {
-  // const { value, index, record } = props;
-  // const [customAppServiceState, customAppServiceDispatchers] = pageStore.useModel('customAppService');
+  const {record} = props;
+  const customAppServiceDispatchers = pageStore.useModelDispatchers('customAppService');
 
   return (
     <>
+      {
+        record.appPort !== null && <Button
+          type="normal"
+          size="small"
+          onClick={() => customAppServiceDispatchers.createAppFile({id: record.id})}
+          // eslint-disable-next-line react/jsx-closing-tag-location
+        > 生成服务 </Button>
+      }
     </>
   );
 }

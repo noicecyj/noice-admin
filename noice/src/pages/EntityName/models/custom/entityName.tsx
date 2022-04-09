@@ -10,8 +10,6 @@ export default {
     customMethodName2: null,
     customMethodName3: null,
     customFrom: [],
-    chooseVisible: false,
-    chooseFormData: {},
   },
 
   reducers: {
@@ -35,14 +33,6 @@ export default {
           Message.error('生成失败');
         }
       });
-      const entityName = {
-        entityNameFormData: {},
-      };
-      dispatch.entityName.setState(entityName);
-      const customEntityName = {
-        chooseVisible: false,
-      };
-      dispatch.customEntityName.setState(customEntityName);
     },
   }),
 };

@@ -1,3 +1,6 @@
+import customAppServiceServices from '../../services/custom/appService'
+import {Message} from "@alifd/next";
+
 export default {
 
   namespace: 'customAppService',
@@ -21,6 +24,15 @@ export default {
     customMethod2() {
     },
     customMethod3() {
+    },
+    createAppFile(data) {
+      customAppServiceServices.createAppFile(data).then((res) => {
+        if (res.code === 200) {
+          Message.success('生成成功');
+        } else {
+          Message.error('生成失败');
+        }
+      });
     },
   }),
 };
