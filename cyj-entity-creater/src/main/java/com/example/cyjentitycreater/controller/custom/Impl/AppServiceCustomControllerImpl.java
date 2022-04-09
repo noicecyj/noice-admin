@@ -3,6 +3,8 @@ package com.example.cyjentitycreater.controller.custom.Impl;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.controller.custom.AppServiceCustomController;
 import com.example.cyjentitycreater.entity.custom.vo.CreateVO;
+import com.example.cyjentitycreater.service.custom.AppServiceCustomService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,8 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "entityCreateApi")
 public class AppServiceCustomControllerImpl implements AppServiceCustomController {
 
+    private AppServiceCustomService appServiceCustomService;
+
+    @Autowired
+    public void setAppServiceCustomService(AppServiceCustomService appServiceCustomService) {
+        this.appServiceCustomService = appServiceCustomService;
+    }
+
     @Override
     public ResultVO createAppFile(CreateVO createVO) {
-        return null;
+        appServiceCustomService.createAppFile(createVO.getId());
+        return ResultVO.success();
     }
 }

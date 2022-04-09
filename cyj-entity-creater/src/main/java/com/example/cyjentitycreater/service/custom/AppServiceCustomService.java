@@ -11,4 +11,6 @@ public interface AppServiceCustomService {
 
     AppServicePO findOneByName(String name);
 
+    void createAppFile(String id);
+
 }

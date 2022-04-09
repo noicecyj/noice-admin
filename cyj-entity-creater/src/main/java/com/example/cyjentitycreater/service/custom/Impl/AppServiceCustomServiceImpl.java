@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author 曹元杰
@@ -37,40 +38,49 @@ public class AppServiceCustomServiceImpl extends BaseService implements AppServi
         this.dictionaryCustomService = dictionaryCustomService;
     }
 
-    public void createJavaFile(AppServicePO po) throws IOException {
-        String AppName = BeanUtils.captureName(BeanUtils.underline2Camel2(po.getName()));
-        List<DictionaryPO> pos = dictionaryCustomService.findCatalogByValue("FILE_PATH");
-        HashMap<String, DictionaryPO> mapPo = CommonUtils.listToMap(pos, "dictionaryName");
-        String AppFilePath = mapPo.get("servicePath").getDictionaryValue() + po.getName()
-                + "\\src\\main\\java\\com\\example\\" + AppName;
-        String[] AppResult = appGenerate(po);
-        createJavaFile(AppFilePath, AppResult);
-        String ymlFilePath = mapPo.get("servicePath").getDictionaryValue() + po.getName()
-                + "\\src\\main\\resources";
-        String[] ymlResult = ymlGenerate(po);
-        createJavaFile(ymlFilePath, ymlResult);
-        String xmlFilePath = mapPo.get("servicePath").getDictionaryValue() + po.getName()
-                + "\\src\\main\\resources";
-        String[] xmlResult = xmlGenerate(po);
-        createJavaFile(xmlFilePath, xmlResult);
-        String configFilePath = mapPo.get("servicePath").getDictionaryValue() + po.getName()
-                + "\\src\\main\\resources";
-        String[] configResult = configGenerate();
-        createJavaFile(configFilePath, configResult);
-        String pomFilePath = mapPo.get("servicePath").getDictionaryValue() + po.getName();
-        String[] pomResult = pomGenerate(po);
-        createJavaFile(pomFilePath, pomResult);
+    @Override
+    public void createAppFile(String id) {
+        Optional<AppServicePO> opt = appServiceCustomDao.findById(id);
+        if (opt.isPresent()) {
+            AppServicePO appServicePO = opt.get();
+            String AppName = BeanUtils.captureName(BeanUtils.underline2Camel2(appServicePO.getName()));
+            List<DictionaryPO> pos = dictionaryCustomService.findCatalogByValue("PROJECT_PATH");
+            HashMap<String, DictionaryPO> mapPo = CommonUtils.listToMap(pos, "dictionaryName");
+            String AppFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appServicePO.getName() + "\\src\\main\\java\\com\\example\\" + AppName;
+            String[] AppResult = appGenerate(appServicePO);
+            String ymlFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appServicePO.getName() + "\\src\\main\\resources";
+            String[] ymlResult = ymlGenerate(appServicePO);
+            String xmlFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appServicePO.getName() + "\\src\\main\\resources";
+            String[] xmlResult = xmlGenerate(appServicePO);
+            String configFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appServicePO.getName() + "\\src\\main\\resources";
+            String[] configResult = configGenerate();
+            String pomFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appServicePO.getName();
+            String[] pomResult = pomGenerate(appServicePO);
+            try {
+                createJavaFile(AppFilePath, AppResult);
+                createJavaFile(ymlFilePath, ymlResult);
+                createJavaFile(xmlFilePath, xmlResult);
+                createJavaFile(configFilePath, configResult);
+                createJavaFile(pomFilePath, pomResult);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     public String[] appGenerate(AppServicePO po) {
         String AppName = BeanUtils.captureName(BeanUtils.underline2Camel2(po.getName()));
         StringBuilder sb = new StringBuilder();
-        sb.append("package com.example.").append(AppName).append(";\r\n");
+        sb.append("package com.example.").append(AppName.toLowerCase()).append(";\r\n");
         sb.append("\r\n");
         sb.append("import org.springframework.boot.SpringApplication;\r\n");
         sb.append("import org.springframework.boot.autoconfigure.SpringBootApplication;\r\n");
+        sb.append("import org.springframework.boot.autoconfigure.domain.EntityScan;\r\n");
         sb.append("import org.springframework.cloud.netflix.eureka.EnableEurekaClient;\r\n");
         sb.append("import org.springframework.cloud.openfeign.EnableFeignClients;\r\n");
+        sb.append("import org.springframework.context.annotation.ComponentScan;\r\n");
+        sb.append("import org.springframework.data.jpa.repository.config.EnableJpaRepositories;\r\n");
         sb.append("\r\n");
         generateAuthor(sb);
         sb.append("@SpringBootApplication\r\n");
