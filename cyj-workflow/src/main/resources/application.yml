@@ -21,3 +21,11 @@ spring:
     url: jdbc:mysql://localhost:3306/data_user?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: root
     password: 68762306
+camunda:
+  bpm:
+    admin-user:
+      id: cyj
+      password: 123456
+      first-name: noice
+    filter:
+      create: All tasks
