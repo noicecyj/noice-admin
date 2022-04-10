@@ -209,3 +209,15 @@
 /cyj-auth/target/classes/com/example/cyjauth/entity/custom/dto/RoleAuthorityDTO.class
 /cyj-auth/target/classes/com/example/cyjauth/entity/custom/dto/PasswordDTO.class
 /log/
+/cyj-workflow/target/classes/com/example/cyjworkflow/controller/auto/Impl/BpmnControllerImpl.class
+/cyj-workflow/target/classes/com/example/cyjworkflow/controller/auto/BpmnController.class
+/cyj-workflow/target/classes/com/example/cyjworkflow/controller/custom/BpmnCustomController.class
+/cyj-workflow/target/classes/com/example/cyjworkflow/controller/custom/Impl/BpmnCustomControllerImpl.class
+/cyj-workflow/target/classes/com/example/cyjworkflow/dao/custom/BpmnCustomDao.class
+/cyj-workflow/target/classes/com/example/cyjworkflow/service/custom/BpmnCustomService.class
+/cyj-workflow/target/classes/com/example/cyjworkflow/service/custom/Impl/BpmnCustomServiceImpl.class
+/cyj-workflow/target/classes/com/example/cyjworkflow/dao/auto/BpmnDao.class
+/cyj-workflow/target/classes/com/example/cyjworkflow/entity/auto/po/BpmnPO.class
+/cyj-workflow/target/classes/com/example/cyjworkflow/service/auto/BpmnService.class
+/cyj-workflow/target/classes/com/example/cyjworkflow/service/auto/Impl/BpmnServiceImpl.class
+/cyj-workflow/target/classes/com/example/cyjworkflow/entity/auto/po/QBpmnPO.class
