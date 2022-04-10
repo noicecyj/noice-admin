@@ -29,6 +29,10 @@
       "enable": true,
       "target": "http://127.0.0.1:8100/cyj-entity-creater"
     },
+    "/workFlowApi": {
+      "enable": true,
+      "target": "http://127.0.0.1:8100/cyj-workflow"
+    },
     "/authApi": {
       "enable": true,
       "target": "http://127.0.0.1:8100"

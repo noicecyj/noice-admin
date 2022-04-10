@@ -25,6 +25,10 @@ const asideMenuConfig = [
         name: '菜单管理',
         path: '/admin/firstMenu',
       },
+      {
+        name: '流程管理',
+        path: '/admin/bpmu',
+      },
     ],
   },
   {
