@@ -7,6 +7,9 @@ export default {
     customMethodName2: null,
     customMethodName3: null,
     customFrom: [],
+    dialogBpmnVisible: false,
+    bpmnXml: '',
+    recordId: '',
   },
 
   reducers: {
@@ -22,5 +25,8 @@ export default {
     },
     customMethod3() {
     },
+    okBpmnDialog(data) {
+
+    }
   }),
 };
