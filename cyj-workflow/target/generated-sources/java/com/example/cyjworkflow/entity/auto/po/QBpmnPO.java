@@ -23,6 +23,8 @@ public class QBpmnPO extends EntityPathBase<BpmnPO> {
 
     public final StringPath processName = createString("processName");
 
+    public final StringPath processXml = createString("processXml");
+
     public final StringPath sortCode = createString("sortCode");
 
     public final StringPath status = createString("status");
