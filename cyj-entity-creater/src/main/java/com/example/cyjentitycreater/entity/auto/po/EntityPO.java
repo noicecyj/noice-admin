@@ -34,6 +34,8 @@ public class EntityPO implements Serializable {
     @GeneratedValue(generator = "uuid2")
     @Column(name = "id", length = 36)
     private String id;
+    @Column(name = "property_length")
+    private String propertyLength;
     @Column(name = "pid")
     private String pid;
     @Column(name = "property_code")

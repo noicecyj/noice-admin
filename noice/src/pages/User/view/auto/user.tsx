@@ -45,7 +45,6 @@ function User() {
       />
       <DataFormTemple
         formType={userState.formType}
-        customType={userState.customType}
         title={userState.userTitle}
         visibleDialog={userState.userVisible}
         onClose={() => userDispatchers.setState({userVisible: false})}

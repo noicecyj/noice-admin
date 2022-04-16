@@ -45,7 +45,6 @@ function Bpmn() {
       />
       <DataFormTemple
         formType={bpmnState.formType}
-        customType={bpmnState.customType}
         title={bpmnState.bpmnTitle}
         visibleDialog={bpmnState.bpmnVisible}
         onClose={() => bpmnDispatchers.setState({bpmnVisible: false})}

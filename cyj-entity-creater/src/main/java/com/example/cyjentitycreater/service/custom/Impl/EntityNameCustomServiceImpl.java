@@ -1092,7 +1092,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "      </Dialog>\r\n" +
                 "      <DataFormTemple\r\n" +
                 "        formType={" + underSubPoName + "State.formType}\r\n" +
-                "        customType={" + underSubPoName + "State.customType}\r\n" +
                 "        title={" + underSubPoName + "State." + underSubPoName + "Title}\r\n" +
                 "        visibleDialog={" + underSubPoName + "State." + underSubPoName + "Visible}\r\n" +
                 "        onClose={() => " + underSubPoName + "Dispatchers.setState({" + underSubPoName + "Visible: false})}\r\n" +
@@ -1451,7 +1450,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("      />\r\n");
         sb.append("      <DataFormTemple\r\n");
         sb.append("        formType={").append(underPoName).append("State.formType}\r\n");
-        sb.append("        customType={").append(underPoName).append("State.customType}\r\n");
         sb.append("        title={").append(underPoName).append("State.").append(underPoName).append("Title}\r\n");
         sb.append("        visibleDialog={").append(underPoName).append("State.").append(underPoName).append("Visible}\r\n");
         sb.append("        onClose={() => ").append(underPoName).append("Dispatchers.setState({").append(underPoName).append("Visible: false})}\r\n");
