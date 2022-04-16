@@ -43,7 +43,7 @@ function CustomColumnUser(props) {
           userId: customUserState.recordId,
         })}
         formDataValue={customUserState.passwordFormData}
-        customData={false}
+        customData={{customType: false, formCol: 2}}
       />
       <Dialog
         v2

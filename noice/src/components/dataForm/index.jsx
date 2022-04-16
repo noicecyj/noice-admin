@@ -14,15 +14,6 @@ import {
   TimePicker
 } from '@alifd/next';
 
-const formItemLayout = {
-  labelCol: {
-    fixedSpan: 6,
-  },
-  wrapperCol: {
-    span: 40,
-  },
-};
-
 const dataSource = [
   {value: '有效', label: '有效'},
   {value: '无效', label: '无效'},
@@ -57,11 +48,10 @@ function DataForm(props) {
       style={{width: '50%'}}>
       <Card free>
         <Card.Content>
-
           <Form
             responsive={true}
-            {...formItemLayout}
             fullWidth
+            labelAlign="top"
             value={formDataValue}
             onChange={(value) => dispatchers(value)}>
             {items.map((item) => {
@@ -262,7 +252,7 @@ function DataForm(props) {
                 }
               }
             })}
-            <FormItem
+            {customData.customType && <FormItem
               colSpan={formCol}
               label="状态"
               required
@@ -274,8 +264,8 @@ function DataForm(props) {
                 dataSource={dataSource}
                 defaultValue="有效"
               />
-            </FormItem>
-            <FormItem
+            </FormItem>}
+            {customData.customType && <FormItem
               colSpan={formCol}
               label="排序代码"
               required
@@ -286,7 +276,7 @@ function DataForm(props) {
                 placeholder="请输入排序代码"
                 defaultValue="0010"
               />
-            </FormItem>
+            </FormItem>}
           </Form>
         </Card.Content>
       </Card>
