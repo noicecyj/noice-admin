@@ -17,8 +17,6 @@ export default {
     userTable: [],
     userId: '',
     customData: {},
-    customType: false,
-    formType: 'ONE_LIST',
   },
 
   reducers: {

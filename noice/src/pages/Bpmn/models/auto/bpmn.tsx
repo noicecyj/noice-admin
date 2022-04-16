@@ -17,8 +17,6 @@ export default {
     bpmnTable: [],
     bpmnId: '',
     customData: {},
-    customType: false,
-    formType: 'ONE_LIST',
   },
 
   reducers: {
