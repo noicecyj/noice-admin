@@ -34,8 +34,10 @@ public class BpmnPO implements Serializable {
     @GeneratedValue(generator = "uuid2")
     @Column(name = "id", length = 36)
     private String id;
-    @Column(name = "process_xml")
+    @Column(name = "process_xml", length = 3000)
     private String processXml;
+    @Column(name = "upload_file")
+    private String uploadFile;
     @Column(name = "process_name")
     private String processName;
     @Column(name = "status")
