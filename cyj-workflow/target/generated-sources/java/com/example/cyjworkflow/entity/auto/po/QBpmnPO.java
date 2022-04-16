@@ -29,6 +29,8 @@ public class QBpmnPO extends EntityPathBase<BpmnPO> {
 
     public final StringPath status = createString("status");
 
+    public final StringPath uploadFile = createString("uploadFile");
+
     public QBpmnPO(String variable) {
         super(BpmnPO.class, forVariable(variable));
     }
