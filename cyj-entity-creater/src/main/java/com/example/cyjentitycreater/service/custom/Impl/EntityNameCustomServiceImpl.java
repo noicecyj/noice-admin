@@ -294,7 +294,11 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("    @Column(name = \"id\", length = 36)\r\n");
         sb.append("    private String id;\r\n");
         poList.forEach(entityPO -> {
-            sb.append("    @Column(name = \"").append(entityPO.getPropertyCode()).append("\")\r\n");
+            if (StringUtils.isNotEmpty(entityPO.getPropertyLength())){
+                sb.append("    @Column(name = \"").append(entityPO.getPropertyCode()).append("\", length = ").append(entityPO.getPropertyLength()).append(")\r\n");
+            }else {
+                sb.append("    @Column(name = \"").append(entityPO.getPropertyCode()).append("\")\r\n");
+            }
             sb.append("    private ").append(entityPO.getPropertyType()).append(" ").append(BeanUtils.underline2Camel(entityPO.getPropertyCode())).append(";\r\n");
         });
         sb.append("    @Column(name = \"status\")\r\n");
@@ -1537,7 +1541,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
     @Override
     public JSONObject findDataTableAndFormByName(String entityCode) {
         EntityNamePO po = entityNameCustomDao.findEntityNamePOByEntityCodeAndEntityType(entityCode, "PO");
-        List<EntityPO> entityPOList = entityCustomDao.findEntityPOByPidAndPropertyDisplayEquals(po.getId(), "是");
+        List<EntityPO> entityPOList = entityCustomDao.findEntityPOByPid(po.getId());
         List<EntityCustomDTO> entityCustomDTOList = new ArrayList<>();
         for (EntityPO entityPO : entityPOList) {
             EntityCustomDTO entityCustomDTO = new EntityCustomDTO();

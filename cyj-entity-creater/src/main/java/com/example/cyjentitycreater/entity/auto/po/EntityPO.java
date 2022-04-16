@@ -38,7 +38,7 @@ public class EntityPO implements Serializable {
     private String propertyLength;
     @Column(name = "pid")
     private String pid;
-    @Column(name = "property_code")
+    @Column(name = "property_code", length = 3000)
     private String propertyCode;
     @Column(name = "property_type")
     private String propertyType;

@@ -12,6 +12,6 @@ import java.util.List;
  */
 public interface EntityCustomDao extends JpaRepository<EntityPO, String> {
 
-    List<EntityPO> findEntityPOByPidAndPropertyDisplayEquals(String pid, String display);
+    List<EntityPO> findEntityPOByPid(String pid);
 
 }

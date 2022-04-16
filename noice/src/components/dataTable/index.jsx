@@ -73,13 +73,15 @@ function DataTable(props) {
               primaryKey={primaryKey}
             >
               {items.length === 0 ? null : items.map((item, index) => {
-                return (<Table.Column
-                  hidden={item.propertyDisplay === '否'}
-                  title={item.propertyLabel}
-                  dataIndex={item.propertyName}
-                  width={item.propertyWidth != null ? item.propertyWidth : null}
-                  key={index}
-                />);
+                if (item.propertyDisplay === "是"){
+                  return (<Table.Column
+                    hidden={item.propertyDisplay === '否'}
+                    title={item.propertyLabel}
+                    dataIndex={item.propertyName}
+                    width={item.propertyWidth != null ? item.propertyWidth : null}
+                    key={index}
+                  />);
+                }
               })}
               {customType && <Table.Column
                 title="自定义操作"
