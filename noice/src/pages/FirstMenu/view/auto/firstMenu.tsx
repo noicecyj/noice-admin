@@ -41,7 +41,7 @@ function FirstMenu() {
           ],
         }}
         primaryKey="id"
-        customType={firstMenuState.customType}
+        customData={firstMenuState.customData}
         columnRender={(value, index, record) => {
           return (
             <CustomColumnFirstMenu value={value} index={index} record={record}/>
@@ -55,7 +55,7 @@ function FirstMenu() {
         customMethodName3={customFirstMenuState.customMethodName3}
       />
       <DataFormTemple
-        formType={firstMenuState.formType}
+        customData={firstMenuState.customData}
         title={firstMenuState.firstMenuTitle}
         visibleDialog={firstMenuState.firstMenuVisible}
         onClose={() => firstMenuDispatchers.setState({firstMenuVisible: false})}

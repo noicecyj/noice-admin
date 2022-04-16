@@ -16,6 +16,7 @@ export default {
     appServiceForm: [],
     appServiceTable: [],
     appServiceId: '',
+    customData: {},
     customType: false,
     formType: 'ONE_LIST',
   },
@@ -85,8 +86,7 @@ export default {
       const payload = {
         appServiceTable: ret.data.dataTable,
         appServiceForm: ret.data.dataForm,
-        customType: ret.data.customType,
-        formType: ret.data.formType,
+        customData: ret.data.customData,
       };
       dispatch.appService.setState(payload);
     },

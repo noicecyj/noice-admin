@@ -16,6 +16,7 @@ export default {
     bpmnForm: [],
     bpmnTable: [],
     bpmnId: '',
+    customData: {},
     customType: false,
     formType: 'ONE_LIST',
   },
@@ -85,8 +86,7 @@ export default {
       const payload = {
         bpmnTable: ret.data.dataTable,
         bpmnForm: ret.data.dataForm,
-        customType: ret.data.customType,
-        formType: ret.data.formType,
+        customData: ret.data.customData,
       };
       dispatch.bpmn.setState(payload);
     },

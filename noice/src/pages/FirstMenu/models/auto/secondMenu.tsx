@@ -17,6 +17,7 @@ export default {
     secondMenuVisible: false,
     divVisible: false,
     firstMenuId: '',
+    customData: {},
     customType: false,
     formType: 'ONE_LIST',
   },
@@ -86,8 +87,7 @@ export default {
       const payload = {
         secondMenuTable: ret.data.dataTable,
         secondMenuForm: ret.data.dataForm,
-        customType: ret.data.customType,
-        formType: ret.data.formType,
+        customData: ret.data.customData,
       };
       dispatch.secondMenu.setState(payload);
     },

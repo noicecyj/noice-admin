@@ -16,6 +16,7 @@ export default {
     roleForm: [],
     roleTable: [],
     roleId: '',
+    customData: {},
     customType: false,
     formType: 'ONE_LIST',
   },
@@ -85,8 +86,7 @@ export default {
       const payload = {
         roleTable: ret.data.dataTable,
         roleForm: ret.data.dataForm,
-        customType: ret.data.customType,
-        formType: ret.data.formType,
+        customData: ret.data.customData,
       };
       dispatch.role.setState(payload);
     },

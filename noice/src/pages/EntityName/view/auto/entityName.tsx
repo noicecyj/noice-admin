@@ -41,7 +41,7 @@ function EntityName() {
           ],
         }}
         primaryKey="id"
-        customType={entityNameState.customType}
+        customData={entityNameState.customData}
         columnRender={(value, index, record) => {
           return (
             <CustomColumnEntityName value={value} index={index} record={record}/>
@@ -55,7 +55,7 @@ function EntityName() {
         customMethodName3={customEntityNameState.customMethodName3}
       />
       <DataFormTemple
-        formType={entityNameState.formType}
+        customData={entityNameState.customData}
         title={entityNameState.entityNameTitle}
         visibleDialog={entityNameState.entityNameVisible}
         onClose={() => entityNameDispatchers.setState({entityNameVisible: false})}

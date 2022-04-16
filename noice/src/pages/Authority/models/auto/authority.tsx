@@ -16,6 +16,7 @@ export default {
     authorityForm: [],
     authorityTable: [],
     authorityId: '',
+    customData: {},
     customType: false,
     formType: 'ONE_LIST',
   },
@@ -85,8 +86,7 @@ export default {
       const payload = {
         authorityTable: ret.data.dataTable,
         authorityForm: ret.data.dataForm,
-        customType: ret.data.customType,
-        formType: ret.data.formType,
+        customData: ret.data.customData,
       };
       dispatch.authority.setState(payload);
     },

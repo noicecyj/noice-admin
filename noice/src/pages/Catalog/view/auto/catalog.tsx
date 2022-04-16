@@ -41,7 +41,7 @@ function Catalog() {
           ],
         }}
         primaryKey="id"
-        customType={catalogState.customType}
+        customData={catalogState.customData}
         columnRender={(value, index, record) => {
           return (
             <CustomColumnCatalog value={value} index={index} record={record}/>
@@ -55,7 +55,7 @@ function Catalog() {
         customMethodName3={customCatalogState.customMethodName3}
       />
       <DataFormTemple
-        formType={catalogState.formType}
+        customData={catalogState.customData}
         title={catalogState.catalogTitle}
         visibleDialog={catalogState.catalogVisible}
         onClose={() => catalogDispatchers.setState({catalogVisible: false})}

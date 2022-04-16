@@ -41,10 +41,10 @@ function DataForm(props) {
     title,
     visibleDialog,
     onClose,
-    formType,
+    customData,
   } = props;
 
-  const formCol = formType === 'FOUR_LIST' ? 3 : formType === 'THREE_LIST' ? 4 : formType === 'TWO_LIST' ? 6 : 12;
+  const formCol = customData.formCol === 4 ? 3 : customData.formCol === 3 ? 4 : customData.formCol === 2 ? 6 : 12;
 
   return (
     <Dialog

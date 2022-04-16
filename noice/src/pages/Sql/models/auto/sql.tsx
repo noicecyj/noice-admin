@@ -16,6 +16,7 @@ export default {
     sqlForm: [],
     sqlTable: [],
     sqlId: '',
+    customData: {},
     customType: false,
     formType: 'ONE_LIST',
   },
@@ -85,8 +86,7 @@ export default {
       const payload = {
         sqlTable: ret.data.dataTable,
         sqlForm: ret.data.dataForm,
-        customType: ret.data.customType,
-        formType: ret.data.formType,
+        customData: ret.data.customData,
       };
       dispatch.sql.setState(payload);
     },

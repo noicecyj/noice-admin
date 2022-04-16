@@ -41,7 +41,7 @@ function Dictionary() {
             dictionaryCurrent,
             pid: dictionaryState.catalogId
           })}
-          customType={dictionaryState.customType}
+          customData={dictionaryState.customData}
           columnRender={(value, index, record) => {
             return (
               <CustomColumnDictionary value={value} index={index} record={record}/>
@@ -56,7 +56,7 @@ function Dictionary() {
         />
       </Dialog>
       <DataFormTemple
-        formType={dictionaryState.formType}
+        customData={dictionaryState.customData}
         title={dictionaryState.dictionaryTitle}
         visibleDialog={dictionaryState.dictionaryVisible}
         onClose={() => dictionaryDispatchers.setState({dictionaryVisible: false})}

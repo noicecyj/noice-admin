@@ -30,7 +30,7 @@ function Bpmn() {
         total={bpmnState.bpmnTotal}
         getPage={bpmnCurrent => bpmnDispatchers.bpmnPage(bpmnCurrent)}
         primaryKey="id"
-        customType={bpmnState.customType}
+        customData={bpmnState.customData}
         columnRender={(value, index, record) => {
           return (
             <CustomColumnBpmn value={value} index={index} record={record}/>
@@ -44,7 +44,7 @@ function Bpmn() {
         customMethodName3={customBpmnState.customMethodName3}
       />
       <DataFormTemple
-        formType={bpmnState.formType}
+        customData={bpmnState.customData}
         title={bpmnState.bpmnTitle}
         visibleDialog={bpmnState.bpmnVisible}
         onClose={() => bpmnDispatchers.setState({bpmnVisible: false})}

@@ -30,7 +30,7 @@ function Sql() {
         total={sqlState.sqlTotal}
         getPage={sqlCurrent => sqlDispatchers.sqlPage(sqlCurrent)}
         primaryKey="id"
-        customType={sqlState.customType}
+        customData={sqlState.customData}
         columnRender={(value, index, record) => {
           return (
             <CustomColumnSql value={value} index={index} record={record}/>
@@ -44,7 +44,7 @@ function Sql() {
         customMethodName3={customSqlState.customMethodName3}
       />
       <DataFormTemple
-        formType={sqlState.formType}
+        customData={sqlState.customData}
         title={sqlState.sqlTitle}
         visibleDialog={sqlState.sqlVisible}
         onClose={() => sqlDispatchers.setState({sqlVisible: false})}

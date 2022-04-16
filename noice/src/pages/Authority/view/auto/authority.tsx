@@ -30,7 +30,7 @@ function Authority() {
         total={authorityState.authorityTotal}
         getPage={authorityCurrent => authorityDispatchers.authorityPage(authorityCurrent)}
         primaryKey="id"
-        customType={authorityState.customType}
+        customData={authorityState.customData}
         columnRender={(value, index, record) => {
           return (
             <CustomColumnAuthority value={value} index={index} record={record}/>
@@ -44,7 +44,7 @@ function Authority() {
         customMethodName3={customAuthorityState.customMethodName3}
       />
       <DataFormTemple
-        formType={authorityState.formType}
+        customData={authorityState.customData}
         title={authorityState.authorityTitle}
         visibleDialog={authorityState.authorityVisible}
         onClose={() => authorityDispatchers.setState({authorityVisible: false})}

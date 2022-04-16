@@ -30,7 +30,7 @@ function AppService() {
         total={appServiceState.appServiceTotal}
         getPage={appServiceCurrent => appServiceDispatchers.appServicePage(appServiceCurrent)}
         primaryKey="id"
-        customType={appServiceState.customType}
+        customData={appServiceState.customData}
         columnRender={(value, index, record) => {
           return (
             <CustomColumnAppService value={value} index={index} record={record}/>
@@ -44,7 +44,7 @@ function AppService() {
         customMethodName3={customAppServiceState.customMethodName3}
       />
       <DataFormTemple
-        formType={appServiceState.formType}
+        customData={appServiceState.customData}
         title={appServiceState.appServiceTitle}
         visibleDialog={appServiceState.appServiceVisible}
         onClose={() => appServiceDispatchers.setState({appServiceVisible: false})}

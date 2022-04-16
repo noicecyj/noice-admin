@@ -41,7 +41,7 @@ function Entity() {
             entityCurrent,
             pid: entityState.entityNameId
           })}
-          customType={entityState.customType}
+          customData={entityState.customData}
           columnRender={(value, index, record) => {
             return (
               <CustomColumnEntity value={value} index={index} record={record}/>
@@ -56,7 +56,7 @@ function Entity() {
         />
       </Dialog>
       <DataFormTemple
-        formType={entityState.formType}
+        customData={entityState.customData}
         title={entityState.entityTitle}
         visibleDialog={entityState.entityVisible}
         onClose={() => entityDispatchers.setState({entityVisible: false})}

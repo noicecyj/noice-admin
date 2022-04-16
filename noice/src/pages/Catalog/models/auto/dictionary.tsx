@@ -17,6 +17,7 @@ export default {
     dictionaryVisible: false,
     divVisible: false,
     catalogId: '',
+    customData: {},
     customType: false,
     formType: 'ONE_LIST',
   },
@@ -86,8 +87,7 @@ export default {
       const payload = {
         dictionaryTable: ret.data.dataTable,
         dictionaryForm: ret.data.dataForm,
-        customType: ret.data.customType,
-        formType: ret.data.formType,
+        customData: ret.data.customData,
       };
       dispatch.dictionary.setState(payload);
     },

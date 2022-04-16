@@ -16,6 +16,7 @@ export default {
     firstMenuForm: [],
     firstMenuTable: [],
     firstMenuId: '',
+    customData: {},
     customType: false,
     formType: 'ONE_LIST',
   },
@@ -85,8 +86,7 @@ export default {
       const payload = {
         firstMenuTable: ret.data.dataTable,
         firstMenuForm: ret.data.dataForm,
-        customType: ret.data.customType,
-        formType: ret.data.formType,
+        customData: ret.data.customData,
       };
       dispatch.firstMenu.setState(payload);
     },

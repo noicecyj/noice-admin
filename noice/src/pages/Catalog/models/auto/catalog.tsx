@@ -16,6 +16,7 @@ export default {
     catalogForm: [],
     catalogTable: [],
     catalogId: '',
+    customData: {},
     customType: false,
     formType: 'ONE_LIST',
   },
@@ -85,8 +86,7 @@ export default {
       const payload = {
         catalogTable: ret.data.dataTable,
         catalogForm: ret.data.dataForm,
-        customType: ret.data.customType,
-        formType: ret.data.formType,
+        customData: ret.data.customData,
       };
       dispatch.catalog.setState(payload);
     },

@@ -30,7 +30,7 @@ function Role() {
         total={roleState.roleTotal}
         getPage={roleCurrent => roleDispatchers.rolePage(roleCurrent)}
         primaryKey="id"
-        customType={roleState.customType}
+        customData={roleState.customData}
         columnRender={(value, index, record) => {
           return (
             <CustomColumnRole value={value} index={index} record={record}/>
@@ -44,7 +44,7 @@ function Role() {
         customMethodName3={customRoleState.customMethodName3}
       />
       <DataFormTemple
-        formType={roleState.formType}
+        customData={roleState.customData}
         title={roleState.roleTitle}
         visibleDialog={roleState.roleVisible}
         onClose={() => roleDispatchers.setState({roleVisible: false})}

@@ -30,7 +30,7 @@ function User() {
         total={userState.userTotal}
         getPage={userCurrent => userDispatchers.userPage(userCurrent)}
         primaryKey="id"
-        customType={userState.customType}
+        customData={userState.customData}
         columnRender={(value, index, record) => {
           return (
             <CustomColumnUser value={value} index={index} record={record}/>
@@ -44,7 +44,7 @@ function User() {
         customMethodName3={customUserState.customMethodName3}
       />
       <DataFormTemple
-        formType={userState.formType}
+        customData={userState.customData}
         title={userState.userTitle}
         visibleDialog={userState.userVisible}
         onClose={() => userDispatchers.setState({userVisible: false})}

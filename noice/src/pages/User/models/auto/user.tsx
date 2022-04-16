@@ -16,6 +16,7 @@ export default {
     userForm: [],
     userTable: [],
     userId: '',
+    customData: {},
     customType: false,
     formType: 'ONE_LIST',
   },
@@ -85,8 +86,7 @@ export default {
       const payload = {
         userTable: ret.data.dataTable,
         userForm: ret.data.dataForm,
-        customType: ret.data.customType,
-        formType: ret.data.formType,
+        customData: ret.data.customData,
       };
       dispatch.user.setState(payload);
     },

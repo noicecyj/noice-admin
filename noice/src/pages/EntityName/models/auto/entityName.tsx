@@ -16,6 +16,7 @@ export default {
     entityNameForm: [],
     entityNameTable: [],
     entityNameId: '',
+    customData: {},
     customType: false,
     formType: 'ONE_LIST',
   },
@@ -85,8 +86,7 @@ export default {
       const payload = {
         entityNameTable: ret.data.dataTable,
         entityNameForm: ret.data.dataForm,
-        customType: ret.data.customType,
-        formType: ret.data.formType,
+        customData: ret.data.customData,
       };
       dispatch.entityName.setState(payload);
     },

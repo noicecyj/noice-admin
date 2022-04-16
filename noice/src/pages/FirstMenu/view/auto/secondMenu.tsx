@@ -41,7 +41,7 @@ function SecondMenu() {
             secondMenuCurrent,
             pid: secondMenuState.firstMenuId
           })}
-          customType={secondMenuState.customType}
+          customData={secondMenuState.customData}
           columnRender={(value, index, record) => {
             return (
               <CustomColumnSecondMenu value={value} index={index} record={record}/>
@@ -56,7 +56,7 @@ function SecondMenu() {
         />
       </Dialog>
       <DataFormTemple
-        formType={secondMenuState.formType}
+        customData={secondMenuState.customData}
         title={secondMenuState.secondMenuTitle}
         visibleDialog={secondMenuState.secondMenuVisible}
         onClose={() => secondMenuDispatchers.setState({secondMenuVisible: false})}

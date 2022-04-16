@@ -17,6 +17,7 @@ export default {
     entityVisible: false,
     divVisible: false,
     entityNameId: '',
+    customData: {},
     customType: false,
     formType: 'ONE_LIST',
   },
@@ -86,8 +87,7 @@ export default {
       const payload = {
         entityTable: ret.data.dataTable,
         entityForm: ret.data.dataForm,
-        customType: ret.data.customType,
-        formType: ret.data.formType,
+        customData: ret.data.customData,
       };
       dispatch.entity.setState(payload);
     },
