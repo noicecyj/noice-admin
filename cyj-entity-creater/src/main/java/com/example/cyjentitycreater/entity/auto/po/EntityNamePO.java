@@ -34,6 +34,8 @@ public class EntityNamePO implements Serializable {
     @GeneratedValue(generator = "uuid2")
     @Column(name = "id", length = 36)
     private String id;
+    @Column(name = "form_col")
+    private Integer formCol;
     @Column(name = "parent_entity_name")
     private String parentEntityName;
     @Column(name = "app_name")

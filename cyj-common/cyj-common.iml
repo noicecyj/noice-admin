@@ -183,25 +183,24 @@
     <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-loadbalancer:2.2.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-validation:2.3.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate.validator:hibernate-validator:6.1.7.Final" level="project" />
-    <orderEntry type="library" name="Maven: jakarta.validation:jakarta.validation-api:2.0.2" level="project" />
     <orderEntry type="library" name="Maven: io.projectreactor.addons:reactor-extra:3.3.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-cache:2.3.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: com.stoyanr:evictor:1.0.0" level="project" />
     <orderEntry type="library" name="Maven: com.netflix.ribbon:ribbon-eureka:2.3.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-configuration-processor:2.3.8.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.commons:commons-dbcp2:2.8.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-dbcp2:2.9.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-pool2:2.8.1" level="project" />
-    <orderEntry type="library" name="Maven: org.springdoc:springdoc-openapi-ui:1.5.12" level="project" />
-    <orderEntry type="library" name="Maven: org.springdoc:springdoc-openapi-webmvc-core:1.5.12" level="project" />
-    <orderEntry type="library" name="Maven: org.springdoc:springdoc-openapi-common:1.5.12" level="project" />
-    <orderEntry type="library" name="Maven: io.swagger.core.v3:swagger-models:2.1.11" level="project" />
-    <orderEntry type="library" name="Maven: io.swagger.core.v3:swagger-annotations:2.1.11" level="project" />
-    <orderEntry type="library" name="Maven: io.swagger.core.v3:swagger-integration:2.1.11" level="project" />
-    <orderEntry type="library" name="Maven: io.swagger.core.v3:swagger-core:2.1.11" level="project" />
+    <orderEntry type="library" name="Maven: org.springdoc:springdoc-openapi-ui:1.6.7" level="project" />
+    <orderEntry type="library" name="Maven: org.springdoc:springdoc-openapi-webmvc-core:1.6.7" level="project" />
+    <orderEntry type="library" name="Maven: org.springdoc:springdoc-openapi-common:1.6.7" level="project" />
+    <orderEntry type="library" name="Maven: io.swagger.core.v3:swagger-core:2.2.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.11.4" level="project" />
-    <orderEntry type="library" name="Maven: io.github.classgraph:classgraph:4.8.116" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars:swagger-ui:3.52.5" level="project" />
+    <orderEntry type="library" name="Maven: io.swagger.core.v3:swagger-annotations:2.2.0" level="project" />
+    <orderEntry type="library" name="Maven: io.swagger.core.v3:swagger-models:2.2.0" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.validation:jakarta.validation-api:2.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.webjars:swagger-ui:4.10.3" level="project" />
     <orderEntry type="library" name="Maven: org.webjars:webjars-locator-core:0.45" level="project" />
+    <orderEntry type="library" name="Maven: io.github.classgraph:classgraph:4.8.143" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-api:5.6.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apiguardian:apiguardian-api:1.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.opentest4j:opentest4j:1.2.0" level="project" />
@@ -214,7 +213,7 @@
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.10" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.30" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.7.30" level="project" />
-    <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.2.78" level="project" />
+    <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.2.80" level="project" />
     <orderEntry type="library" name="Maven: javax.persistence:javax.persistence-api:2.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:javax.servlet-api:4.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-data-jpa:2.3.8.RELEASE" level="project" />
