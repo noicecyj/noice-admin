@@ -53,16 +53,19 @@ function DataForm(props) {
             fullWidth
             labelAlign="top"
             value={formDataValue}
+            isPreview={!customData.editEnable}
             onChange={(value) => dispatchers(value)}>
             {items.map((item) => {
               if (item.propertyCode !== "pid") {
                 if (item.propertyMode === 'Input') {
+                  console.log(item)
                   return (
                     <FormItem
                       colSpan={formCol}
                       label={`${item.propertyLabel}`}
                       required={item.propertyRequired === '是'}
                       requiredMessage={`请输入${item.propertyLabel}`}
+                      disabled={item.propertyEditEnable === '是'}
                       key={item.id}>
                       <Input
                         id={item.propertyCode}

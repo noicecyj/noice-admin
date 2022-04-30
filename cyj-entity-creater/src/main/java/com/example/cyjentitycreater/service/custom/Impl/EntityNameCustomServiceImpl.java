@@ -1578,6 +1578,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         JSONObject customData = new JSONObject();
         customData.put("customType", "是".equals(po.getCustomType()));
         customData.put("customForm", "是".equals(po.getCustomForm()));
+        customData.put("editEnable", "是".equals(po.getEditEnable()));
         customData.put("formType", po.getFormType());
         customData.put("formCol", po.getFormCol());
         jsonObject.put("customData", customData);

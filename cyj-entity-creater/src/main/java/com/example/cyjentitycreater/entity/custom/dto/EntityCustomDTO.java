@@ -25,6 +25,7 @@ public class EntityCustomDTO implements Serializable {
     private String propertyDirection;
     private String propertyRequired;
     private String propertyDataSourceType;
+    private String propertyEditEnable;
     private List<Map<String, String>> propertyDataSource;
     private String propertyDefaultValue;
     private String propertyDisplay;
