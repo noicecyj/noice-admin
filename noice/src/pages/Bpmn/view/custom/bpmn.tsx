@@ -44,7 +44,7 @@ function CustomColumnBpmn(props) {
           recordId: customBpmnState.recordId,
         })}
         style={{width: '90%'}}
-        // height='800'
+        height='800px'
       >
         <ReactBpmn
           url="/diagram_1.bpmn"
