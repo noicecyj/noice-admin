@@ -902,8 +902,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "    " + underSubPoName + "Visible: false,\r\n" +
                 "    divVisible: false,\r\n" +
                 "    " + underPoName + "Id: '',\r\n" +
-                "    customType: false,\r\n" +
-                "    formType: 'ONE_LIST',\r\n" +
+                "    customData: {},\r\n" +
                 "  },\r\n" +
                 "\r\n" +
                 "  reducers: {\r\n" +
@@ -1196,8 +1195,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "    " + underPoName + "Form: [],\r\n" +
                 "    " + underPoName + "Table: [],\r\n" +
                 "    " + underPoName + "Id: '',\r\n" +
-                "    customType: false,\r\n" +
-                "    formType: 'ONE_LIST',\r\n" +
+                "    customData: {},\r\n" +
                 "  },\r\n" +
                 "\r\n" +
                 "  reducers: {\r\n" +
@@ -1579,6 +1577,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         jsonObject.put("dataForm", entityCustomDTOList);
         JSONObject customData = new JSONObject();
         customData.put("customType", "是".equals(po.getCustomType()));
+        customData.put("customForm", "是".equals(po.getCustomForm()));
         customData.put("formType", po.getFormType());
         customData.put("formCol", po.getFormCol());
         jsonObject.put("customData", customData);

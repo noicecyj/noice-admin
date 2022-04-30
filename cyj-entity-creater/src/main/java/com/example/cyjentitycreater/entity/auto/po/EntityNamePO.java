@@ -38,6 +38,10 @@ public class EntityNamePO implements Serializable {
     private Integer formCol;
     @Column(name = "parent_entity_name")
     private String parentEntityName;
+    @Column(name = "edit_enable")
+    private String editEnable;
+    @Column(name = "custom_form")
+    private String customForm;
     @Column(name = "app_name")
     private String appName;
     @Column(name = "entity_name")

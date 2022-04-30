@@ -252,7 +252,7 @@ function DataForm(props) {
                 }
               }
             })}
-            {customData.customType && <FormItem
+            {!customData.customForm && <FormItem
               colSpan={formCol}
               label="状态"
               required
@@ -265,7 +265,7 @@ function DataForm(props) {
                 defaultValue="有效"
               />
             </FormItem>}
-            {customData.customType && <FormItem
+            {!customData.customForm && <FormItem
               colSpan={formCol}
               label="排序代码"
               required
