@@ -34,6 +34,12 @@ public class FlowUserPO implements Serializable {
     @GeneratedValue(generator = "uuid2")
     @Column(name = "id", length = 36)
     private String id;
+    @Column(name = "second_name")
+    private String secondName;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "first_name")
+    private String firstName;
     @Column(name = "status")
     private String status;
     @Column(name = "sort_code")
