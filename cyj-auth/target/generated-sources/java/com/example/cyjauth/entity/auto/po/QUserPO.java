@@ -19,6 +19,8 @@ public class QUserPO extends EntityPathBase<UserPO> {
 
     public static final QUserPO userPO = new QUserPO("userPO");
 
+    public final StringPath firstName = createString("firstName");
+
     public final StringPath id = createString("id");
 
     public final StringPath name = createString("name");
@@ -26,6 +28,8 @@ public class QUserPO extends EntityPathBase<UserPO> {
     public final StringPath password = createString("password");
 
     public final StringPath phone = createString("phone");
+
+    public final StringPath secondName = createString("secondName");
 
     public final StringPath sortCode = createString("sortCode");
 

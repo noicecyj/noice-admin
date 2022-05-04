@@ -24,9 +24,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author 曹元杰
@@ -1536,7 +1538,8 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
 
     @Override
     public JSONObject findDataTableAndFormByName(String entityCode) {
-        EntityNamePO po = entityNameCustomDao.findEntityNamePOByEntityCodeAndEntityType(entityCode, "PO");
+        EntityNamePO po = entityNameCustomDao
+                .findEntityNamePOByEntityCodeAndEntityType(entityCode, "PO");
         List<EntityPO> entityPOList = entityCustomDao.findEntityPOByPid(po.getId());
         List<EntityCustomDTO> entityCustomDTOList = new ArrayList<>();
         for (EntityPO entityPO : entityPOList) {
@@ -1572,9 +1575,12 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
             }
             entityCustomDTOList.add(entityCustomDTO);
         }
+        List<EntityCustomDTO> entityCustomDTOS = entityCustomDTOList.stream()
+                .sorted(Comparator.comparing(EntityCustomDTO::getSortCode))
+                .collect(Collectors.toList());
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("dataTable", entityCustomDTOList);
-        jsonObject.put("dataForm", entityCustomDTOList);
+        jsonObject.put("dataTable", entityCustomDTOS);
+        jsonObject.put("dataForm", entityCustomDTOS);
         JSONObject customData = new JSONObject();
         customData.put("customType", "是".equals(po.getCustomType()));
         customData.put("customForm", "是".equals(po.getCustomForm()));

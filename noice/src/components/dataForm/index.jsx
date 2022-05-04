@@ -65,7 +65,7 @@ function DataForm(props) {
                       label={`${item.propertyLabel}`}
                       required={item.propertyRequired === '是'}
                       requiredMessage={`请输入${item.propertyLabel}`}
-                      disabled={item.propertyEditEnable === '是'}
+                      disabled={item.propertyEditEnable !== '是'}
                       key={item.id}>
                       <Input
                         id={item.propertyCode}

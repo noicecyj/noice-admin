@@ -9,7 +9,7 @@ function CustomColumnEntityName(props) {
   return (
     <>
       {
-        record.parentEntityName === null && <Button
+        (record.parentEntityName === null || record.parentEntityName === '') && <Button
           type="normal"
           size="small"
           onClick={() => customEntityNameDispatchers.createEntityFile({id: record.id})}
