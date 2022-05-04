@@ -19,7 +19,13 @@ public class QFlowUserPO extends EntityPathBase<FlowUserPO> {
 
     public static final QFlowUserPO flowUserPO = new QFlowUserPO("flowUserPO");
 
+    public final StringPath email = createString("email");
+
+    public final StringPath firstName = createString("firstName");
+
     public final StringPath id = createString("id");
+
+    public final StringPath secondName = createString("secondName");
 
     public final StringPath sortCode = createString("sortCode");
 
