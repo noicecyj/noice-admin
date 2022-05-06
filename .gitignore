@@ -258,3 +258,15 @@
 /cyj-workflow/target/classes/com/example/cyjworkflow/entity/auto/po/QFlowGroupPO.class
 /cyj-workflow/target/classes/com/example/cyjworkflow/entity/auto/po/QFlowTenantPO.class
 /cyj-workflow/target/classes/com/example/cyjworkflow/entity/auto/po/QFlowUserPO.class
+/cyj-auth/target/classes/com/example/cyjauth/controller/auto/EnterpriseController.class
+/cyj-auth/target/classes/com/example/cyjauth/controller/auto/Impl/EnterpriseControllerImpl.class
+/cyj-auth/target/classes/com/example/cyjauth/controller/custom/EnterpriseCustomController.class
+/cyj-auth/target/classes/com/example/cyjauth/controller/custom/Impl/EnterpriseCustomControllerImpl.class
+/cyj-auth/target/classes/com/example/cyjauth/dao/custom/EnterpriseCustomDao.class
+/cyj-auth/target/classes/com/example/cyjauth/service/custom/EnterpriseCustomService.class
+/cyj-auth/target/classes/com/example/cyjauth/service/custom/Impl/EnterpriseCustomServiceImpl.class
+/cyj-auth/target/classes/com/example/cyjauth/dao/auto/EnterpriseDao.class
+/cyj-auth/target/classes/com/example/cyjauth/entity/auto/po/EnterprisePO.class
+/cyj-auth/target/classes/com/example/cyjauth/service/auto/EnterpriseService.class
+/cyj-auth/target/classes/com/example/cyjauth/service/auto/Impl/EnterpriseServiceImpl.class
+/cyj-auth/target/classes/com/example/cyjauth/entity/auto/po/QEnterprisePO.class
