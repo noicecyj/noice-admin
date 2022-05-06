@@ -37,6 +37,7 @@ function DataForm(props) {
   } = props;
 
   const formCol = customData.formCol === 4 ? 3 : customData.formCol === 3 ? 4 : customData.formCol === 2 ? 6 : 12;
+  console.log(customData.customType)
 
   return (
     <Dialog

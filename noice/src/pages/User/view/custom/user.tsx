@@ -10,6 +10,8 @@ function CustomColumnUser(props) {
   const [roleState, roleDispatchers] = pageStore.useModel('role');
   const [authorityState, authorityDispatchers] = pageStore.useModel('authority');
 
+  const customData = {customType: false, formCol: 2};
+
   return (
     <>
       <Box direction="row" spacing={5}>
@@ -43,7 +45,7 @@ function CustomColumnUser(props) {
           userId: customUserState.recordId,
         })}
         formDataValue={customUserState.passwordFormData}
-        customData={{customType: false, formCol: 2}}
+        customData={customData}
       />
       <Dialog
         v2
@@ -75,6 +77,7 @@ function CustomColumnUser(props) {
             },
             selectedRowKeys: customUserState.selectRoles,
           }}
+          customData={customData}
         />
       </Dialog>
       <Dialog
@@ -107,6 +110,7 @@ function CustomColumnUser(props) {
             },
             selectedRowKeys: customUserState.selectAuthorities,
           }}
+          customData={customData}
         />
       </Dialog>
     </>

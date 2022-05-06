@@ -9,6 +9,8 @@ function CustomColumnRole(props) {
   const [customRoleState, customRoleDispatchers] = pageStore.useModel('customRole');
   const [authorityState, authorityDispatchers] = pageStore.useModel('authority');
 
+  const customData = {customType: false, formCol: 2};
+
   return (
     <>
       <Box direction="row" spacing={5}>
@@ -48,6 +50,7 @@ function CustomColumnRole(props) {
             },
             selectedRowKeys: customRoleState.selectAuthorities,
           }}
+          customData={customData}
         />
       </Dialog>
     </>
