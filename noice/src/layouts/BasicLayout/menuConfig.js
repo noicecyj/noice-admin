@@ -29,6 +29,18 @@ const asideMenuConfig = [
         name: '流程管理',
         path: '/admin/bpmu',
       },
+      {
+        name: '流程用户管理',
+        path: '/admin/flowUser',
+      },
+      {
+        name: '流程分组管理',
+        path: '/admin/flowGroup',
+      },
+      {
+        name: '流程租户管理',
+        path: '/admin/flowTenant',
+      },
     ],
   },
   {
@@ -36,6 +48,10 @@ const asideMenuConfig = [
     icon: 'set',
     path: '/auth',
     children: [
+      {
+        name: '企业管理',
+        path: '/auth/enterprise',
+      },
       {
         name: '用户管理',
         path: '/auth/user',

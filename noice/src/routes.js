@@ -7,6 +7,10 @@ import SqlPage from '@/pages/Sql';
 import AppServicePage from '@/pages/AppService';
 import FirstMenuPage from '@/pages/FirstMenu';
 import BpmnPage from '@/pages/Bpmn';
+import FlowUserPage from '@/pages/FlowUser';
+import FlowGroupPage from '@/pages/FlowGroup';
+import FlowTenantPage from '@/pages/FlowTenant';
+import EnterprisePage from '@/pages/Enterprise';
 import UserPage from '@/pages/User';
 import RolePage from '@/pages/Role';
 import AuthorityPage from '@/pages/Authority';
@@ -40,12 +44,28 @@ const routerConfig = [
         path: '/bpmu',
         component: BpmnPage,
       },
+      {
+        path: '/flowUser',
+        component: FlowUserPage,
+      },
+      {
+        path: '/flowGroup',
+        component: FlowGroupPage,
+      },
+      {
+        path: '/flowTenant',
+        component: FlowTenantPage,
+      },
     ],
   },
   {
     path: '/auth',
     component: BasicLayout,
     children: [
+      {
+        path: '/enterprise',
+        component: EnterprisePage,
+      },
       {
         path: '/user',
         component: UserPage,
