@@ -1600,7 +1600,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
         //serviceImpl路径
         String poServicePath = packetPath + ".service.auto.";
-        sb.append("package ").append(packetPath).append(".custom.aop;\r\n");
+        sb.append("package ").append(packetPath).append(".service.custom.aop;\r\n");
         sb.append("\r\n");
         sb.append("import org.aspectj.lang.JoinPoint;\r\n");
         sb.append("import org.aspectj.lang.annotation.After;\r\n");
