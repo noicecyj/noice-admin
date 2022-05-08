@@ -125,8 +125,9 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
             createJavaFile(appPath + "/service/auto", serviceGenerate(poName, appPath));
             createJavaFile(appPath + "/service/auto/Impl", serviceImplGenerate(underPoName, poName, appPath));
             createJavaFile(appPath + "/service/custom", serviceCustomGenerate(poName, appPath), false);
+            createJavaFile(appPath + "/service/custom/aop", aopCustomGenerate(poName, appPath), false);
             createJavaFile(appPath + "/service/custom/Impl", serviceImplCustomGenerate(poName, appPath), false);
-            createJavaFile(appPath + "/controller/auto", controllerGenerate(underPoName, poName, appPath, appApi));
+            createJavaFile(appPath + "/controller/auto", controllerGenerate(underPoName, poName, appPath));
             createJavaFile(appPath + "/controller/auto/Impl", controllerImplGenerate(underPoName, poName, appPath, appApi));
             createJavaFile(appPath + "/controller/custom", controllerCustomGenerate(poName, appPath), false);
             createJavaFile(appPath + "/controller/custom/Impl", controllerImplCustomGenerate(poName, appPath, appApi), false);
@@ -134,6 +135,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
             e.printStackTrace();
         }
     }
+
 
     private void createSubJavaFile(EntityNamePO po, List<EntityPO> poList, String underPoName, String poName, String appPath, String appApi) {
         try {
@@ -143,8 +145,9 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
             createJavaFile(appPath + "/service/auto", serviceSubGenerate(poName, appPath));
             createJavaFile(appPath + "/service/auto/Impl", serviceImplSubGenerate(underPoName, poName, appPath));
             createJavaFile(appPath + "/service/custom", serviceCustomGenerate(poName, appPath), false);
+            createJavaFile(appPath + "/service/custom/aop", aopSubCustomGenerate(poName, appPath), false);
             createJavaFile(appPath + "/service/custom/Impl", serviceImplCustomGenerate(poName, appPath), false);
-            createJavaFile(appPath + "/controller/auto", controllerSubGenerate(underPoName, poName, appPath, appApi));
+            createJavaFile(appPath + "/controller/auto", controllerSubGenerate(underPoName, poName, appPath));
             createJavaFile(appPath + "/controller/auto/Impl", controllerImplSubGenerate(underPoName, poName, appPath, appApi));
             createJavaFile(appPath + "/controller/custom", controllerCustomGenerate(poName, appPath), false);
             createJavaFile(appPath + "/controller/custom/Impl", controllerImplCustomGenerate(poName, appPath, appApi), false);
@@ -152,7 +155,6 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
             e.printStackTrace();
         }
     }
-
 
     private String[] controllerImplCustomGenerate(String poName, String appPath, String appApi) {
         StringBuilder sb = new StringBuilder();
@@ -602,7 +604,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         return new String[]{entityServiceImplData, poName + "ServiceImpl.java"};
     }
 
-    public String[] controllerGenerate(String underPoName, String poName, String appPath, String appApi) {
+    public String[] controllerGenerate(String underPoName, String poName, String appPath) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
@@ -713,7 +715,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         return new String[]{entityControllerImplData, poName + "ControllerImpl.java"};
     }
 
-    private String[] controllerSubGenerate(String underPoName, String poName, String appPath, String appApi) {
+    private String[] controllerSubGenerate(String underPoName, String poName, String appPath) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
@@ -1589,6 +1591,183 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         customData.put("formCol", po.getFormCol());
         jsonObject.put("customData", customData);
         return jsonObject;
+    }
+
+
+    private String[] aopCustomGenerate(String poName, String appPath) {
+        StringBuilder sb = new StringBuilder();
+        String[] PathArr = appPath.split("java");
+        String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
+        //serviceImpl路径
+        String poServicePath = packetPath + ".service.auto.";
+        sb.append("package ").append(packetPath).append(".custom.aop;\r\n");
+        sb.append("\r\n");
+        sb.append("import org.aspectj.lang.JoinPoint;\r\n");
+        sb.append("import org.aspectj.lang.annotation.After;\r\n");
+        sb.append("import org.aspectj.lang.annotation.Aspect;\r\n");
+        sb.append("import org.aspectj.lang.annotation.Before;\r\n");
+        sb.append("import org.slf4j.Logger;\r\n");
+        sb.append("import org.slf4j.LoggerFactory;\r\n");
+        sb.append("import org.springframework.stereotype.Component;\r\n");
+        sb.append("import org.springframework.transaction.annotation.Transactional;\r\n");
+        sb.append("\r\n");
+        sb.append("/**\r\n");
+        sb.append(" * @author 曹元杰\r\n");
+        sb.append(" * @version 1.0\r\n");
+        sb.append(" */\r\n");
+        sb.append("@Aspect\r\n");
+        sb.append("@Component\r\n");
+        sb.append("@Transactional(rollbackFor = Exception.class)\r\n");
+        sb.append("public class ").append(poName).append("CustomAop {\r\n");
+        sb.append("\r\n");
+        sb.append("    private static final Logger logger = LoggerFactory.getLogger(").append(poName).append("CustomAop.class);\r\n");
+        sb.append("\r\n");
+        sb.append("    @Before(value = \"execution(* ").append(packetPath).append(poName).append("Service.addOne(..))\")\r\n");
+        sb.append("    public void addOneBefore(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.addOneBefore:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @After(value = \"execution(* ").append(packetPath).append(poName).append("Service.addOne(..))\")\r\n");
+        sb.append("    public void addOneAfter(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.addOneAfter:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @Before(value = \"execution(* ").append(packetPath).append(poName).append("Service.deleteOne(..))\")\r\n");
+        sb.append("    public void deleteOneBefore(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.deleteOneBefore:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @After(value = \"execution(* ").append(packetPath).append(poName).append("Service.deleteOne(..))\")\r\n");
+        sb.append("    public void deleteOneAfter(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.deleteOneAfter:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @Before(value = \"execution(* ").append(packetPath).append(poName).append("Service.updateOne(..))\")\r\n");
+        sb.append("    public void updateOneBefore(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.updateOneBefore:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @After(value = \"execution(* ").append(packetPath).append(poName).append("Service.updateOne(..))\")\r\n");
+        sb.append("    public void updateOneAfter(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.updateOneAfter:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @Before(value = \"execution(* ").append(packetPath).append(poName).append("Service.findAll(..))\")\r\n");
+        sb.append("    public void findAllBefore(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.findAllBefore:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @After(value = \"execution(* ").append(packetPath).append(poName).append("Service.findAll(..))\")\r\n");
+        sb.append("    public void findAllAfter(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.findAllAfter:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @Before(value = \"execution(* ").append(packetPath).append(poName).append("Service.findOneById(..))\")\r\n");
+        sb.append("    public void findOneByIdBefore(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.findOneByIdBefore:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @After(value = \"execution(* ").append(packetPath).append(poName).append("Service.findOneById(..))\")\r\n");
+        sb.append("    public void findOneByIdAfter(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.findOneByIdAfter:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("}\r\n");
+        String entityAopData = sb.toString();
+        return new String[]{entityAopData, poName + "CustomAop.java"};
+    }
+
+    private String[] aopSubCustomGenerate(String poName, String appPath) {
+        StringBuilder sb = new StringBuilder();
+        String[] PathArr = appPath.split("java");
+        String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
+        //serviceImpl路径
+        String poServicePath = packetPath + ".service.auto.";
+        sb.append("package ").append(packetPath).append(".service.custom.aop;\r\n");
+        sb.append("\r\n");
+        sb.append("import org.aspectj.lang.JoinPoint;\r\n");
+        sb.append("import org.aspectj.lang.annotation.After;\r\n");
+        sb.append("import org.aspectj.lang.annotation.Aspect;\r\n");
+        sb.append("import org.aspectj.lang.annotation.Before;\r\n");
+        sb.append("import org.slf4j.Logger;\r\n");
+        sb.append("import org.slf4j.LoggerFactory;\r\n");
+        sb.append("import org.springframework.stereotype.Component;\r\n");
+        sb.append("import org.springframework.transaction.annotation.Transactional;\r\n");
+        sb.append("\r\n");
+        sb.append("/**\r\n");
+        sb.append(" * @author 曹元杰\r\n");
+        sb.append(" * @version 1.0\r\n");
+        sb.append(" */\r\n");
+        sb.append("@Aspect\r\n");
+        sb.append("@Component\r\n");
+        sb.append("@Transactional(rollbackFor = Exception.class)\r\n");
+        sb.append("public class ").append(poName).append("CustomAop {\r\n");
+        sb.append("\r\n");
+        sb.append("    private static final Logger logger = LoggerFactory.getLogger(").append(poName).append("CustomAop.class);\r\n");
+        sb.append("\r\n");
+        sb.append("    @Before(value = \"execution(* ").append(packetPath).append(poName).append("Service.addOne(..))\")\r\n");
+        sb.append("    public void addOneBefore(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.addOneBefore:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @After(value = \"execution(* ").append(packetPath).append(poName).append("Service.addOne(..))\")\r\n");
+        sb.append("    public void addOneAfter(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.addOneAfter:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @Before(value = \"execution(* ").append(packetPath).append(poName).append("Service.deleteOne(..))\")\r\n");
+        sb.append("    public void deleteOneBefore(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.deleteOneBefore:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @After(value = \"execution(* ").append(packetPath).append(poName).append("Service.deleteOne(..))\")\r\n");
+        sb.append("    public void deleteOneAfter(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.deleteOneAfter:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @Before(value = \"execution(* ").append(packetPath).append(poName).append("Service.updateOne(..))\")\r\n");
+        sb.append("    public void updateOneBefore(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.updateOneBefore:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @After(value = \"execution(* ").append(packetPath).append(poName).append("Service.updateOne(..))\")\r\n");
+        sb.append("    public void updateOneAfter(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.updateOneAfter:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @Before(value = \"execution(* ").append(packetPath).append(poName).append("Service.findAll(..))\")\r\n");
+        sb.append("    public void findAllBefore(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.findAllBefore:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @After(value = \"execution(* ").append(packetPath).append(poName).append("Service.findAll(..))\")\r\n");
+        sb.append("    public void findAllAfter(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.findAllAfter:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @Before(value = \"execution(* ").append(packetPath).append(poName).append("Service.findOneById(..))\")\r\n");
+        sb.append("    public void findOneByIdBefore(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.findOneByIdBefore:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @After(value = \"execution(* ").append(packetPath).append(poName).append("Service.findOneById(..))\")\r\n");
+        sb.append("    public void findOneByIdAfter(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.findOneByIdAfter:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @Before(value = \"execution(* ").append(packetPath).append(poName).append("Service.findListByPid(..))\")\r\n");
+        sb.append("    public void findListByPidBefore(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.findListByPidBefore:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @After(value = \"execution(* ").append(packetPath).append(poName).append("Service.findListByPid(..))\")\r\n");
+        sb.append("    public void findListByPidAfter(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.findListByPidAfter:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("}\r\n");
+        String entitySubAopData = sb.toString();
+        return new String[]{entitySubAopData, poName + "CustomAop.java"};
     }
 
 }
