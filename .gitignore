@@ -272,3 +272,7 @@
 /cyj-auth/target/classes/com/example/cyjauth/entity/auto/po/QEnterprisePO.class
 /cyj-common/target/
 /cyj-entity-creater/target/
+/cyj-auth/target/
+/cyj-dictionary/target/
+/cyj-workflow/target/
+/cyj-query/target/

@@ -23,22 +23,11 @@ public class Redis {
 
     private static final Logger logger = LoggerFactory.getLogger(Redis.class);
 
-    private RedisTemplate redisTemplate;
-
-    public RedisTemplate getRedisTemplate() {
-        return redisTemplate;
-    }
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Autowired
-    public void setRedisTemplate(RedisTemplate redisTemplate) {
+    public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
         this.redisTemplate = redisTemplate;
-    }
-
-    public Redis(RedisTemplate redisTemplate) {
-        this.redisTemplate = redisTemplate;
-    }
-
-    public Redis() {
     }
 
     public static Redis companyExecute;
@@ -49,6 +38,8 @@ public class Redis {
     @PostConstruct
     public void init() {
         companyExecute = this;
+        Set<String> keys = companyExecute.redisTemplate.keys("*");
+        redisTemplate.delete(keys);
     }
 
 
@@ -85,17 +76,14 @@ public class Redis {
      *
      * @param key  键
      * @param time 时间(秒)
-     * @return boolean
      */
-    public boolean expire(String key, long time) {
+    public void expire(String key, long time) {
         try {
             if (time > 0) {
                 companyExecute.redisTemplate.expire(key, time, TimeUnit.SECONDS);
             }
-            return true;
         } catch (Exception e) {
             logger.error(e.getMessage());
-            return false;
         }
     }
 
@@ -169,7 +157,7 @@ public class Redis {
             companyExecute.redisTemplate.opsForValue().set(key, value);
             return true;
         } catch (Exception e) {
-            logger.error("redis set方法 异常{}", e);
+            logger.error("redis set方法 异常:" + e);
             return false;
         }
     }
@@ -298,7 +286,6 @@ public class Redis {
      * @param key   键
      * @param item  项
      * @param value 值
-     * @return true 成功 false失败
      */
     public void hset(String key, String item, Object value) {
         companyExecute.redisTemplate.opsForHash().put(key, item, value);
@@ -356,7 +343,6 @@ public class Redis {
      * @param key  键
      * @param item 项
      * @param by   要增加几(大于0)
-     * @return
      */
     public double hincr(String key, String item, double by) {
         return companyExecute.redisTemplate.opsForHash().increment(key, item, by);
@@ -369,7 +355,6 @@ public class Redis {
      * @param key  键
      * @param item 项
      * @param by   要减少记(小于0)
-     * @return
      */
     public double hdecr(String key, String item, double by) {
         return companyExecute.redisTemplate.opsForHash().increment(key, item, -by);
@@ -464,9 +449,6 @@ public class Redis {
 
     /**
      * 随机删除集合中一个元素
-     *
-     * @param key
-     * @return
      */
     public Object sPop(String key) {
         return companyExecute.redisTemplate.opsForSet().pop(key);
