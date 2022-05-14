@@ -59,12 +59,12 @@ public class UserPO implements Serializable {
     @Column(name = "sort_code")
     private String sortCode;
     @JsonIgnore
-    @OneToMany(targetEntity = RolePO.class, fetch = FetchType.EAGER, mappedBy = "role")
+    @OneToMany(targetEntity = RolePO.class, fetch = FetchType.EAGER, mappedBy = "user")
     @NotFound(action = NotFoundAction.IGNORE)
     @BatchSize(size = 20)
     private Set<RolePO> role = new HashSet<>();
     @JsonIgnore
-    @OneToMany(targetEntity = AuthorityPO.class, fetch = FetchType.EAGER, mappedBy = "authority")
+    @OneToMany(targetEntity = AuthorityPO.class, fetch = FetchType.EAGER, mappedBy = "user")
     @NotFound(action = NotFoundAction.IGNORE)
     @BatchSize(size = 20)
     private Set<AuthorityPO> authority = new HashSet<>();
