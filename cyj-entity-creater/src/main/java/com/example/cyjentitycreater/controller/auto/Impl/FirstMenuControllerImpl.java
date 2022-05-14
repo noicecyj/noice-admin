@@ -1,8 +1,8 @@
 package com.example.cyjentitycreater.controller.auto.Impl;
 
+import com.example.cyjcommon.entity.FirstMenuPO;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.controller.auto.FirstMenuController;
-import com.example.cyjentitycreater.entity.auto.po.FirstMenuPO;
 import com.example.cyjentitycreater.service.auto.FirstMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

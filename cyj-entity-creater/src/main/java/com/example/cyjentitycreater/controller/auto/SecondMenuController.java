@@ -1,7 +1,7 @@
 package com.example.cyjentitycreater.controller.auto;
 
+import com.example.cyjcommon.entity.SecondMenuPO;
 import com.example.cyjcommon.utils.ResultVO;
-import com.example.cyjentitycreater.entity.auto.po.SecondMenuPO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.PostMapping;

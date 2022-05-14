@@ -1,6 +1,6 @@
-package com.example.cyjentitycreater.dao.auto;
+package com.example.cyjcommon.dao;
 
-import com.example.cyjentitycreater.entity.auto.po.FirstMenuPO;
+import com.example.cyjcommon.entity.FirstMenuPO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

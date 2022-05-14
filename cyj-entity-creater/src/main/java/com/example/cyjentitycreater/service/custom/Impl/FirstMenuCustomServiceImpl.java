@@ -1,15 +1,15 @@
 package com.example.cyjentitycreater.service.custom.Impl;
 
 import com.example.cyjcommon.entity.DictionaryPO;
+import com.example.cyjcommon.entity.FirstMenuPO;
+import com.example.cyjcommon.entity.SecondMenuPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjcommon.utils.VoPoConverter;
 import com.example.cyjdictionary.service.custom.DictionaryCustomService;
-import com.example.cyjentitycreater.dao.custom.FirstMenuCustomDao;
-import com.example.cyjentitycreater.dao.custom.SecondMenuCustomDao;
-import com.example.cyjentitycreater.entity.auto.po.FirstMenuPO;
-import com.example.cyjentitycreater.entity.auto.po.SecondMenuPO;
-import com.example.cyjentitycreater.entity.custom.dto.FirstMenuDTO;
-import com.example.cyjentitycreater.entity.custom.dto.SecondMenuDTO;
+import com.example.cyjentitycreater.dao.FirstMenuCustomDao;
+import com.example.cyjentitycreater.dao.SecondMenuCustomDao;
+import com.example.cyjentitycreater.entity.dto.FirstMenuDTO;
+import com.example.cyjentitycreater.entity.dto.SecondMenuDTO;
 import com.example.cyjentitycreater.service.custom.FirstMenuCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

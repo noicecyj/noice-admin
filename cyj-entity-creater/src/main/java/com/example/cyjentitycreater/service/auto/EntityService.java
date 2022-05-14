@@ -1,6 +1,6 @@
 package com.example.cyjentitycreater.service.auto;
 
-import com.example.cyjentitycreater.entity.auto.po.EntityPO;
+import com.example.cyjcommon.entity.EntityPO;
 import com.querydsl.core.QueryResults;
 
 import java.util.List;

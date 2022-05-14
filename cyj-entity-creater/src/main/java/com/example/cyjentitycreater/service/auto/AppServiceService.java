@@ -1,6 +1,6 @@
 package com.example.cyjentitycreater.service.auto;
 
-import com.example.cyjentitycreater.entity.auto.po.AppServicePO;
+import com.example.cyjcommon.entity.AppServicePO;
 import com.querydsl.core.QueryResults;
 
 /**

@@ -1,6 +1,6 @@
 package com.example.cyjentitycreater.service.custom;
 
-import com.example.cyjentitycreater.entity.auto.po.AppServicePO;
+import com.example.cyjcommon.entity.AppServicePO;
 
 /**
  * @author 曹元杰

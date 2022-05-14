@@ -1,11 +1,11 @@
 package com.example.cyjentitycreater.service.custom.Impl;
 
+import com.example.cyjcommon.entity.AppServicePO;
 import com.example.cyjcommon.entity.DictionaryPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjcommon.utils.CommonUtils;
 import com.example.cyjdictionary.service.custom.DictionaryCustomService;
-import com.example.cyjentitycreater.dao.custom.AppServiceCustomDao;
-import com.example.cyjentitycreater.entity.auto.po.AppServicePO;
+import com.example.cyjentitycreater.dao.AppServiceCustomDao;
 import com.example.cyjentitycreater.service.custom.AppServiceCustomService;
 import com.example.cyjentitycreater.utils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

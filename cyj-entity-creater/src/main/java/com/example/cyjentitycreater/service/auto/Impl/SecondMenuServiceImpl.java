@@ -1,9 +1,9 @@
 package com.example.cyjentitycreater.service.auto.Impl;
 
+import com.example.cyjcommon.dao.SecondMenuDao;
+import com.example.cyjcommon.entity.QSecondMenuPO;
+import com.example.cyjcommon.entity.SecondMenuPO;
 import com.example.cyjcommon.service.BaseService;
-import com.example.cyjentitycreater.dao.auto.SecondMenuDao;
-import com.example.cyjentitycreater.entity.auto.po.QSecondMenuPO;
-import com.example.cyjentitycreater.entity.auto.po.SecondMenuPO;
 import com.example.cyjentitycreater.service.auto.SecondMenuService;
 import com.querydsl.core.QueryResults;
 import org.springframework.beans.factory.annotation.Autowired;

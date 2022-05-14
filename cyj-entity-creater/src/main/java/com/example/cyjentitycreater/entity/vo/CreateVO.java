@@ -1,4 +1,4 @@
-package com.example.cyjentitycreater.entity.custom.vo;
+package com.example.cyjentitycreater.entity.vo;
 
 import lombok.Data;
 

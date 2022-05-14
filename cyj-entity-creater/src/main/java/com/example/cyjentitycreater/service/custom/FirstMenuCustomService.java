@@ -1,6 +1,6 @@
 package com.example.cyjentitycreater.service.custom;
 
-import com.example.cyjentitycreater.entity.custom.dto.FirstMenuDTO;
+import com.example.cyjentitycreater.entity.dto.FirstMenuDTO;
 
 import java.util.List;
 

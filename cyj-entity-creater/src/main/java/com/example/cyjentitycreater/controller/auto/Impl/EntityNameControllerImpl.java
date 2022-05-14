@@ -1,8 +1,8 @@
 package com.example.cyjentitycreater.controller.auto.Impl;
 
+import com.example.cyjcommon.entity.EntityNamePO;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.controller.auto.EntityNameController;
-import com.example.cyjentitycreater.entity.auto.po.EntityNamePO;
 import com.example.cyjentitycreater.service.auto.EntityNameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
