@@ -1,6 +1,5 @@
 package com.example.cyjauth.service.custom;
 
-import com.example.cyjauth.entity.po.UserCustomPO;
 import com.example.cyjcommon.entity.UserPO;
 
 import java.util.Set;

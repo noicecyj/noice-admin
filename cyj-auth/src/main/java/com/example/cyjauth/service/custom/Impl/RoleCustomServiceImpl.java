@@ -1,9 +1,5 @@
 package com.example.cyjauth.service.custom.Impl;
 
-import com.example.cyjauth.dao.AuthorityCustomDao;
-import com.example.cyjauth.dao.RoleCustomDao;
-import com.example.cyjauth.entity.po.AuthorityCustomPO;
-import com.example.cyjauth.entity.po.RoleCustomPO;
 import com.example.cyjauth.service.custom.RoleCustomService;
 import com.example.cyjcommon.dao.AuthorityDao;
 import com.example.cyjcommon.dao.RoleDao;
@@ -34,6 +30,7 @@ public class RoleCustomServiceImpl extends BaseService implements RoleCustomServ
     public void setRoleDao(RoleDao roleDao) {
         this.roleDao = roleDao;
     }
+
     @Autowired
     public void setAuthorityDao(AuthorityDao authorityDao) {
         this.authorityDao = authorityDao;

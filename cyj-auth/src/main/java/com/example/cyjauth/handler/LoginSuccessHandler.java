@@ -3,7 +3,6 @@ package com.example.cyjauth.handler;
 import com.alibaba.fastjson.JSON;
 import com.example.cyjauth.constant.SecurityConstant;
 import com.example.cyjauth.entity.bo.AuthUserDetails;
-import com.example.cyjauth.entity.po.RoleCustomPO;
 import com.example.cyjauth.service.custom.UserCustomService;
 import com.example.cyjcommon.entity.RolePO;
 import com.example.cyjcommon.utils.ResponseUtil;
