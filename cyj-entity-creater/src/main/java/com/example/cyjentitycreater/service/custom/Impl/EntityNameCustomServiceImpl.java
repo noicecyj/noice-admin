@@ -1,9 +1,9 @@
 package com.example.cyjentitycreater.service.custom.Impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.cyjcommon.entity.DictionaryPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjcommon.utils.VoPoConverter;
-import com.example.cyjdictionary.entity.auto.po.DictionaryPO;
 import com.example.cyjdictionary.service.custom.DictionaryCustomService;
 import com.example.cyjentitycreater.dao.custom.EntityCustomDao;
 import com.example.cyjentitycreater.dao.custom.EntityNameCustomDao;
@@ -298,9 +298,9 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("    @Column(name = \"id\", length = 36)\r\n");
         sb.append("    private String id;\r\n");
         poList.forEach(entityPO -> {
-            if (StringUtils.isNotEmpty(entityPO.getPropertyLength())){
+            if (StringUtils.isNotEmpty(entityPO.getPropertyLength())) {
                 sb.append("    @Column(name = \"").append(entityPO.getPropertyCode()).append("\", length = ").append(entityPO.getPropertyLength()).append(")\r\n");
-            }else {
+            } else {
                 sb.append("    @Column(name = \"").append(entityPO.getPropertyCode()).append("\")\r\n");
             }
             sb.append("    private ").append(entityPO.getPropertyType()).append(" ").append(BeanUtils.underline2Camel(entityPO.getPropertyCode())).append(";\r\n");
