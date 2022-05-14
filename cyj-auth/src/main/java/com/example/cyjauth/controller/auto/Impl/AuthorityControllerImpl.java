@@ -52,22 +52,24 @@ public class AuthorityControllerImpl implements AuthorityController {
 
     @Override
     public ResultVO getUserAuthority(String userId) {
-        return null;
+        return ResultVO.success(authorityService.getUserAuthority(userId));
     }
 
     @Override
     public ResultVO setUserAuthority(UserAuthorityDTO userAuthorityDTO) {
-        return null;
+        authorityService.setUserAuthority(userAuthorityDTO.getUserId(), userAuthorityDTO.getAuthorityIds());
+        return ResultVO.success();
     }
 
     @Override
     public ResultVO getRoleAuthority(String roleId) {
-        return null;
+        return ResultVO.success(authorityService.getRoleAuthority(roleId));
     }
 
     @Override
     public ResultVO setRoleAuthority(RoleAuthorityDTO roleAuthorityDTO) {
-        return null;
+        authorityService.setRoleAuthority(roleAuthorityDTO.getRoleId(), roleAuthorityDTO.getAuthorityIds());
+        return ResultVO.success();
     }
 
 }
