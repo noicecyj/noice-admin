@@ -25,9 +25,9 @@ public class AuthorityCustomControllerImpl implements AuthorityCustomController 
         this.authorityCustomService = authorityCustomService;
     }
 
-//    @Override
-//    public ResultVO createAuthority() {
-//        authorityCustomService.createAuthority();
-//        return ResultVO.success();
-//    }
+    @Override
+    public ResultVO createAuthority() {
+        authorityCustomService.createAuthority();
+        return ResultVO.success();
+    }
 }

@@ -1,8 +1,8 @@
 package com.example.cyjauth.service.custom.Impl;
 
-import com.example.cyjauth.dao.AuthorityCustomDao;
-import com.example.cyjauth.entity.po.AuthorityCustomPO;
 import com.example.cyjauth.service.custom.AuthorityCustomService;
+import com.example.cyjcommon.dao.AuthorityDao;
+import com.example.cyjcommon.entity.AuthorityPO;
 import com.example.cyjcommon.entity.QAuthorityPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjcommon.utils.BeanUtils;
@@ -36,12 +36,12 @@ public class AuthorityCustomServiceImpl extends BaseService implements Authority
     private final static String STATUS = "有效";
     private final static String SORTCODE = "0010";
 
-    private AuthorityCustomDao authorityCustomDao;
+    private AuthorityDao authorityDao;
     private SqlCustomService sqlCustomService;
 
     @Autowired
-    public void setAuthorityCustomDao(AuthorityCustomDao authorityCustomDao) {
-        this.authorityCustomDao = authorityCustomDao;
+    public void setAuthorityDao(AuthorityDao authorityDao) {
+        this.authorityDao = authorityDao;
     }
 
     @Autowired
@@ -50,14 +50,11 @@ public class AuthorityCustomServiceImpl extends BaseService implements Authority
     }
 
     @Override
-    public List<AuthorityCustomPO> findRoleAndAuthority() {
+    public List<AuthorityPO> findRoleAndAuthority() {
         return queryFactory
-                .selectFrom(QAuthorityPO)
-                .where(QAuthorityPO.authorityPO.sortCode.isNotNull())
-                .offset((pageNumber - 1) * 10L)
-                .orderBy(QAuthorityPO.authorityPO.sortCode.asc())
-                .limit(10)
-                .fetchResults();
+                .selectFrom(QAuthorityPO.authorityPO)
+                .where(QAuthorityPO.authorityPO.status.eq("有效"))
+                .fetch();
     }
 
     @Override
@@ -79,10 +76,9 @@ public class AuthorityCustomServiceImpl extends BaseService implements Authority
             //根据名称获取app
             Map<String, Object> appService = sqlCustomService
                     .queryBySqlOne(SELECT_SERVICE_BY_NAME, nameMap);
-            AuthorityCustomPO page = authorityCustomDao
-                    .findByPathAndName(appService.get("app_api").toString() + "/" + underPoName + "Page", "查询所有" + poName);
+            AuthorityPO page = findByPathAndName(appService.get("app_api").toString() + "/" + underPoName + "Page", "查询所有" + poName);
             if (page == null) {
-                page = new AuthorityCustomPO();
+                page = new AuthorityPO();
                 page.setMethod(POST);
                 page.setName("查询所有" + poName);
                 page.setPath(appService.get("app_api").toString() + "/" + underPoName + "Page");
@@ -90,13 +86,12 @@ public class AuthorityCustomServiceImpl extends BaseService implements Authority
                 page.setVersion(VERSION);
                 page.setStatus(STATUS);
                 page.setSortCode(SORTCODE);
-                authorityCustomDao.save(page);
+                authorityDao.save(page);
                 logger.info("生成分页权限:" + page.getName());
             }
-            AuthorityCustomPO save = authorityCustomDao
-                    .findByPathAndName(appService.get("app_api").toString() + "/" + underPoName + "Save", "保存" + poName);
+            AuthorityPO save = findByPathAndName(appService.get("app_api").toString() + "/" + underPoName + "Save", "保存" + poName);
             if (save == null) {
-                save = new AuthorityCustomPO();
+                save = new AuthorityPO();
                 save.setMethod(POST);
                 save.setName("保存" + poName);
                 save.setPath(appService.get("app_api").toString() + "/" + underPoName + "Save");
@@ -104,13 +99,12 @@ public class AuthorityCustomServiceImpl extends BaseService implements Authority
                 save.setVersion(VERSION);
                 save.setStatus(STATUS);
                 save.setSortCode(SORTCODE);
-                authorityCustomDao.save(save);
+                authorityDao.save(save);
                 logger.info("生成保存权限:" + save.getName());
             }
-            AuthorityCustomPO delete = authorityCustomDao
-                    .findByPathAndName(appService.get("app_api").toString() + "/" + underPoName + "Delete", "删除" + poName);
+            AuthorityPO delete = findByPathAndName(appService.get("app_api").toString() + "/" + underPoName + "Delete", "删除" + poName);
             if (delete == null) {
-                delete = new AuthorityCustomPO();
+                delete = new AuthorityPO();
                 delete.setMethod(POST);
                 delete.setName("删除" + poName);
                 delete.setPath(appService.get("app_api").toString() + "/" + underPoName + "Delete");
@@ -118,13 +112,12 @@ public class AuthorityCustomServiceImpl extends BaseService implements Authority
                 delete.setVersion(VERSION);
                 delete.setStatus(STATUS);
                 delete.setSortCode(SORTCODE);
-                authorityCustomDao.save(delete);
+                authorityDao.save(delete);
                 logger.info("生成删除权限:" + delete.getName());
             }
-            AuthorityCustomPO find = authorityCustomDao
-                    .findByPathAndName(appService.get("app_api").toString() + "/find" + poName + "ById", "根据ID查询" + poName);
+            AuthorityPO find = findByPathAndName(appService.get("app_api").toString() + "/find" + poName + "ById", "根据ID查询" + poName);
             if (find == null) {
-                find = new AuthorityCustomPO();
+                find = new AuthorityPO();
                 find.setMethod(POST);
                 find.setName("根据ID查询" + poName);
                 find.setPath(appService.get("app_api").toString() + "/find" + poName + "ById");
@@ -132,10 +125,18 @@ public class AuthorityCustomServiceImpl extends BaseService implements Authority
                 find.setVersion(VERSION);
                 find.setStatus(STATUS);
                 find.setSortCode(SORTCODE);
-                authorityCustomDao.save(find);
+                authorityDao.save(find);
                 logger.info("生成ID查询权限:" + find.getName());
             }
         }
+    }
+
+    @Override
+    public AuthorityPO findByPathAndName(String path, String name) {
+        return queryFactory
+                .selectFrom(QAuthorityPO.authorityPO)
+                .where(QAuthorityPO.authorityPO.path.eq(path).and(QAuthorityPO.authorityPO.name.eq(name)))
+                .fetchOne();
     }
 
 }

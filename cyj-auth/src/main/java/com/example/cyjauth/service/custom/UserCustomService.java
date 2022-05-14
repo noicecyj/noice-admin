@@ -1,6 +1,7 @@
 package com.example.cyjauth.service.custom;
 
 import com.example.cyjauth.entity.po.UserCustomPO;
+import com.example.cyjcommon.entity.UserPO;
 
 import java.util.Set;
 
@@ -11,7 +12,7 @@ import java.util.Set;
  */
 public interface UserCustomService {
 
-    UserCustomPO findAuthUserByUsername(String username);
+    UserPO findAuthUserByUsername(String username);
 
     Set<String> getUserRole(String userId);
 

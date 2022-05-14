@@ -8,6 +8,4 @@ import com.example.cyjcommon.dao.AuthorityDao;
  * @date 2022-03-02
  */
 public interface AuthorityCustomDao extends AuthorityDao {
-
-
 }

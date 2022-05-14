@@ -1,7 +1,7 @@
 package com.example.cyjauth.entity.bo;
 
-import com.example.cyjauth.entity.po.AuthorityCustomPO;
-import com.example.cyjauth.entity.po.UserCustomPO;
+import com.example.cyjcommon.entity.AuthorityPO;
+import com.example.cyjcommon.entity.UserPO;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -15,11 +15,11 @@ import java.util.Set;
  * @version 1.0
  * @date 2021-03-20
  */
-public class AuthUserDetails extends UserCustomPO implements UserDetails {
+public class AuthUserDetails extends UserPO implements UserDetails {
 
     private static final long serialVersionUID = 1L;
 
-    public AuthUserDetails(UserCustomPO po) {
+    public AuthUserDetails(UserPO po) {
         if (po != null) {
             this.setUserName(po.getUserName());
             this.setPassword(po.getPassword());
@@ -33,9 +33,9 @@ public class AuthUserDetails extends UserCustomPO implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorityList = new ArrayList<>();
-        Set<AuthorityCustomPO> authorityCustomPOList = this.getAuthority();
+        Set<AuthorityPO> authorityCustomPOList = this.getAuthority();
         if (authorityCustomPOList != null) {
-            for (AuthorityCustomPO po : authorityCustomPOList) {
+            for (AuthorityPO po : authorityCustomPOList) {
                 GrantedAuthority grantedAuthority = new AuthGrantedAuthority(po.getPath(), po.getMethod());
                 authorityList.add(grantedAuthority);
             }

@@ -1,13 +1,13 @@
 package com.example.cyjauth.service.custom.Impl;
 
-import com.example.cyjauth.dao.AuthorityCustomDao;
-import com.example.cyjauth.dao.RoleCustomDao;
 import com.example.cyjauth.dao.UserCustomDao;
 import com.example.cyjauth.entity.bo.AuthUserDetails;
-import com.example.cyjauth.entity.po.AuthorityCustomPO;
-import com.example.cyjauth.entity.po.RoleCustomPO;
-import com.example.cyjauth.entity.po.UserCustomPO;
 import com.example.cyjauth.service.custom.UserCustomService;
+import com.example.cyjcommon.dao.AuthorityDao;
+import com.example.cyjcommon.dao.RoleDao;
+import com.example.cyjcommon.entity.AuthorityPO;
+import com.example.cyjcommon.entity.RolePO;
+import com.example.cyjcommon.entity.UserPO;
 import com.example.cyjcommon.service.BaseService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +33,9 @@ import java.util.Set;
 public class UserCustomServiceImpl extends BaseService implements UserCustomService, UserDetailsService {
 
     private StringRedisTemplate redisTemplate;
-    private UserCustomDao userCustomDao;
-    private RoleCustomDao roleCustomDao;
-    private AuthorityCustomDao authorityCustomDao;
+    private UserCustomDao userDao;
+    private RoleDao roleDao;
+    private AuthorityDao authorityDao;
 
     @Autowired
     public void setRedisTemplate(StringRedisTemplate redisTemplate) {
@@ -43,34 +43,34 @@ public class UserCustomServiceImpl extends BaseService implements UserCustomServ
     }
 
     @Autowired
-    public void setUserCustomDao(UserCustomDao userCustomDao) {
-        this.userCustomDao = userCustomDao;
+    public void setUserDao(UserCustomDao userDao) {
+        this.userDao = userDao;
     }
 
     @Autowired
-    public void setRoleCustomDao(RoleCustomDao roleCustomDao) {
-        this.roleCustomDao = roleCustomDao;
+    public void setRoleDao(RoleDao roleDao) {
+        this.roleDao = roleDao;
     }
 
     @Autowired
-    public void setAuthorityCustomDao(AuthorityCustomDao authorityCustomDao) {
-        this.authorityCustomDao = authorityCustomDao;
+    public void setAuthorityDao(AuthorityDao authorityDao) {
+        this.authorityDao = authorityDao;
     }
 
     @Override
-    public UserCustomPO findAuthUserByUsername(String username) {
-        return userCustomDao.findByUserName(username);
+    public UserPO findAuthUserByUsername(String username) {
+        return userDao.findByUserName(username);
     }
 
     @Override
     public Set<String> getUserRole(String userId) {
-        Optional<UserCustomPO> userCustomPOOptional = userCustomDao.findById(userId);
-        if (userCustomPOOptional.isPresent()) {
-            UserCustomPO userCustomPO = userCustomPOOptional.get();
+        Optional<UserPO> userPOOptional = userDao.findById(userId);
+        if (userPOOptional.isPresent()) {
+            UserPO userPO = userPOOptional.get();
             Set<String> roleIds = new HashSet<>();
-            if (userCustomPO.getRole() != null) {
-                for (RoleCustomPO roleCustomPO : userCustomPO.getRole()) {
-                    roleIds.add(roleCustomPO.getId());
+            if (userPO.getRole() != null) {
+                for (RolePO rolePO : userPO.getRole()) {
+                    roleIds.add(rolePO.getId());
                 }
             }
             return roleIds;
@@ -80,31 +80,31 @@ public class UserCustomServiceImpl extends BaseService implements UserCustomServ
 
     @Override
     public void setUserRole(String userId, Set<String> roleIds) {
-        Optional<UserCustomPO> userCustomPOOptional = userCustomDao.findById(userId);
-        if (userCustomPOOptional.isPresent()) {
-            UserCustomPO userCustomPO = userCustomPOOptional.get();
-            Set<RoleCustomPO> roleCustomPOSet = new HashSet<>();
+        Optional<UserPO> userPOOptional = userDao.findById(userId);
+        if (userPOOptional.isPresent()) {
+            UserPO userPO = userPOOptional.get();
+            Set<RolePO> rolePOSet = new HashSet<>();
             for (String roleId : roleIds) {
-                Optional<RoleCustomPO> roleCustomPOOptional = roleCustomDao.findById(roleId);
-                if (roleCustomPOOptional.isPresent()) {
-                    RoleCustomPO roleCustomPO = roleCustomPOOptional.get();
-                    roleCustomPOSet.add(roleCustomPO);
+                Optional<RolePO> rolePOOptional = roleDao.findById(roleId);
+                if (rolePOOptional.isPresent()) {
+                    RolePO rolePO = rolePOOptional.get();
+                    rolePOSet.add(rolePO);
                 }
             }
-            userCustomPO.setRole(roleCustomPOSet);
-            userCustomDao.saveAndFlush(userCustomPO);
+            userPO.setRole(rolePOSet);
+            userDao.saveAndFlush(userPO);
         }
     }
 
     @Override
     public Set<String> getUserAuthority(String userId) {
-        Optional<UserCustomPO> userCustomPOOptional = userCustomDao.findById(userId);
-        if (userCustomPOOptional.isPresent()) {
-            UserCustomPO userCustomPO = userCustomPOOptional.get();
+        Optional<UserPO> userPOOptional = userDao.findById(userId);
+        if (userPOOptional.isPresent()) {
+            UserPO userPO = userPOOptional.get();
             Set<String> authorityIds = new HashSet<>();
-            if (userCustomPO.getAuthority() != null) {
-                for (AuthorityCustomPO authorityCustomPO : userCustomPO.getAuthority()) {
-                    authorityIds.add(authorityCustomPO.getId());
+            if (userPO.getAuthority() != null) {
+                for (AuthorityPO authorityPO : userPO.getAuthority()) {
+                    authorityIds.add(authorityPO.getId());
                 }
             }
             return authorityIds;
@@ -114,32 +114,32 @@ public class UserCustomServiceImpl extends BaseService implements UserCustomServ
 
     @Override
     public void setUserAuthority(String userId, Set<String> authorityIds) {
-        Optional<UserCustomPO> userCustomPOOptional = userCustomDao.findById(userId);
-        if (userCustomPOOptional.isPresent()) {
-            UserCustomPO userCustomPO = userCustomPOOptional.get();
-            Set<AuthorityCustomPO> authorityCustomPOSet = new HashSet<>();
+        Optional<UserPO> userPOOptional = userDao.findById(userId);
+        if (userPOOptional.isPresent()) {
+            UserPO userPO = userPOOptional.get();
+            Set<AuthorityPO> authorityPOSet = new HashSet<>();
             for (String authorityId : authorityIds) {
-                Optional<AuthorityCustomPO> authorityCustomPOOptional = authorityCustomDao.findById(authorityId);
-                if (authorityCustomPOOptional.isPresent()) {
-                    AuthorityCustomPO authorityCustomPO = authorityCustomPOOptional.get();
-                    authorityCustomPOSet.add(authorityCustomPO);
+                Optional<AuthorityPO> authorityPOOptional = authorityDao.findById(authorityId);
+                if (authorityPOOptional.isPresent()) {
+                    AuthorityPO authorityPO = authorityPOOptional.get();
+                    authorityPOSet.add(authorityPO);
                 }
             }
-            userCustomPO.setAuthority(authorityCustomPOSet);
-            userCustomDao.saveAndFlush(userCustomPO);
+            userPO.setAuthority(authorityPOSet);
+            userDao.saveAndFlush(userPO);
         }
     }
 
     @Override
     public void resetPassword(String userId, String newPassword, String checkPassword) {
-        if (newPassword.equals(checkPassword)){
-            Optional<UserCustomPO> userCustomPOOptional = userCustomDao.findById(userId);
-            if (userCustomPOOptional.isPresent()) {
-                UserCustomPO userCustomPO = userCustomPOOptional.get();
+        if (newPassword.equals(checkPassword)) {
+            Optional<UserPO> userPOOptional = userDao.findById(userId);
+            if (userPOOptional.isPresent()) {
+                UserPO userPO = userPOOptional.get();
                 BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
                 String password = passwordEncoder.encode(newPassword);
-                userCustomPO.setPassword(password);
-                userCustomDao.saveAndFlush(userCustomPO);
+                userPO.setPassword(password);
+                userDao.saveAndFlush(userPO);
             }
         }
     }
@@ -153,7 +153,7 @@ public class UserCustomServiceImpl extends BaseService implements UserCustomServ
             throw new UsernameNotFoundException("登录错误次数超过限制");
         }
         //查询用户信息
-        UserCustomPO po = findAuthUserByUsername(username);
+        UserPO po = findAuthUserByUsername(username);
         if (null == po) {
             throw new UsernameNotFoundException("当前用户不存在");
         }

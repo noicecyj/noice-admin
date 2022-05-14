@@ -5,6 +5,10 @@ import com.example.cyjauth.dao.RoleCustomDao;
 import com.example.cyjauth.entity.po.AuthorityCustomPO;
 import com.example.cyjauth.entity.po.RoleCustomPO;
 import com.example.cyjauth.service.custom.RoleCustomService;
+import com.example.cyjcommon.dao.AuthorityDao;
+import com.example.cyjcommon.dao.RoleDao;
+import com.example.cyjcommon.entity.AuthorityPO;
+import com.example.cyjcommon.entity.RolePO;
 import com.example.cyjcommon.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,28 +27,27 @@ import java.util.Set;
 @Transactional(rollbackFor = Exception.class)
 public class RoleCustomServiceImpl extends BaseService implements RoleCustomService {
 
-    private RoleCustomDao roleCustomDao;
-    private AuthorityCustomDao authorityCustomDao;
+    private RoleDao roleDao;
+    private AuthorityDao authorityDao;
 
     @Autowired
-    public void setRoleCustomDao(RoleCustomDao roleCustomDao) {
-        this.roleCustomDao = roleCustomDao;
+    public void setRoleDao(RoleDao roleDao) {
+        this.roleDao = roleDao;
     }
-
     @Autowired
-    public void setAuthorityCustomDao(AuthorityCustomDao authorityCustomDao) {
-        this.authorityCustomDao = authorityCustomDao;
+    public void setAuthorityDao(AuthorityDao authorityDao) {
+        this.authorityDao = authorityDao;
     }
 
     @Override
     public Set<String> getRoleAuthority(String roleId) {
-        Optional<RoleCustomPO> roleCustomPOOptional = roleCustomDao.findById(roleId);
-        if (roleCustomPOOptional.isPresent()) {
-            RoleCustomPO roleCustomPO = roleCustomPOOptional.get();
+        Optional<RolePO> rolePOOptional = roleDao.findById(roleId);
+        if (rolePOOptional.isPresent()) {
+            RolePO rolePO = rolePOOptional.get();
             Set<String> authorityIds = new HashSet<>();
-            if (roleCustomPO.getAuthority() != null) {
-                for (AuthorityCustomPO authorityCustomPO : roleCustomPO.getAuthority()) {
-                    authorityIds.add(authorityCustomPO.getId());
+            if (rolePO.getAuthority() != null) {
+                for (AuthorityPO authorityPO : rolePO.getAuthority()) {
+                    authorityIds.add(authorityPO.getId());
                 }
             }
             return authorityIds;
@@ -54,19 +57,19 @@ public class RoleCustomServiceImpl extends BaseService implements RoleCustomServ
 
     @Override
     public void setRoleAuthority(String roleId, Set<String> authorityIds) {
-        Optional<RoleCustomPO> roleCustomPOOptional = roleCustomDao.findById(roleId);
-        if (roleCustomPOOptional.isPresent()) {
-            RoleCustomPO roleCustomPO = roleCustomPOOptional.get();
-            Set<AuthorityCustomPO> authorityCustomPOSet = new HashSet<>();
+        Optional<RolePO> rolePOOptional = roleDao.findById(roleId);
+        if (rolePOOptional.isPresent()) {
+            RolePO rolePO = rolePOOptional.get();
+            Set<AuthorityPO> authorityPOSet = new HashSet<>();
             for (String authorityId : authorityIds) {
-                Optional<AuthorityCustomPO> authorityCustomPOOptional = authorityCustomDao.findById(authorityId);
-                if (authorityCustomPOOptional.isPresent()) {
-                    AuthorityCustomPO authorityCustomPO = authorityCustomPOOptional.get();
-                    authorityCustomPOSet.add(authorityCustomPO);
+                Optional<AuthorityPO> authorityPOOptional = authorityDao.findById(authorityId);
+                if (authorityPOOptional.isPresent()) {
+                    AuthorityPO authorityPO = authorityPOOptional.get();
+                    authorityPOSet.add(authorityPO);
                 }
             }
-            roleCustomPO.setAuthority(authorityCustomPOSet);
-            roleCustomDao.saveAndFlush(roleCustomPO);
+            rolePO.setAuthority(authorityPOSet);
+            roleDao.saveAndFlush(rolePO);
         }
     }
 }

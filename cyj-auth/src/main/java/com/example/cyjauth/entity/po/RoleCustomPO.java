@@ -1,5 +1,6 @@
 package com.example.cyjauth.entity.po;
 
+import com.example.cyjcommon.entity.AuthorityPO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -52,9 +53,9 @@ public class RoleCustomPO implements Serializable {
     @Column(name = "sort_code")
     private String sortCode;
     @JsonIgnore
-    @ManyToMany(targetEntity = AuthorityCustomPO.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = AuthorityPO.class, fetch = FetchType.EAGER)
     @BatchSize(size = 20)
-    private Set<AuthorityCustomPO> authority = new HashSet<>();
+    private Set<AuthorityPO> authority = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
