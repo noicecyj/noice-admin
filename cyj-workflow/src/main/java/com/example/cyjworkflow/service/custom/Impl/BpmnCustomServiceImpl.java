@@ -3,13 +3,10 @@ package com.example.cyjworkflow.service.custom.Impl;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjcommon.utils.XmlParser;
 import com.example.cyjworkflow.service.custom.BpmnCustomService;
-import org.camunda.bpm.client.ExternalTaskClient;
-import org.camunda.bpm.client.backoff.ExponentialBackoffStrategy;
-import org.dom4j.Node;
+import org.dom4j.Element;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.dom4j.Element;
-import org.dom4j.Node;
+
 import java.util.List;
 
 /**
@@ -43,7 +40,7 @@ public class BpmnCustomServiceImpl extends BaseService implements BpmnCustomServ
         Element element = XmlParser.getRootNode("C:\\Users\\noice\\IdeaProjects\\noice-admin\\noice\\public\\diagram_1.bpmn");
         List<Element> elementList = XmlParser.getChildList(element);
 
-        Element node = XmlParser.getChild(element,"process");
+        Element node = XmlParser.getChild(element, "process");
         List<Element> elementList1 = XmlParser.getChildList(node);
         System.out.printf("12323");
     }

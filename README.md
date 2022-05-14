@@ -8,7 +8,8 @@ SSH clone URL: ssh://git@git.jetbrains.space/noicecyj/noice-admin/noice-admin.gi
 
 HTTPS clone URL: https://git.jetbrains.space/noicecyj/noice-admin/noice-admin.git
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+These instructions will get you a copy of the project up and running on your local machine for development and testing
+purposes.
 
 ## Prerequisites
 

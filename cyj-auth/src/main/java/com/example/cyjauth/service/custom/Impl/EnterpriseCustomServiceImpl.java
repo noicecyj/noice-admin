@@ -1,7 +1,7 @@
 package com.example.cyjauth.service.custom.Impl;
 
-import com.example.cyjcommon.service.BaseService;
 import com.example.cyjauth.service.custom.EnterpriseCustomService;
+import com.example.cyjcommon.service.BaseService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

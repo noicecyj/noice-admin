@@ -34,8 +34,10 @@ function DataTable(props) {
     return (
       <div className={styles.opt}>
         <Box direction="row" spacing={5}>
-          {editItem !== null && customData.editEnable && <Button type="primary" size="small" onClick={() => editItem(record)}> 编辑 </Button>}
-          {editItem !== null && !customData.editEnable && <Button type="primary" size="small" onClick={() => editItem(record)}> 预览 </Button>}
+          {editItem !== null && customData.editEnable &&
+            <Button type="primary" size="small" onClick={() => editItem(record)}> 编辑 </Button>}
+          {editItem !== null && !customData.editEnable &&
+            <Button type="primary" size="small" onClick={() => editItem(record)}> 预览 </Button>}
           {deleteItem !== null &&
             <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning> 删除 </Button>}
         </Box>
@@ -74,7 +76,7 @@ function DataTable(props) {
               primaryKey={primaryKey}
             >
               {items.length === 0 ? null : items.map((item, index) => {
-                if (item.propertyDisplay === "是"){
+                if (item.propertyDisplay === "是") {
                   return (<Table.Column
                     hidden={item.propertyDisplay === '否'}
                     title={item.propertyLabel}

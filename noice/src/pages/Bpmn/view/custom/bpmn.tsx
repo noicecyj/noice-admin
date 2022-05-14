@@ -48,9 +48,9 @@ function CustomColumnBpmn(props) {
       >
         <ReactBpmn
           url="/diagram_1.bpmn"
-          onShown={ onShown }
-          onLoading={ onLoading }
-          onError={ onError }
+          onShown={onShown}
+          onLoading={onLoading}
+          onError={onError}
         />
       </Dialog>
     </>

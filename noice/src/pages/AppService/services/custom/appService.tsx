@@ -1,4 +1,5 @@
-import { request } from 'ice';
+import {request} from 'ice';
+
 export default {
   createAppFile(value) {
     return request({

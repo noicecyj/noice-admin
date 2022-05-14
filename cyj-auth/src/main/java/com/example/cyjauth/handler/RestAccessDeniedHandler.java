@@ -1,9 +1,7 @@
 package com.example.cyjauth.handler;
 
-import com.alibaba.fastjson.JSON;
 import com.example.cyjcommon.utils.ResponseUtil;
 import com.example.cyjcommon.utils.ResultCode;
-import com.example.cyjcommon.utils.ResultVO;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
