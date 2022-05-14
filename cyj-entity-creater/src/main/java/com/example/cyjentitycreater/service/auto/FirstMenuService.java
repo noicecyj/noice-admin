@@ -1,6 +1,6 @@
 package com.example.cyjentitycreater.service.auto;
 
-import com.example.cyjcommon.entity.FirstMenuPO;
+import com.example.cyjcommon.entity.po.FirstMenuPO;
 import com.querydsl.core.QueryResults;
 
 /**

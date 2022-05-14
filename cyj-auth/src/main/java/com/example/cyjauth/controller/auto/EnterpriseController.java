@@ -1,6 +1,6 @@
 package com.example.cyjauth.controller.auto;
 
-import com.example.cyjcommon.entity.EnterprisePO;
+import com.example.cyjcommon.entity.po.EnterprisePO;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -1,7 +1,7 @@
 package com.example.cyjentitycreater.utils;
 
-import com.example.cyjcommon.entity.AppServicePO;
-import com.example.cyjcommon.entity.EntityPO;
+import com.example.cyjcommon.entity.po.AppServicePO;
+import com.example.cyjcommon.entity.po.EntityPO;
 
 import java.util.List;
 import java.util.regex.Matcher;

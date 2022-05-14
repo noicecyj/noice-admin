@@ -1,6 +1,6 @@
 package com.example.cyjworkflow.controller.auto.Impl;
 
-import com.example.cyjcommon.entity.BpmnPO;
+import com.example.cyjcommon.entity.po.BpmnPO;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjworkflow.controller.auto.BpmnController;
 import com.example.cyjworkflow.service.auto.BpmnService;

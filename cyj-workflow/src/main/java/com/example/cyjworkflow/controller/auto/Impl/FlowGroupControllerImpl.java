@@ -1,6 +1,6 @@
 package com.example.cyjworkflow.controller.auto.Impl;
 
-import com.example.cyjcommon.entity.FlowGroupPO;
+import com.example.cyjcommon.entity.po.FlowGroupPO;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjworkflow.controller.auto.FlowGroupController;
 import com.example.cyjworkflow.service.auto.FlowGroupService;

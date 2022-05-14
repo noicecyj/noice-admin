@@ -1,6 +1,6 @@
 package com.example.cyjquery.controller.auto.Impl;
 
-import com.example.cyjcommon.entity.SqlPO;
+import com.example.cyjcommon.entity.po.SqlPO;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjquery.controller.auto.SqlController;
 import com.example.cyjquery.service.auto.SqlService;

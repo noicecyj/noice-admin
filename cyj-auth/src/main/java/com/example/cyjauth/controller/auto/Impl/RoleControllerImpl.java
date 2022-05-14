@@ -1,8 +1,9 @@
 package com.example.cyjauth.controller.auto.Impl;
 
 import com.example.cyjauth.controller.auto.RoleController;
+import com.example.cyjcommon.entity.dto.UserRoleDTO;
 import com.example.cyjauth.service.auto.RoleService;
-import com.example.cyjcommon.entity.RolePO;
+import com.example.cyjcommon.entity.po.RolePO;
 import com.example.cyjcommon.utils.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -46,6 +47,16 @@ public class RoleControllerImpl implements RoleController {
     @Override
     public ResultVO findRoleById(String id) {
         return ResultVO.success(roleService.findOneById(id));
+    }
+
+    @Override
+    public ResultVO getUserRole(String userId) {
+        return null;
+    }
+
+    @Override
+    public ResultVO setUserRole(UserRoleDTO userRoleDTO) {
+        return null;
     }
 
 }

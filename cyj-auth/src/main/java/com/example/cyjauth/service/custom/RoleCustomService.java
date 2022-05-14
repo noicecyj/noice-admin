@@ -8,9 +8,4 @@ import java.util.Set;
  * @date 2022-02-07
  */
 public interface RoleCustomService {
-
-    Set<String> getRoleAuthority(String roleId);
-
-    void setRoleAuthority(String roleId, Set<String> authorityIds);
-
 }

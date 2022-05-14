@@ -1,8 +1,8 @@
 package com.example.cyjentitycreater.service.auto.Impl;
 
 import com.example.cyjcommon.dao.AppServiceDao;
-import com.example.cyjcommon.entity.AppServicePO;
-import com.example.cyjcommon.entity.QAppServicePO;
+import com.example.cyjcommon.entity.po.AppServicePO;
+import com.example.cyjcommon.entity.po.QAppServicePO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjentitycreater.service.auto.AppServiceService;
 import com.querydsl.core.QueryResults;

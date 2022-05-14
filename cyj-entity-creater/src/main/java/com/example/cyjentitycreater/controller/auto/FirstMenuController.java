@@ -1,6 +1,6 @@
 package com.example.cyjentitycreater.controller.auto;
 
-import com.example.cyjcommon.entity.FirstMenuPO;
+import com.example.cyjcommon.entity.po.FirstMenuPO;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

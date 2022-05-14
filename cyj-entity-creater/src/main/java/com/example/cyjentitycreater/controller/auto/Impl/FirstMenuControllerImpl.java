@@ -1,6 +1,6 @@
 package com.example.cyjentitycreater.controller.auto.Impl;
 
-import com.example.cyjcommon.entity.FirstMenuPO;
+import com.example.cyjcommon.entity.po.FirstMenuPO;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.controller.auto.FirstMenuController;
 import com.example.cyjentitycreater.service.auto.FirstMenuService;

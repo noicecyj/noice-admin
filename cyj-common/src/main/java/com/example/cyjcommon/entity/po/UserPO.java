@@ -1,4 +1,4 @@
-package com.example.cyjcommon.entity;
+package com.example.cyjcommon.entity.po;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;

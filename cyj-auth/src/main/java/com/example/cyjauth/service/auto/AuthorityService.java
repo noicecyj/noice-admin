@@ -1,7 +1,10 @@
 package com.example.cyjauth.service.auto;
 
-import com.example.cyjcommon.entity.AuthorityPO;
+import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.querydsl.core.QueryResults;
+
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author 曹元杰
@@ -18,5 +21,13 @@ public interface AuthorityService {
     QueryResults<AuthorityPO> findAll(Integer pageNumber);
 
     AuthorityPO findOneById(String id);
+
+    List<String> getRoleAuthority(String roleId);
+
+    void setRoleAuthority(String roleId, Set<String> authorityIds);
+
+    List<String> getUserAuthority(String userId);
+
+    void setUserAuthority(String userId, Set<String> authorityIds);
 
 }

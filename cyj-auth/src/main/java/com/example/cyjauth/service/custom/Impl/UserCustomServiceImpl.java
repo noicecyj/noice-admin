@@ -1,13 +1,10 @@
 package com.example.cyjauth.service.custom.Impl;
 
-import com.example.cyjauth.dao.UserCustomDao;
 import com.example.cyjauth.entity.bo.AuthUserDetails;
 import com.example.cyjauth.service.custom.UserCustomService;
-import com.example.cyjcommon.dao.AuthorityDao;
-import com.example.cyjcommon.dao.RoleDao;
-import com.example.cyjcommon.entity.AuthorityPO;
-import com.example.cyjcommon.entity.RolePO;
-import com.example.cyjcommon.entity.UserPO;
+import com.example.cyjcommon.dao.UserDao;
+import com.example.cyjcommon.entity.po.QUserPO;
+import com.example.cyjcommon.entity.po.UserPO;
 import com.example.cyjcommon.service.BaseService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * @author 曹元杰
@@ -33,9 +28,7 @@ import java.util.Set;
 public class UserCustomServiceImpl extends BaseService implements UserCustomService, UserDetailsService {
 
     private StringRedisTemplate redisTemplate;
-    private UserCustomDao userDao;
-    private RoleDao roleDao;
-    private AuthorityDao authorityDao;
+    private UserDao userDao;
 
     @Autowired
     public void setRedisTemplate(StringRedisTemplate redisTemplate) {
@@ -43,91 +36,16 @@ public class UserCustomServiceImpl extends BaseService implements UserCustomServ
     }
 
     @Autowired
-    public void setUserDao(UserCustomDao userDao) {
+    public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
-    }
-
-    @Autowired
-    public void setRoleDao(RoleDao roleDao) {
-        this.roleDao = roleDao;
-    }
-
-    @Autowired
-    public void setAuthorityDao(AuthorityDao authorityDao) {
-        this.authorityDao = authorityDao;
     }
 
     @Override
     public UserPO findAuthUserByUsername(String username) {
-        return userDao.findByUserName(username);
-    }
-
-    @Override
-    public Set<String> getUserRole(String userId) {
-        Optional<UserPO> userPOOptional = userDao.findById(userId);
-        if (userPOOptional.isPresent()) {
-            UserPO userPO = userPOOptional.get();
-            Set<String> roleIds = new HashSet<>();
-            if (userPO.getRole() != null) {
-                for (RolePO rolePO : userPO.getRole()) {
-                    roleIds.add(rolePO.getId());
-                }
-            }
-            return roleIds;
-        }
-        return null;
-    }
-
-    @Override
-    public void setUserRole(String userId, Set<String> roleIds) {
-        Optional<UserPO> userPOOptional = userDao.findById(userId);
-        if (userPOOptional.isPresent()) {
-            UserPO userPO = userPOOptional.get();
-            Set<RolePO> rolePOSet = new HashSet<>();
-            for (String roleId : roleIds) {
-                Optional<RolePO> rolePOOptional = roleDao.findById(roleId);
-                if (rolePOOptional.isPresent()) {
-                    RolePO rolePO = rolePOOptional.get();
-                    rolePOSet.add(rolePO);
-                }
-            }
-            userPO.setRole(rolePOSet);
-            userDao.saveAndFlush(userPO);
-        }
-    }
-
-    @Override
-    public Set<String> getUserAuthority(String userId) {
-        Optional<UserPO> userPOOptional = userDao.findById(userId);
-        if (userPOOptional.isPresent()) {
-            UserPO userPO = userPOOptional.get();
-            Set<String> authorityIds = new HashSet<>();
-            if (userPO.getAuthority() != null) {
-                for (AuthorityPO authorityPO : userPO.getAuthority()) {
-                    authorityIds.add(authorityPO.getId());
-                }
-            }
-            return authorityIds;
-        }
-        return null;
-    }
-
-    @Override
-    public void setUserAuthority(String userId, Set<String> authorityIds) {
-        Optional<UserPO> userPOOptional = userDao.findById(userId);
-        if (userPOOptional.isPresent()) {
-            UserPO userPO = userPOOptional.get();
-            Set<AuthorityPO> authorityPOSet = new HashSet<>();
-            for (String authorityId : authorityIds) {
-                Optional<AuthorityPO> authorityPOOptional = authorityDao.findById(authorityId);
-                if (authorityPOOptional.isPresent()) {
-                    AuthorityPO authorityPO = authorityPOOptional.get();
-                    authorityPOSet.add(authorityPO);
-                }
-            }
-            userPO.setAuthority(authorityPOSet);
-            userDao.saveAndFlush(userPO);
-        }
+        return queryFactory
+                .selectFrom(QUserPO.userPO)
+                .where(QUserPO.userPO.userName.eq(username))
+                .fetchOne();
     }
 
     @Override

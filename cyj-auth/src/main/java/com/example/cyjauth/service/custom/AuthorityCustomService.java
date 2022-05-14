@@ -1,7 +1,7 @@
 package com.example.cyjauth.service.custom;
 
 
-import com.example.cyjcommon.entity.AuthorityPO;
+import com.example.cyjcommon.entity.po.AuthorityPO;
 
 import java.util.List;
 

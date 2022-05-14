@@ -1,4 +1,4 @@
-package com.example.cyjcommon.entity;
+package com.example.cyjcommon.entity.po;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

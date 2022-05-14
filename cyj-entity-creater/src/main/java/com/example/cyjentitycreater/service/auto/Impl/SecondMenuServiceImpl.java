@@ -1,8 +1,8 @@
 package com.example.cyjentitycreater.service.auto.Impl;
 
 import com.example.cyjcommon.dao.SecondMenuDao;
-import com.example.cyjcommon.entity.QSecondMenuPO;
-import com.example.cyjcommon.entity.SecondMenuPO;
+import com.example.cyjcommon.entity.po.QSecondMenuPO;
+import com.example.cyjcommon.entity.po.SecondMenuPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjentitycreater.service.auto.SecondMenuService;
 import com.querydsl.core.QueryResults;

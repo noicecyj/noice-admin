@@ -1,4 +1,4 @@
-package com.example.cyjcommon.entity;
+package com.example.cyjcommon.entity.po;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -54,10 +54,10 @@ public class AuthorityPO implements Serializable {
     private String status;
     @Column(name = "sort_code")
     private String sortCode;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "role_id")
     private RolePO role;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id")
     private UserPO user;
 

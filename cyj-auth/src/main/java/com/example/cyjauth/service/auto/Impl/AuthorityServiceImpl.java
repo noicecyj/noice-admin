@@ -2,13 +2,21 @@ package com.example.cyjauth.service.auto.Impl;
 
 import com.example.cyjauth.service.auto.AuthorityService;
 import com.example.cyjcommon.dao.AuthorityDao;
-import com.example.cyjcommon.entity.AuthorityPO;
-import com.example.cyjcommon.entity.QAuthorityPO;
+import com.example.cyjcommon.entity.po.AuthorityPO;
+import com.example.cyjcommon.entity.po.QAuthorityPO;
+import com.example.cyjcommon.entity.po.QRolePO;
+import com.example.cyjcommon.entity.po.QUserPO;
+import com.example.cyjcommon.entity.po.RolePO;
+import com.example.cyjcommon.entity.po.UserPO;
 import com.example.cyjcommon.service.BaseService;
 import com.querydsl.core.QueryResults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * @author 曹元杰
@@ -54,6 +62,64 @@ public class AuthorityServiceImpl extends BaseService implements AuthorityServic
     @Override
     public AuthorityPO findOneById(String id) {
         return authorityDao.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<String> getRoleAuthority(String roleId) {
+        RolePO rolePO = queryFactory
+                .selectFrom(QRolePO.rolePO)
+                .where(QRolePO.rolePO.id.eq(roleId))
+                .fetchOne();
+        return rolePO == null ? null : queryFactory
+                .select(QAuthorityPO.authorityPO.id)
+                .from(QAuthorityPO.authorityPO)
+                .where(QAuthorityPO.authorityPO.role.eq(rolePO))
+                .fetch();
+    }
+
+    @Override
+    public void setRoleAuthority(String roleId, Set<String> authorityIds) {
+        RolePO rolePO = queryFactory
+                .selectFrom(QRolePO.rolePO)
+                .where(QRolePO.rolePO.id.eq(roleId))
+                .fetchOne();
+        for (String authorityId : authorityIds) {
+            Optional<AuthorityPO> optionalAuthorityPO = authorityDao.findById(authorityId);
+            if (optionalAuthorityPO.isPresent()) {
+                AuthorityPO authorityPO = optionalAuthorityPO.get();
+                authorityPO.setRole(rolePO);
+                authorityDao.saveAndFlush(authorityPO);
+            }
+        }
+    }
+
+    @Override
+    public List<String> getUserAuthority(String userId) {
+        UserPO userPO = queryFactory
+                .selectFrom(QUserPO.userPO)
+                .where(QUserPO.userPO.id.eq(userId))
+                .fetchOne();
+        return userPO == null ? null : queryFactory
+                .select(QAuthorityPO.authorityPO.id)
+                .from(QAuthorityPO.authorityPO)
+                .where(QAuthorityPO.authorityPO.user.eq(userPO))
+                .fetch();
+    }
+
+    @Override
+    public void setUserAuthority(String userId, Set<String> authorityIds) {
+        UserPO userPO = queryFactory
+                .selectFrom(QUserPO.userPO)
+                .where(QUserPO.userPO.id.eq(userId))
+                .fetchOne();
+        for (String authorityId : authorityIds) {
+            Optional<AuthorityPO> optionalAuthorityPO = authorityDao.findById(authorityId);
+            if (optionalAuthorityPO.isPresent()) {
+                AuthorityPO authorityPO = optionalAuthorityPO.get();
+                authorityPO.setUser(userPO);
+                authorityDao.saveAndFlush(authorityPO);
+            }
+        }
     }
 
 }

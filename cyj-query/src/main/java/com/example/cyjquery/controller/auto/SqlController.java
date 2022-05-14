@@ -1,6 +1,6 @@
 package com.example.cyjquery.controller.auto;
 
-import com.example.cyjcommon.entity.SqlPO;
+import com.example.cyjcommon.entity.po.SqlPO;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

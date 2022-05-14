@@ -1,6 +1,6 @@
 package com.example.cyjdictionary.controller.auto;
 
-import com.example.cyjcommon.entity.DictionaryPO;
+import com.example.cyjcommon.entity.po.DictionaryPO;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

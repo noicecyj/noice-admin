@@ -2,8 +2,8 @@ package com.example.cyjauth.service.auto.Impl;
 
 import com.example.cyjauth.service.auto.UserService;
 import com.example.cyjcommon.dao.UserDao;
-import com.example.cyjcommon.entity.QUserPO;
-import com.example.cyjcommon.entity.UserPO;
+import com.example.cyjcommon.entity.po.QUserPO;
+import com.example.cyjcommon.entity.po.UserPO;
 import com.example.cyjcommon.service.BaseService;
 import com.querydsl.core.QueryResults;
 import org.springframework.beans.factory.annotation.Autowired;

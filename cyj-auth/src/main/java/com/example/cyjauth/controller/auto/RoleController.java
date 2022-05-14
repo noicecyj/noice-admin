@@ -1,6 +1,7 @@
 package com.example.cyjauth.controller.auto;
 
-import com.example.cyjcommon.entity.RolePO;
+import com.example.cyjcommon.entity.dto.UserRoleDTO;
+import com.example.cyjcommon.entity.po.RolePO;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -30,5 +31,13 @@ public interface RoleController {
     @Operation(summary = "根据ID查询Role")
     @PostMapping(value = "findRoleById")
     ResultVO findRoleById(@RequestParam("id") String id);
+
+    @Operation(summary = "获取用户角色")
+    @PostMapping(value = "getUserRole")
+    ResultVO getUserRole(@RequestParam("userId") String userId);
+
+    @Operation(summary = "设置用户角色")
+    @PostMapping(value = "setUserRole")
+    ResultVO setUserRole(@RequestBody UserRoleDTO userRoleDTO);
 
 }

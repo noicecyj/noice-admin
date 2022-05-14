@@ -1,6 +1,6 @@
 package com.example.cyjworkflow.service.auto;
 
-import com.example.cyjcommon.entity.FlowUserPO;
+import com.example.cyjcommon.entity.po.FlowUserPO;
 import com.querydsl.core.QueryResults;
 
 /**

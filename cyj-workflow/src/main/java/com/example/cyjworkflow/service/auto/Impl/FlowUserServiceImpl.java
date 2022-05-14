@@ -1,8 +1,8 @@
 package com.example.cyjworkflow.service.auto.Impl;
 
 import com.example.cyjcommon.dao.FlowUserDao;
-import com.example.cyjcommon.entity.FlowUserPO;
-import com.example.cyjcommon.entity.QFlowUserPO;
+import com.example.cyjcommon.entity.po.FlowUserPO;
+import com.example.cyjcommon.entity.po.QFlowUserPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjworkflow.service.auto.FlowUserService;
 import com.querydsl.core.QueryResults;

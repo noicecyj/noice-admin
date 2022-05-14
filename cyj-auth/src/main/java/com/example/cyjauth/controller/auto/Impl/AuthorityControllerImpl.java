@@ -2,7 +2,9 @@ package com.example.cyjauth.controller.auto.Impl;
 
 import com.example.cyjauth.controller.auto.AuthorityController;
 import com.example.cyjauth.service.auto.AuthorityService;
-import com.example.cyjcommon.entity.AuthorityPO;
+import com.example.cyjcommon.entity.dto.RoleAuthorityDTO;
+import com.example.cyjcommon.entity.dto.UserAuthorityDTO;
+import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.example.cyjcommon.utils.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -46,6 +48,26 @@ public class AuthorityControllerImpl implements AuthorityController {
     @Override
     public ResultVO findAuthorityById(String id) {
         return ResultVO.success(authorityService.findOneById(id));
+    }
+
+    @Override
+    public ResultVO getUserAuthority(String userId) {
+        return null;
+    }
+
+    @Override
+    public ResultVO setUserAuthority(UserAuthorityDTO userAuthorityDTO) {
+        return null;
+    }
+
+    @Override
+    public ResultVO getRoleAuthority(String roleId) {
+        return null;
+    }
+
+    @Override
+    public ResultVO setRoleAuthority(RoleAuthorityDTO roleAuthorityDTO) {
+        return null;
     }
 
 }

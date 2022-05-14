@@ -1,6 +1,6 @@
 package com.example.cyjdictionary.service.auto;
 
-import com.example.cyjcommon.entity.DictionaryPO;
+import com.example.cyjcommon.entity.po.DictionaryPO;
 import com.querydsl.core.QueryResults;
 
 import java.util.List;

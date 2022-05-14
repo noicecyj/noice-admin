@@ -1,7 +1,10 @@
 package com.example.cyjauth.service.auto;
 
-import com.example.cyjcommon.entity.RolePO;
+import com.example.cyjcommon.entity.po.RolePO;
 import com.querydsl.core.QueryResults;
+
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author 曹元杰
@@ -18,5 +21,9 @@ public interface RoleService {
     QueryResults<RolePO> findAll(Integer pageNumber);
 
     RolePO findOneById(String id);
+
+    List<String> getUserRole(String userId);
+
+    void setUserRole(String userId, Set<String> roleIds);
 
 }

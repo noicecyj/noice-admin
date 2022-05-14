@@ -1,8 +1,8 @@
 package com.example.cyjworkflow.service.auto.Impl;
 
 import com.example.cyjcommon.dao.FlowTenantDao;
-import com.example.cyjcommon.entity.FlowTenantPO;
-import com.example.cyjcommon.entity.QFlowTenantPO;
+import com.example.cyjcommon.entity.po.FlowTenantPO;
+import com.example.cyjcommon.entity.po.QFlowTenantPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjworkflow.service.auto.FlowTenantService;
 import com.querydsl.core.QueryResults;

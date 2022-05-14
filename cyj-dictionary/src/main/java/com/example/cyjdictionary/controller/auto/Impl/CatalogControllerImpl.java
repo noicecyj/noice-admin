@@ -1,6 +1,6 @@
 package com.example.cyjdictionary.controller.auto.Impl;
 
-import com.example.cyjcommon.entity.CatalogPO;
+import com.example.cyjcommon.entity.po.CatalogPO;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjdictionary.controller.auto.CatalogController;
 import com.example.cyjdictionary.service.auto.CatalogService;

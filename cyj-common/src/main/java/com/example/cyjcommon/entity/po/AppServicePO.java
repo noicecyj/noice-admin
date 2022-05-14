@@ -1,4 +1,4 @@
-package com.example.cyjcommon.entity;
+package com.example.cyjcommon.entity.po;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -20,30 +20,28 @@ import java.util.Objects;
  * @version 1.0
  */
 @Entity
-@Table(name = SecondMenuPO.T_SECOND_MENU)
+@Table(name = AppServicePO.T_APP_SERVICE)
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
 @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-public class SecondMenuPO implements Serializable {
+public class AppServicePO implements Serializable {
 
-    static final String T_SECOND_MENU = "t_second_menu";
+    static final String T_APP_SERVICE = "t_app_service";
 
     @Id
     @GeneratedValue(generator = "uuid2")
     @Column(name = "id", length = 36)
     private String id;
-    @Column(name = "menu_code")
-    private String menuCode;
-    @Column(name = "component")
-    private String component;
-    @Column(name = "path")
-    private String path;
-    @Column(name = "pid")
-    private String pid;
-    @Column(name = "menu_name")
-    private String menuName;
+    @Column(name = "app_api")
+    private String appApi;
+    @Column(name = "app_port")
+    private String appPort;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "app_path")
+    private String appPath;
     @Column(name = "status")
     private String status;
     @Column(name = "sort_code")
@@ -53,7 +51,7 @@ public class SecondMenuPO implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        SecondMenuPO that = (SecondMenuPO) o;
+        AppServicePO that = (AppServicePO) o;
         return Objects.equals(id, that.id);
     }
 

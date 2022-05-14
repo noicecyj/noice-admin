@@ -1,8 +1,8 @@
 package com.example.cyjdictionary.service.auto.Impl;
 
 import com.example.cyjcommon.dao.CatalogDao;
-import com.example.cyjcommon.entity.CatalogPO;
-import com.example.cyjcommon.entity.QCatalogPO;
+import com.example.cyjcommon.entity.po.CatalogPO;
+import com.example.cyjcommon.entity.po.QCatalogPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjdictionary.service.auto.CatalogService;
 import com.querydsl.core.QueryResults;

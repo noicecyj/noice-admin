@@ -1,6 +1,6 @@
 package com.example.cyjworkflow.controller.auto;
 
-import com.example.cyjcommon.entity.BpmnPO;
+import com.example.cyjcommon.entity.po.BpmnPO;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

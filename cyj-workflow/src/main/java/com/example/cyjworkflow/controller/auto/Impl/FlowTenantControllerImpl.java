@@ -1,6 +1,6 @@
 package com.example.cyjworkflow.controller.auto.Impl;
 
-import com.example.cyjcommon.entity.FlowTenantPO;
+import com.example.cyjcommon.entity.po.FlowTenantPO;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjworkflow.controller.auto.FlowTenantController;
 import com.example.cyjworkflow.service.auto.FlowTenantService;

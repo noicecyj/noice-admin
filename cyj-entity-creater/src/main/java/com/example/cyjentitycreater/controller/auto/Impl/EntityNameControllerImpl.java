@@ -1,6 +1,6 @@
 package com.example.cyjentitycreater.controller.auto.Impl;
 
-import com.example.cyjcommon.entity.EntityNamePO;
+import com.example.cyjcommon.entity.po.EntityNamePO;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.controller.auto.EntityNameController;
 import com.example.cyjentitycreater.service.auto.EntityNameService;

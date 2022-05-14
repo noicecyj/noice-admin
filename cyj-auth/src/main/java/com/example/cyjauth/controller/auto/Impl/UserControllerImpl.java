@@ -2,7 +2,7 @@ package com.example.cyjauth.controller.auto.Impl;
 
 import com.example.cyjauth.controller.auto.UserController;
 import com.example.cyjauth.service.auto.UserService;
-import com.example.cyjcommon.entity.UserPO;
+import com.example.cyjcommon.entity.po.UserPO;
 import com.example.cyjcommon.utils.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

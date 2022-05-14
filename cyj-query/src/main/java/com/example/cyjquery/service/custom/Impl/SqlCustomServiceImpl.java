@@ -1,6 +1,6 @@
 package com.example.cyjquery.service.custom.Impl;
 
-import com.example.cyjcommon.entity.SqlPO;
+import com.example.cyjcommon.entity.po.SqlPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjquery.dao.SqlCustomDao;
 import com.example.cyjquery.service.custom.SqlCustomService;

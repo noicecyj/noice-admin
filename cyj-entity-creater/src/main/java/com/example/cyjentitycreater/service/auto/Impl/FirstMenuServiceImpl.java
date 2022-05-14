@@ -1,8 +1,8 @@
 package com.example.cyjentitycreater.service.auto.Impl;
 
 import com.example.cyjcommon.dao.FirstMenuDao;
-import com.example.cyjcommon.entity.FirstMenuPO;
-import com.example.cyjcommon.entity.QFirstMenuPO;
+import com.example.cyjcommon.entity.po.FirstMenuPO;
+import com.example.cyjcommon.entity.po.QFirstMenuPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjentitycreater.service.auto.FirstMenuService;
 import com.querydsl.core.QueryResults;

@@ -2,8 +2,8 @@ package com.example.cyjauth.service.custom.Impl;
 
 import com.example.cyjauth.service.custom.AuthorityCustomService;
 import com.example.cyjcommon.dao.AuthorityDao;
-import com.example.cyjcommon.entity.AuthorityPO;
-import com.example.cyjcommon.entity.QAuthorityPO;
+import com.example.cyjcommon.entity.po.AuthorityPO;
+import com.example.cyjcommon.entity.po.QAuthorityPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjcommon.utils.BeanUtils;
 import com.example.cyjquery.service.custom.SqlCustomService;

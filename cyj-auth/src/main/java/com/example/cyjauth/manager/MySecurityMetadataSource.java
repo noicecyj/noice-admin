@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.cyjauth.service.custom.AuthorityCustomService;
-import com.example.cyjcommon.entity.AuthorityPO;
+import com.example.cyjcommon.entity.po.AuthorityPO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;

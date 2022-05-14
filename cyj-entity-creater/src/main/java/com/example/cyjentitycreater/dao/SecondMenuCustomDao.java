@@ -1,6 +1,6 @@
 package com.example.cyjentitycreater.dao;
 
-import com.example.cyjcommon.entity.SecondMenuPO;
+import com.example.cyjcommon.entity.po.SecondMenuPO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

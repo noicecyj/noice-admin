@@ -1,10 +1,10 @@
 package com.example.cyjentitycreater.service.custom.Impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.example.cyjcommon.entity.AppServicePO;
-import com.example.cyjcommon.entity.DictionaryPO;
-import com.example.cyjcommon.entity.EntityNamePO;
-import com.example.cyjcommon.entity.EntityPO;
+import com.example.cyjcommon.entity.po.AppServicePO;
+import com.example.cyjcommon.entity.po.DictionaryPO;
+import com.example.cyjcommon.entity.po.EntityNamePO;
+import com.example.cyjcommon.entity.po.EntityPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjcommon.utils.VoPoConverter;
 import com.example.cyjdictionary.service.custom.DictionaryCustomService;

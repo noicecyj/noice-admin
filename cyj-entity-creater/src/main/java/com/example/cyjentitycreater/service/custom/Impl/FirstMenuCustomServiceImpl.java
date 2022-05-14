@@ -1,8 +1,8 @@
 package com.example.cyjentitycreater.service.custom.Impl;
 
-import com.example.cyjcommon.entity.DictionaryPO;
-import com.example.cyjcommon.entity.FirstMenuPO;
-import com.example.cyjcommon.entity.SecondMenuPO;
+import com.example.cyjcommon.entity.po.DictionaryPO;
+import com.example.cyjcommon.entity.po.FirstMenuPO;
+import com.example.cyjcommon.entity.po.SecondMenuPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjcommon.utils.VoPoConverter;
 import com.example.cyjdictionary.service.custom.DictionaryCustomService;

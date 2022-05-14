@@ -1,8 +1,8 @@
 package com.example.cyjquery.service.auto.Impl;
 
 import com.example.cyjcommon.dao.SqlDao;
-import com.example.cyjcommon.entity.QSqlPO;
-import com.example.cyjcommon.entity.SqlPO;
+import com.example.cyjcommon.entity.po.QSqlPO;
+import com.example.cyjcommon.entity.po.SqlPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjquery.service.auto.SqlService;
 import com.querydsl.core.QueryResults;

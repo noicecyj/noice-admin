@@ -1,6 +1,6 @@
 package com.example.cyjcommon.dao;
 
-import com.example.cyjcommon.entity.EnterprisePO;
+import com.example.cyjcommon.entity.po.EnterprisePO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
