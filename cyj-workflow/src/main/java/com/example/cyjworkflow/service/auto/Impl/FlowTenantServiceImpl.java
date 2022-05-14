@@ -1,9 +1,9 @@
 package com.example.cyjworkflow.service.auto.Impl;
 
+import com.example.cyjcommon.dao.FlowTenantDao;
+import com.example.cyjcommon.entity.FlowTenantPO;
+import com.example.cyjcommon.entity.QFlowTenantPO;
 import com.example.cyjcommon.service.BaseService;
-import com.example.cyjworkflow.dao.auto.FlowTenantDao;
-import com.example.cyjworkflow.entity.auto.po.QFlowTenantPO;
-import com.example.cyjworkflow.entity.auto.po.FlowTenantPO;
 import com.example.cyjworkflow.service.auto.FlowTenantService;
 import com.querydsl.core.QueryResults;
 import org.springframework.beans.factory.annotation.Autowired;

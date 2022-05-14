@@ -1,8 +1,8 @@
 package com.example.cyjauth.controller.custom;
 
-import com.example.cyjauth.entity.custom.dto.PasswordDTO;
-import com.example.cyjauth.entity.custom.dto.UserAuthorityDTO;
-import com.example.cyjauth.entity.custom.dto.UserRoleDTO;
+import com.example.cyjauth.entity.dto.PasswordDTO;
+import com.example.cyjauth.entity.dto.UserAuthorityDTO;
+import com.example.cyjauth.entity.dto.UserRoleDTO;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

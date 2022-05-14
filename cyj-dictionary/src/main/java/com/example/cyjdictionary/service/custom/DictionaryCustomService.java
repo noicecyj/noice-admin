@@ -1,6 +1,6 @@
 package com.example.cyjdictionary.service.custom;
 
-import com.example.cyjdictionary.entity.auto.po.DictionaryPO;
+import com.example.cyjcommon.entity.DictionaryPO;
 
 import java.util.List;
 

@@ -1,12 +1,12 @@
 package com.example.cyjauth.service.custom.Impl;
 
-import com.example.cyjauth.dao.custom.AuthorityCustomDao;
-import com.example.cyjauth.dao.custom.RoleCustomDao;
-import com.example.cyjauth.dao.custom.UserCustomDao;
-import com.example.cyjauth.entity.custom.bo.AuthUserDetails;
-import com.example.cyjauth.entity.custom.po.AuthorityCustomPO;
-import com.example.cyjauth.entity.custom.po.RoleCustomPO;
-import com.example.cyjauth.entity.custom.po.UserCustomPO;
+import com.example.cyjauth.dao.AuthorityCustomDao;
+import com.example.cyjauth.dao.RoleCustomDao;
+import com.example.cyjauth.dao.UserCustomDao;
+import com.example.cyjauth.entity.bo.AuthUserDetails;
+import com.example.cyjauth.entity.po.AuthorityCustomPO;
+import com.example.cyjauth.entity.po.RoleCustomPO;
+import com.example.cyjauth.entity.po.UserCustomPO;
 import com.example.cyjauth.service.custom.UserCustomService;
 import com.example.cyjcommon.service.BaseService;
 import org.apache.commons.lang3.StringUtils;
@@ -19,9 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 

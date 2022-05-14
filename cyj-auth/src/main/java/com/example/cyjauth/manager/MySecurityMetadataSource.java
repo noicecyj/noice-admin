@@ -3,7 +3,7 @@ package com.example.cyjauth.manager;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.example.cyjauth.entity.custom.po.AuthorityCustomPO;
+import com.example.cyjauth.entity.po.AuthorityCustomPO;
 import com.example.cyjauth.service.custom.AuthorityCustomService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

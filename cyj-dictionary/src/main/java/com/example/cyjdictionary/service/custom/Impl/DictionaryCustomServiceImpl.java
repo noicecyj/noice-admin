@@ -1,9 +1,9 @@
 package com.example.cyjdictionary.service.custom.Impl;
 
+import com.example.cyjcommon.entity.DictionaryPO;
+import com.example.cyjcommon.entity.QCatalogPO;
+import com.example.cyjcommon.entity.QDictionaryPO;
 import com.example.cyjcommon.service.BaseService;
-import com.example.cyjdictionary.entity.auto.po.DictionaryPO;
-import com.example.cyjdictionary.entity.auto.po.QCatalogPO;
-import com.example.cyjdictionary.entity.auto.po.QDictionaryPO;
 import com.example.cyjdictionary.service.custom.DictionaryCustomService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

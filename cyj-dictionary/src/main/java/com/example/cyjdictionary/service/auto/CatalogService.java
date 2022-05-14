@@ -1,6 +1,6 @@
 package com.example.cyjdictionary.service.auto;
 
-import com.example.cyjdictionary.entity.auto.po.CatalogPO;
+import com.example.cyjcommon.entity.CatalogPO;
 import com.querydsl.core.QueryResults;
 
 /**

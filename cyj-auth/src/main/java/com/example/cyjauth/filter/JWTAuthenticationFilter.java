@@ -3,7 +3,7 @@ package com.example.cyjauth.filter;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.cyjauth.constant.SecurityConstant;
-import com.example.cyjauth.entity.custom.bo.AuthGrantedAuthority;
+import com.example.cyjauth.entity.bo.AuthGrantedAuthority;
 import com.example.cyjauth.exception.CommonException;
 import com.example.cyjcommon.utils.ResultCode;
 import com.example.cyjcommon.utils.SpringUtil;

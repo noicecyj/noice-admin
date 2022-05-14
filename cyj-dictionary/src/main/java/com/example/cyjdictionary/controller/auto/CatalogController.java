@@ -1,7 +1,7 @@
 package com.example.cyjdictionary.controller.auto;
 
+import com.example.cyjcommon.entity.CatalogPO;
 import com.example.cyjcommon.utils.ResultVO;
-import com.example.cyjdictionary.entity.auto.po.CatalogPO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.PostMapping;

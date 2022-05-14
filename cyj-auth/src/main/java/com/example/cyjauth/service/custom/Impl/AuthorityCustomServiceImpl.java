@@ -1,8 +1,9 @@
 package com.example.cyjauth.service.custom.Impl;
 
-import com.example.cyjauth.dao.custom.AuthorityCustomDao;
-import com.example.cyjauth.entity.custom.po.AuthorityCustomPO;
+import com.example.cyjauth.dao.AuthorityCustomDao;
+import com.example.cyjauth.entity.po.AuthorityCustomPO;
 import com.example.cyjauth.service.custom.AuthorityCustomService;
+import com.example.cyjcommon.entity.QAuthorityPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjcommon.utils.BeanUtils;
 import com.example.cyjquery.service.custom.SqlCustomService;
@@ -50,7 +51,13 @@ public class AuthorityCustomServiceImpl extends BaseService implements Authority
 
     @Override
     public List<AuthorityCustomPO> findRoleAndAuthority() {
-        return authorityCustomDao.findAllByStatusEquals("有效");
+        return queryFactory
+                .selectFrom(QAuthorityPO)
+                .where(QAuthorityPO.authorityPO.sortCode.isNotNull())
+                .offset((pageNumber - 1) * 10L)
+                .orderBy(QAuthorityPO.authorityPO.sortCode.asc())
+                .limit(10)
+                .fetchResults();
     }
 
     @Override

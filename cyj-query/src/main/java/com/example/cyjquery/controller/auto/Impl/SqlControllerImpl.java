@@ -1,8 +1,8 @@
 package com.example.cyjquery.controller.auto.Impl;
 
+import com.example.cyjcommon.entity.SqlPO;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjquery.controller.auto.SqlController;
-import com.example.cyjquery.entity.auto.po.SqlPO;
 import com.example.cyjquery.service.auto.SqlService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

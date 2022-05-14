@@ -1,6 +1,6 @@
 package com.example.cyjauth.service.auto;
 
-import com.example.cyjauth.entity.auto.po.AuthorityPO;
+import com.example.cyjcommon.entity.AuthorityPO;
 import com.querydsl.core.QueryResults;
 
 /**

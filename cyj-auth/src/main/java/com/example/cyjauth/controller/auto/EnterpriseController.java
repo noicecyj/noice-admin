@@ -1,7 +1,7 @@
 package com.example.cyjauth.controller.auto;
 
+import com.example.cyjcommon.entity.EnterprisePO;
 import com.example.cyjcommon.utils.ResultVO;
-import com.example.cyjauth.entity.auto.po.EnterprisePO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.PostMapping;

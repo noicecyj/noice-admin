@@ -1,6 +1,6 @@
 package com.example.cyjauth.manager;
 
-import com.example.cyjauth.entity.custom.bo.AuthGrantedAuthority;
+import com.example.cyjauth.entity.bo.AuthGrantedAuthority;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;

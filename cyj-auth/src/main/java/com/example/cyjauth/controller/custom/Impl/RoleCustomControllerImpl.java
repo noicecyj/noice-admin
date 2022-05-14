@@ -1,7 +1,7 @@
 package com.example.cyjauth.controller.custom.Impl;
 
 import com.example.cyjauth.controller.custom.RoleCustomController;
-import com.example.cyjauth.entity.custom.dto.RoleAuthorityDTO;
+import com.example.cyjauth.entity.dto.RoleAuthorityDTO;
 import com.example.cyjauth.service.custom.RoleCustomService;
 import com.example.cyjcommon.utils.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;

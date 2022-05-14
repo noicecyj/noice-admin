@@ -1,8 +1,8 @@
 package com.example.cyjworkflow.controller.auto.Impl;
 
+import com.example.cyjcommon.entity.FlowTenantPO;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjworkflow.controller.auto.FlowTenantController;
-import com.example.cyjworkflow.entity.auto.po.FlowTenantPO;
 import com.example.cyjworkflow.service.auto.FlowTenantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

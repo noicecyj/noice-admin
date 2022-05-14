@@ -1,8 +1,8 @@
 package com.example.cyjdictionary.controller.auto.Impl;
 
+import com.example.cyjcommon.entity.CatalogPO;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjdictionary.controller.auto.CatalogController;
-import com.example.cyjdictionary.entity.auto.po.CatalogPO;
 import com.example.cyjdictionary.service.auto.CatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

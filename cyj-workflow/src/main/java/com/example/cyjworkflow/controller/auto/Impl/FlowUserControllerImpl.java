@@ -1,8 +1,8 @@
 package com.example.cyjworkflow.controller.auto.Impl;
 
+import com.example.cyjcommon.entity.FlowUserPO;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjworkflow.controller.auto.FlowUserController;
-import com.example.cyjworkflow.entity.auto.po.FlowUserPO;
 import com.example.cyjworkflow.service.auto.FlowUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

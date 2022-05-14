@@ -1,8 +1,8 @@
 package com.example.cyjworkflow.controller.auto.Impl;
 
+import com.example.cyjcommon.entity.BpmnPO;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjworkflow.controller.auto.BpmnController;
-import com.example.cyjworkflow.entity.auto.po.BpmnPO;
 import com.example.cyjworkflow.service.auto.BpmnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

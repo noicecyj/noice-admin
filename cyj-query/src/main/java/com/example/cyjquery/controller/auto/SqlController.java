@@ -1,7 +1,7 @@
 package com.example.cyjquery.controller.auto;
 
+import com.example.cyjcommon.entity.SqlPO;
 import com.example.cyjcommon.utils.ResultVO;
-import com.example.cyjquery.entity.auto.po.SqlPO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.PostMapping;

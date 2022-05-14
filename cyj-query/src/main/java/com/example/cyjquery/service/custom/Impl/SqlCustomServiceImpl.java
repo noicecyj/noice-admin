@@ -1,8 +1,8 @@
 package com.example.cyjquery.service.custom.Impl;
 
+import com.example.cyjcommon.entity.SqlPO;
 import com.example.cyjcommon.service.BaseService;
-import com.example.cyjquery.dao.custom.SqlCustomDao;
-import com.example.cyjquery.entity.auto.po.SqlPO;
+import com.example.cyjquery.dao.SqlCustomDao;
 import com.example.cyjquery.service.custom.SqlCustomService;
 import org.hibernate.query.internal.NativeQueryImpl;
 import org.hibernate.transform.Transformers;

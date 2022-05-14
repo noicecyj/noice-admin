@@ -1,7 +1,7 @@
 package com.example.cyjworkflow.controller.auto;
 
+import com.example.cyjcommon.entity.FlowUserPO;
 import com.example.cyjcommon.utils.ResultVO;
-import com.example.cyjworkflow.entity.auto.po.FlowUserPO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,9 +1,9 @@
 package com.example.cyjauth.service.custom.Impl;
 
-import com.example.cyjauth.dao.custom.AuthorityCustomDao;
-import com.example.cyjauth.dao.custom.RoleCustomDao;
-import com.example.cyjauth.entity.custom.po.AuthorityCustomPO;
-import com.example.cyjauth.entity.custom.po.RoleCustomPO;
+import com.example.cyjauth.dao.AuthorityCustomDao;
+import com.example.cyjauth.dao.RoleCustomDao;
+import com.example.cyjauth.entity.po.AuthorityCustomPO;
+import com.example.cyjauth.entity.po.RoleCustomPO;
 import com.example.cyjauth.service.custom.RoleCustomService;
 import com.example.cyjcommon.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;

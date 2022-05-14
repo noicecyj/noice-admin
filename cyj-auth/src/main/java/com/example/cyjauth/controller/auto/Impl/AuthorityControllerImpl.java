@@ -1,9 +1,9 @@
 package com.example.cyjauth.controller.auto.Impl;
 
-import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjauth.controller.auto.AuthorityController;
-import com.example.cyjauth.entity.auto.po.AuthorityPO;
 import com.example.cyjauth.service.auto.AuthorityService;
+import com.example.cyjcommon.entity.AuthorityPO;
+import com.example.cyjcommon.utils.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;

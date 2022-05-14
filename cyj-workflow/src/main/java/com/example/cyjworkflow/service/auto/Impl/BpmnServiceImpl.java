@@ -1,9 +1,9 @@
 package com.example.cyjworkflow.service.auto.Impl;
 
+import com.example.cyjcommon.dao.BpmnDao;
+import com.example.cyjcommon.entity.BpmnPO;
+import com.example.cyjcommon.entity.QBpmnPO;
 import com.example.cyjcommon.service.BaseService;
-import com.example.cyjworkflow.dao.auto.BpmnDao;
-import com.example.cyjworkflow.entity.auto.po.QBpmnPO;
-import com.example.cyjworkflow.entity.auto.po.BpmnPO;
 import com.example.cyjworkflow.service.auto.BpmnService;
 import com.querydsl.core.QueryResults;
 import org.springframework.beans.factory.annotation.Autowired;
