@@ -1109,6 +1109,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 "          pid: " + underSubPoName + "State." + underPoName + "Id,\r\n" +
                 "        })}\r\n" +
                 "        formDataValue={" + underSubPoName + "State." + underSubPoName + "FormData}\r\n" +
+                "        formSortCode={String(Number.parseInt(String(" + underSubPoName + "State." + underSubPoName + "Total)) + 10)}\r\n" +
                 "      />\r\n" +
                 "    </div>\r\n" +
                 "  );\r\n" +
@@ -1464,6 +1465,7 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
         sb.append("          pageNumber: ").append(underPoName).append("State.").append(underPoName).append("Current,\r\n");
         sb.append("        })}\r\n");
         sb.append("        formDataValue={").append(underPoName).append("State.").append(underPoName).append("FormData}\r\n");
+        sb.append("        formSortCode={String(Number.parseInt(String(").append(underPoName).append("State.").append(underPoName).append("Total)) + 10)}\r\n");
         sb.append("      />\r\n");
         sb.append("    </>\r\n");
         sb.append("  );\r\n");
@@ -1568,6 +1570,9 @@ public class EntityNameCustomServiceImpl extends BaseService implements EntityNa
                 if (dateSourceList != null && dateSourceList.size() != 0) {
                     for (Map<String, Object> dateSourceMap : dateSourceList) {
                         Map<String, String> map = new HashMap<>();
+                        if (dateSourceMap.get("label") == null && dateSourceMap.get("value") == null) {
+                            continue;
+                        }
                         map.put("label", dateSourceMap.get("label").toString());
                         map.put("value", dateSourceMap.get("value").toString());
                         mapList.add(map);

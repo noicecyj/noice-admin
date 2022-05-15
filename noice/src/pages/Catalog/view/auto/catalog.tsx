@@ -66,6 +66,7 @@ function Catalog() {
           pageNumber: catalogState.catalogCurrent,
         })}
         formDataValue={catalogState.catalogFormData}
+        formSortCode={String(Number.parseInt(String(catalogState.catalogTotal)) + 10)}
       />
     </>
   );

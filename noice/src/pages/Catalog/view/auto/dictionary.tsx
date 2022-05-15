@@ -68,6 +68,7 @@ function Dictionary() {
           pid: dictionaryState.catalogId,
         })}
         formDataValue={dictionaryState.dictionaryFormData}
+        formSortCode={String(Number.parseInt(String(dictionaryState.dictionaryTotal)) + 10)}
       />
     </div>
   );

@@ -55,6 +55,7 @@ function AppService() {
           pageNumber: appServiceState.appServiceCurrent,
         })}
         formDataValue={appServiceState.appServiceFormData}
+        formSortCode={String(Number.parseInt(String(appServiceState.appServiceTotal)) + 10)}
       />
     </>
   );

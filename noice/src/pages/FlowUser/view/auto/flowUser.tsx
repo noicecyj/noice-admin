@@ -55,6 +55,7 @@ function FlowUser() {
           pageNumber: flowUserState.flowUserCurrent,
         })}
         formDataValue={flowUserState.flowUserFormData}
+        formSortCode={String(Number.parseInt(String(flowUserState.flowUserTotal)) + 10)}
       />
     </>
   );

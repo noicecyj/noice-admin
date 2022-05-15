@@ -55,6 +55,7 @@ function Sql() {
           pageNumber: sqlState.sqlCurrent,
         })}
         formDataValue={sqlState.sqlFormData}
+        formSortCode={String(Number.parseInt(String(sqlState.sqlTotal)) + 10)}
       />
     </>
   );

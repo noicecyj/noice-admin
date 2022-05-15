@@ -55,6 +55,7 @@ function FlowTenant() {
           pageNumber: flowTenantState.flowTenantCurrent,
         })}
         formDataValue={flowTenantState.flowTenantFormData}
+        formSortCode={String(Number.parseInt(String(flowTenantState.flowTenantTotal)) + 10)}
       />
     </>
   );

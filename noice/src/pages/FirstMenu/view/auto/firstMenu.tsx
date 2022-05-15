@@ -66,6 +66,7 @@ function FirstMenu() {
           pageNumber: firstMenuState.firstMenuCurrent,
         })}
         formDataValue={firstMenuState.firstMenuFormData}
+        formSortCode={String(Number.parseInt(String(firstMenuState.firstMenuTotal)) + 10)}
       />
     </>
   );

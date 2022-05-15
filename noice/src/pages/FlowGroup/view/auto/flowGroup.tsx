@@ -55,6 +55,7 @@ function FlowGroup() {
           pageNumber: flowGroupState.flowGroupCurrent,
         })}
         formDataValue={flowGroupState.flowGroupFormData}
+        formSortCode={String(Number.parseInt(String(flowGroupState.flowGroupTotal)) + 10)}
       />
     </>
   );

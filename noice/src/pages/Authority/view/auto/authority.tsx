@@ -55,6 +55,7 @@ function Authority() {
           pageNumber: authorityState.authorityCurrent,
         })}
         formDataValue={authorityState.authorityFormData}
+        formSortCode={String(Number.parseInt(String(authorityState.authorityTotal)) + 10)}
       />
     </>
   );

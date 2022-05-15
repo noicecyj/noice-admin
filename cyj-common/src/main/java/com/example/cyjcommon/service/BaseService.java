@@ -76,18 +76,4 @@ public class BaseService {
         createJavaFile(path, result, true);
     }
 
-    /**
-     * 生成文件夹
-     *
-     * @param path 路径
-     */
-    public void createJavaFile(String path) {
-        File file = new File(path);
-        if (!file.exists()) {
-            if (file.mkdirs()) {
-                logger.info("生成文件夹,路径为：{}", path);
-            }
-        }
-    }
-
 }

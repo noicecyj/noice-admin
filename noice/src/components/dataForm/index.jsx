@@ -11,7 +11,9 @@ import {
   Range,
   Select,
   Switch,
-  TimePicker
+  TimePicker,
+  Field,
+  Message,
 } from '@alifd/next';
 
 const dataSource = [
@@ -24,6 +26,7 @@ const {RangePicker} = DatePicker;
 const {Group: RadioGroup} = Radio;
 const {Group: CheckboxGroup} = Checkbox;
 
+
 function DataForm(props) {
   const {
     items,
@@ -34,22 +37,40 @@ function DataForm(props) {
     visibleDialog,
     onClose,
     customData,
+    formSortCode,
   } = props;
 
   const formCol = customData.formCol === 4 ? 3 : customData.formCol === 3 ? 4 : customData.formCol === 2 ? 6 : 12;
-  console.log(customData.customType)
+  console.log("formSortCode===>",formSortCode)
+
+  const validate = items.map(item =>{
+    return item.propertyName;
+  })
+  const field = Field.useField();
+
+  const validateMethod = () => {
+    field.validate(validate,(errors) =>{
+      console.log(errors)
+      if (errors == null){
+        onOk();
+      }else {
+        Message.error('请完成表单');
+      }
+    });
+  }
 
   return (
     <Dialog
       v2
       title={title}
       visible={visibleDialog}
-      onOk={onOk}
+      onOk={validateMethod}
       onClose={onClose}
       style={{width: '50%'}}>
       <Card free>
         <Card.Content>
           <Form
+            field={field}
             responsive={true}
             fullWidth
             labelAlign="top"
@@ -274,11 +295,13 @@ function DataForm(props) {
               label="排序代码"
               required
               requiredMessage="请输入排序代码">
-              <Input
+              <NumberPicker
                 id="sortCode"
                 name="sortCode"
-                placeholder="请输入排序代码"
-                defaultValue="0010"
+                defaultValue={formSortCode}
+                stringMode
+                type="inline"
+                editable={false}
               />
             </FormItem>}
           </Form>

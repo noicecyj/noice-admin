@@ -55,6 +55,7 @@ function Bpmn() {
           pageNumber: bpmnState.bpmnCurrent,
         })}
         formDataValue={bpmnState.bpmnFormData}
+        formSortCode={String(Number.parseInt(String(bpmnState.bpmnTotal)) + 10)}
       />
     </>
   );

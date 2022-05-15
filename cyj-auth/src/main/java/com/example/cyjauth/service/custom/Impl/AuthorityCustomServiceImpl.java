@@ -34,7 +34,7 @@ public class AuthorityCustomServiceImpl extends BaseService implements Authority
     private final static String POST = "POST";
     private final static String VERSION = "1.0";
     private final static String STATUS = "有效";
-    private final static String SORTCODE = "0010";
+    private final static String SORTCODE = "10";
 
     private AuthorityDao authorityDao;
     private SqlCustomService sqlCustomService;

@@ -55,6 +55,7 @@ function Role() {
           pageNumber: roleState.roleCurrent,
         })}
         formDataValue={roleState.roleFormData}
+        formSortCode={String(Number.parseInt(String(roleState.roleTotal)) + 10)}
       />
     </>
   );

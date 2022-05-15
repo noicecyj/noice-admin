@@ -68,6 +68,7 @@ function SecondMenu() {
           pid: secondMenuState.firstMenuId,
         })}
         formDataValue={secondMenuState.secondMenuFormData}
+        formSortCode={String(Number.parseInt(String(secondMenuState.secondMenuTotal)) + 10)}
       />
     </div>
   );

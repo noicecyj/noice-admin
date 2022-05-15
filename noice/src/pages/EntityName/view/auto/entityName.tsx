@@ -66,6 +66,7 @@ function EntityName() {
           pageNumber: entityNameState.entityNameCurrent,
         })}
         formDataValue={entityNameState.entityNameFormData}
+        formSortCode={String(Number.parseInt(String(entityNameState.entityNameTotal)) + 10)}
       />
     </>
   );

@@ -68,6 +68,7 @@ function Entity() {
           pid: entityState.entityNameId,
         })}
         formDataValue={entityState.entityFormData}
+        formSortCode={String(Number.parseInt(String(entityState.entityTotal)) + 10)}
       />
     </div>
   );

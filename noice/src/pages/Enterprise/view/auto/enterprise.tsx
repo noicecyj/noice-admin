@@ -55,6 +55,7 @@ function Enterprise() {
           pageNumber: enterpriseState.enterpriseCurrent,
         })}
         formDataValue={enterpriseState.enterpriseFormData}
+        formSortCode={String(Number.parseInt(String(enterpriseState.enterpriseTotal)) + 10)}
       />
     </>
   );

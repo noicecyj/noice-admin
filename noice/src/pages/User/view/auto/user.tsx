@@ -55,6 +55,7 @@ function User() {
           pageNumber: userState.userCurrent,
         })}
         formDataValue={userState.userFormData}
+        formSortCode={String(Number.parseInt(String(userState.userTotal)) + 10)}
       />
     </>
   );
