@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -83,13 +82,17 @@ public class AuthorityServiceImpl extends BaseService implements AuthorityServic
                 .selectFrom(QRolePO.rolePO)
                 .where(QRolePO.rolePO.id.eq(roleId))
                 .fetchOne();
-        for (String authorityId : authorityIds) {
-            Optional<AuthorityPO> optionalAuthorityPO = authorityDao.findById(authorityId);
-            if (optionalAuthorityPO.isPresent()) {
-                AuthorityPO authorityPO = optionalAuthorityPO.get();
-                authorityPO.setRole(rolePO);
-                authorityDao.saveAndFlush(authorityPO);
+        List<AuthorityPO> authorityPOList = queryFactory
+                .selectFrom(QAuthorityPO.authorityPO)
+                .fetch();
+        for (AuthorityPO authorityPO : authorityPOList) {
+            authorityPO.setRole(null);
+            for (String authorityId : authorityIds) {
+                if (authorityPO.getId().equals(authorityId)) {
+                    authorityPO.setRole(rolePO);
+                }
             }
+            authorityDao.saveAndFlush(authorityPO);
         }
     }
 
@@ -112,13 +115,17 @@ public class AuthorityServiceImpl extends BaseService implements AuthorityServic
                 .selectFrom(QUserPO.userPO)
                 .where(QUserPO.userPO.id.eq(userId))
                 .fetchOne();
-        for (String authorityId : authorityIds) {
-            Optional<AuthorityPO> optionalAuthorityPO = authorityDao.findById(authorityId);
-            if (optionalAuthorityPO.isPresent()) {
-                AuthorityPO authorityPO = optionalAuthorityPO.get();
-                authorityPO.setUser(userPO);
-                authorityDao.saveAndFlush(authorityPO);
+        List<AuthorityPO> authorityPOList = queryFactory
+                .selectFrom(QAuthorityPO.authorityPO)
+                .fetch();
+        for (AuthorityPO authorityPO : authorityPOList) {
+            authorityPO.setUser(null);
+            for (String authorityId : authorityIds) {
+                if (authorityPO.getId().equals(authorityId)) {
+                    authorityPO.setUser(userPO);
+                }
             }
+            authorityDao.saveAndFlush(authorityPO);
         }
     }
 

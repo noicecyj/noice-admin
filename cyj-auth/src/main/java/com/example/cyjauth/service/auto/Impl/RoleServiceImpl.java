@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -81,13 +80,17 @@ public class RoleServiceImpl extends BaseService implements RoleService {
                 .selectFrom(QUserPO.userPO)
                 .where(QUserPO.userPO.id.eq(userId))
                 .fetchOne();
-        for (String roleId : roleIds) {
-            Optional<RolePO> rolePOOptional = roleDao.findById(roleId);
-            if (rolePOOptional.isPresent()) {
-                RolePO rolePO = rolePOOptional.get();
-                rolePO.setUser(userPO);
-                roleDao.saveAndFlush(rolePO);
+        List<RolePO> rolePOList = queryFactory
+                .selectFrom(QRolePO.rolePO)
+                .fetch();
+        for (RolePO rolePO : rolePOList) {
+            rolePO.setUser(null);
+            for (String roleId : roleIds) {
+                if (rolePO.getId().equals(roleId)) {
+                    rolePO.setUser(userPO);
+                }
             }
+            roleDao.saveAndFlush(rolePO);
         }
     }
 
