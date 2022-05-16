@@ -1,11 +1,9 @@
-import customAuthorityServices from '../../services/custom/authority';
-
 export default {
 
   namespace: 'customAuthority',
 
   state: {
-    customMethodName1: '生成权限',
+    customMethodName1: null,
     customMethodName2: null,
     customMethodName3: null,
     customFrom: [],
@@ -19,7 +17,6 @@ export default {
 
   effects: () => ({
     customMethod1() {
-      customAuthorityServices.createAuthority();
     },
     customMethod2() {
     },

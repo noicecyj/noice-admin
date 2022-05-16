@@ -1,5 +1,6 @@
 import roleService from '@/pages/Role/services/auto/role';
 import initService from '@/services/init';
+import {Message} from "@alifd/next";
 
 export default {
 
@@ -15,8 +16,11 @@ export default {
     roleCurrent: 1,
     roleForm: [],
     roleTable: [],
-    roleId: '',
     customData: {},
+    userId: '',
+    dialogUserRoleVisible: false,
+    visibleUserRoleLoading: false,
+    selectUserRoles: [],
   },
 
   reducers: {
@@ -85,6 +89,29 @@ export default {
         roleTable: ret.data.dataTable,
         roleForm: ret.data.dataForm,
         customData: ret.data.customData,
+      };
+      dispatch.role.setState(payload);
+    },
+    async openUserRoleDialog(data) {
+      await this.findDataTableAndFormByName();
+      const ret = await roleService.getUserRole(data.userId);
+      const payload = {
+        userId: data.userId,
+        dialogUserRoleVisible: true,
+        selectUserRoles: ret.data,
+      };
+      dispatch.role.setState(payload);
+    },
+    async okUserRoleDialog(data) {
+      const ret = await roleService.setUserRole(data);
+      if (ret.code === 200) {
+        Message.success('分配成功');
+      } else {
+        Message.error('分配失败');
+      }
+      const payload = {
+        dialogUserRoleVisible: false,
+        selectUserRoles: [],
       };
       dispatch.role.setState(payload);
     },

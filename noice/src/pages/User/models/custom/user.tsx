@@ -66,58 +66,11 @@ export default {
           Message.error('重置失败');
         }
         const customUser = {
-          recordId: '',
           dialogPasswordVisible: false,
           passwordFormData: {},
         };
         dispatch.customUser.setState(customUser);
       });
-    },
-    async openUserRoleDialog(data) {
-      dispatch.role.findDataTableAndFormByName();
-      const ret = await userCustomService.getUserRole(data.userId);
-      const customUser = {
-        dialogRoleVisible: true,
-        recordId: data.userId,
-        selectRoles: ret.data,
-      };
-      dispatch.customUser.setState(customUser);
-    },
-    async okUserRoleDialog(data) {
-      const ret = await userCustomService.setUserRole(data);
-      if (ret.code === 200) {
-        Message.success('分配成功');
-      } else {
-        Message.error('分配失败');
-      }
-      const customUser = {
-        dialogRoleVisible: false,
-        selectRoles: [],
-      };
-      dispatch.customUser.setState(customUser);
-    },
-    async openUserAuthorityDialog(data) {
-      dispatch.authority.findDataTableAndFormByName();
-      const ret = await userCustomService.getUserAuthority(data.userId);
-      const customUser = {
-        dialogAuthorityVisible: true,
-        recordId: data.userId,
-        selectAuthorities: ret.data,
-      };
-      dispatch.customUser.setState(customUser);
-    },
-    async okUserAuthorityDialog(data) {
-      const ret = await userCustomService.setUserAuthority(data);
-      if (ret.code === 200) {
-        Message.success('分配成功');
-      } else {
-        Message.error('分配失败');
-      }
-      const customUser = {
-        dialogAuthorityVisible: false,
-        selectAuthorities: [],
-      };
-      dispatch.customUser.setState(customUser);
     },
   }),
 };

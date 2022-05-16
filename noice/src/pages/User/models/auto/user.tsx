@@ -15,7 +15,6 @@ export default {
     userCurrent: 1,
     userForm: [],
     userTable: [],
-    userId: '',
     customData: {},
   },
 

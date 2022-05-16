@@ -35,4 +35,36 @@ export default {
       },
     });
   },
+  getUserAuthority(userId) {
+    return request({
+      url: '/authApi/getUserAuthority',
+      method: 'post',
+      params: {
+        userId,
+      },
+    });
+  },
+  setUserAuthority(data) {
+    return request({
+      url: '/authApi/setUserAuthority',
+      method: 'post',
+      data,
+    });
+  },
+  getRoleAuthority(roleId) {
+    return request({
+      url: '/authApi/getRoleAuthority',
+      method: 'post',
+      params: {
+        roleId,
+      },
+    });
+  },
+  setRoleAuthority(data) {
+    return request({
+      url: '/authApi/setRoleAuthority',
+      method: 'post',
+      data,
+    });
+  },
 };
