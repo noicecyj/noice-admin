@@ -17,7 +17,9 @@ export default {
       {
         id: '1',
         propertyMode: 'Password',
-        propertyRequired: '是',
+        propertyRequired: true,
+        propertyEditEnable: true,
+        propertyDefaultValue: '',
         propertyLabel: '新密码',
         propertyCode: 'new_password',
         propertyName: 'newPassword',
@@ -25,7 +27,9 @@ export default {
       {
         id: '2',
         propertyMode: 'Password',
-        propertyRequired: '是',
+        propertyRequired: true,
+        propertyEditEnable: true,
+        propertyDefaultValue: '',
         propertyLabel: '确认密码',
         propertyCode: 'check_password',
         propertyName: 'checkPassword',

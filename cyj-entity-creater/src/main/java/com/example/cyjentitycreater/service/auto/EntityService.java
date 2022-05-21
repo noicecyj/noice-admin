@@ -1,7 +1,8 @@
 package com.example.cyjentitycreater.service.auto;
 
 import com.example.cyjcommon.entity.po.EntityPO;
-import com.querydsl.core.QueryResults;
+import com.example.cyjcommon.entity.po.PropertyPO;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -13,14 +14,12 @@ public interface EntityService {
 
     EntityPO addOne(EntityPO po);
 
-    void deleteOne(String id);
+    void deleteOne(EntityPO po);
 
     EntityPO updateOne(EntityPO po);
 
-    QueryResults<EntityPO> findAll(Integer pageNumber, String pid);
+    Page<EntityPO> findAll(Integer pageNumber);
 
-    EntityPO findOneById(String id);
-
-    List<EntityPO> findListByPid(String id);
+    List<EntityPO> findAllByEntity(EntityPO entity);
 
 }

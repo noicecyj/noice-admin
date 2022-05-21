@@ -1,5 +1,6 @@
 package com.example.cyjdictionary.controller.auto;
 
+import com.example.cyjcommon.entity.po.CatalogPO;
 import com.example.cyjcommon.entity.po.DictionaryPO;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,7 +18,7 @@ public interface DictionaryController {
 
     @Operation(summary = "查询所有Dictionary")
     @PostMapping(value = "dictionaryPage")
-    ResultVO dictionaryPage(@RequestParam("pageNumber") Integer pageNumber, @RequestParam("pid") String pid);
+    ResultVO dictionaryPage(@RequestParam("pageNumber") Integer pageNumber, @RequestBody CatalogPO catalog);
 
     @Operation(summary = "保存Dictionary")
     @PostMapping(value = "dictionarySave")

@@ -1,31 +1,33 @@
 package com.example.cyjcommon.entity.po;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
-import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
- * @author 曹元杰
- * @version 1.0
+ * @author Noice
  */
 @Entity
 @Table(name = EntityPO.T_ENTITY)
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
 @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class EntityPO implements Serializable {
 
     static final String T_ENTITY = "t_entity";
@@ -34,50 +36,45 @@ public class EntityPO implements Serializable {
     @GeneratedValue(generator = "uuid2")
     @Column(name = "id", length = 36)
     private String id;
-    @Column(name = "property_edit_enable")
-    private String propertyEditEnable;
-    @Column(name = "property_length")
-    private String propertyLength;
-    @Column(name = "pid")
-    private String pid;
-    @Column(name = "property_code")
-    private String propertyCode;
-    @Column(name = "property_type")
-    private String propertyType;
-    @Column(name = "property_label")
-    private String propertyLabel;
-    @Column(name = "property_width")
-    private String propertyWidth;
-    @Column(name = "property_mode")
-    private String propertyMode;
-    @Column(name = "property_direction")
-    private String propertyDirection;
-    @Column(name = "property_required")
-    private String propertyRequired;
-    @Column(name = "property_data_source_type")
-    private String propertyDataSourceType;
-    @Column(name = "property_default_value")
-    private String propertyDefaultValue;
-    @Column(name = "property_display")
-    private String propertyDisplay;
-    @Column(name = "property_name")
-    private String propertyName;
+
+    @NotNull(message = "实体名称不能为空")
+    @Column(name = "entity_name")
+    private String entityName;
+
+    @NotNull(message = "实体编码不能为空")
+    @Column(name = "entity_code")
+    private String entityCode;
+
+    @NotNull(message = "表单类型不能为空")
+    @Column(name = "entity_form_type")
+    private String entityFormType;
+
+    @Column(name = "entity_form_row")
+    private Integer entityFormRow;
+
+    @Column(name = "entity_edit_enable")
+    private String entityEditEnable;
+
+    @Column(name = "entity_custom_form")
+    private String entityCustomForm;
+
+    @Column(name = "entity_custom_table")
+    private String entityCustomTable;
+
+    @NotNull(message = "状态不能为空")
     @Column(name = "status")
     private String status;
+
+    @NotNull(message = "排序不能为空")
     @Column(name = "sort_code")
     private String sortCode;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        EntityPO that = (EntityPO) o;
-        return Objects.equals(id, that.id);
-    }
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "entity_id")
+    private EntityPO entity;
 
-    @Override
-    public int hashCode() {
-        return 0;
-    }
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "app_service_id")
+    private AppServicePO appService;
 
 }

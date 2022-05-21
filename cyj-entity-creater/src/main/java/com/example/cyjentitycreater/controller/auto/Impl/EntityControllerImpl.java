@@ -5,6 +5,7 @@ import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.controller.auto.EntityController;
 import com.example.cyjentitycreater.service.auto.EntityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,12 +27,15 @@ public class EntityControllerImpl implements EntityController {
     }
 
     @Override
-    public ResultVO entityPage(Integer pageNumber, String pid) {
-        return ResultVO.success(entityService.findAll(pageNumber, pid));
+    public ResultVO entityPage(Integer pageNumber) {
+        return ResultVO.success(entityService.findAll(pageNumber));
     }
 
     @Override
-    public ResultVO entitySave(EntityPO po) {
+    public ResultVO entitySave(EntityPO po, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResultVO.failure(bindingResult.getAllErrors().get(0));
+        }
         if (po.getId() == null) {
             return ResultVO.success(entityService.addOne(po));
         }
@@ -39,13 +43,12 @@ public class EntityControllerImpl implements EntityController {
     }
 
     @Override
-    public void entityDelete(String id) {
-        entityService.deleteOne(id);
-    }
-
-    @Override
-    public ResultVO findEntityById(String id) {
-        return ResultVO.success(entityService.findOneById(id));
+    public ResultVO entityDelete(EntityPO po) {
+        if (po.getId() == null) {
+            return ResultVO.failure();
+        }
+        entityService.deleteOne(po);
+        return ResultVO.success();
     }
 
 }

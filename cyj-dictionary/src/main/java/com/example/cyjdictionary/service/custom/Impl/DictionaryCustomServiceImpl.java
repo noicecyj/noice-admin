@@ -25,7 +25,7 @@ public class DictionaryCustomServiceImpl extends BaseService implements Dictiona
         QCatalogPO qCatalogPO = QCatalogPO.catalogPO;
         return queryFactory.selectFrom(qDictionary)
                 .innerJoin(qCatalogPO)
-                .on(qDictionary.pid.eq(qCatalogPO.id))
+                .on(qDictionary.catalog.eq(qCatalogPO))
                 .where(qCatalogPO.catalogName.eq(name))
                 .orderBy(qDictionary.sortCode.asc()).fetch();
     }
@@ -36,7 +36,7 @@ public class DictionaryCustomServiceImpl extends BaseService implements Dictiona
         QCatalogPO qCatalogPO = QCatalogPO.catalogPO;
         return queryFactory.selectFrom(qDictionary)
                 .innerJoin(qCatalogPO)
-                .on(qDictionary.pid.eq(qCatalogPO.id))
+                .on(qDictionary.catalog.id.eq(qCatalogPO.id))
                 .where(qCatalogPO.catalogValue.eq(value))
                 .orderBy(qDictionary.sortCode.asc()).fetch();
     }
@@ -47,7 +47,7 @@ public class DictionaryCustomServiceImpl extends BaseService implements Dictiona
         QCatalogPO qCatalogPO = QCatalogPO.catalogPO;
         return queryFactory.selectFrom(qDictionary)
                 .innerJoin(qCatalogPO)
-                .on(qDictionary.pid.eq(qCatalogPO.id))
+                .on(qDictionary.catalog.eq(qCatalogPO))
                 .where(qCatalogPO.catalogValue.eq(value).and(qDictionary.dictionaryValue.eq(key)))
                 .orderBy(qDictionary.sortCode.asc()).fetchOne();
     }
@@ -58,7 +58,7 @@ public class DictionaryCustomServiceImpl extends BaseService implements Dictiona
         QCatalogPO qCatalogPO = QCatalogPO.catalogPO;
         return queryFactory.selectFrom(qDictionary)
                 .innerJoin(qCatalogPO)
-                .on(qDictionary.pid.eq(qCatalogPO.id))
+                .on(qDictionary.catalog.eq(qCatalogPO))
                 .where(qCatalogPO.catalogValue.eq(value).and(qDictionary.dictionaryName.eq(value2)))
                 .orderBy(qDictionary.sortCode.asc()).fetchOne();
     }

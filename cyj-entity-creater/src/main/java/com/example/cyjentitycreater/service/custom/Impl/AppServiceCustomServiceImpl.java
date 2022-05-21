@@ -1,11 +1,11 @@
 package com.example.cyjentitycreater.service.custom.Impl;
 
+import com.example.cyjcommon.dao.AppServiceDao;
 import com.example.cyjcommon.entity.po.AppServicePO;
 import com.example.cyjcommon.entity.po.DictionaryPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjcommon.utils.CommonUtils;
 import com.example.cyjdictionary.service.custom.DictionaryCustomService;
-import com.example.cyjentitycreater.dao.AppServiceCustomDao;
 import com.example.cyjentitycreater.service.custom.AppServiceCustomService;
 import com.example.cyjentitycreater.utils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +25,12 @@ import java.util.Optional;
 @Transactional(rollbackFor = Exception.class)
 public class AppServiceCustomServiceImpl extends BaseService implements AppServiceCustomService {
 
-    private AppServiceCustomDao appServiceCustomDao;
+    private AppServiceDao appServiceDao;
     private DictionaryCustomService dictionaryCustomService;
 
     @Autowired
-    public void setAppServiceCustomDao(AppServiceCustomDao appServiceCustomDao) {
-        this.appServiceCustomDao = appServiceCustomDao;
+    public void setAppServiceDao(AppServiceDao appServiceDao) {
+        this.appServiceDao = appServiceDao;
     }
 
     @Autowired
@@ -40,21 +40,21 @@ public class AppServiceCustomServiceImpl extends BaseService implements AppServi
 
     @Override
     public void createAppFile(String id) {
-        Optional<AppServicePO> opt = appServiceCustomDao.findById(id);
+        Optional<AppServicePO> opt = appServiceDao.findById(id);
         if (opt.isPresent()) {
             AppServicePO appServicePO = opt.get();
-            String AppName = BeanUtils.captureName(BeanUtils.underline2Camel2(appServicePO.getName()));
+            String AppName = BeanUtils.captureName(BeanUtils.underline2Camel2(appServicePO.getAppServicename()));
             List<DictionaryPO> pos = dictionaryCustomService.findCatalogByValue("PROJECT_PATH");
             HashMap<String, DictionaryPO> mapPo = CommonUtils.listToMap(pos, "dictionaryName");
-            String AppFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appServicePO.getName() + "\\src\\main\\java\\com\\example\\" + AppName;
+            String AppFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appServicePO.getAppServicename() + "\\src\\main\\java\\com\\example\\" + AppName;
             String[] AppResult = appGenerate(appServicePO);
-            String ymlFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appServicePO.getName() + "\\src\\main\\resources";
+            String ymlFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appServicePO.getAppServicename() + "\\src\\main\\resources";
             String[] ymlResult = ymlGenerate(appServicePO);
-            String xmlFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appServicePO.getName() + "\\src\\main\\resources";
+            String xmlFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appServicePO.getAppServicename() + "\\src\\main\\resources";
             String[] xmlResult = xmlGenerate(appServicePO);
-            String configFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appServicePO.getName() + "\\src\\main\\resources";
+            String configFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appServicePO.getAppServicename() + "\\src\\main\\resources";
             String[] configResult = configGenerate();
-            String pomFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appServicePO.getName();
+            String pomFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appServicePO.getAppServicename();
             String[] pomResult = pomGenerate(appServicePO);
             try {
                 createJavaFile(AppFilePath, AppResult);
@@ -70,7 +70,7 @@ public class AppServiceCustomServiceImpl extends BaseService implements AppServi
     }
 
     public String[] appGenerate(AppServicePO po) {
-        String AppName = BeanUtils.captureName(BeanUtils.underline2Camel2(po.getName()));
+        String AppName = BeanUtils.captureName(BeanUtils.underline2Camel2(po.getAppServicename()));
         StringBuilder sb = new StringBuilder();
         sb.append("package com.example.").append(AppName.toLowerCase()).append(";\r\n");
         sb.append("\r\n");
@@ -103,7 +103,7 @@ public class AppServiceCustomServiceImpl extends BaseService implements AppServi
     public String[] ymlGenerate(AppServicePO po) {
         String serviceFileData =
                 "server:\r\n" +
-                        "  port: " + po.getAppPort() + "\r\n" +
+                        "  port: " + po.getAppServicePort() + "\r\n" +
                         "eureka:\r\n" +
                         "  client:\r\n" +
                         "    serviceUrl:\r\n" +
@@ -113,7 +113,7 @@ public class AppServiceCustomServiceImpl extends BaseService implements AppServi
                         "    prefer-ip-address: true\r\n" +
                         "spring:\r\n" +
                         "  application:\r\n" +
-                        "    name: " + po.getName() + "\r\n" +
+                        "    name: " + po.getAppServicename() + "\r\n" +
                         "  jpa:\r\n" +
                         "    generate-ddl: false\r\n" +
                         "    show-sql: true\r\n" +
@@ -148,7 +148,7 @@ public class AppServiceCustomServiceImpl extends BaseService implements AppServi
                         "    <!-- 2.1 level为 DEBUG 日志，时间滚动输出 -->\r\n" +
                         "    <appender name=\"LOG_FILE\" class=\"ch.qos.logback.core.rolling.RollingFileAppender\">\r\n" +
                         "        <!-- 正在记录的日志文档的路径及文档名 -->\r\n" +
-                        "        <file>${LOG_HOME}/" + po.getName() + ".log</file>\r\n" +
+                        "        <file>${LOG_HOME}/" + po.getAppServicename() + ".log</file>\r\n" +
                         "        <!--日志文档输出格式-->\r\n" +
                         "        <encoder>\r\n" +
                         "            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>\r\n" +
@@ -157,7 +157,7 @@ public class AppServiceCustomServiceImpl extends BaseService implements AppServi
                         "        <!-- 日志记录器的滚动策略，按日期，按大小记录 -->\r\n" +
                         "        <rollingPolicy class=\"ch.qos.logback.core.rolling.TimeBasedRollingPolicy\">\r\n" +
                         "            <!-- 日志归档 -->\r\n" +
-                        "            <fileNamePattern>${LOG_HOME}/" + po.getName() + "-%d{yyyy-MM-dd}.%i.log</fileNamePattern>\r\n" +
+                        "            <fileNamePattern>${LOG_HOME}/" + po.getAppServicename() + "-%d{yyyy-MM-dd}.%i.log</fileNamePattern>\r\n" +
                         "            <timeBasedFileNamingAndTriggeringPolicy class=\"ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP\">\r\n" +
                         "                <maxFileSize>100MB</maxFileSize>\r\n" +
                         "            </timeBasedFileNamingAndTriggeringPolicy>\r\n" +
@@ -189,11 +189,11 @@ public class AppServiceCustomServiceImpl extends BaseService implements AppServi
                         "    <modelVersion>4.0.0</modelVersion>\r\n" +
                         "\r\n" +
                         "    <groupId>com.example</groupId>\r\n" +
-                        "    <artifactId>" + po.getName() + "</artifactId>\r\n" +
+                        "    <artifactId>" + po.getAppServicename() + "</artifactId>\r\n" +
                         "    <version>0.0.1-SNAPSHOT</version>\r\n" +
                         "    <packaging>jar</packaging>\r\n" +
                         "\r\n" +
-                        "    <name>" + po.getName() + "</name>\r\n" +
+                        "    <name>" + po.getAppServicename() + "</name>\r\n" +
                         "    <description>Demo project for Spring Boot</description>\r\n" +
                         "\r\n" +
                         "    <parent>\r\n" +
@@ -274,8 +274,4 @@ public class AppServiceCustomServiceImpl extends BaseService implements AppServi
         sb.append(" */\r\n");
     }
 
-    @Override
-    public AppServicePO findOneByName(String name) {
-        return appServiceCustomDao.findAppServicePOByName(name);
-    }
 }

@@ -4,6 +4,8 @@ import com.example.cyjcommon.entity.po.EntityPO;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,18 +19,14 @@ public interface EntityController {
 
     @Operation(summary = "查询所有Entity")
     @PostMapping(value = "entityPage")
-    ResultVO entityPage(@RequestParam("pageNumber") Integer pageNumber, @RequestParam("pid") String pid);
+    ResultVO entityPage(@RequestParam("pageNumber") Integer pageNumber);
 
     @Operation(summary = "保存Entity")
     @PostMapping(value = "entitySave")
-    ResultVO entitySave(@RequestBody EntityPO po);
+    ResultVO entitySave(@RequestBody @Validated EntityPO po, BindingResult bindingResult);
 
     @Operation(summary = "删除Entity")
     @PostMapping(value = "entityDelete")
-    void entityDelete(@RequestParam("id") String id);
-
-    @Operation(summary = "根据ID查询Entity")
-    @PostMapping(value = "findEntityById")
-    ResultVO findEntityById(@RequestParam("id") String id);
+    ResultVO entityDelete(@RequestBody EntityPO po);
 
 }

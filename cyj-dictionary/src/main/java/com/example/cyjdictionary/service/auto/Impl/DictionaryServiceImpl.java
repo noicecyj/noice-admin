@@ -1,12 +1,16 @@
 package com.example.cyjdictionary.service.auto.Impl;
 
 import com.example.cyjcommon.dao.DictionaryDao;
+import com.example.cyjcommon.entity.po.CatalogPO;
 import com.example.cyjcommon.entity.po.DictionaryPO;
-import com.example.cyjcommon.entity.po.QDictionaryPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjdictionary.service.auto.DictionaryService;
-import com.querydsl.core.QueryResults;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,14 +47,12 @@ public class DictionaryServiceImpl extends BaseService implements DictionaryServ
     }
 
     @Override
-    public QueryResults<DictionaryPO> findAll(Integer pageNumber, String pid) {
-        return queryFactory
-                .selectFrom(QDictionaryPO.dictionaryPO)
-                .where(QDictionaryPO.dictionaryPO.pid.eq(pid).and(QDictionaryPO.dictionaryPO.sortCode.isNotNull()))
-                .offset((pageNumber - 1) * 10L)
-                .orderBy(QDictionaryPO.dictionaryPO.sortCode.asc())
-                .limit(10)
-                .fetchResults();
+    public Page<DictionaryPO> findAll(Integer pageNumber, CatalogPO catalog) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
+        DictionaryPO dictionaryPO = new DictionaryPO();
+        dictionaryPO.setCatalog(catalog);
+        Example<DictionaryPO> example = Example.of(dictionaryPO);
+        return dictionaryDao.findAll(example, pageable);
     }
 
     @Override
@@ -59,11 +61,8 @@ public class DictionaryServiceImpl extends BaseService implements DictionaryServ
     }
 
     @Override
-    public List<DictionaryPO> findListByPid(String id) {
-        return queryFactory
-                .selectFrom(QDictionaryPO.dictionaryPO)
-                .where(QDictionaryPO.dictionaryPO.pid.eq(id))
-                .fetch();
+    public List<DictionaryPO> findAllByCatalog(CatalogPO catalog) {
+        return dictionaryDao.findAllByCatalog(catalog);
     }
 
 }

@@ -1,13 +1,13 @@
 package com.example.cyjentitycreater.service.custom.Impl;
 
+import com.example.cyjcommon.dao.FirstMenuDao;
 import com.example.cyjcommon.entity.po.DictionaryPO;
 import com.example.cyjcommon.entity.po.FirstMenuPO;
+import com.example.cyjcommon.entity.po.QSecondMenuPO;
 import com.example.cyjcommon.entity.po.SecondMenuPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjcommon.utils.VoPoConverter;
 import com.example.cyjdictionary.service.custom.DictionaryCustomService;
-import com.example.cyjentitycreater.dao.FirstMenuCustomDao;
-import com.example.cyjentitycreater.dao.SecondMenuCustomDao;
 import com.example.cyjentitycreater.entity.dto.FirstMenuDTO;
 import com.example.cyjentitycreater.entity.dto.SecondMenuDTO;
 import com.example.cyjentitycreater.service.custom.FirstMenuCustomService;
@@ -35,8 +35,7 @@ public class FirstMenuCustomServiceImpl extends BaseService implements FirstMenu
     final static String FRONT_END = "FRONT_END";
 
     private DictionaryCustomService dictionaryCustomService;
-    private FirstMenuCustomDao firstMenuCustomDao;
-    private SecondMenuCustomDao secondMenuCustomDao;
+    private FirstMenuDao firstMenuDao;
 
     @Autowired
     public void setDictionaryCustomService(DictionaryCustomService dictionaryCustomService) {
@@ -44,13 +43,8 @@ public class FirstMenuCustomServiceImpl extends BaseService implements FirstMenu
     }
 
     @Autowired
-    public void setFirstMenuCustomDao(FirstMenuCustomDao firstMenuCustomDao) {
-        this.firstMenuCustomDao = firstMenuCustomDao;
-    }
-
-    @Autowired
-    public void setSecondMenuCustomDao(SecondMenuCustomDao secondMenuCustomDao) {
-        this.secondMenuCustomDao = secondMenuCustomDao;
+    public void setFirstMenuDao(FirstMenuDao firstMenuDao) {
+        this.firstMenuDao = firstMenuDao;
     }
 
     @Override
@@ -114,18 +108,18 @@ public class FirstMenuCustomServiceImpl extends BaseService implements FirstMenu
 
     @Override
     public List<FirstMenuDTO> getMenu() {
-        List<FirstMenuPO> firstMenuPOList = firstMenuCustomDao
+        List<FirstMenuPO> firstMenuPOList = firstMenuDao
                 .findAll()
                 .stream()
                 .sorted(Comparator.comparing(FirstMenuPO::getSortCode))
                 .collect(Collectors.toList());
         List<FirstMenuDTO> firstMenuDTOList = VoPoConverter.copyList(firstMenuPOList, FirstMenuDTO.class);
         for (FirstMenuDTO firstMenuDTO : firstMenuDTOList) {
-            List<SecondMenuPO> secondMenuPOList = secondMenuCustomDao
-                    .findByPid(firstMenuDTO.getId())
-                    .stream()
-                    .sorted(Comparator.comparing(SecondMenuPO::getSortCode))
-                    .collect(Collectors.toList());
+            List<SecondMenuPO> secondMenuPOList = queryFactory
+                    .selectFrom(QSecondMenuPO.secondMenuPO)
+                    .where(QSecondMenuPO.secondMenuPO.pid.eq(firstMenuDTO.getId()))
+                    .orderBy(QSecondMenuPO.secondMenuPO.sortCode.asc())
+                    .fetch();
             List<SecondMenuDTO> secondMenuDTOList = VoPoConverter.copyList(secondMenuPOList, SecondMenuDTO.class);
             firstMenuDTO.setSecondMenuDTOList(secondMenuDTOList);
         }

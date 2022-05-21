@@ -22,62 +22,42 @@ public class EntityCustomAop {
 
     @Before(value = "execution(* com.example.cyjentitycreater.service.auto.EntityService.addOne(..))")
     public void addOneBefore(JoinPoint joinPoint) {
-        logger.info("EntityCustomAop.addOneBefore:{}", joinPoint);
+        logger.info("EntityNameCustomAop.addOneBefore:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjentitycreater.service.auto.EntityService.addOne(..))")
     public void addOneAfter(JoinPoint joinPoint) {
-        logger.info("EntityCustomAop.addOneAfter:{}", joinPoint);
+        logger.info("EntityNameCustomAop.addOneAfter:{}", joinPoint);
     }
 
     @Before(value = "execution(* com.example.cyjentitycreater.service.auto.EntityService.deleteOne(..))")
     public void deleteOneBefore(JoinPoint joinPoint) {
-        logger.info("EntityCustomAop.deleteOneBefore:{}", joinPoint);
+        logger.info("EntityNameCustomAop.deleteOneBefore:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjentitycreater.service.auto.EntityService.deleteOne(..))")
     public void deleteOneAfter(JoinPoint joinPoint) {
-        logger.info("EntityCustomAop.deleteOneAfter:{}", joinPoint);
+        logger.info("EntityNameCustomAop.deleteOneAfter:{}", joinPoint);
     }
 
     @Before(value = "execution(* com.example.cyjentitycreater.service.auto.EntityService.updateOne(..))")
     public void updateOneBefore(JoinPoint joinPoint) {
-        logger.info("EntityCustomAop.updateOneBefore:{}", joinPoint);
+        logger.info("EntityNameCustomAop.updateOneBefore:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjentitycreater.service.auto.EntityService.updateOne(..))")
     public void updateOneAfter(JoinPoint joinPoint) {
-        logger.info("EntityCustomAop.updateOneAfter:{}", joinPoint);
+        logger.info("EntityNameCustomAop.updateOneAfter:{}", joinPoint);
     }
 
     @Before(value = "execution(* com.example.cyjentitycreater.service.auto.EntityService.findAll(..))")
     public void findAllBefore(JoinPoint joinPoint) {
-        logger.info("EntityCustomAop.findAllBefore:{}", joinPoint);
+        logger.info("EntityNameCustomAop.findAllBefore:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjentitycreater.service.auto.EntityService.findAll(..))")
     public void findAllAfter(JoinPoint joinPoint) {
-        logger.info("EntityCustomAop.findAllAfter:{}", joinPoint);
-    }
-
-    @Before(value = "execution(* com.example.cyjentitycreater.service.auto.EntityService.findOneById(..))")
-    public void findOneByIdBefore(JoinPoint joinPoint) {
-        logger.info("EntityCustomAop.findOneByIdBefore:{}", joinPoint);
-    }
-
-    @After(value = "execution(* com.example.cyjentitycreater.service.auto.EntityService.findOneById(..))")
-    public void findOneByIdAfter(JoinPoint joinPoint) {
-        logger.info("EntityCustomAop.findOneByIdAfter:{}", joinPoint);
-    }
-
-    @Before(value = "execution(* com.example.cyjentitycreater.service.auto.EntityService.findListByPid(..))")
-    public void findListByPidBefore(JoinPoint joinPoint) {
-        logger.info("EntityCustomAop.findListByPidBefore:{}", joinPoint);
-    }
-
-    @After(value = "execution(* com.example.cyjentitycreater.service.auto.EntityService.findListByPid(..))")
-    public void findListByPidAfter(JoinPoint joinPoint) {
-        logger.info("EntityCustomAop.findListByPidAfter:{}", joinPoint);
+        logger.info("EntityNameCustomAop.findAllAfter:{}", joinPoint);
     }
 
 }

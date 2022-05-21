@@ -7,7 +7,6 @@ const {Cell} = ResponsiveGrid;
 
 function DataTable(props) {
   const loadingStyle = {width: '100%'};
-  console.log(props)
 
   const {
     items,
@@ -76,9 +75,9 @@ function DataTable(props) {
               primaryKey={primaryKey}
             >
               {items.length === 0 ? null : items.map((item, index) => {
-                if (item.propertyDisplay === "是") {
+                if (!item.propertyDisplay) {
                   return (<Table.Column
-                    hidden={item.propertyDisplay === '否'}
+                    hidden={item.propertyDisplay}
                     title={item.propertyLabel}
                     dataIndex={item.propertyName}
                     width={item.propertyWidth != null ? item.propertyWidth : null}
@@ -88,7 +87,8 @@ function DataTable(props) {
               })}
               {customData.customType && <Table.Column
                 title="自定义操作"
-                align="right"
+                alignHeader="center"
+                align="center"
                 key="columnRender"
                 width="160px"
                 cell={columnRender}
@@ -96,21 +96,26 @@ function DataTable(props) {
               <Table.Column
                 title="状态"
                 dataIndex="status"
-                width="80px"
+                width="65px"
                 key="status"
+                alignHeader="center"
+                align="center"
               />
               <Table.Column
                 title="排序"
                 dataIndex="sortCode"
-                width="80px"
+                width="65px"
                 key="sortCode"
+                alignHeader="center"
+                align="center"
               />
               {
                 !!editItem && !!deleteItem && <Table.Column
                   title="操作"
-                  align="right"
                   key="pageRender"
-                  width="160px"
+                  width="150px"
+                  alignHeader="center"
+                  align="center"
                   cell={pageRender}
                 />
               }

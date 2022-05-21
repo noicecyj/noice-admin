@@ -2,11 +2,13 @@ package com.example.cyjentitycreater.service.auto.Impl;
 
 import com.example.cyjcommon.dao.EntityDao;
 import com.example.cyjcommon.entity.po.EntityPO;
-import com.example.cyjcommon.entity.po.QEntityPO;
+import com.example.cyjcommon.entity.po.PropertyPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjentitycreater.service.auto.EntityService;
-import com.querydsl.core.QueryResults;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,8 +35,8 @@ public class EntityServiceImpl extends BaseService implements EntityService {
     }
 
     @Override
-    public void deleteOne(String id) {
-        entityDao.deleteById(id);
+    public void deleteOne(EntityPO po) {
+        entityDao.delete(po);
     }
 
     @Override
@@ -43,27 +45,13 @@ public class EntityServiceImpl extends BaseService implements EntityService {
     }
 
     @Override
-    public QueryResults<EntityPO> findAll(Integer pageNumber, String pid) {
-        return queryFactory
-                .selectFrom(QEntityPO.entityPO)
-                .where(QEntityPO.entityPO.pid.eq(pid).and(QEntityPO.entityPO.sortCode.isNotNull()))
-                .offset((pageNumber - 1) * 10L)
-                .orderBy(QEntityPO.entityPO.sortCode.asc())
-                .limit(10)
-                .fetchResults();
+    public Page<EntityPO> findAll(Integer pageNumber) {
+        return entityDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 
     @Override
-    public EntityPO findOneById(String id) {
-        return entityDao.findById(id).orElse(null);
-    }
-
-    @Override
-    public List<EntityPO> findListByPid(String id) {
-        return queryFactory
-                .selectFrom(QEntityPO.entityPO)
-                .where(QEntityPO.entityPO.pid.eq(id))
-                .fetch();
+    public List<EntityPO> findAllByEntity(EntityPO entity) {
+        return entityDao.findAllByEntity(entity);
     }
 
 }

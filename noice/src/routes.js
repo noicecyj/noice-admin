@@ -1,7 +1,7 @@
 import BasicLayout from '@/layouts/BasicLayout';
 import UserLayout from '@/layouts/UserLayout';
 import LoginPage from '@/pages/Login';
-import EntityNamePage from '@/pages/EntityName';
+import EntityPage from '@/pages/Entity';
 import CatalogPage from '@/pages/Catalog';
 import SqlPage from '@/pages/Sql';
 import AppServicePage from '@/pages/AppService';
@@ -22,7 +22,7 @@ const routerConfig = [
     children: [
       {
         path: '/entitycreater',
-        component: EntityNamePage,
+        component: EntityPage,
       },
       {
         path: '/catalog',

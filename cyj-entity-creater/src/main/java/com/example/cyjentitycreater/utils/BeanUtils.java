@@ -1,7 +1,7 @@
 package com.example.cyjentitycreater.utils;
 
 import com.example.cyjcommon.entity.po.AppServicePO;
-import com.example.cyjcommon.entity.po.EntityPO;
+import com.example.cyjcommon.entity.po.PropertyPO;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -64,8 +64,8 @@ public class BeanUtils {
         return String.valueOf(cs);
     }
 
-    public static Boolean ifDate(List<EntityPO> poList) {
-        for (EntityPO po : poList) {
+    public static Boolean ifDate(List<PropertyPO> poList) {
+        for (PropertyPO po : poList) {
             if ("Date".equals(po.getPropertyType())) {
                 return true;
             }
@@ -73,8 +73,8 @@ public class BeanUtils {
         return false;
     }
 
-    public static Boolean ifTimestamp(List<EntityPO> poList) {
-        for (EntityPO po : poList) {
+    public static Boolean ifTimestamp(List<PropertyPO> poList) {
+        for (PropertyPO po : poList) {
             if ("Timestamp".equals(po.getPropertyType())) {
                 return true;
             }
@@ -83,7 +83,7 @@ public class BeanUtils {
     }
 
     public static String AppFileName(AppServicePO po) {
-        return BeanUtils.captureName(BeanUtils.underline2Camel2(po.getName())) + "Application.java";
+        return BeanUtils.captureName(BeanUtils.underline2Camel2(po.getAppServicename())) + "Application.java";
     }
 
 }
