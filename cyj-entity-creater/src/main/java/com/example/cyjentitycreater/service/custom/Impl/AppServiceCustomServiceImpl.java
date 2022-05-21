@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * @author 曹元杰
+ * @author Noice
  * @version 1.0
  */
 @Service
@@ -269,7 +269,7 @@ public class AppServiceCustomServiceImpl extends BaseService implements AppServi
 
     public void generateAuthor(StringBuilder sb) {
         sb.append("/**\r\n");
-        sb.append(" * @author 曹元杰\r\n");
+        sb.append(" * @author Noice\r\n");
         sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
     }

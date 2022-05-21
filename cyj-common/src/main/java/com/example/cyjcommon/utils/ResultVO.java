@@ -3,7 +3,7 @@ package com.example.cyjcommon.utils;
 import lombok.Data;
 
 /**
- * @author 曹元杰
+ * @author Noice
  * @version 1.0
  * @date 2020/7/07 14:46
  */

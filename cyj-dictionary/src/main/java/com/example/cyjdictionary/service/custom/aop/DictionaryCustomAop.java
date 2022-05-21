@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * @author 曹元杰
+ * @author Noice
  * @version 1.0
  */
 @Aspect
@@ -68,16 +68,6 @@ public class DictionaryCustomAop {
     @After(value = "execution(* com.example.cyjdictionary.service.auto.DictionaryService.findOneById(..))")
     public void findOneByIdAfter(JoinPoint joinPoint) {
         logger.info("DictionaryCustomAop.findOneByIdAfter:{}", joinPoint);
-    }
-
-    @Before(value = "execution(* com.example.cyjdictionary.service.auto.DictionaryService.findListByPid(..))")
-    public void findListByPidBefore(JoinPoint joinPoint) {
-        logger.info("DictionaryCustomAop.findListByPidBefore:{}", joinPoint);
-    }
-
-    @After(value = "execution(* com.example.cyjdictionary.service.auto.DictionaryService.findListByPid(..))")
-    public void findListByPidAfter(JoinPoint joinPoint) {
-        logger.info("DictionaryCustomAop.findListByPidAfter:{}", joinPoint);
     }
 
 }

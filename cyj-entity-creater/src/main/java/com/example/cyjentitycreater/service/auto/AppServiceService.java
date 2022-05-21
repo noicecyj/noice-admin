@@ -4,7 +4,7 @@ import com.example.cyjcommon.entity.po.AppServicePO;
 import com.querydsl.core.QueryResults;
 
 /**
- * @author 曹元杰
+ * @author Noice
  * @version 1.0
  */
 public interface AppServiceService {

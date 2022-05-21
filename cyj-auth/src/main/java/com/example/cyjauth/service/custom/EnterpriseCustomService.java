@@ -1,7 +1,7 @@
 package com.example.cyjauth.service.custom;
 
 /**
- * @author 曹元杰
+ * @author Noice
  * @version 1.0
  */
 public interface EnterpriseCustomService {

@@ -1,7 +1,7 @@
 package com.example.cyjcommon.utils;
 
 /**
- * @author 曹元杰
+ * @author Noice
  * @version 1.0
  * @date 2020/7/09 14:46
  */

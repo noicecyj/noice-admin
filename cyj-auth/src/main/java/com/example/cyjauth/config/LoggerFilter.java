@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  * 继承父类后，必须实现父类中定义的4个抽象方法。
  * shouldFilter、 run、 filterType、 filterOrder
  *
- * @author 曹元杰
+ * @author Noice
  */
 @Component
 public class LoggerFilter extends ZuulFilter {

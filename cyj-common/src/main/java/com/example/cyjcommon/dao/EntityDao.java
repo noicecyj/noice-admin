@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 /**
- * @author 曹元杰
+ * @author Noice
  * @version 1.0
  */
 public interface EntityDao extends JpaRepository<EntityPO, String> {

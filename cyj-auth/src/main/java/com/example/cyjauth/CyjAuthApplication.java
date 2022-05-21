@@ -12,7 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
- * @author 曹元杰
+ * @author Noice
  * @version 1.0
  * @date 2020/1/21 14:46
  */

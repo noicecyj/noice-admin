@@ -30,7 +30,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * @author 曹元杰
+ * @author Noice
  * @version 1.0
  * @date 2021-10-16
  */
@@ -111,7 +111,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
     private void createJavaFile(EntityPO po, List<PropertyPO> poList, String underPoName, String poName,
                                 String appPath, String appApi) {
         try {
-            createJavaFile(commonPath + "/entity/po", poGenerate(po, poList, poName, appPath));
+            createJavaFile(commonPath + "/entity/po", poGenerate(po, poList, poName));
             createJavaFile(commonPath + "/dao", daoGenerate(poName, appPath));
             createJavaFile(appPath + "/service/auto", serviceGenerate(poName, appPath));
             createJavaFile(appPath + "/service/auto/Impl", serviceImplGenerate(underPoName, poName, appPath));
@@ -130,7 +130,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
 
     private void createSubJavaFile(EntityPO po, List<PropertyPO> poList, String underPoName, String poName, String appPath, String appApi) {
         try {
-            createJavaFile(appPath + "/entity/auto/po", poGenerate(po, poList, poName, appPath));
+            createJavaFile(appPath + "/entity/auto/po", poGenerate(po, poList, poName));
             createJavaFile(appPath + "/dao/auto", daoGenerate(poName, appPath));
             createJavaFile(appPath + "/dao/custom", daoCustomGenerate(poName, appPath), false);
             createJavaFile(appPath + "/service/auto", serviceSubGenerate(poName, appPath));
@@ -161,7 +161,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import org.springframework.web.bind.annotation.RestController;\r\n");
         sb.append("\r\n");
         sb.append("/**\r\n");
-        sb.append(" * @author 曹元杰\r\n");
+        sb.append(" * @author Noice\r\n");
         sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
         sb.append("@CrossOrigin\r\n");
@@ -185,7 +185,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import io.swagger.v3.oas.annotations.tags.Tag;\r\n");
         sb.append("\r\n");
         sb.append("/**\r\n");
-        sb.append(" * @author 曹元杰\r\n");
+        sb.append(" * @author Noice\r\n");
         sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
         sb.append("@Tag(name = \"").append(poName).append("\")\r\n");
@@ -211,7 +211,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import org.springframework.transaction.annotation.Transactional;\r\n");
         sb.append("\r\n");
         sb.append("/**\r\n");
-        sb.append(" * @author 曹元杰\r\n");
+        sb.append(" * @author Noice\r\n");
         sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
         sb.append("@Service\r\n");
@@ -232,7 +232,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("package ").append(poServicePath);
         sb.append("\r\n");
         sb.append("/**\r\n");
-        sb.append(" * @author 曹元杰\r\n");
+        sb.append(" * @author Noice\r\n");
         sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
         sb.append("public interface ").append(poName).append("CustomService {\r\n");
@@ -242,7 +242,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{entityServiceData, poName + "CustomService.java"};
     }
 
-    public String[] poGenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String poName, String appPath) {
+    public String[] poGenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String poName) {
         StringBuilder sb = new StringBuilder();
         sb.append("package com.example.cyjcommon.entity.po;\r\n");
         sb.append("\r\n");
@@ -341,8 +341,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import org.springframework.data.jpa.repository.JpaRepository;\r\n");
         sb.append("\r\n");
         sb.append("/**\r\n");
-        sb.append(" * @author 曹元杰\r\n");
-        sb.append(" * @version 1.0\r\n");
+        sb.append(" * @author Noice\r\n");
         sb.append(" */\r\n");
         sb.append("public interface ").append(poName).append("Dao extends JpaRepository<").append(poName).append("PO, String> {\r\n");
         sb.append("}\r\n");
@@ -364,7 +363,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import org.springframework.data.jpa.repository.JpaRepository;\r\n");
         sb.append("\r\n");
         sb.append("/**\r\n");
-        sb.append(" * @author 曹元杰\r\n");
+        sb.append(" * @author Noice\r\n");
         sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
         sb.append("public interface ").append(poName).append("CustomDao extends JpaRepository<").append(poName).append("PO, String> {\r\n");
@@ -387,7 +386,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import com.querydsl.core.QueryResults;\r\n");
         sb.append("\r\n");
         sb.append("/**\r\n");
-        sb.append(" * @author 曹元杰\r\n");
+        sb.append(" * @author Noice\r\n");
         sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
         sb.append("public interface ").append(poName).append("Service {\r\n");
@@ -423,7 +422,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import java.util.List;\r\n");
         sb.append("\r\n");
         sb.append("/**\r\n");
-        sb.append(" * @author 曹元杰\r\n");
+        sb.append(" * @author Noice\r\n");
         sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
         sb.append("public interface ").append(poName).append("Service {\r\n");
@@ -469,7 +468,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import org.springframework.transaction.annotation.Transactional;\r\n");
         sb.append("\r\n");
         sb.append("/**\r\n");
-        sb.append(" * @author 曹元杰\r\n");
+        sb.append(" * @author Noice\r\n");
         sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
         sb.append("@Service\r\n");
@@ -545,7 +544,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import java.util.List;\r\n");
         sb.append("\r\n");
         sb.append("/**\r\n");
-        sb.append(" * @author 曹元杰\r\n");
+        sb.append(" * @author Noice\r\n");
         sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
         sb.append("@Service\r\n");
@@ -622,7 +621,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import org.springframework.web.bind.annotation.RequestParam;\r\n");
         sb.append("\r\n");
         sb.append("/**\r\n");
-        sb.append(" * @author 曹元杰\r\n");
+        sb.append(" * @author Noice\r\n");
         sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
         sb.append("@Tag(name = \"").append(poName).append("\")\r\n");
@@ -671,7 +670,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import org.springframework.web.bind.annotation.RestController;\r\n");
         sb.append("\r\n");
         sb.append("/**\r\n");
-        sb.append(" * @author 曹元杰\r\n");
+        sb.append(" * @author Noice\r\n");
         sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
         sb.append("@CrossOrigin\r\n");
@@ -733,7 +732,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import org.springframework.web.bind.annotation.RequestParam;\r\n");
         sb.append("\r\n");
         sb.append("/**\r\n");
-        sb.append(" * @author 曹元杰\r\n");
+        sb.append(" * @author Noice\r\n");
         sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
         sb.append("@Tag(name = \"").append(poName).append("\")\r\n");
@@ -782,7 +781,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import org.springframework.web.bind.annotation.RestController;\r\n");
         sb.append("\r\n");
         sb.append("/**\r\n");
-        sb.append(" * @author 曹元杰\r\n");
+        sb.append(" * @author Noice\r\n");
         sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
         sb.append("@CrossOrigin\r\n");
@@ -1632,7 +1631,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import org.springframework.transaction.annotation.Transactional;\r\n");
         sb.append("\r\n");
         sb.append("/**\r\n");
-        sb.append(" * @author 曹元杰\r\n");
+        sb.append(" * @author Noice\r\n");
         sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
         sb.append("@Aspect\r\n");
@@ -1715,7 +1714,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import org.springframework.transaction.annotation.Transactional;\r\n");
         sb.append("\r\n");
         sb.append("/**\r\n");
-        sb.append(" * @author 曹元杰\r\n");
+        sb.append(" * @author Noice\r\n");
         sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
         sb.append("@Aspect\r\n");

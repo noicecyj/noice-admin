@@ -3,7 +3,7 @@ package com.example.cyjauth.service.custom;
 import com.example.cyjcommon.entity.po.UserPO;
 
 /**
- * @author 曹元杰
+ * @author Noice
  * @version 1.0
  * @date 2022-02-07
  */

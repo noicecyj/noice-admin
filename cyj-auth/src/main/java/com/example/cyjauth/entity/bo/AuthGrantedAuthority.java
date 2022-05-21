@@ -4,7 +4,7 @@ import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 
 /**
- * @author 曹元杰
+ * @author Noice
  * @version 1.0
  * @date 2021-03-20
  */

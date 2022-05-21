@@ -20,7 +20,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * @author 曹元杰
+ * @author Noice
  * @version 1.0
  */
 @Entity
