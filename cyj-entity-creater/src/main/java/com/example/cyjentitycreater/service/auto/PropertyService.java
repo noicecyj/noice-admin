@@ -20,6 +20,4 @@ public interface PropertyService {
 
     Page<PropertyPO> findAll(Integer pageNumber, EntityPO entity);
 
-    List<PropertyPO> findAllByEntity(EntityPO entity);
-
 }

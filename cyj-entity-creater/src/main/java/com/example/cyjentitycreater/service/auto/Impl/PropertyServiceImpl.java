@@ -55,9 +55,4 @@ public class PropertyServiceImpl extends BaseService implements PropertyService 
         return propertyDao.findAll(example, pageable);
     }
 
-    @Override
-    public List<PropertyPO> findAllByEntity(EntityPO entity) {
-        return propertyDao.findAllByEntity(entity);
-    }
-
 }

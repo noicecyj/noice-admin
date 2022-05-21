@@ -12,7 +12,6 @@ import com.example.cyjcommon.entity.po.QEntityPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjdictionary.service.custom.DictionaryCustomService;
 import com.example.cyjentitycreater.entity.dto.PropertyCustomDTO;
-import com.example.cyjentitycreater.service.auto.PropertyService;
 import com.example.cyjentitycreater.service.custom.EntityCustomService;
 import com.example.cyjentitycreater.utils.BeanUtils;
 import com.example.cyjquery.service.custom.SqlCustomService;
@@ -41,17 +40,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
     private final static String componentPath = "C:/Users/noice/IdeaProjects/noice-admin/noice/src/pages/";
 
     private final static String commonPath = "C:/Users/noice/IdeaProjects/noice-admin/cyj-common/src/main/java/com/example/cyjcommon";
-
-    private PropertyService propertyService;
     private EntityDao entityDao;
     private PropertyDao propertyDao;
     private DictionaryCustomService dictionaryCustomService;
     private SqlCustomService sqlCustomService;
-
-    @Autowired
-    public void setPropertyService(PropertyService propertyService) {
-        this.propertyService = propertyService;
-    }
 
     @Autowired
     public void setEntityDao(EntityDao entityDao) {
@@ -61,11 +53,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
     @Autowired
     public void setPropertyDao(PropertyDao propertyDao) {
         this.propertyDao = propertyDao;
-    }
-
-    @Autowired
-    public void setEntityService(PropertyService propertyService) {
-        this.propertyService = propertyService;
     }
 
     @Autowired
@@ -83,7 +70,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         if (entityPO == null) {
             return;
         }
-        List<PropertyPO> propertyPOList = propertyService.findAllByEntity(entityPO);
+        List<PropertyPO> propertyPOList = propertyDao.findAllByEntity(entityPO);
         //驼峰名
         String underPoName = BeanUtils.underline2Camel(entityPO.getEntityCode());
         //文件名
@@ -99,7 +86,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         createJavaFile(entityPO, propertyPOList, underPoName, poName, appPath, appApi);
         List<EntityPO> entityPOList = entityDao.findAllByEntity(entityPO);
         entityPOList.forEach(subPo -> {
-            List<PropertyPO> subPoList = propertyService.findAllByEntity(subPo);
+            List<PropertyPO> subPoList = propertyDao.findAllByEntity(subPo);
             //驼峰名
             String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
             //文件名
@@ -108,11 +95,11 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         });
     }
 
-    private void createJavaFile(EntityPO po, List<PropertyPO> poList, String underPoName, String poName,
+    private void createJavaFile(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName,
                                 String appPath, String appApi) {
         try {
-            createJavaFile(commonPath + "/entity/po", poGenerate(po, poList, poName));
-            createJavaFile(commonPath + "/dao", daoGenerate(poName, appPath));
+            createJavaFile(commonPath + "/entity/po", poGenerate(entityPO, propertyPOList, poName));
+            createJavaFile(commonPath + "/dao", daoGenerate(propertyPOList, poName));
             createJavaFile(appPath + "/service/auto", serviceGenerate(poName, appPath));
             createJavaFile(appPath + "/service/auto/Impl", serviceImplGenerate(underPoName, poName, appPath));
             createJavaFile(appPath + "/service/custom", serviceCustomGenerate(poName, appPath), false);
@@ -128,11 +115,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
     }
 
 
-    private void createSubJavaFile(EntityPO po, List<PropertyPO> poList, String underPoName, String poName, String appPath, String appApi) {
+    private void createSubJavaFile(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath, String appApi) {
         try {
-            createJavaFile(appPath + "/entity/auto/po", poGenerate(po, poList, poName));
-            createJavaFile(appPath + "/dao/auto", daoGenerate(poName, appPath));
-            createJavaFile(appPath + "/dao/custom", daoCustomGenerate(poName, appPath), false);
+            createJavaFile(commonPath + "/entity/auto/po", poGenerate(entityPO, propertyPOList, poName));
+            createJavaFile(commonPath + "/dao/auto", daoGenerate(propertyPOList, poName));
             createJavaFile(appPath + "/service/auto", serviceSubGenerate(poName, appPath));
             createJavaFile(appPath + "/service/auto/Impl", serviceImplSubGenerate(underPoName, poName, appPath));
             createJavaFile(appPath + "/service/custom", serviceCustomGenerate(poName, appPath), false);
@@ -310,7 +296,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                 sb.append("    @JoinColumn(name = \"").append(propertyPO.getPropertyOut()).append("_id\")\r\n");
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("    private ").append(propertyOut).append("PO ").append(propertyPO.getPropertyOut()).append(";\r\n");
+                sb.append("    private ").append(propertyOut).append("PO ").append(underPropertyOut).append(";\r\n");
             }
             sb.append("\r\n");
         });
@@ -327,79 +313,61 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{entityData, poName + "PO.java"};
     }
 
-    public String[] daoGenerate(String poName, String appPath) {
+    public String[] daoGenerate(List<PropertyPO> propertyPOList, String poName) {
         StringBuilder sb = new StringBuilder();
-        String[] PathArr = appPath.split("java");
-        String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
-        //entity路径
-        String poPath = packetPath + ".entity";
-        //dao路径
-        String poDaoPath = packetPath + ".dao";
-        sb.append("package ").append(poDaoPath).append(".auto;\r\n");
+        sb.append("package com.example.cyjcommon.dao;\r\n");
         sb.append("\r\n");
-        sb.append("import ").append(poPath).append(".auto.po.").append(poName).append("PO;\r\n");
+        for (PropertyPO propertyPO : propertyPOList) {
+            if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
+                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
+                String propertyOut = BeanUtils.captureName(underPropertyOut);
+                sb.append("import com.example.cyjcommon.entity.po.").append(propertyOut).append("PO;\r\n");
+            }
+        }
+        sb.append("import com.example.cyjcommon.entity.po.").append(poName).append("PO;\r\n");
         sb.append("import org.springframework.data.jpa.repository.JpaRepository;\r\n");
         sb.append("\r\n");
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
         sb.append(" */\r\n");
         sb.append("public interface ").append(poName).append("Dao extends JpaRepository<").append(poName).append("PO, String> {\r\n");
+        sb.append("\r\n");
+        for (PropertyPO propertyPO : propertyPOList) {
+            if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
+                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
+                String propertyOut = BeanUtils.captureName(underPropertyOut);
+                sb.append("List<").append(poName).append("PO> findAllBy").append(propertyOut).append("(").append(poName).append("PO ").append(underPropertyOut).append(");\r\n");
+                sb.append("\r\n");
+            }
+        }
         sb.append("}\r\n");
         String entityDaoData = sb.toString();
         return new String[]{entityDaoData, poName + "Dao.java"};
-    }
-
-    public String[] daoCustomGenerate(String poName, String appPath) {
-        StringBuilder sb = new StringBuilder();
-        String[] PathArr = appPath.split("java");
-        String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
-        //entity路径
-        String poPath = packetPath + ".entity";
-        //dao路径
-        String poDaoPath = packetPath + ".dao";
-        sb.append("package ").append(poDaoPath).append(".custom;\r\n");
-        sb.append("\r\n");
-        sb.append("import ").append(poPath).append(".auto.po.").append(poName).append("PO;\r\n");
-        sb.append("import org.springframework.data.jpa.repository.JpaRepository;\r\n");
-        sb.append("\r\n");
-        sb.append("/**\r\n");
-        sb.append(" * @author Noice\r\n");
-        sb.append(" * @version 1.0\r\n");
-        sb.append(" */\r\n");
-        sb.append("public interface ").append(poName).append("CustomDao extends JpaRepository<").append(poName).append("PO, String> {\r\n");
-        sb.append("}\r\n");
-        String entityDaoData = sb.toString();
-        return new String[]{entityDaoData, poName + "CustomDao.java"};
     }
 
     public String[] serviceGenerate(String poName, String appPath) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
-        //entity路径
-        String poPath = packetPath + ".entity.auto.po.";
         //service路径
         String poServicePath = packetPath + ".service.auto;\r\n";
         sb.append("package ").append(poServicePath);
         sb.append("\r\n");
-        sb.append("import ").append(poPath).append(poName).append("PO;\r\n");
-        sb.append("import com.querydsl.core.QueryResults;\r\n");
+        sb.append("import com.example.cyjcommon.entity.po.").append(poName).append("PO;\r\n");
+        sb.append("import org.springframework.data.domain.Page;\r\n");
         sb.append("\r\n");
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
-        sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
         sb.append("public interface ").append(poName).append("Service {\r\n");
         sb.append("\r\n");
         sb.append("    ").append(poName).append("PO addOne(").append(poName).append("PO po);\r\n");
         sb.append("\r\n");
-        sb.append("    void deleteOne(String id);\r\n");
+        sb.append("    void deleteOne(").append(poName).append("PO po);\r\n");
         sb.append("\r\n");
         sb.append("    ").append(poName).append("PO updateOne(").append(poName).append("PO po);\r\n");
         sb.append("\r\n");
-        sb.append("    QueryResults<").append(poName).append("PO> findAll(Integer pageNumber);\r\n");
-        sb.append("\r\n");
-        sb.append("    ").append(poName).append("PO findOneById(String id);\r\n");
+        sb.append("    Page<").append(poName).append("PO> findAll(Integer pageNumber);\r\n");
         sb.append("\r\n");
         sb.append("}\r\n");
         String entityServiceData = sb.toString();
@@ -448,28 +416,24 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
-        //entity路径
-        String poPath = packetPath + ".entity.auto.po.";
-        //dao路径
-        String poDaoPath = packetPath + ".dao.auto.";
         //service路径
         String poServicePath = packetPath + ".service.auto.";
         //serviceImpl路径
         sb.append("package ").append(poServicePath).append("Impl;\r\n");
         sb.append("\r\n");
+        sb.append("import com.example.cyjcommon.dao.").append(poName).append("Dao;\r\n");
+        sb.append("import com.example.cyjcommon.entity.po.").append(poName).append("PO;\r\n");
         sb.append("import com.example.cyjcommon.service.BaseService;\r\n");
-        sb.append("import ").append(poDaoPath).append(poName).append("Dao;\r\n");
-        sb.append("import ").append(poPath).append("Q").append(poName).append("PO;\r\n");
-        sb.append("import ").append(poPath).append(poName).append("PO;\r\n");
         sb.append("import ").append(poServicePath).append(poName).append("Service;\r\n");
-        sb.append("import com.querydsl.core.QueryResults;\r\n");
         sb.append("import org.springframework.beans.factory.annotation.Autowired;\r\n");
+        sb.append("import org.springframework.data.domain.Page;\r\n");
+        sb.append("import org.springframework.data.domain.PageRequest;\r\n");
+        sb.append("import org.springframework.data.domain.Sort;\r\n");
         sb.append("import org.springframework.stereotype.Service;\r\n");
         sb.append("import org.springframework.transaction.annotation.Transactional;\r\n");
         sb.append("\r\n");
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
-        sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
         sb.append("@Service\r\n");
         sb.append("@Transactional(rollbackFor = Exception.class)\r\n");
@@ -499,18 +463,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("\r\n");
         sb.append("    @Override\r\n");
         sb.append("    public QueryResults<").append(poName).append("PO> findAll(Integer pageNumber) {\r\n");
-        sb.append("        return queryFactory\r\n");
-        sb.append("                .selectFrom(Q").append(poName).append("PO.").append(underPoName).append("PO)\r\n");
-        sb.append("                .where(Q").append(poName).append("PO.").append(underPoName).append("PO.sortCode.isNotNull())\r\n");
-        sb.append("                .offset((pageNumber - 1) * 10L)\r\n");
-        sb.append("                .orderBy(Q").append(poName).append("PO.").append(underPoName).append("PO.sortCode.asc())\r\n");
-        sb.append("                .limit(10)\r\n");
-        sb.append("                .fetchResults();\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("    @Override\r\n");
-        sb.append("    public ").append(poName).append("PO findOneById(String id) {\r\n");
-        sb.append("        return ").append(underPoName).append("Dao.findById(id).orElse(null);\r\n");
+        sb.append("        return ").append(underPoName).append("Dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by(\"sortCode\").ascending()));\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
         sb.append("}\r\n");
@@ -606,23 +559,22 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
-        //entity路径
-        String poPath = packetPath + ".entity.auto.po.";
         //controller路径
         String poControllerPath = packetPath + ".controller.auto;\r\n";
         sb.append("package ").append(poControllerPath);
         sb.append("\r\n");
+        sb.append("import com.example.cyjcommon.entity.po.").append(poName).append("PO;\r\n");
         sb.append("import com.example.cyjcommon.utils.ResultVO;\r\n");
-        sb.append("import ").append(poPath).append(poName).append("PO;\r\n");
         sb.append("import io.swagger.v3.oas.annotations.Operation;\r\n");
         sb.append("import io.swagger.v3.oas.annotations.tags.Tag;\r\n");
+        sb.append("import org.springframework.validation.BindingResult;\r\n");
+        sb.append("import org.springframework.validation.annotation.Validated;\r\n");
         sb.append("import org.springframework.web.bind.annotation.PostMapping;\r\n");
         sb.append("import org.springframework.web.bind.annotation.RequestBody;\r\n");
         sb.append("import org.springframework.web.bind.annotation.RequestParam;\r\n");
         sb.append("\r\n");
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
-        sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
         sb.append("@Tag(name = \"").append(poName).append("\")\r\n");
         sb.append("public interface ").append(poName).append("Controller {\r\n");
@@ -633,15 +585,11 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("\r\n");
         sb.append("    @Operation(summary = \"保存").append(poName).append("\")\r\n");
         sb.append("    @PostMapping(value = \"").append(underPoName).append("Save\")\r\n");
-        sb.append("    ResultVO ").append(underPoName).append("Save(@RequestBody ").append(poName).append("PO po);\r\n");
+        sb.append("    ResultVO ").append(underPoName).append("Save(@RequestBody @Validated ").append(poName).append("PO po, BindingResult bindingResult);\r\n");
         sb.append("\r\n");
         sb.append("    @Operation(summary = \"删除").append(poName).append("\")\r\n");
         sb.append("    @PostMapping(value = \"").append(underPoName).append("Delete\")\r\n");
-        sb.append("    void ").append(underPoName).append("Delete(@RequestParam(\"id\") String id);\r\n");
-        sb.append("\r\n");
-        sb.append("    @Operation(summary = \"根据ID查询").append(poName).append("\")\r\n");
-        sb.append("    @PostMapping(value = \"find").append(poName).append("ById\")\r\n");
-        sb.append("    ResultVO find").append(poName).append("ById(@RequestParam(\"id\") String id);\r\n");
+        sb.append("    void ").append(underPoName).append("Delete(@RequestBody ").append(poName).append("PO po);\r\n");
         sb.append("\r\n");
         sb.append("}\r\n");
         String entityControllerData = sb.toString();
@@ -652,26 +600,24 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
-        //entity路径
-        String poPath = packetPath + ".entity.auto.po.";
         //serviceImpl路径
         String poServicePath = packetPath + ".service.auto.";
         //controller路径
         String poControllerPath = packetPath + ".controller.auto.";
         sb.append("package ").append(poControllerPath).append("Impl;\r\n");
         sb.append("\r\n");
+        sb.append("import com.example.cyjcommon.entity.po.").append(poName).append("PO;\r\n");
         sb.append("import com.example.cyjcommon.utils.ResultVO;\r\n");
         sb.append("import ").append(poControllerPath).append(poName).append("Controller;\r\n");
-        sb.append("import ").append(poPath).append(poName).append("PO;\r\n");
         sb.append("import ").append(poServicePath).append(poName).append("Service;\r\n");
         sb.append("import org.springframework.beans.factory.annotation.Autowired;\r\n");
+        sb.append("import org.springframework.validation.BindingResult;\r\n");
         sb.append("import org.springframework.web.bind.annotation.CrossOrigin;\r\n");
         sb.append("import org.springframework.web.bind.annotation.RequestMapping;\r\n");
         sb.append("import org.springframework.web.bind.annotation.RestController;\r\n");
         sb.append("\r\n");
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
-        sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
         sb.append("@CrossOrigin\r\n");
         sb.append("@RestController\r\n");
@@ -691,7 +637,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("    }\r\n");
         sb.append("\r\n");
         sb.append("    @Override\r\n");
-        sb.append("    public ResultVO ").append(underPoName).append("Save(").append(poName).append("PO po) {\r\n");
+        sb.append("    public ResultVO ").append(underPoName).append("Save(").append(poName).append("PO po, BindingResult bindingResult) {\r\n");
+        sb.append("        if (bindingResult.hasErrors()) {\r\n");
+        sb.append("            return ResultVO.failure(bindingResult.getAllErrors().get(0));\r\n");
+        sb.append("        }\r\n");
         sb.append("        if (po.getId() == null) {\r\n");
         sb.append("            return ResultVO.success(").append(underPoName).append("Service.addOne(po));\r\n");
         sb.append("        }\r\n");
@@ -699,13 +648,12 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("    }\r\n");
         sb.append("\r\n");
         sb.append("    @Override\r\n");
-        sb.append("    public void ").append(underPoName).append("Delete(String id) {\r\n");
+        sb.append("    public void ").append(underPoName).append("Delete(").append(poName).append("PO po) {\r\n");
+        sb.append("        if (po.getId() == null) {\r\n");
+        sb.append("            return ResultVO.failure();\r\n");
+        sb.append("        }\r\n");
         sb.append("        ").append(underPoName).append("Service.deleteOne(id);\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("    @Override\r\n");
-        sb.append("    public ResultVO find").append(poName).append("ById(String id) {\r\n");
-        sb.append("        return ResultVO.success(").append(underPoName).append("Service.findOneById(id));\r\n");
+        sb.append("        return ResultVO.success();\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
         sb.append("}\r\n");
@@ -1679,16 +1627,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("    @After(value = \"execution(* ").append(poServicePath).append(poName).append("Service.findAll(..))\")\r\n");
         sb.append("    public void findAllAfter(JoinPoint joinPoint) {\r\n");
         sb.append("        logger.info(\"").append(poName).append("CustomAop.findAllAfter:{}\", joinPoint);\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("    @Before(value = \"execution(* ").append(poServicePath).append(poName).append("Service.findOneById(..))\")\r\n");
-        sb.append("    public void findOneByIdBefore(JoinPoint joinPoint) {\r\n");
-        sb.append("        logger.info(\"").append(poName).append("CustomAop.findOneByIdBefore:{}\", joinPoint);\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("    @After(value = \"execution(* ").append(poServicePath).append(poName).append("Service.findOneById(..))\")\r\n");
-        sb.append("    public void findOneByIdAfter(JoinPoint joinPoint) {\r\n");
-        sb.append("        logger.info(\"").append(poName).append("CustomAop.findOneByIdAfter:{}\", joinPoint);\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
         sb.append("}\r\n");
