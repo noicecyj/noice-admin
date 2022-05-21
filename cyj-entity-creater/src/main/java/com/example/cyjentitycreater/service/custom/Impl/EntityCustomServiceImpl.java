@@ -40,6 +40,8 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
 
     private final static String componentPath = "C:/Users/noice/IdeaProjects/noice-admin/noice/src/pages/";
 
+    private final static String commonPath = "C:/Users/noice/IdeaProjects/noice-admin/cyj-common/src/main/java/com/example/cyjcommon";
+
     private PropertyService propertyService;
     private EntityDao entityDao;
     private PropertyDao propertyDao;
@@ -109,9 +111,8 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
     private void createJavaFile(EntityPO po, List<PropertyPO> poList, String underPoName, String poName,
                                 String appPath, String appApi) {
         try {
-            createJavaFile(appPath + "/entity/auto/po", poGenerate(po, poList, poName, appPath));
-            createJavaFile(appPath + "/dao/auto", daoGenerate(poName, appPath));
-            createJavaFile(appPath + "/dao/custom", daoCustomGenerate(poName, appPath), false);
+            createJavaFile(commonPath + "/entity/po", poGenerate(po, poList, poName, appPath));
+            createJavaFile(commonPath + "/dao", daoGenerate(poName, appPath));
             createJavaFile(appPath + "/service/auto", serviceGenerate(poName, appPath));
             createJavaFile(appPath + "/service/auto/Impl", serviceImplGenerate(underPoName, poName, appPath));
             createJavaFile(appPath + "/service/custom", serviceCustomGenerate(poName, appPath), false);
@@ -241,77 +242,85 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{entityServiceData, poName + "CustomService.java"};
     }
 
-    public String[] poGenerate(EntityPO po, List<PropertyPO> poList, String poName, String appPath) {
+    public String[] poGenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String poName, String appPath) {
         StringBuilder sb = new StringBuilder();
-        String[] poPathArr = appPath.split("java");
-        String poPath = poPathArr[1].substring(1).replaceAll("\\\\", ".") + ".entity";
-        sb.append("package ").append(poPath).append(".auto.po;\r\n");
+        sb.append("package com.example.cyjcommon.entity.po;\r\n");
         sb.append("\r\n");
+        sb.append("import com.fasterxml.jackson.annotation.JsonIgnoreProperties;\r\n");
         sb.append("import lombok.Getter;\r\n");
         sb.append("import lombok.RequiredArgsConstructor;\r\n");
         sb.append("import lombok.Setter;\r\n");
-        sb.append("import lombok.ToString;\r\n");
-        sb.append("import org.hibernate.Hibernate;\r\n");
         sb.append("import org.hibernate.annotations.GenericGenerator;\r\n");
         sb.append("\r\n");
+        if (BeanUtils.ifOut(propertyPOList)) {
+            sb.append("import javax.persistence.CascadeType;\r\n");
+        }
         sb.append("import javax.persistence.Column;\r\n");
         sb.append("import javax.persistence.Entity;\r\n");
+        if (BeanUtils.ifOut(propertyPOList)) {
+            sb.append("import javax.persistence.FetchType;\r\n");
+        }
         sb.append("import javax.persistence.GeneratedValue;\r\n");
         sb.append("import javax.persistence.Id;\r\n");
+        if (BeanUtils.ifOut(propertyPOList)) {
+            sb.append("import javax.persistence.JoinColumn;\r\n");
+            sb.append("import javax.persistence.ManyToOne;\r\n");
+        }
         sb.append("import javax.persistence.Table;\r\n");
+        sb.append("import javax.validation.constraints.NotNull;\r\n");
         sb.append("import java.io.Serializable;\r\n");
-        if (BeanUtils.ifDate(poList)) {
+        if (BeanUtils.ifDate(propertyPOList)) {
             sb.append("import java.sql.Date;\r\n");
         }
-        if (BeanUtils.ifTimestamp(poList)) {
+        if (BeanUtils.ifTimestamp(propertyPOList)) {
             sb.append("import java.sql.Timestamp;\r\n");
         }
-        sb.append("import java.util.Objects;\r\n");
         sb.append("\r\n");
         sb.append("/**\r\n");
-        sb.append(" * @author 曹元杰\r\n");
-        sb.append(" * @version 1.0\r\n");
+        sb.append(" * @author Noice\r\n");
         sb.append(" */\r\n");
         sb.append("@Entity\r\n");
-        sb.append("@Table(name = ").append(poName).append("PO.T_").append(po.getEntityCode().toUpperCase()).append(")\r\n");
+        sb.append("@Table(name = ").append(poName).append("PO.T_").append(entityPO.getEntityCode().toUpperCase()).append(")\r\n");
         sb.append("@Getter\r\n");
         sb.append("@Setter\r\n");
-        sb.append("@ToString\r\n");
         sb.append("@RequiredArgsConstructor\r\n");
         sb.append("@GenericGenerator(name = \"uuid2\", strategy = \"org.hibernate.id.UUIDGenerator\")\r\n");
+        sb.append("@JsonIgnoreProperties(value = {\"hibernateLazyInitializer\", \"handler\"})\r\n");
         sb.append("public class ").append(poName).append("PO implements Serializable {\r\n");
         sb.append("\r\n");
-        sb.append("    static final String T_").append(po.getEntityCode().toUpperCase()).append(" = \"t_").append(po.getEntityCode()).append("\";\r\n");
+        sb.append("    static final String T_").append(entityPO.getEntityCode().toUpperCase()).append(" = \"t_").append(entityPO.getEntityCode()).append("\";\r\n");
         sb.append("\r\n");
         sb.append("    @Id\r\n");
         sb.append("    @GeneratedValue(generator = \"uuid2\")\r\n");
         sb.append("    @Column(name = \"id\", length = 36)\r\n");
         sb.append("    private String id;\r\n");
-        poList.forEach(entityPO -> {
-            if (StringUtils.isNotEmpty(entityPO.getPropertyLength())) {
-                sb.append("    @Column(name = \"").append(entityPO.getPropertyCode()).append("\", length = ").append(entityPO.getPropertyLength()).append(")\r\n");
+        propertyPOList.forEach(propertyPO -> {
+            if (StringUtils.isEmpty(propertyPO.getPropertyOut())) {
+                if (StringUtils.isNotEmpty(propertyPO.getPropertyRequired())) {
+                    sb.append("    @NotNull(message = \"").append(propertyPO.getPropertyLabel()).append("不能为空\")\r\n");
+                }
+                if (StringUtils.isNotEmpty(propertyPO.getPropertyLength())) {
+                    sb.append("    @Column(name = \"").append(propertyPO.getPropertyCode()).append("\", length = ").append(propertyPO.getPropertyLength()).append(")\r\n");
+                } else {
+                    sb.append("    @Column(name = \"").append(propertyPO.getPropertyCode()).append("\")\r\n");
+                }
+                sb.append("    private ").append(propertyPO.getPropertyType()).append(" ").append(BeanUtils.underline2Camel(propertyPO.getPropertyCode())).append(";\r\n");
             } else {
-                sb.append("    @Column(name = \"").append(entityPO.getPropertyCode()).append("\")\r\n");
+                sb.append("    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)\r\n");
+                sb.append("    @JoinColumn(name = \"").append(propertyPO.getPropertyOut()).append("_id\")\r\n");
+                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
+                String propertyOut = BeanUtils.captureName(underPropertyOut);
+                sb.append("    private ").append(propertyOut).append("PO ").append(propertyPO.getPropertyOut()).append(";\r\n");
             }
-            sb.append("    private ").append(entityPO.getPropertyType()).append(" ").append(BeanUtils.underline2Camel(entityPO.getPropertyCode())).append(";\r\n");
+            sb.append("\r\n");
         });
+        sb.append("    @NotNull(message = \"状态不能为空\")\r\n");
         sb.append("    @Column(name = \"status\")\r\n");
         sb.append("    private String status;\r\n");
+        sb.append("\r\n");
+        sb.append("    @NotNull(message = \"排序不能为空\")\r\n");
         sb.append("    @Column(name = \"sort_code\")\r\n");
         sb.append("    private String sortCode;\r\n");
-        sb.append("\r\n");
-        sb.append("    @Override\r\n");
-        sb.append("    public boolean equals(Object o) {\r\n");
-        sb.append("        if (this == o) return true;\r\n");
-        sb.append("        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;\r\n");
-        sb.append("        ").append(poName).append("PO that = (").append(poName).append("PO) o;\r\n");
-        sb.append("        return Objects.equals(id, that.id);\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("    @Override\r\n");
-        sb.append("    public int hashCode() {\r\n");
-        sb.append("        return 0;\r\n");
-        sb.append("    }\r\n");
         sb.append("\r\n");
         sb.append("}");
         String entityData = sb.toString();

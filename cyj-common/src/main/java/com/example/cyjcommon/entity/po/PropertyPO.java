@@ -59,6 +59,9 @@ public class PropertyPO implements Serializable {
     @Column(name = "property_mode")
     private String propertyMode;
 
+    @Column(name = "property_out")
+    private String propertyOut;
+
     @Column(name = "property_width")
     private String propertyWidth;
 
@@ -79,6 +82,10 @@ public class PropertyPO implements Serializable {
     @Column(name = "property_display")
     private String propertyDisplay;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @JoinColumn(name = "entity_id")
+    private EntityPO entity;
+
     @NotNull(message = "状态不能为空")
     @Column(name = "status")
     private String status;
@@ -86,9 +93,5 @@ public class PropertyPO implements Serializable {
     @NotNull(message = "排序不能为空")
     @Column(name = "sort_code")
     private String sortCode;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
-    @JoinColumn(name = "entity_id")
-    private EntityPO entity;
 
 }

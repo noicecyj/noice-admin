@@ -2,6 +2,7 @@ package com.example.cyjentitycreater.utils;
 
 import com.example.cyjcommon.entity.po.AppServicePO;
 import com.example.cyjcommon.entity.po.PropertyPO;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -76,6 +77,15 @@ public class BeanUtils {
     public static Boolean ifTimestamp(List<PropertyPO> poList) {
         for (PropertyPO po : poList) {
             if ("Timestamp".equals(po.getPropertyType())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static Boolean ifOut(List<PropertyPO> poList) {
+        for (PropertyPO po : poList) {
+            if (StringUtils.isNotEmpty(po.getPropertyOut())) {
                 return true;
             }
         }

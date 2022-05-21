@@ -61,6 +61,14 @@ public class EntityPO implements Serializable {
     @Column(name = "entity_custom_table")
     private String entityCustomTable;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @JoinColumn(name = "entity_id")
+    private EntityPO entity;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @JoinColumn(name = "app_service_id")
+    private AppServicePO appService;
+
     @NotNull(message = "状态不能为空")
     @Column(name = "status")
     private String status;
@@ -68,13 +76,5 @@ public class EntityPO implements Serializable {
     @NotNull(message = "排序不能为空")
     @Column(name = "sort_code")
     private String sortCode;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "entity_id")
-    private EntityPO entity;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "app_service_id")
-    private AppServicePO appService;
 
 }
