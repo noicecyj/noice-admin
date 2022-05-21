@@ -117,8 +117,8 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
 
     private void createSubJavaFile(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath, String appApi) {
         try {
-            createJavaFile(commonPath + "/entity/auto/po", poGenerate(entityPO, propertyPOList, poName));
-            createJavaFile(commonPath + "/dao/auto", daoGenerate(propertyPOList, poName));
+            createJavaFile(commonPath + "/entity/po", poGenerate(entityPO, propertyPOList, poName));
+            createJavaFile(commonPath + "/dao", daoGenerate(propertyPOList, poName));
             createJavaFile(appPath + "/service/auto", serviceSubGenerate(poName, appPath));
             createJavaFile(appPath + "/service/auto/Impl", serviceImplSubGenerate(underPoName, poName, appPath));
             createJavaFile(appPath + "/service/custom", serviceCustomGenerate(poName, appPath), false);

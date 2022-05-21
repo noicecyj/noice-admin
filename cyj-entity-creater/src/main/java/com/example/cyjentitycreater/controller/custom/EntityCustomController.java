@@ -2,7 +2,6 @@ package com.example.cyjentitycreater.controller.custom;
 
 import com.example.cyjcommon.entity.po.EntityPO;
 import com.example.cyjcommon.utils.ResultVO;
-import com.example.cyjentitycreater.entity.vo.CreateVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.PostMapping;

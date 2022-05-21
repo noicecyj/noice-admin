@@ -3,7 +3,6 @@ package com.example.cyjentitycreater.controller.custom.Impl;
 import com.example.cyjcommon.entity.po.EntityPO;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.controller.custom.EntityCustomController;
-import com.example.cyjentitycreater.entity.vo.CreateVO;
 import com.example.cyjentitycreater.service.custom.EntityCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
