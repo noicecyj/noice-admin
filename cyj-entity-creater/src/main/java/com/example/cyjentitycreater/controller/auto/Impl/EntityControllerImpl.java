@@ -1,5 +1,6 @@
 package com.example.cyjentitycreater.controller.auto.Impl;
 
+import com.example.cyjcommon.entity.po.AppServicePO;
 import com.example.cyjcommon.entity.po.EntityPO;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.controller.auto.EntityController;
@@ -29,6 +30,16 @@ public class EntityControllerImpl implements EntityController {
     @Override
     public ResultVO entityPage(Integer pageNumber) {
         return ResultVO.success(entityService.findAll(pageNumber));
+    }
+
+    @Override
+    public ResultVO entityPage(Integer pageNumber, EntityPO entity) {
+        return ResultVO.success(entityService.findAll(pageNumber, entity));
+    }
+
+    @Override
+    public ResultVO entityPage(Integer pageNumber, AppServicePO appServicePO) {
+        return ResultVO.success(entityService.findAll(pageNumber, appServicePO));
     }
 
     @Override
