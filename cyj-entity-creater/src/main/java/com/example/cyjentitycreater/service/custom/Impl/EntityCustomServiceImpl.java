@@ -106,7 +106,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             createJavaFile(appPath + "/service/custom/aop", aopCustomGenerate(poName, appPath), false);
             createJavaFile(appPath + "/service/custom/Impl", serviceImplCustomGenerate(poName, appPath), false);
             createJavaFile(appPath + "/controller/auto", controllerGenerate(propertyPOList, underPoName, poName, appPath));
-            createJavaFile(appPath + "/controller/auto/Impl", controllerImplGenerate(underPoName, poName, appPath, appApi));
+            createJavaFile(appPath + "/controller/auto/Impl", controllerImplGenerate(propertyPOList, underPoName, poName, appPath, appApi));
             createJavaFile(appPath + "/controller/custom", controllerCustomGenerate(poName, appPath), false);
             createJavaFile(appPath + "/controller/custom/Impl", controllerImplCustomGenerate(poName, appPath, appApi), false);
         } catch (IOException e) {
@@ -531,7 +531,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 if (!propertyOut.equals(poName)) {
                     sb.append("    @Operation(summary = \"根据").append(propertyOut).append("查询所有").append(poName).append("\")\r\n");
-                    sb.append("    @PostMapping(value = \"").append(underPoName).append("PageBy").append(propertyOut).append("\")r\n");
+                    sb.append("    @PostMapping(value = \"").append(underPoName).append("PageBy").append(propertyOut).append("\")\r\n");
                     sb.append("    ResultVO ").append(underPoName).append("Page(@RequestParam(\"pageNumber\") Integer pageNumber, @RequestBody ").append(propertyOut).append("PO ").append(underPropertyOut).append(");\r\n");
                     sb.append("\r\n");
                 }
@@ -550,7 +550,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{entityControllerData, poName + "Controller.java"};
     }
 
-    public String[] controllerImplGenerate(String underPoName, String poName, String appPath, String appApi) {
+    public String[] controllerImplGenerate(List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath, String appApi) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
@@ -560,6 +560,15 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         String poControllerPath = packetPath + ".controller.auto.";
         sb.append("package ").append(poControllerPath).append("Impl;\r\n");
         sb.append("\r\n");
+        for (PropertyPO propertyPO : propertyPOList) {
+            if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
+                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
+                String propertyOut = BeanUtils.captureName(underPropertyOut);
+                if (!propertyOut.equals(poName)) {
+                    sb.append("import com.example.cyjcommon.entity.po.").append(propertyOut).append("PO;\r\n");
+                }
+            }
+        }
         sb.append("import com.example.cyjcommon.entity.po.").append(poName).append("PO;\r\n");
         sb.append("import com.example.cyjcommon.utils.ResultVO;\r\n");
         sb.append("import ").append(poControllerPath).append(poName).append("Controller;\r\n");
@@ -590,6 +599,19 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("        return ResultVO.success(").append(underPoName).append("Service.findAll(pageNumber));\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
+        for (PropertyPO propertyPO : propertyPOList) {
+            if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
+                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
+                String propertyOut = BeanUtils.captureName(underPropertyOut);
+                if (!propertyOut.equals(poName)) {
+                    sb.append("    @Override\r\n");
+                    sb.append("    public ResultVO ").append(underPoName).append("Page(Integer pageNumber, ").append(propertyOut).append("PO ").append(underPropertyOut).append(") {\r\n");
+                    sb.append("        return ResultVO.success(").append(underPoName).append("Service.findAll(pageNumber, ").append(underPropertyOut).append("));\r\n");
+                    sb.append("    }\r\n");
+                    sb.append("\r\n");
+                }
+            }
+        }
         sb.append("    @Override\r\n");
         sb.append("    public ResultVO ").append(underPoName).append("Save(").append(poName).append("PO po, BindingResult bindingResult) {\r\n");
         sb.append("        if (bindingResult.hasErrors()) {\r\n");
