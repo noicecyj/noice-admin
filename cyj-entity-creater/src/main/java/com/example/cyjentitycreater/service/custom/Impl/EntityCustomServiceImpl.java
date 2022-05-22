@@ -30,8 +30,6 @@ import java.util.stream.Collectors;
 
 /**
  * @author Noice
- * @version 1.0
- * @date 2021-10-16
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -148,7 +146,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("\r\n");
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
-        sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
         sb.append("@CrossOrigin\r\n");
         sb.append("@RestController\r\n");
@@ -172,7 +169,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("\r\n");
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
-        sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
         sb.append("@Tag(name = \"").append(poName).append("\")\r\n");
         sb.append("public interface ").append(poName).append("CustomController {\r\n");
@@ -198,7 +194,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("\r\n");
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
-        sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
         sb.append("@Service\r\n");
         sb.append("@Transactional(rollbackFor = Exception.class)\r\n");
@@ -219,7 +214,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("\r\n");
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
-        sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
         sb.append("public interface ").append(poName).append("CustomService {\r\n");
         sb.append("\r\n");
@@ -1710,7 +1704,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("\r\n");
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
-        sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
         sb.append("@Aspect\r\n");
         sb.append("@Component\r\n");
@@ -1783,7 +1776,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("\r\n");
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
-        sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
         sb.append("@Aspect\r\n");
         sb.append("@Component\r\n");
