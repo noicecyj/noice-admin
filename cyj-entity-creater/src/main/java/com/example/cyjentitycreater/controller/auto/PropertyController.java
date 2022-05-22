@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Tag(name = "Property")
 public interface PropertyController {
 
-    @Operation(summary = "查询所有Property")
-    @PostMapping(value = "propertyPage")
+    @Operation(summary = "根据Entity查询所有Property")
+    @PostMapping(value = "propertyPageByEntity")
     ResultVO propertyPage(@RequestParam("pageNumber") Integer pageNumber, @RequestBody EntityPO entity);
 
     @Operation(summary = "保存Property")

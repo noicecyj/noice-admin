@@ -24,7 +24,7 @@ public class PropertyServiceImpl extends BaseService implements PropertyService 
     private PropertyDao propertyDao;
 
     @Autowired
-    public void setEntityDao(PropertyDao propertyDao) {
+    public void setPropertyDao(PropertyDao propertyDao) {
         this.propertyDao = propertyDao;
     }
 
