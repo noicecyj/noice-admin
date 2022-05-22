@@ -1,33 +1,31 @@
 package com.example.cyjauth.service.auto;
 
+import com.example.cyjcommon.entity.po.EntityPO;
+import com.example.cyjcommon.entity.po.AppServicePO;
+import com.example.cyjcommon.entity.po.UserPO;
+import com.example.cyjcommon.entity.po.RolePO;
 import com.example.cyjcommon.entity.po.AuthorityPO;
-import com.querydsl.core.QueryResults;
-
-import java.util.List;
-import java.util.Set;
+import org.springframework.data.domain.Page;
 
 /**
  * @author Noice
- * @version 1.0
  */
 public interface AuthorityService {
 
     AuthorityPO addOne(AuthorityPO po);
 
-    void deleteOne(String id);
+    void deleteOne(AuthorityPO po);
 
     AuthorityPO updateOne(AuthorityPO po);
 
-    QueryResults<AuthorityPO> findAll(Integer pageNumber);
+    Page<AuthorityPO> findAll(Integer pageNumber);
 
-    AuthorityPO findOneById(String id);
+    Page<AuthorityPO> findAll(Integer pageNumber, EntityPO entity);
 
-    List<String> getRoleAuthority(String roleId);
+    Page<AuthorityPO> findAll(Integer pageNumber, AppServicePO appService);
 
-    void setRoleAuthority(String roleId, Set<String> authorityIds);
+    Page<AuthorityPO> findAll(Integer pageNumber, UserPO user);
 
-    List<String> getUserAuthority(String userId);
-
-    void setUserAuthority(String userId, Set<String> authorityIds);
+    Page<AuthorityPO> findAll(Integer pageNumber, RolePO role);
 
 }

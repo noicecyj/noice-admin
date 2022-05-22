@@ -1,19 +1,21 @@
 package com.example.cyjauth.controller.auto.Impl;
 
-import com.example.cyjauth.controller.auto.AuthorityController;
-import com.example.cyjauth.service.auto.AuthorityService;
-import com.example.cyjcommon.entity.dto.RoleAuthorityDTO;
-import com.example.cyjcommon.entity.dto.UserAuthorityDTO;
+import com.example.cyjcommon.entity.po.EntityPO;
+import com.example.cyjcommon.entity.po.AppServicePO;
+import com.example.cyjcommon.entity.po.UserPO;
+import com.example.cyjcommon.entity.po.RolePO;
 import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.example.cyjcommon.utils.ResultVO;
+import com.example.cyjauth.controller.auto.AuthorityController;
+import com.example.cyjauth.service.auto.AuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @CrossOrigin
 @RestController
@@ -33,7 +35,30 @@ public class AuthorityControllerImpl implements AuthorityController {
     }
 
     @Override
-    public ResultVO authoritySave(AuthorityPO po) {
+    public ResultVO authorityPage(Integer pageNumber, EntityPO entity) {
+        return ResultVO.success(authorityService.findAll(pageNumber, entity));
+    }
+
+    @Override
+    public ResultVO authorityPage(Integer pageNumber, AppServicePO appService) {
+        return ResultVO.success(authorityService.findAll(pageNumber, appService));
+    }
+
+    @Override
+    public ResultVO authorityPage(Integer pageNumber, UserPO user) {
+        return ResultVO.success(authorityService.findAll(pageNumber, user));
+    }
+
+    @Override
+    public ResultVO authorityPage(Integer pageNumber, RolePO role) {
+        return ResultVO.success(authorityService.findAll(pageNumber, role));
+    }
+
+    @Override
+    public ResultVO authoritySave(AuthorityPO po, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResultVO.failure(bindingResult.getAllErrors().get(0));
+        }
         if (po.getId() == null) {
             return ResultVO.success(authorityService.addOne(po));
         }
@@ -41,34 +66,11 @@ public class AuthorityControllerImpl implements AuthorityController {
     }
 
     @Override
-    public void authorityDelete(String id) {
-        authorityService.deleteOne(id);
-    }
-
-    @Override
-    public ResultVO findAuthorityById(String id) {
-        return ResultVO.success(authorityService.findOneById(id));
-    }
-
-    @Override
-    public ResultVO getUserAuthority(String userId) {
-        return ResultVO.success(authorityService.getUserAuthority(userId));
-    }
-
-    @Override
-    public ResultVO setUserAuthority(UserAuthorityDTO userAuthorityDTO) {
-        authorityService.setUserAuthority(userAuthorityDTO.getUserId(), userAuthorityDTO.getAuthorityIds());
-        return ResultVO.success();
-    }
-
-    @Override
-    public ResultVO getRoleAuthority(String roleId) {
-        return ResultVO.success(authorityService.getRoleAuthority(roleId));
-    }
-
-    @Override
-    public ResultVO setRoleAuthority(RoleAuthorityDTO roleAuthorityDTO) {
-        authorityService.setRoleAuthority(roleAuthorityDTO.getRoleId(), roleAuthorityDTO.getAuthorityIds());
+    public ResultVO authorityDelete(AuthorityPO po) {
+        if (po.getId() == null) {
+            return ResultVO.failure();
+        }
+        authorityService.deleteOne(po);
         return ResultVO.success();
     }
 

@@ -1,25 +1,24 @@
 package com.example.cyjauth.service.auto.Impl;
 
-import com.example.cyjauth.service.auto.AuthorityService;
 import com.example.cyjcommon.dao.AuthorityDao;
-import com.example.cyjcommon.entity.po.AuthorityPO;
-import com.example.cyjcommon.entity.po.QAuthorityPO;
-import com.example.cyjcommon.entity.po.QRolePO;
-import com.example.cyjcommon.entity.po.QUserPO;
-import com.example.cyjcommon.entity.po.RolePO;
+import com.example.cyjcommon.entity.po.EntityPO;
+import com.example.cyjcommon.entity.po.AppServicePO;
 import com.example.cyjcommon.entity.po.UserPO;
+import com.example.cyjcommon.entity.po.RolePO;
+import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.example.cyjcommon.service.BaseService;
-import com.querydsl.core.QueryResults;
+import com.example.cyjauth.service.auto.AuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Set;
-
 /**
  * @author Noice
- * @version 1.0
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -38,8 +37,8 @@ public class AuthorityServiceImpl extends BaseService implements AuthorityServic
     }
 
     @Override
-    public void deleteOne(String id) {
-        authorityDao.deleteById(id);
+    public void deleteOne(AuthorityPO po) {
+        authorityDao.delete(po);
     }
 
     @Override
@@ -48,85 +47,44 @@ public class AuthorityServiceImpl extends BaseService implements AuthorityServic
     }
 
     @Override
-    public QueryResults<AuthorityPO> findAll(Integer pageNumber) {
-        return queryFactory
-                .selectFrom(QAuthorityPO.authorityPO)
-                .where(QAuthorityPO.authorityPO.sortCode.isNotNull())
-                .offset((pageNumber - 1) * 10L)
-                .orderBy(QAuthorityPO.authorityPO.sortCode.asc())
-                .limit(10)
-                .fetchResults();
+    public Page<AuthorityPO> findAll(Integer pageNumber) {
+        return authorityDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 
     @Override
-    public AuthorityPO findOneById(String id) {
-        return authorityDao.findById(id).orElse(null);
+    public Page<AuthorityPO> findAll(Integer pageNumber, EntityPO entity) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
+        AuthorityPO authorityPO = new AuthorityPO();
+        authorityPO.setEntity(entity);
+        Example<AuthorityPO> example = Example.of(authorityPO);
+        return authorityDao.findAll(example, pageable);
     }
 
     @Override
-    public List<String> getRoleAuthority(String roleId) {
-        RolePO rolePO = queryFactory
-                .selectFrom(QRolePO.rolePO)
-                .where(QRolePO.rolePO.id.eq(roleId))
-                .fetchOne();
-        return rolePO == null ? null : queryFactory
-                .select(QAuthorityPO.authorityPO.id)
-                .from(QAuthorityPO.authorityPO)
-                .where(QAuthorityPO.authorityPO.role.eq(rolePO))
-                .fetch();
+    public Page<AuthorityPO> findAll(Integer pageNumber, AppServicePO appService) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
+        AuthorityPO authorityPO = new AuthorityPO();
+        authorityPO.setAppService(appService);
+        Example<AuthorityPO> example = Example.of(authorityPO);
+        return authorityDao.findAll(example, pageable);
     }
 
     @Override
-    public void setRoleAuthority(String roleId, Set<String> authorityIds) {
-        RolePO rolePO = queryFactory
-                .selectFrom(QRolePO.rolePO)
-                .where(QRolePO.rolePO.id.eq(roleId))
-                .fetchOne();
-        List<AuthorityPO> authorityPOList = queryFactory
-                .selectFrom(QAuthorityPO.authorityPO)
-                .fetch();
-        for (AuthorityPO authorityPO : authorityPOList) {
-            authorityPO.setRole(null);
-            for (String authorityId : authorityIds) {
-                if (authorityPO.getId().equals(authorityId)) {
-                    authorityPO.setRole(rolePO);
-                }
-            }
-            authorityDao.saveAndFlush(authorityPO);
-        }
+    public Page<AuthorityPO> findAll(Integer pageNumber, UserPO user) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
+        AuthorityPO authorityPO = new AuthorityPO();
+        authorityPO.setUser(user);
+        Example<AuthorityPO> example = Example.of(authorityPO);
+        return authorityDao.findAll(example, pageable);
     }
 
     @Override
-    public List<String> getUserAuthority(String userId) {
-        UserPO userPO = queryFactory
-                .selectFrom(QUserPO.userPO)
-                .where(QUserPO.userPO.id.eq(userId))
-                .fetchOne();
-        return userPO == null ? null : queryFactory
-                .select(QAuthorityPO.authorityPO.id)
-                .from(QAuthorityPO.authorityPO)
-                .where(QAuthorityPO.authorityPO.user.eq(userPO))
-                .fetch();
-    }
-
-    @Override
-    public void setUserAuthority(String userId, Set<String> authorityIds) {
-        UserPO userPO = queryFactory
-                .selectFrom(QUserPO.userPO)
-                .where(QUserPO.userPO.id.eq(userId))
-                .fetchOne();
-        List<AuthorityPO> authorityPOList = queryFactory
-                .selectFrom(QAuthorityPO.authorityPO)
-                .fetch();
-        for (AuthorityPO authorityPO : authorityPOList) {
-            authorityPO.setUser(null);
-            for (String authorityId : authorityIds) {
-                if (authorityPO.getId().equals(authorityId)) {
-                    authorityPO.setUser(userPO);
-                }
-            }
-            authorityDao.saveAndFlush(authorityPO);
-        }
+    public Page<AuthorityPO> findAll(Integer pageNumber, RolePO role) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
+        AuthorityPO authorityPO = new AuthorityPO();
+        authorityPO.setRole(role);
+        Example<AuthorityPO> example = Example.of(authorityPO);
+        return authorityDao.findAll(example, pageable);
     }
 
 }

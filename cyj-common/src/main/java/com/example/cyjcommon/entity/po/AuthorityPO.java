@@ -1,10 +1,9 @@
 package com.example.cyjcommon.entity.po;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
-import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.CascadeType;
@@ -16,20 +15,19 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @Entity
 @Table(name = AuthorityPO.T_AUTHORITY)
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
 @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class AuthorityPO implements Serializable {
 
     static final String T_AUTHORITY = "t_authority";
@@ -38,40 +36,44 @@ public class AuthorityPO implements Serializable {
     @GeneratedValue(generator = "uuid2")
     @Column(name = "id", length = 36)
     private String id;
-    @Column(name = "method")
-    private String method;
-    @Column(name = "app_name")
-    private String appName;
-    @Column(name = "version")
-    private String version;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "description")
-    private String description;
-    @Column(name = "path")
-    private String path;
-    @Column(name = "status")
-    private String status;
-    @Column(name = "sort_code")
-    private String sortCode;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "role_id")
-    private RolePO role;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+
+    @NotNull(message = "请求模式不能为空")
+    @Column(name = "authority_method")
+    private String authorityMethod;
+
+    @NotNull(message = "名称不能为空")
+    @Column(name = "authority_name")
+    private String authorityName;
+
+    @NotNull(message = "权限路径不能为空")
+    @Column(name = "authority_path")
+    private String authorityPath;
+
+    @Column(name = "authority_description")
+    private String authorityDescription;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @JoinColumn(name = "entity_id")
+    private EntityPO entity;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @JoinColumn(name = "app_service_id")
+    private AppServicePO appService;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinColumn(name = "user_id")
     private UserPO user;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        AuthorityPO that = (AuthorityPO) o;
-        return Objects.equals(id, that.id);
-    }
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @JoinColumn(name = "role_id")
+    private RolePO role;
 
-    @Override
-    public int hashCode() {
-        return 0;
-    }
+    @NotNull(message = "状态不能为空")
+    @Column(name = "status")
+    private String status;
+
+    @NotNull(message = "排序不能为空")
+    @Column(name = "sort_code")
+    private String sortCode;
 
 }
