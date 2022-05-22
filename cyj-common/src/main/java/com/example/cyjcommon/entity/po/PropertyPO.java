@@ -20,7 +20,6 @@ import java.io.Serializable;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @Entity
 @Table(name = PropertyPO.T_PROPERTY)
@@ -44,6 +43,13 @@ public class PropertyPO implements Serializable {
     @Column(name = "property_length")
     private String propertyLength;
 
+    @Column(name = "property_out")
+    private String propertyOut;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @JoinColumn(name = "entity_id")
+    private EntityPO entity;
+
     @NotNull(message = "属性编码不能为空")
     @Column(name = "property_code")
     private String propertyCode;
@@ -56,14 +62,11 @@ public class PropertyPO implements Serializable {
     @Column(name = "property_label")
     private String propertyLabel;
 
-    @Column(name = "property_mode")
-    private String propertyMode;
-
-    @Column(name = "property_out")
-    private String propertyOut;
-
     @Column(name = "property_width")
     private String propertyWidth;
+
+    @Column(name = "property_mode")
+    private String propertyMode;
 
     @Column(name = "property_direction")
     private String propertyDirection;
@@ -81,10 +84,6 @@ public class PropertyPO implements Serializable {
     @NotNull(message = "属性是否展示不能为空")
     @Column(name = "property_display")
     private String propertyDisplay;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
-    @JoinColumn(name = "entity_id")
-    private EntityPO entity;
 
     @NotNull(message = "状态不能为空")
     @Column(name = "status")

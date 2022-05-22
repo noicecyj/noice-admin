@@ -8,7 +8,6 @@ import java.util.List;
 
 /**
  * @author Noice
- * @version 1.0
  */
 public interface PropertyDao extends JpaRepository<PropertyPO, String> {
 
