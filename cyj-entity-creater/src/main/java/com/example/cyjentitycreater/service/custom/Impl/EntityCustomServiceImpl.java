@@ -68,7 +68,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         if (entityPO == null) {
             return;
         }
-        List<PropertyPO> propertyPOList = propertyDao.findAllByEntity(entityPO);
+        List<PropertyPO> propertyPOList = propertyDao.findAllByEntity(entityPO)
+                .stream()
+                .sorted(Comparator.comparing(PropertyPO::getSortCode))
+                .collect(Collectors.toList());
         //驼峰名
         String underPoName = BeanUtils.underline2Camel(entityPO.getEntityCode());
         //文件名
