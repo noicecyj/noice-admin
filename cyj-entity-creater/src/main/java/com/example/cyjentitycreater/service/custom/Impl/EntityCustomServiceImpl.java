@@ -886,7 +886,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("        if (po.getId() == null) {\r\n");
         sb.append("            return ResultVO.failure();\r\n");
         sb.append("        }\r\n");
-        sb.append("        ").append(underPoName).append("Service.deleteOne(id);\r\n");
+        sb.append("        ").append(underPoName).append("Service.deleteOne(po);\r\n");
         sb.append("        return ResultVO.success();\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
