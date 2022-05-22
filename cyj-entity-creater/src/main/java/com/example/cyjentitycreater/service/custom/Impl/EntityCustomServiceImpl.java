@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.cyjcommon.dao.EntityDao;
 import com.example.cyjcommon.dao.PropertyDao;
 import com.example.cyjcommon.entity.po.AppServicePO;
+import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.example.cyjcommon.entity.po.DictionaryPO;
 import com.example.cyjcommon.entity.po.EntityPO;
 import com.example.cyjcommon.entity.po.PropertyPO;
@@ -95,6 +96,64 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             createSubJavaFile(subPo, subPoList, underSubPoName, SubPoName, appPath, appApi);
         });
     }
+
+//    private void authorityCenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName,
+//                              String appPath, String appApi){
+//            //根据名称获取app
+//            AppServicePO appServicePO = entityPO.getAppService();
+//            AuthorityPO page = findByPathAndName(appService.get("app_api").toString() + "/" + underPoName + "Page", "查询所有" + poName);
+//            if (page == null) {
+//                page = new AuthorityPO();
+//                page.setMethod(POST);
+//                page.setName("查询所有" + poName);
+//                page.setPath(appService.get("app_api").toString() + "/" + underPoName + "Page");
+//                page.setAppName(appService.get("name").toString());
+//                page.setVersion(VERSION);
+//                page.setStatus(STATUS);
+//                page.setSortCode(SORTCODE);
+//                authorityDao.save(page);
+//                logger.info("生成分页权限:" + page.getName());
+//            }
+//            AuthorityPO save = findByPathAndName(appService.get("app_api").toString() + "/" + underPoName + "Save", "保存" + poName);
+//            if (save == null) {
+//                save = new AuthorityPO();
+//                save.setMethod(POST);
+//                save.setName("保存" + poName);
+//                save.setPath(appService.get("app_api").toString() + "/" + underPoName + "Save");
+//                save.setAppName(appService.get("name").toString());
+//                save.setVersion(VERSION);
+//                save.setStatus(STATUS);
+//                save.setSortCode(SORTCODE);
+//                authorityDao.save(save);
+//                logger.info("生成保存权限:" + save.getName());
+//            }
+//            AuthorityPO delete = findByPathAndName(appService.get("app_api").toString() + "/" + underPoName + "Delete", "删除" + poName);
+//            if (delete == null) {
+//                delete = new AuthorityPO();
+//                delete.setMethod(POST);
+//                delete.setName("删除" + poName);
+//                delete.setPath(appService.get("app_api").toString() + "/" + underPoName + "Delete");
+//                delete.setAppName(appService.get("name").toString());
+//                delete.setVersion(VERSION);
+//                delete.setStatus(STATUS);
+//                delete.setSortCode(SORTCODE);
+//                authorityDao.save(delete);
+//                logger.info("生成删除权限:" + delete.getName());
+//            }
+//            AuthorityPO find = findByPathAndName(appService.get("app_api").toString() + "/find" + poName + "ById", "根据ID查询" + poName);
+//            if (find == null) {
+//                find = new AuthorityPO();
+//                find.setMethod(POST);
+//                find.setName("根据ID查询" + poName);
+//                find.setPath(appService.get("app_api").toString() + "/find" + poName + "ById");
+//                find.setAppName(appService.get("name").toString());
+//                find.setVersion(VERSION);
+//                find.setStatus(STATUS);
+//                find.setSortCode(SORTCODE);
+//                authorityDao.save(find);
+//                logger.info("生成ID查询权限:" + find.getName());
+//            }
+//    }
 
     private void createJavaFile(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName,
                                 String appPath, String appApi) {
