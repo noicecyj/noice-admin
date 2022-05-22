@@ -30,7 +30,7 @@ public class EntityCustomControllerImpl implements EntityCustomController {
     @Override
     public ResultVO createEntity(@RequestBody EntityPO po) {
         entityCustomService.generateJavaFile(po);
-        entityCustomService.createComponentFile(po);
+//        entityCustomService.createComponentFile(po);
         return ResultVO.success();
     }
 
