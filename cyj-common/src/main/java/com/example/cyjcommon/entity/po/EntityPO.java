@@ -49,8 +49,8 @@ public class EntityPO implements Serializable {
     @Column(name = "entity_form_type")
     private String entityFormType;
 
-    @Column(name = "entity_form_row")
-    private Integer entityFormRow;
+    @Column(name = "entity_custom_table")
+    private String entityCustomTable;
 
     @Column(name = "entity_edit_enable")
     private String entityEditEnable;
@@ -58,8 +58,8 @@ public class EntityPO implements Serializable {
     @Column(name = "entity_custom_form")
     private String entityCustomForm;
 
-    @Column(name = "entity_custom_table")
-    private String entityCustomTable;
+    @Column(name = "entity_form_row")
+    private Integer entityFormRow;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinColumn(name = "entity_id")
