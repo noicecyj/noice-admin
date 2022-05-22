@@ -12,7 +12,7 @@ function CustomColumnEntity(props) {
         record.entity === null && <Button
           type="normal"
           size="small"
-          onClick={() => customEntityDispatchers.createEntityFile({id: record.id})}
+          onClick={() => customEntityDispatchers.createEntityFile(record)}
           // eslint-disable-next-line react/jsx-closing-tag-location
         > 生成代码 </Button>
       }
