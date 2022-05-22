@@ -1,22 +1,22 @@
 package com.example.cyjcommon.entity.po;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * @author Noice
@@ -49,9 +49,10 @@ public class RolePO implements Serializable {
     @Column(name = "role_description")
     private String roleDescription;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
-    @JoinColumn(name = "user_id")
-    private UserPO user;
+    @JsonIgnore
+    @ManyToMany(targetEntity = UserPO.class)
+    @BatchSize(size = 20)
+    private Set<UserPO> user;
 
     @NotNull(message = "状态不能为空")
     @Column(name = "status")

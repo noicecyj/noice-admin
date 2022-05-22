@@ -1,18 +1,20 @@
 package com.example.cyjauth.controller.auto.Impl;
 
-import com.example.cyjcommon.entity.po.EntityPO;
-import com.example.cyjcommon.entity.po.AppServicePO;
-import com.example.cyjcommon.entity.po.UserPO;
-import com.example.cyjcommon.entity.po.RolePO;
-import com.example.cyjcommon.entity.po.AuthorityPO;
-import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjauth.controller.auto.AuthorityController;
 import com.example.cyjauth.service.auto.AuthorityService;
+import com.example.cyjcommon.entity.po.AppServicePO;
+import com.example.cyjcommon.entity.po.AuthorityPO;
+import com.example.cyjcommon.entity.po.EntityPO;
+import com.example.cyjcommon.entity.po.RolePO;
+import com.example.cyjcommon.entity.po.UserPO;
+import com.example.cyjcommon.utils.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Set;
 
 /**
  * @author Noice
@@ -45,13 +47,13 @@ public class AuthorityControllerImpl implements AuthorityController {
     }
 
     @Override
-    public ResultVO authorityPage(Integer pageNumber, UserPO user) {
-        return ResultVO.success(authorityService.findAll(pageNumber, user));
+    public ResultVO authorityPageByUserList(Integer pageNumber, Set<UserPO> userList) {
+        return ResultVO.success(authorityService.findAllByUserList(pageNumber, userList));
     }
 
     @Override
-    public ResultVO authorityPage(Integer pageNumber, RolePO role) {
-        return ResultVO.success(authorityService.findAll(pageNumber, role));
+    public ResultVO authorityPageByRoleList(Integer pageNumber, Set<RolePO> roleList) {
+        return ResultVO.success(authorityService.findAllByRoleList(pageNumber, roleList));
     }
 
     @Override

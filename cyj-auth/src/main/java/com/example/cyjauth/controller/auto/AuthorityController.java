@@ -1,10 +1,10 @@
 package com.example.cyjauth.controller.auto;
 
-import com.example.cyjcommon.entity.po.EntityPO;
 import com.example.cyjcommon.entity.po.AppServicePO;
-import com.example.cyjcommon.entity.po.UserPO;
-import com.example.cyjcommon.entity.po.RolePO;
 import com.example.cyjcommon.entity.po.AuthorityPO;
+import com.example.cyjcommon.entity.po.EntityPO;
+import com.example.cyjcommon.entity.po.RolePO;
+import com.example.cyjcommon.entity.po.UserPO;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -13,6 +13,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Set;
 
 /**
  * @author Noice
@@ -33,12 +35,12 @@ public interface AuthorityController {
     ResultVO authorityPage(@RequestParam("pageNumber") Integer pageNumber, @RequestBody AppServicePO appService);
 
     @Operation(summary = "根据User查询所有Authority")
-    @PostMapping(value = "authorityPageByUser")
-    ResultVO authorityPage(@RequestParam("pageNumber") Integer pageNumber, @RequestBody UserPO user);
+    @PostMapping(value = "authorityPageByUserList")
+    ResultVO authorityPageByUserList(@RequestParam("pageNumber") Integer pageNumber, @RequestBody Set<UserPO> user);
 
     @Operation(summary = "根据Role查询所有Authority")
-    @PostMapping(value = "authorityPageByRole")
-    ResultVO authorityPage(@RequestParam("pageNumber") Integer pageNumber, @RequestBody RolePO role);
+    @PostMapping(value = "authorityPageByRoleList")
+    ResultVO authorityPageByRoleList(@RequestParam("pageNumber") Integer pageNumber, @RequestBody Set<RolePO> role);
 
     @Operation(summary = "保存Authority")
     @PostMapping(value = "authoritySave")

@@ -1,15 +1,17 @@
 package com.example.cyjauth.controller.auto.Impl;
 
-import com.example.cyjcommon.entity.po.UserPO;
-import com.example.cyjcommon.entity.po.RolePO;
-import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjauth.controller.auto.RoleController;
 import com.example.cyjauth.service.auto.RoleService;
+import com.example.cyjcommon.entity.po.RolePO;
+import com.example.cyjcommon.entity.po.UserPO;
+import com.example.cyjcommon.utils.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Set;
 
 /**
  * @author Noice
@@ -32,8 +34,8 @@ public class RoleControllerImpl implements RoleController {
     }
 
     @Override
-    public ResultVO rolePage(Integer pageNumber, UserPO user) {
-        return ResultVO.success(roleService.findAll(pageNumber, user));
+    public ResultVO rolePageByUserList(Integer pageNumber, Set<UserPO> userList) {
+        return ResultVO.success(roleService.findAllByUserList(pageNumber, userList));
     }
 
     @Override

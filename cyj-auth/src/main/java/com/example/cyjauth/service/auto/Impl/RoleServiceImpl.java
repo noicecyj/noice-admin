@@ -1,10 +1,10 @@
 package com.example.cyjauth.service.auto.Impl;
 
-import com.example.cyjcommon.dao.RoleDao;
-import com.example.cyjcommon.entity.po.UserPO;
-import com.example.cyjcommon.entity.po.RolePO;
-import com.example.cyjcommon.service.BaseService;
 import com.example.cyjauth.service.auto.RoleService;
+import com.example.cyjcommon.dao.RoleDao;
+import com.example.cyjcommon.entity.po.RolePO;
+import com.example.cyjcommon.entity.po.UserPO;
+import com.example.cyjcommon.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Set;
 
 /**
  * @author Noice
@@ -49,10 +51,10 @@ public class RoleServiceImpl extends BaseService implements RoleService {
     }
 
     @Override
-    public Page<RolePO> findAll(Integer pageNumber, UserPO user) {
+    public Page<RolePO> findAllByUserList(Integer pageNumber, Set<UserPO> userList) {
         Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
         RolePO rolePO = new RolePO();
-        rolePO.setUser(user);
+        rolePO.setUser(userList);
         Example<RolePO> example = Example.of(rolePO);
         return roleDao.findAll(example, pageable);
     }

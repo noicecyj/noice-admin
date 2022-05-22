@@ -57,9 +57,9 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
         if (StringUtils.isBlank(redisConfigAttributesPermission)) {
             List<AuthorityPO> authorityPOList = authorityCustomService.findRoleAndAuthority();
             for (AuthorityPO po : authorityPOList) {
-                String path = po.getPath();
-                if (po.getAppName() != null) {
-                    path = "/" + po.getAppName() + "/" + path;
+                String path = po.getAuthorityPath();
+                if (po.getAppService() != null) {
+                    path = "/" + po.getAppService().getAppServicename() + "/" + path;
                 }
                 ConfigAttribute configAttribute = new SecurityConfig(path);
                 configAttributes.add(configAttribute);

@@ -36,7 +36,7 @@ public class AuthUserDetails extends UserPO implements UserDetails {
         Set<AuthorityPO> authorityCustomPOList = this.getAuthority();
         if (authorityCustomPOList != null) {
             for (AuthorityPO po : authorityCustomPOList) {
-                GrantedAuthority grantedAuthority = new AuthGrantedAuthority(po.getPath(), po.getMethod());
+                GrantedAuthority grantedAuthority = new AuthGrantedAuthority(po.getAuthorityPath(), po.getAuthorityMethod());
                 authorityList.add(grantedAuthority);
             }
         }
