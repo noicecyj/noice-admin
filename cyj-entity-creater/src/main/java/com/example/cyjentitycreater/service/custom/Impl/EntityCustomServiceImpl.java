@@ -280,7 +280,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("\r\n");
         propertyPOList.forEach(propertyPO -> {
             if (StringUtils.isEmpty(propertyPO.getPropertyOut())) {
-                if (StringUtils.isNotEmpty(propertyPO.getPropertyRequired())) {
+                if (StringUtils.isNotEmpty(propertyPO.getPropertyRequired()) && "是".equals(propertyPO.getPropertyRequired())) {
                     sb.append("    @NotNull(message = \"").append(propertyPO.getPropertyLabel()).append("不能为空\")\r\n");
                 }
                 if (StringUtils.isNotEmpty(propertyPO.getPropertyLength())) {
