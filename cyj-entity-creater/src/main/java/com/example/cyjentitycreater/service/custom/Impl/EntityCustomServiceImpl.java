@@ -274,6 +274,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("    @GeneratedValue(generator = \"uuid2\")\r\n");
         sb.append("    @Column(name = \"id\", length = 36)\r\n");
         sb.append("    private String id;\r\n");
+        sb.append("\r\n");
         propertyPOList.forEach(propertyPO -> {
             if (StringUtils.isEmpty(propertyPO.getPropertyOut())) {
                 if (StringUtils.isNotEmpty(propertyPO.getPropertyRequired())) {
@@ -323,6 +324,8 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import com.example.cyjcommon.entity.po.").append(poName).append("PO;\r\n");
         sb.append("import org.springframework.data.jpa.repository.JpaRepository;\r\n");
         sb.append("\r\n");
+        sb.append("import java.util.List;\r\n");
+        sb.append("\r\n");
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
         sb.append(" */\r\n");
@@ -332,10 +335,8 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
-                if (!propertyOut.equals(poName)) {
-                    sb.append("    List<").append(poName).append("PO> findAllBy").append(propertyOut).append("(").append(propertyOut).append("PO ").append(underPropertyOut).append(");\r\n");
-                    sb.append("\r\n");
-                }
+                sb.append("    List<").append(poName).append("PO> findAllBy").append(propertyOut).append("(").append(propertyOut).append("PO ").append(underPropertyOut).append(");\r\n");
+                sb.append("\r\n");
             }
         }
         sb.append("}\r\n");
