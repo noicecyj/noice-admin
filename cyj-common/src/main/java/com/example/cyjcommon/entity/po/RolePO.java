@@ -1,15 +1,10 @@
 package com.example.cyjcommon.entity.po;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
-import org.hibernate.Hibernate;
-import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,24 +14,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @Entity
 @Table(name = RolePO.T_ROLE)
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
 @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class RolePO implements Serializable {
 
     static final String T_ROLE = "t_role";
@@ -45,36 +36,29 @@ public class RolePO implements Serializable {
     @GeneratedValue(generator = "uuid2")
     @Column(name = "id", length = 36)
     private String id;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "description")
-    private String description;
-    @Column(name = "value")
-    private String value;
-    @Column(name = "status")
-    private String status;
-    @Column(name = "sort_code")
-    private String sortCode;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+
+    @NotNull(message = "角色名称不能为空")
+    @Column(name = "role_name")
+    private String roleName;
+
+    @NotNull(message = "角色值不能为空")
+    @Column(name = "role_value")
+    private String roleValue;
+
+    @NotNull(message = "角色描述不能为空")
+    @Column(name = "role_description")
+    private String roleDescription;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinColumn(name = "user_id")
     private UserPO user;
-    @JsonIgnore
-    @OneToMany(targetEntity = AuthorityPO.class, fetch = FetchType.EAGER, mappedBy = "role")
-    @NotFound(action = NotFoundAction.IGNORE)
-    @BatchSize(size = 20)
-    private Set<AuthorityPO> authority = new HashSet<>();
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        RolePO that = (RolePO) o;
-        return Objects.equals(id, that.id);
-    }
+    @NotNull(message = "状态不能为空")
+    @Column(name = "status")
+    private String status;
 
-    @Override
-    public int hashCode() {
-        return 0;
-    }
+    @NotNull(message = "排序不能为空")
+    @Column(name = "sort_code")
+    private String sortCode;
 
 }
