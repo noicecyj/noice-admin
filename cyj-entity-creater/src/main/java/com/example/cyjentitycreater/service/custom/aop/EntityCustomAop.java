@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @Aspect
 @Component

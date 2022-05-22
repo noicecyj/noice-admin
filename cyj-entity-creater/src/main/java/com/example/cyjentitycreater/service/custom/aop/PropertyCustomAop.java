@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @Aspect
 @Component
@@ -58,16 +57,6 @@ public class PropertyCustomAop {
     @After(value = "execution(* com.example.cyjentitycreater.service.auto.PropertyService.findAll(..))")
     public void findAllAfter(JoinPoint joinPoint) {
         logger.info("EntityCustomAop.findAllAfter:{}", joinPoint);
-    }
-
-    @Before(value = "execution(* com.example.cyjentitycreater.service.auto.PropertyService.findAllByEntity(..))")
-    public void findListByPidBefore(JoinPoint joinPoint) {
-        logger.info("EntityCustomAop.findListByPidBefore:{}", joinPoint);
-    }
-
-    @After(value = "execution(* com.example.cyjentitycreater.service.auto.PropertyService.findAllByEntity(..))")
-    public void findListByPidAfter(JoinPoint joinPoint) {
-        logger.info("EntityCustomAop.findListByPidAfter:{}", joinPoint);
     }
 
 }

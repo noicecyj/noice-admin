@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @CrossOrigin
 @RestController

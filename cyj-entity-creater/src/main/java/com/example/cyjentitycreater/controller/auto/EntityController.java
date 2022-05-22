@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @Tag(name = "Entity")
 public interface EntityController {

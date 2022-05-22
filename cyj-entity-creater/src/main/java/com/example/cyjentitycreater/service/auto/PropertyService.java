@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 
 /**
  * @author Noice
- * @version 1.0
  */
 public interface PropertyService {
 

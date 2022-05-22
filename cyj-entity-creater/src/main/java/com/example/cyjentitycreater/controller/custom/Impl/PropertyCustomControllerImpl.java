@@ -7,12 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Noice
- * @version 1.0
- * @date 2021-10-16
  */
 @CrossOrigin
 @RestController
 @RequestMapping(value = "entityCreateApi")
 public class PropertyCustomControllerImpl implements PropertyCustomController {
-
 }
