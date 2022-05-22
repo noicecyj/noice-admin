@@ -3,7 +3,7 @@ import {request} from 'ice';
 export default {
   propertyPage(pageNumber, data) {
     return request({
-      url: '/entityCreateApi/propertyPage',
+      url: '/entityCreateApi/propertyPageByEntity',
       method: 'post',
       params: {
         pageNumber,
