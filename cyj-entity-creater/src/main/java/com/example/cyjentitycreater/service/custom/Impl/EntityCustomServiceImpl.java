@@ -788,10 +788,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("@Tag(name = \"").append(poName).append("\")\r\n");
         sb.append("public interface ").append(poName).append("Controller {\r\n");
         sb.append("\r\n");
-        sb.append("    @Operation(summary = \"查询所有").append(poName).append("\")\r\n");
-        sb.append("    @PostMapping(value = \"").append(underPoName).append("Page\")\r\n");
-        sb.append("    ResultVO ").append(underPoName).append("Page(@RequestParam(\"pageNumber\") Integer pageNumber);\r\n");
-        sb.append("\r\n");
         for (PropertyPO propertyPO : propertyPOList) {
             if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
@@ -859,11 +855,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("    @Autowired\r\n");
         sb.append("    public void set").append(poName).append("Service(").append(poName).append("Service ").append(underPoName).append("Service) {\r\n");
         sb.append("        this.").append(underPoName).append("Service = ").append(underPoName).append("Service;\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("    @Override\r\n");
-        sb.append("    public ResultVO ").append(underPoName).append("Page(Integer pageNumber) {\r\n");
-        sb.append("        return ResultVO.success(").append(underPoName).append("Service.findAll(pageNumber));\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
         for (PropertyPO propertyPO : propertyPOList) {
