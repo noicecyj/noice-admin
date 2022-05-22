@@ -743,7 +743,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                 sb.append("    public Page<").append(poName).append("PO> findAll(Integer pageNumber, ").append(propertyOut).append("PO ").append(underPropertyOut).append(") {\r\n");
                 sb.append("        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by(\"sortCode\").ascending());\r\n");
                 sb.append("        ").append(poName).append("PO ").append(underPoName).append("PO = new ").append(poName).append("PO();\r\n");
-                sb.append("        ").append(underPoName).append("PO.set").append(poName).append("(").append(underPropertyOut).append(");\r\n");
+                sb.append("        ").append(underPoName).append("PO.set").append(propertyOut).append("(").append(underPropertyOut).append(");\r\n");
                 sb.append("        Example<").append(poName).append("PO> example = Example.of(").append(underPoName).append("PO);\r\n");
                 sb.append("        return ").append(underPoName).append("Dao.findAll(example, pageable);\r\n");
                 sb.append("    }\r\n");
@@ -796,10 +796,12 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("    @Operation(summary = \"根据").append(propertyOut).append("查询所有").append(poName).append("\")\r\n");
-                sb.append("    @PostMapping(value = \"").append(underPoName).append("PageBy").append(propertyOut).append("\")\r\n");
-                sb.append("    ResultVO ").append(underPoName).append("Page(@RequestParam(\"pageNumber\") Integer pageNumber, @RequestBody ").append(propertyOut).append("PO ").append(underPropertyOut).append(");\r\n");
-                sb.append("\r\n");
+                if (!propertyOut.equals(poName)) {
+                    sb.append("    @Operation(summary = \"根据").append(propertyOut).append("查询所有").append(poName).append("\")\r\n");
+                    sb.append("    @PostMapping(value = \"").append(underPoName).append("PageBy").append(propertyOut).append("\")\r\n");
+                    sb.append("    ResultVO ").append(underPoName).append("Page(@RequestParam(\"pageNumber\") Integer pageNumber, @RequestBody ").append(propertyOut).append("PO ").append(underPropertyOut).append(");\r\n");
+                    sb.append("\r\n");
+                }
             }
         }
         sb.append("    @Operation(summary = \"保存").append(poName).append("\")\r\n");
@@ -868,11 +870,13 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("    @Override\r\n");
-                sb.append("    public ResultVO ").append(underPoName).append("Page(Integer pageNumber, ").append(propertyOut).append("PO ").append(underPropertyOut).append(") {\r\n");
-                sb.append("        return ResultVO.success(").append(underPoName).append("Service.findAll(pageNumber, ").append(underPropertyOut).append("));\r\n");
-                sb.append("    }\r\n");
-                sb.append("\r\n");
+                if (!propertyOut.equals(poName)) {
+                    sb.append("    @Override\r\n");
+                    sb.append("    public ResultVO ").append(underPoName).append("Page(Integer pageNumber, ").append(propertyOut).append("PO ").append(underPropertyOut).append(") {\r\n");
+                    sb.append("        return ResultVO.success(").append(underPoName).append("Service.findAll(pageNumber, ").append(underPropertyOut).append("));\r\n");
+                    sb.append("    }\r\n");
+                    sb.append("\r\n");
+                }
             }
         }
         sb.append("    @Override\r\n");
