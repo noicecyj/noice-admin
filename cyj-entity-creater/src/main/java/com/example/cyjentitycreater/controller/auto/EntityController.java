@@ -27,7 +27,7 @@ public interface EntityController {
 
     @Operation(summary = "根据AppService查询所有Entity")
     @PostMapping(value = "entityPageByAppService")
-    ResultVO entityPage(@RequestParam("pageNumber") Integer pageNumber, @RequestBody AppServicePO appServicePO);
+    ResultVO entityPage(@RequestParam("pageNumber") Integer pageNumber, @RequestBody AppServicePO appService);
 
     @Operation(summary = "保存Entity")
     @PostMapping(value = "entitySave")
