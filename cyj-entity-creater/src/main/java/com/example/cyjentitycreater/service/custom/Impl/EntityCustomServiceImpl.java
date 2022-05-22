@@ -327,8 +327,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import com.example.cyjcommon.entity.po.").append(poName).append("PO;\r\n");
         sb.append("import org.springframework.data.jpa.repository.JpaRepository;\r\n");
         sb.append("\r\n");
-        sb.append("import java.util.List;\r\n");
-        sb.append("\r\n");
+        if (BeanUtils.ifDate(propertyPOList)) {
+            sb.append("import java.util.List;\r\n");
+            sb.append("\r\n");
+        }
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
         sb.append(" */\r\n");
