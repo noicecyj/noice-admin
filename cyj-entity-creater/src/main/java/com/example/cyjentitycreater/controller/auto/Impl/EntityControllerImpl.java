@@ -38,8 +38,8 @@ public class EntityControllerImpl implements EntityController {
     }
 
     @Override
-    public ResultVO entityPage(Integer pageNumber, AppServicePO appServicePO) {
-        return ResultVO.success(entityService.findAll(pageNumber, appServicePO));
+    public ResultVO entityPage(Integer pageNumber, AppServicePO appService) {
+        return ResultVO.success(entityService.findAll(pageNumber, appService));
     }
 
     @Override

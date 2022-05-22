@@ -470,7 +470,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                 sb.append("    public Page<").append(poName).append("PO> findAll(Integer pageNumber, ").append(propertyOut).append("PO ").append(underPropertyOut).append(") {\r\n");
                 sb.append("        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by(\"sortCode\").ascending());\r\n");
                 sb.append("        ").append(poName).append("PO ").append(underPoName).append("PO = new ").append(poName).append("PO();\r\n");
-                sb.append("        entityPO.set").append(poName).append("(").append(underPropertyOut).append(");\r\n");
+                sb.append("        ").append(underPoName).append("PO.set").append(propertyOut).append("(").append(underPropertyOut).append(");\r\n");
                 sb.append("        Example<").append(poName).append("PO> example = Example.of(").append(underPoName).append("PO);\r\n");
                 sb.append("        return ").append(underPoName).append("Dao.findAll(example, pageable);\r\n");
                 sb.append("    }\r\n");
@@ -535,7 +535,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("\r\n");
         sb.append("    @Operation(summary = \"删除").append(poName).append("\")\r\n");
         sb.append("    @PostMapping(value = \"").append(underPoName).append("Delete\")\r\n");
-        sb.append("    void ").append(underPoName).append("Delete(@RequestBody ").append(poName).append("PO po);\r\n");
+        sb.append("    ResultVO ").append(underPoName).append("Delete(@RequestBody ").append(poName).append("PO po);\r\n");
         sb.append("\r\n");
         sb.append("}\r\n");
         String entityControllerData = sb.toString();
@@ -614,7 +614,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("    }\r\n");
         sb.append("\r\n");
         sb.append("    @Override\r\n");
-        sb.append("    public void ").append(underPoName).append("Delete(").append(poName).append("PO po) {\r\n");
+        sb.append("    public ResultVO ").append(underPoName).append("Delete(").append(poName).append("PO po) {\r\n");
         sb.append("        if (po.getId() == null) {\r\n");
         sb.append("            return ResultVO.failure();\r\n");
         sb.append("        }\r\n");
@@ -808,7 +808,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("\r\n");
         sb.append("    @Operation(summary = \"删除").append(poName).append("\")\r\n");
         sb.append("    @PostMapping(value = \"").append(underPoName).append("Delete\")\r\n");
-        sb.append("    void ").append(underPoName).append("Delete(@RequestBody ").append(poName).append("PO po);\r\n");
+        sb.append("    ResultVO ").append(underPoName).append("Delete(@RequestBody ").append(poName).append("PO po);\r\n");
         sb.append("\r\n");
         sb.append("}\r\n");
         String entityControllerData = sb.toString();
@@ -887,7 +887,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("    }\r\n");
         sb.append("\r\n");
         sb.append("    @Override\r\n");
-        sb.append("    public void ").append(underPoName).append("Delete(").append(poName).append("PO po) {\r\n");
+        sb.append("    public ResultVO ").append(underPoName).append("Delete(").append(poName).append("PO po) {\r\n");
         sb.append("        if (po.getId() == null) {\r\n");
         sb.append("            return ResultVO.failure();\r\n");
         sb.append("        }\r\n");
