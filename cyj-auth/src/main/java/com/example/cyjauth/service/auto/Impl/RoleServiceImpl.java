@@ -2,6 +2,7 @@ package com.example.cyjauth.service.auto.Impl;
 
 import com.example.cyjauth.service.auto.RoleService;
 import com.example.cyjcommon.dao.RoleDao;
+import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.example.cyjcommon.entity.po.RolePO;
 import com.example.cyjcommon.entity.po.UserPO;
 import com.example.cyjcommon.service.BaseService;
@@ -55,6 +56,15 @@ public class RoleServiceImpl extends BaseService implements RoleService {
         Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
         RolePO rolePO = new RolePO();
         rolePO.setUser(userList);
+        Example<RolePO> example = Example.of(rolePO);
+        return roleDao.findAll(example, pageable);
+    }
+
+    @Override
+    public Object findAllByAuthorityList(Integer pageNumber, Set<AuthorityPO> authorityList) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
+        RolePO rolePO = new RolePO();
+        rolePO.setAuthority(authorityList);
         Example<RolePO> example = Example.of(rolePO);
         return roleDao.findAll(example, pageable);
     }

@@ -1,5 +1,6 @@
 package com.example.cyjauth.service.auto;
 
+import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.example.cyjcommon.entity.po.RolePO;
 import com.example.cyjcommon.entity.po.UserPO;
 import org.springframework.data.domain.Page;
@@ -21,4 +22,5 @@ public interface RoleService {
 
     Page<RolePO> findAllByUserList(Integer pageNumber, Set<UserPO> userList);
 
+    Object findAllByAuthorityList(Integer pageNumber, Set<AuthorityPO> authorityList);
 }

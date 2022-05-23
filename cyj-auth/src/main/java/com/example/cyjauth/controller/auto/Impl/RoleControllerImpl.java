@@ -2,6 +2,7 @@ package com.example.cyjauth.controller.auto.Impl;
 
 import com.example.cyjauth.controller.auto.RoleController;
 import com.example.cyjauth.service.auto.RoleService;
+import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.example.cyjcommon.entity.po.RolePO;
 import com.example.cyjcommon.entity.po.UserPO;
 import com.example.cyjcommon.utils.ResultVO;
@@ -36,6 +37,11 @@ public class RoleControllerImpl implements RoleController {
     @Override
     public ResultVO rolePageByUserList(Integer pageNumber, Set<UserPO> userList) {
         return ResultVO.success(roleService.findAllByUserList(pageNumber, userList));
+    }
+
+    @Override
+    public ResultVO rolePageByAuthorityList(Integer pageNumber, Set<AuthorityPO> authorityList) {
+        return ResultVO.success(roleService.findAllByAuthorityList(pageNumber, authorityList));
     }
 
     @Override

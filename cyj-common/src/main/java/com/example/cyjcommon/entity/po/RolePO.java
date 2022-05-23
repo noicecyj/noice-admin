@@ -55,6 +55,11 @@ public class RolePO implements Serializable {
     @BatchSize(size = 20)
     private Set<UserPO> user;
 
+    @JsonIgnore
+    @ManyToMany(targetEntity = AuthorityPO.class, fetch = FetchType.EAGER)
+    @BatchSize(size = 20)
+    private Set<AuthorityPO> authority;
+
     @NotNull(message = "状态不能为空")
     @Column(name = "status")
     private String status;
