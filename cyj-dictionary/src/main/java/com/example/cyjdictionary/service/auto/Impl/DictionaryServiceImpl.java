@@ -14,11 +14,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 /**
  * @author Noice
- * @version 1.0
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -37,8 +34,8 @@ public class DictionaryServiceImpl extends BaseService implements DictionaryServ
     }
 
     @Override
-    public void deleteOne(String id) {
-        dictionaryDao.deleteById(id);
+    public void deleteOne(DictionaryPO po) {
+        dictionaryDao.delete(po);
     }
 
     @Override
@@ -53,16 +50,6 @@ public class DictionaryServiceImpl extends BaseService implements DictionaryServ
         dictionaryPO.setCatalog(catalog);
         Example<DictionaryPO> example = Example.of(dictionaryPO);
         return dictionaryDao.findAll(example, pageable);
-    }
-
-    @Override
-    public DictionaryPO findOneById(String id) {
-        return dictionaryDao.findById(id).orElse(null);
-    }
-
-    @Override
-    public List<DictionaryPO> findAllByCatalog(CatalogPO catalog) {
-        return dictionaryDao.findAllByCatalog(catalog);
     }
 
 }

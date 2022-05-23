@@ -5,13 +5,13 @@ import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjdictionary.controller.auto.CatalogController;
 import com.example.cyjdictionary.service.auto.CatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @CrossOrigin
 @RestController
@@ -31,7 +31,10 @@ public class CatalogControllerImpl implements CatalogController {
     }
 
     @Override
-    public ResultVO catalogSave(CatalogPO po) {
+    public ResultVO catalogSave(CatalogPO po, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResultVO.failure(bindingResult.getAllErrors().get(0));
+        }
         if (po.getId() == null) {
             return ResultVO.success(catalogService.addOne(po));
         }
@@ -39,13 +42,12 @@ public class CatalogControllerImpl implements CatalogController {
     }
 
     @Override
-    public void catalogDelete(String id) {
-        catalogService.deleteOne(id);
-    }
-
-    @Override
-    public ResultVO findCatalogById(String id) {
-        return ResultVO.success(catalogService.findOneById(id));
+    public ResultVO catalogDelete(CatalogPO po) {
+        if (po.getId() == null) {
+            return ResultVO.failure();
+        }
+        catalogService.deleteOne(po);
+        return ResultVO.success();
     }
 
 }

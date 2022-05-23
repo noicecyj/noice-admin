@@ -4,13 +4,14 @@ import com.example.cyjcommon.entity.po.CatalogPO;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @Tag(name = "Catalog")
 public interface CatalogController {
@@ -21,14 +22,10 @@ public interface CatalogController {
 
     @Operation(summary = "保存Catalog")
     @PostMapping(value = "catalogSave")
-    ResultVO catalogSave(@RequestBody CatalogPO po);
+    ResultVO catalogSave(@RequestBody @Validated CatalogPO po, BindingResult bindingResult);
 
     @Operation(summary = "删除Catalog")
     @PostMapping(value = "catalogDelete")
-    void catalogDelete(@RequestParam("id") String id);
-
-    @Operation(summary = "根据ID查询Catalog")
-    @PostMapping(value = "findCatalogById")
-    ResultVO findCatalogById(@RequestParam("id") String id);
+    ResultVO catalogDelete(@RequestBody CatalogPO po);
 
 }

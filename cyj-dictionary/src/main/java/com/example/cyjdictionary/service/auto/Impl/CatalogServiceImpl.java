@@ -2,17 +2,17 @@ package com.example.cyjdictionary.service.auto.Impl;
 
 import com.example.cyjcommon.dao.CatalogDao;
 import com.example.cyjcommon.entity.po.CatalogPO;
-import com.example.cyjcommon.entity.po.QCatalogPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjdictionary.service.auto.CatalogService;
-import com.querydsl.core.QueryResults;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -31,8 +31,8 @@ public class CatalogServiceImpl extends BaseService implements CatalogService {
     }
 
     @Override
-    public void deleteOne(String id) {
-        catalogDao.deleteById(id);
+    public void deleteOne(CatalogPO po) {
+        catalogDao.delete(po);
     }
 
     @Override
@@ -41,19 +41,8 @@ public class CatalogServiceImpl extends BaseService implements CatalogService {
     }
 
     @Override
-    public QueryResults<CatalogPO> findAll(Integer pageNumber) {
-        return queryFactory
-                .selectFrom(QCatalogPO.catalogPO)
-                .where(QCatalogPO.catalogPO.sortCode.isNotNull())
-                .offset((pageNumber - 1) * 10L)
-                .orderBy(QCatalogPO.catalogPO.sortCode.asc())
-                .limit(10)
-                .fetchResults();
-    }
-
-    @Override
-    public CatalogPO findOneById(String id) {
-        return catalogDao.findById(id).orElse(null);
+    public Page<CatalogPO> findAll(Integer pageNumber) {
+        return catalogDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 
 }

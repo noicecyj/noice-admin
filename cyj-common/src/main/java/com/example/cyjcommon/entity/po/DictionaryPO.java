@@ -15,11 +15,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @Entity
 @Table(name = DictionaryPO.T_DICTIONARY)
@@ -43,14 +43,16 @@ public class DictionaryPO implements Serializable {
     @Column(name = "dictionary_value")
     private String dictionaryValue;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @JoinColumn(name = "catalog_id")
+    private CatalogPO catalog;
+
+    @NotNull(message = "状态不能为空")
     @Column(name = "status")
     private String status;
 
+    @NotNull(message = "排序不能为空")
     @Column(name = "sort_code")
     private String sortCode;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "catalog_id")
-    private CatalogPO catalog;
 
 }

@@ -6,13 +6,13 @@ import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjdictionary.controller.auto.DictionaryController;
 import com.example.cyjdictionary.service.auto.DictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @CrossOrigin
 @RestController
@@ -32,7 +32,10 @@ public class DictionaryControllerImpl implements DictionaryController {
     }
 
     @Override
-    public ResultVO dictionarySave(DictionaryPO po) {
+    public ResultVO dictionarySave(DictionaryPO po, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResultVO.failure(bindingResult.getAllErrors().get(0));
+        }
         if (po.getId() == null) {
             return ResultVO.success(dictionaryService.addOne(po));
         }
@@ -40,13 +43,12 @@ public class DictionaryControllerImpl implements DictionaryController {
     }
 
     @Override
-    public void dictionaryDelete(String id) {
-        dictionaryService.deleteOne(id);
-    }
-
-    @Override
-    public ResultVO findDictionaryById(String id) {
-        return ResultVO.success(dictionaryService.findOneById(id));
+    public ResultVO dictionaryDelete(DictionaryPO po) {
+        if (po.getId() == null) {
+            return ResultVO.failure();
+        }
+        dictionaryService.deleteOne(po);
+        return ResultVO.success();
     }
 
 }

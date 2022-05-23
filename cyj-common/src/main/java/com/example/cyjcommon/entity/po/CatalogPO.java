@@ -11,11 +11,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @Entity
 @Table(name = CatalogPO.T_CATALOG)
@@ -36,15 +36,17 @@ public class CatalogPO implements Serializable {
     @Column(name = "catalog_name")
     private String catalogName;
 
-    @Column(name = "description")
-    private String description;
-
     @Column(name = "catalog_value")
     private String catalogValue;
 
+    @Column(name = "description")
+    private String description;
+
+    @NotNull(message = "状态不能为空")
     @Column(name = "status")
     private String status;
 
+    @NotNull(message = "排序不能为空")
     @Column(name = "sort_code")
     private String sortCode;
 
