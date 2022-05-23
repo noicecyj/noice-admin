@@ -36,11 +36,11 @@ public interface AuthorityController {
 
     @Operation(summary = "根据UserList查询所有Authority")
     @PostMapping(value = "authorityPageByUserList")
-    ResultVO authorityPageByUserList(@RequestParam("pageNumber") Integer pageNumber, @RequestBody Set<UserPO> user);
+    ResultVO authorityPageByUserList(@RequestParam("pageNumber") Integer pageNumber, @RequestBody Set<UserPO> userList);
 
     @Operation(summary = "根据RoleList查询所有Authority")
     @PostMapping(value = "authorityPageByRoleList")
-    ResultVO authorityPageByRoleList(@RequestParam("pageNumber") Integer pageNumber, @RequestBody Set<RolePO> role);
+    ResultVO authorityPageByRoleList(@RequestParam("pageNumber") Integer pageNumber, @RequestBody Set<RolePO> roleList);
 
     @Operation(summary = "保存Authority")
     @PostMapping(value = "authoritySave")

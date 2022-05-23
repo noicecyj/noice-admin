@@ -1,16 +1,20 @@
 package com.example.cyjcommon.dao;
 
+import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.example.cyjcommon.entity.po.UserPO;
 import com.example.cyjcommon.entity.po.RolePO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Noice
  */
 public interface RoleDao extends JpaRepository<RolePO, String> {
 
-    List<RolePO> findAllByUser(UserPO user);
+    List<RolePO> findAllByUser(Set<UserPO> userList);
+
+    List<RolePO> findAllByAuthority(Set<AuthorityPO> authorityList);
 
 }

@@ -8,6 +8,7 @@ import com.example.cyjcommon.entity.po.AuthorityPO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Noice
@@ -18,8 +19,8 @@ public interface AuthorityDao extends JpaRepository<AuthorityPO, String> {
 
     List<AuthorityPO> findAllByAppService(AppServicePO appService);
 
-    List<AuthorityPO> findAllByUser(UserPO user);
+    List<AuthorityPO> findAllByUser(Set<UserPO> userList);
 
-    List<AuthorityPO> findAllByRole(RolePO role);
+    List<AuthorityPO> findAllByRole(Set<RolePO> roleList);
 
 }
