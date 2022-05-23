@@ -40,6 +40,9 @@ public class PropertyPO implements Serializable {
     @Column(name = "property_edit_enable")
     private String propertyEditEnable;
 
+    @Column(name = "property_out_type")
+    private String propertyOutType;
+
     @Column(name = "property_length")
     private String propertyLength;
 
