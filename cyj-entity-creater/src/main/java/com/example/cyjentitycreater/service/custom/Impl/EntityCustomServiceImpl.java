@@ -196,10 +196,16 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         StringBuilder sb = new StringBuilder();
         sb.append("package com.example.cyjcommon.entity.po;\r\n");
         sb.append("\r\n");
+        if (BeanUtils.ifManyToMany(propertyPOList)) {
+            sb.append("import com.fasterxml.jackson.annotation.JsonIgnore;\r\n");
+        }
         sb.append("import com.fasterxml.jackson.annotation.JsonIgnoreProperties;\r\n");
         sb.append("import lombok.Getter;\r\n");
         sb.append("import lombok.RequiredArgsConstructor;\r\n");
         sb.append("import lombok.Setter;\r\n");
+        if (BeanUtils.ifManyToMany(propertyPOList)) {
+            sb.append("import org.hibernate.annotations.BatchSize;\r\n");
+        }
         sb.append("import org.hibernate.annotations.GenericGenerator;\r\n");
         sb.append("\r\n");
         if (BeanUtils.ifManyToOne(propertyPOList)) {
@@ -214,6 +220,11 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import javax.persistence.Id;\r\n");
         if (BeanUtils.ifManyToOne(propertyPOList)) {
             sb.append("import javax.persistence.JoinColumn;\r\n");
+        }
+        if (BeanUtils.ifManyToMany(propertyPOList)) {
+            sb.append("import javax.persistence.ManyToMany;\r\n");
+        }
+        if (BeanUtils.ifManyToOne(propertyPOList)) {
             sb.append("import javax.persistence.ManyToOne;\r\n");
         }
         sb.append("import javax.persistence.Table;\r\n");
@@ -246,7 +257,22 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("    private String id;\r\n");
         sb.append("\r\n");
         propertyPOList.forEach(propertyPO -> {
-            if (StringUtils.isEmpty(propertyPO.getPropertyOut())) {
+            if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
+                if ("ManyToOne".equals(propertyPO.getPropertyOutType())) {
+                    sb.append("    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)\r\n");
+                    sb.append("    @JoinColumn(name = \"").append(propertyPO.getPropertyOut()).append("_id\")\r\n");
+                    String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
+                    String propertyOut = BeanUtils.captureName(underPropertyOut);
+                    sb.append("    private ").append(propertyOut).append("PO ").append(underPropertyOut).append(";\r\n");
+                } else {
+                    String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
+                    String propertyOut = BeanUtils.captureName(underPropertyOut);
+                    sb.append("    @JsonIgnore\r\n");
+                    sb.append("    @ManyToMany(targetEntity = ").append(propertyOut).append("PO.class)\r\n");
+                    sb.append("    @BatchSize(size = 20)\r\n");
+                    sb.append("    private Set<").append(propertyOut).append("PO> ").append(underPropertyOut).append(";\r\n");
+                }
+            } else {
                 if (StringUtils.isNotEmpty(propertyPO.getPropertyRequired()) && "是".equals(propertyPO.getPropertyRequired())) {
                     sb.append("    @NotNull(message = \"").append(propertyPO.getPropertyLabel()).append("不能为空\")\r\n");
                 }
@@ -256,12 +282,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                     sb.append("    @Column(name = \"").append(propertyPO.getPropertyCode()).append("\")\r\n");
                 }
                 sb.append("    private ").append(propertyPO.getPropertyType()).append(" ").append(BeanUtils.underline2Camel(propertyPO.getPropertyCode())).append(";\r\n");
-            } else {
-                sb.append("    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)\r\n");
-                sb.append("    @JoinColumn(name = \"").append(propertyPO.getPropertyOut()).append("_id\")\r\n");
-                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
-                String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("    private ").append(propertyOut).append("PO ").append(underPropertyOut).append(";\r\n");
             }
             sb.append("\r\n");
         });
