@@ -83,9 +83,22 @@ public class BeanUtils {
         return false;
     }
 
-    public static Boolean ifOut(List<PropertyPO> poList) {
+    public static Boolean ifManyToOne(List<PropertyPO> poList) {
         for (PropertyPO po : poList) {
-            if (StringUtils.isNotEmpty(po.getPropertyOut())) {
+            if (StringUtils.isNotEmpty(po.getPropertyOut()) &&
+                    StringUtils.isNotEmpty(po.getPropertyOutType()) &&
+                    "ManyToOne".equals(po.getPropertyOutType())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static Boolean ifManyToMany(List<PropertyPO> poList) {
+        for (PropertyPO po : poList) {
+            if (StringUtils.isNotEmpty(po.getPropertyOut()) &&
+                    StringUtils.isNotEmpty(po.getPropertyOutType()) &&
+                    "ManyToMany".equals(po.getPropertyOutType())) {
                 return true;
             }
         }

@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.cyjcommon.dao.EntityDao;
 import com.example.cyjcommon.dao.PropertyDao;
 import com.example.cyjcommon.entity.po.AppServicePO;
-import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.example.cyjcommon.entity.po.DictionaryPO;
 import com.example.cyjcommon.entity.po.EntityPO;
 import com.example.cyjcommon.entity.po.PropertyPO;
@@ -193,97 +192,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         }
     }
 
-    private String[] controllerImplCustomGenerate(String poName, String appPath, String appApi) {
-        StringBuilder sb = new StringBuilder();
-        String[] PathArr = appPath.split("java");
-        String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
-        //controller路径
-        String poControllerPath = packetPath + ".controller.custom.";
-        sb.append("package ").append(poControllerPath).append("Impl;\r\n");
-        sb.append("\r\n");
-        sb.append("import ").append(poControllerPath).append(poName).append("CustomController;\r\n");
-        sb.append("import org.springframework.web.bind.annotation.CrossOrigin;\r\n");
-        sb.append("import org.springframework.web.bind.annotation.RequestMapping;\r\n");
-        sb.append("import org.springframework.web.bind.annotation.RestController;\r\n");
-        sb.append("\r\n");
-        sb.append("/**\r\n");
-        sb.append(" * @author Noice\r\n");
-        sb.append(" */\r\n");
-        sb.append("@CrossOrigin\r\n");
-        sb.append("@RestController\r\n");
-        sb.append("@RequestMapping(value = \"").append(appApi).append("\")\r\n");
-        sb.append("public class ").append(poName).append("CustomControllerImpl implements ").append(poName).append("CustomController {\r\n");
-        sb.append("\r\n");
-        sb.append("}\r\n");
-        String entityControllerImplData = sb.toString();
-        return new String[]{entityControllerImplData, poName + "CustomControllerImpl.java"};
-    }
-
-    private String[] controllerCustomGenerate(String poName, String appPath) {
-        StringBuilder sb = new StringBuilder();
-        String[] PathArr = appPath.split("java");
-        String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
-        //controller路径
-        String poControllerPath = packetPath + ".controller.custom;\r\n";
-        sb.append("package ").append(poControllerPath);
-        sb.append("\r\n");
-        sb.append("import io.swagger.v3.oas.annotations.tags.Tag;\r\n");
-        sb.append("\r\n");
-        sb.append("/**\r\n");
-        sb.append(" * @author Noice\r\n");
-        sb.append(" */\r\n");
-        sb.append("@Tag(name = \"").append(poName).append("\")\r\n");
-        sb.append("public interface ").append(poName).append("CustomController {\r\n");
-        sb.append("\r\n");
-        sb.append("}\r\n");
-        String entityControllerData = sb.toString();
-        return new String[]{entityControllerData, poName + "CustomController.java"};
-    }
-
-    private String[] serviceImplCustomGenerate(String poName, String appPath) {
-        StringBuilder sb = new StringBuilder();
-        String[] PathArr = appPath.split("java");
-        String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
-        //service路径
-        String poServicePath = packetPath + ".service.custom.";
-        //serviceImpl路径
-        sb.append("package ").append(poServicePath).append("Impl;\r\n");
-        sb.append("\r\n");
-        sb.append("import com.example.cyjcommon.service.BaseService;\r\n");
-        sb.append("import ").append(poServicePath).append(poName).append("CustomService;\r\n");
-        sb.append("import org.springframework.stereotype.Service;\r\n");
-        sb.append("import org.springframework.transaction.annotation.Transactional;\r\n");
-        sb.append("\r\n");
-        sb.append("/**\r\n");
-        sb.append(" * @author Noice\r\n");
-        sb.append(" */\r\n");
-        sb.append("@Service\r\n");
-        sb.append("@Transactional(rollbackFor = Exception.class)\r\n");
-        sb.append("public class ").append(poName).append("CustomServiceImpl extends BaseService implements ").append(poName).append("CustomService {\r\n");
-        sb.append("\r\n");
-        sb.append("}\r\n");
-        String entityServiceImplData = sb.toString();
-        return new String[]{entityServiceImplData, poName + "CustomServiceImpl.java"};
-    }
-
-    private String[] serviceCustomGenerate(String poName, String appPath) {
-        StringBuilder sb = new StringBuilder();
-        String[] PathArr = appPath.split("java");
-        String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
-        //service路径
-        String poServicePath = packetPath + ".service.custom;\r\n";
-        sb.append("package ").append(poServicePath);
-        sb.append("\r\n");
-        sb.append("/**\r\n");
-        sb.append(" * @author Noice\r\n");
-        sb.append(" */\r\n");
-        sb.append("public interface ").append(poName).append("CustomService {\r\n");
-        sb.append("\r\n");
-        sb.append("}\r\n");
-        String entityServiceData = sb.toString();
-        return new String[]{entityServiceData, poName + "CustomService.java"};
-    }
-
     public String[] poGenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String poName) {
         StringBuilder sb = new StringBuilder();
         sb.append("package com.example.cyjcommon.entity.po;\r\n");
@@ -294,17 +202,17 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import lombok.Setter;\r\n");
         sb.append("import org.hibernate.annotations.GenericGenerator;\r\n");
         sb.append("\r\n");
-        if (BeanUtils.ifOut(propertyPOList)) {
+        if (BeanUtils.ifManyToOne(propertyPOList)) {
             sb.append("import javax.persistence.CascadeType;\r\n");
         }
         sb.append("import javax.persistence.Column;\r\n");
         sb.append("import javax.persistence.Entity;\r\n");
-        if (BeanUtils.ifOut(propertyPOList)) {
+        if (BeanUtils.ifManyToOne(propertyPOList)) {
             sb.append("import javax.persistence.FetchType;\r\n");
         }
         sb.append("import javax.persistence.GeneratedValue;\r\n");
         sb.append("import javax.persistence.Id;\r\n");
-        if (BeanUtils.ifOut(propertyPOList)) {
+        if (BeanUtils.ifManyToOne(propertyPOList)) {
             sb.append("import javax.persistence.JoinColumn;\r\n");
             sb.append("import javax.persistence.ManyToOne;\r\n");
         }
@@ -386,7 +294,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import com.example.cyjcommon.entity.po.").append(poName).append("PO;\r\n");
         sb.append("import org.springframework.data.jpa.repository.JpaRepository;\r\n");
         sb.append("\r\n");
-        if (BeanUtils.ifOut(propertyPOList)) {
+        if (BeanUtils.ifManyToOne(propertyPOList)) {
             sb.append("import java.util.List;\r\n");
             sb.append("\r\n");
         }
@@ -477,12 +385,12 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import com.example.cyjcommon.service.BaseService;\r\n");
         sb.append("import ").append(poServicePath).append(poName).append("Service;\r\n");
         sb.append("import org.springframework.beans.factory.annotation.Autowired;\r\n");
-        if (BeanUtils.ifOut(propertyPOList)) {
+        if (BeanUtils.ifManyToOne(propertyPOList)) {
             sb.append("import org.springframework.data.domain.Example;\r\n");
         }
         sb.append("import org.springframework.data.domain.Page;\r\n");
         sb.append("import org.springframework.data.domain.PageRequest;\r\n");
-        if (BeanUtils.ifOut(propertyPOList)) {
+        if (BeanUtils.ifManyToOne(propertyPOList)) {
             sb.append("import org.springframework.data.domain.Pageable;\r\n");
         }
         sb.append("import org.springframework.data.domain.Sort;\r\n");
@@ -755,12 +663,12 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import com.example.cyjcommon.service.BaseService;\r\n");
         sb.append("import ").append(poServicePath).append(poName).append("Service;\r\n");
         sb.append("import org.springframework.beans.factory.annotation.Autowired;\r\n");
-        if (BeanUtils.ifOut(propertyPOList)) {
+        if (BeanUtils.ifManyToOne(propertyPOList)) {
             sb.append("import org.springframework.data.domain.Example;\r\n");
         }
         sb.append("import org.springframework.data.domain.Page;\r\n");
         sb.append("import org.springframework.data.domain.PageRequest;\r\n");
-        if (BeanUtils.ifOut(propertyPOList)) {
+        if (BeanUtils.ifManyToOne(propertyPOList)) {
             sb.append("import org.springframework.data.domain.Pageable;\r\n");
         }
         sb.append("import org.springframework.data.domain.Sort;\r\n");
@@ -954,6 +862,97 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("}\r\n");
         String entityControllerImplData = sb.toString();
         return new String[]{entityControllerImplData, poName + "ControllerImpl.java"};
+    }
+
+    private String[] controllerImplCustomGenerate(String poName, String appPath, String appApi) {
+        StringBuilder sb = new StringBuilder();
+        String[] PathArr = appPath.split("java");
+        String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
+        //controller路径
+        String poControllerPath = packetPath + ".controller.custom.";
+        sb.append("package ").append(poControllerPath).append("Impl;\r\n");
+        sb.append("\r\n");
+        sb.append("import ").append(poControllerPath).append(poName).append("CustomController;\r\n");
+        sb.append("import org.springframework.web.bind.annotation.CrossOrigin;\r\n");
+        sb.append("import org.springframework.web.bind.annotation.RequestMapping;\r\n");
+        sb.append("import org.springframework.web.bind.annotation.RestController;\r\n");
+        sb.append("\r\n");
+        sb.append("/**\r\n");
+        sb.append(" * @author Noice\r\n");
+        sb.append(" */\r\n");
+        sb.append("@CrossOrigin\r\n");
+        sb.append("@RestController\r\n");
+        sb.append("@RequestMapping(value = \"").append(appApi).append("\")\r\n");
+        sb.append("public class ").append(poName).append("CustomControllerImpl implements ").append(poName).append("CustomController {\r\n");
+        sb.append("\r\n");
+        sb.append("}\r\n");
+        String entityControllerImplData = sb.toString();
+        return new String[]{entityControllerImplData, poName + "CustomControllerImpl.java"};
+    }
+
+    private String[] controllerCustomGenerate(String poName, String appPath) {
+        StringBuilder sb = new StringBuilder();
+        String[] PathArr = appPath.split("java");
+        String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
+        //controller路径
+        String poControllerPath = packetPath + ".controller.custom;\r\n";
+        sb.append("package ").append(poControllerPath);
+        sb.append("\r\n");
+        sb.append("import io.swagger.v3.oas.annotations.tags.Tag;\r\n");
+        sb.append("\r\n");
+        sb.append("/**\r\n");
+        sb.append(" * @author Noice\r\n");
+        sb.append(" */\r\n");
+        sb.append("@Tag(name = \"").append(poName).append("\")\r\n");
+        sb.append("public interface ").append(poName).append("CustomController {\r\n");
+        sb.append("\r\n");
+        sb.append("}\r\n");
+        String entityControllerData = sb.toString();
+        return new String[]{entityControllerData, poName + "CustomController.java"};
+    }
+
+    private String[] serviceImplCustomGenerate(String poName, String appPath) {
+        StringBuilder sb = new StringBuilder();
+        String[] PathArr = appPath.split("java");
+        String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
+        //service路径
+        String poServicePath = packetPath + ".service.custom.";
+        //serviceImpl路径
+        sb.append("package ").append(poServicePath).append("Impl;\r\n");
+        sb.append("\r\n");
+        sb.append("import com.example.cyjcommon.service.BaseService;\r\n");
+        sb.append("import ").append(poServicePath).append(poName).append("CustomService;\r\n");
+        sb.append("import org.springframework.stereotype.Service;\r\n");
+        sb.append("import org.springframework.transaction.annotation.Transactional;\r\n");
+        sb.append("\r\n");
+        sb.append("/**\r\n");
+        sb.append(" * @author Noice\r\n");
+        sb.append(" */\r\n");
+        sb.append("@Service\r\n");
+        sb.append("@Transactional(rollbackFor = Exception.class)\r\n");
+        sb.append("public class ").append(poName).append("CustomServiceImpl extends BaseService implements ").append(poName).append("CustomService {\r\n");
+        sb.append("\r\n");
+        sb.append("}\r\n");
+        String entityServiceImplData = sb.toString();
+        return new String[]{entityServiceImplData, poName + "CustomServiceImpl.java"};
+    }
+
+    private String[] serviceCustomGenerate(String poName, String appPath) {
+        StringBuilder sb = new StringBuilder();
+        String[] PathArr = appPath.split("java");
+        String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
+        //service路径
+        String poServicePath = packetPath + ".service.custom;\r\n";
+        sb.append("package ").append(poServicePath);
+        sb.append("\r\n");
+        sb.append("/**\r\n");
+        sb.append(" * @author Noice\r\n");
+        sb.append(" */\r\n");
+        sb.append("public interface ").append(poName).append("CustomService {\r\n");
+        sb.append("\r\n");
+        sb.append("}\r\n");
+        String entityServiceData = sb.toString();
+        return new String[]{entityServiceData, poName + "CustomService.java"};
     }
 
     @Override

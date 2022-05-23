@@ -10,7 +10,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -50,12 +49,12 @@ public class UserPO implements Serializable {
     private String phone;
 
     @JsonIgnore
-    @ManyToMany(targetEntity = RolePO.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = RolePO.class)
     @BatchSize(size = 20)
     private Set<RolePO> role;
 
     @JsonIgnore
-    @ManyToMany(targetEntity = AuthorityPO.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = AuthorityPO.class)
     @BatchSize(size = 20)
     private Set<AuthorityPO> authority;
 
