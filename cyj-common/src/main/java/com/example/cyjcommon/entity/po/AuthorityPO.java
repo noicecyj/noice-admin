@@ -65,12 +65,12 @@ public class AuthorityPO implements Serializable {
     private AppServicePO appService;
 
     @JsonIgnore
-    @ManyToMany(targetEntity = UserPO.class)
+    @ManyToMany(targetEntity = UserPO.class, fetch = FetchType.EAGER)
     @BatchSize(size = 20)
     private Set<UserPO> user;
 
     @JsonIgnore
-    @ManyToMany(targetEntity = RolePO.class)
+    @ManyToMany(targetEntity = RolePO.class, fetch = FetchType.EAGER)
     @BatchSize(size = 20)
     private Set<RolePO> role;
 

@@ -213,7 +213,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         }
         sb.append("import javax.persistence.Column;\r\n");
         sb.append("import javax.persistence.Entity;\r\n");
-        if (BeanUtils.ifManyToOne(propertyPOList)) {
+        if (BeanUtils.ifManyToOne(propertyPOList) || BeanUtils.ifManyToMany(propertyPOList)) {
             sb.append("import javax.persistence.FetchType;\r\n");
         }
         sb.append("import javax.persistence.GeneratedValue;\r\n");
@@ -230,6 +230,9 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import javax.persistence.Table;\r\n");
         sb.append("import javax.validation.constraints.NotNull;\r\n");
         sb.append("import java.io.Serializable;\r\n");
+        if (BeanUtils.ifManyToMany(propertyPOList)) {
+            sb.append("import java.util.Set;\r\n");
+        }
         if (BeanUtils.ifDate(propertyPOList)) {
             sb.append("import java.sql.Date;\r\n");
         }
@@ -268,7 +271,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                     String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
                     String propertyOut = BeanUtils.captureName(underPropertyOut);
                     sb.append("    @JsonIgnore\r\n");
-                    sb.append("    @ManyToMany(targetEntity = ").append(propertyOut).append("PO.class)\r\n");
+                    sb.append("    @ManyToMany(targetEntity = ").append(propertyOut).append("PO.class, fetch = FetchType.EAGER)\r\n");
                     sb.append("    @BatchSize(size = 20)\r\n");
                     sb.append("    private Set<").append(propertyOut).append("PO> ").append(underPropertyOut).append(";\r\n");
                 }
