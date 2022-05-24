@@ -4,13 +4,14 @@ import com.example.cyjcommon.entity.po.SqlPO;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @Tag(name = "Sql")
 public interface SqlController {
@@ -21,14 +22,10 @@ public interface SqlController {
 
     @Operation(summary = "保存Sql")
     @PostMapping(value = "sqlSave")
-    ResultVO sqlSave(@RequestBody SqlPO po);
+    ResultVO sqlSave(@RequestBody @Validated SqlPO po, BindingResult bindingResult);
 
     @Operation(summary = "删除Sql")
     @PostMapping(value = "sqlDelete")
-    void sqlDelete(@RequestParam("id") String id);
-
-    @Operation(summary = "根据ID查询Sql")
-    @PostMapping(value = "findSqlById")
-    ResultVO findSqlById(@RequestParam("id") String id);
+    ResultVO sqlDelete(@RequestBody SqlPO po);
 
 }

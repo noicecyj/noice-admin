@@ -5,13 +5,13 @@ import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjquery.controller.auto.SqlController;
 import com.example.cyjquery.service.auto.SqlService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @CrossOrigin
 @RestController
@@ -31,7 +31,10 @@ public class SqlControllerImpl implements SqlController {
     }
 
     @Override
-    public ResultVO sqlSave(SqlPO po) {
+    public ResultVO sqlSave(SqlPO po, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResultVO.failure(bindingResult.getAllErrors().get(0));
+        }
         if (po.getId() == null) {
             return ResultVO.success(sqlService.addOne(po));
         }
@@ -39,13 +42,12 @@ public class SqlControllerImpl implements SqlController {
     }
 
     @Override
-    public void sqlDelete(String id) {
-        sqlService.deleteOne(id);
-    }
-
-    @Override
-    public ResultVO findSqlById(String id) {
-        return ResultVO.success(sqlService.findOneById(id));
+    public ResultVO sqlDelete(SqlPO po) {
+        if (po.getId() == null) {
+            return ResultVO.failure();
+        }
+        sqlService.deleteOne(po);
+        return ResultVO.success();
     }
 
 }

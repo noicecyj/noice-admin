@@ -1,22 +1,19 @@
 package com.example.cyjquery.service.auto;
 
 import com.example.cyjcommon.entity.po.SqlPO;
-import com.querydsl.core.QueryResults;
+import org.springframework.data.domain.Page;
 
 /**
  * @author Noice
- * @version 1.0
  */
 public interface SqlService {
 
     SqlPO addOne(SqlPO po);
 
-    void deleteOne(String id);
+    void deleteOne(SqlPO po);
 
     SqlPO updateOne(SqlPO po);
 
-    QueryResults<SqlPO> findAll(Integer pageNumber);
-
-    SqlPO findOneById(String id);
+    Page<SqlPO> findAll(Integer pageNumber);
 
 }

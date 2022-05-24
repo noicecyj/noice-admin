@@ -1,18 +1,18 @@
 package com.example.cyjquery.service.auto.Impl;
 
 import com.example.cyjcommon.dao.SqlDao;
-import com.example.cyjcommon.entity.po.QSqlPO;
 import com.example.cyjcommon.entity.po.SqlPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjquery.service.auto.SqlService;
-import com.querydsl.core.QueryResults;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -31,8 +31,8 @@ public class SqlServiceImpl extends BaseService implements SqlService {
     }
 
     @Override
-    public void deleteOne(String id) {
-        sqlDao.deleteById(id);
+    public void deleteOne(SqlPO po) {
+        sqlDao.delete(po);
     }
 
     @Override
@@ -41,19 +41,8 @@ public class SqlServiceImpl extends BaseService implements SqlService {
     }
 
     @Override
-    public QueryResults<SqlPO> findAll(Integer pageNumber) {
-        return queryFactory
-                .selectFrom(QSqlPO.sqlPO)
-                .where(QSqlPO.sqlPO.sortCode.isNotNull())
-                .offset((pageNumber - 1) * 10L)
-                .orderBy(QSqlPO.sqlPO.sortCode.asc())
-                .limit(10)
-                .fetchResults();
-    }
-
-    @Override
-    public SqlPO findOneById(String id) {
-        return sqlDao.findById(id).orElse(null);
+    public Page<SqlPO> findAll(Integer pageNumber) {
+        return sqlDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 
 }
