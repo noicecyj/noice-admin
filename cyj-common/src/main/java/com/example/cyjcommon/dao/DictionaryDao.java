@@ -11,6 +11,6 @@ import java.util.List;
  */
 public interface DictionaryDao extends JpaRepository<DictionaryPO, String> {
 
-    List<DictionaryPO> findAllByCatalog(CatalogPO catalog);
+    List<DictionaryPO> findByCatalog(CatalogPO catalog);
 
 }

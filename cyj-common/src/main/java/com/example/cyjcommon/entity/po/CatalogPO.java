@@ -39,8 +39,9 @@ public class CatalogPO implements Serializable {
     @Column(name = "catalog_value")
     private String catalogValue;
 
-    @Column(name = "description")
-    private String description;
+    @NotNull(message = "描述不能为空")
+    @Column(name = "catalog_description")
+    private String catalogDescription;
 
     @NotNull(message = "状态不能为空")
     @Column(name = "status")
