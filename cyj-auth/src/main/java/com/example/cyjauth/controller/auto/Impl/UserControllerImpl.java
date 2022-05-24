@@ -2,12 +2,17 @@ package com.example.cyjauth.controller.auto.Impl;
 
 import com.example.cyjauth.controller.auto.UserController;
 import com.example.cyjauth.service.auto.UserService;
+import com.example.cyjcommon.entity.po.AuthorityPO;
+import com.example.cyjcommon.entity.po.RolePO;
 import com.example.cyjcommon.entity.po.UserPO;
 import com.example.cyjcommon.utils.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Set;
 
 /**
  * @author Noice
@@ -31,7 +36,20 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
-    public ResultVO userSave(UserPO po) {
+    public ResultVO userPageByRoleList(Integer pageNumber, Set<RolePO> roleList) {
+        return ResultVO.success(userService.findAllByRoleList(pageNumber, roleList));
+    }
+
+    @Override
+    public ResultVO userPageByAuthorityList(Integer pageNumber, Set<AuthorityPO> authorityList) {
+        return ResultVO.success(userService.findAllByAuthorityList(pageNumber, authorityList));
+    }
+
+    @Override
+    public ResultVO userSave(UserPO po, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResultVO.failure(bindingResult.getAllErrors().get(0));
+        }
         if (po.getId() == null) {
             return ResultVO.success(userService.addOne(po));
         }
@@ -39,13 +57,12 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
-    public void userDelete(String id) {
-        userService.deleteOne(id);
-    }
-
-    @Override
-    public ResultVO findUserById(String id) {
-        return ResultVO.success(userService.findOneById(id));
+    public ResultVO userDelete(UserPO po) {
+        if (po.getId() == null) {
+            return ResultVO.failure();
+        }
+        userService.deleteOne(po);
+        return ResultVO.success();
     }
 
 }

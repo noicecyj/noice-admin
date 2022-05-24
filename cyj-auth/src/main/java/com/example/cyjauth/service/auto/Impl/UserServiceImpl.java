@@ -2,13 +2,20 @@ package com.example.cyjauth.service.auto.Impl;
 
 import com.example.cyjauth.service.auto.UserService;
 import com.example.cyjcommon.dao.UserDao;
-import com.example.cyjcommon.entity.po.QUserPO;
+import com.example.cyjcommon.entity.po.AuthorityPO;
+import com.example.cyjcommon.entity.po.RolePO;
 import com.example.cyjcommon.entity.po.UserPO;
 import com.example.cyjcommon.service.BaseService;
-import com.querydsl.core.QueryResults;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Set;
 
 /**
  * @author Noice
@@ -31,8 +38,8 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
-    public void deleteOne(String id) {
-        userDao.deleteById(id);
+    public void deleteOne(UserPO po) {
+
     }
 
     @Override
@@ -41,19 +48,26 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
-    public QueryResults<UserPO> findAll(Integer pageNumber) {
-        return queryFactory
-                .selectFrom(QUserPO.userPO)
-                .where(QUserPO.userPO.sortCode.isNotNull())
-                .offset((pageNumber - 1) * 10L)
-                .orderBy(QUserPO.userPO.sortCode.asc())
-                .limit(10)
-                .fetchResults();
+    public Page<UserPO> findAll(Integer pageNumber) {
+        return userDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 
     @Override
-    public UserPO findOneById(String id) {
-        return userDao.findById(id).orElse(null);
+    public Page<UserPO> findAllByRoleList(Integer pageNumber, Set<RolePO> roleList) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
+        UserPO userPO = new UserPO();
+        userPO.setRole(roleList);
+        Example<UserPO> example = Example.of(userPO);
+        return userDao.findAll(example, pageable);
+    }
+
+    @Override
+    public Page<UserPO> findAllByAuthorityList(Integer pageNumber, Set<AuthorityPO> authorityList) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
+        UserPO userPO = new UserPO();
+        userPO.setAuthority(authorityList);
+        Example<UserPO> example = Example.of(userPO);
+        return userDao.findAll(example, pageable);
     }
 
 }

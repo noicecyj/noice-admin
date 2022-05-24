@@ -22,5 +22,5 @@ public interface RoleService {
 
     Page<RolePO> findAllByUserList(Integer pageNumber, Set<UserPO> userList);
 
-    Object findAllByAuthorityList(Integer pageNumber, Set<AuthorityPO> authorityList);
+    Page<RolePO> findAllByAuthorityList(Integer pageNumber, Set<AuthorityPO> authorityList);
 }

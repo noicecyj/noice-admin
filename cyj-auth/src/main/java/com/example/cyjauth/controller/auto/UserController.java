@@ -6,6 +6,8 @@ import com.example.cyjcommon.entity.po.UserPO;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,14 +35,10 @@ public interface UserController {
 
     @Operation(summary = "保存User")
     @PostMapping(value = "userSave")
-    ResultVO userSave(@RequestBody UserPO po);
+    ResultVO userSave(@RequestBody @Validated UserPO po, BindingResult bindingResult);
 
     @Operation(summary = "删除User")
     @PostMapping(value = "userDelete")
-    void userDelete(@RequestParam("id") String id);
-
-    @Operation(summary = "根据ID查询User")
-    @PostMapping(value = "findUserById")
-    ResultVO findUserById(@RequestParam("id") String id);
+    ResultVO userDelete(@RequestBody UserPO po);
 
 }

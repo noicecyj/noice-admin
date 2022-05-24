@@ -61,7 +61,7 @@ public class RoleServiceImpl extends BaseService implements RoleService {
     }
 
     @Override
-    public Object findAllByAuthorityList(Integer pageNumber, Set<AuthorityPO> authorityList) {
+    public Page<RolePO> findAllByAuthorityList(Integer pageNumber, Set<AuthorityPO> authorityList) {
         Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
         RolePO rolePO = new RolePO();
         rolePO.setAuthority(authorityList);
