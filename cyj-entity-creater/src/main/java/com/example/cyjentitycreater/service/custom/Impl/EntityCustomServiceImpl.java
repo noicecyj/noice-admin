@@ -344,7 +344,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                     sb.append("    List<").append(poName).append("PO> findBy").append(propertyOut).append("(").append(propertyOut).append("PO ").append(underPropertyOut).append(");\r\n");
                     sb.append("\r\n");
                 } else {
-                    sb.append("    List<").append(poName).append("PO> findBy").append(propertyOut).append("(Collection<Set<").append(propertyOut).append("PO>> ").append(underPropertyOut).append("List);\r\n");
+                    sb.append("    List<").append(poName).append("PO> findBy").append(propertyOut).append("In(Collection<Set<").append(propertyOut).append("PO>> ").append(underPropertyOut).append("List);\r\n");
                     sb.append("\r\n");
                 }
 
@@ -433,12 +433,12 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import com.example.cyjcommon.service.BaseService;\r\n");
         sb.append("import ").append(poServicePath).append(poName).append("Service;\r\n");
         sb.append("import org.springframework.beans.factory.annotation.Autowired;\r\n");
-        if (BeanUtils.ifManyToOne(propertyPOList)) {
+        if (BeanUtils.ifManyToOne(propertyPOList) || BeanUtils.ifManyToMany(propertyPOList)) {
             sb.append("import org.springframework.data.domain.Example;\r\n");
         }
         sb.append("import org.springframework.data.domain.Page;\r\n");
         sb.append("import org.springframework.data.domain.PageRequest;\r\n");
-        if (BeanUtils.ifManyToOne(propertyPOList)) {
+        if (BeanUtils.ifManyToOne(propertyPOList) || BeanUtils.ifManyToMany(propertyPOList)) {
             sb.append("import org.springframework.data.domain.Pageable;\r\n");
         }
         sb.append("import org.springframework.data.domain.Sort;\r\n");
@@ -760,12 +760,12 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import com.example.cyjcommon.service.BaseService;\r\n");
         sb.append("import ").append(poServicePath).append(poName).append("Service;\r\n");
         sb.append("import org.springframework.beans.factory.annotation.Autowired;\r\n");
-        if (BeanUtils.ifManyToOne(propertyPOList)) {
+        if (BeanUtils.ifManyToOne(propertyPOList) || BeanUtils.ifManyToMany(propertyPOList)) {
             sb.append("import org.springframework.data.domain.Example;\r\n");
         }
         sb.append("import org.springframework.data.domain.Page;\r\n");
         sb.append("import org.springframework.data.domain.PageRequest;\r\n");
-        if (BeanUtils.ifManyToOne(propertyPOList)) {
+        if (BeanUtils.ifManyToOne(propertyPOList) || BeanUtils.ifManyToMany(propertyPOList)) {
             sb.append("import org.springframework.data.domain.Pageable;\r\n");
         }
         sb.append("import org.springframework.data.domain.Sort;\r\n");
