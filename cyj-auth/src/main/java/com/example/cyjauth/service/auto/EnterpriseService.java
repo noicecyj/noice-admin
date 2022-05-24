@@ -1,22 +1,19 @@
 package com.example.cyjauth.service.auto;
 
 import com.example.cyjcommon.entity.po.EnterprisePO;
-import com.querydsl.core.QueryResults;
+import org.springframework.data.domain.Page;
 
 /**
  * @author Noice
- * @version 1.0
  */
 public interface EnterpriseService {
 
     EnterprisePO addOne(EnterprisePO po);
 
-    void deleteOne(String id);
+    void deleteOne(EnterprisePO po);
 
     EnterprisePO updateOne(EnterprisePO po);
 
-    QueryResults<EnterprisePO> findAll(Integer pageNumber);
-
-    EnterprisePO findOneById(String id);
+    Page<EnterprisePO> findAll(Integer pageNumber);
 
 }
