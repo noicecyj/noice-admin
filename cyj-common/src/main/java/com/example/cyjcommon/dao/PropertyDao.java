@@ -11,6 +11,6 @@ import java.util.List;
  */
 public interface PropertyDao extends JpaRepository<PropertyPO, String> {
 
-    List<PropertyPO> findAllByEntity(EntityPO entity);
+    List<PropertyPO> findByEntity(EntityPO entity);
 
 }

@@ -11,8 +11,8 @@ import java.util.List;
  */
 public interface EntityDao extends JpaRepository<EntityPO, String> {
 
-    List<EntityPO> findAllByEntity(EntityPO entity);
+    List<EntityPO> findByEntity(EntityPO entity);
 
-    List<EntityPO> findAllByAppService(AppServicePO appService);
+    List<EntityPO> findByAppService(AppServicePO appService);
 
 }
