@@ -318,6 +318,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import org.springframework.data.jpa.repository.JpaRepository;\r\n");
         sb.append("\r\n");
         if (BeanUtils.ifManyToOne(propertyPOList) && BeanUtils.ifManyToMany(propertyPOList)) {
+            sb.append("import java.util.Collection;\r\n");
             sb.append("import java.util.List;\r\n");
             sb.append("import java.util.Set;\r\n");
             sb.append("\r\n");
@@ -325,6 +326,8 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             sb.append("import java.util.List;\r\n");
             sb.append("\r\n");
         } else if (BeanUtils.ifManyToMany(propertyPOList)) {
+            sb.append("import java.util.Collection;\r\n");
+            sb.append("import java.util.List;\r\n");
             sb.append("import java.util.Set;\r\n");
             sb.append("\r\n");
         }
@@ -338,10 +341,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 if ("ManyToOne".equals(propertyPO.getPropertyOutType())) {
-                    sb.append("    List<").append(poName).append("PO> findAllBy").append(propertyOut).append("(").append(propertyOut).append("PO ").append(underPropertyOut).append(");\r\n");
+                    sb.append("    List<").append(poName).append("PO> findBy").append(propertyOut).append("(").append(propertyOut).append("PO ").append(underPropertyOut).append(");\r\n");
                     sb.append("\r\n");
                 } else {
-                    sb.append("    List<").append(poName).append("PO> findAllBy").append(propertyOut).append("(Set<").append(propertyOut).append("PO> ").append(underPropertyOut).append("List);\r\n");
+                    sb.append("    List<").append(poName).append("PO> findBy").append(propertyOut).append("(CollectionSet<").append(propertyOut).append("PO>> ").append(underPropertyOut).append("List);\r\n");
                     sb.append("\r\n");
                 }
 

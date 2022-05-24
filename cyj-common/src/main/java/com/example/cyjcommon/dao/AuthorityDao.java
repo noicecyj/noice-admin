@@ -20,8 +20,8 @@ public interface AuthorityDao extends JpaRepository<AuthorityPO, String> {
 
     List<AuthorityPO> findByAppService(AppServicePO appService);
 
-    List<AuthorityPO> findByUserIn(Collection<Set<UserPO>> user);
+    List<AuthorityPO> findByUserIn(Collection<Set<UserPO>> userList);
 
-    List<AuthorityPO> findByRoleIn(Collection<Set<RolePO>> role);
+    List<AuthorityPO> findByRoleIn(Collection<Set<RolePO>> roleList);
 
 }
