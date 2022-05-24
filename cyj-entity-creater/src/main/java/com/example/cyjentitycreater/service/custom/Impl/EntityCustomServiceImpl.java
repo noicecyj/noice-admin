@@ -505,7 +505,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                     sb.append("    }\r\n");
                     sb.append("\r\n");
                 }
-
             }
         }
         sb.append("}\r\n");
@@ -654,7 +653,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                     sb.append("    }\r\n");
                     sb.append("\r\n");
                 }
-
             }
         }
         sb.append("    @Override\r\n");
@@ -702,6 +700,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import com.example.cyjcommon.entity.po.").append(poName).append("PO;\r\n");
         sb.append("import org.springframework.data.domain.Page;\r\n");
         sb.append("\r\n");
+        if (BeanUtils.ifManyToMany(propertyPOList)) {
+            sb.append("import java.util.Set;\r\n");
+            sb.append("\r\n");
+        }
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
         sb.append(" */\r\n");
@@ -717,8 +719,14 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("    Page<").append(poName).append("PO> findAll(Integer pageNumber, ").append(propertyOut).append("PO ").append(underPropertyOut).append(");\r\n");
-                sb.append("\r\n");
+                if ("ManyToOne".equals(propertyPO.getPropertyOutType())) {
+                    sb.append("    Page<").append(poName).append("PO> findAll(Integer pageNumber, ").append(propertyOut).append("PO ").append(underPropertyOut).append(");\r\n");
+                    sb.append("\r\n");
+                } else {
+                    sb.append("    Page<").append(poName).append("PO> findAllBy").append(propertyOut).append("List(Integer pageNumber, Set<").append(propertyOut).append("PO> ").append(underPropertyOut).append("List);\r\n");
+                    sb.append("\r\n");
+                }
+
             }
         }
         sb.append("}\r\n");
@@ -761,6 +769,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import org.springframework.stereotype.Service;\r\n");
         sb.append("import org.springframework.transaction.annotation.Transactional;\r\n");
         sb.append("\r\n");
+        if (BeanUtils.ifManyToMany(propertyPOList)) {
+            sb.append("import java.util.Set;\r\n");
+            sb.append("\r\n");
+        }
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
         sb.append(" */\r\n");
@@ -794,15 +806,27 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("    @Override\r\n");
-                sb.append("    public Page<").append(poName).append("PO> findAll(Integer pageNumber, ").append(propertyOut).append("PO ").append(underPropertyOut).append(") {\r\n");
-                sb.append("        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by(\"sortCode\").ascending());\r\n");
-                sb.append("        ").append(poName).append("PO ").append(underPoName).append("PO = new ").append(poName).append("PO();\r\n");
-                sb.append("        ").append(underPoName).append("PO.set").append(propertyOut).append("(").append(underPropertyOut).append(");\r\n");
-                sb.append("        Example<").append(poName).append("PO> example = Example.of(").append(underPoName).append("PO);\r\n");
-                sb.append("        return ").append(underPoName).append("Dao.findAll(example, pageable);\r\n");
-                sb.append("    }\r\n");
-                sb.append("\r\n");
+                if ("ManyToOne".equals(propertyPO.getPropertyOutType())) {
+                    sb.append("    @Override\r\n");
+                    sb.append("    public Page<").append(poName).append("PO> findAll(Integer pageNumber, ").append(propertyOut).append("PO ").append(underPropertyOut).append(") {\r\n");
+                    sb.append("        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by(\"sortCode\").ascending());\r\n");
+                    sb.append("        ").append(poName).append("PO ").append(underPoName).append("PO = new ").append(poName).append("PO();\r\n");
+                    sb.append("        ").append(underPoName).append("PO.set").append(propertyOut).append("(").append(underPropertyOut).append(");\r\n");
+                    sb.append("        Example<").append(poName).append("PO> example = Example.of(").append(underPoName).append("PO);\r\n");
+                    sb.append("        return ").append(underPoName).append("Dao.findAll(example, pageable);\r\n");
+                    sb.append("    }\r\n");
+                    sb.append("\r\n");
+                } else {
+                    sb.append("    @Override\r\n");
+                    sb.append("    public Page<").append(poName).append("PO> findAllBy").append(propertyOut).append("List(Integer pageNumber, Set<").append(propertyOut).append("PO> ").append(underPropertyOut).append("List) {\r\n");
+                    sb.append("        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by(\"sortCode\").ascending());\r\n");
+                    sb.append("        ").append(poName).append("PO ").append(underPoName).append("PO = new ").append(poName).append("PO();\r\n");
+                    sb.append("        ").append(underPoName).append("PO.set").append(propertyOut).append("(").append(underPropertyOut).append("List);\r\n");
+                    sb.append("        Example<").append(poName).append("PO> example = Example.of(").append(underPoName).append("PO);\r\n");
+                    sb.append("        return ").append(underPoName).append("Dao.findAll(example, pageable);\r\n");
+                    sb.append("    }\r\n");
+                    sb.append("\r\n");
+                }
             }
         }
         sb.append("}\r\n");
@@ -837,6 +861,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import org.springframework.web.bind.annotation.RequestBody;\r\n");
         sb.append("import org.springframework.web.bind.annotation.RequestParam;\r\n");
         sb.append("\r\n");
+        if (BeanUtils.ifManyToMany(propertyPOList)) {
+            sb.append("import java.util.Set;\r\n");
+            sb.append("\r\n");
+        }
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
         sb.append(" */\r\n");
@@ -848,10 +876,17 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 if (!propertyOut.equals(poName)) {
-                    sb.append("    @Operation(summary = \"根据").append(propertyOut).append("查询所有").append(poName).append("\")\r\n");
-                    sb.append("    @PostMapping(value = \"").append(underPoName).append("PageBy").append(propertyOut).append("\")\r\n");
-                    sb.append("    ResultVO ").append(underPoName).append("Page(@RequestParam(\"pageNumber\") Integer pageNumber, @RequestBody ").append(propertyOut).append("PO ").append(underPropertyOut).append(");\r\n");
-                    sb.append("\r\n");
+                    if ("ManyToOne".equals(propertyPO.getPropertyOutType())) {
+                        sb.append("    @Operation(summary = \"根据").append(propertyOut).append("查询所有").append(poName).append("\")\r\n");
+                        sb.append("    @PostMapping(value = \"").append(underPoName).append("PageBy").append(propertyOut).append("\")\r\n");
+                        sb.append("    ResultVO ").append(underPoName).append("Page(@RequestParam(\"pageNumber\") Integer pageNumber, @RequestBody ").append(propertyOut).append("PO ").append(underPropertyOut).append(");\r\n");
+                        sb.append("\r\n");
+                    } else {
+                        sb.append("    @Operation(summary = \"根据").append(propertyOut).append("List查询所有").append(poName).append("\")\r\n");
+                        sb.append("    @PostMapping(value = \"").append(underPoName).append("PageBy").append(propertyOut).append("List\")\r\n");
+                        sb.append("    ResultVO ").append(underPoName).append("PageBy").append(propertyOut).append("List(@RequestParam(\"pageNumber\") Integer pageNumber, @RequestBody Set<").append(propertyOut).append("PO> ").append(underPropertyOut).append("List);\r\n");
+                        sb.append("\r\n");
+                    }
                 }
             }
         }
@@ -897,6 +932,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import org.springframework.web.bind.annotation.RequestMapping;\r\n");
         sb.append("import org.springframework.web.bind.annotation.RestController;\r\n");
         sb.append("\r\n");
+        if (BeanUtils.ifManyToMany(propertyPOList)) {
+            sb.append("import java.util.Set;\r\n");
+            sb.append("\r\n");
+        }
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
         sb.append(" */\r\n");
@@ -917,11 +956,19 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 if (!propertyOut.equals(poName)) {
-                    sb.append("    @Override\r\n");
-                    sb.append("    public ResultVO ").append(underPoName).append("Page(Integer pageNumber, ").append(propertyOut).append("PO ").append(underPropertyOut).append(") {\r\n");
-                    sb.append("        return ResultVO.success(").append(underPoName).append("Service.findAll(pageNumber, ").append(underPropertyOut).append("));\r\n");
-                    sb.append("    }\r\n");
-                    sb.append("\r\n");
+                    if ("ManyToOne".equals(propertyPO.getPropertyOutType())) {
+                        sb.append("    @Override\r\n");
+                        sb.append("    public ResultVO ").append(underPoName).append("Page(Integer pageNumber, ").append(propertyOut).append("PO ").append(underPropertyOut).append(") {\r\n");
+                        sb.append("        return ResultVO.success(").append(underPoName).append("Service.findAll(pageNumber, ").append(underPropertyOut).append("));\r\n");
+                        sb.append("    }\r\n");
+                        sb.append("\r\n");
+                    } else {
+                        sb.append("    @Override\r\n");
+                        sb.append("    public ResultVO ").append(underPoName).append("PageBy").append(propertyOut).append("List(Integer pageNumber, Set<").append(propertyOut).append("PO> ").append(underPropertyOut).append("List) {\r\n");
+                        sb.append("        return ResultVO.success(").append(underPoName).append("Service.findAllBy").append(propertyOut).append("List(pageNumber, ").append(underPropertyOut).append("List));\r\n");
+                        sb.append("    }\r\n");
+                        sb.append("\r\n");
+                    }
                 }
             }
         }
