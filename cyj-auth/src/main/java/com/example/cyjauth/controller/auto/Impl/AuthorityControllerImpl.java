@@ -1,13 +1,13 @@
 package com.example.cyjauth.controller.auto.Impl;
 
+import com.example.cyjcommon.entity.po.EntityPO;
+import com.example.cyjcommon.entity.po.AppServicePO;
+import com.example.cyjcommon.entity.po.UserPO;
+import com.example.cyjcommon.entity.po.RolePO;
+import com.example.cyjcommon.entity.po.AuthorityPO;
+import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjauth.controller.auto.AuthorityController;
 import com.example.cyjauth.service.auto.AuthorityService;
-import com.example.cyjcommon.entity.po.AppServicePO;
-import com.example.cyjcommon.entity.po.AuthorityPO;
-import com.example.cyjcommon.entity.po.EntityPO;
-import com.example.cyjcommon.entity.po.RolePO;
-import com.example.cyjcommon.entity.po.UserPO;
-import com.example.cyjcommon.utils.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;

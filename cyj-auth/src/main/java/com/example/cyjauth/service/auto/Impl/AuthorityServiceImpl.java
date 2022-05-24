@@ -1,13 +1,13 @@
 package com.example.cyjauth.service.auto.Impl;
 
-import com.example.cyjauth.service.auto.AuthorityService;
 import com.example.cyjcommon.dao.AuthorityDao;
-import com.example.cyjcommon.entity.po.AppServicePO;
-import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.example.cyjcommon.entity.po.EntityPO;
-import com.example.cyjcommon.entity.po.RolePO;
+import com.example.cyjcommon.entity.po.AppServicePO;
 import com.example.cyjcommon.entity.po.UserPO;
+import com.example.cyjcommon.entity.po.RolePO;
+import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.example.cyjcommon.service.BaseService;
+import com.example.cyjauth.service.auto.AuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
