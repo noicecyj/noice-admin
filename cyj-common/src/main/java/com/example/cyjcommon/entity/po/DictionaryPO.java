@@ -43,7 +43,7 @@ public class DictionaryPO implements Serializable {
     @Column(name = "dictionary_value")
     private String dictionaryValue;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "catalog_id")
     private CatalogPO catalog;
 

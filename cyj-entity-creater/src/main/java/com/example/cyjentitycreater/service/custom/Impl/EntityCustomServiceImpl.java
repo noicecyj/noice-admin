@@ -262,7 +262,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         propertyPOList.forEach(propertyPO -> {
             if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
                 if ("ManyToOne".equals(propertyPO.getPropertyOutType())) {
-                    sb.append("    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)\r\n");
+                    sb.append("    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)\r\n");
                     sb.append("    @JoinColumn(name = \"").append(propertyPO.getPropertyOut()).append("_id\")\r\n");
                     String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
                     String propertyOut = BeanUtils.captureName(underPropertyOut);

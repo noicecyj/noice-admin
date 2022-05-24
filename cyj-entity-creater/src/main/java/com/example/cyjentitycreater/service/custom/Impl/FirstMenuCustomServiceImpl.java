@@ -1,15 +1,12 @@
 package com.example.cyjentitycreater.service.custom.Impl;
 
 import com.example.cyjcommon.dao.FirstMenuDao;
+import com.example.cyjcommon.dao.SecondMenuDao;
 import com.example.cyjcommon.entity.po.DictionaryPO;
 import com.example.cyjcommon.entity.po.FirstMenuPO;
-import com.example.cyjcommon.entity.po.QSecondMenuPO;
 import com.example.cyjcommon.entity.po.SecondMenuPO;
 import com.example.cyjcommon.service.BaseService;
-import com.example.cyjcommon.utils.VoPoConverter;
 import com.example.cyjdictionary.service.custom.DictionaryCustomService;
-import com.example.cyjentitycreater.entity.dto.FirstMenuDTO;
-import com.example.cyjentitycreater.entity.dto.SecondMenuDTO;
 import com.example.cyjentitycreater.service.custom.FirstMenuCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +33,7 @@ public class FirstMenuCustomServiceImpl extends BaseService implements FirstMenu
 
     private DictionaryCustomService dictionaryCustomService;
     private FirstMenuDao firstMenuDao;
+    private SecondMenuDao secondMenuDao;
 
     @Autowired
     public void setDictionaryCustomService(DictionaryCustomService dictionaryCustomService) {
@@ -47,40 +45,49 @@ public class FirstMenuCustomServiceImpl extends BaseService implements FirstMenu
         this.firstMenuDao = firstMenuDao;
     }
 
+    @Autowired
+    public void setSecondMenuDao(SecondMenuDao secondMenuDao) {
+        this.secondMenuDao = secondMenuDao;
+    }
+
     @Override
     public void createMenu() {
         try {
             DictionaryPO dictionaryPO = dictionaryCustomService
                     .findDictionaryByCatalogValueAndDictionaryValue(PROJECT_PATH, FRONT_END);
-            List<FirstMenuDTO> firstMenuDTOList = getMenu();
-            createJavaFile(dictionaryPO.getDictionaryValue() + menuPath, menuGenerate(firstMenuDTOList));
-            createJavaFile(dictionaryPO.getDictionaryValue() + routerPath, routerGenerate(firstMenuDTOList));
+            List<FirstMenuPO> firstMenuPOList = firstMenuDao.findAll().stream()
+                    .sorted(Comparator.comparing(FirstMenuPO::getSortCode))
+                    .collect(Collectors.toList());
+            createJavaFile(dictionaryPO.getDictionaryValue() + menuPath, menuGenerate(firstMenuPOList));
+            createJavaFile(dictionaryPO.getDictionaryValue() + routerPath, routerGenerate(firstMenuPOList));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private String[] routerGenerate(List<FirstMenuDTO> firstMenuDTOList) {
+    private String[] routerGenerate(List<FirstMenuPO> firstMenuPOList) {
         StringBuilder sb = new StringBuilder();
         sb.append("import BasicLayout from '@/layouts/BasicLayout';\r\n");
         sb.append("import UserLayout from '@/layouts/UserLayout';\r\n");
         sb.append("import LoginPage from '@/pages/Login';\r\n");
-        for (FirstMenuDTO firstMenuDTO : firstMenuDTOList) {
-            for (SecondMenuDTO secondMenuDTO : firstMenuDTO.getSecondMenuDTOList()) {
-                sb.append("import ").append(secondMenuDTO.getComponent()).append("Page from '@/pages/").append(secondMenuDTO.getComponent()).append("';\r\n");
+        for (FirstMenuPO firstMenuPO : firstMenuPOList) {
+            List<SecondMenuPO> secondMenuPOList = secondMenuDao.findByFirstMenu(firstMenuPO);
+            for (SecondMenuPO secondMenuPO : secondMenuPOList) {
+                sb.append("import ").append(secondMenuPO.getSecondMenuComponent()).append("Page from '@/pages/").append(secondMenuPO.getSecondMenuComponent()).append("';\r\n");
             }
         }
         sb.append("\r\n");
         sb.append("const routerConfig = [\r\n");
-        for (FirstMenuDTO firstMenuDTO : firstMenuDTOList) {
+        for (FirstMenuPO firstMenuPO : firstMenuPOList) {
+            List<SecondMenuPO> secondMenuPOList = secondMenuDao.findByFirstMenu(firstMenuPO);
             sb.append("  {\r\n");
-            sb.append("    path: '").append(firstMenuDTO.getPath()).append("',\r\n");
-            sb.append("    component: ").append(firstMenuDTO.getLayout()).append(",\r\n");
+            sb.append("    path: '").append(firstMenuPO.getFirstMenuPath()).append("',\r\n");
+            sb.append("    component: ").append(firstMenuPO.getFirstMenuLayout()).append(",\r\n");
             sb.append("    children: [\r\n");
-            for (SecondMenuDTO secondMenuDTO : firstMenuDTO.getSecondMenuDTOList()) {
+            for (SecondMenuPO secondMenuPO : secondMenuPOList) {
                 sb.append("      {\r\n");
-                sb.append("        path: '").append(secondMenuDTO.getPath()).append("',\r\n");
-                sb.append("        component: ").append(secondMenuDTO.getComponent()).append("Page,\r\n");
+                sb.append("        path: '").append(secondMenuPO.getSecondMenuPath()).append("',\r\n");
+                sb.append("        component: ").append(secondMenuPO.getSecondMenuComponent()).append("Page,\r\n");
                 sb.append("      },\r\n");
             }
             sb.append("    ],\r\n");
@@ -106,40 +113,21 @@ public class FirstMenuCustomServiceImpl extends BaseService implements FirstMenu
         return new String[]{menuData, "routes.js"};
     }
 
-    @Override
-    public List<FirstMenuDTO> getMenu() {
-        List<FirstMenuPO> firstMenuPOList = firstMenuDao
-                .findAll()
-                .stream()
-                .sorted(Comparator.comparing(FirstMenuPO::getSortCode))
-                .collect(Collectors.toList());
-        List<FirstMenuDTO> firstMenuDTOList = VoPoConverter.copyList(firstMenuPOList, FirstMenuDTO.class);
-        for (FirstMenuDTO firstMenuDTO : firstMenuDTOList) {
-            List<SecondMenuPO> secondMenuPOList = queryFactory
-                    .selectFrom(QSecondMenuPO.secondMenuPO)
-                    .where(QSecondMenuPO.secondMenuPO.pid.eq(firstMenuDTO.getId()))
-                    .orderBy(QSecondMenuPO.secondMenuPO.sortCode.asc())
-                    .fetch();
-            List<SecondMenuDTO> secondMenuDTOList = VoPoConverter.copyList(secondMenuPOList, SecondMenuDTO.class);
-            firstMenuDTO.setSecondMenuDTOList(secondMenuDTOList);
-        }
-        return firstMenuDTOList;
-    }
-
-    private String[] menuGenerate(List<FirstMenuDTO> firstMenuDTOList) {
+    private String[] menuGenerate(List<FirstMenuPO> firstMenuPOList) {
         StringBuilder sb = new StringBuilder();
         sb.append("const headerMenuConfig = [];\r\n");
         sb.append("const asideMenuConfig = [\r\n");
-        for (FirstMenuDTO firstMenuDTO : firstMenuDTOList) {
+        for (FirstMenuPO firstMenuPO : firstMenuPOList) {
+            List<SecondMenuPO> secondMenuPOList = secondMenuDao.findByFirstMenu(firstMenuPO);
             sb.append("  {\r\n");
-            sb.append("    name: '").append(firstMenuDTO.getMenuName()).append("',\r\n");
-            sb.append("    icon: '").append(firstMenuDTO.getIcon()).append("',\r\n");
-            sb.append("    path: '").append(firstMenuDTO.getPath()).append("',\r\n");
+            sb.append("    name: '").append(firstMenuPO.getFirstMenuName()).append("',\r\n");
+            sb.append("    icon: '").append(firstMenuPO.getFirstMenuIcon()).append("',\r\n");
+            sb.append("    path: '").append(firstMenuPO.getFirstMenuPath()).append("',\r\n");
             sb.append("    children: [\r\n");
-            for (SecondMenuDTO secondMenuDTO : firstMenuDTO.getSecondMenuDTOList()) {
+            for (SecondMenuPO secondMenuPO : secondMenuPOList) {
                 sb.append("      {\r\n");
-                sb.append("        name: '").append(secondMenuDTO.getMenuName()).append("',\r\n");
-                sb.append("        path: '").append(firstMenuDTO.getPath()).append(secondMenuDTO.getPath()).append("',\r\n");
+                sb.append("        name: '").append(secondMenuPO.getSecondMenuName()).append("',\r\n");
+                sb.append("        path: '").append(firstMenuPO.getFirstMenuPath()).append(secondMenuPO.getSecondMenuPath()).append("',\r\n");
                 sb.append("      },\r\n");
             }
             sb.append("    ],\r\n");

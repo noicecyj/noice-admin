@@ -61,11 +61,11 @@ public class EntityPO implements Serializable {
     @Column(name = "entity_form_row")
     private Integer entityFormRow;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "entity_id")
     private EntityPO entity;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "app_service_id")
     private AppServicePO appService;
 

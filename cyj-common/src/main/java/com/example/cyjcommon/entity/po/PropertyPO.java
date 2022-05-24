@@ -49,7 +49,7 @@ public class PropertyPO implements Serializable {
     @Column(name = "property_out")
     private String propertyOut;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "entity_id")
     private EntityPO entity;
 

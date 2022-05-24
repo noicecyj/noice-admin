@@ -13,6 +13,4 @@ public interface FirstMenuCustomService {
 
     void createMenu();
 
-    List<FirstMenuDTO> getMenu();
-
 }

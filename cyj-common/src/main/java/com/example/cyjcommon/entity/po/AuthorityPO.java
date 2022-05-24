@@ -56,11 +56,11 @@ public class AuthorityPO implements Serializable {
     @Column(name = "authority_description")
     private String authorityDescription;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "entity_id")
     private EntityPO entity;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "app_service_id")
     private AppServicePO appService;
 

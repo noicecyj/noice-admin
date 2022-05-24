@@ -45,7 +45,7 @@ public class SecondMenuPO implements Serializable {
     @Column(name = "second_menu_component")
     private String secondMenuComponent;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "first_menu_id")
     private FirstMenuPO firstMenu;
 
