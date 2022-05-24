@@ -16,9 +16,9 @@ import java.util.Set;
  */
 public interface AuthorityDao extends JpaRepository<AuthorityPO, String> {
 
-    List<AuthorityPO> findAllByEntity(EntityPO entity);
+    List<AuthorityPO> findByEntity(EntityPO entity);
 
-    List<AuthorityPO> findAllByAppService(AppServicePO appService);
+    List<AuthorityPO> findByAppService(AppServicePO appService);
 
     List<AuthorityPO> findByUserIn(Collection<Set<UserPO>> user);
 
