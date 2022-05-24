@@ -1,11 +1,11 @@
 package com.example.cyjauth.service.auto.Impl;
 
-import com.example.cyjauth.service.auto.UserService;
 import com.example.cyjcommon.dao.UserDao;
-import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.example.cyjcommon.entity.po.RolePO;
+import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.example.cyjcommon.entity.po.UserPO;
 import com.example.cyjcommon.service.BaseService;
+import com.example.cyjauth.service.auto.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -19,7 +19,6 @@ import java.util.Set;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -39,7 +38,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     @Override
     public void deleteOne(UserPO po) {
-
+        userDao.delete(po);
     }
 
     @Override

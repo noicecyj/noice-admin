@@ -1,11 +1,11 @@
 package com.example.cyjauth.controller.auto.Impl;
 
-import com.example.cyjauth.controller.auto.UserController;
-import com.example.cyjauth.service.auto.UserService;
-import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.example.cyjcommon.entity.po.RolePO;
+import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.example.cyjcommon.entity.po.UserPO;
 import com.example.cyjcommon.utils.ResultVO;
+import com.example.cyjauth.controller.auto.UserController;
+import com.example.cyjauth.service.auto.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,7 +16,6 @@ import java.util.Set;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @CrossOrigin
 @RestController

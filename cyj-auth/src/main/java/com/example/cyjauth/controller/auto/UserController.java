@@ -1,7 +1,7 @@
 package com.example.cyjauth.controller.auto;
 
-import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.example.cyjcommon.entity.po.RolePO;
+import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.example.cyjcommon.entity.po.UserPO;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,7 +16,6 @@ import java.util.Set;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @Tag(name = "User")
 public interface UserController {
