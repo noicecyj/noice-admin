@@ -1,22 +1,19 @@
 package com.example.cyjentitycreater.service.auto;
 
 import com.example.cyjcommon.entity.po.AppServicePO;
-import com.querydsl.core.QueryResults;
+import org.springframework.data.domain.Page;
 
 /**
  * @author Noice
- * @version 1.0
  */
 public interface AppServiceService {
 
     AppServicePO addOne(AppServicePO po);
 
-    void deleteOne(String id);
+    void deleteOne(AppServicePO po);
 
     AppServicePO updateOne(AppServicePO po);
 
-    QueryResults<AppServicePO> findAll(Integer pageNumber);
-
-    AppServicePO findOneById(String id);
+    Page<AppServicePO> findAll(Integer pageNumber);
 
 }

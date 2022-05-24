@@ -5,13 +5,13 @@ import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.controller.auto.AppServiceController;
 import com.example.cyjentitycreater.service.auto.AppServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @CrossOrigin
 @RestController
@@ -31,7 +31,10 @@ public class AppServiceControllerImpl implements AppServiceController {
     }
 
     @Override
-    public ResultVO appServiceSave(AppServicePO po) {
+    public ResultVO appServiceSave(AppServicePO po, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResultVO.failure(bindingResult.getAllErrors().get(0));
+        }
         if (po.getId() == null) {
             return ResultVO.success(appServiceService.addOne(po));
         }
@@ -39,13 +42,12 @@ public class AppServiceControllerImpl implements AppServiceController {
     }
 
     @Override
-    public void appServiceDelete(String id) {
-        appServiceService.deleteOne(id);
-    }
-
-    @Override
-    public ResultVO findAppServiceById(String id) {
-        return ResultVO.success(appServiceService.findOneById(id));
+    public ResultVO appServiceDelete(AppServicePO po) {
+        if (po.getId() == null) {
+            return ResultVO.failure();
+        }
+        appServiceService.deleteOne(po);
+        return ResultVO.success();
     }
 
 }
