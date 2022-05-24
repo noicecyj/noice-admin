@@ -5,6 +5,7 @@ import com.example.cyjcommon.entity.po.RolePO;
 import com.example.cyjcommon.entity.po.UserPO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -14,8 +15,8 @@ import java.util.Set;
  */
 public interface UserDao extends JpaRepository<UserPO, String> {
 
-    List<UserPO> findAllByRole(Set<RolePO> roleList);
+    List<UserPO> findByRoleIn(Collection<Set<RolePO>> role);
 
-    List<UserPO> findAllByAuthority(Set<AuthorityPO> authorityList);
+    List<UserPO> findByAuthorityIn(Collection<Set<AuthorityPO>> authority);
 
 }

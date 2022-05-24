@@ -30,7 +30,7 @@ public interface UserController {
     ResultVO userPageByRoleList(@RequestParam("pageNumber") Integer pageNumber, @RequestBody Set<RolePO> roleList);
 
     @Operation(summary = "根据AuthorityList查询所有User")
-    @PostMapping(value = "userPageByRoleList")
+    @PostMapping(value = "userPageByAuthorityList")
     ResultVO userPageByAuthorityList(@RequestParam("pageNumber") Integer pageNumber, @RequestBody Set<AuthorityPO> authorityList);
 
     @Operation(summary = "保存User")
