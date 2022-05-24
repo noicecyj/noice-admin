@@ -1,5 +1,6 @@
 package com.example.cyjauth.controller.auto.Impl;
 
+import com.example.cyjcommon.entity.po.EnterprisePO;
 import com.example.cyjcommon.entity.po.RolePO;
 import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.example.cyjcommon.entity.po.UserPO;
@@ -32,6 +33,11 @@ public class UserControllerImpl implements UserController {
     @Override
     public ResultVO userPage(Integer pageNumber) {
         return ResultVO.success(userService.findAll(pageNumber));
+    }
+
+    @Override
+    public ResultVO userPage(Integer pageNumber, EnterprisePO enterprise) {
+        return ResultVO.success(userService.findAll(pageNumber, enterprise));
     }
 
     @Override

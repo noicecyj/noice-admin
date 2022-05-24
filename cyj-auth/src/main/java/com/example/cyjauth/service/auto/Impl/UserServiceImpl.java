@@ -1,6 +1,7 @@
 package com.example.cyjauth.service.auto.Impl;
 
 import com.example.cyjcommon.dao.UserDao;
+import com.example.cyjcommon.entity.po.EnterprisePO;
 import com.example.cyjcommon.entity.po.RolePO;
 import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.example.cyjcommon.entity.po.UserPO;
@@ -49,6 +50,15 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     public Page<UserPO> findAll(Integer pageNumber) {
         return userDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
+    }
+
+    @Override
+    public Page<UserPO> findAll(Integer pageNumber, EnterprisePO enterprise) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
+        UserPO userPO = new UserPO();
+        userPO.setEnterprise(enterprise);
+        Example<UserPO> example = Example.of(userPO);
+        return userDao.findAll(example, pageable);
     }
 
     @Override

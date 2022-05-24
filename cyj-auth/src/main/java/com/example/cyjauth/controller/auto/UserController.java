@@ -1,5 +1,6 @@
 package com.example.cyjauth.controller.auto;
 
+import com.example.cyjcommon.entity.po.EnterprisePO;
 import com.example.cyjcommon.entity.po.RolePO;
 import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.example.cyjcommon.entity.po.UserPO;
@@ -23,6 +24,10 @@ public interface UserController {
     @Operation(summary = "查询所有User")
     @PostMapping(value = "userPage")
     ResultVO userPage(@RequestParam("pageNumber") Integer pageNumber);
+
+    @Operation(summary = "根据Enterprise查询所有User")
+    @PostMapping(value = "userPageByEnterprise")
+    ResultVO userPage(@RequestParam("pageNumber") Integer pageNumber, @RequestBody EnterprisePO enterprise);
 
     @Operation(summary = "根据RoleList查询所有User")
     @PostMapping(value = "userPageByRoleList")
