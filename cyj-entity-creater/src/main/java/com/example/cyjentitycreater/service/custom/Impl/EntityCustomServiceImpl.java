@@ -344,7 +344,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                     sb.append("    List<").append(poName).append("PO> findBy").append(propertyOut).append("(").append(propertyOut).append("PO ").append(underPropertyOut).append(");\r\n");
                     sb.append("\r\n");
                 } else {
-                    sb.append("    List<").append(poName).append("PO> findBy").append(propertyOut).append("(CollectionSet<").append(propertyOut).append("PO>> ").append(underPropertyOut).append("List);\r\n");
+                    sb.append("    List<").append(poName).append("PO> findBy").append(propertyOut).append("(Collection<Set<").append(propertyOut).append("PO>> ").append(underPropertyOut).append("List);\r\n");
                     sb.append("\r\n");
                 }
 
