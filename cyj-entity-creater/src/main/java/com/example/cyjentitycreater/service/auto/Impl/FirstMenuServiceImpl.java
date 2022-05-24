@@ -2,17 +2,17 @@ package com.example.cyjentitycreater.service.auto.Impl;
 
 import com.example.cyjcommon.dao.FirstMenuDao;
 import com.example.cyjcommon.entity.po.FirstMenuPO;
-import com.example.cyjcommon.entity.po.QFirstMenuPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjentitycreater.service.auto.FirstMenuService;
-import com.querydsl.core.QueryResults;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -31,8 +31,8 @@ public class FirstMenuServiceImpl extends BaseService implements FirstMenuServic
     }
 
     @Override
-    public void deleteOne(String id) {
-        firstMenuDao.deleteById(id);
+    public void deleteOne(FirstMenuPO po) {
+        firstMenuDao.delete(po);
     }
 
     @Override
@@ -41,19 +41,8 @@ public class FirstMenuServiceImpl extends BaseService implements FirstMenuServic
     }
 
     @Override
-    public QueryResults<FirstMenuPO> findAll(Integer pageNumber) {
-        return queryFactory
-                .selectFrom(QFirstMenuPO.firstMenuPO)
-                .where(QFirstMenuPO.firstMenuPO.sortCode.isNotNull())
-                .offset((pageNumber - 1) * 10L)
-                .orderBy(QFirstMenuPO.firstMenuPO.sortCode.asc())
-                .limit(10)
-                .fetchResults();
-    }
-
-    @Override
-    public FirstMenuPO findOneById(String id) {
-        return firstMenuDao.findById(id).orElse(null);
+    public Page<FirstMenuPO> findAll(Integer pageNumber) {
+        return firstMenuDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 
 }

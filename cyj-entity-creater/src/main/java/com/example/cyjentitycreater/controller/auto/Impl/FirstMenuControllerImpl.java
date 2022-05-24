@@ -5,13 +5,13 @@ import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.controller.auto.FirstMenuController;
 import com.example.cyjentitycreater.service.auto.FirstMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @CrossOrigin
 @RestController
@@ -31,7 +31,10 @@ public class FirstMenuControllerImpl implements FirstMenuController {
     }
 
     @Override
-    public ResultVO firstMenuSave(FirstMenuPO po) {
+    public ResultVO firstMenuSave(FirstMenuPO po, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResultVO.failure(bindingResult.getAllErrors().get(0));
+        }
         if (po.getId() == null) {
             return ResultVO.success(firstMenuService.addOne(po));
         }
@@ -39,13 +42,12 @@ public class FirstMenuControllerImpl implements FirstMenuController {
     }
 
     @Override
-    public void firstMenuDelete(String id) {
-        firstMenuService.deleteOne(id);
-    }
-
-    @Override
-    public ResultVO findFirstMenuById(String id) {
-        return ResultVO.success(firstMenuService.findOneById(id));
+    public ResultVO firstMenuDelete(FirstMenuPO po) {
+        if (po.getId() == null) {
+            return ResultVO.failure();
+        }
+        firstMenuService.deleteOne(po);
+        return ResultVO.success();
     }
 
 }

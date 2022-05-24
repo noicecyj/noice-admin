@@ -1,17 +1,18 @@
 package com.example.cyjentitycreater.controller.auto.Impl;
 
+import com.example.cyjcommon.entity.po.FirstMenuPO;
 import com.example.cyjcommon.entity.po.SecondMenuPO;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.controller.auto.SecondMenuController;
 import com.example.cyjentitycreater.service.auto.SecondMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @CrossOrigin
 @RestController
@@ -26,12 +27,15 @@ public class SecondMenuControllerImpl implements SecondMenuController {
     }
 
     @Override
-    public ResultVO secondMenuPage(Integer pageNumber, String pid) {
-        return ResultVO.success(secondMenuService.findAll(pageNumber, pid));
+    public ResultVO secondMenuPage(Integer pageNumber, FirstMenuPO firstMenu) {
+        return ResultVO.success(secondMenuService.findAll(pageNumber, firstMenu));
     }
 
     @Override
-    public ResultVO secondMenuSave(SecondMenuPO po) {
+    public ResultVO secondMenuSave(SecondMenuPO po, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResultVO.failure(bindingResult.getAllErrors().get(0));
+        }
         if (po.getId() == null) {
             return ResultVO.success(secondMenuService.addOne(po));
         }
@@ -39,13 +43,12 @@ public class SecondMenuControllerImpl implements SecondMenuController {
     }
 
     @Override
-    public void secondMenuDelete(String id) {
-        secondMenuService.deleteOne(id);
-    }
-
-    @Override
-    public ResultVO findSecondMenuById(String id) {
-        return ResultVO.success(secondMenuService.findOneById(id));
+    public ResultVO secondMenuDelete(SecondMenuPO po) {
+        if (po.getId() == null) {
+            return ResultVO.failure();
+        }
+        secondMenuService.deleteOne(po);
+        return ResultVO.success();
     }
 
 }

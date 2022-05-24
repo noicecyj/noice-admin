@@ -1,20 +1,21 @@
 package com.example.cyjentitycreater.service.auto.Impl;
 
 import com.example.cyjcommon.dao.SecondMenuDao;
-import com.example.cyjcommon.entity.po.QSecondMenuPO;
+import com.example.cyjcommon.entity.po.FirstMenuPO;
 import com.example.cyjcommon.entity.po.SecondMenuPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjentitycreater.service.auto.SecondMenuService;
-import com.querydsl.core.QueryResults;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 /**
  * @author Noice
- * @version 1.0
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -33,8 +34,8 @@ public class SecondMenuServiceImpl extends BaseService implements SecondMenuServ
     }
 
     @Override
-    public void deleteOne(String id) {
-        secondMenuDao.deleteById(id);
+    public void deleteOne(SecondMenuPO po) {
+        secondMenuDao.delete(po);
     }
 
     @Override
@@ -43,27 +44,12 @@ public class SecondMenuServiceImpl extends BaseService implements SecondMenuServ
     }
 
     @Override
-    public QueryResults<SecondMenuPO> findAll(Integer pageNumber, String pid) {
-        return queryFactory
-                .selectFrom(QSecondMenuPO.secondMenuPO)
-                .where(QSecondMenuPO.secondMenuPO.pid.eq(pid).and(QSecondMenuPO.secondMenuPO.sortCode.isNotNull()))
-                .offset((pageNumber - 1) * 10L)
-                .orderBy(QSecondMenuPO.secondMenuPO.sortCode.asc())
-                .limit(10)
-                .fetchResults();
-    }
-
-    @Override
-    public SecondMenuPO findOneById(String id) {
-        return secondMenuDao.findById(id).orElse(null);
-    }
-
-    @Override
-    public List<SecondMenuPO> findListByPid(String id) {
-        return queryFactory
-                .selectFrom(QSecondMenuPO.secondMenuPO)
-                .where(QSecondMenuPO.secondMenuPO.pid.eq(id))
-                .fetch();
+    public Page<SecondMenuPO> findAll(Integer pageNumber, FirstMenuPO firstMenu) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
+        SecondMenuPO secondMenuPO = new SecondMenuPO();
+        secondMenuPO.setFirstMenu(firstMenu);
+        Example<SecondMenuPO> example = Example.of(secondMenuPO);
+        return secondMenuDao.findAll(example, pageable);
     }
 
 }

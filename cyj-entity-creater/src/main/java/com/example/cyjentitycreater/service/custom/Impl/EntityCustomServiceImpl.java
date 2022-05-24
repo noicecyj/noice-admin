@@ -68,7 +68,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         if (entityPO == null) {
             return;
         }
-        List<PropertyPO> propertyPOList = propertyDao.findAllByEntity(entityPO)
+        List<PropertyPO> propertyPOList = propertyDao.findByEntity(entityPO)
                 .stream()
                 .sorted(Comparator.comparing(PropertyPO::getSortCode))
                 .collect(Collectors.toList());
@@ -85,9 +85,9 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         //服务接口
         String appApi = appServicePO.getAppServiceApi();
         createJavaFile(entityPO, propertyPOList, underPoName, poName, appPath, appApi);
-        List<EntityPO> entityPOList = entityDao.findAllByEntity(entityPO);
+        List<EntityPO> entityPOList = entityDao.findByEntity(entityPO);
         entityPOList.forEach(subPo -> {
-            List<PropertyPO> subPoList = propertyDao.findAllByEntity(subPo);
+            List<PropertyPO> subPoList = propertyDao.findByEntity(subPo);
             //驼峰名
             String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
             //文件名
@@ -1107,7 +1107,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             }
             //服务接口
             String appApi = appServicePO.getAppServiceApi();
-            List<EntityPO> entityPOList = entityDao.findAllByEntity(entityPO);
+            List<EntityPO> entityPOList = entityDao.findByEntity(entityPO);
             createComponentFile(appApi, entityPOList, entityPO, underPoName, poName);
             entityPOList.forEach(subPo -> {
                 //驼峰名
@@ -1811,7 +1811,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         if (po == null) {
             return null;
         }
-        List<PropertyPO> propertyPOList = propertyDao.findAllByEntity(po);
+        List<PropertyPO> propertyPOList = propertyDao.findByEntity(po);
         List<PropertyCustomDTO> propertyCustomDTOList = new ArrayList<>();
         for (PropertyPO propertyPO : propertyPOList) {
             PropertyCustomDTO propertyCustomDTO = new PropertyCustomDTO();

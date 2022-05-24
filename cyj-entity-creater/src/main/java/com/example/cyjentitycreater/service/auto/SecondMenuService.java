@@ -1,26 +1,20 @@
 package com.example.cyjentitycreater.service.auto;
 
+import com.example.cyjcommon.entity.po.FirstMenuPO;
 import com.example.cyjcommon.entity.po.SecondMenuPO;
-import com.querydsl.core.QueryResults;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 /**
  * @author Noice
- * @version 1.0
  */
 public interface SecondMenuService {
 
     SecondMenuPO addOne(SecondMenuPO po);
 
-    void deleteOne(String id);
+    void deleteOne(SecondMenuPO po);
 
     SecondMenuPO updateOne(SecondMenuPO po);
 
-    QueryResults<SecondMenuPO> findAll(Integer pageNumber, String pid);
-
-    SecondMenuPO findOneById(String id);
-
-    List<SecondMenuPO> findListByPid(String id);
+    Page<SecondMenuPO> findAll(Integer pageNumber, FirstMenuPO firstMenu);
 
 }

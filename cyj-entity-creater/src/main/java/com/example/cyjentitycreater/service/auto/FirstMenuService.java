@@ -1,22 +1,19 @@
 package com.example.cyjentitycreater.service.auto;
 
 import com.example.cyjcommon.entity.po.FirstMenuPO;
-import com.querydsl.core.QueryResults;
+import org.springframework.data.domain.Page;
 
 /**
  * @author Noice
- * @version 1.0
  */
 public interface FirstMenuService {
 
     FirstMenuPO addOne(FirstMenuPO po);
 
-    void deleteOne(String id);
+    void deleteOne(FirstMenuPO po);
 
     FirstMenuPO updateOne(FirstMenuPO po);
 
-    QueryResults<FirstMenuPO> findAll(Integer pageNumber);
-
-    FirstMenuPO findOneById(String id);
+    Page<FirstMenuPO> findAll(Integer pageNumber);
 
 }
