@@ -12,7 +12,7 @@ spring:
     name: cyj-entity-creater
   jpa:
     generate-ddl: false
-    show-sql: false
+    show-sql: true
     hibernate:
       ddl-auto: update
   datasource:

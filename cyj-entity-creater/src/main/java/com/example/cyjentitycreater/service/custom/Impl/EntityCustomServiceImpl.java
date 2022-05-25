@@ -211,11 +211,13 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         if (BeanUtils.ifManyToOne(propertyPOList)) {
             sb.append("import javax.persistence.CascadeType;\r\n");
         }
+        sb.append("import javax.persistence.ConstraintMode;\r\n");
         sb.append("import javax.persistence.Column;\r\n");
         sb.append("import javax.persistence.Entity;\r\n");
         if (BeanUtils.ifManyToOne(propertyPOList) || BeanUtils.ifManyToMany(propertyPOList)) {
             sb.append("import javax.persistence.FetchType;\r\n");
         }
+        sb.append("import javax.persistence.ForeignKey;\r\n");
         sb.append("import javax.persistence.GeneratedValue;\r\n");
         sb.append("import javax.persistence.Id;\r\n");
         if (BeanUtils.ifManyToOne(propertyPOList)) {
@@ -262,8 +264,8 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         propertyPOList.forEach(propertyPO -> {
             if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
                 if ("ManyToOne".equals(propertyPO.getPropertyOutType())) {
-                    sb.append("    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)\r\n");
-                    sb.append("    @JoinColumn(name = \"").append(propertyPO.getPropertyOut()).append("_id\")\r\n");
+                    sb.append("    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.REMOVE})\r\n");
+                    sb.append("    @JoinColumn(name = \"").append(propertyPO.getPropertyOut()).append("_id\", foreignKey = @ForeignKey(name = \"none\", value = ConstraintMode.NO_CONSTRAINT))\r\n");
                     String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
                     String propertyOut = BeanUtils.captureName(underPropertyOut);
                     sb.append("    private ").append(propertyOut).append("PO ").append(underPropertyOut).append(";\r\n");
