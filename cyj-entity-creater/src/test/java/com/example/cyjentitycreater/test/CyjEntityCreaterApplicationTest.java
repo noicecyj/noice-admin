@@ -44,7 +44,7 @@ public class CyjEntityCreaterApplicationTest {
     @Test
     @Transactional
     public void entityTest() {
-        EntityPO entityPO = entityDao.getOne("1b6e7b0d-8758-4de0-a80f-b54505ac9e91");
+        EntityPO entityPO = entityDao.getOne("edd90446-98bc-4330-8d93-1ba4ff003af0");
         entityCustomService.entityHandler(entityPO);
     }
 
