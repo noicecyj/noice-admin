@@ -273,13 +273,17 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         if (BeanUtils.ifManyToOne(propertyPOList)) {
             sb.append("import javax.persistence.CascadeType;\r\n");
         }
-        sb.append("import javax.persistence.ConstraintMode;\r\n");
+        if ("是".equals(entityPO.getEntitySelf()) || BeanUtils.ifManyToOne(propertyPOList) || BeanUtils.ifManyToMany(propertyPOList)){
+            sb.append("import javax.persistence.ConstraintMode;\r\n");
+        }
         sb.append("import javax.persistence.Column;\r\n");
         sb.append("import javax.persistence.Entity;\r\n");
         if (BeanUtils.ifManyToOne(propertyPOList) || BeanUtils.ifManyToMany(propertyPOList)) {
             sb.append("import javax.persistence.FetchType;\r\n");
         }
-        sb.append("import javax.persistence.ForeignKey;\r\n");
+        if ("是".equals(entityPO.getEntitySelf()) || BeanUtils.ifManyToOne(propertyPOList) || BeanUtils.ifManyToMany(propertyPOList)){
+            sb.append("import javax.persistence.ForeignKey;\r\n");
+        }
         sb.append("import javax.persistence.GeneratedValue;\r\n");
         sb.append("import javax.persistence.Id;\r\n");
         if (BeanUtils.ifManyToOne(propertyPOList)) {
