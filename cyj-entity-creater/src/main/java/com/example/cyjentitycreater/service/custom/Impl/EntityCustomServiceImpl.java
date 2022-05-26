@@ -85,7 +85,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         String appPath = appServicePO.getAppServicePath();
         //服务接口
         String appApi = appServicePO.getAppServiceApi();
-        createJavaFile(entityPO, propertyPOList, underPoName, poName, appPath, appApi);
+//        createJavaFile(entityPO, propertyPOList, underPoName, poName, appPath, appApi);
         List<EntityPO> entityPOList = entityDao.findByEntityOrderBySortCode(entityPO);
         entityPOList.forEach(subPo -> {
             List<PropertyPO> subPoList = propertyDao.findByEntityOrderBySortCode(subPo);
@@ -103,11 +103,11 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         List<EntityPO> subEntityPOList = entityDao.findByEntityOrderBySortCode(entityPO);
         //若存在则便利子实体
         if (!subEntityPOList.isEmpty()) {
+            //生成有子实体的实体
+            createEntityHandler(entityPO, true);
             for (EntityPO entityPO1 : subEntityPOList) {
                 //进入递归
                 entityHandler(entityPO1);
-                //生成有子实体的实体
-                createEntityHandler(entityPO1, true);
             }
         } else {
             //生成没有有子实体的实体
@@ -133,10 +133,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         Map<String, String[]> entityObj = new HashMap<>();
         entityObj.put(commonPath + "/entity/po", poGenerate(entityPO, propertyPOList, poName, underPoName));
         entityObj.put(commonPath + "/dao", daoGenerate(propertyPOList, poName));
-        entityObj.put(appPath + "/service/auto", serviceGenerate(propertyPOList, poName, appPath));
-        entityObj.put(appPath + "/service/auto/Impl", serviceImplGenerate(propertyPOList, underPoName, poName, appPath));
-        entityObj.put(appPath + "/controller/auto", controllerGenerate(propertyPOList, underPoName, poName, appPath));
-        entityObj.put(appPath + "/controller/auto/Impl", controllerImplGenerate(propertyPOList, underPoName, poName, appPath, appApi));
+        entityObj.put(appPath + "/service/auto", serviceGenerate(propertyPOList, poName, appPath, isHaveSub));
+        entityObj.put(appPath + "/service/auto/Impl", serviceImplGenerate(propertyPOList, underPoName, poName, appPath, isHaveSub));
+        entityObj.put(appPath + "/controller/auto", controllerGenerate(propertyPOList, underPoName, poName, appPath, isHaveSub));
+        entityObj.put(appPath + "/controller/auto/Impl", controllerImplGenerate(propertyPOList, underPoName, poName, appPath, appApi, isHaveSub));
         Map<String, String[]> entityCustomObj = new HashMap<>();
         entityCustomObj.put(appPath + "/service/custom", serviceCustomGenerate(poName, appPath));
         entityCustomObj.put(appPath + "/service/custom/aop", aopCustomGenerate(poName, appPath));
@@ -217,23 +217,23 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
 //            }
 //    }
 
-    private void createJavaFile(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath, String appApi) {
-        try {
-            createJavaFile(commonPath + "/entity/po", poGenerate(entityPO, propertyPOList, poName, underPoName));
-            createJavaFile(commonPath + "/dao", daoGenerate(propertyPOList, poName));
-            createJavaFile(appPath + "/service/auto", serviceGenerate(propertyPOList, poName, appPath));
-            createJavaFile(appPath + "/service/auto/Impl", serviceImplGenerate(propertyPOList, underPoName, poName, appPath));
-            createJavaFile(appPath + "/service/custom", serviceCustomGenerate(poName, appPath), false);
-            createJavaFile(appPath + "/service/custom/aop", aopCustomGenerate(poName, appPath), false);
-            createJavaFile(appPath + "/service/custom/Impl", serviceImplCustomGenerate(poName, appPath), false);
-            createJavaFile(appPath + "/controller/auto", controllerGenerate(propertyPOList, underPoName, poName, appPath));
-            createJavaFile(appPath + "/controller/auto/Impl", controllerImplGenerate(propertyPOList, underPoName, poName, appPath, appApi));
-            createJavaFile(appPath + "/controller/custom", controllerCustomGenerate(poName, appPath), false);
-            createJavaFile(appPath + "/controller/custom/Impl", controllerImplCustomGenerate(poName, appPath, appApi), false);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void createJavaFile(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath, String appApi) {
+//        try {
+//            createJavaFile(commonPath + "/entity/po", poGenerate(entityPO, propertyPOList, poName, underPoName));
+//            createJavaFile(commonPath + "/dao", daoGenerate(propertyPOList, poName));
+//            createJavaFile(appPath + "/service/auto", serviceGenerate(propertyPOList, poName, appPath));
+//            createJavaFile(appPath + "/service/auto/Impl", serviceImplGenerate(propertyPOList, underPoName, poName, appPath));
+//            createJavaFile(appPath + "/service/custom", serviceCustomGenerate(poName, appPath), false);
+//            createJavaFile(appPath + "/service/custom/aop", aopCustomGenerate(poName, appPath), false);
+//            createJavaFile(appPath + "/service/custom/Impl", serviceImplCustomGenerate(poName, appPath), false);
+//            createJavaFile(appPath + "/controller/auto", controllerGenerate(propertyPOList, underPoName, poName, appPath));
+//            createJavaFile(appPath + "/controller/auto/Impl", controllerImplGenerate(propertyPOList, underPoName, poName, appPath, appApi));
+//            createJavaFile(appPath + "/controller/custom", controllerCustomGenerate(poName, appPath), false);
+//            createJavaFile(appPath + "/controller/custom/Impl", controllerImplCustomGenerate(poName, appPath, appApi), false);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
     private void createSubJavaFile(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath, String appApi) {
@@ -409,10 +409,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 if ("ManyToOne".equals(propertyPO.getPropertyOutType())) {
-                    sb.append("    List<").append(poName).append("PO> findBy").append(propertyOut).append("(").append(propertyOut).append("PO ").append(underPropertyOut).append(");\r\n");
+                    sb.append("    List<").append(poName).append("PO> findBy").append(propertyOut).append("OrderBySortCode(").append(propertyOut).append("PO ").append(underPropertyOut).append(");\r\n");
                     sb.append("\r\n");
                 } else {
-                    sb.append("    List<").append(poName).append("PO> findBy").append(propertyOut).append("In(Collection<Set<").append(propertyOut).append("PO>> ").append(underPropertyOut).append("List);\r\n");
+                    sb.append("    List<").append(poName).append("PO> findBy").append(propertyOut).append("InOrderBySortCode(Collection<Set<").append(propertyOut).append("PO>> ").append(underPropertyOut).append("List);\r\n");
                     sb.append("\r\n");
                 }
 
@@ -423,7 +423,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{entityDaoData, poName + "Dao.java"};
     }
 
-    public String[] serviceGenerate(List<PropertyPO> propertyPOList, String poName, String appPath) {
+    public String[] serviceGenerate(List<PropertyPO> propertyPOList, String poName, String appPath, boolean isHaveSub) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
@@ -456,8 +456,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("\r\n");
         sb.append("    ").append(poName).append("PO updateOne(").append(poName).append("PO po);\r\n");
         sb.append("\r\n");
-        sb.append("    Page<").append(poName).append("PO> findAll(Integer pageNumber);\r\n");
-        sb.append("\r\n");
+        if (isHaveSub) {
+            sb.append("    Page<").append(poName).append("PO> findAll(Integer pageNumber);\r\n");
+            sb.append("\r\n");
+        }
         for (PropertyPO propertyPO : propertyPOList) {
             if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
@@ -476,7 +478,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{entityServiceData, poName + "Service.java"};
     }
 
-    public String[] serviceImplGenerate(List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath) {
+    public String[] serviceImplGenerate(List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath, boolean isHaveSub) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
@@ -550,11 +552,13 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("        return ").append(underPoName).append("Dao.saveAndFlush(po);\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        sb.append("    @Override\r\n");
-        sb.append("    public Page<").append(poName).append("PO> findAll(Integer pageNumber) {\r\n");
-        sb.append("        return ").append(underPoName).append("Dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by(\"sortCode\").ascending()));\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
+        if (isHaveSub) {
+            sb.append("    @Override\r\n");
+            sb.append("    public Page<").append(poName).append("PO> findAll(Integer pageNumber) {\r\n");
+            sb.append("        return ").append(underPoName).append("Dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by(\"sortCode\").ascending()));\r\n");
+            sb.append("    }\r\n");
+            sb.append("\r\n");
+        }
         for (PropertyPO propertyPO : propertyPOList) {
             if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
@@ -587,7 +591,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{entityServiceImplData, poName + "ServiceImpl.java"};
     }
 
-    public String[] controllerGenerate(List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath) {
+    public String[] controllerGenerate(List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath, boolean isHaveSub) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
@@ -622,10 +626,12 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("@Tag(name = \"").append(poName).append("\")\r\n");
         sb.append("public interface ").append(poName).append("Controller {\r\n");
         sb.append("\r\n");
-        sb.append("    @Operation(summary = \"查询所有").append(poName).append("\")\r\n");
-        sb.append("    @PostMapping(value = \"").append(underPoName).append("Page\")\r\n");
-        sb.append("    ResultVO ").append(underPoName).append("Page(@RequestParam(\"pageNumber\") Integer pageNumber);\r\n");
-        sb.append("\r\n");
+        if (isHaveSub) {
+            sb.append("    @Operation(summary = \"查询所有").append(poName).append("\")\r\n");
+            sb.append("    @PostMapping(value = \"").append(underPoName).append("Page\")\r\n");
+            sb.append("    ResultVO ").append(underPoName).append("Page(@RequestParam(\"pageNumber\") Integer pageNumber);\r\n");
+            sb.append("\r\n");
+        }
         for (PropertyPO propertyPO : propertyPOList) {
             if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
@@ -656,7 +662,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{entityControllerData, poName + "Controller.java"};
     }
 
-    public String[] controllerImplGenerate(List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath, String appApi) {
+    public String[] controllerImplGenerate(List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath, String appApi, boolean isHaveSub) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
@@ -702,11 +708,13 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("        this.").append(underPoName).append("Service = ").append(underPoName).append("Service;\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        sb.append("    @Override\r\n");
-        sb.append("    public ResultVO ").append(underPoName).append("Page(Integer pageNumber) {\r\n");
-        sb.append("        return ResultVO.success(").append(underPoName).append("Service.findAll(pageNumber));\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
+        if (isHaveSub) {
+            sb.append("    @Override\r\n");
+            sb.append("    public ResultVO ").append(underPoName).append("Page(Integer pageNumber) {\r\n");
+            sb.append("        return ResultVO.success(").append(underPoName).append("Service.findAll(pageNumber));\r\n");
+            sb.append("    }\r\n");
+            sb.append("\r\n");
+        }
         for (PropertyPO propertyPO : propertyPOList) {
             if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
