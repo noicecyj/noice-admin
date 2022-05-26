@@ -7,8 +7,8 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
@@ -54,6 +54,9 @@ public class EntityPO implements Serializable {
     @Column(name = "entity_custom_table")
     private String entityCustomTable;
 
+    @Column(name = "entity_self")
+    private String entitySelf;
+
     @Column(name = "entity_edit_enable")
     private String entityEditEnable;
 
@@ -63,16 +66,13 @@ public class EntityPO implements Serializable {
     @Column(name = "entity_form_row")
     private Integer entityFormRow;
 
-    @Column(name = "entity_self")
-    private String entitySelf;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.REMOVE})
+    @JoinColumn(name = "app_service_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
+    private AppServicePO appService;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.REMOVE})
     @JoinColumn(name = "entity_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
     private EntityPO entity;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.REMOVE})
-    @JoinColumn(name = "app_service_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
-    private AppServicePO appService;
 
     @NotNull(message = "状态不能为空")
     @Column(name = "status")
