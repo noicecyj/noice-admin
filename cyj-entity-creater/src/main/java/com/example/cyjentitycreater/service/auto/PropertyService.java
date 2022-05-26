@@ -15,6 +15,8 @@ public interface PropertyService {
 
     PropertyPO updateOne(PropertyPO po);
 
+    Page<PropertyPO> findAll(Integer pageNumber);
+
     Page<PropertyPO> findAll(Integer pageNumber, EntityPO entity);
 
 }

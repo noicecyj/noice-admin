@@ -78,19 +78,19 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         //若存在则便利子实体
         if (!subEntityPOList.isEmpty()) {
             //生成有子实体的实体
-            createEntityHandler(entityPO, true);
+            createEntityHandler(entityPO);
             for (EntityPO entityPO1 : subEntityPOList) {
                 //进入递归
                 entityHandler(entityPO1);
             }
         } else {
             //生成没有有子实体的实体
-            createEntityHandler(entityPO, false);
+            createEntityHandler(entityPO);
         }
 
     }
 
-    private void createEntityHandler(EntityPO entityPO, boolean isHaveSub) {
+    private void createEntityHandler(EntityPO entityPO) {
         //驼峰名
         String underPoName = BeanUtils.underline2Camel(entityPO.getEntityCode());
         //文件名
@@ -107,10 +107,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         Map<String, String[]> entityObj = new HashMap<>();
         entityObj.put(commonPath + "/entity/po", poGenerate(entityPO, propertyPOList, poName, underPoName));
         entityObj.put(commonPath + "/dao", daoGenerate(entityPO, propertyPOList, poName, underPoName));
-        entityObj.put(appPath + "/service/auto", serviceGenerate(entityPO, propertyPOList, poName, underPoName, appPath, isHaveSub));
-        entityObj.put(appPath + "/service/auto/Impl", serviceImplGenerate(entityPO, propertyPOList, underPoName, poName, appPath, isHaveSub));
-        entityObj.put(appPath + "/controller/auto", controllerGenerate(entityPO, propertyPOList, underPoName, poName, appPath, isHaveSub));
-        entityObj.put(appPath + "/controller/auto/Impl", controllerImplGenerate(entityPO, propertyPOList, underPoName, poName, appPath, appApi, isHaveSub));
+        entityObj.put(appPath + "/service/auto", serviceGenerate(entityPO, propertyPOList, poName, underPoName, appPath));
+        entityObj.put(appPath + "/service/auto/Impl", serviceImplGenerate(entityPO, propertyPOList, underPoName, poName, appPath));
+        entityObj.put(appPath + "/controller/auto", controllerGenerate(entityPO, propertyPOList, underPoName, poName, appPath));
+        entityObj.put(appPath + "/controller/auto/Impl", controllerImplGenerate(entityPO, propertyPOList, underPoName, poName, appPath, appApi));
         Map<String, String[]> entityCustomObj = new HashMap<>();
         entityCustomObj.put(appPath + "/service/custom", serviceCustomGenerate(poName, appPath));
         entityCustomObj.put(appPath + "/service/custom/aop", aopCustomGenerate(poName, appPath));
@@ -410,7 +410,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{entityDaoData, poName + "Dao.java"};
     }
 
-    public String[] serviceGenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String poName, String underPoName, String appPath, boolean isHaveSub) {
+    public String[] serviceGenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String poName, String underPoName, String appPath) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
@@ -443,10 +443,8 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("\r\n");
         sb.append("    ").append(poName).append("PO updateOne(").append(poName).append("PO po);\r\n");
         sb.append("\r\n");
-        if (isHaveSub) {
-            sb.append("    Page<").append(poName).append("PO> findAll(Integer pageNumber);\r\n");
-            sb.append("\r\n");
-        }
+        sb.append("    Page<").append(poName).append("PO> findAll(Integer pageNumber);\r\n");
+        sb.append("\r\n");
         if ("是".equals(entityPO.getEntitySelf())) {
             sb.append("    Page<").append(poName).append("PO> findAll(Integer pageNumber, ").append(poName).append("PO ").append(underPoName).append(");\r\n");
             sb.append("\r\n");
@@ -469,7 +467,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{entityServiceData, poName + "Service.java"};
     }
 
-    public String[] serviceImplGenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath, boolean isHaveSub) {
+    public String[] serviceImplGenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath) {
         List<EntityPO> subEntityPOList = entityDao.findByEntityOrderBySortCode(entityPO);
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
@@ -524,7 +522,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import org.springframework.stereotype.Service;\r\n");
         sb.append("import org.springframework.transaction.annotation.Transactional;\r\n");
         sb.append("\r\n");
-        if (isHaveSub) {
+        if (!subEntityPOList.isEmpty()){
             sb.append("import java.util.List;\r\n");
             sb.append("\r\n");
         }
@@ -583,17 +581,15 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             sb.append("            deleteOne(entityPO);\r\n");
             sb.append("        }\r\n");
         }
-        if (isHaveSub) {
-            for (EntityPO entityPO1 : subEntityPOList) {
-                //驼峰名
-                String underSubPoName = BeanUtils.underline2Camel(entityPO1.getEntityCode());
-                //文件名
-                String subPoName = BeanUtils.captureName(underSubPoName);
-                sb.append("        List<").append(subPoName).append("PO> ").append(underSubPoName).append("POList = ").append(underSubPoName).append("Dao.findBy").append(poName).append("OrderBySortCode(po);\r\n");
-                sb.append("        for (").append(subPoName).append("PO ").append(underSubPoName).append("PO : ").append(underSubPoName).append("POList) {\r\n");
-                sb.append("            ").append(underSubPoName).append("Service.deleteOne(").append(underSubPoName).append("PO);\r\n");
-                sb.append("        }\r\n");
-            }
+        for (EntityPO entityPO1 : subEntityPOList) {
+            //驼峰名
+            String underSubPoName = BeanUtils.underline2Camel(entityPO1.getEntityCode());
+            //文件名
+            String subPoName = BeanUtils.captureName(underSubPoName);
+            sb.append("        List<").append(subPoName).append("PO> ").append(underSubPoName).append("POList = ").append(underSubPoName).append("Dao.findBy").append(poName).append("OrderBySortCode(po);\r\n");
+            sb.append("        for (").append(subPoName).append("PO ").append(underSubPoName).append("PO : ").append(underSubPoName).append("POList) {\r\n");
+            sb.append("            ").append(underSubPoName).append("Service.deleteOne(").append(underSubPoName).append("PO);\r\n");
+            sb.append("        }\r\n");
         }
         sb.append("        ").append(underPoName).append("Dao.delete(po);\r\n");
         sb.append("    }\r\n");
@@ -603,13 +599,11 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("        return ").append(underPoName).append("Dao.saveAndFlush(po);\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        if (isHaveSub) {
-            sb.append("    @Override\r\n");
-            sb.append("    public Page<").append(poName).append("PO> findAll(Integer pageNumber) {\r\n");
-            sb.append("        return ").append(underPoName).append("Dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by(\"sortCode\").ascending()));\r\n");
-            sb.append("    }\r\n");
-            sb.append("\r\n");
-        }
+        sb.append("    @Override\r\n");
+        sb.append("    public Page<").append(poName).append("PO> findAll(Integer pageNumber) {\r\n");
+        sb.append("        return ").append(underPoName).append("Dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by(\"sortCode\").ascending()));\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
         if ("是".equals(entityPO.getEntitySelf())) {
             sb.append("    @Override\r\n");
             sb.append("    public Page<").append(poName).append("PO> findAll(Integer pageNumber, ").append(poName).append("PO ").append(underPoName).append(") {\r\n");
@@ -653,7 +647,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{entityServiceImplData, poName + "ServiceImpl.java"};
     }
 
-    public String[] controllerGenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath, boolean isHaveSub) {
+    public String[] controllerGenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
@@ -688,12 +682,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("@Tag(name = \"").append(poName).append("\")\r\n");
         sb.append("public interface ").append(poName).append("Controller {\r\n");
         sb.append("\r\n");
-        if (isHaveSub) {
-            sb.append("    @Operation(summary = \"查询所有").append(poName).append("\")\r\n");
-            sb.append("    @PostMapping(value = \"").append(underPoName).append("Page\")\r\n");
-            sb.append("    ResultVO ").append(underPoName).append("Page(@RequestParam(\"pageNumber\") Integer pageNumber);\r\n");
-            sb.append("\r\n");
-        }
+        sb.append("    @Operation(summary = \"查询所有").append(poName).append("\")\r\n");
+        sb.append("    @PostMapping(value = \"").append(underPoName).append("Page\")\r\n");
+        sb.append("    ResultVO ").append(underPoName).append("Page(@RequestParam(\"pageNumber\") Integer pageNumber);\r\n");
+        sb.append("\r\n");
         if ("是".equals(entityPO.getEntitySelf())) {
             sb.append("    @Operation(summary = \"根据").append(poName).append("查询所有").append(poName).append("\")\r\n");
             sb.append("    @PostMapping(value = \"").append(underPoName).append("PageBy").append(poName).append("\")\r\n");
@@ -730,7 +722,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{entityControllerData, poName + "Controller.java"};
     }
 
-    public String[] controllerImplGenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath, String appApi, boolean isHaveSub) {
+    public String[] controllerImplGenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath, String appApi) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
@@ -776,13 +768,11 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("        this.").append(underPoName).append("Service = ").append(underPoName).append("Service;\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        if (isHaveSub) {
-            sb.append("    @Override\r\n");
-            sb.append("    public ResultVO ").append(underPoName).append("Page(Integer pageNumber) {\r\n");
-            sb.append("        return ResultVO.success(").append(underPoName).append("Service.findAll(pageNumber));\r\n");
-            sb.append("    }\r\n");
-            sb.append("\r\n");
-        }
+        sb.append("    @Override\r\n");
+        sb.append("    public ResultVO ").append(underPoName).append("Page(Integer pageNumber) {\r\n");
+        sb.append("        return ResultVO.success(").append(underPoName).append("Service.findAll(pageNumber));\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
         if ("是".equals(entityPO.getEntitySelf())) {
             sb.append("    @Override\r\n");
             sb.append("    public ResultVO ").append(underPoName).append("Page(Integer pageNumber, ").append(poName).append("PO ").append(underPoName).append(") {\r\n");

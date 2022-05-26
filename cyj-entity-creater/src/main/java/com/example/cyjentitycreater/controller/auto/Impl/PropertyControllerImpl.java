@@ -27,6 +27,11 @@ public class PropertyControllerImpl implements PropertyController {
     }
 
     @Override
+    public ResultVO propertyPage(Integer pageNumber) {
+        return ResultVO.success(propertyService.findAll(pageNumber));
+    }
+
+    @Override
     public ResultVO propertyPage(Integer pageNumber, EntityPO entity) {
         return ResultVO.success(propertyService.findAll(pageNumber, entity));
     }

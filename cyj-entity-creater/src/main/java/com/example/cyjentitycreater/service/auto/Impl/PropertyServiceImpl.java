@@ -14,6 +14,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * @author Noice
  */
@@ -41,6 +43,11 @@ public class PropertyServiceImpl extends BaseService implements PropertyService 
     @Override
     public PropertyPO updateOne(PropertyPO po) {
         return propertyDao.saveAndFlush(po);
+    }
+
+    @Override
+    public Page<PropertyPO> findAll(Integer pageNumber) {
+        return propertyDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 
     @Override
