@@ -133,7 +133,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         Map<String, String[]> entityObj = new HashMap<>();
         entityObj.put(commonPath + "/entity/po", poGenerate(entityPO, propertyPOList, poName, underPoName));
         entityObj.put(commonPath + "/dao", daoGenerate(entityPO, propertyPOList, poName, underPoName));
-        entityObj.put(appPath + "/service/auto", serviceGenerate(entityPO, propertyPOList, poName, appPath, isHaveSub));
+        entityObj.put(appPath + "/service/auto", serviceGenerate(entityPO, propertyPOList, poName, underPoName, appPath, isHaveSub));
         entityObj.put(appPath + "/service/auto/Impl", serviceImplGenerate(entityPO, propertyPOList, underPoName, poName, appPath, isHaveSub));
         entityObj.put(appPath + "/controller/auto", controllerGenerate(entityPO, propertyPOList, underPoName, poName, appPath, isHaveSub));
         entityObj.put(appPath + "/controller/auto/Impl", controllerImplGenerate(entityPO, propertyPOList, underPoName, poName, appPath, appApi, isHaveSub));
@@ -427,7 +427,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{entityDaoData, poName + "Dao.java"};
     }
 
-    public String[] serviceGenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String poName, String appPath, boolean isHaveSub) {
+    public String[] serviceGenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String poName, String underPoName, String appPath, boolean isHaveSub) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
@@ -462,6 +462,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("\r\n");
         if (isHaveSub) {
             sb.append("    Page<").append(poName).append("PO> findAll(Integer pageNumber);\r\n");
+            sb.append("\r\n");
+        }
+        if ("是".equals(entityPO.getEntitySelf())) {
+            sb.append("    Page<").append(poName).append("PO> findAll(Integer pageNumber, ").append(poName).append("PO ").append(underPoName).append(");\r\n");
             sb.append("\r\n");
         }
         for (PropertyPO propertyPO : propertyPOList) {
