@@ -133,10 +133,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         Map<String, String[]> entityObj = new HashMap<>();
         entityObj.put(commonPath + "/entity/po", poGenerate(entityPO, propertyPOList, poName, underPoName));
         entityObj.put(commonPath + "/dao", daoGenerate(entityPO, propertyPOList, poName, underPoName));
-        entityObj.put(appPath + "/service/auto", serviceGenerate(propertyPOList, poName, appPath, isHaveSub));
-        entityObj.put(appPath + "/service/auto/Impl", serviceImplGenerate(propertyPOList, underPoName, poName, appPath, isHaveSub));
-        entityObj.put(appPath + "/controller/auto", controllerGenerate(propertyPOList, underPoName, poName, appPath, isHaveSub));
-        entityObj.put(appPath + "/controller/auto/Impl", controllerImplGenerate(propertyPOList, underPoName, poName, appPath, appApi, isHaveSub));
+        entityObj.put(appPath + "/service/auto", serviceGenerate(entityPO, propertyPOList, poName, appPath, isHaveSub));
+        entityObj.put(appPath + "/service/auto/Impl", serviceImplGenerate(entityPO, propertyPOList, underPoName, poName, appPath, isHaveSub));
+        entityObj.put(appPath + "/controller/auto", controllerGenerate(entityPO, propertyPOList, underPoName, poName, appPath, isHaveSub));
+        entityObj.put(appPath + "/controller/auto/Impl", controllerImplGenerate(entityPO, propertyPOList, underPoName, poName, appPath, appApi, isHaveSub));
         Map<String, String[]> entityCustomObj = new HashMap<>();
         entityCustomObj.put(appPath + "/service/custom", serviceCustomGenerate(poName, appPath));
         entityCustomObj.put(appPath + "/service/custom/aop", aopCustomGenerate(poName, appPath));
@@ -427,7 +427,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{entityDaoData, poName + "Dao.java"};
     }
 
-    public String[] serviceGenerate(List<PropertyPO> propertyPOList, String poName, String appPath, boolean isHaveSub) {
+    public String[] serviceGenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String poName, String appPath, boolean isHaveSub) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
@@ -482,7 +482,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{entityServiceData, poName + "Service.java"};
     }
 
-    public String[] serviceImplGenerate(List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath, boolean isHaveSub) {
+    public String[] serviceImplGenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath, boolean isHaveSub) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
@@ -515,6 +515,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import org.springframework.stereotype.Service;\r\n");
         sb.append("import org.springframework.transaction.annotation.Transactional;\r\n");
         sb.append("\r\n");
+        if (isHaveSub) {
+            sb.append("import java.util.List;\r\n");
+            sb.append("\r\n");
+        }
         if (BeanUtils.ifManyToMany(propertyPOList)) {
             sb.append("import java.util.Set;\r\n");
             sb.append("\r\n");
@@ -540,14 +544,16 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("\r\n");
         sb.append("    @Override\r\n");
         sb.append("    public void deleteOne(").append(poName).append("PO po) {\r\n");
-        sb.append("        List<EntityPO> entityPOList = entityDao.findByEntity(po);\r\n");
-        sb.append("        for (EntityPO entityPO : entityPOList) {\r\n");
-        sb.append("            deleteOne(entityPO);\r\n");
-        sb.append("        }\r\n");
-        sb.append("        List<PropertyPO> propertyPOList = propertyDao.findByEntity(po);\r\n");
-        sb.append("        for (PropertyPO propertyPO : propertyPOList) {\r\n");
-        sb.append("            propertyService.deleteOne(propertyPO);\r\n");
-        sb.append("        }\r\n");
+        if (isHaveSub){
+            sb.append("        List<EntityPO> entityPOList = entityDao.findByEntityOrderBySortCode(po);\r\n");
+            sb.append("        for (EntityPO entityPO : entityPOList) {\r\n");
+            sb.append("            deleteOne(entityPO);\r\n");
+            sb.append("        }\r\n");
+            sb.append("        List<PropertyPO> propertyPOList = propertyDao.findByEntityOrderBySortCode(po);\r\n");
+            sb.append("        for (PropertyPO propertyPO : propertyPOList) {\r\n");
+            sb.append("            propertyService.deleteOne(propertyPO);\r\n");
+            sb.append("        }\r\n");
+        }
         sb.append("        ").append(underPoName).append("Dao.delete(po);\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
@@ -595,7 +601,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{entityServiceImplData, poName + "ServiceImpl.java"};
     }
 
-    public String[] controllerGenerate(List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath, boolean isHaveSub) {
+    public String[] controllerGenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath, boolean isHaveSub) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
@@ -666,7 +672,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{entityControllerData, poName + "Controller.java"};
     }
 
-    public String[] controllerImplGenerate(List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath, String appApi, boolean isHaveSub) {
+    public String[] controllerImplGenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath, String appApi, boolean isHaveSub) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
