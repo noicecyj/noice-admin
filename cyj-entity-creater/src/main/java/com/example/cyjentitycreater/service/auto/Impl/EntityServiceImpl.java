@@ -1,13 +1,13 @@
 package com.example.cyjentitycreater.service.auto.Impl;
 
-import com.example.cyjcommon.dao.EntityDao;
 import com.example.cyjcommon.dao.PropertyDao;
+import com.example.cyjcommon.dao.EntityDao;
+import com.example.cyjcommon.entity.po.PropertyPO;
 import com.example.cyjcommon.entity.po.AppServicePO;
 import com.example.cyjcommon.entity.po.EntityPO;
-import com.example.cyjcommon.entity.po.PropertyPO;
 import com.example.cyjcommon.service.BaseService;
-import com.example.cyjentitycreater.service.auto.EntityService;
 import com.example.cyjentitycreater.service.auto.PropertyService;
+import com.example.cyjentitycreater.service.auto.EntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
