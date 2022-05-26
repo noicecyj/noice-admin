@@ -7,8 +7,8 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
@@ -39,22 +39,6 @@ public class PropertyPO implements Serializable {
     @Column(name = "id", length = 36)
     private String id;
 
-    @Column(name = "property_edit_enable")
-    private String propertyEditEnable;
-
-    @Column(name = "property_out_type")
-    private String propertyOutType;
-
-    @Column(name = "property_length")
-    private String propertyLength;
-
-    @Column(name = "property_out")
-    private String propertyOut;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.REMOVE})
-    @JoinColumn(name = "entity_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
-    private EntityPO entity;
-
     @NotNull(message = "属性编码不能为空")
     @Column(name = "property_code")
     private String propertyCode;
@@ -67,6 +51,20 @@ public class PropertyPO implements Serializable {
     @Column(name = "property_label")
     private String propertyLabel;
 
+    @NotNull(message = "属性是否必填不能为空")
+    @Column(name = "property_required")
+    private String propertyRequired;
+
+    @NotNull(message = "属性是否展示不能为空")
+    @Column(name = "property_display")
+    private String propertyDisplay;
+
+    @Column(name = "property_out")
+    private String propertyOut;
+
+    @Column(name = "property_out_type")
+    private String propertyOutType;
+
     @Column(name = "property_width")
     private String propertyWidth;
 
@@ -76,9 +74,11 @@ public class PropertyPO implements Serializable {
     @Column(name = "property_direction")
     private String propertyDirection;
 
-    @NotNull(message = "属性是否必填不能为空")
-    @Column(name = "property_required")
-    private String propertyRequired;
+    @Column(name = "property_edit_enable")
+    private String propertyEditEnable;
+
+    @Column(name = "property_length")
+    private String propertyLength;
 
     @Column(name = "property_data_source_type")
     private String propertyDataSourceType;
@@ -86,9 +86,9 @@ public class PropertyPO implements Serializable {
     @Column(name = "property_default_value")
     private String propertyDefaultValue;
 
-    @NotNull(message = "属性是否展示不能为空")
-    @Column(name = "property_display")
-    private String propertyDisplay;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.REMOVE})
+    @JoinColumn(name = "entity_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
+    private EntityPO entity;
 
     @NotNull(message = "状态不能为空")
     @Column(name = "status")
