@@ -492,16 +492,30 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         //serviceImpl路径
         sb.append("package ").append(poServicePath).append("Impl;\r\n");
         sb.append("\r\n");
+        for (EntityPO entityPO1 : subEntityPOList) {
+            //驼峰名
+            String underSubPoName = BeanUtils.underline2Camel(entityPO1.getEntityCode());
+            //文件名
+            String subPoName = BeanUtils.captureName(underSubPoName);
+            sb.append("import com.example.cyjcommon.dao.").append(subPoName).append("Dao;\r\n");
+        }
         sb.append("import com.example.cyjcommon.dao.").append(poName).append("Dao;\r\n");
-        for (PropertyPO propertyPO : propertyPOList) {
-            if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
-                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
-                String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("import com.example.cyjcommon.entity.po.").append(propertyOut).append("PO;\r\n");
-            }
+        for (EntityPO entityPO1 : subEntityPOList) {
+            //驼峰名
+            String underSubPoName = BeanUtils.underline2Camel(entityPO1.getEntityCode());
+            //文件名
+            String subPoName = BeanUtils.captureName(underSubPoName);
+            sb.append("import com.example.cyjcommon.entity.po.").append(subPoName).append("PO;\r\n");
         }
         sb.append("import com.example.cyjcommon.entity.po.").append(poName).append("PO;\r\n");
         sb.append("import com.example.cyjcommon.service.BaseService;\r\n");
+        for (EntityPO entityPO1 : subEntityPOList) {
+            //驼峰名
+            String underSubPoName = BeanUtils.underline2Camel(entityPO1.getEntityCode());
+            //文件名
+            String subPoName = BeanUtils.captureName(underSubPoName);
+            sb.append("import ").append(poServicePath).append(subPoName).append("Service;\r\n");
+        }
         sb.append("import ").append(poServicePath).append(poName).append("Service;\r\n");
         sb.append("import org.springframework.beans.factory.annotation.Autowired;\r\n");
         if (BeanUtils.ifManyToOne(propertyPOList) || BeanUtils.ifManyToMany(propertyPOList)) {
