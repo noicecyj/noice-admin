@@ -1,10 +1,13 @@
 package com.example.cyjentitycreater.service.auto.Impl;
 
 import com.example.cyjcommon.dao.EntityDao;
+import com.example.cyjcommon.dao.PropertyDao;
 import com.example.cyjcommon.entity.po.AppServicePO;
 import com.example.cyjcommon.entity.po.EntityPO;
+import com.example.cyjcommon.entity.po.PropertyPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjentitycreater.service.auto.EntityService;
+import com.example.cyjentitycreater.service.auto.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -14,6 +17,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * @author Noice
  */
@@ -22,10 +27,22 @@ import org.springframework.transaction.annotation.Transactional;
 public class EntityServiceImpl extends BaseService implements EntityService {
 
     private EntityDao entityDao;
+    private PropertyDao propertyDao;
+    private PropertyService propertyService;
 
     @Autowired
     public void setEntityDao(EntityDao entityDao) {
         this.entityDao = entityDao;
+    }
+
+    @Autowired
+    public void setPropertyDao(PropertyDao propertyDao) {
+        this.propertyDao = propertyDao;
+    }
+
+    @Autowired
+    public void setPropertyService(PropertyService propertyService) {
+        this.propertyService = propertyService;
     }
 
     @Override
@@ -35,6 +52,14 @@ public class EntityServiceImpl extends BaseService implements EntityService {
 
     @Override
     public void deleteOne(EntityPO po) {
+        List<EntityPO> entityPOList = entityDao.findByEntity(po);
+        for (EntityPO entityPO : entityPOList) {
+            deleteOne(entityPO);
+        }
+        List<PropertyPO> propertyPOList = propertyDao.findByEntity(po);
+        for (PropertyPO propertyPO : propertyPOList) {
+            propertyService.deleteOne(propertyPO);
+        }
         entityDao.delete(po);
     }
 

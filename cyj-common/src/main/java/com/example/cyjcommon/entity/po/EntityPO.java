@@ -63,6 +63,9 @@ public class EntityPO implements Serializable {
     @Column(name = "entity_form_row")
     private Integer entityFormRow;
 
+    @Column(name = "entity_self")
+    private String entitySelf;
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.REMOVE})
     @JoinColumn(name = "entity_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
     private EntityPO entity;
