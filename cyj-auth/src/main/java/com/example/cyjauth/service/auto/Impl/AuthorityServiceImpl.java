@@ -2,7 +2,6 @@ package com.example.cyjauth.service.auto.Impl;
 
 import com.example.cyjcommon.dao.AuthorityDao;
 import com.example.cyjcommon.entity.po.EntityPO;
-import com.example.cyjcommon.entity.po.AppServicePO;
 import com.example.cyjcommon.entity.po.UserPO;
 import com.example.cyjcommon.entity.po.RolePO;
 import com.example.cyjcommon.entity.po.AuthorityPO;
@@ -58,15 +57,6 @@ public class AuthorityServiceImpl extends BaseService implements AuthorityServic
         Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
         AuthorityPO authorityPO = new AuthorityPO();
         authorityPO.setEntity(entity);
-        Example<AuthorityPO> example = Example.of(authorityPO);
-        return authorityDao.findAll(example, pageable);
-    }
-
-    @Override
-    public Page<AuthorityPO> findAll(Integer pageNumber, AppServicePO appService) {
-        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
-        AuthorityPO authorityPO = new AuthorityPO();
-        authorityPO.setAppService(appService);
         Example<AuthorityPO> example = Example.of(authorityPO);
         return authorityDao.findAll(example, pageable);
     }

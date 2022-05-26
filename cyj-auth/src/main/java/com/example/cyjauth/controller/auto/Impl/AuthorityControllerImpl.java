@@ -1,7 +1,6 @@
 package com.example.cyjauth.controller.auto.Impl;
 
 import com.example.cyjcommon.entity.po.EntityPO;
-import com.example.cyjcommon.entity.po.AppServicePO;
 import com.example.cyjcommon.entity.po.UserPO;
 import com.example.cyjcommon.entity.po.RolePO;
 import com.example.cyjcommon.entity.po.AuthorityPO;
@@ -39,11 +38,6 @@ public class AuthorityControllerImpl implements AuthorityController {
     @Override
     public ResultVO authorityPage(Integer pageNumber, EntityPO entity) {
         return ResultVO.success(authorityService.findAll(pageNumber, entity));
-    }
-
-    @Override
-    public ResultVO authorityPage(Integer pageNumber, AppServicePO appService) {
-        return ResultVO.success(authorityService.findAll(pageNumber, appService));
     }
 
     @Override

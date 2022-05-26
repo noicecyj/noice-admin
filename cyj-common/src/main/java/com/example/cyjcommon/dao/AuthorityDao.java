@@ -1,7 +1,6 @@
 package com.example.cyjcommon.dao;
 
 import com.example.cyjcommon.entity.po.EntityPO;
-import com.example.cyjcommon.entity.po.AppServicePO;
 import com.example.cyjcommon.entity.po.UserPO;
 import com.example.cyjcommon.entity.po.RolePO;
 import com.example.cyjcommon.entity.po.AuthorityPO;
@@ -16,12 +15,10 @@ import java.util.Set;
  */
 public interface AuthorityDao extends JpaRepository<AuthorityPO, String> {
 
-    List<AuthorityPO> findByEntity(EntityPO entity);
+    List<AuthorityPO> findByEntityOrderBySortCode(EntityPO entity);
 
-    List<AuthorityPO> findByAppService(AppServicePO appService);
+    List<AuthorityPO> findByUserInOrderBySortCode(Collection<Set<UserPO>> userList);
 
-    List<AuthorityPO> findByUserIn(Collection<Set<UserPO>> userList);
-
-    List<AuthorityPO> findByRoleIn(Collection<Set<RolePO>> roleList);
+    List<AuthorityPO> findByRoleInOrderBySortCode(Collection<Set<RolePO>> roleList);
 
 }
