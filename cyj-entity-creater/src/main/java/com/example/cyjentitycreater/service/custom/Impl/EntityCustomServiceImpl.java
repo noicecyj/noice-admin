@@ -16,8 +16,6 @@ import com.example.cyjentitycreater.service.custom.EntityCustomService;
 import com.example.cyjentitycreater.utils.BeanUtils;
 import com.example.cyjquery.service.custom.SqlCustomService;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,8 +34,6 @@ import java.util.stream.Collectors;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class EntityCustomServiceImpl extends BaseService implements EntityCustomService {
-
-    private static final Logger logger = LoggerFactory.getLogger(EntityCustomServiceImpl.class);
 
     private final static String componentPath = "C:/Users/noice/IdeaProjects/noice-admin/noice/src/pages/";
 
@@ -72,29 +68,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         if (entityPO == null) {
             return;
         }
-        List<PropertyPO> propertyPOList = propertyDao.findByEntityOrderBySortCode(entityPO).stream().sorted(Comparator.comparing(PropertyPO::getSortCode)).collect(Collectors.toList());
-        //驼峰名
-        String underPoName = BeanUtils.underline2Camel(entityPO.getEntityCode());
-        //文件名
-        String poName = BeanUtils.captureName(underPoName);
-        AppServicePO appServicePO = entityPO.getAppService();
-        if (appServicePO == null) {
-            return;
-        }
-        //服务路径
-        String appPath = appServicePO.getAppServicePath();
-        //服务接口
-        String appApi = appServicePO.getAppServiceApi();
-//        createJavaFile(entityPO, propertyPOList, underPoName, poName, appPath, appApi);
-        List<EntityPO> entityPOList = entityDao.findByEntityOrderBySortCode(entityPO);
-        entityPOList.forEach(subPo -> {
-            List<PropertyPO> subPoList = propertyDao.findByEntityOrderBySortCode(subPo);
-            //驼峰名
-            String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
-            //文件名
-            String SubPoName = BeanUtils.captureName(underSubPoName);
-//            createSubJavaFile(subPo, subPoList, underSubPoName, SubPoName, appPath, appApi);
-        });
+        entityHandler(entityPO);
     }
 
     @Override
@@ -152,6 +126,11 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                 String key = entry.getKey();
                 String[] value = entry.getValue();
                 createJavaFile(key, value);
+            }
+            for (Map.Entry<String, String[]> entry : entityCustomObj.entrySet()) {
+                String key = entry.getKey();
+                String[] value = entry.getValue();
+                createJavaFile(key, value, false);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -273,7 +252,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         if (BeanUtils.ifManyToOne(propertyPOList)) {
             sb.append("import javax.persistence.CascadeType;\r\n");
         }
-        if ("是".equals(entityPO.getEntitySelf()) || BeanUtils.ifManyToOne(propertyPOList) || BeanUtils.ifManyToMany(propertyPOList)){
+        if ("是".equals(entityPO.getEntitySelf()) || BeanUtils.ifManyToOne(propertyPOList) || BeanUtils.ifManyToMany(propertyPOList)) {
             sb.append("import javax.persistence.ConstraintMode;\r\n");
         }
         sb.append("import javax.persistence.Column;\r\n");
@@ -281,7 +260,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         if (BeanUtils.ifManyToOne(propertyPOList) || BeanUtils.ifManyToMany(propertyPOList)) {
             sb.append("import javax.persistence.FetchType;\r\n");
         }
-        if ("是".equals(entityPO.getEntitySelf()) || BeanUtils.ifManyToOne(propertyPOList) || BeanUtils.ifManyToMany(propertyPOList)){
+        if ("是".equals(entityPO.getEntitySelf()) || BeanUtils.ifManyToOne(propertyPOList) || BeanUtils.ifManyToMany(propertyPOList)) {
             sb.append("import javax.persistence.ForeignKey;\r\n");
         }
         sb.append("import javax.persistence.GeneratedValue;\r\n");
