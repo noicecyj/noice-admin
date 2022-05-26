@@ -12,6 +12,8 @@ public interface EntityCustomService {
 
     void generateJavaFile(EntityPO po);
 
+    void entityHandler(EntityPO entityPO);
+
     void createComponentFile(EntityPO po);
 
     JSONObject findDataTableAndFormByName(String entityCode);

@@ -16,6 +16,8 @@ import com.example.cyjentitycreater.service.custom.EntityCustomService;
 import com.example.cyjentitycreater.utils.BeanUtils;
 import com.example.cyjquery.service.custom.SqlCustomService;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +36,8 @@ import java.util.stream.Collectors;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class EntityCustomServiceImpl extends BaseService implements EntityCustomService {
+
+    private static final Logger logger = LoggerFactory.getLogger(EntityCustomServiceImpl.class);
 
     private final static String componentPath = "C:/Users/noice/IdeaProjects/noice-admin/noice/src/pages/";
 
@@ -68,7 +72,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         if (entityPO == null) {
             return;
         }
-        List<PropertyPO> propertyPOList = propertyDao.findByEntity(entityPO).stream().sorted(Comparator.comparing(PropertyPO::getSortCode)).collect(Collectors.toList());
+        List<PropertyPO> propertyPOList = propertyDao.findByEntityOrderBySortCode(entityPO).stream().sorted(Comparator.comparing(PropertyPO::getSortCode)).collect(Collectors.toList());
         //驼峰名
         String underPoName = BeanUtils.underline2Camel(entityPO.getEntityCode());
         //文件名
@@ -82,9 +86,9 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         //服务接口
         String appApi = appServicePO.getAppServiceApi();
         createJavaFile(entityPO, propertyPOList, underPoName, poName, appPath, appApi);
-        List<EntityPO> entityPOList = entityDao.findByEntity(entityPO);
+        List<EntityPO> entityPOList = entityDao.findByEntityOrderBySortCode(entityPO);
         entityPOList.forEach(subPo -> {
-            List<PropertyPO> subPoList = propertyDao.findByEntity(subPo);
+            List<PropertyPO> subPoList = propertyDao.findByEntityOrderBySortCode(subPo);
             //驼峰名
             String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
             //文件名
@@ -93,9 +97,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         });
     }
 
-    private void entityHandler(EntityPO entityPO) {
+    @Override
+    public void entityHandler(EntityPO entityPO) {
         //查询是否存在子实体
-        List<EntityPO> subEntityPOList = entityDao.findByEntity(entityPO);
+        List<EntityPO> subEntityPOList = entityDao.findByEntityOrderBySortCode(entityPO);
         //若存在则便利子实体
         if (!subEntityPOList.isEmpty()) {
             for (EntityPO entityPO1 : subEntityPOList) {
@@ -112,11 +117,46 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
     }
 
     private void createEntityHandler(EntityPO entityPO, boolean isHaveSub) {
-        if (isHaveSub) {
-            // TODO: 2022/5/26 生成存在子实体的实体
-        } else {
-            // TODO: 2022/5/26 生成不存在子实体的实体
+        //驼峰名
+        String underPoName = BeanUtils.underline2Camel(entityPO.getEntityCode());
+        //文件名
+        String poName = BeanUtils.captureName(underPoName);
+        AppServicePO appServicePO = entityPO.getAppService();
+        if (appServicePO == null) {
+            return;
         }
+        //服务路径
+        String appPath = appServicePO.getAppServicePath();
+        //服务接口
+        String appApi = appServicePO.getAppServiceApi();
+        List<PropertyPO> propertyPOList = propertyDao.findByEntityOrderBySortCode(entityPO);
+        Map<String, String[]> entityObj = new HashMap<>();
+        entityObj.put(commonPath + "/entity/po", poGenerate(entityPO, propertyPOList, poName, underPoName));
+        entityObj.put(commonPath + "/dao", daoGenerate(propertyPOList, poName));
+        entityObj.put(appPath + "/service/auto", serviceGenerate(propertyPOList, poName, appPath));
+        entityObj.put(appPath + "/service/auto/Impl", serviceImplGenerate(propertyPOList, underPoName, poName, appPath));
+        entityObj.put(appPath + "/controller/auto", controllerGenerate(propertyPOList, underPoName, poName, appPath));
+        entityObj.put(appPath + "/controller/auto/Impl", controllerImplGenerate(propertyPOList, underPoName, poName, appPath, appApi));
+        Map<String, String[]> entityCustomObj = new HashMap<>();
+        entityCustomObj.put(appPath + "/service/custom", serviceCustomGenerate(poName, appPath));
+        entityCustomObj.put(appPath + "/service/custom/aop", aopCustomGenerate(poName, appPath));
+        entityCustomObj.put(appPath + "/service/custom/Impl", serviceImplCustomGenerate(poName, appPath));
+        entityCustomObj.put(appPath + "/controller/custom", controllerCustomGenerate(poName, appPath));
+        entityCustomObj.put(appPath + "/controller/custom/Impl", controllerImplCustomGenerate(poName, appPath, appApi));
+        createEntityCodeHandler(entityObj, entityCustomObj);
+    }
+
+    private void createEntityCodeHandler(Map<String, String[]> entityObj, Map<String, String[]> entityCustomObj) {
+        try {
+            for (Map.Entry<String, String[]> entry : entityObj.entrySet()) {
+                String key = entry.getKey();
+                String[] value = entry.getValue();
+                createJavaFile(key, value);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 //    private void authorityCenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName,
@@ -1123,7 +1163,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             }
             //服务接口
             String appApi = appServicePO.getAppServiceApi();
-            List<EntityPO> entityPOList = entityDao.findByEntity(entityPO);
+            List<EntityPO> entityPOList = entityDao.findByEntityOrderBySortCode(entityPO);
             createComponentFile(appApi, entityPOList, entityPO, underPoName, poName);
             entityPOList.forEach(subPo -> {
                 //驼峰名
@@ -1382,7 +1422,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         if (po == null) {
             return null;
         }
-        List<PropertyPO> propertyPOList = propertyDao.findByEntity(po);
+        List<PropertyPO> propertyPOList = propertyDao.findByEntityOrderBySortCode(po);
         List<PropertyCustomDTO> propertyCustomDTOList = new ArrayList<>();
         for (PropertyPO propertyPO : propertyPOList) {
             PropertyCustomDTO propertyCustomDTO = new PropertyCustomDTO();

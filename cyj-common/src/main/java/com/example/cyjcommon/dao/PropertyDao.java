@@ -11,6 +11,6 @@ import java.util.List;
  */
 public interface PropertyDao extends JpaRepository<PropertyPO, String> {
 
-    List<PropertyPO> findByEntity(EntityPO entity);
+    List<PropertyPO> findByEntityOrderBySortCode(EntityPO entity);
 
 }

@@ -52,11 +52,11 @@ public class EntityServiceImpl extends BaseService implements EntityService {
 
     @Override
     public void deleteOne(EntityPO po) {
-        List<EntityPO> entityPOList = entityDao.findByEntity(po);
+        List<EntityPO> entityPOList = entityDao.findByEntityOrderBySortCode(po);
         for (EntityPO entityPO : entityPOList) {
             deleteOne(entityPO);
         }
-        List<PropertyPO> propertyPOList = propertyDao.findByEntity(po);
+        List<PropertyPO> propertyPOList = propertyDao.findByEntityOrderBySortCode(po);
         for (PropertyPO propertyPO : propertyPOList) {
             propertyService.deleteOne(propertyPO);
         }
