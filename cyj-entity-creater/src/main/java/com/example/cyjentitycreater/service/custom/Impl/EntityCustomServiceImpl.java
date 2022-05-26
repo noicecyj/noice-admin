@@ -511,6 +511,13 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             String subPoName = BeanUtils.captureName(underSubPoName);
             sb.append("import com.example.cyjcommon.entity.po.").append(subPoName).append("PO;\r\n");
         }
+        for (PropertyPO propertyPO : propertyPOList) {
+            if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
+                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
+                String propertyOut = BeanUtils.captureName(underPropertyOut);
+                sb.append("import com.example.cyjcommon.entity.po.").append(propertyOut).append("PO;\r\n");
+            }
+        }
         sb.append("import com.example.cyjcommon.entity.po.").append(poName).append("PO;\r\n");
         sb.append("import com.example.cyjcommon.service.BaseService;\r\n");
         for (EntityPO entityPO1 : subEntityPOList) {
@@ -617,6 +624,17 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             sb.append("    @Override\r\n");
             sb.append("    public Page<").append(poName).append("PO> findAll(Integer pageNumber) {\r\n");
             sb.append("        return ").append(underPoName).append("Dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by(\"sortCode\").ascending()));\r\n");
+            sb.append("    }\r\n");
+            sb.append("\r\n");
+        }
+        if ("是".equals(entityPO.getEntitySelf())) {
+            sb.append("    @Override\r\n");
+            sb.append("    public Page<").append(poName).append("PO> findAll(Integer pageNumber, ").append(poName).append("PO ").append(underPoName).append(") {\r\n");
+            sb.append("        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by(\"sortCode\").ascending());\r\n");
+            sb.append("        ").append(poName).append("PO ").append(underPoName).append("PO = new ").append(poName).append("PO();\r\n");
+            sb.append("        ").append(underPoName).append("PO.set").append(poName).append("(").append(underPoName).append(");\r\n");
+            sb.append("        Example<").append(poName).append("PO> example = Example.of(").append(underPoName).append("PO);\r\n");
+            sb.append("        return ").append(underPoName).append("Dao.findAll(example, pageable);\r\n");
             sb.append("    }\r\n");
             sb.append("\r\n");
         }
