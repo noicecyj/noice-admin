@@ -483,6 +483,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
     }
 
     public String[] serviceImplGenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath, boolean isHaveSub) {
+        List<EntityPO> subEntityPOList = entityDao.findByEntityOrderBySortCode(entityPO);
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
@@ -531,12 +532,36 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("public class ").append(poName).append("ServiceImpl extends BaseService implements ").append(poName).append("Service {\r\n");
         sb.append("\r\n");
         sb.append("    private ").append(poName).append("Dao ").append(underPoName).append("Dao;\r\n");
+        for (EntityPO entityPO1 : subEntityPOList) {
+            //驼峰名
+            String underSubPoName = BeanUtils.underline2Camel(entityPO1.getEntityCode());
+            //文件名
+            String subPoName = BeanUtils.captureName(underSubPoName);
+            sb.append("    private ").append(subPoName).append("Dao ").append(underSubPoName).append("Dao;\r\n");
+            sb.append("    private ").append(subPoName).append("Service ").append(underSubPoName).append("Service;\r\n");
+        }
         sb.append("\r\n");
         sb.append("    @Autowired\r\n");
         sb.append("    public void set").append(poName).append("Dao(").append(poName).append("Dao ").append(underPoName).append("Dao) {\r\n");
         sb.append("        this.").append(underPoName).append("Dao = ").append(underPoName).append("Dao;\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
+        for (EntityPO entityPO1 : subEntityPOList) {
+            //驼峰名
+            String underSubPoName = BeanUtils.underline2Camel(entityPO1.getEntityCode());
+            //文件名
+            String subPoName = BeanUtils.captureName(underSubPoName);
+            sb.append("    @Autowired\r\n");
+            sb.append("    public void set").append(subPoName).append("Dao(").append(subPoName).append("Dao ").append(underSubPoName).append("Dao) {\r\n");
+            sb.append("        this.").append(underSubPoName).append("Dao = ").append(underSubPoName).append("Dao;\r\n");
+            sb.append("    }\r\n");
+            sb.append("\r\n");
+            sb.append("    @Autowired\r\n");
+            sb.append("    public void set").append(subPoName).append("Service(").append(subPoName).append("Service ").append(underSubPoName).append("Service) {\r\n");
+            sb.append("        this.").append(underSubPoName).append("Service = ").append(underSubPoName).append("Service;\r\n");
+            sb.append("    }\r\n");
+            sb.append("\r\n");
+        }
         sb.append("    @Override\r\n");
         sb.append("    public ").append(poName).append("PO addOne(").append(poName).append("PO po) {\r\n");
         sb.append("        return ").append(underPoName).append("Dao.save(po);\r\n");
@@ -544,15 +569,23 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("\r\n");
         sb.append("    @Override\r\n");
         sb.append("    public void deleteOne(").append(poName).append("PO po) {\r\n");
-        if (isHaveSub){
+        if ("是".equals(entityPO.getEntitySelf())) {
             sb.append("        List<EntityPO> entityPOList = entityDao.findByEntityOrderBySortCode(po);\r\n");
             sb.append("        for (EntityPO entityPO : entityPOList) {\r\n");
             sb.append("            deleteOne(entityPO);\r\n");
             sb.append("        }\r\n");
-            sb.append("        List<PropertyPO> propertyPOList = propertyDao.findByEntityOrderBySortCode(po);\r\n");
-            sb.append("        for (PropertyPO propertyPO : propertyPOList) {\r\n");
-            sb.append("            propertyService.deleteOne(propertyPO);\r\n");
-            sb.append("        }\r\n");
+        }
+        if (isHaveSub) {
+            for (EntityPO entityPO1 : subEntityPOList) {
+                //驼峰名
+                String underSubPoName = BeanUtils.underline2Camel(entityPO1.getEntityCode());
+                //文件名
+                String subPoName = BeanUtils.captureName(underSubPoName);
+                sb.append("        List<").append(subPoName).append("PO> ").append(underSubPoName).append("POList = ").append(underSubPoName).append("Dao.findBy").append(poName).append("OrderBySortCode(po);\r\n");
+                sb.append("        for (").append(subPoName).append("PO ").append(underSubPoName).append("PO : ").append(underSubPoName).append("POList) {\r\n");
+                sb.append("            ").append(underSubPoName).append("Service.deleteOne(").append(underSubPoName).append("PO);\r\n");
+                sb.append("        }\r\n");
+            }
         }
         sb.append("        ").append(underPoName).append("Dao.delete(po);\r\n");
         sb.append("    }\r\n");
@@ -642,6 +675,12 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             sb.append("    ResultVO ").append(underPoName).append("Page(@RequestParam(\"pageNumber\") Integer pageNumber);\r\n");
             sb.append("\r\n");
         }
+        if ("是".equals(entityPO.getEntitySelf())) {
+            sb.append("    @Operation(summary = \"根据").append(poName).append("查询所有").append(poName).append("\")\r\n");
+            sb.append("    @PostMapping(value = \"").append(underPoName).append("PageBy").append(poName).append("\")\r\n");
+            sb.append("    ResultVO ").append(underPoName).append("Page(@RequestParam(\"pageNumber\") Integer pageNumber, @RequestBody ").append(poName).append("PO ").append(underPoName).append(");\r\n");
+            sb.append("\r\n");
+        }
         for (PropertyPO propertyPO : propertyPOList) {
             if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
@@ -722,6 +761,13 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             sb.append("    @Override\r\n");
             sb.append("    public ResultVO ").append(underPoName).append("Page(Integer pageNumber) {\r\n");
             sb.append("        return ResultVO.success(").append(underPoName).append("Service.findAll(pageNumber));\r\n");
+            sb.append("    }\r\n");
+            sb.append("\r\n");
+        }
+        if ("是".equals(entityPO.getEntitySelf())) {
+            sb.append("    @Override\r\n");
+            sb.append("    public ResultVO ").append(underPoName).append("Page(Integer pageNumber, ").append(poName).append("PO ").append(underPoName).append(") {\r\n");
+            sb.append("        return ResultVO.success(").append(underPoName).append("Service.findAll(pageNumber, ").append(underPoName).append("));\r\n");
             sb.append("    }\r\n");
             sb.append("\r\n");
         }
