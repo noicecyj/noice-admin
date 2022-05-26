@@ -2,9 +2,11 @@ package com.example.cyjentitycreater.service.custom.Impl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.example.cyjcommon.dao.AuthorityDao;
 import com.example.cyjcommon.dao.EntityDao;
 import com.example.cyjcommon.dao.PropertyDao;
 import com.example.cyjcommon.entity.po.AppServicePO;
+import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.example.cyjcommon.entity.po.DictionaryPO;
 import com.example.cyjcommon.entity.po.EntityPO;
 import com.example.cyjcommon.entity.po.PropertyPO;
@@ -36,10 +38,15 @@ import java.util.stream.Collectors;
 public class EntityCustomServiceImpl extends BaseService implements EntityCustomService {
 
     private final static String componentPath = "C:/Users/noice/IdeaProjects/noice-admin/noice/src/pages/";
-
+    private final static String POST = "POST";
+    private final static String MANY_TO_ONE = "ManyToOne";
+    private final static String AUTO = "auto";
+    private final static String STATUS = "有效";
+    private final static String SORTCODE = "10";
     private final static String commonPath = "C:/Users/noice/IdeaProjects/noice-admin/cyj-common/src/main/java/com/example/cyjcommon";
     private EntityDao entityDao;
     private PropertyDao propertyDao;
+    private AuthorityDao authorityDao;
     private DictionaryCustomService dictionaryCustomService;
     private SqlCustomService sqlCustomService;
 
@@ -51,6 +58,11 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
     @Autowired
     public void setPropertyDao(PropertyDao propertyDao) {
         this.propertyDao = propertyDao;
+    }
+
+    @Autowired
+    public void setAuthorityDao(AuthorityDao authorityDao) {
+        this.authorityDao = authorityDao;
     }
 
     @Autowired
@@ -69,6 +81,81 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             return;
         }
         entityHandler(entityPO);
+        authorityHandler(entityPO);
+    }
+
+    private void authorityHandler(EntityPO entityPO) {
+        List<PropertyPO> propertyPOOutList = propertyDao
+                .findByEntityOrderBySortCode(entityPO)
+                .stream()
+                .filter(propertyPO -> MANY_TO_ONE.equals(propertyPO.getPropertyOutType()))
+                .collect(Collectors.toList());
+        //驼峰名
+        String underPoName = BeanUtils.underline2Camel(entityPO.getEntityCode());
+        //文件名
+        String poName = BeanUtils.captureName(underPoName);
+        List<AuthorityPO> authorityPOList = authorityDao
+                .findByEntityOrderBySortCode(entityPO)
+                .stream()
+                .filter(authorityPO -> AUTO.equals(authorityPO.getAuthorityType()))
+                .collect(Collectors.toList());
+        authorityDao.deleteAll(authorityPOList);
+        AuthorityPO findAll = new AuthorityPO();
+        findAll.setAuthorityMethod(POST);
+        findAll.setAuthorityPath(entityPO.getAppService().getAppServiceName() + "/" + underPoName + "Page");
+        findAll.setAuthorityName("查询所有" + poName);
+        findAll.setAuthorityType(AUTO);
+        findAll.setAuthorityDescription("查询所有" + poName);
+        findAll.setEntity(entityPO);
+        findAll.setSortCode(SORTCODE);
+        findAll.setStatus(STATUS);
+        authorityDao.save(findAll);
+        if ("是".equals(entityPO.getEntitySelf())) {
+            AuthorityPO findAllSelf = new AuthorityPO();
+            findAllSelf.setAuthorityMethod(POST);
+            findAllSelf.setAuthorityPath(entityPO.getAppService().getAppServiceName() + "/" + underPoName + "PageBy" + poName);
+            findAllSelf.setAuthorityName("根据" + poName + "查询所有" + poName);
+            findAllSelf.setAuthorityType(AUTO);
+            findAllSelf.setAuthorityDescription("根据" + poName + "查询所有" + poName);
+            findAllSelf.setEntity(entityPO);
+            findAllSelf.setSortCode(SORTCODE);
+            findAllSelf.setStatus(STATUS);
+            authorityDao.save(findAllSelf);
+        }
+        for (PropertyPO propertyPO : propertyPOOutList) {
+            String underPropertyPoName = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
+            String propertyPoName = BeanUtils.captureName(underPropertyPoName);
+            AuthorityPO findAllOut = new AuthorityPO();
+            findAllOut.setAuthorityMethod(POST);
+            findAllOut.setAuthorityPath(entityPO.getAppService().getAppServiceName() + "/" + underPoName + "PageBy" + propertyPoName);
+            findAllOut.setAuthorityName("根据" + propertyPoName + "查询所有" + poName);
+            findAllOut.setAuthorityType(AUTO);
+            findAllOut.setAuthorityDescription("根据" + propertyPoName + "查询所有" + poName);
+            findAllOut.setEntity(entityPO);
+            findAllOut.setSortCode(SORTCODE);
+            findAllOut.setStatus(STATUS);
+            authorityDao.save(findAllOut);
+        }
+        AuthorityPO save = new AuthorityPO();
+        save.setAuthorityMethod(POST);
+        save.setAuthorityPath(entityPO.getAppService().getAppServiceName() + "/" + underPoName + "Save");
+        save.setAuthorityName("保存" + poName);
+        save.setAuthorityType(AUTO);
+        save.setAuthorityDescription("保存" + poName);
+        save.setEntity(entityPO);
+        save.setSortCode(SORTCODE);
+        save.setStatus(STATUS);
+        authorityDao.save(save);
+        AuthorityPO delete = new AuthorityPO();
+        delete.setAuthorityMethod(POST);
+        delete.setAuthorityPath(entityPO.getAppService().getAppServiceName() + "/" + underPoName + "Delete");
+        delete.setAuthorityName("删除" + poName);
+        delete.setAuthorityType(AUTO);
+        delete.setAuthorityDescription("删除" + poName);
+        delete.setEntity(entityPO);
+        delete.setSortCode(SORTCODE);
+        delete.setStatus(STATUS);
+        authorityDao.save(delete);
     }
 
     @Override
@@ -522,7 +609,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import org.springframework.stereotype.Service;\r\n");
         sb.append("import org.springframework.transaction.annotation.Transactional;\r\n");
         sb.append("\r\n");
-        if (!subEntityPOList.isEmpty()){
+        if (!subEntityPOList.isEmpty()) {
             sb.append("import java.util.List;\r\n");
             sb.append("\r\n");
         }
