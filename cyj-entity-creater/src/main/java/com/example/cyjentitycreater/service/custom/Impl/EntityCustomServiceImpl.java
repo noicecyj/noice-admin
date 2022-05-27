@@ -225,101 +225,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
 
     }
 
-//    private void authorityCenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName,
-//                              String appPath, String appApi){
-//            //根据名称获取app
-//            AppServicePO appServicePO = entityPO.getAppService();
-//            AuthorityPO page = findByPathAndName(appService.get("app_api").toString() + "/" + underPoName + "Page", "查询所有" + poName);
-//            if (page == null) {
-//                page = new AuthorityPO();
-//                page.setMethod(POST);
-//                page.setName("查询所有" + poName);
-//                page.setPath(appService.get("app_api").toString() + "/" + underPoName + "Page");
-//                page.setAppName(appService.get("name").toString());
-//                page.setVersion(VERSION);
-//                page.setStatus(STATUS);
-//                page.setSortCode(SORTCODE);
-//                authorityDao.save(page);
-//                logger.info("生成分页权限:" + page.getName());
-//            }
-//            AuthorityPO save = findByPathAndName(appService.get("app_api").toString() + "/" + underPoName + "Save", "保存" + poName);
-//            if (save == null) {
-//                save = new AuthorityPO();
-//                save.setMethod(POST);
-//                save.setName("保存" + poName);
-//                save.setPath(appService.get("app_api").toString() + "/" + underPoName + "Save");
-//                save.setAppName(appService.get("name").toString());
-//                save.setVersion(VERSION);
-//                save.setStatus(STATUS);
-//                save.setSortCode(SORTCODE);
-//                authorityDao.save(save);
-//                logger.info("生成保存权限:" + save.getName());
-//            }
-//            AuthorityPO delete = findByPathAndName(appService.get("app_api").toString() + "/" + underPoName + "Delete", "删除" + poName);
-//            if (delete == null) {
-//                delete = new AuthorityPO();
-//                delete.setMethod(POST);
-//                delete.setName("删除" + poName);
-//                delete.setPath(appService.get("app_api").toString() + "/" + underPoName + "Delete");
-//                delete.setAppName(appService.get("name").toString());
-//                delete.setVersion(VERSION);
-//                delete.setStatus(STATUS);
-//                delete.setSortCode(SORTCODE);
-//                authorityDao.save(delete);
-//                logger.info("生成删除权限:" + delete.getName());
-//            }
-//            AuthorityPO find = findByPathAndName(appService.get("app_api").toString() + "/find" + poName + "ById", "根据ID查询" + poName);
-//            if (find == null) {
-//                find = new AuthorityPO();
-//                find.setMethod(POST);
-//                find.setName("根据ID查询" + poName);
-//                find.setPath(appService.get("app_api").toString() + "/find" + poName + "ById");
-//                find.setAppName(appService.get("name").toString());
-//                find.setVersion(VERSION);
-//                find.setStatus(STATUS);
-//                find.setSortCode(SORTCODE);
-//                authorityDao.save(find);
-//                logger.info("生成ID查询权限:" + find.getName());
-//            }
-//    }
-
-//    private void createJavaFile(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath, String appApi) {
-//        try {
-//            createJavaFile(commonPath + "/entity/po", poGenerate(entityPO, propertyPOList, poName, underPoName));
-//            createJavaFile(commonPath + "/dao", daoGenerate(propertyPOList, poName));
-//            createJavaFile(appPath + "/service/auto", serviceGenerate(propertyPOList, poName, appPath));
-//            createJavaFile(appPath + "/service/auto/Impl", serviceImplGenerate(propertyPOList, underPoName, poName, appPath));
-//            createJavaFile(appPath + "/service/custom", serviceCustomGenerate(poName, appPath), false);
-//            createJavaFile(appPath + "/service/custom/aop", aopCustomGenerate(poName, appPath), false);
-//            createJavaFile(appPath + "/service/custom/Impl", serviceImplCustomGenerate(poName, appPath), false);
-//            createJavaFile(appPath + "/controller/auto", controllerGenerate(propertyPOList, underPoName, poName, appPath));
-//            createJavaFile(appPath + "/controller/auto/Impl", controllerImplGenerate(propertyPOList, underPoName, poName, appPath, appApi));
-//            createJavaFile(appPath + "/controller/custom", controllerCustomGenerate(poName, appPath), false);
-//            createJavaFile(appPath + "/controller/custom/Impl", controllerImplCustomGenerate(poName, appPath, appApi), false);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-
-//    private void createSubJavaFile(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath, String appApi) {
-//        try {
-//            createJavaFile(commonPath + "/entity/po", poGenerate(entityPO, propertyPOList, poName, underPoName));
-//            createJavaFile(commonPath + "/dao", daoGenerate(propertyPOList, poName));
-//            createJavaFile(appPath + "/service/auto", serviceSubGenerate(propertyPOList, poName, appPath));
-//            createJavaFile(appPath + "/service/auto/Impl", serviceImplSubGenerate(propertyPOList, underPoName, poName, appPath));
-//            createJavaFile(appPath + "/service/custom", serviceCustomGenerate(poName, appPath), false);
-//            createJavaFile(appPath + "/service/custom/aop", aopSubCustomGenerate(poName, appPath), false);
-//            createJavaFile(appPath + "/service/custom/Impl", serviceImplCustomGenerate(poName, appPath), false);
-//            createJavaFile(appPath + "/controller/auto", controllerSubGenerate(propertyPOList, underPoName, poName, appPath));
-//            createJavaFile(appPath + "/controller/auto/Impl", controllerImplSubGenerate(propertyPOList, underPoName, poName, appPath, appApi));
-//            createJavaFile(appPath + "/controller/custom", controllerCustomGenerate(poName, appPath), false);
-//            createJavaFile(appPath + "/controller/custom/Impl", controllerImplCustomGenerate(poName, appPath, appApi), false);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
     public String[] poGenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String poName, String underPoName) {
         StringBuilder sb = new StringBuilder();
         sb.append("package com.example.cyjcommon.entity.po;\r\n");
@@ -397,7 +302,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             if ("是".equals(propertyPO.getPropertyOut())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
-                if ("ManyToOne".equals(propertyPO.getPropertyOutType())) {
+                if (MANY_TO_ONE.equals(propertyPO.getPropertyOutType())) {
                     sb.append("    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.REMOVE})\r\n");
                     sb.append("    @JoinColumn(name = \"").append(propertyPO.getPropertyCode()).append("_id\", foreignKey = @ForeignKey(name = \"none\", value = ConstraintMode.NO_CONSTRAINT))\r\n");
                     sb.append("    private ").append(propertyOut).append("PO ").append(underPropertyOut).append(";\r\n");
@@ -480,7 +385,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             if ("是".equals(propertyPO.getPropertyOut())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
-                if ("ManyToOne".equals(propertyPO.getPropertyOutType())) {
+                if (MANY_TO_ONE.equals(propertyPO.getPropertyOutType())) {
                     sb.append("    List<").append(poName).append("PO> findBy").append(propertyOut).append("OrderBySortCode(").append(propertyOut).append("PO ").append(underPropertyOut).append(");\r\n");
                     sb.append("\r\n");
                 } else {
@@ -538,7 +443,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             if ("是".equals(propertyPO.getPropertyOut())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
-                if ("ManyToOne".equals(propertyPO.getPropertyOutType())) {
+                if (MANY_TO_ONE.equals(propertyPO.getPropertyOutType())) {
                     sb.append("    Page<").append(poName).append("PO> findAll(Integer pageNumber, ").append(propertyOut).append("PO ").append(underPropertyOut).append(");\r\n");
                     sb.append("\r\n");
                 } else {
@@ -704,7 +609,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             if ("是".equals(propertyPO.getPropertyOut())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
-                if ("ManyToOne".equals(propertyPO.getPropertyOutType())) {
+                if (MANY_TO_ONE.equals(propertyPO.getPropertyOutType())) {
                     sb.append("    @Override\r\n");
                     sb.append("    public Page<").append(poName).append("PO> findAll(Integer pageNumber, ").append(propertyOut).append("PO ").append(underPropertyOut).append(") {\r\n");
                     sb.append("        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by(\"sortCode\").ascending());\r\n");
@@ -781,7 +686,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             if ("是".equals(propertyPO.getPropertyOut())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
-                if ("ManyToOne".equals(propertyPO.getPropertyOutType())) {
+                if (MANY_TO_ONE.equals(propertyPO.getPropertyOutType())) {
                     sb.append("    @Operation(summary = \"根据").append(propertyOut).append("查询所有").append(poName).append("\")\r\n");
                     sb.append("    @PostMapping(value = \"").append(underPoName).append("PageBy").append(propertyOut).append("\")\r\n");
                     sb.append("    ResultVO ").append(underPoName).append("Page(@RequestParam(\"pageNumber\") Integer pageNumber, @RequestBody ").append(propertyOut).append("PO ").append(underPropertyOut).append(");\r\n");
@@ -869,7 +774,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             if ("是".equals(propertyPO.getPropertyOut())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
-                if ("ManyToOne".equals(propertyPO.getPropertyOutType())) {
+                if (MANY_TO_ONE.equals(propertyPO.getPropertyOutType())) {
                     sb.append("    @Override\r\n");
                     sb.append("    public ResultVO ").append(underPoName).append("Page(Integer pageNumber, ").append(propertyOut).append("PO ").append(underPropertyOut).append(") {\r\n");
                     sb.append("        return ResultVO.success(").append(underPoName).append("Service.findAll(pageNumber, ").append(underPropertyOut).append("));\r\n");
