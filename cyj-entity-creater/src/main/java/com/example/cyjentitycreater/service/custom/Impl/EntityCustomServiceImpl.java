@@ -81,7 +81,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             return;
         }
         entityHandler(entityPO);
-        authorityHandler(entityPO);
     }
 
     private void authorityHandler(EntityPO entityPO) {
@@ -121,7 +120,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         }
         AuthorityPO save = new AuthorityPO();
         save.setAuthorityMethod(POST);
-        save.setAuthorityPath(entityPO.getAppService().getAppServiceName() + "/" + underPoName + "Save");
+        save.setAuthorityPath(entityPO.getAppService().getAppServiceApi() + "/" + underPoName + "Save");
         save.setAuthorityName("保存" + poName);
         save.setAuthorityType(AUTO);
         save.setAuthorityDescription("保存" + poName);
@@ -132,7 +131,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         authorityDao.save(save);
         AuthorityPO delete = new AuthorityPO();
         delete.setAuthorityMethod(POST);
-        delete.setAuthorityPath(entityPO.getAppService().getAppServiceName() + "/" + underPoName + "Delete");
+        delete.setAuthorityPath(entityPO.getAppService().getAppServiceApi() + "/" + underPoName + "Delete");
         delete.setAuthorityName("删除" + poName);
         delete.setAuthorityType(AUTO);
         delete.setAuthorityDescription("删除" + poName);
@@ -146,7 +145,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
     private void authoritySaveHandler(EntityPO entityPO, String underPoName, String poName, String propertyPoName) {
         AuthorityPO findAllOut = new AuthorityPO();
         findAllOut.setAuthorityMethod(POST);
-        findAllOut.setAuthorityPath(entityPO.getAppService().getAppServiceName() + "/" + underPoName + "PageBy" + propertyPoName);
+        findAllOut.setAuthorityPath(entityPO.getAppService().getAppServiceApi() + "/" + underPoName + "PageBy" + propertyPoName);
         findAllOut.setAuthorityName("根据" + propertyPoName + "查询所有" + poName);
         findAllOut.setAuthorityType(AUTO);
         findAllOut.setAuthorityDescription("根据" + propertyPoName + "查询所有" + poName);
@@ -165,6 +164,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         if (!subEntityPOList.isEmpty()) {
             //生成有子实体的实体
             createEntityHandler(entityPO);
+            authorityHandler(entityPO);
             for (EntityPO entityPO1 : subEntityPOList) {
                 //进入递归
                 entityHandler(entityPO1);
@@ -172,6 +172,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         } else {
             //生成没有有子实体的实体
             createEntityHandler(entityPO);
+            authorityHandler(entityPO);
         }
 
     }
