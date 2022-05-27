@@ -88,7 +88,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         List<PropertyPO> propertyPOOutList = propertyDao
                 .findByEntityOrderBySortCode(entityPO)
                 .stream()
-                .filter(propertyPO -> MANY_TO_ONE.equals(propertyPO.getPropertyOutType()))
+                .filter(propertyPO -> "是".equals(propertyPO.getPropertyOut()))
                 .collect(Collectors.toList());
         //驼峰名
         String underPoName = BeanUtils.underline2Camel(entityPO.getEntityCode());
@@ -123,7 +123,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             authorityDao.save(findAllSelf);
         }
         for (PropertyPO propertyPO : propertyPOOutList) {
-            String underPropertyPoName = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
+            String underPropertyPoName = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
             String propertyPoName = BeanUtils.captureName(underPropertyPoName);
             AuthorityPO findAllOut = new AuthorityPO();
             findAllOut.setAuthorityMethod(POST);
@@ -394,16 +394,14 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("    private String id;\r\n");
         sb.append("\r\n");
         propertyPOList.forEach(propertyPO -> {
-            if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
+            if ("是".equals(propertyPO.getPropertyOut())) {
+                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
+                String propertyOut = BeanUtils.captureName(underPropertyOut);
                 if ("ManyToOne".equals(propertyPO.getPropertyOutType())) {
                     sb.append("    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.REMOVE})\r\n");
-                    sb.append("    @JoinColumn(name = \"").append(propertyPO.getPropertyOut()).append("_id\", foreignKey = @ForeignKey(name = \"none\", value = ConstraintMode.NO_CONSTRAINT))\r\n");
-                    String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
-                    String propertyOut = BeanUtils.captureName(underPropertyOut);
+                    sb.append("    @JoinColumn(name = \"").append(propertyPO.getPropertyCode()).append("_id\", foreignKey = @ForeignKey(name = \"none\", value = ConstraintMode.NO_CONSTRAINT))\r\n");
                     sb.append("    private ").append(propertyOut).append("PO ").append(underPropertyOut).append(";\r\n");
                 } else {
-                    String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
-                    String propertyOut = BeanUtils.captureName(underPropertyOut);
                     sb.append("    @JsonIgnore\r\n");
                     sb.append("    @ManyToMany(targetEntity = ").append(propertyOut).append("PO.class, fetch = FetchType.EAGER)\r\n");
                     sb.append("    @BatchSize(size = 20)\r\n");
@@ -446,8 +444,8 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("package com.example.cyjcommon.dao;\r\n");
         sb.append("\r\n");
         for (PropertyPO propertyPO : propertyPOList) {
-            if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
-                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
+            if ("是".equals(propertyPO.getPropertyOut())) {
+                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("import com.example.cyjcommon.entity.po.").append(propertyOut).append("PO;\r\n");
             }
@@ -479,8 +477,8 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             sb.append("\r\n");
         }
         for (PropertyPO propertyPO : propertyPOList) {
-            if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
-                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
+            if ("是".equals(propertyPO.getPropertyOut())) {
+                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 if ("ManyToOne".equals(propertyPO.getPropertyOutType())) {
                     sb.append("    List<").append(poName).append("PO> findBy").append(propertyOut).append("OrderBySortCode(").append(propertyOut).append("PO ").append(underPropertyOut).append(");\r\n");
@@ -506,8 +504,8 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("package ").append(poServicePath);
         sb.append("\r\n");
         for (PropertyPO propertyPO : propertyPOList) {
-            if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
-                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
+            if ("是".equals(propertyPO.getPropertyOut())) {
+                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("import com.example.cyjcommon.entity.po.").append(propertyOut).append("PO;\r\n");
             }
@@ -537,8 +535,8 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             sb.append("\r\n");
         }
         for (PropertyPO propertyPO : propertyPOList) {
-            if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
-                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
+            if ("是".equals(propertyPO.getPropertyOut())) {
+                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 if ("ManyToOne".equals(propertyPO.getPropertyOutType())) {
                     sb.append("    Page<").append(poName).append("PO> findAll(Integer pageNumber, ").append(propertyOut).append("PO ").append(underPropertyOut).append(");\r\n");
@@ -580,8 +578,8 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             sb.append("import com.example.cyjcommon.entity.po.").append(subPoName).append("PO;\r\n");
         }
         for (PropertyPO propertyPO : propertyPOList) {
-            if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
-                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
+            if ("是".equals(propertyPO.getPropertyOut())) {
+                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("import com.example.cyjcommon.entity.po.").append(propertyOut).append("PO;\r\n");
             }
@@ -703,8 +701,8 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             sb.append("\r\n");
         }
         for (PropertyPO propertyPO : propertyPOList) {
-            if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
-                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
+            if ("是".equals(propertyPO.getPropertyOut())) {
+                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 if ("ManyToOne".equals(propertyPO.getPropertyOutType())) {
                     sb.append("    @Override\r\n");
@@ -743,8 +741,8 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("package ").append(poControllerPath);
         sb.append("\r\n");
         for (PropertyPO propertyPO : propertyPOList) {
-            if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
-                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
+            if ("是".equals(propertyPO.getPropertyOut())) {
+                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("import com.example.cyjcommon.entity.po.").append(propertyOut).append("PO;\r\n");
             }
@@ -780,8 +778,8 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             sb.append("\r\n");
         }
         for (PropertyPO propertyPO : propertyPOList) {
-            if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
-                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
+            if ("是".equals(propertyPO.getPropertyOut())) {
+                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 if ("ManyToOne".equals(propertyPO.getPropertyOutType())) {
                     sb.append("    @Operation(summary = \"根据").append(propertyOut).append("查询所有").append(poName).append("\")\r\n");
@@ -820,8 +818,8 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("package ").append(poControllerPath).append("Impl;\r\n");
         sb.append("\r\n");
         for (PropertyPO propertyPO : propertyPOList) {
-            if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
-                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
+            if ("是".equals(propertyPO.getPropertyOut())) {
+                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("import com.example.cyjcommon.entity.po.").append(propertyOut).append("PO;\r\n");
             }
@@ -868,8 +866,8 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             sb.append("\r\n");
         }
         for (PropertyPO propertyPO : propertyPOList) {
-            if (StringUtils.isNotEmpty(propertyPO.getPropertyOut())) {
-                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyOut());
+            if ("是".equals(propertyPO.getPropertyOut())) {
+                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 if ("ManyToOne".equals(propertyPO.getPropertyOutType())) {
                     sb.append("    @Override\r\n");
