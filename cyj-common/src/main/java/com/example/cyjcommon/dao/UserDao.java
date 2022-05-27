@@ -15,10 +15,10 @@ import java.util.Set;
  */
 public interface UserDao extends JpaRepository<UserPO, String> {
 
-    List<UserPO> findByEnterprise(EnterprisePO enterprise);
+    List<UserPO> findByEnterpriseOrderBySortCode(EnterprisePO enterprise);
 
-    List<UserPO> findByRoleIn(Collection<Set<RolePO>> roleList);
+    List<UserPO> findByRoleInOrderBySortCode(Collection<Set<RolePO>> roleList);
 
-    List<UserPO> findByAuthorityIn(Collection<Set<AuthorityPO>> authorityList);
+    List<UserPO> findByAuthorityInOrderBySortCode(Collection<Set<AuthorityPO>> authorityList);
 
 }
