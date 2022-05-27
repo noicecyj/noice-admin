@@ -10,7 +10,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
