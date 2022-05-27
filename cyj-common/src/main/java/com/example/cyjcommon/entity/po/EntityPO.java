@@ -66,7 +66,7 @@ public class EntityPO implements Serializable {
     @Column(name = "entity_form_row")
     private Integer entityFormRow;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.REMOVE})
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})
     @JoinColumn(name = "app_service_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
     private AppServicePO appService;
 
