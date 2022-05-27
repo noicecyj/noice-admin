@@ -27,6 +27,11 @@ public class DictionaryControllerImpl implements DictionaryController {
     }
 
     @Override
+    public ResultVO dictionaryPage(Integer pageNumber) {
+        return ResultVO.success(dictionaryService.findAll(pageNumber));
+    }
+
+    @Override
     public ResultVO dictionaryPage(Integer pageNumber, CatalogPO catalog) {
         return ResultVO.success(dictionaryService.findAll(pageNumber, catalog));
     }

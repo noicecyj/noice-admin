@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Tag(name = "Dictionary")
 public interface DictionaryController {
 
+    @Operation(summary = "查询所有Dictionary")
+    @PostMapping(value = "dictionaryPage")
+    ResultVO dictionaryPage(@RequestParam("pageNumber") Integer pageNumber);
+
     @Operation(summary = "根据Catalog查询所有Dictionary")
     @PostMapping(value = "dictionaryPageByCatalog")
     ResultVO dictionaryPage(@RequestParam("pageNumber") Integer pageNumber, @RequestBody CatalogPO catalog);

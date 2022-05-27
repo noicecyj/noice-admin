@@ -44,6 +44,11 @@ public class DictionaryServiceImpl extends BaseService implements DictionaryServ
     }
 
     @Override
+    public Page<DictionaryPO> findAll(Integer pageNumber) {
+        return dictionaryDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
+    }
+
+    @Override
     public Page<DictionaryPO> findAll(Integer pageNumber, CatalogPO catalog) {
         Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
         DictionaryPO dictionaryPO = new DictionaryPO();

@@ -15,6 +15,8 @@ public interface DictionaryService {
 
     DictionaryPO updateOne(DictionaryPO po);
 
+    Page<DictionaryPO> findAll(Integer pageNumber);
+
     Page<DictionaryPO> findAll(Integer pageNumber, CatalogPO catalog);
 
 }
