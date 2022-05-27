@@ -320,7 +320,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             sb.append("\r\n");
         });
         if ("是".equals(entityPO.getEntitySelf())) {
-            sb.append("    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.REMOVE})\r\n");
+            sb.append("    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})\r\n");
             sb.append("    @JoinColumn(name = \"").append(entityPO.getEntityCode()).append("_id\", foreignKey = @ForeignKey(name = \"none\", value = ConstraintMode.NO_CONSTRAINT))\r\n");
             sb.append("    private ").append(poName).append("PO ").append(underPoName).append(";\r\n");
             sb.append("\r\n");

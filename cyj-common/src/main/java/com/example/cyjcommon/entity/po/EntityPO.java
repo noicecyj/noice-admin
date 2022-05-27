@@ -10,7 +10,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -70,7 +69,7 @@ public class EntityPO implements Serializable {
     @JoinColumn(name = "app_service_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
     private AppServicePO appService;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.REMOVE})
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})
     @JoinColumn(name = "entity_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
     private EntityPO entity;
 
