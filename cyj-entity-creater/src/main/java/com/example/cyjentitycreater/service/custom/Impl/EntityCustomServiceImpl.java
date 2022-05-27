@@ -93,12 +93,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         String underPoName = BeanUtils.underline2Camel(entityPO.getEntityCode());
         //文件名
         String poName = BeanUtils.captureName(underPoName);
-        List<AuthorityPO> authorityPOList = authorityDao
-                .findByEntityOrderBySortCode(entityPO)
-                .stream()
-                .filter(authorityPO -> AUTO.equals(authorityPO.getAuthorityType()))
-                .collect(Collectors.toList());
-        authorityDao.deleteAll(authorityPOList);
         AuthorityPO findAll = new AuthorityPO();
         findAll.setAuthorityMethod(POST);
         findAll.setAuthorityPath(entityPO.getAppService().getAppServiceApi() + "/" + underPoName + "Page");
