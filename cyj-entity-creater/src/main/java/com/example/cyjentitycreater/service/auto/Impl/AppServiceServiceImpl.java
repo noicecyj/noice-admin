@@ -1,11 +1,8 @@
 package com.example.cyjentitycreater.service.auto.Impl;
 
-import com.example.cyjcommon.dao.EntityDao;
 import com.example.cyjcommon.dao.AppServiceDao;
-import com.example.cyjcommon.entity.po.EntityPO;
 import com.example.cyjcommon.entity.po.AppServicePO;
 import com.example.cyjcommon.service.BaseService;
-import com.example.cyjentitycreater.service.auto.EntityService;
 import com.example.cyjentitycreater.service.auto.AppServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,8 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 /**
  * @author Noice
@@ -24,22 +19,10 @@ import java.util.List;
 public class AppServiceServiceImpl extends BaseService implements AppServiceService {
 
     private AppServiceDao appServiceDao;
-    private EntityDao entityDao;
-    private EntityService entityService;
 
     @Autowired
     public void setAppServiceDao(AppServiceDao appServiceDao) {
         this.appServiceDao = appServiceDao;
-    }
-
-    @Autowired
-    public void setEntityDao(EntityDao entityDao) {
-        this.entityDao = entityDao;
-    }
-
-    @Autowired
-    public void setEntityService(EntityService entityService) {
-        this.entityService = entityService;
     }
 
     @Override
@@ -49,10 +32,6 @@ public class AppServiceServiceImpl extends BaseService implements AppServiceServ
 
     @Override
     public void deleteOne(AppServicePO po) {
-        List<EntityPO> entityPOList = entityDao.findByAppServiceOrderBySortCode(po);
-        for (EntityPO entityPO : entityPOList) {
-            entityService.deleteOne(entityPO);
-        }
         appServiceDao.delete(po);
     }
 
