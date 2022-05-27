@@ -1,5 +1,6 @@
 package com.example.cyjauth.controller.auto;
 
+import com.example.cyjcommon.entity.po.AppServicePO;
 import com.example.cyjcommon.entity.po.EntityPO;
 import com.example.cyjcommon.entity.po.UserPO;
 import com.example.cyjcommon.entity.po.RolePO;
@@ -24,6 +25,10 @@ public interface AuthorityController {
     @Operation(summary = "查询所有Authority")
     @PostMapping(value = "authorityPage")
     ResultVO authorityPage(@RequestParam("pageNumber") Integer pageNumber);
+
+    @Operation(summary = "根据AppService查询所有Authority")
+    @PostMapping(value = "authorityPageByAppService")
+    ResultVO authorityPage(@RequestParam("pageNumber") Integer pageNumber, @RequestBody AppServicePO appService);
 
     @Operation(summary = "根据Entity查询所有Authority")
     @PostMapping(value = "authorityPageByEntity")

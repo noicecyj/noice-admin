@@ -1,5 +1,6 @@
 package com.example.cyjauth.service.auto;
 
+import com.example.cyjcommon.entity.po.AppServicePO;
 import com.example.cyjcommon.entity.po.EntityPO;
 import com.example.cyjcommon.entity.po.UserPO;
 import com.example.cyjcommon.entity.po.RolePO;
@@ -20,6 +21,8 @@ public interface AuthorityService {
     AuthorityPO updateOne(AuthorityPO po);
 
     Page<AuthorityPO> findAll(Integer pageNumber);
+
+    Page<AuthorityPO> findAll(Integer pageNumber, AppServicePO appService);
 
     Page<AuthorityPO> findAll(Integer pageNumber, EntityPO entity);
 

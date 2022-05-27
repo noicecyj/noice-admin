@@ -1,5 +1,6 @@
 package com.example.cyjcommon.dao;
 
+import com.example.cyjcommon.entity.po.AppServicePO;
 import com.example.cyjcommon.entity.po.EntityPO;
 import com.example.cyjcommon.entity.po.UserPO;
 import com.example.cyjcommon.entity.po.RolePO;
@@ -14,6 +15,8 @@ import java.util.Set;
  * @author Noice
  */
 public interface AuthorityDao extends JpaRepository<AuthorityPO, String> {
+
+    List<AuthorityPO> findByAppServiceOrderBySortCode(AppServicePO appService);
 
     List<AuthorityPO> findByEntityOrderBySortCode(EntityPO entity);
 
