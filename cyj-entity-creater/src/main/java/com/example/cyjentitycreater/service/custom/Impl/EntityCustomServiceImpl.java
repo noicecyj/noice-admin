@@ -111,30 +111,12 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         findAll.setStatus(STATUS);
         authorityDao.save(findAll);
         if ("是".equals(entityPO.getEntitySelf())) {
-            AuthorityPO findAllSelf = new AuthorityPO();
-            findAllSelf.setAuthorityMethod(POST);
-            findAllSelf.setAuthorityPath(entityPO.getAppService().getAppServiceName() + "/" + underPoName + "PageBy" + poName);
-            findAllSelf.setAuthorityName("根据" + poName + "查询所有" + poName);
-            findAllSelf.setAuthorityType(AUTO);
-            findAllSelf.setAuthorityDescription("根据" + poName + "查询所有" + poName);
-            findAllSelf.setEntity(entityPO);
-            findAllSelf.setSortCode(SORTCODE);
-            findAllSelf.setStatus(STATUS);
-            authorityDao.save(findAllSelf);
+            authoritySaveHandler(entityPO, underPoName, poName, poName);
         }
         for (PropertyPO propertyPO : propertyPOOutList) {
             String underPropertyPoName = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
             String propertyPoName = BeanUtils.captureName(underPropertyPoName);
-            AuthorityPO findAllOut = new AuthorityPO();
-            findAllOut.setAuthorityMethod(POST);
-            findAllOut.setAuthorityPath(entityPO.getAppService().getAppServiceName() + "/" + underPoName + "PageBy" + propertyPoName);
-            findAllOut.setAuthorityName("根据" + propertyPoName + "查询所有" + poName);
-            findAllOut.setAuthorityType(AUTO);
-            findAllOut.setAuthorityDescription("根据" + propertyPoName + "查询所有" + poName);
-            findAllOut.setEntity(entityPO);
-            findAllOut.setSortCode(SORTCODE);
-            findAllOut.setStatus(STATUS);
-            authorityDao.save(findAllOut);
+            authoritySaveHandler(entityPO, underPoName, poName, propertyPoName);
         }
         AuthorityPO save = new AuthorityPO();
         save.setAuthorityMethod(POST);
@@ -156,6 +138,19 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         delete.setSortCode(SORTCODE);
         delete.setStatus(STATUS);
         authorityDao.save(delete);
+    }
+
+    private void authoritySaveHandler(EntityPO entityPO, String underPoName, String poName, String propertyPoName) {
+        AuthorityPO findAllOut = new AuthorityPO();
+        findAllOut.setAuthorityMethod(POST);
+        findAllOut.setAuthorityPath(entityPO.getAppService().getAppServiceName() + "/" + underPoName + "PageBy" + propertyPoName);
+        findAllOut.setAuthorityName("根据" + propertyPoName + "查询所有" + poName);
+        findAllOut.setAuthorityType(AUTO);
+        findAllOut.setAuthorityDescription("根据" + propertyPoName + "查询所有" + poName);
+        findAllOut.setEntity(entityPO);
+        findAllOut.setSortCode(SORTCODE);
+        findAllOut.setStatus(STATUS);
+        authorityDao.save(findAllOut);
     }
 
     @Override
@@ -406,16 +401,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
         //service路径
         String poServicePath = packetPath + ".service.auto;\r\n";
-        sb.append("package ").append(poServicePath);
-        sb.append("\r\n");
-        for (PropertyPO propertyPO : propertyPOList) {
-            if ("是".equals(propertyPO.getPropertyOut())) {
-                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
-                String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("import com.example.cyjcommon.entity.po.").append(propertyOut).append("PO;\r\n");
-            }
-        }
-        sb.append("import com.example.cyjcommon.entity.po.").append(poName).append("PO;\r\n");
+        packageHandler(propertyPOList, poName, sb, poServicePath);
         sb.append("import org.springframework.data.domain.Page;\r\n");
         sb.append("\r\n");
         if (BeanUtils.ifManyToMany(propertyPOList)) {
@@ -455,6 +441,19 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("}\r\n");
         String entityServiceData = sb.toString();
         return new String[]{entityServiceData, poName + "Service.java"};
+    }
+
+    private void packageHandler(List<PropertyPO> propertyPOList, String poName, StringBuilder sb, String poServicePath) {
+        sb.append("package ").append(poServicePath);
+        sb.append("\r\n");
+        for (PropertyPO propertyPO : propertyPOList) {
+            if ("是".equals(propertyPO.getPropertyOut())) {
+                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
+                String propertyOut = BeanUtils.captureName(underPropertyOut);
+                sb.append("import com.example.cyjcommon.entity.po.").append(propertyOut).append("PO;\r\n");
+            }
+        }
+        sb.append("import com.example.cyjcommon.entity.po.").append(poName).append("PO;\r\n");
     }
 
     public String[] serviceImplGenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath) {
@@ -595,30 +594,14 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("    }\r\n");
         sb.append("\r\n");
         if ("是".equals(entityPO.getEntitySelf())) {
-            sb.append("    @Override\r\n");
-            sb.append("    public Page<").append(poName).append("PO> findAll(Integer pageNumber, ").append(poName).append("PO ").append(underPoName).append(") {\r\n");
-            sb.append("        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by(\"sortCode\").ascending());\r\n");
-            sb.append("        ").append(poName).append("PO ").append(underPoName).append("PO = new ").append(poName).append("PO();\r\n");
-            sb.append("        ").append(underPoName).append("PO.set").append(poName).append("(").append(underPoName).append(");\r\n");
-            sb.append("        Example<").append(poName).append("PO> example = Example.of(").append(underPoName).append("PO);\r\n");
-            sb.append("        return ").append(underPoName).append("Dao.findAll(example, pageable);\r\n");
-            sb.append("    }\r\n");
-            sb.append("\r\n");
+            OverRideHandler(underPoName, poName, sb, underPoName, poName);
         }
         for (PropertyPO propertyPO : propertyPOList) {
             if ("是".equals(propertyPO.getPropertyOut())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 if (MANY_TO_ONE.equals(propertyPO.getPropertyOutType())) {
-                    sb.append("    @Override\r\n");
-                    sb.append("    public Page<").append(poName).append("PO> findAll(Integer pageNumber, ").append(propertyOut).append("PO ").append(underPropertyOut).append(") {\r\n");
-                    sb.append("        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by(\"sortCode\").ascending());\r\n");
-                    sb.append("        ").append(poName).append("PO ").append(underPoName).append("PO = new ").append(poName).append("PO();\r\n");
-                    sb.append("        ").append(underPoName).append("PO.set").append(propertyOut).append("(").append(underPropertyOut).append(");\r\n");
-                    sb.append("        Example<").append(poName).append("PO> example = Example.of(").append(underPoName).append("PO);\r\n");
-                    sb.append("        return ").append(underPoName).append("Dao.findAll(example, pageable);\r\n");
-                    sb.append("    }\r\n");
-                    sb.append("\r\n");
+                    OverRideHandler(underPoName, poName, sb, underPropertyOut, propertyOut);
                 } else {
                     sb.append("    @Override\r\n");
                     sb.append("    public Page<").append(poName).append("PO> findAllBy").append(propertyOut).append("List(Integer pageNumber, Set<").append(propertyOut).append("PO> ").append(underPropertyOut).append("List) {\r\n");
@@ -637,22 +620,25 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{entityServiceImplData, poName + "ServiceImpl.java"};
     }
 
+    private void OverRideHandler(String underPoName, String poName, StringBuilder sb, String underPropertyOut, String propertyOut) {
+        sb.append("    @Override\r\n");
+        sb.append("    public Page<").append(poName).append("PO> findAll(Integer pageNumber, ").append(propertyOut).append("PO ").append(underPropertyOut).append(") {\r\n");
+        sb.append("        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by(\"sortCode\").ascending());\r\n");
+        sb.append("        ").append(poName).append("PO ").append(underPoName).append("PO = new ").append(poName).append("PO();\r\n");
+        sb.append("        ").append(underPoName).append("PO.set").append(propertyOut).append("(").append(underPropertyOut).append(");\r\n");
+        sb.append("        Example<").append(poName).append("PO> example = Example.of(").append(underPoName).append("PO);\r\n");
+        sb.append("        return ").append(underPoName).append("Dao.findAll(example, pageable);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+    }
+
     public String[] controllerGenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName, String appPath) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
         //controller路径
         String poControllerPath = packetPath + ".controller.auto;\r\n";
-        sb.append("package ").append(poControllerPath);
-        sb.append("\r\n");
-        for (PropertyPO propertyPO : propertyPOList) {
-            if ("是".equals(propertyPO.getPropertyOut())) {
-                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
-                String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("import com.example.cyjcommon.entity.po.").append(propertyOut).append("PO;\r\n");
-            }
-        }
-        sb.append("import com.example.cyjcommon.entity.po.").append(poName).append("PO;\r\n");
+        packageHandler(propertyPOList, poName, sb, poControllerPath);
         sb.append("import com.example.cyjcommon.utils.ResultVO;\r\n");
         sb.append("import io.swagger.v3.oas.annotations.Operation;\r\n");
         sb.append("import io.swagger.v3.oas.annotations.tags.Tag;\r\n");
