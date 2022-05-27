@@ -102,11 +102,12 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         authorityDao.deleteAll(authorityPOList);
         AuthorityPO findAll = new AuthorityPO();
         findAll.setAuthorityMethod(POST);
-        findAll.setAuthorityPath(entityPO.getAppService().getAppServiceName() + "/" + underPoName + "Page");
+        findAll.setAuthorityPath(entityPO.getAppService().getAppServiceApi() + "/" + underPoName + "Page");
         findAll.setAuthorityName("查询所有" + poName);
         findAll.setAuthorityType(AUTO);
         findAll.setAuthorityDescription("查询所有" + poName);
         findAll.setEntity(entityPO);
+        findAll.setAppService(entityPO.getAppService());
         findAll.setSortCode(SORTCODE);
         findAll.setStatus(STATUS);
         authorityDao.save(findAll);
@@ -125,6 +126,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         save.setAuthorityType(AUTO);
         save.setAuthorityDescription("保存" + poName);
         save.setEntity(entityPO);
+        save.setAppService(entityPO.getAppService());
         save.setSortCode(SORTCODE);
         save.setStatus(STATUS);
         authorityDao.save(save);
@@ -135,6 +137,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         delete.setAuthorityType(AUTO);
         delete.setAuthorityDescription("删除" + poName);
         delete.setEntity(entityPO);
+        delete.setAppService(entityPO.getAppService());
         delete.setSortCode(SORTCODE);
         delete.setStatus(STATUS);
         authorityDao.save(delete);
@@ -148,6 +151,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         findAllOut.setAuthorityType(AUTO);
         findAllOut.setAuthorityDescription("根据" + propertyPoName + "查询所有" + poName);
         findAllOut.setEntity(entityPO);
+        findAllOut.setAppService(entityPO.getAppService());
         findAllOut.setSortCode(SORTCODE);
         findAllOut.setStatus(STATUS);
         authorityDao.save(findAllOut);
@@ -298,7 +302,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 if (MANY_TO_ONE.equals(propertyPO.getPropertyOutType())) {
-                    sb.append("    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.REMOVE})\r\n");
+                    sb.append("    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})\r\n");
                     sb.append("    @JoinColumn(name = \"").append(propertyPO.getPropertyCode()).append("_id\", foreignKey = @ForeignKey(name = \"none\", value = ConstraintMode.NO_CONSTRAINT))\r\n");
                     sb.append("    private ").append(propertyOut).append("PO ").append(underPropertyOut).append(";\r\n");
                 } else {
