@@ -10,6 +10,7 @@ import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.example.cyjcommon.entity.po.DictionaryPO;
 import com.example.cyjcommon.entity.po.EntityPO;
 import com.example.cyjcommon.entity.po.PropertyPO;
+import com.example.cyjcommon.entity.po.QAuthorityPO;
 import com.example.cyjcommon.entity.po.QEntityPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjdictionary.service.custom.DictionaryCustomService;
@@ -93,17 +94,23 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         String underPoName = BeanUtils.underline2Camel(entityPO.getEntityCode());
         //文件名
         String poName = BeanUtils.captureName(underPoName);
-        AuthorityPO findAll = new AuthorityPO();
-        findAll.setAuthorityMethod(POST);
-        findAll.setAuthorityPath(entityPO.getAppService().getAppServiceApi() + "/" + underPoName + "Page");
-        findAll.setAuthorityName("查询所有" + poName);
-        findAll.setAuthorityType(AUTO);
-        findAll.setAuthorityDescription("查询所有" + poName);
-        findAll.setEntity(entityPO);
-        findAll.setAppService(entityPO.getAppService());
-        findAll.setSortCode(SORTCODE);
-        findAll.setStatus(STATUS);
-        authorityDao.save(findAll);
+        AuthorityPO findAll = queryFactory
+                .selectFrom(QAuthorityPO.authorityPO)
+                .where(QAuthorityPO.authorityPO.authorityPath
+                        .eq(entityPO.getAppService().getAppServiceApi() + "/" + underPoName + "Page")).fetchOne();
+        if (findAll == null) {
+            findAll = new AuthorityPO();
+            findAll.setAuthorityMethod(POST);
+            findAll.setAuthorityPath(entityPO.getAppService().getAppServiceApi() + "/" + underPoName + "Page");
+            findAll.setAuthorityName("查询所有" + poName);
+            findAll.setAuthorityType(AUTO);
+            findAll.setAuthorityDescription("查询所有" + poName);
+            findAll.setEntity(entityPO);
+            findAll.setAppService(entityPO.getAppService());
+            findAll.setSortCode(SORTCODE);
+            findAll.setStatus(STATUS);
+            authorityDao.save(findAll);
+        }
         if ("是".equals(entityPO.getEntitySelf())) {
             authoritySaveHandler(entityPO, underPoName, poName, poName);
         }
@@ -112,42 +119,60 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             String propertyPoName = BeanUtils.captureName(underPropertyPoName);
             authoritySaveHandler(entityPO, underPoName, poName, propertyPoName);
         }
-        AuthorityPO save = new AuthorityPO();
-        save.setAuthorityMethod(POST);
-        save.setAuthorityPath(entityPO.getAppService().getAppServiceApi() + "/" + underPoName + "Save");
-        save.setAuthorityName("保存" + poName);
-        save.setAuthorityType(AUTO);
-        save.setAuthorityDescription("保存" + poName);
-        save.setEntity(entityPO);
-        save.setAppService(entityPO.getAppService());
-        save.setSortCode(SORTCODE);
-        save.setStatus(STATUS);
-        authorityDao.save(save);
-        AuthorityPO delete = new AuthorityPO();
-        delete.setAuthorityMethod(POST);
-        delete.setAuthorityPath(entityPO.getAppService().getAppServiceApi() + "/" + underPoName + "Delete");
-        delete.setAuthorityName("删除" + poName);
-        delete.setAuthorityType(AUTO);
-        delete.setAuthorityDescription("删除" + poName);
-        delete.setEntity(entityPO);
-        delete.setAppService(entityPO.getAppService());
-        delete.setSortCode(SORTCODE);
-        delete.setStatus(STATUS);
-        authorityDao.save(delete);
+        AuthorityPO save = queryFactory
+                .selectFrom(QAuthorityPO.authorityPO)
+                .where(QAuthorityPO.authorityPO.authorityPath
+                        .eq(entityPO.getAppService().getAppServiceApi() + "/" + underPoName + "Save")).fetchOne();
+        if (save == null) {
+            save = new AuthorityPO();
+            save.setAuthorityMethod(POST);
+            save.setAuthorityPath(entityPO.getAppService().getAppServiceApi() + "/" + underPoName + "Save");
+            save.setAuthorityName("保存" + poName);
+            save.setAuthorityType(AUTO);
+            save.setAuthorityDescription("保存" + poName);
+            save.setEntity(entityPO);
+            save.setAppService(entityPO.getAppService());
+            save.setSortCode(SORTCODE);
+            save.setStatus(STATUS);
+            authorityDao.save(save);
+        }
+        AuthorityPO delete = queryFactory
+                .selectFrom(QAuthorityPO.authorityPO)
+                .where(QAuthorityPO.authorityPO.authorityPath
+                        .eq(entityPO.getAppService().getAppServiceApi() + "/" + underPoName + "Delete")).fetchOne();
+        if (delete == null) {
+            delete = new AuthorityPO();
+            delete.setAuthorityMethod(POST);
+            delete.setAuthorityPath(entityPO.getAppService().getAppServiceApi() + "/" + underPoName + "Delete");
+            delete.setAuthorityName("删除" + poName);
+            delete.setAuthorityType(AUTO);
+            delete.setAuthorityDescription("删除" + poName);
+            delete.setEntity(entityPO);
+            delete.setAppService(entityPO.getAppService());
+            delete.setSortCode(SORTCODE);
+            delete.setStatus(STATUS);
+            authorityDao.save(delete);
+        }
     }
 
     private void authoritySaveHandler(EntityPO entityPO, String underPoName, String poName, String propertyPoName) {
-        AuthorityPO findAllOut = new AuthorityPO();
-        findAllOut.setAuthorityMethod(POST);
-        findAllOut.setAuthorityPath(entityPO.getAppService().getAppServiceApi() + "/" + underPoName + "PageBy" + propertyPoName);
-        findAllOut.setAuthorityName("根据" + propertyPoName + "查询所有" + poName);
-        findAllOut.setAuthorityType(AUTO);
-        findAllOut.setAuthorityDescription("根据" + propertyPoName + "查询所有" + poName);
-        findAllOut.setEntity(entityPO);
-        findAllOut.setAppService(entityPO.getAppService());
-        findAllOut.setSortCode(SORTCODE);
-        findAllOut.setStatus(STATUS);
-        authorityDao.save(findAllOut);
+        AuthorityPO findAllOut = queryFactory
+                .selectFrom(QAuthorityPO.authorityPO)
+                .where(QAuthorityPO.authorityPO.authorityPath
+                        .eq(entityPO.getAppService().getAppServiceApi() + "/" + underPoName + "PageBy" + propertyPoName)).fetchOne();
+        if (findAllOut == null) {
+            findAllOut = new AuthorityPO();
+            findAllOut.setAuthorityMethod(POST);
+            findAllOut.setAuthorityPath(entityPO.getAppService().getAppServiceApi() + "/" + underPoName + "PageBy" + propertyPoName);
+            findAllOut.setAuthorityName("根据" + propertyPoName + "查询所有" + poName);
+            findAllOut.setAuthorityType(AUTO);
+            findAllOut.setAuthorityDescription("根据" + propertyPoName + "查询所有" + poName);
+            findAllOut.setEntity(entityPO);
+            findAllOut.setAppService(entityPO.getAppService());
+            findAllOut.setSortCode(SORTCODE);
+            findAllOut.setStatus(STATUS);
+            authorityDao.save(findAllOut);
+        }
     }
 
     @Override
