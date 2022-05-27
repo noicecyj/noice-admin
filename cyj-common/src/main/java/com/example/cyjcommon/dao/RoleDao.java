@@ -14,8 +14,8 @@ import java.util.Set;
  */
 public interface RoleDao extends JpaRepository<RolePO, String> {
 
-    List<RolePO> findByUserIn(Collection<Set<UserPO>> userList);
+    List<RolePO> findByUserInOrderBySortCode(Collection<Set<UserPO>> userList);
 
-    List<RolePO> findByAuthorityIn(Collection<Set<AuthorityPO>> authorityList);
+    List<RolePO> findByAuthorityInOrderBySortCode(Collection<Set<AuthorityPO>> authorityList);
 
 }
