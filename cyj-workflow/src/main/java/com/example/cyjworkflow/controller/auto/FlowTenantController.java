@@ -4,13 +4,14 @@ import com.example.cyjcommon.entity.po.FlowTenantPO;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @Tag(name = "FlowTenant")
 public interface FlowTenantController {
@@ -21,14 +22,10 @@ public interface FlowTenantController {
 
     @Operation(summary = "保存FlowTenant")
     @PostMapping(value = "flowTenantSave")
-    ResultVO flowTenantSave(@RequestBody FlowTenantPO po);
+    ResultVO flowTenantSave(@RequestBody @Validated FlowTenantPO po, BindingResult bindingResult);
 
     @Operation(summary = "删除FlowTenant")
     @PostMapping(value = "flowTenantDelete")
-    void flowTenantDelete(@RequestParam("id") String id);
-
-    @Operation(summary = "根据ID查询FlowTenant")
-    @PostMapping(value = "findFlowTenantById")
-    ResultVO findFlowTenantById(@RequestParam("id") String id);
+    ResultVO flowTenantDelete(@RequestBody FlowTenantPO po);
 
 }

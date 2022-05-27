@@ -5,13 +5,13 @@ import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjworkflow.controller.auto.FlowUserController;
 import com.example.cyjworkflow.service.auto.FlowUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @CrossOrigin
 @RestController
@@ -31,7 +31,10 @@ public class FlowUserControllerImpl implements FlowUserController {
     }
 
     @Override
-    public ResultVO flowUserSave(FlowUserPO po) {
+    public ResultVO flowUserSave(FlowUserPO po, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResultVO.failure(bindingResult.getAllErrors().get(0));
+        }
         if (po.getId() == null) {
             return ResultVO.success(flowUserService.addOne(po));
         }
@@ -39,13 +42,12 @@ public class FlowUserControllerImpl implements FlowUserController {
     }
 
     @Override
-    public void flowUserDelete(String id) {
-        flowUserService.deleteOne(id);
-    }
-
-    @Override
-    public ResultVO findFlowUserById(String id) {
-        return ResultVO.success(flowUserService.findOneById(id));
+    public ResultVO flowUserDelete(FlowUserPO po) {
+        if (po.getId() == null) {
+            return ResultVO.failure();
+        }
+        flowUserService.deleteOne(po);
+        return ResultVO.success();
     }
 
 }

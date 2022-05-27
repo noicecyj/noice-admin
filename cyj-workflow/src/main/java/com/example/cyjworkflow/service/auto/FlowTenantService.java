@@ -1,22 +1,19 @@
 package com.example.cyjworkflow.service.auto;
 
 import com.example.cyjcommon.entity.po.FlowTenantPO;
-import com.querydsl.core.QueryResults;
+import org.springframework.data.domain.Page;
 
 /**
  * @author Noice
- * @version 1.0
  */
 public interface FlowTenantService {
 
     FlowTenantPO addOne(FlowTenantPO po);
 
-    void deleteOne(String id);
+    void deleteOne(FlowTenantPO po);
 
     FlowTenantPO updateOne(FlowTenantPO po);
 
-    QueryResults<FlowTenantPO> findAll(Integer pageNumber);
-
-    FlowTenantPO findOneById(String id);
+    Page<FlowTenantPO> findAll(Integer pageNumber);
 
 }

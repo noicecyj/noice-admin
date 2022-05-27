@@ -4,13 +4,14 @@ import com.example.cyjcommon.entity.po.FlowGroupPO;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @Tag(name = "FlowGroup")
 public interface FlowGroupController {
@@ -21,14 +22,10 @@ public interface FlowGroupController {
 
     @Operation(summary = "保存FlowGroup")
     @PostMapping(value = "flowGroupSave")
-    ResultVO flowGroupSave(@RequestBody FlowGroupPO po);
+    ResultVO flowGroupSave(@RequestBody @Validated FlowGroupPO po, BindingResult bindingResult);
 
     @Operation(summary = "删除FlowGroup")
     @PostMapping(value = "flowGroupDelete")
-    void flowGroupDelete(@RequestParam("id") String id);
-
-    @Operation(summary = "根据ID查询FlowGroup")
-    @PostMapping(value = "findFlowGroupById")
-    ResultVO findFlowGroupById(@RequestParam("id") String id);
+    ResultVO flowGroupDelete(@RequestBody FlowGroupPO po);
 
 }

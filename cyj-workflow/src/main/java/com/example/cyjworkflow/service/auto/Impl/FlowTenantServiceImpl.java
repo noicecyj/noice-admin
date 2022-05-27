@@ -2,17 +2,17 @@ package com.example.cyjworkflow.service.auto.Impl;
 
 import com.example.cyjcommon.dao.FlowTenantDao;
 import com.example.cyjcommon.entity.po.FlowTenantPO;
-import com.example.cyjcommon.entity.po.QFlowTenantPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjworkflow.service.auto.FlowTenantService;
-import com.querydsl.core.QueryResults;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -31,8 +31,8 @@ public class FlowTenantServiceImpl extends BaseService implements FlowTenantServ
     }
 
     @Override
-    public void deleteOne(String id) {
-        flowTenantDao.deleteById(id);
+    public void deleteOne(FlowTenantPO po) {
+        flowTenantDao.delete(po);
     }
 
     @Override
@@ -41,19 +41,8 @@ public class FlowTenantServiceImpl extends BaseService implements FlowTenantServ
     }
 
     @Override
-    public QueryResults<FlowTenantPO> findAll(Integer pageNumber) {
-        return queryFactory
-                .selectFrom(QFlowTenantPO.flowTenantPO)
-                .where(QFlowTenantPO.flowTenantPO.sortCode.isNotNull())
-                .offset((pageNumber - 1) * 10L)
-                .orderBy(QFlowTenantPO.flowTenantPO.sortCode.asc())
-                .limit(10)
-                .fetchResults();
-    }
-
-    @Override
-    public FlowTenantPO findOneById(String id) {
-        return flowTenantDao.findById(id).orElse(null);
+    public Page<FlowTenantPO> findAll(Integer pageNumber) {
+        return flowTenantDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 
 }

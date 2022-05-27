@@ -1,10 +1,9 @@
 package com.example.cyjcommon.entity.po;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
-import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
@@ -12,20 +11,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @Entity
 @Table(name = FlowUserPO.T_FLOW_USER)
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
 @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class FlowUserPO implements Serializable {
 
     static final String T_FLOW_USER = "t_flow_user";
@@ -34,28 +32,25 @@ public class FlowUserPO implements Serializable {
     @GeneratedValue(generator = "uuid2")
     @Column(name = "id", length = 36)
     private String id;
-    @Column(name = "second_name")
-    private String secondName;
-    @Column(name = "email")
-    private String email;
+
+    @NotNull(message = "姓不能为空")
     @Column(name = "first_name")
     private String firstName;
+
+    @NotNull(message = "名不能为空")
+    @Column(name = "second_name")
+    private String secondName;
+
+    @NotNull(message = "邮件不能为空")
+    @Column(name = "email")
+    private String email;
+
+    @NotNull(message = "状态不能为空")
     @Column(name = "status")
     private String status;
+
+    @NotNull(message = "排序不能为空")
     @Column(name = "sort_code")
     private String sortCode;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        FlowUserPO that = (FlowUserPO) o;
-        return Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return 0;
-    }
 
 }

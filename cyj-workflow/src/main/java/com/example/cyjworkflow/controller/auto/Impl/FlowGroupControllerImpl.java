@@ -5,13 +5,13 @@ import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjworkflow.controller.auto.FlowGroupController;
 import com.example.cyjworkflow.service.auto.FlowGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @CrossOrigin
 @RestController
@@ -31,7 +31,10 @@ public class FlowGroupControllerImpl implements FlowGroupController {
     }
 
     @Override
-    public ResultVO flowGroupSave(FlowGroupPO po) {
+    public ResultVO flowGroupSave(FlowGroupPO po, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResultVO.failure(bindingResult.getAllErrors().get(0));
+        }
         if (po.getId() == null) {
             return ResultVO.success(flowGroupService.addOne(po));
         }
@@ -39,13 +42,12 @@ public class FlowGroupControllerImpl implements FlowGroupController {
     }
 
     @Override
-    public void flowGroupDelete(String id) {
-        flowGroupService.deleteOne(id);
-    }
-
-    @Override
-    public ResultVO findFlowGroupById(String id) {
-        return ResultVO.success(flowGroupService.findOneById(id));
+    public ResultVO flowGroupDelete(FlowGroupPO po) {
+        if (po.getId() == null) {
+            return ResultVO.failure();
+        }
+        flowGroupService.deleteOne(po);
+        return ResultVO.success();
     }
 
 }

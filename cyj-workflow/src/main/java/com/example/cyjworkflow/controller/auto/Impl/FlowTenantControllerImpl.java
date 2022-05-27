@@ -5,13 +5,13 @@ import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjworkflow.controller.auto.FlowTenantController;
 import com.example.cyjworkflow.service.auto.FlowTenantService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Noice
- * @version 1.0
  */
 @CrossOrigin
 @RestController
@@ -31,7 +31,10 @@ public class FlowTenantControllerImpl implements FlowTenantController {
     }
 
     @Override
-    public ResultVO flowTenantSave(FlowTenantPO po) {
+    public ResultVO flowTenantSave(FlowTenantPO po, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResultVO.failure(bindingResult.getAllErrors().get(0));
+        }
         if (po.getId() == null) {
             return ResultVO.success(flowTenantService.addOne(po));
         }
@@ -39,13 +42,12 @@ public class FlowTenantControllerImpl implements FlowTenantController {
     }
 
     @Override
-    public void flowTenantDelete(String id) {
-        flowTenantService.deleteOne(id);
-    }
-
-    @Override
-    public ResultVO findFlowTenantById(String id) {
-        return ResultVO.success(flowTenantService.findOneById(id));
+    public ResultVO flowTenantDelete(FlowTenantPO po) {
+        if (po.getId() == null) {
+            return ResultVO.failure();
+        }
+        flowTenantService.deleteOne(po);
+        return ResultVO.success();
     }
 
 }
