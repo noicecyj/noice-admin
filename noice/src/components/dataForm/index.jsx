@@ -269,6 +269,15 @@ function DataForm(props) {
                   </FormItem>)
               }
             })}
+            {customData.isOutSelf && <FormItem
+              colSpan={formCol}
+              label={`${customData.outSelf.label}`}>
+              <Select
+                id={customData.outSelf.code}
+                name={customData.outSelf.name}
+                dataSource={customData.outSelf.dataSource}
+              />
+            </FormItem>}
             {!customData.customForm && <FormItem
               colSpan={formCol}
               label="状态"

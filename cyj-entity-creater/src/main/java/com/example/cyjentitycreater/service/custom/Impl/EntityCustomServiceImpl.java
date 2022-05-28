@@ -960,6 +960,78 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{entityServiceData, poName + "CustomService.java"};
     }
 
+    private String[] aopCustomGenerate(String poName, String appPath) {
+        StringBuilder sb = new StringBuilder();
+        String[] PathArr = appPath.split("java");
+        String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
+        //serviceImpl路径
+        String poServicePath = packetPath + ".service.auto.";
+        sb.append("package ").append(packetPath).append(".service.custom.aop;\r\n");
+        sb.append("\r\n");
+        sb.append("import org.aspectj.lang.JoinPoint;\r\n");
+        sb.append("import org.aspectj.lang.annotation.After;\r\n");
+        sb.append("import org.aspectj.lang.annotation.Aspect;\r\n");
+        sb.append("import org.aspectj.lang.annotation.Before;\r\n");
+        sb.append("import org.slf4j.Logger;\r\n");
+        sb.append("import org.slf4j.LoggerFactory;\r\n");
+        sb.append("import org.springframework.stereotype.Component;\r\n");
+        sb.append("import org.springframework.transaction.annotation.Transactional;\r\n");
+        sb.append("\r\n");
+        sb.append("/**\r\n");
+        sb.append(" * @author Noice\r\n");
+        sb.append(" */\r\n");
+        sb.append("@Aspect\r\n");
+        sb.append("@Component\r\n");
+        sb.append("@Transactional(rollbackFor = Exception.class)\r\n");
+        sb.append("public class ").append(poName).append("CustomAop {\r\n");
+        sb.append("\r\n");
+        sb.append("    private static final Logger logger = LoggerFactory.getLogger(").append(poName).append("CustomAop.class);\r\n");
+        sb.append("\r\n");
+        sb.append("    @Before(value = \"execution(* ").append(poServicePath).append(poName).append("Service.addOne(..))\")\r\n");
+        sb.append("    public void addOneBefore(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.addOneBefore:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @After(value = \"execution(* ").append(poServicePath).append(poName).append("Service.addOne(..))\")\r\n");
+        sb.append("    public void addOneAfter(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.addOneAfter:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @Before(value = \"execution(* ").append(poServicePath).append(poName).append("Service.deleteOne(..))\")\r\n");
+        sb.append("    public void deleteOneBefore(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.deleteOneBefore:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @After(value = \"execution(* ").append(poServicePath).append(poName).append("Service.deleteOne(..))\")\r\n");
+        sb.append("    public void deleteOneAfter(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.deleteOneAfter:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @Before(value = \"execution(* ").append(poServicePath).append(poName).append("Service.updateOne(..))\")\r\n");
+        sb.append("    public void updateOneBefore(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.updateOneBefore:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @After(value = \"execution(* ").append(poServicePath).append(poName).append("Service.updateOne(..))\")\r\n");
+        sb.append("    public void updateOneAfter(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.updateOneAfter:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @Before(value = \"execution(* ").append(poServicePath).append(poName).append("Service.findAll(..))\")\r\n");
+        sb.append("    public void findAllBefore(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.findAllBefore:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("    @After(value = \"execution(* ").append(poServicePath).append(poName).append("Service.findAll(..))\")\r\n");
+        sb.append("    public void findAllAfter(JoinPoint joinPoint) {\r\n");
+        sb.append("        logger.info(\"").append(poName).append("CustomAop.findAllAfter:{}\", joinPoint);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("}\r\n");
+        String entityAopData = sb.toString();
+        return new String[]{entityAopData, poName + "CustomAop.java"};
+    }
+
     @Override
     public void createComponentFile(EntityPO entityPO) {
         try {
@@ -1299,81 +1371,30 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         customData.put("editEnable", "是".equals(po.getEntityEditEnable()));
         customData.put("formType", po.getEntityFormType());
         customData.put("formCol", po.getEntityFormRow());
+        customData.put("isOutSelf", "是".equals(po.getEntitySelf()));
+        if ("是".equals(po.getEntitySelf())) {
+            JSONObject outSelf = new JSONObject();
+            outSelf.put("label", po.getEntityName());
+            outSelf.put("name", BeanUtils.underline2Camel(po.getEntityCode()) + "Id");
+            outSelf.put("code", po.getEntityCode() + "_id");
+            JSONArray mapOutList = new JSONArray();
+            List<Map<String, Object>> dateSourceList = sqlCustomService.queryBySqlValue("ENTITY_FORM_DATESOURSE");
+            if (dateSourceList != null && dateSourceList.size() != 0) {
+                for (Map<String, Object> dateSourceMap : dateSourceList) {
+                    JSONObject map = new JSONObject();
+                    if (dateSourceMap.get("label") == null && dateSourceMap.get("value") == null) {
+                        continue;
+                    }
+                    map.put("label", dateSourceMap.get("label").toString());
+                    map.put("value", dateSourceMap.get("value").toString());
+                    mapOutList.add(map);
+                }
+            }
+            outSelf.put("dataSource", mapOutList);
+            customData.put("outSelf", outSelf);
+        }
         jsonObject.put("customData", customData);
         return jsonObject;
-    }
-
-
-    private String[] aopCustomGenerate(String poName, String appPath) {
-        StringBuilder sb = new StringBuilder();
-        String[] PathArr = appPath.split("java");
-        String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
-        //serviceImpl路径
-        String poServicePath = packetPath + ".service.auto.";
-        sb.append("package ").append(packetPath).append(".service.custom.aop;\r\n");
-        sb.append("\r\n");
-        sb.append("import org.aspectj.lang.JoinPoint;\r\n");
-        sb.append("import org.aspectj.lang.annotation.After;\r\n");
-        sb.append("import org.aspectj.lang.annotation.Aspect;\r\n");
-        sb.append("import org.aspectj.lang.annotation.Before;\r\n");
-        sb.append("import org.slf4j.Logger;\r\n");
-        sb.append("import org.slf4j.LoggerFactory;\r\n");
-        sb.append("import org.springframework.stereotype.Component;\r\n");
-        sb.append("import org.springframework.transaction.annotation.Transactional;\r\n");
-        sb.append("\r\n");
-        sb.append("/**\r\n");
-        sb.append(" * @author Noice\r\n");
-        sb.append(" */\r\n");
-        sb.append("@Aspect\r\n");
-        sb.append("@Component\r\n");
-        sb.append("@Transactional(rollbackFor = Exception.class)\r\n");
-        sb.append("public class ").append(poName).append("CustomAop {\r\n");
-        sb.append("\r\n");
-        sb.append("    private static final Logger logger = LoggerFactory.getLogger(").append(poName).append("CustomAop.class);\r\n");
-        sb.append("\r\n");
-        sb.append("    @Before(value = \"execution(* ").append(poServicePath).append(poName).append("Service.addOne(..))\")\r\n");
-        sb.append("    public void addOneBefore(JoinPoint joinPoint) {\r\n");
-        sb.append("        logger.info(\"").append(poName).append("CustomAop.addOneBefore:{}\", joinPoint);\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("    @After(value = \"execution(* ").append(poServicePath).append(poName).append("Service.addOne(..))\")\r\n");
-        sb.append("    public void addOneAfter(JoinPoint joinPoint) {\r\n");
-        sb.append("        logger.info(\"").append(poName).append("CustomAop.addOneAfter:{}\", joinPoint);\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("    @Before(value = \"execution(* ").append(poServicePath).append(poName).append("Service.deleteOne(..))\")\r\n");
-        sb.append("    public void deleteOneBefore(JoinPoint joinPoint) {\r\n");
-        sb.append("        logger.info(\"").append(poName).append("CustomAop.deleteOneBefore:{}\", joinPoint);\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("    @After(value = \"execution(* ").append(poServicePath).append(poName).append("Service.deleteOne(..))\")\r\n");
-        sb.append("    public void deleteOneAfter(JoinPoint joinPoint) {\r\n");
-        sb.append("        logger.info(\"").append(poName).append("CustomAop.deleteOneAfter:{}\", joinPoint);\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("    @Before(value = \"execution(* ").append(poServicePath).append(poName).append("Service.updateOne(..))\")\r\n");
-        sb.append("    public void updateOneBefore(JoinPoint joinPoint) {\r\n");
-        sb.append("        logger.info(\"").append(poName).append("CustomAop.updateOneBefore:{}\", joinPoint);\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("    @After(value = \"execution(* ").append(poServicePath).append(poName).append("Service.updateOne(..))\")\r\n");
-        sb.append("    public void updateOneAfter(JoinPoint joinPoint) {\r\n");
-        sb.append("        logger.info(\"").append(poName).append("CustomAop.updateOneAfter:{}\", joinPoint);\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("    @Before(value = \"execution(* ").append(poServicePath).append(poName).append("Service.findAll(..))\")\r\n");
-        sb.append("    public void findAllBefore(JoinPoint joinPoint) {\r\n");
-        sb.append("        logger.info(\"").append(poName).append("CustomAop.findAllBefore:{}\", joinPoint);\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("    @After(value = \"execution(* ").append(poServicePath).append(poName).append("Service.findAll(..))\")\r\n");
-        sb.append("    public void findAllAfter(JoinPoint joinPoint) {\r\n");
-        sb.append("        logger.info(\"").append(poName).append("CustomAop.findAllAfter:{}\", joinPoint);\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("}\r\n");
-        String entityAopData = sb.toString();
-        return new String[]{entityAopData, poName + "CustomAop.java"};
     }
 
 }
