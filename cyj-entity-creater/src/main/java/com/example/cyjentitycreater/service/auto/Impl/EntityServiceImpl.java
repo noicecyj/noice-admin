@@ -1,13 +1,14 @@
 package com.example.cyjentitycreater.service.auto.Impl;
 
-import com.example.cyjcommon.dao.PropertyDao;
+import com.example.cyjcommon.dao.AppServiceDao;
 import com.example.cyjcommon.dao.EntityDao;
-import com.example.cyjcommon.entity.po.PropertyPO;
+import com.example.cyjcommon.dao.PropertyDao;
 import com.example.cyjcommon.entity.po.AppServicePO;
 import com.example.cyjcommon.entity.po.EntityPO;
+import com.example.cyjcommon.entity.po.PropertyPO;
 import com.example.cyjcommon.service.BaseService;
-import com.example.cyjentitycreater.service.auto.PropertyService;
 import com.example.cyjentitycreater.service.auto.EntityService;
+import com.example.cyjentitycreater.service.auto.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -27,12 +28,18 @@ import java.util.List;
 public class EntityServiceImpl extends BaseService implements EntityService {
 
     private EntityDao entityDao;
+    private AppServiceDao appServiceDao;
     private PropertyDao propertyDao;
     private PropertyService propertyService;
 
     @Autowired
     public void setEntityDao(EntityDao entityDao) {
         this.entityDao = entityDao;
+    }
+
+    @Autowired
+    public void setAppServiceDao(AppServiceDao appServiceDao) {
+        this.appServiceDao = appServiceDao;
     }
 
     @Autowired
@@ -47,6 +54,10 @@ public class EntityServiceImpl extends BaseService implements EntityService {
 
     @Override
     public EntityPO addOne(EntityPO po) {
+        EntityPO entityPO = entityDao.getOne(po.getEntityId());
+        po.setEntity(entityPO);
+        AppServicePO appServicePO = appServiceDao.getOne(po.getAppServiceId());
+        po.setAppService(appServicePO);
         return entityDao.save(po);
     }
 
@@ -65,6 +76,10 @@ public class EntityServiceImpl extends BaseService implements EntityService {
 
     @Override
     public EntityPO updateOne(EntityPO po) {
+        EntityPO entityPO = entityDao.getOne(po.getEntityId());
+        po.setEntity(entityPO);
+        AppServicePO appServicePO = appServiceDao.getOne(po.getAppServiceId());
+        po.setAppService(appServicePO);
         return entityDao.saveAndFlush(po);
     }
 

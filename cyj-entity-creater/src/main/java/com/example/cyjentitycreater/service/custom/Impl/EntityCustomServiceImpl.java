@@ -557,6 +557,13 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("public class ").append(poName).append("ServiceImpl extends BaseService implements ").append(poName).append("Service {\r\n");
         sb.append("\r\n");
         sb.append("    private ").append(poName).append("Dao ").append(underPoName).append("Dao;\r\n");
+        for (PropertyPO propertyPO : propertyPOList) {
+            if ("是".equals(propertyPO.getPropertyOut())) {
+                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
+                String propertyOut = BeanUtils.captureName(underPropertyOut);
+                sb.append("    private ").append(propertyOut).append("Dao ").append(underPropertyOut).append("Dao;\r\n");
+            }
+        }
         for (EntityPO entityPO1 : subEntityPOList) {
             //驼峰名
             String underSubPoName = BeanUtils.underline2Camel(entityPO1.getEntityCode());
@@ -571,6 +578,17 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("        this.").append(underPoName).append("Dao = ").append(underPoName).append("Dao;\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
+        for (PropertyPO propertyPO : propertyPOList) {
+            if ("是".equals(propertyPO.getPropertyOut())) {
+                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
+                String propertyOut = BeanUtils.captureName(underPropertyOut);
+                sb.append("    @Autowired\r\n");
+                sb.append("    public void set").append(propertyOut).append("Dao(").append(propertyOut).append("Dao ").append(underPropertyOut).append("Dao) {\r\n");
+                sb.append("        this.").append(underPropertyOut).append("Dao = ").append(underPropertyOut).append("Dao;\r\n");
+                sb.append("    }\r\n");
+                sb.append("\r\n");
+            }
+        }
         for (EntityPO entityPO1 : subEntityPOList) {
             //驼峰名
             String underSubPoName = BeanUtils.underline2Camel(entityPO1.getEntityCode());
@@ -589,15 +607,16 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         }
         sb.append("    @Override\r\n");
         sb.append("    public ").append(poName).append("PO addOne(").append(poName).append("PO po) {\r\n");
+        addAndUpdataHandler(entityPO, propertyPOList, underPoName, poName, sb);
         sb.append("        return ").append(underPoName).append("Dao.save(po);\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
         sb.append("    @Override\r\n");
         sb.append("    public void deleteOne(").append(poName).append("PO po) {\r\n");
         if ("是".equals(entityPO.getEntitySelf())) {
-            sb.append("        List<EntityPO> entityPOList = entityDao.findByEntityOrderBySortCode(po);\r\n");
-            sb.append("        for (EntityPO entityPO : entityPOList) {\r\n");
-            sb.append("            deleteOne(entityPO);\r\n");
+            sb.append("        List<").append(poName).append("PO> ").append(underPoName).append("POList = ").append(underPoName).append("Dao.findBy").append(poName).append("OrderBySortCode(po);\r\n");
+            sb.append("        for (").append(poName).append("PO ").append(underPoName).append("PO : ").append(underPoName).append("POList) {\r\n");
+            sb.append("            deleteOne(").append(underPoName).append("PO);\r\n");
             sb.append("        }\r\n");
         }
         for (EntityPO entityPO1 : subEntityPOList) {
@@ -615,6 +634,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("\r\n");
         sb.append("    @Override\r\n");
         sb.append("    public ").append(poName).append("PO updateOne(").append(poName).append("PO po) {\r\n");
+        addAndUpdataHandler(entityPO, propertyPOList, underPoName, poName, sb);
         sb.append("        return ").append(underPoName).append("Dao.saveAndFlush(po);\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
@@ -648,6 +668,21 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("}\r\n");
         String entityServiceImplData = sb.toString();
         return new String[]{entityServiceImplData, poName + "ServiceImpl.java"};
+    }
+
+    private void addAndUpdataHandler(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName, StringBuilder sb) {
+        if ("是".equals(entityPO.getEntitySelf())) {
+            sb.append("        ").append(poName).append("PO ").append(underPoName).append("PO = ").append(underPoName).append("Dao.getOne(po.get").append(poName).append("Id());\r\n");
+            sb.append("        po.set").append(poName).append("(").append(underPoName).append("PO);\r\n");
+        }
+        for (PropertyPO propertyPO : propertyPOList) {
+            if ("是".equals(propertyPO.getPropertyOut())) {
+                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
+                String propertyOut = BeanUtils.captureName(underPropertyOut);
+                sb.append("        ").append(propertyOut).append("PO ").append(underPropertyOut).append("PO = ").append(underPropertyOut).append("Dao.getOne(po.get").append(propertyOut).append("Id());\r\n");
+                sb.append("        po.set").append(propertyOut).append("(").append(underPropertyOut).append("PO);\r\n");
+            }
+        }
     }
 
     private void OverRideHandler(String underPoName, String poName, StringBuilder sb, String underPropertyOut, String propertyOut) {
@@ -1223,8 +1258,8 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                 mapNull.put("value", null);
                 mapList.add(mapNull);
                 JSONObject mapOut = new JSONObject();
-                mapNull.put("label", "外键");
-                mapNull.put("value", "out");
+                mapOut.put("label", "外键");
+                mapOut.put("value", "out");
                 mapList.add(mapOut);
                 if (dictionaryDTOList != null && dictionaryDTOList.size() != 0) {
                     for (DictionaryPO dictionaryPO : dictionaryDTOList) {

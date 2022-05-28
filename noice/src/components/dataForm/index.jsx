@@ -245,8 +245,8 @@ function DataForm(props) {
                     requiredMessage={`请输入${item.propertyLabel}`}
                     key={item.id}>
                     <Select
-                      id={item.propertyCode}
-                      name={item.propertyName}
+                      id={item.propertyCode + "_id"}
+                      name={item.propertyName + "Id"}
                       filterLocal={false}
                       dataSource={item.propertyDataSource}
                       defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
