@@ -54,10 +54,14 @@ public class EntityServiceImpl extends BaseService implements EntityService {
 
     @Override
     public EntityPO addOne(EntityPO po) {
-        EntityPO entityPO = entityDao.getOne(po.getEntityId());
-        po.setEntity(entityPO);
-        AppServicePO appServicePO = appServiceDao.getOne(po.getAppServiceId());
-        po.setAppService(appServicePO);
+        if (po.getEntityId() != null){
+            EntityPO entityPO = entityDao.getOne(po.getEntityId());
+            po.setEntity(entityPO);
+        }
+        if (po.getAppServiceId() != null){
+            AppServicePO appServicePO = appServiceDao.getOne(po.getAppServiceId());
+            po.setAppService(appServicePO);
+        }
         return entityDao.save(po);
     }
 
@@ -76,10 +80,14 @@ public class EntityServiceImpl extends BaseService implements EntityService {
 
     @Override
     public EntityPO updateOne(EntityPO po) {
-        EntityPO entityPO = entityDao.getOne(po.getEntityId());
-        po.setEntity(entityPO);
-        AppServicePO appServicePO = appServiceDao.getOne(po.getAppServiceId());
-        po.setAppService(appServicePO);
+        if (po.getEntityId() != null){
+            EntityPO entityPO = entityDao.getOne(po.getEntityId());
+            po.setEntity(entityPO);
+        }
+        if (po.getAppServiceId() != null){
+            AppServicePO appServicePO = appServiceDao.getOne(po.getAppServiceId());
+            po.setAppService(appServicePO);
+        }
         return entityDao.saveAndFlush(po);
     }
 

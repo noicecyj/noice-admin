@@ -672,15 +672,19 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
 
     private void addAndUpdataHandler(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName, StringBuilder sb) {
         if ("是".equals(entityPO.getEntitySelf())) {
-            sb.append("        ").append(poName).append("PO ").append(underPoName).append("PO = ").append(underPoName).append("Dao.getOne(po.get").append(poName).append("Id());\r\n");
-            sb.append("        po.set").append(poName).append("(").append(underPoName).append("PO);\r\n");
+            sb.append("        if (po.get").append(poName).append("Id() != null){\r\n");
+            sb.append("            ").append(poName).append("PO ").append(underPoName).append("PO = ").append(underPoName).append("Dao.getOne(po.get").append(poName).append("Id());\r\n");
+            sb.append("            po.set").append(poName).append("(").append(underPoName).append("PO);\r\n");
+            sb.append("        }\r\n");
         }
         for (PropertyPO propertyPO : propertyPOList) {
             if ("是".equals(propertyPO.getPropertyOut())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("        ").append(propertyOut).append("PO ").append(underPropertyOut).append("PO = ").append(underPropertyOut).append("Dao.getOne(po.get").append(propertyOut).append("Id());\r\n");
-                sb.append("        po.set").append(propertyOut).append("(").append(underPropertyOut).append("PO);\r\n");
+                sb.append("        if (po.get").append(propertyOut).append("Id() != null){\r\n");
+                sb.append("            ").append(propertyOut).append("PO ").append(underPropertyOut).append("PO = ").append(underPropertyOut).append("Dao.getOne(po.get").append(propertyOut).append("Id());\r\n");
+                sb.append("            po.set").append(propertyOut).append("(").append(underPropertyOut).append("PO);\r\n");
+                sb.append("        }\r\n");
             }
         }
     }
