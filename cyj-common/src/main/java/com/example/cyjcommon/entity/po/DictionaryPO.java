@@ -44,6 +44,9 @@ public class DictionaryPO implements Serializable {
     @Column(name = "dictionary_value")
     private String dictionaryValue;
 
+    @Column(name = "catalog_id", insertable = false, updatable = false)
+    private String catalogId;
+
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})
     @JoinColumn(name = "catalog_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
     private CatalogPO catalog;
