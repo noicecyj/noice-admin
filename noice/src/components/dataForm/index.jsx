@@ -236,6 +236,22 @@ function DataForm(props) {
                       direction={item.propertyDirection}
                     />
                   </FormItem>)
+              } else if (item.propertyMode === 'out') {
+                return (
+                  <FormItem
+                    colSpan={formCol}
+                    label={`${item.propertyLabel}`}
+                    required={item.propertyRequired}
+                    requiredMessage={`请输入${item.propertyLabel}`}
+                    key={item.id}>
+                    <Select
+                      id={item.propertyCode}
+                      name={item.propertyName}
+                      filterLocal={false}
+                      dataSource={item.propertyDataSource}
+                      defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
+                    />
+                  </FormItem>)
               } else {
                 return (
                   <FormItem

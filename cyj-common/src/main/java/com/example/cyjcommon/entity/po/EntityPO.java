@@ -7,8 +7,8 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.CascadeType;
-import javax.persistence.ConstraintMode;
 import javax.persistence.Column;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
@@ -65,9 +65,15 @@ public class EntityPO implements Serializable {
     @Column(name = "entity_form_row")
     private Integer entityFormRow;
 
+    @Column(name = "app_service_id", insertable = false, updatable = false)
+    private String appServiceId;
+
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})
     @JoinColumn(name = "app_service_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
     private AppServicePO appService;
+
+    @Column(name = "entity_id", insertable = false, updatable = false)
+    private String entityId;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})
     @JoinColumn(name = "entity_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))

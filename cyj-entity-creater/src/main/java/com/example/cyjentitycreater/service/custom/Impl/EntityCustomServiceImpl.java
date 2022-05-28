@@ -322,6 +322,9 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 if (MANY_TO_ONE.equals(propertyPO.getPropertyOutType())) {
+                    sb.append("    @Column(name = \"").append(propertyPO.getPropertyCode()).append("_id\", insertable = false, updatable = false)\r\n");
+                    sb.append("    private String ").append(underPropertyOut).append("Id;\r\n");
+                    sb.append("\r\n");
                     sb.append("    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})\r\n");
                     sb.append("    @JoinColumn(name = \"").append(propertyPO.getPropertyCode()).append("_id\", foreignKey = @ForeignKey(name = \"none\", value = ConstraintMode.NO_CONSTRAINT))\r\n");
                     sb.append("    private ").append(propertyOut).append("PO ").append(underPropertyOut).append(";\r\n");
@@ -345,6 +348,9 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             sb.append("\r\n");
         });
         if ("是".equals(entityPO.getEntitySelf())) {
+            sb.append("    @Column(name = \"").append(entityPO.getEntityCode()).append("_id\", insertable = false, updatable = false)\r\n");
+            sb.append("    private String ").append(underPoName).append("Id;\r\n");
+            sb.append("\r\n");
             sb.append("    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})\r\n");
             sb.append("    @JoinColumn(name = \"").append(entityPO.getEntityCode()).append("_id\", foreignKey = @ForeignKey(name = \"none\", value = ConstraintMode.NO_CONSTRAINT))\r\n");
             sb.append("    private ").append(poName).append("PO ").append(underPoName).append(";\r\n");
@@ -1216,6 +1222,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                 mapNull.put("label", "无");
                 mapNull.put("value", null);
                 mapList.add(mapNull);
+                JSONObject mapOut = new JSONObject();
+                mapNull.put("label", "外键");
+                mapNull.put("value", "out");
+                mapList.add(mapOut);
                 if (dictionaryDTOList != null && dictionaryDTOList.size() != 0) {
                     for (DictionaryPO dictionaryPO : dictionaryDTOList) {
                         Map<String, String> map = new HashMap<>();
