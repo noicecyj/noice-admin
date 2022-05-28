@@ -193,7 +193,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             createEntityHandler(entityPO);
             authorityHandler(entityPO);
         }
-
     }
 
     private void createEntityHandler(EntityPO entityPO) {
@@ -217,13 +216,330 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         entityObj.put(appPath + "/service/auto/Impl", serviceImplGenerate(entityPO, propertyPOList, underPoName, poName, appPath));
         entityObj.put(appPath + "/controller/auto", controllerGenerate(entityPO, propertyPOList, underPoName, poName, appPath));
         entityObj.put(appPath + "/controller/auto/Impl", controllerImplGenerate(entityPO, propertyPOList, underPoName, poName, appPath, appApi));
+        entityObj.put(componentPath + poName + "/view/auto", viewAutoGenerate(entityPO, underPoName, poName));
+        entityObj.put(componentPath + poName + "/services/auto", servicesAutoGenerate(entityPO, propertyPOList, appApi, underPoName, poName));
+        entityObj.put(componentPath + poName + "/models/auto", modelsAutoGenerate(entityPO, underPoName, poName));
+        if (entityPO.getEntityId() == null){
+            entityObj.put(componentPath + poName, indexGenerate(entityPO, underPoName, poName));
+            entityObj.put(componentPath + poName, storeGenerate(entityPO, underPoName, poName));
+        }
         Map<String, String[]> entityCustomObj = new HashMap<>();
         entityCustomObj.put(appPath + "/service/custom", serviceCustomGenerate(poName, appPath));
         entityCustomObj.put(appPath + "/service/custom/aop", aopCustomGenerate(poName, appPath));
         entityCustomObj.put(appPath + "/service/custom/Impl", serviceImplCustomGenerate(poName, appPath));
         entityCustomObj.put(appPath + "/controller/custom", controllerCustomGenerate(poName, appPath));
         entityCustomObj.put(appPath + "/controller/custom/Impl", controllerImplCustomGenerate(poName, appPath, appApi));
+        entityCustomObj.put(componentPath + poName + "/view/custom", viewCustomGenerate(entityPO, underPoName, poName));
+        entityCustomObj.put(componentPath + poName + "/services/custom", servicesCustomGenerate(appApi, underPoName, poName));
+        entityCustomObj.put(componentPath + poName + "/models/custom", modelsCustomGenerate(entityPO, underPoName, poName));
         createEntityCodeHandler(entityObj, entityCustomObj);
+    }
+
+    private String[] servicesAutoGenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String appApi, String underPoName, String poName) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("import {request} from 'ice';\r\n");
+        sb.append("\r\n");
+        sb.append("export default {\r\n");
+        sb.append("  ").append(underPoName).append("Page(pageNumber) {\r\n");
+        sb.append("    return request({\r\n");
+        sb.append("      url: '/").append(appApi).append("/").append(underPoName).append("Page',\r\n");
+        sb.append("      method: 'post',\r\n");
+        sb.append("      params: {\r\n");
+        sb.append("        pageNumber,\r\n");
+        sb.append("      },\r\n");
+        sb.append("    });\r\n");
+        sb.append("  },\r\n");
+        if ("是".equals(entityPO.getEntitySelf())) {
+            sb.append("  ").append(underPoName).append("PageBy").append(poName).append("(pageNumber, data) {\r\n");
+            sb.append("    return request({\r\n");
+            sb.append("      url: '/").append(appApi).append("/").append(underPoName).append("PageBy").append(poName).append("',\r\n");
+            sb.append("      method: 'post',\r\n");
+            sb.append("      params: {\r\n");
+            sb.append("        pageNumber,\r\n");
+            sb.append("      },\r\n");
+            sb.append("      data,\r\n");
+            sb.append("    });\r\n");
+            sb.append("  },\r\n");
+        }
+        for (PropertyPO propertyPO : propertyPOList) {
+            if ("是".equals(propertyPO.getPropertyOut())) {
+                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
+                String propertyOut = BeanUtils.captureName(underPropertyOut);
+                if (MANY_TO_ONE.equals(propertyPO.getPropertyOutType())) {
+                    sb.append("  ").append(underPoName).append("PageBy").append(propertyOut).append("(pageNumber, data) {\r\n");
+                    sb.append("    return request({\r\n");
+                    sb.append("      url: '/").append(appApi).append("/").append(underPoName).append("PageBy").append(propertyOut).append("',\r\n");
+                    sb.append("      method: 'post',\r\n");
+                    sb.append("      params: {\r\n");
+                    sb.append("        pageNumber,\r\n");
+                    sb.append("      },\r\n");
+                    sb.append("      data,\r\n");
+                    sb.append("    });\r\n");
+                    sb.append("  },\r\n");
+                } else {
+                    sb.append("  ").append(underPoName).append("PageBy").append(propertyOut).append("List(pageNumber, data) {\r\n");
+                    sb.append("    return request({\r\n");
+                    sb.append("      url: '/").append(appApi).append("/").append(underPoName).append("PageBy").append(propertyOut).append("List',\r\n");
+                    sb.append("      method: 'post',\r\n");
+                    sb.append("      params: {\r\n");
+                    sb.append("        pageNumber,\r\n");
+                    sb.append("      },\r\n");
+                    sb.append("      data,\r\n");
+                    sb.append("    });\r\n");
+                    sb.append("  },\r\n");
+                }
+            }
+        }
+        sb.append("  ").append(underPoName).append("Save(data) {\r\n");
+        sb.append("    return request({\r\n");
+        sb.append("      url: '/").append(appApi).append("/").append(underPoName).append("Save',\r\n");
+        sb.append("      method: 'post',\r\n");
+        sb.append("      data,\r\n");
+        sb.append("    });\r\n");
+        sb.append("  },\r\n");
+        sb.append("  ").append(underPoName).append("Delete(data) {\r\n");
+        sb.append("    return request({\r\n");
+        sb.append("      url: '/").append(appApi).append("/").append(underPoName).append("Delete',\r\n");
+        sb.append("      method: 'post',\r\n");
+        sb.append("      data,\r\n");
+        sb.append("    });\r\n");
+        sb.append("  },\r\n");
+        sb.append("};\r\n");
+        String viewData = sb.toString();
+        return new String[]{viewData, underPoName + ".tsx"};
+    }
+
+    private String[] storeGenerate(EntityPO entityPO, String underPoName, String poName) {
+        return new String[0];
+    }
+
+    private String[] indexGenerate(EntityPO entityPO, String underPoName, String poName) {
+        return new String[0];
+    }
+
+    private String[] modelsCustomGenerate(EntityPO entityPO, String underPoName, String poName) {
+        return new String[0];
+    }
+
+    private String[] servicesCustomGenerate(String appApi, String underPoName, String poName) {
+        return new String[0];
+    }
+
+    private String[] viewCustomGenerate(EntityPO entityPO, String underPoName, String poName) {
+        return new String[0];
+    }
+
+    private String[] modelsAutoGenerate(EntityPO po, String underPoName, String poName) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("import ").append(underPoName).append("Service from '@/pages/").append(poName).append("/services/auto/").append(underPoName).append("';\r\n");
+        sb.append("import initService from '@/services/init';\r\n");
+        sb.append("import {Message} from \"@alifd/next\";\r\n");
+        sb.append("\r\n");
+        sb.append("export default {\r\n");
+        sb.append("\r\n");
+        sb.append("  namespace: '").append(underPoName).append("',\r\n");
+        sb.append("\r\n");
+        sb.append("  state: {\r\n");
+        sb.append("    ").append(underPoName).append("Title: '添加',\r\n");
+        sb.append("    ").append(underPoName).append("TableData: [],\r\n");
+        sb.append("    ").append(underPoName).append("Visible: false,\r\n");
+        sb.append("    ").append(underPoName).append("FormData: {},\r\n");
+        sb.append("    ").append(underPoName).append("LoadingVisible: true,\r\n");
+        sb.append("    ").append(underPoName).append("Total: 0,\r\n");
+        sb.append("    ").append(underPoName).append("Current: 1,\r\n");
+        sb.append("    ").append(underPoName).append("Form: [],\r\n");
+        sb.append("    ").append(underPoName).append("Table: [],\r\n");
+        sb.append("    customData: {},\r\n");
+        sb.append("  },\r\n");
+        sb.append("\r\n");
+        sb.append("  reducers: {\r\n");
+        sb.append("    setState(prevState, payload) {\r\n");
+        sb.append("      return {...prevState, ...payload};\r\n");
+        sb.append("    },\r\n");
+        sb.append("  },\r\n");
+        sb.append("\r\n");
+        sb.append("  effects: (dispatch) => ({\r\n");
+        sb.append("    async ").append(underPoName).append("Page(").append(underPoName).append("Current) {\r\n");
+        sb.append("      const dataRes = await ").append(underPoName).append("Service.").append(underPoName).append("Page(").append(underPoName).append("Current);\r\n");
+        sb.append("      const payload = {\r\n");
+        sb.append("        ").append(underPoName).append("TableData: dataRes.data.content,\r\n");
+        sb.append("        ").append(underPoName).append("Total: dataRes.data.totalElements,\r\n");
+        sb.append("        ").append(underPoName).append("Current,\r\n");
+        sb.append("        ").append(underPoName).append("LoadingVisible: false,\r\n");
+        sb.append("      };\r\n");
+        sb.append("      dispatch.").append(underPoName).append(".setState(payload);\r\n");
+        sb.append("    },\r\n");
+        sb.append("    ").append(underPoName).append("Add() {\r\n");
+        sb.append("      const payload = {\r\n");
+        sb.append("        ").append(underPoName).append("FormData: {},\r\n");
+        sb.append("        ").append(underPoName).append("Title: '添加',\r\n");
+        sb.append("        ").append(underPoName).append("Visible: true,\r\n");
+        sb.append("      };\r\n");
+        sb.append("      dispatch.").append(underPoName).append(".setState(payload);\r\n");
+        sb.append("    },\r\n");
+        sb.append("    ").append(underPoName).append("Edit(data) {\r\n");
+        sb.append("      const payload = {\r\n");
+        sb.append("        ").append(underPoName).append("FormData: data,\r\n");
+        sb.append("        ").append(underPoName).append("Title: '编辑',\r\n");
+        sb.append("        ").append(underPoName).append("Visible: true,\r\n");
+        sb.append("      };\r\n");
+        sb.append("      dispatch.").append(underPoName).append(".setState(payload);\r\n");
+        sb.append("    },\r\n");
+        sb.append("    async ").append(underPoName).append("Delete(data) {\r\n");
+        sb.append("      const ret = await ").append(underPoName).append("Service.").append(underPoName).append("Delete(data.record);\r\n");
+        sb.append("      if (ret.code === 400) {\r\n");
+        sb.append("        Message.error('删除失败');\r\n");
+        sb.append("      } else {\r\n");
+        sb.append("        Message.success('删除成功');\r\n");
+        sb.append("        await this.").append(underPoName).append("Page(data.pageNumber);\r\n");
+        sb.append("        const payload = {\r\n");
+        sb.append("          ").append(underPoName).append("Visible: false,\r\n");
+        sb.append("        };\r\n");
+        sb.append("        dispatch.").append(underPoName).append(".setState(payload);\r\n");
+        sb.append("      }\r\n");
+        sb.append("    },\r\n");
+        sb.append("    async ").append(underPoName).append("Save(data) {\r\n");
+        sb.append("      const ret = await ").append(underPoName).append("Service.").append(underPoName).append("Save(data.").append(underPoName).append("FormData);\r\n");
+        sb.append("      if (ret.code === 400) {\r\n");
+        sb.append("        Message.error(ret.data.defaultMessage);\r\n");
+        sb.append("      } else {\r\n");
+        sb.append("        Message.success('保存成功');\r\n");
+        sb.append("        await this.").append(underPoName).append("Page(data.pageNumber);\r\n");
+        sb.append("        const payload = {\r\n");
+        sb.append("          ").append(underPoName).append("Visible: false,\r\n");
+        sb.append("        };\r\n");
+        sb.append("        dispatch.").append(underPoName).append(".setState(payload);\r\n");
+        sb.append("      }\r\n");
+        sb.append("    },\r\n");
+        sb.append("    setDataForm(data) {\r\n");
+        sb.append("      const payload = {\r\n");
+        sb.append("        ").append(underPoName).append("FormData: data,\r\n");
+        sb.append("      };\r\n");
+        sb.append("      dispatch.").append(underPoName).append(".setState(payload);\r\n");
+        sb.append("    },\r\n");
+        sb.append("    async findDataTableAndFormByName() {\r\n");
+        sb.append("      const ret = await initService.findDataTableAndFormByName('").append(underPoName).append("');\r\n");
+        sb.append("      await this.").append(underPoName).append("Page(1);\r\n");
+        sb.append("      const payload = {\r\n");
+        sb.append("        ").append(underPoName).append("Table: ret.data.dataTable,\r\n");
+        sb.append("        ").append(underPoName).append("Form: ret.data.dataForm,\r\n");
+        sb.append("        customData: ret.data.customData,\r\n");
+        sb.append("      };\r\n");
+        sb.append("      dispatch.").append(underPoName).append(".setState(payload);\r\n");
+        sb.append("    },\r\n");
+        sb.append("  }),\r\n");
+        sb.append("};\r\n");
+        String viewData = sb.toString();
+        return new String[]{viewData, underPoName + ".tsx"};
+    }
+
+    private String[] viewAutoGenerate(EntityPO entityPO, String underPoName, String poName) {
+        List<EntityPO> subEntityPOList = entityDao.findByEntityOrderBySortCode(entityPO);
+        StringBuilder sb = new StringBuilder();
+        sb.append("import React, {useEffect} from 'react';\r\n");
+        sb.append("import pageStore from '@/pages/").append(poName).append("/store';\r\n");
+        sb.append("import DataFormTemple from '@/components/dataForm';\r\n");
+        sb.append("import DataTableTemple from '@/components/dataTable';\r\n");
+        sb.append("import {CustomColumn").append(poName).append("} from '@/pages/").append(poName).append("/view/custom/").append(underPoName).append("';\r\n");
+        sb.append("\r\n");
+        sb.append("function ").append(poName).append("() {\r\n");
+        sb.append("  const [").append(underPoName).append("State, ").append(underPoName).append("Dispatchers] = pageStore.useModel('").append(underPoName).append("');\r\n");
+        for (EntityPO entityPO1 :subEntityPOList){
+            //驼峰名
+            String underSubPoName = BeanUtils.underline2Camel(entityPO1.getEntityCode());
+            sb.append("  const [").append(underSubPoName).append("State, ").append(underSubPoName).append("Dispatchers] = pageStore.useModel('").append(underSubPoName).append("');\r\n");
+        }
+        sb.append("\r\n");
+        sb.append("  const [custom").append(poName).append("State, custom").append(poName).append("Dispatchers] = pageStore.useModel('custom").append(poName).append("');\r\n");
+        sb.append("\r\n");
+        sb.append("  useEffect(() => {\r\n");
+        sb.append("    ").append(underPoName).append("Dispatchers.findDataTableAndFormByName().then(r => console.log(r));\r\n");
+        sb.append("  }, [").append(underPoName).append("Dispatchers]);\r\n");
+        sb.append("\r\n");
+        sb.append("  return (\r\n");
+        sb.append("    <>\r\n");
+        sb.append("      <DataTableTemple\r\n");
+        sb.append("        createItem={() => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Add()}\r\n");
+        sb.append("        editItem={record => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Edit(record)}\r\n");
+        sb.append("        deleteItem={record => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Delete({\r\n");
+        sb.append("          record,\r\n");
+        sb.append("          pageNumber: ").append(underPoName).append("State.").append(underPoName).append("Current,\r\n");
+        sb.append("        })}\r\n");
+        sb.append("        visibleLoading={").append(underPoName).append("State.").append(underPoName).append("LoadingVisible}\r\n");
+        sb.append("        dataSource={").append(underPoName).append("State.").append(underPoName).append("TableData}\r\n");
+        sb.append("        items={").append(underPoName).append("State.").append(underPoName).append("Table}\r\n");
+        sb.append("        total={").append(underPoName).append("State.").append(underPoName).append("Total}\r\n");
+        sb.append("        getPage={").append(underPoName).append("Current => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Page(").append(underPoName).append("Current)}\r\n");
+        sb.append("        rowSelection={{\r\n");
+        sb.append("          mode: 'single',\r\n");
+        sb.append("          onSelect: (selected, record) => {\r\n");
+        sb.append("            propertyDispatchers.onRowClick({selected, record});\r\n");
+        sb.append("          },\r\n");
+        sb.append("          selectedRowKeys: [\r\n");
+        sb.append("            propertyState.").append(underPoName).append(",\r\n");
+        sb.append("          ],\r\n");
+        sb.append("        }}\r\n");
+        sb.append("        primaryKey=\"id\"\r\n");
+        sb.append("        customData={").append(underPoName).append("State.customData}\r\n");
+        sb.append("        columnRender={(value, index, record) => {\r\n");
+        sb.append("          return (\r\n");
+        sb.append("            <CustomColumn").append(poName).append(" value={value} index={index} record={record}/>\r\n");
+        sb.append("          );\r\n");
+        sb.append("        }}\r\n");
+        sb.append("        customMethod1={() => custom").append(poName).append("Dispatchers.customMethod1()}\r\n");
+        sb.append("        customMethod2={() => custom").append(poName).append("Dispatchers.customMethod2()}\r\n");
+        sb.append("        customMethod3={() => custom").append(poName).append("Dispatchers.customMethod3()}\r\n");
+        sb.append("        customMethodName1={custom").append(poName).append("State.customMethodName1}\r\n");
+        sb.append("        customMethodName2={custom").append(poName).append("State.customMethodName2}\r\n");
+        sb.append("        customMethodName3={custom").append(poName).append("State.customMethodName3}\r\n");
+        sb.append("      />\r\n");
+        sb.append("      <DataFormTemple\r\n");
+        sb.append("        customData={").append(underPoName).append("State.customData}\r\n");
+        sb.append("        title={").append(underPoName).append("State.").append(underPoName).append("Title}\r\n");
+        sb.append("        visibleDialog={").append(underPoName).append("State.").append(underPoName).append("Visible}\r\n");
+        sb.append("        onClose={() => ").append(underPoName).append("Dispatchers.setState({").append(underPoName).append("Visible: false})}\r\n");
+        sb.append("        items={[...").append(underPoName).append("State.").append(underPoName).append("Form, ...custom").append(poName).append("State.customFrom]}\r\n");
+        sb.append("        dispatchers={value => ").append(underPoName).append("Dispatchers.setDataForm(value)}\r\n");
+        sb.append("        onOk={() => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Save({\r\n");
+        sb.append("          ").append(underPoName).append("FormData: ").append(underPoName).append("State.").append(underPoName).append("FormData,\r\n");
+        sb.append("          pageNumber: ").append(underPoName).append("State.").append(underPoName).append("Current,\r\n");
+        sb.append("        })}\r\n");
+        sb.append("        formDataValue={").append(underPoName).append("State.").append(underPoName).append("FormData}\r\n");
+        sb.append("        formSortCode={String(Number.parseInt(String(").append(underPoName).append("State.").append(underPoName).append("Total)) + 10)}\r\n");
+        sb.append("      />\r\n");
+        sb.append("    </>\r\n");
+        sb.append("  );\r\n");
+        sb.append("}\r\n");
+        sb.append("\r\n");
+        sb.append("export default ").append(poName).append(";\r\n");
+        String viewData = sb.toString();
+        return new String[]{viewData, underPoName + ".tsx"};
+    }
+
+    private void createComponentFile(String appApi, List<EntityPO> entityPOList, EntityPO po, String underPoName, String poName) {
+        try {
+            createJavaFile(componentPath + poName + "/view/auto", viewAutoGenerate(entityPOList, underPoName, poName));
+            createJavaFile(componentPath + poName + "/view/custom", viewCustomGenerate(underPoName, poName), false);
+            createJavaFile(componentPath + poName + "/services/auto", servicesAutoGenerate(appApi, underPoName, poName));
+            createJavaFile(componentPath + poName + "/services/custom", servicesCustomGenerate(underPoName), false);
+            createJavaFile(componentPath + poName + "/models/auto", modelsAutoGenerate(po, underPoName, poName));
+            createJavaFile(componentPath + poName + "/models/custom", modelsCustomGenerate(underPoName, poName), false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void createSubComponentFile(String appApi, EntityPO subPo, String poName, String underPoName, String underSubPoName, String subPoName) {
+        try {
+            createJavaFile(componentPath + poName + "/view/auto", viewSubAutoGenerate(poName, underPoName, underSubPoName, subPoName));
+            createJavaFile(componentPath + poName + "/view/custom", viewSubCustomGenerate(poName, underSubPoName, subPoName), false);
+            createJavaFile(componentPath + poName + "/services/auto", servicesSubAutoGenerate(appApi, underSubPoName, subPoName));
+            createJavaFile(componentPath + poName + "/services/custom", servicesCustomGenerate(underSubPoName), false);
+            createJavaFile(componentPath + poName + "/models/auto", modelsSubAutoGenerate(subPo, poName, underPoName, underSubPoName, subPoName));
+            createJavaFile(componentPath + poName + "/models/custom", modelsSubCustomGenerate(underSubPoName, subPoName), false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void createEntityCodeHandler(Map<String, String[]> entityObj, Map<String, String[]> entityCustomObj) {
@@ -1064,31 +1380,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         }
     }
 
-    private void createComponentFile(String appApi, List<EntityPO> entityPOList, EntityPO po, String underPoName, String poName) {
-        try {
-            createJavaFile(componentPath + poName + "/view/auto", viewAutoGenerate(entityPOList, underPoName, poName));
-            createJavaFile(componentPath + poName + "/view/custom", viewCustomGenerate(underPoName, poName), false);
-            createJavaFile(componentPath + poName + "/services/auto", servicesAutoGenerate(appApi, underPoName, poName));
-            createJavaFile(componentPath + poName + "/services/custom", servicesCustomGenerate(underPoName), false);
-            createJavaFile(componentPath + poName + "/models/auto", modelsAutoGenerate(po, underPoName, poName));
-            createJavaFile(componentPath + poName + "/models/custom", modelsCustomGenerate(underPoName, poName), false);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
-    private void createSubComponentFile(String appApi, EntityPO subPo, String poName, String underPoName, String underSubPoName, String subPoName) {
-        try {
-            createJavaFile(componentPath + poName + "/view/auto", viewSubAutoGenerate(poName, underPoName, underSubPoName, subPoName));
-            createJavaFile(componentPath + poName + "/view/custom", viewSubCustomGenerate(poName, underSubPoName, subPoName), false);
-            createJavaFile(componentPath + poName + "/services/auto", servicesSubAutoGenerate(appApi, underSubPoName, subPoName));
-            createJavaFile(componentPath + poName + "/services/custom", servicesCustomGenerate(underSubPoName), false);
-            createJavaFile(componentPath + poName + "/models/auto", modelsSubAutoGenerate(subPo, poName, underPoName, underSubPoName, subPoName));
-            createJavaFile(componentPath + poName + "/models/custom", modelsSubCustomGenerate(underSubPoName, subPoName), false);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     private String[] modelsSubAutoGenerate(EntityPO subPo, String poName, String underPoName, String underSubPoName, String subPoName) {
         String viewData = "import " + underSubPoName + "Service from '@/pages/" + poName + "/services/auto/" + underSubPoName + "';\r\n" + "import initService from '@/services/init';\r\n" + "\r\n" + "export default {\r\n" + "\r\n" + "  namespace: '" + underSubPoName + "',\r\n" + "\r\n" + "  state: {\r\n" + "    " + underSubPoName + "Title: '添加',\r\n" + "    " + underSubPoName + "TableData: [],\r\n" + "    " + underSubPoName + "FormData: {},\r\n" + "    " + underSubPoName + "LoadingVisible: true,\r\n" + "    " + underSubPoName + "Total: 0,\r\n" + "    " + underSubPoName + "Current: 1,\r\n" + "    " + underSubPoName + "Form: [],\r\n" + "    " + underSubPoName + "Table: [],\r\n" + "    " + underSubPoName + "Visible: false,\r\n" + "    divVisible: false,\r\n" + "    " + underPoName + "Id: '',\r\n" + "    customData: {},\r\n" + "  },\r\n" + "\r\n" + "  reducers: {\r\n" + "    setState(prevState, payload) {\r\n" + "      return {...prevState, ...payload};\r\n" + "    },\r\n" + "  },\r\n" + "\r\n" + "  effects: (dispatch) => ({\r\n" + "    async " + underSubPoName + "Page(data) {\r\n" + "      const dataRes = await " + underSubPoName + "Service." + underSubPoName + "Page(data." + underSubPoName + "Current, data.pid);\r\n" + "      const payload = {\r\n" + "        " + underSubPoName + "TableData: dataRes.data.results,\r\n" + "        " + underSubPoName + "Total: dataRes.data.total,\r\n" + "        " + underSubPoName + "Current: data." + underSubPoName + "Current,\r\n" + "        " + underSubPoName + "LoadingVisible: false,\r\n" + "      };\r\n" + "      dispatch." + underSubPoName + ".setState(payload);\r\n" + "    },\r\n" + "    async " + underSubPoName + "Add() {\r\n" + "      const payload = {\r\n" + "        " + underSubPoName + "FormData: {},\r\n" + "        " + underSubPoName + "Title: '添加',\r\n" + "        " + underSubPoName + "Visible: true,\r\n" + "      };\r\n" + "      dispatch." + underSubPoName + ".setState(payload);\r\n" + "    },\r\n" + "    async " + underSubPoName + "Edit(data) {\r\n" + "      const " + underSubPoName + " = await " + underSubPoName + "Service.find" + subPoName + "ById(data.id);\r\n" + "      const fromData = {\r\n" + "        ..." + underSubPoName + ".data,\r\n" + "      };\r\n" + "      const payload = {\r\n" + "        " + underSubPoName + "FormData: fromData,\r\n" + "        " + underSubPoName + "Title: '编辑',\r\n" + "        " + underSubPoName + "Visible: true,\r\n" + "      };\r\n" + "      dispatch." + underSubPoName + ".setState(payload);\r\n" + "    },\r\n" + "    async " + underSubPoName + "Delete(data) {\r\n" + "      await " + underSubPoName + "Service." + underSubPoName + "Delete(data.record.id);\r\n" + "      await this." + underSubPoName + "Page({" + underSubPoName + "Current: data.data.pageNumber, pid: data.data.pid});\r\n" + "      const payload = {\r\n" + "        " + underSubPoName + "Visible: false,\r\n" + "      };\r\n" + "      dispatch." + underSubPoName + ".setState(payload);\r\n" + "    },\r\n" + "    async " + underSubPoName + "Save(data) {\r\n" + "      await " + underSubPoName + "Service." + underSubPoName + "Save({...data." + underSubPoName + "FormData, pid: data.pid});\r\n" + "      await this." + underSubPoName + "Page({" + underSubPoName + "Current: data.pageNumber, pid: data.pid});\r\n" + "      const payload = {\r\n" + "        " + underSubPoName + "Visible: false,\r\n" + "      };\r\n" + "      dispatch." + underSubPoName + ".setState(payload);\r\n" + "    },\r\n" + "    setDataForm(data) {\r\n" + "      const payload = {\r\n" + "        " + underSubPoName + "FormData: data,\r\n" + "      };\r\n" + "      dispatch." + underSubPoName + ".setState(payload);\r\n" + "    },\r\n" + "    async findDataTableAndFormByName(pid) {\r\n" + "      const ret = await initService.findDataTableAndFormByName('" + subPo.getEntityCode() + "');\r\n" + "      await this." + underSubPoName + "Page({" + underSubPoName + "Current: 1, pid});\r\n" + "      const payload = {\r\n" + "        " + underSubPoName + "Table: ret.data.dataTable,\r\n" + "        " + underSubPoName + "Form: ret.data.dataForm,\r\n" + "        customData: ret.data.customData,\r\n" + "      };\r\n" + "      dispatch." + underSubPoName + ".setState(payload);\r\n" + "    },\r\n" + "    async onRowClick(data) {\r\n" + "      await this.findDataTableAndFormByName(data.record.id);\r\n" + "      await this." + underSubPoName + "Page({" + underSubPoName + "Current: 1, pid: data.record.id});\r\n" + "      const payload = {\r\n" + "        divVisible: data.selected,\r\n" + "        " + underPoName + "Id: data.record.id,\r\n" + "        " + underSubPoName + "Visible: false,\r\n" + "      };\r\n" + "      dispatch." + underSubPoName + ".setState(payload);\r\n" + "    },\r\n" + "  }),\r\n" + "};\r\n";
@@ -1117,10 +1409,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{viewData, underPoName + ".tsx"};
     }
 
-    private String[] modelsAutoGenerate(EntityPO po, String underPoName, String poName) {
-        String viewData = "import " + underPoName + "Service from '@/pages/" + poName + "/services/auto/" + underPoName + "';\r\n" + "import initService from '@/services/init';\r\n" + "\r\n" + "export default {\r\n" + "\r\n" + "  namespace: '" + underPoName + "',\r\n" + "\r\n" + "  state: {\r\n" + "    " + underPoName + "Title: '添加',\r\n" + "    " + underPoName + "TableData: [],\r\n" + "    " + underPoName + "Visible: false,\r\n" + "    " + underPoName + "FormData: {},\r\n" + "    " + underPoName + "LoadingVisible: true,\r\n" + "    " + underPoName + "Total: 0,\r\n" + "    " + underPoName + "Current: 1,\r\n" + "    " + underPoName + "Form: [],\r\n" + "    " + underPoName + "Table: [],\r\n" + "    " + underPoName + "Id: '',\r\n" + "    customData: {},\r\n" + "  },\r\n" + "\r\n" + "  reducers: {\r\n" + "    setState(prevState, payload) {\r\n" + "      return {...prevState, ...payload};\r\n" + "    },\r\n" + "  },\r\n" + "\r\n" + "  effects: (dispatch) => ({\r\n" + "    async " + underPoName + "Page(" + underPoName + "Current) {\r\n" + "      const dataRes = await " + underPoName + "Service." + underPoName + "Page(" + underPoName + "Current);\r\n" + "      const payload = {\r\n" + "        " + underPoName + "TableData: dataRes.data.results,\r\n" + "        " + underPoName + "Total: dataRes.data.total,\r\n" + "        " + underPoName + "Current,\r\n" + "        " + underPoName + "LoadingVisible: false,\r\n" + "      };\r\n" + "      dispatch." + underPoName + ".setState(payload);\r\n" + "    },\r\n" + "    async " + underPoName + "Add() {\r\n" + "      const payload = {\r\n" + "        " + underPoName + "FormData: {},\r\n" + "        " + underPoName + "Title: '添加',\r\n" + "        " + underPoName + "Visible: true,\r\n" + "      };\r\n" + "      dispatch." + underPoName + ".setState(payload);\r\n" + "    },\r\n" + "    async " + underPoName + "Edit(data) {\r\n" + "      const " + underPoName + " = await " + underPoName + "Service.find" + poName + "ById(data.id);\r\n" + "      const fromData = {\r\n" + "        ..." + underPoName + ".data,\r\n" + "      };\r\n" + "      const payload = {\r\n" + "        " + underPoName + "FormData: fromData,\r\n" + "        " + underPoName + "Title: '编辑',\r\n" + "        " + underPoName + "Visible: true,\r\n" + "      };\r\n" + "      dispatch." + underPoName + ".setState(payload);\r\n" + "    },\r\n" + "    async " + underPoName + "Delete(data) {\r\n" + "      await " + underPoName + "Service." + underPoName + "Delete(data.record.id);\r\n" + "      await this." + underPoName + "Page(data.data.pageNumber);\r\n" + "      const payload = {\r\n" + "        " + underPoName + "Visible: false,\r\n" + "      };\r\n" + "      dispatch." + underPoName + ".setState(payload);\r\n" + "    },\r\n" + "    async " + underPoName + "Save(data) {\r\n" + "      await " + underPoName + "Service." + underPoName + "Save(data." + underPoName + "FormData);\r\n" + "      await this." + underPoName + "Page(data.pageNumber);\r\n" + "      const payload = {\r\n" + "        " + underPoName + "Visible: false,\r\n" + "      };\r\n" + "      dispatch." + underPoName + ".setState(payload);\r\n" + "    },\r\n" + "    setDataForm(data) {\r\n" + "      const payload = {\r\n" + "        " + underPoName + "FormData: data,\r\n" + "      };\r\n" + "      dispatch." + underPoName + ".setState(payload);\r\n" + "    },\r\n" + "    async findDataTableAndFormByName() {\r\n" + "      const ret = await initService.findDataTableAndFormByName('" + po.getEntityCode() + "');\r\n" + "      await this." + underPoName + "Page(1);\r\n" + "      const payload = {\r\n" + "        " + underPoName + "Table: ret.data.dataTable,\r\n" + "        " + underPoName + "Form: ret.data.dataForm,\r\n" + "        customData: ret.data.customData,\r\n" + "      };\r\n" + "      dispatch." + underPoName + ".setState(payload);\r\n" + "    },\r\n" + "  }),\r\n" + "};\r\n";
-        return new String[]{viewData, underPoName + ".tsx"};
-    }
+
 
     private String[] servicesCustomGenerate(String underPoName) {
         String viewData = "// import {request} from 'ice';\r\n" + "// export default {\r\n" + "// \r\n" + "// };\r\n";

@@ -10,6 +10,26 @@ export default {
       },
     });
   },
+  entityPageByEntity(pageNumber, data) {
+    return request({
+      url: '/entityCreateApi/entityPageByEntity',
+      method: 'post',
+      params: {
+        pageNumber,
+      },
+      data,
+    });
+  },
+  entityPageByAppService(pageNumber, data) {
+    return request({
+      url: '/entityCreateApi/entityPageByAppService',
+      method: 'post',
+      params: {
+        pageNumber,
+      },
+      data,
+    });
+  },
   entitySave(data) {
     return request({
       url: '/entityCreateApi/entitySave',
