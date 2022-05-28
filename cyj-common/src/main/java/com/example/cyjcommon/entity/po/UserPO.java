@@ -64,6 +64,9 @@ public class UserPO implements Serializable {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "enterprise_id", insertable = false, updatable = false)
+    private String enterpriseId;
+
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})
     @JoinColumn(name = "enterprise_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
     private EnterprisePO enterprise;

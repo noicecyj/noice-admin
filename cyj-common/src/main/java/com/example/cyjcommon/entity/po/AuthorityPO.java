@@ -61,9 +61,15 @@ public class AuthorityPO implements Serializable {
     @Column(name = "authority_type")
     private String authorityType;
 
+    @Column(name = "app_service_id", insertable = false, updatable = false)
+    private String appServiceId;
+
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})
     @JoinColumn(name = "app_service_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
     private AppServicePO appService;
+
+    @Column(name = "entity_id", insertable = false, updatable = false)
+    private String entityId;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})
     @JoinColumn(name = "entity_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
