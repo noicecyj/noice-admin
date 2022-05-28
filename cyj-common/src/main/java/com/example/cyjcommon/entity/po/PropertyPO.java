@@ -85,6 +85,9 @@ public class PropertyPO implements Serializable {
     @Column(name = "property_default_value")
     private String propertyDefaultValue;
 
+    @Column(name = "entity_id", insertable = false, updatable = false)
+    private String entityId;
+
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})
     @JoinColumn(name = "entity_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
     private EntityPO entity;
