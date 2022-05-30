@@ -21,6 +21,12 @@ function DataTable(props) {
     createItem,
     deleteItem,
     editItem,
+    son1,
+    son2,
+    son3,
+    sonMethod1,
+    sonMethod2,
+    sonMethod3,
     customMethod1,
     customMethod2,
     customMethod3,
@@ -28,11 +34,15 @@ function DataTable(props) {
     customMethodName2,
     customMethodName3,
   } = props;
+  console.log(sonMethod2)
 
   const pageRender = (value, index, record) => {
     return (
       <div className={styles.opt}>
         <Box direction="row" spacing={5}>
+          {!!sonMethod1 && <Button size="small" onClick={() => sonMethod1(record)}> {son1} </Button>}
+          {!!sonMethod2 && <Button size="small" onClick={() => sonMethod2(record)}> {son2} </Button>}
+          {!!sonMethod3 && <Button size="small" onClick={() => sonMethod3(record)}> {son3} </Button>}
           {editItem !== null && customData.editEnable &&
             <Button type="primary" size="small" onClick={() => editItem(record)}> 编辑 </Button>}
           {editItem !== null && !customData.editEnable &&
