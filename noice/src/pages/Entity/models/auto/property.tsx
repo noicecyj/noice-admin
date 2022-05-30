@@ -17,7 +17,6 @@ export default {
     propertyTable: [],
     propertyVisible: false,
     divVisible: false,
-    entity: {},
     customData: {},
   },
 
@@ -98,10 +97,10 @@ export default {
       dispatch.property.setState(payload);
     },
     async onRowClick(data) {
-      await this.findDataTableAndFormByName(data.record);
+      console.log(data)
+      await this.findDataTableAndFormByName(data);
       const payload = {
-        divVisible: data.selected,
-        entity: data.record,
+        divVisible: true,
         propertyVisible: false,
       };
       dispatch.property.setState(payload);

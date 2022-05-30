@@ -6,7 +6,8 @@ import {CustomColumnEntity} from '@/pages/Entity/view/custom/entity';
 
 function Entity() {
   const [entityState, entityDispatchers] = pageStore.useModel('entity');
-  const [propertyState, propertyDispatchers] = pageStore.useModel('property');
+
+  const propertyDispatchers = pageStore.useModelDispatchers('property');
 
   const [customEntityState, customEntityDispatchers] = pageStore.useModel('customEntity');
 
@@ -28,15 +29,6 @@ function Entity() {
         items={entityState.entityTable}
         total={entityState.entityTotal}
         getPage={entityCurrent => entityDispatchers.entityPage(entityCurrent)}
-        rowSelection={{
-          mode: 'single',
-          onSelect: (selected, record) => {
-            propertyDispatchers.onRowClick({selected, record});
-          },
-          selectedRowKeys: [
-            propertyState.entity,
-          ],
-        }}
         primaryKey="id"
         customData={entityState.customData}
         columnRender={(value, index, record) => {
@@ -44,6 +36,8 @@ function Entity() {
             <CustomColumnEntity value={value} index={index} record={record}/>
           );
         }}
+        son1="属性"
+        sonMethod1={record => propertyDispatchers.onRowClick(record)}
         customMethod1={() => customEntityDispatchers.customMethod1()}
         customMethod2={() => customEntityDispatchers.customMethod2()}
         customMethod3={() => customEntityDispatchers.customMethod3()}
