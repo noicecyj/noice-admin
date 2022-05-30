@@ -17,6 +17,7 @@ export default {
     propertyTable: [],
     propertyVisible: false,
     divVisible: false,
+    entity: {},
     customData: {},
   },
 
@@ -101,6 +102,7 @@ export default {
       await this.findDataTableAndFormByName(data);
       const payload = {
         divVisible: true,
+        entity: data,
         propertyVisible: false,
       };
       dispatch.property.setState(payload);

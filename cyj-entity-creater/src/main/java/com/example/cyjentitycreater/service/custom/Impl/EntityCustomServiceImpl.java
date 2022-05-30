@@ -447,9 +447,9 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         for (EntityPO entityPO1 :subEntityPOList){
             //驼峰名
             String underSubPoName = BeanUtils.underline2Camel(entityPO1.getEntityCode());
-            sb.append("  const [").append(underSubPoName).append("State, ").append(underSubPoName).append("Dispatchers] = pageStore.useModel('").append(underSubPoName).append("');\r\n");
+            sb.append("  const ").append(underSubPoName).append("Dispatchers = pageStore.useModelDispatchers('").append(entityPO1.getEntityCode()).append("');\r\n");
+            sb.append("\r\n");
         }
-        sb.append("\r\n");
         sb.append("  const [custom").append(poName).append("State, custom").append(poName).append("Dispatchers] = pageStore.useModel('custom").append(poName).append("');\r\n");
         sb.append("\r\n");
         sb.append("  useEffect(() => {\r\n");
@@ -470,15 +470,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("        items={").append(underPoName).append("State.").append(underPoName).append("Table}\r\n");
         sb.append("        total={").append(underPoName).append("State.").append(underPoName).append("Total}\r\n");
         sb.append("        getPage={").append(underPoName).append("Current => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Page(").append(underPoName).append("Current)}\r\n");
-        sb.append("        rowSelection={{\r\n");
-        sb.append("          mode: 'single',\r\n");
-        sb.append("          onSelect: (selected, record) => {\r\n");
-        sb.append("            propertyDispatchers.onRowClick({selected, record});\r\n");
-        sb.append("          },\r\n");
-        sb.append("          selectedRowKeys: [\r\n");
-        sb.append("            propertyState.").append(underPoName).append(",\r\n");
-        sb.append("          ],\r\n");
-        sb.append("        }}\r\n");
         sb.append("        primaryKey=\"id\"\r\n");
         sb.append("        customData={").append(underPoName).append("State.customData}\r\n");
         sb.append("        columnRender={(value, index, record) => {\r\n");
@@ -486,6 +477,24 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("            <CustomColumn").append(poName).append(" value={value} index={index} record={record}/>\r\n");
         sb.append("          );\r\n");
         sb.append("        }}\r\n");
+        EntityPO entityPO1 = subEntityPOList.get(0);
+        if (entityPO1 != null){
+            String underSubPoName = BeanUtils.underline2Camel(entityPO1.getEntityCode());
+            sb.append("        son1=\"").append(entityPO1.getEntityName()).append("\"\r\n");
+            sb.append("        sonMethod1={record => ").append(underSubPoName).append("Dispatchers.onRowClick(record)}\r\n");
+        }
+        EntityPO entityPO2 = subEntityPOList.get(1);
+        if (entityPO2 != null){
+            String underSubPoName = BeanUtils.underline2Camel(entityPO2.getEntityCode());
+            sb.append("        son2=\"").append(entityPO2.getEntityName()).append("\"\r\n");
+            sb.append("        sonMethod2={record => ").append(underSubPoName).append("Dispatchers.onRowClick(record)}\r\n");
+        }
+        EntityPO entityPO3 = subEntityPOList.get(2);
+        if (entityPO3 != null){
+            String underSubPoName = BeanUtils.underline2Camel(entityPO3.getEntityCode());
+            sb.append("        son3=\"").append(entityPO3.getEntityName()).append("\"\r\n");
+            sb.append("        sonMethod3={record => ").append(underSubPoName).append("Dispatchers.onRowClick(record)}\r\n");
+        }
         sb.append("        customMethod1={() => custom").append(poName).append("Dispatchers.customMethod1()}\r\n");
         sb.append("        customMethod2={() => custom").append(poName).append("Dispatchers.customMethod2()}\r\n");
         sb.append("        customMethod3={() => custom").append(poName).append("Dispatchers.customMethod3()}\r\n");
