@@ -598,7 +598,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         if (BeanUtils.ifManyToMany(propertyPOList)) {
             sb.append("import javax.persistence.ManyToMany;\r\n");
         }
-        if (BeanUtils.ifManyToOne(propertyPOList)) {
+        if ("是".equals(entityPO.getEntitySelf()) || BeanUtils.ifManyToOne(propertyPOList)) {
             sb.append("import javax.persistence.ManyToOne;\r\n");
         }
         sb.append("import javax.persistence.Table;\r\n");
