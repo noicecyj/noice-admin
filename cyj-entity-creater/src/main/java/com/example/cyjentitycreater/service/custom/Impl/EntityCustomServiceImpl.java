@@ -329,7 +329,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[0];
     }
 
-    private String[] modelsAutoGenerate(EntityPO po, String underPoName, String poName) {
+    private String[] modelsAutoGenerate(EntityPO entityPO, String underPoName, String poName) {
         StringBuilder sb = new StringBuilder();
         sb.append("import ").append(underPoName).append("Service from '@/pages/").append(poName).append("/services/auto/").append(underPoName).append("';\r\n");
         sb.append("import initService from '@/services/init';\r\n");
@@ -349,6 +349,14 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("    ").append(underPoName).append("Current: 1,\r\n");
         sb.append("    ").append(underPoName).append("Form: [],\r\n");
         sb.append("    ").append(underPoName).append("Table: [],\r\n");
+        if (entityPO.getEntityId() != null) {
+            EntityPO entityPOParent = entityDao.getOne(entityPO.getEntityId());
+            //驼峰名
+            String underPoNameParent = BeanUtils.underline2Camel(entityPOParent.getEntityCode());
+            sb.append("    ").append(underPoName).append("Visible: false,\r\n");
+            sb.append("    divVisible: false,\r\n");
+            sb.append("    ").append(underPoNameParent).append(": {},\r\n");
+        }
         sb.append("    customData: {},\r\n");
         sb.append("  },\r\n");
         sb.append("\r\n");
@@ -359,8 +367,16 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("  },\r\n");
         sb.append("\r\n");
         sb.append("  effects: (dispatch) => ({\r\n");
-        sb.append("    async ").append(underPoName).append("Page(").append(underPoName).append("Current) {\r\n");
-        sb.append("      const dataRes = await ").append(underPoName).append("Service.").append(underPoName).append("Page(").append(underPoName).append("Current);\r\n");
+        if (entityPO.getEntityId() == null) {
+            sb.append("    async ").append(underPoName).append("Page(").append(underPoName).append("Current) {\r\n");
+            sb.append("      const dataRes = await ").append(underPoName).append("Service.").append(underPoName).append("Page(").append(underPoName).append("Current);\r\n");
+        } else {
+            EntityPO entityPOParent = entityDao.getOne(entityPO.getEntityId());
+            //驼峰名
+            String underPoNameParent = BeanUtils.underline2Camel(entityPOParent.getEntityCode());
+            sb.append("    async ").append(underPoName).append("Page(").append(underPoName).append("Current, ").append(underPoNameParent).append(") {\r\n");
+            sb.append("      const dataRes = await ").append(underPoName).append("Service.").append(underPoName).append("Page(").append(underPoName).append("Current, ").append(underPoNameParent).append(");\r\n");
+        }
         sb.append("      const payload = {\r\n");
         sb.append("        ").append(underPoName).append("TableData: dataRes.data.content,\r\n");
         sb.append("        ").append(underPoName).append("Total: dataRes.data.totalElements,\r\n");
@@ -385,12 +401,30 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("      };\r\n");
         sb.append("      dispatch.").append(underPoName).append(".setState(payload);\r\n");
         sb.append("    },\r\n");
+        if (entityPO.getEntityId() == null) {
+            sb.append("    async ").append(underPoName).append("Delete(").append(underPoName).append("Current, record) {\r\n");
+            sb.append("      const ret = await ").append(underPoName).append("Service.").append(underPoName).append("Delete(record);\r\n");
+        } else {
+            EntityPO entityPOParent = entityDao.getOne(entityPO.getEntityId());
+            //驼峰名
+            String underPoNameParent = BeanUtils.underline2Camel(entityPOParent.getEntityCode());
+            sb.append("    async ").append(underPoName).append("Delete(").append(underPoName).append("Current, ").append(underPoNameParent).append(", record) {\r\n");
+            sb.append("      const ret = await ").append(underPoName).append("Service.").append(underPoName).append("Delete(record);\r\n");
+        }
         sb.append("    async ").append(underPoName).append("Delete(data) {\r\n");
         sb.append("      const ret = await ").append(underPoName).append("Service.").append(underPoName).append("Delete(data.record);\r\n");
         sb.append("      if (ret.code === 400) {\r\n");
         sb.append("        Message.error('删除失败');\r\n");
         sb.append("      } else {\r\n");
         sb.append("        Message.success('删除成功');\r\n");
+        if (entityPO.getEntityId() == null) {
+            sb.append("        await this.").append(underPoName).append("Page(").append(underPoName).append("Current);\r\n");
+        } else {
+            EntityPO entityPOParent = entityDao.getOne(entityPO.getEntityId());
+            //驼峰名
+            String underPoNameParent = BeanUtils.underline2Camel(entityPOParent.getEntityCode());
+            sb.append("        await this.").append(underPoName).append("Page(").append(underPoName).append("Current, ").append(underPoNameParent).append(");\r\n");
+        }
         sb.append("        await this.").append(underPoName).append("Page(data.pageNumber);\r\n");
         sb.append("        const payload = {\r\n");
         sb.append("          ").append(underPoName).append("Visible: false,\r\n");
@@ -398,13 +432,27 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("        dispatch.").append(underPoName).append(".setState(payload);\r\n");
         sb.append("      }\r\n");
         sb.append("    },\r\n");
-        sb.append("    async ").append(underPoName).append("Save(data) {\r\n");
-        sb.append("      const ret = await ").append(underPoName).append("Service.").append(underPoName).append("Save(data.").append(underPoName).append("FormData);\r\n");
+        if (entityPO.getEntityId() == null) {
+            sb.append("    async ").append(underPoName).append("Save(").append(underPoName).append("Current, formData) {\r\n");
+        } else {
+            EntityPO entityPOParent = entityDao.getOne(entityPO.getEntityId());
+            //驼峰名
+            String underPoNameParent = BeanUtils.underline2Camel(entityPOParent.getEntityCode());
+            sb.append("    async ").append(underPoName).append("Save(").append(underPoName).append("Current, ").append(underPoNameParent).append(", formData) {\r\n");
+        }
+        sb.append("      const ret = await ").append(underPoName).append("Service.").append(underPoName).append("Save(formData);\r\n");
         sb.append("      if (ret.code === 400) {\r\n");
         sb.append("        Message.error(ret.data.defaultMessage);\r\n");
         sb.append("      } else {\r\n");
         sb.append("        Message.success('保存成功');\r\n");
-        sb.append("        await this.").append(underPoName).append("Page(data.pageNumber);\r\n");
+        if (entityPO.getEntityId() == null) {
+            sb.append("        await this.").append(underPoName).append("Page(").append(underPoName).append("Current);\r\n");
+        } else {
+            EntityPO entityPOParent = entityDao.getOne(entityPO.getEntityId());
+            //驼峰名
+            String underPoNameParent = BeanUtils.underline2Camel(entityPOParent.getEntityCode());
+            sb.append("        await this.").append(underPoName).append("Page(").append(underPoName).append("Current, ").append(underPoNameParent).append(");\r\n");
+        }
         sb.append("        const payload = {\r\n");
         sb.append("          ").append(underPoName).append("Visible: false,\r\n");
         sb.append("        };\r\n");
@@ -417,9 +465,23 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("      };\r\n");
         sb.append("      dispatch.").append(underPoName).append(".setState(payload);\r\n");
         sb.append("    },\r\n");
-        sb.append("    async findDataTableAndFormByName() {\r\n");
+        if (entityPO.getEntityId() == null) {
+            sb.append("    async findDataTableAndFormByName() {\r\n");
+        } else {
+            EntityPO entityPOParent = entityDao.getOne(entityPO.getEntityId());
+            //驼峰名
+            String underPoNameParent = BeanUtils.underline2Camel(entityPOParent.getEntityCode());
+            sb.append("    async findDataTableAndFormByName(").append(underPoNameParent).append(") {\r\n");
+        }
         sb.append("      const ret = await initService.findDataTableAndFormByName('").append(underPoName).append("');\r\n");
-        sb.append("      await this.").append(underPoName).append("Page(1);\r\n");
+        if (entityPO.getEntityId() == null) {
+            sb.append("      await this.").append(underPoName).append("Page(1);\r\n");
+        } else {
+            EntityPO entityPOParent = entityDao.getOne(entityPO.getEntityId());
+            //驼峰名
+            String underPoNameParent = BeanUtils.underline2Camel(entityPOParent.getEntityCode());
+            sb.append("      await this.").append(underPoName).append("Page(1, ").append(underPoNameParent).append(");\r\n");
+        }
         sb.append("      const payload = {\r\n");
         sb.append("        ").append(underPoName).append("Table: ret.data.dataTable,\r\n");
         sb.append("        ").append(underPoName).append("Form: ret.data.dataForm,\r\n");
@@ -427,6 +489,20 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("      };\r\n");
         sb.append("      dispatch.").append(underPoName).append(".setState(payload);\r\n");
         sb.append("    },\r\n");
+        if (entityPO.getEntityId() != null) {
+            EntityPO entityPOParent = entityDao.getOne(entityPO.getEntityId());
+            //驼峰名
+            String underPoNameParent = BeanUtils.underline2Camel(entityPOParent.getEntityCode());
+            sb.append("    async onRowClick(data) {\r\n");
+            sb.append("      await this.findDataTableAndFormByName(data);\r\n");
+            sb.append("      const payload = {\r\n");
+            sb.append("        divVisible: true,\r\n");
+            sb.append("        ").append(underPoNameParent).append(": data,\r\n");
+            sb.append("        ").append(underPoName).append("Visible: false,\r\n");
+            sb.append("      };\r\n");
+            sb.append("      dispatch.").append(underPoName).append(".setState(payload);\r\n");
+            sb.append("    },\r\n");
+        }
         sb.append("  }),\r\n");
         sb.append("};\r\n");
         String viewData = sb.toString();
@@ -492,15 +568,26 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("      <DataTableTemple\r\n");
         sb.append("        createItem={() => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Add()}\r\n");
         sb.append("        editItem={record => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Edit(record)}\r\n");
-        sb.append("        deleteItem={record => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Delete({\r\n");
-        sb.append("          record,\r\n");
-        sb.append("          pageNumber: ").append(underPoName).append("State.").append(underPoName).append("Current,\r\n");
-        sb.append("        })}\r\n");
+        if (entityPO.getEntityId() == null) {
+            sb.append("        deleteItem={record => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Delete(").append(underPoName).append("State.").append(underPoName).append("Current, record)}\r\n");
+        } else {
+            EntityPO entityPOParent = entityDao.getOne(entityPO.getEntityId());
+            //驼峰名
+            String underPoNameParent = BeanUtils.underline2Camel(entityPOParent.getEntityCode());
+            sb.append("        deleteItem={record => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Delete(").append(underPoName).append("State.").append(underPoName).append("Current, ").append(underPoName).append("State.").append(underPoNameParent).append(", record)}\r\n");
+        }
         sb.append("        visibleLoading={").append(underPoName).append("State.").append(underPoName).append("LoadingVisible}\r\n");
         sb.append("        dataSource={").append(underPoName).append("State.").append(underPoName).append("TableData}\r\n");
         sb.append("        items={").append(underPoName).append("State.").append(underPoName).append("Table}\r\n");
         sb.append("        total={").append(underPoName).append("State.").append(underPoName).append("Total}\r\n");
-        sb.append("        getPage={").append(underPoName).append("Current => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Page(").append(underPoName).append("Current)}\r\n");
+        if (entityPO.getEntityId() == null) {
+            sb.append("        getPage={").append(underPoName).append("Current => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Page(").append(underPoName).append("Current)}\r\n");
+        } else {
+            EntityPO entityPOParent = entityDao.getOne(entityPO.getEntityId());
+            //驼峰名
+            String underPoNameParent = BeanUtils.underline2Camel(entityPOParent.getEntityCode());
+            sb.append("        getPage={").append(underPoName).append("Current => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Page(").append(underPoName).append("Current, ").append(underPoName).append("State.").append(underPoNameParent).append(")}\r\n");
+        }
         sb.append("        primaryKey=\"id\"\r\n");
         sb.append("        customData={").append(underPoName).append("State.customData}\r\n");
         sb.append("        columnRender={(value, index, record) => {\r\n");
@@ -540,16 +627,14 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("        onClose={() => ").append(underPoName).append("Dispatchers.setState({").append(underPoName).append("Visible: false})}\r\n");
         sb.append("        items={[...").append(underPoName).append("State.").append(underPoName).append("Form, ...custom").append(poName).append("State.customFrom]}\r\n");
         sb.append("        dispatchers={value => ").append(underPoName).append("Dispatchers.setDataForm(value)}\r\n");
-        sb.append("        onOk={() => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Save({\r\n");
-        sb.append("          ").append(underPoName).append("FormData: ").append(underPoName).append("State.").append(underPoName).append("FormData,\r\n");
-        sb.append("          pageNumber: ").append(underPoName).append("State.").append(underPoName).append("Current,\r\n");
-        if (entityPO.getEntityId() != null) {
+        if (entityPO.getEntityId() == null) {
+            sb.append("        onOk={() => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Save(").append(underPoName).append("State.").append(underPoName).append("Current, ").append(underPoName).append("State.").append(underPoName).append("FormData)}\r\n");
+        } else {
             EntityPO entityPOParent = entityDao.getOne(entityPO.getEntityId());
             //驼峰名
             String underPoNameParent = BeanUtils.underline2Camel(entityPOParent.getEntityCode());
-            sb.append("          ").append(underPoNameParent).append(": ").append(underPoName).append("State.").append(underPoNameParent).append(",\r\n");
+            sb.append("        onOk={() => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Save(").append(underPoName).append("State.").append(underPoName).append("Current, ").append(underPoName).append("State.").append(underPoNameParent).append(", ").append(underPoName).append("State.").append(underPoName).append("FormData)}\r\n");
         }
-        sb.append("        })}\r\n");
         sb.append("        formDataValue={").append(underPoName).append("State.").append(underPoName).append("FormData}\r\n");
         sb.append("        formSortCode={String(Number.parseInt(String(").append(underPoName).append("State.").append(underPoName).append("Total)) + 10)}\r\n");
         sb.append("      />\r\n");

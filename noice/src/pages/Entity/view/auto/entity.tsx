@@ -20,10 +20,7 @@ function Entity() {
       <DataTableTemple
         createItem={() => entityDispatchers.entityAdd()}
         editItem={record => entityDispatchers.entityEdit(record)}
-        deleteItem={record => entityDispatchers.entityDelete({
-          record,
-          pageNumber: entityState.entityCurrent,
-        })}
+        deleteItem={record => entityDispatchers.entityDelete(entityState.entityCurrent, record)}
         visibleLoading={entityState.entityLoadingVisible}
         dataSource={entityState.entityTableData}
         items={entityState.entityTable}
@@ -52,10 +49,7 @@ function Entity() {
         onClose={() => entityDispatchers.setState({entityVisible: false})}
         items={[...entityState.entityForm, ...customEntityState.customFrom]}
         dispatchers={value => entityDispatchers.setDataForm(value)}
-        onOk={() => entityDispatchers.entitySave({
-          entityFormData: entityState.entityFormData,
-          pageNumber: entityState.entityCurrent,
-        })}
+        onOk={() => entityDispatchers.entitySave(entityState.entityCurrent, entityState.entityFormData)}
         formDataValue={entityState.entityFormData}
         formSortCode={String(Number.parseInt(String(entityState.entityTotal)) + 10)}
       />

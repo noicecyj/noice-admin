@@ -24,20 +24,13 @@ function Property() {
       <DataTableTemple
         createItem={() => propertyDispatchers.propertyAdd()}
         editItem={record => propertyDispatchers.propertyEdit(record)}
-        deleteItem={record => propertyDispatchers.propertyDelete({
-          record,
-          pageNumber: propertyState.propertyCurrent,
-          entity: propertyState.entity,
-        })}
+        deleteItem={record => propertyDispatchers.propertyDelete(propertyState.propertyCurrent, propertyState.entity, record)}
         visibleLoading={propertyState.propertyLoadingVisible}
         dataSource={propertyState.propertyTableData}
         items={propertyState.propertyTable}
         total={propertyState.propertyTotal}
         primaryKey="id"
-        getPage={propertyCurrent => propertyDispatchers.propertyPage({
-          propertyCurrent,
-          entity: propertyState.entity,
-        })}
+        getPage={propertyCurrent => propertyDispatchers.propertyPage(propertyCurrent, propertyState.entity)}
         customData={propertyState.customData}
         columnRender={(value, index, record) => {
           return (
@@ -58,11 +51,7 @@ function Property() {
         onClose={() => propertyDispatchers.setState({propertyVisible: false})}
         items={[...propertyState.propertyForm, ...customPropertyState.customFrom]}
         dispatchers={value => propertyDispatchers.setDataForm(value)}
-        onOk={() => propertyDispatchers.propertySave({
-          propertyFormData: propertyState.propertyFormData,
-          pageNumber: propertyState.propertyCurrent,
-          entity: propertyState.entity,
-        })}
+        onOk={() => propertyDispatchers.propertySave(propertyState.propertyCurrent, propertyState.entity, propertyState.propertyFormData)}
         formDataValue={propertyState.propertyFormData}
         formSortCode={String(Number.parseInt(String(propertyState.propertyTotal)) + 10)}
       />

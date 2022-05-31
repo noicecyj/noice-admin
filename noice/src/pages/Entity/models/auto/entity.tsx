@@ -52,26 +52,26 @@ export default {
       };
       dispatch.entity.setState(payload);
     },
-    async entityDelete(data) {
-      const ret = await entityService.entityDelete(data.record);
+    async entityDelete(entityCurrent, record) {
+      const ret = await entityService.entityDelete(record);
       if (ret.code === 400) {
         Message.error('删除失败');
       } else {
         Message.success('删除成功');
-        await this.entityPage(data.pageNumber);
+        await this.entityPage(entityCurrent);
         const payload = {
           entityVisible: false,
         };
         dispatch.entity.setState(payload);
       }
     },
-    async entitySave(data) {
-      const ret = await entityService.entitySave(data.entityFormData);
+    async entitySave(entityCurrent, formData) {
+      const ret = await entityService.entitySave(formData);
       if (ret.code === 400) {
         Message.error(ret.data.defaultMessage);
       } else {
         Message.success('保存成功');
-        await this.entityPage(data.pageNumber);
+        await this.entityPage(entityCurrent);
         const payload = {
           entityVisible: false,
         };

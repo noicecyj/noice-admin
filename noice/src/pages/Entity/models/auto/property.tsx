@@ -28,12 +28,12 @@ export default {
   },
 
   effects: (dispatch) => ({
-    async propertyPage(data) {
-      const dataRes = await propertyService.propertyPage(data.propertyCurrent, data.entity);
+    async propertyPage(propertyCurrent, entity) {
+      const dataRes = await propertyService.propertyPage(propertyCurrent, entity);
       const payload = {
         propertyTableData: dataRes.data.content,
         propertyTotal: dataRes.data.totalElements,
-        propertyCurrent: data.propertyCurrent,
+        propertyCurrent,
         propertyLoadingVisible: false,
       };
       dispatch.property.setState(payload);
@@ -54,27 +54,26 @@ export default {
       };
       dispatch.property.setState(payload);
     },
-    async propertyDelete(data) {
-      console.log('data=====>', data)
-      const ret = await propertyService.propertyDelete(data.record);
+    async propertyDelete(propertyCurrent, entity, record) {
+      const ret = await propertyService.propertyDelete(record);
       if (ret.code === 400) {
         Message.error('删除失败');
       } else {
         Message.success('删除成功');
-        await this.propertyPage({propertyCurrent: data.pageNumber, entity: data.entity});
+        await this.propertyPage(propertyCurrent, entity);
         const payload = {
           propertyVisible: false,
         };
         dispatch.property.setState(payload);
       }
     },
-    async propertySave(data) {
-      const ret = await propertyService.propertySave({...data.propertyFormData, entity: data.entity});
+    async propertySave(propertyCurrent, entity, formData) {
+      const ret = await propertyService.propertySave(formData);
       if (ret.code === 400) {
         Message.error(ret.data.defaultMessage);
       } else {
         Message.success('保存成功');
-        await this.propertyPage({propertyCurrent: data.pageNumber, entity: data.entity});
+        await this.propertyPage(propertyCurrent, entity);
         const payload = {
           propertyVisible: false,
         };
@@ -89,7 +88,7 @@ export default {
     },
     async findDataTableAndFormByName(entity) {
       const ret = await initService.findDataTableAndFormByName('property');
-      await this.propertyPage({propertyCurrent: 1, entity});
+      await this.propertyPage(1, entity);
       const payload = {
         propertyTable: ret.data.dataTable,
         propertyForm: ret.data.dataForm,
@@ -98,7 +97,6 @@ export default {
       dispatch.property.setState(payload);
     },
     async onRowClick(data) {
-      console.log(data)
       await this.findDataTableAndFormByName(data);
       const payload = {
         divVisible: true,
