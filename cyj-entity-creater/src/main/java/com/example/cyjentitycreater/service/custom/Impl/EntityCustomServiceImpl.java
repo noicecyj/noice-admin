@@ -219,7 +219,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         entityObj.put(componentPath + poName + "/view/auto", viewAutoGenerate(entityPO, underPoName, poName));
         entityObj.put(componentPath + poName + "/services/auto", servicesAutoGenerate(entityPO, propertyPOList, appApi, underPoName, poName));
         entityObj.put(componentPath + poName + "/models/auto", modelsAutoGenerate(entityPO, underPoName, poName));
-        if (entityPO.getEntityId() == null){
+        if (entityPO.getEntityId() == null) {
             entityObj.put(componentPath + poName, indexGenerate(entityPO, underPoName, poName));
             entityObj.put(componentPath + poName, storeGenerate(entityPO, underPoName, poName));
         }
@@ -436,6 +436,9 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
     private String[] viewAutoGenerate(EntityPO entityPO, String underPoName, String poName) {
         List<EntityPO> subEntityPOList = entityDao.findByEntityOrderBySortCode(entityPO);
         StringBuilder sb = new StringBuilder();
+        if (entityPO.getEntityId() != null) {
+            sb.append("import {Dialog} from '@alifd/next';\r\n");
+        }
         sb.append("import React, {useEffect} from 'react';\r\n");
         sb.append("import pageStore from '@/pages/").append(poName).append("/store';\r\n");
         sb.append("import DataFormTemple from '@/components/dataForm';\r\n");
@@ -444,10 +447,22 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("\r\n");
         sb.append("function ").append(poName).append("() {\r\n");
         sb.append("  const [").append(underPoName).append("State, ").append(underPoName).append("Dispatchers] = pageStore.useModel('").append(underPoName).append("');\r\n");
-        for (EntityPO entityPO1 :subEntityPOList){
-            //驼峰名
-            String underSubPoName = BeanUtils.underline2Camel(entityPO1.getEntityCode());
-            sb.append("  const ").append(underSubPoName).append("Dispatchers = pageStore.useModelDispatchers('").append(entityPO1.getEntityCode()).append("');\r\n");
+        EntityPO entityPO11 = subEntityPOList.get(0);
+        if (entityPO11 != null) {
+            String underSubPoName = BeanUtils.underline2Camel(entityPO11.getEntityCode());
+            sb.append("  const ").append(underSubPoName).append("Dispatchers = pageStore.useModelDispatchers('").append(entityPO11.getEntityCode()).append("');\r\n");
+            sb.append("\r\n");
+        }
+        EntityPO entityPO21 = subEntityPOList.get(1);
+        if (entityPO21 != null) {
+            String underSubPoName = BeanUtils.underline2Camel(entityPO21.getEntityCode());
+            sb.append("  const ").append(underSubPoName).append("Dispatchers = pageStore.useModelDispatchers('").append(entityPO21.getEntityCode()).append("');\r\n");
+            sb.append("\r\n");
+        }
+        EntityPO entityPO31 = subEntityPOList.get(2);
+        if (entityPO31 != null) {
+            String underSubPoName = BeanUtils.underline2Camel(entityPO31.getEntityCode());
+            sb.append("  const ").append(underSubPoName).append("Dispatchers = pageStore.useModelDispatchers('").append(entityPO31.getEntityCode()).append("');\r\n");
             sb.append("\r\n");
         }
         sb.append("  const [custom").append(poName).append("State, custom").append(poName).append("Dispatchers] = pageStore.useModel('custom").append(poName).append("');\r\n");
@@ -457,7 +472,23 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("  }, [").append(underPoName).append("Dispatchers]);\r\n");
         sb.append("\r\n");
         sb.append("  return (\r\n");
-        sb.append("    <>\r\n");
+        if (entityPO.getEntityId() == null) {
+            sb.append("    <>\r\n");
+        } else {
+            EntityPO entityPOParent = entityDao.getOne(entityPO.getEntityId());
+            //驼峰名
+            String underPoNameParent = BeanUtils.underline2Camel(entityPOParent.getEntityCode());
+            sb.append("    <Dialog\r\n");
+            sb.append("      v2\r\n");
+            sb.append("      visible={").append(underPoName).append("State.divVisible}\r\n");
+            sb.append("      footer={false}\r\n");
+            sb.append("      onClose={() => ").append(underPoName).append("Dispatchers.setState({\r\n");
+            sb.append("        divVisible: false,\r\n");
+            sb.append("        ").append(underPoNameParent).append(": {},\r\n");
+            sb.append("      })}\r\n");
+            sb.append("      style={{width: '100%'}}\r\n");
+            sb.append("    >\r\n");
+        }
         sb.append("      <DataTableTemple\r\n");
         sb.append("        createItem={() => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Add()}\r\n");
         sb.append("        editItem={record => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Edit(record)}\r\n");
@@ -478,19 +509,19 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("          );\r\n");
         sb.append("        }}\r\n");
         EntityPO entityPO1 = subEntityPOList.get(0);
-        if (entityPO1 != null){
+        if (entityPO1 != null) {
             String underSubPoName = BeanUtils.underline2Camel(entityPO1.getEntityCode());
             sb.append("        son1=\"").append(entityPO1.getEntityName()).append("\"\r\n");
             sb.append("        sonMethod1={record => ").append(underSubPoName).append("Dispatchers.onRowClick(record)}\r\n");
         }
         EntityPO entityPO2 = subEntityPOList.get(1);
-        if (entityPO2 != null){
+        if (entityPO2 != null) {
             String underSubPoName = BeanUtils.underline2Camel(entityPO2.getEntityCode());
             sb.append("        son2=\"").append(entityPO2.getEntityName()).append("\"\r\n");
             sb.append("        sonMethod2={record => ").append(underSubPoName).append("Dispatchers.onRowClick(record)}\r\n");
         }
         EntityPO entityPO3 = subEntityPOList.get(2);
-        if (entityPO3 != null){
+        if (entityPO3 != null) {
             String underSubPoName = BeanUtils.underline2Camel(entityPO3.getEntityCode());
             sb.append("        son3=\"").append(entityPO3.getEntityName()).append("\"\r\n");
             sb.append("        sonMethod3={record => ").append(underSubPoName).append("Dispatchers.onRowClick(record)}\r\n");
@@ -512,11 +543,21 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("        onOk={() => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Save({\r\n");
         sb.append("          ").append(underPoName).append("FormData: ").append(underPoName).append("State.").append(underPoName).append("FormData,\r\n");
         sb.append("          pageNumber: ").append(underPoName).append("State.").append(underPoName).append("Current,\r\n");
+        if (entityPO.getEntityId() != null) {
+            EntityPO entityPOParent = entityDao.getOne(entityPO.getEntityId());
+            //驼峰名
+            String underPoNameParent = BeanUtils.underline2Camel(entityPOParent.getEntityCode());
+            sb.append("          ").append(underPoNameParent).append(": ").append(underPoName).append("State.").append(underPoNameParent).append(",\r\n");
+        }
         sb.append("        })}\r\n");
         sb.append("        formDataValue={").append(underPoName).append("State.").append(underPoName).append("FormData}\r\n");
         sb.append("        formSortCode={String(Number.parseInt(String(").append(underPoName).append("State.").append(underPoName).append("Total)) + 10)}\r\n");
         sb.append("      />\r\n");
-        sb.append("    </>\r\n");
+        if (entityPO.getEntityId() == null) {
+            sb.append("    </>\r\n");
+        } else {
+            sb.append("    </Dialog>\r\n");
+        }
         sb.append("  );\r\n");
         sb.append("}\r\n");
         sb.append("\r\n");
@@ -1390,7 +1431,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
     }
 
 
-
     private String[] modelsSubAutoGenerate(EntityPO subPo, String poName, String underPoName, String underSubPoName, String subPoName) {
         String viewData = "import " + underSubPoName + "Service from '@/pages/" + poName + "/services/auto/" + underSubPoName + "';\r\n" + "import initService from '@/services/init';\r\n" + "\r\n" + "export default {\r\n" + "\r\n" + "  namespace: '" + underSubPoName + "',\r\n" + "\r\n" + "  state: {\r\n" + "    " + underSubPoName + "Title: '添加',\r\n" + "    " + underSubPoName + "TableData: [],\r\n" + "    " + underSubPoName + "FormData: {},\r\n" + "    " + underSubPoName + "LoadingVisible: true,\r\n" + "    " + underSubPoName + "Total: 0,\r\n" + "    " + underSubPoName + "Current: 1,\r\n" + "    " + underSubPoName + "Form: [],\r\n" + "    " + underSubPoName + "Table: [],\r\n" + "    " + underSubPoName + "Visible: false,\r\n" + "    divVisible: false,\r\n" + "    " + underPoName + "Id: '',\r\n" + "    customData: {},\r\n" + "  },\r\n" + "\r\n" + "  reducers: {\r\n" + "    setState(prevState, payload) {\r\n" + "      return {...prevState, ...payload};\r\n" + "    },\r\n" + "  },\r\n" + "\r\n" + "  effects: (dispatch) => ({\r\n" + "    async " + underSubPoName + "Page(data) {\r\n" + "      const dataRes = await " + underSubPoName + "Service." + underSubPoName + "Page(data." + underSubPoName + "Current, data.pid);\r\n" + "      const payload = {\r\n" + "        " + underSubPoName + "TableData: dataRes.data.results,\r\n" + "        " + underSubPoName + "Total: dataRes.data.total,\r\n" + "        " + underSubPoName + "Current: data." + underSubPoName + "Current,\r\n" + "        " + underSubPoName + "LoadingVisible: false,\r\n" + "      };\r\n" + "      dispatch." + underSubPoName + ".setState(payload);\r\n" + "    },\r\n" + "    async " + underSubPoName + "Add() {\r\n" + "      const payload = {\r\n" + "        " + underSubPoName + "FormData: {},\r\n" + "        " + underSubPoName + "Title: '添加',\r\n" + "        " + underSubPoName + "Visible: true,\r\n" + "      };\r\n" + "      dispatch." + underSubPoName + ".setState(payload);\r\n" + "    },\r\n" + "    async " + underSubPoName + "Edit(data) {\r\n" + "      const " + underSubPoName + " = await " + underSubPoName + "Service.find" + subPoName + "ById(data.id);\r\n" + "      const fromData = {\r\n" + "        ..." + underSubPoName + ".data,\r\n" + "      };\r\n" + "      const payload = {\r\n" + "        " + underSubPoName + "FormData: fromData,\r\n" + "        " + underSubPoName + "Title: '编辑',\r\n" + "        " + underSubPoName + "Visible: true,\r\n" + "      };\r\n" + "      dispatch." + underSubPoName + ".setState(payload);\r\n" + "    },\r\n" + "    async " + underSubPoName + "Delete(data) {\r\n" + "      await " + underSubPoName + "Service." + underSubPoName + "Delete(data.record.id);\r\n" + "      await this." + underSubPoName + "Page({" + underSubPoName + "Current: data.data.pageNumber, pid: data.data.pid});\r\n" + "      const payload = {\r\n" + "        " + underSubPoName + "Visible: false,\r\n" + "      };\r\n" + "      dispatch." + underSubPoName + ".setState(payload);\r\n" + "    },\r\n" + "    async " + underSubPoName + "Save(data) {\r\n" + "      await " + underSubPoName + "Service." + underSubPoName + "Save({...data." + underSubPoName + "FormData, pid: data.pid});\r\n" + "      await this." + underSubPoName + "Page({" + underSubPoName + "Current: data.pageNumber, pid: data.pid});\r\n" + "      const payload = {\r\n" + "        " + underSubPoName + "Visible: false,\r\n" + "      };\r\n" + "      dispatch." + underSubPoName + ".setState(payload);\r\n" + "    },\r\n" + "    setDataForm(data) {\r\n" + "      const payload = {\r\n" + "        " + underSubPoName + "FormData: data,\r\n" + "      };\r\n" + "      dispatch." + underSubPoName + ".setState(payload);\r\n" + "    },\r\n" + "    async findDataTableAndFormByName(pid) {\r\n" + "      const ret = await initService.findDataTableAndFormByName('" + subPo.getEntityCode() + "');\r\n" + "      await this." + underSubPoName + "Page({" + underSubPoName + "Current: 1, pid});\r\n" + "      const payload = {\r\n" + "        " + underSubPoName + "Table: ret.data.dataTable,\r\n" + "        " + underSubPoName + "Form: ret.data.dataForm,\r\n" + "        customData: ret.data.customData,\r\n" + "      };\r\n" + "      dispatch." + underSubPoName + ".setState(payload);\r\n" + "    },\r\n" + "    async onRowClick(data) {\r\n" + "      await this.findDataTableAndFormByName(data.record.id);\r\n" + "      await this." + underSubPoName + "Page({" + underSubPoName + "Current: 1, pid: data.record.id});\r\n" + "      const payload = {\r\n" + "        divVisible: data.selected,\r\n" + "        " + underPoName + "Id: data.record.id,\r\n" + "        " + underSubPoName + "Visible: false,\r\n" + "      };\r\n" + "      dispatch." + underSubPoName + ".setState(payload);\r\n" + "    },\r\n" + "  }),\r\n" + "};\r\n";
         return new String[]{viewData, underSubPoName + ".tsx"};
@@ -1417,7 +1457,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         String viewData = "export default {\r\n" + "\r\n" + "  namespace: 'custom" + poName + "',\r\n" + "\r\n" + "  state: {\r\n" + "    customMethodName1: null,\r\n" + "    customMethodName2: null,\r\n" + "    customMethodName3: null,\r\n" + "    customFrom: [],\r\n" + "  },\r\n" + "\r\n" + "  reducers: {\r\n" + "    setState(prevState, payload) {\r\n" + "      return {...prevState, ...payload};\r\n" + "    },\r\n" + "  },\r\n" + "\r\n" + "  effects: () => ({\r\n" + "    customMethod1() {\r\n" + "    },\r\n" + "    customMethod2() {\r\n" + "    },\r\n" + "    customMethod3() {\r\n" + "    },\r\n" + "  }),\r\n" + "};\r\n";
         return new String[]{viewData, underPoName + ".tsx"};
     }
-
 
 
     private String[] servicesCustomGenerate(String underPoName) {
