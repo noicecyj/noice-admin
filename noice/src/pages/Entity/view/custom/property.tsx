@@ -1,23 +1,3 @@
-import React from 'react';
-// import pageStore from '@/pages/Entity/store';
-
-// const formItemLayout = {
-//   labelCol: {
-//     fixedSpan: 6,
-//   },
-//   wrapperCol: {
-//     span: 40,
-//   },
-// };
-
-function CustomColumnProperty(props) {
-  // const { value, index, record } = props;
-  // const [customEntityState, customEntityDispatchers] = pageStore.useModel('customEntity');
-
-  return (
-    <>
-    </>
-  );
-}
+function CustomColumnProperty() {}
 
 export {CustomColumnProperty};

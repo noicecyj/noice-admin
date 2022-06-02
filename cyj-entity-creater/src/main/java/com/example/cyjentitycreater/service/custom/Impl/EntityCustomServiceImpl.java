@@ -240,13 +240,20 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import {request} from 'ice';\r\n");
         sb.append("\r\n");
         sb.append("export default {\r\n");
-        sb.append("  ").append(underPoName).append("Page(pageNumber) {\r\n");
+        if (entityPO.getEntityId() == null) {
+            sb.append("  ").append(underPoName).append("Page(pageNumber) {\r\n");
+        } else {
+            sb.append("  ").append(underPoName).append("Page(pageNumber, data) {\r\n");
+        }
         sb.append("    return request({\r\n");
         sb.append("      url: '/").append(appApi).append("/").append(underPoName).append("Page',\r\n");
         sb.append("      method: 'post',\r\n");
         sb.append("      params: {\r\n");
         sb.append("        pageNumber,\r\n");
         sb.append("      },\r\n");
+        if (entityPO.getEntityId() != null) {
+            sb.append("      data,\r\n");
+        }
         sb.append("    });\r\n");
         sb.append("  },\r\n");
         if ("是".equals(entityPO.getEntitySelf())) {
@@ -269,25 +276,18 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                     sb.append("  ").append(underPoName).append("PageBy").append(propertyOut).append("(pageNumber, data) {\r\n");
                     sb.append("    return request({\r\n");
                     sb.append("      url: '/").append(appApi).append("/").append(underPoName).append("PageBy").append(propertyOut).append("',\r\n");
-                    sb.append("      method: 'post',\r\n");
-                    sb.append("      params: {\r\n");
-                    sb.append("        pageNumber,\r\n");
-                    sb.append("      },\r\n");
-                    sb.append("      data,\r\n");
-                    sb.append("    });\r\n");
-                    sb.append("  },\r\n");
                 } else {
                     sb.append("  ").append(underPoName).append("PageBy").append(propertyOut).append("List(pageNumber, data) {\r\n");
                     sb.append("    return request({\r\n");
                     sb.append("      url: '/").append(appApi).append("/").append(underPoName).append("PageBy").append(propertyOut).append("List',\r\n");
-                    sb.append("      method: 'post',\r\n");
-                    sb.append("      params: {\r\n");
-                    sb.append("        pageNumber,\r\n");
-                    sb.append("      },\r\n");
-                    sb.append("      data,\r\n");
-                    sb.append("    });\r\n");
-                    sb.append("  },\r\n");
                 }
+                sb.append("      method: 'post',\r\n");
+                sb.append("      params: {\r\n");
+                sb.append("        pageNumber,\r\n");
+                sb.append("      },\r\n");
+                sb.append("      data,\r\n");
+                sb.append("    });\r\n");
+                sb.append("  },\r\n");
             }
         }
         sb.append("  ").append(underPoName).append("Save(data) {\r\n");
@@ -310,23 +310,110 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
     }
 
     private String[] storeGenerate(EntityPO entityPO, String underPoName, String poName) {
-        return new String[0];
+        List<EntityPO> subEntityPOList = entityDao.findByEntityOrderBySortCode(entityPO);
+        StringBuilder sb = new StringBuilder();
+        sb.append("import {createStore} from 'ice';\r\n");
+        sb.append("import ").append(underPoName).append(" from './models/auto/").append(underPoName).append("';\r\n");
+        sb.append("import custom").append(poName).append(" from './models/custom/").append(underPoName).append("';\r\n");
+        subEntityPOList.forEach(subPo -> {
+            //驼峰名
+            String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
+            //文件名
+            String subPoName = BeanUtils.captureName(underSubPoName);
+            sb.append("import ").append(underSubPoName).append(" from './models/auto/").append(underSubPoName).append("';\r\n");
+            sb.append("import custom").append(subPoName).append(" from './models/custom/").append(underSubPoName).append("';\r\n");
+        });
+        sb.append("\r\n");
+        sb.append("const store = createStore({\r\n");
+        sb.append("  ").append(underPoName).append(",\r\n");
+        sb.append("  custom").append(poName).append(",\r\n");
+        subEntityPOList.forEach(subPo -> {
+            //驼峰名
+            String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
+            //文件名
+            String subPoName = BeanUtils.captureName(underSubPoName);
+            sb.append("  ").append(underSubPoName).append(",\r\n");
+            sb.append("  custom").append(subPoName).append(",\r\n");
+        });
+        sb.append("});\r\n");
+        sb.append("\r\n");
+        sb.append("export default store;\r\n");
+        String viewData = sb.toString();
+        return new String[]{viewData, "store.ts"};
     }
 
     private String[] indexGenerate(EntityPO entityPO, String underPoName, String poName) {
-        return new String[0];
+        List<EntityPO> subEntityPOList = entityDao.findByEntityOrderBySortCode(entityPO);
+        StringBuilder sb = new StringBuilder();
+        sb.append("import React from 'react';\r\n");
+        sb.append("import ").append(poName).append(" from '@/pages/").append(poName).append("/view/auto/").append(underPoName).append("';\r\n");
+        subEntityPOList.forEach(subPo -> {
+            //驼峰名
+            String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
+            //文件名
+            String subPoName = BeanUtils.captureName(underSubPoName);
+            sb.append("import ").append(subPoName).append(" from '@/pages/").append(poName).append("/view/auto/").append(underSubPoName).append("';\r\n");
+        });
+        sb.append("\r\n");
+        sb.append("function ").append(poName).append("Page() {\r\n");
+        sb.append("  return (\r\n");
+        sb.append("    <div>\r\n");
+        sb.append("      <").append(poName).append("/>\r\n");
+        subEntityPOList.forEach(subPo -> {
+            //驼峰名
+            String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
+            //文件名
+            String subPoName = BeanUtils.captureName(underSubPoName);
+            sb.append("      <").append(subPoName).append("/>\r\n");
+        });
+        sb.append("    </div>\r\n");
+        sb.append("  );\r\n");
+        sb.append("}\r\n");
+        sb.append("\r\n");
+        sb.append("export default ").append(poName).append("Page;\r\n");
+        String viewData = sb.toString();
+        return new String[]{viewData, "index.tsx"};
     }
 
     private String[] modelsCustomGenerate(EntityPO entityPO, String underPoName, String poName) {
-        return new String[0];
+        String viewData = "export default {\r\n" +
+                "\r\n" +
+                "  namespace: 'customEntity',\r\n" +
+                "\r\n" +
+                "  state: {\r\n" +
+                "    customMethodName1: null,\r\n" +
+                "    customMethodName2: null,\r\n" +
+                "    customMethodName3: null,\r\n" +
+                "    customFrom: [],\r\n" +
+                "  },\r\n" +
+                "\r\n" +
+                "  reducers: {\r\n" +
+                "    setState(prevState, payload) {\r\n" +
+                "      return {...prevState, ...payload};\r\n" +
+                "    },\r\n" +
+                "  },\r\n" +
+                "  effects: () => ({\r\n" +
+                "    customMethod1() {\r\n" +
+                "    },\r\n" +
+                "    customMethod2() {\r\n" +
+                "    },\r\n" +
+                "    customMethod3() {\r\n" +
+                "    },\r\n" +
+                "  }),\r\n" +
+                "};\r\n";
+        return new String[]{viewData, underPoName + ".tsx"};
     }
 
     private String[] servicesCustomGenerate(String appApi, String underPoName, String poName) {
-        return new String[0];
+        String viewData = "\r\n";
+        return new String[]{viewData, underPoName + ".tsx"};
     }
 
     private String[] viewCustomGenerate(EntityPO entityPO, String underPoName, String poName) {
-        return new String[0];
+        String viewData = "function CustomColumnProperty() {}\r\n" +
+                "\r\n" +
+                "export {CustomColumnProperty};\r\n";
+        return new String[]{viewData, underPoName + ".tsx"};
     }
 
     private String[] modelsAutoGenerate(EntityPO entityPO, String underPoName, String poName) {
@@ -1555,12 +1642,19 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
     }
 
     private String[] viewSubCustomGenerate(String poName, String underSubPoName, String subPoName) {
-        String viewData = "import React from 'react';\r\n" + "// import pageStore from '@/pages/" + poName + "/store';\r\n" + "\r\n" + "// const formItemLayout = {\r\n" + "//   labelCol: {\r\n" + "//     fixedSpan: 6,\r\n" + "//   },\r\n" + "//   wrapperCol: {\r\n" + "//     span: 40,\r\n" + "//   },\r\n" + "// };\r\n" + "\r\n" + "function CustomColumn" + subPoName + "(props) {\r\n" + "//   const {value, index, record} = props;\r\n" + "//   const [custom" + subPoName + "State, custom" + subPoName + "Dispatchers] = pageStore.useModel('custom" + poName + "');\r\n" + "\r\n" + "  return (\r\n" + "    <>\r\n" + "    </>\r\n" + "  );\r\n" + "}\r\n" + "\r\n" + "export {CustomColumn" + subPoName + "};\r\n";
+        String viewData = "import React from 'react';\r\n" +
+                "// import pageStore from '@/pages/" + poName + "/store';\r\n" +
+                "\r\n" + "// const formItemLayout = {\r\n" +
+                "//   labelCol: {\r\n" +
+                "//     fixedSpan: 6,\r\n" +
+                "//   },\r\n" + "//   wrapperCol: {\r\n" + "//     span: 40,\r\n" + "//   },\r\n" + "// };\r\n" + "\r\n" + "function CustomColumn" + subPoName + "(props) {\r\n" + "//   const {value, index, record} = props;\r\n" + "//   const [custom" + subPoName + "State, custom" + subPoName + "Dispatchers] = pageStore.useModel('custom" + poName + "');\r\n" + "\r\n" + "  return (\r\n" + "    <>\r\n" + "    </>\r\n" + "  );\r\n" + "}\r\n" + "\r\n" + "export {CustomColumn" + subPoName + "};\r\n";
         return new String[]{viewData, underSubPoName + ".tsx"};
     }
 
     private String[] viewCustomGenerate(String underPoName, String poName) {
-        String viewData = "import React from 'react';\r\n" + "// import pageStore from '@/pages/" + poName + "/store';\r\n" + "\r\n" + "// const formItemLayout = {\r\n" + "//   labelCol: {\r\n" + "//     fixedSpan: 6,\r\n" + "//   },\r\n" + "//   wrapperCol: {\r\n" + "//     span: 40,\r\n" + "//   },\r\n" + "// };\r\n" + "// \r\n" + "function CustomColumn" + poName + "(props) {\r\n" + "//   const {value, index, record} = props;\r\n" + "//   const [custom" + poName + "State, custom" + poName + "Dispatchers] = pageStore.useModel('custom" + poName + "');\r\n" + "\r\n" + "  return (\r\n" + "    <>\r\n" + "    </>\r\n" + "  );\r\n" + "}\r\n" + "\r\n" + "export {CustomColumn" + poName + "};\r\n";
+        String viewData = "function CustomColumnProperty() {}\r\n" +
+                "\r\n" +
+                "export {CustomColumnProperty};\r\n";
         return new String[]{viewData, underPoName + ".tsx"};
     }
 
