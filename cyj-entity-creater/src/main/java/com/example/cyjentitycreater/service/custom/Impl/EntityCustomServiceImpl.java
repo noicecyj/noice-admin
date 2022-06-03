@@ -688,23 +688,29 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("            <CustomColumn").append(poName).append(" value={value} index={index} record={record}/>\r\n");
         sb.append("          );\r\n");
         sb.append("        }}\r\n");
-        EntityPO entityPO1 = subEntityPOList.get(0);
-        if (entityPO1 != null) {
-            String underSubPoName = BeanUtils.underline2Camel(entityPO1.getEntityCode());
-            sb.append("        son1=\"").append(entityPO1.getEntityName()).append("\"\r\n");
-            sb.append("        sonMethod1={record => ").append(underSubPoName).append("Dispatchers.onRowClick(record)}\r\n");
+        if (subEntityPOList.size() > 0){
+            EntityPO entityPO1 = subEntityPOList.get(0);
+            if (entityPO1 != null) {
+                String underSubPoName = BeanUtils.underline2Camel(entityPO1.getEntityCode());
+                sb.append("        son1=\"").append(entityPO1.getEntityName()).append("\"\r\n");
+                sb.append("        sonMethod1={record => ").append(underSubPoName).append("Dispatchers.onRowClick(record)}\r\n");
+            }
         }
-        EntityPO entityPO2 = subEntityPOList.get(1);
-        if (entityPO2 != null) {
-            String underSubPoName = BeanUtils.underline2Camel(entityPO2.getEntityCode());
-            sb.append("        son2=\"").append(entityPO2.getEntityName()).append("\"\r\n");
-            sb.append("        sonMethod2={record => ").append(underSubPoName).append("Dispatchers.onRowClick(record)}\r\n");
+        if (subEntityPOList.size() > 1){
+            EntityPO entityPO2 = subEntityPOList.get(1);
+            if (entityPO2 != null) {
+                String underSubPoName = BeanUtils.underline2Camel(entityPO2.getEntityCode());
+                sb.append("        son2=\"").append(entityPO2.getEntityName()).append("\"\r\n");
+                sb.append("        sonMethod2={record => ").append(underSubPoName).append("Dispatchers.onRowClick(record)}\r\n");
+            }
         }
-        EntityPO entityPO3 = subEntityPOList.get(2);
-        if (entityPO3 != null) {
-            String underSubPoName = BeanUtils.underline2Camel(entityPO3.getEntityCode());
-            sb.append("        son3=\"").append(entityPO3.getEntityName()).append("\"\r\n");
-            sb.append("        sonMethod3={record => ").append(underSubPoName).append("Dispatchers.onRowClick(record)}\r\n");
+        if (subEntityPOList.size() > 2){
+            EntityPO entityPO3 = subEntityPOList.get(2);
+            if (entityPO3 != null) {
+                String underSubPoName = BeanUtils.underline2Camel(entityPO3.getEntityCode());
+                sb.append("        son3=\"").append(entityPO3.getEntityName()).append("\"\r\n");
+                sb.append("        sonMethod3={record => ").append(underSubPoName).append("Dispatchers.onRowClick(record)}\r\n");
+            }
         }
         sb.append("        customMethod1={() => custom").append(poName).append("Dispatchers.customMethod1()}\r\n");
         sb.append("        customMethod2={() => custom").append(poName).append("Dispatchers.customMethod2()}\r\n");
