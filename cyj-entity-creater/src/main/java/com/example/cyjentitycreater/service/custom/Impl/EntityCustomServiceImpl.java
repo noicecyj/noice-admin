@@ -326,7 +326,8 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         for (PropertyPO propertyPO : propertyPOList) {
             if ("是".equals(propertyPO.getPropertyOut())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
-                sb.append("import ").append(underPropertyOut).append(" from './models/auto/").append(underPropertyOut).append("';\r\n");
+                String propertyOut = BeanUtils.captureName(underPropertyOut);
+                sb.append("import ").append(underPropertyOut).append(" from \"@/pages/").append(propertyOut).append("/models/auto/").append(underPropertyOut).append("\";\r\n");
             }
         }
         sb.append("\r\n");
@@ -1061,6 +1062,13 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             //文件名
             String subPoName = BeanUtils.captureName(underSubPoName);
             sb.append("import com.example.cyjcommon.dao.").append(subPoName).append("Dao;\r\n");
+        }
+        for (PropertyPO propertyPO : propertyPOList) {
+            if ("是".equals(propertyPO.getPropertyOut()) && MANY_TO_ONE.equals(propertyPO.getPropertyOutType())) {
+                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
+                String propertyOut = BeanUtils.captureName(underPropertyOut);
+                sb.append("import com.example.cyjcommon.dao.").append(propertyOut).append("Dao;\r\n");
+            }
         }
         sb.append("import com.example.cyjcommon.dao.").append(poName).append("Dao;\r\n");
         for (EntityPO entityPO1 : subEntityPOList) {
