@@ -221,7 +221,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         entityObj.put(componentPath + poName + "/models/auto", modelsAutoGenerate(entityPO, underPoName, poName));
         if (entityPO.getEntityId() == null) {
             entityObj.put(componentPath + poName, indexGenerate(entityPO, underPoName, poName));
-            entityObj.put(componentPath + poName, storeGenerate(entityPO, underPoName, poName));
+            entityObj.put(componentPath + poName, storeGenerate(entityPO, propertyPOList, underPoName, poName));
         }
         Map<String, String[]> entityCustomObj = new HashMap<>();
         entityCustomObj.put(appPath + "/service/custom", serviceCustomGenerate(poName, appPath));
@@ -309,7 +309,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{viewData, underPoName + ".tsx"};
     }
 
-    private String[] storeGenerate(EntityPO entityPO, String underPoName, String poName) {
+    private String[] storeGenerate(EntityPO entityPO, List<PropertyPO> propertyPOList, String underPoName, String poName) {
         List<EntityPO> subEntityPOList = entityDao.findByEntityOrderBySortCode(entityPO);
         StringBuilder sb = new StringBuilder();
         sb.append("import {createStore} from 'ice';\r\n");
@@ -323,6 +323,12 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             sb.append("import ").append(underSubPoName).append(" from './models/auto/").append(underSubPoName).append("';\r\n");
             sb.append("import custom").append(subPoName).append(" from './models/custom/").append(underSubPoName).append("';\r\n");
         });
+        for (PropertyPO propertyPO : propertyPOList) {
+            if ("是".equals(propertyPO.getPropertyOut())) {
+                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
+                sb.append("import ").append(underPropertyOut).append(" from './models/auto/").append(underPropertyOut).append("';\r\n");
+            }
+        }
         sb.append("\r\n");
         sb.append("const store = createStore({\r\n");
         sb.append("  ").append(underPoName).append(",\r\n");
@@ -335,6 +341,12 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             sb.append("  ").append(underSubPoName).append(",\r\n");
             sb.append("  custom").append(subPoName).append(",\r\n");
         });
+        for (PropertyPO propertyPO : propertyPOList) {
+            if ("是".equals(propertyPO.getPropertyOut())) {
+                String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
+                sb.append("  ").append(underPropertyOut).append(",\r\n");
+            }
+        }
         sb.append("});\r\n");
         sb.append("\r\n");
         sb.append("export default store;\r\n");
@@ -498,8 +510,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             sb.append("    async ").append(underPoName).append("Delete(").append(underPoName).append("Current, ").append(underPoNameParent).append(", record) {\r\n");
             sb.append("      const ret = await ").append(underPoName).append("Service.").append(underPoName).append("Delete(record);\r\n");
         }
-        sb.append("    async ").append(underPoName).append("Delete(data) {\r\n");
-        sb.append("      const ret = await ").append(underPoName).append("Service.").append(underPoName).append("Delete(data.record);\r\n");
         sb.append("      if (ret.code === 400) {\r\n");
         sb.append("        Message.error('删除失败');\r\n");
         sb.append("      } else {\r\n");
@@ -512,7 +522,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             String underPoNameParent = BeanUtils.underline2Camel(entityPOParent.getEntityCode());
             sb.append("        await this.").append(underPoName).append("Page(").append(underPoName).append("Current, ").append(underPoNameParent).append(");\r\n");
         }
-        sb.append("        await this.").append(underPoName).append("Page(data.pageNumber);\r\n");
         sb.append("        const payload = {\r\n");
         sb.append("          ").append(underPoName).append("Visible: false,\r\n");
         sb.append("        };\r\n");
@@ -1108,7 +1117,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("\r\n");
         sb.append("    private ").append(poName).append("Dao ").append(underPoName).append("Dao;\r\n");
         for (PropertyPO propertyPO : propertyPOList) {
-            if ("是".equals(propertyPO.getPropertyOut())) {
+            if ("是".equals(propertyPO.getPropertyOut()) && MANY_TO_ONE.equals(propertyPO.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("    private ").append(propertyOut).append("Dao ").append(underPropertyOut).append("Dao;\r\n");
@@ -1129,7 +1138,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("    }\r\n");
         sb.append("\r\n");
         for (PropertyPO propertyPO : propertyPOList) {
-            if ("是".equals(propertyPO.getPropertyOut())) {
+            if ("是".equals(propertyPO.getPropertyOut()) && MANY_TO_ONE.equals(propertyPO.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("    @Autowired\r\n");
@@ -1228,7 +1237,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             sb.append("        }\r\n");
         }
         for (PropertyPO propertyPO : propertyPOList) {
-            if ("是".equals(propertyPO.getPropertyOut())) {
+            if ("是".equals(propertyPO.getPropertyOut()) && MANY_TO_ONE.equals(propertyPO.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("        if (po.get").append(propertyOut).append("Id() != null){\r\n");
