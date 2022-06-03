@@ -610,23 +610,29 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("\r\n");
         sb.append("function ").append(poName).append("() {\r\n");
         sb.append("  const [").append(underPoName).append("State, ").append(underPoName).append("Dispatchers] = pageStore.useModel('").append(underPoName).append("');\r\n");
-        EntityPO entityPO11 = subEntityPOList.get(0);
-        if (entityPO11 != null) {
-            String underSubPoName = BeanUtils.underline2Camel(entityPO11.getEntityCode());
-            sb.append("  const ").append(underSubPoName).append("Dispatchers = pageStore.useModelDispatchers('").append(entityPO11.getEntityCode()).append("');\r\n");
-            sb.append("\r\n");
+        if (subEntityPOList.size() > 0){
+            EntityPO entityPO11 = subEntityPOList.get(0);
+            if (entityPO11 != null) {
+                String underSubPoName = BeanUtils.underline2Camel(entityPO11.getEntityCode());
+                sb.append("  const ").append(underSubPoName).append("Dispatchers = pageStore.useModelDispatchers('").append(entityPO11.getEntityCode()).append("');\r\n");
+                sb.append("\r\n");
+            }
         }
-        EntityPO entityPO21 = subEntityPOList.get(1);
-        if (entityPO21 != null) {
-            String underSubPoName = BeanUtils.underline2Camel(entityPO21.getEntityCode());
-            sb.append("  const ").append(underSubPoName).append("Dispatchers = pageStore.useModelDispatchers('").append(entityPO21.getEntityCode()).append("');\r\n");
-            sb.append("\r\n");
+        if (subEntityPOList.size() > 1){
+            EntityPO entityPO21 = subEntityPOList.get(1);
+            if (entityPO21 != null) {
+                String underSubPoName = BeanUtils.underline2Camel(entityPO21.getEntityCode());
+                sb.append("  const ").append(underSubPoName).append("Dispatchers = pageStore.useModelDispatchers('").append(entityPO21.getEntityCode()).append("');\r\n");
+                sb.append("\r\n");
+            }
         }
-        EntityPO entityPO31 = subEntityPOList.get(2);
-        if (entityPO31 != null) {
-            String underSubPoName = BeanUtils.underline2Camel(entityPO31.getEntityCode());
-            sb.append("  const ").append(underSubPoName).append("Dispatchers = pageStore.useModelDispatchers('").append(entityPO31.getEntityCode()).append("');\r\n");
-            sb.append("\r\n");
+        if (subEntityPOList.size() > 2){
+            EntityPO entityPO31 = subEntityPOList.get(2);
+            if (entityPO31 != null) {
+                String underSubPoName = BeanUtils.underline2Camel(entityPO31.getEntityCode());
+                sb.append("  const ").append(underSubPoName).append("Dispatchers = pageStore.useModelDispatchers('").append(entityPO31.getEntityCode()).append("');\r\n");
+                sb.append("\r\n");
+            }
         }
         sb.append("  const [custom").append(poName).append("State, custom").append(poName).append("Dispatchers] = pageStore.useModel('custom").append(poName).append("');\r\n");
         sb.append("\r\n");
