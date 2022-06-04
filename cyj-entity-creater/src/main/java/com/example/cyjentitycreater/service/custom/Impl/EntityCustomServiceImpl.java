@@ -1330,7 +1330,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("package ").append(poControllerPath).append("Impl;\r\n");
         sb.append("\r\n");
         for (PropertyPO propertyPO : propertyPOList) {
-            if ("是".equals(propertyPO.getPropertyOut())) {
+            if ("是".equals(propertyPO.getPropertyOut()) && MANY_TO_ONE.equals(propertyPO.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("import com.example.cyjcommon.entity.po.").append(propertyOut).append("PO;\r\n");
