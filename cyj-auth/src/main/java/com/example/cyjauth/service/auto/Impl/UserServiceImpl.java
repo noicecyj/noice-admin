@@ -1,13 +1,13 @@
 package com.example.cyjauth.service.auto.Impl;
 
-import com.example.cyjauth.service.auto.UserService;
-import com.example.cyjcommon.dao.AuthorityDao;
 import com.example.cyjcommon.dao.EnterpriseDao;
 import com.example.cyjcommon.dao.RoleDao;
+import com.example.cyjcommon.dao.AuthorityDao;
 import com.example.cyjcommon.dao.UserDao;
 import com.example.cyjcommon.entity.po.EnterprisePO;
 import com.example.cyjcommon.entity.po.UserPO;
 import com.example.cyjcommon.service.BaseService;
+import com.example.cyjauth.service.auto.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -32,10 +32,14 @@ public class UserServiceImpl extends BaseService implements UserService {
     private RoleDao roleDao;
     private AuthorityDao authorityDao;
 
-
     @Autowired
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
+    }
+
+    @Autowired
+    public void setEnterpriseDao(EnterpriseDao enterpriseDao) {
+        this.enterpriseDao = enterpriseDao;
     }
 
     @Autowired
@@ -48,14 +52,9 @@ public class UserServiceImpl extends BaseService implements UserService {
         this.authorityDao = authorityDao;
     }
 
-    @Autowired
-    public void setEnterpriseDao(EnterpriseDao enterpriseDao) {
-        this.enterpriseDao = enterpriseDao;
-    }
-
     @Override
     public UserPO addOne(UserPO po) {
-        if (po.getEnterpriseId() != null) {
+        if (po.getEnterpriseId() != null){
             EnterprisePO enterprisePO = enterpriseDao.getOne(po.getEnterpriseId());
             po.setEnterprise(enterprisePO);
         }
@@ -69,7 +68,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     @Override
     public UserPO updateOne(UserPO po) {
-        if (po.getEnterpriseId() != null) {
+        if (po.getEnterpriseId() != null){
             EnterprisePO enterprisePO = enterpriseDao.getOne(po.getEnterpriseId());
             po.setEnterprise(enterprisePO);
         }

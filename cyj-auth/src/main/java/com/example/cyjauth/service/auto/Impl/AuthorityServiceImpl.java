@@ -2,11 +2,11 @@ package com.example.cyjauth.service.auto.Impl;
 
 import com.example.cyjcommon.dao.AppServiceDao;
 import com.example.cyjcommon.dao.EntityDao;
+import com.example.cyjcommon.dao.UserDao;
+import com.example.cyjcommon.dao.RoleDao;
 import com.example.cyjcommon.dao.AuthorityDao;
 import com.example.cyjcommon.entity.po.AppServicePO;
 import com.example.cyjcommon.entity.po.EntityPO;
-import com.example.cyjcommon.entity.po.UserPO;
-import com.example.cyjcommon.entity.po.RolePO;
 import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjauth.service.auto.AuthorityService;
@@ -19,6 +19,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -31,6 +32,8 @@ public class AuthorityServiceImpl extends BaseService implements AuthorityServic
     private AuthorityDao authorityDao;
     private AppServiceDao appServiceDao;
     private EntityDao entityDao;
+    private UserDao userDao;
+    private RoleDao roleDao;
 
     @Autowired
     public void setAuthorityDao(AuthorityDao authorityDao) {
@@ -45,6 +48,16 @@ public class AuthorityServiceImpl extends BaseService implements AuthorityServic
     @Autowired
     public void setEntityDao(EntityDao entityDao) {
         this.entityDao = entityDao;
+    }
+
+    @Autowired
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
+    @Autowired
+    public void setRoleDao(RoleDao roleDao) {
+        this.roleDao = roleDao;
     }
 
     @Override
@@ -102,19 +115,19 @@ public class AuthorityServiceImpl extends BaseService implements AuthorityServic
     }
 
     @Override
-    public Page<AuthorityPO> findAllByUserList(Integer pageNumber, Set<UserPO> userList) {
+    public Page<AuthorityPO> findAllByUserList(Integer pageNumber, Set<String> userList) {
         Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
         AuthorityPO authorityPO = new AuthorityPO();
-        authorityPO.setUser(userList);
+        authorityPO.setUser(new HashSet<>(userDao.findAllById(userList)));
         Example<AuthorityPO> example = Example.of(authorityPO);
         return authorityDao.findAll(example, pageable);
     }
 
     @Override
-    public Page<AuthorityPO> findAllByRoleList(Integer pageNumber, Set<RolePO> roleList) {
+    public Page<AuthorityPO> findAllByRoleList(Integer pageNumber, Set<String> roleList) {
         Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
         AuthorityPO authorityPO = new AuthorityPO();
-        authorityPO.setRole(roleList);
+        authorityPO.setRole(new HashSet<>(roleDao.findAllById(roleList)));
         Example<AuthorityPO> example = Example.of(authorityPO);
         return authorityDao.findAll(example, pageable);
     }

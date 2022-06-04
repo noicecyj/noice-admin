@@ -2,8 +2,6 @@ package com.example.cyjauth.service.auto;
 
 import com.example.cyjcommon.entity.po.AppServicePO;
 import com.example.cyjcommon.entity.po.EntityPO;
-import com.example.cyjcommon.entity.po.UserPO;
-import com.example.cyjcommon.entity.po.RolePO;
 import com.example.cyjcommon.entity.po.AuthorityPO;
 import org.springframework.data.domain.Page;
 
@@ -26,8 +24,8 @@ public interface AuthorityService {
 
     Page<AuthorityPO> findAll(Integer pageNumber, EntityPO entity);
 
-    Page<AuthorityPO> findAllByUserList(Integer pageNumber, Set<UserPO> userList);
+    Page<AuthorityPO> findAllByUserList(Integer pageNumber, Set<String> userList);
 
-    Page<AuthorityPO> findAllByRoleList(Integer pageNumber, Set<RolePO> roleList);
+    Page<AuthorityPO> findAllByRoleList(Integer pageNumber, Set<String> roleList);
 
 }

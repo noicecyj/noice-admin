@@ -1,8 +1,6 @@
 package com.example.cyjauth.service.auto;
 
 import com.example.cyjcommon.entity.po.EnterprisePO;
-import com.example.cyjcommon.entity.po.RolePO;
-import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.example.cyjcommon.entity.po.UserPO;
 import org.springframework.data.domain.Page;
 
