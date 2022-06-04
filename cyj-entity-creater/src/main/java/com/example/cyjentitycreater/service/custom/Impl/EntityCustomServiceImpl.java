@@ -1021,7 +1021,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("package ").append(poServicePath);
         sb.append("\r\n");
         for (PropertyPO propertyPO : propertyPOList) {
-            if ("是".equals(propertyPO.getPropertyOut())) {
+            if ("是".equals(propertyPO.getPropertyOut()) && MANY_TO_ONE.equals(propertyPO.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("import com.example.cyjcommon.entity.po.").append(propertyOut).append("PO;\r\n");
@@ -1063,7 +1063,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             sb.append("import com.example.cyjcommon.entity.po.").append(subPoName).append("PO;\r\n");
         }
         for (PropertyPO propertyPO : propertyPOList) {
-            if ("是".equals(propertyPO.getPropertyOut())) {
+            if ("是".equals(propertyPO.getPropertyOut()) && MANY_TO_ONE.equals(propertyPO.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("import com.example.cyjcommon.entity.po.").append(propertyOut).append("PO;\r\n");
