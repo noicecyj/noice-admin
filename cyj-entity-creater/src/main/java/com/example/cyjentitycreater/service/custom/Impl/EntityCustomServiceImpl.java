@@ -997,7 +997,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                     sb.append("    Page<").append(poName).append("PO> findAll(Integer pageNumber, ").append(propertyOut).append("PO ").append(underPropertyOut).append(");\r\n");
                     sb.append("\r\n");
                 } else {
-                    sb.append("    Page<").append(poName).append("PO> findAllBy").append(propertyOut).append("List(Integer pageNumber, Set<").append(propertyOut).append("PO> ").append(underPropertyOut).append("List);\r\n");
+                    sb.append("    Page<").append(poName).append("PO> findAllBy").append(propertyOut).append("List(Integer pageNumber, Set<String> ").append(underPropertyOut).append("List);\r\n");
                     sb.append("\r\n");
                 }
             }
@@ -1099,7 +1099,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("\r\n");
         sb.append("    private ").append(poName).append("Dao ").append(underPoName).append("Dao;\r\n");
         for (PropertyPO propertyPO : propertyPOList) {
-            if ("是".equals(propertyPO.getPropertyOut()) && MANY_TO_ONE.equals(propertyPO.getPropertyOutType())) {
+            if ("是".equals(propertyPO.getPropertyOut())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("    private ").append(propertyOut).append("Dao ").append(underPropertyOut).append("Dao;\r\n");
@@ -1120,7 +1120,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("    }\r\n");
         sb.append("\r\n");
         for (PropertyPO propertyPO : propertyPOList) {
-            if ("是".equals(propertyPO.getPropertyOut()) && MANY_TO_ONE.equals(propertyPO.getPropertyOutType())) {
+            if ("是".equals(propertyPO.getPropertyOut())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("    @Autowired\r\n");
@@ -1195,10 +1195,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                     OverRideHandler(underPoName, poName, sb, underPropertyOut, propertyOut);
                 } else {
                     sb.append("    @Override\r\n");
-                    sb.append("    public Page<").append(poName).append("PO> findAllBy").append(propertyOut).append("List(Integer pageNumber, Set<").append(propertyOut).append("PO> ").append(underPropertyOut).append("List) {\r\n");
+                    sb.append("    public Page<").append(poName).append("PO> findAllBy").append(propertyOut).append("List(Integer pageNumber, Set<String> ").append(underPropertyOut).append("List) {\r\n");
                     sb.append("        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by(\"sortCode\").ascending());\r\n");
                     sb.append("        ").append(poName).append("PO ").append(underPoName).append("PO = new ").append(poName).append("PO();\r\n");
-                    sb.append("        ").append(underPoName).append("PO.set").append(propertyOut).append("(").append(underPropertyOut).append("List);\r\n");
+                    sb.append("        ").append(underPoName).append("PO.set").append(propertyOut).append("(new HashSet<>(").append(underPropertyOut).append("Dao.findAllById(").append(underPropertyOut).append("List)));\r\n");
                     sb.append("        Example<").append(poName).append("PO> example = Example.of(").append(underPoName).append("PO);\r\n");
                     sb.append("        return ").append(underPoName).append("Dao.findAll(example, pageable);\r\n");
                     sb.append("    }\r\n");
@@ -1290,7 +1290,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                 } else {
                     sb.append("    @Operation(summary = \"根据").append(propertyOut).append("List查询所有").append(poName).append("\")\r\n");
                     sb.append("    @PostMapping(value = \"").append(underPoName).append("PageBy").append(propertyOut).append("List\")\r\n");
-                    sb.append("    ResultVO ").append(underPoName).append("PageBy").append(propertyOut).append("List(@RequestParam(\"pageNumber\") Integer pageNumber, @RequestBody Set<").append(propertyOut).append("PO> ").append(underPropertyOut).append("List);\r\n");
+                    sb.append("    ResultVO ").append(underPoName).append("PageBy").append(propertyOut).append("List(@RequestParam(\"pageNumber\") Integer pageNumber, @RequestBody Set<String> ").append(underPropertyOut).append("List);\r\n");
                     sb.append("\r\n");
                 }
             }
@@ -1378,7 +1378,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                     sb.append("\r\n");
                 } else {
                     sb.append("    @Override\r\n");
-                    sb.append("    public ResultVO ").append(underPoName).append("PageBy").append(propertyOut).append("List(Integer pageNumber, Set<").append(propertyOut).append("PO> ").append(underPropertyOut).append("List) {\r\n");
+                    sb.append("    public ResultVO ").append(underPoName).append("PageBy").append(propertyOut).append("List(Integer pageNumber, Set<String> ").append(underPropertyOut).append("List) {\r\n");
                     sb.append("        return ResultVO.success(").append(underPoName).append("Service.findAllBy").append(propertyOut).append("List(pageNumber, ").append(underPropertyOut).append("List));\r\n");
                     sb.append("    }\r\n");
                     sb.append("\r\n");
