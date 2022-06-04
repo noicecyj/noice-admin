@@ -638,7 +638,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             EntityPO entityPO11 = subEntityPOList.get(0);
             if (entityPO11 != null) {
                 String underSubPoName = BeanUtils.underline2Camel(entityPO11.getEntityCode());
-                sb.append("  const [").append(underPoName).append("State, ").append(underPoName).append("Dispatchers] = pageStore.useModel('").append(underSubPoName).append("');\r\n");
+                sb.append("  const [").append(underSubPoName).append("State, ").append(underSubPoName).append("Dispatchers] = pageStore.useModel('").append(underSubPoName).append("');\r\n");
                 sb.append("\r\n");
             }
         }
@@ -646,7 +646,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             EntityPO entityPO21 = subEntityPOList.get(1);
             if (entityPO21 != null) {
                 String underSubPoName = BeanUtils.underline2Camel(entityPO21.getEntityCode());
-                sb.append("  const [").append(underPoName).append("State, ").append(underPoName).append("Dispatchers] = pageStore.useModel('").append(underSubPoName).append("');\r\n");
+                sb.append("  const [").append(underSubPoName).append("State, ").append(underSubPoName).append("Dispatchers] = pageStore.useModel('").append(underSubPoName).append("');\r\n");
                 sb.append("\r\n");
             }
         }
@@ -654,7 +654,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             EntityPO entityPO31 = subEntityPOList.get(2);
             if (entityPO31 != null) {
                 String underSubPoName = BeanUtils.underline2Camel(entityPO31.getEntityCode());
-                sb.append("  const [").append(underPoName).append("State, ").append(underPoName).append("Dispatchers] = pageStore.useModel('").append(underSubPoName).append("');\r\n");
+                sb.append("  const [").append(underSubPoName).append("State, ").append(underSubPoName).append("Dispatchers] = pageStore.useModel('").append(underSubPoName).append("');\r\n");
                 sb.append("\r\n");
             }
         }
@@ -662,7 +662,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             PropertyPO propertyPO11 = manyToManyList.get(0);
             if (propertyPO11 != null) {
                 String underSubPoName = BeanUtils.underline2Camel(propertyPO11.getPropertyCode());
-                sb.append("  const [").append(underPoName).append("State, ").append(underPoName).append("Dispatchers] = pageStore.useModel('").append(underSubPoName).append("');\r\n");
+                sb.append("  const [").append(underSubPoName).append("State, ").append(underSubPoName).append("Dispatchers] = pageStore.useModel('").append(underSubPoName).append("');\r\n");
                 sb.append("\r\n");
             }
         }
@@ -670,7 +670,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             PropertyPO propertyPO21 = manyToManyList.get(1);
             if (propertyPO21 != null) {
                 String underSubPoName = BeanUtils.underline2Camel(propertyPO21.getPropertyCode());
-                sb.append("  const [").append(underPoName).append("State, ").append(underPoName).append("Dispatchers] = pageStore.useModelDispatchers('").append(underSubPoName).append("');\r\n");
+                sb.append("  const [").append(underSubPoName).append("State, ").append(underSubPoName).append("Dispatchers] = pageStore.useModelDispatchers('").append(underSubPoName).append("');\r\n");
                 sb.append("\r\n");
             }
         }
@@ -678,7 +678,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             PropertyPO propertyPO31 = manyToManyList.get(2);
             if (propertyPO31 != null) {
                 String underSubPoName = BeanUtils.underline2Camel(propertyPO31.getPropertyCode());
-                sb.append("  const [").append(underPoName).append("State, ").append(underPoName).append("Dispatchers] = pageStore.useModelDispatchers('").append(underSubPoName).append("');\r\n");
+                sb.append("  const [").append(underSubPoName).append("State, ").append(underSubPoName).append("Dispatchers] = pageStore.useModelDispatchers('").append(underSubPoName).append("');\r\n");
                 sb.append("\r\n");
             }
         }
