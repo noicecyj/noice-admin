@@ -1048,7 +1048,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             sb.append("import com.example.cyjcommon.dao.").append(subPoName).append("Dao;\r\n");
         }
         for (PropertyPO propertyPO : propertyPOList) {
-            if ("是".equals(propertyPO.getPropertyOut()) && MANY_TO_ONE.equals(propertyPO.getPropertyOutType())) {
+            if ("是".equals(propertyPO.getPropertyOut())) {
                 String underPropertyOut = BeanUtils.underline2Camel(propertyPO.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("import com.example.cyjcommon.dao.").append(propertyOut).append("Dao;\r\n");
