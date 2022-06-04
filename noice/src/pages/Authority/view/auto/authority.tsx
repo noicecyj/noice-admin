@@ -6,7 +6,6 @@ import {CustomColumnAuthority} from '@/pages/Authority/view/custom/authority';
 
 function Authority() {
   const [authorityState, authorityDispatchers] = pageStore.useModel('authority');
-
   const [customAuthorityState, customAuthorityDispatchers] = pageStore.useModel('customAuthority');
 
   useEffect(() => {
@@ -18,12 +17,7 @@ function Authority() {
       <DataTableTemple
         createItem={() => authorityDispatchers.authorityAdd()}
         editItem={record => authorityDispatchers.authorityEdit(record)}
-        deleteItem={record => authorityDispatchers.authorityDelete({
-          record,
-          data: {
-            pageNumber: authorityState.authorityCurrent,
-          },
-        })}
+        deleteItem={record => authorityDispatchers.authorityDelete(authorityState.authorityCurrent, record)}
         visibleLoading={authorityState.authorityLoadingVisible}
         dataSource={authorityState.authorityTableData}
         items={authorityState.authorityTable}
@@ -50,10 +44,7 @@ function Authority() {
         onClose={() => authorityDispatchers.setState({authorityVisible: false})}
         items={[...authorityState.authorityForm, ...customAuthorityState.customFrom]}
         dispatchers={value => authorityDispatchers.setDataForm(value)}
-        onOk={() => authorityDispatchers.authoritySave({
-          authorityFormData: authorityState.authorityFormData,
-          pageNumber: authorityState.authorityCurrent,
-        })}
+        onOk={() => authorityDispatchers.authoritySave(authorityState.authorityCurrent, authorityState.authorityFormData)}
         formDataValue={authorityState.authorityFormData}
         formSortCode={String(Number.parseInt(String(authorityState.authorityTotal)) + 10)}
       />

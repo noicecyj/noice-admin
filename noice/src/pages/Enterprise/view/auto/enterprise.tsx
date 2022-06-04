@@ -6,7 +6,6 @@ import {CustomColumnEnterprise} from '@/pages/Enterprise/view/custom/enterprise'
 
 function Enterprise() {
   const [enterpriseState, enterpriseDispatchers] = pageStore.useModel('enterprise');
-
   const [customEnterpriseState, customEnterpriseDispatchers] = pageStore.useModel('customEnterprise');
 
   useEffect(() => {
@@ -18,12 +17,7 @@ function Enterprise() {
       <DataTableTemple
         createItem={() => enterpriseDispatchers.enterpriseAdd()}
         editItem={record => enterpriseDispatchers.enterpriseEdit(record)}
-        deleteItem={record => enterpriseDispatchers.enterpriseDelete({
-          record,
-          data: {
-            pageNumber: enterpriseState.enterpriseCurrent,
-          },
-        })}
+        deleteItem={record => enterpriseDispatchers.enterpriseDelete(enterpriseState.enterpriseCurrent, record)}
         visibleLoading={enterpriseState.enterpriseLoadingVisible}
         dataSource={enterpriseState.enterpriseTableData}
         items={enterpriseState.enterpriseTable}
@@ -50,10 +44,7 @@ function Enterprise() {
         onClose={() => enterpriseDispatchers.setState({enterpriseVisible: false})}
         items={[...enterpriseState.enterpriseForm, ...customEnterpriseState.customFrom]}
         dispatchers={value => enterpriseDispatchers.setDataForm(value)}
-        onOk={() => enterpriseDispatchers.enterpriseSave({
-          enterpriseFormData: enterpriseState.enterpriseFormData,
-          pageNumber: enterpriseState.enterpriseCurrent,
-        })}
+        onOk={() => enterpriseDispatchers.enterpriseSave(enterpriseState.enterpriseCurrent, enterpriseState.enterpriseFormData)}
         formDataValue={enterpriseState.enterpriseFormData}
         formSortCode={String(Number.parseInt(String(enterpriseState.enterpriseTotal)) + 10)}
       />

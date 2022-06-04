@@ -17,22 +17,11 @@ export default {
       data,
     });
   },
-  enterpriseDelete(id) {
+  enterpriseDelete(data) {
     return request({
       url: '/authApi/enterpriseDelete',
       method: 'post',
-      params: {
-        id,
-      },
-    });
-  },
-  findEnterpriseById(id) {
-    return request({
-      url: '/authApi/findEnterpriseById',
-      method: 'post',
-      params: {
-        id,
-      },
+      data,
     });
   },
 };

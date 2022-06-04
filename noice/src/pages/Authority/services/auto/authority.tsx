@@ -10,6 +10,46 @@ export default {
       },
     });
   },
+  authorityPageByAppService(pageNumber, data) {
+    return request({
+      url: '/authApi/authorityPageByAppService',
+      method: 'post',
+      params: {
+        pageNumber,
+      },
+      data,
+    });
+  },
+  authorityPageByEntity(pageNumber, data) {
+    return request({
+      url: '/authApi/authorityPageByEntity',
+      method: 'post',
+      params: {
+        pageNumber,
+      },
+      data,
+    });
+  },
+  authorityPageByUserList(pageNumber, data) {
+    return request({
+      url: '/authApi/authorityPageByUserList',
+      method: 'post',
+      params: {
+        pageNumber,
+      },
+      data,
+    });
+  },
+  authorityPageByRoleList(pageNumber, data) {
+    return request({
+      url: '/authApi/authorityPageByRoleList',
+      method: 'post',
+      params: {
+        pageNumber,
+      },
+      data,
+    });
+  },
   authoritySave(data) {
     return request({
       url: '/authApi/authoritySave',
@@ -17,52 +57,9 @@ export default {
       data,
     });
   },
-  authorityDelete(id) {
+  authorityDelete(data) {
     return request({
       url: '/authApi/authorityDelete',
-      method: 'post',
-      params: {
-        id,
-      },
-    });
-  },
-  findAuthorityById(id) {
-    return request({
-      url: '/authApi/findAuthorityById',
-      method: 'post',
-      params: {
-        id,
-      },
-    });
-  },
-  getUserAuthority(userId) {
-    return request({
-      url: '/authApi/getUserAuthority',
-      method: 'post',
-      params: {
-        userId,
-      },
-    });
-  },
-  setUserAuthority(data) {
-    return request({
-      url: '/authApi/setUserAuthority',
-      method: 'post',
-      data,
-    });
-  },
-  getRoleAuthority(roleId) {
-    return request({
-      url: '/authApi/getRoleAuthority',
-      method: 'post',
-      params: {
-        roleId,
-      },
-    });
-  },
-  setRoleAuthority(data) {
-    return request({
-      url: '/authApi/setRoleAuthority',
       method: 'post',
       data,
     });

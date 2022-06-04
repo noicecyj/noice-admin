@@ -1,5 +1,7 @@
 package com.example.cyjauth.service.auto.Impl;
 
+import com.example.cyjcommon.dao.AppServiceDao;
+import com.example.cyjcommon.dao.EntityDao;
 import com.example.cyjcommon.dao.AuthorityDao;
 import com.example.cyjcommon.entity.po.AppServicePO;
 import com.example.cyjcommon.entity.po.EntityPO;
@@ -27,14 +29,34 @@ import java.util.Set;
 public class AuthorityServiceImpl extends BaseService implements AuthorityService {
 
     private AuthorityDao authorityDao;
+    private AppServiceDao appServiceDao;
+    private EntityDao entityDao;
 
     @Autowired
     public void setAuthorityDao(AuthorityDao authorityDao) {
         this.authorityDao = authorityDao;
     }
 
+    @Autowired
+    public void setAppServiceDao(AppServiceDao appServiceDao) {
+        this.appServiceDao = appServiceDao;
+    }
+
+    @Autowired
+    public void setEntityDao(EntityDao entityDao) {
+        this.entityDao = entityDao;
+    }
+
     @Override
     public AuthorityPO addOne(AuthorityPO po) {
+        if (po.getAppServiceId() != null){
+            AppServicePO appServicePO = appServiceDao.getOne(po.getAppServiceId());
+            po.setAppService(appServicePO);
+        }
+        if (po.getEntityId() != null){
+            EntityPO entityPO = entityDao.getOne(po.getEntityId());
+            po.setEntity(entityPO);
+        }
         return authorityDao.save(po);
     }
 
@@ -45,6 +67,14 @@ public class AuthorityServiceImpl extends BaseService implements AuthorityServic
 
     @Override
     public AuthorityPO updateOne(AuthorityPO po) {
+        if (po.getAppServiceId() != null){
+            AppServicePO appServicePO = appServiceDao.getOne(po.getAppServiceId());
+            po.setAppService(appServicePO);
+        }
+        if (po.getEntityId() != null){
+            EntityPO entityPO = entityDao.getOne(po.getEntityId());
+            po.setEntity(entityPO);
+        }
         return authorityDao.saveAndFlush(po);
     }
 

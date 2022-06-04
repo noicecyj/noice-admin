@@ -1,5 +1,6 @@
 import enterpriseService from '@/pages/Enterprise/services/auto/enterprise';
 import initService from '@/services/init';
+import {Message} from "@alifd/next";
 
 export default {
 
@@ -15,7 +16,6 @@ export default {
     enterpriseCurrent: 1,
     enterpriseForm: [],
     enterpriseTable: [],
-    enterpriseId: '',
     customData: {},
   },
 
@@ -29,14 +29,14 @@ export default {
     async enterprisePage(enterpriseCurrent) {
       const dataRes = await enterpriseService.enterprisePage(enterpriseCurrent);
       const payload = {
-        enterpriseTableData: dataRes.data.results,
-        enterpriseTotal: dataRes.data.total,
+        enterpriseTableData: dataRes.data.content,
+        enterpriseTotal: dataRes.data.totalElements,
         enterpriseCurrent,
         enterpriseLoadingVisible: false,
       };
       dispatch.enterprise.setState(payload);
     },
-    async enterpriseAdd() {
+    enterpriseAdd() {
       const payload = {
         enterpriseFormData: {},
         enterpriseTitle: '添加',
@@ -44,33 +44,39 @@ export default {
       };
       dispatch.enterprise.setState(payload);
     },
-    async enterpriseEdit(data) {
-      const enterprise = await enterpriseService.findEnterpriseById(data.id);
-      const fromData = {
-        ...enterprise.data,
-      };
+    enterpriseEdit(data) {
       const payload = {
-        enterpriseFormData: fromData,
+        enterpriseFormData: data,
         enterpriseTitle: '编辑',
         enterpriseVisible: true,
       };
       dispatch.enterprise.setState(payload);
     },
-    async enterpriseDelete(data) {
-      await enterpriseService.enterpriseDelete(data.record.id);
-      await this.enterprisePage(data.data.pageNumber);
-      const payload = {
-        enterpriseVisible: false,
-      };
-      dispatch.enterprise.setState(payload);
+    async enterpriseDelete(enterpriseCurrent, record) {
+      const ret = await enterpriseService.enterpriseDelete(record);
+      if (ret.code === 400) {
+        Message.error('删除失败');
+      } else {
+        Message.success('删除成功');
+        await this.enterprisePage(enterpriseCurrent);
+        const payload = {
+          enterpriseVisible: false,
+        };
+        dispatch.enterprise.setState(payload);
+      }
     },
-    async enterpriseSave(data) {
-      await enterpriseService.enterpriseSave(data.enterpriseFormData);
-      await this.enterprisePage(data.pageNumber);
-      const payload = {
-        enterpriseVisible: false,
-      };
-      dispatch.enterprise.setState(payload);
+    async enterpriseSave(enterpriseCurrent, formData) {
+      const ret = await enterpriseService.enterpriseSave(formData);
+      if (ret.code === 400) {
+        Message.error(ret.data.defaultMessage);
+      } else {
+        Message.success('保存成功');
+        await this.enterprisePage(enterpriseCurrent);
+        const payload = {
+          enterpriseVisible: false,
+        };
+        dispatch.enterprise.setState(payload);
+      }
     },
     setDataForm(data) {
       const payload = {

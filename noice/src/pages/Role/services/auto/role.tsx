@@ -10,6 +10,26 @@ export default {
       },
     });
   },
+  rolePageByUserList(pageNumber, data) {
+    return request({
+      url: '/authApi/rolePageByUserList',
+      method: 'post',
+      params: {
+        pageNumber,
+      },
+      data,
+    });
+  },
+  rolePageByAuthorityList(pageNumber, data) {
+    return request({
+      url: '/authApi/rolePageByAuthorityList',
+      method: 'post',
+      params: {
+        pageNumber,
+      },
+      data,
+    });
+  },
   roleSave(data) {
     return request({
       url: '/authApi/roleSave',
@@ -17,36 +37,9 @@ export default {
       data,
     });
   },
-  roleDelete(id) {
+  roleDelete(data) {
     return request({
       url: '/authApi/roleDelete',
-      method: 'post',
-      params: {
-        id,
-      },
-    });
-  },
-  findRoleById(id) {
-    return request({
-      url: '/authApi/findRoleById',
-      method: 'post',
-      params: {
-        id,
-      },
-    });
-  },
-  getUserRole(userId) {
-    return request({
-      url: '/authApi/getUserRole',
-      method: 'post',
-      params: {
-        userId,
-      },
-    });
-  },
-  setUserRole(data) {
-    return request({
-      url: '/authApi/setUserRole',
       method: 'post',
       data,
     });

@@ -16,16 +16,7 @@ export default {
     authorityCurrent: 1,
     authorityForm: [],
     authorityTable: [],
-    authorityId: '',
     customData: {},
-    userId: '',
-    dialogUserAuthorityVisible: false,
-    visibleUserAuthorityLoading: false,
-    selectUserAuthorities: [],
-    roleId: '',
-    dialogRoleAuthorityVisible: false,
-    visibleRoleAuthorityLoading: false,
-    selectRoleAuthorities: [],
   },
 
   reducers: {
@@ -38,14 +29,14 @@ export default {
     async authorityPage(authorityCurrent) {
       const dataRes = await authorityService.authorityPage(authorityCurrent);
       const payload = {
-        authorityTableData: dataRes.data.results,
-        authorityTotal: dataRes.data.total,
+        authorityTableData: dataRes.data.content,
+        authorityTotal: dataRes.data.totalElements,
         authorityCurrent,
         authorityLoadingVisible: false,
       };
       dispatch.authority.setState(payload);
     },
-    async authorityAdd() {
+    authorityAdd() {
       const payload = {
         authorityFormData: {},
         authorityTitle: '添加',
@@ -53,33 +44,39 @@ export default {
       };
       dispatch.authority.setState(payload);
     },
-    async authorityEdit(data) {
-      const authority = await authorityService.findAuthorityById(data.id);
-      const fromData = {
-        ...authority.data,
-      };
+    authorityEdit(data) {
       const payload = {
-        authorityFormData: fromData,
+        authorityFormData: data,
         authorityTitle: '编辑',
         authorityVisible: true,
       };
       dispatch.authority.setState(payload);
     },
-    async authorityDelete(data) {
-      await authorityService.authorityDelete(data.record.id);
-      await this.authorityPage(data.data.pageNumber);
-      const payload = {
-        authorityVisible: false,
-      };
-      dispatch.authority.setState(payload);
+    async authorityDelete(authorityCurrent, record) {
+      const ret = await authorityService.authorityDelete(record);
+      if (ret.code === 400) {
+        Message.error('删除失败');
+      } else {
+        Message.success('删除成功');
+        await this.authorityPage(authorityCurrent);
+        const payload = {
+          authorityVisible: false,
+        };
+        dispatch.authority.setState(payload);
+      }
     },
-    async authoritySave(data) {
-      await authorityService.authoritySave(data.authorityFormData);
-      await this.authorityPage(data.pageNumber);
-      const payload = {
-        authorityVisible: false,
-      };
-      dispatch.authority.setState(payload);
+    async authoritySave(authorityCurrent, formData) {
+      const ret = await authorityService.authoritySave(formData);
+      if (ret.code === 400) {
+        Message.error(ret.data.defaultMessage);
+      } else {
+        Message.success('保存成功');
+        await this.authorityPage(authorityCurrent);
+        const payload = {
+          authorityVisible: false,
+        };
+        dispatch.authority.setState(payload);
+      }
     },
     setDataForm(data) {
       const payload = {
@@ -94,52 +91,6 @@ export default {
         authorityTable: ret.data.dataTable,
         authorityForm: ret.data.dataForm,
         customData: ret.data.customData,
-      };
-      dispatch.authority.setState(payload);
-    },
-    async openUserAuthorityDialog(data) {
-      await this.findDataTableAndFormByName();
-      const ret = await authorityService.getUserAuthority(data.userId);
-      const payload = {
-        userId: data.userId,
-        dialogUserAuthorityVisible: true,
-        selectUserAuthorities: ret.data,
-      };
-      dispatch.authority.setState(payload);
-    },
-    async okUserAuthorityDialog(data) {
-      const ret = await authorityService.setUserAuthority(data);
-      if (ret.code === 200) {
-        Message.success('分配成功');
-      } else {
-        Message.error('分配失败');
-      }
-      const payload = {
-        dialogUserAuthorityVisible: false,
-        selectUserAuthorities: [],
-      };
-      dispatch.authority.setState(payload);
-    },
-    async openRoleAuthorityDialog(data) {
-      await this.findDataTableAndFormByName();
-      const ret = await authorityService.getRoleAuthority(data.roleId);
-      const payload = {
-        roleId: data.roleId,
-        dialogRoleAuthorityVisible: true,
-        selectRoleAuthorities: ret.data,
-      };
-      dispatch.authority.setState(payload);
-    },
-    async okRoleAuthorityDialog(data) {
-      const ret = await authorityService.setRoleAuthority(data);
-      if (ret.code === 200) {
-        Message.success('分配成功');
-      } else {
-        Message.error('分配失败');
-      }
-      const payload = {
-        dialogRoleAuthorityVisible: false,
-        selectRoleAuthorities: [],
       };
       dispatch.authority.setState(payload);
     },

@@ -17,10 +17,6 @@ export default {
     roleForm: [],
     roleTable: [],
     customData: {},
-    userId: '',
-    dialogUserRoleVisible: false,
-    visibleUserRoleLoading: false,
-    selectUserRoles: [],
   },
 
   reducers: {
@@ -33,14 +29,14 @@ export default {
     async rolePage(roleCurrent) {
       const dataRes = await roleService.rolePage(roleCurrent);
       const payload = {
-        roleTableData: dataRes.data.results,
-        roleTotal: dataRes.data.total,
+        roleTableData: dataRes.data.content,
+        roleTotal: dataRes.data.totalElements,
         roleCurrent,
         roleLoadingVisible: false,
       };
       dispatch.role.setState(payload);
     },
-    async roleAdd() {
+    roleAdd() {
       const payload = {
         roleFormData: {},
         roleTitle: '添加',
@@ -48,33 +44,39 @@ export default {
       };
       dispatch.role.setState(payload);
     },
-    async roleEdit(data) {
-      const role = await roleService.findRoleById(data.id);
-      const fromData = {
-        ...role.data,
-      };
+    roleEdit(data) {
       const payload = {
-        roleFormData: fromData,
+        roleFormData: data,
         roleTitle: '编辑',
         roleVisible: true,
       };
       dispatch.role.setState(payload);
     },
-    async roleDelete(data) {
-      await roleService.roleDelete(data.record.id);
-      await this.rolePage(data.data.pageNumber);
-      const payload = {
-        roleVisible: false,
-      };
-      dispatch.role.setState(payload);
+    async roleDelete(roleCurrent, record) {
+      const ret = await roleService.roleDelete(record);
+      if (ret.code === 400) {
+        Message.error('删除失败');
+      } else {
+        Message.success('删除成功');
+        await this.rolePage(roleCurrent);
+        const payload = {
+          roleVisible: false,
+        };
+        dispatch.role.setState(payload);
+      }
     },
-    async roleSave(data) {
-      await roleService.roleSave(data.roleFormData);
-      await this.rolePage(data.pageNumber);
-      const payload = {
-        roleVisible: false,
-      };
-      dispatch.role.setState(payload);
+    async roleSave(roleCurrent, formData) {
+      const ret = await roleService.roleSave(formData);
+      if (ret.code === 400) {
+        Message.error(ret.data.defaultMessage);
+      } else {
+        Message.success('保存成功');
+        await this.rolePage(roleCurrent);
+        const payload = {
+          roleVisible: false,
+        };
+        dispatch.role.setState(payload);
+      }
     },
     setDataForm(data) {
       const payload = {
@@ -89,29 +91,6 @@ export default {
         roleTable: ret.data.dataTable,
         roleForm: ret.data.dataForm,
         customData: ret.data.customData,
-      };
-      dispatch.role.setState(payload);
-    },
-    async openUserRoleDialog(data) {
-      await this.findDataTableAndFormByName();
-      const ret = await roleService.getUserRole(data.userId);
-      const payload = {
-        userId: data.userId,
-        dialogUserRoleVisible: true,
-        selectUserRoles: ret.data,
-      };
-      dispatch.role.setState(payload);
-    },
-    async okUserRoleDialog(data) {
-      const ret = await roleService.setUserRole(data);
-      if (ret.code === 200) {
-        Message.success('分配成功');
-      } else {
-        Message.error('分配失败');
-      }
-      const payload = {
-        dialogUserRoleVisible: false,
-        selectUserRoles: [],
       };
       dispatch.role.setState(payload);
     },

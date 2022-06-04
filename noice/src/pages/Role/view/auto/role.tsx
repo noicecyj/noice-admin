@@ -6,7 +6,6 @@ import {CustomColumnRole} from '@/pages/Role/view/custom/role';
 
 function Role() {
   const [roleState, roleDispatchers] = pageStore.useModel('role');
-
   const [customRoleState, customRoleDispatchers] = pageStore.useModel('customRole');
 
   useEffect(() => {
@@ -18,12 +17,7 @@ function Role() {
       <DataTableTemple
         createItem={() => roleDispatchers.roleAdd()}
         editItem={record => roleDispatchers.roleEdit(record)}
-        deleteItem={record => roleDispatchers.roleDelete({
-          record,
-          data: {
-            pageNumber: roleState.roleCurrent,
-          },
-        })}
+        deleteItem={record => roleDispatchers.roleDelete(roleState.roleCurrent, record)}
         visibleLoading={roleState.roleLoadingVisible}
         dataSource={roleState.roleTableData}
         items={roleState.roleTable}
@@ -50,10 +44,7 @@ function Role() {
         onClose={() => roleDispatchers.setState({roleVisible: false})}
         items={[...roleState.roleForm, ...customRoleState.customFrom]}
         dispatchers={value => roleDispatchers.setDataForm(value)}
-        onOk={() => roleDispatchers.roleSave({
-          roleFormData: roleState.roleFormData,
-          pageNumber: roleState.roleCurrent,
-        })}
+        onOk={() => roleDispatchers.roleSave(roleState.roleCurrent, roleState.roleFormData)}
         formDataValue={roleState.roleFormData}
         formSortCode={String(Number.parseInt(String(roleState.roleTotal)) + 10)}
       />
