@@ -1097,6 +1097,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             sb.append("\r\n");
         }
         if (BeanUtils.ifManyToMany(propertyPOList)) {
+            sb.append("import java.util.HashSet;\r\n");
             sb.append("import java.util.Set;\r\n");
             sb.append("\r\n");
         }
