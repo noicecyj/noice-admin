@@ -21,6 +21,12 @@ function DataTable(props) {
     createItem,
     deleteItem,
     editItem,
+    manyToMany1,
+    manyToMany2,
+    manyToMany3,
+    manyToManyMethod1,
+    manyToManyMethod2,
+    manyToManyMethod3,
     son1,
     son2,
     son3,
@@ -43,6 +49,9 @@ function DataTable(props) {
           {!!sonMethod1 && <Button size="small" onClick={() => sonMethod1(record)}> {son1} </Button>}
           {!!sonMethod2 && <Button size="small" onClick={() => sonMethod2(record)}> {son2} </Button>}
           {!!sonMethod3 && <Button size="small" onClick={() => sonMethod3(record)}> {son3} </Button>}
+          {!!manyToManyMethod1 && <Button size="small" onClick={() => manyToManyMethod1(record)}> {manyToMany1} </Button>}
+          {!!manyToManyMethod2 && <Button size="small" onClick={() => manyToManyMethod2(record)}> {manyToMany2} </Button>}
+          {!!manyToManyMethod3 && <Button size="small" onClick={() => manyToManyMethod3(record)}> {manyToMany3} </Button>}
           {editItem !== null && customData.editEnable &&
             <Button type="primary" size="small" onClick={() => editItem(record)}> 编辑 </Button>}
           {editItem !== null && !customData.editEnable &&
