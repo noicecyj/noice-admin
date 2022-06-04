@@ -633,11 +633,12 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("\r\n");
         sb.append("function ").append(poName).append("() {\r\n");
         sb.append("  const [").append(underPoName).append("State, ").append(underPoName).append("Dispatchers] = pageStore.useModel('").append(underPoName).append("');\r\n");
+        sb.append("\r\n");
         if (subEntityPOList.size() > 0) {
             EntityPO entityPO11 = subEntityPOList.get(0);
             if (entityPO11 != null) {
                 String underSubPoName = BeanUtils.underline2Camel(entityPO11.getEntityCode());
-                sb.append("  const ").append(underSubPoName).append("Dispatchers = pageStore.useModelDispatchers('").append(underSubPoName).append("');\r\n");
+                sb.append("  const [").append(underPoName).append("State, ").append(underPoName).append("Dispatchers] = pageStore.useModel('").append(underSubPoName).append("');\r\n");
                 sb.append("\r\n");
             }
         }
@@ -645,7 +646,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             EntityPO entityPO21 = subEntityPOList.get(1);
             if (entityPO21 != null) {
                 String underSubPoName = BeanUtils.underline2Camel(entityPO21.getEntityCode());
-                sb.append("  const ").append(underSubPoName).append("Dispatchers = pageStore.useModelDispatchers('").append(underSubPoName).append("');\r\n");
+                sb.append("  const [").append(underPoName).append("State, ").append(underPoName).append("Dispatchers] = pageStore.useModel('").append(underSubPoName).append("');\r\n");
                 sb.append("\r\n");
             }
         }
@@ -653,7 +654,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             EntityPO entityPO31 = subEntityPOList.get(2);
             if (entityPO31 != null) {
                 String underSubPoName = BeanUtils.underline2Camel(entityPO31.getEntityCode());
-                sb.append("  const ").append(underSubPoName).append("Dispatchers = pageStore.useModelDispatchers('").append(underSubPoName).append("');\r\n");
+                sb.append("  const [").append(underPoName).append("State, ").append(underPoName).append("Dispatchers] = pageStore.useModel('").append(underSubPoName).append("');\r\n");
                 sb.append("\r\n");
             }
         }
@@ -661,7 +662,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             PropertyPO propertyPO11 = manyToManyList.get(0);
             if (propertyPO11 != null) {
                 String underSubPoName = BeanUtils.underline2Camel(propertyPO11.getPropertyCode());
-                sb.append("  const ").append(underSubPoName).append("Dispatchers = pageStore.useModelDispatchers('").append(underSubPoName).append("');\r\n");
+                sb.append("  const [").append(underPoName).append("State, ").append(underPoName).append("Dispatchers] = pageStore.useModel('").append(underSubPoName).append("');\r\n");
                 sb.append("\r\n");
             }
         }
@@ -669,7 +670,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             PropertyPO propertyPO21 = manyToManyList.get(1);
             if (propertyPO21 != null) {
                 String underSubPoName = BeanUtils.underline2Camel(propertyPO21.getPropertyCode());
-                sb.append("  const ").append(underSubPoName).append("Dispatchers = pageStore.useModelDispatchers('").append(underSubPoName).append("');\r\n");
+                sb.append("  const [").append(underPoName).append("State, ").append(underPoName).append("Dispatchers] = pageStore.useModelDispatchers('").append(underSubPoName).append("');\r\n");
                 sb.append("\r\n");
             }
         }
@@ -677,7 +678,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             PropertyPO propertyPO31 = manyToManyList.get(2);
             if (propertyPO31 != null) {
                 String underSubPoName = BeanUtils.underline2Camel(propertyPO31.getPropertyCode());
-                sb.append("  const ").append(underSubPoName).append("Dispatchers = pageStore.useModelDispatchers('").append(underSubPoName).append("');\r\n");
+                sb.append("  const [").append(underPoName).append("State, ").append(underPoName).append("Dispatchers] = pageStore.useModelDispatchers('").append(underSubPoName).append("');\r\n");
                 sb.append("\r\n");
             }
         }
@@ -764,7 +765,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             if (propertyPO1 != null) {
                 String underSubPoName = BeanUtils.underline2Camel(propertyPO1.getPropertyCode());
                 sb.append("        manyToMany1=\"").append(propertyPO1.getPropertyLabel()).append("\"\r\n");
-                sb.append("        manyToManyMethod1={record => ").append(underSubPoName).append("Dispatchers.onRowClick(record)}\r\n");
+                sb.append("        manyToManyMethod1={record => ").append(underSubPoName).append("Dispatchers.onManyToManyRowClick(record)}\r\n");
             }
         }
         if (manyToManyList.size() > 1) {
@@ -772,7 +773,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             if (propertyPO2 != null) {
                 String underSubPoName = BeanUtils.underline2Camel(propertyPO2.getPropertyCode());
                 sb.append("        manyToMany2=\"").append(propertyPO2.getPropertyLabel()).append("\"\r\n");
-                sb.append("        manyToManyMethod2={record => ").append(underSubPoName).append("Dispatchers.onRowClick(record)}\r\n");
+                sb.append("        manyToManyMethod2={record => ").append(underSubPoName).append("Dispatchers.onManyToManyRowClick(record)}\r\n");
             }
         }
         if (manyToManyList.size() > 2) {
@@ -780,7 +781,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             if (propertyPO3 != null) {
                 String underSubPoName = BeanUtils.underline2Camel(propertyPO3.getPropertyCode());
                 sb.append("        manyToMany3=\"").append(propertyPO3.getPropertyLabel()).append("\"\r\n");
-                sb.append("        manyToManyMethod3={record => ").append(underSubPoName).append("Dispatchers.onRowClick(record)}\r\n");
+                sb.append("        manyToManyMethod3={record => ").append(underSubPoName).append("Dispatchers.onManyToManyRowClick(record)}\r\n");
             }
         }
         sb.append("        customMethod1={() => custom").append(poName).append("Dispatchers.customMethod1()}\r\n");
