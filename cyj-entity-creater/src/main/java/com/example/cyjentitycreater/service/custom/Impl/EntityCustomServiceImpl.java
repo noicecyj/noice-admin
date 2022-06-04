@@ -229,7 +229,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         entityCustomObj.put(appPath + "/service/custom/Impl", serviceImplCustomGenerate(poName, appPath));
         entityCustomObj.put(appPath + "/controller/custom", controllerCustomGenerate(poName, appPath));
         entityCustomObj.put(appPath + "/controller/custom/Impl", controllerImplCustomGenerate(poName, appPath, appApi));
-        entityCustomObj.put(componentPath + poName + "/view/custom", viewCustomGenerate(underPoName));
+        entityCustomObj.put(componentPath + poName + "/view/custom", viewCustomGenerate(underPoName, poName));
         entityCustomObj.put(componentPath + poName + "/services/custom", servicesCustomGenerate(underPoName));
         entityCustomObj.put(componentPath + poName + "/models/custom", modelsCustomGenerate(underPoName, poName));
         createEntityCodeHandler(entityObj, entityCustomObj);
@@ -422,10 +422,20 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{viewData, underPoName + ".tsx"};
     }
 
-    private String[] viewCustomGenerate(String underPoName) {
-        String viewData = "function CustomColumnProperty() {}\r\n" +
+    private String[] viewCustomGenerate(String underPoName, String poName) {
+        String viewData = "import React from \"react\";\r\n" +
                 "\r\n" +
-                "export {CustomColumnProperty};\r\n";
+                "function CustomColumn" + poName + "(props) {\r\n" +
+                "\r\n" +
+                "  console.log(props)\r\n" +
+                "\r\n" +
+                "  return (\r\n" +
+                "    <></>\r\n" +
+                "  );\r\n" +
+                "\r\n" +
+                "}\r\n" +
+                "\r\n" +
+                "export {CustomColumn" + poName + "};\r\n";
         return new String[]{viewData, underPoName + ".tsx"};
     }
 
