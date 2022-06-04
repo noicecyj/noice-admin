@@ -10,6 +10,36 @@ export default {
       },
     });
   },
+  userPageByEnterprise(pageNumber, data) {
+    return request({
+      url: '/authApi/userPageByEnterprise',
+      method: 'post',
+      params: {
+        pageNumber,
+      },
+      data,
+    });
+  },
+  userPageByRoleList(pageNumber, data) {
+    return request({
+      url: '/authApi/userPageByRoleList',
+      method: 'post',
+      params: {
+        pageNumber,
+      },
+      data,
+    });
+  },
+  userPageByAuthorityList(pageNumber, data) {
+    return request({
+      url: '/authApi/userPageByAuthorityList',
+      method: 'post',
+      params: {
+        pageNumber,
+      },
+      data,
+    });
+  },
   userSave(data) {
     return request({
       url: '/authApi/userSave',
@@ -17,22 +47,11 @@ export default {
       data,
     });
   },
-  userDelete(id) {
+  userDelete(data) {
     return request({
       url: '/authApi/userDelete',
       method: 'post',
-      params: {
-        id,
-      },
-    });
-  },
-  findUserById(id) {
-    return request({
-      url: '/authApi/findUserById',
-      method: 'post',
-      params: {
-        id,
-      },
+      data,
     });
   },
 };

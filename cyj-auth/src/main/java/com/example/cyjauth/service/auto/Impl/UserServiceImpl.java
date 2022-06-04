@@ -1,5 +1,6 @@
 package com.example.cyjauth.service.auto.Impl;
 
+import com.example.cyjcommon.dao.EnterpriseDao;
 import com.example.cyjcommon.dao.UserDao;
 import com.example.cyjcommon.entity.po.EnterprisePO;
 import com.example.cyjcommon.entity.po.RolePO;
@@ -26,14 +27,24 @@ import java.util.Set;
 public class UserServiceImpl extends BaseService implements UserService {
 
     private UserDao userDao;
+    private EnterpriseDao enterpriseDao;
 
     @Autowired
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
 
+    @Autowired
+    public void setEnterpriseDao(EnterpriseDao enterpriseDao) {
+        this.enterpriseDao = enterpriseDao;
+    }
+
     @Override
     public UserPO addOne(UserPO po) {
+        if (po.getEnterpriseId() != null){
+            EnterprisePO enterprisePO = enterpriseDao.getOne(po.getEnterpriseId());
+            po.setEnterprise(enterprisePO);
+        }
         return userDao.save(po);
     }
 
@@ -44,6 +55,10 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     @Override
     public UserPO updateOne(UserPO po) {
+        if (po.getEnterpriseId() != null){
+            EnterprisePO enterprisePO = enterpriseDao.getOne(po.getEnterpriseId());
+            po.setEnterprise(enterprisePO);
+        }
         return userDao.saveAndFlush(po);
     }
 

@@ -1,5 +1,6 @@
 import userService from '@/pages/User/services/auto/user';
 import initService from '@/services/init';
+import {Message} from "@alifd/next";
 
 export default {
 
@@ -28,14 +29,14 @@ export default {
     async userPage(userCurrent) {
       const dataRes = await userService.userPage(userCurrent);
       const payload = {
-        userTableData: dataRes.data.results,
-        userTotal: dataRes.data.total,
+        userTableData: dataRes.data.content,
+        userTotal: dataRes.data.totalElements,
         userCurrent,
         userLoadingVisible: false,
       };
       dispatch.user.setState(payload);
     },
-    async userAdd() {
+    userAdd() {
       const payload = {
         userFormData: {},
         userTitle: '添加',
@@ -43,33 +44,39 @@ export default {
       };
       dispatch.user.setState(payload);
     },
-    async userEdit(data) {
-      const user = await userService.findUserById(data.id);
-      const fromData = {
-        ...user.data,
-      };
+    userEdit(data) {
       const payload = {
-        userFormData: fromData,
+        userFormData: data,
         userTitle: '编辑',
         userVisible: true,
       };
       dispatch.user.setState(payload);
     },
-    async userDelete(data) {
-      await userService.userDelete(data.record.id);
-      await this.userPage(data.data.pageNumber);
-      const payload = {
-        userVisible: false,
-      };
-      dispatch.user.setState(payload);
+    async userDelete(userCurrent, record) {
+      const ret = await userService.userDelete(record);
+      if (ret.code === 400) {
+        Message.error('删除失败');
+      } else {
+        Message.success('删除成功');
+        await this.userPage(userCurrent);
+        const payload = {
+          userVisible: false,
+        };
+        dispatch.user.setState(payload);
+      }
     },
-    async userSave(data) {
-      await userService.userSave(data.userFormData);
-      await this.userPage(data.pageNumber);
-      const payload = {
-        userVisible: false,
-      };
-      dispatch.user.setState(payload);
+    async userSave(userCurrent, formData) {
+      const ret = await userService.userSave(formData);
+      if (ret.code === 400) {
+        Message.error(ret.data.defaultMessage);
+      } else {
+        Message.success('保存成功');
+        await this.userPage(userCurrent);
+        const payload = {
+          userVisible: false,
+        };
+        dispatch.user.setState(payload);
+      }
     },
     setDataForm(data) {
       const payload = {
