@@ -1,12 +1,10 @@
 package com.example.cyjauth.controller.auto.Impl;
 
-import com.example.cyjcommon.entity.po.EnterprisePO;
-import com.example.cyjcommon.entity.po.RolePO;
-import com.example.cyjcommon.entity.po.AuthorityPO;
-import com.example.cyjcommon.entity.po.UserPO;
-import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjauth.controller.auto.UserController;
 import com.example.cyjauth.service.auto.UserService;
+import com.example.cyjcommon.entity.po.EnterprisePO;
+import com.example.cyjcommon.entity.po.UserPO;
+import com.example.cyjcommon.utils.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -41,12 +39,12 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
-    public ResultVO userPageByRoleList(Integer pageNumber, Set<RolePO> roleList) {
+    public ResultVO userPageByRoleList(Integer pageNumber, Set<String> roleList) {
         return ResultVO.success(userService.findAllByRoleList(pageNumber, roleList));
     }
 
     @Override
-    public ResultVO userPageByAuthorityList(Integer pageNumber, Set<AuthorityPO> authorityList) {
+    public ResultVO userPageByAuthorityList(Integer pageNumber, Set<String> authorityList) {
         return ResultVO.success(userService.findAllByAuthorityList(pageNumber, authorityList));
     }
 

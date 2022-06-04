@@ -1,13 +1,13 @@
 package com.example.cyjauth.service.auto.Impl;
 
+import com.example.cyjauth.service.auto.UserService;
+import com.example.cyjcommon.dao.AuthorityDao;
 import com.example.cyjcommon.dao.EnterpriseDao;
+import com.example.cyjcommon.dao.RoleDao;
 import com.example.cyjcommon.dao.UserDao;
 import com.example.cyjcommon.entity.po.EnterprisePO;
-import com.example.cyjcommon.entity.po.RolePO;
-import com.example.cyjcommon.entity.po.AuthorityPO;
 import com.example.cyjcommon.entity.po.UserPO;
 import com.example.cyjcommon.service.BaseService;
-import com.example.cyjauth.service.auto.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -17,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -28,10 +29,23 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     private UserDao userDao;
     private EnterpriseDao enterpriseDao;
+    private RoleDao roleDao;
+    private AuthorityDao authorityDao;
+
 
     @Autowired
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
+    }
+
+    @Autowired
+    public void setRoleDao(RoleDao roleDao) {
+        this.roleDao = roleDao;
+    }
+
+    @Autowired
+    public void setAuthorityDao(AuthorityDao authorityDao) {
+        this.authorityDao = authorityDao;
     }
 
     @Autowired
@@ -41,7 +55,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     @Override
     public UserPO addOne(UserPO po) {
-        if (po.getEnterpriseId() != null){
+        if (po.getEnterpriseId() != null) {
             EnterprisePO enterprisePO = enterpriseDao.getOne(po.getEnterpriseId());
             po.setEnterprise(enterprisePO);
         }
@@ -55,7 +69,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     @Override
     public UserPO updateOne(UserPO po) {
-        if (po.getEnterpriseId() != null){
+        if (po.getEnterpriseId() != null) {
             EnterprisePO enterprisePO = enterpriseDao.getOne(po.getEnterpriseId());
             po.setEnterprise(enterprisePO);
         }
@@ -77,19 +91,19 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
-    public Page<UserPO> findAllByRoleList(Integer pageNumber, Set<RolePO> roleList) {
+    public Page<UserPO> findAllByRoleList(Integer pageNumber, Set<String> roleList) {
         Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
         UserPO userPO = new UserPO();
-        userPO.setRole(roleList);
+        userPO.setRole(new HashSet<>(roleDao.findAllById(roleList)));
         Example<UserPO> example = Example.of(userPO);
         return userDao.findAll(example, pageable);
     }
 
     @Override
-    public Page<UserPO> findAllByAuthorityList(Integer pageNumber, Set<AuthorityPO> authorityList) {
+    public Page<UserPO> findAllByAuthorityList(Integer pageNumber, Set<String> authorityList) {
         Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
         UserPO userPO = new UserPO();
-        userPO.setAuthority(authorityList);
+        userPO.setAuthority(new HashSet<>(authorityDao.findAllById(authorityList)));
         Example<UserPO> example = Example.of(userPO);
         return userDao.findAll(example, pageable);
     }

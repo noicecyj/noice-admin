@@ -31,11 +31,11 @@ public interface UserController {
 
     @Operation(summary = "根据RoleList查询所有User")
     @PostMapping(value = "userPageByRoleList")
-    ResultVO userPageByRoleList(@RequestParam("pageNumber") Integer pageNumber, @RequestBody Set<RolePO> roleList);
+    ResultVO userPageByRoleList(@RequestParam("pageNumber") Integer pageNumber, @RequestBody Set<String> roleList);
 
     @Operation(summary = "根据AuthorityList查询所有User")
     @PostMapping(value = "userPageByAuthorityList")
-    ResultVO userPageByAuthorityList(@RequestParam("pageNumber") Integer pageNumber, @RequestBody Set<AuthorityPO> authorityList);
+    ResultVO userPageByAuthorityList(@RequestParam("pageNumber") Integer pageNumber, @RequestBody Set<String> authorityList);
 
     @Operation(summary = "保存User")
     @PostMapping(value = "userSave")

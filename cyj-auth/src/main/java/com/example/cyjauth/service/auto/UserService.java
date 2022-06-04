@@ -23,8 +23,8 @@ public interface UserService {
 
     Page<UserPO> findAll(Integer pageNumber, EnterprisePO enterprise);
 
-    Page<UserPO> findAllByRoleList(Integer pageNumber, Set<RolePO> roleList);
+    Page<UserPO> findAllByRoleList(Integer pageNumber, Set<String> roleList);
 
-    Page<UserPO> findAllByAuthorityList(Integer pageNumber, Set<AuthorityPO> authorityList);
+    Page<UserPO> findAllByAuthorityList(Integer pageNumber, Set<String> authorityList);
 
 }
