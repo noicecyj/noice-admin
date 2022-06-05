@@ -6,6 +6,11 @@ import {CustomColumnUser} from '@/pages/User/view/custom/user';
 
 function User() {
   const [userState, userDispatchers] = pageStore.useModel('user');
+
+  const [roleState, roleDispatchers] = pageStore.useModel('role');
+
+  const [authorityState, authorityDispatchers] = pageStore.useModelDispatchers('authority');
+
   const [customUserState, customUserDispatchers] = pageStore.useModel('customUser');
 
   useEffect(() => {
@@ -30,6 +35,10 @@ function User() {
             <CustomColumnUser value={value} index={index} record={record}/>
           );
         }}
+        manyToMany1="角色"
+        manyToManyMethod1={record => roleDispatchers.onManyToManyRowClick(record)}
+        manyToMany2="权限"
+        manyToManyMethod2={record => authorityDispatchers.onManyToManyRowClick(record)}
         customMethod1={() => customUserDispatchers.customMethod1()}
         customMethod2={() => customUserDispatchers.customMethod2()}
         customMethod3={() => customUserDispatchers.customMethod3()}

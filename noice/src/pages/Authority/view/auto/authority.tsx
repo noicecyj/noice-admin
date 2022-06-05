@@ -6,6 +6,11 @@ import {CustomColumnAuthority} from '@/pages/Authority/view/custom/authority';
 
 function Authority() {
   const [authorityState, authorityDispatchers] = pageStore.useModel('authority');
+
+  const [userState, userDispatchers] = pageStore.useModel('user');
+
+  const [roleState, roleDispatchers] = pageStore.useModelDispatchers('role');
+
   const [customAuthorityState, customAuthorityDispatchers] = pageStore.useModel('customAuthority');
 
   useEffect(() => {
@@ -30,6 +35,10 @@ function Authority() {
             <CustomColumnAuthority value={value} index={index} record={record}/>
           );
         }}
+        manyToMany1="用户"
+        manyToManyMethod1={record => userDispatchers.onManyToManyRowClick(record)}
+        manyToMany2="角色"
+        manyToManyMethod2={record => roleDispatchers.onManyToManyRowClick(record)}
         customMethod1={() => customAuthorityDispatchers.customMethod1()}
         customMethod2={() => customAuthorityDispatchers.customMethod2()}
         customMethod3={() => customAuthorityDispatchers.customMethod3()}

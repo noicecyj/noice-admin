@@ -6,6 +6,11 @@ import {CustomColumnRole} from '@/pages/Role/view/custom/role';
 
 function Role() {
   const [roleState, roleDispatchers] = pageStore.useModel('role');
+
+  const [userState, userDispatchers] = pageStore.useModel('user');
+
+  const [authorityState, authorityDispatchers] = pageStore.useModelDispatchers('authority');
+
   const [customRoleState, customRoleDispatchers] = pageStore.useModel('customRole');
 
   useEffect(() => {
@@ -30,6 +35,10 @@ function Role() {
             <CustomColumnRole value={value} index={index} record={record}/>
           );
         }}
+        manyToMany1="用户"
+        manyToManyMethod1={record => userDispatchers.onManyToManyRowClick(record)}
+        manyToMany2="权限"
+        manyToManyMethod2={record => authorityDispatchers.onManyToManyRowClick(record)}
         customMethod1={() => customRoleDispatchers.customMethod1()}
         customMethod2={() => customRoleDispatchers.customMethod2()}
         customMethod3={() => customRoleDispatchers.customMethod3()}

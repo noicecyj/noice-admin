@@ -6,6 +6,7 @@ import {CustomColumnEnterprise} from '@/pages/Enterprise/view/custom/enterprise'
 
 function Enterprise() {
   const [enterpriseState, enterpriseDispatchers] = pageStore.useModel('enterprise');
+
   const [customEnterpriseState, customEnterpriseDispatchers] = pageStore.useModel('customEnterprise');
 
   useEffect(() => {
