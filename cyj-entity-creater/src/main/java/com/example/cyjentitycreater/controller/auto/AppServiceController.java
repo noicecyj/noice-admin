@@ -1,6 +1,6 @@
 package com.example.cyjentitycreater.controller.auto;
 
-import com.example.cyjcommon.entity.po.AppServicePO;
+import com.example.cyjcommon.entity.AppService;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,10 +22,10 @@ public interface AppServiceController {
 
     @Operation(summary = "保存AppService")
     @PostMapping(value = "appServiceSave")
-    ResultVO appServiceSave(@RequestBody @Validated AppServicePO po, BindingResult bindingResult);
+    ResultVO appServiceSave(@RequestBody @Validated AppService po, BindingResult bindingResult);
 
     @Operation(summary = "删除AppService")
     @PostMapping(value = "appServiceDelete")
-    ResultVO appServiceDelete(@RequestBody AppServicePO po);
+    ResultVO appServiceDelete(@RequestBody AppService po);
 
 }

@@ -1,6 +1,6 @@
 package com.example.cyjdictionary.controller.auto.Impl;
 
-import com.example.cyjcommon.entity.po.CatalogPO;
+import com.example.cyjcommon.entity.Catalog;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjdictionary.controller.auto.CatalogController;
 import com.example.cyjdictionary.service.auto.CatalogService;
@@ -31,7 +31,7 @@ public class CatalogControllerImpl implements CatalogController {
     }
 
     @Override
-    public ResultVO catalogSave(CatalogPO po, BindingResult bindingResult) {
+    public ResultVO catalogSave(Catalog po, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultVO.failure(bindingResult.getAllErrors().get(0));
         }
@@ -42,7 +42,7 @@ public class CatalogControllerImpl implements CatalogController {
     }
 
     @Override
-    public ResultVO catalogDelete(CatalogPO po) {
+    public ResultVO catalogDelete(Catalog po) {
         if (po.getId() == null) {
             return ResultVO.failure();
         }

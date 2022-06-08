@@ -1,6 +1,6 @@
 package com.example.cyjworkflow.service.auto;
 
-import com.example.cyjcommon.entity.po.FlowUserPO;
+import com.example.cyjcommon.entity.FlowUser;
 import org.springframework.data.domain.Page;
 
 /**
@@ -8,12 +8,12 @@ import org.springframework.data.domain.Page;
  */
 public interface FlowUserService {
 
-    FlowUserPO addOne(FlowUserPO po);
+    FlowUser addOne(FlowUser po);
 
-    void deleteOne(FlowUserPO po);
+    void deleteOne(FlowUser po);
 
-    FlowUserPO updateOne(FlowUserPO po);
+    FlowUser updateOne(FlowUser po);
 
-    Page<FlowUserPO> findAll(Integer pageNumber);
+    Page<FlowUser> findAll(Integer pageNumber);
 
 }

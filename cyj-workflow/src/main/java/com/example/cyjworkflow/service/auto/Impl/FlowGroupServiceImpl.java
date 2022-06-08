@@ -1,7 +1,7 @@
 package com.example.cyjworkflow.service.auto.Impl;
 
 import com.example.cyjcommon.dao.FlowGroupDao;
-import com.example.cyjcommon.entity.po.FlowGroupPO;
+import com.example.cyjcommon.entity.FlowGroup;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjworkflow.service.auto.FlowGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,22 +26,22 @@ public class FlowGroupServiceImpl extends BaseService implements FlowGroupServic
     }
 
     @Override
-    public FlowGroupPO addOne(FlowGroupPO po) {
+    public FlowGroup addOne(FlowGroup po) {
         return flowGroupDao.save(po);
     }
 
     @Override
-    public void deleteOne(FlowGroupPO po) {
+    public void deleteOne(FlowGroup po) {
         flowGroupDao.delete(po);
     }
 
     @Override
-    public FlowGroupPO updateOne(FlowGroupPO po) {
+    public FlowGroup updateOne(FlowGroup po) {
         return flowGroupDao.saveAndFlush(po);
     }
 
     @Override
-    public Page<FlowGroupPO> findAll(Integer pageNumber) {
+    public Page<FlowGroup> findAll(Integer pageNumber) {
         return flowGroupDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 

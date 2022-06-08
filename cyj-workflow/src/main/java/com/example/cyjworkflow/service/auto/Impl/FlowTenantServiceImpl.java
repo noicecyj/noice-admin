@@ -1,7 +1,7 @@
 package com.example.cyjworkflow.service.auto.Impl;
 
 import com.example.cyjcommon.dao.FlowTenantDao;
-import com.example.cyjcommon.entity.po.FlowTenantPO;
+import com.example.cyjcommon.entity.FlowTenant;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjworkflow.service.auto.FlowTenantService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,22 +26,22 @@ public class FlowTenantServiceImpl extends BaseService implements FlowTenantServ
     }
 
     @Override
-    public FlowTenantPO addOne(FlowTenantPO po) {
+    public FlowTenant addOne(FlowTenant po) {
         return flowTenantDao.save(po);
     }
 
     @Override
-    public void deleteOne(FlowTenantPO po) {
+    public void deleteOne(FlowTenant po) {
         flowTenantDao.delete(po);
     }
 
     @Override
-    public FlowTenantPO updateOne(FlowTenantPO po) {
+    public FlowTenant updateOne(FlowTenant po) {
         return flowTenantDao.saveAndFlush(po);
     }
 
     @Override
-    public Page<FlowTenantPO> findAll(Integer pageNumber) {
+    public Page<FlowTenant> findAll(Integer pageNumber) {
         return flowTenantDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 

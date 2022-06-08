@@ -1,7 +1,7 @@
 package com.example.cyjdictionary.controller.auto.Impl;
 
-import com.example.cyjcommon.entity.po.CatalogPO;
-import com.example.cyjcommon.entity.po.DictionaryPO;
+import com.example.cyjcommon.entity.Catalog;
+import com.example.cyjcommon.entity.Dictionary;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjdictionary.controller.auto.DictionaryController;
 import com.example.cyjdictionary.service.auto.DictionaryService;
@@ -32,12 +32,12 @@ public class DictionaryControllerImpl implements DictionaryController {
     }
 
     @Override
-    public ResultVO dictionaryPage(Integer pageNumber, CatalogPO catalog) {
+    public ResultVO dictionaryPage(Integer pageNumber, Catalog catalog) {
         return ResultVO.success(dictionaryService.findAll(pageNumber, catalog));
     }
 
     @Override
-    public ResultVO dictionarySave(DictionaryPO po, BindingResult bindingResult) {
+    public ResultVO dictionarySave(Dictionary po, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultVO.failure(bindingResult.getAllErrors().get(0));
         }
@@ -48,7 +48,7 @@ public class DictionaryControllerImpl implements DictionaryController {
     }
 
     @Override
-    public ResultVO dictionaryDelete(DictionaryPO po) {
+    public ResultVO dictionaryDelete(Dictionary po) {
         if (po.getId() == null) {
             return ResultVO.failure();
         }

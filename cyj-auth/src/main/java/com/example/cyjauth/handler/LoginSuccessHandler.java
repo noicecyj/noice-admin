@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.example.cyjauth.constant.SecurityConstant;
 import com.example.cyjauth.entity.bo.AuthUserDetails;
 import com.example.cyjauth.service.custom.UserCustomService;
-import com.example.cyjcommon.entity.po.RolePO;
+import com.example.cyjcommon.entity.Role;
 import com.example.cyjcommon.utils.ResponseUtil;
 import com.example.cyjcommon.utils.ResultCode;
 import com.example.cyjcommon.utils.ResultVO;
@@ -66,7 +66,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         String roleInfosMapPermission = redisTemplate.opsForValue().get("authentication:roleinfos:permissions:" + userName);
         if (StringUtils.isBlank(roleInfosMapPermission)) {
             //将角色与权限关系存入redis
-            Set<RolePO> roleInfos = userCustomService.findAuthUserByUsername(userName).getRole();
+            Set<Role> roleInfos = userCustomService.findAuthUserByUsername(userName).getRole();
             redisTemplate.opsForValue().set("authentication:roleinfos:permissions:" + userName, JSON.toJSONString(roleInfos), 480, TimeUnit.MINUTES);
         }
         //创建token
@@ -92,7 +92,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         Claims claims = Jwts.claims().setSubject(authUserDetails.getUsername());
         //存入角色信息
         List<String> list = new ArrayList<>();
-        for (RolePO po : authUserDetails.getRole()) {
+        for (Role po : authUserDetails.getRole()) {
             list.add(po.getId());
         }
         claims.put(SecurityConstant.AUTHORITIES, JSON.toJSONString(list));

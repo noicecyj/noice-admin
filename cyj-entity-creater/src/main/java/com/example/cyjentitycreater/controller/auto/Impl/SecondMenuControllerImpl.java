@@ -1,7 +1,7 @@
 package com.example.cyjentitycreater.controller.auto.Impl;
 
-import com.example.cyjcommon.entity.po.FirstMenuPO;
-import com.example.cyjcommon.entity.po.SecondMenuPO;
+import com.example.cyjcommon.entity.FirstMenu;
+import com.example.cyjcommon.entity.SecondMenu;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.controller.auto.SecondMenuController;
 import com.example.cyjentitycreater.service.auto.SecondMenuService;
@@ -27,12 +27,12 @@ public class SecondMenuControllerImpl implements SecondMenuController {
     }
 
     @Override
-    public ResultVO secondMenuPage(Integer pageNumber, FirstMenuPO firstMenu) {
+    public ResultVO secondMenuPage(Integer pageNumber, FirstMenu firstMenu) {
         return ResultVO.success(secondMenuService.findAll(pageNumber, firstMenu));
     }
 
     @Override
-    public ResultVO secondMenuSave(SecondMenuPO po, BindingResult bindingResult) {
+    public ResultVO secondMenuSave(SecondMenu po, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultVO.failure(bindingResult.getAllErrors().get(0));
         }
@@ -43,7 +43,7 @@ public class SecondMenuControllerImpl implements SecondMenuController {
     }
 
     @Override
-    public ResultVO secondMenuDelete(SecondMenuPO po) {
+    public ResultVO secondMenuDelete(SecondMenu po) {
         if (po.getId() == null) {
             return ResultVO.failure();
         }

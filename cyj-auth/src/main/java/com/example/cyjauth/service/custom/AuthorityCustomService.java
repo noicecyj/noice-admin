@@ -1,7 +1,7 @@
 package com.example.cyjauth.service.custom;
 
 
-import com.example.cyjcommon.entity.po.AuthorityPO;
+import com.example.cyjcommon.entity.Authority;
 
 import java.util.List;
 
@@ -12,10 +12,10 @@ import java.util.List;
  */
 public interface AuthorityCustomService {
 
-    List<AuthorityPO> findRoleAndAuthority();
+    List<Authority> findRoleAndAuthority();
 
     void createAuthority();
 
-    AuthorityPO findByPathAndName(String path, String name);
+    Authority findByPathAndName(String path, String name);
 
 }

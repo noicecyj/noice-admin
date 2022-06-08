@@ -1,7 +1,7 @@
 package com.example.cyjauth.service.auto;
 
-import com.example.cyjcommon.entity.po.EnterprisePO;
-import com.example.cyjcommon.entity.po.UserPO;
+import com.example.cyjcommon.entity.Enterprise;
+import com.example.cyjcommon.entity.User;
 import org.springframework.data.domain.Page;
 
 import java.util.Set;
@@ -11,18 +11,6 @@ import java.util.Set;
  */
 public interface UserService {
 
-    UserPO addOne(UserPO po);
-
-    void deleteOne(UserPO po);
-
-    UserPO updateOne(UserPO po);
-
-    Page<UserPO> findAll(Integer pageNumber);
-
-    Page<UserPO> findAll(Integer pageNumber, EnterprisePO enterprise);
-
-    Page<UserPO> findAllByRoleList(Integer pageNumber, Set<String> roleList);
-
-    Page<UserPO> findAllByAuthorityList(Integer pageNumber, Set<String> authorityList);
+    Page<User> findAll(Integer pageNumber, Enterprise enterprise);
 
 }

@@ -1,7 +1,7 @@
 package com.example.cyjcommon.dao;
 
-import com.example.cyjcommon.entity.po.AppServicePO;
-import com.example.cyjcommon.entity.po.EntityPO;
+import com.example.cyjcommon.entity.AppService;
+import com.example.cyjcommon.entity.Entity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -9,10 +9,10 @@ import java.util.List;
 /**
  * @author Noice
  */
-public interface EntityDao extends JpaRepository<EntityPO, String> {
+public interface EntityDao extends JpaRepository<Entity, String> {
 
-    List<EntityPO> findByEntityOrderBySortCode(EntityPO entity);
+    List<Entity> findByEntityParentOrderBySortCode(Entity entity);
 
-    List<EntityPO> findByAppServiceOrderBySortCode(AppServicePO appService);
+    List<Entity> findByAppServiceOrderBySortCode(AppService appService);
 
 }

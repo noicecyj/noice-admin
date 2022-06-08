@@ -1,9 +1,11 @@
 package com.example.cyjauth.service.auto.Impl;
 
 import com.example.cyjcommon.dao.EnterpriseDao;
-import com.example.cyjcommon.entity.po.EnterprisePO;
+import com.example.cyjcommon.entity.Enterprise;
+import com.example.cyjcommon.entity.Role;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjauth.service.auto.EnterpriseService;
+import com.example.cyjcommon.service.autoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class EnterpriseServiceImpl extends BaseService implements EnterpriseService {
+public class EnterpriseServiceImpl extends BaseService implements autoService<Enterprise>, EnterpriseService {
 
     private EnterpriseDao enterpriseDao;
 
@@ -26,22 +28,22 @@ public class EnterpriseServiceImpl extends BaseService implements EnterpriseServ
     }
 
     @Override
-    public EnterprisePO addOne(EnterprisePO po) {
+    public Enterprise addOne(Enterprise po) {
         return enterpriseDao.save(po);
     }
 
     @Override
-    public void deleteOne(EnterprisePO po) {
+    public void deleteOne(Enterprise po) {
         enterpriseDao.delete(po);
     }
 
     @Override
-    public EnterprisePO updateOne(EnterprisePO po) {
+    public Enterprise updateOne(Enterprise po) {
         return enterpriseDao.saveAndFlush(po);
     }
 
     @Override
-    public Page<EnterprisePO> findAll(Integer pageNumber) {
+    public Page<Enterprise> findAll(Integer pageNumber) {
         return enterpriseDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 

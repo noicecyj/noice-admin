@@ -1,6 +1,6 @@
 package com.example.cyjdictionary.controller.auto;
 
-import com.example.cyjcommon.entity.po.CatalogPO;
+import com.example.cyjcommon.entity.Catalog;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,10 +22,10 @@ public interface CatalogController {
 
     @Operation(summary = "保存Catalog")
     @PostMapping(value = "catalogSave")
-    ResultVO catalogSave(@RequestBody @Validated CatalogPO po, BindingResult bindingResult);
+    ResultVO catalogSave(@RequestBody @Validated Catalog po, BindingResult bindingResult);
 
     @Operation(summary = "删除Catalog")
     @PostMapping(value = "catalogDelete")
-    ResultVO catalogDelete(@RequestBody CatalogPO po);
+    ResultVO catalogDelete(@RequestBody Catalog po);
 
 }

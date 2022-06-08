@@ -1,6 +1,6 @@
 package com.example.cyjworkflow.controller.auto;
 
-import com.example.cyjcommon.entity.po.FlowTenantPO;
+import com.example.cyjcommon.entity.FlowTenant;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,10 +22,10 @@ public interface FlowTenantController {
 
     @Operation(summary = "保存FlowTenant")
     @PostMapping(value = "flowTenantSave")
-    ResultVO flowTenantSave(@RequestBody @Validated FlowTenantPO po, BindingResult bindingResult);
+    ResultVO flowTenantSave(@RequestBody @Validated FlowTenant po, BindingResult bindingResult);
 
     @Operation(summary = "删除FlowTenant")
     @PostMapping(value = "flowTenantDelete")
-    ResultVO flowTenantDelete(@RequestBody FlowTenantPO po);
+    ResultVO flowTenantDelete(@RequestBody FlowTenant po);
 
 }

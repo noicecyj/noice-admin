@@ -1,6 +1,6 @@
 package com.example.cyjworkflow.service.auto;
 
-import com.example.cyjcommon.entity.po.BpmnPO;
+import com.example.cyjcommon.entity.Bpmn;
 import com.querydsl.core.QueryResults;
 
 /**
@@ -9,14 +9,14 @@ import com.querydsl.core.QueryResults;
  */
 public interface BpmnService {
 
-    BpmnPO addOne(BpmnPO po);
+    Bpmn addOne(Bpmn po);
 
     void deleteOne(String id);
 
-    BpmnPO updateOne(BpmnPO po);
+    Bpmn updateOne(Bpmn po);
 
-    QueryResults<BpmnPO> findAll(Integer pageNumber);
+    QueryResults<Bpmn> findAll(Integer pageNumber);
 
-    BpmnPO findOneById(String id);
+    Bpmn findOneById(String id);
 
 }

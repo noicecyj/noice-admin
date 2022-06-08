@@ -2,8 +2,8 @@ package com.example.cyjdictionary.service.auto.Impl;
 
 import com.example.cyjcommon.dao.DictionaryDao;
 import com.example.cyjcommon.dao.CatalogDao;
-import com.example.cyjcommon.entity.po.DictionaryPO;
-import com.example.cyjcommon.entity.po.CatalogPO;
+import com.example.cyjcommon.entity.Catalog;
+import com.example.cyjcommon.entity.Dictionary;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjdictionary.service.auto.DictionaryService;
 import com.example.cyjdictionary.service.auto.CatalogService;
@@ -43,26 +43,26 @@ public class CatalogServiceImpl extends BaseService implements CatalogService {
     }
 
     @Override
-    public CatalogPO addOne(CatalogPO po) {
+    public Catalog addOne(Catalog po) {
         return catalogDao.save(po);
     }
 
     @Override
-    public void deleteOne(CatalogPO po) {
-        List<DictionaryPO> dictionaryPOList = dictionaryDao.findByCatalogOrderBySortCode(po);
-        for (DictionaryPO dictionaryPO : dictionaryPOList) {
-            dictionaryService.deleteOne(dictionaryPO);
+    public void deleteOne(Catalog po) {
+        List<Dictionary> dictionaryList = dictionaryDao.findByCatalogOrderBySortCode(po);
+        for (Dictionary dictionary : dictionaryList) {
+            dictionaryService.deleteOne(dictionary);
         }
         catalogDao.delete(po);
     }
 
     @Override
-    public CatalogPO updateOne(CatalogPO po) {
+    public Catalog updateOne(Catalog po) {
         return catalogDao.saveAndFlush(po);
     }
 
     @Override
-    public Page<CatalogPO> findAll(Integer pageNumber) {
+    public Page<Catalog> findAll(Integer pageNumber) {
         return catalogDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 

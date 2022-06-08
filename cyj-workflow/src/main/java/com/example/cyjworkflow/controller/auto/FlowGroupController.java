@@ -1,6 +1,6 @@
 package com.example.cyjworkflow.controller.auto;
 
-import com.example.cyjcommon.entity.po.FlowGroupPO;
+import com.example.cyjcommon.entity.FlowGroup;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,10 +22,10 @@ public interface FlowGroupController {
 
     @Operation(summary = "保存FlowGroup")
     @PostMapping(value = "flowGroupSave")
-    ResultVO flowGroupSave(@RequestBody @Validated FlowGroupPO po, BindingResult bindingResult);
+    ResultVO flowGroupSave(@RequestBody @Validated FlowGroup po, BindingResult bindingResult);
 
     @Operation(summary = "删除FlowGroup")
     @PostMapping(value = "flowGroupDelete")
-    ResultVO flowGroupDelete(@RequestBody FlowGroupPO po);
+    ResultVO flowGroupDelete(@RequestBody FlowGroup po);
 
 }

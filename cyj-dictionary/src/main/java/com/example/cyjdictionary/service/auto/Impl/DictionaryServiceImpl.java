@@ -1,8 +1,8 @@
 package com.example.cyjdictionary.service.auto.Impl;
 
 import com.example.cyjcommon.dao.DictionaryDao;
-import com.example.cyjcommon.entity.po.CatalogPO;
-import com.example.cyjcommon.entity.po.DictionaryPO;
+import com.example.cyjcommon.entity.Catalog;
+import com.example.cyjcommon.entity.Dictionary;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjdictionary.service.auto.DictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,31 +29,31 @@ public class DictionaryServiceImpl extends BaseService implements DictionaryServ
     }
 
     @Override
-    public DictionaryPO addOne(DictionaryPO po) {
+    public Dictionary addOne(Dictionary po) {
         return dictionaryDao.save(po);
     }
 
     @Override
-    public void deleteOne(DictionaryPO po) {
+    public void deleteOne(Dictionary po) {
         dictionaryDao.delete(po);
     }
 
     @Override
-    public DictionaryPO updateOne(DictionaryPO po) {
+    public Dictionary updateOne(Dictionary po) {
         return dictionaryDao.saveAndFlush(po);
     }
 
     @Override
-    public Page<DictionaryPO> findAll(Integer pageNumber) {
+    public Page<Dictionary> findAll(Integer pageNumber) {
         return dictionaryDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 
     @Override
-    public Page<DictionaryPO> findAll(Integer pageNumber, CatalogPO catalog) {
+    public Page<Dictionary> findAll(Integer pageNumber, Catalog catalog) {
         Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
-        DictionaryPO dictionaryPO = new DictionaryPO();
-        dictionaryPO.setCatalog(catalog);
-        Example<DictionaryPO> example = Example.of(dictionaryPO);
+        Dictionary dictionary = new Dictionary();
+        dictionary.setCatalog(catalog);
+        Example<Dictionary> example = Example.of(dictionary);
         return dictionaryDao.findAll(example, pageable);
     }
 

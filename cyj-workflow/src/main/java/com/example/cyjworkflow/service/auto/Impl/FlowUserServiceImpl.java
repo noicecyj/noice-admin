@@ -1,7 +1,7 @@
 package com.example.cyjworkflow.service.auto.Impl;
 
 import com.example.cyjcommon.dao.FlowUserDao;
-import com.example.cyjcommon.entity.po.FlowUserPO;
+import com.example.cyjcommon.entity.FlowUser;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjworkflow.service.auto.FlowUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,22 +26,22 @@ public class FlowUserServiceImpl extends BaseService implements FlowUserService 
     }
 
     @Override
-    public FlowUserPO addOne(FlowUserPO po) {
+    public FlowUser addOne(FlowUser po) {
         return flowUserDao.save(po);
     }
 
     @Override
-    public void deleteOne(FlowUserPO po) {
+    public void deleteOne(FlowUser po) {
         flowUserDao.delete(po);
     }
 
     @Override
-    public FlowUserPO updateOne(FlowUserPO po) {
+    public FlowUser updateOne(FlowUser po) {
         return flowUserDao.saveAndFlush(po);
     }
 
     @Override
-    public Page<FlowUserPO> findAll(Integer pageNumber) {
+    public Page<FlowUser> findAll(Integer pageNumber) {
         return flowUserDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 

@@ -1,8 +1,8 @@
 package com.example.cyjentitycreater.service.auto.Impl;
 
 import com.example.cyjcommon.dao.SecondMenuDao;
-import com.example.cyjcommon.entity.po.FirstMenuPO;
-import com.example.cyjcommon.entity.po.SecondMenuPO;
+import com.example.cyjcommon.entity.FirstMenu;
+import com.example.cyjcommon.entity.SecondMenu;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjentitycreater.service.auto.SecondMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,26 +29,26 @@ public class SecondMenuServiceImpl extends BaseService implements SecondMenuServ
     }
 
     @Override
-    public SecondMenuPO addOne(SecondMenuPO po) {
+    public SecondMenu addOne(SecondMenu po) {
         return secondMenuDao.save(po);
     }
 
     @Override
-    public void deleteOne(SecondMenuPO po) {
+    public void deleteOne(SecondMenu po) {
         secondMenuDao.delete(po);
     }
 
     @Override
-    public SecondMenuPO updateOne(SecondMenuPO po) {
+    public SecondMenu updateOne(SecondMenu po) {
         return secondMenuDao.saveAndFlush(po);
     }
 
     @Override
-    public Page<SecondMenuPO> findAll(Integer pageNumber, FirstMenuPO firstMenu) {
+    public Page<SecondMenu> findAll(Integer pageNumber, FirstMenu firstMenu) {
         Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
-        SecondMenuPO secondMenuPO = new SecondMenuPO();
-        secondMenuPO.setFirstMenu(firstMenu);
-        Example<SecondMenuPO> example = Example.of(secondMenuPO);
+        SecondMenu secondMenu = new SecondMenu();
+        secondMenu.setFirstMenu(firstMenu);
+        Example<SecondMenu> example = Example.of(secondMenu);
         return secondMenuDao.findAll(example, pageable);
     }
 

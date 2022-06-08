@@ -1,6 +1,6 @@
 package com.example.cyjquery.controller.auto;
 
-import com.example.cyjcommon.entity.po.SqlPO;
+import com.example.cyjcommon.entity.Sql;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,10 +22,10 @@ public interface SqlController {
 
     @Operation(summary = "保存Sql")
     @PostMapping(value = "sqlSave")
-    ResultVO sqlSave(@RequestBody @Validated SqlPO po, BindingResult bindingResult);
+    ResultVO sqlSave(@RequestBody @Validated Sql po, BindingResult bindingResult);
 
     @Operation(summary = "删除Sql")
     @PostMapping(value = "sqlDelete")
-    ResultVO sqlDelete(@RequestBody SqlPO po);
+    ResultVO sqlDelete(@RequestBody Sql po);
 
 }

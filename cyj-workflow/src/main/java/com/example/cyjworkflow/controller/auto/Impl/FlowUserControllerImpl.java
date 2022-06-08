@@ -1,6 +1,6 @@
 package com.example.cyjworkflow.controller.auto.Impl;
 
-import com.example.cyjcommon.entity.po.FlowUserPO;
+import com.example.cyjcommon.entity.FlowUser;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjworkflow.controller.auto.FlowUserController;
 import com.example.cyjworkflow.service.auto.FlowUserService;
@@ -31,7 +31,7 @@ public class FlowUserControllerImpl implements FlowUserController {
     }
 
     @Override
-    public ResultVO flowUserSave(FlowUserPO po, BindingResult bindingResult) {
+    public ResultVO flowUserSave(FlowUser po, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultVO.failure(bindingResult.getAllErrors().get(0));
         }
@@ -42,7 +42,7 @@ public class FlowUserControllerImpl implements FlowUserController {
     }
 
     @Override
-    public ResultVO flowUserDelete(FlowUserPO po) {
+    public ResultVO flowUserDelete(FlowUser po) {
         if (po.getId() == null) {
             return ResultVO.failure();
         }

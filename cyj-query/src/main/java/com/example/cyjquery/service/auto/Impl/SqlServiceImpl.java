@@ -1,7 +1,7 @@
 package com.example.cyjquery.service.auto.Impl;
 
 import com.example.cyjcommon.dao.SqlDao;
-import com.example.cyjcommon.entity.po.SqlPO;
+import com.example.cyjcommon.entity.Sql;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjquery.service.auto.SqlService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,22 +26,22 @@ public class SqlServiceImpl extends BaseService implements SqlService {
     }
 
     @Override
-    public SqlPO addOne(SqlPO po) {
+    public Sql addOne(Sql po) {
         return sqlDao.save(po);
     }
 
     @Override
-    public void deleteOne(SqlPO po) {
+    public void deleteOne(Sql po) {
         sqlDao.delete(po);
     }
 
     @Override
-    public SqlPO updateOne(SqlPO po) {
+    public Sql updateOne(Sql po) {
         return sqlDao.saveAndFlush(po);
     }
 
     @Override
-    public Page<SqlPO> findAll(Integer pageNumber) {
+    public Page<Sql> findAll(Integer pageNumber) {
         return sqlDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 

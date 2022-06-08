@@ -1,21 +1,22 @@
 package com.example.cyjauth.service.auto.Impl;
 
-import com.example.cyjcommon.dao.UserDao;
+import com.example.cyjauth.service.auto.RoleService;
 import com.example.cyjcommon.dao.AuthorityDao;
 import com.example.cyjcommon.dao.RoleDao;
-import com.example.cyjcommon.entity.po.RolePO;
+import com.example.cyjcommon.dao.UserDao;
+import com.example.cyjcommon.entity.Role;
+import com.example.cyjcommon.entity.User;
 import com.example.cyjcommon.service.BaseService;
-import com.example.cyjauth.service.auto.RoleService;
+import com.example.cyjcommon.service.autoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -23,11 +24,10 @@ import java.util.Set;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class RoleServiceImpl extends BaseService implements RoleService {
+public class RoleServiceImpl extends BaseService implements autoService<Role>, RoleService {
 
     private RoleDao roleDao;
     private UserDao userDao;
-    private AuthorityDao authorityDao;
 
     @Autowired
     public void setRoleDao(RoleDao roleDao) {
@@ -39,47 +39,51 @@ public class RoleServiceImpl extends BaseService implements RoleService {
         this.userDao = userDao;
     }
 
-    @Autowired
-    public void setAuthorityDao(AuthorityDao authorityDao) {
-        this.authorityDao = authorityDao;
-    }
-
     @Override
-    public RolePO addOne(RolePO po) {
+    public Role addOne(Role po) {
         return roleDao.save(po);
     }
 
     @Override
-    public void deleteOne(RolePO po) {
+    public void deleteOne(Role po) {
         roleDao.delete(po);
     }
 
     @Override
-    public RolePO updateOne(RolePO po) {
+    public Role updateOne(Role po) {
         return roleDao.saveAndFlush(po);
     }
 
     @Override
-    public Page<RolePO> findAll(Integer pageNumber) {
+    public Page<Role> findAll(Integer pageNumber) {
         return roleDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 
     @Override
-    public Page<RolePO> findAllByUserList(Integer pageNumber, Set<String> userList) {
-        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
-        RolePO rolePO = new RolePO();
-        rolePO.setUser(new HashSet<>(userDao.findAllById(userList)));
-        Example<RolePO> example = Example.of(rolePO);
-        return roleDao.findAll(example, pageable);
+    public Set<String> roleByUser(String userId) {
+        Set<String> roleIds = new HashSet<>();
+        Optional<User> user = userDao.findById(userId);
+        if (user.isPresent()) {
+            Set<Role> roleSet = user.get().getRole();
+            for (Role role : roleSet) {
+                roleIds.add(role.getId());
+            }
+        }
+        return roleIds;
     }
 
     @Override
-    public Page<RolePO> findAllByAuthorityList(Integer pageNumber, Set<String> authorityList) {
-        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
-        RolePO rolePO = new RolePO();
-        rolePO.setAuthority(new HashSet<>(authorityDao.findAllById(authorityList)));
-        Example<RolePO> example = Example.of(rolePO);
-        return roleDao.findAll(example, pageable);
+    public void roleSaveUser(String userId, Set<String> roleIds) {
+        Set<Role> roleSet = new HashSet<>();
+        Optional<User> user = userDao.findById(userId);
+        if (user.isPresent()) {
+            for (String roleId : roleIds) {
+                Role role = roleDao.getOne(roleId);
+                roleSet.add(role);
+            }
+            user.get().setRole(roleSet);
+            userDao.save(user.get());
+        }
     }
 
 }

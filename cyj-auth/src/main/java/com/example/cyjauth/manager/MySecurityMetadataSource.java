@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.cyjauth.service.custom.AuthorityCustomService;
-import com.example.cyjcommon.entity.po.AuthorityPO;
+import com.example.cyjcommon.entity.Authority;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -55,8 +55,8 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
         //从redis中获取角色与权限数据
         String redisConfigAttributesPermission = redisTemplate.opsForValue().get("configAttributes:permissions");
         if (StringUtils.isBlank(redisConfigAttributesPermission)) {
-            List<AuthorityPO> authorityPOList = authorityCustomService.findRoleAndAuthority();
-            for (AuthorityPO po : authorityPOList) {
+            List<Authority> authorityList = authorityCustomService.findRoleAndAuthority();
+            for (Authority po : authorityList) {
                 String path = po.getAuthorityPath();
                 if (po.getAppService() != null) {
                     path = "/" + po.getAppService().getAppServiceName() + "/" + path;
@@ -66,7 +66,7 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
             }
             //将权限存入redis
             redisTemplate.opsForValue().set("configAttributes:permissions",
-                    JSON.toJSONString(authorityPOList), 480, TimeUnit.MINUTES);
+                    JSON.toJSONString(authorityList), 480, TimeUnit.MINUTES);
         } else {
             JSONArray array = JSONObject.parseArray(redisConfigAttributesPermission);
             for (int i = 0; i < array.size(); i++) {

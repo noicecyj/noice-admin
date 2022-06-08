@@ -1,7 +1,7 @@
 package com.example.cyjcommon.dao;
 
-import com.example.cyjcommon.entity.po.CatalogPO;
-import com.example.cyjcommon.entity.po.DictionaryPO;
+import com.example.cyjcommon.entity.Catalog;
+import com.example.cyjcommon.entity.Dictionary;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -9,8 +9,8 @@ import java.util.List;
 /**
  * @author Noice
  */
-public interface DictionaryDao extends JpaRepository<DictionaryPO, String> {
+public interface DictionaryDao extends JpaRepository<Dictionary, String> {
 
-    List<DictionaryPO> findByCatalogOrderBySortCode(CatalogPO catalog);
+    List<Dictionary> findByCatalogOrderBySortCode(Catalog catalog);
 
 }

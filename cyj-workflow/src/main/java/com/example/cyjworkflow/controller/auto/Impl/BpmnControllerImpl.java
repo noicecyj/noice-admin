@@ -1,6 +1,6 @@
 package com.example.cyjworkflow.controller.auto.Impl;
 
-import com.example.cyjcommon.entity.po.BpmnPO;
+import com.example.cyjcommon.entity.Bpmn;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjworkflow.controller.auto.BpmnController;
 import com.example.cyjworkflow.service.auto.BpmnService;
@@ -31,7 +31,7 @@ public class BpmnControllerImpl implements BpmnController {
     }
 
     @Override
-    public ResultVO bpmnSave(BpmnPO po) {
+    public ResultVO bpmnSave(Bpmn po) {
         if (po.getId() == null) {
             return ResultVO.success(bpmnService.addOne(po));
         }

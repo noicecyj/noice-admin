@@ -1,7 +1,7 @@
 package com.example.cyjentitycreater.controller.auto;
 
-import com.example.cyjcommon.entity.po.AppServicePO;
-import com.example.cyjcommon.entity.po.EntityPO;
+import com.example.cyjcommon.entity.AppService;
+import com.example.cyjcommon.entity.Entity;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,18 +23,18 @@ public interface EntityController {
 
     @Operation(summary = "根据Entity查询所有Entity")
     @PostMapping(value = "entityPageByEntity")
-    ResultVO entityPage(@RequestParam("pageNumber") Integer pageNumber, @RequestBody EntityPO entity);
+    ResultVO entityPage(@RequestParam("pageNumber") Integer pageNumber, @RequestBody Entity entity);
 
     @Operation(summary = "根据AppService查询所有Entity")
     @PostMapping(value = "entityPageByAppService")
-    ResultVO entityPage(@RequestParam("pageNumber") Integer pageNumber, @RequestBody AppServicePO appService);
+    ResultVO entityPage(@RequestParam("pageNumber") Integer pageNumber, @RequestBody AppService appService);
 
     @Operation(summary = "保存Entity")
     @PostMapping(value = "entitySave")
-    ResultVO entitySave(@RequestBody @Validated EntityPO po, BindingResult bindingResult);
+    ResultVO entitySave(@RequestBody @Validated Entity po, BindingResult bindingResult);
 
     @Operation(summary = "删除Entity")
     @PostMapping(value = "entityDelete")
-    ResultVO entityDelete(@RequestBody EntityPO po);
+    ResultVO entityDelete(@RequestBody Entity po);
 
 }

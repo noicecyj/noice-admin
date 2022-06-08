@@ -1,7 +1,7 @@
 package com.example.cyjcommon.dao;
 
-import com.example.cyjcommon.entity.po.FirstMenuPO;
-import com.example.cyjcommon.entity.po.SecondMenuPO;
+import com.example.cyjcommon.entity.FirstMenu;
+import com.example.cyjcommon.entity.SecondMenu;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -9,8 +9,8 @@ import java.util.List;
 /**
  * @author Noice
  */
-public interface SecondMenuDao extends JpaRepository<SecondMenuPO, String> {
+public interface SecondMenuDao extends JpaRepository<SecondMenu, String> {
 
-    List<SecondMenuPO> findByFirstMenu(FirstMenuPO firstMenu);
+    List<SecondMenu> findByFirstMenu(FirstMenu firstMenu);
 
 }

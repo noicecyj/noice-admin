@@ -1,8 +1,8 @@
 package com.example.cyjworkflow.service.auto.Impl;
 
 import com.example.cyjcommon.dao.BpmnDao;
-import com.example.cyjcommon.entity.po.BpmnPO;
-import com.example.cyjcommon.entity.po.QBpmnPO;
+import com.example.cyjcommon.entity.Bpmn;
+import com.example.cyjcommon.entity.QBpmn;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjworkflow.service.auto.BpmnService;
 import com.querydsl.core.QueryResults;
@@ -26,7 +26,7 @@ public class BpmnServiceImpl extends BaseService implements BpmnService {
     }
 
     @Override
-    public BpmnPO addOne(BpmnPO po) {
+    public Bpmn addOne(Bpmn po) {
         return bpmnDao.save(po);
     }
 
@@ -36,23 +36,23 @@ public class BpmnServiceImpl extends BaseService implements BpmnService {
     }
 
     @Override
-    public BpmnPO updateOne(BpmnPO po) {
+    public Bpmn updateOne(Bpmn po) {
         return bpmnDao.saveAndFlush(po);
     }
 
     @Override
-    public QueryResults<BpmnPO> findAll(Integer pageNumber) {
+    public QueryResults<Bpmn> findAll(Integer pageNumber) {
         return queryFactory
-                .selectFrom(QBpmnPO.bpmnPO)
-                .where(QBpmnPO.bpmnPO.sortCode.isNotNull())
+                .selectFrom(QBpmn.bpmn)
+                .where(QBpmn.bpmn.sortCode.isNotNull())
                 .offset((pageNumber - 1) * 10L)
-                .orderBy(QBpmnPO.bpmnPO.sortCode.asc())
+                .orderBy(QBpmn.bpmn.sortCode.asc())
                 .limit(10)
                 .fetchResults();
     }
 
     @Override
-    public BpmnPO findOneById(String id) {
+    public Bpmn findOneById(String id) {
         return bpmnDao.findById(id).orElse(null);
     }
 

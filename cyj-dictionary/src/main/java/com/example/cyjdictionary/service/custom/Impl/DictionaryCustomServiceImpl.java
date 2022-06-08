@@ -1,8 +1,8 @@
 package com.example.cyjdictionary.service.custom.Impl;
 
-import com.example.cyjcommon.entity.po.DictionaryPO;
-import com.example.cyjcommon.entity.po.QCatalogPO;
-import com.example.cyjcommon.entity.po.QDictionaryPO;
+import com.example.cyjcommon.entity.Dictionary;
+import com.example.cyjcommon.entity.QCatalog;
+import com.example.cyjcommon.entity.QDictionary;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjdictionary.service.custom.DictionaryCustomService;
 import org.springframework.stereotype.Service;
@@ -20,46 +20,46 @@ import java.util.List;
 public class DictionaryCustomServiceImpl extends BaseService implements DictionaryCustomService {
 
     @Override
-    public List<DictionaryPO> findCatalogByName(String name) {
-        QDictionaryPO qDictionary = QDictionaryPO.dictionaryPO;
-        QCatalogPO qCatalogPO = QCatalogPO.catalogPO;
+    public List<Dictionary> findCatalogByName(String name) {
+        QDictionary qDictionary = QDictionary.dictionary;
+        QCatalog qCatalog = QCatalog.catalog;
         return queryFactory.selectFrom(qDictionary)
-                .innerJoin(qCatalogPO)
-                .on(qDictionary.catalog.eq(qCatalogPO))
-                .where(qCatalogPO.catalogName.eq(name))
+                .innerJoin(qCatalog)
+                .on(qDictionary.catalog.eq(qCatalog))
+                .where(qCatalog.catalogName.eq(name))
                 .orderBy(qDictionary.sortCode.asc()).fetch();
     }
 
     @Override
-    public List<DictionaryPO> findCatalogByValue(String value) {
-        QDictionaryPO qDictionary = QDictionaryPO.dictionaryPO;
-        QCatalogPO qCatalogPO = QCatalogPO.catalogPO;
+    public List<Dictionary> findCatalogByValue(String value) {
+        QDictionary qDictionary = QDictionary.dictionary;
+        QCatalog qCatalog = QCatalog.catalog;
         return queryFactory.selectFrom(qDictionary)
-                .innerJoin(qCatalogPO)
-                .on(qDictionary.catalog.id.eq(qCatalogPO.id))
-                .where(qCatalogPO.catalogValue.eq(value))
+                .innerJoin(qCatalog)
+                .on(qDictionary.catalog.id.eq(qCatalog.id))
+                .where(qCatalog.catalogValue.eq(value))
                 .orderBy(qDictionary.sortCode.asc()).fetch();
     }
 
     @Override
-    public DictionaryPO findDictionaryByCatalogValueAndDictionaryKey(String value, String key) {
-        QDictionaryPO qDictionary = QDictionaryPO.dictionaryPO;
-        QCatalogPO qCatalogPO = QCatalogPO.catalogPO;
+    public Dictionary findDictionaryByCatalogValueAndDictionaryKey(String value, String key) {
+        QDictionary qDictionary = QDictionary.dictionary;
+        QCatalog qCatalog = QCatalog.catalog;
         return queryFactory.selectFrom(qDictionary)
-                .innerJoin(qCatalogPO)
-                .on(qDictionary.catalog.eq(qCatalogPO))
-                .where(qCatalogPO.catalogValue.eq(value).and(qDictionary.dictionaryValue.eq(key)))
+                .innerJoin(qCatalog)
+                .on(qDictionary.catalog.eq(qCatalog))
+                .where(qCatalog.catalogValue.eq(value).and(qDictionary.dictionaryValue.eq(key)))
                 .orderBy(qDictionary.sortCode.asc()).fetchOne();
     }
 
     @Override
-    public DictionaryPO findDictionaryByCatalogValueAndDictionaryValue(String value, String value2) {
-        QDictionaryPO qDictionary = QDictionaryPO.dictionaryPO;
-        QCatalogPO qCatalogPO = QCatalogPO.catalogPO;
+    public Dictionary findDictionaryByCatalogValueAndDictionaryValue(String value, String value2) {
+        QDictionary qDictionary = QDictionary.dictionary;
+        QCatalog qCatalog = QCatalog.catalog;
         return queryFactory.selectFrom(qDictionary)
-                .innerJoin(qCatalogPO)
-                .on(qDictionary.catalog.eq(qCatalogPO))
-                .where(qCatalogPO.catalogValue.eq(value).and(qDictionary.dictionaryName.eq(value2)))
+                .innerJoin(qCatalog)
+                .on(qDictionary.catalog.eq(qCatalog))
+                .where(qCatalog.catalogValue.eq(value).and(qDictionary.dictionaryName.eq(value2)))
                 .orderBy(qDictionary.sortCode.asc()).fetchOne();
     }
 

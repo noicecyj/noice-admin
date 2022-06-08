@@ -3,8 +3,8 @@ package com.example.cyjauth.service.custom.Impl;
 import com.example.cyjauth.entity.bo.AuthUserDetails;
 import com.example.cyjauth.service.custom.UserCustomService;
 import com.example.cyjcommon.dao.UserDao;
-import com.example.cyjcommon.entity.po.QUserPO;
-import com.example.cyjcommon.entity.po.UserPO;
+import com.example.cyjcommon.entity.QUser;
+import com.example.cyjcommon.entity.User;
 import com.example.cyjcommon.service.BaseService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,23 +41,23 @@ public class UserCustomServiceImpl extends BaseService implements UserCustomServ
     }
 
     @Override
-    public UserPO findAuthUserByUsername(String username) {
+    public User findAuthUserByUsername(String username) {
         return queryFactory
-                .selectFrom(QUserPO.userPO)
-                .where(QUserPO.userPO.userName.eq(username))
+                .selectFrom(QUser.user)
+                .where(QUser.user.userName.eq(username))
                 .fetchOne();
     }
 
     @Override
     public void resetPassword(String userId, String newPassword, String checkPassword) {
         if (newPassword.equals(checkPassword)) {
-            Optional<UserPO> userPOOptional = userDao.findById(userId);
-            if (userPOOptional.isPresent()) {
-                UserPO userPO = userPOOptional.get();
+            Optional<User> userOptional = userDao.findById(userId);
+            if (userOptional.isPresent()) {
+                User user = userOptional.get();
                 BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
                 String password = passwordEncoder.encode(newPassword);
-                userPO.setPassword(password);
-                userDao.saveAndFlush(userPO);
+                user.setPassword(password);
+                userDao.saveAndFlush(user);
             }
         }
     }
@@ -71,7 +71,7 @@ public class UserCustomServiceImpl extends BaseService implements UserCustomServ
             throw new UsernameNotFoundException("登录错误次数超过限制");
         }
         //查询用户信息
-        UserPO po = findAuthUserByUsername(username);
+        User po = findAuthUserByUsername(username);
         if (null == po) {
             throw new UsernameNotFoundException("当前用户不存在");
         }

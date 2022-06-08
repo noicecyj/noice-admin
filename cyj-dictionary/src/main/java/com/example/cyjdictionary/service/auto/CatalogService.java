@@ -1,6 +1,6 @@
 package com.example.cyjdictionary.service.auto;
 
-import com.example.cyjcommon.entity.po.CatalogPO;
+import com.example.cyjcommon.entity.Catalog;
 import org.springframework.data.domain.Page;
 
 /**
@@ -8,12 +8,12 @@ import org.springframework.data.domain.Page;
  */
 public interface CatalogService {
 
-    CatalogPO addOne(CatalogPO po);
+    Catalog addOne(Catalog po);
 
-    void deleteOne(CatalogPO po);
+    void deleteOne(Catalog po);
 
-    CatalogPO updateOne(CatalogPO po);
+    Catalog updateOne(Catalog po);
 
-    Page<CatalogPO> findAll(Integer pageNumber);
+    Page<Catalog> findAll(Integer pageNumber);
 
 }

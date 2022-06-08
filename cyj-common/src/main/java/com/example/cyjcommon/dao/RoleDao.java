@@ -1,8 +1,7 @@
 package com.example.cyjcommon.dao;
 
-import com.example.cyjcommon.entity.po.UserPO;
-import com.example.cyjcommon.entity.po.AuthorityPO;
-import com.example.cyjcommon.entity.po.RolePO;
+import com.example.cyjcommon.entity.Role;
+import com.example.cyjcommon.entity.Authority;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;
@@ -12,10 +11,8 @@ import java.util.Set;
 /**
  * @author Noice
  */
-public interface RoleDao extends JpaRepository<RolePO, String> {
+public interface RoleDao extends JpaRepository<Role, String> {
 
-    List<RolePO> findByUserInOrderBySortCode(Collection<Set<UserPO>> userList);
-
-    List<RolePO> findByAuthorityInOrderBySortCode(Collection<Set<AuthorityPO>> authorityList);
+    List<Role> findByAuthorityInOrderBySortCode(Collection<Set<Authority>> authorityList);
 
 }

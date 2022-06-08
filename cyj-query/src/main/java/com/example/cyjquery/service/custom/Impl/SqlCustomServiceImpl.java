@@ -1,6 +1,6 @@
 package com.example.cyjquery.service.custom.Impl;
 
-import com.example.cyjcommon.entity.po.SqlPO;
+import com.example.cyjcommon.entity.Sql;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjquery.dao.SqlCustomDao;
 import com.example.cyjquery.service.custom.SqlCustomService;
@@ -61,27 +61,27 @@ public class SqlCustomServiceImpl extends BaseService implements SqlCustomServic
 
     @Override
     public List<Map<String, Object>> queryBySqlValue(String value) {
-        SqlPO sqlPO = sqlCustomDao.findBySqlDescription(value);
-        if (sqlPO != null) {
-            return queryBySql(sqlPO.getSqlStr());
+        Sql sql = sqlCustomDao.findBySqlDescription(value);
+        if (sql != null) {
+            return queryBySql(sql.getSqlStr());
         }
         return null;
     }
 
     @Override
     public List<Map<String, Object>> queryBySqlValue(String value, HashMap<String, String> str) {
-        SqlPO sqlPO = sqlCustomDao.findBySqlDescription(value);
-        if (sqlPO != null) {
-            return queryBySql(sqlPO.getSqlStr(), str);
+        Sql sql = sqlCustomDao.findBySqlDescription(value);
+        if (sql != null) {
+            return queryBySql(sql.getSqlStr(), str);
         }
         return null;
     }
 
     @Override
     public Map<String, Object> queryBySqlOne(String value, HashMap<String, String> str) {
-        SqlPO sqlPO = sqlCustomDao.findBySqlDescription(value);
-        if (sqlPO != null) {
-            return queryByOne(sqlPO.getSqlStr(), str);
+        Sql sql = sqlCustomDao.findBySqlDescription(value);
+        if (sql != null) {
+            return queryByOne(sql.getSqlStr(), str);
         }
         return null;
     }

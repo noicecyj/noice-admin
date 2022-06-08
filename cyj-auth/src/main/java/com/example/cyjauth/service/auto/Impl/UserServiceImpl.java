@@ -1,13 +1,15 @@
 package com.example.cyjauth.service.auto.Impl;
 
+import com.example.cyjauth.service.auto.UserService;
 import com.example.cyjcommon.dao.EnterpriseDao;
 import com.example.cyjcommon.dao.RoleDao;
-import com.example.cyjcommon.dao.AuthorityDao;
 import com.example.cyjcommon.dao.UserDao;
-import com.example.cyjcommon.entity.po.EnterprisePO;
-import com.example.cyjcommon.entity.po.UserPO;
+import com.example.cyjcommon.entity.Authority;
+import com.example.cyjcommon.entity.Enterprise;
+import com.example.cyjcommon.entity.Role;
+import com.example.cyjcommon.entity.User;
 import com.example.cyjcommon.service.BaseService;
-import com.example.cyjauth.service.auto.UserService;
+import com.example.cyjcommon.service.autoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -25,12 +28,10 @@ import java.util.Set;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class UserServiceImpl extends BaseService implements UserService {
+public class UserServiceImpl extends BaseService implements autoService<User>, UserService {
 
     private UserDao userDao;
     private EnterpriseDao enterpriseDao;
-    private RoleDao roleDao;
-    private AuthorityDao authorityDao;
 
     @Autowired
     public void setUserDao(UserDao userDao) {
@@ -42,69 +43,43 @@ public class UserServiceImpl extends BaseService implements UserService {
         this.enterpriseDao = enterpriseDao;
     }
 
-    @Autowired
-    public void setRoleDao(RoleDao roleDao) {
-        this.roleDao = roleDao;
-    }
-
-    @Autowired
-    public void setAuthorityDao(AuthorityDao authorityDao) {
-        this.authorityDao = authorityDao;
-    }
-
     @Override
-    public UserPO addOne(UserPO po) {
-        if (po.getEnterpriseId() != null){
-            EnterprisePO enterprisePO = enterpriseDao.getOne(po.getEnterpriseId());
-            po.setEnterprise(enterprisePO);
+    public User addOne(User po) {
+        if (po.getEnterpriseId() != null) {
+            Enterprise enterprise = enterpriseDao.getOne(po.getEnterpriseId());
+            po.setEnterprise(enterprise);
         }
         return userDao.save(po);
     }
 
     @Override
-    public void deleteOne(UserPO po) {
+    public void deleteOne(User po) {
         userDao.delete(po);
     }
 
     @Override
-    public UserPO updateOne(UserPO po) {
-        if (po.getEnterpriseId() != null){
-            EnterprisePO enterprisePO = enterpriseDao.getOne(po.getEnterpriseId());
-            po.setEnterprise(enterprisePO);
+    public User updateOne(User po) {
+        if (po.getEnterpriseId() != null) {
+            Enterprise enterprise = enterpriseDao.getOne(po.getEnterpriseId());
+            po.setEnterprise(enterprise);
         }
         return userDao.saveAndFlush(po);
     }
 
     @Override
-    public Page<UserPO> findAll(Integer pageNumber) {
+    public Page<User> findAll(Integer pageNumber) {
         return userDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 
     @Override
-    public Page<UserPO> findAll(Integer pageNumber, EnterprisePO enterprise) {
+    public Page<User> findAll(Integer pageNumber, Enterprise enterprise) {
         Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
-        UserPO userPO = new UserPO();
-        userPO.setEnterprise(enterprise);
-        Example<UserPO> example = Example.of(userPO);
+        User user = new User();
+        user.setEnterprise(enterprise);
+        Example<User> example = Example.of(user);
         return userDao.findAll(example, pageable);
     }
 
-    @Override
-    public Page<UserPO> findAllByRoleList(Integer pageNumber, Set<String> roleList) {
-        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
-        UserPO userPO = new UserPO();
-        userPO.setRole(new HashSet<>(roleDao.findAllById(roleList)));
-        Example<UserPO> example = Example.of(userPO);
-        return userDao.findAll(example, pageable);
-    }
 
-    @Override
-    public Page<UserPO> findAllByAuthorityList(Integer pageNumber, Set<String> authorityList) {
-        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
-        UserPO userPO = new UserPO();
-        userPO.setAuthority(new HashSet<>(authorityDao.findAllById(authorityList)));
-        Example<UserPO> example = Example.of(userPO);
-        return userDao.findAll(example, pageable);
-    }
 
 }

@@ -1,7 +1,7 @@
 package com.example.cyjdictionary.service.auto;
 
-import com.example.cyjcommon.entity.po.CatalogPO;
-import com.example.cyjcommon.entity.po.DictionaryPO;
+import com.example.cyjcommon.entity.Catalog;
+import com.example.cyjcommon.entity.Dictionary;
 import org.springframework.data.domain.Page;
 
 /**
@@ -9,14 +9,14 @@ import org.springframework.data.domain.Page;
  */
 public interface DictionaryService {
 
-    DictionaryPO addOne(DictionaryPO po);
+    Dictionary addOne(Dictionary po);
 
-    void deleteOne(DictionaryPO po);
+    void deleteOne(Dictionary po);
 
-    DictionaryPO updateOne(DictionaryPO po);
+    Dictionary updateOne(Dictionary po);
 
-    Page<DictionaryPO> findAll(Integer pageNumber);
+    Page<Dictionary> findAll(Integer pageNumber);
 
-    Page<DictionaryPO> findAll(Integer pageNumber, CatalogPO catalog);
+    Page<Dictionary> findAll(Integer pageNumber, Catalog catalog);
 
 }

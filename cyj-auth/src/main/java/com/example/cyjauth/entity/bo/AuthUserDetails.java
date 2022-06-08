@@ -1,7 +1,8 @@
 package com.example.cyjauth.entity.bo;
 
-import com.example.cyjcommon.entity.po.AuthorityPO;
-import com.example.cyjcommon.entity.po.UserPO;
+import com.example.cyjcommon.entity.Authority;
+import com.example.cyjcommon.entity.Role;
+import com.example.cyjcommon.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -15,17 +16,16 @@ import java.util.Set;
  * @version 1.0
  * @date 2021-03-20
  */
-public class AuthUserDetails extends UserPO implements UserDetails {
+public class AuthUserDetails extends User implements UserDetails {
 
     private static final long serialVersionUID = 1L;
 
-    public AuthUserDetails(UserPO po) {
+    public AuthUserDetails(User po) {
         if (po != null) {
             this.setUserName(po.getUserName());
             this.setPassword(po.getPassword());
             this.setStatus(po.getStatus());
             this.setRole(po.getRole());
-            this.setAuthority(po.getAuthority());
         }
     }
 
@@ -33,11 +33,14 @@ public class AuthUserDetails extends UserPO implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorityList = new ArrayList<>();
-        Set<AuthorityPO> authorityCustomPOList = this.getAuthority();
-        if (authorityCustomPOList != null) {
-            for (AuthorityPO po : authorityCustomPOList) {
-                GrantedAuthority grantedAuthority = new AuthGrantedAuthority(po.getAuthorityPath(), po.getAuthorityMethod());
-                authorityList.add(grantedAuthority);
+        Set<Role> roles = this.getRole();
+        for (Role role : roles) {
+            Set<Authority> authorityCustomList = role.getAuthority();
+            if (authorityCustomList != null) {
+                for (Authority po : authorityCustomList) {
+                    GrantedAuthority grantedAuthority = new AuthGrantedAuthority(po.getAuthorityPath(), po.getAuthorityMethod());
+                    authorityList.add(grantedAuthority);
+                }
             }
         }
         return authorityList;

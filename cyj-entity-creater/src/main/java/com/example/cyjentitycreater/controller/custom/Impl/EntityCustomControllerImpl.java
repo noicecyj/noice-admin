@@ -1,6 +1,6 @@
 package com.example.cyjentitycreater.controller.custom.Impl;
 
-import com.example.cyjcommon.entity.po.EntityPO;
+import com.example.cyjcommon.entity.Entity;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.controller.custom.EntityCustomController;
 import com.example.cyjentitycreater.service.custom.EntityCustomService;
@@ -26,7 +26,7 @@ public class EntityCustomControllerImpl implements EntityCustomController {
     }
 
     @Override
-    public ResultVO createEntity(@RequestBody EntityPO po) {
+    public ResultVO createEntity(@RequestBody Entity po) {
         entityCustomService.generateJavaFile(po);
 //        entityCustomService.createComponentFile(po);
         return ResultVO.success();

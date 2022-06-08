@@ -1,27 +1,19 @@
 package com.example.cyjcommon.dao;
 
-import com.example.cyjcommon.entity.po.AppServicePO;
-import com.example.cyjcommon.entity.po.EntityPO;
-import com.example.cyjcommon.entity.po.UserPO;
-import com.example.cyjcommon.entity.po.RolePO;
-import com.example.cyjcommon.entity.po.AuthorityPO;
+import com.example.cyjcommon.entity.AppService;
+import com.example.cyjcommon.entity.Entity;
+import com.example.cyjcommon.entity.Authority;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author Noice
  */
-public interface AuthorityDao extends JpaRepository<AuthorityPO, String> {
+public interface AuthorityDao extends JpaRepository<Authority, String> {
 
-    List<AuthorityPO> findByAppServiceOrderBySortCode(AppServicePO appService);
+    List<Authority> findByAppServiceOrderBySortCode(AppService appService);
 
-    List<AuthorityPO> findByEntityOrderBySortCode(EntityPO entity);
-
-    List<AuthorityPO> findByUserInOrderBySortCode(Collection<Set<UserPO>> userList);
-
-    List<AuthorityPO> findByRoleInOrderBySortCode(Collection<Set<RolePO>> roleList);
+    List<Authority> findByEntityOrderBySortCode(Entity entity);
 
 }

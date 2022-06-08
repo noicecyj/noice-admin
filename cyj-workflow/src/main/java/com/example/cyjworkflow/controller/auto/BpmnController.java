@@ -1,6 +1,6 @@
 package com.example.cyjworkflow.controller.auto;
 
-import com.example.cyjcommon.entity.po.BpmnPO;
+import com.example.cyjcommon.entity.Bpmn;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -21,7 +21,7 @@ public interface BpmnController {
 
     @Operation(summary = "保存Bpmn")
     @PostMapping(value = "bpmnSave")
-    ResultVO bpmnSave(@RequestBody BpmnPO po);
+    ResultVO bpmnSave(@RequestBody Bpmn po);
 
     @Operation(summary = "删除Bpmn")
     @PostMapping(value = "bpmnDelete")

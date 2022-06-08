@@ -1,6 +1,6 @@
 package com.example.cyjdictionary.service.custom;
 
-import com.example.cyjcommon.entity.po.DictionaryPO;
+import com.example.cyjcommon.entity.Dictionary;
 
 import java.util.List;
 
@@ -11,11 +11,11 @@ import java.util.List;
  */
 public interface DictionaryCustomService {
 
-    List<DictionaryPO> findCatalogByName(String name);
+    List<Dictionary> findCatalogByName(String name);
 
-    List<DictionaryPO> findCatalogByValue(String value);
+    List<Dictionary> findCatalogByValue(String value);
 
-    DictionaryPO findDictionaryByCatalogValueAndDictionaryKey(String value, String key);
+    Dictionary findDictionaryByCatalogValueAndDictionaryKey(String value, String key);
 
-    DictionaryPO findDictionaryByCatalogValueAndDictionaryValue(String value, String value2);
+    Dictionary findDictionaryByCatalogValueAndDictionaryValue(String value, String value2);
 }

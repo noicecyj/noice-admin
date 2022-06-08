@@ -1,7 +1,7 @@
 package com.example.cyjentitycreater.controller.auto.Impl;
 
-import com.example.cyjcommon.entity.po.EntityPO;
-import com.example.cyjcommon.entity.po.PropertyPO;
+import com.example.cyjcommon.entity.Entity;
+import com.example.cyjcommon.entity.Property;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.controller.auto.PropertyController;
 import com.example.cyjentitycreater.service.auto.PropertyService;
@@ -32,12 +32,12 @@ public class PropertyControllerImpl implements PropertyController {
     }
 
     @Override
-    public ResultVO propertyPage(Integer pageNumber, EntityPO entity) {
+    public ResultVO propertyPage(Integer pageNumber, Entity entity) {
         return ResultVO.success(propertyService.findAll(pageNumber, entity));
     }
 
     @Override
-    public ResultVO propertySave(PropertyPO po, BindingResult bindingResult) {
+    public ResultVO propertySave(Property po, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultVO.failure(bindingResult.getAllErrors().get(0));
         }
@@ -48,7 +48,7 @@ public class PropertyControllerImpl implements PropertyController {
     }
 
     @Override
-    public ResultVO propertyDelete(PropertyPO po) {
+    public ResultVO propertyDelete(Property po) {
         if (po.getId() == null) {
             return ResultVO.failure();
         }

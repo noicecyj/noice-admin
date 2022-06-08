@@ -1,6 +1,6 @@
 package com.example.cyjworkflow.service.auto;
 
-import com.example.cyjcommon.entity.po.FlowGroupPO;
+import com.example.cyjcommon.entity.FlowGroup;
 import org.springframework.data.domain.Page;
 
 /**
@@ -8,12 +8,12 @@ import org.springframework.data.domain.Page;
  */
 public interface FlowGroupService {
 
-    FlowGroupPO addOne(FlowGroupPO po);
+    FlowGroup addOne(FlowGroup po);
 
-    void deleteOne(FlowGroupPO po);
+    void deleteOne(FlowGroup po);
 
-    FlowGroupPO updateOne(FlowGroupPO po);
+    FlowGroup updateOne(FlowGroup po);
 
-    Page<FlowGroupPO> findAll(Integer pageNumber);
+    Page<FlowGroup> findAll(Integer pageNumber);
 
 }

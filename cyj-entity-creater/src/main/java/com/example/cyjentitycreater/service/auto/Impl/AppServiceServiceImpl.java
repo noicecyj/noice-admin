@@ -1,7 +1,7 @@
 package com.example.cyjentitycreater.service.auto.Impl;
 
 import com.example.cyjcommon.dao.AppServiceDao;
-import com.example.cyjcommon.entity.po.AppServicePO;
+import com.example.cyjcommon.entity.AppService;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjentitycreater.service.auto.AppServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,22 +26,22 @@ public class AppServiceServiceImpl extends BaseService implements AppServiceServ
     }
 
     @Override
-    public AppServicePO addOne(AppServicePO po) {
+    public AppService addOne(AppService po) {
         return appServiceDao.save(po);
     }
 
     @Override
-    public void deleteOne(AppServicePO po) {
+    public void deleteOne(AppService po) {
         appServiceDao.delete(po);
     }
 
     @Override
-    public AppServicePO updateOne(AppServicePO po) {
+    public AppService updateOne(AppService po) {
         return appServiceDao.saveAndFlush(po);
     }
 
     @Override
-    public Page<AppServicePO> findAll(Integer pageNumber) {
+    public Page<AppService> findAll(Integer pageNumber) {
         return appServiceDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 

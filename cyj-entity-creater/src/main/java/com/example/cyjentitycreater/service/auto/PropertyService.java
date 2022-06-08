@@ -1,7 +1,7 @@
 package com.example.cyjentitycreater.service.auto;
 
-import com.example.cyjcommon.entity.po.EntityPO;
-import com.example.cyjcommon.entity.po.PropertyPO;
+import com.example.cyjcommon.entity.Entity;
+import com.example.cyjcommon.entity.Property;
 import org.springframework.data.domain.Page;
 
 /**
@@ -9,14 +9,14 @@ import org.springframework.data.domain.Page;
  */
 public interface PropertyService {
 
-    PropertyPO addOne(PropertyPO po);
+    Property addOne(Property po);
 
-    void deleteOne(PropertyPO po);
+    void deleteOne(Property po);
 
-    PropertyPO updateOne(PropertyPO po);
+    Property updateOne(Property po);
 
-    Page<PropertyPO> findAll(Integer pageNumber);
+    Page<Property> findAll(Integer pageNumber);
 
-    Page<PropertyPO> findAll(Integer pageNumber, EntityPO entity);
+    Page<Property> findAll(Integer pageNumber, Entity entity);
 
 }

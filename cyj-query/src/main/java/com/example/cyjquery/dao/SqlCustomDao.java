@@ -1,7 +1,7 @@
 package com.example.cyjquery.dao;
 
 import com.example.cyjcommon.dao.SqlDao;
-import com.example.cyjcommon.entity.po.SqlPO;
+import com.example.cyjcommon.entity.Sql;
 
 /**
  * @author Noice
@@ -10,6 +10,6 @@ import com.example.cyjcommon.entity.po.SqlPO;
  */
 public interface SqlCustomDao extends SqlDao {
 
-    SqlPO findBySqlDescription(String value);
+    Sql findBySqlDescription(String value);
 
 }

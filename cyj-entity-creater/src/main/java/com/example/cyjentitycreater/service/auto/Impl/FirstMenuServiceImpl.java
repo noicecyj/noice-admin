@@ -1,7 +1,7 @@
 package com.example.cyjentitycreater.service.auto.Impl;
 
 import com.example.cyjcommon.dao.FirstMenuDao;
-import com.example.cyjcommon.entity.po.FirstMenuPO;
+import com.example.cyjcommon.entity.FirstMenu;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjentitycreater.service.auto.FirstMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,22 +26,22 @@ public class FirstMenuServiceImpl extends BaseService implements FirstMenuServic
     }
 
     @Override
-    public FirstMenuPO addOne(FirstMenuPO po) {
+    public FirstMenu addOne(FirstMenu po) {
         return firstMenuDao.save(po);
     }
 
     @Override
-    public void deleteOne(FirstMenuPO po) {
+    public void deleteOne(FirstMenu po) {
         firstMenuDao.delete(po);
     }
 
     @Override
-    public FirstMenuPO updateOne(FirstMenuPO po) {
+    public FirstMenu updateOne(FirstMenu po) {
         return firstMenuDao.saveAndFlush(po);
     }
 
     @Override
-    public Page<FirstMenuPO> findAll(Integer pageNumber) {
+    public Page<FirstMenu> findAll(Integer pageNumber) {
         return firstMenuDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 

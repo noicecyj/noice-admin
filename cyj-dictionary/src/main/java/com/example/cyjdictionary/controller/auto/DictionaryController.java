@@ -1,7 +1,7 @@
 package com.example.cyjdictionary.controller.auto;
 
-import com.example.cyjcommon.entity.po.CatalogPO;
-import com.example.cyjcommon.entity.po.DictionaryPO;
+import com.example.cyjcommon.entity.Catalog;
+import com.example.cyjcommon.entity.Dictionary;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,14 +23,14 @@ public interface DictionaryController {
 
     @Operation(summary = "根据Catalog查询所有Dictionary")
     @PostMapping(value = "dictionaryPageByCatalog")
-    ResultVO dictionaryPage(@RequestParam("pageNumber") Integer pageNumber, @RequestBody CatalogPO catalog);
+    ResultVO dictionaryPage(@RequestParam("pageNumber") Integer pageNumber, @RequestBody Catalog catalog);
 
     @Operation(summary = "保存Dictionary")
     @PostMapping(value = "dictionarySave")
-    ResultVO dictionarySave(@RequestBody @Validated DictionaryPO po, BindingResult bindingResult);
+    ResultVO dictionarySave(@RequestBody @Validated Dictionary po, BindingResult bindingResult);
 
     @Operation(summary = "删除Dictionary")
     @PostMapping(value = "dictionaryDelete")
-    ResultVO dictionaryDelete(@RequestBody DictionaryPO po);
+    ResultVO dictionaryDelete(@RequestBody Dictionary po);
 
 }

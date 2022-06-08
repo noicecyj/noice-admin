@@ -1,7 +1,7 @@
 package com.example.cyjentitycreater.service.auto;
 
-import com.example.cyjcommon.entity.po.FirstMenuPO;
-import com.example.cyjcommon.entity.po.SecondMenuPO;
+import com.example.cyjcommon.entity.FirstMenu;
+import com.example.cyjcommon.entity.SecondMenu;
 import org.springframework.data.domain.Page;
 
 /**
@@ -9,12 +9,12 @@ import org.springframework.data.domain.Page;
  */
 public interface SecondMenuService {
 
-    SecondMenuPO addOne(SecondMenuPO po);
+    SecondMenu addOne(SecondMenu po);
 
-    void deleteOne(SecondMenuPO po);
+    void deleteOne(SecondMenu po);
 
-    SecondMenuPO updateOne(SecondMenuPO po);
+    SecondMenu updateOne(SecondMenu po);
 
-    Page<SecondMenuPO> findAll(Integer pageNumber, FirstMenuPO firstMenu);
+    Page<SecondMenu> findAll(Integer pageNumber, FirstMenu firstMenu);
 
 }

@@ -1,6 +1,6 @@
 package com.example.cyjquery.service.auto;
 
-import com.example.cyjcommon.entity.po.SqlPO;
+import com.example.cyjcommon.entity.Sql;
 import org.springframework.data.domain.Page;
 
 /**
@@ -8,12 +8,12 @@ import org.springframework.data.domain.Page;
  */
 public interface SqlService {
 
-    SqlPO addOne(SqlPO po);
+    Sql addOne(Sql po);
 
-    void deleteOne(SqlPO po);
+    void deleteOne(Sql po);
 
-    SqlPO updateOne(SqlPO po);
+    Sql updateOne(Sql po);
 
-    Page<SqlPO> findAll(Integer pageNumber);
+    Page<Sql> findAll(Integer pageNumber);
 
 }

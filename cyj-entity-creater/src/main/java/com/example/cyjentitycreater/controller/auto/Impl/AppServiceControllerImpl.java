@@ -1,6 +1,6 @@
 package com.example.cyjentitycreater.controller.auto.Impl;
 
-import com.example.cyjcommon.entity.po.AppServicePO;
+import com.example.cyjcommon.entity.AppService;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.controller.auto.AppServiceController;
 import com.example.cyjentitycreater.service.auto.AppServiceService;
@@ -31,7 +31,7 @@ public class AppServiceControllerImpl implements AppServiceController {
     }
 
     @Override
-    public ResultVO appServiceSave(AppServicePO po, BindingResult bindingResult) {
+    public ResultVO appServiceSave(AppService po, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultVO.failure(bindingResult.getAllErrors().get(0));
         }
@@ -42,7 +42,7 @@ public class AppServiceControllerImpl implements AppServiceController {
     }
 
     @Override
-    public ResultVO appServiceDelete(AppServicePO po) {
+    public ResultVO appServiceDelete(AppService po) {
         if (po.getId() == null) {
             return ResultVO.failure();
         }

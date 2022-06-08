@@ -1,6 +1,6 @@
 package com.example.cyjworkflow.controller.auto.Impl;
 
-import com.example.cyjcommon.entity.po.FlowTenantPO;
+import com.example.cyjcommon.entity.FlowTenant;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjworkflow.controller.auto.FlowTenantController;
 import com.example.cyjworkflow.service.auto.FlowTenantService;
@@ -31,7 +31,7 @@ public class FlowTenantControllerImpl implements FlowTenantController {
     }
 
     @Override
-    public ResultVO flowTenantSave(FlowTenantPO po, BindingResult bindingResult) {
+    public ResultVO flowTenantSave(FlowTenant po, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultVO.failure(bindingResult.getAllErrors().get(0));
         }
@@ -42,7 +42,7 @@ public class FlowTenantControllerImpl implements FlowTenantController {
     }
 
     @Override
-    public ResultVO flowTenantDelete(FlowTenantPO po) {
+    public ResultVO flowTenantDelete(FlowTenant po) {
         if (po.getId() == null) {
             return ResultVO.failure();
         }

@@ -1,6 +1,6 @@
 package com.example.cyjauth.service.custom;
 
-import com.example.cyjcommon.entity.po.UserPO;
+import com.example.cyjcommon.entity.User;
 
 /**
  * @author Noice
@@ -9,7 +9,7 @@ import com.example.cyjcommon.entity.po.UserPO;
  */
 public interface UserCustomService {
 
-    UserPO findAuthUserByUsername(String username);
+    User findAuthUserByUsername(String username);
     void resetPassword(String userId, String newPassword, String checkPassword);
 
 }

@@ -1,6 +1,6 @@
 package com.example.cyjauth.service.auto;
 
-import com.example.cyjcommon.entity.po.RolePO;
+import com.example.cyjcommon.entity.Role;
 import org.springframework.data.domain.Page;
 
 import java.util.Set;
@@ -10,16 +10,8 @@ import java.util.Set;
  */
 public interface RoleService {
 
-    RolePO addOne(RolePO po);
+    Set<String> roleByUser(String userId);
 
-    void deleteOne(RolePO po);
-
-    RolePO updateOne(RolePO po);
-
-    Page<RolePO> findAll(Integer pageNumber);
-
-    Page<RolePO> findAllByUserList(Integer pageNumber, Set<String> userList);
-
-    Page<RolePO> findAllByAuthorityList(Integer pageNumber, Set<String> authorityList);
+    void roleSaveUser(String userId, Set<String> roleIds);
 
 }

@@ -1,6 +1,6 @@
 package com.example.cyjworkflow.controller.auto;
 
-import com.example.cyjcommon.entity.po.FlowUserPO;
+import com.example.cyjcommon.entity.FlowUser;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,10 +22,10 @@ public interface FlowUserController {
 
     @Operation(summary = "保存FlowUser")
     @PostMapping(value = "flowUserSave")
-    ResultVO flowUserSave(@RequestBody @Validated FlowUserPO po, BindingResult bindingResult);
+    ResultVO flowUserSave(@RequestBody @Validated FlowUser po, BindingResult bindingResult);
 
     @Operation(summary = "删除FlowUser")
     @PostMapping(value = "flowUserDelete")
-    ResultVO flowUserDelete(@RequestBody FlowUserPO po);
+    ResultVO flowUserDelete(@RequestBody FlowUser po);
 
 }

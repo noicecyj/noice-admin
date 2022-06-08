@@ -1,6 +1,6 @@
 package com.example.cyjquery.controller.auto.Impl;
 
-import com.example.cyjcommon.entity.po.SqlPO;
+import com.example.cyjcommon.entity.Sql;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjquery.controller.auto.SqlController;
 import com.example.cyjquery.service.auto.SqlService;
@@ -31,7 +31,7 @@ public class SqlControllerImpl implements SqlController {
     }
 
     @Override
-    public ResultVO sqlSave(SqlPO po, BindingResult bindingResult) {
+    public ResultVO sqlSave(Sql po, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultVO.failure(bindingResult.getAllErrors().get(0));
         }
@@ -42,7 +42,7 @@ public class SqlControllerImpl implements SqlController {
     }
 
     @Override
-    public ResultVO sqlDelete(SqlPO po) {
+    public ResultVO sqlDelete(Sql po) {
         if (po.getId() == null) {
             return ResultVO.failure();
         }

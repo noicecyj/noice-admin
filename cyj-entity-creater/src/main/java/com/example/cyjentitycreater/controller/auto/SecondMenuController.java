@@ -1,7 +1,7 @@
 package com.example.cyjentitycreater.controller.auto;
 
-import com.example.cyjcommon.entity.po.FirstMenuPO;
-import com.example.cyjcommon.entity.po.SecondMenuPO;
+import com.example.cyjcommon.entity.FirstMenu;
+import com.example.cyjcommon.entity.SecondMenu;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,14 +19,14 @@ public interface SecondMenuController {
 
     @Operation(summary = "根据FirstMenu查询所有SecondMenu")
     @PostMapping(value = "secondMenuPageByFirstMenu")
-    ResultVO secondMenuPage(@RequestParam("pageNumber") Integer pageNumber, @RequestBody FirstMenuPO firstMenu);
+    ResultVO secondMenuPage(@RequestParam("pageNumber") Integer pageNumber, @RequestBody FirstMenu firstMenu);
 
     @Operation(summary = "保存SecondMenu")
     @PostMapping(value = "secondMenuSave")
-    ResultVO secondMenuSave(@RequestBody @Validated SecondMenuPO po, BindingResult bindingResult);
+    ResultVO secondMenuSave(@RequestBody @Validated SecondMenu po, BindingResult bindingResult);
 
     @Operation(summary = "删除SecondMenu")
     @PostMapping(value = "secondMenuDelete")
-    ResultVO secondMenuDelete(@RequestBody SecondMenuPO po);
+    ResultVO secondMenuDelete(@RequestBody SecondMenu po);
 
 }

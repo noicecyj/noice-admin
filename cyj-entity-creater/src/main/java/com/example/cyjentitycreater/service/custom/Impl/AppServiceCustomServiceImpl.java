@@ -1,13 +1,13 @@
 package com.example.cyjentitycreater.service.custom.Impl;
 
 import com.example.cyjcommon.dao.AppServiceDao;
-import com.example.cyjcommon.entity.po.AppServicePO;
-import com.example.cyjcommon.entity.po.DictionaryPO;
+import com.example.cyjcommon.entity.AppService;
+import com.example.cyjcommon.entity.Dictionary;
 import com.example.cyjcommon.service.BaseService;
+import com.example.cyjcommon.utils.BeanUtils;
 import com.example.cyjcommon.utils.CommonUtils;
 import com.example.cyjdictionary.service.custom.DictionaryCustomService;
 import com.example.cyjentitycreater.service.custom.AppServiceCustomService;
-import com.example.cyjentitycreater.utils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,28 +40,28 @@ public class AppServiceCustomServiceImpl extends BaseService implements AppServi
 
     @Override
     public void createAppFile(String id) {
-        Optional<AppServicePO> opt = appServiceDao.findById(id);
+        Optional<AppService> opt = appServiceDao.findById(id);
         if (opt.isPresent()) {
-            AppServicePO appServicePO = opt.get();
-            String AppName = BeanUtils.captureName(BeanUtils.underline2Camel2(appServicePO.getAppServiceName()));
-            List<DictionaryPO> pos = dictionaryCustomService.findCatalogByValue("PROJECT_PATH");
-            HashMap<String, DictionaryPO> mapPo = CommonUtils.listToMap(pos, "dictionaryName");
-            String AppFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appServicePO.getAppServiceName() + "\\src\\main\\java\\com\\example\\" + AppName;
-            String[] AppResult = appGenerate(appServicePO);
-            String ymlFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appServicePO.getAppServiceName() + "\\src\\main\\resources";
-            String[] ymlResult = ymlGenerate(appServicePO);
-            String xmlFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appServicePO.getAppServiceName() + "\\src\\main\\resources";
-            String[] xmlResult = xmlGenerate(appServicePO);
-            String configFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appServicePO.getAppServiceName() + "\\src\\main\\resources";
+            AppService appService = opt.get();
+            String AppName = BeanUtils.captureName(BeanUtils.underline2Camel2(appService.getAppServiceName()));
+            List<Dictionary> pos = dictionaryCustomService.findCatalogByValue("PROJECT_PATH");
+            HashMap<String, Dictionary> mapPo = CommonUtils.listToMap(pos, "dictionaryName");
+            String AppFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appService.getAppServiceName() + "\\src\\main\\java\\com\\example\\" + AppName;
+            String[] AppResult = appGenerate(appService);
+            String ymlFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appService.getAppServiceName() + "\\src\\main\\resources";
+            String[] ymlResult = ymlGenerate(appService);
+            String xmlFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appService.getAppServiceName() + "\\src\\main\\resources";
+            String[] xmlResult = xmlGenerate(appService);
+            String configFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appService.getAppServiceName() + "\\src\\main\\resources";
             String[] configResult = configGenerate();
-            String pomFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appServicePO.getAppServiceName();
-            String[] pomResult = pomGenerate(appServicePO);
+            String pomFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appService.getAppServiceName();
+            String[] pomResult = pomGenerate(appService);
             try {
-                createJavaFile(AppFilePath, AppResult);
-                createJavaFile(ymlFilePath, ymlResult);
-                createJavaFile(xmlFilePath, xmlResult);
-                createJavaFile(configFilePath, configResult);
-                createJavaFile(pomFilePath, pomResult);
+                BeanUtils.createJavaFile(AppFilePath, AppResult);
+                BeanUtils.createJavaFile(ymlFilePath, ymlResult);
+                BeanUtils.createJavaFile(xmlFilePath, xmlResult);
+                BeanUtils.createJavaFile(configFilePath, configResult);
+                BeanUtils.createJavaFile(pomFilePath, pomResult);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -69,7 +69,7 @@ public class AppServiceCustomServiceImpl extends BaseService implements AppServi
 
     }
 
-    public String[] appGenerate(AppServicePO po) {
+    public String[] appGenerate(AppService po) {
         String AppName = BeanUtils.captureName(BeanUtils.underline2Camel2(po.getAppServiceName()));
         StringBuilder sb = new StringBuilder();
         sb.append("package com.example.").append(AppName.toLowerCase()).append(";\r\n");
@@ -100,7 +100,7 @@ public class AppServiceCustomServiceImpl extends BaseService implements AppServi
         return new String[]{serviceFileData, BeanUtils.AppFileName(po)};
     }
 
-    public String[] ymlGenerate(AppServicePO po) {
+    public String[] ymlGenerate(AppService po) {
         String serviceFileData =
                 "server:\r\n" +
                         "  port: " + po.getAppServicePort() + "\r\n" +
@@ -128,7 +128,7 @@ public class AppServiceCustomServiceImpl extends BaseService implements AppServi
         return new String[]{serviceFileData, "application.yml"};
     }
 
-    public String[] xmlGenerate(AppServicePO po) {
+    public String[] xmlGenerate(AppService po) {
         String serviceFileData =
                 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n" +
                         "<!--该日志将日志级别不同的log信息保存到不同的文件中 -->\r\n" +
@@ -181,7 +181,7 @@ public class AppServiceCustomServiceImpl extends BaseService implements AppServi
         return new String[]{serviceFileData, "config.properties"};
     }
 
-    public String[] pomGenerate(AppServicePO po) {
+    public String[] pomGenerate(AppService po) {
         String serviceFileData =
                 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n" +
                         "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n" +

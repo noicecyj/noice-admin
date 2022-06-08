@@ -1,51 +1,84 @@
 package com.example.cyjauth.controller.auto;
 
-import com.example.cyjcommon.entity.po.AppServicePO;
-import com.example.cyjcommon.entity.po.EntityPO;
-import com.example.cyjcommon.entity.po.AuthorityPO;
+import com.example.cyjauth.service.auto.Impl.AuthorityServiceImpl;
+import com.example.cyjcommon.controller.autoController;
+import com.example.cyjcommon.entity.Authority;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Set;
 
 /**
  * @author Noice
  */
+@CrossOrigin
+@RestController
+@RequestMapping(value = "authApi")
 @Tag(name = "Authority")
-public interface AuthorityController {
+public class AuthorityController implements autoController<Authority> {
 
-    @Operation(summary = "查询所有Authority")
-    @PostMapping(value = "authorityPage")
-    ResultVO authorityPage(@RequestParam("pageNumber") Integer pageNumber);
+    private AuthorityServiceImpl service;
 
-    @Operation(summary = "根据AppService查询所有Authority")
-    @PostMapping(value = "authorityPageByAppService")
-    ResultVO authorityPage(@RequestParam("pageNumber") Integer pageNumber, @RequestBody AppServicePO appService);
+    @Autowired
+    public void setService(AuthorityServiceImpl service) {
+        this.service = service;
+    }
 
-    @Operation(summary = "根据Entity查询所有Authority")
-    @PostMapping(value = "authorityPageByEntity")
-    ResultVO authorityPage(@RequestParam("pageNumber") Integer pageNumber, @RequestBody EntityPO entity);
+    @Override
+    @Operation(summary = "分页查询所有Authority")
+    @PostMapping(value = "pageAuthority")
+    public ResultVO page(Integer pageNumber) {
+        return ResultVO.success(service.findAll(pageNumber));
+    }
 
-    @Operation(summary = "根据UserList查询所有Authority")
-    @PostMapping(value = "authorityPageByUserList")
-    ResultVO authorityPageByUserList(@RequestParam("pageNumber") Integer pageNumber, @RequestBody Set<String> userList);
-
-    @Operation(summary = "根据RoleList查询所有Authority")
-    @PostMapping(value = "authorityPageByRoleList")
-    ResultVO authorityPageByRoleList(@RequestParam("pageNumber") Integer pageNumber, @RequestBody Set<String> roleList);
-
+    @Override
     @Operation(summary = "保存Authority")
-    @PostMapping(value = "authoritySave")
-    ResultVO authoritySave(@RequestBody @Validated AuthorityPO po, BindingResult bindingResult);
+    @PostMapping(value = "saveAuthority")
+    public ResultVO save(Authority po, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResultVO.failure(bindingResult.getAllErrors().get(0));
+        }
+        if (po.getId() == null) {
+            return ResultVO.success(service.addOne(po));
+        }
+        return ResultVO.success(service.updateOne(po));
+    }
 
+    @Override
     @Operation(summary = "删除Authority")
-    @PostMapping(value = "authorityDelete")
-    ResultVO authorityDelete(@RequestBody AuthorityPO po);
+    @PostMapping(value = "deleteAuthority")
+    public ResultVO delete(Authority po) {
+        if (po.getId() == null) {
+            return ResultVO.failure();
+        }
+        service.deleteOne(po);
+        return ResultVO.success();
+    }
+
+    @Operation(summary = "根据Role查询所有Authority")
+    @PostMapping(value = "authorityByRole")
+    public ResultVO authorityByRole(String roleId) {
+        if (roleId == null) {
+            return ResultVO.failure();
+        }
+        return ResultVO.success(service.authorityByRole(roleId));
+    }
+
+    @Operation(summary = "根据Role保存Authority")
+    @PostMapping(value = "authoritySaveRole")
+    public ResultVO authoritySaveRole(String roleId, Set<String> authorityIds) {
+        if (roleId == null) {
+            return ResultVO.failure();
+        }
+        service.authoritySaveRole(roleId, authorityIds);
+        return ResultVO.success();
+    }
 
 }

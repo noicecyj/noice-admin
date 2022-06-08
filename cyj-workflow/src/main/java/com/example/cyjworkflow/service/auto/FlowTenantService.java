@@ -1,6 +1,6 @@
 package com.example.cyjworkflow.service.auto;
 
-import com.example.cyjcommon.entity.po.FlowTenantPO;
+import com.example.cyjcommon.entity.FlowTenant;
 import org.springframework.data.domain.Page;
 
 /**
@@ -8,12 +8,12 @@ import org.springframework.data.domain.Page;
  */
 public interface FlowTenantService {
 
-    FlowTenantPO addOne(FlowTenantPO po);
+    FlowTenant addOne(FlowTenant po);
 
-    void deleteOne(FlowTenantPO po);
+    void deleteOne(FlowTenant po);
 
-    FlowTenantPO updateOne(FlowTenantPO po);
+    FlowTenant updateOne(FlowTenant po);
 
-    Page<FlowTenantPO> findAll(Integer pageNumber);
+    Page<FlowTenant> findAll(Integer pageNumber);
 
 }

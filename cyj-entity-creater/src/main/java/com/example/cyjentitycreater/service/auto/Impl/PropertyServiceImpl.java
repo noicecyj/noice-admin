@@ -1,8 +1,8 @@
 package com.example.cyjentitycreater.service.auto.Impl;
 
 import com.example.cyjcommon.dao.PropertyDao;
-import com.example.cyjcommon.entity.po.EntityPO;
-import com.example.cyjcommon.entity.po.PropertyPO;
+import com.example.cyjcommon.entity.Entity;
+import com.example.cyjcommon.entity.Property;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjentitycreater.service.auto.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,31 +29,31 @@ public class PropertyServiceImpl extends BaseService implements PropertyService 
     }
 
     @Override
-    public PropertyPO addOne(PropertyPO po) {
+    public Property addOne(Property po) {
         return propertyDao.save(po);
     }
 
     @Override
-    public void deleteOne(PropertyPO po) {
+    public void deleteOne(Property po) {
         propertyDao.delete(po);
     }
 
     @Override
-    public PropertyPO updateOne(PropertyPO po) {
+    public Property updateOne(Property po) {
         return propertyDao.saveAndFlush(po);
     }
 
     @Override
-    public Page<PropertyPO> findAll(Integer pageNumber) {
+    public Page<Property> findAll(Integer pageNumber) {
         return propertyDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 
     @Override
-    public Page<PropertyPO> findAll(Integer pageNumber, EntityPO entity) {
+    public Page<Property> findAll(Integer pageNumber, Entity entity) {
         Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
-        PropertyPO propertyPO = new PropertyPO();
-        propertyPO.setEntity(entity);
-        Example<PropertyPO> example = Example.of(propertyPO);
+        Property property = new Property();
+        property.setEntity(entity);
+        Example<Property> example = Example.of(property);
         return propertyDao.findAll(example, pageable);
     }
 

@@ -1,7 +1,7 @@
 package com.example.cyjentitycreater.controller.auto.Impl;
 
-import com.example.cyjcommon.entity.po.AppServicePO;
-import com.example.cyjcommon.entity.po.EntityPO;
+import com.example.cyjcommon.entity.AppService;
+import com.example.cyjcommon.entity.Entity;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.controller.auto.EntityController;
 import com.example.cyjentitycreater.service.auto.EntityService;
@@ -32,17 +32,17 @@ public class EntityControllerImpl implements EntityController {
     }
 
     @Override
-    public ResultVO entityPage(Integer pageNumber, EntityPO entity) {
+    public ResultVO entityPage(Integer pageNumber, Entity entity) {
         return ResultVO.success(entityService.findAll(pageNumber, entity));
     }
 
     @Override
-    public ResultVO entityPage(Integer pageNumber, AppServicePO appService) {
+    public ResultVO entityPage(Integer pageNumber, AppService appService) {
         return ResultVO.success(entityService.findAll(pageNumber, appService));
     }
 
     @Override
-    public ResultVO entitySave(EntityPO po, BindingResult bindingResult) {
+    public ResultVO entitySave(Entity po, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultVO.failure(bindingResult.getAllErrors().get(0));
         }
@@ -53,7 +53,7 @@ public class EntityControllerImpl implements EntityController {
     }
 
     @Override
-    public ResultVO entityDelete(EntityPO po) {
+    public ResultVO entityDelete(Entity po) {
         if (po.getId() == null) {
             return ResultVO.failure();
         }

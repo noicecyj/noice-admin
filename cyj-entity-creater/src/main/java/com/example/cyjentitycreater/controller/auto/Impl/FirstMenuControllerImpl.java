@@ -1,6 +1,6 @@
 package com.example.cyjentitycreater.controller.auto.Impl;
 
-import com.example.cyjcommon.entity.po.FirstMenuPO;
+import com.example.cyjcommon.entity.FirstMenu;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.controller.auto.FirstMenuController;
 import com.example.cyjentitycreater.service.auto.FirstMenuService;
@@ -31,7 +31,7 @@ public class FirstMenuControllerImpl implements FirstMenuController {
     }
 
     @Override
-    public ResultVO firstMenuSave(FirstMenuPO po, BindingResult bindingResult) {
+    public ResultVO firstMenuSave(FirstMenu po, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultVO.failure(bindingResult.getAllErrors().get(0));
         }
@@ -42,7 +42,7 @@ public class FirstMenuControllerImpl implements FirstMenuController {
     }
 
     @Override
-    public ResultVO firstMenuDelete(FirstMenuPO po) {
+    public ResultVO firstMenuDelete(FirstMenu po) {
         if (po.getId() == null) {
             return ResultVO.failure();
         }
