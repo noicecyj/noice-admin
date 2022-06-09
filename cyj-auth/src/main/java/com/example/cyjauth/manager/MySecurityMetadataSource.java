@@ -3,8 +3,9 @@ package com.example.cyjauth.manager;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.example.cyjauth.service.custom.AuthorityCustomService;
 import com.example.cyjcommon.entity.Authority;
+import com.example.cyjcommon.entity.QAuthority;
+import com.example.cyjcommon.service.BaseService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -14,6 +15,7 @@ import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
 
@@ -30,15 +32,10 @@ import java.util.concurrent.TimeUnit;
  */
 
 @Component
-public class MySecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
+@Transactional(rollbackFor = Exception.class)
+public class MySecurityMetadataSource extends BaseService implements FilterInvocationSecurityMetadataSource {
 
-    private AuthorityCustomService authorityCustomService;
     private StringRedisTemplate redisTemplate;
-
-    @Autowired
-    public void setAuthorityCustomService(AuthorityCustomService authorityCustomService) {
-        this.authorityCustomService = authorityCustomService;
-    }
 
     @Autowired
     public void setRedisTemplate(StringRedisTemplate redisTemplate) {
@@ -55,7 +52,8 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
         //从redis中获取角色与权限数据
         String redisConfigAttributesPermission = redisTemplate.opsForValue().get("configAttributes:permissions");
         if (StringUtils.isBlank(redisConfigAttributesPermission)) {
-            List<Authority> authorityList = authorityCustomService.findRoleAndAuthority();
+            List<Authority> authorityList = queryFactory.selectFrom(QAuthority.authority)
+                    .where(QAuthority.authority.status.eq("有效")).fetch();
             for (Authority po : authorityList) {
                 String path = po.getAuthorityPath();
                 if (po.getAppService() != null) {
