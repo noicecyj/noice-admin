@@ -1,6 +1,6 @@
 package com.example.cyjauth.controller.auto;
 
-import com.example.cyjauth.service.auto.Impl.RoleServiceImpl;
+import com.example.cyjauth.service.auto.RoleService;
 import com.example.cyjcommon.controller.autoController;
 import com.example.cyjcommon.entity.Role;
 import com.example.cyjcommon.utils.ResultVO;
@@ -24,10 +24,10 @@ import java.util.Set;
 @Tag(name = "Role")
 public class RoleController implements autoController<Role> {
 
-    private RoleServiceImpl service;
+    private RoleService service;
 
     @Autowired
-    public void setService(RoleServiceImpl service) {
+    public void setService(RoleService service) {
         this.service = service;
     }
 

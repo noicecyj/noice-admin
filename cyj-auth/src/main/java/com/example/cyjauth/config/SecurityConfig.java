@@ -6,7 +6,7 @@ import com.example.cyjauth.filter.MyUsernamePasswordAuthenticationFilter;
 import com.example.cyjauth.filter.WebSecurityCorsFilter;
 import com.example.cyjauth.handler.EntryPointUnauthorizedHandler;
 import com.example.cyjauth.handler.RestAccessDeniedHandler;
-import com.example.cyjauth.service.custom.Impl.UserCustomServiceImpl;
+import com.example.cyjauth.service.custom.UserCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,7 +32,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     protected AuthenticationManager authenticationManager;
-    private UserCustomServiceImpl userCustomService;
+    private UserCustomService userCustomService;
     private AuthenticationSuccessHandler successHandler;
     private AuthenticationFailureHandler failHandler;
     private RestAccessDeniedHandler accessDeniedHandler;
@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private MyFilterSecurityInterceptor myFilterSecurityInterceptor;
 
     @Autowired
-    public void setUserCustomService(UserCustomServiceImpl userCustomService) {
+    public void setUserCustomService(UserCustomService userCustomService) {
         this.userCustomService = userCustomService;
     }
 

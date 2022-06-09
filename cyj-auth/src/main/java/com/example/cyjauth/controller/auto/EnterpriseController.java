@@ -1,6 +1,6 @@
 package com.example.cyjauth.controller.auto;
 
-import com.example.cyjauth.service.auto.Impl.EnterpriseServiceImpl;
+import com.example.cyjauth.service.auto.EnterpriseService;
 import com.example.cyjcommon.controller.autoController;
 import com.example.cyjcommon.entity.Enterprise;
 import com.example.cyjcommon.utils.ResultVO;
@@ -25,10 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Enterprise")
 public class EnterpriseController implements autoController<Enterprise> {
 
-    private EnterpriseServiceImpl service;
+    private EnterpriseService service;
 
     @Autowired
-    public void setService(EnterpriseServiceImpl service) {
+    public void setService(EnterpriseService service) {
         this.service = service;
     }
 
