@@ -13,4 +13,5 @@ public interface AuthorityService {
     Set<String> authorityByRole(String role);
 
     void authoritySaveRole(String role, Set<String> authorityIds);
+
 }
