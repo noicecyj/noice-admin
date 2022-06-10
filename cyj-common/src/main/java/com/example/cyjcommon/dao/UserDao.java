@@ -14,8 +14,4 @@ import java.util.Set;
  */
 public interface UserDao extends JpaRepository<User, String> {
 
-    List<User> findByEnterpriseOrderBySortCode(Enterprise enterprise);
-
-    List<User> findByRoleInOrderBySortCode(Collection<Set<Role>> roleList);
-
 }

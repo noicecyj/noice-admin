@@ -210,12 +210,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         String appApi = appService.getAppServiceApi();
         List<Property> propertyList = propertyDao.findByEntityOrderBySortCode(entity);
         Map<String, String[]> entityObj = new HashMap<>();
-        entityObj.put(commonPath + "/entity/po", poGenerate(entity, propertyList, poName, underPoName));
+        entityObj.put(commonPath + "/entity", poGenerate(entity, propertyList, poName, underPoName));
         entityObj.put(commonPath + "/dao", daoGenerate(entity, propertyList, poName, underPoName));
         entityObj.put(appPath + "/service/auto", serviceGenerate(entity, propertyList, poName, underPoName, appPath));
-        entityObj.put(appPath + "/service/auto/Impl", serviceImplGenerate(entity, propertyList, underPoName, poName, appPath));
         entityObj.put(appPath + "/controller/auto", controllerGenerate(entity, propertyList, underPoName, poName, appPath));
-        entityObj.put(appPath + "/controller/auto/Impl", controllerImplGenerate(entity, propertyList, underPoName, poName, appPath, appApi));
         entityObj.put(componentPath + poName + "/view/auto", viewAutoGenerate(entity, propertyList, underPoName, poName));
         entityObj.put(componentPath + poName + "/services/auto", servicesAutoGenerate(entity, propertyList, appApi, underPoName, poName));
         entityObj.put(componentPath + poName + "/models/auto", modelsAutoGenerate(entity, underPoName, poName));
@@ -225,10 +223,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         }
         Map<String, String[]> entityCustomObj = new HashMap<>();
         entityCustomObj.put(appPath + "/service/custom", serviceCustomGenerate(poName, appPath));
-        entityCustomObj.put(appPath + "/service/custom/aop", aopCustomGenerate(poName, appPath));
-        entityCustomObj.put(appPath + "/service/custom/Impl", serviceImplCustomGenerate(poName, appPath));
         entityCustomObj.put(appPath + "/controller/custom", controllerCustomGenerate(poName, appPath));
-        entityCustomObj.put(appPath + "/controller/custom/Impl", controllerImplCustomGenerate(poName, appPath, appApi));
         entityCustomObj.put(componentPath + poName + "/view/custom", viewCustomGenerate(underPoName, poName));
         entityCustomObj.put(componentPath + poName + "/services/custom", servicesCustomGenerate(underPoName));
         entityCustomObj.put(componentPath + poName + "/models/custom", modelsCustomGenerate(underPoName, poName));

@@ -12,8 +12,4 @@ import java.util.List;
  */
 public interface AuthorityDao extends JpaRepository<Authority, String> {
 
-    List<Authority> findByAppServiceOrderBySortCode(AppService appService);
-
-    List<Authority> findByEntityOrderBySortCode(Entity entity);
-
 }

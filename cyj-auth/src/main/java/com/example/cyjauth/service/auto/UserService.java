@@ -22,12 +22,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = Exception.class)
 public class UserService extends BaseService implements autoService<User> {
 
-    private UserDao userDao;
+    private UserDao dao;
     private EnterpriseDao enterpriseDao;
 
     @Autowired
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
+    public void setDao(UserDao dao) {
+        this.dao = dao;
     }
 
     @Autowired
@@ -41,12 +41,12 @@ public class UserService extends BaseService implements autoService<User> {
             Enterprise enterprise = enterpriseDao.getOne(po.getEnterpriseId());
             po.setEnterprise(enterprise);
         }
-        return userDao.save(po);
+        return dao.save(po);
     }
 
     @Override
     public void deleteOne(User po) {
-        userDao.delete(po);
+        dao.delete(po);
     }
 
     @Override
@@ -55,20 +55,20 @@ public class UserService extends BaseService implements autoService<User> {
             Enterprise enterprise = enterpriseDao.getOne(po.getEnterpriseId());
             po.setEnterprise(enterprise);
         }
-        return userDao.saveAndFlush(po);
+        return dao.saveAndFlush(po);
     }
 
     @Override
     public Page<User> findAll(Integer pageNumber) {
-        return userDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
+        return dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 
     public Page<User> findAll(Integer pageNumber, Enterprise enterprise) {
         Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
-        User user = new User();
-        user.setEnterprise(enterprise);
-        Example<User> example = Example.of(user);
-        return userDao.findAll(example, pageable);
+        User po = new User();
+        po.setEnterprise(enterprise);
+        Example<User> example = Example.of(po);
+        return dao.findAll(example, pageable);
     }
 
 }
