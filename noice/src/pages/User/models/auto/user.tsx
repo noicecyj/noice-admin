@@ -18,7 +18,8 @@ export default {
     table: [],
     customData: {},
     divVisible: false,
-    parent: {},
+    parent: "",
+    select:[],
   },
 
   reducers: {

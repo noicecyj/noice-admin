@@ -3,6 +3,7 @@ import pageStore from '@/pages/User/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
 import {CustomColumn} from '@/pages/User/view/custom/user';
+import {Dialog} from "@alifd/next";
 
 function User() {
 
@@ -10,7 +11,7 @@ function User() {
 
   const [customState, customDispatchers] = pageStore.useModel('userCustom');
 
-  const roleDispatchers = pageStore.useModelDispatchers('role');
+  const [roleState, roleDispatchers] = pageStore.useModel('role');
 
   useEffect(() => {
     dispatchers.findDataTableAndFormByName().then(r => console.log(r));
@@ -35,7 +36,7 @@ function User() {
           );
         }}
         manyToMany1="角色"
-        manyToManyMethod1={record => roleDispatchers.onRowClick(record)}
+        manyToManyMethod1={record => roleDispatchers.roleByUser(record)}
         customMethod1={() => customDispatchers.customMethod1()}
         customMethod2={() => customDispatchers.customMethod2()}
         customMethod3={() => customDispatchers.customMethod3()}
@@ -54,6 +55,36 @@ function User() {
         formDataValue={state.formData}
         formSortCode={String(Number.parseInt(String(state.total)) + 10)}
       />
+      <Dialog
+        v2
+        title="角色"
+        visible={roleState.divVisible}
+        onClose={() => roleDispatchers.setState({
+          divVisible: false,
+          parent: "",
+          select: [],
+        })}
+        onOk={() => roleDispatchers.roleSaveUser(roleState.parent, roleState.select)}
+        style={{width: '90%'}}
+      >
+        <DataTableTemple
+          visibleLoading={roleState.loadingVisible}
+          dataSource={roleState.tableData}
+          items={roleState.table}
+          total={roleState.total}
+          getPage={(current) => roleDispatchers.page(current)}
+          primaryKey="id"
+          rowSelection={{
+            onChange: (ids, records) => {
+              console.log(ids, records)
+              roleDispatchers.setState({
+                select: ids,
+              })
+            },
+            selectedRowKeys: roleState.select,
+          }}
+        />
+      </Dialog>
     </>
   );
 }

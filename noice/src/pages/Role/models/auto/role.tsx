@@ -18,7 +18,8 @@ export default {
     table: [],
     customData: {},
     divVisible: false,
-    parent: {},
+    parent: "",
+    select: [],
   },
 
   reducers: {
@@ -96,8 +97,31 @@ export default {
       };
       dispatch.role.setState(payload);
     },
-    onRowClick(record){
-
+    async roleByUser(record) {
+      await this.findDataTableAndFormByName();
+      const ret = await service.roleByUser(record.id);
+      if (ret.code === 400) {
+        Message.error('获取失败');
+      } else {
+        const payload = {
+          divVisible: true,
+          parent: record.id,
+          select: ret.data,
+        };
+        dispatch.role.setState(payload);
+      }
+    },
+    async roleSaveUser(id, data) {
+      const ret = await service.roleSaveUser(id, data);
+      if (ret.code === 400) {
+        Message.error('保存失败');
+      } else {
+        Message.success('保存成功');
+        const payload = {
+          divVisible: false,
+        };
+        dispatch.role.setState(payload);
+      }
     },
   }),
 };

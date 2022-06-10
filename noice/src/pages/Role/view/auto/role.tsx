@@ -3,6 +3,7 @@ import pageStore from '@/pages/Role/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
 import {CustomColumn} from '@/pages/Role/view/custom/role';
+import {Dialog} from "@alifd/next";
 
 function Role() {
 
@@ -10,7 +11,7 @@ function Role() {
 
   const [customState, customDispatchers] = pageStore.useModel('roleCustom');
 
-  const authorityDispatchers = pageStore.useModelDispatchers('authority');
+  const [authorityState, authorityDispatchers] = pageStore.useModel('authority');
 
   useEffect(() => {
     dispatchers.findDataTableAndFormByName().then(r => console.log(r));
@@ -35,7 +36,7 @@ function Role() {
           );
         }}
         manyToMany1="权限"
-        manyToManyMethod1={record => authorityDispatchers.onRowClick(record)}
+        manyToManyMethod1={record => authorityDispatchers.authorityByRole(record)}
         customMethod1={() => customDispatchers.customMethod1()}
         customMethod2={() => customDispatchers.customMethod2()}
         customMethod3={() => customDispatchers.customMethod3()}
@@ -54,6 +55,36 @@ function Role() {
         formDataValue={state.formData}
         formSortCode={String(Number.parseInt(String(state.total)) + 10)}
       />
+      <Dialog
+        v2
+        title="角色"
+        visible={authorityState.divVisible}
+        onClose={() => authorityDispatchers.setState({
+          divVisible: false,
+          parent: "",
+          select: [],
+        })}
+        onOk={() => authorityDispatchers.authoritySaveRole(authorityState.parent, authorityState.select)}
+        style={{width: '90%'}}
+      >
+        <DataTableTemple
+          visibleLoading={authorityState.loadingVisible}
+          dataSource={authorityState.tableData}
+          items={authorityState.table}
+          total={authorityState.total}
+          getPage={(current) => authorityDispatchers.page(current)}
+          primaryKey="id"
+          rowSelection={{
+            onChange: (ids, records) => {
+              console.log(ids, records)
+              authorityDispatchers.setState({
+                select: ids,
+              })
+            },
+            selectedRowKeys: authorityState.select,
+          }}
+        />
+      </Dialog>
     </>
   );
 }
