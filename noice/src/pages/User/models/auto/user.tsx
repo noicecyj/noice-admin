@@ -19,7 +19,7 @@ export default {
     customData: {},
     divVisible: false,
     parent: "",
-    select:[],
+    select: [],
   },
 
   reducers: {
