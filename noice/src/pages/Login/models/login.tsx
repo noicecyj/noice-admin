@@ -21,11 +21,6 @@ export default {
   },
 
   effects: (dispatch) => ({
-    /**
-     * 数据
-     *
-     * @param {*} data
-     */
     login(data) {
       loginService.login(data)
         .then((res) => {
@@ -39,7 +34,6 @@ export default {
         Message.success('登录失败');
       });
     },
-
     setDataForm(data) {
       dispatch.login.setState(data);
     },
