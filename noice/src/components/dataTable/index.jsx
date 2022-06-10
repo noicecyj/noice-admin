@@ -40,7 +40,6 @@ function DataTable(props) {
     customMethodName2,
     customMethodName3,
   } = props;
-  console.log(sonMethod2)
 
   const pageRender = (value, index, record) => {
     return (

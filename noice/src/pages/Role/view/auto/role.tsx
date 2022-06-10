@@ -64,10 +64,14 @@ function Role() {
           parent: "",
           select: [],
         })}
-        onOk={() => authorityDispatchers.authoritySaveRole(authorityState.parent, authorityState.select)}
+        onOk={() => authorityDispatchers.authoritySaveRole({
+          parent: authorityState.parent,
+          select: authorityState.select
+        })}
         style={{width: '90%'}}
       >
         <DataTableTemple
+          customData={{customType:false}}
           visibleLoading={authorityState.loadingVisible}
           dataSource={authorityState.tableData}
           items={authorityState.table}
@@ -75,8 +79,7 @@ function Role() {
           getPage={(current) => authorityDispatchers.page(current)}
           primaryKey="id"
           rowSelection={{
-            onChange: (ids, records) => {
-              console.log(ids, records)
+            onChange: (ids) => {
               authorityDispatchers.setState({
                 select: ids,
               })

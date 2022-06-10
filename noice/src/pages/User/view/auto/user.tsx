@@ -64,10 +64,14 @@ function User() {
           parent: "",
           select: [],
         })}
-        onOk={() => roleDispatchers.roleSaveUser(roleState.parent, roleState.select)}
+        onOk={() => roleDispatchers.roleSaveUser({
+          parent: roleState.parent,
+          select: roleState.select
+        })}
         style={{width: '90%'}}
       >
         <DataTableTemple
+          customData={{customType: false}}
           visibleLoading={roleState.loadingVisible}
           dataSource={roleState.tableData}
           items={roleState.table}
@@ -75,8 +79,7 @@ function User() {
           getPage={(current) => roleDispatchers.page(current)}
           primaryKey="id"
           rowSelection={{
-            onChange: (ids, records) => {
-              console.log(ids, records)
+            onChange: (ids) => {
               roleDispatchers.setState({
                 select: ids,
               })
