@@ -97,9 +97,9 @@ export default {
       };
       dispatch.role.setState(payload);
     },
-    async roleByUser(data) {
-      await this.findDataTableAndFormByName();
-      const ret = await service.roleByUser(data.id);
+    async authorityByRole(data) {
+      await dispatch.authority.findDataTableAndFormByName();
+      const ret = await service.authorityByRole(data.id);
       if (ret.code === 400) {
         Message.error('获取失败');
       } else {
@@ -108,11 +108,11 @@ export default {
           parent: data.id,
           select: ret.data,
         };
-        dispatch.role.setState(payload);
+        dispatch.authority.setState(payload);
       }
     },
-    async roleSaveUser(data) {
-      const ret = await service.roleSaveUser(data.parent, data.select);
+    async authoritySaveRole(data) {
+      const ret = await service.authoritySaveRole(data.parent, data.select);
       if (ret.code === 400) {
         Message.error('保存失败');
       } else {
@@ -120,7 +120,7 @@ export default {
         const payload = {
           divVisible: false,
         };
-        dispatch.role.setState(payload);
+        dispatch.authority.setState(payload);
       }
     },
   }),

@@ -1,7 +1,9 @@
 package com.example.cyjauth.service.auto;
 
+import com.example.cyjcommon.dao.AuthorityDao;
 import com.example.cyjcommon.dao.RoleDao;
 import com.example.cyjcommon.dao.UserDao;
+import com.example.cyjcommon.entity.Authority;
 import com.example.cyjcommon.entity.Role;
 import com.example.cyjcommon.entity.User;
 import com.example.cyjcommon.service.BaseService;
@@ -24,61 +26,61 @@ import java.util.Set;
 @Transactional(rollbackFor = Exception.class)
 public class RoleService extends BaseService implements autoService<Role> {
 
-    private RoleDao roleDao;
-    private UserDao userDao;
+    private RoleDao dao;
+    private AuthorityDao authorityDao;
 
     @Autowired
-    public void setRoleDao(RoleDao roleDao) {
-        this.roleDao = roleDao;
+    public void setDao(RoleDao dao) {
+        this.dao = dao;
     }
 
     @Autowired
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
+    public void setAuthorityDao(AuthorityDao authorityDao) {
+        this.authorityDao = authorityDao;
     }
 
     @Override
     public Role addOne(Role po) {
-        return roleDao.save(po);
+        return dao.save(po);
     }
 
     @Override
     public void deleteOne(Role po) {
-        roleDao.delete(po);
+        dao.delete(po);
     }
 
     @Override
     public Role updateOne(Role po) {
-        return roleDao.saveAndFlush(po);
+        return dao.saveAndFlush(po);
     }
 
     @Override
     public Page<Role> findAll(Integer pageNumber) {
-        return roleDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
+        return dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 
-    public Set<String> roleByUser(String userId) {
-        Set<String> roleIds = new HashSet<>();
-        Optional<User> user = userDao.findById(userId);
-        if (user.isPresent()) {
-            Set<Role> roleSet = user.get().getRole();
-            for (Role role : roleSet) {
-                roleIds.add(role.getId());
+    public Set<String> authorityByRole(String roleId) {
+        Set<String> authorityIds = new HashSet<>();
+        Optional<Role> role = dao.findById(roleId);
+        if (role.isPresent()) {
+            Set<Authority> authoritySet = role.get().getAuthority();
+            for (Authority authority : authoritySet) {
+                authorityIds.add(authority.getId());
             }
         }
-        return roleIds;
+        return authorityIds;
     }
 
-    public void roleSaveUser(String userId, Set<String> roleIds) {
-        Set<Role> roleSet = new HashSet<>();
-        Optional<User> user = userDao.findById(userId);
-        if (user.isPresent()) {
-            for (String roleId : roleIds) {
-                Role role = roleDao.getOne(roleId);
-                roleSet.add(role);
+    public void authoritySaveRole(String roleId, Set<String> authorityIds) {
+        Set<Authority> authoritySet = new HashSet<>();
+        Optional<Role> role = dao.findById(roleId);
+        if (role.isPresent()) {
+            for (String authorityId : authorityIds) {
+                Authority authority = authorityDao.getOne(authorityId);
+                authoritySet.add(authority);
             }
-            user.get().setRole(roleSet);
-            userDao.save(user.get());
+            role.get().setAuthority(authoritySet);
+            dao.save(role.get());
         }
     }
 

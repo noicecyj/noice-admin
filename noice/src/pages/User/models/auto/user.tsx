@@ -97,5 +97,31 @@ export default {
       };
       dispatch.user.setState(payload);
     },
+    async roleByUser(data) {
+      await dispatch.role.findDataTableAndFormByName();
+      const ret = await service.roleByUser(data.id);
+      if (ret.code === 400) {
+        Message.error('获取失败');
+      } else {
+        const payload = {
+          divVisible: true,
+          parent: data.id,
+          select: ret.data,
+        };
+        dispatch.role.setState(payload);
+      }
+    },
+    async roleSaveUser(data) {
+      const ret = await service.roleSaveUser(data.parent, data.select);
+      if (ret.code === 400) {
+        Message.error('保存失败');
+      } else {
+        Message.success('保存成功');
+        const payload = {
+          divVisible: false,
+        };
+        dispatch.role.setState(payload);
+      }
+    },
   }),
 };

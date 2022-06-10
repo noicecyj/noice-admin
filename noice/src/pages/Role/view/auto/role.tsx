@@ -36,7 +36,7 @@ function Role() {
           );
         }}
         manyToMany1="权限"
-        manyToManyMethod1={record => authorityDispatchers.authorityByRole(record)}
+        manyToManyMethod1={record => dispatchers.authorityByRole(record)}
         customMethod1={() => customDispatchers.customMethod1()}
         customMethod2={() => customDispatchers.customMethod2()}
         customMethod3={() => customDispatchers.customMethod3()}
@@ -64,7 +64,7 @@ function Role() {
           parent: "",
           select: [],
         })}
-        onOk={() => authorityDispatchers.authoritySaveRole({
+        onOk={() => dispatchers.authoritySaveRole({
           parent: authorityState.parent,
           select: authorityState.select
         })}

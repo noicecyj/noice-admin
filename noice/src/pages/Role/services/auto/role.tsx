@@ -24,21 +24,21 @@ export default {
       data,
     });
   },
-  roleByUser(userId) {
+  authorityByRole(roleId) {
     return request({
-      url: '/authApi/roleByUser',
+      url: '/authApi/authorityByRole',
       method: 'post',
       params: {
-        userId,
+        roleId,
       },
     });
   },
-  roleSaveUser(userId, data) {
+  authoritySaveRole(roleId, data) {
     return request({
-      url: '/authApi/roleSaveUser',
+      url: '/authApi/authoritySaveRole',
       method: 'post',
       params: {
-        userId,
+        roleId,
       },
       data,
     });

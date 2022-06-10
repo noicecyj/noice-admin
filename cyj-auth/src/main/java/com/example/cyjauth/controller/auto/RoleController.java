@@ -64,22 +64,22 @@ public class RoleController implements autoController<Role> {
         return ResultVO.success();
     }
 
-    @Operation(summary = "根据User查询所有Role")
-    @PostMapping(value = "roleByUser")
-    public ResultVO roleByUser(@RequestParam("userId") String userId) {
-        if (userId == null) {
+    @Operation(summary = "根据Role查询所有Authority")
+    @PostMapping(value = "authorityByRole")
+    public ResultVO authorityByRole(@RequestParam("roleId") String roleId) {
+        if (roleId == null) {
             return ResultVO.failure();
         }
-        return ResultVO.success(service.roleByUser(userId));
+        return ResultVO.success(service.authorityByRole(roleId));
     }
 
-    @Operation(summary = "根据User保存Role")
-    @PostMapping(value = "roleSaveUser")
-    public ResultVO roleSaveUser(@RequestParam("userId") String userId, @RequestBody Set<String> roleIds) {
-        if (userId == null) {
+    @Operation(summary = "根据Role保存Authority")
+    @PostMapping(value = "authoritySaveRole")
+    public ResultVO authoritySaveRole(@RequestParam("roleId") String roleId, @RequestBody Set<String> authorityIds) {
+        if (roleId == null) {
             return ResultVO.failure();
         }
-        service.roleSaveUser(userId, roleIds);
+        service.authoritySaveRole(roleId, authorityIds);
         return ResultVO.success();
     }
 

@@ -1,8 +1,10 @@
 package com.example.cyjauth.service.auto;
 
 import com.example.cyjcommon.dao.EnterpriseDao;
+import com.example.cyjcommon.dao.RoleDao;
 import com.example.cyjcommon.dao.UserDao;
 import com.example.cyjcommon.entity.Enterprise;
+import com.example.cyjcommon.entity.Role;
 import com.example.cyjcommon.entity.User;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjcommon.service.autoService;
@@ -15,6 +17,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+
 /**
  * @author Noice
  */
@@ -23,11 +29,17 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService extends BaseService implements autoService<User> {
 
     private UserDao dao;
+    private RoleDao roleDao;
     private EnterpriseDao enterpriseDao;
 
     @Autowired
     public void setDao(UserDao dao) {
         this.dao = dao;
+    }
+
+    @Autowired
+    public void setRoleDao(RoleDao roleDao) {
+        this.roleDao = roleDao;
     }
 
     @Autowired
@@ -69,6 +81,31 @@ public class UserService extends BaseService implements autoService<User> {
         po.setEnterprise(enterprise);
         Example<User> example = Example.of(po);
         return dao.findAll(example, pageable);
+    }
+
+    public Set<String> roleByUser(String userId) {
+        Set<String> roleIds = new HashSet<>();
+        Optional<User> user = dao.findById(userId);
+        if (user.isPresent()) {
+            Set<Role> roleSet = user.get().getRole();
+            for (Role role : roleSet) {
+                roleIds.add(role.getId());
+            }
+        }
+        return roleIds;
+    }
+
+    public void roleSaveUser(String userId, Set<String> roleIds) {
+        Set<Role> roleSet = new HashSet<>();
+        Optional<User> user = dao.findById(userId);
+        if (user.isPresent()) {
+            for (String roleId : roleIds) {
+                Role role = roleDao.getOne(roleId);
+                roleSet.add(role);
+            }
+            user.get().setRole(roleSet);
+            dao.save(user.get());
+        }
     }
 
 }

@@ -36,7 +36,7 @@ function User() {
           );
         }}
         manyToMany1="角色"
-        manyToManyMethod1={record => roleDispatchers.roleByUser(record)}
+        manyToManyMethod1={record => dispatchers.roleByUser(record)}
         customMethod1={() => customDispatchers.customMethod1()}
         customMethod2={() => customDispatchers.customMethod2()}
         customMethod3={() => customDispatchers.customMethod3()}
@@ -64,7 +64,7 @@ function User() {
           parent: "",
           select: [],
         })}
-        onOk={() => roleDispatchers.roleSaveUser({
+        onOk={() => dispatchers.roleSaveUser({
           parent: roleState.parent,
           select: roleState.select
         })}

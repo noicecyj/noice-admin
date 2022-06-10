@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Set;
+
 /**
  * @author Noice
  */
@@ -68,6 +70,25 @@ public class UserController implements autoController<User> {
     @PostMapping(value = "pageByEnterprise")
     public ResultVO pageByEnterprise(@RequestParam("pageNumber") Integer pageNumber, @RequestBody Enterprise po) {
         return ResultVO.success(service.findAll(pageNumber, po));
+    }
+
+    @Operation(summary = "根据User查询所有Role")
+    @PostMapping(value = "roleByUser")
+    public ResultVO roleByUser(@RequestParam("userId") String userId) {
+        if (userId == null) {
+            return ResultVO.failure();
+        }
+        return ResultVO.success(service.roleByUser(userId));
+    }
+
+    @Operation(summary = "根据User保存Role")
+    @PostMapping(value = "roleSaveUser")
+    public ResultVO roleSaveUser(@RequestParam("userId") String userId, @RequestBody Set<String> roleIds) {
+        if (userId == null) {
+            return ResultVO.failure();
+        }
+        service.roleSaveUser(userId, roleIds);
+        return ResultVO.success();
     }
 
 }

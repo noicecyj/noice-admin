@@ -34,4 +34,23 @@ export default {
       data,
     });
   },
+  roleByUser(userId) {
+    return request({
+      url: '/authApi/roleByUser',
+      method: 'post',
+      params: {
+        userId,
+      },
+    });
+  },
+  roleSaveUser(userId, data) {
+    return request({
+      url: '/authApi/roleSaveUser',
+      method: 'post',
+      params: {
+        userId,
+      },
+      data,
+    });
+  },
 };

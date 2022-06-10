@@ -24,23 +24,4 @@ export default {
       data,
     });
   },
-  authorityByRole(roleId) {
-    return request({
-      url: '/authApi/authorityByRole',
-      method: 'post',
-      params: {
-        roleId,
-      },
-    });
-  },
-  authoritySaveRole(roleId, data) {
-    return request({
-      url: '/authApi/authoritySaveRole',
-      method: 'post',
-      params: {
-        roleId,
-      },
-      data,
-    });
-  },
 };
