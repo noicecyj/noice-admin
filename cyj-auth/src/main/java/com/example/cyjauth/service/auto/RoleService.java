@@ -59,11 +59,11 @@ public class RoleService extends BaseService implements autoService<Role> {
         return dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 
-    public Set<String> authorityByRole(String roleId) {
+    public Set<String> authorityByRole(String id) {
         Set<String> authorityIds = new HashSet<>();
-        Optional<Role> role = dao.findById(roleId);
-        if (role.isPresent()) {
-            Set<Authority> authoritySet = role.get().getAuthority();
+        Optional<Role> po = dao.findById(id);
+        if (po.isPresent()) {
+            Set<Authority> authoritySet = po.get().getAuthority();
             for (Authority authority : authoritySet) {
                 authorityIds.add(authority.getId());
             }
@@ -71,16 +71,16 @@ public class RoleService extends BaseService implements autoService<Role> {
         return authorityIds;
     }
 
-    public void authoritySaveRole(String roleId, Set<String> authorityIds) {
+    public void authoritySaveRole(String id, Set<String> authorityIds) {
         Set<Authority> authoritySet = new HashSet<>();
-        Optional<Role> role = dao.findById(roleId);
-        if (role.isPresent()) {
+        Optional<Role> po = dao.findById(id);
+        if (po.isPresent()) {
             for (String authorityId : authorityIds) {
                 Authority authority = authorityDao.getOne(authorityId);
                 authoritySet.add(authority);
             }
-            role.get().setAuthority(authoritySet);
-            dao.save(role.get());
+            po.get().setAuthority(authoritySet);
+            dao.save(po.get());
         }
     }
 

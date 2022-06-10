@@ -83,11 +83,11 @@ public class UserService extends BaseService implements autoService<User> {
         return dao.findAll(example, pageable);
     }
 
-    public Set<String> roleByUser(String userId) {
+    public Set<String> roleByUser(String id) {
         Set<String> roleIds = new HashSet<>();
-        Optional<User> user = dao.findById(userId);
-        if (user.isPresent()) {
-            Set<Role> roleSet = user.get().getRole();
+        Optional<User> po = dao.findById(id);
+        if (po.isPresent()) {
+            Set<Role> roleSet = po.get().getRole();
             for (Role role : roleSet) {
                 roleIds.add(role.getId());
             }
@@ -95,16 +95,16 @@ public class UserService extends BaseService implements autoService<User> {
         return roleIds;
     }
 
-    public void roleSaveUser(String userId, Set<String> roleIds) {
+    public void roleSaveUser(String id, Set<String> roleIds) {
         Set<Role> roleSet = new HashSet<>();
-        Optional<User> user = dao.findById(userId);
-        if (user.isPresent()) {
+        Optional<User> po = dao.findById(id);
+        if (po.isPresent()) {
             for (String roleId : roleIds) {
                 Role role = roleDao.getOne(roleId);
                 roleSet.add(role);
             }
-            user.get().setRole(roleSet);
-            dao.save(user.get());
+            po.get().setRole(roleSet);
+            dao.save(po.get());
         }
     }
 
