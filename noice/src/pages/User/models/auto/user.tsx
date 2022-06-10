@@ -1,4 +1,4 @@
-import userService from '@/pages/User/services/auto/user';
+import service from '@/pages/User/services/auto/user';
 import initService from '@/services/init';
 import {Message} from "@alifd/next";
 
@@ -7,16 +7,18 @@ export default {
   namespace: 'user',
 
   state: {
-    userTitle: '添加',
-    userTableData: [],
-    userVisible: false,
-    userFormData: {},
-    userLoadingVisible: true,
-    userTotal: 0,
-    userCurrent: 1,
-    userForm: [],
-    userTable: [],
+    title: '添加',
+    tableData: [],
+    visible: false,
+    formData: {},
+    loadingVisible: true,
+    total: 0,
+    current: 1,
+    form: [],
+    table: [],
     customData: {},
+    divVisible: false,
+    parent: {},
   },
 
   reducers: {
@@ -26,70 +28,70 @@ export default {
   },
 
   effects: (dispatch) => ({
-    async userPage(userCurrent) {
-      const dataRes = await userService.userPage(userCurrent);
+    async page(current) {
+      const dataRes = await service.page(current);
       const payload = {
-        userTableData: dataRes.data.content,
-        userTotal: dataRes.data.totalElements,
-        userCurrent,
-        userLoadingVisible: false,
+        tableData: dataRes.data.content,
+        total: dataRes.data.totalElements,
+        current,
+        loadingVisible: false,
       };
       dispatch.user.setState(payload);
     },
-    userAdd() {
-      const payload = {
-        userFormData: {},
-        userTitle: '添加',
-        userVisible: true,
-      };
-      dispatch.user.setState(payload);
-    },
-    userEdit(data) {
-      const payload = {
-        userFormData: data,
-        userTitle: '编辑',
-        userVisible: true,
-      };
-      dispatch.user.setState(payload);
-    },
-    async userDelete(userCurrent, record) {
-      const ret = await userService.userDelete(record);
-      if (ret.code === 400) {
-        Message.error('删除失败');
-      } else {
-        Message.success('删除成功');
-        await this.userPage(userCurrent);
-        const payload = {
-          userVisible: false,
-        };
-        dispatch.user.setState(payload);
-      }
-    },
-    async userSave(userCurrent, formData) {
-      const ret = await userService.userSave(formData);
+    async save(current, formData) {
+      const ret = await service.save(formData);
       if (ret.code === 400) {
         Message.error(ret.data.defaultMessage);
       } else {
         Message.success('保存成功');
-        await this.userPage(userCurrent);
+        await this.page(current);
         const payload = {
-          userVisible: false,
+          visible: false,
         };
         dispatch.user.setState(payload);
       }
     },
+    async delete(current, record) {
+      const ret = await service.delete(record);
+      if (ret.code === 400) {
+        Message.error('删除失败');
+      } else {
+        Message.success('删除成功');
+        await this.page(current);
+        const payload = {
+          visible: false,
+        };
+        dispatch.user.setState(payload);
+      }
+    },
+    add() {
+      const payload = {
+        formData: {},
+        title: '添加',
+        visible: true,
+      };
+      dispatch.user.setState(payload);
+    },
+    edit(data) {
+      const payload = {
+        formData: data,
+        title: '编辑',
+        visible: true,
+      };
+      dispatch.user.setState(payload);
+    },
     setDataForm(data) {
       const payload = {
-        userFormData: data,
+        formData: data,
       };
       dispatch.user.setState(payload);
     },
     async findDataTableAndFormByName() {
       const ret = await initService.findDataTableAndFormByName('user');
-      await this.userPage(1);
+      await this.page(1);
       const payload = {
-        userTable: ret.data.dataTable,
-        userForm: ret.data.dataForm,
+        table: ret.data.dataTable,
+        form: ret.data.dataForm,
         customData: ret.data.customData,
       };
       dispatch.user.setState(payload);

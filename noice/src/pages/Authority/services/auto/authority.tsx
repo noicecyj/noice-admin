@@ -1,66 +1,45 @@
 import {request} from 'ice';
 
 export default {
-  authorityPage(pageNumber) {
+  page(pageNumber) {
     return request({
-      url: '/authApi/authorityPage',
+      url: '/authApi/pageAuthority',
       method: 'post',
       params: {
         pageNumber,
       },
     });
   },
-  authorityPageByAppService(pageNumber, data) {
+  save(data) {
     return request({
-      url: '/authApi/authorityPageByAppService',
+      url: '/authApi/saveAuthority',
+      method: 'post',
+      data,
+    });
+  },
+  delete(data) {
+    return request({
+      url: '/authApi/deleteAuthority',
+      method: 'post',
+      data,
+    });
+  },
+  authorityByRole(roleId) {
+    return request({
+      url: '/authApi/authorityByRole',
       method: 'post',
       params: {
-        pageNumber,
+        roleId,
       },
-      data,
     });
   },
-  authorityPageByEntity(pageNumber, data) {
+  authoritySaveRole(roleId, data) {
     return request({
-      url: '/authApi/authorityPageByEntity',
+      url: '/authApi/authoritySaveRole',
       method: 'post',
       params: {
-        pageNumber,
+        roleId,
       },
-      data,
-    });
-  },
-  authorityPageByUserList(pageNumber, data) {
-    return request({
-      url: '/authApi/authorityPageByUserList',
-      method: 'post',
-      params: {
-        pageNumber,
-      },
-      data,
-    });
-  },
-  authorityPageByRoleList(pageNumber, data) {
-    return request({
-      url: '/authApi/authorityPageByRoleList',
-      method: 'post',
-      params: {
-        pageNumber,
-      },
-      data,
-    });
-  },
-  authoritySave(data) {
-    return request({
-      url: '/authApi/authoritySave',
-      method: 'post',
-      data,
-    });
-  },
-  authorityDelete(data) {
-    return request({
-      url: '/authApi/authorityDelete',
-      method: 'post',
       data,
     });
   },

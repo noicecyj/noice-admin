@@ -1,9 +1,9 @@
-import userCustomService from '@/pages/User/services/custom/user';
+import customService from '@/pages/User/services/custom/user';
 import {Message} from '@alifd/next';
 
 export default {
 
-  namespace: 'customUser',
+  namespace: 'userCustom',
 
   state: {
     customMethodName1: null,
@@ -60,10 +60,10 @@ export default {
       const payload = {
         passwordFormData: data,
       };
-      dispatch.customUser.setState(payload);
+      dispatch.userCustom.setState(payload);
     },
     async resetPassword(data) {
-      userCustomService.resetPassword(data).then((res) => {
+      customService.resetPassword(data).then((res) => {
         if (res.code === 200) {
           Message.success('重置成功');
         } else {
@@ -73,7 +73,7 @@ export default {
           dialogPasswordVisible: false,
           passwordFormData: {},
         };
-        dispatch.customUser.setState(customUser);
+        dispatch.userCustom.setState(customUser);
       });
     },
   }),

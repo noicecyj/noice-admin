@@ -1,4 +1,4 @@
-import authorityService from '@/pages/Authority/services/auto/authority';
+import service from '@/pages/Authority/services/auto/authority';
 import initService from '@/services/init';
 import {Message} from "@alifd/next";
 
@@ -7,16 +7,18 @@ export default {
   namespace: 'authority',
 
   state: {
-    authorityTitle: '添加',
-    authorityTableData: [],
-    authorityVisible: false,
-    authorityFormData: {},
-    authorityLoadingVisible: true,
-    authorityTotal: 0,
-    authorityCurrent: 1,
-    authorityForm: [],
-    authorityTable: [],
+    title: '添加',
+    tableData: [],
+    visible: false,
+    formData: {},
+    loadingVisible: true,
+    total: 0,
+    current: 1,
+    form: [],
+    table: [],
     customData: {},
+    divVisible: false,
+    parent: {},
   },
 
   reducers: {
@@ -26,73 +28,76 @@ export default {
   },
 
   effects: (dispatch) => ({
-    async authorityPage(authorityCurrent) {
-      const dataRes = await authorityService.authorityPage(authorityCurrent);
+    async page(current) {
+      const dataRes = await service.page(current);
       const payload = {
-        authorityTableData: dataRes.data.content,
-        authorityTotal: dataRes.data.totalElements,
-        authorityCurrent,
-        authorityLoadingVisible: false,
+        tableData: dataRes.data.content,
+        total: dataRes.data.totalElements,
+        current,
+        loadingVisible: false,
       };
       dispatch.authority.setState(payload);
     },
-    authorityAdd() {
-      const payload = {
-        authorityFormData: {},
-        authorityTitle: '添加',
-        authorityVisible: true,
-      };
-      dispatch.authority.setState(payload);
-    },
-    authorityEdit(data) {
-      const payload = {
-        authorityFormData: data,
-        authorityTitle: '编辑',
-        authorityVisible: true,
-      };
-      dispatch.authority.setState(payload);
-    },
-    async authorityDelete(authorityCurrent, record) {
-      const ret = await authorityService.authorityDelete(record);
-      if (ret.code === 400) {
-        Message.error('删除失败');
-      } else {
-        Message.success('删除成功');
-        await this.authorityPage(authorityCurrent);
-        const payload = {
-          authorityVisible: false,
-        };
-        dispatch.authority.setState(payload);
-      }
-    },
-    async authoritySave(authorityCurrent, formData) {
-      const ret = await authorityService.authoritySave(formData);
+    async save(current, formData) {
+      const ret = await service.save(formData);
       if (ret.code === 400) {
         Message.error(ret.data.defaultMessage);
       } else {
         Message.success('保存成功');
-        await this.authorityPage(authorityCurrent);
+        await this.page(current);
         const payload = {
-          authorityVisible: false,
+          visible: false,
         };
         dispatch.authority.setState(payload);
       }
     },
+    async delete(current, record) {
+      const ret = await service.delete(record);
+      if (ret.code === 400) {
+        Message.error('删除失败');
+      } else {
+        Message.success('删除成功');
+        await this.page(current);
+        const payload = {
+          visible: false,
+        };
+        dispatch.authority.setState(payload);
+      }
+    },
+    add() {
+      const payload = {
+        formData: {},
+        title: '添加',
+        visible: true,
+      };
+      dispatch.authority.setState(payload);
+    },
+    edit(data) {
+      const payload = {
+        formData: data,
+        title: '编辑',
+        visible: true,
+      };
+      dispatch.authority.setState(payload);
+    },
     setDataForm(data) {
       const payload = {
-        authorityFormData: data,
+        formData: data,
       };
       dispatch.authority.setState(payload);
     },
     async findDataTableAndFormByName() {
       const ret = await initService.findDataTableAndFormByName('authority');
-      await this.authorityPage(1);
+      await this.page(1);
       const payload = {
-        authorityTable: ret.data.dataTable,
-        authorityForm: ret.data.dataForm,
+        table: ret.data.dataTable,
+        form: ret.data.dataForm,
         customData: ret.data.customData,
       };
       dispatch.authority.setState(payload);
+    },
+    onRowClick(record) {
+
     },
   }),
 };

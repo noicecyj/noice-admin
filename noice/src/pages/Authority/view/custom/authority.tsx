@@ -10,7 +10,7 @@ import React from 'react';
 //   },
 // };
 
-function CustomColumnAuthority(props) {
+function CustomColumn(props) {
   // const { value, index, record } = props;
   // const [customAuthorityState, customAuthorityDispatchers] = pageStore.useModel('customAuthority');
 
@@ -20,4 +20,4 @@ function CustomColumnAuthority(props) {
   );
 }
 
-export {CustomColumnAuthority};
+export {CustomColumn};

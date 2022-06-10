@@ -3,9 +3,9 @@ import {Box, Button} from "@alifd/next";
 import pageStore from '@/pages/User/store';
 import DataFormTemple from "@/components/dataForm";
 
-function CustomColumnUser(props) {
+function CustomColumn(props) {
   const {record} = props;
-  const [customUserState, customUserDispatchers] = pageStore.useModel('customUser');
+  const [customState, customDispatchers] = pageStore.useModel('userCustom');
 
   const customData = {customType: false, formCol: 2};
 
@@ -15,7 +15,7 @@ function CustomColumnUser(props) {
         <Button
           type="normal"
           size="small"
-          onClick={() => customUserDispatchers.setState({
+          onClick={() => customDispatchers.setState({
             dialogPasswordVisible: true,
             recordId: record.id,
           })}
@@ -23,19 +23,19 @@ function CustomColumnUser(props) {
       </Box>
       <DataFormTemple
         title='重置密码'
-        visibleDialog={customUserState.dialogPasswordVisible}
-        onClose={() => customUserDispatchers.setState({dialogPasswordVisible: false})}
-        items={customUserState.passwordForm}
-        dispatchers={(value) => customUserDispatchers.setDataForm(value)}
-        onOk={() => customUserDispatchers.resetPassword({
-          ...customUserState.passwordFormData,
-          userId: customUserState.recordId,
+        visibleDialog={customState.dialogPasswordVisible}
+        onClose={() => customDispatchers.setState({dialogPasswordVisible: false})}
+        items={customState.passwordForm}
+        dispatchers={(value) => customDispatchers.setDataForm(value)}
+        onOk={() => customDispatchers.resetPassword({
+          ...customState.passwordFormData,
+          userId: customState.recordId,
         })}
-        formDataValue={customUserState.passwordFormData}
+        formDataValue={customState.passwordFormData}
         customData={customData}
       />
     </>
   );
 }
 
-export {CustomColumnUser};
+export {CustomColumn};

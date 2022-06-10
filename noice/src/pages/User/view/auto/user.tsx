@@ -2,60 +2,57 @@ import React, {useEffect} from 'react';
 import pageStore from '@/pages/User/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
-import {CustomColumnUser} from '@/pages/User/view/custom/user';
+import {CustomColumn} from '@/pages/User/view/custom/user';
 
 function User() {
-  const [userState, userDispatchers] = pageStore.useModel('user');
 
-  const [roleState, roleDispatchers] = pageStore.useModel('role');
+  const [state, dispatchers] = pageStore.useModel('user');
 
-  const [authorityState, authorityDispatchers] = pageStore.useModelDispatchers('authority');
+  const [customState, customDispatchers] = pageStore.useModel('userCustom');
 
-  const [customUserState, customUserDispatchers] = pageStore.useModel('customUser');
+  const roleDispatchers = pageStore.useModelDispatchers('role');
 
   useEffect(() => {
-    userDispatchers.findDataTableAndFormByName().then(r => console.log(r));
-  }, [userDispatchers]);
+    dispatchers.findDataTableAndFormByName().then(r => console.log(r));
+  }, [dispatchers]);
 
   return (
     <>
       <DataTableTemple
-        createItem={() => userDispatchers.userAdd()}
-        editItem={record => userDispatchers.userEdit(record)}
-        deleteItem={record => userDispatchers.userDelete(userState.userCurrent, record)}
-        visibleLoading={userState.userLoadingVisible}
-        dataSource={userState.userTableData}
-        items={userState.userTable}
-        total={userState.userTotal}
-        getPage={userCurrent => userDispatchers.userPage(userCurrent)}
+        createItem={() => dispatchers.add()}
+        editItem={record => dispatchers.edit(record)}
+        deleteItem={record => dispatchers.delete(state.current, record)}
+        visibleLoading={state.loadingVisible}
+        dataSource={state.tableData}
+        items={state.table}
+        total={state.total}
+        getPage={current => dispatchers.page(current)}
         primaryKey="id"
-        customData={userState.customData}
+        customData={state.customData}
         columnRender={(value, index, record) => {
           return (
-            <CustomColumnUser value={value} index={index} record={record}/>
+            <CustomColumn value={value} index={index} record={record}/>
           );
         }}
         manyToMany1="角色"
-        manyToManyMethod1={record => roleDispatchers.onManyToManyRowClick(record)}
-        manyToMany2="权限"
-        manyToManyMethod2={record => authorityDispatchers.onManyToManyRowClick(record)}
-        customMethod1={() => customUserDispatchers.customMethod1()}
-        customMethod2={() => customUserDispatchers.customMethod2()}
-        customMethod3={() => customUserDispatchers.customMethod3()}
-        customMethodName1={customUserState.customMethodName1}
-        customMethodName2={customUserState.customMethodName2}
-        customMethodName3={customUserState.customMethodName3}
+        manyToManyMethod1={record => roleDispatchers.onRowClick(record)}
+        customMethod1={() => customDispatchers.customMethod1()}
+        customMethod2={() => customDispatchers.customMethod2()}
+        customMethod3={() => customDispatchers.customMethod3()}
+        customMethodName1={customState.customMethodName1}
+        customMethodName2={customState.customMethodName2}
+        customMethodName3={customState.customMethodName3}
       />
       <DataFormTemple
-        customData={userState.customData}
-        title={userState.userTitle}
-        visibleDialog={userState.userVisible}
-        onClose={() => userDispatchers.setState({userVisible: false})}
-        items={[...userState.userForm, ...customUserState.customFrom]}
-        dispatchers={value => userDispatchers.setDataForm(value)}
-        onOk={() => userDispatchers.userSave(userState.userCurrent, userState.userFormData)}
-        formDataValue={userState.userFormData}
-        formSortCode={String(Number.parseInt(String(userState.userTotal)) + 10)}
+        customData={state.customData}
+        title={state.title}
+        visibleDialog={state.visible}
+        onClose={() => dispatchers.setState({visible: false})}
+        items={[...state.form, ...customState.customFrom]}
+        dispatchers={value => dispatchers.setDataForm(value)}
+        onOk={() => dispatchers.save(state.current, state.formData)}
+        formDataValue={state.formData}
+        formSortCode={String(Number.parseInt(String(state.total)) + 10)}
       />
     </>
   );

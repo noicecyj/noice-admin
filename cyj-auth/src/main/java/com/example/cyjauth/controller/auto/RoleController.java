@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Set;
@@ -64,7 +66,7 @@ public class RoleController implements autoController<Role> {
 
     @Operation(summary = "根据User查询所有Role")
     @PostMapping(value = "roleByUser")
-    public ResultVO roleByUser(String userId) {
+    public ResultVO roleByUser(@RequestParam("userId") String userId) {
         if (userId == null) {
             return ResultVO.failure();
         }
@@ -73,7 +75,7 @@ public class RoleController implements autoController<Role> {
 
     @Operation(summary = "根据User保存Role")
     @PostMapping(value = "roleSaveUser")
-    public ResultVO roleSaveUser(String userId, Set<String> roleIds) {
+    public ResultVO roleSaveUser(@RequestParam("userId") String userId, @RequestBody Set<String> roleIds) {
         if (userId == null) {
             return ResultVO.failure();
         }

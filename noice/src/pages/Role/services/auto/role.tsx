@@ -1,46 +1,45 @@
 import {request} from 'ice';
 
 export default {
-  rolePage(pageNumber) {
+  page(pageNumber) {
     return request({
-      url: '/authApi/rolePage',
+      url: '/authApi/pageRole',
       method: 'post',
       params: {
         pageNumber,
       },
     });
   },
-  rolePageByUserList(pageNumber, data) {
+  save(data) {
     return request({
-      url: '/authApi/rolePageByUserList',
+      url: '/authApi/saveRole',
+      method: 'post',
+      data,
+    });
+  },
+  delete(data) {
+    return request({
+      url: '/authApi/deleteRole',
+      method: 'post',
+      data,
+    });
+  },
+  roleByUser(userId) {
+    return request({
+      url: '/authApi/roleByUser',
       method: 'post',
       params: {
-        pageNumber,
+        userId,
       },
-      data,
     });
   },
-  rolePageByAuthorityList(pageNumber, data) {
+  roleSaveUser(userId, data) {
     return request({
-      url: '/authApi/rolePageByAuthorityList',
+      url: '/authApi/roleSaveUser',
       method: 'post',
       params: {
-        pageNumber,
+        userId,
       },
-      data,
-    });
-  },
-  roleSave(data) {
-    return request({
-      url: '/authApi/roleSave',
-      method: 'post',
-      data,
-    });
-  },
-  roleDelete(data) {
-    return request({
-      url: '/authApi/roleDelete',
-      method: 'post',
       data,
     });
   },

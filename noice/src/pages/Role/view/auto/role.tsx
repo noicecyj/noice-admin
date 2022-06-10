@@ -2,60 +2,57 @@ import React, {useEffect} from 'react';
 import pageStore from '@/pages/Role/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
-import {CustomColumnRole} from '@/pages/Role/view/custom/role';
+import {CustomColumn} from '@/pages/Role/view/custom/role';
 
 function Role() {
-  const [roleState, roleDispatchers] = pageStore.useModel('role');
 
-  const [userState, userDispatchers] = pageStore.useModel('user');
+  const [state, dispatchers] = pageStore.useModel('role');
 
-  const [authorityState, authorityDispatchers] = pageStore.useModelDispatchers('authority');
+  const [customState, customDispatchers] = pageStore.useModel('roleCustom');
 
-  const [customRoleState, customRoleDispatchers] = pageStore.useModel('customRole');
+  const authorityDispatchers = pageStore.useModelDispatchers('authority');
 
   useEffect(() => {
-    roleDispatchers.findDataTableAndFormByName().then(r => console.log(r));
-  }, [roleDispatchers]);
+    dispatchers.findDataTableAndFormByName().then(r => console.log(r));
+  }, [dispatchers]);
 
   return (
     <>
       <DataTableTemple
-        createItem={() => roleDispatchers.roleAdd()}
-        editItem={record => roleDispatchers.roleEdit(record)}
-        deleteItem={record => roleDispatchers.roleDelete(roleState.roleCurrent, record)}
-        visibleLoading={roleState.roleLoadingVisible}
-        dataSource={roleState.roleTableData}
-        items={roleState.roleTable}
-        total={roleState.roleTotal}
-        getPage={roleCurrent => roleDispatchers.rolePage(roleCurrent)}
+        createItem={() => dispatchers.add()}
+        editItem={record => dispatchers.edit(record)}
+        deleteItem={record => dispatchers.delete(state.current, record)}
+        visibleLoading={state.loadingVisible}
+        dataSource={state.tableData}
+        items={state.table}
+        total={state.total}
+        getPage={roleCurrent => dispatchers.page(roleCurrent)}
         primaryKey="id"
-        customData={roleState.customData}
+        customData={state.customData}
         columnRender={(value, index, record) => {
           return (
-            <CustomColumnRole value={value} index={index} record={record}/>
+            <CustomColumn value={value} index={index} record={record}/>
           );
         }}
-        manyToMany1="用户"
-        manyToManyMethod1={record => userDispatchers.onManyToManyRowClick(record)}
-        manyToMany2="权限"
-        manyToManyMethod2={record => authorityDispatchers.onManyToManyRowClick(record)}
-        customMethod1={() => customRoleDispatchers.customMethod1()}
-        customMethod2={() => customRoleDispatchers.customMethod2()}
-        customMethod3={() => customRoleDispatchers.customMethod3()}
-        customMethodName1={customRoleState.customMethodName1}
-        customMethodName2={customRoleState.customMethodName2}
-        customMethodName3={customRoleState.customMethodName3}
+        manyToMany1="权限"
+        manyToManyMethod1={record => authorityDispatchers.onRowClick(record)}
+        customMethod1={() => customDispatchers.customMethod1()}
+        customMethod2={() => customDispatchers.customMethod2()}
+        customMethod3={() => customDispatchers.customMethod3()}
+        customMethodName1={customState.customMethodName1}
+        customMethodName2={customState.customMethodName2}
+        customMethodName3={customState.customMethodName3}
       />
       <DataFormTemple
-        customData={roleState.customData}
-        title={roleState.roleTitle}
-        visibleDialog={roleState.roleVisible}
-        onClose={() => roleDispatchers.setState({roleVisible: false})}
-        items={[...roleState.roleForm, ...customRoleState.customFrom]}
-        dispatchers={value => roleDispatchers.setDataForm(value)}
-        onOk={() => roleDispatchers.roleSave(roleState.roleCurrent, roleState.roleFormData)}
-        formDataValue={roleState.roleFormData}
-        formSortCode={String(Number.parseInt(String(roleState.roleTotal)) + 10)}
+        customData={state.customData}
+        title={state.title}
+        visibleDialog={state.visible}
+        onClose={() => dispatchers.setState({roleVisible: false})}
+        items={[...state.form, ...customState.customFrom]}
+        dispatchers={value => dispatchers.setDataForm(value)}
+        onOk={() => dispatchers.save(state.current, state.formData)}
+        formDataValue={state.formData}
+        formSortCode={String(Number.parseInt(String(state.total)) + 10)}
       />
     </>
   );

@@ -1,6 +1,6 @@
 export default {
 
-  namespace: 'customRole',
+  namespace: 'roleCustom',
 
   state: {
     customMethodName1: null,

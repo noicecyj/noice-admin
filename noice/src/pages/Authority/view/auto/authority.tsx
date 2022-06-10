@@ -2,60 +2,53 @@ import React, {useEffect} from 'react';
 import pageStore from '@/pages/Authority/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
-import {CustomColumnAuthority} from '@/pages/Authority/view/custom/authority';
+import {CustomColumn} from '@/pages/Authority/view/custom/authority';
 
 function Authority() {
-  const [authorityState, authorityDispatchers] = pageStore.useModel('authority');
 
-  const [userState, userDispatchers] = pageStore.useModel('user');
+  const [state, dispatchers] = pageStore.useModel('authority');
 
-  const [roleState, roleDispatchers] = pageStore.useModelDispatchers('role');
-
-  const [customAuthorityState, customAuthorityDispatchers] = pageStore.useModel('customAuthority');
+  const [customState, customDispatchers] = pageStore.useModel('authorityCustom');
 
   useEffect(() => {
-    authorityDispatchers.findDataTableAndFormByName().then(r => console.log(r));
-  }, [authorityDispatchers]);
+    dispatchers.findDataTableAndFormByName().then(r => console.log(r));
+  }, [dispatchers]);
 
   return (
     <>
       <DataTableTemple
-        createItem={() => authorityDispatchers.authorityAdd()}
-        editItem={record => authorityDispatchers.authorityEdit(record)}
-        deleteItem={record => authorityDispatchers.authorityDelete(authorityState.authorityCurrent, record)}
-        visibleLoading={authorityState.authorityLoadingVisible}
-        dataSource={authorityState.authorityTableData}
-        items={authorityState.authorityTable}
-        total={authorityState.authorityTotal}
-        getPage={authorityCurrent => authorityDispatchers.authorityPage(authorityCurrent)}
+        createItem={() => dispatchers.add()}
+        editItem={record => dispatchers.edit(record)}
+        deleteItem={record => dispatchers.delete(state.current, record)}
+        visibleLoading={state.loadingVisible}
+        dataSource={state.tableData}
+        items={state.table}
+        total={state.total}
+        getPage={current => dispatchers.page(current)}
         primaryKey="id"
-        customData={authorityState.customData}
+        customData={state.customData}
         columnRender={(value, index, record) => {
           return (
-            <CustomColumnAuthority value={value} index={index} record={record}/>
+            <CustomColumn value={value} index={index} record={record}/>
           );
         }}
-        manyToMany1="用户"
-        manyToManyMethod1={record => userDispatchers.onManyToManyRowClick(record)}
-        manyToMany2="角色"
-        manyToManyMethod2={record => roleDispatchers.onManyToManyRowClick(record)}
-        customMethod1={() => customAuthorityDispatchers.customMethod1()}
-        customMethod2={() => customAuthorityDispatchers.customMethod2()}
-        customMethod3={() => customAuthorityDispatchers.customMethod3()}
-        customMethodName1={customAuthorityState.customMethodName1}
-        customMethodName2={customAuthorityState.customMethodName2}
-        customMethodName3={customAuthorityState.customMethodName3}
+        customMethod1={() => customDispatchers.customMethod1()}
+        customMethod2={() => customDispatchers.customMethod2()}
+        customMethod3={() => customDispatchers.customMethod3()}
+        customMethodName1={customState.customMethodName1}
+        customMethodName2={customState.customMethodName2}
+        customMethodName3={customState.customMethodName3}
       />
       <DataFormTemple
-        customData={authorityState.customData}
-        title={authorityState.authorityTitle}
-        visibleDialog={authorityState.authorityVisible}
-        onClose={() => authorityDispatchers.setState({authorityVisible: false})}
-        items={[...authorityState.authorityForm, ...customAuthorityState.customFrom]}
-        dispatchers={value => authorityDispatchers.setDataForm(value)}
-        onOk={() => authorityDispatchers.authoritySave(authorityState.authorityCurrent, authorityState.authorityFormData)}
-        formDataValue={authorityState.authorityFormData}
-        formSortCode={String(Number.parseInt(String(authorityState.authorityTotal)) + 10)}
+        customData={state.customData}
+        title={state.title}
+        visibleDialog={state.visible}
+        onClose={() => dispatchers.setState({visible: false})}
+        items={[...state.form, ...customState.customFrom]}
+        dispatchers={value => dispatchers.setDataForm(value)}
+        onOk={() => dispatchers.save(state.current, state.formData)}
+        formDataValue={state.formData}
+        formSortCode={String(Number.parseInt(String(state.total)) + 10)}
       />
     </>
   );
