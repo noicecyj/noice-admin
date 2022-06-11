@@ -223,7 +223,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         }
         Map<String, String[]> entityCustomObj = new HashMap<>();
         entityCustomObj.put(appPath + "/service/custom", serviceCustomGenerate(poName, appPath));
-        entityCustomObj.put(appPath + "/controller/custom", controllerCustomGenerate(poName, appPath));
+        entityCustomObj.put(appPath + "/controller/custom", controllerCustomGenerate(poName, appPath, appApi));
         entityCustomObj.put(componentPath + poName + "/view/custom", viewCustomGenerate(underPoName, poName));
         entityCustomObj.put(componentPath + poName + "/services/custom", servicesCustomGenerate(underPoName));
         entityCustomObj.put(componentPath + poName + "/models/custom", modelsCustomGenerate(underPoName, poName));
@@ -1296,7 +1296,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         }
     }
 
-    private String[] controllerCustomGenerate(String poName, String appPath) {
+    private String[] controllerCustomGenerate(String poName, String appPath, String appApi) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
@@ -1305,10 +1305,16 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("package ").append(poControllerPath);
         sb.append("\r\n");
         sb.append("import io.swagger.v3.oas.annotations.tags.Tag;\r\n");
+        sb.append("import org.springframework.web.bind.annotation.CrossOrigin;\r\n");
+        sb.append("import org.springframework.web.bind.annotation.RequestMapping;\r\n");
+        sb.append("import org.springframework.web.bind.annotation.RestController;\r\n");
         sb.append("\r\n");
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
         sb.append(" */\r\n");
+        sb.append("@CrossOrigin\r\n");
+        sb.append("@RestController\r\n");
+        sb.append("@RequestMapping(value = \"").append(appApi).append("\")\r\n");
         sb.append("@Tag(name = \"").append(poName).append("\")\r\n");
         sb.append("public interface ").append(poName).append("CustomController {\r\n");
         sb.append("\r\n");
