@@ -74,20 +74,20 @@ public class UserController implements autoController<User> {
 
     @Operation(summary = "根据User查询所有Role")
     @PostMapping(value = "roleByUser")
-    public ResultVO roleByUser(@RequestParam("userId") String userId) {
-        if (userId == null) {
+    public ResultVO roleByUser(@RequestParam("id") String id) {
+        if (id == null) {
             return ResultVO.failure();
         }
-        return ResultVO.success(service.roleByUser(userId));
+        return ResultVO.success(service.roleByUser(id));
     }
 
     @Operation(summary = "根据User保存Role")
     @PostMapping(value = "roleSaveUser")
-    public ResultVO roleSaveUser(@RequestParam("userId") String userId, @RequestBody Set<String> roleIds) {
-        if (userId == null) {
+    public ResultVO roleSaveUser(@RequestParam("id") String id, @RequestBody Set<String> roleIds) {
+        if (id == null) {
             return ResultVO.failure();
         }
-        service.roleSaveUser(userId, roleIds);
+        service.roleSaveUser(id, roleIds);
         return ResultVO.success();
     }
 

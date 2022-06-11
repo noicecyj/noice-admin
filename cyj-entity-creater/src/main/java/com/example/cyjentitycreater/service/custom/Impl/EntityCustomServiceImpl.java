@@ -210,10 +210,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         String appApi = appService.getAppServiceApi();
         List<Property> propertyList = propertyDao.findByEntityOrderBySortCode(entity);
         Map<String, String[]> entityObj = new HashMap<>();
-        entityObj.put(commonPath + "/entity", poGenerate(entity, propertyList, poName, underPoName));
+        entityObj.put(commonPath + "/entity", poGenerate(entity, propertyList, poName));
         entityObj.put(commonPath + "/dao", daoGenerate(poName));
-        entityObj.put(appPath + "/service/auto", serviceGenerate(entity, propertyList, poName, underPoName, appPath));
-        entityObj.put(appPath + "/controller/auto", controllerGenerate(entity, propertyList, underPoName, poName, appPath));
+        entityObj.put(appPath + "/service/auto", serviceGenerate(propertyList, poName, appPath));
+        entityObj.put(appPath + "/controller/auto", controllerGenerate(propertyList, poName, appPath, appApi));
         entityObj.put(componentPath + poName + "/view/auto", viewAutoGenerate(entity, propertyList, underPoName, poName));
         entityObj.put(componentPath + poName + "/services/auto", servicesAutoGenerate(entity, propertyList, appApi, underPoName, poName));
         entityObj.put(componentPath + poName + "/models/auto", modelsAutoGenerate(entity, underPoName, poName));
@@ -835,7 +835,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
 
     }
 
-    public String[] poGenerate(Entity entity, List<Property> propertyList, String poName, String underPoName) {
+    public String[] poGenerate(Entity entity, List<Property> propertyList, String poName) {
         StringBuilder sb = new StringBuilder();
         sb.append("package com.example.cyjcommon.entity.po;\r\n");
         sb.append("\r\n");
@@ -854,7 +854,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         if (BeanUtils.ifManyToOne(propertyList)) {
             sb.append("import javax.persistence.CascadeType;\r\n");
         }
-        if ("是".equals(entity.getEntitySelf()) || BeanUtils.ifManyToOne(propertyList)) {
+        if (BeanUtils.ifManyToOne(propertyList)) {
             sb.append("import javax.persistence.ConstraintMode;\r\n");
         }
         sb.append("import javax.persistence.Column;\r\n");
@@ -862,7 +862,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         if (BeanUtils.ifManyToMany(propertyList)) {
             sb.append("import javax.persistence.FetchType;\r\n");
         }
-        if ("是".equals(entity.getEntitySelf()) || BeanUtils.ifManyToOne(propertyList)) {
+        if (BeanUtils.ifManyToOne(propertyList)) {
             sb.append("import javax.persistence.ForeignKey;\r\n");
         }
         sb.append("import javax.persistence.GeneratedValue;\r\n");
@@ -873,7 +873,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         if (BeanUtils.ifManyToMany(propertyList)) {
             sb.append("import javax.persistence.ManyToMany;\r\n");
         }
-        if ("是".equals(entity.getEntitySelf()) || BeanUtils.ifManyToOne(propertyList)) {
+        if (BeanUtils.ifManyToOne(propertyList)) {
             sb.append("import javax.persistence.ManyToOne;\r\n");
         }
         sb.append("import javax.persistence.Table;\r\n");
@@ -908,45 +908,9 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("    @Column(name = \"id\", length = 36)\r\n");
         sb.append("    private String id;\r\n");
         sb.append("\r\n");
-        propertyList.forEach(property -> {
-            if ("是".equals(property.getPropertyOut())) {
-                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-                String propertyOut = BeanUtils.captureName(underPropertyOut);
-                if (MANY_TO_ONE.equals(property.getPropertyOutType())) {
-                    sb.append("    @Column(name = \"").append(property.getPropertyCode()).append("_id\", insertable = false, updatable = false)\r\n");
-                    sb.append("    private String ").append(underPropertyOut).append("Id;\r\n");
-                    sb.append("\r\n");
-                    sb.append("    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})\r\n");
-                    sb.append("    @JoinColumn(name = \"").append(property.getPropertyCode()).append("_id\", foreignKey = @ForeignKey(name = \"none\", value = ConstraintMode.NO_CONSTRAINT))\r\n");
-                    sb.append("    private ").append(propertyOut).append(" ").append(underPropertyOut).append(";\r\n");
-                } else {
-                    sb.append("    @JsonIgnore\r\n");
-                    sb.append("    @ManyToMany(targetEntity = ").append(propertyOut).append(".class, fetch = FetchType.EAGER)\r\n");
-                    sb.append("    @BatchSize(size = 20)\r\n");
-                    sb.append("    private Set<").append(propertyOut).append("> ").append(underPropertyOut).append(";\r\n");
-                }
-            } else {
-                if (StringUtils.isNotEmpty(property.getPropertyRequired()) && "是".equals(property.getPropertyRequired())) {
-                    sb.append("    @NotNull(message = \"").append(property.getPropertyLabel()).append("不能为空\")\r\n");
-                }
-                if (StringUtils.isNotEmpty(property.getPropertyLength())) {
-                    sb.append("    @Column(name = \"").append(property.getPropertyCode()).append("\", length = ").append(property.getPropertyLength()).append(")\r\n");
-                } else {
-                    sb.append("    @Column(name = \"").append(property.getPropertyCode()).append("\")\r\n");
-                }
-                sb.append("    private ").append(property.getPropertyType()).append(" ").append(BeanUtils.underline2Camel(property.getPropertyCode())).append(";\r\n");
-            }
-            sb.append("\r\n");
-        });
-        if ("是".equals(entity.getEntitySelf())) {
-            sb.append("    @Column(name = \"").append(entity.getEntityCode()).append("_id\", insertable = false, updatable = false)\r\n");
-            sb.append("    private String ").append(underPoName).append("Id;\r\n");
-            sb.append("\r\n");
-            sb.append("    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})\r\n");
-            sb.append("    @JoinColumn(name = \"").append(entity.getEntityCode()).append("_id\", foreignKey = @ForeignKey(name = \"none\", value = ConstraintMode.NO_CONSTRAINT))\r\n");
-            sb.append("    private ").append(poName).append(" ").append(underPoName).append(";\r\n");
-            sb.append("\r\n");
-        }
+        propertyEntityHandler(propertyList, sb);
+        manyToOneEntityHandler(propertyList, sb);
+        manyToManyEntityHandler(propertyList, sb);
         sb.append("    @NotNull(message = \"状态不能为空\")\r\n");
         sb.append("    @Column(name = \"status\")\r\n");
         sb.append("    private String status;\r\n");
@@ -960,29 +924,76 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{entityData, poName + ".java"};
     }
 
+    private void propertyEntityHandler(List<Property> propertyList, StringBuilder sb) {
+        for (Property property : propertyList) {
+            if (!"是".equals(property.getPropertyOut())) {
+                if (StringUtils.isNotEmpty(property.getPropertyRequired()) && "是".equals(property.getPropertyRequired())) {
+                    sb.append("    @NotNull(message = \"").append(property.getPropertyLabel()).append("不能为空\")\r\n");
+                }
+                if (StringUtils.isNotEmpty(property.getPropertyLength())) {
+                    sb.append("    @Column(name = \"").append(property.getPropertyCode()).append("\", length = ").append(property.getPropertyLength()).append(")\r\n");
+                } else {
+                    sb.append("    @Column(name = \"").append(property.getPropertyCode()).append("\")\r\n");
+                }
+                sb.append("    private ").append(property.getPropertyType()).append(" ").append(BeanUtils.underline2Camel(property.getPropertyCode())).append(";\r\n");
+                sb.append("\r\n");
+            }
+        }
+    }
+
+    private void manyToOneEntityHandler(List<Property> propertyList, StringBuilder sb) {
+        for (Property property : propertyList) {
+            if ("是".equals(property.getPropertyOut()) && MANY_TO_ONE.equals(property.getPropertyOutType())) {
+                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
+                String propertyOut = BeanUtils.captureName(underPropertyOut);
+                sb.append("    @Column(name = \"").append(property.getPropertyCode()).append("_id\", insertable = false, updatable = false)\r\n");
+                sb.append("    private String ").append(underPropertyOut).append("Id;\r\n");
+                sb.append("\r\n");
+                sb.append("    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})\r\n");
+                sb.append("    @JoinColumn(name = \"").append(property.getPropertyCode()).append("_id\", foreignKey = @ForeignKey(name = \"none\", value = ConstraintMode.NO_CONSTRAINT))\r\n");
+                sb.append("    private ").append(propertyOut).append(" ").append(underPropertyOut).append(";\r\n");
+                sb.append("\r\n");
+            }
+        }
+    }
+
+    private void manyToManyEntityHandler(List<Property> propertyList, StringBuilder sb) {
+        for (Property property : propertyList) {
+            if ("是".equals(property.getPropertyOut()) && !MANY_TO_ONE.equals(property.getPropertyOutType())) {
+                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
+                String propertyOut = BeanUtils.captureName(underPropertyOut);
+                sb.append("    @JsonIgnore\r\n");
+                sb.append("    @ManyToMany(targetEntity = ").append(propertyOut).append(".class, fetch = FetchType.EAGER)\r\n");
+                sb.append("    @BatchSize(size = 20)\r\n");
+                sb.append("    private Set<").append(propertyOut).append("> ").append(underPropertyOut).append(";\r\n");
+                sb.append("\r\n");
+            }
+        }
+    }
+
     public String[] daoGenerate(String poName) {
         String entityDaoData =
                 "package com.example.cyjcommon.dao;\r\n" +
-                "\r\n" +
-                "import com.example.cyjcommon.entity.po." + poName + ";\r\n" +
-                "import org.springframework.data.jpa.repository.JpaRepository;\r\n" +
-                "\r\n" +
-                "/**\r\n" +
-                " * @author Noice\r\n" +
-                " */\r\n" +
-                "public interface " + poName + "Dao extends JpaRepository<" + poName + ", String> {\r\n" +
-                "\r\n" +
-                "}\r\n";
+                        "\r\n" +
+                        "import com.example.cyjcommon.entity.po." + poName + ";\r\n" +
+                        "import org.springframework.data.jpa.repository.JpaRepository;\r\n" +
+                        "\r\n" +
+                        "/**\r\n" +
+                        " * @author Noice\r\n" +
+                        " */\r\n" +
+                        "public interface " + poName + "Dao extends JpaRepository<" + poName + ", String> {\r\n" +
+                        "\r\n" +
+                        "}\r\n";
         return new String[]{entityDaoData, poName + "Dao.java"};
     }
 
-    public String[] serviceGenerate(Entity entity, List<Property> propertyList, String poName, String underPoName, String appPath) {
+    public String[] serviceGenerate(List<Property> propertyList, String poName, String appPath) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
         //service路径
         String poServicePath = packetPath + ".service.auto;\r\n";
-        packageHandler(propertyList, poName, sb, poServicePath);
+        packageServiceHandler(propertyList, poName, sb, poServicePath);
         sb.append("import com.example.cyjcommon.service.BaseService;\r\n");
         sb.append("import com.example.cyjcommon.service.autoService;\r\n");
         sb.append("import org.springframework.beans.factory.annotation.Autowired;\r\n");
@@ -1005,7 +1016,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("@Transactional(rollbackFor = Exception.class)\r\n");
         sb.append("public class ").append(poName).append("Service extends BaseService implements autoService<").append(poName).append("> {\r\n");
         sb.append("\r\n");
-        daoHandler(propertyList, poName, sb);
+        daoServiceHandler(propertyList, poName, sb);
         sb.append("    @Override\r\n");
         sb.append("    public ").append(poName).append(" addOne(").append(poName).append(" po) {\r\n");
         setHandler(propertyList, sb);
@@ -1028,16 +1039,15 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("        return dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by(\"sortCode\").ascending()));\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        manyToOneHandler(propertyList, poName, sb);
-        manyToManyHandler(propertyList, poName, sb);
+        manyToOneServiceHandler(propertyList, poName, sb);
+        manyToManyServiceHandler(propertyList, poName, sb);
         sb.append("}\r\n");
         String entityServiceData = sb.toString();
         return new String[]{entityServiceData, poName + "Service.java"};
     }
 
 
-
-    private void packageHandler(List<Property> propertyList, String poName, StringBuilder sb, String poServicePath) {
+    private void packageServiceHandler(List<Property> propertyList, String poName, StringBuilder sb, String poServicePath) {
         sb.append("package ").append(poServicePath);
         sb.append("\r\n");
         for (Property property : propertyList) {
@@ -1058,7 +1068,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import com.example.cyjcommon.entity.").append(poName).append(";\r\n");
     }
 
-    private void daoHandler(List<Property> propertyList, String poName, StringBuilder sb) {
+    private void daoServiceHandler(List<Property> propertyList, String poName, StringBuilder sb) {
         sb.append("    private ").append(poName).append("Dao dao;\r\n");
         for (Property property : propertyList) {
             if ("是".equals(property.getPropertyOut()) && MANY_TO_ONE.equals(property.getPropertyOutType())) {
@@ -1099,7 +1109,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         }
     }
 
-    private void manyToOneHandler(List<Property> propertyList, String poName, StringBuilder sb) {
+    private void manyToOneServiceHandler(List<Property> propertyList, String poName, StringBuilder sb) {
         for (Property property : propertyList) {
             if ("是".equals(property.getPropertyOut()) && MANY_TO_ONE.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
@@ -1116,7 +1126,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         }
     }
 
-    private void manyToManyHandler(List<Property> propertyList, String poName, StringBuilder sb) {
+    private void manyToManyServiceHandler(List<Property> propertyList, String poName, StringBuilder sb) {
         for (Property property : propertyList) {
             if ("是".equals(property.getPropertyOut()) && !MANY_TO_ONE.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
@@ -1150,198 +1160,140 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         }
     }
 
-    public String[] controllerGenerate(Entity entity, List<Property> propertyList, String underPoName, String poName, String appPath) {
-        StringBuilder sb = new StringBuilder();
-        String[] PathArr = appPath.split("java");
-        String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
-        //controller路径
-        String poControllerPath = packetPath + ".controller.auto;\r\n";
-        packageHandler(propertyList, poName, sb, poControllerPath);
-        sb.append("import com.example.cyjcommon.utils.ResultVO;\r\n");
-        sb.append("import io.swagger.v3.oas.annotations.Operation;\r\n");
-        sb.append("import io.swagger.v3.oas.annotations.tags.Tag;\r\n");
-        sb.append("import org.springframework.validation.BindingResult;\r\n");
-        sb.append("import org.springframework.validation.annotation.Validated;\r\n");
-        sb.append("import org.springframework.web.bind.annotation.PostMapping;\r\n");
-        sb.append("import org.springframework.web.bind.annotation.RequestBody;\r\n");
-        sb.append("import org.springframework.web.bind.annotation.RequestParam;\r\n");
-        sb.append("\r\n");
-        if (BeanUtils.ifManyToMany(propertyList)) {
-            sb.append("import java.util.Set;\r\n");
-            sb.append("\r\n");
-        }
-        sb.append("/**\r\n");
-        sb.append(" * @author Noice\r\n");
-        sb.append(" */\r\n");
-        sb.append("@Tag(name = \"").append(poName).append("\")\r\n");
-        sb.append("public interface ").append(poName).append("Controller {\r\n");
-        sb.append("\r\n");
-        sb.append("    @Operation(summary = \"查询所有").append(poName).append("\")\r\n");
-        sb.append("    @PostMapping(value = \"").append(underPoName).append("Page\")\r\n");
-        sb.append("    ResultVO ").append(underPoName).append("Page(@RequestParam(\"pageNumber\") Integer pageNumber);\r\n");
-        sb.append("\r\n");
-        if ("是".equals(entity.getEntitySelf())) {
-            sb.append("    @Operation(summary = \"根据").append(poName).append("查询所有").append(poName).append("\")\r\n");
-            sb.append("    @PostMapping(value = \"").append(underPoName).append("PageBy").append(poName).append("\")\r\n");
-            sb.append("    ResultVO ").append(underPoName).append("Page(@RequestParam(\"pageNumber\") Integer pageNumber, @RequestBody ").append(poName).append(" ").append(underPoName).append(");\r\n");
-            sb.append("\r\n");
-        }
-        for (Property property : propertyList) {
-            if ("是".equals(property.getPropertyOut())) {
-                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-                String propertyOut = BeanUtils.captureName(underPropertyOut);
-                if (MANY_TO_ONE.equals(property.getPropertyOutType())) {
-                    sb.append("    @Operation(summary = \"根据").append(propertyOut).append("查询所有").append(poName).append("\")\r\n");
-                    sb.append("    @PostMapping(value = \"").append(underPoName).append("PageBy").append(propertyOut).append("\")\r\n");
-                    sb.append("    ResultVO ").append(underPoName).append("Page(@RequestParam(\"pageNumber\") Integer pageNumber, @RequestBody ").append(propertyOut).append(" ").append(underPropertyOut).append(");\r\n");
-                    sb.append("\r\n");
-                } else {
-                    sb.append("    @Operation(summary = \"根据").append(propertyOut).append("List查询所有").append(poName).append("\")\r\n");
-                    sb.append("    @PostMapping(value = \"").append(underPoName).append("PageBy").append(propertyOut).append("List\")\r\n");
-                    sb.append("    ResultVO ").append(underPoName).append("PageBy").append(propertyOut).append("List(@RequestParam(\"pageNumber\") Integer pageNumber, @RequestBody Set<String> ").append(underPropertyOut).append("List);\r\n");
-                    sb.append("\r\n");
-                }
-            }
-        }
-        sb.append("    @Operation(summary = \"保存").append(poName).append("\")\r\n");
-        sb.append("    @PostMapping(value = \"").append(underPoName).append("Save\")\r\n");
-        sb.append("    ResultVO ").append(underPoName).append("Save(@RequestBody @Validated ").append(poName).append(" po, BindingResult bindingResult);\r\n");
-        sb.append("\r\n");
-        sb.append("    @Operation(summary = \"删除").append(poName).append("\")\r\n");
-        sb.append("    @PostMapping(value = \"").append(underPoName).append("Delete\")\r\n");
-        sb.append("    ResultVO ").append(underPoName).append("Delete(@RequestBody ").append(poName).append(" po);\r\n");
-        sb.append("\r\n");
-        sb.append("}\r\n");
-        String entityControllerData = sb.toString();
-        return new String[]{entityControllerData, poName + "Controller.java"};
-    }
-
-    public String[] controllerImplGenerate(Entity entity, List<Property> propertyList, String underPoName, String poName, String appPath, String appApi) {
+    public String[] controllerGenerate(List<Property> propertyList, String poName, String appPath, String appApi) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
         //serviceImpl路径
         String poServicePath = packetPath + ".service.auto.";
         //controller路径
-        String poControllerPath = packetPath + ".controller.auto.";
-        sb.append("package ").append(poControllerPath).append("Impl;\r\n");
-        sb.append("\r\n");
-        for (Property property : propertyList) {
-            if ("是".equals(property.getPropertyOut()) && MANY_TO_ONE.equals(property.getPropertyOutType())) {
-                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-                String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("import com.example.cyjcommon.entity.po.").append(propertyOut).append(";\r\n");
-            }
-        }
-        sb.append("import com.example.cyjcommon.entity.po.").append(poName).append(";\r\n");
+        String poControllerPath = packetPath + ".controller.auto;\r\n";
+        packageControllerHandler(propertyList, poName, sb, poServicePath, poControllerPath);
         sb.append("import com.example.cyjcommon.utils.ResultVO;\r\n");
-        sb.append("import ").append(poControllerPath).append(poName).append("Controller;\r\n");
-        sb.append("import ").append(poServicePath).append(poName).append("Service;\r\n");
+        sb.append("import io.swagger.v3.oas.annotations.Operation;\r\n");
+        sb.append("import io.swagger.v3.oas.annotations.tags.Tag;\r\n");
         sb.append("import org.springframework.beans.factory.annotation.Autowired;\r\n");
         sb.append("import org.springframework.validation.BindingResult;\r\n");
+        sb.append("import org.springframework.validation.annotation.Validated;\r\n");
         sb.append("import org.springframework.web.bind.annotation.CrossOrigin;\r\n");
+        sb.append("import org.springframework.web.bind.annotation.PostMapping;\r\n");
+        sb.append("import org.springframework.web.bind.annotation.RequestBody;\r\n");
         sb.append("import org.springframework.web.bind.annotation.RequestMapping;\r\n");
+        sb.append("import org.springframework.web.bind.annotation.RequestParam;\r\n");
         sb.append("import org.springframework.web.bind.annotation.RestController;\r\n");
         sb.append("\r\n");
-        if (BeanUtils.ifManyToMany(propertyList)) {
-            sb.append("import java.util.Set;\r\n");
-            sb.append("\r\n");
-        }
+        sb.append("import java.util.Set;\r\n");
+        sb.append("\r\n");
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
         sb.append(" */\r\n");
         sb.append("@CrossOrigin\r\n");
         sb.append("@RestController\r\n");
         sb.append("@RequestMapping(value = \"").append(appApi).append("\")\r\n");
-        sb.append("public class ").append(poName).append("ControllerImpl implements ").append(poName).append("Controller {\r\n");
+        sb.append("@Tag(name = \"").append(poName).append("\")\r\n");
+        sb.append("public class ").append(poName).append("Controller implements autoController<").append(poName).append("> {\r\n");
         sb.append("\r\n");
-        sb.append("    private ").append(poName).append("Service ").append(underPoName).append("Service;\r\n");
+        sb.append("    private ").append(poName).append("Service service;\r\n");
         sb.append("\r\n");
         sb.append("    @Autowired\r\n");
-        sb.append("    public void set").append(poName).append("Service(").append(poName).append("Service ").append(underPoName).append("Service) {\r\n");
-        sb.append("        this.").append(underPoName).append("Service = ").append(underPoName).append("Service;\r\n");
+        sb.append("    public void setService(").append(poName).append("Service service) {\r\n");
+        sb.append("        this.service = service;\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
         sb.append("    @Override\r\n");
-        sb.append("    public ResultVO ").append(underPoName).append("Page(Integer pageNumber) {\r\n");
-        sb.append("        return ResultVO.success(").append(underPoName).append("Service.findAll(pageNumber));\r\n");
+        sb.append("    @Operation(summary = \"分页查询所有").append(poName).append("\")\r\n");
+        sb.append("    @PostMapping(value = \"page").append(poName).append("\")\r\n");
+        sb.append("    public ResultVO page(@RequestParam(\"pageNumber\") Integer pageNumber) {\r\n");
+        sb.append("        return ResultVO.success(service.findAll(pageNumber));\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        if ("是".equals(entity.getEntitySelf())) {
-            sb.append("    @Override\r\n");
-            sb.append("    public ResultVO ").append(underPoName).append("Page(Integer pageNumber, ").append(poName).append(" ").append(underPoName).append(") {\r\n");
-            sb.append("        return ResultVO.success(").append(underPoName).append("Service.findAll(pageNumber, ").append(underPoName).append("));\r\n");
-            sb.append("    }\r\n");
-            sb.append("\r\n");
-        }
-        for (Property property : propertyList) {
-            if ("是".equals(property.getPropertyOut())) {
-                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-                String propertyOut = BeanUtils.captureName(underPropertyOut);
-                if (MANY_TO_ONE.equals(property.getPropertyOutType())) {
-                    sb.append("    @Override\r\n");
-                    sb.append("    public ResultVO ").append(underPoName).append("Page(Integer pageNumber, ").append(propertyOut).append(" ").append(underPropertyOut).append(") {\r\n");
-                    sb.append("        return ResultVO.success(").append(underPoName).append("Service.findAll(pageNumber, ").append(underPropertyOut).append("));\r\n");
-                    sb.append("    }\r\n");
-                    sb.append("\r\n");
-                } else {
-                    sb.append("    @Override\r\n");
-                    sb.append("    public ResultVO ").append(underPoName).append("PageBy").append(propertyOut).append("List(Integer pageNumber, Set<String> ").append(underPropertyOut).append("List) {\r\n");
-                    sb.append("        return ResultVO.success(").append(underPoName).append("Service.findAllBy").append(propertyOut).append("List(pageNumber, ").append(underPropertyOut).append("List));\r\n");
-                    sb.append("    }\r\n");
-                    sb.append("\r\n");
-                }
-            }
-        }
         sb.append("    @Override\r\n");
-        sb.append("    public ResultVO ").append(underPoName).append("Save(").append(poName).append(" po, BindingResult bindingResult) {\r\n");
+        sb.append("    @Operation(summary = \"保存").append(poName).append("\")\r\n");
+        sb.append("    @PostMapping(value = \"save").append(poName).append("\")\r\n");
+        sb.append("    public ResultVO save(@RequestBody @Validated ").append(poName).append(" po, BindingResult bindingResult) {\r\n");
         sb.append("        if (bindingResult.hasErrors()) {\r\n");
         sb.append("            return ResultVO.failure(bindingResult.getAllErrors().get(0));\r\n");
         sb.append("        }\r\n");
         sb.append("        if (po.getId() == null) {\r\n");
-        sb.append("            return ResultVO.success(").append(underPoName).append("Service.addOne(po));\r\n");
+        sb.append("            return ResultVO.success(service.addOne(po));\r\n");
         sb.append("        }\r\n");
-        sb.append("        return ResultVO.success(").append(underPoName).append("Service.updateOne(po));\r\n");
+        sb.append("        return ResultVO.success(service.updateOne(po));\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
         sb.append("    @Override\r\n");
-        sb.append("    public ResultVO ").append(underPoName).append("Delete(").append(poName).append(" po) {\r\n");
+        sb.append("    @Operation(summary = \"删除").append(poName).append("\")\r\n");
+        sb.append("    @PostMapping(value = \"delete").append(poName).append("\")\r\n");
+        sb.append("    public ResultVO delete(@RequestBody ").append(poName).append(" po) {\r\n");
         sb.append("        if (po.getId() == null) {\r\n");
         sb.append("            return ResultVO.failure();\r\n");
         sb.append("        }\r\n");
-        sb.append("        ").append(underPoName).append("Service.deleteOne(po);\r\n");
+        sb.append("        service.deleteOne(po);\r\n");
         sb.append("        return ResultVO.success();\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
+        manyToOneControllerHandler(propertyList, poName, sb);
+        manyToManyControllerHandler(propertyList, poName, sb);
         sb.append("}\r\n");
-        String entityControllerImplData = sb.toString();
-        return new String[]{entityControllerImplData, poName + "ControllerImpl.java"};
+        String entityControllerData = sb.toString();
+        return new String[]{entityControllerData, poName + "Controller.java"};
     }
 
-    private String[] controllerImplCustomGenerate(String poName, String appPath, String appApi) {
-        StringBuilder sb = new StringBuilder();
-        String[] PathArr = appPath.split("java");
-        String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
-        //controller路径
-        String poControllerPath = packetPath + ".controller.custom.";
-        sb.append("package ").append(poControllerPath).append("Impl;\r\n");
+    private void packageControllerHandler(List<Property> propertyList, String poName, StringBuilder sb, String poServicePath, String poControllerPath) {
+        sb.append("package ").append(poControllerPath);
         sb.append("\r\n");
-        sb.append("import ").append(poControllerPath).append(poName).append("CustomController;\r\n");
-        sb.append("import org.springframework.web.bind.annotation.CrossOrigin;\r\n");
-        sb.append("import org.springframework.web.bind.annotation.RequestMapping;\r\n");
-        sb.append("import org.springframework.web.bind.annotation.RestController;\r\n");
-        sb.append("\r\n");
-        sb.append("/**\r\n");
-        sb.append(" * @author Noice\r\n");
-        sb.append(" */\r\n");
-        sb.append("@CrossOrigin\r\n");
-        sb.append("@RestController\r\n");
-        sb.append("@RequestMapping(value = \"").append(appApi).append("\")\r\n");
-        sb.append("public class ").append(poName).append("CustomControllerImpl implements ").append(poName).append("CustomController {\r\n");
-        sb.append("\r\n");
-        sb.append("}\r\n");
-        String entityControllerImplData = sb.toString();
-        return new String[]{entityControllerImplData, poName + "CustomControllerImpl.java"};
+        sb.append("import ").append(poServicePath).append(poName).append("Service;\r\n");
+        sb.append("import com.example.cyjcommon.controller.autoController;\r\n");
+        for (Property property : propertyList) {
+            if ("是".equals(property.getPropertyOut()) && MANY_TO_ONE.equals(property.getPropertyOutType())) {
+                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
+                String propertyOut = BeanUtils.captureName(underPropertyOut);
+                sb.append("import com.example.cyjcommon.entity.").append(propertyOut).append(";\r\n");
+            }
+        }
+        sb.append("import com.example.cyjcommon.entity.").append(poName).append(";\r\n");
+    }
+
+    private void manyToOneControllerHandler(List<Property> propertyList, String poName, StringBuilder sb) {
+        for (Property property : propertyList) {
+            if ("是".equals(property.getPropertyOut()) && MANY_TO_ONE.equals(property.getPropertyOutType())) {
+                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
+                String propertyOut = BeanUtils.captureName(underPropertyOut);
+                sb.append("    @Operation(summary = \"根据").append(propertyOut).append("查询所有").append(poName).append("\")\r\n");
+                sb.append("    @PostMapping(value = \"pageBy").append(propertyOut).append("\")\r\n");
+                sb.append("    public ResultVO pageBy").append(propertyOut).append("(@RequestParam(\"pageNumber\") Integer pageNumber, @RequestBody ").append(propertyOut).append(" po) {\r\n");
+                sb.append("        return ResultVO.success(service.findAll(pageNumber, po));\r\n");
+                sb.append("    }\r\n");
+                sb.append("\r\n");
+            }
+        }
+    }
+
+    private void manyToManyControllerHandler(List<Property> propertyList, String poName, StringBuilder sb) {
+        for (Property property : propertyList) {
+            if ("是".equals(property.getPropertyOut()) && !MANY_TO_ONE.equals(property.getPropertyOutType())) {
+                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
+                String propertyOut = BeanUtils.captureName(underPropertyOut);
+                sb.append("    @Operation(summary = \"根据").append(poName).append("查询所有").append(propertyOut).append("\")\r\n");
+                sb.append("    @PostMapping(value = \"").append(underPropertyOut).append("By").append(poName).append("\")\r\n");
+                sb.append("    public ResultVO ").append(underPropertyOut).append("By").append(poName).append("(@RequestParam(\"id\") String id) {\r\n");
+                sb.append("        if (id == null) {\r\n");
+                sb.append("            return ResultVO.failure();\r\n");
+                sb.append("        }\r\n");
+                sb.append("        return ResultVO.success(service.").append(underPropertyOut).append("By").append(poName).append("(id));\r\n");
+                sb.append("    }\r\n");
+                sb.append("\r\n");
+                sb.append("    @Operation(summary = \"根据").append(poName).append("保存").append(propertyOut).append("\")\r\n");
+                sb.append("    @PostMapping(value = \"").append(underPropertyOut).append("Save").append(poName).append("\")\r\n");
+                sb.append("    public ResultVO ").append(underPropertyOut).append("Save").append(poName).append("(@RequestParam(\"id\") String id, @RequestBody Set<String> ").append(underPropertyOut).append("Ids) {\r\n");
+                sb.append("        if (id == null) {\r\n");
+                sb.append("            return ResultVO.failure();\r\n");
+                sb.append("        }\r\n");
+                sb.append("        service.").append(underPropertyOut).append("Save").append(poName).append("(id, ").append(underPropertyOut).append("Ids);\r\n");
+                sb.append("        return ResultVO.success();\r\n");
+                sb.append("    }\r\n");
+                sb.append("\r\n");
+            }
+        }
     }
 
     private String[] controllerCustomGenerate(String poName, String appPath) {
@@ -1363,32 +1315,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("}\r\n");
         String entityControllerData = sb.toString();
         return new String[]{entityControllerData, poName + "CustomController.java"};
-    }
-
-    private String[] serviceImplCustomGenerate(String poName, String appPath) {
-        StringBuilder sb = new StringBuilder();
-        String[] PathArr = appPath.split("java");
-        String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
-        //service路径
-        String poServicePath = packetPath + ".service.custom.";
-        //serviceImpl路径
-        sb.append("package ").append(poServicePath).append("Impl;\r\n");
-        sb.append("\r\n");
-        sb.append("import com.example.cyjcommon.service.BaseService;\r\n");
-        sb.append("import ").append(poServicePath).append(poName).append("CustomService;\r\n");
-        sb.append("import org.springframework.stereotype.Service;\r\n");
-        sb.append("import org.springframework.transaction.annotation.Transactional;\r\n");
-        sb.append("\r\n");
-        sb.append("/**\r\n");
-        sb.append(" * @author Noice\r\n");
-        sb.append(" */\r\n");
-        sb.append("@Service\r\n");
-        sb.append("@Transactional(rollbackFor = Exception.class)\r\n");
-        sb.append("public class ").append(poName).append("CustomServiceImpl extends BaseService implements ").append(poName).append("CustomService {\r\n");
-        sb.append("\r\n");
-        sb.append("}\r\n");
-        String entityServiceImplData = sb.toString();
-        return new String[]{entityServiceImplData, poName + "CustomServiceImpl.java"};
     }
 
     private String[] serviceCustomGenerate(String poName, String appPath) {
@@ -1526,17 +1452,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                     }
                 }
                 List<Map<String, Object>> dateSourceList = sqlCustomService.queryBySqlValue(propertyCustomDTO.getPropertyDataSourceType());
-                if (dateSourceList != null && dateSourceList.size() != 0) {
-                    for (Map<String, Object> dateSourceMap : dateSourceList) {
-                        JSONObject map = new JSONObject();
-                        if (dateSourceMap.get("label") == null && dateSourceMap.get("value") == null) {
-                            continue;
-                        }
-                        map.put("label", dateSourceMap.get("label").toString());
-                        map.put("value", dateSourceMap.get("value").toString());
-                        mapList.add(map);
-                    }
-                }
+                dateSourceHandler(mapList, dateSourceList);
                 propertyCustomDTO.setPropertyDataSource(mapList);
             }
             propertyCustomDTOList.add(propertyCustomDTO);
@@ -1559,22 +1475,26 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             outSelf.put("code", po.getEntityCode() + "_id");
             JSONArray mapOutList = new JSONArray();
             List<Map<String, Object>> dateSourceList = sqlCustomService.queryBySqlValue("ENTITY_FORM_DATESOURSE");
-            if (dateSourceList != null && dateSourceList.size() != 0) {
-                for (Map<String, Object> dateSourceMap : dateSourceList) {
-                    JSONObject map = new JSONObject();
-                    if (dateSourceMap.get("label") == null && dateSourceMap.get("value") == null) {
-                        continue;
-                    }
-                    map.put("label", dateSourceMap.get("label").toString());
-                    map.put("value", dateSourceMap.get("value").toString());
-                    mapOutList.add(map);
-                }
-            }
+            dateSourceHandler(mapOutList, dateSourceList);
             outSelf.put("dataSource", mapOutList);
             customData.put("outSelf", outSelf);
         }
         jsonObject.put("customData", customData);
         return jsonObject;
+    }
+
+    private void dateSourceHandler(JSONArray mapList, List<Map<String, Object>> dateSourceList) {
+        if (dateSourceList != null && dateSourceList.size() != 0) {
+            for (Map<String, Object> dateSourceMap : dateSourceList) {
+                JSONObject map = new JSONObject();
+                if (dateSourceMap.get("label") == null && dateSourceMap.get("value") == null) {
+                    continue;
+                }
+                map.put("label", dateSourceMap.get("label").toString());
+                map.put("value", dateSourceMap.get("value").toString());
+                mapList.add(map);
+            }
+        }
     }
 
 }
