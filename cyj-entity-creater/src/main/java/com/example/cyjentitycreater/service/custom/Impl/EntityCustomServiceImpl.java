@@ -1325,40 +1325,23 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         String poServicePath = packetPath + ".service.custom;\r\n";
         sb.append("package ").append(poServicePath);
         sb.append("\r\n");
-        sb.append("/**\r\n");
-        sb.append(" * @author Noice\r\n");
-        sb.append(" */\r\n");
-        sb.append("public interface ").append(poName).append("CustomService {\r\n");
-        sb.append("\r\n");
-        sb.append("}\r\n");
-        String entityServiceData = sb.toString();
-        return new String[]{entityServiceData, poName + "CustomService.java"};
-    }
-
-    private String[] aopCustomGenerate(String poName, String appPath) {
-        StringBuilder sb = new StringBuilder();
-        String[] PathArr = appPath.split("java");
-        String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
-        //serviceImpl路径
-        String poServicePath = packetPath + ".service.auto.";
-        sb.append("package ").append(packetPath).append(".service.custom.aop;\r\n");
-        sb.append("\r\n");
+        sb.append("import com.example.cyjcommon.service.BaseService;\r\n");
         sb.append("import org.aspectj.lang.JoinPoint;\r\n");
         sb.append("import org.aspectj.lang.annotation.After;\r\n");
         sb.append("import org.aspectj.lang.annotation.Aspect;\r\n");
         sb.append("import org.aspectj.lang.annotation.Before;\r\n");
         sb.append("import org.slf4j.Logger;\r\n");
         sb.append("import org.slf4j.LoggerFactory;\r\n");
-        sb.append("import org.springframework.stereotype.Component;\r\n");
+        sb.append("import org.springframework.stereotype.Service;\r\n");
         sb.append("import org.springframework.transaction.annotation.Transactional;\r\n");
         sb.append("\r\n");
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
         sb.append(" */\r\n");
         sb.append("@Aspect\r\n");
-        sb.append("@Component\r\n");
+        sb.append("@Service\r\n");
         sb.append("@Transactional(rollbackFor = Exception.class)\r\n");
-        sb.append("public class ").append(poName).append("CustomAop {\r\n");
+        sb.append("public class ").append(poName).append("CustomService extends BaseService {\r\n");
         sb.append("\r\n");
         sb.append("    private static final Logger logger = LoggerFactory.getLogger(").append(poName).append("CustomAop.class);\r\n");
         sb.append("\r\n");
@@ -1403,8 +1386,8 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("    }\r\n");
         sb.append("\r\n");
         sb.append("}\r\n");
-        String entityAopData = sb.toString();
-        return new String[]{entityAopData, poName + "CustomAop.java"};
+        String entityServiceData = sb.toString();
+        return new String[]{entityServiceData, poName + "CustomService.java"};
     }
 
     @Override
