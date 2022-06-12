@@ -81,7 +81,10 @@ function Enterprise() {
           dataSource={userState.tableData}
           items={userState.table}
           total={userState.total}
-          getPage={current => userDispatchers.page(current)}
+          getPage={current => dispatchers.pageUserByEnterprise({
+            current,
+            id: userState.parent,
+          })}
           primaryKey="id"
           customData={userState.customData}
         />

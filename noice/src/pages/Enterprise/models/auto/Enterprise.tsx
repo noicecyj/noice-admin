@@ -1,4 +1,3 @@
-
 import initService from '@/services/init';
 import {Message} from "@alifd/next";
 import service from "@/pages/Enterprise/services/auto/Enterprise";
@@ -104,6 +103,16 @@ export default {
         divVisible: true,
         parent: data.id,
         visible: false,
+      };
+      dispatch.user.setState(payload);
+    },
+    async pageUserByEnterprise(data) {
+      const dataRes = await service.pageUserByEnterprise(data.current, data.id);
+      const payload = {
+        tableData: dataRes.data.content,
+        total: dataRes.data.totalElements,
+        current: data.current,
+        loadingVisible: false,
       };
       dispatch.user.setState(payload);
     },

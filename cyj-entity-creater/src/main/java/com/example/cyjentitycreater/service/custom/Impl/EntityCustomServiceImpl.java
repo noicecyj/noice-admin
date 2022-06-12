@@ -582,7 +582,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("      };\r\n");
         sb.append("      dispatch.").append(underPoName).append(".setState(payload);\r\n");
         sb.append("    },\r\n");
-        oneToManyModelHandler(outPropertyList, sb);
+        oneToManyModelHandler(outPropertyList, sb, poName);
         manyToManyModelHandler(outPropertyList, sb, poName);
         sb.append("  }),\r\n");
         sb.append("};\r\n");
@@ -590,16 +590,28 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{viewData, poName + ".tsx"};
     }
 
-    private void oneToManyModelHandler(List<Property> outPropertyList, StringBuilder sb) {
+    private void oneToManyModelHandler(List<Property> outPropertyList, StringBuilder sb, String poName) {
         for (Property property : outPropertyList) {
             if (BeanUtils.MANY_TO_ONE.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
+                String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("    async onRowClick(data) {\r\n");
                 sb.append("      await dispatch.").append(underPropertyOut).append(".findDataTableAndFormByName(data);\r\n");
                 sb.append("      const payload = {\r\n");
                 sb.append("        divVisible: true,\r\n");
                 sb.append("        parent: data.id,\r\n");
                 sb.append("        visible: false,\r\n");
+                sb.append("      };\r\n");
+                sb.append("      dispatch.").append(underPropertyOut).append(".setState(payload);\r\n");
+                sb.append("    },\r\n");
+                sb.append("\r\n");
+                sb.append("    async page").append(propertyOut).append("By").append(poName).append("(data) {\r\n");
+                sb.append("      const dataRes = await service.page").append(propertyOut).append("By").append(poName).append("(data.current, data.id);\r\n");
+                sb.append("      const payload = {\r\n");
+                sb.append("        tableData: dataRes.data.content,\r\n");
+                sb.append("        total: dataRes.data.totalElements,\r\n");
+                sb.append("        current: data.current,\r\n");
+                sb.append("        loadingVisible: false,\r\n");
                 sb.append("      };\r\n");
                 sb.append("      dispatch.").append(underPropertyOut).append(".setState(payload);\r\n");
                 sb.append("    },\r\n");
@@ -700,7 +712,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("        formDataValue={state.formData}\r\n");
         sb.append("        formSortCode={String(Number.parseInt(String(state.total)) + 10)}\r\n");
         sb.append("      />\r\n");
-        oneToManyViewDialogHandler(outPropertyList, sb);
+        oneToManyViewDialogHandler(outPropertyList, sb, poName);
         manyToManyViewDialogHandler(outPropertyList, sb, poName);
         sb.append("    </>\r\n");
         sb.append("  );\r\n");
@@ -783,10 +795,11 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         }
     }
 
-    private void oneToManyViewDialogHandler(List<Property> outPropertyList, StringBuilder sb) {
+    private void oneToManyViewDialogHandler(List<Property> outPropertyList, StringBuilder sb, String poName) {
         for (Property property : outPropertyList) {
             if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
+                String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("      <Dialog\r\n");
                 sb.append("        v2\r\n");
                 sb.append("        visible={").append(underPropertyOut).append("State.divVisible}\r\n");
@@ -808,7 +821,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                 sb.append("          dataSource={").append(underPropertyOut).append("State.tableData}\r\n");
                 sb.append("          items={").append(underPropertyOut).append("State.table}\r\n");
                 sb.append("          total={").append(underPropertyOut).append("State.total}\r\n");
-                sb.append("          getPage={current => ").append(underPropertyOut).append("Dispatchers.page(current)}\r\n");
+                sb.append("          getPage={current => dispatchers.page").append(propertyOut).append("By").append(poName).append("({\r\n");
+                sb.append("            current,\r\n");
+                sb.append("            id: ").append(underPropertyOut).append("State.parent,\r\n");
+                sb.append("          })}\r\n");
                 sb.append("          primaryKey=\"id\"\r\n");
                 sb.append("          customData={").append(underPropertyOut).append("State.customData}\r\n");
                 sb.append("        />\r\n");
