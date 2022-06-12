@@ -9,8 +9,8 @@ import React from 'react';
 //     span: 40,
 //   },
 // };
-// 
-function CustomColumnEnterprise(props) {
+//
+function CustomColumn(props) {
 //   const {value, index, record} = props;
 //   const [customEnterpriseState, customEnterpriseDispatchers] = pageStore.useModel('customEnterprise');
 
@@ -20,4 +20,4 @@ function CustomColumnEnterprise(props) {
   );
 }
 
-export {CustomColumnEnterprise};
+export {CustomColumn};

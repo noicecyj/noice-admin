@@ -1,18 +1,25 @@
 package com.example.cyjcommon.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Noice
@@ -51,5 +58,10 @@ public class Enterprise implements Serializable {
     @NotNull(message = "排序不能为空")
     @Column(name = "sort_code")
     private String sortCode;
+
+    @JsonIgnore
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "enterprise")
+    @BatchSize(size = 20)
+    private Set<User> user = new HashSet<>();
 
 }

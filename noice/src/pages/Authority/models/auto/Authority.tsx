@@ -1,10 +1,10 @@
-import service from '@/pages/User/services/auto/user';
+import service from '@/pages/Authority/services/auto/Authority';
 import initService from '@/services/init';
 import {Message} from "@alifd/next";
 
 export default {
 
-  namespace: 'user',
+  namespace: 'authority',
 
   state: {
     title: '添加',
@@ -37,32 +37,32 @@ export default {
         current,
         loadingVisible: false,
       };
-      dispatch.user.setState(payload);
+      dispatch.authority.setState(payload);
     },
-    async save(current, formData) {
-      const ret = await service.save(formData);
+    async save(data) {
+      const ret = await service.save(data.formData);
       if (ret.code === 400) {
         Message.error(ret.data.defaultMessage);
       } else {
         Message.success('保存成功');
-        await this.page(current);
+        await this.page(data.current);
         const payload = {
           visible: false,
         };
-        dispatch.user.setState(payload);
+        dispatch.authority.setState(payload);
       }
     },
-    async delete(current, record) {
-      const ret = await service.delete(record);
+    async delete(data) {
+      const ret = await service.delete(data.record);
       if (ret.code === 400) {
         Message.error('删除失败');
       } else {
         Message.success('删除成功');
-        await this.page(current);
+        await this.page(data.current);
         const payload = {
           visible: false,
         };
-        dispatch.user.setState(payload);
+        dispatch.authority.setState(payload);
       }
     },
     add() {
@@ -71,7 +71,7 @@ export default {
         title: '添加',
         visible: true,
       };
-      dispatch.user.setState(payload);
+      dispatch.authority.setState(payload);
     },
     edit(data) {
       const payload = {
@@ -79,49 +79,23 @@ export default {
         title: '编辑',
         visible: true,
       };
-      dispatch.user.setState(payload);
+      dispatch.authority.setState(payload);
     },
     setDataForm(data) {
       const payload = {
         formData: data,
       };
-      dispatch.user.setState(payload);
+      dispatch.authority.setState(payload);
     },
     async findDataTableAndFormByName() {
-      const ret = await initService.findDataTableAndFormByName('user');
+      const ret = await initService.findDataTableAndFormByName('authority');
       await this.page(1);
       const payload = {
         table: ret.data.dataTable,
         form: ret.data.dataForm,
         customData: ret.data.customData,
       };
-      dispatch.user.setState(payload);
-    },
-    async roleByUser(data) {
-      await dispatch.role.findDataTableAndFormByName();
-      const ret = await service.roleByUser(data.id);
-      if (ret.code === 400) {
-        Message.error('获取失败');
-      } else {
-        const payload = {
-          divVisible: true,
-          parent: data.id,
-          select: ret.data,
-        };
-        dispatch.role.setState(payload);
-      }
-    },
-    async roleSaveUser(data) {
-      const ret = await service.roleSaveUser(data.parent, data.select);
-      if (ret.code === 400) {
-        Message.error('保存失败');
-      } else {
-        Message.success('保存成功');
-        const payload = {
-          divVisible: false,
-        };
-        dispatch.role.setState(payload);
-      }
+      dispatch.authority.setState(payload);
     },
   }),
 };

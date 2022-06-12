@@ -1,10 +1,11 @@
-import service from '@/pages/Role/services/auto/role';
+
 import initService from '@/services/init';
 import {Message} from "@alifd/next";
+import service from "@/pages/Enterprise/services/auto/Enterprise";
 
 export default {
 
-  namespace: 'role',
+  namespace: 'enterprise',
 
   state: {
     title: '添加',
@@ -37,32 +38,32 @@ export default {
         current,
         loadingVisible: false,
       };
-      dispatch.role.setState(payload);
+      dispatch.enterprise.setState(payload);
     },
-    async save(current, formData) {
-      const ret = await service.save(formData);
+    async save(data) {
+      const ret = await service.save(data.formData);
       if (ret.code === 400) {
         Message.error(ret.data.defaultMessage);
       } else {
         Message.success('保存成功');
-        await this.page(current);
+        await this.page(data.current);
         const payload = {
           visible: false,
         };
-        dispatch.role.setState(payload);
+        dispatch.enterprise.setState(payload);
       }
     },
-    async delete(current, record) {
-      const ret = await service.delete(record);
+    async delete(data) {
+      const ret = await service.delete(data.record);
       if (ret.code === 400) {
         Message.error('删除失败');
       } else {
         Message.success('删除成功');
-        await this.page(current);
+        await this.page(data.current);
         const payload = {
           visible: false,
         };
-        dispatch.role.setState(payload);
+        dispatch.enterprise.setState(payload);
       }
     },
     add() {
@@ -71,7 +72,7 @@ export default {
         title: '添加',
         visible: true,
       };
-      dispatch.role.setState(payload);
+      dispatch.enterprise.setState(payload);
     },
     edit(data) {
       const payload = {
@@ -79,49 +80,32 @@ export default {
         title: '编辑',
         visible: true,
       };
-      dispatch.role.setState(payload);
+      dispatch.enterprise.setState(payload);
     },
     setDataForm(data) {
       const payload = {
         formData: data,
       };
-      dispatch.role.setState(payload);
+      dispatch.enterprise.setState(payload);
     },
     async findDataTableAndFormByName() {
-      const ret = await initService.findDataTableAndFormByName('role');
+      const ret = await initService.findDataTableAndFormByName('enterprise');
       await this.page(1);
       const payload = {
         table: ret.data.dataTable,
         form: ret.data.dataForm,
         customData: ret.data.customData,
       };
-      dispatch.role.setState(payload);
+      dispatch.enterprise.setState(payload);
     },
-    async authorityByRole(data) {
-      await dispatch.authority.findDataTableAndFormByName();
-      const ret = await service.authorityByRole(data.id);
-      if (ret.code === 400) {
-        Message.error('获取失败');
-      } else {
-        const payload = {
-          divVisible: true,
-          parent: data.id,
-          select: ret.data,
-        };
-        dispatch.authority.setState(payload);
-      }
-    },
-    async authoritySaveRole(data) {
-      const ret = await service.authoritySaveRole(data.parent, data.select);
-      if (ret.code === 400) {
-        Message.error('保存失败');
-      } else {
-        Message.success('保存成功');
-        const payload = {
-          divVisible: false,
-        };
-        dispatch.authority.setState(payload);
-      }
+    async onRowClick(data) {
+      await dispatch.user.findDataTableAndFormByName(data);
+      const payload = {
+        divVisible: true,
+        parent: data.id,
+        visible: false,
+      };
+      dispatch.user.setState(payload);
     },
   }),
 };

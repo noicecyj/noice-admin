@@ -2,7 +2,6 @@ package com.example.cyjauth.controller.auto;
 
 import com.example.cyjauth.service.auto.UserService;
 import com.example.cyjcommon.controller.autoController;
-import com.example.cyjcommon.entity.Enterprise;
 import com.example.cyjcommon.entity.User;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -64,12 +63,6 @@ public class UserController implements autoController<User> {
         }
         service.deleteOne(po);
         return ResultVO.success();
-    }
-
-    @Operation(summary = "根据Enterprise查询所有User")
-    @PostMapping(value = "pageByEnterprise")
-    public ResultVO pageByEnterprise(@RequestParam("pageNumber") Integer pageNumber, @RequestBody Enterprise po) {
-        return ResultVO.success(service.findAll(pageNumber, po));
     }
 
     @Operation(summary = "根据User查询所有Role")

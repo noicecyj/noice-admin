@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import pageStore from '@/pages/Authority/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
-import {CustomColumn} from '@/pages/Authority/view/custom/authority';
+import {CustomColumn} from '@/pages/Authority/view/custom/Authority';
 
 function Authority() {
 
@@ -19,7 +19,10 @@ function Authority() {
       <DataTableTemple
         createItem={() => dispatchers.add()}
         editItem={record => dispatchers.edit(record)}
-        deleteItem={record => dispatchers.delete(state.current, record)}
+        deleteItem={record => dispatchers.delete({
+          current: state.current,
+          record,
+        })}
         visibleLoading={state.loadingVisible}
         dataSource={state.tableData}
         items={state.table}
@@ -46,7 +49,10 @@ function Authority() {
         onClose={() => dispatchers.setState({visible: false})}
         items={[...state.form, ...customState.customFrom]}
         dispatchers={value => dispatchers.setDataForm(value)}
-        onOk={() => dispatchers.save(state.current, state.formData)}
+        onOk={() => dispatchers.save({
+          current: state.current,
+          formData: state.formData,
+        })}
         formDataValue={state.formData}
         formSortCode={String(Number.parseInt(String(state.total)) + 10)}
       />

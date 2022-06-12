@@ -3,7 +3,7 @@ import {request} from 'ice';
 export default {
   page(pageNumber) {
     return request({
-      url: '/authApi/pageUser',
+      url: '/authApi/pageEnterprise',
       method: 'post',
       params: {
         pageNumber,
@@ -12,14 +12,14 @@ export default {
   },
   save(data) {
     return request({
-      url: '/authApi/saveUser',
+      url: '/authApi/saveEnterprise',
       method: 'post',
       data,
     });
   },
   delete(data) {
     return request({
-      url: '/authApi/deleteUser',
+      url: '/authApi/deleteEnterprise',
       method: 'post',
       data,
     });
@@ -30,25 +30,6 @@ export default {
       method: 'post',
       params: {
         pageNumber,
-      },
-      data,
-    });
-  },
-  roleByUser(id) {
-    return request({
-      url: '/authApi/roleByUser',
-      method: 'post',
-      params: {
-        id,
-      },
-    });
-  },
-  roleSaveUser(id, data) {
-    return request({
-      url: '/authApi/roleSaveUser',
-      method: 'post',
-      params: {
-        id,
       },
       data,
     });

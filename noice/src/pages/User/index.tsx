@@ -1,5 +1,5 @@
 import React from 'react';
-import User from '@/pages/User/view/auto/user';
+import User from '@/pages/User/view/auto/User';
 
 function UserPage() {
 

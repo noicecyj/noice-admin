@@ -94,5 +94,14 @@ export default {
       };
       dispatch.entity.setState(payload);
     },
+    async onRowClick(data) {
+      await dispatch.property.findDataTableAndFormByName(data);
+      const payload = {
+        divVisible: true,
+        entity: data,
+        propertyVisible: false,
+      };
+      dispatch.property.setState(payload);
+    },
   }),
 };

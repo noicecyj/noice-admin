@@ -1,5 +1,5 @@
 import React from 'react';
-import Enterprise from '@/pages/Enterprise/view/auto/enterprise';
+import Enterprise from '@/pages/Enterprise/view/auto/Enterprise';
 
 function EnterprisePage() {
   return (

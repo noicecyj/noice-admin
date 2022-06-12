@@ -1,17 +1,17 @@
 import React, {useEffect} from 'react';
-import pageStore from '@/pages/Role/store';
+import pageStore from '@/pages/User/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
-import {CustomColumn} from '@/pages/Role/view/custom/role';
+import {CustomColumn} from '@/pages/User/view/custom/User';
 import {Dialog} from "@alifd/next";
 
-function Role() {
+function User() {
 
-  const [state, dispatchers] = pageStore.useModel('role');
+  const [state, dispatchers] = pageStore.useModel('user');
 
-  const [customState, customDispatchers] = pageStore.useModel('roleCustom');
+  const [customState, customDispatchers] = pageStore.useModel('userCustom');
 
-  const [authorityState, authorityDispatchers] = pageStore.useModel('authority');
+  const [roleState, roleDispatchers] = pageStore.useModel('role');
 
   useEffect(() => {
     dispatchers.findDataTableAndFormByName().then(r => console.log(r));
@@ -22,12 +22,15 @@ function Role() {
       <DataTableTemple
         createItem={() => dispatchers.add()}
         editItem={record => dispatchers.edit(record)}
-        deleteItem={record => dispatchers.delete(state.current, record)}
+        deleteItem={record => dispatchers.delete({
+          current: state.current,
+          record,
+        })}
         visibleLoading={state.loadingVisible}
         dataSource={state.tableData}
         items={state.table}
         total={state.total}
-        getPage={roleCurrent => dispatchers.page(roleCurrent)}
+        getPage={current => dispatchers.page(current)}
         primaryKey="id"
         customData={state.customData}
         columnRender={(value, index, record) => {
@@ -35,8 +38,8 @@ function Role() {
             <CustomColumn value={value} index={index} record={record}/>
           );
         }}
-        manyToMany1="权限"
-        manyToManyMethod1={record => dispatchers.authorityByRole(record)}
+        manyToMany1="角色"
+        manyToManyMethod1={record => dispatchers.roleByUser(record)}
         customMethod1={() => customDispatchers.customMethod1()}
         customMethod2={() => customDispatchers.customMethod2()}
         customMethod3={() => customDispatchers.customMethod3()}
@@ -48,43 +51,46 @@ function Role() {
         customData={state.customData}
         title={state.title}
         visibleDialog={state.visible}
-        onClose={() => dispatchers.setState({roleVisible: false})}
+        onClose={() => dispatchers.setState({visible: false})}
         items={[...state.form, ...customState.customFrom]}
         dispatchers={value => dispatchers.setDataForm(value)}
-        onOk={() => dispatchers.save(state.current, state.formData)}
+        onOk={() => dispatchers.save({
+          current: state.current,
+          formData: state.formData,
+        })}
         formDataValue={state.formData}
         formSortCode={String(Number.parseInt(String(state.total)) + 10)}
       />
       <Dialog
         v2
         title="角色"
-        visible={authorityState.divVisible}
-        onClose={() => authorityDispatchers.setState({
+        visible={roleState.divVisible}
+        onClose={() => roleDispatchers.setState({
           divVisible: false,
           parent: "",
           select: [],
         })}
-        onOk={() => dispatchers.authoritySaveRole({
-          parent: authorityState.parent,
-          select: authorityState.select
+        onOk={() => dispatchers.roleSaveUser({
+          parent: roleState.parent,
+          select: roleState.select,
         })}
         style={{width: '90%'}}
       >
         <DataTableTemple
-          customData={{customType:false}}
-          visibleLoading={authorityState.loadingVisible}
-          dataSource={authorityState.tableData}
-          items={authorityState.table}
-          total={authorityState.total}
-          getPage={(current) => authorityDispatchers.page(current)}
+          customData={{customType: false}}
+          visibleLoading={roleState.loadingVisible}
+          dataSource={roleState.tableData}
+          items={roleState.table}
+          total={roleState.total}
+          getPage={(current) => roleDispatchers.page(current)}
           primaryKey="id"
           rowSelection={{
             onChange: (ids) => {
-              authorityDispatchers.setState({
+              roleDispatchers.setState({
                 select: ids,
               })
             },
-            selectedRowKeys: authorityState.select,
+            selectedRowKeys: roleState.select,
           }}
         />
       </Dialog>
@@ -92,4 +98,4 @@ function Role() {
   );
 }
 
-export default Role;
+export default User;

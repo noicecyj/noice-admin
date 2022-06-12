@@ -1,4 +1,4 @@
-import customService from '@/pages/User/services/custom/user';
+import customService from '@/pages/User/services/custom/User';
 import {Message} from '@alifd/next';
 
 export default {

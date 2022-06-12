@@ -41,6 +41,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
     private final static String componentPath = "C:/Users/noice/IdeaProjects/noice-admin/noice/src/pages/";
     private final static String POST = "POST";
     private final static String MANY_TO_ONE = "ManyToOne";
+
+    private final static String MANY_TO_MANY = "ManyToMany";
+
+    private final static String ONE_TO_MANY = "OneToMany";
     private final static String AUTO = "auto";
     private final static String STATUS = "有效";
     private final static String SORTCODE = "10";
@@ -209,73 +213,73 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         //服务接口
         String appApi = appService.getAppServiceApi();
         List<Property> propertyList = propertyDao.findByEntityOrderBySortCode(entity);
+
         Map<String, String[]> entityObj = new HashMap<>();
         entityObj.put(commonPath + "/entity", poGenerate(entity, propertyList, poName));
         entityObj.put(commonPath + "/dao", daoGenerate(poName));
-        entityObj.put(appPath + "/service/auto", serviceGenerate(propertyList, poName, appPath));
-        entityObj.put(appPath + "/controller/auto", controllerGenerate(propertyList, poName, appPath, appApi));
-        entityObj.put(componentPath + poName + "/view/auto", viewAutoGenerate(entity, propertyList, underPoName, poName));
-        entityObj.put(componentPath + poName + "/services/auto", servicesAutoGenerate(entity, propertyList, appApi, underPoName, poName));
-        entityObj.put(componentPath + poName + "/models/auto", modelsAutoGenerate(entity, underPoName, poName));
+        List<Property> outPropertyList = propertyList.stream()
+                .filter(property -> "是".equals(property.getPropertyOut())).collect(Collectors.toList());
+        entityObj.put(appPath + "/service/auto", serviceGenerate(outPropertyList, poName, appPath));
+        entityObj.put(appPath + "/controller/auto", controllerGenerate(outPropertyList, poName, appPath, appApi));
+        entityObj.put(componentPath + poName + "/services/auto", servicesAutoGenerate(entity, outPropertyList, appApi, underPoName, poName));
+        entityObj.put(componentPath + poName + "/models/auto", modelsAutoGenerate(outPropertyList, underPoName, poName));
+        entityObj.put(componentPath + poName + "/view/auto", viewAutoGenerate(entity, outPropertyList, underPoName, poName));
         if (entity.getEntityId() == null) {
             entityObj.put(componentPath + poName, indexGenerate(entity, underPoName, poName));
-            entityObj.put(componentPath + poName, storeGenerate(entity, propertyList, underPoName, poName));
+            entityObj.put(componentPath + poName, storeGenerate(entity, outPropertyList, underPoName, poName));
         }
         Map<String, String[]> entityCustomObj = new HashMap<>();
         entityCustomObj.put(appPath + "/service/custom", serviceCustomGenerate(poName, appPath));
         entityCustomObj.put(appPath + "/controller/custom", controllerCustomGenerate(poName, appPath, appApi));
-        entityCustomObj.put(componentPath + poName + "/view/custom", viewCustomGenerate(underPoName, poName));
-        entityCustomObj.put(componentPath + poName + "/services/custom", servicesCustomGenerate(underPoName));
-        entityCustomObj.put(componentPath + poName + "/models/custom", modelsCustomGenerate(underPoName, poName));
+        entityCustomObj.put(componentPath + poName + "/services/custom", servicesCustomGenerate(poName));
+        entityCustomObj.put(componentPath + poName + "/models/custom", modelsCustomGenerate(poName));
+        entityCustomObj.put(componentPath + poName + "/view/custom", viewCustomGenerate(poName));
         createEntityCodeHandler(entityObj, entityCustomObj);
     }
 
-    private String[] servicesAutoGenerate(Entity entity, List<Property> propertyList, String appApi, String underPoName, String poName) {
+    private String[] servicesAutoGenerate(Entity entity, List<Property> outPropertyList, String appApi, String underPoName, String poName) {
         StringBuilder sb = new StringBuilder();
         sb.append("import {request} from 'ice';\r\n");
         sb.append("\r\n");
         sb.append("export default {\r\n");
-        if (entity.getEntityId() == null) {
-            sb.append("  ").append(underPoName).append("Page(pageNumber) {\r\n");
-        } else {
-            sb.append("  ").append(underPoName).append("Page(pageNumber, data) {\r\n");
-        }
+        sb.append("  page(pageNumber) {\r\n");
         sb.append("    return request({\r\n");
-        sb.append("      url: '/").append(appApi).append("/").append(underPoName).append("Page',\r\n");
+        sb.append("      url: '/").append(appApi).append("/page").append(poName).append("',\r\n");
         sb.append("      method: 'post',\r\n");
         sb.append("      params: {\r\n");
         sb.append("        pageNumber,\r\n");
         sb.append("      },\r\n");
-        if (entity.getEntityId() != null) {
-            sb.append("      data,\r\n");
-        }
         sb.append("    });\r\n");
         sb.append("  },\r\n");
-        if ("是".equals(entity.getEntitySelf())) {
-            sb.append("  ").append(underPoName).append("PageBy").append(poName).append("(pageNumber, data) {\r\n");
-            sb.append("    return request({\r\n");
-            sb.append("      url: '/").append(appApi).append("/").append(underPoName).append("PageBy").append(poName).append("',\r\n");
-            sb.append("      method: 'post',\r\n");
-            sb.append("      params: {\r\n");
-            sb.append("        pageNumber,\r\n");
-            sb.append("      },\r\n");
-            sb.append("      data,\r\n");
-            sb.append("    });\r\n");
-            sb.append("  },\r\n");
-        }
-        for (Property property : propertyList) {
-            if ("是".equals(property.getPropertyOut())) {
+        sb.append("  save(data) {\r\n");
+        sb.append("    return request({\r\n");
+        sb.append("      url: '/").append(appApi).append("/save").append(poName).append("',\r\n");
+        sb.append("      method: 'post',\r\n");
+        sb.append("      data,\r\n");
+        sb.append("    });\r\n");
+        sb.append("  },\r\n");
+        sb.append("  delete(data) {\r\n");
+        sb.append("    return request({\r\n");
+        sb.append("      url: '/").append(appApi).append("/delete").append(poName).append("',\r\n");
+        sb.append("      method: 'post',\r\n");
+        sb.append("      data,\r\n");
+        sb.append("    });\r\n");
+        sb.append("  },\r\n");
+        manyToOneServiceHandler(outPropertyList, sb, appApi);
+        manyToManyServiceHandler(outPropertyList, sb, appApi, poName);
+        sb.append("};\r\n");
+        String viewData = sb.toString();
+        return new String[]{viewData, underPoName + ".tsx"};
+    }
+
+    private void manyToOneServiceHandler(List<Property> outPropertyList, StringBuilder sb, String appApi) {
+        for (Property property : outPropertyList) {
+            if (MANY_TO_ONE.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
-                if (MANY_TO_ONE.equals(property.getPropertyOutType())) {
-                    sb.append("  ").append(underPoName).append("PageBy").append(propertyOut).append("(pageNumber, data) {\r\n");
-                    sb.append("    return request({\r\n");
-                    sb.append("      url: '/").append(appApi).append("/").append(underPoName).append("PageBy").append(propertyOut).append("',\r\n");
-                } else {
-                    sb.append("  ").append(underPoName).append("PageBy").append(propertyOut).append("List(pageNumber, data) {\r\n");
-                    sb.append("    return request({\r\n");
-                    sb.append("      url: '/").append(appApi).append("/").append(underPoName).append("PageBy").append(propertyOut).append("List',\r\n");
-                }
+                sb.append("  pageBy").append(propertyOut).append("(pageNumber, data) {\r\n");
+                sb.append("    return request({\r\n");
+                sb.append("      url: '/").append(appApi).append("/pageBy").append(propertyOut).append("',\r\n");
                 sb.append("      method: 'post',\r\n");
                 sb.append("      params: {\r\n");
                 sb.append("        pageNumber,\r\n");
@@ -285,23 +289,33 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                 sb.append("  },\r\n");
             }
         }
-        sb.append("  ").append(underPoName).append("Save(data) {\r\n");
-        sb.append("    return request({\r\n");
-        sb.append("      url: '/").append(appApi).append("/").append(underPoName).append("Save',\r\n");
-        sb.append("      method: 'post',\r\n");
-        sb.append("      data,\r\n");
-        sb.append("    });\r\n");
-        sb.append("  },\r\n");
-        sb.append("  ").append(underPoName).append("Delete(data) {\r\n");
-        sb.append("    return request({\r\n");
-        sb.append("      url: '/").append(appApi).append("/").append(underPoName).append("Delete',\r\n");
-        sb.append("      method: 'post',\r\n");
-        sb.append("      data,\r\n");
-        sb.append("    });\r\n");
-        sb.append("  },\r\n");
-        sb.append("};\r\n");
-        String viewData = sb.toString();
-        return new String[]{viewData, underPoName + ".tsx"};
+    }
+
+    private void manyToManyServiceHandler(List<Property> outPropertyList, StringBuilder sb, String appApi, String poName) {
+        for (Property property : outPropertyList) {
+            if (MANY_TO_MANY.equals(property.getPropertyOutType())) {
+                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
+                sb.append("  ").append(underPropertyOut).append("By").append(poName).append("(id) {\r\n");
+                sb.append("    return request({\r\n");
+                sb.append("      url: '/").append(appApi).append("/").append(underPropertyOut).append("By").append(poName).append("',\r\n");
+                sb.append("      method: 'post',\r\n");
+                sb.append("      params: {\r\n");
+                sb.append("        id,\r\n");
+                sb.append("      },\r\n");
+                sb.append("    });\r\n");
+                sb.append("  },\r\n");
+                sb.append("  ").append(underPropertyOut).append("Save").append(poName).append("(id, data) {\r\n");
+                sb.append("    return request({\r\n");
+                sb.append("      url: '/").append(appApi).append("/").append(underPropertyOut).append("Save").append(poName).append("',\r\n");
+                sb.append("      method: 'post',\r\n");
+                sb.append("      params: {\r\n");
+                sb.append("        id,\r\n");
+                sb.append("      },\r\n");
+                sb.append("      data,\r\n");
+                sb.append("    });\r\n");
+                sb.append("  },\r\n");
+            }
+        }
     }
 
     private String[] storeGenerate(Entity entity, List<Property> propertyList, String underPoName, String poName) {
@@ -383,7 +397,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{viewData, "index.tsx"};
     }
 
-    private String[] modelsCustomGenerate(String underPoName, String poName) {
+    private String[] modelsCustomGenerate(String poName) {
         String viewData = "export default {\r\n" +
                 "\r\n" +
                 "  namespace: 'custom" + poName + "',\r\n" +
@@ -409,15 +423,15 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                 "    },\r\n" +
                 "  }),\r\n" +
                 "};\r\n";
-        return new String[]{viewData, underPoName + ".tsx"};
+        return new String[]{viewData, poName + ".tsx"};
     }
 
-    private String[] servicesCustomGenerate(String underPoName) {
+    private String[] servicesCustomGenerate(String poName) {
         String viewData = "\r\n";
-        return new String[]{viewData, underPoName + ".tsx"};
+        return new String[]{viewData, poName + ".tsx"};
     }
 
-    private String[] viewCustomGenerate(String underPoName, String poName) {
+    private String[] viewCustomGenerate(String poName) {
         String viewData = "import React from \"react\";\r\n" +
                 "\r\n" +
                 "function CustomColumn" + poName + "(props) {\r\n" +
@@ -431,12 +445,12 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                 "}\r\n" +
                 "\r\n" +
                 "export {CustomColumn" + poName + "};\r\n";
-        return new String[]{viewData, underPoName + ".tsx"};
+        return new String[]{viewData, poName + ".tsx"};
     }
 
-    private String[] modelsAutoGenerate(Entity entity, String underPoName, String poName) {
+    private String[] modelsAutoGenerate(List<Property> outPropertyList, String underPoName, String poName) {
         StringBuilder sb = new StringBuilder();
-        sb.append("import ").append(underPoName).append("Service from '@/pages/").append(poName).append("/services/auto/").append(underPoName).append("';\r\n");
+        sb.append("import service from '@/pages/").append(poName).append("/services/auto/").append(poName).append("';\r\n");
         sb.append("import initService from '@/services/init';\r\n");
         sb.append("import {Message} from \"@alifd/next\";\r\n");
         sb.append("\r\n");
@@ -445,24 +459,19 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("  namespace: '").append(underPoName).append("',\r\n");
         sb.append("\r\n");
         sb.append("  state: {\r\n");
-        sb.append("    ").append(underPoName).append("Title: '添加',\r\n");
-        sb.append("    ").append(underPoName).append("TableData: [],\r\n");
-        sb.append("    ").append(underPoName).append("Visible: false,\r\n");
-        sb.append("    ").append(underPoName).append("FormData: {},\r\n");
-        sb.append("    ").append(underPoName).append("LoadingVisible: true,\r\n");
-        sb.append("    ").append(underPoName).append("Total: 0,\r\n");
-        sb.append("    ").append(underPoName).append("Current: 1,\r\n");
-        sb.append("    ").append(underPoName).append("Form: [],\r\n");
-        sb.append("    ").append(underPoName).append("Table: [],\r\n");
-        if (entity.getEntityId() != null) {
-            Entity entityParent = entityDao.getOne(entity.getEntityId());
-            //驼峰名
-            String underPoNameParent = BeanUtils.underline2Camel(entityParent.getEntityCode());
-            sb.append("    ").append(underPoName).append("Visible: false,\r\n");
-            sb.append("    divVisible: false,\r\n");
-            sb.append("    ").append(underPoNameParent).append(": {},\r\n");
-        }
+        sb.append("    title: '添加',\r\n");
+        sb.append("    tableData: [],\r\n");
+        sb.append("    visible: false,\r\n");
+        sb.append("    formData: {},\r\n");
+        sb.append("    loadingVisible: true,\r\n");
+        sb.append("    total: 0,\r\n");
+        sb.append("    current: 1,\r\n");
+        sb.append("    form: [],\r\n");
+        sb.append("    table: [],\r\n");
         sb.append("    customData: {},\r\n");
+        sb.append("    divVisible: false,\r\n");
+        sb.append("    parent: \"\",\r\n");
+        sb.append("    select: [],\r\n");
         sb.append("  },\r\n");
         sb.append("\r\n");
         sb.append("  reducers: {\r\n");
@@ -472,313 +481,175 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("  },\r\n");
         sb.append("\r\n");
         sb.append("  effects: (dispatch) => ({\r\n");
-        if (entity.getEntityId() == null) {
-            sb.append("    async ").append(underPoName).append("Page(").append(underPoName).append("Current) {\r\n");
-            sb.append("      const dataRes = await ").append(underPoName).append("Service.").append(underPoName).append("Page(").append(underPoName).append("Current);\r\n");
-        } else {
-            Entity entityParent = entityDao.getOne(entity.getEntityId());
-            //驼峰名
-            String underPoNameParent = BeanUtils.underline2Camel(entityParent.getEntityCode());
-            sb.append("    async ").append(underPoName).append("Page(").append(underPoName).append("Current, ").append(underPoNameParent).append(") {\r\n");
-            sb.append("      const dataRes = await ").append(underPoName).append("Service.").append(underPoName).append("Page(").append(underPoName).append("Current, ").append(underPoNameParent).append(");\r\n");
-        }
+        sb.append("    async page(current) {\r\n");
+        sb.append("      const dataRes = await service.page(current);\r\n");
         sb.append("      const payload = {\r\n");
-        sb.append("        ").append(underPoName).append("TableData: dataRes.data.content,\r\n");
-        sb.append("        ").append(underPoName).append("Total: dataRes.data.totalElements,\r\n");
-        sb.append("        ").append(underPoName).append("Current,\r\n");
-        sb.append("        ").append(underPoName).append("LoadingVisible: false,\r\n");
+        sb.append("        tableData: dataRes.data.content,\r\n");
+        sb.append("        total: dataRes.data.totalElements,\r\n");
+        sb.append("        current,\r\n");
+        sb.append("        loadingVisible: false,\r\n");
         sb.append("      };\r\n");
         sb.append("      dispatch.").append(underPoName).append(".setState(payload);\r\n");
         sb.append("    },\r\n");
-        sb.append("    ").append(underPoName).append("Add() {\r\n");
-        sb.append("      const payload = {\r\n");
-        sb.append("        ").append(underPoName).append("FormData: {},\r\n");
-        sb.append("        ").append(underPoName).append("Title: '添加',\r\n");
-        sb.append("        ").append(underPoName).append("Visible: true,\r\n");
-        sb.append("      };\r\n");
-        sb.append("      dispatch.").append(underPoName).append(".setState(payload);\r\n");
-        sb.append("    },\r\n");
-        sb.append("    ").append(underPoName).append("Edit(data) {\r\n");
-        sb.append("      const payload = {\r\n");
-        sb.append("        ").append(underPoName).append("FormData: data,\r\n");
-        sb.append("        ").append(underPoName).append("Title: '编辑',\r\n");
-        sb.append("        ").append(underPoName).append("Visible: true,\r\n");
-        sb.append("      };\r\n");
-        sb.append("      dispatch.").append(underPoName).append(".setState(payload);\r\n");
-        sb.append("    },\r\n");
-        if (entity.getEntityId() == null) {
-            sb.append("    async ").append(underPoName).append("Delete(").append(underPoName).append("Current, record) {\r\n");
-            sb.append("      const ret = await ").append(underPoName).append("Service.").append(underPoName).append("Delete(record);\r\n");
-        } else {
-            Entity entityParent = entityDao.getOne(entity.getEntityId());
-            //驼峰名
-            String underPoNameParent = BeanUtils.underline2Camel(entityParent.getEntityCode());
-            sb.append("    async ").append(underPoName).append("Delete(").append(underPoName).append("Current, ").append(underPoNameParent).append(", record) {\r\n");
-            sb.append("      const ret = await ").append(underPoName).append("Service.").append(underPoName).append("Delete(record);\r\n");
-        }
-        sb.append("      if (ret.code === 400) {\r\n");
-        sb.append("        Message.error('删除失败');\r\n");
-        sb.append("      } else {\r\n");
-        sb.append("        Message.success('删除成功');\r\n");
-        if (entity.getEntityId() == null) {
-            sb.append("        await this.").append(underPoName).append("Page(").append(underPoName).append("Current);\r\n");
-        } else {
-            Entity entityParent = entityDao.getOne(entity.getEntityId());
-            //驼峰名
-            String underPoNameParent = BeanUtils.underline2Camel(entityParent.getEntityCode());
-            sb.append("        await this.").append(underPoName).append("Page(").append(underPoName).append("Current, ").append(underPoNameParent).append(");\r\n");
-        }
-        sb.append("        const payload = {\r\n");
-        sb.append("          ").append(underPoName).append("Visible: false,\r\n");
-        sb.append("        };\r\n");
-        sb.append("        dispatch.").append(underPoName).append(".setState(payload);\r\n");
-        sb.append("      }\r\n");
-        sb.append("    },\r\n");
-        if (entity.getEntityId() == null) {
-            sb.append("    async ").append(underPoName).append("Save(").append(underPoName).append("Current, formData) {\r\n");
-        } else {
-            Entity entityParent = entityDao.getOne(entity.getEntityId());
-            //驼峰名
-            String underPoNameParent = BeanUtils.underline2Camel(entityParent.getEntityCode());
-            sb.append("    async ").append(underPoName).append("Save(").append(underPoName).append("Current, ").append(underPoNameParent).append(", formData) {\r\n");
-        }
-        sb.append("      const ret = await ").append(underPoName).append("Service.").append(underPoName).append("Save(formData);\r\n");
+        sb.append("    async save(current, formData) {\r\n");
+        sb.append("      const ret = await service.save(formData);\r\n");
         sb.append("      if (ret.code === 400) {\r\n");
         sb.append("        Message.error(ret.data.defaultMessage);\r\n");
         sb.append("      } else {\r\n");
         sb.append("        Message.success('保存成功');\r\n");
-        if (entity.getEntityId() == null) {
-            sb.append("        await this.").append(underPoName).append("Page(").append(underPoName).append("Current);\r\n");
-        } else {
-            Entity entityParent = entityDao.getOne(entity.getEntityId());
-            //驼峰名
-            String underPoNameParent = BeanUtils.underline2Camel(entityParent.getEntityCode());
-            sb.append("        await this.").append(underPoName).append("Page(").append(underPoName).append("Current, ").append(underPoNameParent).append(");\r\n");
-        }
+        sb.append("        await this.page(current);\r\n");
         sb.append("        const payload = {\r\n");
-        sb.append("          ").append(underPoName).append("Visible: false,\r\n");
+        sb.append("          visible: false,\r\n");
         sb.append("        };\r\n");
         sb.append("        dispatch.").append(underPoName).append(".setState(payload);\r\n");
         sb.append("      }\r\n");
         sb.append("    },\r\n");
-        sb.append("    setDataForm(data) {\r\n");
+        sb.append("    async delete(current, record) {\r\n");
+        sb.append("      const ret = await service.delete(record);\r\n");
+        sb.append("      if (ret.code === 400) {\r\n");
+        sb.append("        Message.error('删除失败');\r\n");
+        sb.append("      } else {\r\n");
+        sb.append("        Message.success('删除成功');\r\n");
+        sb.append("        await this.page(current);\r\n");
+        sb.append("        const payload = {\r\n");
+        sb.append("          visible: false,\r\n");
+        sb.append("        };\r\n");
+        sb.append("        dispatch.").append(underPoName).append(".setState(payload);\r\n");
+        sb.append("      }\r\n");
+        sb.append("    },\r\n");
+        sb.append("    add() {\r\n");
         sb.append("      const payload = {\r\n");
-        sb.append("        ").append(underPoName).append("FormData: data,\r\n");
+        sb.append("        formData: {},\r\n");
+        sb.append("        title: '添加',\r\n");
+        sb.append("        visible: true,\r\n");
         sb.append("      };\r\n");
         sb.append("      dispatch.").append(underPoName).append(".setState(payload);\r\n");
         sb.append("    },\r\n");
-        if (entity.getEntityId() == null) {
-            sb.append("    async findDataTableAndFormByName() {\r\n");
-        } else {
-            Entity entityParent = entityDao.getOne(entity.getEntityId());
-            //驼峰名
-            String underPoNameParent = BeanUtils.underline2Camel(entityParent.getEntityCode());
-            sb.append("    async findDataTableAndFormByName(").append(underPoNameParent).append(") {\r\n");
-        }
-        sb.append("      const ret = await initService.findDataTableAndFormByName('").append(underPoName).append("');\r\n");
-        if (entity.getEntityId() == null) {
-            sb.append("      await this.").append(underPoName).append("Page(1);\r\n");
-        } else {
-            Entity entityParent = entityDao.getOne(entity.getEntityId());
-            //驼峰名
-            String underPoNameParent = BeanUtils.underline2Camel(entityParent.getEntityCode());
-            sb.append("      await this.").append(underPoName).append("Page(1, ").append(underPoNameParent).append(");\r\n");
-        }
+        sb.append("    edit(data) {\r\n");
         sb.append("      const payload = {\r\n");
-        sb.append("        ").append(underPoName).append("Table: ret.data.dataTable,\r\n");
-        sb.append("        ").append(underPoName).append("Form: ret.data.dataForm,\r\n");
+        sb.append("        formData: data,\r\n");
+        sb.append("        title: '编辑',\r\n");
+        sb.append("        visible: true,\r\n");
+        sb.append("      };\r\n");
+        sb.append("      dispatch.").append(underPoName).append(".setState(payload);\r\n");
+        sb.append("    },\r\n");
+        sb.append("    setDataForm(data) {\r\n");
+        sb.append("      const payload = {\r\n");
+        sb.append("        formData: data,\r\n");
+        sb.append("      };\r\n");
+        sb.append("      dispatch.").append(underPoName).append(".setState(payload);\r\n");
+        sb.append("    },\r\n");
+        sb.append("    async findDataTableAndFormByName() {\r\n");
+        sb.append("      const ret = await initService.findDataTableAndFormByName('").append(underPoName).append("');\r\n");
+        sb.append("      await this.page(1);\r\n");
+        sb.append("      const payload = {\r\n");
+        sb.append("        table: ret.data.dataTable,\r\n");
+        sb.append("        form: ret.data.dataForm,\r\n");
         sb.append("        customData: ret.data.customData,\r\n");
         sb.append("      };\r\n");
         sb.append("      dispatch.").append(underPoName).append(".setState(payload);\r\n");
         sb.append("    },\r\n");
-        if (entity.getEntityId() != null) {
-            Entity entityParent = entityDao.getOne(entity.getEntityId());
-            //驼峰名
-            String underPoNameParent = BeanUtils.underline2Camel(entityParent.getEntityCode());
-            sb.append("    async onRowClick(data) {\r\n");
-            sb.append("      await this.findDataTableAndFormByName(data);\r\n");
-            sb.append("      const payload = {\r\n");
-            sb.append("        divVisible: true,\r\n");
-            sb.append("        ").append(underPoNameParent).append(": data,\r\n");
-            sb.append("        ").append(underPoName).append("Visible: false,\r\n");
-            sb.append("      };\r\n");
-            sb.append("      dispatch.").append(underPoName).append(".setState(payload);\r\n");
-            sb.append("    },\r\n");
-        }
+        oneToManyModelHandler(outPropertyList, sb);
+        manyToManyModelHandler(outPropertyList, sb, poName);
         sb.append("  }),\r\n");
         sb.append("};\r\n");
         String viewData = sb.toString();
-        return new String[]{viewData, underPoName + ".tsx"};
+        return new String[]{viewData, poName + ".tsx"};
     }
 
-    private String[] viewAutoGenerate(Entity entity, List<Property> propertyList, String underPoName, String poName) {
-        List<Entity> subEntityList = entityDao.findByEntityParentOrderBySortCode(entity);
-        List<Property> manyToManyList = propertyList.stream()
-                .filter(property -> "是".equals(property.getPropertyOut()) && !MANY_TO_ONE.equals(property.getPropertyOutType()))
-                .collect(Collectors.toList());
-        StringBuilder sb = new StringBuilder();
-        if (entity.getEntityId() != null) {
-            sb.append("import {Dialog} from '@alifd/next';\r\n");
+    private void oneToManyModelHandler(List<Property> outPropertyList, StringBuilder sb) {
+        for (Property property : outPropertyList) {
+            if (MANY_TO_ONE.equals(property.getPropertyOutType())) {
+                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
+                sb.append("    async onRowClick(data) {\r\n");
+                sb.append("      await dispatch.").append(underPropertyOut).append(".findDataTableAndFormByName(data);\r\n");
+                sb.append("      const payload = {\r\n");
+                sb.append("        divVisible: true,\r\n");
+                sb.append("        parent: data.id,\r\n");
+                sb.append("        visible: false,\r\n");
+                sb.append("      };\r\n");
+                sb.append("      dispatch.").append(underPropertyOut).append(".setState(payload);\r\n");
+                sb.append("    },\r\n");
+                sb.append("\r\n");
+            }
         }
+    }
+
+    private void manyToManyModelHandler(List<Property> outPropertyList, StringBuilder sb, String poName) {
+        for (Property property : outPropertyList) {
+            if (MANY_TO_MANY.equals(property.getPropertyOutType())) {
+                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
+                sb.append("    async ").append(underPropertyOut).append("By").append(poName).append("(data) {\r\n");
+                sb.append("      await dispatch.").append(underPropertyOut).append(".findDataTableAndFormByName();\r\n");
+                sb.append("      const ret = await service.").append(underPropertyOut).append("By").append(poName).append("(data.id);\r\n");
+                sb.append("      if (ret.code === 400) {\r\n");
+                sb.append("        Message.error('获取失败');\r\n");
+                sb.append("      } else {\r\n");
+                sb.append("        const payload = {\r\n");
+                sb.append("          divVisible: true,\r\n");
+                sb.append("          parent: data.id,\r\n");
+                sb.append("          select: ret.data,\r\n");
+                sb.append("        };\r\n");
+                sb.append("        dispatch.").append(underPropertyOut).append(".setState(payload);\r\n");
+                sb.append("      }\r\n");
+                sb.append("    },\r\n");
+                sb.append("    async ").append(underPropertyOut).append("Save").append(poName).append("(data) {\r\n");
+                sb.append("      const ret = await service.").append(underPropertyOut).append("Save").append(poName).append("(data.parent, data.select);\r\n");
+                sb.append("      if (ret.code === 400) {\r\n");
+                sb.append("        Message.error('保存失败');\r\n");
+                sb.append("      } else {\r\n");
+                sb.append("        Message.success('保存成功');\r\n");
+                sb.append("        const payload = {\r\n");
+                sb.append("          divVisible: false,\r\n");
+                sb.append("        };\r\n");
+                sb.append("        dispatch.").append(underPropertyOut).append(".setState(payload);\r\n");
+                sb.append("      }\r\n");
+                sb.append("    },\r\n");
+            }
+        }
+    }
+
+    private String[] viewAutoGenerate(Entity entity, List<Property> outPropertyList, String underPoName, String poName) {
+        List<Entity> subEntityList = entityDao.findByEntityParentOrderBySortCode(entity);
+        StringBuilder sb = new StringBuilder();
         sb.append("import React, {useEffect} from 'react';\r\n");
         sb.append("import pageStore from '@/pages/").append(poName).append("/store';\r\n");
         sb.append("import DataFormTemple from '@/components/dataForm';\r\n");
         sb.append("import DataTableTemple from '@/components/dataTable';\r\n");
-        sb.append("import {CustomColumn").append(poName).append("} from '@/pages/").append(poName).append("/view/custom/").append(underPoName).append("';\r\n");
+        sb.append("import {CustomColumn} from '@/pages/").append(poName).append("/view/custom/").append(poName).append("';\r\n");
+        sb.append("import {Dialog} from \"@alifd/next\";\r\n");
         sb.append("\r\n");
         sb.append("function ").append(poName).append("() {\r\n");
-        sb.append("  const [").append(underPoName).append("State, ").append(underPoName).append("Dispatchers] = pageStore.useModel('").append(underPoName).append("');\r\n");
         sb.append("\r\n");
-        if (subEntityList.size() > 0) {
-            Entity entity11 = subEntityList.get(0);
-            if (entity11 != null) {
-                String underSubPoName = BeanUtils.underline2Camel(entity11.getEntityCode());
-                sb.append("  const [").append(underSubPoName).append("State, ").append(underSubPoName).append("Dispatchers] = pageStore.useModel('").append(underSubPoName).append("');\r\n");
-                sb.append("\r\n");
-            }
-        }
-        if (subEntityList.size() > 1) {
-            Entity entity21 = subEntityList.get(1);
-            if (entity21 != null) {
-                String underSubPoName = BeanUtils.underline2Camel(entity21.getEntityCode());
-                sb.append("  const [").append(underSubPoName).append("State, ").append(underSubPoName).append("Dispatchers] = pageStore.useModel('").append(underSubPoName).append("');\r\n");
-                sb.append("\r\n");
-            }
-        }
-        if (subEntityList.size() > 2) {
-            Entity entity31 = subEntityList.get(2);
-            if (entity31 != null) {
-                String underSubPoName = BeanUtils.underline2Camel(entity31.getEntityCode());
-                sb.append("  const [").append(underSubPoName).append("State, ").append(underSubPoName).append("Dispatchers] = pageStore.useModel('").append(underSubPoName).append("');\r\n");
-                sb.append("\r\n");
-            }
-        }
-        if (manyToManyList.size() > 0) {
-            Property property11 = manyToManyList.get(0);
-            if (property11 != null) {
-                String underSubPoName = BeanUtils.underline2Camel(property11.getPropertyCode());
-                sb.append("  const [").append(underSubPoName).append("State, ").append(underSubPoName).append("Dispatchers] = pageStore.useModel('").append(underSubPoName).append("');\r\n");
-                sb.append("\r\n");
-            }
-        }
-        if (manyToManyList.size() > 1) {
-            Property property21 = manyToManyList.get(1);
-            if (property21 != null) {
-                String underSubPoName = BeanUtils.underline2Camel(property21.getPropertyCode());
-                sb.append("  const [").append(underSubPoName).append("State, ").append(underSubPoName).append("Dispatchers] = pageStore.useModelDispatchers('").append(underSubPoName).append("');\r\n");
-                sb.append("\r\n");
-            }
-        }
-        if (manyToManyList.size() > 2) {
-            Property property31 = manyToManyList.get(2);
-            if (property31 != null) {
-                String underSubPoName = BeanUtils.underline2Camel(property31.getPropertyCode());
-                sb.append("  const [").append(underSubPoName).append("State, ").append(underSubPoName).append("Dispatchers] = pageStore.useModelDispatchers('").append(underSubPoName).append("');\r\n");
-                sb.append("\r\n");
-            }
-        }
-        sb.append("  const [custom").append(poName).append("State, custom").append(poName).append("Dispatchers] = pageStore.useModel('custom").append(poName).append("');\r\n");
+        sb.append("  const [state, dispatchers] = pageStore.useModel('").append(underPoName).append("');\r\n");
         sb.append("\r\n");
+        sb.append("  const [customState, customDispatchers] = pageStore.useModel('").append(underPoName).append("Custom');\r\n");
+        sb.append("\r\n");
+        manyToManyViewStoreHandler(outPropertyList, sb);
         sb.append("  useEffect(() => {\r\n");
-        sb.append("    ").append(underPoName).append("Dispatchers.findDataTableAndFormByName().then(r => console.log(r));\r\n");
-        sb.append("  }, [").append(underPoName).append("Dispatchers]);\r\n");
+        sb.append("    dispatchers.findDataTableAndFormByName().then(r => console.log(r));\r\n");
+        sb.append("  }, [dispatchers]);\r\n");
         sb.append("\r\n");
         sb.append("  return (\r\n");
-        if (entity.getEntityId() == null) {
-            sb.append("    <>\r\n");
-        } else {
-            Entity entityParent = entityDao.getOne(entity.getEntityId());
-            //驼峰名
-            String underPoNameParent = BeanUtils.underline2Camel(entityParent.getEntityCode());
-            sb.append("    <Dialog\r\n");
-            sb.append("      v2\r\n");
-            sb.append("      visible={").append(underPoName).append("State.divVisible}\r\n");
-            sb.append("      footer={false}\r\n");
-            sb.append("      onClose={() => ").append(underPoName).append("Dispatchers.setState({\r\n");
-            sb.append("        divVisible: false,\r\n");
-            sb.append("        ").append(underPoNameParent).append(": {},\r\n");
-            sb.append("      })}\r\n");
-            sb.append("      style={{width: '100%'}}\r\n");
-            sb.append("    >\r\n");
-        }
+        sb.append("    <>\r\n");
         sb.append("      <DataTableTemple\r\n");
-        sb.append("        createItem={() => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Add()}\r\n");
-        sb.append("        editItem={record => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Edit(record)}\r\n");
-        if (entity.getEntityId() == null) {
-            sb.append("        deleteItem={record => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Delete(").append(underPoName).append("State.").append(underPoName).append("Current, record)}\r\n");
-        } else {
-            Entity entityParent = entityDao.getOne(entity.getEntityId());
-            //驼峰名
-            String underPoNameParent = BeanUtils.underline2Camel(entityParent.getEntityCode());
-            sb.append("        deleteItem={record => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Delete(").append(underPoName).append("State.").append(underPoName).append("Current, ").append(underPoName).append("State.").append(underPoNameParent).append(", record)}\r\n");
-        }
-        sb.append("        visibleLoading={").append(underPoName).append("State.").append(underPoName).append("LoadingVisible}\r\n");
-        sb.append("        dataSource={").append(underPoName).append("State.").append(underPoName).append("TableData}\r\n");
-        sb.append("        items={").append(underPoName).append("State.").append(underPoName).append("Table}\r\n");
-        sb.append("        total={").append(underPoName).append("State.").append(underPoName).append("Total}\r\n");
-        if (entity.getEntityId() == null) {
-            sb.append("        getPage={").append(underPoName).append("Current => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Page(").append(underPoName).append("Current)}\r\n");
-        } else {
-            Entity entityParent = entityDao.getOne(entity.getEntityId());
-            //驼峰名
-            String underPoNameParent = BeanUtils.underline2Camel(entityParent.getEntityCode());
-            sb.append("        getPage={").append(underPoName).append("Current => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Page(").append(underPoName).append("Current, ").append(underPoName).append("State.").append(underPoNameParent).append(")}\r\n");
-        }
+        sb.append("        createItem={() => dispatchers.add()}\r\n");
+        sb.append("        editItem={record => dispatchers.edit(record)}\r\n");
+        sb.append("        deleteItem={record => dispatchers.delete(state.current, record)}\r\n");
+        sb.append("        visibleLoading={state.loadingVisible}\r\n");
+        sb.append("        dataSource={state.tableData}\r\n");
+        sb.append("        items={state.table}\r\n");
+        sb.append("        total={state.total}\r\n");
+        sb.append("        getPage={current => dispatchers.page(current)}\r\n");
         sb.append("        primaryKey=\"id\"\r\n");
-        sb.append("        customData={").append(underPoName).append("State.customData}\r\n");
+        sb.append("        customData={state.customData}\r\n");
         sb.append("        columnRender={(value, index, record) => {\r\n");
         sb.append("          return (\r\n");
-        sb.append("            <CustomColumn").append(poName).append(" value={value} index={index} record={record}/>\r\n");
+        sb.append("            <CustomColumn value={value} index={index} record={record}/>\r\n");
         sb.append("          );\r\n");
         sb.append("        }}\r\n");
-        if (subEntityList.size() > 0) {
-            Entity entity1 = subEntityList.get(0);
-            if (entity1 != null) {
-                String underSubPoName = BeanUtils.underline2Camel(entity1.getEntityCode());
-                sb.append("        son1=\"").append(entity1.getEntityName()).append("\"\r\n");
-                sb.append("        sonMethod1={record => ").append(underSubPoName).append("Dispatchers.onRowClick(record)}\r\n");
-            }
-        }
-        if (subEntityList.size() > 1) {
-            Entity entity2 = subEntityList.get(1);
-            if (entity2 != null) {
-                String underSubPoName = BeanUtils.underline2Camel(entity2.getEntityCode());
-                sb.append("        son2=\"").append(entity2.getEntityName()).append("\"\r\n");
-                sb.append("        sonMethod2={record => ").append(underSubPoName).append("Dispatchers.onRowClick(record)}\r\n");
-            }
-        }
-        if (subEntityList.size() > 2) {
-            Entity entity3 = subEntityList.get(2);
-            if (entity3 != null) {
-                String underSubPoName = BeanUtils.underline2Camel(entity3.getEntityCode());
-                sb.append("        son3=\"").append(entity3.getEntityName()).append("\"\r\n");
-                sb.append("        sonMethod3={record => ").append(underSubPoName).append("Dispatchers.onRowClick(record)}\r\n");
-            }
-        }
-        if (manyToManyList.size() > 0) {
-            Property property1 = manyToManyList.get(0);
-            if (property1 != null) {
-                String underSubPoName = BeanUtils.underline2Camel(property1.getPropertyCode());
-                sb.append("        manyToMany1=\"").append(property1.getPropertyLabel()).append("\"\r\n");
-                sb.append("        manyToManyMethod1={record => ").append(underSubPoName).append("Dispatchers.onManyToManyRowClick(record)}\r\n");
-            }
-        }
-        if (manyToManyList.size() > 1) {
-            Property property2 = manyToManyList.get(1);
-            if (property2 != null) {
-                String underSubPoName = BeanUtils.underline2Camel(property2.getPropertyCode());
-                sb.append("        manyToMany2=\"").append(property2.getPropertyLabel()).append("\"\r\n");
-                sb.append("        manyToManyMethod2={record => ").append(underSubPoName).append("Dispatchers.onManyToManyRowClick(record)}\r\n");
-            }
-        }
-        if (manyToManyList.size() > 2) {
-            Property property3 = manyToManyList.get(2);
-            if (property3 != null) {
-                String underSubPoName = BeanUtils.underline2Camel(property3.getPropertyCode());
-                sb.append("        manyToMany3=\"").append(property3.getPropertyLabel()).append("\"\r\n");
-                sb.append("        manyToManyMethod3={record => ").append(underSubPoName).append("Dispatchers.onManyToManyRowClick(record)}\r\n");
-            }
-        }
+        oneToManyViewMethodHandler(outPropertyList, sb, poName);
+        manyToManyViewMethodHandler(outPropertyList, sb, poName);
         sb.append("        customMethod1={() => custom").append(poName).append("Dispatchers.customMethod1()}\r\n");
         sb.append("        customMethod2={() => custom").append(poName).append("Dispatchers.customMethod2()}\r\n");
         sb.append("        customMethod3={() => custom").append(poName).append("Dispatchers.customMethod3()}\r\n");
@@ -787,34 +658,145 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("        customMethodName3={custom").append(poName).append("State.customMethodName3}\r\n");
         sb.append("      />\r\n");
         sb.append("      <DataFormTemple\r\n");
-        sb.append("        customData={").append(underPoName).append("State.customData}\r\n");
-        sb.append("        title={").append(underPoName).append("State.").append(underPoName).append("Title}\r\n");
-        sb.append("        visibleDialog={").append(underPoName).append("State.").append(underPoName).append("Visible}\r\n");
-        sb.append("        onClose={() => ").append(underPoName).append("Dispatchers.setState({").append(underPoName).append("Visible: false})}\r\n");
-        sb.append("        items={[...").append(underPoName).append("State.").append(underPoName).append("Form, ...custom").append(poName).append("State.customFrom]}\r\n");
-        sb.append("        dispatchers={value => ").append(underPoName).append("Dispatchers.setDataForm(value)}\r\n");
-        if (entity.getEntityId() == null) {
-            sb.append("        onOk={() => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Save(").append(underPoName).append("State.").append(underPoName).append("Current, ").append(underPoName).append("State.").append(underPoName).append("FormData)}\r\n");
-        } else {
-            Entity entityParent = entityDao.getOne(entity.getEntityId());
-            //驼峰名
-            String underPoNameParent = BeanUtils.underline2Camel(entityParent.getEntityCode());
-            sb.append("        onOk={() => ").append(underPoName).append("Dispatchers.").append(underPoName).append("Save(").append(underPoName).append("State.").append(underPoName).append("Current, ").append(underPoName).append("State.").append(underPoNameParent).append(", ").append(underPoName).append("State.").append(underPoName).append("FormData)}\r\n");
-        }
-        sb.append("        formDataValue={").append(underPoName).append("State.").append(underPoName).append("FormData}\r\n");
-        sb.append("        formSortCode={String(Number.parseInt(String(").append(underPoName).append("State.").append(underPoName).append("Total)) + 10)}\r\n");
+        sb.append("        customData={state.customData}\r\n");
+        sb.append("        title={state.title}\r\n");
+        sb.append("        visibleDialog={state.visible}\r\n");
+        sb.append("        onClose={() => dispatchers.setState({visible: false})}\r\n");
+        sb.append("        items={[...state.form, ...customState.customFrom]}\r\n");
+        sb.append("        dispatchers={value => dispatchers.setDataForm(value)}\r\n");
+        sb.append("        onOk={() => dispatchers.save(state.current, state.formData)}\r\n");
+        sb.append("        formDataValue={state.formData}\r\n");
+        sb.append("        formSortCode={String(Number.parseInt(String(state.total)) + 10)}\r\n");
         sb.append("      />\r\n");
-        if (entity.getEntityId() == null) {
-            sb.append("    </>\r\n");
-        } else {
-            sb.append("    </Dialog>\r\n");
-        }
+        oneToManyViewDialogHandler(outPropertyList, sb);
+        manyToManyViewDialogHandler(outPropertyList, sb, poName);
+        sb.append("    </>\r\n");
         sb.append("  );\r\n");
         sb.append("}\r\n");
         sb.append("\r\n");
         sb.append("export default ").append(poName).append(";\r\n");
         String viewData = sb.toString();
-        return new String[]{viewData, underPoName + ".tsx"};
+        return new String[]{viewData, poName + ".tsx"};
+    }
+
+    private void manyToManyViewStoreHandler(List<Property> outPropertyList, StringBuilder sb) {
+        for (Property property : outPropertyList) {
+            if (MANY_TO_MANY.equals(property.getPropertyOutType())) {
+                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
+                sb.append("  const [").append(underPropertyOut).append("State, ").append(underPropertyOut).append("Dispatchers] = pageStore.useModel('").append(underPropertyOut).append("');\r\n");
+                sb.append("\r\n");
+            }
+        }
+    }
+
+    private void oneToManyViewMethodHandler(List<Property> outPropertyList, StringBuilder sb, String poName) {
+        for (int i = 0; i < outPropertyList.size(); i++) {
+            Property property = outPropertyList.get(i);
+            if (MANY_TO_ONE.equals(property.getPropertyOutType())) {
+                sb.append("        son").append(i + 1).append("=\"").append(property.getPropertyLabel()).append("\"\r\n");
+                sb.append("        sonMethod").append(i + 1).append("={record => ").append(poName).append("Dispatchers.onRowClick(record)}\r\n");
+            }
+        }
+    }
+
+    private void manyToManyViewMethodHandler(List<Property> outPropertyList, StringBuilder sb, String poName) {
+        for (int i = 0; i < outPropertyList.size(); i++) {
+            Property property = outPropertyList.get(i);
+            if (MANY_TO_MANY.equals(property.getPropertyOutType())) {
+                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
+                sb.append("        manyToMany").append(i + 1).append("=\"").append(property.getPropertyLabel()).append("\"\r\n");
+                sb.append("        manyToManyMethod").append(i + 1).append("={record => dispatchers.").append(underPropertyOut).append("By").append(poName).append("(record)}\r\n");
+            }
+        }
+    }
+
+    private void manyToManyViewDialogHandler(List<Property> outPropertyList, StringBuilder sb, String poName) {
+        for (Property property : outPropertyList) {
+            if (MANY_TO_MANY.equals(property.getPropertyOutType())) {
+                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
+                sb.append("      <Dialog\r\n");
+                sb.append("        v2\r\n");
+                sb.append("        title=\"").append(property.getPropertyLabel()).append("\"\r\n");
+                sb.append("        visible={").append(underPropertyOut).append("State.divVisible}\r\n");
+                sb.append("        onClose={() => ").append(underPropertyOut).append("Dispatchers.setState({\r\n");
+                sb.append("          divVisible: false,\r\n");
+                sb.append("          parent: \"\",\r\n");
+                sb.append("          select: [],\r\n");
+                sb.append("        })}\r\n");
+                sb.append("        onOk={() => dispatchers.").append(underPropertyOut).append("Save").append(poName).append("({\r\n");
+                sb.append("          parent: ").append(underPropertyOut).append("State.parent,\r\n");
+                sb.append("          select: ").append(underPropertyOut).append("State.select,\r\n");
+                sb.append("        })}\r\n");
+                sb.append("        style={{width: '90%'}}\r\n");
+                sb.append("      >\r\n");
+                sb.append("        <DataTableTemple\r\n");
+                sb.append("          customData={{customType: false}}\r\n");
+                sb.append("          visibleLoading={").append(underPropertyOut).append("State.loadingVisible}\r\n");
+                sb.append("          dataSource={").append(underPropertyOut).append("State.tableData}\r\n");
+                sb.append("          items={").append(underPropertyOut).append("State.table}\r\n");
+                sb.append("          total={").append(underPropertyOut).append("State.total}\r\n");
+                sb.append("          getPage={(current) => ").append(underPropertyOut).append("Dispatchers.page(current)}\r\n");
+                sb.append("          primaryKey=\"id\"\r\n");
+                sb.append("          rowSelection={{\r\n");
+                sb.append("            onChange: (ids) => {\r\n");
+                sb.append("              ").append(underPropertyOut).append("Dispatchers.setState({\r\n");
+                sb.append("                select: ids,\r\n");
+                sb.append("              })\r\n");
+                sb.append("            },\r\n");
+                sb.append("            selectedRowKeys: ").append(underPropertyOut).append("State.select,\r\n");
+                sb.append("          }}\r\n");
+                sb.append("        />\r\n");
+                sb.append("      </Dialog>\r\n");
+            }
+        }
+    }
+
+    private void oneToManyViewDialogHandler(List<Property> outPropertyList, StringBuilder sb) {
+        for (Property property : outPropertyList) {
+            if (ONE_TO_MANY.equals(property.getPropertyOutType())) {
+                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
+                sb.append("      <Dialog\r\n");
+                sb.append("        v2\r\n");
+                sb.append("        visible={").append(underPropertyOut).append("State.divVisible}\r\n");
+                sb.append("        footer={false}\r\n");
+                sb.append("        onClose={() => ").append(underPropertyOut).append("Dispatchers.setState({\r\n");
+                sb.append("          divVisible: false,\r\n");
+                sb.append("          parent: \"\",\r\n");
+                sb.append("        })}\r\n");
+                sb.append("        style={{width: '100%'}}\r\n");
+                sb.append("      >\r\n");
+                sb.append("        <DataTableTemple\r\n");
+                sb.append("          createItem={() => ").append(underPropertyOut).append("Dispatchers.add()}\r\n");
+                sb.append("          editItem={record => ").append(underPropertyOut).append("Dispatchers.edit(record)}\r\n");
+                sb.append("          deleteItem={record => ").append(underPropertyOut).append("Dispatchers.delete({\r\n");
+                sb.append("            current: ").append(underPropertyOut).append("State.current,\r\n");
+                sb.append("            record,\r\n");
+                sb.append("          })}\r\n");
+                sb.append("          visibleLoading={").append(underPropertyOut).append("State.loadingVisible}\r\n");
+                sb.append("          dataSource={").append(underPropertyOut).append("State.tableData}\r\n");
+                sb.append("          items={").append(underPropertyOut).append("State.table}\r\n");
+                sb.append("          total={").append(underPropertyOut).append("State.total}\r\n");
+                sb.append("          getPage={current => ").append(underPropertyOut).append("Dispatchers.page(current)}\r\n");
+                sb.append("          primaryKey=\"id\"\r\n");
+                sb.append("          customData={").append(underPropertyOut).append("State.customData}\r\n");
+                sb.append("        />\r\n");
+                sb.append("        <DataFormTemple\r\n");
+                sb.append("          customData={").append(underPropertyOut).append("State.customData}\r\n");
+                sb.append("          title={").append(underPropertyOut).append("State.title}\r\n");
+                sb.append("          visibleDialog={").append(underPropertyOut).append("State.visible}\r\n");
+                sb.append("          onClose={() => ").append(underPropertyOut).append("Dispatchers.setState({visible: false})}\r\n");
+                sb.append("          items={").append(underPropertyOut).append("State.form}\r\n");
+                sb.append("          dispatchers={value => ").append(underPropertyOut).append("Dispatchers.setDataForm(value)}\r\n");
+                sb.append("          onOk={() => ").append(underPropertyOut).append("Dispatchers.save({\r\n");
+                sb.append("            current: ").append(underPropertyOut).append("State.current,\r\n");
+                sb.append("            formData: ").append(underPropertyOut).append("State.formData,\r\n");
+                sb.append("          })}\r\n");
+                sb.append("          formDataValue={").append(underPropertyOut).append("State.formData}\r\n");
+                sb.append("          formSortCode={String(Number.parseInt(String(").append(underPropertyOut).append("State.total)) + 10)}\r\n");
+                sb.append("        />\r\n");
+                sb.append("      </Dialog>\r\n");
+            }
+        }
     }
 
     private void createEntityCodeHandler(Map<String, String[]> entityObj, Map<String, String[]> entityCustomObj) {
@@ -987,22 +969,22 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{entityDaoData, poName + "Dao.java"};
     }
 
-    public String[] serviceGenerate(List<Property> propertyList, String poName, String appPath) {
+    public String[] serviceGenerate(List<Property> outPropertyList, String poName, String appPath) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
         //service路径
         String poServicePath = packetPath + ".service.auto;\r\n";
-        packageServiceHandler(propertyList, poName, sb, poServicePath);
+        packageServiceHandler(outPropertyList, poName, sb, poServicePath);
         sb.append("import com.example.cyjcommon.service.BaseService;\r\n");
         sb.append("import com.example.cyjcommon.service.autoService;\r\n");
         sb.append("import org.springframework.beans.factory.annotation.Autowired;\r\n");
-        if (BeanUtils.ifManyToOne(propertyList)) {
+        if (BeanUtils.ifManyToOne(outPropertyList)) {
             sb.append("import org.springframework.data.domain.Example;\r\n");
         }
         sb.append("import org.springframework.data.domain.Page;\r\n");
         sb.append("import org.springframework.data.domain.PageRequest;\r\n");
-        if (BeanUtils.ifManyToOne(propertyList)) {
+        if (BeanUtils.ifManyToOne(outPropertyList)) {
             sb.append("import org.springframework.data.domain.Pageable;\r\n");
         }
         sb.append("import org.springframework.data.domain.Sort;\r\n");
@@ -1016,10 +998,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("@Transactional(rollbackFor = Exception.class)\r\n");
         sb.append("public class ").append(poName).append("Service extends BaseService implements autoService<").append(poName).append("> {\r\n");
         sb.append("\r\n");
-        daoServiceHandler(propertyList, poName, sb);
+        daoServiceHandler(outPropertyList, poName, sb);
         sb.append("    @Override\r\n");
         sb.append("    public ").append(poName).append(" addOne(").append(poName).append(" po) {\r\n");
-        setHandler(propertyList, sb);
+        setHandler(outPropertyList, sb);
         sb.append("        return dao.save(po);\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
@@ -1030,7 +1012,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("\r\n");
         sb.append("    @Override\r\n");
         sb.append("    public ").append(poName).append(" updateOne(").append(poName).append(" po) {\r\n");
-        setHandler(propertyList, sb);
+        setHandler(outPropertyList, sb);
         sb.append("        return dao.saveAndFlush(po);\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
@@ -1039,27 +1021,27 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("        return dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by(\"sortCode\").ascending()));\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        manyToOneServiceHandler(propertyList, poName, sb);
-        manyToManyServiceHandler(propertyList, poName, sb);
+        manyToOneServiceHandler(outPropertyList, poName, sb);
+        manyToManyServiceHandler(outPropertyList, poName, sb);
         sb.append("}\r\n");
         String entityServiceData = sb.toString();
         return new String[]{entityServiceData, poName + "Service.java"};
     }
 
 
-    private void packageServiceHandler(List<Property> propertyList, String poName, StringBuilder sb, String poServicePath) {
+    private void packageServiceHandler(List<Property> outPropertyList, String poName, StringBuilder sb, String poServicePath) {
         sb.append("package ").append(poServicePath);
         sb.append("\r\n");
-        for (Property property : propertyList) {
-            if ("是".equals(property.getPropertyOut()) && MANY_TO_ONE.equals(property.getPropertyOutType())) {
+        for (Property property : outPropertyList) {
+            if (MANY_TO_ONE.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("import com.example.cyjcommon.dao.").append(propertyOut).append("Dao;\r\n");
             }
         }
         sb.append("import com.example.cyjcommon.dao.").append(poName).append("Dao;\r\n");
-        for (Property property : propertyList) {
-            if ("是".equals(property.getPropertyOut()) && MANY_TO_ONE.equals(property.getPropertyOutType())) {
+        for (Property property : outPropertyList) {
+            if (MANY_TO_ONE.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("import com.example.cyjcommon.entity.").append(propertyOut).append(";\r\n");
@@ -1068,10 +1050,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import com.example.cyjcommon.entity.").append(poName).append(";\r\n");
     }
 
-    private void daoServiceHandler(List<Property> propertyList, String poName, StringBuilder sb) {
+    private void daoServiceHandler(List<Property> outPropertyList, String poName, StringBuilder sb) {
         sb.append("    private ").append(poName).append("Dao dao;\r\n");
-        for (Property property : propertyList) {
-            if ("是".equals(property.getPropertyOut()) && MANY_TO_ONE.equals(property.getPropertyOutType())) {
+        for (Property property : outPropertyList) {
+            if (MANY_TO_ONE.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("    private ").append(propertyOut).append("Dao ").append(underPropertyOut).append("Dao;\r\n");
@@ -1083,8 +1065,8 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("        this.dao = dao;\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        for (Property property : propertyList) {
-            if ("是".equals(property.getPropertyOut()) && MANY_TO_ONE.equals(property.getPropertyOutType())) {
+        for (Property property : outPropertyList) {
+            if (MANY_TO_ONE.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("    @Autowired\r\n");
@@ -1096,9 +1078,9 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         }
     }
 
-    private void setHandler(List<Property> propertyList, StringBuilder sb) {
-        for (Property property : propertyList) {
-            if ("是".equals(property.getPropertyOut()) && MANY_TO_ONE.equals(property.getPropertyOutType())) {
+    private void setHandler(List<Property> outPropertyList, StringBuilder sb) {
+        for (Property property : outPropertyList) {
+            if (MANY_TO_ONE.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("        if (po.get").append(propertyOut).append("Id() != null) {\r\n");
@@ -1109,9 +1091,9 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         }
     }
 
-    private void manyToOneServiceHandler(List<Property> propertyList, String poName, StringBuilder sb) {
-        for (Property property : propertyList) {
-            if ("是".equals(property.getPropertyOut()) && MANY_TO_ONE.equals(property.getPropertyOutType())) {
+    private void manyToOneServiceHandler(List<Property> outPropertyList, String poName, StringBuilder sb) {
+        for (Property property : outPropertyList) {
+            if (MANY_TO_ONE.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("    public Page<").append(poName).append("> findAll(Integer pageNumber, ").append(propertyOut).append(" ").append(underPropertyOut).append(") {\r\n");
@@ -1126,9 +1108,9 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         }
     }
 
-    private void manyToManyServiceHandler(List<Property> propertyList, String poName, StringBuilder sb) {
-        for (Property property : propertyList) {
-            if ("是".equals(property.getPropertyOut()) && !MANY_TO_ONE.equals(property.getPropertyOutType())) {
+    private void manyToManyServiceHandler(List<Property> outPropertyList, String poName, StringBuilder sb) {
+        for (Property property : outPropertyList) {
+            if (!MANY_TO_ONE.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("    public Set<String> ").append(underPropertyOut).append("By").append(poName).append("(String id) {\r\n");
@@ -1160,7 +1142,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         }
     }
 
-    public String[] controllerGenerate(List<Property> propertyList, String poName, String appPath, String appApi) {
+    public String[] controllerGenerate(List<Property> outPropertyList, String poName, String appPath, String appApi) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
@@ -1168,7 +1150,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         String poServicePath = packetPath + ".service.auto.";
         //controller路径
         String poControllerPath = packetPath + ".controller.auto;\r\n";
-        packageControllerHandler(propertyList, poName, sb, poServicePath, poControllerPath);
+        packageControllerHandler(outPropertyList, poName, sb, poServicePath, poControllerPath);
         sb.append("import com.example.cyjcommon.utils.ResultVO;\r\n");
         sb.append("import io.swagger.v3.oas.annotations.Operation;\r\n");
         sb.append("import io.swagger.v3.oas.annotations.tags.Tag;\r\n");
@@ -1231,20 +1213,20 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("        return ResultVO.success();\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        manyToOneControllerHandler(propertyList, poName, sb);
-        manyToManyControllerHandler(propertyList, poName, sb);
+        manyToOneControllerHandler(outPropertyList, poName, sb);
+        manyToManyControllerHandler(outPropertyList, poName, sb);
         sb.append("}\r\n");
         String entityControllerData = sb.toString();
         return new String[]{entityControllerData, poName + "Controller.java"};
     }
 
-    private void packageControllerHandler(List<Property> propertyList, String poName, StringBuilder sb, String poServicePath, String poControllerPath) {
+    private void packageControllerHandler(List<Property> outPropertyList, String poName, StringBuilder sb, String poServicePath, String poControllerPath) {
         sb.append("package ").append(poControllerPath);
         sb.append("\r\n");
         sb.append("import ").append(poServicePath).append(poName).append("Service;\r\n");
         sb.append("import com.example.cyjcommon.controller.autoController;\r\n");
-        for (Property property : propertyList) {
-            if ("是".equals(property.getPropertyOut()) && MANY_TO_ONE.equals(property.getPropertyOutType())) {
+        for (Property property : outPropertyList) {
+            if (MANY_TO_ONE.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("import com.example.cyjcommon.entity.").append(propertyOut).append(";\r\n");
@@ -1253,9 +1235,9 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import com.example.cyjcommon.entity.").append(poName).append(";\r\n");
     }
 
-    private void manyToOneControllerHandler(List<Property> propertyList, String poName, StringBuilder sb) {
-        for (Property property : propertyList) {
-            if ("是".equals(property.getPropertyOut()) && MANY_TO_ONE.equals(property.getPropertyOutType())) {
+    private void manyToOneControllerHandler(List<Property> outPropertyList, String poName, StringBuilder sb) {
+        for (Property property : outPropertyList) {
+            if (MANY_TO_ONE.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("    @Operation(summary = \"根据").append(propertyOut).append("查询所有").append(poName).append("\")\r\n");
@@ -1268,9 +1250,9 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         }
     }
 
-    private void manyToManyControllerHandler(List<Property> propertyList, String poName, StringBuilder sb) {
-        for (Property property : propertyList) {
-            if ("是".equals(property.getPropertyOut()) && !MANY_TO_ONE.equals(property.getPropertyOutType())) {
+    private void manyToManyControllerHandler(List<Property> outPropertyList, String poName, StringBuilder sb) {
+        for (Property property : outPropertyList) {
+            if (!MANY_TO_ONE.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("    @Operation(summary = \"根据").append(poName).append("查询所有").append(propertyOut).append("\")\r\n");

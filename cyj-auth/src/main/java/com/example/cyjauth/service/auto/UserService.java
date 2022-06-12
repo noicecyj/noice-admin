@@ -75,13 +75,7 @@ public class UserService extends BaseService implements autoService<User> {
         return dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 
-    public Page<User> findAll(Integer pageNumber, Enterprise enterprise) {
-        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
-        User po = new User();
-        po.setEnterprise(enterprise);
-        Example<User> example = Example.of(po);
-        return dao.findAll(example, pageable);
-    }
+
 
     public Set<String> roleByUser(String id) {
         Set<String> roleIds = new HashSet<>();

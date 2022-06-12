@@ -96,14 +96,5 @@ export default {
       };
       dispatch.property.setState(payload);
     },
-    async onRowClick(data) {
-      await this.findDataTableAndFormByName(data);
-      const payload = {
-        divVisible: true,
-        entity: data,
-        propertyVisible: false,
-      };
-      dispatch.property.setState(payload);
-    },
   }),
 };

@@ -9,8 +9,8 @@ import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.CascadeType;
-import javax.persistence.ConstraintMode;
 import javax.persistence.Column;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
@@ -73,7 +73,7 @@ public class User implements Serializable {
     private Enterprise enterprise;
 
     @JsonIgnore
-    @ManyToMany(cascade = CascadeType.ALL,targetEntity = Role.class, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, targetEntity = Role.class, fetch = FetchType.EAGER)
     @BatchSize(size = 20)
     private Set<Role> role = new HashSet<>();
 
