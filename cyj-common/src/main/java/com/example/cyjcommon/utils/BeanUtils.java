@@ -25,6 +25,12 @@ public class BeanUtils {
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("([A-Za-z\\d]+)(_)?");
 
+    public final static String MANY_TO_ONE = "ManyToOne";
+
+    public final static String MANY_TO_MANY = "ManyToMany";
+
+    public final static String ONE_TO_MANY = "OneToMany";
+
     public static String underline2Camel(String line) {
         StringBuilder sb = new StringBuilder();
         Matcher matcher = NUMBER_PATTERN.matcher(line);
@@ -137,6 +143,17 @@ public class BeanUtils {
             if (StringUtils.isNotEmpty(po.getPropertyOut()) &&
                     StringUtils.isNotEmpty(po.getPropertyOutType()) &&
                     "ManyToMany".equals(po.getPropertyOutType())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static Boolean ifOneToMany(List<Property> poList) {
+        for (Property po : poList) {
+            if (StringUtils.isNotEmpty(po.getPropertyOut()) &&
+                    StringUtils.isNotEmpty(po.getPropertyOutType()) &&
+                    "OneToMany".equals(po.getPropertyOutType())) {
                 return true;
             }
         }

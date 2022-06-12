@@ -64,9 +64,9 @@ public class EnterpriseController implements autoController<Enterprise> {
     }
 
     @Operation(summary = "根据Enterprise查询所有User")
-    @PostMapping(value = "pageByEnterprise")
-    public ResultVO pageByEnterprise(@RequestParam("pageNumber") Integer pageNumber, @RequestBody Enterprise po) {
-        return ResultVO.success(service.findAll(pageNumber, po));
+    @PostMapping(value = "pageUserByEnterprise")
+    public ResultVO pageUserByEnterprise(@RequestParam("pageNumber") Integer pageNumber, @RequestParam("id") String id) {
+        return ResultVO.success(service.findAll(pageNumber, id));
     }
 
 }

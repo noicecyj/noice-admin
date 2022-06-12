@@ -24,14 +24,14 @@ export default {
       data,
     });
   },
-  pageByEnterprise(pageNumber, data) {
+  pageUserByEnterprise(pageNumber, id) {
     return request({
-      url: '/authApi/pageByEnterprise',
+      url: '/authApi/pageUserByEnterprise',
       method: 'post',
       params: {
         pageNumber,
+        id,
       },
-      data,
     });
   },
 };

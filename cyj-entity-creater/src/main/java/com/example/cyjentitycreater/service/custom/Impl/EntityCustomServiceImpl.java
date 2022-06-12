@@ -40,11 +40,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
 
     private final static String componentPath = "C:/Users/noice/IdeaProjects/noice-admin/noice/src/pages/";
     private final static String POST = "POST";
-    private final static String MANY_TO_ONE = "ManyToOne";
-
-    private final static String MANY_TO_MANY = "ManyToMany";
-
-    private final static String ONE_TO_MANY = "OneToMany";
     private final static String AUTO = "auto";
     private final static String STATUS = "有效";
     private final static String SORTCODE = "10";
@@ -89,11 +84,9 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
     }
 
     private void authorityHandler(Entity entity) {
-        List<Property> propertyOutList = propertyDao
-                .findByEntityOrderBySortCode(entity)
-                .stream()
-                .filter(property -> "是".equals(property.getPropertyOut()))
-                .collect(Collectors.toList());
+        List<Property> propertyList = propertyDao.findByEntityOrderBySortCode(entity);
+        List<Property> outPropertyList = propertyList.stream()
+                .filter(property -> "是".equals(property.getPropertyOut())).collect(Collectors.toList());
         //驼峰名
         String underPoName = BeanUtils.underline2Camel(entity.getEntityCode());
         //文件名
@@ -101,11 +94,11 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         Authority findAll = queryFactory
                 .selectFrom(QAuthority.authority)
                 .where(QAuthority.authority.authorityPath
-                        .eq(entity.getAppService().getAppServiceApi() + "/" + underPoName + "Page")).fetchOne();
+                        .eq(entity.getAppService().getAppServiceApi() + "/page" + poName)).fetchOne();
         if (findAll == null) {
             findAll = new Authority();
             findAll.setAuthorityMethod(POST);
-            findAll.setAuthorityPath(entity.getAppService().getAppServiceApi() + "/" + underPoName + "Page");
+            findAll.setAuthorityPath(entity.getAppService().getAppServiceApi() + "/page" + poName);
             findAll.setAuthorityName("查询所有" + poName);
             findAll.setAuthorityType(AUTO);
             findAll.setAuthorityDescription("查询所有" + poName);
@@ -115,22 +108,24 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             findAll.setStatus(STATUS);
             authorityDao.save(findAll);
         }
-        if ("是".equals(entity.getEntitySelf())) {
-            authoritySaveHandler(entity, underPoName, poName, poName);
-        }
-        for (Property property : propertyOutList) {
+        for (Property property : outPropertyList) {
             String underPropertyPoName = BeanUtils.underline2Camel(property.getPropertyCode());
             String propertyPoName = BeanUtils.captureName(underPropertyPoName);
-            authoritySaveHandler(entity, underPoName, poName, propertyPoName);
+            if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
+                oneToManyAuthorityHandler(entity, poName, propertyPoName);
+            }
+            if (BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())) {
+                manyToManyAuthorityHandler(entity, poName, propertyPoName);
+            }
         }
         Authority save = queryFactory
                 .selectFrom(QAuthority.authority)
                 .where(QAuthority.authority.authorityPath
-                        .eq(entity.getAppService().getAppServiceApi() + "/" + underPoName + "Save")).fetchOne();
+                        .eq(entity.getAppService().getAppServiceApi() + "/save" + poName)).fetchOne();
         if (save == null) {
             save = new Authority();
             save.setAuthorityMethod(POST);
-            save.setAuthorityPath(entity.getAppService().getAppServiceApi() + "/" + underPoName + "Save");
+            save.setAuthorityPath(entity.getAppService().getAppServiceApi() + "/save" + poName);
             save.setAuthorityName("保存" + poName);
             save.setAuthorityType(AUTO);
             save.setAuthorityDescription("保存" + poName);
@@ -143,11 +138,11 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         Authority delete = queryFactory
                 .selectFrom(QAuthority.authority)
                 .where(QAuthority.authority.authorityPath
-                        .eq(entity.getAppService().getAppServiceApi() + "/" + underPoName + "Delete")).fetchOne();
+                        .eq(entity.getAppService().getAppServiceApi() + "/delete" + poName)).fetchOne();
         if (delete == null) {
             delete = new Authority();
             delete.setAuthorityMethod(POST);
-            delete.setAuthorityPath(entity.getAppService().getAppServiceApi() + "/" + underPoName + "Delete");
+            delete.setAuthorityPath(entity.getAppService().getAppServiceApi() + "/delete" + poName);
             delete.setAuthorityName("删除" + poName);
             delete.setAuthorityType(AUTO);
             delete.setAuthorityDescription("删除" + poName);
@@ -159,23 +154,60 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         }
     }
 
-    private void authoritySaveHandler(Entity entity, String underPoName, String poName, String propertyPoName) {
-        Authority findAllOut = queryFactory
+    private void oneToManyAuthorityHandler(Entity entity, String poName, String propertyPoName) {
+        Authority oneToMany = queryFactory
                 .selectFrom(QAuthority.authority)
                 .where(QAuthority.authority.authorityPath
-                        .eq(entity.getAppService().getAppServiceApi() + "/" + underPoName + "PageBy" + propertyPoName)).fetchOne();
-        if (findAllOut == null) {
-            findAllOut = new Authority();
-            findAllOut.setAuthorityMethod(POST);
-            findAllOut.setAuthorityPath(entity.getAppService().getAppServiceApi() + "/" + underPoName + "PageBy" + propertyPoName);
-            findAllOut.setAuthorityName("根据" + propertyPoName + "查询所有" + poName);
-            findAllOut.setAuthorityType(AUTO);
-            findAllOut.setAuthorityDescription("根据" + propertyPoName + "查询所有" + poName);
-            findAllOut.setEntity(entity);
-            findAllOut.setAppService(entity.getAppService());
-            findAllOut.setSortCode(SORTCODE);
-            findAllOut.setStatus(STATUS);
-            authorityDao.save(findAllOut);
+                        .eq(entity.getAppService().getAppServiceApi() + "/page" + propertyPoName + "By" + poName)).fetchOne();
+        if (oneToMany == null) {
+            oneToMany = new Authority();
+            oneToMany.setAuthorityMethod(POST);
+            oneToMany.setAuthorityPath(entity.getAppService().getAppServiceApi() + "/page" + propertyPoName + "By" + poName);
+            oneToMany.setAuthorityName("根据" + propertyPoName + "查询所有" + poName);
+            oneToMany.setAuthorityType(AUTO);
+            oneToMany.setAuthorityDescription("根据" + propertyPoName + "查询所有" + poName);
+            oneToMany.setEntity(entity);
+            oneToMany.setAppService(entity.getAppService());
+            oneToMany.setSortCode(SORTCODE);
+            oneToMany.setStatus(STATUS);
+            authorityDao.save(oneToMany);
+        }
+    }
+
+    private void manyToManyAuthorityHandler(Entity entity, String poName, String propertyPoName) {
+        Authority manyToMany1 = queryFactory
+                .selectFrom(QAuthority.authority)
+                .where(QAuthority.authority.authorityPath
+                        .eq(entity.getAppService().getAppServiceApi() + "/" + propertyPoName + "By" + poName)).fetchOne();
+        Authority manyToMany2 = queryFactory
+                .selectFrom(QAuthority.authority)
+                .where(QAuthority.authority.authorityPath
+                        .eq(entity.getAppService().getAppServiceApi() + "/" + propertyPoName + "Save" + poName)).fetchOne();
+        if (manyToMany1 == null) {
+            manyToMany1 = new Authority();
+            manyToMany1.setAuthorityMethod(POST);
+            manyToMany1.setAuthorityPath(entity.getAppService().getAppServiceApi() + "/" + propertyPoName + "By" + poName);
+            manyToMany1.setAuthorityName("根据" + poName + "查询所有" + propertyPoName);
+            manyToMany1.setAuthorityType(AUTO);
+            manyToMany1.setAuthorityDescription("根据" + poName + "查询所有" + propertyPoName);
+            manyToMany1.setEntity(entity);
+            manyToMany1.setAppService(entity.getAppService());
+            manyToMany1.setSortCode(SORTCODE);
+            manyToMany1.setStatus(STATUS);
+            authorityDao.save(manyToMany1);
+        }
+        if (manyToMany2 == null) {
+            manyToMany2 = new Authority();
+            manyToMany2.setAuthorityMethod(POST);
+            manyToMany2.setAuthorityPath(entity.getAppService().getAppServiceApi() + "/" + propertyPoName + "Save" + poName);
+            manyToMany2.setAuthorityName("根据" + poName + "保存" + propertyPoName);
+            manyToMany2.setAuthorityType(AUTO);
+            manyToMany2.setAuthorityDescription("根据" + poName + "保存" + propertyPoName);
+            manyToMany2.setEntity(entity);
+            manyToMany2.setAppService(entity.getAppService());
+            manyToMany2.setSortCode(SORTCODE);
+            manyToMany2.setStatus(STATUS);
+            authorityDao.save(manyToMany2);
         }
     }
 
@@ -213,12 +245,13 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         //服务接口
         String appApi = appService.getAppServiceApi();
         List<Property> propertyList = propertyDao.findByEntityOrderBySortCode(entity);
-
         Map<String, String[]> entityObj = new HashMap<>();
-        entityObj.put(commonPath + "/entity", poGenerate(entity, propertyList, poName));
-        entityObj.put(commonPath + "/dao", daoGenerate(poName));
+        List<Property> inPropertyList = propertyList.stream()
+                .filter(property -> !"是".equals(property.getPropertyOut())).collect(Collectors.toList());
         List<Property> outPropertyList = propertyList.stream()
                 .filter(property -> "是".equals(property.getPropertyOut())).collect(Collectors.toList());
+        entityObj.put(commonPath + "/entity", poGenerate(entity, inPropertyList, outPropertyList, poName, underPoName));
+        entityObj.put(commonPath + "/dao", daoGenerate(poName));
         entityObj.put(appPath + "/service/auto", serviceGenerate(outPropertyList, poName, appPath));
         entityObj.put(appPath + "/controller/auto", controllerGenerate(outPropertyList, poName, appPath, appApi));
         entityObj.put(componentPath + poName + "/services/auto", servicesAutoGenerate(entity, outPropertyList, appApi, underPoName, poName));
@@ -265,26 +298,26 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("      data,\r\n");
         sb.append("    });\r\n");
         sb.append("  },\r\n");
-        manyToOneServiceHandler(outPropertyList, sb, appApi);
+        oneToManyServiceHandler(outPropertyList, sb, appApi, poName);
         manyToManyServiceHandler(outPropertyList, sb, appApi, poName);
         sb.append("};\r\n");
         String viewData = sb.toString();
         return new String[]{viewData, underPoName + ".tsx"};
     }
 
-    private void manyToOneServiceHandler(List<Property> outPropertyList, StringBuilder sb, String appApi) {
+    private void oneToManyServiceHandler(List<Property> outPropertyList, StringBuilder sb, String appApi, String poName) {
         for (Property property : outPropertyList) {
-            if (MANY_TO_ONE.equals(property.getPropertyOutType())) {
+            if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("  pageBy").append(propertyOut).append("(pageNumber, data) {\r\n");
+                sb.append("  page").append(propertyOut).append("By").append(poName).append("(pageNumber, id) {\r\n");
                 sb.append("    return request({\r\n");
-                sb.append("      url: '/").append(appApi).append("/pageBy").append(propertyOut).append("',\r\n");
+                sb.append("      url: '/").append(appApi).append("/page").append(propertyOut).append("By").append(poName).append("',\r\n");
                 sb.append("      method: 'post',\r\n");
                 sb.append("      params: {\r\n");
                 sb.append("        pageNumber,\r\n");
+                sb.append("        id,\r\n");
                 sb.append("      },\r\n");
-                sb.append("      data,\r\n");
                 sb.append("    });\r\n");
                 sb.append("  },\r\n");
             }
@@ -293,7 +326,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
 
     private void manyToManyServiceHandler(List<Property> outPropertyList, StringBuilder sb, String appApi, String poName) {
         for (Property property : outPropertyList) {
-            if (MANY_TO_MANY.equals(property.getPropertyOutType())) {
+            if (BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 sb.append("  ").append(underPropertyOut).append("By").append(poName).append("(id) {\r\n");
                 sb.append("    return request({\r\n");
@@ -559,7 +592,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
 
     private void oneToManyModelHandler(List<Property> outPropertyList, StringBuilder sb) {
         for (Property property : outPropertyList) {
-            if (MANY_TO_ONE.equals(property.getPropertyOutType())) {
+            if (BeanUtils.MANY_TO_ONE.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 sb.append("    async onRowClick(data) {\r\n");
                 sb.append("      await dispatch.").append(underPropertyOut).append(".findDataTableAndFormByName(data);\r\n");
@@ -577,7 +610,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
 
     private void manyToManyModelHandler(List<Property> outPropertyList, StringBuilder sb, String poName) {
         for (Property property : outPropertyList) {
-            if (MANY_TO_MANY.equals(property.getPropertyOutType())) {
+            if (BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 sb.append("    async ").append(underPropertyOut).append("By").append(poName).append("(data) {\r\n");
                 sb.append("      await dispatch.").append(underPropertyOut).append(".findDataTableAndFormByName();\r\n");
@@ -610,7 +643,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
     }
 
     private String[] viewAutoGenerate(Entity entity, List<Property> outPropertyList, String underPoName, String poName) {
-        List<Entity> subEntityList = entityDao.findByEntityParentOrderBySortCode(entity);
         StringBuilder sb = new StringBuilder();
         sb.append("import React, {useEffect} from 'react';\r\n");
         sb.append("import pageStore from '@/pages/").append(poName).append("/store';\r\n");
@@ -681,7 +713,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
 
     private void manyToManyViewStoreHandler(List<Property> outPropertyList, StringBuilder sb) {
         for (Property property : outPropertyList) {
-            if (MANY_TO_MANY.equals(property.getPropertyOutType())) {
+            if (BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 sb.append("  const [").append(underPropertyOut).append("State, ").append(underPropertyOut).append("Dispatchers] = pageStore.useModel('").append(underPropertyOut).append("');\r\n");
                 sb.append("\r\n");
@@ -692,7 +724,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
     private void oneToManyViewMethodHandler(List<Property> outPropertyList, StringBuilder sb, String poName) {
         for (int i = 0; i < outPropertyList.size(); i++) {
             Property property = outPropertyList.get(i);
-            if (MANY_TO_ONE.equals(property.getPropertyOutType())) {
+            if (BeanUtils.MANY_TO_ONE.equals(property.getPropertyOutType())) {
                 sb.append("        son").append(i + 1).append("=\"").append(property.getPropertyLabel()).append("\"\r\n");
                 sb.append("        sonMethod").append(i + 1).append("={record => ").append(poName).append("Dispatchers.onRowClick(record)}\r\n");
             }
@@ -702,7 +734,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
     private void manyToManyViewMethodHandler(List<Property> outPropertyList, StringBuilder sb, String poName) {
         for (int i = 0; i < outPropertyList.size(); i++) {
             Property property = outPropertyList.get(i);
-            if (MANY_TO_MANY.equals(property.getPropertyOutType())) {
+            if (BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 sb.append("        manyToMany").append(i + 1).append("=\"").append(property.getPropertyLabel()).append("\"\r\n");
                 sb.append("        manyToManyMethod").append(i + 1).append("={record => dispatchers.").append(underPropertyOut).append("By").append(poName).append("(record)}\r\n");
@@ -712,7 +744,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
 
     private void manyToManyViewDialogHandler(List<Property> outPropertyList, StringBuilder sb, String poName) {
         for (Property property : outPropertyList) {
-            if (MANY_TO_MANY.equals(property.getPropertyOutType())) {
+            if (BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 sb.append("      <Dialog\r\n");
                 sb.append("        v2\r\n");
@@ -753,7 +785,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
 
     private void oneToManyViewDialogHandler(List<Property> outPropertyList, StringBuilder sb) {
         for (Property property : outPropertyList) {
-            if (ONE_TO_MANY.equals(property.getPropertyOutType())) {
+            if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 sb.append("      <Dialog\r\n");
                 sb.append("        v2\r\n");
@@ -817,57 +849,60 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
 
     }
 
-    public String[] poGenerate(Entity entity, List<Property> propertyList, String poName) {
+    public String[] poGenerate(Entity entity, List<Property> inPropertyList, List<Property> outPropertyList, String poName, String underPoName) {
         StringBuilder sb = new StringBuilder();
         sb.append("package com.example.cyjcommon.entity.po;\r\n");
         sb.append("\r\n");
-        if (BeanUtils.ifManyToMany(propertyList)) {
+        if (BeanUtils.ifManyToMany(outPropertyList) || BeanUtils.ifOneToMany(outPropertyList)) {
             sb.append("import com.fasterxml.jackson.annotation.JsonIgnore;\r\n");
         }
         sb.append("import com.fasterxml.jackson.annotation.JsonIgnoreProperties;\r\n");
         sb.append("import lombok.Getter;\r\n");
         sb.append("import lombok.RequiredArgsConstructor;\r\n");
         sb.append("import lombok.Setter;\r\n");
-        if (BeanUtils.ifManyToMany(propertyList)) {
+        if (BeanUtils.ifManyToMany(outPropertyList) || BeanUtils.ifOneToMany(outPropertyList)) {
             sb.append("import org.hibernate.annotations.BatchSize;\r\n");
         }
         sb.append("import org.hibernate.annotations.GenericGenerator;\r\n");
         sb.append("\r\n");
-        if (BeanUtils.ifManyToOne(propertyList)) {
+        if (BeanUtils.ifManyToOne(outPropertyList) || BeanUtils.ifOneToMany(outPropertyList)) {
             sb.append("import javax.persistence.CascadeType;\r\n");
         }
-        if (BeanUtils.ifManyToOne(propertyList)) {
+        if (BeanUtils.ifManyToOne(outPropertyList)) {
             sb.append("import javax.persistence.ConstraintMode;\r\n");
         }
         sb.append("import javax.persistence.Column;\r\n");
         sb.append("import javax.persistence.Entity;\r\n");
-        if (BeanUtils.ifManyToMany(propertyList)) {
+        if (BeanUtils.ifManyToMany(outPropertyList) || BeanUtils.ifOneToMany(outPropertyList)) {
             sb.append("import javax.persistence.FetchType;\r\n");
         }
-        if (BeanUtils.ifManyToOne(propertyList)) {
+        if (BeanUtils.ifManyToOne(outPropertyList)) {
             sb.append("import javax.persistence.ForeignKey;\r\n");
         }
         sb.append("import javax.persistence.GeneratedValue;\r\n");
         sb.append("import javax.persistence.Id;\r\n");
-        if (BeanUtils.ifManyToOne(propertyList)) {
+        if (BeanUtils.ifManyToOne(outPropertyList)) {
             sb.append("import javax.persistence.JoinColumn;\r\n");
         }
-        if (BeanUtils.ifManyToMany(propertyList)) {
+        if (BeanUtils.ifManyToMany(outPropertyList)) {
             sb.append("import javax.persistence.ManyToMany;\r\n");
         }
-        if (BeanUtils.ifManyToOne(propertyList)) {
+        if (BeanUtils.ifManyToOne(outPropertyList)) {
             sb.append("import javax.persistence.ManyToOne;\r\n");
+        }
+        if (BeanUtils.ifOneToMany(outPropertyList)) {
+            sb.append("import javax.persistence.OneToMany;\r\n");
         }
         sb.append("import javax.persistence.Table;\r\n");
         sb.append("import javax.validation.constraints.NotNull;\r\n");
         sb.append("import java.io.Serializable;\r\n");
-        if (BeanUtils.ifManyToMany(propertyList)) {
+        if (BeanUtils.ifManyToMany(outPropertyList) || BeanUtils.ifOneToMany(outPropertyList)) {
             sb.append("import java.util.Set;\r\n");
         }
-        if (BeanUtils.ifDate(propertyList)) {
+        if (BeanUtils.ifDate(inPropertyList)) {
             sb.append("import java.sql.Date;\r\n");
         }
-        if (BeanUtils.ifTimestamp(propertyList)) {
+        if (BeanUtils.ifTimestamp(inPropertyList)) {
             sb.append("import java.sql.Timestamp;\r\n");
         }
         sb.append("\r\n");
@@ -890,9 +925,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("    @Column(name = \"id\", length = 36)\r\n");
         sb.append("    private String id;\r\n");
         sb.append("\r\n");
-        propertyEntityHandler(propertyList, sb);
-        manyToOneEntityHandler(propertyList, sb);
-        manyToManyEntityHandler(propertyList, sb);
+        propertyEntityHandler(inPropertyList, sb);
+        oneToManyEntityHandler(outPropertyList, sb, underPoName);
+        manyToOneEntityHandler(outPropertyList, sb);
+        manyToManyEntityHandler(outPropertyList, sb);
         sb.append("    @NotNull(message = \"状态不能为空\")\r\n");
         sb.append("    @Column(name = \"status\")\r\n");
         sb.append("    private String status;\r\n");
@@ -906,26 +942,38 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{entityData, poName + ".java"};
     }
 
-    private void propertyEntityHandler(List<Property> propertyList, StringBuilder sb) {
-        for (Property property : propertyList) {
-            if (!"是".equals(property.getPropertyOut())) {
-                if (StringUtils.isNotEmpty(property.getPropertyRequired()) && "是".equals(property.getPropertyRequired())) {
-                    sb.append("    @NotNull(message = \"").append(property.getPropertyLabel()).append("不能为空\")\r\n");
-                }
-                if (StringUtils.isNotEmpty(property.getPropertyLength())) {
-                    sb.append("    @Column(name = \"").append(property.getPropertyCode()).append("\", length = ").append(property.getPropertyLength()).append(")\r\n");
-                } else {
-                    sb.append("    @Column(name = \"").append(property.getPropertyCode()).append("\")\r\n");
-                }
-                sb.append("    private ").append(property.getPropertyType()).append(" ").append(BeanUtils.underline2Camel(property.getPropertyCode())).append(";\r\n");
+    private void propertyEntityHandler(List<Property> inPropertyList, StringBuilder sb) {
+        for (Property property : inPropertyList) {
+            if (StringUtils.isNotEmpty(property.getPropertyRequired()) && "是".equals(property.getPropertyRequired())) {
+                sb.append("    @NotNull(message = \"").append(property.getPropertyLabel()).append("不能为空\")\r\n");
+            }
+            if (StringUtils.isNotEmpty(property.getPropertyLength())) {
+                sb.append("    @Column(name = \"").append(property.getPropertyCode()).append("\", length = ").append(property.getPropertyLength()).append(")\r\n");
+            } else {
+                sb.append("    @Column(name = \"").append(property.getPropertyCode()).append("\")\r\n");
+            }
+            sb.append("    private ").append(property.getPropertyType()).append(" ").append(BeanUtils.underline2Camel(property.getPropertyCode())).append(";\r\n");
+            sb.append("\r\n");
+        }
+    }
+
+    private void oneToManyEntityHandler(List<Property> outPropertyList, StringBuilder sb, String underPoName) {
+        for (Property property : outPropertyList) {
+            if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
+                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
+                String propertyOut = BeanUtils.captureName(underPropertyOut);
+                sb.append("    @JsonIgnore\r\n");
+                sb.append("    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = \"").append(underPoName).append("\")\r\n");
+                sb.append("    @BatchSize(size = 20)\r\n");
+                sb.append("    private Set<").append(propertyOut).append("> ").append(underPropertyOut).append(" = new HashSet<>();\r\n");
                 sb.append("\r\n");
             }
         }
     }
 
-    private void manyToOneEntityHandler(List<Property> propertyList, StringBuilder sb) {
-        for (Property property : propertyList) {
-            if ("是".equals(property.getPropertyOut()) && MANY_TO_ONE.equals(property.getPropertyOutType())) {
+    private void manyToOneEntityHandler(List<Property> outPropertyList, StringBuilder sb) {
+        for (Property property : outPropertyList) {
+            if (BeanUtils.MANY_TO_ONE.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("    @Column(name = \"").append(property.getPropertyCode()).append("_id\", insertable = false, updatable = false)\r\n");
@@ -939,9 +987,9 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         }
     }
 
-    private void manyToManyEntityHandler(List<Property> propertyList, StringBuilder sb) {
-        for (Property property : propertyList) {
-            if ("是".equals(property.getPropertyOut()) && !MANY_TO_ONE.equals(property.getPropertyOutType())) {
+    private void manyToManyEntityHandler(List<Property> outPropertyList, StringBuilder sb) {
+        for (Property property : outPropertyList) {
+            if (BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("    @JsonIgnore\r\n");
@@ -979,12 +1027,12 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import com.example.cyjcommon.service.BaseService;\r\n");
         sb.append("import com.example.cyjcommon.service.autoService;\r\n");
         sb.append("import org.springframework.beans.factory.annotation.Autowired;\r\n");
-        if (BeanUtils.ifManyToOne(outPropertyList)) {
+        if (BeanUtils.ifOneToMany(outPropertyList)) {
             sb.append("import org.springframework.data.domain.Example;\r\n");
         }
         sb.append("import org.springframework.data.domain.Page;\r\n");
         sb.append("import org.springframework.data.domain.PageRequest;\r\n");
-        if (BeanUtils.ifManyToOne(outPropertyList)) {
+        if (BeanUtils.ifOneToMany(outPropertyList)) {
             sb.append("import org.springframework.data.domain.Pageable;\r\n");
         }
         sb.append("import org.springframework.data.domain.Sort;\r\n");
@@ -1001,7 +1049,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         daoServiceHandler(outPropertyList, poName, sb);
         sb.append("    @Override\r\n");
         sb.append("    public ").append(poName).append(" addOne(").append(poName).append(" po) {\r\n");
-        setHandler(outPropertyList, sb);
+        manyToOneSetHandler(outPropertyList, sb);
         sb.append("        return dao.save(po);\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
@@ -1012,7 +1060,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("\r\n");
         sb.append("    @Override\r\n");
         sb.append("    public ").append(poName).append(" updateOne(").append(poName).append(" po) {\r\n");
-        setHandler(outPropertyList, sb);
+        manyToOneSetHandler(outPropertyList, sb);
         sb.append("        return dao.saveAndFlush(po);\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
@@ -1021,7 +1069,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("        return dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by(\"sortCode\").ascending()));\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        manyToOneServiceHandler(outPropertyList, poName, sb);
+        oneToManyServiceHandler(outPropertyList, poName, sb);
         manyToManyServiceHandler(outPropertyList, poName, sb);
         sb.append("}\r\n");
         String entityServiceData = sb.toString();
@@ -1033,19 +1081,15 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("package ").append(poServicePath);
         sb.append("\r\n");
         for (Property property : outPropertyList) {
-            if (MANY_TO_ONE.equals(property.getPropertyOutType())) {
-                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-                String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("import com.example.cyjcommon.dao.").append(propertyOut).append("Dao;\r\n");
-            }
+            String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
+            String propertyOut = BeanUtils.captureName(underPropertyOut);
+            sb.append("import com.example.cyjcommon.dao.").append(propertyOut).append("Dao;\r\n");
         }
         sb.append("import com.example.cyjcommon.dao.").append(poName).append("Dao;\r\n");
         for (Property property : outPropertyList) {
-            if (MANY_TO_ONE.equals(property.getPropertyOutType())) {
-                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-                String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("import com.example.cyjcommon.entity.").append(propertyOut).append(";\r\n");
-            }
+            String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
+            String propertyOut = BeanUtils.captureName(underPropertyOut);
+            sb.append("import com.example.cyjcommon.entity.").append(propertyOut).append(";\r\n");
         }
         sb.append("import com.example.cyjcommon.entity.").append(poName).append(";\r\n");
     }
@@ -1053,11 +1097,9 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
     private void daoServiceHandler(List<Property> outPropertyList, String poName, StringBuilder sb) {
         sb.append("    private ").append(poName).append("Dao dao;\r\n");
         for (Property property : outPropertyList) {
-            if (MANY_TO_ONE.equals(property.getPropertyOutType())) {
-                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-                String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("    private ").append(propertyOut).append("Dao ").append(underPropertyOut).append("Dao;\r\n");
-            }
+            String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
+            String propertyOut = BeanUtils.captureName(underPropertyOut);
+            sb.append("    private ").append(propertyOut).append("Dao ").append(underPropertyOut).append("Dao;\r\n");
         }
         sb.append("\r\n");
         sb.append("    @Autowired\r\n");
@@ -1066,21 +1108,19 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("    }\r\n");
         sb.append("\r\n");
         for (Property property : outPropertyList) {
-            if (MANY_TO_ONE.equals(property.getPropertyOutType())) {
-                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-                String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("    @Autowired\r\n");
-                sb.append("    public void set").append(propertyOut).append("Dao(").append(propertyOut).append("Dao ").append(underPropertyOut).append("Dao) {\r\n");
-                sb.append("        this.").append(underPropertyOut).append("Dao = ").append(underPropertyOut).append("Dao;\r\n");
-                sb.append("    }\r\n");
-                sb.append("\r\n");
-            }
+            String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
+            String propertyOut = BeanUtils.captureName(underPropertyOut);
+            sb.append("    @Autowired\r\n");
+            sb.append("    public void set").append(propertyOut).append("Dao(").append(propertyOut).append("Dao ").append(underPropertyOut).append("Dao) {\r\n");
+            sb.append("        this.").append(underPropertyOut).append("Dao = ").append(underPropertyOut).append("Dao;\r\n");
+            sb.append("    }\r\n");
+            sb.append("\r\n");
         }
     }
 
-    private void setHandler(List<Property> outPropertyList, StringBuilder sb) {
+    private void manyToOneSetHandler(List<Property> outPropertyList, StringBuilder sb) {
         for (Property property : outPropertyList) {
-            if (MANY_TO_ONE.equals(property.getPropertyOutType())) {
+            if (BeanUtils.MANY_TO_ONE.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("        if (po.get").append(propertyOut).append("Id() != null) {\r\n");
@@ -1091,16 +1131,17 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         }
     }
 
-    private void manyToOneServiceHandler(List<Property> outPropertyList, String poName, StringBuilder sb) {
+    private void oneToManyServiceHandler(List<Property> outPropertyList, String poName, StringBuilder sb) {
         for (Property property : outPropertyList) {
-            if (MANY_TO_ONE.equals(property.getPropertyOutType())) {
+            if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("    public Page<").append(poName).append("> findAll(Integer pageNumber, ").append(propertyOut).append(" ").append(underPropertyOut).append(") {\r\n");
+                sb.append("    public Page<").append(poName).append("> findAll(Integer pageNumber, String id) {\r\n");
                 sb.append("        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by(\"sortCode\").ascending());\r\n");
-                sb.append("        ").append(poName).append(" po = new ").append(poName).append("();\r\n");
-                sb.append("        po.set").append(propertyOut).append("(").append(underPropertyOut).append(");\r\n");
-                sb.append("        Example<").append(poName).append("> example = Example.of(po);\r\n");
+                sb.append("        ").append(poName).append(" po = dao.getOne(id);\r\n");
+                sb.append("        ").append(propertyOut).append(" ").append(underPropertyOut).append(" = new ").append(propertyOut).append("();\r\n");
+                sb.append("        ").append(underPropertyOut).append(".set").append(poName).append("(po);\r\n");
+                sb.append("        Example<").append(propertyOut).append("> example = Example.of(").append(underPropertyOut).append(");\r\n");
                 sb.append("        return dao.findAll(example, pageable);\r\n");
                 sb.append("    }\r\n");
                 sb.append("\r\n");
@@ -1110,7 +1151,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
 
     private void manyToManyServiceHandler(List<Property> outPropertyList, String poName, StringBuilder sb) {
         for (Property property : outPropertyList) {
-            if (!MANY_TO_ONE.equals(property.getPropertyOutType())) {
+            if (BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("    public Set<String> ").append(underPropertyOut).append("By").append(poName).append("(String id) {\r\n");
@@ -1150,7 +1191,11 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         String poServicePath = packetPath + ".service.auto.";
         //controller路径
         String poControllerPath = packetPath + ".controller.auto;\r\n";
-        packageControllerHandler(outPropertyList, poName, sb, poServicePath, poControllerPath);
+        sb.append("package ").append(poControllerPath);
+        sb.append("\r\n");
+        sb.append("import ").append(poServicePath).append(poName).append("Service;\r\n");
+        sb.append("import com.example.cyjcommon.controller.autoController;\r\n");
+        sb.append("import com.example.cyjcommon.entity.").append(poName).append(";\r\n");
         sb.append("import com.example.cyjcommon.utils.ResultVO;\r\n");
         sb.append("import io.swagger.v3.oas.annotations.Operation;\r\n");
         sb.append("import io.swagger.v3.oas.annotations.tags.Tag;\r\n");
@@ -1213,37 +1258,22 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("        return ResultVO.success();\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        manyToOneControllerHandler(outPropertyList, poName, sb);
+        oneToManyControllerHandler(outPropertyList, poName, sb);
         manyToManyControllerHandler(outPropertyList, poName, sb);
         sb.append("}\r\n");
         String entityControllerData = sb.toString();
         return new String[]{entityControllerData, poName + "Controller.java"};
     }
 
-    private void packageControllerHandler(List<Property> outPropertyList, String poName, StringBuilder sb, String poServicePath, String poControllerPath) {
-        sb.append("package ").append(poControllerPath);
-        sb.append("\r\n");
-        sb.append("import ").append(poServicePath).append(poName).append("Service;\r\n");
-        sb.append("import com.example.cyjcommon.controller.autoController;\r\n");
+    private void oneToManyControllerHandler(List<Property> outPropertyList, String poName, StringBuilder sb) {
         for (Property property : outPropertyList) {
-            if (MANY_TO_ONE.equals(property.getPropertyOutType())) {
-                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-                String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("import com.example.cyjcommon.entity.").append(propertyOut).append(";\r\n");
-            }
-        }
-        sb.append("import com.example.cyjcommon.entity.").append(poName).append(";\r\n");
-    }
-
-    private void manyToOneControllerHandler(List<Property> outPropertyList, String poName, StringBuilder sb) {
-        for (Property property : outPropertyList) {
-            if (MANY_TO_ONE.equals(property.getPropertyOutType())) {
+            if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("    @Operation(summary = \"根据").append(propertyOut).append("查询所有").append(poName).append("\")\r\n");
-                sb.append("    @PostMapping(value = \"pageBy").append(propertyOut).append("\")\r\n");
-                sb.append("    public ResultVO pageBy").append(propertyOut).append("(@RequestParam(\"pageNumber\") Integer pageNumber, @RequestBody ").append(propertyOut).append(" po) {\r\n");
-                sb.append("        return ResultVO.success(service.findAll(pageNumber, po));\r\n");
+                sb.append("    @PostMapping(value = \"page").append(propertyOut).append("By").append(poName).append("\")\r\n");
+                sb.append("    public ResultVO page").append(propertyOut).append("By").append(poName).append("(@RequestParam(\"pageNumber\") Integer pageNumber, @RequestParam(\"id\") String id) {\r\n");
+                sb.append("        return ResultVO.success(service.findAll(pageNumber, id));\r\n");
                 sb.append("    }\r\n");
                 sb.append("\r\n");
             }
@@ -1252,7 +1282,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
 
     private void manyToManyControllerHandler(List<Property> outPropertyList, String poName, StringBuilder sb) {
         for (Property property : outPropertyList) {
-            if (!MANY_TO_ONE.equals(property.getPropertyOutType())) {
+            if (BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("    @Operation(summary = \"根据").append(poName).append("查询所有").append(propertyOut).append("\")\r\n");
