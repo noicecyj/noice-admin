@@ -38,7 +38,10 @@ function Enterprise() {
           );
         }}
         son1="用户"
-        sonMethod1={record => dispatchers.onRowClick(record)}
+        sonMethod1={record => dispatchers.pageUserByEnterprise({
+          current: 1,
+          id: record.id,
+        })}
         customMethod1={() => customDispatchers.customMethod1()}
         customMethod2={() => customDispatchers.customMethod2()}
         customMethod3={() => customDispatchers.customMethod3()}

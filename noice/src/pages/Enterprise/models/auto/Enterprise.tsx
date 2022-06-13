@@ -97,22 +97,20 @@ export default {
       };
       dispatch.enterprise.setState(payload);
     },
-    async onRowClick(data) {
-      await dispatch.user.findDataTableAndFormByName(data);
-      const payload = {
-        divVisible: true,
-        parent: data.id,
-        visible: false,
-      };
-      dispatch.user.setState(payload);
-    },
     async pageUserByEnterprise(data) {
+      const ret = await initService.findDataTableAndFormByName('user');
       const dataRes = await service.pageUserByEnterprise(data.current, data.id);
       const payload = {
+        table: ret.data.dataTable,
+        form: ret.data.dataForm,
+        customData: ret.data.customData,
         tableData: dataRes.data.content,
         total: dataRes.data.totalElements,
         current: data.current,
         loadingVisible: false,
+        divVisible: true,
+        parent: data.id,
+        visible: false,
       };
       dispatch.user.setState(payload);
     },
