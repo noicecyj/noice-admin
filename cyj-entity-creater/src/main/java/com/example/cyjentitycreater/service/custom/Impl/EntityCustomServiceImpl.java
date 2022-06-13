@@ -258,8 +258,8 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         entityObj.put(componentPath + poName + "/models/auto", modelsAutoGenerate(outPropertyList, underPoName, poName));
         entityObj.put(componentPath + poName + "/view/auto", viewAutoGenerate(entity, outPropertyList, underPoName, poName));
         if (entity.getEntityId() == null) {
-            entityObj.put(componentPath + poName, indexGenerate(entity, underPoName, poName));
-            entityObj.put(componentPath + poName, storeGenerate(entity, outPropertyList, underPoName, poName));
+            entityObj.put(componentPath + poName, indexGenerate(poName));
+            entityObj.put(componentPath + poName, storeGenerate(outPropertyList, underPoName, poName));
         }
         Map<String, String[]> entityCustomObj = new HashMap<>();
         entityCustomObj.put(appPath + "/service/custom", serviceCustomGenerate(poName, appPath));
@@ -351,45 +351,17 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         }
     }
 
-    private String[] storeGenerate(Entity entity, List<Property> propertyList, String underPoName, String poName) {
-        List<Entity> subEntityList = entityDao.findByEntityParentOrderBySortCode(entity);
+    private String[] storeGenerate(List<Property> outPropertyList, String underPoName, String poName) {
         StringBuilder sb = new StringBuilder();
         sb.append("import {createStore} from 'ice';\r\n");
-        sb.append("import ").append(underPoName).append(" from './models/auto/").append(underPoName).append("';\r\n");
-        sb.append("import custom").append(poName).append(" from './models/custom/").append(underPoName).append("';\r\n");
-        subEntityList.forEach(subPo -> {
-            //驼峰名
-            String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
-            //文件名
-            String subPoName = BeanUtils.captureName(underSubPoName);
-            sb.append("import ").append(underSubPoName).append(" from './models/auto/").append(underSubPoName).append("';\r\n");
-            sb.append("import custom").append(subPoName).append(" from './models/custom/").append(underSubPoName).append("';\r\n");
-        });
-        for (Property property : propertyList) {
-            if ("是".equals(property.getPropertyOut())) {
-                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-                String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("import ").append(underPropertyOut).append(" from \"@/pages/").append(propertyOut).append("/models/auto/").append(underPropertyOut).append("\";\r\n");
-            }
-        }
+        sb.append("import ").append(underPoName).append(" from './models/auto/").append(poName).append("';\r\n");
+        sb.append("import ").append(underPoName).append("Custom from './models/custom/").append(poName).append("';\r\n");
+        storeHandler(outPropertyList, sb);
         sb.append("\r\n");
         sb.append("const store = createStore({\r\n");
         sb.append("  ").append(underPoName).append(",\r\n");
-        sb.append("  custom").append(poName).append(",\r\n");
-        subEntityList.forEach(subPo -> {
-            //驼峰名
-            String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
-            //文件名
-            String subPoName = BeanUtils.captureName(underSubPoName);
-            sb.append("  ").append(underSubPoName).append(",\r\n");
-            sb.append("  custom").append(subPoName).append(",\r\n");
-        });
-        for (Property property : propertyList) {
-            if ("是".equals(property.getPropertyOut())) {
-                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-                sb.append("  ").append(underPropertyOut).append(",\r\n");
-            }
-        }
+        sb.append("  ").append(underPoName).append("Custom,\r\n");
+        storeHandler1(outPropertyList, sb);
         sb.append("});\r\n");
         sb.append("\r\n");
         sb.append("export default store;\r\n");
@@ -397,36 +369,35 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{viewData, "store.ts"};
     }
 
-    private String[] indexGenerate(Entity entity, String underPoName, String poName) {
-        List<Entity> subEntityList = entityDao.findByEntityParentOrderBySortCode(entity);
-        StringBuilder sb = new StringBuilder();
-        sb.append("import React from 'react';\r\n");
-        sb.append("import ").append(poName).append(" from '@/pages/").append(poName).append("/view/auto/").append(underPoName).append("';\r\n");
-        subEntityList.forEach(subPo -> {
-            //驼峰名
-            String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
-            //文件名
-            String subPoName = BeanUtils.captureName(underSubPoName);
-            sb.append("import ").append(subPoName).append(" from '@/pages/").append(poName).append("/view/auto/").append(underSubPoName).append("';\r\n");
-        });
-        sb.append("\r\n");
-        sb.append("function ").append(poName).append("Page() {\r\n");
-        sb.append("  return (\r\n");
-        sb.append("    <div>\r\n");
-        sb.append("      <").append(poName).append("/>\r\n");
-        subEntityList.forEach(subPo -> {
-            //驼峰名
-            String underSubPoName = BeanUtils.underline2Camel(subPo.getEntityCode());
-            //文件名
-            String subPoName = BeanUtils.captureName(underSubPoName);
-            sb.append("      <").append(subPoName).append("/>\r\n");
-        });
-        sb.append("    </div>\r\n");
-        sb.append("  );\r\n");
-        sb.append("}\r\n");
-        sb.append("\r\n");
-        sb.append("export default ").append(poName).append("Page;\r\n");
-        String viewData = sb.toString();
+    private void storeHandler1(List<Property> outPropertyList, StringBuilder sb) {
+        for (Property property : outPropertyList) {
+            String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
+            sb.append("  ").append(underPropertyOut).append(",\r\n");
+        }
+    }
+
+    private void storeHandler(List<Property> outPropertyList, StringBuilder sb) {
+        for (Property property : outPropertyList) {
+            String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
+            String propertyOut = BeanUtils.captureName(underPropertyOut);
+            sb.append("import ").append(underPropertyOut).append(" from '@/pages/").append(propertyOut).append("/models/auto/").append(propertyOut).append("';\r\n");
+        }
+    }
+
+
+    private String[] indexGenerate(String poName) {
+        String viewData = "import React from 'react';\r\n" +
+                "import " + poName + " from '@/pages/" + poName + "/view/auto/" + poName + "';\r\n" +
+                "\r\n" +
+                "function " + poName + "Page() {\r\n" +
+                "  return (\r\n" +
+                "    <div>\r\n" +
+                "      <" + poName + "/>\r\n" +
+                "    </div>\r\n" +
+                "  );\r\n" +
+                "}\r\n" +
+                "\r\n" +
+                "export default " + poName + "Page;\r\n";
         return new String[]{viewData, "index.tsx"};
     }
 
@@ -1077,7 +1048,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         String entityDaoData =
                 "package com.example.cyjcommon.dao;\r\n" +
                         "\r\n" +
-                        "import com.example.cyjcommon.entity.po." + poName + ";\r\n" +
+                        "import com.example.cyjcommon.entity." + poName + ";\r\n" +
                         "import org.springframework.data.jpa.repository.JpaRepository;\r\n" +
                         "\r\n" +
                         "/**\r\n" +
