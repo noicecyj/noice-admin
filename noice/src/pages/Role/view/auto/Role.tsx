@@ -30,7 +30,7 @@ function Role() {
         dataSource={state.tableData}
         items={state.table}
         total={state.total}
-        getPage={roleCurrent => dispatchers.page(roleCurrent)}
+        getPage={current => dispatchers.page(current)}
         primaryKey="id"
         customData={state.customData}
         columnRender={(value, index, record) => {
@@ -51,7 +51,7 @@ function Role() {
         customData={state.customData}
         title={state.title}
         visibleDialog={state.visible}
-        onClose={() => dispatchers.setState({roleVisible: false})}
+        onClose={() => dispatchers.setState({visible: false})}
         items={[...state.form, ...customState.customFrom]}
         dispatchers={value => dispatchers.setDataForm(value)}
         onOk={() => dispatchers.save({
@@ -63,7 +63,7 @@ function Role() {
       />
       <Dialog
         v2
-        title="角色"
+        title="权限"
         visible={authorityState.divVisible}
         onClose={() => authorityDispatchers.setState({
           divVisible: false,
@@ -72,12 +72,12 @@ function Role() {
         })}
         onOk={() => dispatchers.authoritySaveRole({
           parent: authorityState.parent,
-          select: authorityState.select
+          select: authorityState.select,
         })}
         style={{width: '90%'}}
       >
         <DataTableTemple
-          customData={{customType:false}}
+          customData={{customType: false}}
           visibleLoading={authorityState.loadingVisible}
           dataSource={authorityState.tableData}
           items={authorityState.table}

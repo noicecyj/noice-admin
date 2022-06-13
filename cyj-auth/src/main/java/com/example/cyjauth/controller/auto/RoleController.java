@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,14 +37,14 @@ public class RoleController implements autoController<Role> {
     @Override
     @Operation(summary = "分页查询所有Role")
     @PostMapping(value = "pageRole")
-    public ResultVO page(Integer pageNumber) {
+    public ResultVO page(@RequestParam("pageNumber") Integer pageNumber) {
         return ResultVO.success(service.findAll(pageNumber));
     }
 
     @Override
     @Operation(summary = "保存Role")
     @PostMapping(value = "saveRole")
-    public ResultVO save(Role po, BindingResult bindingResult) {
+    public ResultVO save(@RequestBody @Validated Role po, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultVO.failure(bindingResult.getAllErrors().get(0));
         }
@@ -56,7 +57,7 @@ public class RoleController implements autoController<Role> {
     @Override
     @Operation(summary = "删除Role")
     @PostMapping(value = "deleteRole")
-    public ResultVO delete(Role po) {
+    public ResultVO delete(@RequestBody Role po) {
         if (po.getId() == null) {
             return ResultVO.failure();
         }
