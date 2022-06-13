@@ -755,7 +755,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         List<Property> oneToManyPropertyList = outPropertyList.stream()
                 .filter(property -> BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())).collect(Collectors.toList());
         for (int i = 0; i < oneToManyPropertyList.size(); i++) {
-            Property property = outPropertyList.get(i);
+            Property property = oneToManyPropertyList.get(i);
             String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
             String propertyOut = BeanUtils.captureName(underPropertyOut);
             sb.append("        son").append(i + 1).append("=\"").append(property.getPropertyLabel()).append("\"\r\n");
@@ -770,7 +770,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         List<Property> manyToManyPropertyList = outPropertyList.stream()
                 .filter(property -> BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())).collect(Collectors.toList());
         for (int i = 0; i < manyToManyPropertyList.size(); i++) {
-            Property property = outPropertyList.get(i);
+            Property property = manyToManyPropertyList.get(i);
             String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
             sb.append("        manyToMany").append(i + 1).append("=\"").append(property.getPropertyLabel()).append("\"\r\n");
             sb.append("        manyToManyMethod").append(i + 1).append("={record => dispatchers.").append(underPropertyOut).append("By").append(poName).append("(record)}\r\n");
