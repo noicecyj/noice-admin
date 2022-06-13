@@ -1036,9 +1036,9 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("    @JsonIgnore\r\n");
-                sb.append("    @ManyToMany(targetEntity = ").append(propertyOut).append(".class, fetch = FetchType.EAGER)\r\n");
+                sb.append("    @ManyToMany(cascade = CascadeType.ALL, targetEntity = ").append(propertyOut).append(".class, fetch = FetchType.EAGER)\r\n");
                 sb.append("    @BatchSize(size = 20)\r\n");
-                sb.append("    private Set<").append(propertyOut).append("> ").append(underPropertyOut).append(";\r\n");
+                sb.append("    private Set<").append(propertyOut).append("> ").append(underPropertyOut).append(" = new HashSet<>();\r\n");
                 sb.append("\r\n");
             }
         }
