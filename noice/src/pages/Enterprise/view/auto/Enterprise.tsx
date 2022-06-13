@@ -76,8 +76,9 @@ function Enterprise() {
         <DataTableTemple
           createItem={() => userDispatchers.add()}
           editItem={record => userDispatchers.edit(record)}
-          deleteItem={record => userDispatchers.delete({
+          deleteItem={record => dispatchers.deleteUserByEnterprise({
             current: userState.current,
+            id: userState.parent,
             record,
           })}
           visibleLoading={userState.loadingVisible}
@@ -98,9 +99,13 @@ function Enterprise() {
           onClose={() => userDispatchers.setState({visible: false})}
           items={userState.form}
           dispatchers={value => userDispatchers.setDataForm(value)}
-          onOk={() => userDispatchers.save({
+          onOk={() => dispatchers.saveUserByEnterprise({
             current: userState.current,
-            formData: userState.formData,
+            id: userState.parent,
+            formData: {
+              ...userState.formData,
+              enterpriseId: userState.parent,
+            },
           })}
           formDataValue={userState.formData}
           formSortCode={String(Number.parseInt(String(userState.total)) + 10)}

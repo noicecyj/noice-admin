@@ -1,6 +1,7 @@
 import initService from '@/services/init';
 import {Message} from "@alifd/next";
 import service from "@/pages/Enterprise/services/auto/Enterprise";
+import userService from "@/pages/User/services/auto/User"
 
 export default {
 
@@ -113,6 +114,38 @@ export default {
         visible: false,
       };
       dispatch.user.setState(payload);
+    },
+    async saveUserByEnterprise(data) {
+      const ret = await userService.save(data.formData);
+      if (ret.code === 400) {
+        Message.error(ret.data.defaultMessage);
+      } else {
+        Message.success('保存成功');
+        await this.pageUserByEnterprise({
+          current: data.current,
+          id: data.id,
+        });
+        const payload = {
+          visible: false,
+        };
+        dispatch.user.setState(payload);
+      }
+    },
+    async deleteUserByEnterprise(data) {
+      const ret = await userService.delete(data.record);
+      if (ret.code === 400) {
+        Message.error('删除失败');
+      } else {
+        Message.success('删除成功');
+        await this.pageUserByEnterprise({
+          current: data.current,
+          id: data.id,
+        });
+        const payload = {
+          visible: false,
+        };
+        dispatch.user.setState(payload);
+      }
     },
   }),
 };

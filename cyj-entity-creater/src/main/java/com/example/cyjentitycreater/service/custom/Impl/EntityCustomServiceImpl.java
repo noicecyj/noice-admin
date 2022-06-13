@@ -483,9 +483,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
 
     private String[] modelsAutoGenerate(List<Property> outPropertyList, String underPoName, String poName) {
         StringBuilder sb = new StringBuilder();
-        sb.append("import service from '@/pages/").append(poName).append("/services/auto/").append(poName).append("';\r\n");
         sb.append("import initService from '@/services/init';\r\n");
         sb.append("import {Message} from \"@alifd/next\";\r\n");
+        sb.append("import service from '@/pages/").append(poName).append("/services/auto/").append(poName).append("';\r\n");
+        oneToManyModelServiceHandler(outPropertyList, sb);
         sb.append("\r\n");
         sb.append("export default {\r\n");
         sb.append("\r\n");
@@ -590,22 +591,72 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{viewData, poName + ".tsx"};
     }
 
+    private void oneToManyModelServiceHandler(List<Property> outPropertyList, StringBuilder sb) {
+        for (Property property : outPropertyList) {
+            if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
+                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
+                String propertyOut = BeanUtils.captureName(underPropertyOut);
+                sb.append("import ").append(underPropertyOut).append("Service from \"@/pages/").append(propertyOut).append("/services/auto/").append(propertyOut).append("\"\r\n");
+            }
+        }
+    }
+
     private void oneToManyModelHandler(List<Property> outPropertyList, StringBuilder sb, String poName) {
         for (Property property : outPropertyList) {
-            if (BeanUtils.MANY_TO_ONE.equals(property.getPropertyOutType())) {
+            if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("    async page").append(propertyOut).append("By").append(poName).append("(data) {\r\n");
+                sb.append("      const ret = await initService.findDataTableAndFormByName('").append(underPropertyOut).append("');\r\n");
                 sb.append("      const dataRes = await service.page").append(propertyOut).append("By").append(poName).append("(data.current, data.id);\r\n");
                 sb.append("      const payload = {\r\n");
+                sb.append("        table: ret.data.dataTable,\r\n");
+                sb.append("        form: ret.data.dataForm,\r\n");
+                sb.append("        customData: ret.data.customData,\r\n");
                 sb.append("        tableData: dataRes.data.content,\r\n");
                 sb.append("        total: dataRes.data.totalElements,\r\n");
                 sb.append("        current: data.current,\r\n");
                 sb.append("        loadingVisible: false,\r\n");
+                sb.append("        divVisible: true,\r\n");
+                sb.append("        parent: data.id,\r\n");
+                sb.append("        visible: false,\r\n");
                 sb.append("      };\r\n");
                 sb.append("      dispatch.").append(underPropertyOut).append(".setState(payload);\r\n");
                 sb.append("    },\r\n");
-                sb.append("\r\n");
+                sb.append("    async save").append(propertyOut).append("By").append(poName).append("(data) {\r\n");
+                sb.append("      const ret = await ").append(underPropertyOut).append("Service.save(data.formData);\r\n");
+                sb.append("      if (ret.code === 400) {\r\n");
+                sb.append("        Message.error(ret.data.defaultMessage);\r\n");
+                sb.append("      } else {\r\n");
+                sb.append("        Message.success('保存成功');\r\n");
+                sb.append("        await this.page").append(propertyOut).append("By").append(poName).append("({\r\n");
+                sb.append("          current: data.current,\r\n");
+                sb.append("          id: data.id,\r\n");
+                sb.append("        });\r\n");
+                sb.append("        const payload = {\r\n");
+                sb.append("          visible: false,\r\n");
+                sb.append("        };\r\n");
+                sb.append("        dispatch.").append(underPropertyOut).append(".setState(payload);\r\n");
+                sb.append("      }\r\n");
+                sb.append("    },\r\n");
+                sb.append("    async delete").append(propertyOut).append("By").append(poName).append("(data) {\r\n");
+                sb.append("      const ret = await ").append(underPropertyOut).append("Service.delete(data.record);\r\n");
+                sb.append("      if (ret.code === 400) {\r\n");
+                sb.append("        Message.error('删除失败');\r\n");
+                sb.append("      } else {\r\n");
+                sb.append("        Message.success('删除成功');\r\n");
+                sb.append("        await this.page").append(propertyOut).append("By").append(poName).append("({\r\n");
+                sb.append("          current: data.current,\r\n");
+                sb.append("          id: data.id,\r\n");
+                sb.append("        });\r\n");
+                sb.append("        const payload = {\r\n");
+                sb.append("          visible: false,\r\n");
+                sb.append("        };\r\n");
+                sb.append("        dispatch.").append(underPropertyOut).append(".setState(payload);\r\n");
+                sb.append("      }\r\n");
+                sb.append("    },\r\n");
+
+
             }
         }
     }
@@ -702,7 +753,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("        formDataValue={state.formData}\r\n");
         sb.append("        formSortCode={String(Number.parseInt(String(state.total)) + 10)}\r\n");
         sb.append("      />\r\n");
-        oneToManyViewDialogHandler(outPropertyList, sb, poName);
+        oneToManyViewDialogHandler(outPropertyList, sb, poName, underPoName);
         manyToManyViewDialogHandler(outPropertyList, sb, poName);
         sb.append("    </>\r\n");
         sb.append("  );\r\n");
@@ -789,7 +840,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         }
     }
 
-    private void oneToManyViewDialogHandler(List<Property> outPropertyList, StringBuilder sb, String poName) {
+    private void oneToManyViewDialogHandler(List<Property> outPropertyList, StringBuilder sb, String poName, String underPoName) {
         for (Property property : outPropertyList) {
             if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
@@ -807,8 +858,9 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                 sb.append("        <DataTableTemple\r\n");
                 sb.append("          createItem={() => ").append(underPropertyOut).append("Dispatchers.add()}\r\n");
                 sb.append("          editItem={record => ").append(underPropertyOut).append("Dispatchers.edit(record)}\r\n");
-                sb.append("          deleteItem={record => ").append(underPropertyOut).append("Dispatchers.delete({\r\n");
+                sb.append("          deleteItem={record => dispatchers.delete").append(propertyOut).append("By").append(poName).append("({\r\n");
                 sb.append("            current: ").append(underPropertyOut).append("State.current,\r\n");
+                sb.append("            id: ").append(underPropertyOut).append("State.parent,\r\n");
                 sb.append("            record,\r\n");
                 sb.append("          })}\r\n");
                 sb.append("          visibleLoading={").append(underPropertyOut).append("State.loadingVisible}\r\n");
@@ -829,9 +881,13 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                 sb.append("          onClose={() => ").append(underPropertyOut).append("Dispatchers.setState({visible: false})}\r\n");
                 sb.append("          items={").append(underPropertyOut).append("State.form}\r\n");
                 sb.append("          dispatchers={value => ").append(underPropertyOut).append("Dispatchers.setDataForm(value)}\r\n");
-                sb.append("          onOk={() => ").append(underPropertyOut).append("Dispatchers.save({\r\n");
+                sb.append("          onOk={() => dispatchers.save").append(propertyOut).append("By").append(poName).append("({\r\n");
                 sb.append("            current: ").append(underPropertyOut).append("State.current,\r\n");
-                sb.append("            formData: ").append(underPropertyOut).append("State.formData,\r\n");
+                sb.append("            id: ").append(underPropertyOut).append("State.parent,\r\n");
+                sb.append("            formData: {\r\n");
+                sb.append("              ...").append(underPropertyOut).append("State.formData,\r\n");
+                sb.append("              ").append(underPoName).append("Id: ").append(underPropertyOut).append("State.parent,\r\n");
+                sb.append("            },\r\n");
                 sb.append("          })}\r\n");
                 sb.append("          formDataValue={").append(underPropertyOut).append("State.formData}\r\n");
                 sb.append("          formSortCode={String(Number.parseInt(String(").append(underPropertyOut).append("State.total)) + 10)}\r\n");
