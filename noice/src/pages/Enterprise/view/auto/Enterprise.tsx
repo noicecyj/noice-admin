@@ -6,6 +6,7 @@ import {CustomColumn} from '@/pages/Enterprise/view/custom/Enterprise';
 import {Dialog} from "@alifd/next";
 
 function Enterprise() {
+
   const [state, dispatchers] = pageStore.useModel('enterprise');
 
   const [customState, customDispatchers] = pageStore.useModel('enterpriseCustom');
