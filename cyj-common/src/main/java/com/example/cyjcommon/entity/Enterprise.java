@@ -51,6 +51,11 @@ public class Enterprise implements Serializable {
     @Column(name = "enterprise_description")
     private String enterpriseDescription;
 
+    @JsonIgnore
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "enterprise")
+    @BatchSize(size = 20)
+    private Set<User> user = new HashSet<>();
+
     @NotNull(message = "状态不能为空")
     @Column(name = "status")
     private String status;
@@ -58,10 +63,5 @@ public class Enterprise implements Serializable {
     @NotNull(message = "排序不能为空")
     @Column(name = "sort_code")
     private String sortCode;
-
-    @JsonIgnore
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
-    @BatchSize(size = 20)
-    private Set<User> user = new HashSet<>();
 
 }
