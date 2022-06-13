@@ -256,7 +256,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         entityObj.put(appPath + "/controller/auto", controllerGenerate(outPropertyList, poName, appPath, appApi));
         entityObj.put(componentPath + poName + "/services/auto", servicesAutoGenerate(entity, outPropertyList, appApi, underPoName, poName));
         entityObj.put(componentPath + poName + "/models/auto", modelsAutoGenerate(outPropertyList, underPoName, poName));
-        entityObj.put(componentPath + poName + "/view/auto", viewAutoGenerate(entity, outPropertyList, underPoName, poName));
+        entityObj.put(componentPath + poName + "/view/auto", viewAutoGenerate(outPropertyList, underPoName, poName));
         if (entity.getEntityId() == null) {
             entityObj.put(componentPath + poName, indexGenerate(poName));
             entityObj.put(componentPath + poName, storeGenerate(outPropertyList, underPoName, poName));
@@ -666,7 +666,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         }
     }
 
-    private String[] viewAutoGenerate(Entity entity, List<Property> outPropertyList, String underPoName, String poName) {
+    private String[] viewAutoGenerate(List<Property> outPropertyList, String underPoName, String poName) {
         StringBuilder sb = new StringBuilder();
         sb.append("import React, {useEffect} from 'react';\r\n");
         sb.append("import pageStore from '@/pages/").append(poName).append("/store';\r\n");
@@ -744,34 +744,36 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
     private void ViewStoreHandler(List<Property> outPropertyList, StringBuilder sb) {
         for (Property property : outPropertyList) {
             String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-            sb.append("  const [").append(underPropertyOut).append("State, ").append(underPropertyOut).append("Dispatchers] = pageStore.useModel('").append(underPropertyOut).append("');\r\n");
-            sb.append("\r\n");
+            if (!BeanUtils.MANY_TO_ONE.equals(property.getPropertyOutType())) {
+                sb.append("  const [").append(underPropertyOut).append("State, ").append(underPropertyOut).append("Dispatchers] = pageStore.useModel('").append(underPropertyOut).append("');\r\n");
+                sb.append("\r\n");
+            }
         }
     }
 
     private void oneToManyViewMethodHandler(List<Property> outPropertyList, StringBuilder sb, String poName) {
-        for (int i = 0; i < outPropertyList.size(); i++) {
+        List<Property> oneToManyPropertyList = outPropertyList.stream()
+                .filter(property -> BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())).collect(Collectors.toList());
+        for (int i = 0; i < oneToManyPropertyList.size(); i++) {
             Property property = outPropertyList.get(i);
-            if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
-                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-                String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("        son").append(i + 1).append("=\"").append(property.getPropertyLabel()).append("\"\r\n");
-                sb.append("        sonMethod1={record => dispatchers.page").append(propertyOut).append("By").append(poName).append("({\r\n");
-                sb.append("          current: 1,\r\n");
-                sb.append("          id: record.id,\r\n");
-                sb.append("        })}\r\n");
-            }
+            String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
+            String propertyOut = BeanUtils.captureName(underPropertyOut);
+            sb.append("        son").append(i + 1).append("=\"").append(property.getPropertyLabel()).append("\"\r\n");
+            sb.append("        sonMethod1={record => dispatchers.page").append(propertyOut).append("By").append(poName).append("({\r\n");
+            sb.append("          current: 1,\r\n");
+            sb.append("          id: record.id,\r\n");
+            sb.append("        })}\r\n");
         }
     }
 
     private void manyToManyViewMethodHandler(List<Property> outPropertyList, StringBuilder sb, String poName) {
-        for (int i = 0; i < outPropertyList.size(); i++) {
+        List<Property> manyToManyPropertyList = outPropertyList.stream()
+                .filter(property -> BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())).collect(Collectors.toList());
+        for (int i = 0; i < manyToManyPropertyList.size(); i++) {
             Property property = outPropertyList.get(i);
-            if (BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())) {
-                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-                sb.append("        manyToMany").append(i + 1).append("=\"").append(property.getPropertyLabel()).append("\"\r\n");
-                sb.append("        manyToManyMethod").append(i + 1).append("={record => dispatchers.").append(underPropertyOut).append("By").append(poName).append("(record)}\r\n");
-            }
+            String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
+            sb.append("        manyToMany").append(i + 1).append("=\"").append(property.getPropertyLabel()).append("\"\r\n");
+            sb.append("        manyToManyMethod").append(i + 1).append("={record => dispatchers.").append(underPropertyOut).append("By").append(poName).append("(record)}\r\n");
         }
     }
 
@@ -1082,6 +1084,12 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import org.springframework.stereotype.Service;\r\n");
         sb.append("import org.springframework.transaction.annotation.Transactional;\r\n");
         sb.append("\r\n");
+        if (BeanUtils.ifManyToMany(outPropertyList)){
+            sb.append("import java.util.HashSet;\r\n");
+            sb.append("import java.util.Optional;\r\n");
+            sb.append("import java.util.Set;\r\n");
+            sb.append("\r\n");
+        }
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
         sb.append(" */\r\n");
@@ -1252,6 +1260,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import org.springframework.web.bind.annotation.RequestParam;\r\n");
         sb.append("import org.springframework.web.bind.annotation.RestController;\r\n");
         sb.append("\r\n");
+        if (BeanUtils.ifManyToMany(outPropertyList)){
+            sb.append("import java.util.Set;\r\n");
+            sb.append("\r\n");
+        }
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
         sb.append(" */\r\n");
