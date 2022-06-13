@@ -595,16 +595,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             if (BeanUtils.MANY_TO_ONE.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("    async onRowClick(data) {\r\n");
-                sb.append("      await dispatch.").append(underPropertyOut).append(".findDataTableAndFormByName(data);\r\n");
-                sb.append("      const payload = {\r\n");
-                sb.append("        divVisible: true,\r\n");
-                sb.append("        parent: data.id,\r\n");
-                sb.append("        visible: false,\r\n");
-                sb.append("      };\r\n");
-                sb.append("      dispatch.").append(underPropertyOut).append(".setState(payload);\r\n");
-                sb.append("    },\r\n");
-                sb.append("\r\n");
                 sb.append("    async page").append(propertyOut).append("By").append(poName).append("(data) {\r\n");
                 sb.append("      const dataRes = await service.page").append(propertyOut).append("By").append(poName).append("(data.current, data.id);\r\n");
                 sb.append("      const payload = {\r\n");
@@ -736,9 +726,13 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
     private void oneToManyViewMethodHandler(List<Property> outPropertyList, StringBuilder sb, String poName) {
         for (int i = 0; i < outPropertyList.size(); i++) {
             Property property = outPropertyList.get(i);
-            if (BeanUtils.MANY_TO_ONE.equals(property.getPropertyOutType())) {
+            if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
+                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 sb.append("        son").append(i + 1).append("=\"").append(property.getPropertyLabel()).append("\"\r\n");
-                sb.append("        sonMethod").append(i + 1).append("={record => ").append(poName).append("Dispatchers.onRowClick(record)}\r\n");
+                sb.append("        sonMethod1={record => dispatchers.page").append(underPropertyOut).append("By").append(poName).append("({\r\n");
+                sb.append("          current: 1,\r\n");
+                sb.append("          id: record.id,\r\n");
+                sb.append("        })}\r\n");
             }
         }
     }
