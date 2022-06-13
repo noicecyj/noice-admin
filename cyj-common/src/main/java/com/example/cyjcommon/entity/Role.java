@@ -53,7 +53,7 @@ public class Role implements Serializable {
     private String roleDescription;
 
     @JsonIgnore
-    @ManyToMany(cascade = CascadeType.ALL,targetEntity = Authority.class, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, targetEntity = Authority.class, fetch = FetchType.EAGER)
     @BatchSize(size = 20)
     private Set<Authority> authority = new HashSet<>();
 
