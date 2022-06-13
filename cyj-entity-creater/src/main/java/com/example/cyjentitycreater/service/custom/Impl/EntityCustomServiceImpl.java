@@ -254,7 +254,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         entityObj.put(commonPath + "/dao", daoGenerate(poName));
         entityObj.put(appPath + "/service/auto", serviceGenerate(outPropertyList, poName, appPath));
         entityObj.put(appPath + "/controller/auto", controllerGenerate(outPropertyList, poName, appPath, appApi));
-        entityObj.put(componentPath + poName + "/services/auto", servicesAutoGenerate(entity, outPropertyList, appApi, underPoName, poName));
+        entityObj.put(componentPath + poName + "/services/auto", servicesAutoGenerate(outPropertyList, appApi, underPoName, poName));
         entityObj.put(componentPath + poName + "/models/auto", modelsAutoGenerate(outPropertyList, underPoName, poName));
         entityObj.put(componentPath + poName + "/view/auto", viewAutoGenerate(outPropertyList, underPoName, poName));
         if (entity.getEntityId() == null) {
@@ -270,7 +270,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         createEntityCodeHandler(entityObj, entityCustomObj);
     }
 
-    private String[] servicesAutoGenerate(Entity entity, List<Property> outPropertyList, String appApi, String underPoName, String poName) {
+    private String[] servicesAutoGenerate(List<Property> outPropertyList, String appApi, String underPoName, String poName) {
         StringBuilder sb = new StringBuilder();
         sb.append("import {request} from 'ice';\r\n");
         sb.append("\r\n");
@@ -909,7 +909,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         }
         sb.append("import org.hibernate.annotations.GenericGenerator;\r\n");
         sb.append("\r\n");
-        if (BeanUtils.ifManyToOne(outPropertyList) || BeanUtils.ifOneToMany(outPropertyList)) {
+        if (BeanUtils.ifManyToOne(outPropertyList) || BeanUtils.ifOneToMany(outPropertyList) || BeanUtils.ifManyToMany(outPropertyList)) {
             sb.append("import javax.persistence.CascadeType;\r\n");
         }
         if (BeanUtils.ifManyToOne(outPropertyList)) {
@@ -1084,7 +1084,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import org.springframework.stereotype.Service;\r\n");
         sb.append("import org.springframework.transaction.annotation.Transactional;\r\n");
         sb.append("\r\n");
-        if (BeanUtils.ifManyToMany(outPropertyList)){
+        if (BeanUtils.ifManyToMany(outPropertyList)) {
             sb.append("import java.util.HashSet;\r\n");
             sb.append("import java.util.Optional;\r\n");
             sb.append("import java.util.Set;\r\n");
@@ -1260,7 +1260,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import org.springframework.web.bind.annotation.RequestParam;\r\n");
         sb.append("import org.springframework.web.bind.annotation.RestController;\r\n");
         sb.append("\r\n");
-        if (BeanUtils.ifManyToMany(outPropertyList)){
+        if (BeanUtils.ifManyToMany(outPropertyList)) {
             sb.append("import java.util.Set;\r\n");
             sb.append("\r\n");
         }
