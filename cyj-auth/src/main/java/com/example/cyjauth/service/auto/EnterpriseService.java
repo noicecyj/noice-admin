@@ -1,9 +1,9 @@
 package com.example.cyjauth.service.auto;
 
-import com.example.cyjcommon.dao.EnterpriseDao;
 import com.example.cyjcommon.dao.UserDao;
-import com.example.cyjcommon.entity.Enterprise;
+import com.example.cyjcommon.dao.EnterpriseDao;
 import com.example.cyjcommon.entity.User;
+import com.example.cyjcommon.entity.Enterprise;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjcommon.service.autoService;
 import org.springframework.beans.factory.annotation.Autowired;
