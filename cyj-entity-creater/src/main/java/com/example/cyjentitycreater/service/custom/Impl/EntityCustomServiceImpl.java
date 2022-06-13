@@ -596,7 +596,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("import ").append(underPropertyOut).append("Service from \"@/pages/").append(propertyOut).append("/services/auto/").append(propertyOut).append("\"\r\n");
+                sb.append("import ").append(underPropertyOut).append("Service from '@/pages/").append(propertyOut).append("/services/auto/").append(propertyOut).append("'\r\n");
             }
         }
     }
@@ -710,7 +710,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("\r\n");
         sb.append("  const [customState, customDispatchers] = pageStore.useModel('").append(underPoName).append("Custom');\r\n");
         sb.append("\r\n");
-        manyToManyViewStoreHandler(outPropertyList, sb);
+        ViewStoreHandler(outPropertyList, sb);
         sb.append("  useEffect(() => {\r\n");
         sb.append("    dispatchers.findDataTableAndFormByName().then(r => console.log(r));\r\n");
         sb.append("  }, [dispatchers]);\r\n");
@@ -720,7 +720,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("      <DataTableTemple\r\n");
         sb.append("        createItem={() => dispatchers.add()}\r\n");
         sb.append("        editItem={record => dispatchers.edit(record)}\r\n");
-        sb.append("        deleteItem={record => dispatchers.delete(state.current, record)}\r\n");
+        sb.append("        deleteItem={record => dispatchers.delete({\r\n");
+        sb.append("          current: state.current,\r\n");
+        sb.append("          record,\r\n");
+        sb.append("        })}\r\n");
         sb.append("        visibleLoading={state.loadingVisible}\r\n");
         sb.append("        dataSource={state.tableData}\r\n");
         sb.append("        items={state.table}\r\n");
@@ -735,12 +738,12 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("        }}\r\n");
         oneToManyViewMethodHandler(outPropertyList, sb, poName);
         manyToManyViewMethodHandler(outPropertyList, sb, poName);
-        sb.append("        customMethod1={() => custom").append(poName).append("Dispatchers.customMethod1()}\r\n");
-        sb.append("        customMethod2={() => custom").append(poName).append("Dispatchers.customMethod2()}\r\n");
-        sb.append("        customMethod3={() => custom").append(poName).append("Dispatchers.customMethod3()}\r\n");
-        sb.append("        customMethodName1={custom").append(poName).append("State.customMethodName1}\r\n");
-        sb.append("        customMethodName2={custom").append(poName).append("State.customMethodName2}\r\n");
-        sb.append("        customMethodName3={custom").append(poName).append("State.customMethodName3}\r\n");
+        sb.append("        customMethod1={() => customDispatchers.customMethod1()}\r\n");
+        sb.append("        customMethod2={() => customDispatchers.customMethod2()}\r\n");
+        sb.append("        customMethod3={() => customDispatchers.customMethod3()}\r\n");
+        sb.append("        customMethodName1={customState.customMethodName1}\r\n");
+        sb.append("        customMethodName2={customState.customMethodName2}\r\n");
+        sb.append("        customMethodName3={customState.customMethodName3}\r\n");
         sb.append("      />\r\n");
         sb.append("      <DataFormTemple\r\n");
         sb.append("        customData={state.customData}\r\n");
@@ -749,7 +752,10 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("        onClose={() => dispatchers.setState({visible: false})}\r\n");
         sb.append("        items={[...state.form, ...customState.customFrom]}\r\n");
         sb.append("        dispatchers={value => dispatchers.setDataForm(value)}\r\n");
-        sb.append("        onOk={() => dispatchers.save(state.current, state.formData)}\r\n");
+        sb.append("        onOk={() => dispatchers.save({\r\n");
+        sb.append("          current: state.current,\r\n");
+        sb.append("          formData: state.formData,\r\n");
+        sb.append("        })}\r\n");
         sb.append("        formDataValue={state.formData}\r\n");
         sb.append("        formSortCode={String(Number.parseInt(String(state.total)) + 10)}\r\n");
         sb.append("      />\r\n");
@@ -764,13 +770,11 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{viewData, poName + ".tsx"};
     }
 
-    private void manyToManyViewStoreHandler(List<Property> outPropertyList, StringBuilder sb) {
+    private void ViewStoreHandler(List<Property> outPropertyList, StringBuilder sb) {
         for (Property property : outPropertyList) {
-            if (BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())) {
-                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-                sb.append("  const [").append(underPropertyOut).append("State, ").append(underPropertyOut).append("Dispatchers] = pageStore.useModel('").append(underPropertyOut).append("');\r\n");
-                sb.append("\r\n");
-            }
+            String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
+            sb.append("  const [").append(underPropertyOut).append("State, ").append(underPropertyOut).append("Dispatchers] = pageStore.useModel('").append(underPropertyOut).append("');\r\n");
+            sb.append("\r\n");
         }
     }
 
@@ -779,8 +783,9 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             Property property = outPropertyList.get(i);
             if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
+                String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("        son").append(i + 1).append("=\"").append(property.getPropertyLabel()).append("\"\r\n");
-                sb.append("        sonMethod1={record => dispatchers.page").append(underPropertyOut).append("By").append(poName).append("({\r\n");
+                sb.append("        sonMethod1={record => dispatchers.page").append(propertyOut).append("By").append(poName).append("({\r\n");
                 sb.append("          current: 1,\r\n");
                 sb.append("          id: record.id,\r\n");
                 sb.append("        })}\r\n");
@@ -917,7 +922,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
 
     public String[] poGenerate(Entity entity, List<Property> inPropertyList, List<Property> outPropertyList, String poName, String underPoName) {
         StringBuilder sb = new StringBuilder();
-        sb.append("package com.example.cyjcommon.entity.po;\r\n");
+        sb.append("package com.example.cyjcommon.entity;\r\n");
         sb.append("\r\n");
         if (BeanUtils.ifManyToMany(outPropertyList) || BeanUtils.ifOneToMany(outPropertyList)) {
             sb.append("import com.fasterxml.jackson.annotation.JsonIgnore;\r\n");
@@ -963,6 +968,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import javax.validation.constraints.NotNull;\r\n");
         sb.append("import java.io.Serializable;\r\n");
         if (BeanUtils.ifManyToMany(outPropertyList) || BeanUtils.ifOneToMany(outPropertyList)) {
+            sb.append("import java.util.HashSet;\r\n");
             sb.append("import java.util.Set;\r\n");
         }
         if (BeanUtils.ifDate(inPropertyList)) {
