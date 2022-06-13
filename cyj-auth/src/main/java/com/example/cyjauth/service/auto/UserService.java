@@ -27,8 +27,8 @@ import java.util.Set;
 public class UserService extends BaseService implements autoService<User> {
 
     private UserDao dao;
-    private RoleDao roleDao;
     private EnterpriseDao enterpriseDao;
+    private RoleDao roleDao;
 
     @Autowired
     public void setDao(UserDao dao) {
@@ -36,13 +36,13 @@ public class UserService extends BaseService implements autoService<User> {
     }
 
     @Autowired
-    public void setRoleDao(RoleDao roleDao) {
-        this.roleDao = roleDao;
+    public void setEnterpriseDao(EnterpriseDao enterpriseDao) {
+        this.enterpriseDao = enterpriseDao;
     }
 
     @Autowired
-    public void setEnterpriseDao(EnterpriseDao enterpriseDao) {
-        this.enterpriseDao = enterpriseDao;
+    public void setRoleDao(RoleDao roleDao) {
+        this.roleDao = roleDao;
     }
 
     @Override
