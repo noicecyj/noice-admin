@@ -1,6 +1,6 @@
-import service from '@/pages/User/services/auto/User';
 import initService from '@/services/init';
 import {Message} from "@alifd/next";
+import service from '@/pages/User/services/auto/User';
 
 export default {
 
