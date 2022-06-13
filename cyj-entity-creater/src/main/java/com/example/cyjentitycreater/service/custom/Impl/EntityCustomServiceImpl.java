@@ -1179,13 +1179,13 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("    public Page<").append(poName).append("> findAll(Integer pageNumber, String id) {\r\n");
+                sb.append("    public Page<").append(propertyOut).append("> findAll(Integer pageNumber, String id) {\r\n");
                 sb.append("        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by(\"sortCode\").ascending());\r\n");
                 sb.append("        ").append(poName).append(" po = dao.getOne(id);\r\n");
                 sb.append("        ").append(propertyOut).append(" ").append(underPropertyOut).append(" = new ").append(propertyOut).append("();\r\n");
                 sb.append("        ").append(underPropertyOut).append(".set").append(poName).append("(po);\r\n");
                 sb.append("        Example<").append(propertyOut).append("> example = Example.of(").append(underPropertyOut).append(");\r\n");
-                sb.append("        return dao.findAll(example, pageable);\r\n");
+                sb.append("        return ").append(underPropertyOut).append("Dao.findAll(example, pageable);\r\n");
                 sb.append("    }\r\n");
                 sb.append("\r\n");
             }
@@ -1252,8 +1252,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import org.springframework.web.bind.annotation.RequestParam;\r\n");
         sb.append("import org.springframework.web.bind.annotation.RestController;\r\n");
         sb.append("\r\n");
-        sb.append("import java.util.Set;\r\n");
-        sb.append("\r\n");
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
         sb.append(" */\r\n");
@@ -1313,7 +1311,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("    @Operation(summary = \"根据").append(propertyOut).append("查询所有").append(poName).append("\")\r\n");
+                sb.append("    @Operation(summary = \"根据").append(poName).append("查询所有").append(propertyOut).append("\")\r\n");
                 sb.append("    @PostMapping(value = \"page").append(propertyOut).append("By").append(poName).append("\")\r\n");
                 sb.append("    public ResultVO page").append(propertyOut).append("By").append(poName).append("(@RequestParam(\"pageNumber\") Integer pageNumber, @RequestParam(\"id\") String id) {\r\n");
                 sb.append("        return ResultVO.success(service.findAll(pageNumber, id));\r\n");
