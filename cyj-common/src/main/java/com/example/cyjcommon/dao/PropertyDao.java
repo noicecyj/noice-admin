@@ -11,6 +11,6 @@ import java.util.List;
  */
 public interface PropertyDao extends JpaRepository<Property, String> {
 
-    List<Property> findByEntityOrderBySortCode(Persistent persistent);
+    List<Property> findByPersistentOrderBySortCode(Persistent persistent);
 
 }

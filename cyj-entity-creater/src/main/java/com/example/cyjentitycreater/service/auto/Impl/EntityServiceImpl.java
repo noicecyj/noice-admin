@@ -63,14 +63,6 @@ public class EntityServiceImpl extends BaseService implements EntityService {
 
     @Override
     public void deleteOne(Persistent po) {
-        List<Persistent> persistentList = entityDao.findByEntityParentOrderBySortCode(po);
-        for (Persistent persistent : persistentList) {
-            deleteOne(persistent);
-        }
-        List<Property> propertyList = propertyDao.findByEntityOrderBySortCode(po);
-        for (Property property : propertyList) {
-            propertyService.deleteOne(property);
-        }
         entityDao.delete(po);
     }
 

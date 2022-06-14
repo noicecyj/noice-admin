@@ -84,7 +84,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
     }
 
     private void authorityHandler(Persistent persistent) {
-        List<Property> propertyList = propertyDao.findByEntityOrderBySortCode(persistent);
+        List<Property> propertyList = propertyDao.findByPersistentOrderBySortCode(persistent);
         List<Property> outPropertyList = propertyList.stream()
                 .filter(property -> "是".equals(property.getPropertyOut())).collect(Collectors.toList());
         //驼峰名
@@ -214,21 +214,8 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
     @Override
     public void entityHandler(Persistent persistent) {
         //查询是否存在子实体
-        List<Persistent> subPersistentList = entityDao.findByEntityParentOrderBySortCode(persistent);
-        //若存在则便利子实体
-        if (!subPersistentList.isEmpty()) {
-            //生成有子实体的实体
-            createEntityHandler(persistent);
-            authorityHandler(persistent);
-            for (Persistent persistent1 : subPersistentList) {
-                //进入递归
-                entityHandler(persistent1);
-            }
-        } else {
-            //生成没有有子实体的实体
-            createEntityHandler(persistent);
-            authorityHandler(persistent);
-        }
+        createEntityHandler(persistent);
+        authorityHandler(persistent);
     }
 
     private void createEntityHandler(Persistent persistent) {
@@ -244,7 +231,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         String appPath = appService.getAppServicePath();
         //服务接口
         String appApi = appService.getAppServiceApi();
-        List<Property> propertyList = propertyDao.findByEntityOrderBySortCode(persistent);
+        List<Property> propertyList = propertyDao.findByPersistentOrderBySortCode(persistent);
         Map<String, String[]> entityObj = new HashMap<>();
         List<Property> inPropertyList = propertyList.stream()
                 .filter(property -> !"是".equals(property.getPropertyOut())).collect(Collectors.toList());
@@ -1467,7 +1454,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         if (po == null) {
             return null;
         }
-        List<Property> propertyList = propertyDao.findByEntityOrderBySortCode(po);
+        List<Property> propertyList = propertyDao.findByPersistentOrderBySortCode(po);
         List<PropertyCustomDTO> propertyCustomDTOList = new ArrayList<>();
         for (Property property : propertyList) {
             PropertyCustomDTO propertyCustomDTO = new PropertyCustomDTO();

@@ -11,8 +11,4 @@ import java.util.List;
  */
 public interface EntityDao extends JpaRepository<Persistent, String> {
 
-    List<Persistent> findByEntityParentOrderBySortCode(Persistent persistent);
-
-    List<Persistent> findByAppServiceOrderBySortCode(AppService appService);
-
 }
