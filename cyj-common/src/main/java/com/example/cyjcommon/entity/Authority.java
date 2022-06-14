@@ -56,19 +56,19 @@ public class Authority implements Serializable {
     @Column(name = "authority_type")
     private String authorityType;
 
-    @Column(name = "app_service_id", insertable = false, updatable = false)
-    private String appServiceId;
-
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})
-    @JoinColumn(name = "app_service_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
-    private AppService appService;
-
     @Column(name = "persistent_id", insertable = false, updatable = false)
     private String persistentId;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})
     @JoinColumn(name = "persistent_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
     private Persistent persistent;
+
+    @Column(name = "app_service_id", insertable = false, updatable = false)
+    private String appServiceId;
+
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})
+    @JoinColumn(name = "app_service_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
+    private AppService appService;
 
     @NotNull(message = "状态不能为空")
     @Column(name = "status")
