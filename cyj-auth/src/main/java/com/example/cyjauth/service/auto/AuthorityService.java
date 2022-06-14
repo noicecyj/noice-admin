@@ -1,13 +1,9 @@
 package com.example.cyjauth.service.auto;
 
-import com.example.cyjcommon.dao.AppServiceDao;
-import com.example.cyjcommon.dao.AuthorityDao;
 import com.example.cyjcommon.dao.EntityDao;
-import com.example.cyjcommon.dao.RoleDao;
-import com.example.cyjcommon.entity.AppService;
+import com.example.cyjcommon.dao.AuthorityDao;
+import com.example.cyjcommon.entity.Persistent;
 import com.example.cyjcommon.entity.Authority;
-import com.example.cyjcommon.entity.Entity;
-import com.example.cyjcommon.entity.Role;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjcommon.service.autoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +13,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-
 /**
  * @author Noice
  */
@@ -29,17 +21,11 @@ import java.util.Set;
 public class AuthorityService extends BaseService implements autoService<Authority> {
 
     private AuthorityDao dao;
-    private AppServiceDao appServiceDao;
     private EntityDao entityDao;
 
     @Autowired
     public void setDao(AuthorityDao dao) {
         this.dao = dao;
-    }
-
-    @Autowired
-    public void setAppServiceDao(AppServiceDao appServiceDao) {
-        this.appServiceDao = appServiceDao;
     }
 
     @Autowired
@@ -49,13 +35,9 @@ public class AuthorityService extends BaseService implements autoService<Authori
 
     @Override
     public Authority addOne(Authority po) {
-        if (po.getAppServiceId() != null) {
-            AppService appService = appServiceDao.getOne(po.getAppServiceId());
-            po.setAppService(appService);
-        }
-        if (po.getEntityId() != null) {
-            Entity entity = entityDao.getOne(po.getEntityId());
-            po.setEntity(entity);
+        if (po.getPersistentId() != null) {
+            Persistent persistent = entityDao.getOne(po.getPersistentId());
+            po.setPersistent(persistent);
         }
         return dao.save(po);
     }
@@ -67,13 +49,9 @@ public class AuthorityService extends BaseService implements autoService<Authori
 
     @Override
     public Authority updateOne(Authority po) {
-        if (po.getAppServiceId() != null) {
-            AppService appService = appServiceDao.getOne(po.getAppServiceId());
-            po.setAppService(appService);
-        }
-        if (po.getEntityId() != null) {
-            Entity entity = entityDao.getOne(po.getEntityId());
-            po.setEntity(entity);
+        if (po.getPersistentId() != null) {
+            Persistent persistent = entityDao.getOne(po.getPersistentId());
+            po.setPersistent(persistent);
         }
         return dao.saveAndFlush(po);
     }

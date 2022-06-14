@@ -84,12 +84,12 @@ public class Property implements Serializable {
     @Column(name = "property_default_value")
     private String propertyDefaultValue;
 
-    @Column(name = "entity_id", insertable = false, updatable = false)
-    private String entityId;
+    @Column(name = "persistent_id", insertable = false, updatable = false)
+    private String persistentId;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})
-    @JoinColumn(name = "entity_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
-    private Entity entity;
+    @JoinColumn(name = "persistent_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
+    private Persistent persistent;
 
     @NotNull(message = "状态不能为空")
     @Column(name = "status")

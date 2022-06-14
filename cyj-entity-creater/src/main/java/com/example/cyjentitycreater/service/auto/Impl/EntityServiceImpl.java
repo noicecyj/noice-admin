@@ -4,7 +4,7 @@ import com.example.cyjcommon.dao.AppServiceDao;
 import com.example.cyjcommon.dao.EntityDao;
 import com.example.cyjcommon.dao.PropertyDao;
 import com.example.cyjcommon.entity.AppService;
-import com.example.cyjcommon.entity.Entity;
+import com.example.cyjcommon.entity.Persistent;
 import com.example.cyjcommon.entity.Property;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjentitycreater.service.auto.EntityService;
@@ -53,11 +53,7 @@ public class EntityServiceImpl extends BaseService implements EntityService {
     }
 
     @Override
-    public Entity addOne(Entity po) {
-        if (po.getEntityId() != null){
-            Entity entity = entityDao.getOne(po.getEntityId());
-            po.setEntityParent(entity);
-        }
+    public Persistent addOne(Persistent po) {
         if (po.getAppServiceId() != null){
             AppService appService = appServiceDao.getOne(po.getAppServiceId());
             po.setAppService(appService);
@@ -66,10 +62,10 @@ public class EntityServiceImpl extends BaseService implements EntityService {
     }
 
     @Override
-    public void deleteOne(Entity po) {
-        List<Entity> entityList = entityDao.findByEntityParentOrderBySortCode(po);
-        for (Entity entity : entityList) {
-            deleteOne(entity);
+    public void deleteOne(Persistent po) {
+        List<Persistent> persistentList = entityDao.findByEntityParentOrderBySortCode(po);
+        for (Persistent persistent : persistentList) {
+            deleteOne(persistent);
         }
         List<Property> propertyList = propertyDao.findByEntityOrderBySortCode(po);
         for (Property property : propertyList) {
@@ -79,11 +75,7 @@ public class EntityServiceImpl extends BaseService implements EntityService {
     }
 
     @Override
-    public Entity updateOne(Entity po) {
-        if (po.getEntityId() != null){
-            Entity entity = entityDao.getOne(po.getEntityId());
-            po.setEntityParent(entity);
-        }
+    public Persistent updateOne(Persistent po) {
         if (po.getAppServiceId() != null){
             AppService appService = appServiceDao.getOne(po.getAppServiceId());
             po.setAppService(appService);
@@ -92,25 +84,16 @@ public class EntityServiceImpl extends BaseService implements EntityService {
     }
 
     @Override
-    public Page<Entity> findAll(Integer pageNumber) {
+    public Page<Persistent> findAll(Integer pageNumber) {
         return entityDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 
     @Override
-    public Page<Entity> findAll(Integer pageNumber, Entity entity) {
+    public Page<Persistent> findAll(Integer pageNumber, AppService appService) {
         Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
-        Entity entityParent = new Entity();
-        entity.setEntityParent(entityParent);
-        Example<Entity> example = Example.of(entity);
-        return entityDao.findAll(example, pageable);
-    }
-
-    @Override
-    public Page<Entity> findAll(Integer pageNumber, AppService appService) {
-        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
-        Entity entity = new Entity();
-        entity.setAppService(appService);
-        Example<Entity> example = Example.of(entity);
+        Persistent persistent = new Persistent();
+        persistent.setAppService(appService);
+        Example<Persistent> example = Example.of(persistent);
         return entityDao.findAll(example, pageable);
     }
 

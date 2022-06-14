@@ -1,7 +1,7 @@
 package com.example.cyjentitycreater.service.custom;
 
 import com.alibaba.fastjson.JSONObject;
-import com.example.cyjcommon.entity.Entity;
+import com.example.cyjcommon.entity.Persistent;
 
 /**
  * @author Noice
@@ -10,9 +10,9 @@ import com.example.cyjcommon.entity.Entity;
  */
 public interface EntityCustomService {
 
-    void generateJavaFile(Entity po);
+    void generateJavaFile(Persistent po);
 
-    void entityHandler(Entity entity);
+    void entityHandler(Persistent persistent);
 
     JSONObject findDataTableAndFormByName(String entityCode);
 

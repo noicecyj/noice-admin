@@ -1,7 +1,7 @@
 package com.example.cyjentitycreater.service.auto.Impl;
 
 import com.example.cyjcommon.dao.PropertyDao;
-import com.example.cyjcommon.entity.Entity;
+import com.example.cyjcommon.entity.Persistent;
 import com.example.cyjcommon.entity.Property;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjentitycreater.service.auto.PropertyService;
@@ -49,10 +49,10 @@ public class PropertyServiceImpl extends BaseService implements PropertyService 
     }
 
     @Override
-    public Page<Property> findAll(Integer pageNumber, Entity entity) {
+    public Page<Property> findAll(Integer pageNumber, Persistent persistent) {
         Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
         Property property = new Property();
-        property.setEntity(entity);
+        property.setPersistent(persistent);
         Example<Property> example = Example.of(property);
         return propertyDao.findAll(example, pageable);
     }

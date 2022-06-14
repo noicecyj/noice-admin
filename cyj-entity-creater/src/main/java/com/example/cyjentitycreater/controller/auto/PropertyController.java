@@ -1,6 +1,6 @@
 package com.example.cyjentitycreater.controller.auto;
 
-import com.example.cyjcommon.entity.Entity;
+import com.example.cyjcommon.entity.Persistent;
 import com.example.cyjcommon.entity.Property;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,7 +23,7 @@ public interface PropertyController {
 
     @Operation(summary = "根据Entity查询所有Property")
     @PostMapping(value = "propertyPageByEntity")
-    ResultVO propertyPage(@RequestParam("pageNumber") Integer pageNumber, @RequestBody Entity entity);
+    ResultVO propertyPage(@RequestParam("pageNumber") Integer pageNumber, @RequestBody Persistent persistent);
 
     @Operation(summary = "保存Property")
     @PostMapping(value = "propertySave")

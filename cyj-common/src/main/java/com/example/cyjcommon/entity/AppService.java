@@ -1,18 +1,25 @@
 package com.example.cyjcommon.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Noice
@@ -48,6 +55,16 @@ public class AppService implements Serializable {
     @NotNull(message = "服务名称不能为空")
     @Column(name = "app_service_name")
     private String appServiceName;
+
+    @JsonIgnore
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "appService")
+    @BatchSize(size = 20)
+    private Set<Authority> authority = new HashSet<>();
+
+    @JsonIgnore
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "appService")
+    @BatchSize(size = 20)
+    private Set<Persistent> persistent = new HashSet<>();
 
     @NotNull(message = "状态不能为空")
     @Column(name = "status")

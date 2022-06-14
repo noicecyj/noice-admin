@@ -8,7 +8,7 @@ import com.example.cyjcommon.dao.PropertyDao;
 import com.example.cyjcommon.entity.AppService;
 import com.example.cyjcommon.entity.Authority;
 import com.example.cyjcommon.entity.Dictionary;
-import com.example.cyjcommon.entity.Entity;
+import com.example.cyjcommon.entity.Persistent;
 import com.example.cyjcommon.entity.Property;
 import com.example.cyjcommon.entity.QAuthority;
 import com.example.cyjcommon.entity.QEntity;
@@ -76,34 +76,34 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
     }
 
     @Override
-    public void generateJavaFile(Entity entity) {
-        if (entity == null) {
+    public void generateJavaFile(Persistent persistent) {
+        if (persistent == null) {
             return;
         }
-        entityHandler(entity);
+        entityHandler(persistent);
     }
 
-    private void authorityHandler(Entity entity) {
-        List<Property> propertyList = propertyDao.findByEntityOrderBySortCode(entity);
+    private void authorityHandler(Persistent persistent) {
+        List<Property> propertyList = propertyDao.findByEntityOrderBySortCode(persistent);
         List<Property> outPropertyList = propertyList.stream()
                 .filter(property -> "是".equals(property.getPropertyOut())).collect(Collectors.toList());
         //驼峰名
-        String underPoName = BeanUtils.underline2Camel(entity.getEntityCode());
+        String underPoName = BeanUtils.underline2Camel(persistent.getPersistentCode());
         //文件名
         String poName = BeanUtils.captureName(underPoName);
         Authority findAll = queryFactory
                 .selectFrom(QAuthority.authority)
                 .where(QAuthority.authority.authorityPath
-                        .eq(entity.getAppService().getAppServiceApi() + "/page" + poName)).fetchOne();
+                        .eq(persistent.getAppService().getAppServiceApi() + "/page" + poName)).fetchOne();
         if (findAll == null) {
             findAll = new Authority();
             findAll.setAuthorityMethod(POST);
-            findAll.setAuthorityPath(entity.getAppService().getAppServiceApi() + "/page" + poName);
+            findAll.setAuthorityPath(persistent.getAppService().getAppServiceApi() + "/page" + poName);
             findAll.setAuthorityName("查询所有" + poName);
             findAll.setAuthorityType(AUTO);
             findAll.setAuthorityDescription("查询所有" + poName);
-            findAll.setEntity(entity);
-            findAll.setAppService(entity.getAppService());
+            findAll.setPersistent(persistent);
+            findAll.setAppService(persistent.getAppService());
             findAll.setSortCode(SORTCODE);
             findAll.setStatus(STATUS);
             authorityDao.save(findAll);
@@ -112,25 +112,25 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             String underPropertyPoName = BeanUtils.underline2Camel(property.getPropertyCode());
             String propertyPoName = BeanUtils.captureName(underPropertyPoName);
             if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
-                oneToManyAuthorityHandler(entity, poName, propertyPoName);
+                oneToManyAuthorityHandler(persistent, poName, propertyPoName);
             }
             if (BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())) {
-                manyToManyAuthorityHandler(entity, poName, propertyPoName);
+                manyToManyAuthorityHandler(persistent, poName, propertyPoName);
             }
         }
         Authority save = queryFactory
                 .selectFrom(QAuthority.authority)
                 .where(QAuthority.authority.authorityPath
-                        .eq(entity.getAppService().getAppServiceApi() + "/save" + poName)).fetchOne();
+                        .eq(persistent.getAppService().getAppServiceApi() + "/save" + poName)).fetchOne();
         if (save == null) {
             save = new Authority();
             save.setAuthorityMethod(POST);
-            save.setAuthorityPath(entity.getAppService().getAppServiceApi() + "/save" + poName);
+            save.setAuthorityPath(persistent.getAppService().getAppServiceApi() + "/save" + poName);
             save.setAuthorityName("保存" + poName);
             save.setAuthorityType(AUTO);
             save.setAuthorityDescription("保存" + poName);
-            save.setEntity(entity);
-            save.setAppService(entity.getAppService());
+            save.setPersistent(persistent);
+            save.setAppService(persistent.getAppService());
             save.setSortCode(SORTCODE);
             save.setStatus(STATUS);
             authorityDao.save(save);
@@ -138,60 +138,60 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         Authority delete = queryFactory
                 .selectFrom(QAuthority.authority)
                 .where(QAuthority.authority.authorityPath
-                        .eq(entity.getAppService().getAppServiceApi() + "/delete" + poName)).fetchOne();
+                        .eq(persistent.getAppService().getAppServiceApi() + "/delete" + poName)).fetchOne();
         if (delete == null) {
             delete = new Authority();
             delete.setAuthorityMethod(POST);
-            delete.setAuthorityPath(entity.getAppService().getAppServiceApi() + "/delete" + poName);
+            delete.setAuthorityPath(persistent.getAppService().getAppServiceApi() + "/delete" + poName);
             delete.setAuthorityName("删除" + poName);
             delete.setAuthorityType(AUTO);
             delete.setAuthorityDescription("删除" + poName);
-            delete.setEntity(entity);
-            delete.setAppService(entity.getAppService());
+            delete.setPersistent(persistent);
+            delete.setAppService(persistent.getAppService());
             delete.setSortCode(SORTCODE);
             delete.setStatus(STATUS);
             authorityDao.save(delete);
         }
     }
 
-    private void oneToManyAuthorityHandler(Entity entity, String poName, String propertyPoName) {
+    private void oneToManyAuthorityHandler(Persistent persistent, String poName, String propertyPoName) {
         Authority oneToMany = queryFactory
                 .selectFrom(QAuthority.authority)
                 .where(QAuthority.authority.authorityPath
-                        .eq(entity.getAppService().getAppServiceApi() + "/page" + propertyPoName + "By" + poName)).fetchOne();
+                        .eq(persistent.getAppService().getAppServiceApi() + "/page" + propertyPoName + "By" + poName)).fetchOne();
         if (oneToMany == null) {
             oneToMany = new Authority();
             oneToMany.setAuthorityMethod(POST);
-            oneToMany.setAuthorityPath(entity.getAppService().getAppServiceApi() + "/page" + propertyPoName + "By" + poName);
+            oneToMany.setAuthorityPath(persistent.getAppService().getAppServiceApi() + "/page" + propertyPoName + "By" + poName);
             oneToMany.setAuthorityName("根据" + propertyPoName + "查询所有" + poName);
             oneToMany.setAuthorityType(AUTO);
             oneToMany.setAuthorityDescription("根据" + propertyPoName + "查询所有" + poName);
-            oneToMany.setEntity(entity);
-            oneToMany.setAppService(entity.getAppService());
+            oneToMany.setPersistent(persistent);
+            oneToMany.setAppService(persistent.getAppService());
             oneToMany.setSortCode(SORTCODE);
             oneToMany.setStatus(STATUS);
             authorityDao.save(oneToMany);
         }
     }
 
-    private void manyToManyAuthorityHandler(Entity entity, String poName, String propertyPoName) {
+    private void manyToManyAuthorityHandler(Persistent persistent, String poName, String propertyPoName) {
         Authority manyToMany1 = queryFactory
                 .selectFrom(QAuthority.authority)
                 .where(QAuthority.authority.authorityPath
-                        .eq(entity.getAppService().getAppServiceApi() + "/" + propertyPoName + "By" + poName)).fetchOne();
+                        .eq(persistent.getAppService().getAppServiceApi() + "/" + propertyPoName + "By" + poName)).fetchOne();
         Authority manyToMany2 = queryFactory
                 .selectFrom(QAuthority.authority)
                 .where(QAuthority.authority.authorityPath
-                        .eq(entity.getAppService().getAppServiceApi() + "/" + propertyPoName + "Save" + poName)).fetchOne();
+                        .eq(persistent.getAppService().getAppServiceApi() + "/" + propertyPoName + "Save" + poName)).fetchOne();
         if (manyToMany1 == null) {
             manyToMany1 = new Authority();
             manyToMany1.setAuthorityMethod(POST);
-            manyToMany1.setAuthorityPath(entity.getAppService().getAppServiceApi() + "/" + propertyPoName + "By" + poName);
+            manyToMany1.setAuthorityPath(persistent.getAppService().getAppServiceApi() + "/" + propertyPoName + "By" + poName);
             manyToMany1.setAuthorityName("根据" + poName + "查询所有" + propertyPoName);
             manyToMany1.setAuthorityType(AUTO);
             manyToMany1.setAuthorityDescription("根据" + poName + "查询所有" + propertyPoName);
-            manyToMany1.setEntity(entity);
-            manyToMany1.setAppService(entity.getAppService());
+            manyToMany1.setPersistent(persistent);
+            manyToMany1.setAppService(persistent.getAppService());
             manyToMany1.setSortCode(SORTCODE);
             manyToMany1.setStatus(STATUS);
             authorityDao.save(manyToMany1);
@@ -199,12 +199,12 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         if (manyToMany2 == null) {
             manyToMany2 = new Authority();
             manyToMany2.setAuthorityMethod(POST);
-            manyToMany2.setAuthorityPath(entity.getAppService().getAppServiceApi() + "/" + propertyPoName + "Save" + poName);
+            manyToMany2.setAuthorityPath(persistent.getAppService().getAppServiceApi() + "/" + propertyPoName + "Save" + poName);
             manyToMany2.setAuthorityName("根据" + poName + "保存" + propertyPoName);
             manyToMany2.setAuthorityType(AUTO);
             manyToMany2.setAuthorityDescription("根据" + poName + "保存" + propertyPoName);
-            manyToMany2.setEntity(entity);
-            manyToMany2.setAppService(entity.getAppService());
+            manyToMany2.setPersistent(persistent);
+            manyToMany2.setAppService(persistent.getAppService());
             manyToMany2.setSortCode(SORTCODE);
             manyToMany2.setStatus(STATUS);
             authorityDao.save(manyToMany2);
@@ -212,31 +212,31 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
     }
 
     @Override
-    public void entityHandler(Entity entity) {
+    public void entityHandler(Persistent persistent) {
         //查询是否存在子实体
-        List<Entity> subEntityList = entityDao.findByEntityParentOrderBySortCode(entity);
+        List<Persistent> subPersistentList = entityDao.findByEntityParentOrderBySortCode(persistent);
         //若存在则便利子实体
-        if (!subEntityList.isEmpty()) {
+        if (!subPersistentList.isEmpty()) {
             //生成有子实体的实体
-            createEntityHandler(entity);
-            authorityHandler(entity);
-            for (Entity entity1 : subEntityList) {
+            createEntityHandler(persistent);
+            authorityHandler(persistent);
+            for (Persistent persistent1 : subPersistentList) {
                 //进入递归
-                entityHandler(entity1);
+                entityHandler(persistent1);
             }
         } else {
             //生成没有有子实体的实体
-            createEntityHandler(entity);
-            authorityHandler(entity);
+            createEntityHandler(persistent);
+            authorityHandler(persistent);
         }
     }
 
-    private void createEntityHandler(Entity entity) {
+    private void createEntityHandler(Persistent persistent) {
         //驼峰名
-        String underPoName = BeanUtils.underline2Camel(entity.getEntityCode());
+        String underPoName = BeanUtils.underline2Camel(persistent.getPersistentCode());
         //文件名
         String poName = BeanUtils.captureName(underPoName);
-        AppService appService = entity.getAppService();
+        AppService appService = persistent.getAppService();
         if (appService == null) {
             return;
         }
@@ -244,23 +244,21 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         String appPath = appService.getAppServicePath();
         //服务接口
         String appApi = appService.getAppServiceApi();
-        List<Property> propertyList = propertyDao.findByEntityOrderBySortCode(entity);
+        List<Property> propertyList = propertyDao.findByEntityOrderBySortCode(persistent);
         Map<String, String[]> entityObj = new HashMap<>();
         List<Property> inPropertyList = propertyList.stream()
                 .filter(property -> !"是".equals(property.getPropertyOut())).collect(Collectors.toList());
         List<Property> outPropertyList = propertyList.stream()
                 .filter(property -> "是".equals(property.getPropertyOut())).collect(Collectors.toList());
-        entityObj.put(commonPath + "/entity", poGenerate(entity, inPropertyList, outPropertyList, poName, underPoName));
+        entityObj.put(commonPath + "/entity", poGenerate(persistent, inPropertyList, outPropertyList, poName, underPoName));
         entityObj.put(commonPath + "/dao", daoGenerate(poName));
         entityObj.put(appPath + "/service/auto", serviceGenerate(outPropertyList, poName, appPath));
         entityObj.put(appPath + "/controller/auto", controllerGenerate(outPropertyList, poName, appPath, appApi));
         entityObj.put(componentPath + poName + "/services/auto", servicesAutoGenerate(outPropertyList, appApi, underPoName, poName));
         entityObj.put(componentPath + poName + "/models/auto", modelsAutoGenerate(outPropertyList, underPoName, poName));
         entityObj.put(componentPath + poName + "/view/auto", viewAutoGenerate(outPropertyList, underPoName, poName));
-        if (entity.getEntityId() == null) {
-            entityObj.put(componentPath + poName, indexGenerate(poName));
-            entityObj.put(componentPath + poName, storeGenerate(outPropertyList, underPoName, poName));
-        }
+        entityObj.put(componentPath + poName, indexGenerate(poName));
+        entityObj.put(componentPath + poName, storeGenerate(outPropertyList, underPoName, poName));
         Map<String, String[]> entityCustomObj = new HashMap<>();
         entityCustomObj.put(appPath + "/service/custom", serviceCustomGenerate(poName, appPath));
         entityCustomObj.put(appPath + "/controller/custom", controllerCustomGenerate(poName, appPath, appApi));
@@ -673,7 +671,9 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("import DataFormTemple from '@/components/dataForm';\r\n");
         sb.append("import DataTableTemple from '@/components/dataTable';\r\n");
         sb.append("import {CustomColumn} from '@/pages/").append(poName).append("/view/custom/").append(poName).append("';\r\n");
-        sb.append("import {Dialog} from \"@alifd/next\";\r\n");
+        if (BeanUtils.ifManyToMany(outPropertyList) || BeanUtils.ifOneToMany(outPropertyList)){
+            sb.append("import {Dialog} from \"@alifd/next\";\r\n");
+        }
         sb.append("\r\n");
         sb.append("function ").append(poName).append("() {\r\n");
         sb.append("\r\n");
@@ -893,7 +893,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
 
     }
 
-    public String[] poGenerate(Entity entity, List<Property> inPropertyList, List<Property> outPropertyList, String poName, String underPoName) {
+    public String[] poGenerate(Persistent persistent, List<Property> inPropertyList, List<Property> outPropertyList, String poName, String underPoName) {
         StringBuilder sb = new StringBuilder();
         sb.append("package com.example.cyjcommon.entity;\r\n");
         sb.append("\r\n");
@@ -955,7 +955,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append(" * @author Noice\r\n");
         sb.append(" */\r\n");
         sb.append("@Entity\r\n");
-        sb.append("@Table(name = ").append(poName).append(".T_").append(entity.getEntityCode().toUpperCase()).append(")\r\n");
+        sb.append("@Table(name = ").append(poName).append(".T_").append(persistent.getPersistentCode().toUpperCase()).append(")\r\n");
         sb.append("@Getter\r\n");
         sb.append("@Setter\r\n");
         sb.append("@RequiredArgsConstructor\r\n");
@@ -963,7 +963,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         sb.append("@JsonIgnoreProperties(value = {\"hibernateLazyInitializer\", \"handler\"})\r\n");
         sb.append("public class ").append(poName).append(" implements Serializable {\r\n");
         sb.append("\r\n");
-        sb.append("    static final String T_").append(entity.getEntityCode().toUpperCase()).append(" = \"t_").append(entity.getEntityCode()).append("\";\r\n");
+        sb.append("    static final String T_").append(persistent.getPersistentCode().toUpperCase()).append(" = \"t_").append(persistent.getPersistentCode()).append("\";\r\n");
         sb.append("\r\n");
         sb.append("    @Id\r\n");
         sb.append("    @GeneratedValue(generator = \"uuid2\")\r\n");
@@ -1463,7 +1463,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
 
     @Override
     public JSONObject findDataTableAndFormByName(String entityCode) {
-        Entity po = queryFactory.selectFrom(QEntity.entity).where(QEntity.entity.entityCode.eq(entityCode)).fetchOne();
+        Persistent po = queryFactory.selectFrom(QEntity.entity).where(QEntity.entity.entityCode.eq(entityCode)).fetchOne();
         if (po == null) {
             return null;
         }
@@ -1516,23 +1516,22 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         jsonObject.put("dataTable", propertyCustomDTOS);
         jsonObject.put("dataForm", propertyCustomDTOS);
         JSONObject customData = new JSONObject();
-        customData.put("customType", "是".equals(po.getEntityCustomTable()));
-        customData.put("customForm", "是".equals(po.getEntityCustomForm()));
-        customData.put("editEnable", "是".equals(po.getEntityEditEnable()));
-        customData.put("formType", po.getEntityFormType());
-        customData.put("formCol", po.getEntityFormRow());
-        customData.put("isOutSelf", "是".equals(po.getEntitySelf()));
-        if ("是".equals(po.getEntitySelf())) {
-            JSONObject outSelf = new JSONObject();
-            outSelf.put("label", po.getEntityName());
-            outSelf.put("name", BeanUtils.underline2Camel(po.getEntityCode()) + "Id");
-            outSelf.put("code", po.getEntityCode() + "_id");
-            JSONArray mapOutList = new JSONArray();
-            List<Map<String, Object>> dateSourceList = sqlCustomService.queryBySqlValue("ENTITY_FORM_DATESOURSE");
-            dateSourceHandler(mapOutList, dateSourceList);
-            outSelf.put("dataSource", mapOutList);
-            customData.put("outSelf", outSelf);
-        }
+        customData.put("customType", "是".equals(po.getPersistentCustomTable()));
+        customData.put("customForm", "是".equals(po.getPersistentCustomForm()));
+        customData.put("editEnable", "是".equals(po.getPersistentEditEnable()));
+        customData.put("formType", po.getPersistentFormType());
+        customData.put("formCol", po.getPersistentFormRow());
+//        if ("是".equals(po.getEntitySelf())) {
+//            JSONObject outSelf = new JSONObject();
+//            outSelf.put("label", po.getEntityName());
+//            outSelf.put("name", BeanUtils.underline2Camel(po.getEntityCode()) + "Id");
+//            outSelf.put("code", po.getEntityCode() + "_id");
+//            JSONArray mapOutList = new JSONArray();
+//            List<Map<String, Object>> dateSourceList = sqlCustomService.queryBySqlValue("ENTITY_FORM_DATESOURSE");
+//            dateSourceHandler(mapOutList, dateSourceList);
+//            outSelf.put("dataSource", mapOutList);
+//            customData.put("outSelf", outSelf);
+//        }
         jsonObject.put("customData", customData);
         return jsonObject;
     }

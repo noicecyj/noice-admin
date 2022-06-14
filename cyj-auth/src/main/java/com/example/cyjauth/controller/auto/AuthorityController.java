@@ -8,14 +8,13 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Set;
 
 /**
  * @author Noice
@@ -36,14 +35,14 @@ public class AuthorityController implements autoController<Authority> {
     @Override
     @Operation(summary = "分页查询所有Authority")
     @PostMapping(value = "pageAuthority")
-    public ResultVO page(Integer pageNumber) {
+    public ResultVO page(@RequestParam("pageNumber") Integer pageNumber) {
         return ResultVO.success(service.findAll(pageNumber));
     }
 
     @Override
     @Operation(summary = "保存Authority")
     @PostMapping(value = "saveAuthority")
-    public ResultVO save(Authority po, BindingResult bindingResult) {
+    public ResultVO save(@RequestBody @Validated Authority po, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultVO.failure(bindingResult.getAllErrors().get(0));
         }
@@ -56,7 +55,7 @@ public class AuthorityController implements autoController<Authority> {
     @Override
     @Operation(summary = "删除Authority")
     @PostMapping(value = "deleteAuthority")
-    public ResultVO delete(Authority po) {
+    public ResultVO delete(@RequestBody Authority po) {
         if (po.getId() == null) {
             return ResultVO.failure();
         }

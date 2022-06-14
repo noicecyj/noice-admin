@@ -1,6 +1,6 @@
 package com.example.cyjentitycreater.service.auto;
 
-import com.example.cyjcommon.entity.Entity;
+import com.example.cyjcommon.entity.Persistent;
 import com.example.cyjcommon.entity.Property;
 import org.springframework.data.domain.Page;
 
@@ -17,6 +17,6 @@ public interface PropertyService {
 
     Page<Property> findAll(Integer pageNumber);
 
-    Page<Property> findAll(Integer pageNumber, Entity entity);
+    Page<Property> findAll(Integer pageNumber, Persistent persistent);
 
 }

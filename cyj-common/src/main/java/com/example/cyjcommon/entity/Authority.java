@@ -7,8 +7,9 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,7 +22,7 @@ import java.io.Serializable;
 /**
  * @author Noice
  */
-@javax.persistence.Entity
+@Entity
 @Table(name = Authority.T_AUTHORITY)
 @Getter
 @Setter
@@ -62,12 +63,12 @@ public class Authority implements Serializable {
     @JoinColumn(name = "app_service_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
     private AppService appService;
 
-    @Column(name = "entity_id", insertable = false, updatable = false)
-    private String entityId;
+    @Column(name = "persistent_id", insertable = false, updatable = false)
+    private String persistentId;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})
-    @JoinColumn(name = "entity_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
-    private Entity entity;
+    @JoinColumn(name = "persistent_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
+    private Persistent persistent;
 
     @NotNull(message = "状态不能为空")
     @Column(name = "status")

@@ -1,6 +1,6 @@
 package com.example.cyjentitycreater.controller.auto.Impl;
 
-import com.example.cyjcommon.entity.Entity;
+import com.example.cyjcommon.entity.Persistent;
 import com.example.cyjcommon.entity.Property;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.controller.auto.PropertyController;
@@ -32,8 +32,8 @@ public class PropertyControllerImpl implements PropertyController {
     }
 
     @Override
-    public ResultVO propertyPage(Integer pageNumber, Entity entity) {
-        return ResultVO.success(propertyService.findAll(pageNumber, entity));
+    public ResultVO propertyPage(Integer pageNumber, Persistent persistent) {
+        return ResultVO.success(propertyService.findAll(pageNumber, persistent));
     }
 
     @Override

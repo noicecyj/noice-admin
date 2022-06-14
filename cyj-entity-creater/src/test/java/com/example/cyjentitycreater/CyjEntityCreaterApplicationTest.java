@@ -1,7 +1,7 @@
 package com.example.cyjentitycreater;
 
 import com.example.cyjcommon.dao.EntityDao;
-import com.example.cyjcommon.entity.Entity;
+import com.example.cyjcommon.entity.Persistent;
 import com.example.cyjentitycreater.service.custom.EntityCustomService;
 import lombok.Data;
 import org.junit.Test;
@@ -43,14 +43,14 @@ public class CyjEntityCreaterApplicationTest {
     @Test
     @Transactional
     public void entityTest() {
-//        Entity entity1 = entityDao.getOne("edd90446-98bc-4330-8d93-1ba4ff003af0");
-//        entityCustomService.entityHandler(entity1);
-//        Entity entity2 = entityDao.getOne("ea17ecb7-4ab9-4f93-8546-3da3483400aa");
-//        entityCustomService.entityHandler(entity2);
-        Entity entity3 = entityDao.getOne("a714354b-0fbd-4cb0-89b5-4ff3663755cf");
-        entityCustomService.entityHandler(entity3);
-//        Entity entity4 = entityDao.getOne("8e954fce-ac50-45b9-9bbd-fb5eaa839b4f");
-//        entityCustomService.entityHandler(entity4);
+        Persistent persistent1 = entityDao.getOne("edd90446-98bc-4330-8d93-1ba4ff003af0");
+        entityCustomService.entityHandler(persistent1);
+        Persistent persistent2 = entityDao.getOne("ea17ecb7-4ab9-4f93-8546-3da3483400aa");
+        entityCustomService.entityHandler(persistent2);
+        Persistent persistent3 = entityDao.getOne("a714354b-0fbd-4cb0-89b5-4ff3663755cf");
+        entityCustomService.entityHandler(persistent3);
+        Persistent persistent4 = entityDao.getOne("8e954fce-ac50-45b9-9bbd-fb5eaa839b4f");
+        entityCustomService.entityHandler(persistent4);
     }
 
 }
