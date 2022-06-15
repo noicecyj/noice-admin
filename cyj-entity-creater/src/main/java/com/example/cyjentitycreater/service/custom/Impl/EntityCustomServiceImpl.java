@@ -3,7 +3,7 @@ package com.example.cyjentitycreater.service.custom.Impl;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.cyjcommon.dao.AuthorityDao;
-import com.example.cyjcommon.dao.EntityDao;
+import com.example.cyjcommon.dao.PersistentDao;
 import com.example.cyjcommon.dao.PropertyDao;
 import com.example.cyjcommon.entity.AppService;
 import com.example.cyjcommon.entity.Authority;
@@ -44,15 +44,15 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
     private final static String STATUS = "有效";
     private final static String SORTCODE = "10";
     private final static String commonPath = "C:/Users/noice/IdeaProjects/noice-admin/cyj-common/src/main/java/com/example/cyjcommon";
-    private EntityDao entityDao;
+    private PersistentDao persistentDao;
     private PropertyDao propertyDao;
     private AuthorityDao authorityDao;
     private DictionaryCustomService dictionaryCustomService;
     private SqlCustomService sqlCustomService;
 
     @Autowired
-    public void setEntityDao(EntityDao entityDao) {
-        this.entityDao = entityDao;
+    public void setEntityDao(PersistentDao persistentDao) {
+        this.persistentDao = persistentDao;
     }
 
     @Autowired
@@ -287,7 +287,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         manyToManyServiceHandler(outPropertyList, sb, appApi, poName);
         sb.append("};\r\n");
         String viewData = sb.toString();
-        return new String[]{viewData, underPoName + ".tsx"};
+        return new String[]{viewData, poName + ".tsx"};
     }
 
     private void oneToManyServiceHandler(List<Property> outPropertyList, StringBuilder sb, String appApi, String poName) {

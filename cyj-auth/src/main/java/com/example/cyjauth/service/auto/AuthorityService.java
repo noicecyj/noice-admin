@@ -1,8 +1,10 @@
 package com.example.cyjauth.service.auto;
 
-import com.example.cyjcommon.dao.EntityDao;
+import com.example.cyjcommon.dao.PersistentDao;
+import com.example.cyjcommon.dao.AppServiceDao;
 import com.example.cyjcommon.dao.AuthorityDao;
 import com.example.cyjcommon.entity.Persistent;
+import com.example.cyjcommon.entity.AppService;
 import com.example.cyjcommon.entity.Authority;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjcommon.service.autoService;
@@ -21,7 +23,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class AuthorityService extends BaseService implements autoService<Authority> {
 
     private AuthorityDao dao;
-    private EntityDao entityDao;
+    private PersistentDao persistentDao;
+    private AppServiceDao appServiceDao;
 
     @Autowired
     public void setDao(AuthorityDao dao) {
@@ -29,15 +32,24 @@ public class AuthorityService extends BaseService implements autoService<Authori
     }
 
     @Autowired
-    public void setEntityDao(EntityDao entityDao) {
-        this.entityDao = entityDao;
+    public void setPersistentDao(PersistentDao persistentDao) {
+        this.persistentDao = persistentDao;
+    }
+
+    @Autowired
+    public void setAppServiceDao(AppServiceDao appServiceDao) {
+        this.appServiceDao = appServiceDao;
     }
 
     @Override
     public Authority addOne(Authority po) {
         if (po.getPersistentId() != null) {
-            Persistent persistent = entityDao.getOne(po.getPersistentId());
+            Persistent persistent = persistentDao.getOne(po.getPersistentId());
             po.setPersistent(persistent);
+        }
+        if (po.getAppServiceId() != null) {
+            AppService appService = appServiceDao.getOne(po.getAppServiceId());
+            po.setAppService(appService);
         }
         return dao.save(po);
     }
@@ -50,8 +62,12 @@ public class AuthorityService extends BaseService implements autoService<Authori
     @Override
     public Authority updateOne(Authority po) {
         if (po.getPersistentId() != null) {
-            Persistent persistent = entityDao.getOne(po.getPersistentId());
+            Persistent persistent = persistentDao.getOne(po.getPersistentId());
             po.setPersistent(persistent);
+        }
+        if (po.getAppServiceId() != null) {
+            AppService appService = appServiceDao.getOne(po.getAppServiceId());
+            po.setAppService(appService);
         }
         return dao.saveAndFlush(po);
     }

@@ -1,6 +1,6 @@
 package com.example.cyjentitycreater;
 
-import com.example.cyjcommon.dao.EntityDao;
+import com.example.cyjcommon.dao.PersistentDao;
 import com.example.cyjcommon.entity.Persistent;
 import com.example.cyjentitycreater.service.custom.EntityCustomService;
 import lombok.Data;
@@ -38,7 +38,7 @@ public class CyjEntityCreaterApplicationTest {
     @Autowired
     private EntityCustomService entityCustomService;
     @Autowired
-    private EntityDao entityDao;
+    private PersistentDao persistentDao;
 
     @Test
     @Transactional
@@ -47,10 +47,12 @@ public class CyjEntityCreaterApplicationTest {
 //        entityCustomService.entityHandler(persistent1);
 //        Persistent persistent2 = entityDao.getOne("ea17ecb7-4ab9-4f93-8546-3da3483400aa");
 //        entityCustomService.entityHandler(persistent2);
-        Persistent persistent3 = entityDao.getOne("a714354b-0fbd-4cb0-89b5-4ff3663755cf");
-        entityCustomService.entityHandler(persistent3);
+//        Persistent persistent3 = persistentDao.getOne("a714354b-0fbd-4cb0-89b5-4ff3663755cf");
+//        entityCustomService.entityHandler(persistent3);
 //        Persistent persistent4 = entityDao.getOne("8e954fce-ac50-45b9-9bbd-fb5eaa839b4f");
 //        entityCustomService.entityHandler(persistent4);
+        Persistent persistent3 = persistentDao.getOne("1b6e7b0d-8758-4de0-a80f-b54505ac9e91");
+        entityCustomService.entityHandler(persistent3);
     }
 
 }

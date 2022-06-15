@@ -1,11 +1,10 @@
 package com.example.cyjentitycreater.service.auto.Impl;
 
 import com.example.cyjcommon.dao.AppServiceDao;
-import com.example.cyjcommon.dao.EntityDao;
+import com.example.cyjcommon.dao.PersistentDao;
 import com.example.cyjcommon.dao.PropertyDao;
 import com.example.cyjcommon.entity.AppService;
 import com.example.cyjcommon.entity.Persistent;
-import com.example.cyjcommon.entity.Property;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjentitycreater.service.auto.EntityService;
 import com.example.cyjentitycreater.service.auto.PropertyService;
@@ -18,8 +17,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 /**
  * @author Noice
  */
@@ -27,14 +24,14 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class)
 public class EntityServiceImpl extends BaseService implements EntityService {
 
-    private EntityDao entityDao;
+    private PersistentDao persistentDao;
     private AppServiceDao appServiceDao;
     private PropertyDao propertyDao;
     private PropertyService propertyService;
 
     @Autowired
-    public void setEntityDao(EntityDao entityDao) {
-        this.entityDao = entityDao;
+    public void setEntityDao(PersistentDao persistentDao) {
+        this.persistentDao = persistentDao;
     }
 
     @Autowired
@@ -58,12 +55,12 @@ public class EntityServiceImpl extends BaseService implements EntityService {
             AppService appService = appServiceDao.getOne(po.getAppServiceId());
             po.setAppService(appService);
         }
-        return entityDao.save(po);
+        return persistentDao.save(po);
     }
 
     @Override
     public void deleteOne(Persistent po) {
-        entityDao.delete(po);
+        persistentDao.delete(po);
     }
 
     @Override
@@ -72,12 +69,12 @@ public class EntityServiceImpl extends BaseService implements EntityService {
             AppService appService = appServiceDao.getOne(po.getAppServiceId());
             po.setAppService(appService);
         }
-        return entityDao.saveAndFlush(po);
+        return persistentDao.saveAndFlush(po);
     }
 
     @Override
     public Page<Persistent> findAll(Integer pageNumber) {
-        return entityDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
+        return persistentDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 
     @Override
@@ -86,7 +83,7 @@ public class EntityServiceImpl extends BaseService implements EntityService {
         Persistent persistent = new Persistent();
         persistent.setAppService(appService);
         Example<Persistent> example = Example.of(persistent);
-        return entityDao.findAll(example, pageable);
+        return persistentDao.findAll(example, pageable);
     }
 
 }
