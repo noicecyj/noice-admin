@@ -40,12 +40,12 @@ function Persistent() {
             <CustomColumn value={value} index={index} record={record}/>
           );
         }}
-        son1="表单类型"
+        son1="权限"
         sonMethod1={record => dispatchers.pageAuthorityByPersistent({
           current: 1,
           id: record.id,
         })}
-        son2="表单类型"
+        son2="属性"
         sonMethod2={record => dispatchers.pagePropertyByPersistent({
           current: 1,
           id: record.id,

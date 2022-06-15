@@ -1,6 +1,6 @@
 import React from "react";
 
-function CustomColumnPersistent(props) {
+function CustomColumn(props) {
 
   console.log(props)
 
@@ -10,4 +10,4 @@ function CustomColumnPersistent(props) {
 
 }
 
-export {CustomColumnPersistent};
+export {CustomColumn};

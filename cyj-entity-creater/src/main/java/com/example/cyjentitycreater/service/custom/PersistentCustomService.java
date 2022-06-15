@@ -420,7 +420,7 @@ public class PersistentCustomService extends BaseService {
     private String[] viewCustomGenerate(String poName) {
         String viewData = "import React from \"react\";\r\n" +
                 "\r\n" +
-                "function CustomColumn" + poName + "(props) {\r\n" +
+                "function CustomColumn(props) {\r\n" +
                 "\r\n" +
                 "  console.log(props)\r\n" +
                 "\r\n" +
@@ -430,7 +430,7 @@ public class PersistentCustomService extends BaseService {
                 "\r\n" +
                 "}\r\n" +
                 "\r\n" +
-                "export {CustomColumn" + poName + "};\r\n";
+                "export {CustomColumn};\r\n";
         return new String[]{viewData, poName + ".tsx"};
     }
 
