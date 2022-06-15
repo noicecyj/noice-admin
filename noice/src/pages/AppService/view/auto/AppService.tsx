@@ -46,7 +46,7 @@ function AppService() {
           id: record.id,
         })}
         son2="实体"
-        sonMethod1={record => dispatchers.pagePersistentByAppService({
+        sonMethod2={record => dispatchers.pagePersistentByAppService({
           current: 1,
           id: record.id,
         })}

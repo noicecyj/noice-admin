@@ -9,6 +9,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.CascadeType;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,7 +22,7 @@ import java.io.Serializable;
 /**
  * @author Noice
  */
-@javax.persistence.Entity
+@Entity
 @Table(name = Property.T_PROPERTY)
 @Getter
 @Setter

@@ -1,6 +1,6 @@
 export default {
 
-  namespace: 'customSecondMenu',
+  namespace: 'customProperty',
 
   state: {
     customMethodName1: null,
@@ -14,7 +14,6 @@ export default {
       return {...prevState, ...payload};
     },
   },
-
   effects: () => ({
     customMethod1() {
     },

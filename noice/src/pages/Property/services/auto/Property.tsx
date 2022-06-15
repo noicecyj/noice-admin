@@ -1,26 +1,25 @@
 import {request} from 'ice';
 
 export default {
-  propertyPage(pageNumber, data) {
+  page(pageNumber) {
     return request({
-      url: '/entityCreateApi/propertyPageByEntity',
+      url: '/entityCreateApi/pageProperty',
       method: 'post',
       params: {
         pageNumber,
       },
-      data,
     });
   },
-  propertySave(data) {
+  save(data) {
     return request({
-      url: '/entityCreateApi/propertySave',
+      url: '/entityCreateApi/saveProperty',
       method: 'post',
       data,
     });
   },
-  propertyDelete(data) {
+  delete(data) {
     return request({
-      url: '/entityCreateApi/propertyDelete',
+      url: '/entityCreateApi/deleteProperty',
       method: 'post',
       data,
     });

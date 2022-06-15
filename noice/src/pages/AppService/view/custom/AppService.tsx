@@ -2,9 +2,9 @@ import React from 'react';
 import pageStore from '@/pages/AppService/store';
 import {Button} from "@alifd/next";
 
-function CustomColumnAppService(props) {
+function CustomColumn(props) {
   const {record} = props;
-  const customAppServiceDispatchers = pageStore.useModelDispatchers('customAppService');
+  const customAppServiceDispatchers = pageStore.useModelDispatchers('appServiceCustom');
 
   return (
     <>
@@ -20,4 +20,4 @@ function CustomColumnAppService(props) {
   );
 }
 
-export {CustomColumnAppService};
+export {CustomColumn};

@@ -1,6 +1,6 @@
 import React from "react";
 
-function CustomColumnProperty(props) {
+function CustomColumn(props) {
 
   console.log(props)
 
@@ -10,4 +10,4 @@ function CustomColumnProperty(props) {
 
 }
 
-export {CustomColumnProperty};
+export {CustomColumn};
