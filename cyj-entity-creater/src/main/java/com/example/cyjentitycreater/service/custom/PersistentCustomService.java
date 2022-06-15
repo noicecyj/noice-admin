@@ -743,7 +743,7 @@ public class PersistentCustomService extends BaseService {
             String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
             String propertyOut = BeanUtils.captureName(underPropertyOut);
             sb.append("        son").append(i + 1).append("=\"").append(property.getPropertyLabel()).append("\"\r\n");
-            sb.append("        sonMethod1={record => dispatchers.page").append(propertyOut).append("By").append(poName).append("({\r\n");
+            sb.append("        sonMethod").append(i + 1).append("={record => dispatchers.page").append(propertyOut).append("By").append(poName).append("({\r\n");
             sb.append("          current: 1,\r\n");
             sb.append("          id: record.id,\r\n");
             sb.append("        })}\r\n");
