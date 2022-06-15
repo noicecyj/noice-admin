@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author Noice
  */
 @Tag(name = "Entity")
-public interface EntityController {
+public interface PersistentController {
 
     @Operation(summary = "查询所有Entity")
     @PostMapping(value = "entityPage")

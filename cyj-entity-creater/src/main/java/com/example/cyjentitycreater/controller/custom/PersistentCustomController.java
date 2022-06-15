@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping(value = "entityCreateApi")
-public class EntityCustomController {
+public class PersistentCustomController {
 
     private PersistentCustomService persistentCustomService;
 
