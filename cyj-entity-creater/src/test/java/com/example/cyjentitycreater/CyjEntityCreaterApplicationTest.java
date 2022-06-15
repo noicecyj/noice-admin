@@ -51,7 +51,9 @@ public class CyjEntityCreaterApplicationTest {
 //        entityCustomService.entityHandler(persistent3);
 //        Persistent persistent4 = entityDao.getOne("8e954fce-ac50-45b9-9bbd-fb5eaa839b4f");
 //        entityCustomService.entityHandler(persistent4);
-        Persistent persistent3 = persistentDao.getOne("1b6e7b0d-8758-4de0-a80f-b54505ac9e91");
+//        Persistent persistent3 = persistentDao.getOne("1b6e7b0d-8758-4de0-a80f-b54505ac9e91");
+//        persistentCustomService.entityHandler(persistent3);
+        Persistent persistent3 = persistentDao.getOne("1b6e7b0d-8758-4de0-a80f-b54505ac9e9d");
         persistentCustomService.entityHandler(persistent3);
     }
 

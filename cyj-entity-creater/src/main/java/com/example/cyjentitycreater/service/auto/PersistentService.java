@@ -1,10 +1,12 @@
 package com.example.cyjentitycreater.service.auto;
 
+import com.example.cyjcommon.dao.AuthorityDao;
+import com.example.cyjcommon.dao.PropertyDao;
 import com.example.cyjcommon.dao.AppServiceDao;
 import com.example.cyjcommon.dao.PersistentDao;
-import com.example.cyjcommon.dao.PropertyDao;
-import com.example.cyjcommon.entity.AppService;
 import com.example.cyjcommon.entity.Authority;
+import com.example.cyjcommon.entity.Property;
+import com.example.cyjcommon.entity.AppService;
 import com.example.cyjcommon.entity.Persistent;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjcommon.service.autoService;
@@ -24,19 +26,19 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = Exception.class)
 public class PersistentService extends BaseService implements autoService<Persistent> {
 
-    private PersistentDao persistentDao;
-    private AppServiceDao appServiceDao;
+    private PersistentDao dao;
+    private AuthorityDao authorityDao;
     private PropertyDao propertyDao;
-    private PropertyService propertyService;
+    private AppServiceDao appServiceDao;
 
     @Autowired
-    public void setEntityDao(PersistentDao persistentDao) {
-        this.persistentDao = persistentDao;
+    public void setDao(PersistentDao dao) {
+        this.dao = dao;
     }
 
     @Autowired
-    public void setAppServiceDao(AppServiceDao appServiceDao) {
-        this.appServiceDao = appServiceDao;
+    public void setAuthorityDao(AuthorityDao authorityDao) {
+        this.authorityDao = authorityDao;
     }
 
     @Autowired
@@ -45,37 +47,54 @@ public class PersistentService extends BaseService implements autoService<Persis
     }
 
     @Autowired
-    public void setPropertyService(PropertyService propertyService) {
-        this.propertyService = propertyService;
+    public void setAppServiceDao(AppServiceDao appServiceDao) {
+        this.appServiceDao = appServiceDao;
     }
 
     @Override
     public Persistent addOne(Persistent po) {
-        if (po.getAppServiceId() != null){
+        if (po.getAppServiceId() != null) {
             AppService appService = appServiceDao.getOne(po.getAppServiceId());
             po.setAppService(appService);
         }
-        return persistentDao.save(po);
+        return dao.save(po);
     }
 
     @Override
     public void deleteOne(Persistent po) {
-        persistentDao.delete(po);
+        dao.delete(po);
     }
 
     @Override
     public Persistent updateOne(Persistent po) {
-        if (po.getAppServiceId() != null){
+        if (po.getAppServiceId() != null) {
             AppService appService = appServiceDao.getOne(po.getAppServiceId());
             po.setAppService(appService);
         }
-        return persistentDao.saveAndFlush(po);
+        return dao.saveAndFlush(po);
     }
 
     @Override
     public Page<Persistent> findAll(Integer pageNumber) {
-        return persistentDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
+        return dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 
+    public Page<Authority> pageAuthorityByPersistent(Integer pageNumber, String id) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
+        Persistent po = dao.getOne(id);
+        Authority authority = new Authority();
+        authority.setPersistent(po);
+        Example<Authority> example = Example.of(authority);
+        return authorityDao.findAll(example, pageable);
+    }
+
+    public Page<Property> pagePropertyByPersistent(Integer pageNumber, String id) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
+        Persistent po = dao.getOne(id);
+        Property property = new Property();
+        property.setPersistent(po);
+        Example<Property> example = Example.of(property);
+        return propertyDao.findAll(example, pageable);
+    }
 
 }

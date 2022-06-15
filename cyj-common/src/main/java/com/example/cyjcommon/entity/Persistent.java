@@ -68,13 +68,6 @@ public class Persistent implements Serializable {
     @Column(name = "persistent_form_row")
     private Integer persistentFormRow;
 
-    @Column(name = "app_service_id", insertable = false, updatable = false)
-    private String appServiceId;
-
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})
-    @JoinColumn(name = "app_service_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
-    private AppService appService;
-
     @JsonIgnore
     @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "persistent")
     @BatchSize(size = 20)
@@ -84,6 +77,13 @@ public class Persistent implements Serializable {
     @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "persistent")
     @BatchSize(size = 20)
     private Set<Property> property = new HashSet<>();
+
+    @Column(name = "app_service_id", insertable = false, updatable = false)
+    private String appServiceId;
+
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})
+    @JoinColumn(name = "app_service_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
+    private AppService appService;
 
     @NotNull(message = "状态不能为空")
     @Column(name = "status")
