@@ -1,11 +1,10 @@
 import BasicLayout from '@/layouts/BasicLayout';
 import UserLayout from '@/layouts/UserLayout';
 import LoginPage from '@/pages/Login';
-import EntityPage from '@/pages/Entity';
+import PersistentPage from '@/pages/Persistent';
 import CatalogPage from '@/pages/Catalog';
 import SqlPage from '@/pages/Sql';
 import AppServicePage from '@/pages/AppService';
-import FirstMenuPage from '@/pages/FirstMenu';
 import BpmnPage from '@/pages/Bpmn';
 import FlowUserPage from '@/pages/FlowUser';
 import FlowGroupPage from '@/pages/FlowGroup';
@@ -22,7 +21,7 @@ const routerConfig = [
     children: [
       {
         path: '/entitycreater',
-        component: EntityPage,
+        component: PersistentPage,
       },
       {
         path: '/catalog',

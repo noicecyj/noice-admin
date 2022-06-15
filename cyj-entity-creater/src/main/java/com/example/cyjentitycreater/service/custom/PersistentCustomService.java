@@ -69,7 +69,7 @@ public class PersistentCustomService extends BaseService {
     }
 
     private void authorityHandler(Persistent persistent) {
-        List<Property> propertyList = queryFactory.selectFrom(QProperty.property).where(QProperty.property.persistentId.eq(persistent.getId())).fetch();
+        List<Property> propertyList = queryFactory.selectFrom(QProperty.property).where(QProperty.property.persistentId.eq(persistent.getId())).orderBy(QProperty.property.sortCode.asc()).fetch();
         List<Property> outPropertyList = propertyList.stream().filter(property -> "是".equals(property.getPropertyOut())).collect(Collectors.toList());
         //驼峰名
         String underPoName = BeanUtils.underline2Camel(persistent.getPersistentCode());
@@ -196,7 +196,7 @@ public class PersistentCustomService extends BaseService {
         String appPath = appService.getAppServicePath();
         //服务接口
         String appApi = appService.getAppServiceApi();
-        List<Property> propertyList = queryFactory.selectFrom(QProperty.property).where(QProperty.property.persistentId.eq(persistent.getId())).fetch();
+        List<Property> propertyList = queryFactory.selectFrom(QProperty.property).where(QProperty.property.persistentId.eq(persistent.getId())).orderBy(QProperty.property.sortCode.asc()).fetch();
         Map<String, String[]> entityObj = new HashMap<>();
         List<Property> inPropertyList = propertyList.stream().filter(property -> !"是".equals(property.getPropertyOut())).collect(Collectors.toList());
         List<Property> outPropertyList = propertyList.stream().filter(property -> "是".equals(property.getPropertyOut())).collect(Collectors.toList());
@@ -207,8 +207,12 @@ public class PersistentCustomService extends BaseService {
         entityObj.put(componentPath + poName + "/services/auto", servicesAutoGenerate(outPropertyList, appApi, poName));
         entityObj.put(componentPath + poName + "/models/auto", modelsAutoGenerate(outPropertyList, underPoName, poName));
         entityObj.put(componentPath + poName + "/view/auto", viewAutoGenerate(outPropertyList, underPoName, poName));
-        entityObj.put(componentPath + poName, indexGenerate(poName));
-        entityObj.put(componentPath + poName, storeGenerate(outPropertyList, underPoName, poName));
+        try {
+            BeanUtils.createJavaFile(componentPath + poName, indexGenerate(poName));
+            BeanUtils.createJavaFile(componentPath + poName, storeGenerate(outPropertyList, underPoName, poName));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         Map<String, String[]> entityCustomObj = new HashMap<>();
         entityCustomObj.put(appPath + "/service/custom", serviceCustomGenerate(poName, appPath));
         entityCustomObj.put(appPath + "/controller/custom", controllerCustomGenerate(poName, appPath, appApi));
@@ -1356,7 +1360,7 @@ public class PersistentCustomService extends BaseService {
         if (persistent == null) {
             return null;
         }
-        List<Property> propertyList = queryFactory.selectFrom(QProperty.property).where(QProperty.property.persistentId.eq(persistent.getId())).fetch();
+        List<Property> propertyList = queryFactory.selectFrom(QProperty.property).where(QProperty.property.persistentId.eq(persistent.getId())).orderBy(QProperty.property.sortCode.asc()).fetch();
         List<PropertyCustomDTO> propertyCustomDTOList = new ArrayList<>();
         for (Property property : propertyList) {
             PropertyCustomDTO propertyCustomDTO = new PropertyCustomDTO();
