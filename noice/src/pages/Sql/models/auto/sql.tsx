@@ -1,22 +1,25 @@
-import sqlService from '@/pages/Sql/services/auto/sql';
 import initService from '@/services/init';
+import {Message} from "@alifd/next";
+import service from '@/pages/Sql/services/auto/Sql';
 
 export default {
 
   namespace: 'sql',
 
   state: {
-    sqlTitle: '添加',
-    sqlTableData: [],
-    sqlVisible: false,
-    sqlFormData: {},
-    sqlLoadingVisible: true,
-    sqlTotal: 0,
-    sqlCurrent: 1,
-    sqlForm: [],
-    sqlTable: [],
-    sqlId: '',
+    title: '添加',
+    tableData: [],
+    visible: false,
+    formData: {},
+    loadingVisible: true,
+    total: 0,
+    current: 1,
+    form: [],
+    table: [],
     customData: {},
+    divVisible: false,
+    parent: "",
+    select: [],
   },
 
   reducers: {
@@ -26,64 +29,70 @@ export default {
   },
 
   effects: (dispatch) => ({
-    async sqlPage(sqlCurrent) {
-      const dataRes = await sqlService.sqlPage(sqlCurrent);
+    async page(current) {
+      const dataRes = await service.page(current);
       const payload = {
-        sqlTableData: dataRes.data.results,
-        sqlTotal: dataRes.data.total,
-        sqlCurrent,
-        sqlLoadingVisible: false,
+        tableData: dataRes.data.content,
+        total: dataRes.data.totalElements,
+        current,
+        loadingVisible: false,
       };
       dispatch.sql.setState(payload);
     },
-    async sqlAdd() {
+    async save(data) {
+      const ret = await service.save(data.formData);
+      if (ret.code === 400) {
+        Message.error(ret.data.defaultMessage);
+      } else {
+        Message.success('保存成功');
+        await this.page(data.current);
+        const payload = {
+          visible: false,
+        };
+        dispatch.sql.setState(payload);
+      }
+    },
+    async delete(data) {
+      const ret = await service.delete(data.record);
+      if (ret.code === 400) {
+        Message.error('删除失败');
+      } else {
+        Message.success('删除成功');
+        await this.page(data.current);
+        const payload = {
+          visible: false,
+        };
+        dispatch.sql.setState(payload);
+      }
+    },
+    add() {
       const payload = {
-        sqlFormData: {},
-        sqlTitle: '添加',
-        sqlVisible: true,
+        formData: {},
+        title: '添加',
+        visible: true,
       };
       dispatch.sql.setState(payload);
     },
-    async sqlEdit(data) {
-      const sql = await sqlService.findSqlById(data.id);
-      const fromData = {
-        ...sql.data,
-      };
+    edit(data) {
       const payload = {
-        sqlFormData: fromData,
-        sqlTitle: '编辑',
-        sqlVisible: true,
-      };
-      dispatch.sql.setState(payload);
-    },
-    async sqlDelete(data) {
-      await sqlService.sqlDelete(data.record.id);
-      await this.sqlPage(data.data.pageNumber);
-      const payload = {
-        sqlVisible: false,
-      };
-      dispatch.sql.setState(payload);
-    },
-    async sqlSave(data) {
-      await sqlService.sqlSave(data.sqlFormData);
-      await this.sqlPage(data.pageNumber);
-      const payload = {
-        sqlVisible: false,
+        formData: data,
+        title: '编辑',
+        visible: true,
       };
       dispatch.sql.setState(payload);
     },
     setDataForm(data) {
       const payload = {
-        sqlFormData: data,
+        formData: data,
       };
       dispatch.sql.setState(payload);
     },
     async findDataTableAndFormByName() {
       const ret = await initService.findDataTableAndFormByName('sql');
-      await this.sqlPage(1);
+      await this.page(1);
       const payload = {
-        sqlTable: ret.data.dataTable,
-        sqlForm: ret.data.dataForm,
+        table: ret.data.dataTable,
+        form: ret.data.dataForm,
         customData: ret.data.customData,
       };
       dispatch.sql.setState(payload);

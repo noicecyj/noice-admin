@@ -1,10 +1,10 @@
 import {createStore} from 'ice';
-import flowUser from './models/auto/flowUser';
-import customFlowUser from './models/custom/flowUser';
+import flowUser from './models/auto/FlowUser';
+import flowUserCustom from './models/custom/FlowUser';
 
 const store = createStore({
   flowUser,
-  customFlowUser,
+  flowUserCustom,
 });
 
 export default store;

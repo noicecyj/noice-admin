@@ -1,12 +1,16 @@
 package com.example.cyjworkflow.controller.custom;
 
-import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Noice
  * @version 1.0
  */
-@Tag(name = "FlowTenant")
-public interface FlowTenantCustomController {
+@CrossOrigin
+@RestController
+@RequestMapping(value = "workFlowApi")
+public class FlowTenantCustomController {
 
 }

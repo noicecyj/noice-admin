@@ -1,5 +1,18 @@
 package com.example.cyjquery.service.custom;
 
+import com.example.cyjcommon.entity.QSql;
+import com.example.cyjcommon.entity.Sql;
+import com.example.cyjcommon.service.BaseService;
+import com.example.cyjquery.dao.SqlCustomDao;
+import org.hibernate.query.internal.NativeQueryImpl;
+import org.hibernate.transform.Transformers;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,83 +22,73 @@ import java.util.Map;
  * @version 1.0
  * @date 2022-02-07
  */
-public interface SqlCustomService {
+@Service
+@Transactional(rollbackFor = Exception.class)
+public class SqlCustomService extends BaseService {
 
-    /**
-     * 使用sql查询
-     *
-     * @param sql sql语句
-     * @return 查询结果
-     */
-    List<Map<String, Object>> queryBySql(String sql);
+    @PersistenceContext
+    EntityManager em;
 
-    /**
-     * 使用sql查询
-     *
-     * @param sql sql语句
-     * @param str str
-     * @return 查询结果
-     */
-    List<Map<String, Object>> queryBySql(String sql, HashMap<String, String> str);
+    public List<Map<String, Object>> queryBySql(String sql) {
+        Query query = em.createNativeQuery(sql);
+        return query.unwrap(NativeQueryImpl.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).list();
+    }
 
-    /**
-     * 使用sql查询一条
-     *
-     * @param sql sql语句
-     * @param str str
-     * @return 查询结果
-     */
-    Map<String, Object> queryByOne(String sql, HashMap<String, String> str);
+    public List<Map<String, Object>> queryBySql(String sql, HashMap<String, String> str) {
+        Query query = em.createNativeQuery(sql);
+        for (String value : str.keySet()) {
+            query.setParameter(value, str.get(value));
+        }
+        return query.unwrap(NativeQueryImpl.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).list();
+    }
 
-    /**
-     * 使用value查询
-     *
-     * @param value value
-     * @return 查询结果
-     */
-    List<Map<String, Object>> queryBySqlValue(String value);
+    public Map<String, Object> queryByOne(String sql, HashMap<String, String> str) {
+        List<Map<String, Object>> resultList = queryBySql(sql, str);
+        if (resultList.size() == 1) {
+            return resultList.get(0);
+        }
+        return null;
+    }
 
-    /**
-     * 使用value查询,带参数
-     *
-     * @param value value
-     * @param str   str
-     * @return 查询结果
-     */
-    List<Map<String, Object>> queryBySqlValue(String value, HashMap<String, String> str);
+    public List<Map<String, Object>> queryBySqlValue(String value) {
+        Sql sql = queryFactory.selectFrom(QSql.sql).where(QSql.sql.sqlDescription.eq(value)).fetchOne();
+        if (sql != null) {
+            return queryBySql(sql.getSqlStr());
+        }
+        return null;
+    }
 
-    /**
-     * 使用value查询,带参数
-     *
-     * @param value value
-     * @param str   str
-     * @return 查询结果
-     */
-    Map<String, Object> queryBySqlOne(String value, HashMap<String, String> str);
+    public List<Map<String, Object>> queryBySqlValue(String value, HashMap<String, String> str) {
+        Sql sql = queryFactory.selectFrom(QSql.sql).where(QSql.sql.sqlDescription.eq(value)).fetchOne();
+        if (sql != null) {
+            return queryBySql(sql.getSqlStr(), str);
+        }
+        return null;
+    }
 
+    public Map<String, Object> queryBySqlOne(String value, HashMap<String, String> str) {
+        Sql sql = queryFactory.selectFrom(QSql.sql).where(QSql.sql.sqlDescription.eq(value)).fetchOne();
+        if (sql != null) {
+            return queryByOne(sql.getSqlStr(), str);
+        }
+        return null;
+    }
 
-    /**
-     * 执行sql
-     *
-     * @param sql sql语句
-     */
-    void excuteSql(String sql);
+    public void excuteSql(String sql) {
+        Query query = em.createNativeQuery(sql);
+        query.executeUpdate();
+    }
 
-    /**
-     * 使用sql查询全部
-     *
-     * @param tableName 表名
-     * @return 查询结果
-     */
-    List<Map<String, Object>> findAllSql(String tableName);
+    public List<Map<String, Object>> findAllSql(String tableName) {
+        String sql = "select * from " + tableName + " where 1=1";
+        return queryBySql(sql);
+    }
 
-    /**
-     * 使用主键sql查询
-     *
-     * @param tableName 表名
-     * @param id        主键
-     * @return 查询结果
-     */
-    Object findSqlById(String tableName, String id);
+    public Object findSqlById(String tableName, String id) {
+        String sql = String.format("select * from %s where id = ?", tableName);
+        Query query = em.createNativeQuery(sql);
+        query.setParameter(1, id);
+        return query.unwrap(NativeQueryImpl.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).getSingleResult();
+    }
 
 }

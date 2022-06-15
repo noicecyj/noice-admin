@@ -1,12 +1,10 @@
 import React from 'react';
-import Catalog from '@/pages/Catalog/view/auto/catalog';
-import Dictionary from '@/pages/Catalog/view/auto/dictionary';
+import Catalog from '@/pages/Catalog/view/auto/Catalog';
 
 function CatalogPage() {
   return (
     <div>
       <Catalog/>
-      <Dictionary/>
     </div>
   );
 }

@@ -1,10 +1,10 @@
 import {createStore} from 'ice';
-import flowGroup from './models/auto/flowGroup';
-import customFlowGroup from './models/custom/flowGroup';
+import flowGroup from './models/auto/FlowGroup';
+import flowGroupCustom from './models/custom/FlowGroup';
 
 const store = createStore({
   flowGroup,
-  customFlowGroup,
+  flowGroupCustom,
 });
 
 export default store;

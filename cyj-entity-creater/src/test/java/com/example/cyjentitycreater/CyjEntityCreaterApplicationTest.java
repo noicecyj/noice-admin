@@ -17,6 +17,8 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import java.util.List;
+
 /**
  * @author Noice
  */
@@ -41,22 +43,26 @@ public class CyjEntityCreaterApplicationTest {
     private PersistentDao persistentDao;
 
     @Test
-    @Transactional
+//    @Transactional
     public void entityTest() {
-        Persistent persistent1 = persistentDao.getOne("edd90446-98bc-4330-8d93-1ba4ff003af0");
-        persistentCustomService.entityHandler(persistent1);
-        Persistent persistent2 = persistentDao.getOne("ea17ecb7-4ab9-4f93-8546-3da3483400aa");
-        persistentCustomService.entityHandler(persistent2);
-        Persistent persistent3 = persistentDao.getOne("a714354b-0fbd-4cb0-89b5-4ff3663755cf");
-        persistentCustomService.entityHandler(persistent3);
-        Persistent persistent4 = persistentDao.getOne("8e954fce-ac50-45b9-9bbd-fb5eaa839b4f");
-        persistentCustomService.entityHandler(persistent4);
-        Persistent persistent5 = persistentDao.getOne("1b6e7b0d-8758-4de0-a80f-b54505ac9e91");
-        persistentCustomService.entityHandler(persistent5);
-        Persistent persistent6 = persistentDao.getOne("1b6e7b0d-8758-4de0-a80f-b54505ac9e9d");
-        persistentCustomService.entityHandler(persistent6);
-        Persistent persistent7 = persistentDao.getOne("0c9f71bf-be44-4629-9d42-46bb0950647d");
-        persistentCustomService.entityHandler(persistent7);
+        List<Persistent> persistentList = persistentDao.findAll();
+        for (Persistent persistent :persistentList){
+            persistentCustomService.entityHandler(persistent);
+        }
+//        Persistent persistent1 = persistentDao.getOne("edd90446-98bc-4330-8d93-1ba4ff003af0");
+//        persistentCustomService.entityHandler(persistent1);
+//        Persistent persistent2 = persistentDao.getOne("ea17ecb7-4ab9-4f93-8546-3da3483400aa");
+//        persistentCustomService.entityHandler(persistent2);
+//        Persistent persistent3 = persistentDao.getOne("a714354b-0fbd-4cb0-89b5-4ff3663755cf");
+//        persistentCustomService.entityHandler(persistent3);
+//        Persistent persistent4 = persistentDao.getOne("8e954fce-ac50-45b9-9bbd-fb5eaa839b4f");
+//        persistentCustomService.entityHandler(persistent4);
+//        Persistent persistent5 = persistentDao.getOne("1b6e7b0d-8758-4de0-a80f-b54505ac9e91");
+//        persistentCustomService.entityHandler(persistent5);
+//        Persistent persistent6 = persistentDao.getOne("1b6e7b0d-8758-4de0-a80f-b54505ac9e9d");
+//        persistentCustomService.entityHandler(persistent6);
+//        Persistent persistent7 = persistentDao.getOne("0c9f71bf-be44-4629-9d42-46bb0950647d");
+//        persistentCustomService.entityHandler(persistent7);
     }
 
 }

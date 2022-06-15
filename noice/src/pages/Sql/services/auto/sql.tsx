@@ -1,38 +1,27 @@
 import {request} from 'ice';
 
 export default {
-  sqlPage(pageNumber) {
+  page(pageNumber) {
     return request({
-      url: '/sqlApi/sqlPage',
+      url: '/sqlApi/pageSql',
       method: 'post',
       params: {
         pageNumber,
       },
     });
   },
-  sqlSave(data) {
+  save(data) {
     return request({
-      url: '/sqlApi/sqlSave',
+      url: '/sqlApi/saveSql',
       method: 'post',
       data,
     });
   },
-  sqlDelete(id) {
+  delete(data) {
     return request({
-      url: '/sqlApi/sqlDelete',
+      url: '/sqlApi/deleteSql',
       method: 'post',
-      params: {
-        id,
-      },
-    });
-  },
-  findSqlById(id) {
-    return request({
-      url: '/sqlApi/findSqlById',
-      method: 'post',
-      params: {
-        id,
-      },
+      data,
     });
   },
 };

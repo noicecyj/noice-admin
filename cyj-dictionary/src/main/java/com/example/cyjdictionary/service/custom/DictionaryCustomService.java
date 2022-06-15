@@ -1,6 +1,11 @@
 package com.example.cyjdictionary.service.custom;
 
 import com.example.cyjcommon.entity.Dictionary;
+import com.example.cyjcommon.entity.QCatalog;
+import com.example.cyjcommon.entity.QDictionary;
+import com.example.cyjcommon.service.BaseService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -9,13 +14,18 @@ import java.util.List;
  * @version 1.0
  * @date 2022-01-04
  */
-public interface DictionaryCustomService {
+@Service
+@Transactional(rollbackFor = Exception.class)
+public class DictionaryCustomService extends BaseService {
 
-    List<Dictionary> findCatalogByName(String name);
+    public List<Dictionary> findCatalogByValue(String value) {
+        QDictionary qDictionary = QDictionary.dictionary;
+        QCatalog qCatalog = QCatalog.catalog;
+        return queryFactory.selectFrom(qDictionary)
+                .innerJoin(qCatalog)
+                .on(qDictionary.catalog.id.eq(qCatalog.id))
+                .where(qCatalog.catalogValue.eq(value))
+                .orderBy(qDictionary.sortCode.asc()).fetch();
+    }
 
-    List<Dictionary> findCatalogByValue(String value);
-
-    Dictionary findDictionaryByCatalogValueAndDictionaryKey(String value, String key);
-
-    Dictionary findDictionaryByCatalogValueAndDictionaryValue(String value, String value2);
 }

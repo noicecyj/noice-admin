@@ -1,5 +1,5 @@
 import React from 'react';
-import FlowTenant from '@/pages/FlowTenant/view/auto/flowTenant';
+import FlowTenant from '@/pages/FlowTenant/view/auto/FlowTenant';
 
 function FlowTenantPage() {
   return (
