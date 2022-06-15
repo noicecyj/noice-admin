@@ -36,10 +36,6 @@ const routerConfig = [
         component: AppServicePage,
       },
       {
-        path: '/firstMenu',
-        component: FirstMenuPage,
-      },
-      {
         path: '/bpmu',
         component: BpmnPage,
       },
