@@ -1,4 +1,4 @@
-package com.example.cyjentitycreater.service.custom.Impl;
+package com.example.cyjentitycreater.service.custom;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -16,7 +16,6 @@ import com.example.cyjcommon.service.BaseService;
 import com.example.cyjcommon.utils.BeanUtils;
 import com.example.cyjdictionary.service.custom.DictionaryCustomService;
 import com.example.cyjentitycreater.entity.dto.PropertyCustomDTO;
-import com.example.cyjentitycreater.service.custom.EntityCustomService;
 import com.example.cyjquery.service.custom.SqlCustomService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class EntityCustomServiceImpl extends BaseService implements EntityCustomService {
+public class PersistentCustomService extends BaseService {
 
     private final static String componentPath = "C:/Users/noice/IdeaProjects/noice-admin/noice/src/pages/";
     private final static String POST = "POST";
@@ -75,7 +74,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         this.sqlCustomService = sqlCustomService;
     }
 
-    @Override
     public void generateJavaFile(Persistent persistent) {
         if (persistent == null) {
             return;
@@ -211,7 +209,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         }
     }
 
-    @Override
     public void entityHandler(Persistent persistent) {
         //查询是否存在子实体
         createEntityHandler(persistent);
@@ -1174,7 +1171,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
             if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("    public Page<").append(propertyOut).append("> findAll(Integer pageNumber, String id) {\r\n");
+                sb.append("    public Page<").append(propertyOut).append("> page").append(propertyOut).append("By").append(poName).append("(Integer pageNumber, String id) {\r\n");
                 sb.append("        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by(\"sortCode\").ascending());\r\n");
                 sb.append("        ").append(poName).append(" po = dao.getOne(id);\r\n");
                 sb.append("        ").append(propertyOut).append(" ").append(underPropertyOut).append(" = new ").append(propertyOut).append("();\r\n");
@@ -1313,7 +1310,7 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
                 sb.append("    @Operation(summary = \"根据").append(poName).append("查询所有").append(propertyOut).append("\")\r\n");
                 sb.append("    @PostMapping(value = \"page").append(propertyOut).append("By").append(poName).append("\")\r\n");
                 sb.append("    public ResultVO page").append(propertyOut).append("By").append(poName).append("(@RequestParam(\"pageNumber\") Integer pageNumber, @RequestParam(\"id\") String id) {\r\n");
-                sb.append("        return ResultVO.success(service.findAll(pageNumber, id));\r\n");
+                sb.append("        return ResultVO.success(service.page").append(propertyOut).append("By").append(poName).append("(pageNumber, id));\r\n");
                 sb.append("    }\r\n");
                 sb.append("\r\n");
             }
@@ -1448,7 +1445,6 @@ public class EntityCustomServiceImpl extends BaseService implements EntityCustom
         return new String[]{entityServiceData, poName + "CustomService.java"};
     }
 
-    @Override
     public JSONObject findDataTableAndFormByName(String entityCode) {
         Persistent po = queryFactory.selectFrom(QEntity.entity).where(QEntity.entity.entityCode.eq(entityCode)).fetchOne();
         if (po == null) {

@@ -2,7 +2,7 @@ package com.example.cyjentitycreater;
 
 import com.example.cyjcommon.dao.PersistentDao;
 import com.example.cyjcommon.entity.Persistent;
-import com.example.cyjentitycreater.service.custom.EntityCustomService;
+import com.example.cyjentitycreater.service.custom.PersistentCustomService;
 import lombok.Data;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,7 +36,7 @@ public class CyjEntityCreaterApplicationTest {
     }
 
     @Autowired
-    private EntityCustomService entityCustomService;
+    private PersistentCustomService  persistentCustomService;
     @Autowired
     private PersistentDao persistentDao;
 
@@ -52,7 +52,7 @@ public class CyjEntityCreaterApplicationTest {
 //        Persistent persistent4 = entityDao.getOne("8e954fce-ac50-45b9-9bbd-fb5eaa839b4f");
 //        entityCustomService.entityHandler(persistent4);
         Persistent persistent3 = persistentDao.getOne("1b6e7b0d-8758-4de0-a80f-b54505ac9e91");
-        entityCustomService.entityHandler(persistent3);
+        persistentCustomService.entityHandler(persistent3);
     }
 
 }

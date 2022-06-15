@@ -1,4 +1,4 @@
-import customAppServiceServices from '../../services/custom/appService'
+import customAppServiceServices from '../../services/custom/AppService'
 import {Message} from "@alifd/next";
 
 export default {

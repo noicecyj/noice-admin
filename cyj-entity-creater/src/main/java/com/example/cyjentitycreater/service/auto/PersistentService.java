@@ -1,13 +1,13 @@
-package com.example.cyjentitycreater.service.auto.Impl;
+package com.example.cyjentitycreater.service.auto;
 
 import com.example.cyjcommon.dao.AppServiceDao;
 import com.example.cyjcommon.dao.PersistentDao;
 import com.example.cyjcommon.dao.PropertyDao;
 import com.example.cyjcommon.entity.AppService;
+import com.example.cyjcommon.entity.Authority;
 import com.example.cyjcommon.entity.Persistent;
 import com.example.cyjcommon.service.BaseService;
-import com.example.cyjentitycreater.service.auto.EntityService;
-import com.example.cyjentitycreater.service.auto.PropertyService;
+import com.example.cyjcommon.service.autoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class EntityServiceImpl extends BaseService implements EntityService {
+public class PersistentService extends BaseService implements autoService<Persistent> {
 
     private PersistentDao persistentDao;
     private AppServiceDao appServiceDao;
@@ -77,13 +77,5 @@ public class EntityServiceImpl extends BaseService implements EntityService {
         return persistentDao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
     }
 
-    @Override
-    public Page<Persistent> findAll(Integer pageNumber, AppService appService) {
-        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
-        Persistent persistent = new Persistent();
-        persistent.setAppService(appService);
-        Example<Persistent> example = Example.of(persistent);
-        return persistentDao.findAll(example, pageable);
-    }
 
 }

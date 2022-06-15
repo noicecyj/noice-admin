@@ -1,11 +1,14 @@
 package com.example.cyjentitycreater.controller.custom;
 
-import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Noice
  */
-@Tag(name = "Property")
-public interface PropertyCustomController {
-
+@CrossOrigin
+@RestController
+@RequestMapping(value = "entityCreateApi")
+public class PropertyCustomController {
 }

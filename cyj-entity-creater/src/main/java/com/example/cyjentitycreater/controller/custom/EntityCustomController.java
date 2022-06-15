@@ -2,24 +2,36 @@ package com.example.cyjentitycreater.controller.custom;
 
 import com.example.cyjcommon.entity.Persistent;
 import com.example.cyjcommon.utils.ResultVO;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.web.bind.annotation.PostMapping;
+import com.example.cyjentitycreater.service.custom.PersistentCustomService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Noice
  */
-@Tag(name = "Entity")
-public interface EntityCustomController {
+@CrossOrigin
+@RestController
+@RequestMapping(value = "entityCreateApi")
+public class EntityCustomController {
 
-    @Operation(summary = "生成实体类文件")
-    @PostMapping(value = "createEntity")
-    ResultVO createEntity(@RequestBody Persistent po);
+    private PersistentCustomService persistentCustomService;
 
-    @Operation(summary = "创建表格与表单")
-    @PostMapping(value = "findDataTableAndFormByName")
-    ResultVO findDataTableAndFormByName(@RequestParam("entityCode") String entityCode);
+    @Autowired
+    public void setPersistentCustomService(PersistentCustomService persistentCustomService) {
+        this.persistentCustomService = persistentCustomService;
+    }
+
+    public ResultVO createEntity(@RequestBody Persistent po) {
+        persistentCustomService.generateJavaFile(po);
+//        entityCustomService.createComponentFile(po);
+        return ResultVO.success();
+    }
+
+    public ResultVO findDataTableAndFormByName(String entityCode) {
+        return ResultVO.success(persistentCustomService.findDataTableAndFormByName(entityCode));
+    }
 
 }
