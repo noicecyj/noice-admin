@@ -3,10 +3,8 @@ package com.example.cyjquery.service.custom;
 import com.example.cyjcommon.entity.QSql;
 import com.example.cyjcommon.entity.Sql;
 import com.example.cyjcommon.service.BaseService;
-import com.example.cyjquery.dao.SqlCustomDao;
 import org.hibernate.query.internal.NativeQueryImpl;
 import org.hibernate.transform.Transformers;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

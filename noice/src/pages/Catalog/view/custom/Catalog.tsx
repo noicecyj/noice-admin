@@ -10,7 +10,7 @@ import React from 'react';
 //   },
 // };
 
-function CustomColumnCatalog(props) {
+function CustomColumn(props) {
   // const { value, index, record } = props;
   // const [customCatalogState, customCatalogDispatchers] = pageStore.useModel('customCatalog');
 
@@ -20,4 +20,4 @@ function CustomColumnCatalog(props) {
   );
 }
 
-export {CustomColumnCatalog};
+export {CustomColumn};

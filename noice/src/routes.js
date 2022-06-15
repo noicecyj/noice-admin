@@ -5,7 +5,6 @@ import PersistentPage from '@/pages/Persistent';
 import CatalogPage from '@/pages/Catalog';
 import SqlPage from '@/pages/Sql';
 import AppServicePage from '@/pages/AppService';
-import BpmnPage from '@/pages/Bpmn';
 import FlowUserPage from '@/pages/FlowUser';
 import FlowGroupPage from '@/pages/FlowGroup';
 import FlowTenantPage from '@/pages/FlowTenant';
@@ -34,10 +33,6 @@ const routerConfig = [
       {
         path: '/appService',
         component: AppServicePage,
-      },
-      {
-        path: '/bpmu',
-        component: BpmnPage,
       },
       {
         path: '/flowUser',

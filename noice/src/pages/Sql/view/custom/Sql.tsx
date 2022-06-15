@@ -10,7 +10,7 @@ import React from 'react';
 //   },
 // };
 
-function CustomColumnSql(props) {
+function CustomColumn(props) {
   // const { value, index, record } = props;
   // const [customSqlState, customSqlDispatchers] = pageStore.useModel('customSql');
 
@@ -20,4 +20,4 @@ function CustomColumnSql(props) {
   );
 }
 
-export {CustomColumnSql};
+export {CustomColumn};
