@@ -3,15 +3,14 @@ package com.example.cyjentitycreater.service.custom;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.cyjcommon.dao.AuthorityDao;
-import com.example.cyjcommon.dao.PersistentDao;
-import com.example.cyjcommon.dao.PropertyDao;
 import com.example.cyjcommon.entity.AppService;
 import com.example.cyjcommon.entity.Authority;
 import com.example.cyjcommon.entity.Dictionary;
 import com.example.cyjcommon.entity.Persistent;
 import com.example.cyjcommon.entity.Property;
 import com.example.cyjcommon.entity.QAuthority;
-import com.example.cyjcommon.entity.QEntity;
+import com.example.cyjcommon.entity.QPersistent;
+import com.example.cyjcommon.entity.QProperty;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjcommon.utils.BeanUtils;
 import com.example.cyjdictionary.service.custom.DictionaryCustomService;
@@ -43,21 +42,9 @@ public class PersistentCustomService extends BaseService {
     private final static String STATUS = "有效";
     private final static String SORTCODE = "10";
     private final static String commonPath = "C:/Users/noice/IdeaProjects/noice-admin/cyj-common/src/main/java/com/example/cyjcommon";
-    private PersistentDao persistentDao;
-    private PropertyDao propertyDao;
     private AuthorityDao authorityDao;
     private DictionaryCustomService dictionaryCustomService;
     private SqlCustomService sqlCustomService;
-
-    @Autowired
-    public void setEntityDao(PersistentDao persistentDao) {
-        this.persistentDao = persistentDao;
-    }
-
-    @Autowired
-    public void setPropertyDao(PropertyDao propertyDao) {
-        this.propertyDao = propertyDao;
-    }
 
     @Autowired
     public void setAuthorityDao(AuthorityDao authorityDao) {
@@ -82,17 +69,13 @@ public class PersistentCustomService extends BaseService {
     }
 
     private void authorityHandler(Persistent persistent) {
-        List<Property> propertyList = propertyDao.findByPersistentOrderBySortCode(persistent);
-        List<Property> outPropertyList = propertyList.stream()
-                .filter(property -> "是".equals(property.getPropertyOut())).collect(Collectors.toList());
+        List<Property> propertyList = queryFactory.selectFrom(QProperty.property).where(QProperty.property.persistentId.eq(persistent.getId())).fetch();
+        List<Property> outPropertyList = propertyList.stream().filter(property -> "是".equals(property.getPropertyOut())).collect(Collectors.toList());
         //驼峰名
         String underPoName = BeanUtils.underline2Camel(persistent.getPersistentCode());
         //文件名
         String poName = BeanUtils.captureName(underPoName);
-        Authority findAll = queryFactory
-                .selectFrom(QAuthority.authority)
-                .where(QAuthority.authority.authorityPath
-                        .eq(persistent.getAppService().getAppServiceApi() + "/page" + poName)).fetchOne();
+        Authority findAll = queryFactory.selectFrom(QAuthority.authority).where(QAuthority.authority.authorityPath.eq(persistent.getAppService().getAppServiceApi() + "/page" + poName)).fetchOne();
         if (findAll == null) {
             findAll = new Authority();
             findAll.setAuthorityMethod(POST);
@@ -116,10 +99,7 @@ public class PersistentCustomService extends BaseService {
                 manyToManyAuthorityHandler(persistent, poName, propertyPoName);
             }
         }
-        Authority save = queryFactory
-                .selectFrom(QAuthority.authority)
-                .where(QAuthority.authority.authorityPath
-                        .eq(persistent.getAppService().getAppServiceApi() + "/save" + poName)).fetchOne();
+        Authority save = queryFactory.selectFrom(QAuthority.authority).where(QAuthority.authority.authorityPath.eq(persistent.getAppService().getAppServiceApi() + "/save" + poName)).fetchOne();
         if (save == null) {
             save = new Authority();
             save.setAuthorityMethod(POST);
@@ -133,10 +113,7 @@ public class PersistentCustomService extends BaseService {
             save.setStatus(STATUS);
             authorityDao.save(save);
         }
-        Authority delete = queryFactory
-                .selectFrom(QAuthority.authority)
-                .where(QAuthority.authority.authorityPath
-                        .eq(persistent.getAppService().getAppServiceApi() + "/delete" + poName)).fetchOne();
+        Authority delete = queryFactory.selectFrom(QAuthority.authority).where(QAuthority.authority.authorityPath.eq(persistent.getAppService().getAppServiceApi() + "/delete" + poName)).fetchOne();
         if (delete == null) {
             delete = new Authority();
             delete.setAuthorityMethod(POST);
@@ -153,10 +130,7 @@ public class PersistentCustomService extends BaseService {
     }
 
     private void oneToManyAuthorityHandler(Persistent persistent, String poName, String propertyPoName) {
-        Authority oneToMany = queryFactory
-                .selectFrom(QAuthority.authority)
-                .where(QAuthority.authority.authorityPath
-                        .eq(persistent.getAppService().getAppServiceApi() + "/page" + propertyPoName + "By" + poName)).fetchOne();
+        Authority oneToMany = queryFactory.selectFrom(QAuthority.authority).where(QAuthority.authority.authorityPath.eq(persistent.getAppService().getAppServiceApi() + "/page" + propertyPoName + "By" + poName)).fetchOne();
         if (oneToMany == null) {
             oneToMany = new Authority();
             oneToMany.setAuthorityMethod(POST);
@@ -173,14 +147,8 @@ public class PersistentCustomService extends BaseService {
     }
 
     private void manyToManyAuthorityHandler(Persistent persistent, String poName, String propertyPoName) {
-        Authority manyToMany1 = queryFactory
-                .selectFrom(QAuthority.authority)
-                .where(QAuthority.authority.authorityPath
-                        .eq(persistent.getAppService().getAppServiceApi() + "/" + propertyPoName + "By" + poName)).fetchOne();
-        Authority manyToMany2 = queryFactory
-                .selectFrom(QAuthority.authority)
-                .where(QAuthority.authority.authorityPath
-                        .eq(persistent.getAppService().getAppServiceApi() + "/" + propertyPoName + "Save" + poName)).fetchOne();
+        Authority manyToMany1 = queryFactory.selectFrom(QAuthority.authority).where(QAuthority.authority.authorityPath.eq(persistent.getAppService().getAppServiceApi() + "/" + propertyPoName + "By" + poName)).fetchOne();
+        Authority manyToMany2 = queryFactory.selectFrom(QAuthority.authority).where(QAuthority.authority.authorityPath.eq(persistent.getAppService().getAppServiceApi() + "/" + propertyPoName + "Save" + poName)).fetchOne();
         if (manyToMany1 == null) {
             manyToMany1 = new Authority();
             manyToMany1.setAuthorityMethod(POST);
@@ -228,17 +196,15 @@ public class PersistentCustomService extends BaseService {
         String appPath = appService.getAppServicePath();
         //服务接口
         String appApi = appService.getAppServiceApi();
-        List<Property> propertyList = propertyDao.findByPersistentOrderBySortCode(persistent);
+        List<Property> propertyList = queryFactory.selectFrom(QProperty.property).where(QProperty.property.persistentId.eq(persistent.getId())).fetch();
         Map<String, String[]> entityObj = new HashMap<>();
-        List<Property> inPropertyList = propertyList.stream()
-                .filter(property -> !"是".equals(property.getPropertyOut())).collect(Collectors.toList());
-        List<Property> outPropertyList = propertyList.stream()
-                .filter(property -> "是".equals(property.getPropertyOut())).collect(Collectors.toList());
+        List<Property> inPropertyList = propertyList.stream().filter(property -> !"是".equals(property.getPropertyOut())).collect(Collectors.toList());
+        List<Property> outPropertyList = propertyList.stream().filter(property -> "是".equals(property.getPropertyOut())).collect(Collectors.toList());
         entityObj.put(commonPath + "/entity", poGenerate(persistent, inPropertyList, outPropertyList, poName, underPoName));
         entityObj.put(commonPath + "/dao", daoGenerate(poName));
         entityObj.put(appPath + "/service/auto", serviceGenerate(outPropertyList, poName, appPath));
         entityObj.put(appPath + "/controller/auto", controllerGenerate(outPropertyList, poName, appPath, appApi));
-        entityObj.put(componentPath + poName + "/services/auto", servicesAutoGenerate(outPropertyList, appApi, underPoName, poName));
+        entityObj.put(componentPath + poName + "/services/auto", servicesAutoGenerate(outPropertyList, appApi, poName));
         entityObj.put(componentPath + poName + "/models/auto", modelsAutoGenerate(outPropertyList, underPoName, poName));
         entityObj.put(componentPath + poName + "/view/auto", viewAutoGenerate(outPropertyList, underPoName, poName));
         entityObj.put(componentPath + poName, indexGenerate(poName));
@@ -252,7 +218,7 @@ public class PersistentCustomService extends BaseService {
         createEntityCodeHandler(entityObj, entityCustomObj);
     }
 
-    private String[] servicesAutoGenerate(List<Property> outPropertyList, String appApi, String underPoName, String poName) {
+    private String[] servicesAutoGenerate(List<Property> outPropertyList, String appApi, String poName) {
         StringBuilder sb = new StringBuilder();
         sb.append("import {request} from 'ice';\r\n");
         sb.append("\r\n");
@@ -368,47 +334,12 @@ public class PersistentCustomService extends BaseService {
 
 
     private String[] indexGenerate(String poName) {
-        String viewData = "import React from 'react';\r\n" +
-                "import " + poName + " from '@/pages/" + poName + "/view/auto/" + poName + "';\r\n" +
-                "\r\n" +
-                "function " + poName + "Page() {\r\n" +
-                "  return (\r\n" +
-                "    <div>\r\n" +
-                "      <" + poName + "/>\r\n" +
-                "    </div>\r\n" +
-                "  );\r\n" +
-                "}\r\n" +
-                "\r\n" +
-                "export default " + poName + "Page;\r\n";
+        String viewData = "import React from 'react';\r\n" + "import " + poName + " from '@/pages/" + poName + "/view/auto/" + poName + "';\r\n" + "\r\n" + "function " + poName + "Page() {\r\n" + "  return (\r\n" + "    <div>\r\n" + "      <" + poName + "/>\r\n" + "    </div>\r\n" + "  );\r\n" + "}\r\n" + "\r\n" + "export default " + poName + "Page;\r\n";
         return new String[]{viewData, "index.tsx"};
     }
 
     private String[] modelsCustomGenerate(String poName) {
-        String viewData = "export default {\r\n" +
-                "\r\n" +
-                "  namespace: 'custom" + poName + "',\r\n" +
-                "\r\n" +
-                "  state: {\r\n" +
-                "    customMethodName1: null,\r\n" +
-                "    customMethodName2: null,\r\n" +
-                "    customMethodName3: null,\r\n" +
-                "    customFrom: [],\r\n" +
-                "  },\r\n" +
-                "\r\n" +
-                "  reducers: {\r\n" +
-                "    setState(prevState, payload) {\r\n" +
-                "      return {...prevState, ...payload};\r\n" +
-                "    },\r\n" +
-                "  },\r\n" +
-                "  effects: () => ({\r\n" +
-                "    customMethod1() {\r\n" +
-                "    },\r\n" +
-                "    customMethod2() {\r\n" +
-                "    },\r\n" +
-                "    customMethod3() {\r\n" +
-                "    },\r\n" +
-                "  }),\r\n" +
-                "};\r\n";
+        String viewData = "export default {\r\n" + "\r\n" + "  namespace: 'custom" + poName + "',\r\n" + "\r\n" + "  state: {\r\n" + "    customMethodName1: null,\r\n" + "    customMethodName2: null,\r\n" + "    customMethodName3: null,\r\n" + "    customFrom: [],\r\n" + "  },\r\n" + "\r\n" + "  reducers: {\r\n" + "    setState(prevState, payload) {\r\n" + "      return {...prevState, ...payload};\r\n" + "    },\r\n" + "  },\r\n" + "  effects: () => ({\r\n" + "    customMethod1() {\r\n" + "    },\r\n" + "    customMethod2() {\r\n" + "    },\r\n" + "    customMethod3() {\r\n" + "    },\r\n" + "  }),\r\n" + "};\r\n";
         return new String[]{viewData, poName + ".tsx"};
     }
 
@@ -418,19 +349,7 @@ public class PersistentCustomService extends BaseService {
     }
 
     private String[] viewCustomGenerate(String poName) {
-        String viewData = "import React from \"react\";\r\n" +
-                "\r\n" +
-                "function CustomColumn(props) {\r\n" +
-                "\r\n" +
-                "  console.log(props)\r\n" +
-                "\r\n" +
-                "  return (\r\n" +
-                "    <></>\r\n" +
-                "  );\r\n" +
-                "\r\n" +
-                "}\r\n" +
-                "\r\n" +
-                "export {CustomColumn};\r\n";
+        String viewData = "import React from \"react\";\r\n" + "\r\n" + "function CustomColumn(props) {\r\n" + "\r\n" + "  console.log(props)\r\n" + "\r\n" + "  return (\r\n" + "    <></>\r\n" + "  );\r\n" + "\r\n" + "}\r\n" + "\r\n" + "export {CustomColumn};\r\n";
         return new String[]{viewData, poName + ".tsx"};
     }
 
@@ -655,7 +574,7 @@ public class PersistentCustomService extends BaseService {
         sb.append("import DataFormTemple from '@/components/dataForm';\r\n");
         sb.append("import DataTableTemple from '@/components/dataTable';\r\n");
         sb.append("import {CustomColumn} from '@/pages/").append(poName).append("/view/custom/").append(poName).append("';\r\n");
-        if (BeanUtils.ifManyToMany(outPropertyList) || BeanUtils.ifOneToMany(outPropertyList)){
+        if (BeanUtils.ifManyToMany(outPropertyList) || BeanUtils.ifOneToMany(outPropertyList)) {
             sb.append("import {Dialog} from \"@alifd/next\";\r\n");
         }
         sb.append("\r\n");
@@ -736,8 +655,7 @@ public class PersistentCustomService extends BaseService {
     }
 
     private void oneToManyViewMethodHandler(List<Property> outPropertyList, StringBuilder sb, String poName) {
-        List<Property> oneToManyPropertyList = outPropertyList.stream()
-                .filter(property -> BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())).collect(Collectors.toList());
+        List<Property> oneToManyPropertyList = outPropertyList.stream().filter(property -> BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())).collect(Collectors.toList());
         for (int i = 0; i < oneToManyPropertyList.size(); i++) {
             Property property = oneToManyPropertyList.get(i);
             String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
@@ -751,8 +669,7 @@ public class PersistentCustomService extends BaseService {
     }
 
     private void manyToManyViewMethodHandler(List<Property> outPropertyList, StringBuilder sb, String poName) {
-        List<Property> manyToManyPropertyList = outPropertyList.stream()
-                .filter(property -> BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())).collect(Collectors.toList());
+        List<Property> manyToManyPropertyList = outPropertyList.stream().filter(property -> BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())).collect(Collectors.toList());
         for (int i = 0; i < manyToManyPropertyList.size(); i++) {
             Property property = manyToManyPropertyList.get(i);
             String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
@@ -1031,18 +948,7 @@ public class PersistentCustomService extends BaseService {
     }
 
     public String[] daoGenerate(String poName) {
-        String entityDaoData =
-                "package com.example.cyjcommon.dao;\r\n" +
-                        "\r\n" +
-                        "import com.example.cyjcommon.entity." + poName + ";\r\n" +
-                        "import org.springframework.data.jpa.repository.JpaRepository;\r\n" +
-                        "\r\n" +
-                        "/**\r\n" +
-                        " * @author Noice\r\n" +
-                        " */\r\n" +
-                        "public interface " + poName + "Dao extends JpaRepository<" + poName + ", String> {\r\n" +
-                        "\r\n" +
-                        "}\r\n";
+        String entityDaoData = "package com.example.cyjcommon.dao;\r\n" + "\r\n" + "import com.example.cyjcommon.entity." + poName + ";\r\n" + "import org.springframework.data.jpa.repository.JpaRepository;\r\n" + "\r\n" + "/**\r\n" + " * @author Noice\r\n" + " */\r\n" + "public interface " + poName + "Dao extends JpaRepository<" + poName + ", String> {\r\n" + "\r\n" + "}\r\n";
         return new String[]{entityDaoData, poName + "Dao.java"};
     }
 
@@ -1445,12 +1351,12 @@ public class PersistentCustomService extends BaseService {
         return new String[]{entityServiceData, poName + "CustomService.java"};
     }
 
-    public JSONObject findDataTableAndFormByName(String entityCode) {
-        Persistent po = queryFactory.selectFrom(QEntity.entity).where(QEntity.entity.entityCode.eq(entityCode)).fetchOne();
-        if (po == null) {
+    public JSONObject findDataTableAndFormByName(String persistentCode) {
+        Persistent persistent = queryFactory.selectFrom(QPersistent.persistent).where(QPersistent.persistent.persistentCode.eq(persistentCode)).fetchOne();
+        if (persistent == null) {
             return null;
         }
-        List<Property> propertyList = propertyDao.findByPersistentOrderBySortCode(po);
+        List<Property> propertyList = queryFactory.selectFrom(QProperty.property).where(QProperty.property.persistentId.eq(persistent.getId())).fetch();
         List<PropertyCustomDTO> propertyCustomDTOList = new ArrayList<>();
         for (Property property : propertyList) {
             PropertyCustomDTO propertyCustomDTO = new PropertyCustomDTO();
@@ -1499,22 +1405,11 @@ public class PersistentCustomService extends BaseService {
         jsonObject.put("dataTable", propertyCustomDTOS);
         jsonObject.put("dataForm", propertyCustomDTOS);
         JSONObject customData = new JSONObject();
-        customData.put("customType", "是".equals(po.getPersistentCustomTable()));
-        customData.put("customForm", "是".equals(po.getPersistentCustomForm()));
-        customData.put("editEnable", "是".equals(po.getPersistentEditEnable()));
-        customData.put("formType", po.getPersistentFormType());
-        customData.put("formCol", po.getPersistentFormRow());
-//        if ("是".equals(po.getEntitySelf())) {
-//            JSONObject outSelf = new JSONObject();
-//            outSelf.put("label", po.getEntityName());
-//            outSelf.put("name", BeanUtils.underline2Camel(po.getEntityCode()) + "Id");
-//            outSelf.put("code", po.getEntityCode() + "_id");
-//            JSONArray mapOutList = new JSONArray();
-//            List<Map<String, Object>> dateSourceList = sqlCustomService.queryBySqlValue("ENTITY_FORM_DATESOURSE");
-//            dateSourceHandler(mapOutList, dateSourceList);
-//            outSelf.put("dataSource", mapOutList);
-//            customData.put("outSelf", outSelf);
-//        }
+        customData.put("customType", "是".equals(persistent.getPersistentCustomTable()));
+        customData.put("customForm", "是".equals(persistent.getPersistentCustomForm()));
+        customData.put("editEnable", "是".equals(persistent.getPersistentEditEnable()));
+        customData.put("formType", persistent.getPersistentFormType());
+        customData.put("formCol", persistent.getPersistentFormRow());
         jsonObject.put("customData", customData);
         return jsonObject;
     }
