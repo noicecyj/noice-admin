@@ -3,6 +3,7 @@ package com.example.cyjentitycreater.service.custom;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.cyjcommon.dao.AuthorityDao;
+import com.example.cyjcommon.dao.SqlDao;
 import com.example.cyjcommon.entity.AppService;
 import com.example.cyjcommon.entity.Authority;
 import com.example.cyjcommon.entity.Dictionary;
@@ -11,6 +12,8 @@ import com.example.cyjcommon.entity.Property;
 import com.example.cyjcommon.entity.QAuthority;
 import com.example.cyjcommon.entity.QPersistent;
 import com.example.cyjcommon.entity.QProperty;
+import com.example.cyjcommon.entity.QSql;
+import com.example.cyjcommon.entity.Sql;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjcommon.utils.BeanUtils;
 import com.example.cyjdictionary.service.custom.DictionaryCustomService;
@@ -43,8 +46,14 @@ public class PersistentCustomService extends BaseService {
     private final static String SORTCODE = "10";
     private final static String commonPath = "C:/Users/noice/IdeaProjects/noice-admin/cyj-common/src/main/java/com/example/cyjcommon";
     private AuthorityDao authorityDao;
+    private SqlDao sqlDao;
     private DictionaryCustomService dictionaryCustomService;
     private SqlCustomService sqlCustomService;
+
+    @Autowired
+    public void setSqlDao(SqlDao sqlDao) {
+        this.sqlDao = sqlDao;
+    }
 
     @Autowired
     public void setAuthorityDao(AuthorityDao authorityDao) {
@@ -181,6 +190,21 @@ public class PersistentCustomService extends BaseService {
         //查询是否存在子实体
         createEntityHandler(persistent);
         authorityHandler(persistent);
+        sqlHandler(persistent);
+    }
+
+    private void sqlHandler(Persistent persistent) {
+        String dataSourceType = "DATABASE_" + persistent.getPersistentCode().toUpperCase() + "_TYPE";
+        Sql sql = queryFactory.selectFrom(QSql.sql).where(QSql.sql.sqlDescription.eq(dataSourceType)).fetchOne();
+        if (sql == null) {
+            sql = new Sql();
+            String sqlStr = "select " + persistent.getPersistentCode() + "_name as label, id as value from t_" + persistent.getPersistentCode();
+            sql.setSqlStr(sqlStr);
+            sql.setSqlType("查询");
+            sql.setStatus("有效");
+            sql.setSortCode("10");
+            sqlDao.save(sql);
+        }
     }
 
     private void createEntityHandler(Persistent persistent) {
