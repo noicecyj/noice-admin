@@ -40,6 +40,14 @@ public class AppService implements Serializable {
     @Column(name = "id", length = 36)
     private String id;
 
+    @NotNull(message = "服务名称不能为空")
+    @Column(name = "app_service_name")
+    private String appServiceName;
+
+    @NotNull(message = "服务路径不能为空")
+    @Column(name = "app_service_path")
+    private String appServicePath;
+
     @NotNull(message = "服务接口不能为空")
     @Column(name = "app_service_api")
     private String appServiceApi;
@@ -47,14 +55,6 @@ public class AppService implements Serializable {
     @NotNull(message = "服务端口不能为空")
     @Column(name = "app_service_port")
     private String appServicePort;
-
-    @NotNull(message = "服务路径不能为空")
-    @Column(name = "app_service_path")
-    private String appServicePath;
-
-    @NotNull(message = "服务名称不能为空")
-    @Column(name = "app_service_name")
-    private String appServiceName;
 
     @JsonIgnore
     @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "appService")

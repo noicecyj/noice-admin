@@ -88,7 +88,7 @@ export default {
       dispatch.flowTenant.setState(payload);
     },
     async findDataTableAndFormByName() {
-      const ret = await initService.findDataTableAndFormByName('flowTenant');
+      const ret = await initService.findDataTableAndFormByName('flow_tenant');
       await this.page(1);
       const payload = {
         table: ret.data.dataTable,

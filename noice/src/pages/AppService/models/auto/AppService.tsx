@@ -90,7 +90,7 @@ export default {
       dispatch.appService.setState(payload);
     },
     async findDataTableAndFormByName() {
-      const ret = await initService.findDataTableAndFormByName('appService');
+      const ret = await initService.findDataTableAndFormByName('app_service');
       await this.page(1);
       const payload = {
         table: ret.data.dataTable,

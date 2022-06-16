@@ -88,7 +88,7 @@ export default {
       dispatch.flowUser.setState(payload);
     },
     async findDataTableAndFormByName() {
-      const ret = await initService.findDataTableAndFormByName('flowUser');
+      const ret = await initService.findDataTableAndFormByName('flow_user');
       await this.page(1);
       const payload = {
         table: ret.data.dataTable,
