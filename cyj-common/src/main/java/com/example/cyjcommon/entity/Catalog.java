@@ -51,7 +51,7 @@ public class Catalog implements Serializable {
     private String catalogDescription;
 
     @JsonIgnore
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "catalog")
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "catalog")
     @BatchSize(size = 20)
     private Set<Dictionary> dictionary = new HashSet<>();
 

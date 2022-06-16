@@ -57,12 +57,12 @@ public class AppService implements Serializable {
     private String appServiceName;
 
     @JsonIgnore
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "appService")
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "appService")
     @BatchSize(size = 20)
     private Set<Authority> authority = new HashSet<>();
 
     @JsonIgnore
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "appService")
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "appService")
     @BatchSize(size = 20)
     private Set<Persistent> persistent = new HashSet<>();
 

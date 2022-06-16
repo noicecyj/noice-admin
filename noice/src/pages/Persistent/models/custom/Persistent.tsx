@@ -1,6 +1,9 @@
+import customServices from '../../services/custom/Persistent';
+import {Message} from '@alifd/next';
+
 export default {
 
-  namespace: 'customPersistent',
+  namespace: 'persistentCustom',
 
   state: {
     customMethodName1: null,
@@ -14,12 +17,22 @@ export default {
       return {...prevState, ...payload};
     },
   },
+
   effects: () => ({
     customMethod1() {
     },
     customMethod2() {
     },
     customMethod3() {
+    },
+    createEntityFile(data) {
+      customServices.createEntityFile(data).then((res) => {
+        if (res.code === 200) {
+          Message.success('生成成功');
+        } else {
+          Message.error('生成失败');
+        }
+      });
     },
   }),
 };

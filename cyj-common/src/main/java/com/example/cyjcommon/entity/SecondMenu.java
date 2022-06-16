@@ -47,7 +47,7 @@ public class SecondMenu implements Serializable {
     @Column(name = "second_menu_component")
     private String secondMenuComponent;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.REMOVE})
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.REMOVE})
     @JoinColumn(name = "first_menu_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
     private FirstMenu firstMenu;
 

@@ -52,7 +52,7 @@ public class Enterprise implements Serializable {
     private String enterpriseDescription;
 
     @JsonIgnore
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "enterprise")
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "enterprise")
     @BatchSize(size = 20)
     private Set<User> user = new HashSet<>();
 

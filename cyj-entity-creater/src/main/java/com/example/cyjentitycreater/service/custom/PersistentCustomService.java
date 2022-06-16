@@ -184,6 +184,7 @@ public class PersistentCustomService extends BaseService {
     }
 
     private void createEntityHandler(Persistent persistent) {
+        String persistentCode = persistent.getPersistentCode();
         //驼峰名
         String underPoName = BeanUtils.underline2Camel(persistent.getPersistentCode());
         //文件名
@@ -205,7 +206,7 @@ public class PersistentCustomService extends BaseService {
         entityObj.put(appPath + "/service/auto", serviceGenerate(outPropertyList, poName, appPath));
         entityObj.put(appPath + "/controller/auto", controllerGenerate(outPropertyList, poName, appPath, appApi));
         entityObj.put(componentPath + poName + "/services/auto", servicesAutoGenerate(outPropertyList, appApi, poName));
-        entityObj.put(componentPath + poName + "/models/auto", modelsAutoGenerate(outPropertyList, underPoName, poName));
+        entityObj.put(componentPath + poName + "/models/auto", modelsAutoGenerate(outPropertyList, underPoName, poName, persistentCode));
         entityObj.put(componentPath + poName + "/view/auto", viewAutoGenerate(outPropertyList, underPoName, poName));
         try {
             BeanUtils.createJavaFile(componentPath + poName, indexGenerate(poName));
@@ -357,7 +358,7 @@ public class PersistentCustomService extends BaseService {
         return new String[]{viewData, poName + ".tsx"};
     }
 
-    private String[] modelsAutoGenerate(List<Property> outPropertyList, String underPoName, String poName) {
+    private String[] modelsAutoGenerate(List<Property> outPropertyList, String underPoName, String poName, String persistentCode) {
         StringBuilder sb = new StringBuilder();
         sb.append("import initService from '@/services/init';\r\n");
         sb.append("import {Message} from \"@alifd/next\";\r\n");
@@ -450,7 +451,7 @@ public class PersistentCustomService extends BaseService {
         sb.append("      dispatch.").append(underPoName).append(".setState(payload);\r\n");
         sb.append("    },\r\n");
         sb.append("    async findDataTableAndFormByName() {\r\n");
-        sb.append("      const ret = await initService.findDataTableAndFormByName('").append(underPoName).append("');\r\n");
+        sb.append("      const ret = await initService.findDataTableAndFormByName('").append(persistentCode).append("');\r\n");
         sb.append("      await this.page(1);\r\n");
         sb.append("      const payload = {\r\n");
         sb.append("        table: ret.data.dataTable,\r\n");
@@ -483,7 +484,7 @@ public class PersistentCustomService extends BaseService {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("    async page").append(propertyOut).append("By").append(poName).append("(data) {\r\n");
-                sb.append("      const ret = await initService.findDataTableAndFormByName('").append(underPropertyOut).append("');\r\n");
+                sb.append("      const ret = await initService.findDataTableAndFormByName('").append(property.getPropertyCode()).append("');\r\n");
                 sb.append("      const dataRes = await service.page").append(propertyOut).append("By").append(poName).append("(data.current, data.id);\r\n");
                 sb.append("      const payload = {\r\n");
                 sb.append("        table: ret.data.dataTable,\r\n");
@@ -913,7 +914,7 @@ public class PersistentCustomService extends BaseService {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("    @JsonIgnore\r\n");
-                sb.append("    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = \"").append(underPoName).append("\")\r\n");
+                sb.append("    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = \"").append(underPoName).append("\")\r\n");
                 sb.append("    @BatchSize(size = 20)\r\n");
                 sb.append("    private Set<").append(propertyOut).append("> ").append(underPropertyOut).append(" = new HashSet<>();\r\n");
                 sb.append("\r\n");

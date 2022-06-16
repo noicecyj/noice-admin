@@ -69,12 +69,12 @@ public class Persistent implements Serializable {
     private Integer persistentFormRow;
 
     @JsonIgnore
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "persistent")
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "persistent")
     @BatchSize(size = 20)
     private Set<Authority> authority = new HashSet<>();
 
     @JsonIgnore
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "persistent")
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "persistent")
     @BatchSize(size = 20)
     private Set<Property> property = new HashSet<>();
 
