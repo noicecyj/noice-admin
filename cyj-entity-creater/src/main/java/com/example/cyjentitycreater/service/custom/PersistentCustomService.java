@@ -70,7 +70,7 @@ public class PersistentCustomService extends BaseService {
 
     private void authorityHandler(Persistent persistent) {
         List<Property> propertyList = queryFactory.selectFrom(QProperty.property).where(QProperty.property.persistentId.eq(persistent.getId())).orderBy(QProperty.property.sortCode.asc()).fetch();
-        List<Property> outPropertyList = propertyList.stream().filter(property -> "是".equals(property.getPropertyOut())).collect(Collectors.toList());
+        List<Property> outPropertyList = propertyList.stream().filter(property -> BeanUtils.YES.equals(property.getPropertyOut())).collect(Collectors.toList());
         //驼峰名
         String underPoName = BeanUtils.underline2Camel(persistent.getPersistentCode());
         //文件名
@@ -199,8 +199,8 @@ public class PersistentCustomService extends BaseService {
         String appApi = appService.getAppServiceApi();
         List<Property> propertyList = queryFactory.selectFrom(QProperty.property).where(QProperty.property.persistentId.eq(persistent.getId())).orderBy(QProperty.property.sortCode.asc()).fetch();
         Map<String, String[]> entityObj = new HashMap<>();
-        List<Property> inPropertyList = propertyList.stream().filter(property -> !"是".equals(property.getPropertyOut())).collect(Collectors.toList());
-        List<Property> outPropertyList = propertyList.stream().filter(property -> "是".equals(property.getPropertyOut())).collect(Collectors.toList());
+        List<Property> inPropertyList = propertyList.stream().filter(property -> BeanUtils.NO.equals(property.getPropertyOut())).collect(Collectors.toList());
+        List<Property> outPropertyList = propertyList.stream().filter(property -> BeanUtils.YES.equals(property.getPropertyOut())).collect(Collectors.toList());
         entityObj.put(commonPath + "/entity", poGenerate(persistent, inPropertyList, outPropertyList, poName, underPoName));
         entityObj.put(commonPath + "/dao", daoGenerate(poName));
         entityObj.put(appPath + "/service/auto", serviceGenerate(outPropertyList, poName, appPath));
@@ -895,7 +895,7 @@ public class PersistentCustomService extends BaseService {
 
     private void propertyEntityHandler(List<Property> inPropertyList, StringBuilder sb) {
         for (Property property : inPropertyList) {
-            if (StringUtils.isNotEmpty(property.getPropertyRequired()) && "是".equals(property.getPropertyRequired())) {
+            if (StringUtils.isNotEmpty(property.getPropertyRequired()) && BeanUtils.YES.equals(property.getPropertyRequired())) {
                 sb.append("    @NotNull(message = \"").append(property.getPropertyLabel()).append("不能为空\")\r\n");
             }
             if (StringUtils.isNotEmpty(property.getPropertyLength())) {
@@ -1369,7 +1369,7 @@ public class PersistentCustomService extends BaseService {
             propertyCustomDTO.setPropertyCode(property.getPropertyCode());
             propertyCustomDTO.setPropertyName(BeanUtils.underline2Camel(property.getPropertyCode()));
             propertyCustomDTO.setPropertyDirection(property.getPropertyDirection());
-            propertyCustomDTO.setPropertyDisplay("否".equals(property.getPropertyDisplay()));
+            propertyCustomDTO.setPropertyDisplay(BeanUtils.NO.equals(property.getPropertyDisplay()));
             propertyCustomDTO.setPropertyDefaultValue(property.getPropertyDefaultValue());
             propertyCustomDTO.setPropertyLabel(property.getPropertyLabel());
             propertyCustomDTO.setPropertyMode(property.getPropertyMode());
@@ -1378,8 +1378,8 @@ public class PersistentCustomService extends BaseService {
             propertyCustomDTO.setSortCode(property.getSortCode());
             propertyCustomDTO.setPropertyMode(property.getPropertyMode());
             propertyCustomDTO.setPropertyDataSourceType(property.getPropertyDataSourceType());
-            propertyCustomDTO.setPropertyEditEnable("否".equals(property.getPropertyEditEnable()));
-            propertyCustomDTO.setPropertyRequired("是".equals(property.getPropertyRequired()));
+            propertyCustomDTO.setPropertyEditEnable(BeanUtils.NO.equals(property.getPropertyEditEnable()));
+            propertyCustomDTO.setPropertyRequired(BeanUtils.YES.equals(property.getPropertyRequired()));
             if (StringUtils.isNotEmpty(property.getPropertyDataSourceType())) {
                 List<Dictionary> dictionaryDTOList = dictionaryCustomService.findCatalogByValue(propertyCustomDTO.getPropertyDataSourceType());
                 JSONArray mapList = new JSONArray();
@@ -1387,10 +1387,6 @@ public class PersistentCustomService extends BaseService {
                 mapNull.put("label", "无");
                 mapNull.put("value", null);
                 mapList.add(mapNull);
-                JSONObject mapOut = new JSONObject();
-                mapOut.put("label", "外键");
-                mapOut.put("value", "out");
-                mapList.add(mapOut);
                 if (dictionaryDTOList != null && dictionaryDTOList.size() != 0) {
                     for (Dictionary dictionary : dictionaryDTOList) {
                         Map<String, String> map = new HashMap<>();
@@ -1410,9 +1406,9 @@ public class PersistentCustomService extends BaseService {
         jsonObject.put("dataTable", propertyCustomDTOS);
         jsonObject.put("dataForm", propertyCustomDTOS);
         JSONObject customData = new JSONObject();
-        customData.put("customType", "是".equals(persistent.getPersistentCustomTable()));
-        customData.put("customForm", "是".equals(persistent.getPersistentCustomForm()));
-        customData.put("editEnable", "是".equals(persistent.getPersistentEditEnable()));
+        customData.put("customType", BeanUtils.YES.equals(persistent.getPersistentCustomTable()));
+        customData.put("customForm", BeanUtils.YES.equals(persistent.getPersistentCustomForm()));
+        customData.put("editEnable", BeanUtils.YES.equals(persistent.getPersistentEditEnable()));
         customData.put("formType", persistent.getPersistentFormType());
         customData.put("formCol", persistent.getPersistentFormRow());
         jsonObject.put("customData", customData);

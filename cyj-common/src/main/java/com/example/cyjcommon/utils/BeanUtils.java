@@ -31,6 +31,10 @@ public class BeanUtils {
 
     public final static String ONE_TO_MANY = "OneToMany";
 
+    public final static String YES = "是";
+
+    public final static String NO = "否";
+
     public static String underline2Camel(String line) {
         StringBuilder sb = new StringBuilder();
         Matcher matcher = NUMBER_PATTERN.matcher(line);

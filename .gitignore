@@ -271,9 +271,9 @@
 /cyj-auth/target/classes/com/example/cyjauth/service/auto/Impl/EnterpriseServiceImpl.class
 /cyj-auth/target/classes/com/example/cyjauth/persistent/auto/po/QEnterprisePO.class
 /cyj-common/target/
-/cyj-persistent-creater/target/
 /cyj-auth/target/
 /cyj-dictionary/target/
 /cyj-workflow/target/
 /cyj-query/target/
-/cyj-persistent-creater/log/
+/cyj-entity-creater/log/
+/cyj-entity-creater/target/
