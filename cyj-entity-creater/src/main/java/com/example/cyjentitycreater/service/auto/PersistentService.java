@@ -1,12 +1,12 @@
 package com.example.cyjentitycreater.service.auto;
 
+import com.example.cyjcommon.dao.AppServiceDao;
 import com.example.cyjcommon.dao.AuthorityDao;
 import com.example.cyjcommon.dao.PropertyDao;
-import com.example.cyjcommon.dao.AppServiceDao;
 import com.example.cyjcommon.dao.PersistentDao;
+import com.example.cyjcommon.entity.AppService;
 import com.example.cyjcommon.entity.Authority;
 import com.example.cyjcommon.entity.Property;
-import com.example.cyjcommon.entity.AppService;
 import com.example.cyjcommon.entity.Persistent;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjcommon.service.autoService;
@@ -27,13 +27,18 @@ import org.springframework.transaction.annotation.Transactional;
 public class PersistentService extends BaseService implements autoService<Persistent> {
 
     private PersistentDao dao;
+    private AppServiceDao appServiceDao;
     private AuthorityDao authorityDao;
     private PropertyDao propertyDao;
-    private AppServiceDao appServiceDao;
 
     @Autowired
     public void setDao(PersistentDao dao) {
         this.dao = dao;
+    }
+
+    @Autowired
+    public void setAppServiceDao(AppServiceDao appServiceDao) {
+        this.appServiceDao = appServiceDao;
     }
 
     @Autowired
@@ -44,11 +49,6 @@ public class PersistentService extends BaseService implements autoService<Persis
     @Autowired
     public void setPropertyDao(PropertyDao propertyDao) {
         this.propertyDao = propertyDao;
-    }
-
-    @Autowired
-    public void setAppServiceDao(AppServiceDao appServiceDao) {
-        this.appServiceDao = appServiceDao;
     }
 
     @Override
