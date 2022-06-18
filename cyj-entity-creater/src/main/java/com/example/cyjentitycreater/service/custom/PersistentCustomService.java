@@ -199,6 +199,7 @@ public class PersistentCustomService extends BaseService {
         if (sql == null) {
             sql = new Sql();
             String sqlStr = "select " + persistent.getPersistentCode() + "_name as label, id as value from t_" + persistent.getPersistentCode();
+            sql.setSqlDescription(dataSourceType);
             sql.setSqlStr(sqlStr);
             sql.setSqlType("查询");
             sql.setStatus("有效");
