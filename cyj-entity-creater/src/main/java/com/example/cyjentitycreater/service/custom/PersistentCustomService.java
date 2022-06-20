@@ -20,6 +20,12 @@ import com.example.cyjdictionary.service.custom.DictionaryCustomService;
 import com.example.cyjentitycreater.entity.dto.PropertyCustomDTO;
 import com.example.cyjquery.service.custom.SqlCustomService;
 import org.apache.commons.lang3.StringUtils;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,6 +41,7 @@ import java.util.stream.Collectors;
 /**
  * @author Noice
  */
+@Aspect
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class PersistentCustomService extends BaseService {
@@ -1289,7 +1296,6 @@ public class PersistentCustomService extends BaseService {
         String poControllerPath = packetPath + ".controller.custom;\r\n";
         sb.append("package ").append(poControllerPath);
         sb.append("\r\n");
-        sb.append("import io.swagger.v3.oas.annotations.tags.Tag;\r\n");
         sb.append("import org.springframework.web.bind.annotation.CrossOrigin;\r\n");
         sb.append("import org.springframework.web.bind.annotation.RequestMapping;\r\n");
         sb.append("import org.springframework.web.bind.annotation.RestController;\r\n");
@@ -1300,9 +1306,7 @@ public class PersistentCustomService extends BaseService {
         sb.append("@CrossOrigin\r\n");
         sb.append("@RestController\r\n");
         sb.append("@RequestMapping(value = \"").append(appApi).append("\")\r\n");
-        sb.append("@Tag(name = \"").append(poName).append("\")\r\n");
-        sb.append("public interface ").append(poName).append("CustomController {\r\n");
-        sb.append("\r\n");
+        sb.append("public class ").append(poName).append("CustomController {\r\n");
         sb.append("}\r\n");
         String entityControllerData = sb.toString();
         return new String[]{entityControllerData, poName + "CustomController.java"};
@@ -1314,6 +1318,8 @@ public class PersistentCustomService extends BaseService {
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
         //service路径
         String poServicePath = packetPath + ".service.custom;\r\n";
+        //service路径
+        String aspectServicePath = packetPath + ".service.auto.";
         sb.append("package ").append(poServicePath);
         sb.append("\r\n");
         sb.append("import com.example.cyjcommon.service.BaseService;\r\n");
@@ -1334,46 +1340,46 @@ public class PersistentCustomService extends BaseService {
         sb.append("@Transactional(rollbackFor = Exception.class)\r\n");
         sb.append("public class ").append(poName).append("CustomService extends BaseService {\r\n");
         sb.append("\r\n");
-        sb.append("    private static final Logger logger = LoggerFactory.getLogger(").append(poName).append("CustomAop.class);\r\n");
+        sb.append("    private static final Logger logger = LoggerFactory.getLogger(").append(poName).append("CustomService.class);\r\n");
         sb.append("\r\n");
-        sb.append("    @Before(value = \"execution(* ").append(poServicePath).append(poName).append("Service.addOne(..))\")\r\n");
+        sb.append("    @Before(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.addOne(..))\")\r\n");
         sb.append("    public void addOneBefore(JoinPoint joinPoint) {\r\n");
-        sb.append("        logger.info(\"").append(poName).append("CustomAop.addOneBefore:{}\", joinPoint);\r\n");
+        sb.append("        logger.info(\"").append(poName).append("Service.addOneBefore:{}\", joinPoint);\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        sb.append("    @After(value = \"execution(* ").append(poServicePath).append(poName).append("Service.addOne(..))\")\r\n");
+        sb.append("    @After(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.addOne(..))\")\r\n");
         sb.append("    public void addOneAfter(JoinPoint joinPoint) {\r\n");
-        sb.append("        logger.info(\"").append(poName).append("CustomAop.addOneAfter:{}\", joinPoint);\r\n");
+        sb.append("        logger.info(\"").append(poName).append("Service.addOneAfter:{}\", joinPoint);\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        sb.append("    @Before(value = \"execution(* ").append(poServicePath).append(poName).append("Service.deleteOne(..))\")\r\n");
+        sb.append("    @Before(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.deleteOne(..))\")\r\n");
         sb.append("    public void deleteOneBefore(JoinPoint joinPoint) {\r\n");
-        sb.append("        logger.info(\"").append(poName).append("CustomAop.deleteOneBefore:{}\", joinPoint);\r\n");
+        sb.append("        logger.info(\"").append(poName).append("Service.deleteOneBefore:{}\", joinPoint);\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        sb.append("    @After(value = \"execution(* ").append(poServicePath).append(poName).append("Service.deleteOne(..))\")\r\n");
+        sb.append("    @After(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.deleteOne(..))\")\r\n");
         sb.append("    public void deleteOneAfter(JoinPoint joinPoint) {\r\n");
-        sb.append("        logger.info(\"").append(poName).append("CustomAop.deleteOneAfter:{}\", joinPoint);\r\n");
+        sb.append("        logger.info(\"").append(poName).append("Service.deleteOneAfter:{}\", joinPoint);\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        sb.append("    @Before(value = \"execution(* ").append(poServicePath).append(poName).append("Service.updateOne(..))\")\r\n");
+        sb.append("    @Before(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.updateOne(..))\")\r\n");
         sb.append("    public void updateOneBefore(JoinPoint joinPoint) {\r\n");
-        sb.append("        logger.info(\"").append(poName).append("CustomAop.updateOneBefore:{}\", joinPoint);\r\n");
+        sb.append("        logger.info(\"").append(poName).append("Service.updateOneBefore:{}\", joinPoint);\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        sb.append("    @After(value = \"execution(* ").append(poServicePath).append(poName).append("Service.updateOne(..))\")\r\n");
+        sb.append("    @After(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.updateOne(..))\")\r\n");
         sb.append("    public void updateOneAfter(JoinPoint joinPoint) {\r\n");
-        sb.append("        logger.info(\"").append(poName).append("CustomAop.updateOneAfter:{}\", joinPoint);\r\n");
+        sb.append("        logger.info(\"").append(poName).append("Service.updateOneAfter:{}\", joinPoint);\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        sb.append("    @Before(value = \"execution(* ").append(poServicePath).append(poName).append("Service.findAll(..))\")\r\n");
+        sb.append("    @Before(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.findAll(..))\")\r\n");
         sb.append("    public void findAllBefore(JoinPoint joinPoint) {\r\n");
-        sb.append("        logger.info(\"").append(poName).append("CustomAop.findAllBefore:{}\", joinPoint);\r\n");
+        sb.append("        logger.info(\"").append(poName).append("Service.findAllBefore:{}\", joinPoint);\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        sb.append("    @After(value = \"execution(* ").append(poServicePath).append(poName).append("Service.findAll(..))\")\r\n");
+        sb.append("    @After(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.findAll(..))\")\r\n");
         sb.append("    public void findAllAfter(JoinPoint joinPoint) {\r\n");
-        sb.append("        logger.info(\"").append(poName).append("CustomAop.findAllAfter:{}\", joinPoint);\r\n");
+        sb.append("        logger.info(\"").append(poName).append("Service.findAllAfter:{}\", joinPoint);\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
         sb.append("}\r\n");
@@ -1452,6 +1458,48 @@ public class PersistentCustomService extends BaseService {
                 mapList.add(map);
             }
         }
+    }
+
+    private static final Logger logger = LoggerFactory.getLogger(PersistentCustomService.class);
+
+    @Before(value = "execution(* com.example.cyjentitycreater.service.auto.PersistentService.addOne(..))")
+    public void addOneBefore(JoinPoint joinPoint) {
+        logger.info("PersistentService.addOneBefore:{}", joinPoint);
+    }
+
+    @After(value = "execution(* com.example.cyjentitycreater.service.auto.PersistentService.addOne(..))")
+    public void addOneAfter(JoinPoint joinPoint) {
+        logger.info("PersistentService.addOneAfter:{}", joinPoint);
+    }
+
+    @Before(value = "execution(* com.example.cyjentitycreater.service.auto.PersistentService.deleteOne(..))")
+    public void deleteOneBefore(JoinPoint joinPoint) {
+        logger.info("PersistentService.deleteOneBefore:{}", joinPoint);
+    }
+
+    @After(value = "execution(* com.example.cyjentitycreater.service.auto.PersistentService.deleteOne(..))")
+    public void deleteOneAfter(JoinPoint joinPoint) {
+        logger.info("PersistentService.deleteOneAfter:{}", joinPoint);
+    }
+
+    @Before(value = "execution(* com.example.cyjentitycreater.service.auto.PersistentService.updateOne(..))")
+    public void updateOneBefore(JoinPoint joinPoint) {
+        logger.info("PersistentService.updateOneBefore:{}", joinPoint);
+    }
+
+    @After(value = "execution(* com.example.cyjentitycreater.service.auto.PersistentService.updateOne(..))")
+    public void updateOneAfter(JoinPoint joinPoint) {
+        logger.info("PersistentService.updateOneAfter:{}", joinPoint);
+    }
+
+    @Before(value = "execution(* com.example.cyjentitycreater.service.auto.PersistentService.findAll(..))")
+    public void findAllBefore(JoinPoint joinPoint) {
+        logger.info("PersistentService.findAllBefore:{}", joinPoint);
+    }
+
+    @After(value = "execution(* com.example.cyjentitycreater.service.auto.PersistentService.findAll(..))")
+    public void findAllAfter(JoinPoint joinPoint) {
+        logger.info("PersistentService.findAllAfter:{}", joinPoint);
     }
 
 }

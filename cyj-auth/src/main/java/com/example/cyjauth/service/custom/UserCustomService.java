@@ -8,6 +8,7 @@ import com.example.cyjcommon.service.BaseService;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,11 +28,12 @@ import java.util.Optional;
  * @version 1.0
  * @date 2022-02-07
  */
+@Aspect
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class UserCustomService extends BaseService implements UserDetailsService {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserCustomService.class);
+
 
     private StringRedisTemplate redisTemplate;
     private UserDao userDao;
@@ -85,44 +87,46 @@ public class UserCustomService extends BaseService implements UserDetailsService
         return new AuthUserDetails(po);
     }
 
+    private static final Logger logger = LoggerFactory.getLogger(UserCustomService.class);
+
     @Before(value = "execution(* com.example.cyjauth.service.auto.UserService.addOne(..))")
     public void addOneBefore(JoinPoint joinPoint) {
-        logger.info("UserCustomAop.addOneBefore:{}", joinPoint);
+        logger.info("UserService.addOneBefore:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjauth.service.auto.UserService.addOne(..))")
     public void addOneAfter(JoinPoint joinPoint) {
-        logger.info("UserCustomAop.addOneAfter:{}", joinPoint);
+        logger.info("UserService.addOneAfter:{}", joinPoint);
     }
 
     @Before(value = "execution(* com.example.cyjauth.service.auto.UserService.deleteOne(..))")
     public void deleteOneBefore(JoinPoint joinPoint) {
-        logger.info("UserCustomAop.deleteOneBefore:{}", joinPoint);
+        logger.info("UserService.deleteOneBefore:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjauth.service.auto.UserService.deleteOne(..))")
     public void deleteOneAfter(JoinPoint joinPoint) {
-        logger.info("UserCustomAop.deleteOneAfter:{}", joinPoint);
+        logger.info("UserService.deleteOneAfter:{}", joinPoint);
     }
 
     @Before(value = "execution(* com.example.cyjauth.service.auto.UserService.updateOne(..))")
     public void updateOneBefore(JoinPoint joinPoint) {
-        logger.info("UserCustomAop.updateOneBefore:{}", joinPoint);
+        logger.info("UserService.updateOneBefore:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjauth.service.auto.UserService.updateOne(..))")
     public void updateOneAfter(JoinPoint joinPoint) {
-        logger.info("UserCustomAop.updateOneAfter:{}", joinPoint);
+        logger.info("UserService.updateOneAfter:{}", joinPoint);
     }
 
     @Before(value = "execution(* com.example.cyjauth.service.auto.UserService.findAll(..))")
     public void findAllBefore(JoinPoint joinPoint) {
-        logger.info("UserCustomAop.findAllBefore:{}", joinPoint);
+        logger.info("UserService.findAllBefore:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjauth.service.auto.UserService.findAll(..))")
     public void findAllAfter(JoinPoint joinPoint) {
-        logger.info("UserCustomAop.findAllAfter:{}", joinPoint);
+        logger.info("UserService.findAllAfter:{}", joinPoint);
     }
 
 }

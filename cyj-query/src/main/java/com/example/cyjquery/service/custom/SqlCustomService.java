@@ -3,8 +3,14 @@ package com.example.cyjquery.service.custom;
 import com.example.cyjcommon.entity.QSql;
 import com.example.cyjcommon.entity.Sql;
 import com.example.cyjcommon.service.BaseService;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.hibernate.query.internal.NativeQueryImpl;
 import org.hibernate.transform.Transformers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,9 +23,8 @@ import java.util.Map;
 
 /**
  * @author Noice
- * @version 1.0
- * @date 2022-02-07
  */
+@Aspect
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class SqlCustomService extends BaseService {
@@ -87,6 +92,49 @@ public class SqlCustomService extends BaseService {
         Query query = em.createNativeQuery(sql);
         query.setParameter(1, id);
         return query.unwrap(NativeQueryImpl.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).getSingleResult();
+    }
+
+
+    private static final Logger logger = LoggerFactory.getLogger(SqlCustomService.class);
+
+    @Before(value = "execution(* com.example.cyjquery.service.auto.SqlService.addOne(..))")
+    public void addOneBefore(JoinPoint joinPoint) {
+        logger.info("SqlService.addOneBefore:{}", joinPoint);
+    }
+
+    @After(value = "execution(* com.example.cyjquery.service.auto.SqlService.addOne(..))")
+    public void addOneAfter(JoinPoint joinPoint) {
+        logger.info("SqlService.addOneAfter:{}", joinPoint);
+    }
+
+    @Before(value = "execution(* com.example.cyjquery.service.auto.SqlService.deleteOne(..))")
+    public void deleteOneBefore(JoinPoint joinPoint) {
+        logger.info("SqlService.deleteOneBefore:{}", joinPoint);
+    }
+
+    @After(value = "execution(* com.example.cyjquery.service.auto.SqlService.deleteOne(..))")
+    public void deleteOneAfter(JoinPoint joinPoint) {
+        logger.info("SqlService.deleteOneAfter:{}", joinPoint);
+    }
+
+    @Before(value = "execution(* com.example.cyjquery.service.auto.SqlService.updateOne(..))")
+    public void updateOneBefore(JoinPoint joinPoint) {
+        logger.info("SqlService.updateOneBefore:{}", joinPoint);
+    }
+
+    @After(value = "execution(* com.example.cyjquery.service.auto.SqlService.updateOne(..))")
+    public void updateOneAfter(JoinPoint joinPoint) {
+        logger.info("SqlService.updateOneAfter:{}", joinPoint);
+    }
+
+    @Before(value = "execution(* com.example.cyjquery.service.auto.SqlService.findAll(..))")
+    public void findAllBefore(JoinPoint joinPoint) {
+        logger.info("SqlService.findAllBefore:{}", joinPoint);
+    }
+
+    @After(value = "execution(* com.example.cyjquery.service.auto.SqlService.findAll(..))")
+    public void findAllAfter(JoinPoint joinPoint) {
+        logger.info("SqlService.findAllAfter:{}", joinPoint);
     }
 
 }

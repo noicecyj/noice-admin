@@ -23,42 +23,42 @@ public class EnterpriseCustomService extends BaseService {
 
     @Before(value = "execution(* com.example.cyjauth.service.auto.EnterpriseService.addOne(..))")
     public void addOneBefore(JoinPoint joinPoint) {
-        logger.info("EnterpriseCustomAop.addOneBefore:{}", joinPoint);
+        logger.info("EnterpriseService.addOneBefore:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjauth.service.auto.EnterpriseService.addOne(..))")
     public void addOneAfter(JoinPoint joinPoint) {
-        logger.info("EnterpriseCustomAop.addOneAfter:{}", joinPoint);
+        logger.info("EnterpriseService.addOneAfter:{}", joinPoint);
     }
 
     @Before(value = "execution(* com.example.cyjauth.service.auto.EnterpriseService.deleteOne(..))")
     public void deleteOneBefore(JoinPoint joinPoint) {
-        logger.info("EnterpriseCustomAop.deleteOneBefore:{}", joinPoint);
+        logger.info("EnterpriseService.deleteOneBefore:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjauth.service.auto.EnterpriseService.deleteOne(..))")
     public void deleteOneAfter(JoinPoint joinPoint) {
-        logger.info("EnterpriseCustomAop.deleteOneAfter:{}", joinPoint);
+        logger.info("EnterpriseService.deleteOneAfter:{}", joinPoint);
     }
 
     @Before(value = "execution(* com.example.cyjauth.service.auto.EnterpriseService.updateOne(..))")
     public void updateOneBefore(JoinPoint joinPoint) {
-        logger.info("EnterpriseCustomAop.updateOneBefore:{}", joinPoint);
+        logger.info("EnterpriseService.updateOneBefore:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjauth.service.auto.EnterpriseService.updateOne(..))")
     public void updateOneAfter(JoinPoint joinPoint) {
-        logger.info("EnterpriseCustomAop.updateOneAfter:{}", joinPoint);
+        logger.info("EnterpriseService.updateOneAfter:{}", joinPoint);
     }
 
     @Before(value = "execution(* com.example.cyjauth.service.auto.EnterpriseService.findAll(..))")
     public void findAllBefore(JoinPoint joinPoint) {
-        logger.info("EnterpriseCustomAop.findAllBefore:{}", joinPoint);
+        logger.info("EnterpriseService.findAllBefore:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjauth.service.auto.EnterpriseService.findAll(..))")
     public void findAllAfter(JoinPoint joinPoint) {
-        logger.info("EnterpriseCustomAop.findAllAfter:{}", joinPoint);
+        logger.info("EnterpriseService.findAllAfter:{}", joinPoint);
     }
 
 }

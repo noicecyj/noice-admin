@@ -7,6 +7,12 @@ import com.example.cyjcommon.service.BaseService;
 import com.example.cyjcommon.utils.BeanUtils;
 import com.example.cyjcommon.utils.CommonUtils;
 import com.example.cyjdictionary.service.custom.DictionaryCustomService;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +24,8 @@ import java.util.Optional;
 
 /**
  * @author Noice
- * @version 1.0
  */
+@Aspect
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class AppServiceCustomService extends BaseService {
@@ -270,6 +276,48 @@ public class AppServiceCustomService extends BaseService {
         sb.append(" * @author Noice\r\n");
         sb.append(" * @version 1.0\r\n");
         sb.append(" */\r\n");
+    }
+
+    private static final Logger logger = LoggerFactory.getLogger(AppServiceCustomService.class);
+
+    @Before(value = "execution(* com.example.cyjentitycreater.service.auto.AppServiceService.addOne(..))")
+    public void addOneBefore(JoinPoint joinPoint) {
+        logger.info("AppServiceService.addOneBefore:{}", joinPoint);
+    }
+
+    @After(value = "execution(* com.example.cyjentitycreater.service.auto.AppServiceService.addOne(..))")
+    public void addOneAfter(JoinPoint joinPoint) {
+        logger.info("AppServiceService.addOneAfter:{}", joinPoint);
+    }
+
+    @Before(value = "execution(* com.example.cyjentitycreater.service.auto.AppServiceService.deleteOne(..))")
+    public void deleteOneBefore(JoinPoint joinPoint) {
+        logger.info("AppServiceService.deleteOneBefore:{}", joinPoint);
+    }
+
+    @After(value = "execution(* com.example.cyjentitycreater.service.auto.AppServiceService.deleteOne(..))")
+    public void deleteOneAfter(JoinPoint joinPoint) {
+        logger.info("AppServiceService.deleteOneAfter:{}", joinPoint);
+    }
+
+    @Before(value = "execution(* com.example.cyjentitycreater.service.auto.AppServiceService.updateOne(..))")
+    public void updateOneBefore(JoinPoint joinPoint) {
+        logger.info("AppServiceService.updateOneBefore:{}", joinPoint);
+    }
+
+    @After(value = "execution(* com.example.cyjentitycreater.service.auto.AppServiceService.updateOne(..))")
+    public void updateOneAfter(JoinPoint joinPoint) {
+        logger.info("AppServiceService.updateOneAfter:{}", joinPoint);
+    }
+
+    @Before(value = "execution(* com.example.cyjentitycreater.service.auto.AppServiceService.findAll(..))")
+    public void findAllBefore(JoinPoint joinPoint) {
+        logger.info("AppServiceService.findAllBefore:{}", joinPoint);
+    }
+
+    @After(value = "execution(* com.example.cyjentitycreater.service.auto.AppServiceService.findAll(..))")
+    public void findAllAfter(JoinPoint joinPoint) {
+        logger.info("AppServiceService.findAllAfter:{}", joinPoint);
     }
 
 }
