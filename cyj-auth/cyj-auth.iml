@@ -302,8 +302,9 @@
     <orderEntry type="library" name="Maven: org.camunda.commons:camunda-commons-typed-values:7.17.0" level="project" />
     <orderEntry type="library" name="Maven: org.camunda.commons:camunda-commons-utils:1.10.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.5.13" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.4.14" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.14" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpmime:4.5.13" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.4.14" level="project" />
     <orderEntry type="module" module-name="cyj-dictionary" />
     <orderEntry type="module" module-name="cyj-query" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-starter-test:2.3.8.RELEASE" level="project" />
