@@ -2,16 +2,13 @@ package com.example.cyjauth.service.custom;
 
 import com.alibaba.fastjson2.JSON;
 import com.example.cyjcommon.entity.Enterprise;
-import com.example.cyjcommon.entity.Role;
 import com.example.cyjcommon.service.BaseService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.camunda.bpm.engine.IdentityService;
-import org.camunda.bpm.engine.identity.Group;
 import org.camunda.bpm.engine.identity.Tenant;
-import org.camunda.bpm.engine.rest.dto.identity.GroupDto;
 import org.camunda.bpm.engine.rest.dto.identity.TenantDto;
 import org.camunda.bpm.engine.rest.exception.InvalidRequestException;
 import org.slf4j.Logger;
