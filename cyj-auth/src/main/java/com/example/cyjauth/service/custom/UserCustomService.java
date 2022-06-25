@@ -1,5 +1,6 @@
 package com.example.cyjauth.service.custom;
 
+import com.alibaba.fastjson2.JSON;
 import com.example.cyjauth.entity.bo.AuthUserDetails;
 import com.example.cyjcommon.dao.UserDao;
 import com.example.cyjcommon.entity.QUser;
@@ -10,6 +11,10 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.camunda.bpm.engine.IdentityService;
+import org.camunda.bpm.engine.rest.dto.identity.UserCredentialsDto;
+import org.camunda.bpm.engine.rest.dto.identity.UserProfileDto;
+import org.camunda.bpm.engine.rest.exception.InvalidRequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +26,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.ws.rs.core.Response;
 import java.util.Optional;
 
 /**
  * @author Noice
- * @version 1.0
- * @date 2022-02-07
  */
 @Aspect
 @Service
@@ -34,9 +38,14 @@ import java.util.Optional;
 public class UserCustomService extends BaseService implements UserDetailsService {
 
 
-
+    private IdentityService identityService;
     private StringRedisTemplate redisTemplate;
     private UserDao userDao;
+
+    @Autowired
+    public void setIdentityService(IdentityService identityService) {
+        this.identityService = identityService;
+    }
 
     @Autowired
     public void setRedisTemplate(StringRedisTemplate redisTemplate) {
@@ -96,37 +105,94 @@ public class UserCustomService extends BaseService implements UserDetailsService
 
     @After(value = "execution(* com.example.cyjauth.service.auto.UserService.addOne(..))")
     public void addOneAfter(JoinPoint joinPoint) {
-        logger.info("UserService.addOneAfter:{}", joinPoint);
+        Object[] params = joinPoint.getArgs();
+        User user = (User) params[0];
+        logger.info("UserService.addOneAfter.user:{}", JSON.toJSONString(user));
+        if (identityService.isReadOnly()) {
+            throw new InvalidRequestException(Response.Status.FORBIDDEN, "Identity service implementation is read-only.");
+        } else {
+            UserProfileDto profile = new UserProfileDto();
+            profile.setId(user.getUserName());
+            profile.setFirstName(user.getFirstName());
+            profile.setLastName(user.getSecondName());
+            profile.setEmail("");
+            UserCredentialsDto userCredentialsDto = new UserCredentialsDto();
+            userCredentialsDto.setPassword(user.getPassword());
+            if (profile != null && profile.getId() != null) {
+                org.camunda.bpm.engine.identity.User newUser = identityService.newUser(profile.getId());
+                profile.update(newUser);
+                if (userCredentialsDto != null) {
+                    newUser.setPassword(userCredentialsDto.getPassword());
+                }
+
+                identityService.saveUser(newUser);
+            } else {
+                throw new InvalidRequestException(Response.Status.BAD_REQUEST, "request object must provide profile information with valid id.");
+            }
+        }
     }
 
     @Before(value = "execution(* com.example.cyjauth.service.auto.UserService.deleteOne(..))")
     public void deleteOneBefore(JoinPoint joinPoint) {
-        logger.info("UserService.deleteOneBefore:{}", joinPoint);
+        Object[] params = joinPoint.getArgs();
+        User user = (User) params[0];
+        logger.info("UserService.deleteOneBefore.user:{}", JSON.toJSONString(user));
     }
 
     @After(value = "execution(* com.example.cyjauth.service.auto.UserService.deleteOne(..))")
     public void deleteOneAfter(JoinPoint joinPoint) {
-        logger.info("UserService.deleteOneAfter:{}", joinPoint);
+        Object[] params = joinPoint.getArgs();
+        User user = (User) params[0];
+        logger.info("UserService.findAllAfter.user:{}", JSON.toJSONString(user));
+        if (identityService.isReadOnly()) {
+            throw new InvalidRequestException(Response.Status.FORBIDDEN, "Identity service implementation is read-only.");
+        } else {
+            identityService.deleteUser(user.getUserName());
+        }
     }
 
     @Before(value = "execution(* com.example.cyjauth.service.auto.UserService.updateOne(..))")
     public void updateOneBefore(JoinPoint joinPoint) {
-        logger.info("UserService.updateOneBefore:{}", joinPoint);
+        Object[] params = joinPoint.getArgs();
+        User user = (User) params[0];
+        logger.info("UserService.updateOneBefore.user:{}", JSON.toJSONString(user));
     }
 
     @After(value = "execution(* com.example.cyjauth.service.auto.UserService.updateOne(..))")
     public void updateOneAfter(JoinPoint joinPoint) {
-        logger.info("UserService.updateOneAfter:{}", joinPoint);
+        Object[] params = joinPoint.getArgs();
+        User user = (User) params[0];
+        logger.info("UserService.updateOneAfter.user:{}", JSON.toJSONString(user));
+        if (identityService.isReadOnly()) {
+            throw new InvalidRequestException(Response.Status.FORBIDDEN, "Identity service implementation is read-only.");
+        } else {
+            UserProfileDto profile = new UserProfileDto();
+            profile.setId(user.getUserName());
+            profile.setFirstName(user.getFirstName());
+            profile.setLastName(user.getSecondName());
+            profile.setEmail("");
+            if (profile != null && profile.getId() != null) {
+                org.camunda.bpm.engine.identity.User newUser = identityService.createUserQuery().userId(user.getUserName()).singleResult();
+                profile.update(newUser);
+                identityService.saveUser(newUser);
+            } else {
+                throw new InvalidRequestException(Response.Status.BAD_REQUEST, "request object must provide profile information with valid id.");
+            }
+        }
     }
 
     @Before(value = "execution(* com.example.cyjauth.service.auto.UserService.findAll(..))")
     public void findAllBefore(JoinPoint joinPoint) {
-        logger.info("UserService.findAllBefore:{}", joinPoint);
+        Object[] params = joinPoint.getArgs();
+        Integer pageNumber = (Integer) params[0];
+        logger.info("UserService.findAllBefore.pageNumber:{}", pageNumber);
     }
 
     @After(value = "execution(* com.example.cyjauth.service.auto.UserService.findAll(..))")
     public void findAllAfter(JoinPoint joinPoint) {
-        logger.info("UserService.findAllAfter:{}", joinPoint);
+        Object[] params = joinPoint.getArgs();
+        Integer pageNumber = (Integer) params[0];
+        logger.info("UserService.findAllBefore.pageNumber:{}", pageNumber);
     }
 
 }

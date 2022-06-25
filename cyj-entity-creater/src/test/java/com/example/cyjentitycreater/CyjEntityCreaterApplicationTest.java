@@ -4,6 +4,12 @@ import com.example.cyjcommon.dao.PersistentDao;
 import com.example.cyjcommon.entity.Persistent;
 import com.example.cyjentitycreater.service.custom.PersistentCustomService;
 import lombok.Data;
+import org.camunda.bpm.engine.IdentityService;
+import org.camunda.bpm.engine.RuntimeService;
+import org.camunda.bpm.engine.identity.User;
+import org.camunda.bpm.engine.rest.dto.identity.UserCredentialsDto;
+import org.camunda.bpm.engine.rest.dto.identity.UserProfileDto;
+import org.camunda.bpm.engine.rest.exception.InvalidRequestException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +18,11 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
@@ -38,7 +44,7 @@ public class CyjEntityCreaterApplicationTest {
     }
 
     @Autowired
-    private PersistentCustomService  persistentCustomService;
+    private PersistentCustomService persistentCustomService;
     @Autowired
     private PersistentDao persistentDao;
 
@@ -46,7 +52,7 @@ public class CyjEntityCreaterApplicationTest {
 //    @Transactional
     public void entityTest() {
         List<Persistent> persistentList = persistentDao.findAll();
-        for (Persistent persistent :persistentList){
+        for (Persistent persistent : persistentList) {
             persistentCustomService.entityHandler(persistent);
         }
 //        Persistent persistent1 = persistentDao.getOne("edd90446-98bc-4330-8d93-1ba4ff003af0");
@@ -63,6 +69,38 @@ public class CyjEntityCreaterApplicationTest {
 //        persistentCustomService.entityHandler(persistent6);
 //        Persistent persistent7 = persistentDao.getOne("0c9f71bf-be44-4629-9d42-46bb0950647d");
 //        persistentCustomService.entityHandler(persistent7);
+    }
+
+    @Autowired
+    private RuntimeService runtimeService;
+    @Autowired
+    private IdentityService identityService;
+
+    @Test
+//    @Transactional
+    public void taskUserTes2() {
+        if (identityService.isReadOnly()) {
+            throw new InvalidRequestException(Response.Status.FORBIDDEN, "Identity service implementation is read-only.");
+        } else {
+            UserProfileDto profile = new UserProfileDto();
+            profile.setId("234");
+            profile.setFirstName("234");
+            profile.setLastName("234");
+            profile.setEmail("");
+            UserCredentialsDto userCredentialsDto = new UserCredentialsDto();
+            userCredentialsDto.setPassword("3434");
+            if (profile != null && profile.getId() != null) {
+                User newUser = identityService.newUser(profile.getId());
+                profile.update(newUser);
+                if (userCredentialsDto != null) {
+                    newUser.setPassword(userCredentialsDto.getPassword());
+                }
+
+                identityService.saveUser(newUser);
+            } else {
+                throw new InvalidRequestException(Response.Status.BAD_REQUEST, "request object must provide profile information with valid id.");
+            }
+        }
     }
 
 }
