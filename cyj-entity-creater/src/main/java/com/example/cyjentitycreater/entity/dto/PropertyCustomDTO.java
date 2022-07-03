@@ -3,6 +3,7 @@ package com.example.cyjentitycreater.entity.dto;
 import com.alibaba.fastjson.JSONArray;
 import lombok.Data;
 
+import javax.persistence.Column;
 import java.io.Serializable;
 
 /**
@@ -22,6 +23,8 @@ public class PropertyCustomDTO implements Serializable {
     private String propertyMode;
     private String propertyDirection;
     private Boolean propertyRequired;
+    private Boolean propertyOut;
+    private String propertyOutType;
     private String propertyDataSourceType;
     private Boolean propertyEditEnable;
     private JSONArray propertyDataSource;

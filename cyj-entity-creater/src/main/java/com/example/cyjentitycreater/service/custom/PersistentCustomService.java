@@ -1411,6 +1411,8 @@ public class PersistentCustomService extends BaseService {
             propertyCustomDTO.setPropertyDataSourceType(property.getPropertyDataSourceType());
             propertyCustomDTO.setPropertyEditEnable(BeanUtils.NO.equals(property.getPropertyEditEnable()));
             propertyCustomDTO.setPropertyRequired(BeanUtils.YES.equals(property.getPropertyRequired()));
+            propertyCustomDTO.setPropertyOut(BeanUtils.YES.equals(property.getPropertyOut()));
+            propertyCustomDTO.setPropertyOutType(property.getPropertyOutType());
             if (StringUtils.isNotEmpty(property.getPropertyDataSourceType())) {
                 List<Dictionary> dictionaryDTOList = dictionaryCustomService.findCatalogByValue(propertyCustomDTO.getPropertyDataSourceType());
                 JSONArray mapList = new JSONArray();

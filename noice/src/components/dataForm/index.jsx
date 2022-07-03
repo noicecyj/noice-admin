@@ -40,6 +40,8 @@ function DataForm(props) {
 
   const formCol = customData.formCol === 4 ? 3 : customData.formCol === 3 ? 4 : customData.formCol === 2 ? 6 : 12;
 
+  console.log("formDataValue====>",formDataValue)
+
   return (
     <Dialog
       v2
@@ -58,6 +60,7 @@ function DataForm(props) {
             isPreview={!customData.editEnable}
             onChange={(value) => dispatchers(value)}>
             {items.map((item) => {
+              console.log("item====>",item)
               if (item.propertyMode === 'Input') {
                 return (
                   <FormItem
@@ -236,7 +239,7 @@ function DataForm(props) {
                       direction={item.propertyDirection}
                     />
                   </FormItem>)
-              } else if (item.propertyMode === 'out') {
+              } else if (item.propertyOut) {
                 return (
                   <FormItem
                     colSpan={formCol}
@@ -269,15 +272,6 @@ function DataForm(props) {
                   </FormItem>)
               }
             })}
-            {customData.isOutSelf && <FormItem
-              colSpan={formCol}
-              label={`${customData.outSelf.label}`}>
-              <Select
-                id={customData.outSelf.code}
-                name={customData.outSelf.name}
-                dataSource={customData.outSelf.dataSource}
-              />
-            </FormItem>}
             {!customData.customForm && <FormItem
               colSpan={formCol}
               label="状态"
