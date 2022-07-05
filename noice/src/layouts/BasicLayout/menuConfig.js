@@ -66,6 +66,21 @@ const asideMenuConfig = [
       },
     ],
   },
+  {
+    name: '考试管理',
+    icon: 'set',
+    path: '/test',
+    children: [
+      {
+        name: '科目管理',
+        path: '/test/subject',
+      },
+      {
+        name: '题库管理',
+        path: '/test/questionBase',
+      },
+    ],
+  },
 ];
 
 export {headerMenuConfig, asideMenuConfig};

@@ -12,6 +12,8 @@ import EnterprisePage from '@/pages/Enterprise';
 import UserPage from '@/pages/User';
 import RolePage from '@/pages/Role';
 import AuthorityPage from '@/pages/Authority';
+import SubjectPage from '@/pages/Subject';
+import QuestionBasePage from '@/pages/QuestionBase';
 
 const routerConfig = [
   {
@@ -67,6 +69,20 @@ const routerConfig = [
       {
         path: '/authority',
         component: AuthorityPage,
+      },
+    ],
+  },
+  {
+    path: '/test',
+    component: BasicLayout,
+    children: [
+      {
+        path: '/subject',
+        component: SubjectPage,
+      },
+      {
+        path: '/questionBase',
+        component: QuestionBasePage,
       },
     ],
   },

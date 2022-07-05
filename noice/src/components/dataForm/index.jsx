@@ -150,8 +150,9 @@ function DataForm(props) {
                     <Switch
                       id={item.propertyCode}
                       name={item.propertyName}
-                      defaultChecked
-                      defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
+                      autoWidth
+                      checkedChildren={'是'}
+                      unCheckedChildren={'否'}
                     />
                   </FormItem>)
               } else if (item.propertyMode === 'Range') {
@@ -239,7 +240,7 @@ function DataForm(props) {
                       direction={item.propertyDirection}
                     />
                   </FormItem>)
-              } else if (item.propertyOut) {
+              } else if (item.propertyOut && item.propertyOutType === 'ManyToOne') {
                 return (
                   <FormItem
                     colSpan={formCol}
@@ -252,21 +253,6 @@ function DataForm(props) {
                       name={item.propertyName + "Id"}
                       filterLocal={false}
                       dataSource={item.propertyDataSource}
-                      defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
-                    />
-                  </FormItem>)
-              } else {
-                return (
-                  <FormItem
-                    colSpan={formCol}
-                    label={`${item.propertyLabel}`}
-                    required={item.propertyRequired}
-                    requiredMessage={`请输入${item.propertyLabel}`}
-                    key={item.id}>
-                    <Input
-                      id={item.propertyCode}
-                      name={item.propertyName}
-                      placeholder={`请输入${item.propertyLabel}`}
                       defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
                     />
                   </FormItem>)
