@@ -79,6 +79,18 @@ const asideMenuConfig = [
         name: '题库管理',
         path: '/test/questionBase',
       },
+      {
+        name: '试卷配置管理',
+        path: '/test/testPaper',
+      },
+      {
+        name: '试卷实例管理',
+        path: '/test/testPaperInstance',
+      },
+      {
+        name: '考试管理',
+        path: '/test/test',
+      },
     ],
   },
 ];

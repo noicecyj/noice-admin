@@ -14,6 +14,9 @@ import RolePage from '@/pages/Role';
 import AuthorityPage from '@/pages/Authority';
 import SubjectPage from '@/pages/Subject';
 import QuestionBasePage from '@/pages/QuestionBase';
+import TestPaperPage from '@/pages/TestPaper';
+import TestPaperInstancePage from '@/pages/TestPaperInstance';
+import TestPage from '@/pages/Test';
 
 const routerConfig = [
   {
@@ -83,6 +86,18 @@ const routerConfig = [
       {
         path: '/questionBase',
         component: QuestionBasePage,
+      },
+      {
+        path: '/testPaper',
+        component: TestPaperPage,
+      },
+      {
+        path: '/testPaperInstance',
+        component: TestPaperInstancePage,
+      },
+      {
+        path: '/test',
+        component: TestPage,
       },
     ],
   },
