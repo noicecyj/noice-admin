@@ -53,12 +53,12 @@ public class Test implements Serializable {
     @Column(name = "test_created_date")
     private String testCreatedDate;
 
-    @Column(name = "test_paper_id", insertable = false, updatable = false)
-    private String testPaperId;
+    @Column(name = "test_paper_instance_id", insertable = false, updatable = false)
+    private String testPaperInstanceId;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})
-    @JoinColumn(name = "test_paper_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
-    private TestPaper testPaper;
+    @JoinColumn(name = "test_paper_instance_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
+    private TestPaperInstance testPaperInstance;
 
     @NotNull(message = "状态不能为空")
     @Column(name = "status")

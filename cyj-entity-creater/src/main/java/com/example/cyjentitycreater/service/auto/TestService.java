@@ -1,8 +1,8 @@
 package com.example.cyjentitycreater.service.auto;
 
-import com.example.cyjcommon.dao.TestPaperDao;
+import com.example.cyjcommon.dao.TestPaperInstanceDao;
 import com.example.cyjcommon.dao.TestDao;
-import com.example.cyjcommon.entity.TestPaper;
+import com.example.cyjcommon.entity.TestPaperInstance;
 import com.example.cyjcommon.entity.Test;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjcommon.service.autoService;
@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class TestService extends BaseService implements autoService<Test> {
 
     private TestDao dao;
-    private TestPaperDao testPaperDao;
+    private TestPaperInstanceDao testPaperInstanceDao;
 
     @Autowired
     public void setDao(TestDao dao) {
@@ -29,15 +29,15 @@ public class TestService extends BaseService implements autoService<Test> {
     }
 
     @Autowired
-    public void setTestPaperDao(TestPaperDao testPaperDao) {
-        this.testPaperDao = testPaperDao;
+    public void setTestPaperInstanceDao(TestPaperInstanceDao testPaperInstanceDao) {
+        this.testPaperInstanceDao = testPaperInstanceDao;
     }
 
     @Override
     public Test addOne(Test po) {
-        if (po.getTestPaperId() != null) {
-            TestPaper testPaper = testPaperDao.getOne(po.getTestPaperId());
-            po.setTestPaper(testPaper);
+        if (po.getTestPaperInstanceId() != null) {
+            TestPaperInstance testPaperInstance = testPaperInstanceDao.getOne(po.getTestPaperInstanceId());
+            po.setTestPaperInstance(testPaperInstance);
         }
         return dao.save(po);
     }
@@ -49,9 +49,9 @@ public class TestService extends BaseService implements autoService<Test> {
 
     @Override
     public Test updateOne(Test po) {
-        if (po.getTestPaperId() != null) {
-            TestPaper testPaper = testPaperDao.getOne(po.getTestPaperId());
-            po.setTestPaper(testPaper);
+        if (po.getTestPaperInstanceId() != null) {
+            TestPaperInstance testPaperInstance = testPaperInstanceDao.getOne(po.getTestPaperInstanceId());
+            po.setTestPaperInstance(testPaperInstance);
         }
         return dao.saveAndFlush(po);
     }

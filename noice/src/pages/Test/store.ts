@@ -1,12 +1,12 @@
 import {createStore} from 'ice';
 import test from './models/auto/Test';
 import testCustom from './models/custom/Test';
-import testPaper from '@/pages/TestPaper/models/auto/TestPaper';
+import testPaperInstance from '@/pages/TestPaperInstance/models/auto/TestPaperInstance';
 
 const store = createStore({
   test,
   testCustom,
-  testPaper,
+  testPaperInstance,
 });
 
 export default store;
