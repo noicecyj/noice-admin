@@ -101,8 +101,10 @@ public class TestPaperInstanceCustomService extends BaseService {
                     .selectFrom(QTestPaperConfig.testPaperConfig)
                     .where(QTestPaperConfig.testPaperConfig.testPaperId.eq(testPaper.getId()))
                     .fetch();
-            for (TestPaperConfig testPaperConfig : testPaperConfigList) {
 
+            for (TestPaperConfig testPaperConfig : testPaperConfigList) {
+                Integer testPaperConfigNumber = testPaperConfig.getTestPaperConfigNumber();
+                Integer testPaperConfigScore = testPaperConfig.getTestPaperConfigScore();
                 Optional<QuestionBase> questionBaseOptional = questionBaseDao.findById(testPaperConfig.getQuestionBaseId());
                 if (questionBaseOptional.isPresent()) {
                     QuestionBase questionBase = questionBaseOptional.get();

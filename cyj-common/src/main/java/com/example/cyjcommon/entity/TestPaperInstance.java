@@ -51,7 +51,7 @@ public class TestPaperInstance implements Serializable {
     private String testPaperInstanceDescription;
 
     @Column(name = "test_paper_instance_score")
-    private String testPaperInstanceScore;
+    private Integer testPaperInstanceScore;
 
     @Column(name = "test_paper_instance_created_by")
     private String testPaperInstanceCreatedBy;

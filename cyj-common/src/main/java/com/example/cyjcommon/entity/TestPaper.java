@@ -40,14 +40,16 @@ public class TestPaper implements Serializable {
     @Column(name = "id", length = 36)
     private String id;
 
+    @NotNull(message = "试卷名称不能为空")
     @Column(name = "test_paper_name")
     private String testPaperName;
 
+    @NotNull(message = "试卷描述不能为空")
     @Column(name = "test_paper_description")
     private String testPaperDescription;
 
     @Column(name = "test_paper_score")
-    private String testPaperScore;
+    private Integer testPaperScore;
 
     @JsonIgnore
     @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "testPaper")
