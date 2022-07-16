@@ -1,5 +1,9 @@
 package com.example.cyjentitycreater.service.custom;
 
+import com.example.cyjcommon.dao.TestPaperDao;
+import com.example.cyjcommon.entity.QTestPaperConfig;
+import com.example.cyjcommon.entity.TestPaper;
+import com.example.cyjcommon.entity.TestPaperConfig;
 import com.example.cyjcommon.entity.TestPaperInstance;
 import com.example.cyjcommon.service.BaseService;
 import org.aspectj.lang.JoinPoint;
@@ -8,8 +12,12 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Noice
@@ -18,6 +26,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class TestPaperInstanceCustomService extends BaseService {
+
+    private TestPaperDao testPaperDao;
+
+    @Autowired
+    public void setTestPaperDao(TestPaperDao testPaperDao) {
+        this.testPaperDao = testPaperDao;
+    }
 
     private static final Logger logger = LoggerFactory.getLogger(TestPaperInstanceCustomService.class);
 
@@ -70,6 +85,17 @@ public class TestPaperInstanceCustomService extends BaseService {
 
     private void testPaperInstance(TestPaperInstance testPaperInstance){
         logger.info("TestPaperInstanceService.testPaperInstance:{}", testPaperInstance);
+        Optional<TestPaper> testPaperOptional = testPaperDao.findById(testPaperInstance.getTestPaperId());
+        if (testPaperOptional.isPresent()){
+            TestPaper testPaper = testPaperOptional.get();
+            List<TestPaperConfig> testPaperConfigList = queryFactory
+                    .selectFrom(QTestPaperConfig.testPaperConfig)
+                    .where(QTestPaperConfig.testPaperConfig.testPaperId.eq(testPaper.getId()))
+                    .fetch();
+            for (TestPaperConfig testPaperConfig:testPaperConfigList){
+
+            }
+        }
     }
 
 }

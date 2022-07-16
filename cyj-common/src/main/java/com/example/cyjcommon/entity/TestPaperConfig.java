@@ -57,6 +57,13 @@ public class TestPaperConfig implements Serializable {
     @JoinColumn(name = "test_paper_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
     private TestPaper testPaper;
 
+    @Column(name = "question_base_id", insertable = false, updatable = false)
+    private String questionBaseId;
+
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})
+    @JoinColumn(name = "question_base_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
+    private QuestionBase questionBase;
+
     @NotNull(message = "状态不能为空")
     @Column(name = "status")
     private String status;

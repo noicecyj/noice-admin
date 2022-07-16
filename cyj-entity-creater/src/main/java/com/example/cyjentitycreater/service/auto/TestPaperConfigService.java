@@ -1,8 +1,10 @@
 package com.example.cyjentitycreater.service.auto;
 
 import com.example.cyjcommon.dao.TestPaperDao;
+import com.example.cyjcommon.dao.QuestionBaseDao;
 import com.example.cyjcommon.dao.TestPaperConfigDao;
 import com.example.cyjcommon.entity.TestPaper;
+import com.example.cyjcommon.entity.QuestionBase;
 import com.example.cyjcommon.entity.TestPaperConfig;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjcommon.service.autoService;
@@ -22,6 +24,7 @@ public class TestPaperConfigService extends BaseService implements autoService<T
 
     private TestPaperConfigDao dao;
     private TestPaperDao testPaperDao;
+    private QuestionBaseDao questionBaseDao;
 
     @Autowired
     public void setDao(TestPaperConfigDao dao) {
@@ -33,11 +36,20 @@ public class TestPaperConfigService extends BaseService implements autoService<T
         this.testPaperDao = testPaperDao;
     }
 
+    @Autowired
+    public void setQuestionBaseDao(QuestionBaseDao questionBaseDao) {
+        this.questionBaseDao = questionBaseDao;
+    }
+
     @Override
     public TestPaperConfig addOne(TestPaperConfig po) {
         if (po.getTestPaperId() != null) {
             TestPaper testPaper = testPaperDao.getOne(po.getTestPaperId());
             po.setTestPaper(testPaper);
+        }
+        if (po.getQuestionBaseId() != null) {
+            QuestionBase questionBase = questionBaseDao.getOne(po.getQuestionBaseId());
+            po.setQuestionBase(questionBase);
         }
         return dao.save(po);
     }
@@ -52,6 +64,10 @@ public class TestPaperConfigService extends BaseService implements autoService<T
         if (po.getTestPaperId() != null) {
             TestPaper testPaper = testPaperDao.getOne(po.getTestPaperId());
             po.setTestPaper(testPaper);
+        }
+        if (po.getQuestionBaseId() != null) {
+            QuestionBase questionBase = questionBaseDao.getOne(po.getQuestionBaseId());
+            po.setQuestionBase(questionBase);
         }
         return dao.saveAndFlush(po);
     }
