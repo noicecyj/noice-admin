@@ -194,10 +194,12 @@ public class TestPaperInstanceCustomService extends BaseService {
                             }
                             tip++;
                         }
+                        questionInstance.setQuestionInstanceContent(question.getQuestionName());
                         questionInstance.setQuestionInstanceIndex(String.valueOf(testQuestionIndex));
                         questionInstance.setQuestionInstanceAnswer(answer.toString());
                         questionInstance.setSortCode(String.valueOf(testQuestionIndex));
                         questionInstance.setStatus("有效");
+                        questionInstance.setTestPaperInstance(testPaperInstance);
                         questionInstanceDao.save(questionInstance);
                         testQuestionIndex++;
                     }
