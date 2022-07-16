@@ -1,7 +1,9 @@
 package com.example.cyjentitycreater.service.custom;
 
+import com.example.cyjcommon.dao.QuestionBaseDao;
 import com.example.cyjcommon.dao.TestPaperDao;
 import com.example.cyjcommon.entity.QTestPaperConfig;
+import com.example.cyjcommon.entity.QuestionBase;
 import com.example.cyjcommon.entity.TestPaper;
 import com.example.cyjcommon.entity.TestPaperConfig;
 import com.example.cyjcommon.entity.TestPaperInstance;
@@ -29,9 +31,16 @@ public class TestPaperInstanceCustomService extends BaseService {
 
     private TestPaperDao testPaperDao;
 
+    private QuestionBaseDao questionBaseDao;
+
     @Autowired
     public void setTestPaperDao(TestPaperDao testPaperDao) {
         this.testPaperDao = testPaperDao;
+    }
+
+    @Autowired
+    public void setQuestionBaseDao(QuestionBaseDao questionBaseDao) {
+        this.questionBaseDao = questionBaseDao;
     }
 
     private static final Logger logger = LoggerFactory.getLogger(TestPaperInstanceCustomService.class);
@@ -76,24 +85,29 @@ public class TestPaperInstanceCustomService extends BaseService {
         logger.info("TestPaperInstanceService.findAllAfter:{}", joinPoint);
     }
 
-    public void createTestPaperInstance(TestPaperInstance testPaperInstance){
-        if (testPaperInstance == null){
+    public void createTestPaperInstance(TestPaperInstance testPaperInstance) {
+        if (testPaperInstance == null) {
             return;
         }
         testPaperInstance(testPaperInstance);
     }
 
-    private void testPaperInstance(TestPaperInstance testPaperInstance){
+    private void testPaperInstance(TestPaperInstance testPaperInstance) {
         logger.info("TestPaperInstanceService.testPaperInstance:{}", testPaperInstance);
         Optional<TestPaper> testPaperOptional = testPaperDao.findById(testPaperInstance.getTestPaperId());
-        if (testPaperOptional.isPresent()){
+        if (testPaperOptional.isPresent()) {
             TestPaper testPaper = testPaperOptional.get();
             List<TestPaperConfig> testPaperConfigList = queryFactory
                     .selectFrom(QTestPaperConfig.testPaperConfig)
                     .where(QTestPaperConfig.testPaperConfig.testPaperId.eq(testPaper.getId()))
                     .fetch();
-            for (TestPaperConfig testPaperConfig:testPaperConfigList){
+            for (TestPaperConfig testPaperConfig : testPaperConfigList) {
 
+                Optional<QuestionBase> questionBaseOptional = questionBaseDao.findById(testPaperConfig.getQuestionBaseId());
+                if (questionBaseOptional.isPresent()) {
+                    QuestionBase questionBase = questionBaseOptional.get();
+
+                }
             }
         }
     }

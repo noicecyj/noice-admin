@@ -42,10 +42,10 @@ public class TestPaperConfig implements Serializable {
     private String testPaperConfigType;
 
     @Column(name = "test_paper_config_number")
-    private String testPaperConfigNumber;
+    private Integer testPaperConfigNumber;
 
     @Column(name = "test_paper_config_score")
-    private String testPaperConfigScore;
+    private Integer testPaperConfigScore;
 
     @Column(name = "test_paper_config_random")
     private String testPaperConfigRandom;
