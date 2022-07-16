@@ -58,7 +58,7 @@ public class PropertyService extends BaseService implements autoService<Property
 
     @Override
     public Page<Property> findAll(Integer pageNumber) {
-        return dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
+        return dao.findAll(PageRequest.of(pageNumber - 1, 13, Sort.by("sortCode").ascending()));
     }
 
 }

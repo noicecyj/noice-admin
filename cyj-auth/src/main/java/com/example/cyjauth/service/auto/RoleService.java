@@ -54,7 +54,7 @@ public class RoleService extends BaseService implements autoService<Role> {
 
     @Override
     public Page<Role> findAll(Integer pageNumber) {
-        return dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
+        return dao.findAll(PageRequest.of(pageNumber - 1, 13, Sort.by("sortCode").ascending()));
     }
 
     public Set<String> authorityByRole(String id) {

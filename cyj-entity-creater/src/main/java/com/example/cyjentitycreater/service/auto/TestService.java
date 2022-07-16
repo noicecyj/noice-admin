@@ -58,7 +58,7 @@ public class TestService extends BaseService implements autoService<Test> {
 
     @Override
     public Page<Test> findAll(Integer pageNumber) {
-        return dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
+        return dao.findAll(PageRequest.of(pageNumber - 1, 13, Sort.by("sortCode").ascending()));
     }
 
 }

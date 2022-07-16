@@ -52,11 +52,11 @@ public class EnterpriseService extends BaseService implements autoService<Enterp
 
     @Override
     public Page<Enterprise> findAll(Integer pageNumber) {
-        return dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
+        return dao.findAll(PageRequest.of(pageNumber - 1, 13, Sort.by("sortCode").ascending()));
     }
 
     public Page<User> pageUserByEnterprise(Integer pageNumber, String id) {
-        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
+        Pageable pageable = PageRequest.of(pageNumber - 1, 13, Sort.by("sortCode").ascending());
         Enterprise po = dao.getOne(id);
         User user = new User();
         user.setEnterprise(po);

@@ -76,11 +76,11 @@ public class PersistentService extends BaseService implements autoService<Persis
 
     @Override
     public Page<Persistent> findAll(Integer pageNumber) {
-        return dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
+        return dao.findAll(PageRequest.of(pageNumber - 1, 13, Sort.by("sortCode").ascending()));
     }
 
     public Page<Authority> pageAuthorityByPersistent(Integer pageNumber, String id) {
-        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
+        Pageable pageable = PageRequest.of(pageNumber - 1, 13, Sort.by("sortCode").ascending());
         Persistent po = dao.getOne(id);
         Authority authority = new Authority();
         authority.setPersistent(po);
@@ -89,7 +89,7 @@ public class PersistentService extends BaseService implements autoService<Persis
     }
 
     public Page<Property> pagePropertyByPersistent(Integer pageNumber, String id) {
-        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
+        Pageable pageable = PageRequest.of(pageNumber - 1, 13, Sort.by("sortCode").ascending());
         Persistent po = dao.getOne(id);
         Property property = new Property();
         property.setPersistent(po);

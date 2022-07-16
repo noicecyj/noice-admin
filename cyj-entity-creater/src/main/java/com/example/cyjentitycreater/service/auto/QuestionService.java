@@ -58,7 +58,7 @@ public class QuestionService extends BaseService implements autoService<Question
 
     @Override
     public Page<Question> findAll(Integer pageNumber) {
-        return dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
+        return dao.findAll(PageRequest.of(pageNumber - 1, 13, Sort.by("sortCode").ascending()));
     }
 
 }

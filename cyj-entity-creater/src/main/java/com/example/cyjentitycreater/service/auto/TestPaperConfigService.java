@@ -58,7 +58,7 @@ public class TestPaperConfigService extends BaseService implements autoService<T
 
     @Override
     public Page<TestPaperConfig> findAll(Integer pageNumber) {
-        return dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
+        return dao.findAll(PageRequest.of(pageNumber - 1, 13, Sort.by("sortCode").ascending()));
     }
 
 }

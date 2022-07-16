@@ -52,11 +52,11 @@ public class CatalogService extends BaseService implements autoService<Catalog> 
 
     @Override
     public Page<Catalog> findAll(Integer pageNumber) {
-        return dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
+        return dao.findAll(PageRequest.of(pageNumber - 1, 13, Sort.by("sortCode").ascending()));
     }
 
     public Page<Dictionary> pageDictionaryByCatalog(Integer pageNumber, String id) {
-        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
+        Pageable pageable = PageRequest.of(pageNumber - 1, 13, Sort.by("sortCode").ascending());
         Catalog po = dao.getOne(id);
         Dictionary dictionary = new Dictionary();
         dictionary.setCatalog(po);

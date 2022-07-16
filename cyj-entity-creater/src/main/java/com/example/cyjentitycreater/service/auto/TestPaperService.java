@@ -60,11 +60,11 @@ public class TestPaperService extends BaseService implements autoService<TestPap
 
     @Override
     public Page<TestPaper> findAll(Integer pageNumber) {
-        return dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
+        return dao.findAll(PageRequest.of(pageNumber - 1, 13, Sort.by("sortCode").ascending()));
     }
 
     public Page<TestPaperConfig> pageTestPaperConfigByTestPaper(Integer pageNumber, String id) {
-        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
+        Pageable pageable = PageRequest.of(pageNumber - 1, 13, Sort.by("sortCode").ascending());
         TestPaper po = dao.getOne(id);
         TestPaperConfig testPaperConfig = new TestPaperConfig();
         testPaperConfig.setTestPaper(po);
@@ -73,7 +73,7 @@ public class TestPaperService extends BaseService implements autoService<TestPap
     }
 
     public Page<TestPaperInstance> pageTestPaperInstanceByTestPaper(Integer pageNumber, String id) {
-        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
+        Pageable pageable = PageRequest.of(pageNumber - 1, 13, Sort.by("sortCode").ascending());
         TestPaper po = dao.getOne(id);
         TestPaperInstance testPaperInstance = new TestPaperInstance();
         testPaperInstance.setTestPaper(po);

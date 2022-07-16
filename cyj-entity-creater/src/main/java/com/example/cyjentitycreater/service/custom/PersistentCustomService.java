@@ -1044,7 +1044,7 @@ public class PersistentCustomService extends BaseService {
         sb.append("\r\n");
         sb.append("    @Override\r\n");
         sb.append("    public Page<").append(poName).append("> findAll(Integer pageNumber) {\r\n");
-        sb.append("        return dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by(\"sortCode\").ascending()));\r\n");
+        sb.append("        return dao.findAll(PageRequest.of(pageNumber - 1, 13, Sort.by(\"sortCode\").ascending()));\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
         oneToManyServiceHandler(outPropertyList, poName, sb);
@@ -1115,7 +1115,7 @@ public class PersistentCustomService extends BaseService {
                 String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
                 String propertyOut = BeanUtils.captureName(underPropertyOut);
                 sb.append("    public Page<").append(propertyOut).append("> page").append(propertyOut).append("By").append(poName).append("(Integer pageNumber, String id) {\r\n");
-                sb.append("        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by(\"sortCode\").ascending());\r\n");
+                sb.append("        Pageable pageable = PageRequest.of(pageNumber - 1, 13, Sort.by(\"sortCode\").ascending());\r\n");
                 sb.append("        ").append(poName).append(" po = dao.getOne(id);\r\n");
                 sb.append("        ").append(propertyOut).append(" ").append(underPropertyOut).append(" = new ").append(propertyOut).append("();\r\n");
                 sb.append("        ").append(underPropertyOut).append(".set").append(poName).append("(po);\r\n");

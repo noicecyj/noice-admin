@@ -148,7 +148,7 @@ function DataTable(props) {
               <Pagination
                 onChange={(current) => getPage(current)}
                 type="simple"
-                pageSize={10}
+                pageSize={13}
                 total={total}
               />
             </Box>

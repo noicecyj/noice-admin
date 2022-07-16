@@ -70,7 +70,7 @@ public class UserService extends BaseService implements autoService<User> {
 
     @Override
     public Page<User> findAll(Integer pageNumber) {
-        return dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
+        return dao.findAll(PageRequest.of(pageNumber - 1, 13, Sort.by("sortCode").ascending()));
     }
 
     public Set<String> roleByUser(String id) {

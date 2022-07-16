@@ -68,11 +68,11 @@ public class QuestionBaseService extends BaseService implements autoService<Ques
 
     @Override
     public Page<QuestionBase> findAll(Integer pageNumber) {
-        return dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
+        return dao.findAll(PageRequest.of(pageNumber - 1, 13, Sort.by("sortCode").ascending()));
     }
 
     public Page<Question> pageQuestionByQuestionBase(Integer pageNumber, String id) {
-        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
+        Pageable pageable = PageRequest.of(pageNumber - 1, 13, Sort.by("sortCode").ascending());
         QuestionBase po = dao.getOne(id);
         Question question = new Question();
         question.setQuestionBase(po);

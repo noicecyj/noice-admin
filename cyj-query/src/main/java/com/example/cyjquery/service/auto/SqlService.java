@@ -42,7 +42,7 @@ public class SqlService extends BaseService implements autoService<Sql> {
 
     @Override
     public Page<Sql> findAll(Integer pageNumber) {
-        return dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
+        return dao.findAll(PageRequest.of(pageNumber - 1, 13, Sort.by("sortCode").ascending()));
     }
 
 }

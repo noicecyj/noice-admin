@@ -60,11 +60,11 @@ public class AppServiceService extends BaseService implements autoService<AppSer
 
     @Override
     public Page<AppService> findAll(Integer pageNumber) {
-        return dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
+        return dao.findAll(PageRequest.of(pageNumber - 1, 13, Sort.by("sortCode").ascending()));
     }
 
     public Page<Authority> pageAuthorityByAppService(Integer pageNumber, String id) {
-        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
+        Pageable pageable = PageRequest.of(pageNumber - 1, 13, Sort.by("sortCode").ascending());
         AppService po = dao.getOne(id);
         Authority authority = new Authority();
         authority.setAppService(po);
@@ -73,7 +73,7 @@ public class AppServiceService extends BaseService implements autoService<AppSer
     }
 
     public Page<Persistent> pagePersistentByAppService(Integer pageNumber, String id) {
-        Pageable pageable = PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending());
+        Pageable pageable = PageRequest.of(pageNumber - 1, 13, Sort.by("sortCode").ascending());
         AppService po = dao.getOne(id);
         Persistent persistent = new Persistent();
         persistent.setAppService(po);

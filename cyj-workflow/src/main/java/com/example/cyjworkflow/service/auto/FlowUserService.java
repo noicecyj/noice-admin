@@ -42,7 +42,7 @@ public class FlowUserService extends BaseService implements autoService<FlowUser
 
     @Override
     public Page<FlowUser> findAll(Integer pageNumber) {
-        return dao.findAll(PageRequest.of(pageNumber - 1, 10, Sort.by("sortCode").ascending()));
+        return dao.findAll(PageRequest.of(pageNumber - 1, 13, Sort.by("sortCode").ascending()));
     }
 
 }
