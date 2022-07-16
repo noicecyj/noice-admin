@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Card,
   Checkbox,
-  DatePicker,
+  DatePicker2,
   Dialog,
   Form,
   Input,
@@ -20,7 +20,7 @@ const dataSource = [
 ];
 
 const FormItem = Form.Item;
-const {RangePicker} = DatePicker;
+const {RangePicker} = DatePicker2;
 const {Group: RadioGroup} = Radio;
 const {Group: CheckboxGroup} = Checkbox;
 
@@ -134,8 +134,9 @@ function DataForm(props) {
                     <NumberPicker
                       id={item.propertyCode}
                       name={item.propertyName}
-                      min={1}
-                      max={10}
+                      stringMode
+                      type="inline"
+                      step={10}
                       defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
                     />
                   </FormItem>)
@@ -179,9 +180,11 @@ function DataForm(props) {
                     required={item.propertyRequired}
                     requiredMessage={`请输入${item.propertyLabel}`}
                     key={item.id}>
-                    <DatePicker
+                    <DatePicker2
                       id={item.propertyCode}
                       name={item.propertyName}
+                      format="YYYY/MM/DD"
+                      outputFormat="YYYY/MM/DD"
                     />
                   </FormItem>)
               } else if (item.propertyMode === 'RangePicker') {
