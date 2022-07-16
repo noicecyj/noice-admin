@@ -1,5 +1,6 @@
 package com.example.cyjentitycreater.service.custom;
 
+import com.example.cyjcommon.entity.TestPaperInstance;
 import com.example.cyjcommon.service.BaseService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -58,6 +59,17 @@ public class TestPaperInstanceCustomService extends BaseService {
     @After(value = "execution(* com.example.cyjentitycreater.service.auto.TestPaperInstanceService.findAll(..))")
     public void findAllAfter(JoinPoint joinPoint) {
         logger.info("TestPaperInstanceService.findAllAfter:{}", joinPoint);
+    }
+
+    public void createTestPaperInstance(TestPaperInstance testPaperInstance){
+        if (testPaperInstance == null){
+            return;
+        }
+        testPaperInstance(testPaperInstance);
+    }
+
+    private void testPaperInstance(TestPaperInstance testPaperInstance){
+        logger.info("TestPaperInstanceService.testPaperInstance:{}", testPaperInstance);
     }
 
 }

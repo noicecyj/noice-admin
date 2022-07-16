@@ -1,3 +1,6 @@
+import customServices from "@/pages/TestPaperInstance/services/custom/TestPaperInstance";
+import {Message} from "@alifd/next";
+
 export default {
 
   namespace: 'customTestPaperInstance',
@@ -20,6 +23,15 @@ export default {
     customMethod2() {
     },
     customMethod3() {
+    },
+    createTestPaperInstance(data) {
+      customServices.createTestPaperInstance(data).then((res) => {
+        if (res.code === 200) {
+          Message.success('生成成功');
+        } else {
+          Message.error('生成失败');
+        }
+      });
     },
   }),
 };

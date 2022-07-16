@@ -30,7 +30,6 @@ public class PersistentCustomController {
     @PostMapping(value = "createEntity")
     public ResultVO createEntity(@RequestBody Persistent po) {
         persistentCustomService.generateJavaFile(po);
-//        entityCustomService.createComponentFile(po);
         return ResultVO.success();
     }
 
