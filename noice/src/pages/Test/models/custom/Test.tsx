@@ -1,3 +1,6 @@
+import customServices from "@/pages/Test/services/custom/Test";
+import {Message} from "@alifd/next";
+
 export default {
 
   namespace: 'customTest',
@@ -20,6 +23,15 @@ export default {
     customMethod2() {
     },
     customMethod3() {
+    },
+    startTest(data) {
+      customServices.startTest(data).then((res) => {
+        if (res.code === 200) {
+          Message.success('开始考试成功');
+        } else {
+          Message.error('开始考试失败');
+        }
+      });
     },
   }),
 };
