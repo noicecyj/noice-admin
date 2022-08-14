@@ -17,6 +17,7 @@ import QuestionBasePage from '@/pages/QuestionBase';
 import TestPaperPage from '@/pages/TestPaper';
 import TestPaperInstancePage from '@/pages/TestPaperInstance';
 import TestPage from '@/pages/Test';
+import TestInstancePage from '@/pages/TestInstance';
 
 const routerConfig = [
   {
@@ -98,6 +99,10 @@ const routerConfig = [
       {
         path: '/test',
         component: TestPage,
+      },
+      {
+        path: '/testInstance',
+        component: TestInstancePage,
       },
     ],
   },

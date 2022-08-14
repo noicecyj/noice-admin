@@ -91,6 +91,10 @@ const asideMenuConfig = [
         name: '考试管理',
         path: '/test/test',
       },
+      {
+        name: '考试实例管理',
+        path: '/test/testInstance',
+      },
     ],
   },
 ];
