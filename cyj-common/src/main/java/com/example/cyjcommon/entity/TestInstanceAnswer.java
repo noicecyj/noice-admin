@@ -38,11 +38,11 @@ public class TestInstanceAnswer implements Serializable {
     @Column(name = "id", length = 36)
     private String id;
 
-    @Column(name = "test_instance_anwser_context")
-    private String testInstanceAnwserContext;
+    @Column(name = "test_instance_answer_context")
+    private String testInstanceAnswerContext;
 
-    @Column(name = "test_instance_anwser_result")
-    private String testInstanceAnwserResult;
+    @Column(name = "test_instance_answer_result")
+    private String testInstanceAnswerResult;
 
     @Column(name = "question_instance_id", insertable = false, updatable = false)
     private String questionInstanceId;
