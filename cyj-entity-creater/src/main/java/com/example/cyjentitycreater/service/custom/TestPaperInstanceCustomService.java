@@ -1,9 +1,12 @@
 package com.example.cyjentitycreater.service.custom;
 
+import com.alibaba.fastjson2.JSONObject;
 import com.example.cyjcommon.dao.QuestionBaseDao;
 import com.example.cyjcommon.dao.QuestionInstanceDao;
 import com.example.cyjcommon.dao.TestPaperDao;
+import com.example.cyjcommon.dao.TestPaperInstanceDao;
 import com.example.cyjcommon.entity.QQuestion;
+import com.example.cyjcommon.entity.QQuestionInstance;
 import com.example.cyjcommon.entity.QTestPaperConfig;
 import com.example.cyjcommon.entity.Question;
 import com.example.cyjcommon.entity.QuestionBase;
@@ -22,11 +25,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 /**
  * @author Noice
@@ -37,12 +39,18 @@ import java.util.Random;
 public class TestPaperInstanceCustomService extends BaseService {
 
     private TestPaperDao testPaperDao;
+    private TestPaperInstanceDao testPaperInstanceDao;
     private QuestionBaseDao questionBaseDao;
     private QuestionInstanceDao questionInstanceDao;
 
     @Autowired
     public void setTestPaperDao(TestPaperDao testPaperDao) {
         this.testPaperDao = testPaperDao;
+    }
+
+    @Autowired
+    public void setTestPaperInstanceDao(TestPaperInstanceDao testPaperInstanceDao) {
+        this.testPaperInstanceDao = testPaperInstanceDao;
     }
 
     @Autowired
@@ -106,6 +114,13 @@ public class TestPaperInstanceCustomService extends BaseService {
 
     private void testPaperInstance(TestPaperInstance testPaperInstance) {
         logger.info("TestPaperInstanceService.testPaperInstance:{}", testPaperInstance);
+        List<QuestionInstance> questionInstanceList = queryFactory
+                .selectFrom(QQuestionInstance.questionInstance)
+                .where(QQuestionInstance.questionInstance.testPaperInstanceId.eq(testPaperInstance.getId()))
+                .fetch();
+        if (!questionInstanceList.isEmpty()){
+            return;
+        }
         Optional<TestPaper> testPaperOptional = testPaperDao.findById(testPaperInstance.getTestPaperId());
         if (testPaperOptional.isPresent()) {
             TestPaper testPaper = testPaperOptional.get();
@@ -128,67 +143,84 @@ public class TestPaperInstanceCustomService extends BaseService {
                             .selectFrom(QQuestion.question)
                             .where(QQuestion.question.questionBaseId.eq(questionBase.getId()))
                             .fetch();
-                    List<Question> questionLinkedList = new LinkedList<>(questionList);
-                    for (int i = 0; i < testPaperConfigNumber; i++) {
-                        Random random = new Random();
-                        int n = random.nextInt(questionLinkedList.size());
-                        Question question = questionLinkedList.get(n);
-                        HashMap<String, Boolean> optionMap = new HashMap<>();
+                    Collections.shuffle(questionList);
+                    List<Question> questionSelectList = questionList.subList(0, testPaperConfigNumber);
+                    for (Question question : questionSelectList) {
+                        List<JSONObject> optionList = new ArrayList<>();
                         if (question.getQuestionOptionA() != null) {
-                            optionMap.put(question.getQuestionOptionA(), "true".equals(question.getQuestionOptionAKey()));
+                            JSONObject optionA = new JSONObject();
+                            optionA.put("optionContent", question.getQuestionOptionA());
+                            optionA.put("optionCode", "true".equals(question.getQuestionOptionAKey()));
+                            optionList.add(optionA);
                         }
                         if (question.getQuestionOptionB() != null) {
-                            optionMap.put(question.getQuestionOptionB(), "true".equals(question.getQuestionOptionBKey()));
+                            JSONObject optionB = new JSONObject();
+                            optionB.put("optionContent", question.getQuestionOptionB());
+                            optionB.put("optionCode", "true".equals(question.getQuestionOptionBKey()));
+                            optionList.add(optionB);
                         }
                         if (question.getQuestionOptionC() != null) {
-                            optionMap.put(question.getQuestionOptionC(), "true".equals(question.getQuestionOptionCKey()));
+                            JSONObject optionC = new JSONObject();
+                            optionC.put("optionContent", question.getQuestionOptionC());
+                            optionC.put("optionCode", "true".equals(question.getQuestionOptionCKey()));
+                            optionList.add(optionC);
                         }
                         if (question.getQuestionOptionD() != null) {
-                            optionMap.put(question.getQuestionOptionD(), "true".equals(question.getQuestionOptionDKey()));
+                            JSONObject optionD = new JSONObject();
+                            optionD.put("optionContent", question.getQuestionOptionD());
+                            optionD.put("optionCode", "true".equals(question.getQuestionOptionDKey()));
+                            optionList.add(optionD);
                         }
                         if (question.getQuestionOptionE() != null) {
-                            optionMap.put(question.getQuestionOptionE(), "true".equals(question.getQuestionOptionEKey()));
+                            JSONObject optionE = new JSONObject();
+                            optionE.put("optionContent", question.getQuestionOptionE());
+                            optionE.put("optionCode", "true".equals(question.getQuestionOptionEKey()));
+                            optionList.add(optionE);
                         }
                         if (question.getQuestionOptionF() != null) {
-                            optionMap.put(question.getQuestionOptionF(), "true".equals(question.getQuestionOptionFKey()));
+                            JSONObject optionF = new JSONObject();
+                            optionF.put("optionContent", question.getQuestionOptionF());
+                            optionF.put("optionCode", "true".equals(question.getQuestionOptionFKey()));
+                            optionList.add(optionF);
                         }
                         QuestionInstance questionInstance = new QuestionInstance();
                         int tip = 1;
                         StringBuilder answer = new StringBuilder();
-                        for (String questionContent : optionMap.keySet()) {
+                        Collections.shuffle(optionList);
+                        for (JSONObject option : optionList) {
                             if (tip == 1) {
-                                questionInstance.setQuestionInstanceOptionA(questionContent);
-                                if (optionMap.get(questionContent)) {
+                                questionInstance.setQuestionInstanceOptionA(option.getString("optionContent"));
+                                if (option.getBoolean("optionCode") != null && option.getBoolean("optionCode")) {
                                     answer.append("A");
                                 }
                             }
                             if (tip == 2) {
-                                questionInstance.setQuestionInstanceOptionB(questionContent);
-                                if (optionMap.get(questionContent)) {
+                                questionInstance.setQuestionInstanceOptionB(option.getString("optionContent"));
+                                if (option.getBoolean("optionCode") != null && option.getBoolean("optionCode")) {
                                     answer.append("B");
                                 }
                             }
                             if (tip == 3) {
-                                questionInstance.setQuestionInstanceOptionC(questionContent);
-                                if (optionMap.get(questionContent)) {
+                                questionInstance.setQuestionInstanceOptionC(option.getString("optionContent"));
+                                if (option.getBoolean("optionCode") != null && option.getBoolean("optionCode")) {
                                     answer.append("C");
                                 }
                             }
                             if (tip == 4) {
-                                questionInstance.setQuestionInstanceOptionD(questionContent);
-                                if (optionMap.get(questionContent)) {
+                                questionInstance.setQuestionInstanceOptionD(option.getString("optionContent"));
+                                if (option.getBoolean("optionCode") != null && option.getBoolean("optionCode")) {
                                     answer.append("D");
                                 }
                             }
                             if (tip == 5) {
-                                questionInstance.setQuestionInstanceOptionE(questionContent);
-                                if (optionMap.get(questionContent)) {
+                                questionInstance.setQuestionInstanceOptionE(option.getString("optionContent"));
+                                if (option.getBoolean("optionCode") != null && option.getBoolean("optionCode")) {
                                     answer.append("E");
                                 }
                             }
                             if (tip == 6) {
-                                questionInstance.setQuestionInstanceOptionF(questionContent);
-                                if (optionMap.get(questionContent)) {
+                                questionInstance.setQuestionInstanceOptionF(option.getString("optionContent"));
+                                if (option.getBoolean("optionCode") != null && option.getBoolean("optionCode")) {
                                     answer.append("F");
                                 }
                             }
@@ -203,9 +235,10 @@ public class TestPaperInstanceCustomService extends BaseService {
                         questionInstanceDao.save(questionInstance);
                         testQuestionIndex++;
                     }
-
                 }
             }
+            testPaperInstance.setTestPaperInstanceScore(testPaperScore);
+            testPaperInstanceDao.save(testPaperInstance);
             testPaper.setTestPaperScore(testPaperScore);
             testPaperDao.save(testPaper);
         }
