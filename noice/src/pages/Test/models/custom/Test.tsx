@@ -10,6 +10,8 @@ export default {
     customMethodName2: null,
     customMethodName3: null,
     customFrom: [],
+    divVisible: false,
+    questionList: [],
   },
 
   reducers: {
@@ -17,16 +19,22 @@ export default {
       return {...prevState, ...payload};
     },
   },
-  effects: () => ({
+  effects: (dispatch) => ({
     customMethod1() {
     },
     customMethod2() {
     },
     customMethod3() {
     },
-    startTest(data) {
-      customServices.startTest(data).then((res) => {
+    startTest(test) {
+      customServices.startTest(test).then((res) => {
         if (res.code === 200) {
+          console.log(res.data)
+          const payload = {
+            divVisible: true,
+            questionList: res.data,
+          };
+          dispatch.testCustom.setState(payload);
           Message.success('开始考试成功');
         } else {
           Message.error('开始考试失败');

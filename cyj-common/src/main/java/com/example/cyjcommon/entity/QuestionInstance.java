@@ -41,6 +41,9 @@ public class QuestionInstance implements Serializable {
     @Column(name = "question_instance_index")
     private String questionInstanceIndex;
 
+    @Column(name = "question_instance_type")
+    private String questionInstanceType;
+
     @Column(name = "question_instance_content")
     private String questionInstanceContent;
 

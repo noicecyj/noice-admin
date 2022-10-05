@@ -226,6 +226,7 @@ public class TestPaperInstanceCustomService extends BaseService {
                             }
                             tip++;
                         }
+                        questionInstance.setQuestionInstanceType(question.getQuestionType());
                         questionInstance.setQuestionInstanceContent(question.getQuestionName());
                         questionInstance.setQuestionInstanceIndex(String.valueOf(testQuestionIndex));
                         questionInstance.setQuestionInstanceAnswer(answer.toString());

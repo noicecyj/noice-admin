@@ -1,5 +1,8 @@
 package com.example.cyjentitycreater.service.custom;
 
+import com.example.cyjcommon.entity.QQuestionInstance;
+import com.example.cyjcommon.entity.QuestionInstance;
+import com.example.cyjcommon.entity.Test;
 import com.example.cyjcommon.service.BaseService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -9,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * @author Noice
@@ -60,4 +65,10 @@ public class TestCustomService extends BaseService {
         logger.info("TestService.findAllAfter:{}", joinPoint);
     }
 
+    public List<QuestionInstance> startTest(Test po) {
+        return queryFactory
+                .selectFrom(QQuestionInstance.questionInstance)
+                .where(QQuestionInstance.questionInstance.testPaperInstanceId.eq(po.getTestPaperInstanceId()))
+                .fetch();
+    }
 }
