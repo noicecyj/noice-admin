@@ -16,8 +16,7 @@ function CustomColumn(props) {
     });
   };
 
-  const questionTypeHandler = (record, item) => {
-    console.log("3123====",item);
+  const questionTypeHandler = (item) => {
     if (item.questionInstanceType == '单选题') {
       return <Radio.Group itemDirection='ver'>
         {!!item.questionInstanceOptionA && <Radio value={1}>
@@ -87,11 +86,13 @@ function CustomColumn(props) {
         style={{width: '100%'}}
       >
         <h1>{record.testName}</h1>
+        <h2>考试时间：{record.testTime} 分钟</h2>
         <List
           dataSource={customTestState.questionList}
           renderItem={(item, i) => (
-            <List.Item key={i} title={item.questionInstanceContent}>
-              {questionTypeHandler(record, item)}
+            <List.Item key={i}>
+              <h2>{i+1}{'. '}{item.questionInstanceContent}</h2>
+              {questionTypeHandler(item)}
             </List.Item>
           )}
         />
