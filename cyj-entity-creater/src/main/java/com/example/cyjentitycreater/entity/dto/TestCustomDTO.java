@@ -1,6 +1,7 @@
 package com.example.cyjentitycreater.entity.dto;
 
 import com.example.cyjcommon.entity.QuestionInstance;
+import com.example.cyjcommon.entity.QuestionInstanceAnswer;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -15,5 +16,6 @@ import java.util.List;
 public class TestCustomDTO implements Serializable {
 
     private List<QuestionInstance> questionInstanceList;
+    private List<QuestionInstanceAnswer> questionInstanceAnswerList;
 
 }

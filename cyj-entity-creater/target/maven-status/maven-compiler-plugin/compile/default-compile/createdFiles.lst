@@ -1,3 +1,4 @@
+com\example\cyjentitycreater\service\auto\QuestionInstanceAnswerService.class
 com\example\cyjentitycreater\service\custom\TestPaperInstanceCustomService.class
 com\example\cyjentitycreater\service\auto\TestPaperService.class
 com\example\cyjentitycreater\service\auto\PropertyService.class
@@ -10,7 +11,9 @@ com\example\cyjentitycreater\service\custom\QuestionInstanceCustomService.class
 com\example\cyjentitycreater\controller\auto\TestPaperConfigController.class
 com\example\cyjentitycreater\controller\custom\AppServiceCustomController.class
 com\example\cyjentitycreater\service\auto\TestPaperInstanceService.class
+com\example\cyjentitycreater\controller\custom\QuestionInstanceAnswerCustomController.class
 com\example\cyjentitycreater\service\custom\TestPaperConfigCustomService.class
+com\example\cyjentitycreater\service\custom\QuestionInstanceAnswerCustomService.class
 com\example\cyjentitycreater\controller\auto\TestController.class
 com\example\cyjentitycreater\controller\custom\SubjectCustomController.class
 com\example\cyjentitycreater\controller\custom\TestPaperCustomController.class
@@ -19,7 +22,6 @@ com\example\cyjentitycreater\controller\auto\TestPaperInstanceController.class
 com\example\cyjentitycreater\CyjEntityCreaterApplication.class
 com\example\cyjentitycreater\service\auto\TestPaperConfigService.class
 com\example\cyjentitycreater\controller\auto\SubjectController.class
-com\example\cyjentitycreater\controller\custom\TestInstanceAnswerCustomController.class
 com\example\cyjentitycreater\controller\auto\TestPaperController.class
 com\example\cyjentitycreater\controller\custom\QuestionBaseCustomController.class
 com\example\cyjentitycreater\service\custom\TestPaperCustomService.class
@@ -28,14 +30,12 @@ com\example\cyjentitycreater\controller\auto\QuestionBaseController.class
 com\example\cyjentitycreater\service\custom\PersistentCustomService.class
 com\example\cyjentitycreater\service\custom\QuestionCustomService.class
 com\example\cyjentitycreater\controller\auto\PersistentController.class
-com\example\cyjentitycreater\service\auto\TestInstanceAnswerService.class
 com\example\cyjentitycreater\service\auto\PersistentService.class
 com\example\cyjentitycreater\service\auto\QuestionBaseService.class
 com\example\cyjentitycreater\service\custom\AppServiceCustomService.class
 com\example\cyjentitycreater\controller\custom\QuestionCustomController.class
 com\example\cyjentitycreater\service\auto\AppServiceService.class
 com\example\cyjentitycreater\service\custom\TestCustomService.class
-com\example\cyjentitycreater\service\custom\TestInstanceAnswerCustomService.class
 com\example\cyjentitycreater\entity\dto\PropertyCustomDTO.class
 com\example\cyjentitycreater\service\custom\PropertyCustomService.class
 com\example\cyjentitycreater\service\auto\QuestionInstanceService.class
@@ -44,11 +44,11 @@ com\example\cyjentitycreater\controller\auto\TestInstanceController.class
 com\example\cyjentitycreater\controller\custom\PropertyCustomController.class
 com\example\cyjentitycreater\entity\dto\FirstMenuDTO.class
 com\example\cyjentitycreater\service\custom\QuestionBaseCustomService.class
+com\example\cyjentitycreater\controller\auto\QuestionInstanceAnswerController.class
 com\example\cyjentitycreater\controller\custom\PersistentCustomController.class
 com\example\cyjentitycreater\controller\custom\TestPaperInstanceCustomController.class
 com\example\cyjentitycreater\controller\custom\QuestionInstanceCustomController.class
 com\example\cyjentitycreater\service\auto\SubjectService.class
-com\example\cyjentitycreater\controller\auto\TestInstanceAnswerController.class
 com\example\cyjentitycreater\entity\dto\SecondMenuDTO.class
 com\example\cyjentitycreater\controller\custom\TestInstanceCustomController.class
 com\example\cyjentitycreater\controller\auto\QuestionInstanceController.class
