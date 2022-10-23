@@ -1,8 +1,8 @@
 package com.example.cyjentitycreater.controller.auto;
 
-import com.example.cyjentitycreater.service.auto.TestInstanceAnswerService;
+import com.example.cyjentitycreater.service.auto.QuestionInstanceAnswerService;
 import com.example.cyjcommon.controller.autoController;
-import com.example.cyjcommon.entity.TestInstanceAnswer;
+import com.example.cyjcommon.entity.QuestionInstanceAnswer;
 import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,27 +22,27 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping(value = "entityCreateApi")
-@Tag(name = "TestInstanceAnswer")
-public class TestInstanceAnswerController implements autoController<TestInstanceAnswer> {
+@Tag(name = "QuestionInstanceAnswer")
+public class QuestionInstanceAnswerController implements autoController<QuestionInstanceAnswer> {
 
-    private TestInstanceAnswerService service;
+    private QuestionInstanceAnswerService service;
 
     @Autowired
-    public void setService(TestInstanceAnswerService service) {
+    public void setService(QuestionInstanceAnswerService service) {
         this.service = service;
     }
 
     @Override
-    @Operation(summary = "分页查询所有TestInstanceAnswer")
-    @PostMapping(value = "pageTestInstanceAnswer")
+    @Operation(summary = "分页查询所有QuestionInstanceAnswer")
+    @PostMapping(value = "pageQuestionInstanceAnswer")
     public ResultVO page(@RequestParam("pageNumber") Integer pageNumber) {
         return ResultVO.success(service.findAll(pageNumber));
     }
 
     @Override
-    @Operation(summary = "保存TestInstanceAnswer")
-    @PostMapping(value = "saveTestInstanceAnswer")
-    public ResultVO save(@RequestBody @Validated TestInstanceAnswer po, BindingResult bindingResult) {
+    @Operation(summary = "保存QuestionInstanceAnswer")
+    @PostMapping(value = "saveQuestionInstanceAnswer")
+    public ResultVO save(@RequestBody @Validated QuestionInstanceAnswer po, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultVO.failure(bindingResult.getAllErrors().get(0));
         }
@@ -53,9 +53,9 @@ public class TestInstanceAnswerController implements autoController<TestInstance
     }
 
     @Override
-    @Operation(summary = "删除TestInstanceAnswer")
-    @PostMapping(value = "deleteTestInstanceAnswer")
-    public ResultVO delete(@RequestBody TestInstanceAnswer po) {
+    @Operation(summary = "删除QuestionInstanceAnswer")
+    @PostMapping(value = "deleteQuestionInstanceAnswer")
+    public ResultVO delete(@RequestBody QuestionInstanceAnswer po) {
         if (po.getId() == null) {
             return ResultVO.failure();
         }

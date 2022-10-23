@@ -1,7 +1,7 @@
 import initService from '@/services/init';
 import {Message} from "@alifd/next";
 import service from '@/pages/TestInstance/services/auto/TestInstance';
-import testInstanceAnswerService from '@/pages/TestInstanceAnswer/services/auto/TestInstanceAnswer'
+import questionInstanceAnswerService from '@/pages/QuestionInstanceAnswer/services/auto/QuestionInstanceAnswer'
 
 export default {
 
@@ -98,9 +98,9 @@ export default {
       };
       dispatch.testInstance.setState(payload);
     },
-    async pageTestInstanceAnswerByTestInstance(data) {
-      const ret = await initService.findDataTableAndFormByName('test_instance_answer');
-      const dataRes = await service.pageTestInstanceAnswerByTestInstance(data.current, data.id);
+    async pageQuestionInstanceAnswerByTestInstance(data) {
+      const ret = await initService.findDataTableAndFormByName('question_instance_answer');
+      const dataRes = await service.pageQuestionInstanceAnswerByTestInstance(data.current, data.id);
       const payload = {
         table: ret.data.dataTable,
         form: ret.data.dataForm,
@@ -113,38 +113,38 @@ export default {
         parent: data.id,
         visible: false,
       };
-      dispatch.testInstanceAnswer.setState(payload);
+      dispatch.questionInstanceAnswer.setState(payload);
     },
-    async saveTestInstanceAnswerByTestInstance(data) {
-      const ret = await testInstanceAnswerService.save(data.formData);
+    async saveQuestionInstanceAnswerByTestInstance(data) {
+      const ret = await questionInstanceAnswerService.save(data.formData);
       if (ret.code === 400) {
         Message.error(ret.data.defaultMessage);
       } else {
         Message.success('保存成功');
-        await this.pageTestInstanceAnswerByTestInstance({
+        await this.pageQuestionInstanceAnswerByTestInstance({
           current: data.current,
           id: data.id,
         });
         const payload = {
           visible: false,
         };
-        dispatch.testInstanceAnswer.setState(payload);
+        dispatch.questionInstanceAnswer.setState(payload);
       }
     },
-    async deleteTestInstanceAnswerByTestInstance(data) {
-      const ret = await testInstanceAnswerService.delete(data.record);
+    async deleteQuestionInstanceAnswerByTestInstance(data) {
+      const ret = await questionInstanceAnswerService.delete(data.record);
       if (ret.code === 400) {
         Message.error('删除失败');
       } else {
         Message.success('删除成功');
-        await this.pageTestInstanceAnswerByTestInstance({
+        await this.pageQuestionInstanceAnswerByTestInstance({
           current: data.current,
           id: data.id,
         });
         const payload = {
           visible: false,
         };
-        dispatch.testInstanceAnswer.setState(payload);
+        dispatch.questionInstanceAnswer.setState(payload);
       }
     },
   }),

@@ -2,10 +2,10 @@ package com.example.cyjentitycreater.service.auto;
 
 import com.example.cyjcommon.dao.QuestionInstanceDao;
 import com.example.cyjcommon.dao.TestInstanceDao;
-import com.example.cyjcommon.dao.TestInstanceAnswerDao;
+import com.example.cyjcommon.dao.QuestionInstanceAnswerDao;
 import com.example.cyjcommon.entity.QuestionInstance;
 import com.example.cyjcommon.entity.TestInstance;
-import com.example.cyjcommon.entity.TestInstanceAnswer;
+import com.example.cyjcommon.entity.QuestionInstanceAnswer;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjcommon.service.autoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +20,14 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class TestInstanceAnswerService extends BaseService implements autoService<TestInstanceAnswer> {
+public class QuestionInstanceAnswerService extends BaseService implements autoService<QuestionInstanceAnswer> {
 
-    private TestInstanceAnswerDao dao;
+    private QuestionInstanceAnswerDao dao;
     private QuestionInstanceDao questionInstanceDao;
     private TestInstanceDao testInstanceDao;
 
     @Autowired
-    public void setDao(TestInstanceAnswerDao dao) {
+    public void setDao(QuestionInstanceAnswerDao dao) {
         this.dao = dao;
     }
 
@@ -42,7 +42,7 @@ public class TestInstanceAnswerService extends BaseService implements autoServic
     }
 
     @Override
-    public TestInstanceAnswer addOne(TestInstanceAnswer po) {
+    public QuestionInstanceAnswer addOne(QuestionInstanceAnswer po) {
         if (po.getQuestionInstanceId() != null) {
             QuestionInstance questionInstance = questionInstanceDao.getOne(po.getQuestionInstanceId());
             po.setQuestionInstance(questionInstance);
@@ -55,12 +55,12 @@ public class TestInstanceAnswerService extends BaseService implements autoServic
     }
 
     @Override
-    public void deleteOne(TestInstanceAnswer po) {
+    public void deleteOne(QuestionInstanceAnswer po) {
         dao.delete(po);
     }
 
     @Override
-    public TestInstanceAnswer updateOne(TestInstanceAnswer po) {
+    public QuestionInstanceAnswer updateOne(QuestionInstanceAnswer po) {
         if (po.getQuestionInstanceId() != null) {
             QuestionInstance questionInstance = questionInstanceDao.getOne(po.getQuestionInstanceId());
             po.setQuestionInstance(questionInstance);
@@ -73,7 +73,7 @@ public class TestInstanceAnswerService extends BaseService implements autoServic
     }
 
     @Override
-    public Page<TestInstanceAnswer> findAll(Integer pageNumber) {
+    public Page<QuestionInstanceAnswer> findAll(Integer pageNumber) {
         return dao.findAll(PageRequest.of(pageNumber - 1, 13, Sort.by("sortCode").ascending()));
     }
 

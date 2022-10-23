@@ -10,5 +10,5 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping(value = "entityCreateApi")
-public class TestInstanceAnswerCustomController {
+public class QuestionInstanceAnswerCustomController {
 }

@@ -12,6 +12,7 @@ export default {
     customFrom: [],
     divVisible: false,
     questionList: [],
+    answerList: [],
   },
 
   reducers: {

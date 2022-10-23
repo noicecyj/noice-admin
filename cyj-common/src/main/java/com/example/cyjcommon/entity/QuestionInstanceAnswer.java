@@ -23,15 +23,15 @@ import java.io.Serializable;
  * @author Noice
  */
 @Entity
-@Table(name = TestInstanceAnswer.T_TEST_INSTANCE_ANSWER)
+@Table(name = QuestionInstanceAnswer.T_QUESTION_INSTANCE_ANSWER)
 @Getter
 @Setter
 @RequiredArgsConstructor
 @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-public class TestInstanceAnswer implements Serializable {
+public class QuestionInstanceAnswer implements Serializable {
 
-    static final String T_TEST_INSTANCE_ANSWER = "t_test_instance_answer";
+    static final String T_QUESTION_INSTANCE_ANSWER = "t_question_instance_answer";
 
     @Id
     @GeneratedValue(generator = "uuid2")

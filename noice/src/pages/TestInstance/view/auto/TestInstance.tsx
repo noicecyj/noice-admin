@@ -11,7 +11,7 @@ function TestInstance() {
 
   const [customState, customDispatchers] = pageStore.useModel('testInstanceCustom');
 
-  const [testInstanceAnswerState, testInstanceAnswerDispatchers] = pageStore.useModel('testInstanceAnswer');
+  const [questionInstanceAnswerState, questionInstanceAnswerDispatchers] = pageStore.useModel('questionInstanceAnswer');
 
   useEffect(() => {
     dispatchers.findDataTableAndFormByName().then(r => console.log(r));
@@ -39,7 +39,7 @@ function TestInstance() {
           );
         }}
         son1="考试答卷"
-        sonMethod1={record => dispatchers.pageTestInstanceAnswerByTestInstance({
+        sonMethod1={record => dispatchers.pageQuestionInstanceAnswerByTestInstance({
           current: 1,
           id: record.id,
         })}
@@ -66,50 +66,50 @@ function TestInstance() {
       />
       <Dialog
         v2
-        visible={testInstanceAnswerState.divVisible}
+        visible={questionInstanceAnswerState.divVisible}
         footer={false}
-        onClose={() => testInstanceAnswerDispatchers.setState({
+        onClose={() => questionInstanceAnswerDispatchers.setState({
           divVisible: false,
           parent: "",
         })}
         style={{width: '100%'}}
       >
         <DataTableTemple
-          createItem={() => testInstanceAnswerDispatchers.add()}
-          editItem={record => testInstanceAnswerDispatchers.edit(record)}
-          deleteItem={record => dispatchers.deleteTestInstanceAnswerByTestInstance({
-            current: testInstanceAnswerState.current,
-            id: testInstanceAnswerState.parent,
+          createItem={() => questionInstanceAnswerDispatchers.add()}
+          editItem={record => questionInstanceAnswerDispatchers.edit(record)}
+          deleteItem={record => dispatchers.deleteQuestionInstanceAnswerByTestInstance({
+            current: questionInstanceAnswerState.current,
+            id: questionInstanceAnswerState.parent,
             record,
           })}
-          visibleLoading={testInstanceAnswerState.loadingVisible}
-          dataSource={testInstanceAnswerState.tableData}
-          items={testInstanceAnswerState.table}
-          total={testInstanceAnswerState.total}
-          getPage={current => dispatchers.pageTestInstanceAnswerByTestInstance({
+          visibleLoading={questionInstanceAnswerState.loadingVisible}
+          dataSource={questionInstanceAnswerState.tableData}
+          items={questionInstanceAnswerState.table}
+          total={questionInstanceAnswerState.total}
+          getPage={current => dispatchers.pageQuestionInstanceAnswerByTestInstance({
             current,
-            id: testInstanceAnswerState.parent,
+            id: questionInstanceAnswerState.parent,
           })}
           primaryKey="id"
-          customData={testInstanceAnswerState.customData}
+          customData={questionInstanceAnswerState.customData}
         />
         <DataFormTemple
-          customData={testInstanceAnswerState.customData}
-          title={testInstanceAnswerState.title}
-          visibleDialog={testInstanceAnswerState.visible}
-          onClose={() => testInstanceAnswerDispatchers.setState({visible: false})}
-          items={testInstanceAnswerState.form}
-          dispatchers={value => testInstanceAnswerDispatchers.setDataForm(value)}
-          onOk={() => dispatchers.saveTestInstanceAnswerByTestInstance({
-            current: testInstanceAnswerState.current,
-            id: testInstanceAnswerState.parent,
+          customData={questionInstanceAnswerState.customData}
+          title={questionInstanceAnswerState.title}
+          visibleDialog={questionInstanceAnswerState.visible}
+          onClose={() => questionInstanceAnswerDispatchers.setState({visible: false})}
+          items={questionInstanceAnswerState.form}
+          dispatchers={value => questionInstanceAnswerDispatchers.setDataForm(value)}
+          onOk={() => dispatchers.saveQuestionInstanceAnswerByTestInstance({
+            current: questionInstanceAnswerState.current,
+            id: questionInstanceAnswerState.parent,
             formData: {
-              ...testInstanceAnswerState.formData,
-              testInstanceId: testInstanceAnswerState.parent,
+              ...questionInstanceAnswerState.formData,
+              testInstanceId: questionInstanceAnswerState.parent,
             },
           })}
-          formDataValue={testInstanceAnswerState.formData}
-          formSortCode={String(Number.parseInt(String(testInstanceAnswerState.total)) + 10)}
+          formDataValue={questionInstanceAnswerState.formData}
+          formSortCode={String(Number.parseInt(String(questionInstanceAnswerState.total)) + 10)}
         />
       </Dialog>
     </>

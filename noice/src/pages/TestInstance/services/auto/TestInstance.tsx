@@ -24,9 +24,9 @@ export default {
       data,
     });
   },
-  pageTestInstanceAnswerByTestInstance(pageNumber, id) {
+  pageQuestionInstanceAnswerByTestInstance(pageNumber, id) {
     return request({
-      url: '/entityCreateApi/pageTestInstanceAnswerByTestInstance',
+      url: '/entityCreateApi/pageQuestionInstanceAnswerByTestInstance',
       method: 'post',
       params: {
         pageNumber,

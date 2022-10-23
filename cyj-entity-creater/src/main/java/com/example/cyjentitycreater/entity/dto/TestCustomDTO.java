@@ -1,0 +1,19 @@
+package com.example.cyjentitycreater.entity.dto;
+
+import com.example.cyjcommon.entity.QuestionInstance;
+import lombok.Data;
+
+import java.io.Serializable;
+import java.util.List;
+
+/**
+ * @author Noice
+ * @version 1.0
+ * @date 2021-10-16
+ */
+@Data
+public class TestCustomDTO implements Serializable {
+
+    private List<QuestionInstance> questionInstanceList;
+
+}

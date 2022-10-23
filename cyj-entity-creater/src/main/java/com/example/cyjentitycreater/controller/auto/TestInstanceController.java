@@ -63,10 +63,10 @@ public class TestInstanceController implements autoController<TestInstance> {
         return ResultVO.success();
     }
 
-    @Operation(summary = "根据TestInstance查询所有TestInstanceAnswer")
-    @PostMapping(value = "pageTestInstanceAnswerByTestInstance")
-    public ResultVO pageTestInstanceAnswerByTestInstance(@RequestParam("pageNumber") Integer pageNumber, @RequestParam("id") String id) {
-        return ResultVO.success(service.pageTestInstanceAnswerByTestInstance(pageNumber, id));
+    @Operation(summary = "根据TestInstance查询所有QuestionInstanceAnswer")
+    @PostMapping(value = "pageQuestionInstanceAnswerByTestInstance")
+    public ResultVO pageQuestionInstanceAnswerByTestInstance(@RequestParam("pageNumber") Integer pageNumber, @RequestParam("id") String id) {
+        return ResultVO.success(service.pageQuestionInstanceAnswerByTestInstance(pageNumber, id));
     }
 
 }

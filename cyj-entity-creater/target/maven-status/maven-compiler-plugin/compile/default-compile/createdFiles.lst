@@ -5,6 +5,7 @@ com\example\cyjentitycreater\service\auto\QuestionService.class
 com\example\cyjentitycreater\controller\custom\TestPaperConfigCustomController.class
 com\example\cyjentitycreater\service\auto\TestService.class
 com\example\cyjentitycreater\controller\auto\QuestionController.class
+com\example\cyjentitycreater\entity\dto\TestCustomDTO.class
 com\example\cyjentitycreater\service\custom\QuestionInstanceCustomService.class
 com\example\cyjentitycreater\controller\auto\TestPaperConfigController.class
 com\example\cyjentitycreater\controller\custom\AppServiceCustomController.class

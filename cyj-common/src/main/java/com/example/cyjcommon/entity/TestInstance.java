@@ -65,7 +65,7 @@ public class TestInstance implements Serializable {
     @JsonIgnore
     @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "testInstance")
     @BatchSize(size = 20)
-    private Set<TestInstanceAnswer> testInstanceAnswer = new HashSet<>();
+    private Set<QuestionInstanceAnswer> questionInstanceAnswer = new HashSet<>();
 
     @Column(name = "test_paper_instance_id", insertable = false, updatable = false)
     private String testPaperInstanceId;
