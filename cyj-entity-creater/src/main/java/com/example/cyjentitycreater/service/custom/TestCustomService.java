@@ -2,9 +2,13 @@ package com.example.cyjentitycreater.service.custom;
 
 import com.example.cyjcommon.entity.QQuestionInstance;
 import com.example.cyjcommon.entity.QQuestionInstanceAnswer;
+import com.example.cyjcommon.entity.QTestInstance;
+import com.example.cyjcommon.entity.QTestPaperInstance;
 import com.example.cyjcommon.entity.QuestionInstance;
 import com.example.cyjcommon.entity.QuestionInstanceAnswer;
 import com.example.cyjcommon.entity.Test;
+import com.example.cyjcommon.entity.TestInstance;
+import com.example.cyjcommon.entity.TestPaperInstance;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjentitycreater.entity.dto.TestCustomDTO;
 import org.aspectj.lang.JoinPoint;
@@ -70,7 +74,14 @@ public class TestCustomService extends BaseService {
 
     public TestCustomDTO startTest(Test po) {
         TestCustomDTO testCustomDTO = new TestCustomDTO();
-
+        TestInstance testInstance = queryFactory.selectFrom(QTestInstance.testInstance)
+                .where(QTestInstance.testInstance.testId.eq(po.getId()))
+                .fetchOne();
+        testCustomDTO.setTestInstance(testInstance);
+        TestPaperInstance testPaperInstance = queryFactory.selectFrom(QTestPaperInstance.testPaperInstance)
+                .where(QTestPaperInstance.testPaperInstance.id.eq(po.getId()))
+                .fetchOne();
+        testCustomDTO.setTestPaperInstance(testPaperInstance);
         List<QuestionInstance> questionInstanceList = queryFactory
                 .selectFrom(QQuestionInstance.questionInstance)
                 .where(QQuestionInstance.questionInstance.testPaperInstanceId.eq(po.getTestPaperInstanceId()))
