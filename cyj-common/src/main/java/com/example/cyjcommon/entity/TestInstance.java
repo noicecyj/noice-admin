@@ -67,6 +67,13 @@ public class TestInstance implements Serializable {
     @BatchSize(size = 20)
     private Set<QuestionInstanceAnswer> questionInstanceAnswer = new HashSet<>();
 
+    @Column(name = "test_id", insertable = false, updatable = false)
+    private String testId;
+
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})
+    @JoinColumn(name = "test_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
+    private Test test;
+
     @Column(name = "test_paper_instance_id", insertable = false, updatable = false)
     private String testPaperInstanceId;
 

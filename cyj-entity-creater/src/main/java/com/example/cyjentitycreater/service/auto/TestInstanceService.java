@@ -1,8 +1,10 @@
 package com.example.cyjentitycreater.service.auto;
 
+import com.example.cyjcommon.dao.TestDao;
 import com.example.cyjcommon.dao.QuestionInstanceAnswerDao;
 import com.example.cyjcommon.dao.TestPaperInstanceDao;
 import com.example.cyjcommon.dao.TestInstanceDao;
+import com.example.cyjcommon.entity.Test;
 import com.example.cyjcommon.entity.QuestionInstanceAnswer;
 import com.example.cyjcommon.entity.TestPaperInstance;
 import com.example.cyjcommon.entity.TestInstance;
@@ -25,12 +27,18 @@ import org.springframework.transaction.annotation.Transactional;
 public class TestInstanceService extends BaseService implements autoService<TestInstance> {
 
     private TestInstanceDao dao;
+    private TestDao testDao;
     private QuestionInstanceAnswerDao questionInstanceAnswerDao;
     private TestPaperInstanceDao testPaperInstanceDao;
 
     @Autowired
     public void setDao(TestInstanceDao dao) {
         this.dao = dao;
+    }
+
+    @Autowired
+    public void setTestDao(TestDao testDao) {
+        this.testDao = testDao;
     }
 
     @Autowired
@@ -45,6 +53,10 @@ public class TestInstanceService extends BaseService implements autoService<Test
 
     @Override
     public TestInstance addOne(TestInstance po) {
+        if (po.getTestId() != null) {
+            Test test = testDao.getOne(po.getTestId());
+            po.setTest(test);
+        }
         if (po.getTestPaperInstanceId() != null) {
             TestPaperInstance testPaperInstance = testPaperInstanceDao.getOne(po.getTestPaperInstanceId());
             po.setTestPaperInstance(testPaperInstance);
@@ -59,6 +71,10 @@ public class TestInstanceService extends BaseService implements autoService<Test
 
     @Override
     public TestInstance updateOne(TestInstance po) {
+        if (po.getTestId() != null) {
+            Test test = testDao.getOne(po.getTestId());
+            po.setTest(test);
+        }
         if (po.getTestPaperInstanceId() != null) {
             TestPaperInstance testPaperInstance = testPaperInstanceDao.getOne(po.getTestPaperInstanceId());
             po.setTestPaperInstance(testPaperInstance);

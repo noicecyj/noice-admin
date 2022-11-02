@@ -1,7 +1,9 @@
 package com.example.cyjentitycreater.service.custom;
 
 import com.example.cyjcommon.entity.QQuestionInstance;
+import com.example.cyjcommon.entity.QQuestionInstanceAnswer;
 import com.example.cyjcommon.entity.QuestionInstance;
+import com.example.cyjcommon.entity.QuestionInstanceAnswer;
 import com.example.cyjcommon.entity.Test;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjentitycreater.entity.dto.TestCustomDTO;
@@ -68,12 +70,17 @@ public class TestCustomService extends BaseService {
 
     public TestCustomDTO startTest(Test po) {
         TestCustomDTO testCustomDTO = new TestCustomDTO();
+
         List<QuestionInstance> questionInstanceList = queryFactory
                 .selectFrom(QQuestionInstance.questionInstance)
                 .where(QQuestionInstance.questionInstance.testPaperInstanceId.eq(po.getTestPaperInstanceId()))
                 .fetch();
         testCustomDTO.setQuestionInstanceList(questionInstanceList);
-
+        List<QuestionInstanceAnswer> questionInstanceAnswerList = queryFactory
+                .selectFrom(QQuestionInstanceAnswer.questionInstanceAnswer)
+                .where(QQuestionInstanceAnswer.questionInstanceAnswer.testPaperInstanceId.eq(po.getTestPaperInstanceId()))
+                .fetch();
+        testCustomDTO.setQuestionInstanceAnswerList(questionInstanceAnswerList);
         return testCustomDTO;
     }
 }
