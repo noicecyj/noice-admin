@@ -4,6 +4,7 @@ import com.example.cyjcommon.entity.QQuestionInstance;
 import com.example.cyjcommon.entity.QuestionInstance;
 import com.example.cyjcommon.entity.Test;
 import com.example.cyjcommon.service.BaseService;
+import com.example.cyjentitycreater.entity.dto.TestCustomDTO;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -65,10 +66,14 @@ public class TestCustomService extends BaseService {
         logger.info("TestService.findAllAfter:{}", joinPoint);
     }
 
-    public List<QuestionInstance> startTest(Test po) {
-        return queryFactory
+    public TestCustomDTO startTest(Test po) {
+        TestCustomDTO testCustomDTO = new TestCustomDTO();
+        List<QuestionInstance> questionInstanceList = queryFactory
                 .selectFrom(QQuestionInstance.questionInstance)
                 .where(QQuestionInstance.questionInstance.testPaperInstanceId.eq(po.getTestPaperInstanceId()))
                 .fetch();
+        testCustomDTO.setQuestionInstanceList(questionInstanceList);
+
+        return testCustomDTO;
     }
 }

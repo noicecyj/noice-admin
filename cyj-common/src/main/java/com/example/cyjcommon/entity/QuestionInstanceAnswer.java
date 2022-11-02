@@ -58,6 +58,13 @@ public class QuestionInstanceAnswer implements Serializable {
     @JoinColumn(name = "test_instance_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
     private TestInstance testInstance;
 
+    @Column(name = "test_paper_instance_id", insertable = false, updatable = false)
+    private String testPaperInstanceId;
+
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})
+    @JoinColumn(name = "test_paper_instance_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
+    private TestPaperInstance testPaperInstance;
+
     @NotNull(message = "状态不能为空")
     @Column(name = "status")
     private String status;

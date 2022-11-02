@@ -2,9 +2,11 @@ package com.example.cyjentitycreater.service.auto;
 
 import com.example.cyjcommon.dao.QuestionInstanceDao;
 import com.example.cyjcommon.dao.TestInstanceDao;
+import com.example.cyjcommon.dao.TestPaperInstanceDao;
 import com.example.cyjcommon.dao.QuestionInstanceAnswerDao;
 import com.example.cyjcommon.entity.QuestionInstance;
 import com.example.cyjcommon.entity.TestInstance;
+import com.example.cyjcommon.entity.TestPaperInstance;
 import com.example.cyjcommon.entity.QuestionInstanceAnswer;
 import com.example.cyjcommon.service.BaseService;
 import com.example.cyjcommon.service.autoService;
@@ -25,6 +27,7 @@ public class QuestionInstanceAnswerService extends BaseService implements autoSe
     private QuestionInstanceAnswerDao dao;
     private QuestionInstanceDao questionInstanceDao;
     private TestInstanceDao testInstanceDao;
+    private TestPaperInstanceDao testPaperInstanceDao;
 
     @Autowired
     public void setDao(QuestionInstanceAnswerDao dao) {
@@ -41,6 +44,11 @@ public class QuestionInstanceAnswerService extends BaseService implements autoSe
         this.testInstanceDao = testInstanceDao;
     }
 
+    @Autowired
+    public void setTestPaperInstanceDao(TestPaperInstanceDao testPaperInstanceDao) {
+        this.testPaperInstanceDao = testPaperInstanceDao;
+    }
+
     @Override
     public QuestionInstanceAnswer addOne(QuestionInstanceAnswer po) {
         if (po.getQuestionInstanceId() != null) {
@@ -50,6 +58,10 @@ public class QuestionInstanceAnswerService extends BaseService implements autoSe
         if (po.getTestInstanceId() != null) {
             TestInstance testInstance = testInstanceDao.getOne(po.getTestInstanceId());
             po.setTestInstance(testInstance);
+        }
+        if (po.getTestPaperInstanceId() != null) {
+            TestPaperInstance testPaperInstance = testPaperInstanceDao.getOne(po.getTestPaperInstanceId());
+            po.setTestPaperInstance(testPaperInstance);
         }
         return dao.save(po);
     }
@@ -68,6 +80,10 @@ public class QuestionInstanceAnswerService extends BaseService implements autoSe
         if (po.getTestInstanceId() != null) {
             TestInstance testInstance = testInstanceDao.getOne(po.getTestInstanceId());
             po.setTestInstance(testInstance);
+        }
+        if (po.getTestPaperInstanceId() != null) {
+            TestPaperInstance testPaperInstance = testPaperInstanceDao.getOne(po.getTestPaperInstanceId());
+            po.setTestPaperInstance(testPaperInstance);
         }
         return dao.saveAndFlush(po);
     }
