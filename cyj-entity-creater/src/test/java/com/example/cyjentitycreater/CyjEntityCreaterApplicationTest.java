@@ -53,7 +53,7 @@ public class CyjEntityCreaterApplicationTest {
     public void entityTest() {
         List<Persistent> persistentList = persistentDao.findAll();
         for (Persistent persistent : persistentList) {
-            persistentCustomService.entityHandler(persistent);
+            persistentCustomService.entityHandler(persistent, "create");
         }
 //        Persistent persistent1 = persistentDao.getOne("edd90446-98bc-4330-8d93-1ba4ff003af0");
 //        persistentCustomService.entityHandler(persistent1);
