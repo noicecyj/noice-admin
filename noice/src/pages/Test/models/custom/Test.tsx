@@ -33,7 +33,8 @@ export default {
           console.log(res.data)
           const payload = {
             divVisible: true,
-            questionList: res.data,
+            questionList: res.data.questionInstanceList,
+            answerList:res.data.questionInstanceAnswerList,
           };
           dispatch.testCustom.setState(payload);
           Message.success('开始考试成功');

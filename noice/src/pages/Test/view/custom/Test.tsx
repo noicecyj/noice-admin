@@ -18,7 +18,7 @@ function CustomColumn(props) {
 
   const questionTypeHandler = (item) => {
     if (item.questionInstanceType == '单选题') {
-      return <Radio.Group itemDirection='ver'>
+      return <Radio.Group direction='ver'>
         {!!item.questionInstanceOptionA && <Radio value={1}>
           {item.questionInstanceOptionA}
         </Radio>}
@@ -39,7 +39,7 @@ function CustomColumn(props) {
         </Radio>}
       </Radio.Group>
     } else if (item.questionInstanceType == '多选题') {
-      return <Checkbox.Group itemDirection='ver'>
+      return <Checkbox.Group direction='ver'>
         {!!item.questionInstanceOptionA && <Checkbox value={1}>
           {item.questionInstanceOptionA}
         </Checkbox>}
