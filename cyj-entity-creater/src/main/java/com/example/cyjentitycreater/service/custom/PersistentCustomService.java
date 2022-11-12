@@ -81,7 +81,15 @@ public class PersistentCustomService extends BaseService {
         if (persistent == null) {
             return;
         }
-        entityHandler(persistent);
+        entityHandler(persistent, "create");
+    }
+
+
+    public void deleteJavaFile(Persistent persistent) {
+        if (persistent == null) {
+            return;
+        }
+        entityHandler(persistent, "delete");
     }
 
     private void authorityHandler(Persistent persistent) {
@@ -193,11 +201,109 @@ public class PersistentCustomService extends BaseService {
         }
     }
 
-    public void entityHandler(Persistent persistent) {
-        //查询是否存在子实体
-        createEntityHandler(persistent);
-        authorityHandler(persistent);
-        sqlHandler(persistent);
+    private void oneToManyAuthorityDeleteHandler(Persistent persistent, String poName, String propertyPoName) {
+        Authority oneToMany = queryFactory.selectFrom(QAuthority.authority).where(QAuthority.authority.authorityPath.eq(persistent.getAppService().getAppServiceApi() + "/page" + propertyPoName + "By" + poName)).fetchOne();
+        if (oneToMany != null) {
+            authorityDao.delete(oneToMany);
+        }
+    }
+
+    private void manyToManyAuthorityDeleteHandler(Persistent persistent, String poName, String propertyPoName) {
+        Authority manyToMany1 = queryFactory.selectFrom(QAuthority.authority).where(QAuthority.authority.authorityPath.eq(persistent.getAppService().getAppServiceApi() + "/" + propertyPoName + "By" + poName)).fetchOne();
+        Authority manyToMany2 = queryFactory.selectFrom(QAuthority.authority).where(QAuthority.authority.authorityPath.eq(persistent.getAppService().getAppServiceApi() + "/" + propertyPoName + "Save" + poName)).fetchOne();
+        if (manyToMany1 != null) {
+            authorityDao.delete(manyToMany1);
+        }
+        if (manyToMany2 != null) {
+            authorityDao.delete(manyToMany2);
+        }
+    }
+
+    public void entityHandler(Persistent persistent, String handlerType) {
+        switch (handlerType) {
+            case "create":
+                createEntityHandler(persistent);
+                authorityHandler(persistent);
+                sqlHandler(persistent);
+                break;
+            case "delete":
+                deleteEntityHandler(persistent);
+                authorityDeleteHandler(persistent);
+                sqlDeleteHandler(persistent);
+                break;
+            default:
+                logger.info("wtf!");
+        }
+    }
+
+    private void sqlDeleteHandler(Persistent persistent) {
+        String dataSourceType = "DATABASE_" + persistent.getPersistentCode().toUpperCase() + "_TYPE";
+        Sql sql = queryFactory.selectFrom(QSql.sql).where(QSql.sql.sqlDescription.eq(dataSourceType)).fetchOne();
+        if (sql != null) {
+            sqlDao.delete(sql);
+        }
+    }
+
+    private void authorityDeleteHandler(Persistent persistent) {
+        List<Property> propertyList = queryFactory.selectFrom(QProperty.property).where(QProperty.property.persistentId.eq(persistent.getId())).orderBy(QProperty.property.sortCode.asc()).fetch();
+        List<Property> outPropertyList = propertyList.stream().filter(property -> BeanUtils.YES.equals(property.getPropertyOut())).collect(Collectors.toList());
+        //驼峰名
+        String underPoName = BeanUtils.underline2Camel(persistent.getPersistentCode());
+        //文件名
+        String poName = BeanUtils.captureName(underPoName);
+        Authority findAll = queryFactory.selectFrom(QAuthority.authority).where(QAuthority.authority.authorityPath.eq(persistent.getAppService().getAppServiceApi() + "/page" + poName)).fetchOne();
+        if (findAll != null) {
+            authorityDao.delete(findAll);
+        }
+        for (Property property : outPropertyList) {
+            String underPropertyPoName = BeanUtils.underline2Camel(property.getPropertyCode());
+            String propertyPoName = BeanUtils.captureName(underPropertyPoName);
+            if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
+                oneToManyAuthorityDeleteHandler(persistent, poName, propertyPoName);
+            }
+            if (BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())) {
+                manyToManyAuthorityDeleteHandler(persistent, poName, propertyPoName);
+            }
+        }
+        Authority save = queryFactory.selectFrom(QAuthority.authority).where(QAuthority.authority.authorityPath.eq(persistent.getAppService().getAppServiceApi() + "/save" + poName)).fetchOne();
+        if (save != null) {
+            authorityDao.delete(save);
+        }
+        Authority delete = queryFactory.selectFrom(QAuthority.authority).where(QAuthority.authority.authorityPath.eq(persistent.getAppService().getAppServiceApi() + "/delete" + poName)).fetchOne();
+        if (delete != null) {
+            authorityDao.delete(delete);
+        }
+    }
+
+    private void deleteEntityHandler(Persistent persistent) {
+        String persistentCode = persistent.getPersistentCode();
+        //驼峰名
+        String underPoName = BeanUtils.underline2Camel(persistentCode);
+        //文件名
+        String poName = BeanUtils.captureName(underPoName);
+        AppService appService = persistent.getAppService();
+        if (appService == null) {
+            return;
+        }
+        //服务路径
+        String appPath = appService.getAppServicePath();
+        Map<String, String> entityObj = new HashMap<>();
+        entityObj.put(commonPath + "/entity", poName + ".java");
+        entityObj.put(commonPath + "/dao", poName + "Dao.java");
+        entityObj.put(appPath + "/service/auto", poName + "Service.java");
+        entityObj.put(appPath + "/controller/auto", poName + "Controller.java");
+        entityObj.put(componentPath + poName + "/services/auto", poName + ".tsx");
+        entityObj.put(componentPath + poName + "/models/auto", poName + ".tsx");
+        entityObj.put(componentPath + poName + "/view/auto", poName + ".tsx");
+        BeanUtils.deleteJavaFile(componentPath + poName, "index.tsx");
+        BeanUtils.deleteJavaFile(componentPath + poName, "store.ts");
+        Map<String, String> entityCustomObj = new HashMap<>();
+        entityCustomObj.put(appPath + "/service/custom", poName + "CustomService.java");
+        entityCustomObj.put(appPath + "/controller/custom", poName + "CustomController.java");
+        entityCustomObj.put(componentPath + poName + "/services/custom", poName + ".tsx");
+        entityCustomObj.put(componentPath + poName + "/models/custom", poName + ".tsx");
+        entityCustomObj.put(componentPath + poName + "/view/custom", poName + ".tsx");
+        deleteEntityCodeHandler(entityObj, entityCustomObj);
     }
 
     private void sqlHandler(Persistent persistent) {
@@ -218,7 +324,7 @@ public class PersistentCustomService extends BaseService {
     private void createEntityHandler(Persistent persistent) {
         String persistentCode = persistent.getPersistentCode();
         //驼峰名
-        String underPoName = BeanUtils.underline2Camel(persistent.getPersistentCode());
+        String underPoName = BeanUtils.underline2Camel(persistentCode);
         //文件名
         String poName = BeanUtils.captureName(underPoName);
         AppService appService = persistent.getAppService();
@@ -829,6 +935,19 @@ public class PersistentCustomService extends BaseService {
             e.printStackTrace();
         }
 
+    }
+
+    private void deleteEntityCodeHandler(Map<String, String> entityObj, Map<String, String> entityCustomObj) {
+        for (Map.Entry<String, String> entry : entityObj.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            BeanUtils.deleteJavaFile(key, value);
+        }
+        for (Map.Entry<String, String> entry : entityCustomObj.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            BeanUtils.deleteJavaFile(key, value);
+        }
     }
 
     public String[] poGenerate(Persistent persistent, List<Property> inPropertyList, List<Property> outPropertyList, String poName, String underPoName) {

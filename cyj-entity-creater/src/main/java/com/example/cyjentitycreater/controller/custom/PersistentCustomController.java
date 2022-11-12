@@ -33,6 +33,13 @@ public class PersistentCustomController {
         return ResultVO.success();
     }
 
+    @Operation(summary = "删除实体类文件")
+    @PostMapping(value = "deleteEntity")
+    public ResultVO deleteEntity(@RequestBody Persistent po) {
+        persistentCustomService.deleteJavaFile(po);
+        return ResultVO.success();
+    }
+
     @Operation(summary = "创建表格与表单")
     @PostMapping(value = "findDataTableAndFormByName")
     public ResultVO findDataTableAndFormByName(String entityCode) {

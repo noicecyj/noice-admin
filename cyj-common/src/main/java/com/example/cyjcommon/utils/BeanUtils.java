@@ -95,6 +95,15 @@ public class BeanUtils {
         createJavaFile(path, result, true);
     }
 
+    public static void deleteJavaFile(String path, String fileName) {
+        File file = new File(path + "/" + fileName);
+        if (file.delete()) {
+            logger.info("Deleted the file: " + file.getName());
+        } else {
+            logger.info("Failed to delete the file.");
+        }
+    }
+
     private static final Pattern NUMBER_PATTERN2 = Pattern.compile("([A-Za-z\\d]+)(-)?");
 
     public static String underline2Camel2(String line) {
