@@ -8,4 +8,11 @@ export default {
       data,
     });
   },
+  deleteEntityFile(data) {
+    return request({
+      url: '/entityCreateApi/deleteEntity',
+      method: 'post',
+      data,
+    });
+  },
 };

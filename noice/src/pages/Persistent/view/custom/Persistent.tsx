@@ -14,6 +14,12 @@ function CustomColumn(props) {
         onClick={() => customEntityDispatchers.createEntityFile(record)}
         // eslint-disable-next-line react/jsx-closing-tag-location
       > 生成代码 </Button>
+      <Button
+        type="normal"
+        size="small"
+        onClick={() => customEntityDispatchers.createEntityFile(record)}
+        // eslint-disable-next-line react/jsx-closing-tag-location
+      > 删除代码 </Button>
     </>
   );
 }

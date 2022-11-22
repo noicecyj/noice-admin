@@ -34,5 +34,14 @@ export default {
         }
       });
     },
+    deleteEntityFile(data) {
+      customServices.deleteEntityFile(data).then((res) => {
+        if (res.code === 200) {
+          Message.success('删除成功');
+        } else {
+          Message.error('删除失败');
+        }
+      });
+    },
   }),
 };
