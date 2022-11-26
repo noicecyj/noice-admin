@@ -1,6 +1,6 @@
 import React from 'react';
 import pageStore from '@/pages/Persistent/store';
-import {Button} from '@alifd/next';
+import {Box, Button} from '@alifd/next';
 
 function CustomColumn(props) {
   const {record} = props;
@@ -8,18 +8,20 @@ function CustomColumn(props) {
 
   return (
     <>
-      <Button
-        type="normal"
-        size="small"
-        onClick={() => customEntityDispatchers.createEntityFile(record)}
-        // eslint-disable-next-line react/jsx-closing-tag-location
-      > 生成代码 </Button>
-      <Button
-        type="normal"
-        size="small"
-        onClick={() => customEntityDispatchers.createEntityFile(record)}
-        // eslint-disable-next-line react/jsx-closing-tag-location
-      > 删除代码 </Button>
+      <Box direction="row" spacing={5}>
+        <Button
+          type="normal"
+          size="small"
+          onClick={() => customEntityDispatchers.createEntityFile(record)}
+          // eslint-disable-next-line react/jsx-closing-tag-location
+        > 生成代码 </Button>
+        <Button
+          type="normal"
+          size="small"
+          onClick={() => customEntityDispatchers.createEntityFile(record)}
+          // eslint-disable-next-line react/jsx-closing-tag-location
+        > 删除代码 </Button>
+      </Box>
     </>
   );
 }
