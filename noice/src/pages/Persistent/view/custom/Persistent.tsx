@@ -18,7 +18,7 @@ function CustomColumn(props) {
         <Button
           type="normal"
           size="small"
-          onClick={() => customEntityDispatchers.createEntityFile(record)}
+          onClick={() => customEntityDispatchers.deleteEntityFile(record)}
           // eslint-disable-next-line react/jsx-closing-tag-location
         > 删除代码 </Button>
       </Box>
