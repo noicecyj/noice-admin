@@ -1,6 +1,5 @@
 package com.example.cyjentitycreater;
 
-import com.example.cyjcommon.mapper.bean.PersistentMapper;
 import com.example.cyjentitycreater.service.bean.custom.PersistentCustomServiceImpl;
 import lombok.Data;
 import org.camunda.bpm.engine.IdentityService;
@@ -43,8 +42,6 @@ public class CyjEntityCreaterApplicationTest {
 
     @Autowired
     private PersistentCustomServiceImpl persistentCustomServiceImpl;
-    @Autowired
-    private PersistentMapper persistentMapper;
 
 //    @Test
 //    @Transactional

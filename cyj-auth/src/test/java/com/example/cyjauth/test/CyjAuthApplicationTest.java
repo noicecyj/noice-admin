@@ -2,7 +2,6 @@ package com.example.cyjauth.test;
 
 import com.example.cyjauth.CyjAuthApplication;
 import com.example.cyjauth.service.bean.auto.AuthorityServiceImpl;
-import com.example.cyjcommon.mapper.bean.UserMapper;
 import lombok.Data;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +34,6 @@ public class CyjAuthApplicationTest {
 
     @Autowired
     private AuthorityServiceImpl authorityServiceImpl;
-    @Autowired
-    private UserMapper userMapper;
 
 
 //    @Test
