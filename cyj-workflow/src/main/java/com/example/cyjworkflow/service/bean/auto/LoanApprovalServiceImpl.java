@@ -3,10 +3,10 @@ package com.example.cyjworkflow.service.bean.auto;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.cyjcommon.entity.bean.LoanApproval;
-import com.example.cyjcommon.mapper.bean.LoanApprovalMapper;
-import com.example.cyjcommon.service.bean.LoanApprovalService;
+import com.example.cyjworkflow.mapper.bean.LoanApprovalMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = Exception.class)
 public class LoanApprovalServiceImpl
         extends ServiceImpl<LoanApprovalMapper, LoanApproval>
-        implements LoanApprovalService {
+        implements IService<LoanApproval> {
 
     public LoanApproval addOne(LoanApproval po) {
         po.insert();

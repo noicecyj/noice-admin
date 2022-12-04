@@ -4,6 +4,7 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.cyjcommon.entity.bean.AppService;
 import com.example.cyjcommon.entity.bean.Authority;
@@ -16,6 +17,7 @@ import com.example.cyjcommon.service.bean.PersistentService;
 import com.example.cyjcommon.utils.BeanUtils;
 import com.example.cyjdictionary.service.bean.custom.DictionaryCustomServiceImpl;
 import com.example.cyjentitycreater.entity.dto.PropertyCustomDTO;
+import com.example.cyjentitycreater.mapper.bean.PersistentMapper;
 import com.example.cyjquery.service.bean.custom.SqlCustomServiceImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
@@ -44,7 +46,7 @@ import java.util.stream.Collectors;
 @Transactional(rollbackFor = Exception.class)
 public class PersistentCustomServiceImpl
         extends ServiceImpl<PersistentMapper, Persistent>
-        implements PersistentService {
+        implements IService<Persistent> {
 
     private final static String componentPath = "C:/Users/noice/IdeaProjects/noice-admin/noice/src/pages/";
     private final static String POST = "POST";

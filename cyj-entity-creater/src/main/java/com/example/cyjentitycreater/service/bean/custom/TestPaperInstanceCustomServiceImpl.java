@@ -2,6 +2,7 @@ package com.example.cyjentitycreater.service.bean.custom;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.cyjcommon.entity.bean.Question;
 import com.example.cyjcommon.entity.bean.QuestionBase;
@@ -9,8 +10,7 @@ import com.example.cyjcommon.entity.bean.QuestionInstance;
 import com.example.cyjcommon.entity.bean.TestPaper;
 import com.example.cyjcommon.entity.bean.TestPaperConfig;
 import com.example.cyjcommon.entity.bean.TestPaperInstance;
-import com.example.cyjcommon.mapper.bean.TestPaperInstanceMapper;
-import com.example.cyjcommon.service.bean.TestPaperInstanceService;
+import com.example.cyjentitycreater.mapper.bean.TestPaperInstanceMapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -32,7 +32,7 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class)
 public class TestPaperInstanceCustomServiceImpl
         extends ServiceImpl<TestPaperInstanceMapper, TestPaperInstance>
-        implements TestPaperInstanceService {
+        implements IService<TestPaperInstance> {
 
     private static final Logger logger = LoggerFactory.getLogger(TestPaperInstanceCustomServiceImpl.class);
 

@@ -1,10 +1,10 @@
 package com.example.cyjquery.service.bean.custom;
 
 import com.alibaba.fastjson2.JSONArray;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.cyjcommon.entity.bean.Sql;
-import com.example.cyjcommon.mapper.bean.SqlMapper;
-import com.example.cyjcommon.service.bean.SqlService;
+import com.example.cyjquery.mapper.bean.SqlMapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = Exception.class)
 public class SqlCustomServiceImpl
         extends ServiceImpl<SqlMapper, Sql>
-        implements SqlService {
+        implements IService<Sql> {
 
     private SqlMapper sqlMapper;
 

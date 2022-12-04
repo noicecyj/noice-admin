@@ -3,10 +3,10 @@ package com.example.cyjworkflow.service.bean.auto;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.cyjcommon.entity.bean.FlowTenant;
-import com.example.cyjcommon.mapper.bean.FlowTenantMapper;
-import com.example.cyjcommon.service.bean.FlowTenantService;
+import com.example.cyjworkflow.mapper.bean.FlowTenantMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = Exception.class)
 public class FlowTenantServiceImpl
         extends ServiceImpl<FlowTenantMapper, FlowTenant>
-        implements FlowTenantService {
+        implements IService<FlowTenant> {
 
     public FlowTenant addOne(FlowTenant po) {
         po.insert();

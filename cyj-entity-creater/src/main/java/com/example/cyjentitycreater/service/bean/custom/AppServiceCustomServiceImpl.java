@@ -1,13 +1,13 @@
 package com.example.cyjentitycreater.service.bean.custom;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.cyjcommon.entity.bean.AppService;
 import com.example.cyjcommon.entity.bean.Dictionary;
-import com.example.cyjcommon.mapper.bean.AppServiceMapper;
-import com.example.cyjcommon.service.bean.AppServiceService;
 import com.example.cyjcommon.utils.BeanUtils;
 import com.example.cyjcommon.utils.CommonUtils;
 import com.example.cyjdictionary.service.bean.custom.DictionaryCustomServiceImpl;
+import com.example.cyjentitycreater.mapper.bean.AppServiceMapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -30,7 +30,7 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class)
 public class AppServiceCustomServiceImpl
         extends ServiceImpl<AppServiceMapper, AppService>
-        implements AppServiceService {
+        implements IService<AppService> {
 
     private DictionaryCustomServiceImpl dictionaryCustomServiceImpl;
 

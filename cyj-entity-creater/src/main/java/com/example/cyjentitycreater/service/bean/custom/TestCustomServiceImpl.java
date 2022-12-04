@@ -1,15 +1,15 @@
 package com.example.cyjentitycreater.service.bean.custom;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.cyjcommon.entity.bean.QuestionInstance;
 import com.example.cyjcommon.entity.bean.QuestionInstanceAnswer;
 import com.example.cyjcommon.entity.bean.Test;
 import com.example.cyjcommon.entity.bean.TestInstance;
 import com.example.cyjcommon.entity.bean.TestPaperInstance;
-import com.example.cyjcommon.mapper.bean.TestMapper;
-import com.example.cyjcommon.service.bean.TestService;
 import com.example.cyjentitycreater.entity.dto.TestCustomDTO;
+import com.example.cyjentitycreater.mapper.bean.TestMapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -29,7 +29,7 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class)
 public class TestCustomServiceImpl
         extends ServiceImpl<TestMapper, Test>
-        implements TestService {
+        implements IService<Test> {
 
     private static final Logger logger = LoggerFactory.getLogger(TestCustomServiceImpl.class);
 

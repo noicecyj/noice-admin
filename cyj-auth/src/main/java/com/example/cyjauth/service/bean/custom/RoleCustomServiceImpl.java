@@ -1,10 +1,10 @@
 package com.example.cyjauth.service.bean.custom;
 
 import com.alibaba.fastjson2.JSON;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.cyjauth.mapper.bean.RoleMapper;
 import com.example.cyjcommon.entity.bean.Role;
-import com.example.cyjcommon.mapper.bean.RoleMapper;
-import com.example.cyjcommon.service.bean.RoleService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -29,7 +29,7 @@ import javax.ws.rs.core.Response;
 @Transactional(rollbackFor = Exception.class)
 public class RoleCustomServiceImpl
         extends ServiceImpl<RoleMapper, Role>
-        implements RoleService {
+        implements IService<Role> {
 
     private IdentityService identityService;
 

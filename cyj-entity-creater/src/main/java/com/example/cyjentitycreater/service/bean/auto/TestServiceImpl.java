@@ -3,10 +3,10 @@ package com.example.cyjentitycreater.service.bean.auto;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.cyjcommon.entity.bean.Test;
-import com.example.cyjcommon.mapper.bean.TestMapper;
-import com.example.cyjcommon.service.bean.TestService;
+import com.example.cyjentitycreater.mapper.bean.TestMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = Exception.class)
 public class TestServiceImpl
         extends ServiceImpl<TestMapper, Test>
-        implements TestService {
+        implements IService<Test> {
 
     public Test addOne(Test po) {
         po.insert();

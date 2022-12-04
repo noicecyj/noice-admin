@@ -1,9 +1,9 @@
 package com.example.cyjworkflow.service.bean.custom;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.cyjcommon.entity.bean.FlowTenant;
-import com.example.cyjcommon.mapper.bean.FlowTenantMapper;
-import com.example.cyjcommon.service.bean.FlowTenantService;
+import com.example.cyjworkflow.mapper.bean.FlowTenantMapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = Exception.class)
 public class FlowTenantCustomServiceImpl
         extends ServiceImpl<FlowTenantMapper, FlowTenant>
-        implements FlowTenantService {
+        implements IService<FlowTenant> {
 
     private static final Logger logger = LoggerFactory.getLogger(FlowTenantCustomServiceImpl.class);
 

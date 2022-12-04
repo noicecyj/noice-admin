@@ -1,11 +1,11 @@
 package com.example.cyjdictionary.service.bean.custom;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.cyjcommon.entity.bean.Catalog;
 import com.example.cyjcommon.entity.bean.Dictionary;
-import com.example.cyjcommon.mapper.bean.DictionaryMapper;
-import com.example.cyjcommon.service.bean.DictionaryService;
+import com.example.cyjdictionary.mapper.bean.DictionaryMapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -26,7 +26,7 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class)
 public class DictionaryCustomServiceImpl
         extends ServiceImpl<DictionaryMapper, Dictionary>
-        implements DictionaryService {
+        implements IService<Dictionary> {
     public List<Dictionary> findCatalogByValue(String value) {
         Catalog catalog = new Catalog()
                 .selectOne(new QueryWrapper<Catalog>().lambda()

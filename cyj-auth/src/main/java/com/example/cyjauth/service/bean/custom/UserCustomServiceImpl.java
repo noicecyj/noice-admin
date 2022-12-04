@@ -2,12 +2,12 @@ package com.example.cyjauth.service.bean.custom;
 
 import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.cyjauth.entity.bo.AuthUserDetails;
+import com.example.cyjauth.mapper.bean.UserMapper;
 import com.example.cyjcommon.entity.bean.User;
 import com.example.cyjcommon.entity.relation.UserRole;
-import com.example.cyjcommon.mapper.bean.UserMapper;
-import com.example.cyjcommon.service.bean.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -39,7 +39,7 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class)
 public class UserCustomServiceImpl
         extends ServiceImpl<UserMapper, User>
-        implements UserService, UserDetailsService {
+        implements IService<User>, UserDetailsService {
 
     private IdentityService identityService;
     private StringRedisTemplate redisTemplate;

@@ -1,9 +1,9 @@
 package com.example.cyjentitycreater.service.bean.custom;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.cyjcommon.entity.bean.QuestionBase;
-import com.example.cyjcommon.mapper.bean.QuestionBaseMapper;
-import com.example.cyjcommon.service.bean.QuestionBaseService;
+import com.example.cyjentitycreater.mapper.bean.QuestionBaseMapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = Exception.class)
 public class QuestionBaseCustomServiceImpl
         extends ServiceImpl<QuestionBaseMapper, QuestionBase>
-        implements QuestionBaseService {
+        implements IService<QuestionBase> {
 
 
     private static final Logger logger = LoggerFactory.getLogger(QuestionBaseCustomServiceImpl.class);
