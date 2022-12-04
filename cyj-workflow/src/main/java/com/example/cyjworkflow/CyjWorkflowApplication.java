@@ -16,9 +16,9 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableProcessApplication
 @EnableEurekaClient
 @EnableFeignClients
-@EntityScan(value = "com.example")
-@ComponentScan(value = "com.example")
-@MapperScan("com.example.cyjcommon.mapper")
+@EntityScan("com.example")
+@ComponentScan("com.example")
+@MapperScan("com.example")
 public class CyjWorkflowApplication {
 
     public static void main(String[] args) {

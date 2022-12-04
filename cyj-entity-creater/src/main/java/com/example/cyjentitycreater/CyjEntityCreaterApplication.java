@@ -14,9 +14,9 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableFeignClients
-@EntityScan(value = "com.example")
-@ComponentScan(value = "com.example")
-@MapperScan("com.example.cyjcommon.mapper")
+@EntityScan("com.example")
+@ComponentScan("com.example")
+@MapperScan("com.example")
 public class CyjEntityCreaterApplication {
 
     public static void main(String[] args) {

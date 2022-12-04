@@ -18,9 +18,9 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableEurekaClient
 @EnableFeignClients
 @EnableZuulProxy
-@EntityScan(value = "com.example")
-@ComponentScan(value = "com.example")
-@MapperScan("com.example.cyjcommon.mapper")
+@EntityScan("com.example")
+@ComponentScan("com.example")
+@MapperScan("com.example")
 public class CyjAuthApplication {
 
     public static void main(String[] args) {

@@ -12,8 +12,6 @@ import com.example.cyjcommon.entity.bean.Dictionary;
 import com.example.cyjcommon.entity.bean.Persistent;
 import com.example.cyjcommon.entity.bean.Property;
 import com.example.cyjcommon.entity.bean.Sql;
-import com.example.cyjcommon.mapper.bean.PersistentMapper;
-import com.example.cyjcommon.service.bean.PersistentService;
 import com.example.cyjcommon.utils.BeanUtils;
 import com.example.cyjdictionary.service.bean.custom.DictionaryCustomServiceImpl;
 import com.example.cyjentitycreater.entity.dto.PropertyCustomDTO;

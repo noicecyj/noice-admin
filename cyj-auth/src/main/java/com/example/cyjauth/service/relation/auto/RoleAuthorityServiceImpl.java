@@ -1,12 +1,12 @@
 package com.example.cyjauth.service.relation.auto;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.cyjauth.mapper.relation.RoleAuthorityMapper;
 import com.example.cyjcommon.entity.bean.Authority;
 import com.example.cyjcommon.entity.bean.Role;
 import com.example.cyjcommon.entity.relation.RoleAuthority;
-import com.example.cyjcommon.mapper.relation.RoleAuthorityMapper;
-import com.example.cyjcommon.service.relation.RoleAuthorityService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +21,7 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class)
 public class RoleAuthorityServiceImpl
         extends ServiceImpl<RoleAuthorityMapper, RoleAuthority>
-        implements RoleAuthorityService {
+        implements IService<RoleAuthority> {
 
     public List<Role> roleByAuthority(String authorityId) {
         List<Role> roleList = new ArrayList<>();
