@@ -2,8 +2,6 @@ package com.example.cyjcommon.utils;
 
 /**
  * @author Noice
- * @version 1.0
- * @date 2020/7/09 14:46
  */
 public enum ResultCode {
 
@@ -30,23 +28,23 @@ public enum ResultCode {
         this.message = message;
     }
 
-    public static String getMessage(String name) {
-        for (ResultCode item : ResultCode.values()) {
-            if (item.name().equals(name)) {
-                return item.message;
-            }
-        }
-        return name;
-    }
-
-    public static Integer getCode(String name) {
-        for (ResultCode item : ResultCode.values()) {
-            if (item.name().equals(name)) {
-                return item.code;
-            }
-        }
-        return null;
-    }
+//    public static String getMessage(String name) {
+//        for (ResultCode item : ResultCode.values()) {
+//            if (item.name().equals(name)) {
+//                return item.message;
+//            }
+//        }
+//        return name;
+//    }
+//
+//    public static Integer getCode(String name) {
+//        for (ResultCode item : ResultCode.values()) {
+//            if (item.name().equals(name)) {
+//                return item.code;
+//            }
+//        }
+//        return null;
+//    }
 
     public Integer code() {
         return this.code;

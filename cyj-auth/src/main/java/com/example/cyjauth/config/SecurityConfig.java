@@ -6,7 +6,7 @@ import com.example.cyjauth.filter.MyUsernamePasswordAuthenticationFilter;
 import com.example.cyjauth.filter.WebSecurityCorsFilter;
 import com.example.cyjauth.handler.EntryPointUnauthorizedHandler;
 import com.example.cyjauth.handler.RestAccessDeniedHandler;
-import com.example.cyjauth.service.custom.UserCustomService;
+import com.example.cyjauth.service.bean.custom.UserCustomServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,14 +25,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 /**
  * @author Noice
- * @version 1.0
- * @date 2020/1/21 14:46
  */
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     protected AuthenticationManager authenticationManager;
-    private UserCustomService userCustomService;
+    private UserCustomServiceImpl userCustomServiceImpl;
     private AuthenticationSuccessHandler successHandler;
     private AuthenticationFailureHandler failHandler;
     private RestAccessDeniedHandler accessDeniedHandler;
@@ -40,8 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private MyFilterSecurityInterceptor myFilterSecurityInterceptor;
 
     @Autowired
-    public void setUserCustomService(UserCustomService userCustomService) {
-        this.userCustomService = userCustomService;
+    public void setUserCustomService(UserCustomServiceImpl userCustomServiceImpl) {
+        this.userCustomServiceImpl = userCustomServiceImpl;
     }
 
     @Autowired
@@ -76,7 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userCustomService).passwordEncoder(new BCryptPasswordEncoder());
+        auth.userDetailsService(userCustomServiceImpl).passwordEncoder(new BCryptPasswordEncoder());
         //密码加密使用 Spring Security 提供的BCryptPasswordEncoder.encode(user.getRawPassword().trim())
     }
 

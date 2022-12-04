@@ -4,8 +4,6 @@ import lombok.Data;
 
 /**
  * @author Noice
- * @version 1.0
- * @date 2020/7/07 14:46
  */
 
 @Data

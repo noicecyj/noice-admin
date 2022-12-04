@@ -6,8 +6,6 @@ import java.io.Serializable;
 
 /**
  * @author Noice
- * @version 1.0
- * @date 2021-03-07
  */
 @Data
 public class PasswordDTO implements Serializable {

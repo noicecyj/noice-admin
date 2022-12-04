@@ -1,9 +1,8 @@
 package com.example.cyjentitycreater.controller.auto;
 
-import com.example.cyjentitycreater.service.auto.QuestionService;
-import com.example.cyjcommon.controller.autoController;
-import com.example.cyjcommon.entity.Question;
+import com.example.cyjcommon.entity.bean.Question;
 import com.example.cyjcommon.utils.ResultVO;
+import com.example.cyjentitycreater.service.bean.auto.QuestionServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,23 +22,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "entityCreateApi")
 @Tag(name = "Question")
-public class QuestionController implements autoController<Question> {
+public class QuestionController {
 
-    private QuestionService service;
+    private QuestionServiceImpl service;
 
     @Autowired
-    public void setService(QuestionService service) {
+    public void setService(QuestionServiceImpl service) {
         this.service = service;
     }
 
-    @Override
     @Operation(summary = "分页查询所有Question")
     @PostMapping(value = "pageQuestion")
-    public ResultVO page(@RequestParam("pageNumber") Integer pageNumber) {
-        return ResultVO.success(service.findAll(pageNumber));
+    public ResultVO page(@RequestBody @Validated Question po,
+                         @RequestParam("pageNumber") Integer pageNumber,
+                         @RequestParam("pageSize") Integer pageSize) {
+        return ResultVO.success(service.findAll(po, pageNumber, pageSize));
     }
 
-    @Override
     @Operation(summary = "保存Question")
     @PostMapping(value = "saveQuestion")
     public ResultVO save(@RequestBody @Validated Question po, BindingResult bindingResult) {
@@ -52,7 +51,6 @@ public class QuestionController implements autoController<Question> {
         return ResultVO.success(service.updateOne(po));
     }
 
-    @Override
     @Operation(summary = "删除Question")
     @PostMapping(value = "deleteQuestion")
     public ResultVO delete(@RequestBody Question po) {
@@ -61,6 +59,15 @@ public class QuestionController implements autoController<Question> {
         }
         service.deleteOne(po);
         return ResultVO.success();
+    }
+
+    @Operation(summary = "根据QuestionBase查询所有Question")
+    @PostMapping(value = "pageQuestionByQuestionBase")
+    public ResultVO pageQuestionByQuestionBase(@RequestBody @Validated Question po,
+                                               @RequestParam("pageNumber") Integer pageNumber,
+                                               @RequestParam("pageSize") Integer pageSize,
+                                               @RequestParam("id") String id) {
+        return ResultVO.success(service.pageQuestionByQuestionBase(po, pageNumber, pageSize, id));
     }
 
 }

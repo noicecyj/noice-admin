@@ -9,8 +9,8 @@
       <excludeFolder url="file://$MODULE_DIR$/noice/.ice" />
       <excludeFolder url="file://$MODULE_DIR$/noice/.vscode" />
       <excludeFolder url="file://$MODULE_DIR$/log" />
-      <excludeFolder url="file://$MODULE_DIR$/target" />
       <excludeFolder url="file://$MODULE_DIR$/noice/.fleet" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

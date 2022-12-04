@@ -107,7 +107,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
                     String userRoleId = list.getString(i);//jtw取出的角色id
                     for (int j = 0; j < redisData.size(); j++) {
                         JSONObject redisArray = redisData.getJSONObject(j);
-                        if (userRoleId.equals(redisArray.getString("id"))) {//对比
+                        if (userRoleId.equals(redisArray.getString("roleId"))) {//对比
                             if ("613cd04b-b988-46d6-af34-76c6e3abdde6".equals(userRoleId)) {
                                 authorities.add(new AuthGrantedAuthority("/**", "ALL"));
                             } else {

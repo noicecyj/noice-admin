@@ -1,9 +1,8 @@
 package com.example.cyjentitycreater.controller.auto;
 
-import com.example.cyjentitycreater.service.auto.TestPaperConfigService;
-import com.example.cyjcommon.controller.autoController;
-import com.example.cyjcommon.entity.TestPaperConfig;
+import com.example.cyjcommon.entity.bean.TestPaperConfig;
 import com.example.cyjcommon.utils.ResultVO;
+import com.example.cyjentitycreater.service.bean.auto.TestPaperConfigServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,23 +22,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "entityCreateApi")
 @Tag(name = "TestPaperConfig")
-public class TestPaperConfigController implements autoController<TestPaperConfig> {
+public class TestPaperConfigController {
 
-    private TestPaperConfigService service;
+    private TestPaperConfigServiceImpl service;
 
     @Autowired
-    public void setService(TestPaperConfigService service) {
+    public void setService(TestPaperConfigServiceImpl service) {
         this.service = service;
     }
 
-    @Override
     @Operation(summary = "分页查询所有TestPaperConfig")
     @PostMapping(value = "pageTestPaperConfig")
-    public ResultVO page(@RequestParam("pageNumber") Integer pageNumber) {
-        return ResultVO.success(service.findAll(pageNumber));
+    public ResultVO page(@RequestBody @Validated TestPaperConfig po,
+                         @RequestParam("pageNumber") Integer pageNumber,
+                         @RequestParam("pageSize") Integer pageSize) {
+        return ResultVO.success(service.findAll(po, pageNumber, pageSize));
     }
 
-    @Override
     @Operation(summary = "保存TestPaperConfig")
     @PostMapping(value = "saveTestPaperConfig")
     public ResultVO save(@RequestBody @Validated TestPaperConfig po, BindingResult bindingResult) {
@@ -52,7 +51,6 @@ public class TestPaperConfigController implements autoController<TestPaperConfig
         return ResultVO.success(service.updateOne(po));
     }
 
-    @Override
     @Operation(summary = "删除TestPaperConfig")
     @PostMapping(value = "deleteTestPaperConfig")
     public ResultVO delete(@RequestBody TestPaperConfig po) {
@@ -61,6 +59,15 @@ public class TestPaperConfigController implements autoController<TestPaperConfig
         }
         service.deleteOne(po);
         return ResultVO.success();
+    }
+
+    @Operation(summary = "根据TestPaper查询所有TestPaperConfig")
+    @PostMapping(value = "pageTestPaperConfigByTestPaper")
+    public ResultVO pageTestPaperConfigByTestPaper(@RequestBody @Validated TestPaperConfig po,
+                                                   @RequestParam("pageNumber") Integer pageNumber,
+                                                   @RequestParam("pageSize") Integer pageSize,
+                                                   @RequestParam("id") String id) {
+        return ResultVO.success(service.pageTestPaperConfigByTestPaper(po, pageNumber, pageSize, id));
     }
 
 }

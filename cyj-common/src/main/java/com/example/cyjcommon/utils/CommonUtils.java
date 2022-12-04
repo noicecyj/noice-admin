@@ -1,8 +1,5 @@
 package com.example.cyjcommon.utils;
 
-import com.alibaba.fastjson.JSONArray;
-
-import javax.persistence.Table;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,8 +8,6 @@ import java.util.Objects;
 
 /**
  * @author Noice
- * @version 1.0
- * @date 2020/1/21 14:46
  */
 public class CommonUtils {
 
@@ -52,22 +47,22 @@ public class CommonUtils {
         }
     }
 
-    /**
-     * 通过获取类上的@Table注解获取表名称
-     *
-     * @param clazz 类class
-     * @return 表名
-     */
-    public static String getTableName(Class<?> clazz) {
-        Table annotation = clazz.getAnnotation(Table.class);
-        return annotation.name();
-    }
-
-    /**
-     * json 转 List<T>
-     */
-    public static <T> List<T> jsonToList(String jsonString, Class<T> clazz) {
-        return JSONArray.parseArray(jsonString, clazz);
-    }
+//    /**
+//     * 通过获取类上的@Table注解获取表名称
+//     *
+//     * @param clazz 类class
+//     * @return 表名
+//     */
+//    public static String getTableName(Class<?> clazz) {
+//        Table annotation = clazz.getAnnotation(Table.class);
+//        return annotation.name();
+//    }
+//
+//    /**
+//     * json 转 List<T>
+//     */
+//    public static <T> List<T> jsonToList(String jsonString, Class<T> clazz) {
+//        return JSONArray.parseArray(jsonString, clazz);
+//    }
 
 }

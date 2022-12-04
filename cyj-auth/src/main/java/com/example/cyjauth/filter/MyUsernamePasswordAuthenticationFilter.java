@@ -17,8 +17,6 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * @author Noice
- * @version 1.0
- * @date 2020/1/21 14:46
  */
 public class MyUsernamePasswordAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 

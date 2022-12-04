@@ -1,20 +1,19 @@
 package com.example.cyjauth.entity.bo;
 
-import com.example.cyjcommon.entity.Authority;
-import com.example.cyjcommon.entity.Role;
-import com.example.cyjcommon.entity.User;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.cyjcommon.entity.bean.Authority;
+import com.example.cyjcommon.entity.bean.User;
+import com.example.cyjcommon.entity.relation.RoleAuthority;
+import com.example.cyjcommon.entity.relation.UserRole;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author Noice
- * @version 1.0
- * @date 2021-03-20
  */
 public class AuthUserDetails extends User implements UserDetails {
 
@@ -25,7 +24,6 @@ public class AuthUserDetails extends User implements UserDetails {
             this.setUserName(po.getUserName());
             this.setPassword(po.getPassword());
             this.setStatus(po.getStatus());
-            this.setRole(po.getRole());
         }
     }
 
@@ -33,14 +31,18 @@ public class AuthUserDetails extends User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorityList = new ArrayList<>();
-        Set<Role> roles = this.getRole();
-        for (Role role : roles) {
-            Set<Authority> authorityCustomList = role.getAuthority();
-            if (authorityCustomList != null) {
-                for (Authority po : authorityCustomList) {
-                    GrantedAuthority grantedAuthority = new AuthGrantedAuthority(po.getAuthorityPath(), po.getAuthorityMethod());
-                    authorityList.add(grantedAuthority);
-                }
+        List<UserRole> userRoleList = new UserRole()
+                .selectList(new QueryWrapper<UserRole>().lambda()
+                        .eq(UserRole::getUserId, this.getId()));
+        for (UserRole userRole : userRoleList) {
+            List<RoleAuthority> roleAuthorityList = new RoleAuthority()
+                    .selectList(new QueryWrapper<RoleAuthority>().lambda()
+                            .eq(RoleAuthority::getRoleId, userRole.getRoleId()));
+            for (RoleAuthority roleAuthority : roleAuthorityList) {
+                Authority authority = new Authority().selectById(roleAuthority.getAuthorityId());
+                GrantedAuthority grantedAuthority = new AuthGrantedAuthority(authority.getAuthorityPath(),
+                        authority.getAuthorityMethod());
+                authorityList.add(grantedAuthority);
             }
         }
         return authorityList;

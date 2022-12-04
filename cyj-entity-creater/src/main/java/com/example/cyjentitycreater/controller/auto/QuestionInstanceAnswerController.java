@@ -1,9 +1,8 @@
 package com.example.cyjentitycreater.controller.auto;
 
-import com.example.cyjentitycreater.service.auto.QuestionInstanceAnswerService;
-import com.example.cyjcommon.controller.autoController;
-import com.example.cyjcommon.entity.QuestionInstanceAnswer;
+import com.example.cyjcommon.entity.bean.QuestionInstanceAnswer;
 import com.example.cyjcommon.utils.ResultVO;
+import com.example.cyjentitycreater.service.bean.auto.QuestionInstanceAnswerServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,23 +22,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "entityCreateApi")
 @Tag(name = "QuestionInstanceAnswer")
-public class QuestionInstanceAnswerController implements autoController<QuestionInstanceAnswer> {
+public class QuestionInstanceAnswerController {
 
-    private QuestionInstanceAnswerService service;
+    private QuestionInstanceAnswerServiceImpl service;
 
     @Autowired
-    public void setService(QuestionInstanceAnswerService service) {
+    public void setService(QuestionInstanceAnswerServiceImpl service) {
         this.service = service;
     }
 
-    @Override
     @Operation(summary = "分页查询所有QuestionInstanceAnswer")
     @PostMapping(value = "pageQuestionInstanceAnswer")
-    public ResultVO page(@RequestParam("pageNumber") Integer pageNumber) {
-        return ResultVO.success(service.findAll(pageNumber));
+    public ResultVO page(@RequestBody @Validated QuestionInstanceAnswer po,
+                         @RequestParam("pageNumber") Integer pageNumber,
+                         @RequestParam("pageSize") Integer pageSize) {
+        return ResultVO.success(service.findAll(po, pageNumber, pageSize));
     }
 
-    @Override
     @Operation(summary = "保存QuestionInstanceAnswer")
     @PostMapping(value = "saveQuestionInstanceAnswer")
     public ResultVO save(@RequestBody @Validated QuestionInstanceAnswer po, BindingResult bindingResult) {
@@ -52,7 +51,6 @@ public class QuestionInstanceAnswerController implements autoController<Question
         return ResultVO.success(service.updateOne(po));
     }
 
-    @Override
     @Operation(summary = "删除QuestionInstanceAnswer")
     @PostMapping(value = "deleteQuestionInstanceAnswer")
     public ResultVO delete(@RequestBody QuestionInstanceAnswer po) {
@@ -61,6 +59,15 @@ public class QuestionInstanceAnswerController implements autoController<Question
         }
         service.deleteOne(po);
         return ResultVO.success();
+    }
+
+    @Operation(summary = "根据TestInstance查询所有QuestionInstanceAnswer")
+    @PostMapping(value = "pageQuestionInstanceAnswerByTestInstance")
+    public ResultVO pageQuestionInstanceAnswerByTestInstance(@RequestBody @Validated QuestionInstanceAnswer po,
+                                                             @RequestParam("pageNumber") Integer pageNumber,
+                                                             @RequestParam("pageSize") Integer pageSize,
+                                                             @RequestParam("id") String id) {
+        return ResultVO.success(service.pageQuestionInstanceAnswerByTestInstance(po, pageNumber, pageSize, id));
     }
 
 }

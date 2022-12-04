@@ -1,15 +1,12 @@
 package com.example.cyjentitycreater.entity.dto;
 
-import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson2.JSONArray;
 import lombok.Data;
 
-import javax.persistence.Column;
 import java.io.Serializable;
 
 /**
  * @author Noice
- * @version 1.0
- * @date 2021-10-16
  */
 @Data
 public class PropertyCustomDTO implements Serializable {

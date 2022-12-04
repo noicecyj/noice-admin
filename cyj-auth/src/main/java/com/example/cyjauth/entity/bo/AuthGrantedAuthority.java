@@ -5,8 +5,6 @@ import org.springframework.security.core.GrantedAuthority;
 
 /**
  * @author Noice
- * @version 1.0
- * @date 2021-03-20
  */
 @Data
 public class AuthGrantedAuthority implements GrantedAuthority {

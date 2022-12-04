@@ -1,9 +1,8 @@
 package com.example.cyjentitycreater.controller.auto;
 
-import com.example.cyjentitycreater.service.auto.QuestionBaseService;
-import com.example.cyjcommon.controller.autoController;
-import com.example.cyjcommon.entity.QuestionBase;
+import com.example.cyjcommon.entity.bean.QuestionBase;
 import com.example.cyjcommon.utils.ResultVO;
+import com.example.cyjentitycreater.service.bean.auto.QuestionBaseServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,23 +22,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "entityCreateApi")
 @Tag(name = "QuestionBase")
-public class QuestionBaseController implements autoController<QuestionBase> {
+public class QuestionBaseController {
 
-    private QuestionBaseService service;
+    private QuestionBaseServiceImpl service;
 
     @Autowired
-    public void setService(QuestionBaseService service) {
+    public void setService(QuestionBaseServiceImpl service) {
         this.service = service;
     }
 
-    @Override
     @Operation(summary = "分页查询所有QuestionBase")
     @PostMapping(value = "pageQuestionBase")
-    public ResultVO page(@RequestParam("pageNumber") Integer pageNumber) {
-        return ResultVO.success(service.findAll(pageNumber));
+    public ResultVO page(@RequestBody @Validated QuestionBase po,
+                         @RequestParam("pageNumber") Integer pageNumber,
+                         @RequestParam("pageSize") Integer pageSize) {
+        return ResultVO.success(service.findAll(po, pageNumber, pageSize));
     }
 
-    @Override
     @Operation(summary = "保存QuestionBase")
     @PostMapping(value = "saveQuestionBase")
     public ResultVO save(@RequestBody @Validated QuestionBase po, BindingResult bindingResult) {
@@ -52,7 +51,6 @@ public class QuestionBaseController implements autoController<QuestionBase> {
         return ResultVO.success(service.updateOne(po));
     }
 
-    @Override
     @Operation(summary = "删除QuestionBase")
     @PostMapping(value = "deleteQuestionBase")
     public ResultVO delete(@RequestBody QuestionBase po) {
@@ -63,10 +61,5 @@ public class QuestionBaseController implements autoController<QuestionBase> {
         return ResultVO.success();
     }
 
-    @Operation(summary = "根据QuestionBase查询所有Question")
-    @PostMapping(value = "pageQuestionByQuestionBase")
-    public ResultVO pageQuestionByQuestionBase(@RequestParam("pageNumber") Integer pageNumber, @RequestParam("id") String id) {
-        return ResultVO.success(service.pageQuestionByQuestionBase(pageNumber, id));
-    }
 
 }

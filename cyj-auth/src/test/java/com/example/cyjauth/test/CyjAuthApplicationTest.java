@@ -1,10 +1,9 @@
 package com.example.cyjauth.test;
 
 import com.example.cyjauth.CyjAuthApplication;
-import com.example.cyjauth.service.auto.AuthorityService;
-import com.example.cyjcommon.dao.UserDao;
+import com.example.cyjauth.service.bean.auto.AuthorityServiceImpl;
+import com.example.cyjcommon.mapper.bean.UserMapper;
 import lombok.Data;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,13 +11,9 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author Noice
@@ -39,9 +34,9 @@ public class CyjAuthApplicationTest {
     }
 
     @Autowired
-    private AuthorityService authorityService;
+    private AuthorityServiceImpl authorityServiceImpl;
     @Autowired
-    private UserDao userDao;
+    private UserMapper userMapper;
 
 
 //    @Test

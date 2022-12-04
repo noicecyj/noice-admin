@@ -1,9 +1,8 @@
 package com.example.cyjentitycreater.controller.auto;
 
-import com.example.cyjentitycreater.service.auto.SubjectService;
-import com.example.cyjcommon.controller.autoController;
-import com.example.cyjcommon.entity.Subject;
+import com.example.cyjcommon.entity.bean.Subject;
 import com.example.cyjcommon.utils.ResultVO;
+import com.example.cyjentitycreater.service.bean.auto.SubjectServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,23 +22,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "entityCreateApi")
 @Tag(name = "Subject")
-public class SubjectController implements autoController<Subject> {
+public class SubjectController {
 
-    private SubjectService service;
+    private SubjectServiceImpl service;
 
     @Autowired
-    public void setService(SubjectService service) {
+    public void setService(SubjectServiceImpl service) {
         this.service = service;
     }
 
-    @Override
     @Operation(summary = "分页查询所有Subject")
     @PostMapping(value = "pageSubject")
-    public ResultVO page(@RequestParam("pageNumber") Integer pageNumber) {
-        return ResultVO.success(service.findAll(pageNumber));
+    public ResultVO page(@RequestBody @Validated Subject po,
+                         @RequestParam("pageNumber") Integer pageNumber,
+                         @RequestParam("pageSize") Integer pageSize) {
+        return ResultVO.success(service.findAll(po, pageNumber, pageSize));
     }
 
-    @Override
     @Operation(summary = "保存Subject")
     @PostMapping(value = "saveSubject")
     public ResultVO save(@RequestBody @Validated Subject po, BindingResult bindingResult) {
@@ -52,7 +51,6 @@ public class SubjectController implements autoController<Subject> {
         return ResultVO.success(service.updateOne(po));
     }
 
-    @Override
     @Operation(summary = "删除Subject")
     @PostMapping(value = "deleteSubject")
     public ResultVO delete(@RequestBody Subject po) {

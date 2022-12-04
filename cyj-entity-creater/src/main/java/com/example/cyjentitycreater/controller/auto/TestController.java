@@ -1,9 +1,8 @@
 package com.example.cyjentitycreater.controller.auto;
 
-import com.example.cyjentitycreater.service.auto.TestService;
-import com.example.cyjcommon.controller.autoController;
-import com.example.cyjcommon.entity.Test;
+import com.example.cyjcommon.entity.bean.Test;
 import com.example.cyjcommon.utils.ResultVO;
+import com.example.cyjentitycreater.service.bean.auto.TestServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,23 +22,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "entityCreateApi")
 @Tag(name = "Test")
-public class TestController implements autoController<Test> {
+public class TestController {
 
-    private TestService service;
+    private TestServiceImpl service;
 
     @Autowired
-    public void setService(TestService service) {
+    public void setService(TestServiceImpl service) {
         this.service = service;
     }
 
-    @Override
     @Operation(summary = "分页查询所有Test")
     @PostMapping(value = "pageTest")
-    public ResultVO page(@RequestParam("pageNumber") Integer pageNumber) {
-        return ResultVO.success(service.findAll(pageNumber));
+    public ResultVO page(@RequestBody @Validated Test po,
+                         @RequestParam("pageNumber") Integer pageNumber,
+                         @RequestParam("pageSize") Integer pageSize) {
+        return ResultVO.success(service.findAll(po, pageNumber, pageSize));
     }
 
-    @Override
     @Operation(summary = "保存Test")
     @PostMapping(value = "saveTest")
     public ResultVO save(@RequestBody @Validated Test po, BindingResult bindingResult) {
@@ -52,7 +51,6 @@ public class TestController implements autoController<Test> {
         return ResultVO.success(service.updateOne(po));
     }
 
-    @Override
     @Operation(summary = "删除Test")
     @PostMapping(value = "deleteTest")
     public ResultVO delete(@RequestBody Test po) {

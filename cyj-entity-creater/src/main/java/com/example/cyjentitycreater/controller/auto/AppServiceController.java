@@ -1,9 +1,8 @@
 package com.example.cyjentitycreater.controller.auto;
 
-import com.example.cyjentitycreater.service.auto.AppServiceService;
-import com.example.cyjcommon.controller.autoController;
-import com.example.cyjcommon.entity.AppService;
+import com.example.cyjcommon.entity.bean.AppService;
 import com.example.cyjcommon.utils.ResultVO;
+import com.example.cyjentitycreater.service.bean.auto.AppServiceServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,23 +22,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "entityCreateApi")
 @Tag(name = "AppService")
-public class AppServiceController implements autoController<AppService> {
+public class AppServiceController {
 
-    private AppServiceService service;
+    private AppServiceServiceImpl service;
 
     @Autowired
-    public void setService(AppServiceService service) {
+    public void setService(AppServiceServiceImpl service) {
         this.service = service;
     }
 
-    @Override
     @Operation(summary = "分页查询所有AppService")
     @PostMapping(value = "pageAppService")
-    public ResultVO page(@RequestParam("pageNumber") Integer pageNumber) {
-        return ResultVO.success(service.findAll(pageNumber));
+    public ResultVO page(@RequestBody @Validated AppService po,
+                         @RequestParam("pageNumber") Integer pageNumber,
+                         @RequestParam("pageSize") Integer pageSize) {
+        return ResultVO.success(service.findAll(po, pageNumber, pageSize));
     }
 
-    @Override
     @Operation(summary = "保存AppService")
     @PostMapping(value = "saveAppService")
     public ResultVO save(@RequestBody @Validated AppService po, BindingResult bindingResult) {
@@ -52,7 +51,6 @@ public class AppServiceController implements autoController<AppService> {
         return ResultVO.success(service.updateOne(po));
     }
 
-    @Override
     @Operation(summary = "删除AppService")
     @PostMapping(value = "deleteAppService")
     public ResultVO delete(@RequestBody AppService po) {
@@ -61,18 +59,6 @@ public class AppServiceController implements autoController<AppService> {
         }
         service.deleteOne(po);
         return ResultVO.success();
-    }
-
-    @Operation(summary = "根据AppService查询所有Authority")
-    @PostMapping(value = "pageAuthorityByAppService")
-    public ResultVO pageAuthorityByAppService(@RequestParam("pageNumber") Integer pageNumber, @RequestParam("id") String id) {
-        return ResultVO.success(service.pageAuthorityByAppService(pageNumber, id));
-    }
-
-    @Operation(summary = "根据AppService查询所有Persistent")
-    @PostMapping(value = "pagePersistentByAppService")
-    public ResultVO pagePersistentByAppService(@RequestParam("pageNumber") Integer pageNumber, @RequestParam("id") String id) {
-        return ResultVO.success(service.pagePersistentByAppService(pageNumber, id));
     }
 
 }

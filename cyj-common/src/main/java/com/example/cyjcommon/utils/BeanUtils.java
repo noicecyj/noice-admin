@@ -1,7 +1,7 @@
 package com.example.cyjcommon.utils;
 
-import com.example.cyjcommon.entity.AppService;
-import com.example.cyjcommon.entity.Property;
+import com.example.cyjcommon.entity.bean.AppService;
+import com.example.cyjcommon.entity.bean.Property;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,8 +16,6 @@ import java.util.regex.Pattern;
 
 /**
  * @author Noice
- * @version 1.0
- * @date 2020/1/21 14:46
  */
 public class BeanUtils {
 
@@ -97,6 +95,15 @@ public class BeanUtils {
 
     public static void deleteJavaFile(String path, String fileName) {
         File file = new File(path + "/" + fileName);
+        if (file.delete()) {
+            logger.info("Deleted the file: " + file.getName());
+        } else {
+            logger.info("Failed to delete the file.");
+        }
+    }
+
+    public static void deleteJavaFile(String path) {
+        File file = new File(path);
         if (file.delete()) {
             logger.info("Deleted the file: " + file.getName());
         } else {

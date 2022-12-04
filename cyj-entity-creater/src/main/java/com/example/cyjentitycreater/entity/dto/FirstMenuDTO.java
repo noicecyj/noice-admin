@@ -7,8 +7,6 @@ import java.util.List;
 
 /**
  * @author Noice
- * @version 1.0
- * @date 2022-02-23
  */
 @Data
 public class FirstMenuDTO implements Serializable {

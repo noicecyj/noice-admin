@@ -1,8 +1,7 @@
 package com.example.cyjentitycreater;
 
-import com.example.cyjcommon.dao.PersistentDao;
-import com.example.cyjcommon.entity.Persistent;
-import com.example.cyjentitycreater.service.custom.PersistentCustomService;
+import com.example.cyjcommon.mapper.bean.PersistentMapper;
+import com.example.cyjentitycreater.service.bean.custom.PersistentCustomServiceImpl;
 import lombok.Data;
 import org.camunda.bpm.engine.IdentityService;
 import org.camunda.bpm.engine.RuntimeService;
@@ -23,7 +22,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 /**
  * @author Noice
@@ -44,17 +42,17 @@ public class CyjEntityCreaterApplicationTest {
     }
 
     @Autowired
-    private PersistentCustomService persistentCustomService;
+    private PersistentCustomServiceImpl persistentCustomServiceImpl;
     @Autowired
-    private PersistentDao persistentDao;
+    private PersistentMapper persistentMapper;
 
-    @Test
+//    @Test
 //    @Transactional
-    public void entityTest() {
-        List<Persistent> persistentList = persistentDao.findAll();
-        for (Persistent persistent : persistentList) {
-            persistentCustomService.entityHandler(persistent, "create");
-        }
+//    public void entityTest() {
+//        List<Persistent> persistentList = persistentMapper.findAll();
+//        for (Persistent persistent : persistentList) {
+//            persistentCustomServiceImpl.entityHandler(persistent, "create");
+//        }
 //        Persistent persistent1 = persistentDao.getOne("edd90446-98bc-4330-8d93-1ba4ff003af0");
 //        persistentCustomService.entityHandler(persistent1);
 //        Persistent persistent2 = persistentDao.getOne("ea17ecb7-4ab9-4f93-8546-3da3483400aa");
@@ -69,7 +67,7 @@ public class CyjEntityCreaterApplicationTest {
 //        persistentCustomService.entityHandler(persistent6);
 //        Persistent persistent7 = persistentDao.getOne("0c9f71bf-be44-4629-9d42-46bb0950647d");
 //        persistentCustomService.entityHandler(persistent7);
-    }
+//    }
 
     @Autowired
     private RuntimeService runtimeService;

@@ -3,9 +3,9 @@ package com.example.cyjauth.manager;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.example.cyjcommon.entity.Authority;
-import com.example.cyjcommon.entity.QAuthority;
-import com.example.cyjcommon.service.BaseService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.cyjcommon.entity.bean.AppService;
+import com.example.cyjcommon.entity.bean.Authority;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -33,7 +33,7 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 @Transactional(rollbackFor = Exception.class)
-public class MySecurityMetadataSource extends BaseService implements FilterInvocationSecurityMetadataSource {
+public class MySecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
     private StringRedisTemplate redisTemplate;
 
@@ -52,12 +52,14 @@ public class MySecurityMetadataSource extends BaseService implements FilterInvoc
         //从redis中获取角色与权限数据
         String redisConfigAttributesPermission = redisTemplate.opsForValue().get("configAttributes:permissions");
         if (StringUtils.isBlank(redisConfigAttributesPermission)) {
-            List<Authority> authorityList = queryFactory.selectFrom(QAuthority.authority)
-                    .where(QAuthority.authority.status.eq("有效")).fetch();
+            List<Authority> authorityList = new Authority()
+                    .selectList(new QueryWrapper<Authority>().lambda()
+                            .eq(Authority::getStatus, "有效"));
             for (Authority po : authorityList) {
                 String path = po.getAuthorityPath();
-                if (po.getAppService() != null) {
-                    path = "/" + po.getAppService().getAppServiceName() + "/" + path;
+                AppService appService = new AppService().selectById(po.getAppServiceId());
+                if (appService != null) {
+                    path = "/" + appService.getAppServiceName() + "/" + path;
                 }
                 ConfigAttribute configAttribute = new SecurityConfig(path);
                 configAttributes.add(configAttribute);

@@ -1,10 +1,12 @@
 package com.example.cyjauth.handler;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.cyjauth.constant.SecurityConstant;
 import com.example.cyjauth.entity.bo.AuthUserDetails;
-import com.example.cyjauth.service.custom.UserCustomService;
-import com.example.cyjcommon.entity.Role;
+import com.example.cyjauth.service.bean.custom.UserCustomServiceImpl;
+import com.example.cyjcommon.entity.bean.User;
+import com.example.cyjcommon.entity.relation.UserRole;
 import com.example.cyjcommon.utils.ResponseUtil;
 import com.example.cyjcommon.utils.ResultCode;
 import com.example.cyjcommon.utils.ResultVO;
@@ -26,23 +28,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
  * @author Noice
- * @version 1.0
- * @date 2021-03-07
  */
 @Component
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
     private StringRedisTemplate redisTemplate;
-    private UserCustomService userCustomService;
+    private UserCustomServiceImpl userCustomServiceImpl;
 
     @Autowired
-    public void setUserCustomService(UserCustomService userCustomService) {
-        this.userCustomService = userCustomService;
+    public void setUserCustomService(UserCustomServiceImpl userCustomServiceImpl) {
+        this.userCustomServiceImpl = userCustomServiceImpl;
     }
 
     @Autowired
@@ -66,8 +65,11 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         String roleInfosMapPermission = redisTemplate.opsForValue().get("authentication:roleinfos:permissions:" + userName);
         if (StringUtils.isBlank(roleInfosMapPermission)) {
             //将角色与权限关系存入redis
-            Set<Role> roleInfos = userCustomService.findAuthUserByUsername(userName).getRole();
-            redisTemplate.opsForValue().set("authentication:roleinfos:permissions:" + userName, JSON.toJSONString(roleInfos), 480, TimeUnit.MINUTES);
+            User user = userCustomServiceImpl.findAuthUserByUsername(userName);
+            List<UserRole> userRoleList = new UserRole().selectList(new QueryWrapper<UserRole>().lambda()
+                    .eq(UserRole::getUserId, user.getId()));
+            redisTemplate.opsForValue()
+                    .set("authentication:roleinfos:permissions:" + userName, JSON.toJSONString(userRoleList), 480, TimeUnit.MINUTES);
         }
         //创建token
         String accessToken = createAccessJwtToken(authUserDetails);
@@ -92,8 +94,10 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         Claims claims = Jwts.claims().setSubject(authUserDetails.getUsername());
         //存入角色信息
         List<String> list = new ArrayList<>();
-        for (Role po : authUserDetails.getRole()) {
-            list.add(po.getId());
+        List<UserRole> userRoleList = new UserRole().selectList(new QueryWrapper<UserRole>().lambda()
+                .eq(UserRole::getUserId, authUserDetails.getId()));
+        for (UserRole userRole : userRoleList) {
+            list.add(userRole.getRoleId());
         }
         claims.put(SecurityConstant.AUTHORITIES, JSON.toJSONString(list));
         LocalDateTime currentTime = LocalDateTime.now();

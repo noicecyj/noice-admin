@@ -1,9 +1,8 @@
 package com.example.cyjentitycreater.controller.auto;
 
-import com.example.cyjentitycreater.service.auto.PropertyService;
-import com.example.cyjcommon.controller.autoController;
-import com.example.cyjcommon.entity.Property;
+import com.example.cyjcommon.entity.bean.Property;
 import com.example.cyjcommon.utils.ResultVO;
+import com.example.cyjentitycreater.service.bean.auto.PropertyServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,23 +22,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "entityCreateApi")
 @Tag(name = "Property")
-public class PropertyController implements autoController<Property> {
+public class PropertyController {
 
-    private PropertyService service;
+    private PropertyServiceImpl service;
 
     @Autowired
-    public void setService(PropertyService service) {
+    public void setService(PropertyServiceImpl service) {
         this.service = service;
     }
 
-    @Override
     @Operation(summary = "分页查询所有Property")
     @PostMapping(value = "pageProperty")
-    public ResultVO page(@RequestParam("pageNumber") Integer pageNumber) {
-        return ResultVO.success(service.findAll(pageNumber));
+    public ResultVO page(@RequestBody @Validated Property po,
+                         @RequestParam("pageNumber") Integer pageNumber,
+                         @RequestParam("pageSize") Integer pageSize) {
+        return ResultVO.success(service.findAll(po, pageNumber, pageSize));
     }
 
-    @Override
     @Operation(summary = "保存Property")
     @PostMapping(value = "saveProperty")
     public ResultVO save(@RequestBody @Validated Property po, BindingResult bindingResult) {
@@ -52,7 +51,6 @@ public class PropertyController implements autoController<Property> {
         return ResultVO.success(service.updateOne(po));
     }
 
-    @Override
     @Operation(summary = "删除Property")
     @PostMapping(value = "deleteProperty")
     public ResultVO delete(@RequestBody Property po) {
@@ -61,6 +59,15 @@ public class PropertyController implements autoController<Property> {
         }
         service.deleteOne(po);
         return ResultVO.success();
+    }
+
+    @Operation(summary = "根据Persistent查询所有Property")
+    @PostMapping(value = "pagePropertyByPersistent")
+    public ResultVO pagePropertyByPersistent(@RequestBody @Validated Property po,
+                                             @RequestParam("pageNumber") Integer pageNumber,
+                                             @RequestParam("pageSize") Integer pageSize,
+                                             @RequestParam("id") String id) {
+        return ResultVO.success(service.pagePropertyByPersistent(po, pageNumber, pageSize, id));
     }
 
 }

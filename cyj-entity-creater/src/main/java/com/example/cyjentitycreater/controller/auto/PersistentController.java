@@ -1,9 +1,8 @@
 package com.example.cyjentitycreater.controller.auto;
 
-import com.example.cyjentitycreater.service.auto.PersistentService;
-import com.example.cyjcommon.controller.autoController;
-import com.example.cyjcommon.entity.Persistent;
+import com.example.cyjcommon.entity.bean.Persistent;
 import com.example.cyjcommon.utils.ResultVO;
+import com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,23 +22,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "entityCreateApi")
 @Tag(name = "Persistent")
-public class PersistentController implements autoController<Persistent> {
+public class PersistentController {
 
-    private PersistentService service;
+    private PersistentServiceImpl service;
 
     @Autowired
-    public void setService(PersistentService service) {
+    public void setService(PersistentServiceImpl service) {
         this.service = service;
     }
 
-    @Override
     @Operation(summary = "分页查询所有Persistent")
     @PostMapping(value = "pagePersistent")
-    public ResultVO page(@RequestParam("pageNumber") Integer pageNumber) {
-        return ResultVO.success(service.findAll(pageNumber));
+    public ResultVO page(@RequestBody @Validated Persistent po,
+                         @RequestParam("pageNumber") Integer pageNumber,
+                         @RequestParam("pageSize") Integer pageSize) {
+        return ResultVO.success(service.findAll(po, pageNumber, pageSize));
     }
 
-    @Override
     @Operation(summary = "保存Persistent")
     @PostMapping(value = "savePersistent")
     public ResultVO save(@RequestBody @Validated Persistent po, BindingResult bindingResult) {
@@ -52,7 +51,6 @@ public class PersistentController implements autoController<Persistent> {
         return ResultVO.success(service.updateOne(po));
     }
 
-    @Override
     @Operation(summary = "删除Persistent")
     @PostMapping(value = "deletePersistent")
     public ResultVO delete(@RequestBody Persistent po) {
@@ -63,16 +61,13 @@ public class PersistentController implements autoController<Persistent> {
         return ResultVO.success();
     }
 
-    @Operation(summary = "根据Persistent查询所有Authority")
-    @PostMapping(value = "pageAuthorityByPersistent")
-    public ResultVO pageAuthorityByPersistent(@RequestParam("pageNumber") Integer pageNumber, @RequestParam("id") String id) {
-        return ResultVO.success(service.pageAuthorityByPersistent(pageNumber, id));
-    }
-
-    @Operation(summary = "根据Persistent查询所有Property")
-    @PostMapping(value = "pagePropertyByPersistent")
-    public ResultVO pagePropertyByPersistent(@RequestParam("pageNumber") Integer pageNumber, @RequestParam("id") String id) {
-        return ResultVO.success(service.pagePropertyByPersistent(pageNumber, id));
+    @Operation(summary = "根据AppService查询所有Persistent")
+    @PostMapping(value = "pagePersistentByAppService")
+    public ResultVO pagePersistentByAppService(@RequestBody @Validated Persistent po,
+                                               @RequestParam("pageNumber") Integer pageNumber,
+                                               @RequestParam("pageSize") Integer pageSize,
+                                               @RequestParam("id") String id) {
+        return ResultVO.success(service.pagePersistentByAppService(po, pageNumber, pageSize, id));
     }
 
 }

@@ -1,9 +1,8 @@
 package com.example.cyjentitycreater.controller.custom;
 
-import com.example.cyjcommon.entity.Persistent;
-import com.example.cyjcommon.entity.TestPaperInstance;
+import com.example.cyjcommon.entity.bean.TestPaperInstance;
 import com.example.cyjcommon.utils.ResultVO;
-import com.example.cyjentitycreater.service.custom.TestPaperInstanceCustomService;
+import com.example.cyjentitycreater.service.bean.custom.TestPaperInstanceCustomServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,17 +19,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "entityCreateApi")
 public class TestPaperInstanceCustomController {
 
-    private TestPaperInstanceCustomService testPaperInstanceCustomService;
+    private TestPaperInstanceCustomServiceImpl testPaperInstanceCustomServiceImpl;
 
     @Autowired
-    public void setTestPaperInstanceCustomService(TestPaperInstanceCustomService testPaperInstanceCustomService) {
-        this.testPaperInstanceCustomService = testPaperInstanceCustomService;
+    public void setTestPaperInstanceCustomService(TestPaperInstanceCustomServiceImpl testPaperInstanceCustomServiceImpl) {
+        this.testPaperInstanceCustomServiceImpl = testPaperInstanceCustomServiceImpl;
     }
 
     @Operation(summary = "生成试卷")
     @PostMapping(value = "createTestPaperInstance")
     public ResultVO createTestPaperInstance(@RequestBody TestPaperInstance po) {
-        testPaperInstanceCustomService.createTestPaperInstance(po);
+        testPaperInstanceCustomServiceImpl.createTestPaperInstance(po);
         return ResultVO.success();
     }
 
