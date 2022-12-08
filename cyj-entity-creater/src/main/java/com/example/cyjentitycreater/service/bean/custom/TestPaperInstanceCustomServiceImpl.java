@@ -10,7 +10,7 @@ import com.example.cyjcommon.entity.bean.QuestionInstance;
 import com.example.cyjcommon.entity.bean.TestPaper;
 import com.example.cyjcommon.entity.bean.TestPaperConfig;
 import com.example.cyjcommon.entity.bean.TestPaperInstance;
-import com.example.cyjentitycreater.mapper.bean.TestPaperInstanceMapper;
+import com.example.cyjcommon.mapper.bean.TestPaperInstanceMapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;

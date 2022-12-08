@@ -3,7 +3,7 @@ package com.example.cyjworkflow.service.bean.custom;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.cyjcommon.entity.bean.FlowUser;
-import com.example.cyjworkflow.mapper.bean.FlowUserMapper;
+import com.example.cyjcommon.mapper.bean.FlowUserMapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;

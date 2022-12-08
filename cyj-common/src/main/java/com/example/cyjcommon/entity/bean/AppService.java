@@ -15,10 +15,10 @@ import javax.validation.constraints.NotNull;
  */
 @Getter
 @Setter
-@TableName(AppService.T_APP_SERVICE)
+@TableName(AppService.APP_SERVICE)
 public class AppService extends Model<AppService> {
 
-    static final String T_APP_SERVICE = "t_app_service";
+    static final String APP_SERVICE = "app_service";
 
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;

@@ -3,7 +3,7 @@ package com.example.cyjdictionary.service.bean.custom;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.cyjcommon.entity.bean.Catalog;
-import com.example.cyjdictionary.mapper.bean.CatalogMapper;
+import com.example.cyjcommon.mapper.bean.CatalogMapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;

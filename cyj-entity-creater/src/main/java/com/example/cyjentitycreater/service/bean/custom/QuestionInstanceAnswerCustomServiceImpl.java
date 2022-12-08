@@ -3,7 +3,7 @@ package com.example.cyjentitycreater.service.bean.custom;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.cyjcommon.entity.bean.QuestionInstanceAnswer;
-import com.example.cyjentitycreater.mapper.bean.QuestionInstanceAnswerMapper;
+import com.example.cyjcommon.mapper.bean.QuestionInstanceAnswerMapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;

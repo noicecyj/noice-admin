@@ -2,8 +2,8 @@ package com.example.cyjauth.service.relation.custom;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.cyjauth.mapper.relation.RoleAuthorityMapper;
 import com.example.cyjcommon.entity.relation.RoleAuthority;
+import com.example.cyjcommon.mapper.relation.RoleAuthorityMapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;

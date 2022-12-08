@@ -2,8 +2,8 @@ package com.example.cyjauth.service.bean.custom;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.cyjauth.mapper.bean.AuthorityMapper;
 import com.example.cyjcommon.entity.bean.Authority;
+import com.example.cyjcommon.mapper.bean.AuthorityMapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
