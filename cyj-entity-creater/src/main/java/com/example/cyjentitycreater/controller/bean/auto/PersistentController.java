@@ -1,4 +1,4 @@
-package com.example.cyjentitycreater.controller.auto;
+package com.example.cyjentitycreater.controller.bean.auto;
 
 import com.example.cyjcommon.entity.bean.Persistent;
 import com.example.cyjcommon.utils.ResultVO;

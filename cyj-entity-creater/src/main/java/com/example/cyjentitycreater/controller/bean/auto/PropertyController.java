@@ -1,8 +1,8 @@
-package com.example.cyjentitycreater.controller.auto;
+package com.example.cyjentitycreater.controller.bean.auto;
 
-import com.example.cyjcommon.entity.bean.AppService;
+import com.example.cyjcommon.entity.bean.Property;
 import com.example.cyjcommon.utils.ResultVO;
-import com.example.cyjentitycreater.service.bean.auto.AppServiceServiceImpl;
+import com.example.cyjentitycreater.service.bean.auto.PropertyServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,27 +21,27 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping(value = "entityCreateApi")
-@Tag(name = "AppService")
-public class AppServiceController {
+@Tag(name = "Property")
+public class PropertyController {
 
-    private AppServiceServiceImpl service;
+    private PropertyServiceImpl service;
 
     @Autowired
-    public void setService(AppServiceServiceImpl service) {
+    public void setService(PropertyServiceImpl service) {
         this.service = service;
     }
 
-    @Operation(summary = "分页查询所有AppService")
-    @PostMapping(value = "pageAppService")
-    public ResultVO page(@RequestBody @Validated AppService po,
+    @Operation(summary = "分页查询所有Property")
+    @PostMapping(value = "pageProperty")
+    public ResultVO page(@RequestBody @Validated Property po,
                          @RequestParam("pageNumber") Integer pageNumber,
                          @RequestParam("pageSize") Integer pageSize) {
         return ResultVO.success(service.findAll(po, pageNumber, pageSize));
     }
 
-    @Operation(summary = "保存AppService")
-    @PostMapping(value = "saveAppService")
-    public ResultVO save(@RequestBody @Validated AppService po, BindingResult bindingResult) {
+    @Operation(summary = "保存Property")
+    @PostMapping(value = "saveProperty")
+    public ResultVO save(@RequestBody @Validated Property po, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultVO.failure(bindingResult.getAllErrors().get(0));
         }
@@ -51,14 +51,23 @@ public class AppServiceController {
         return ResultVO.success(service.updateOne(po));
     }
 
-    @Operation(summary = "删除AppService")
-    @PostMapping(value = "deleteAppService")
-    public ResultVO delete(@RequestBody AppService po) {
+    @Operation(summary = "删除Property")
+    @PostMapping(value = "deleteProperty")
+    public ResultVO delete(@RequestBody Property po) {
         if (po.getId() == null) {
             return ResultVO.failure();
         }
         service.deleteOne(po);
         return ResultVO.success();
+    }
+
+    @Operation(summary = "根据Persistent查询所有Property")
+    @PostMapping(value = "pagePropertyByPersistent")
+    public ResultVO pagePropertyByPersistent(@RequestBody @Validated Property po,
+                                             @RequestParam("pageNumber") Integer pageNumber,
+                                             @RequestParam("pageSize") Integer pageSize,
+                                             @RequestParam("id") String id) {
+        return ResultVO.success(service.pagePropertyByPersistent(po, pageNumber, pageSize, id));
     }
 
 }
