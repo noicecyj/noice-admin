@@ -1,6 +1,5 @@
 package com.example.cyjworkflow;
 
-import org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -12,7 +11,6 @@ import org.springframework.context.annotation.ComponentScan;
  * @author Noice
  */
 @SpringBootApplication
-@EnableProcessApplication
 @EnableEurekaClient
 @EnableFeignClients
 @EntityScan("com.example")
