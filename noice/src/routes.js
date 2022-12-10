@@ -5,19 +5,10 @@ import PersistentPage from '@/pages/Persistent';
 import CatalogPage from '@/pages/Catalog';
 import SqlPage from '@/pages/Sql';
 import AppServicePage from '@/pages/AppService';
-import FlowUserPage from '@/pages/FlowUser';
-import FlowGroupPage from '@/pages/FlowGroup';
-import FlowTenantPage from '@/pages/FlowTenant';
 import EnterprisePage from '@/pages/Enterprise';
 import UserPage from '@/pages/User';
 import RolePage from '@/pages/Role';
 import AuthorityPage from '@/pages/Authority';
-import SubjectPage from '@/pages/Subject';
-import QuestionBasePage from '@/pages/QuestionBase';
-import TestPaperPage from '@/pages/TestPaper';
-import TestPaperInstancePage from '@/pages/TestPaperInstance';
-import TestPage from '@/pages/Test';
-import TestInstancePage from '@/pages/TestInstance';
 
 const routerConfig = [
   {
@@ -40,18 +31,6 @@ const routerConfig = [
         path: '/appService',
         component: AppServicePage,
       },
-      {
-        path: '/flowUser',
-        component: FlowUserPage,
-      },
-      {
-        path: '/flowGroup',
-        component: FlowGroupPage,
-      },
-      {
-        path: '/flowTenant',
-        component: FlowTenantPage,
-      },
     ],
   },
   {
@@ -73,36 +52,6 @@ const routerConfig = [
       {
         path: '/authority',
         component: AuthorityPage,
-      },
-    ],
-  },
-  {
-    path: '/test',
-    component: BasicLayout,
-    children: [
-      {
-        path: '/subject',
-        component: SubjectPage,
-      },
-      {
-        path: '/questionBase',
-        component: QuestionBasePage,
-      },
-      {
-        path: '/testPaper',
-        component: TestPaperPage,
-      },
-      {
-        path: '/testPaperInstance',
-        component: TestPaperInstancePage,
-      },
-      {
-        path: '/test',
-        component: TestPage,
-      },
-      {
-        path: '/testInstance',
-        component: TestInstancePage,
       },
     ],
   },

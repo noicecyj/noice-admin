@@ -25,22 +25,6 @@ const asideMenuConfig = [
         name: '菜单管理',
         path: '/admin/firstMenu',
       },
-      {
-        name: '流程管理',
-        path: '/admin/bpmu',
-      },
-      {
-        name: '流程用户管理',
-        path: '/admin/flowUser',
-      },
-      {
-        name: '流程分组管理',
-        path: '/admin/flowGroup',
-      },
-      {
-        name: '流程租户管理',
-        path: '/admin/flowTenant',
-      },
     ],
   },
   {
@@ -63,37 +47,6 @@ const asideMenuConfig = [
       {
         name: '权限管理',
         path: '/auth/authority',
-      },
-    ],
-  },
-  {
-    name: '考试管理',
-    icon: 'set',
-    path: '/test',
-    children: [
-      {
-        name: '科目管理',
-        path: '/test/subject',
-      },
-      {
-        name: '题库管理',
-        path: '/test/questionBase',
-      },
-      {
-        name: '试卷配置管理',
-        path: '/test/testPaper',
-      },
-      {
-        name: '试卷实例管理',
-        path: '/test/testPaperInstance',
-      },
-      {
-        name: '考试管理',
-        path: '/test/test',
-      },
-      {
-        name: '考试实例管理',
-        path: '/test/testInstance',
       },
     ],
   },
