@@ -5,46 +5,39 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import lombok.Getter;
-import lombok.Setter;
-
-import javax.validation.constraints.NotNull;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author Noice
  */
-@Getter
-@Setter
-@TableName(AppService.T_APP_SERVICE)
+@EqualsAndHashCode(callSuper = true)
+@Data
+@TableName("t_app_service")
 public class AppService extends Model<AppService> {
-
-    static final String T_APP_SERVICE = "t_app_service";
 
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
-    @NotNull(message = "服务名称不能为空")
-    @TableField(value = "app_service_name")
+    @TableField("app_service_name")
     private String appServiceName;
 
-    @NotNull(message = "服务路径不能为空")
-    @TableField(value = "app_service_path")
-    private String appServicePath;
-
-    @NotNull(message = "服务接口不能为空")
-    @TableField(value = "app_service_api")
+    @TableField("app_service_api")
     private String appServiceApi;
 
-    @NotNull(message = "服务端口不能为空")
-    @TableField(value = "app_service_port")
+    @TableField("app_service_path")
+    private String appServicePath;
+
+    @TableField("app_service_port")
     private String appServicePort;
 
-    @NotNull(message = "状态不能为空")
-    @TableField(value = "status")
-    private String status;
+    @TableField("app_service_code")
+    private String appServiceCode;
 
-    @NotNull(message = "排序不能为空")
-    @TableField(value = "sort_code")
-    private String sortCode;
+    @TableField("sort_code")
+    private int sortCode;
+
+    @TableField("status")
+    private int status;
 
 }
