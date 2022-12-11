@@ -961,92 +961,49 @@ public class PersistentCustomServiceImpl
 
     public String[] poGenerate(Persistent persistent, List<Property> inPropertyList, List<Property> outPropertyList, String poName, String underPoName) {
         StringBuilder sb = new StringBuilder();
-        sb.append("package com.example.cyjcommon.entity;\r\n");
+        sb.append("package com.example.cyjcommon.entity.bean;\r\n");
         sb.append("\r\n");
-        if (BeanUtils.ifManyToMany(outPropertyList) || BeanUtils.ifOneToMany(outPropertyList)) {
-            sb.append("import com.fasterxml.jackson.annotation.JsonIgnore;\r\n");
-        }
-        sb.append("import com.fasterxml.jackson.annotation.JsonIgnoreProperties;\r\n");
-        sb.append("import lombok.Getter;\r\n");
-        sb.append("import lombok.RequiredArgsConstructor;\r\n");
-        sb.append("import lombok.Setter;\r\n");
-        if (BeanUtils.ifManyToMany(outPropertyList) || BeanUtils.ifOneToMany(outPropertyList)) {
-            sb.append("import org.hibernate.annotations.BatchSize;\r\n");
-        }
-        sb.append("import org.hibernate.annotations.GenericGenerator;\r\n");
+        sb.append("import com.baomidou.mybatisplus.annotation.IdType;\r\n");
+        sb.append("import com.baomidou.mybatisplus.annotation.TableField;\r\n");
+        sb.append("import com.baomidou.mybatisplus.annotation.TableId;\r\n");
+        sb.append("import com.baomidou.mybatisplus.annotation.TableName;\r\n");
+        sb.append("import com.baomidou.mybatisplus.extension.activerecord.Model;\r\n");
+        sb.append("import lombok.Data;\r\n");
+        sb.append("import lombok.EqualsAndHashCode;\r\n");
         sb.append("\r\n");
-        if (BeanUtils.ifManyToOne(outPropertyList) || BeanUtils.ifOneToMany(outPropertyList) || BeanUtils.ifManyToMany(outPropertyList)) {
-            sb.append("import javax.persistence.CascadeType;\r\n");
-        }
-        if (BeanUtils.ifManyToOne(outPropertyList)) {
-            sb.append("import javax.persistence.ConstraintMode;\r\n");
-        }
-        sb.append("import javax.persistence.Column;\r\n");
-        sb.append("import javax.persistence.Entity;\r\n");
-        if (BeanUtils.ifManyToMany(outPropertyList) || BeanUtils.ifOneToMany(outPropertyList)) {
-            sb.append("import javax.persistence.FetchType;\r\n");
-        }
-        if (BeanUtils.ifManyToOne(outPropertyList)) {
-            sb.append("import javax.persistence.ForeignKey;\r\n");
-        }
-        sb.append("import javax.persistence.GeneratedValue;\r\n");
-        sb.append("import javax.persistence.Id;\r\n");
-        if (BeanUtils.ifManyToOne(outPropertyList)) {
-            sb.append("import javax.persistence.JoinColumn;\r\n");
-        }
-        if (BeanUtils.ifManyToMany(outPropertyList)) {
-            sb.append("import javax.persistence.ManyToMany;\r\n");
-        }
-        if (BeanUtils.ifManyToOne(outPropertyList)) {
-            sb.append("import javax.persistence.ManyToOne;\r\n");
-        }
-        if (BeanUtils.ifOneToMany(outPropertyList)) {
-            sb.append("import javax.persistence.OneToMany;\r\n");
-        }
-        sb.append("import javax.persistence.Table;\r\n");
-        sb.append("import javax.validation.constraints.NotNull;\r\n");
-        sb.append("import java.io.Serializable;\r\n");
-        if (BeanUtils.ifManyToMany(outPropertyList) || BeanUtils.ifOneToMany(outPropertyList)) {
-            sb.append("import java.util.HashSet;\r\n");
-            sb.append("import java.util.Set;\r\n");
-        }
-        if (BeanUtils.ifDate(inPropertyList)) {
-            sb.append("import java.sql.Date;\r\n");
-        }
-        if (BeanUtils.ifTimestamp(inPropertyList)) {
-            sb.append("import java.sql.Timestamp;\r\n");
+        if (BeanUtils.ifLocalDateTime(inPropertyList)) {
+            sb.append("import java.time.LocalDateTime;\r\n");
         }
         sb.append("\r\n");
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
         sb.append(" */\r\n");
-        sb.append("@Entity\r\n");
-        sb.append("@Table(name = ").append(poName).append(".T_").append(persistent.getPersistentCode().toUpperCase()).append(")\r\n");
-        sb.append("@Getter\r\n");
-        sb.append("@Setter\r\n");
-        sb.append("@RequiredArgsConstructor\r\n");
-        sb.append("@GenericGenerator(name = \"uuid2\", strategy = \"org.hibernate.id.UUIDGenerator\")\r\n");
-        sb.append("@JsonIgnoreProperties(value = {\"hibernateLazyInitializer\", \"handler\"})\r\n");
-        sb.append("public class ").append(poName).append(" implements Serializable {\r\n");
+        sb.append("@EqualsAndHashCode(callSuper = true)\r\n");
+        sb.append("@Data\r\n");
+        sb.append("@TableName(\"t_").append(persistent.getPersistentCode()).append("\")\r\n");
+        sb.append("public class ").append(poName).append(" extends Model<").append(poName).append("> {\r\n");
         sb.append("\r\n");
-        sb.append("    static final String T_").append(persistent.getPersistentCode().toUpperCase()).append(" = \"t_").append(persistent.getPersistentCode()).append("\";\r\n");
-        sb.append("\r\n");
-        sb.append("    @Id\r\n");
-        sb.append("    @GeneratedValue(generator = \"uuid2\")\r\n");
-        sb.append("    @TableField(value = \"id\", length = 36)\r\n");
+        sb.append("    @TableId(value = \"id\", type = IdType.ASSIGN_UUID)\r\n");
         sb.append("    private String id;\r\n");
         sb.append("\r\n");
         propertyEntityHandler(inPropertyList, sb);
-        oneToManyEntityHandler(outPropertyList, sb, underPoName);
-        manyToOneEntityHandler(outPropertyList, sb);
-        manyToManyEntityHandler(outPropertyList, sb);
-        sb.append("    @NotNull(message = \"状态不能为空\")\r\n");
-        sb.append("    @TableField(value = \"status\")\r\n");
+        sb.append("    @TableField(\"status\")\r\n");
         sb.append("    private String status;\r\n");
         sb.append("\r\n");
-        sb.append("    @NotNull(message = \"排序不能为空\")\r\n");
-        sb.append("    @TableField(value = \"sort_code\")\r\n");
+        sb.append("    @TableField(\"sort_code\")\r\n");
         sb.append("    private String sortCode;\r\n");
+        sb.append("\r\n");
+        sb.append("    @TableField(\"created_date\")\r\n");
+        sb.append("    private LocalDateTime createdDate;\r\n");
+        sb.append("\r\n");
+        sb.append("    @TableField(\"created_by\")\r\n");
+        sb.append("    private String createdBy;\r\n");
+        sb.append("\r\n");
+        sb.append("    @TableField(\"updated_date\")\r\n");
+        sb.append("    private LocalDateTime updated_date;\r\n");
+        sb.append("\r\n");
+        sb.append("    @TableField(\"updated_by\")\r\n");
+        sb.append("    private String updatedBy;\r\n");
         sb.append("\r\n");
         sb.append("}");
         String entityData = sb.toString();

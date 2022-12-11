@@ -147,6 +147,15 @@ public class BeanUtils {
         return false;
     }
 
+    public static Boolean ifLocalDateTime(List<Property> poList) {
+        for (Property po : poList) {
+            if ("LocalDateTime".equals(po.getPropertyType())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static Boolean ifManyToOne(List<Property> poList) {
         for (Property po : poList) {
             if (StringUtils.isNotEmpty(po.getPropertyOut()) &&
