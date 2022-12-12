@@ -156,38 +156,38 @@ public class BeanUtils {
         return false;
     }
 
-    public static Boolean ifManyToOne(List<Property> poList) {
-        for (Property po : poList) {
-            if (StringUtils.isNotEmpty(po.getPropertyOut()) &&
-                    StringUtils.isNotEmpty(po.getPropertyOutType()) &&
-                    "ManyToOne".equals(po.getPropertyOutType())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static Boolean ifManyToMany(List<Property> poList) {
-        for (Property po : poList) {
-            if (StringUtils.isNotEmpty(po.getPropertyOut()) &&
-                    StringUtils.isNotEmpty(po.getPropertyOutType()) &&
-                    "ManyToMany".equals(po.getPropertyOutType())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static Boolean ifOneToMany(List<Property> poList) {
-        for (Property po : poList) {
-            if (StringUtils.isNotEmpty(po.getPropertyOut()) &&
-                    StringUtils.isNotEmpty(po.getPropertyOutType()) &&
-                    "OneToMany".equals(po.getPropertyOutType())) {
-                return true;
-            }
-        }
-        return false;
-    }
+//    public static Boolean ifManyToOne(List<Property> poList) {
+//        for (Property po : poList) {
+//            if (StringUtils.isNotEmpty(po.getPropertyOut()) &&
+//                    StringUtils.isNotEmpty(po.getPropertyOutType()) &&
+//                    "ManyToOne".equals(po.getPropertyOutType())) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+//
+//    public static Boolean ifManyToMany(List<Property> poList) {
+//        for (Property po : poList) {
+//            if (StringUtils.isNotEmpty(po.getPropertyOut()) &&
+//                    StringUtils.isNotEmpty(po.getPropertyOutType()) &&
+//                    "ManyToMany".equals(po.getPropertyOutType())) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+//
+//    public static Boolean ifOneToMany(List<Property> poList) {
+//        for (Property po : poList) {
+//            if (StringUtils.isNotEmpty(po.getPropertyOut()) &&
+//                    StringUtils.isNotEmpty(po.getPropertyOutType()) &&
+//                    "OneToMany".equals(po.getPropertyOutType())) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
     public static String AppFileName(AppService po) {
         return BeanUtils.captureName(underline2Camel2(po.getAppServiceName())) + "Application.java";
