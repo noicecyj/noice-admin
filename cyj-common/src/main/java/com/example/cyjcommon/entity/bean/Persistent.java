@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.time.LocalDateTime;
+
 /**
  * @author Noice
  */
@@ -19,22 +21,34 @@ public class Persistent extends Model<Persistent> {
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
-    @TableField(value = "persistent_name")
+    @TableField("persistent_name")
     private String persistentName;
 
-    @TableField(value = "persistent_code")
+    @TableField("persistent_code")
     private String persistentCode;
 
-    @TableField(value = "persistent_relation")
+    @TableField("persistent_relation")
     private int persistentRelation;
 
-    @TableField(value = "app_service_id")
+    @TableField("app_service_id")
     private String appServiceId;
 
-    @TableField(value = "status")
+    @TableField("status")
     private int status;
 
-    @TableField(value = "sort_code")
+    @TableField("sort_code")
     private int sortCode;
+
+    @TableField("created_date")
+    private LocalDateTime createdDate;
+
+    @TableField("created_by")
+    private String createdBy;
+
+    @TableField("updated_date")
+    private LocalDateTime updated_date;
+
+    @TableField("updated_by")
+    private String updatedBy;
 
 }
