@@ -25,6 +25,9 @@ public class Persistent extends Model<Persistent> {
     @TableField(value = "persistent_code")
     private String persistentCode;
 
+    @TableField(value = "persistent_relation")
+    private int persistentRelation;
+
     @TableField(value = "app_service_id")
     private String appServiceId;
 

@@ -346,27 +346,26 @@ public class PersistentCustomServiceImpl
                 .eq(Property::getPersistentId, persistent.getId())
                 .orderByAsc(Property::getSortCode));
         Map<String, String[]> entityObj = new HashMap<>();
-        List<Property> inPropertyList = propertyList.stream().filter(property -> BeanUtils.NO.equals(property.getPropertyOut())).collect(Collectors.toList());
-        List<Property> outPropertyList = propertyList.stream().filter(property -> BeanUtils.YES.equals(property.getPropertyOut())).collect(Collectors.toList());
-        entityObj.put(commonPath + "/entity", poGenerate(persistent, inPropertyList, outPropertyList, poName, underPoName));
-        entityObj.put(commonPath + "/dao", daoGenerate(poName));
-        entityObj.put(appPath + "/service/auto", serviceGenerate(outPropertyList, poName, appPath));
-        entityObj.put(appPath + "/controller/auto", controllerGenerate(outPropertyList, poName, appPath, appApi));
-        entityObj.put(componentPath + poName + "/services/auto", servicesAutoGenerate(outPropertyList, appApi, poName));
-        entityObj.put(componentPath + poName + "/models/auto", modelsAutoGenerate(outPropertyList, underPoName, poName, persistentCode));
-        entityObj.put(componentPath + poName + "/view/auto", viewAutoGenerate(outPropertyList, underPoName, poName));
-        try {
-            BeanUtils.createJavaFile(componentPath + poName, indexGenerate(poName));
-            BeanUtils.createJavaFile(componentPath + poName, storeGenerate(outPropertyList, underPoName, poName));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        boolean isBeanFlag = persistent.getPersistentRelation() == 0;
+        entityObj.put(commonPath + "/entity" + (isBeanFlag ? "/bean" : "/relation"), poGenerate(persistent, propertyList, poName));
+        entityObj.put(commonPath + "/mapper" + (isBeanFlag ? "/bean" : "/relation"), mapperGenerate(persistent, poName));
+        entityObj.put(appPath + "/service" + (isBeanFlag ? "/bean" : "/relation") + "/auto", serviceGenerate(persistent, poName, appPath));
+        entityObj.put(appPath + "/controller" + (isBeanFlag ? "/bean" : "/relation") + "/auto", controllerGenerate(persistent, poName, appPath, appApi));
+//        entityObj.put(componentPath + poName + "/services/auto", servicesAutoGenerate(outPropertyList, appApi, poName));
+//        entityObj.put(componentPath + poName + "/models/auto", modelsAutoGenerate(outPropertyList, underPoName, poName, persistentCode));
+//        entityObj.put(componentPath + poName + "/view/auto", viewAutoGenerate(outPropertyList, underPoName, poName));
+//        try {
+//            BeanUtils.createJavaFile(componentPath + poName, indexGenerate(poName));
+//            BeanUtils.createJavaFile(componentPath + poName, storeGenerate(outPropertyList, underPoName, poName));
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
         Map<String, String[]> entityCustomObj = new HashMap<>();
-        entityCustomObj.put(appPath + "/service/custom", serviceCustomGenerate(poName, appPath));
-        entityCustomObj.put(appPath + "/controller/custom", controllerCustomGenerate(poName, appPath, appApi));
-        entityCustomObj.put(componentPath + poName + "/services/custom", servicesCustomGenerate(poName));
-        entityCustomObj.put(componentPath + poName + "/models/custom", modelsCustomGenerate(poName));
-        entityCustomObj.put(componentPath + poName + "/view/custom", viewCustomGenerate(poName));
+//        entityCustomObj.put(appPath + "/service/custom", serviceCustomGenerate(poName, appPath));
+//        entityCustomObj.put(appPath + "/controller/custom", controllerCustomGenerate(poName, appPath, appApi));
+//        entityCustomObj.put(componentPath + poName + "/services/custom", servicesCustomGenerate(poName));
+//        entityCustomObj.put(componentPath + poName + "/models/custom", modelsCustomGenerate(poName));
+//        entityCustomObj.put(componentPath + poName + "/view/custom", viewCustomGenerate(poName));
         createEntityCodeHandler(entityObj, entityCustomObj);
     }
 
@@ -959,9 +958,9 @@ public class PersistentCustomServiceImpl
         }
     }
 
-    public String[] poGenerate(Persistent persistent, List<Property> inPropertyList, List<Property> outPropertyList, String poName, String underPoName) {
+    public String[] poGenerate(Persistent persistent, List<Property> propertyList, String poName) {
         StringBuilder sb = new StringBuilder();
-        sb.append("package com.example.cyjcommon.entity.bean;\r\n");
+        sb.append("package com.example.cyjcommon.entity.").append(persistent.getPersistentRelation() == 0 ? "bean" : "relation").append(";\r\n");
         sb.append("\r\n");
         sb.append("import com.baomidou.mybatisplus.annotation.IdType;\r\n");
         sb.append("import com.baomidou.mybatisplus.annotation.TableField;\r\n");
@@ -971,9 +970,7 @@ public class PersistentCustomServiceImpl
         sb.append("import lombok.Data;\r\n");
         sb.append("import lombok.EqualsAndHashCode;\r\n");
         sb.append("\r\n");
-        if (BeanUtils.ifLocalDateTime(inPropertyList)) {
-            sb.append("import java.time.LocalDateTime;\r\n");
-        }
+        sb.append("import java.time.LocalDateTime;\r\n");
         sb.append("\r\n");
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
@@ -986,7 +983,11 @@ public class PersistentCustomServiceImpl
         sb.append("    @TableId(value = \"id\", type = IdType.ASSIGN_UUID)\r\n");
         sb.append("    private String id;\r\n");
         sb.append("\r\n");
-        propertyEntityHandler(inPropertyList, sb);
+        for (Property property : propertyList) {
+            sb.append("    @TableField(\"").append(property.getPropertyCode()).append("\")\r\n");
+            sb.append("    private ").append(property.getPropertyType()).append(" ").append(BeanUtils.underline2Camel(property.getPropertyCode())).append(";\r\n");
+            sb.append("\r\n");
+        }
         sb.append("    @TableField(\"status\")\r\n");
         sb.append("    private String status;\r\n");
         sb.append("\r\n");
@@ -1010,256 +1011,96 @@ public class PersistentCustomServiceImpl
         return new String[]{entityData, poName + ".java"};
     }
 
-    private void propertyEntityHandler(List<Property> inPropertyList, StringBuilder sb) {
-        for (Property property : inPropertyList) {
-            if (StringUtils.isNotEmpty(property.getPropertyRequired()) && BeanUtils.YES.equals(property.getPropertyRequired())) {
-                sb.append("    @NotNull(message = \"").append(property.getPropertyLabel()).append("不能为空\")\r\n");
-            }
-            if (StringUtils.isNotEmpty(property.getPropertyLength())) {
-                sb.append("    @TableField(value = \"").append(property.getPropertyCode()).append("\", length = ").append(property.getPropertyLength()).append(")\r\n");
-            } else {
-                sb.append("    @TableField(value = \"").append(property.getPropertyCode()).append("\")\r\n");
-            }
-            sb.append("    private ").append(property.getPropertyType()).append(" ").append(BeanUtils.underline2Camel(property.getPropertyCode())).append(";\r\n");
-            sb.append("\r\n");
-        }
+    public String[] mapperGenerate(Persistent persistent, String poName) {
+        String entityMapperData = "package com.example.cyjcommon.mapper." + (persistent.getPersistentRelation() == 0 ? "bean" : "relation") + ";\r\n" +
+                "\r\n" +
+                "import com.baomidou.mybatisplus.core.mapper.BaseMapper;\r\n" +
+                "import com.example.cyjcommon.entity." + (persistent.getPersistentRelation() == 0 ? "bean" : "relation") + "." + poName + ";\r\n" +
+                "import org.apache.ibatis.annotations.Mapper;\r\n" +
+                "\r\n" +
+                "/**\r\n" +
+                " * @author Noice\r\n" +
+                " */\r\n" +
+                "@Mapper\r\n" +
+                "public interface " + poName + "Mapper extends BaseMapper<" + poName + "> {\r\n" +
+                "\r\n" +
+                "}";
+        return new String[]{entityMapperData, poName + "Mapper.java"};
     }
 
-    private void oneToManyEntityHandler(List<Property> outPropertyList, StringBuilder sb, String underPoName) {
-        for (Property property : outPropertyList) {
-            if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
-                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-                String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("    @JsonIgnore\r\n");
-                sb.append("    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = \"").append(underPoName).append("\")\r\n");
-                sb.append("    @BatchSize(size = 20)\r\n");
-                sb.append("    private Set<").append(propertyOut).append("> ").append(underPropertyOut).append(" = new HashSet<>();\r\n");
-                sb.append("\r\n");
-            }
-        }
-    }
-
-    private void manyToOneEntityHandler(List<Property> outPropertyList, StringBuilder sb) {
-        for (Property property : outPropertyList) {
-            if (BeanUtils.MANY_TO_ONE.equals(property.getPropertyOutType())) {
-                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-                String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("    @TableField(value = \"").append(property.getPropertyCode()).append("_id\", insertable = false, updatable = false)\r\n");
-                sb.append("    private String ").append(underPropertyOut).append("Id;\r\n");
-                sb.append("\r\n");
-                sb.append("    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REMOVE})\r\n");
-                sb.append("    @JoinColumn(name = \"").append(property.getPropertyCode()).append("_id\", foreignKey = @ForeignKey(name = \"none\", value = ConstraintMode.NO_CONSTRAINT))\r\n");
-                sb.append("    private ").append(propertyOut).append(" ").append(underPropertyOut).append(";\r\n");
-                sb.append("\r\n");
-            }
-        }
-    }
-
-    private void manyToManyEntityHandler(List<Property> outPropertyList, StringBuilder sb) {
-        for (Property property : outPropertyList) {
-            if (BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())) {
-                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-                String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("    @JsonIgnore\r\n");
-                sb.append("    @ManyToMany(cascade = CascadeType.ALL, targetEntity = ").append(propertyOut).append(".class, fetch = FetchType.EAGER)\r\n");
-                sb.append("    @BatchSize(size = 20)\r\n");
-                sb.append("    private Set<").append(propertyOut).append("> ").append(underPropertyOut).append(" = new HashSet<>();\r\n");
-                sb.append("\r\n");
-            }
-        }
-    }
-
-    public String[] daoGenerate(String poName) {
-        String entityDaoData = "package com.example.cyjcommon.dao;\r\n" + "\r\n" + "import com.example.cyjcommon.entity." + poName + ";\r\n" + "import org.springframework.data.jpa.repository.JpaRepository;\r\n" + "\r\n" + "/**\r\n" + " * @author Noice\r\n" + " */\r\n" + "public interface " + poName + "Dao extends JpaRepository<" + poName + ", String> {\r\n" + "\r\n" + "}\r\n";
-        return new String[]{entityDaoData, poName + "Dao.java"};
-    }
-
-    public String[] serviceGenerate(List<Property> outPropertyList, String poName, String appPath) {
+    public String[] serviceGenerate(Persistent persistent, String poName, String appPath) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
         //service路径
-        String poServicePath = packetPath + ".service.auto;\r\n";
-        packageServiceHandler(outPropertyList, poName, sb, poServicePath);
-        sb.append("import com.example.cyjcommon.service.BaseService;\r\n");
-        sb.append("import com.example.cyjcommon.service.autoService;\r\n");
-        sb.append("import org.springframework.beans.factory.annotation.Autowired;\r\n");
-        if (BeanUtils.ifOneToMany(outPropertyList)) {
-            sb.append("import org.springframework.data.domain.Example;\r\n");
-        }
-        sb.append("import org.springframework.data.domain.Page;\r\n");
-        sb.append("import org.springframework.data.domain.PageRequest;\r\n");
-        if (BeanUtils.ifOneToMany(outPropertyList)) {
-            sb.append("import org.springframework.data.domain.Pageable;\r\n");
-        }
-        sb.append("import org.springframework.data.domain.Sort;\r\n");
+        String poServicePath = packetPath + ".service." + (persistent.getPersistentRelation() == 0 ? "bean" : "relation") + ".auto;\r\n";
+        sb.append("package ").append(poServicePath);
+        sb.append("\r\n");
+        sb.append("import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;\r\n");
+        sb.append("import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;\r\n");
+        sb.append("import com.baomidou.mybatisplus.extension.plugins.pagination.Page;\r\n");
+        sb.append("import com.baomidou.mybatisplus.extension.service.IService;\r\n");
+        sb.append("import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;\r\n");
+        sb.append("import com.example.cyjcommon.entity.bean.").append(poName).append(";\r\n");
+        sb.append("import com.example.cyjcommon.mapper.bean.").append(poName).append("Mapper;\r\n");
+        sb.append("import org.apache.commons.lang3.StringUtils;\r\n");
         sb.append("import org.springframework.stereotype.Service;\r\n");
         sb.append("import org.springframework.transaction.annotation.Transactional;\r\n");
         sb.append("\r\n");
-        if (BeanUtils.ifManyToMany(outPropertyList)) {
-            sb.append("import java.util.HashSet;\r\n");
-            sb.append("import java.util.Optional;\r\n");
-            sb.append("import java.util.Set;\r\n");
-            sb.append("\r\n");
-        }
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
         sb.append(" */\r\n");
         sb.append("@Service\r\n");
         sb.append("@Transactional(rollbackFor = Exception.class)\r\n");
-        sb.append("public class ").append(poName).append("Service extends BaseService implements autoService<").append(poName).append("> {\r\n");
+        sb.append("public class ").append(poName).append("ServiceImpl\r\n");
+        sb.append("        extends ServiceImpl<").append(poName).append("Mapper, ").append(poName).append(">\r\n");
+        sb.append("        implements IService<").append(poName).append("> {\r\n");
         sb.append("\r\n");
-        daoServiceHandler(outPropertyList, poName, sb);
-        sb.append("    @Override\r\n");
         sb.append("    public ").append(poName).append(" addOne(").append(poName).append(" po) {\r\n");
-        manyToOneSetHandler(outPropertyList, sb);
-        sb.append("        return dao.save(po);\r\n");
+        sb.append("        po.insert();\r\n");
+        sb.append("        return po;\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        sb.append("    @Override\r\n");
         sb.append("    public void deleteOne(").append(poName).append(" po) {\r\n");
-        sb.append("        dao.delete(po);\r\n");
+        sb.append("        po.deleteById();\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        sb.append("    @Override\r\n");
         sb.append("    public ").append(poName).append(" updateOne(").append(poName).append(" po) {\r\n");
-        manyToOneSetHandler(outPropertyList, sb);
-        sb.append("        return dao.saveAndFlush(po);\r\n");
+        sb.append("        po.updateById();\r\n");
+        sb.append("        return po;\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        sb.append("    @Override\r\n");
-        sb.append("    public Page<").append(poName).append("> findAll(Integer pageNumber) {\r\n");
-        sb.append("        return dao.findAll(PageRequest.of(pageNumber - 1, 13, Sort.by(\"sortCode\").ascending()));\r\n");
+        sb.append("    public Page<").append(poName).append("> findAll(").append(poName).append(" po, Integer pageNumber, Integer pageSize) {\r\n");
+        sb.append("        Page<").append(poName).append("> page = new Page<>(pageNumber, pageSize);\r\n");
+        sb.append("        LambdaQueryWrapper<").append(poName).append("> queryWrapper = searchHandler(po);\r\n");
+        sb.append("        return new ").append(poName).append("().selectPage(page, queryWrapper);\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        oneToManyServiceHandler(outPropertyList, poName, sb);
-        manyToManyServiceHandler(outPropertyList, poName, sb);
-        sb.append("}\r\n");
+        sb.append("    private LambdaQueryWrapper<").append(poName).append("> searchHandler(").append(poName).append(" po) {\r\n");
+        sb.append("        return new QueryWrapper<").append(poName).append(">().lambda()\r\n");
+        sb.append("                .like(StringUtils.isNotEmpty(po.get").append(poName).append("Name()),\r\n");
+        sb.append("                        ").append(poName).append("::get").append(poName).append("Name, po.get").append(poName).append("Name())\r\n");
+        sb.append("                .orderByAsc(").append(poName).append("::getSortCode);\r\n");
+        sb.append("    }\r\n");
+        sb.append("\r\n");
+        sb.append("}");
         String entityServiceData = sb.toString();
-        return new String[]{entityServiceData, poName + "Service.java"};
+        return new String[]{entityServiceData, poName + "ServiceImpl.java"};
     }
 
-
-    private void packageServiceHandler(List<Property> outPropertyList, String poName, StringBuilder sb, String poServicePath) {
-        sb.append("package ").append(poServicePath);
-        sb.append("\r\n");
-        for (Property property : outPropertyList) {
-            String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-            String propertyOut = BeanUtils.captureName(underPropertyOut);
-            sb.append("import com.example.cyjcommon.dao.").append(propertyOut).append("Dao;\r\n");
-        }
-        sb.append("import com.example.cyjcommon.dao.").append(poName).append("Dao;\r\n");
-        for (Property property : outPropertyList) {
-            String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-            String propertyOut = BeanUtils.captureName(underPropertyOut);
-            sb.append("import com.example.cyjcommon.entity.").append(propertyOut).append(";\r\n");
-        }
-        sb.append("import com.example.cyjcommon.entity.").append(poName).append(";\r\n");
-    }
-
-    private void daoServiceHandler(List<Property> outPropertyList, String poName, StringBuilder sb) {
-        sb.append("    private ").append(poName).append("Dao dao;\r\n");
-        for (Property property : outPropertyList) {
-            String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-            String propertyOut = BeanUtils.captureName(underPropertyOut);
-            sb.append("    private ").append(propertyOut).append("Dao ").append(underPropertyOut).append("Dao;\r\n");
-        }
-        sb.append("\r\n");
-        sb.append("    @Autowired\r\n");
-        sb.append("    public void setDao(").append(poName).append("Dao dao) {\r\n");
-        sb.append("        this.dao = dao;\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        for (Property property : outPropertyList) {
-            String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-            String propertyOut = BeanUtils.captureName(underPropertyOut);
-            sb.append("    @Autowired\r\n");
-            sb.append("    public void set").append(propertyOut).append("Dao(").append(propertyOut).append("Dao ").append(underPropertyOut).append("Dao) {\r\n");
-            sb.append("        this.").append(underPropertyOut).append("Dao = ").append(underPropertyOut).append("Dao;\r\n");
-            sb.append("    }\r\n");
-            sb.append("\r\n");
-        }
-    }
-
-    private void manyToOneSetHandler(List<Property> outPropertyList, StringBuilder sb) {
-        for (Property property : outPropertyList) {
-            if (BeanUtils.MANY_TO_ONE.equals(property.getPropertyOutType())) {
-                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-                String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("        if (po.get").append(propertyOut).append("Id() != null) {\r\n");
-                sb.append("            ").append(propertyOut).append(" ").append(underPropertyOut).append(" = ").append(underPropertyOut).append("Dao.getOne(po.get").append(propertyOut).append("Id());\r\n");
-                sb.append("            po.set").append(propertyOut).append("(").append(underPropertyOut).append(");\r\n");
-                sb.append("        }\r\n");
-            }
-        }
-    }
-
-    private void oneToManyServiceHandler(List<Property> outPropertyList, String poName, StringBuilder sb) {
-        for (Property property : outPropertyList) {
-            if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
-                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-                String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("    public Page<").append(propertyOut).append("> page").append(propertyOut).append("By").append(poName).append("(Integer pageNumber, String id) {\r\n");
-                sb.append("        Pageable pageable = PageRequest.of(pageNumber - 1, 13, Sort.by(\"sortCode\").ascending());\r\n");
-                sb.append("        ").append(poName).append(" po = dao.getOne(id);\r\n");
-                sb.append("        ").append(propertyOut).append(" ").append(underPropertyOut).append(" = new ").append(propertyOut).append("();\r\n");
-                sb.append("        ").append(underPropertyOut).append(".set").append(poName).append("(po);\r\n");
-                sb.append("        Example<").append(propertyOut).append("> example = Example.of(").append(underPropertyOut).append(");\r\n");
-                sb.append("        return ").append(underPropertyOut).append("Dao.findAll(example, pageable);\r\n");
-                sb.append("    }\r\n");
-                sb.append("\r\n");
-            }
-        }
-    }
-
-    private void manyToManyServiceHandler(List<Property> outPropertyList, String poName, StringBuilder sb) {
-        for (Property property : outPropertyList) {
-            if (BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())) {
-                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-                String propertyOut = BeanUtils.captureName(underPropertyOut);
-                sb.append("    public Set<String> ").append(underPropertyOut).append("By").append(poName).append("(String id) {\r\n");
-                sb.append("        Set<String> ").append(underPropertyOut).append("Ids = new HashSet<>();\r\n");
-                sb.append("        Optional<").append(poName).append("> po = dao.findById(id);\r\n");
-                sb.append("        if (po.isPresent()) {\r\n");
-                sb.append("            Set<").append(propertyOut).append("> ").append(underPropertyOut).append("Set = po.get().get").append(propertyOut).append("();\r\n");
-                sb.append("            for (").append(propertyOut).append(" ").append(underPropertyOut).append(" : ").append(underPropertyOut).append("Set) {\r\n");
-                sb.append("                ").append(underPropertyOut).append("Ids.add(").append(underPropertyOut).append(".getId());\r\n");
-                sb.append("            }\r\n");
-                sb.append("        }\r\n");
-                sb.append("        return ").append(underPropertyOut).append("Ids;\r\n");
-                sb.append("    }\r\n");
-                sb.append("\r\n");
-                sb.append("    public void ").append(underPropertyOut).append("Save").append(poName).append("(String id, Set<String> ").append(underPropertyOut).append("Ids) {\r\n");
-                sb.append("        Set<").append(propertyOut).append("> ").append(underPropertyOut).append("Set = new HashSet<>();\r\n");
-                sb.append("        Optional<").append(poName).append("> po = dao.findById(id);\r\n");
-                sb.append("        if (po.isPresent()) {\r\n");
-                sb.append("            for (String ").append(underPropertyOut).append("Id : ").append(underPropertyOut).append("Ids) {\r\n");
-                sb.append("                ").append(propertyOut).append(" ").append(underPropertyOut).append(" = ").append(underPropertyOut).append("Dao.getOne(").append(underPropertyOut).append("Id);\r\n");
-                sb.append("                ").append(underPropertyOut).append("Set.add(").append(underPropertyOut).append(");\r\n");
-                sb.append("            }\r\n");
-                sb.append("            po.get().set").append(propertyOut).append("(").append(underPropertyOut).append("Set);\r\n");
-                sb.append("            dao.save(po.get());\r\n");
-                sb.append("        }\r\n");
-                sb.append("    }\r\n");
-                sb.append("\r\n");
-            }
-        }
-    }
-
-    public String[] controllerGenerate(List<Property> outPropertyList, String poName, String appPath, String appApi) {
+    public String[] controllerGenerate(Persistent persistent, String poName, String appPath, String appApi) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
         //serviceImpl路径
-        String poServicePath = packetPath + ".service.auto.";
+        String poServicePath = packetPath + ".service." + (persistent.getPersistentRelation() == 0 ? "bean" : "relation") + ".auto.";
         //controller路径
-        String poControllerPath = packetPath + ".controller.auto;\r\n";
+        String poControllerPath = packetPath + ".controller." + (persistent.getPersistentRelation() == 0 ? "bean" : "relation") + ".auto;\r\n";
         sb.append("package ").append(poControllerPath);
         sb.append("\r\n");
-        sb.append("import ").append(poServicePath).append(poName).append("Service;\r\n");
-        sb.append("import com.example.cyjcommon.controller.autoController;\r\n");
-        sb.append("import com.example.cyjcommon.entity.").append(poName).append(";\r\n");
+        sb.append("import com.example.cyjcommon.entity.bean.").append(poName).append(";\r\n");
         sb.append("import com.example.cyjcommon.utils.ResultVO;\r\n");
+        sb.append("import ").append(poServicePath).append(poName).append("ServiceImpl;\r\n");
         sb.append("import io.swagger.v3.oas.annotations.Operation;\r\n");
         sb.append("import io.swagger.v3.oas.annotations.tags.Tag;\r\n");
         sb.append("import org.springframework.beans.factory.annotation.Autowired;\r\n");
@@ -1272,10 +1113,6 @@ public class PersistentCustomServiceImpl
         sb.append("import org.springframework.web.bind.annotation.RequestParam;\r\n");
         sb.append("import org.springframework.web.bind.annotation.RestController;\r\n");
         sb.append("\r\n");
-        if (BeanUtils.ifManyToMany(outPropertyList)) {
-            sb.append("import java.util.Set;\r\n");
-            sb.append("\r\n");
-        }
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
         sb.append(" */\r\n");
@@ -1283,23 +1120,23 @@ public class PersistentCustomServiceImpl
         sb.append("@RestController\r\n");
         sb.append("@RequestMapping(value = \"").append(appApi).append("\")\r\n");
         sb.append("@Tag(name = \"").append(poName).append("\")\r\n");
-        sb.append("public class ").append(poName).append("Controller implements autoController<").append(poName).append("> {\r\n");
+        sb.append("public class ").append(poName).append("Controller {\r\n");
         sb.append("\r\n");
-        sb.append("    private ").append(poName).append("Service service;\r\n");
+        sb.append("    private ").append(poName).append("ServiceImpl service;\r\n");
         sb.append("\r\n");
         sb.append("    @Autowired\r\n");
-        sb.append("    public void setService(").append(poName).append("Service service) {\r\n");
+        sb.append("    public void setService(").append(poName).append("ServiceImpl service) {\r\n");
         sb.append("        this.service = service;\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        sb.append("    @Override\r\n");
         sb.append("    @Operation(summary = \"分页查询所有").append(poName).append("\")\r\n");
         sb.append("    @PostMapping(value = \"page").append(poName).append("\")\r\n");
-        sb.append("    public ResultVO page(@RequestParam(\"pageNumber\") Integer pageNumber) {\r\n");
-        sb.append("        return ResultVO.success(service.findAll(pageNumber));\r\n");
+        sb.append("    public ResultVO page(@RequestBody @Validated ").append(poName).append(" po,\r\n");
+        sb.append("                         @RequestParam(\"pageNumber\") Integer pageNumber,\r\n");
+        sb.append("                         @RequestParam(\"pageSize\") Integer pageSize) {\r\n");
+        sb.append("        return ResultVO.success(service.findAll(po, pageNumber, pageSize));\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        sb.append("    @Override\r\n");
         sb.append("    @Operation(summary = \"保存").append(poName).append("\")\r\n");
         sb.append("    @PostMapping(value = \"save").append(poName).append("\")\r\n");
         sb.append("    public ResultVO save(@RequestBody @Validated ").append(poName).append(" po, BindingResult bindingResult) {\r\n");
@@ -1312,7 +1149,6 @@ public class PersistentCustomServiceImpl
         sb.append("        return ResultVO.success(service.updateOne(po));\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        sb.append("    @Override\r\n");
         sb.append("    @Operation(summary = \"删除").append(poName).append("\")\r\n");
         sb.append("    @PostMapping(value = \"delete").append(poName).append("\")\r\n");
         sb.append("    public ResultVO delete(@RequestBody ").append(poName).append(" po) {\r\n");
@@ -1323,8 +1159,6 @@ public class PersistentCustomServiceImpl
         sb.append("        return ResultVO.success();\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        oneToManyControllerHandler(outPropertyList, poName, sb);
-        manyToManyControllerHandler(outPropertyList, poName, sb);
         sb.append("}\r\n");
         String entityControllerData = sb.toString();
         return new String[]{entityControllerData, poName + "Controller.java"};
@@ -1527,11 +1361,11 @@ public class PersistentCustomServiceImpl
         jsonObject.put("dataTable", propertyCustomDTOS);
         jsonObject.put("dataForm", propertyCustomDTOS);
         JSONObject customData = new JSONObject();
-        customData.put("customType", BeanUtils.YES.equals(persistent.getPersistentCustomTable()));
-        customData.put("customForm", BeanUtils.YES.equals(persistent.getPersistentCustomForm()));
-        customData.put("editEnable", BeanUtils.YES.equals(persistent.getPersistentEditEnable()));
-        customData.put("formType", persistent.getPersistentFormType());
-        customData.put("formCol", persistent.getPersistentFormRow());
+//        customData.put("customType", BeanUtils.YES.equals(persistent.getPersistentCustomTable()));
+//        customData.put("customForm", BeanUtils.YES.equals(persistent.getPersistentCustomForm()));
+//        customData.put("editEnable", BeanUtils.YES.equals(persistent.getPersistentEditEnable()));
+//        customData.put("formType", persistent.getPersistentFormType());
+//        customData.put("formCol", persistent.getPersistentFormRow());
         jsonObject.put("customData", customData);
         return jsonObject;
     }
