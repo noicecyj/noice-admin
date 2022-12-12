@@ -369,40 +369,40 @@ public class PersistentCustomServiceImpl
         createEntityCodeHandler(entityObj, entityCustomObj);
     }
 
-    private String[] servicesAutoGenerate(List<Property> outPropertyList, String appApi, String poName) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("import {request} from 'ice';\r\n");
-        sb.append("\r\n");
-        sb.append("export default {\r\n");
-        sb.append("  page(pageNumber) {\r\n");
-        sb.append("    return request({\r\n");
-        sb.append("      url: '/").append(appApi).append("/page").append(poName).append("',\r\n");
-        sb.append("      method: 'post',\r\n");
-        sb.append("      params: {\r\n");
-        sb.append("        pageNumber,\r\n");
-        sb.append("      },\r\n");
-        sb.append("    });\r\n");
-        sb.append("  },\r\n");
-        sb.append("  save(data) {\r\n");
-        sb.append("    return request({\r\n");
-        sb.append("      url: '/").append(appApi).append("/save").append(poName).append("',\r\n");
-        sb.append("      method: 'post',\r\n");
-        sb.append("      data,\r\n");
-        sb.append("    });\r\n");
-        sb.append("  },\r\n");
-        sb.append("  delete(data) {\r\n");
-        sb.append("    return request({\r\n");
-        sb.append("      url: '/").append(appApi).append("/delete").append(poName).append("',\r\n");
-        sb.append("      method: 'post',\r\n");
-        sb.append("      data,\r\n");
-        sb.append("    });\r\n");
-        sb.append("  },\r\n");
-//        oneToManyServiceHandler(outPropertyList, sb, appApi, poName);
-//        manyToManyServiceHandler(outPropertyList, sb, appApi, poName);
-        sb.append("};\r\n");
-        String viewData = sb.toString();
-        return new String[]{viewData, poName + ".tsx"};
-    }
+//    private String[] servicesAutoGenerate(List<Property> outPropertyList, String appApi, String poName) {
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("import {request} from 'ice';\r\n");
+//        sb.append("\r\n");
+//        sb.append("export default {\r\n");
+//        sb.append("  page(pageNumber) {\r\n");
+//        sb.append("    return request({\r\n");
+//        sb.append("      url: '/").append(appApi).append("/page").append(poName).append("',\r\n");
+//        sb.append("      method: 'post',\r\n");
+//        sb.append("      params: {\r\n");
+//        sb.append("        pageNumber,\r\n");
+//        sb.append("      },\r\n");
+//        sb.append("    });\r\n");
+//        sb.append("  },\r\n");
+//        sb.append("  save(data) {\r\n");
+//        sb.append("    return request({\r\n");
+//        sb.append("      url: '/").append(appApi).append("/save").append(poName).append("',\r\n");
+//        sb.append("      method: 'post',\r\n");
+//        sb.append("      data,\r\n");
+//        sb.append("    });\r\n");
+//        sb.append("  },\r\n");
+//        sb.append("  delete(data) {\r\n");
+//        sb.append("    return request({\r\n");
+//        sb.append("      url: '/").append(appApi).append("/delete").append(poName).append("',\r\n");
+//        sb.append("      method: 'post',\r\n");
+//        sb.append("      data,\r\n");
+//        sb.append("    });\r\n");
+//        sb.append("  },\r\n");
+////        oneToManyServiceHandler(outPropertyList, sb, appApi, poName);
+////        manyToManyServiceHandler(outPropertyList, sb, appApi, poName);
+//        sb.append("};\r\n");
+//        String viewData = sb.toString();
+//        return new String[]{viewData, poName + ".tsx"};
+//    }
 
 //    private void oneToManyServiceHandler(List<Property> outPropertyList, StringBuilder sb, String appApi, String poName) {
 //        for (Property property : outPropertyList) {
@@ -989,10 +989,10 @@ public class PersistentCustomServiceImpl
             sb.append("\r\n");
         }
         sb.append("    @TableField(\"status\")\r\n");
-        sb.append("    private String status;\r\n");
+        sb.append("    private int status;\r\n");
         sb.append("\r\n");
         sb.append("    @TableField(\"sort_code\")\r\n");
-        sb.append("    private String sortCode;\r\n");
+        sb.append("    private int sortCode;\r\n");
         sb.append("\r\n");
         sb.append("    @TableField(\"created_date\")\r\n");
         sb.append("    private LocalDateTime createdDate;\r\n");

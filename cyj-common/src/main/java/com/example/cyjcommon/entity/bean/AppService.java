@@ -36,11 +36,11 @@ public class AppService extends Model<AppService> {
     @TableField("app_service_code")
     private String appServiceCode;
 
-    @TableField("sort_code")
-    private int sortCode;
-
     @TableField("status")
     private int status;
+
+    @TableField("sort_code")
+    private int sortCode;
 
     @TableField("created_date")
     private LocalDateTime createdDate;
