@@ -36,6 +36,9 @@ public class Property extends Model<Property> {
     @TableField(value = "property_null")
     private int propertyNull;
 
+    @TableField(value = "property_relation")
+    private int propertyRelation;
+
     @TableField(value = "persistent_id")
     private String persistentId;
 

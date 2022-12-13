@@ -8,16 +8,13 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.cyjcommon.entity.bean.AppService;
 import com.example.cyjcommon.entity.bean.Authority;
-import com.example.cyjcommon.entity.bean.Dictionary;
 import com.example.cyjcommon.entity.bean.Persistent;
 import com.example.cyjcommon.entity.bean.Property;
 import com.example.cyjcommon.entity.bean.Sql;
 import com.example.cyjcommon.mapper.bean.PersistentMapper;
 import com.example.cyjcommon.utils.BeanUtils;
 import com.example.cyjdictionary.service.bean.custom.DictionaryCustomServiceImpl;
-import com.example.cyjentitycreater.entity.dto.PropertyCustomDTO;
 import com.example.cyjquery.service.bean.custom.SqlCustomServiceImpl;
-import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -29,8 +26,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -347,10 +342,14 @@ public class PersistentCustomServiceImpl
                 .orderByAsc(Property::getSortCode));
         Map<String, String[]> entityObj = new HashMap<>();
         boolean isBeanFlag = persistent.getPersistentRelation() == 0;
-        entityObj.put(commonPath + "/entity" + (isBeanFlag ? "/bean" : "/relation"), poGenerate(persistent, propertyList, poName));
-        entityObj.put(commonPath + "/mapper" + (isBeanFlag ? "/bean" : "/relation"), mapperGenerate(persistent, poName));
-        entityObj.put(appPath + "/service" + (isBeanFlag ? "/bean" : "/relation") + "/auto", serviceGenerate(persistent, poName, appPath));
-        entityObj.put(appPath + "/controller" + (isBeanFlag ? "/bean" : "/relation") + "/auto", controllerGenerate(persistent, poName, appPath, appApi));
+        entityObj.put(commonPath + "/entity" + (isBeanFlag ? "/bean" : "/relation"),
+                poGenerate(persistent, propertyList, poName));
+        entityObj.put(commonPath + "/mapper" + (isBeanFlag ? "/bean" : "/relation"),
+                mapperGenerate(persistent, poName));
+        entityObj.put(appPath + "/service" + (isBeanFlag ? "/bean" : "/relation") + "/auto",
+                serviceGenerate(persistent, propertyList, poName, appPath));
+        entityObj.put(appPath + "/controller" + (isBeanFlag ? "/bean" : "/relation") + "/auto",
+                controllerGenerate(persistent, propertyList, poName, appPath, appApi));
 //        entityObj.put(componentPath + poName + "/services/auto", servicesAutoGenerate(outPropertyList, appApi, poName));
 //        entityObj.put(componentPath + poName + "/models/auto", modelsAutoGenerate(outPropertyList, underPoName, poName, persistentCode));
 //        entityObj.put(componentPath + poName + "/view/auto", viewAutoGenerate(outPropertyList, underPoName, poName));
@@ -1028,7 +1027,7 @@ public class PersistentCustomServiceImpl
         return new String[]{entityMapperData, poName + "Mapper.java"};
     }
 
-    public String[] serviceGenerate(Persistent persistent, String poName, String appPath) {
+    public String[] serviceGenerate(Persistent persistent, List<Property> propertyList, String poName, String appPath) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
@@ -1082,13 +1081,30 @@ public class PersistentCustomServiceImpl
         sb.append("                        ").append(poName).append("::get").append(poName).append("Name, po.get").append(poName).append("Name())\r\n");
         sb.append("                .orderByAsc(").append(poName).append("::getSortCode);\r\n");
         sb.append("    }\r\n");
+        List<Property> relationPropertyList = propertyList.stream()
+                .filter(property -> property.getPropertyRelation() == 1).collect(Collectors.toList());
+        for (Property property:relationPropertyList){
+            String propertyCode = property.getPropertyCode();
+            //驼峰名
+            String underPropertyName = BeanUtils.underline2Camel(propertyCode);
+            //文件名
+            String propertyName = BeanUtils.captureName(underPropertyName);
+            sb.append("\r\n");
+            sb.append("    public Page<").append(poName).append("> page").append(poName).append("By").append(propertyName).append("(").append(poName).append(" po, Integer pageNumber, Integer pageSize, String ").append(underPropertyName).append(") {\r\n");
+            sb.append("        Page<").append(poName).append("> page = new Page<>(pageNumber, pageSize);\r\n");
+            sb.append("        LambdaQueryWrapper<").append(poName).append("> queryWrapper = searchHandler(po);\r\n");
+            sb.append("        queryWrapper.eq(").append(poName).append("::get").append(propertyName).append(", ").append(underPropertyName).append(");\r\n");
+            sb.append("        return new ").append(poName).append("().selectPage(page, queryWrapper);\r\n");
+            sb.append("    }\r\n");
+
+        }
         sb.append("\r\n");
         sb.append("}");
         String entityServiceData = sb.toString();
         return new String[]{entityServiceData, poName + "ServiceImpl.java"};
     }
 
-    public String[] controllerGenerate(Persistent persistent, String poName, String appPath, String appApi) {
+    public String[] controllerGenerate(Persistent persistent, List<Property> propertyList, String poName, String appPath, String appApi) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
@@ -1158,6 +1174,24 @@ public class PersistentCustomServiceImpl
         sb.append("        service.deleteOne(po);\r\n");
         sb.append("        return ResultVO.success();\r\n");
         sb.append("    }\r\n");
+        List<Property> relationPropertyList = propertyList.stream()
+                .filter(property -> property.getPropertyRelation() == 1).collect(Collectors.toList());
+        for (Property property:relationPropertyList){
+            String propertyCode = property.getPropertyCode();
+            //驼峰名
+            String underPropertyName = BeanUtils.underline2Camel(propertyCode);
+            //文件名
+            String propertyName = BeanUtils.captureName(underPropertyName);
+            sb.append("\r\n");
+            sb.append("    @Operation(summary = \"根据").append(propertyName).append("查询所有").append(poName).append("\")\r\n");
+            sb.append("    @PostMapping(value = \"page").append(poName).append("By").append(propertyName).append("\")\r\n");
+            sb.append("    public ResultVO page").append(poName).append("ByAppService(@RequestBody @Validated ").append(poName).append(" po,\r\n");
+            sb.append("                                               @RequestParam(\"pageNumber\") Integer pageNumber,\r\n");
+            sb.append("                                               @RequestParam(\"pageSize\") Integer pageSize,\r\n");
+            sb.append("                                               @RequestParam(\"id\") String ").append(underPropertyName).append(") {\r\n");
+            sb.append("        return ResultVO.success(service.page").append(poName).append("ByAppService(po, pageNumber, pageSize, ").append(underPropertyName).append("));\r\n");
+            sb.append("    }\r\n");
+        }
         sb.append("\r\n");
         sb.append("}\r\n");
         String entityControllerData = sb.toString();
