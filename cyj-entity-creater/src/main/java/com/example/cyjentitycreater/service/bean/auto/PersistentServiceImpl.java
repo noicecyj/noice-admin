@@ -42,11 +42,12 @@ public class PersistentServiceImpl
 
     private LambdaQueryWrapper<Persistent> searchHandler(Persistent po) {
         return new QueryWrapper<Persistent>().lambda()
-                .like(StringUtils.isNotEmpty(po.getPersistentName()), Persistent::getPersistentName, po.getPersistentName())
+                .like(StringUtils.isNotEmpty(po.getPersistentName()),
+                        Persistent::getPersistentName, po.getPersistentName())
                 .orderByAsc(Persistent::getSortCode);
     }
 
-    public Page<Persistent> pagePersistentByAppService(Persistent po, Integer pageNumber, Integer pageSize, String appServiceId) {
+    public Page<Persistent> pagePersistentByAppServiceId(Persistent po, Integer pageNumber, Integer pageSize, String appServiceId) {
         Page<Persistent> page = new Page<>(pageNumber, pageSize);
         LambdaQueryWrapper<Persistent> queryWrapper = searchHandler(po);
         queryWrapper.eq(Persistent::getAppServiceId, appServiceId);

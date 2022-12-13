@@ -1189,7 +1189,7 @@ public class PersistentCustomServiceImpl
             sb.append("                                               @RequestParam(\"pageNumber\") Integer pageNumber,\r\n");
             sb.append("                                               @RequestParam(\"pageSize\") Integer pageSize,\r\n");
             sb.append("                                               @RequestParam(\"id\") String ").append(underPropertyName).append(") {\r\n");
-            sb.append("        return ResultVO.success(service.page").append(poName).append("ByAppService(po, pageNumber, pageSize, ").append(underPropertyName).append("));\r\n");
+            sb.append("        return ResultVO.success(service.page").append(poName).append("By").append(propertyName).append("(po, pageNumber, pageSize, ").append(underPropertyName).append("));\r\n");
             sb.append("    }\r\n");
         }
         sb.append("\r\n");

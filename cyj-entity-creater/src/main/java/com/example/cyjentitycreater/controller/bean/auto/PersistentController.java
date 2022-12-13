@@ -61,13 +61,13 @@ public class PersistentController {
         return ResultVO.success();
     }
 
-    @Operation(summary = "根据AppService查询所有Persistent")
-    @PostMapping(value = "pagePersistentByAppService")
+    @Operation(summary = "根据AppServiceId查询所有Persistent")
+    @PostMapping(value = "pagePersistentByAppServiceId")
     public ResultVO pagePersistentByAppService(@RequestBody @Validated Persistent po,
                                                @RequestParam("pageNumber") Integer pageNumber,
                                                @RequestParam("pageSize") Integer pageSize,
-                                               @RequestParam("id") String id) {
-        return ResultVO.success(service.pagePersistentByAppService(po, pageNumber, pageSize, id));
+                                               @RequestParam("id") String appServiceId) {
+        return ResultVO.success(service.pagePersistentByAppServiceId(po, pageNumber, pageSize, appServiceId));
     }
 
 }
