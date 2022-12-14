@@ -30,7 +30,7 @@ public class DictionaryCustomServiceImpl
     public List<Dictionary> findCatalogByValue(String value) {
         Catalog catalog = new Catalog()
                 .selectOne(new QueryWrapper<Catalog>().lambda()
-                        .eq(Catalog::getCatalogValue, value));
+                        .eq(Catalog::getCatalogCode, value));
         if (catalog == null) {
             return new ArrayList<>();
         }
