@@ -45,7 +45,7 @@ public class CyjEntityCreaterApplicationTest {
 //            persistentCustomServiceImpl.entityHandler(persistent, "create");
 //        }
         Persistent persistent1 = new Persistent()
-                .selectById("9aafb17f-45cd-4bae-a4de-934c087c0f61");
+                .selectById("ea17ecb7-4ab9-4f93-8546-3da3483400aa");
         persistentCustomServiceImpl.entityHandler(persistent1, "create");
 //        Persistent persistent2 = new Persistent().selectById("f6c2d230-8e6b-431e-948a-13a07d06846c");
 //        persistentCustomServiceImpl.entityHandler(persistent2,"delete");
