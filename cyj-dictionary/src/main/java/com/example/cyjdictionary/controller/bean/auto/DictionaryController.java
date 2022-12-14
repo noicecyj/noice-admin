@@ -66,7 +66,7 @@ public class DictionaryController {
     public ResultVO pageDictionaryByAppService(@RequestBody @Validated Dictionary po,
                                                @RequestParam("pageNumber") Integer pageNumber,
                                                @RequestParam("pageSize") Integer pageSize,
-                                               @RequestParam("id") String catalogId) {
+                                               @RequestParam("catalogId") String catalogId) {
         return ResultVO.success(service.pageDictionaryByCatalogId(po, pageNumber, pageSize, catalogId));
     }
 

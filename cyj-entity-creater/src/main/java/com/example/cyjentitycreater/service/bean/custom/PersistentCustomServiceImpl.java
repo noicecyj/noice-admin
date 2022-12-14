@@ -1083,7 +1083,7 @@ public class PersistentCustomServiceImpl
         sb.append("    }\r\n");
         List<Property> relationPropertyList = propertyList.stream()
                 .filter(property -> property.getPropertyRelation() == 1).collect(Collectors.toList());
-        for (Property property:relationPropertyList){
+        for (Property property : relationPropertyList) {
             String propertyCode = property.getPropertyCode();
             //驼峰名
             String underPropertyName = BeanUtils.underline2Camel(propertyCode);
@@ -1176,7 +1176,7 @@ public class PersistentCustomServiceImpl
         sb.append("    }\r\n");
         List<Property> relationPropertyList = propertyList.stream()
                 .filter(property -> property.getPropertyRelation() == 1).collect(Collectors.toList());
-        for (Property property:relationPropertyList){
+        for (Property property : relationPropertyList) {
             String propertyCode = property.getPropertyCode();
             //驼峰名
             String underPropertyName = BeanUtils.underline2Camel(propertyCode);
@@ -1188,7 +1188,7 @@ public class PersistentCustomServiceImpl
             sb.append("    public ResultVO page").append(poName).append("ByAppService(@RequestBody @Validated ").append(poName).append(" po,\r\n");
             sb.append("                                               @RequestParam(\"pageNumber\") Integer pageNumber,\r\n");
             sb.append("                                               @RequestParam(\"pageSize\") Integer pageSize,\r\n");
-            sb.append("                                               @RequestParam(\"id\") String ").append(underPropertyName).append(") {\r\n");
+            sb.append("                                               @RequestParam(\"").append(underPropertyName).append("\") String ").append(underPropertyName).append(") {\r\n");
             sb.append("        return ResultVO.success(service.page").append(poName).append("By").append(propertyName).append("(po, pageNumber, pageSize, ").append(underPropertyName).append("));\r\n");
             sb.append("    }\r\n");
         }

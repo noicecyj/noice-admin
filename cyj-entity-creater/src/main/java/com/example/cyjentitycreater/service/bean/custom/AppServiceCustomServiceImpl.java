@@ -45,15 +45,15 @@ public class AppServiceCustomServiceImpl
             String AppName = BeanUtils.captureName(BeanUtils.underline2Camel2(appService.getAppServiceName()));
             List<Dictionary> pos = dictionaryCustomServiceImpl.findCatalogByValue("PROJECT_PATH");
             HashMap<String, Dictionary> mapPo = CommonUtils.listToMap(pos, "dictionaryName");
-            String AppFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appService.getAppServiceName() + "\\src\\main\\java\\com\\example\\" + AppName;
+            String AppFilePath = mapPo.get("BACK_END").getDictionaryCode() + "\\" + appService.getAppServiceName() + "\\src\\main\\java\\com\\example\\" + AppName;
             String[] AppResult = appGenerate(appService);
-            String ymlFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appService.getAppServiceName() + "\\src\\main\\resources";
+            String ymlFilePath = mapPo.get("BACK_END").getDictionaryCode() + "\\" + appService.getAppServiceName() + "\\src\\main\\resources";
             String[] ymlResult = ymlGenerate(appService);
-            String xmlFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appService.getAppServiceName() + "\\src\\main\\resources";
+            String xmlFilePath = mapPo.get("BACK_END").getDictionaryCode() + "\\" + appService.getAppServiceName() + "\\src\\main\\resources";
             String[] xmlResult = xmlGenerate(appService);
-            String configFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appService.getAppServiceName() + "\\src\\main\\resources";
+            String configFilePath = mapPo.get("BACK_END").getDictionaryCode() + "\\" + appService.getAppServiceName() + "\\src\\main\\resources";
             String[] configResult = configGenerate();
-            String pomFilePath = mapPo.get("BACK_END").getDictionaryValue() + "\\" + appService.getAppServiceName();
+            String pomFilePath = mapPo.get("BACK_END").getDictionaryCode() + "\\" + appService.getAppServiceName();
             String[] pomResult = pomGenerate(appService);
             try {
                 BeanUtils.createJavaFile(AppFilePath, AppResult);
