@@ -1,8 +1,8 @@
 package com.example.cyjauth.controller.bean.auto;
 
-import com.example.cyjauth.service.bean.auto.EnterpriseServiceImpl;
 import com.example.cyjcommon.entity.bean.Enterprise;
 import com.example.cyjcommon.utils.ResultVO;
+import com.example.cyjauth.service.bean.auto.EnterpriseServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
