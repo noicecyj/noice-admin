@@ -5,39 +5,47 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 /**
  * @author Noice
  */
-@Getter
-@Setter
-@TableName(Dictionary.T_DICTIONARY)
+@EqualsAndHashCode(callSuper = true)
+@Data
+@TableName("t_dictionary")
 public class Dictionary extends Model<Dictionary> {
-
-    static final String T_DICTIONARY = "t_dictionary";
 
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
-    @TableField(value = "dictionary_name")
+    @TableField("dictionary_code")
+    private String dictionaryCode;
+
+    @TableField("dictionary_name")
     private String dictionaryName;
 
-    @TableField(value = "dictionary_value")
-    private String dictionaryValue;
-
-    @TableField(value = "catalog_id")
+    @TableField("catalog_id")
     private String catalogId;
 
-    @NotNull(message = "状态不能为空")
-    @TableField(value = "status")
-    private String status;
+    @TableField("status")
+    private int status;
 
-    @NotNull(message = "排序不能为空")
-    @TableField(value = "sort_code")
-    private String sortCode;
+    @TableField("sort_code")
+    private int sortCode;
+
+    @TableField("created_date")
+    private LocalDateTime createdDate;
+
+    @TableField("created_by")
+    private String createdBy;
+
+    @TableField("updated_date")
+    private LocalDateTime updated_date;
+
+    @TableField("updated_by")
+    private String updatedBy;
 
 }

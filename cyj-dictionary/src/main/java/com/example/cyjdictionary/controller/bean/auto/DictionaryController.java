@@ -61,13 +61,13 @@ public class DictionaryController {
         return ResultVO.success();
     }
 
-    @Operation(summary = "根据Catalog查询所有Dictionary")
-    @PostMapping(value = "pageDictionaryByCatalog")
-    public ResultVO pageDictionaryByCatalog(@RequestBody @Validated Dictionary po,
-                                            @RequestParam("pageNumber") Integer pageNumber,
-                                            @RequestParam("pageSize") Integer pageSize,
-                                            @RequestParam("id") String id) {
-        return ResultVO.success(service.pageDictionaryByCatalog(po, pageNumber, pageSize, id));
+    @Operation(summary = "根据CatalogId查询所有Dictionary")
+    @PostMapping(value = "pageDictionaryByCatalogId")
+    public ResultVO pageDictionaryByAppService(@RequestBody @Validated Dictionary po,
+                                               @RequestParam("pageNumber") Integer pageNumber,
+                                               @RequestParam("pageSize") Integer pageSize,
+                                               @RequestParam("id") String catalogId) {
+        return ResultVO.success(service.pageDictionaryByCatalogId(po, pageNumber, pageSize, catalogId));
     }
 
 }

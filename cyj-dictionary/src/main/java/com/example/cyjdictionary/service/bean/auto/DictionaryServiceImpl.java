@@ -40,19 +40,18 @@ public class DictionaryServiceImpl
         return new Dictionary().selectPage(page, queryWrapper);
     }
 
-    public Page<Dictionary> pageDictionaryByCatalog(Dictionary po, Integer pageNumber, Integer pageSize, String catalogId) {
-        Page<Dictionary> page = new Page<>(pageNumber, pageSize);
-        LambdaQueryWrapper<Dictionary> queryWrapper = searchHandler(po);
-        queryWrapper.eq(Dictionary::getCatalogId, catalogId);
-        return new Dictionary().selectPage(page, queryWrapper);
-    }
-
-
     private LambdaQueryWrapper<Dictionary> searchHandler(Dictionary po) {
         return new QueryWrapper<Dictionary>().lambda()
                 .like(StringUtils.isNotEmpty(po.getDictionaryName()),
                         Dictionary::getDictionaryName, po.getDictionaryName())
                 .orderByAsc(Dictionary::getSortCode);
+    }
+
+    public Page<Dictionary> pageDictionaryByCatalogId(Dictionary po, Integer pageNumber, Integer pageSize, String catalogId) {
+        Page<Dictionary> page = new Page<>(pageNumber, pageSize);
+        LambdaQueryWrapper<Dictionary> queryWrapper = searchHandler(po);
+        queryWrapper.eq(Dictionary::getCatalogId, catalogId);
+        return new Dictionary().selectPage(page, queryWrapper);
     }
 
 }
