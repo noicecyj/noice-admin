@@ -40,13 +40,6 @@ public class UserServiceImpl
         return new User().selectPage(page, queryWrapper);
     }
 
-    public Page<User> pageUserByEnterprise(User po, Integer pageNumber, Integer pageSize, String enterpriseId) {
-        Page<User> page = new Page<>(pageNumber, pageSize);
-        LambdaQueryWrapper<User> queryWrapper = searchHandler(po);
-        queryWrapper.eq(User::getEnterpriseId, enterpriseId);
-        return new User().selectPage(page, queryWrapper);
-    }
-
     private LambdaQueryWrapper<User> searchHandler(User po) {
         return new QueryWrapper<User>().lambda()
                 .like(StringUtils.isNotEmpty(po.getUserName()),

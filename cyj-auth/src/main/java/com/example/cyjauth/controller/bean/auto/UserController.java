@@ -1,8 +1,8 @@
 package com.example.cyjauth.controller.bean.auto;
 
-import com.example.cyjauth.service.bean.auto.UserServiceImpl;
 import com.example.cyjcommon.entity.bean.User;
 import com.example.cyjcommon.utils.ResultVO;
+import com.example.cyjauth.service.bean.auto.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,15 +59,6 @@ public class UserController {
         }
         service.deleteOne(po);
         return ResultVO.success();
-    }
-
-    @Operation(summary = "根据Enterprise查询所有User")
-    @PostMapping(value = "pageUserByEnterprise")
-    public ResultVO pageUserByEnterprise(@RequestBody @Validated User po,
-                                         @RequestParam("pageNumber") Integer pageNumber,
-                                         @RequestParam("pageSize") Integer pageSize,
-                                         @RequestParam("id") String id) {
-        return ResultVO.success(service.pageUserByEnterprise(po, pageNumber, pageSize, id));
     }
 
 }

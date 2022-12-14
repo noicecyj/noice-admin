@@ -5,54 +5,47 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 /**
  * @author Noice
  */
-@Getter
-@Setter
-@TableName(User.T_USER)
+@EqualsAndHashCode(callSuper = true)
+@Data
+@TableName("t_user")
 public class User extends Model<User> {
-
-    static final String T_USER = "t_user";
 
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
-    @NotNull(message = "用户名不能为空")
-    @TableField(value = "user_name")
+    @TableField("user_code")
+    private String userCode;
+
+    @TableField("user_name")
     private String userName;
 
-    @TableField(value = "name")
-    private String name;
+    @TableField("user_password")
+    private String userPassword;
 
-    @NotNull(message = "姓不能为空")
-    @TableField(value = "first_name")
-    private String firstName;
+    @TableField("status")
+    private int status;
 
-    @NotNull(message = "名不能为空")
-    @TableField(value = "second_name")
-    private String secondName;
+    @TableField("sort_code")
+    private int sortCode;
 
-    @TableField(value = "phone")
-    private String phone;
+    @TableField("created_date")
+    private LocalDateTime createdDate;
 
-    @TableField(value = "password")
-    private String password;
+    @TableField("created_by")
+    private String createdBy;
 
-    @TableField(value = "enterprise_id")
-    private String enterpriseId;
+    @TableField("updated_date")
+    private LocalDateTime updated_date;
 
-    @NotNull(message = "状态不能为空")
-    @TableField(value = "status")
-    private String status;
-
-    @NotNull(message = "排序不能为空")
-    @TableField(value = "sort_code")
-    private String sortCode;
+    @TableField("updated_by")
+    private String updatedBy;
 
 }
