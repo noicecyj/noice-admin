@@ -16,8 +16,6 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.util.List;
-
 /**
  * @author Noice
  */
@@ -46,8 +44,8 @@ public class CyjEntityCreaterApplicationTest {
 //        for (Persistent persistent : persistentList) {
 //            persistentCustomServiceImpl.entityHandler(persistent, "create");
 //        }
-        Persistent persistent1 = new Persistent().selectById("88feb15d-70a1-47bf-b2b3-b8c59e2ddaf9");
-        persistentCustomServiceImpl.entityHandler(persistent1,"create");
+        Persistent persistent1 = new Persistent().selectById("745acad5-fbdf-4755-ae6d-885b3e76d5e6");
+        persistentCustomServiceImpl.entityHandler(persistent1, "create");
 //        Persistent persistent2 = new Persistent().selectById("f6c2d230-8e6b-431e-948a-13a07d06846c");
 //        persistentCustomServiceImpl.entityHandler(persistent2,"delete");
 //        Persistent persistent3 = new Persistent().selectById("ea17ecb7-4ab9-4f93-8546-3da3483400aa");

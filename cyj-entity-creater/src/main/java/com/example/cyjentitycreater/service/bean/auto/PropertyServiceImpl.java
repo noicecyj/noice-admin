@@ -42,14 +42,16 @@ public class PropertyServiceImpl
 
     private LambdaQueryWrapper<Property> searchHandler(Property po) {
         return new QueryWrapper<Property>().lambda()
-                .like(StringUtils.isNotEmpty(po.getPropertyCode()), Property::getPropertyCode, po.getPropertyCode())
+                .like(StringUtils.isNotEmpty(po.getPropertyName()),
+                        Property::getPropertyName, po.getPropertyName())
                 .orderByAsc(Property::getSortCode);
     }
 
-    public Page<Property> pagePropertyByPersistent(Property po, Integer pageNumber, Integer pageSize, String persistentId) {
+    public Page<Property> pagePropertyByPersistentId(Property po, Integer pageNumber, Integer pageSize, String persistentId) {
         Page<Property> page = new Page<>(pageNumber, pageSize);
         LambdaQueryWrapper<Property> queryWrapper = searchHandler(po);
         queryWrapper.eq(Property::getPersistentId, persistentId);
         return new Property().selectPage(page, queryWrapper);
     }
+
 }
