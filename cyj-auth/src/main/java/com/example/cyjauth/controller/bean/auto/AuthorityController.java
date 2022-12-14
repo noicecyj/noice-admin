@@ -1,8 +1,8 @@
 package com.example.cyjauth.controller.bean.auto;
 
-import com.example.cyjauth.service.bean.auto.AuthorityServiceImpl;
 import com.example.cyjcommon.entity.bean.Authority;
 import com.example.cyjcommon.utils.ResultVO;
+import com.example.cyjauth.service.bean.auto.AuthorityServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,22 +61,22 @@ public class AuthorityController {
         return ResultVO.success();
     }
 
-    @Operation(summary = "根据Persistent查询所有Authority")
-    @PostMapping(value = "pageAuthorityByPersistent")
-    public ResultVO pageAuthorityByPersistent(@RequestBody @Validated Authority po,
-                                              @RequestParam("pageNumber") Integer pageNumber,
-                                              @RequestParam("pageSize") Integer pageSize,
-                                              @RequestParam("id") String id) {
-        return ResultVO.success(service.pageAuthorityByPersistent(po, pageNumber, pageSize, id));
+    @Operation(summary = "根据AppServiceId查询所有Authority")
+    @PostMapping(value = "pageAuthorityByAppServiceId")
+    public ResultVO pageAuthorityByAppServiceId(@RequestBody @Validated Authority po,
+                                               @RequestParam("pageNumber") Integer pageNumber,
+                                               @RequestParam("pageSize") Integer pageSize,
+                                               @RequestParam("appServiceId") String appServiceId) {
+        return ResultVO.success(service.pageAuthorityByAppServiceId(po, pageNumber, pageSize, appServiceId));
     }
 
-    @Operation(summary = "根据AppService查询所有Authority")
-    @PostMapping(value = "pageAuthorityByAppService")
-    public ResultVO pageAuthorityByAppService(@RequestBody @Validated Authority po,
-                                              @RequestParam("pageNumber") Integer pageNumber,
-                                              @RequestParam("pageSize") Integer pageSize,
-                                              @RequestParam("id") String id) {
-        return ResultVO.success(service.pageAuthorityByAppService(po, pageNumber, pageSize, id));
+    @Operation(summary = "根据PersistentId查询所有Authority")
+    @PostMapping(value = "pageAuthorityByPersistentId")
+    public ResultVO pageAuthorityByPersistentId(@RequestBody @Validated Authority po,
+                                               @RequestParam("pageNumber") Integer pageNumber,
+                                               @RequestParam("pageSize") Integer pageSize,
+                                               @RequestParam("persistentId") String persistentId) {
+        return ResultVO.success(service.pageAuthorityByPersistentId(po, pageNumber, pageSize, persistentId));
     }
 
 }
