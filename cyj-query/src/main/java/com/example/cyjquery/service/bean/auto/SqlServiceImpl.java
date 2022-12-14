@@ -42,8 +42,8 @@ public class SqlServiceImpl
 
     private LambdaQueryWrapper<Sql> searchHandler(Sql po) {
         return new QueryWrapper<Sql>().lambda()
-                .like(StringUtils.isNotEmpty(po.getSqlDescription()),
-                        Sql::getSqlDescription, po.getSqlDescription())
+                .like(StringUtils.isNotEmpty(po.getSqlName()),
+                        Sql::getSqlName, po.getSqlName())
                 .orderByAsc(Sql::getSortCode);
     }
 

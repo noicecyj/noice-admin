@@ -5,41 +5,50 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 /**
  * @author Noice
  */
-@Getter
-@Setter
-@TableName(Sql.T_SQL)
+@EqualsAndHashCode(callSuper = true)
+@Data
+@TableName("t_sql")
 public class Sql extends Model<Sql> {
-
-    static final String T_SQL = "t_sql";
 
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
-    @NotNull(message = "查询类型不能为空")
-    @TableField(value = "sql_type")
-    private String sqlType;
+    @TableField("sql_code")
+    private String sqlCode;
 
-    @NotNull(message = "查询语句不能为空")
-    @TableField(value = "sql_str")
+    @TableField("sql_name")
+    private String sqlName;
+
+    @TableField("sql_str")
     private String sqlStr;
 
-    @TableField(value = "sql_description")
-    private String sqlDescription;
+    @TableField("sql_type")
+    private String sqlType;
 
-    @NotNull(message = "状态不能为空")
-    @TableField(value = "status")
-    private String status;
+    @TableField("status")
+    private int status;
 
-    @NotNull(message = "排序不能为空")
-    @TableField(value = "sort_code")
-    private String sortCode;
+    @TableField("sort_code")
+    private int sortCode;
+
+    @TableField("created_date")
+    private LocalDateTime createdDate;
+
+    @TableField("created_by")
+    private String createdBy;
+
+    @TableField("updated_date")
+    private LocalDateTime updated_date;
+
+    @TableField("updated_by")
+    private String updatedBy;
 
 }
