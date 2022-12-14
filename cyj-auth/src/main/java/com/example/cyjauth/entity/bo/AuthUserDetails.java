@@ -22,14 +22,9 @@ public class AuthUserDetails extends User implements UserDetails {
     public AuthUserDetails(User po) {
         if (po != null) {
             this.setId(po.getId());
-            this.setName(po.getName());
-            this.setEnterpriseId(po.getEnterpriseId());
-            this.setFirstName(po.getFirstName());
-            this.setSecondName(po.getSecondName());
-            this.setPhone(po.getPhone());
             this.setSortCode(po.getSortCode());
             this.setUserName(po.getUserName());
-            this.setPassword(po.getPassword());
+            this.setUserPassword(po.getUserPassword());
             this.setStatus(po.getStatus());
         }
     }
@@ -57,7 +52,7 @@ public class AuthUserDetails extends User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return super.getPassword();
+        return super.getUserPassword();
     }
 
     @Override

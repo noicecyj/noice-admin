@@ -53,7 +53,7 @@ public class UserCustomServiceImpl
             if (user != null) {
                 BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
                 String password = passwordEncoder.encode(newPassword);
-                user.setPassword(password);
+                user.setUserPassword(password);
                 user.updateById();
             }
         }
