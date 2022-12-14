@@ -47,17 +47,18 @@ public class AuthorityServiceImpl
                 .orderByAsc(Authority::getSortCode);
     }
 
-    public Page<Authority> pageAuthorityByAppService(Authority po, Integer pageNumber, Integer pageSize, String appServiceId) {
+    public Page<Authority> pageAuthorityByAppServiceId(Authority po, Integer pageNumber, Integer pageSize, String appServiceId) {
         Page<Authority> page = new Page<>(pageNumber, pageSize);
         LambdaQueryWrapper<Authority> queryWrapper = searchHandler(po);
         queryWrapper.eq(Authority::getAppServiceId, appServiceId);
         return new Authority().selectPage(page, queryWrapper);
     }
 
-    public Page<Authority> pageAuthorityByPersistent(Authority po, Integer pageNumber, Integer pageSize, String persistentId) {
+    public Page<Authority> pageAuthorityByPersistentId(Authority po, Integer pageNumber, Integer pageSize, String persistentId) {
         Page<Authority> page = new Page<>(pageNumber, pageSize);
         LambdaQueryWrapper<Authority> queryWrapper = searchHandler(po);
         queryWrapper.eq(Authority::getPersistentId, persistentId);
         return new Authority().selectPage(page, queryWrapper);
     }
+
 }
