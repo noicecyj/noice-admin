@@ -30,6 +30,9 @@ public class User extends Model<User> {
     @TableField("user_password")
     private String userPassword;
 
+    @TableField("enterprise_id")
+    private String enterpriseId;
+
     @TableField("status")
     private int status;
 

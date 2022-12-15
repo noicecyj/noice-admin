@@ -47,4 +47,11 @@ public class UserServiceImpl
                 .orderByAsc(User::getSortCode);
     }
 
+    public Page<User> pageUserByEnterpriseId(User po, Integer pageNumber, Integer pageSize, String enterpriseId) {
+        Page<User> page = new Page<>(pageNumber, pageSize);
+        LambdaQueryWrapper<User> queryWrapper = searchHandler(po);
+        queryWrapper.eq(User::getEnterpriseId, enterpriseId);
+        return new User().selectPage(page, queryWrapper);
+    }
+
 }
