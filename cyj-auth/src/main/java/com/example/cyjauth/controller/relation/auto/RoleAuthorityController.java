@@ -30,41 +30,41 @@ public class RoleAuthorityController {
         this.service = service;
     }
 
-    @Operation(summary = "根据Role查询所有Authority")
-    @PostMapping(value = "authorityByRole")
-    public ResultVO authorityByRole(@RequestParam("roleId") String roleId) {
+    @Operation(summary = "根据RoleId查询所有Authority")
+    @PostMapping(value = "authorityByRoleId")
+    public ResultVO authorityByRoleId(@RequestParam("roleId") String roleId) {
         if (roleId == null) {
             return ResultVO.failure();
         }
-        return ResultVO.success(service.authorityByRole(roleId));
+        return ResultVO.success(service.authorityByRoleId(roleId));
     }
 
-    @Operation(summary = "根据Role保存Authority")
-    @PostMapping(value = "authoritySaveRole")
-    public ResultVO authoritySaveRole(@RequestParam("roleId") String roleId, @RequestBody List<String> authorityIds) {
+    @Operation(summary = "根据RoleId保存Authority")
+    @PostMapping(value = "authoritySaveRoleId")
+    public ResultVO authoritySaveRoleId(@RequestParam("roleId") String roleId, @RequestBody List<String> authorityIds) {
         if (roleId == null) {
             return ResultVO.failure();
         }
-        service.authoritySaveRole(roleId, authorityIds);
+        service.authoritySaveRoleId(roleId, authorityIds);
         return ResultVO.success();
     }
 
-    @Operation(summary = "根据Authority查询所有Role")
-    @PostMapping(value = "roleByAuthority")
-    public ResultVO roleByAuthority(@RequestParam("authorityId") String authorityId) {
+    @Operation(summary = "根据AuthorityId查询所有Role")
+    @PostMapping(value = "roleByAuthorityId")
+    public ResultVO roleByAuthorityId(@RequestParam("authorityId") String authorityId) {
         if (authorityId == null) {
             return ResultVO.failure();
         }
-        return ResultVO.success(service.roleByAuthority(authorityId));
+        return ResultVO.success(service.roleByAuthorityId(authorityId));
     }
 
-    @Operation(summary = "根据Authority保存Role")
-    @PostMapping(value = "roleSaveAuthority")
-    public ResultVO roleSaveAuthority(@RequestParam("authorityId") String authorityId, @RequestBody List<String> roleIds) {
+    @Operation(summary = "根据AuthorityId保存Role")
+    @PostMapping(value = "roleSaveAuthorityId")
+    public ResultVO roleSaveAuthorityId(@RequestParam("authorityId") String authorityId, @RequestBody List<String> roleIds) {
         if (authorityId == null) {
             return ResultVO.failure();
         }
-        service.roleSaveAuthority(authorityId, roleIds);
+        service.roleSaveAuthorityId(authorityId, roleIds);
         return ResultVO.success();
     }
 

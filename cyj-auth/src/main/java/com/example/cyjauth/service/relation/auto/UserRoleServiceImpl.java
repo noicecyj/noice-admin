@@ -23,7 +23,7 @@ public class UserRoleServiceImpl
         extends ServiceImpl<UserRoleMapper, UserRole>
         implements IService<UserRole> {
 
-    public List<Role> roleByUser(String userId) {
+    public List<Role> roleByUserId(String userId) {
         List<Role> roleList = new ArrayList<>();
         List<UserRole> userRoleList = new UserRole()
                 .selectList(new QueryWrapper<UserRole>().lambda()
@@ -35,7 +35,7 @@ public class UserRoleServiceImpl
         return roleList;
     }
 
-    public void roleSaveUser(String userId, List<String> roleIds) {
+    public void roleSaveUserId(String userId, List<String> roleIds) {
         if (StringUtils.isEmpty(userId)) {
             return;
         }
@@ -53,7 +53,7 @@ public class UserRoleServiceImpl
         }
     }
 
-    public List<User> userByRole(String roleId) {
+    public List<User> userByRoleId(String roleId) {
         List<User> userList = new ArrayList<>();
         List<UserRole> userRoleList = new UserRole()
                 .selectList(new QueryWrapper<UserRole>().lambda()
@@ -65,7 +65,7 @@ public class UserRoleServiceImpl
         return userList;
     }
 
-    public void userSaveRole(String roleId, List<String> userIds) {
+    public void userSaveRoleId(String roleId, List<String> userIds) {
         if (StringUtils.isEmpty(roleId)) {
             return;
         }

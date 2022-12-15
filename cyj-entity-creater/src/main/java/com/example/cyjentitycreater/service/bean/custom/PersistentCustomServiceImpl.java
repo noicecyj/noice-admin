@@ -10,7 +10,6 @@ import com.example.cyjcommon.entity.bean.AppService;
 import com.example.cyjcommon.entity.bean.Authority;
 import com.example.cyjcommon.entity.bean.Persistent;
 import com.example.cyjcommon.entity.bean.Property;
-import com.example.cyjcommon.entity.bean.Sql;
 import com.example.cyjcommon.mapper.bean.PersistentMapper;
 import com.example.cyjcommon.utils.BeanUtils;
 import com.example.cyjdictionary.service.bean.custom.DictionaryCustomServiceImpl;
@@ -343,7 +342,7 @@ public class PersistentCustomServiceImpl
         Map<String, String[]> entityObj = new HashMap<>();
         boolean isBeanFlag = persistent.getPersistentRelation() == 0;
         entityObj.put(commonPath + "/entity" + (isBeanFlag ? "/bean" : "/relation"),
-                poGenerate(persistent, propertyList, poName));
+                poGenerate(persistent, propertyList, poName, isBeanFlag));
         entityObj.put(commonPath + "/mapper" + (isBeanFlag ? "/bean" : "/relation"),
                 mapperGenerate(persistent, poName));
         entityObj.put(appPath + "/service" + (isBeanFlag ? "/bean" : "/relation") + "/auto",
@@ -957,9 +956,9 @@ public class PersistentCustomServiceImpl
         }
     }
 
-    public String[] poGenerate(Persistent persistent, List<Property> propertyList, String poName) {
+    public String[] poGenerate(Persistent persistent, List<Property> propertyList, String poName, boolean isBeanFlag) {
         StringBuilder sb = new StringBuilder();
-        sb.append("package com.example.cyjcommon.entity.").append(persistent.getPersistentRelation() == 0 ? "bean" : "relation").append(";\r\n");
+        sb.append("package com.example.cyjcommon.entity.").append(isBeanFlag ? "bean" : "relation").append(";\r\n");
         sb.append("\r\n");
         sb.append("import com.baomidou.mybatisplus.annotation.IdType;\r\n");
         sb.append("import com.baomidou.mybatisplus.annotation.TableField;\r\n");
@@ -987,12 +986,14 @@ public class PersistentCustomServiceImpl
             sb.append("    private ").append(property.getPropertyType()).append(" ").append(BeanUtils.underline2Camel(property.getPropertyCode())).append(";\r\n");
             sb.append("\r\n");
         }
-        sb.append("    @TableField(\"status\")\r\n");
-        sb.append("    private int status;\r\n");
-        sb.append("\r\n");
-        sb.append("    @TableField(\"sort_code\")\r\n");
-        sb.append("    private int sortCode;\r\n");
-        sb.append("\r\n");
+        if (isBeanFlag) {
+            sb.append("    @TableField(\"status\")\r\n");
+            sb.append("    private int status;\r\n");
+            sb.append("\r\n");
+            sb.append("    @TableField(\"sort_code\")\r\n");
+            sb.append("    private int sortCode;\r\n");
+            sb.append("\r\n");
+        }
         sb.append("    @TableField(\"created_date\")\r\n");
         sb.append("    private LocalDateTime createdDate;\r\n");
         sb.append("\r\n");

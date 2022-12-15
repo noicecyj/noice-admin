@@ -25,44 +25,44 @@ public class UserRoleCustomServiceImpl
 
     private static final Logger logger = LoggerFactory.getLogger(UserRoleCustomServiceImpl.class);
 
-    @Before(value = "execution(* com.example.cyjauth.service.relation.auto.UserRoleServiceImpl.roleByUser(..))")
+    @Before(value = "execution(* com.example.cyjauth.service.relation.auto.UserRoleServiceImpl.roleByUserId(..))")
     public void addOneBefore(JoinPoint joinPoint) {
-        logger.info("UserRoleService.roleByUserBefore:{}", joinPoint);
+        logger.info("UserRoleService.roleByUserIdBefore:{}", joinPoint);
     }
 
-    @After(value = "execution(* com.example.cyjauth.service.relation.auto.UserRoleServiceImpl.roleByUser(..))")
+    @After(value = "execution(* com.example.cyjauth.service.relation.auto.UserRoleServiceImpl.roleByUserId(..))")
     public void addOneAfter(JoinPoint joinPoint) {
-        logger.info("UserRoleService.roleByUserAfter:{}", joinPoint);
+        logger.info("UserRoleService.roleByUserIdAfter:{}", joinPoint);
     }
 
-    @Before(value = "execution(* com.example.cyjauth.service.relation.auto.UserRoleServiceImpl.roleSaveUser(..))")
+    @Before(value = "execution(* com.example.cyjauth.service.relation.auto.UserRoleServiceImpl.roleSaveUserId(..))")
     public void deleteOneBefore(JoinPoint joinPoint) {
         logger.info("UserRoleService.roleSaveUserBefore:{}", joinPoint);
     }
 
-    @After(value = "execution(* com.example.cyjauth.service.relation.auto.UserRoleServiceImpl.roleSaveUser(..))")
+    @After(value = "execution(* com.example.cyjauth.service.relation.auto.UserRoleServiceImpl.roleSaveUserId(..))")
     public void deleteOneAfter(JoinPoint joinPoint) {
-        logger.info("UserRoleService.roleSaveUserAfter:{}", joinPoint);
+        logger.info("UserRoleService.roleSaveUserIdAfter:{}", joinPoint);
     }
 
-    @Before(value = "execution(* com.example.cyjauth.service.relation.auto.UserRoleServiceImpl.userByRole(..))")
+    @Before(value = "execution(* com.example.cyjauth.service.relation.auto.UserRoleServiceImpl.userByRoleId(..))")
     public void updateOneBefore(JoinPoint joinPoint) {
-        logger.info("UserRoleService.userByRoleBefore:{}", joinPoint);
+        logger.info("UserRoleService.userByRoleIdBefore:{}", joinPoint);
     }
 
-    @After(value = "execution(* com.example.cyjauth.service.relation.auto.UserRoleServiceImpl.userByRole(..))")
+    @After(value = "execution(* com.example.cyjauth.service.relation.auto.UserRoleServiceImpl.userByRoleId(..))")
     public void updateOneAfter(JoinPoint joinPoint) {
-        logger.info("UserRoleService.userByRoleAfter:{}", joinPoint);
+        logger.info("UserRoleService.userByRoleIdAfter:{}", joinPoint);
     }
 
-    @Before(value = "execution(* com.example.cyjauth.service.relation.auto.UserRoleServiceImpl.userSaveRole(..))")
+    @Before(value = "execution(* com.example.cyjauth.service.relation.auto.UserRoleServiceImpl.userSaveRoleId(..))")
     public void findAllBefore(JoinPoint joinPoint) {
-        logger.info("UserRoleService.userSaveRoleBefore:{}", joinPoint);
+        logger.info("UserRoleService.userSaveRoleIdBefore:{}", joinPoint);
     }
 
-    @After(value = "execution(* com.example.cyjauth.service.relation.auto.UserRoleServiceImpl.userSaveRole(..))")
+    @After(value = "execution(* com.example.cyjauth.service.relation.auto.UserRoleServiceImpl.userSaveRoleId(..))")
     public void findAllAfter(JoinPoint joinPoint) {
-        logger.info("UserRoleService.userSaveRoleAfter:{}", joinPoint);
+        logger.info("UserRoleService.userSaveRoleIdAfter:{}", joinPoint);
     }
 
 }

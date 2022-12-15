@@ -23,7 +23,7 @@ public class RoleAuthorityServiceImpl
         extends ServiceImpl<RoleAuthorityMapper, RoleAuthority>
         implements IService<RoleAuthority> {
 
-    public List<Role> roleByAuthority(String authorityId) {
+    public List<Role> roleByAuthorityId(String authorityId) {
         List<Role> roleList = new ArrayList<>();
         List<RoleAuthority> roleAuthorityList = new RoleAuthority()
                 .selectList(new QueryWrapper<RoleAuthority>().lambda()
@@ -35,7 +35,7 @@ public class RoleAuthorityServiceImpl
         return roleList;
     }
 
-    public void roleSaveAuthority(String authorityId, List<String> roleIds) {
+    public void roleSaveAuthorityId(String authorityId, List<String> roleIds) {
         if (StringUtils.isEmpty(authorityId)) {
             return;
         }
@@ -53,7 +53,7 @@ public class RoleAuthorityServiceImpl
         }
     }
 
-    public List<Authority> authorityByRole(String roleId) {
+    public List<Authority> authorityByRoleId(String roleId) {
         List<Authority> authorityList = new ArrayList<>();
         List<RoleAuthority> roleAuthorityList = new RoleAuthority()
                 .selectList(new QueryWrapper<RoleAuthority>().lambda()
@@ -65,7 +65,7 @@ public class RoleAuthorityServiceImpl
         return authorityList;
     }
 
-    public void authoritySaveRole(String roleId, List<String> authorityIds) {
+    public void authoritySaveRoleId(String roleId, List<String> authorityIds) {
         if (StringUtils.isEmpty(roleId)) {
             return;
         }

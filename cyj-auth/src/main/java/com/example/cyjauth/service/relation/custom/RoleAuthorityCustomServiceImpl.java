@@ -25,44 +25,44 @@ public class RoleAuthorityCustomServiceImpl
 
     private static final Logger logger = LoggerFactory.getLogger(RoleAuthorityCustomServiceImpl.class);
 
-    @Before(value = "execution(* com.example.cyjauth.service.relation.auto.RoleAuthorityServiceImpl.authorityByRole(..))")
+    @Before(value = "execution(* com.example.cyjauth.service.relation.auto.RoleAuthorityServiceImpl.authorityByRoleId(..))")
     public void addOneBefore(JoinPoint joinPoint) {
-        logger.info("RoleAuthorityService.authorityByRoleBefore:{}", joinPoint);
+        logger.info("RoleAuthorityService.authorityByRoleIdBefore:{}", joinPoint);
     }
 
-    @After(value = "execution(* com.example.cyjauth.service.relation.auto.RoleAuthorityServiceImpl.authorityByRole(..))")
+    @After(value = "execution(* com.example.cyjauth.service.relation.auto.RoleAuthorityServiceImpl.authorityByRoleId(..))")
     public void addOneAfter(JoinPoint joinPoint) {
-        logger.info("RoleAuthorityService.authorityByRoleAfter:{}", joinPoint);
+        logger.info("RoleAuthorityService.authorityByRoleIdAfter:{}", joinPoint);
     }
 
-    @Before(value = "execution(* com.example.cyjauth.service.relation.auto.RoleAuthorityServiceImpl.authoritySaveRole(..))")
+    @Before(value = "execution(* com.example.cyjauth.service.relation.auto.RoleAuthorityServiceImpl.authoritySaveRoleId(..))")
     public void deleteOneBefore(JoinPoint joinPoint) {
-        logger.info("RoleAuthorityService.authoritySaveRoleBefore:{}", joinPoint);
+        logger.info("RoleAuthorityService.authoritySaveIdRoleBefore:{}", joinPoint);
     }
 
-    @After(value = "execution(* com.example.cyjauth.service.relation.auto.RoleAuthorityServiceImpl.authoritySaveRole(..))")
+    @After(value = "execution(* com.example.cyjauth.service.relation.auto.RoleAuthorityServiceImpl.authoritySaveRoleId(..))")
     public void deleteOneAfter(JoinPoint joinPoint) {
-        logger.info("RoleAuthorityService.authoritySaveRoleAfter:{}", joinPoint);
+        logger.info("RoleAuthorityService.authoritySaveIdRoleAfter:{}", joinPoint);
     }
 
-    @Before(value = "execution(* com.example.cyjauth.service.relation.auto.RoleAuthorityServiceImpl.roleByAuthority(..))")
+    @Before(value = "execution(* com.example.cyjauth.service.relation.auto.RoleAuthorityServiceImpl.roleByAuthorityId(..))")
     public void updateOneBefore(JoinPoint joinPoint) {
-        logger.info("RoleAuthorityService.roleByAuthorityBefore:{}", joinPoint);
+        logger.info("RoleAuthorityService.roleByAuthorityIdBefore:{}", joinPoint);
     }
 
-    @After(value = "execution(* com.example.cyjauth.service.relation.auto.RoleAuthorityServiceImpl.roleByAuthority(..))")
+    @After(value = "execution(* com.example.cyjauth.service.relation.auto.RoleAuthorityServiceImpl.roleByAuthorityId(..))")
     public void updateOneAfter(JoinPoint joinPoint) {
-        logger.info("RoleAuthorityService.roleByAuthorityAfter:{}", joinPoint);
+        logger.info("RoleAuthorityService.roleByAuthorityIdAfter:{}", joinPoint);
     }
 
-    @Before(value = "execution(* com.example.cyjauth.service.relation.auto.RoleAuthorityServiceImpl.roleSaveAuthority(..))")
+    @Before(value = "execution(* com.example.cyjauth.service.relation.auto.RoleAuthorityServiceImpl.roleSaveAuthorityId(..))")
     public void findAllBefore(JoinPoint joinPoint) {
-        logger.info("RoleAuthorityService.roleSaveAuthorityBefore:{}", joinPoint);
+        logger.info("RoleAuthorityService.roleSaveAuthorityIdBefore:{}", joinPoint);
     }
 
-    @After(value = "execution(* com.example.cyjauth.service.relation.auto.RoleAuthorityServiceImpl.roleSaveAuthority(..))")
+    @After(value = "execution(* com.example.cyjauth.service.relation.auto.RoleAuthorityServiceImpl.roleSaveAuthorityId(..))")
     public void findAllAfter(JoinPoint joinPoint) {
-        logger.info("RoleAuthorityService.roleSaveAuthorityAfter:{}", joinPoint);
+        logger.info("RoleAuthorityService.roleSaveAuthorityIdAfter:{}", joinPoint);
     }
 
 }

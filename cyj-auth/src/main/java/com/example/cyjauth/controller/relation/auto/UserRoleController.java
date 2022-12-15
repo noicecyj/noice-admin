@@ -30,41 +30,41 @@ public class UserRoleController {
         this.service = service;
     }
 
-    @Operation(summary = "根据User查询所有Role")
-    @PostMapping(value = "roleByUser")
-    public ResultVO roleByUser(@RequestParam("userId") String userId) {
+    @Operation(summary = "根据UserId查询所有Role")
+    @PostMapping(value = "roleByUserId")
+    public ResultVO roleByUserId(@RequestParam("userId") String userId) {
         if (userId == null) {
             return ResultVO.failure();
         }
-        return ResultVO.success(service.roleByUser(userId));
+        return ResultVO.success(service.roleByUserId(userId));
     }
 
-    @Operation(summary = "根据User保存Role")
-    @PostMapping(value = "roleSaveUser")
-    public ResultVO roleSaveUser(@RequestParam("userId") String userId, @RequestBody List<String> roleIds) {
+    @Operation(summary = "根据UserId保存Role")
+    @PostMapping(value = "roleSaveUserId")
+    public ResultVO roleSaveUserId(@RequestParam("userId") String userId, @RequestBody List<String> roleIds) {
         if (userId == null) {
             return ResultVO.failure();
         }
-        service.roleSaveUser(userId, roleIds);
+        service.roleSaveUserId(userId, roleIds);
         return ResultVO.success();
     }
 
-    @Operation(summary = "根据Role查询所有User")
-    @PostMapping(value = "userByRole")
-    public ResultVO userByRole(@RequestParam("roleId") String roleId) {
+    @Operation(summary = "根据RoleId查询所有User")
+    @PostMapping(value = "userByRoleId")
+    public ResultVO userByRoleId(@RequestParam("roleId") String roleId) {
         if (roleId == null) {
             return ResultVO.failure();
         }
-        return ResultVO.success(service.userByRole(roleId));
+        return ResultVO.success(service.userByRoleId(roleId));
     }
 
-    @Operation(summary = "根据User保存Role")
-    @PostMapping(value = "userSaveRole")
-    public ResultVO userSaveRole(@RequestParam("roleId") String roleId, @RequestBody List<String> userIds) {
+    @Operation(summary = "根据UserId保存Role")
+    @PostMapping(value = "userSaveRoleId")
+    public ResultVO userSaveRoleId(@RequestParam("roleId") String roleId, @RequestBody List<String> userIds) {
         if (roleId == null) {
             return ResultVO.failure();
         }
-        service.userSaveRole(roleId, userIds);
+        service.userSaveRoleId(roleId, userIds);
         return ResultVO.success();
     }
 
