@@ -63,7 +63,7 @@ public class DictionaryController {
 
     @Operation(summary = "根据CatalogId查询所有Dictionary")
     @PostMapping(value = "pageDictionaryByCatalogId")
-    public ResultVO pageDictionaryByAppService(@RequestBody @Validated Dictionary po,
+    public ResultVO pageDictionaryByCatalogId(@RequestBody @Validated Dictionary po,
                                                @RequestParam("pageNumber") Integer pageNumber,
                                                @RequestParam("pageSize") Integer pageSize,
                                                @RequestParam("catalogId") String catalogId) {

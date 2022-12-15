@@ -63,10 +63,10 @@ public class PropertyController {
 
     @Operation(summary = "根据PersistentId查询所有Property")
     @PostMapping(value = "pagePropertyByPersistentId")
-    public ResultVO pagePropertyByAppService(@RequestBody @Validated Property po,
+    public ResultVO pagePropertyByPersistentId(@RequestBody @Validated Property po,
                                                @RequestParam("pageNumber") Integer pageNumber,
                                                @RequestParam("pageSize") Integer pageSize,
-                                               @RequestParam("id") String persistentId) {
+                                               @RequestParam("persistentId") String persistentId) {
         return ResultVO.success(service.pagePropertyByPersistentId(po, pageNumber, pageSize, persistentId));
     }
 
