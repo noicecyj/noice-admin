@@ -346,7 +346,7 @@ public class PersistentCustomServiceImpl
         entityObj.put(commonPath + "/mapper" + (isBeanFlag ? "/bean" : "/relation"),
                 mapperGenerate(persistent, poName));
         entityObj.put(appPath + "/service" + (isBeanFlag ? "/bean" : "/relation") + "/auto",
-                serviceGenerate(persistent, propertyList, poName, appPath, isBeanFlag));
+                serviceGenerate(propertyList, poName, appPath, isBeanFlag));
         entityObj.put(appPath + "/controller" + (isBeanFlag ? "/bean" : "/relation") + "/auto",
                 controllerGenerate(persistent, propertyList, poName, appPath, appApi, isBeanFlag));
 //        entityObj.put(componentPath + poName + "/services/auto", servicesAutoGenerate(outPropertyList, appApi, poName));
@@ -1029,8 +1029,7 @@ public class PersistentCustomServiceImpl
         return new String[]{entityMapperData, poName + "Mapper.java"};
     }
 
-    public String[] serviceGenerate(Persistent persistent, List<Property> propertyList,
-                                    String poName, String appPath, boolean isBeanFlag) {
+    public String[] serviceGenerate(List<Property> propertyList, String poName, String appPath, boolean isBeanFlag) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
@@ -1041,7 +1040,6 @@ public class PersistentCustomServiceImpl
         sb.append("package ").append(poServicePath);
         sb.append("\r\n");
         sb.append("import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;\r\n");
-        sb.append("import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;\r\n");
         sb.append("import com.baomidou.mybatisplus.extension.plugins.pagination.Page;\r\n");
         sb.append("import com.baomidou.mybatisplus.extension.service.IService;\r\n");
         sb.append("import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;\r\n");
@@ -1082,7 +1080,7 @@ public class PersistentCustomServiceImpl
             sb.append("    }\r\n");
             sb.append("\r\n");
             sb.append("    private LambdaQueryWrapper<").append(poName).append("> searchHandler(").append(poName).append(" po) {\r\n");
-            sb.append("        return new QueryWrapper<").append(poName).append(">().lambda()\r\n");
+            sb.append("        return new LambdaQueryWrapper<").append(poName).append(">()\r\n");
             sb.append("                .like(StringUtils.isNotEmpty(po.get").append(poName).append("Name()),\r\n");
             sb.append("                        ").append(poName).append("::get").append(poName).append("Name, po.get").append(poName).append("Name())\r\n");
             sb.append("                .orderByAsc(").append(poName).append("::getSortCode);\r\n");
