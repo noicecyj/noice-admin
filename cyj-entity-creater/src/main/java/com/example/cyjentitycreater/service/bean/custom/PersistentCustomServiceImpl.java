@@ -346,9 +346,9 @@ public class PersistentCustomServiceImpl
         entityObj.put(commonPath + "/mapper" + (isBeanFlag ? "/bean" : "/relation"),
                 mapperGenerate(persistent, poName));
         entityObj.put(appPath + "/service" + (isBeanFlag ? "/bean" : "/relation") + "/auto",
-                serviceGenerate(persistent, propertyList, poName, appPath));
+                serviceGenerate(persistent, propertyList, poName, appPath, isBeanFlag));
         entityObj.put(appPath + "/controller" + (isBeanFlag ? "/bean" : "/relation") + "/auto",
-                controllerGenerate(persistent, propertyList, poName, appPath, appApi));
+                controllerGenerate(persistent, propertyList, poName, appPath, appApi, isBeanFlag));
 //        entityObj.put(componentPath + poName + "/services/auto", servicesAutoGenerate(outPropertyList, appApi, poName));
 //        entityObj.put(componentPath + poName + "/models/auto", modelsAutoGenerate(outPropertyList, underPoName, poName, persistentCode));
 //        entityObj.put(componentPath + poName + "/view/auto", viewAutoGenerate(outPropertyList, underPoName, poName));
@@ -956,7 +956,8 @@ public class PersistentCustomServiceImpl
         }
     }
 
-    public String[] poGenerate(Persistent persistent, List<Property> propertyList, String poName, boolean isBeanFlag) {
+    public String[] poGenerate(Persistent persistent, List<Property> propertyList,
+                               String poName, boolean isBeanFlag) {
         StringBuilder sb = new StringBuilder();
         sb.append("package com.example.cyjcommon.entity.").append(isBeanFlag ? "bean" : "relation").append(";\r\n");
         sb.append("\r\n");
@@ -1028,12 +1029,15 @@ public class PersistentCustomServiceImpl
         return new String[]{entityMapperData, poName + "Mapper.java"};
     }
 
-    public String[] serviceGenerate(Persistent persistent, List<Property> propertyList, String poName, String appPath) {
+    public String[] serviceGenerate(Persistent persistent, List<Property> propertyList,
+                                    String poName, String appPath, boolean isBeanFlag) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
         //service路径
-        String poServicePath = packetPath + ".service." + (persistent.getPersistentRelation() == 0 ? "bean" : "relation") + ".auto;\r\n";
+        String poServicePath = packetPath + ".service." + (isBeanFlag ? "bean" : "relation") + ".auto;\r\n";
+        List<Property> relationPropertyList = propertyList.stream()
+                .filter(property -> property.getPropertyRelation() == 1).collect(Collectors.toList());
         sb.append("package ").append(poServicePath);
         sb.append("\r\n");
         sb.append("import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;\r\n");
@@ -1056,48 +1060,71 @@ public class PersistentCustomServiceImpl
         sb.append("        extends ServiceImpl<").append(poName).append("Mapper, ").append(poName).append(">\r\n");
         sb.append("        implements IService<").append(poName).append("> {\r\n");
         sb.append("\r\n");
-        sb.append("    public ").append(poName).append(" addOne(").append(poName).append(" po) {\r\n");
-        sb.append("        po.insert();\r\n");
-        sb.append("        return po;\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("    public void deleteOne(").append(poName).append(" po) {\r\n");
-        sb.append("        po.deleteById();\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("    public ").append(poName).append(" updateOne(").append(poName).append(" po) {\r\n");
-        sb.append("        po.updateById();\r\n");
-        sb.append("        return po;\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("    public Page<").append(poName).append("> findAll(").append(poName).append(" po, Integer pageNumber, Integer pageSize) {\r\n");
-        sb.append("        Page<").append(poName).append("> page = new Page<>(pageNumber, pageSize);\r\n");
-        sb.append("        LambdaQueryWrapper<").append(poName).append("> queryWrapper = searchHandler(po);\r\n");
-        sb.append("        return new ").append(poName).append("().selectPage(page, queryWrapper);\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("    private LambdaQueryWrapper<").append(poName).append("> searchHandler(").append(poName).append(" po) {\r\n");
-        sb.append("        return new QueryWrapper<").append(poName).append(">().lambda()\r\n");
-        sb.append("                .like(StringUtils.isNotEmpty(po.get").append(poName).append("Name()),\r\n");
-        sb.append("                        ").append(poName).append("::get").append(poName).append("Name, po.get").append(poName).append("Name())\r\n");
-        sb.append("                .orderByAsc(").append(poName).append("::getSortCode);\r\n");
-        sb.append("    }\r\n");
-        List<Property> relationPropertyList = propertyList.stream()
-                .filter(property -> property.getPropertyRelation() == 1).collect(Collectors.toList());
-        for (Property property : relationPropertyList) {
-            String propertyCode = property.getPropertyCode();
-            //驼峰名
-            String underPropertyName = BeanUtils.underline2Camel(propertyCode);
-            //文件名
-            String propertyName = BeanUtils.captureName(underPropertyName);
+        if (isBeanFlag) {
+            sb.append("    public ").append(poName).append(" addOne(").append(poName).append(" po) {\r\n");
+            sb.append("        po.insert();\r\n");
+            sb.append("        return po;\r\n");
+            sb.append("    }\r\n");
             sb.append("\r\n");
-            sb.append("    public Page<").append(poName).append("> page").append(poName).append("By").append(propertyName).append("(").append(poName).append(" po, Integer pageNumber, Integer pageSize, String ").append(underPropertyName).append(") {\r\n");
+            sb.append("    public void deleteOne(").append(poName).append(" po) {\r\n");
+            sb.append("        po.deleteById();\r\n");
+            sb.append("    }\r\n");
+            sb.append("\r\n");
+            sb.append("    public ").append(poName).append(" updateOne(").append(poName).append(" po) {\r\n");
+            sb.append("        po.updateById();\r\n");
+            sb.append("        return po;\r\n");
+            sb.append("    }\r\n");
+            sb.append("\r\n");
+            sb.append("    public Page<").append(poName).append("> findAll(").append(poName).append(" po, Integer pageNumber, Integer pageSize) {\r\n");
             sb.append("        Page<").append(poName).append("> page = new Page<>(pageNumber, pageSize);\r\n");
             sb.append("        LambdaQueryWrapper<").append(poName).append("> queryWrapper = searchHandler(po);\r\n");
-            sb.append("        queryWrapper.eq(").append(poName).append("::get").append(propertyName).append(", ").append(underPropertyName).append(");\r\n");
             sb.append("        return new ").append(poName).append("().selectPage(page, queryWrapper);\r\n");
             sb.append("    }\r\n");
-
+            sb.append("\r\n");
+            sb.append("    private LambdaQueryWrapper<").append(poName).append("> searchHandler(").append(poName).append(" po) {\r\n");
+            sb.append("        return new QueryWrapper<").append(poName).append(">().lambda()\r\n");
+            sb.append("                .like(StringUtils.isNotEmpty(po.get").append(poName).append("Name()),\r\n");
+            sb.append("                        ").append(poName).append("::get").append(poName).append("Name, po.get").append(poName).append("Name())\r\n");
+            sb.append("                .orderByAsc(").append(poName).append("::getSortCode);\r\n");
+            sb.append("    }\r\n");
+            for (Property property : relationPropertyList) {
+                String propertyCode = property.getPropertyCode();
+                //驼峰名
+                String underPropertyName = BeanUtils.underline2Camel(propertyCode);
+                //文件名
+                String propertyName = BeanUtils.captureName(underPropertyName);
+                sb.append("\r\n");
+                sb.append("    public Page<").append(poName).append("> page").append(poName).append("By").append(propertyName).append("(").append(poName).append(" po, Integer pageNumber, Integer pageSize, String ").append(underPropertyName).append(") {\r\n");
+                sb.append("        Page<").append(poName).append("> page = new Page<>(pageNumber, pageSize);\r\n");
+                sb.append("        LambdaQueryWrapper<").append(poName).append("> queryWrapper = searchHandler(po);\r\n");
+                sb.append("        queryWrapper.eq(").append(poName).append("::get").append(propertyName).append(", ").append(underPropertyName).append(");\r\n");
+                sb.append("        return new ").append(poName).append("().selectPage(page, queryWrapper);\r\n");
+                sb.append("    }\r\n");
+            }
+        } else {
+            sb.append("    public List<").append(poName).append("> get").append(poName).append("(").append(poName).append(" po) {\r\n");
+            sb.append("        return new ").append(poName).append("().selectList(new QueryWrapper<").append(poName).append(">().lambda()\r\n");
+            for (Property property : relationPropertyList) {
+                String propertyCode = property.getPropertyCode();
+                //驼峰名
+                String underPropertyName = BeanUtils.underline2Camel(propertyCode);
+                //文件名
+                String propertyName = BeanUtils.captureName(underPropertyName);
+                sb.append("                .eq(StringUtils.isNotEmpty(po.get").append(propertyName).append("()),\r\n");
+                sb.append("                        ").append(poName).append("::get").append(propertyName).append(", po.get").append(propertyName).append("())\r\n");
+            }
+            sb.append("        );\r\n");
+            sb.append("    }\r\n");
+            sb.append("\r\n");
+            sb.append("    public void set").append(poName).append("(").append(poName).append(" po, List<").append(poName).append("> new").append(poName).append("List) {\r\n");
+            sb.append("        List<").append(poName).append("> old").append(poName).append("List = get").append(poName).append("(po);\r\n");
+            sb.append("        for (").append(poName).append(" old").append(poName).append(" : old").append(poName).append("List) {\r\n");
+            sb.append("            old").append(poName).append(".deleteById();\r\n");
+            sb.append("        }\r\n");
+            sb.append("        for (").append(poName).append(" new").append(poName).append(" : new").append(poName).append("List) {\r\n");
+            sb.append("            new").append(poName).append(".insert();\r\n");
+            sb.append("        }\r\n");
+            sb.append("    }\r\n");
         }
         sb.append("\r\n");
         sb.append("}");
@@ -1105,14 +1132,15 @@ public class PersistentCustomServiceImpl
         return new String[]{entityServiceData, poName + "ServiceImpl.java"};
     }
 
-    public String[] controllerGenerate(Persistent persistent, List<Property> propertyList, String poName, String appPath, String appApi) {
+    public String[] controllerGenerate(Persistent persistent, List<Property> propertyList,
+                                       String poName, String appPath, String appApi, boolean isBeanFlag) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
         //serviceImpl路径
-        String poServicePath = packetPath + ".service." + (persistent.getPersistentRelation() == 0 ? "bean" : "relation") + ".auto.";
+        String poServicePath = packetPath + ".service." + (isBeanFlag ? "bean" : "relation") + ".auto.";
         //controller路径
-        String poControllerPath = packetPath + ".controller." + (persistent.getPersistentRelation() == 0 ? "bean" : "relation") + ".auto;\r\n";
+        String poControllerPath = packetPath + ".controller." + (isBeanFlag ? "bean" : "relation") + ".auto;\r\n";
         sb.append("package ").append(poControllerPath);
         sb.append("\r\n");
         sb.append("import com.example.cyjcommon.entity.bean.").append(poName).append(";\r\n");
