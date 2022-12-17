@@ -1153,15 +1153,23 @@ public class PersistentCustomServiceImpl
         sb.append("import io.swagger.v3.oas.annotations.Operation;\r\n");
         sb.append("import io.swagger.v3.oas.annotations.tags.Tag;\r\n");
         sb.append("import org.springframework.beans.factory.annotation.Autowired;\r\n");
-        sb.append("import org.springframework.validation.BindingResult;\r\n");
+        if (isBeanFlag){
+            sb.append("import org.springframework.validation.BindingResult;\r\n");
+        }
         sb.append("import org.springframework.validation.annotation.Validated;\r\n");
         sb.append("import org.springframework.web.bind.annotation.CrossOrigin;\r\n");
         sb.append("import org.springframework.web.bind.annotation.PostMapping;\r\n");
         sb.append("import org.springframework.web.bind.annotation.RequestBody;\r\n");
         sb.append("import org.springframework.web.bind.annotation.RequestMapping;\r\n");
-        sb.append("import org.springframework.web.bind.annotation.RequestParam;\r\n");
+        if (isBeanFlag){
+            sb.append("import org.springframework.web.bind.annotation.RequestParam;\r\n");
+        }
         sb.append("import org.springframework.web.bind.annotation.RestController;\r\n");
         sb.append("\r\n");
+        if (!isBeanFlag) {
+            sb.append("import java.util.List;\r\n");
+            sb.append("\r\n");
+        }
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
         sb.append(" */\r\n");
