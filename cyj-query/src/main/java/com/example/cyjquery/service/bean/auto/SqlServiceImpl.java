@@ -1,7 +1,6 @@
 package com.example.cyjquery.service.bean.auto;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -41,7 +40,7 @@ public class SqlServiceImpl
     }
 
     private LambdaQueryWrapper<Sql> searchHandler(Sql po) {
-        return new QueryWrapper<Sql>().lambda()
+        return new LambdaQueryWrapper<Sql>()
                 .like(StringUtils.isNotEmpty(po.getSqlName()),
                         Sql::getSqlName, po.getSqlName())
                 .orderByAsc(Sql::getSortCode);

@@ -5,26 +5,26 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import java.time.LocalDateTime;
 
 /**
  * @author Noice
  */
-@Getter
-@Setter
-@TableName(UserRole.T_USER_ROLE)
+@EqualsAndHashCode(callSuper = true)
+@Data
+@TableName("t_user_role")
 public class UserRole extends Model<UserRole> {
-
-    static final String T_USER_ROLE = "t_user_role";
 
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
-    @TableField(value = "user_id")
+    @TableField("user_id")
     private String userId;
 
-    @TableField(value = "role_id")
+    @TableField("role_id")
     private String roleId;
 
 }

@@ -1,7 +1,6 @@
 package com.example.cyjdictionary.service.bean.auto;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -41,7 +40,7 @@ public class DictionaryServiceImpl
     }
 
     private LambdaQueryWrapper<Dictionary> searchHandler(Dictionary po) {
-        return new QueryWrapper<Dictionary>().lambda()
+        return new LambdaQueryWrapper<Dictionary>()
                 .like(StringUtils.isNotEmpty(po.getDictionaryName()),
                         Dictionary::getDictionaryName, po.getDictionaryName())
                 .orderByAsc(Dictionary::getSortCode);

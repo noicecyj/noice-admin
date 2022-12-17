@@ -5,26 +5,26 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import java.time.LocalDateTime;
 
 /**
  * @author Noice
  */
-@Getter
-@Setter
-@TableName(RoleAuthority.T_ROLE_AUTHORITY)
+@EqualsAndHashCode(callSuper = true)
+@Data
+@TableName("t_role_authority")
 public class RoleAuthority extends Model<RoleAuthority> {
-
-    static final String T_ROLE_AUTHORITY = "t_role_authority";
 
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
-    @TableField(value = "role_id")
+    @TableField("role_id")
     private String roleId;
 
-    @TableField(value = "authority_id")
+    @TableField("authority_id")
     private String authorityId;
 
 }

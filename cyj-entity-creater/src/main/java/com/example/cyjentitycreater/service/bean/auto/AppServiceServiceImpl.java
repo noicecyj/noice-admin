@@ -1,7 +1,6 @@
 package com.example.cyjentitycreater.service.bean.auto;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -41,7 +40,7 @@ public class AppServiceServiceImpl
     }
 
     private LambdaQueryWrapper<AppService> searchHandler(AppService po) {
-        return new QueryWrapper<AppService>().lambda()
+        return new LambdaQueryWrapper<AppService>()
                 .like(StringUtils.isNotEmpty(po.getAppServiceName()),
                         AppService::getAppServiceName, po.getAppServiceName())
                 .orderByAsc(AppService::getSortCode);

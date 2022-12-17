@@ -1,7 +1,6 @@
 package com.example.cyjauth.service.bean.auto;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -41,7 +40,7 @@ public class EnterpriseServiceImpl
     }
 
     private LambdaQueryWrapper<Enterprise> searchHandler(Enterprise po) {
-        return new QueryWrapper<Enterprise>().lambda()
+        return new LambdaQueryWrapper<Enterprise>()
                 .like(StringUtils.isNotEmpty(po.getEnterpriseName()),
                         Enterprise::getEnterpriseName, po.getEnterpriseName())
                 .orderByAsc(Enterprise::getSortCode);
