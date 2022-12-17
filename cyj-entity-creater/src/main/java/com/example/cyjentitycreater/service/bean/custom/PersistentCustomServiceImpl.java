@@ -1255,49 +1255,6 @@ public class PersistentCustomServiceImpl
         return new String[]{entityControllerData, poName + "Controller.java"};
     }
 
-//    private void oneToManyControllerHandler(List<Property> outPropertyList, String poName, StringBuilder sb) {
-//        for (Property property : outPropertyList) {
-//            if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
-//                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-//                String propertyOut = BeanUtils.captureName(underPropertyOut);
-//                sb.append("    @Operation(summary = \"根据").append(poName).append("查询所有").append(propertyOut).append("\")\r\n");
-//                sb.append("    @PostMapping(value = \"page").append(propertyOut).append("By").append(poName).append("\")\r\n");
-//                sb.append("    public ResultVO page").append(propertyOut).append("By").append(poName).append("(@RequestParam(\"pageNumber\") Integer pageNumber, @RequestParam(\"id\") String id) {\r\n");
-//                sb.append("        return ResultVO.success(service.page").append(propertyOut).append("By").append(poName).append("(pageNumber, id));\r\n");
-//                sb.append("    }\r\n");
-//                sb.append("\r\n");
-//            }
-//        }
-//    }
-//
-//    private void manyToManyControllerHandler(List<Property> outPropertyList, String poName, StringBuilder sb) {
-//        for (Property property : outPropertyList) {
-//            if (BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())) {
-//                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-//                String propertyOut = BeanUtils.captureName(underPropertyOut);
-//                sb.append("    @Operation(summary = \"根据").append(poName).append("查询所有").append(propertyOut).append("\")\r\n");
-//                sb.append("    @PostMapping(value = \"").append(underPropertyOut).append("By").append(poName).append("\")\r\n");
-//                sb.append("    public ResultVO ").append(underPropertyOut).append("By").append(poName).append("(@RequestParam(\"id\") String id) {\r\n");
-//                sb.append("        if (id == null) {\r\n");
-//                sb.append("            return ResultVO.failure();\r\n");
-//                sb.append("        }\r\n");
-//                sb.append("        return ResultVO.success(service.").append(underPropertyOut).append("By").append(poName).append("(id));\r\n");
-//                sb.append("    }\r\n");
-//                sb.append("\r\n");
-//                sb.append("    @Operation(summary = \"根据").append(poName).append("保存").append(propertyOut).append("\")\r\n");
-//                sb.append("    @PostMapping(value = \"").append(underPropertyOut).append("Save").append(poName).append("\")\r\n");
-//                sb.append("    public ResultVO ").append(underPropertyOut).append("Save").append(poName).append("(@RequestParam(\"id\") String id, @RequestBody Set<String> ").append(underPropertyOut).append("Ids) {\r\n");
-//                sb.append("        if (id == null) {\r\n");
-//                sb.append("            return ResultVO.failure();\r\n");
-//                sb.append("        }\r\n");
-//                sb.append("        service.").append(underPropertyOut).append("Save").append(poName).append("(id, ").append(underPropertyOut).append("Ids);\r\n");
-//                sb.append("        return ResultVO.success();\r\n");
-//                sb.append("    }\r\n");
-//                sb.append("\r\n");
-//            }
-//        }
-//    }
-
     private String[] controllerCustomGenerate(String poName, String appPath, String appApi) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");

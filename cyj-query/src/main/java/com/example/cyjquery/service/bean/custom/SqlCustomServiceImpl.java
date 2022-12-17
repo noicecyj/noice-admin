@@ -1,6 +1,5 @@
 package com.example.cyjquery.service.bean.custom;
 
-import com.alibaba.fastjson2.JSONArray;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.cyjcommon.entity.bean.Sql;
@@ -11,7 +10,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,18 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class SqlCustomServiceImpl
         extends ServiceImpl<SqlMapper, Sql>
         implements IService<Sql> {
-
-    private SqlMapper sqlMapper;
-
-    @Autowired
-    public void setSqlMapper(SqlMapper sqlMapper) {
-        this.sqlMapper = sqlMapper;
-    }
-
-    public JSONArray queryBySql(String sql) {
-        return sqlMapper.queryBySql(sql);
-    }
-
 
     private static final Logger logger = LoggerFactory.getLogger(SqlCustomServiceImpl.class);
 
