@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
-@RequestMapping(value = "entityCreateApi")
+@RequestMapping("entityCreateApi")
 @Tag(name = "AppService")
 public class AppServiceCustomController {
 
