@@ -348,7 +348,7 @@ public class PersistentCustomServiceImpl
         entityObj.put(appPath + "/service" + (isBeanFlag ? "/bean" : "/relation") + "/auto",
                 serviceGenerate(propertyList, poName, appPath, isBeanFlag));
         entityObj.put(appPath + "/controller" + (isBeanFlag ? "/bean" : "/relation") + "/auto",
-                controllerGenerate(persistent, propertyList, poName, appPath, appApi, isBeanFlag));
+                controllerGenerate(propertyList, poName, appPath, appApi, isBeanFlag));
 //        entityObj.put(componentPath + poName + "/services/auto", servicesAutoGenerate(outPropertyList, appApi, poName));
 //        entityObj.put(componentPath + poName + "/models/auto", modelsAutoGenerate(outPropertyList, underPoName, poName, persistentCode));
 //        entityObj.put(componentPath + poName + "/view/auto", viewAutoGenerate(outPropertyList, underPoName, poName));
@@ -1039,8 +1039,10 @@ public class PersistentCustomServiceImpl
                 .filter(property -> property.getPropertyRelation() == 1).collect(Collectors.toList());
         sb.append("package ").append(poServicePath);
         sb.append("\r\n");
-        sb.append("import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;\r\n");
-        sb.append("import com.baomidou.mybatisplus.extension.plugins.pagination.Page;\r\n");
+        if (isBeanFlag) {
+            sb.append("import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;\r\n");
+            sb.append("import com.baomidou.mybatisplus.extension.plugins.pagination.Page;\r\n");
+        }
         sb.append("import com.baomidou.mybatisplus.extension.service.IService;\r\n");
         sb.append("import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;\r\n");
         sb.append("import com.example.cyjcommon.entity.").append(isBeanFlag ? "bean" : "relation").append(".").append(poName).append(";\r\n");
@@ -1049,7 +1051,7 @@ public class PersistentCustomServiceImpl
         sb.append("import org.springframework.stereotype.Service;\r\n");
         sb.append("import org.springframework.transaction.annotation.Transactional;\r\n");
         sb.append("\r\n");
-        if (!isBeanFlag){
+        if (!isBeanFlag) {
             sb.append("import java.util.List;\r\n");
             sb.append("\r\n");
         }
@@ -1134,7 +1136,7 @@ public class PersistentCustomServiceImpl
         return new String[]{entityServiceData, poName + "ServiceImpl.java"};
     }
 
-    public String[] controllerGenerate(Persistent persistent, List<Property> propertyList,
+    public String[] controllerGenerate(List<Property> propertyList,
                                        String poName, String appPath, String appApi, boolean isBeanFlag) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
@@ -1145,7 +1147,7 @@ public class PersistentCustomServiceImpl
         String poControllerPath = packetPath + ".controller." + (isBeanFlag ? "bean" : "relation") + ".auto;\r\n";
         sb.append("package ").append(poControllerPath);
         sb.append("\r\n");
-        sb.append("import com.example.cyjcommon.entity.bean.").append(poName).append(";\r\n");
+        sb.append("import com.example.cyjcommon.entity.").append(isBeanFlag ? "bean" : "relation").append(".").append(poName).append(";\r\n");
         sb.append("import com.example.cyjcommon.utils.ResultVO;\r\n");
         sb.append("import ").append(poServicePath).append(poName).append("ServiceImpl;\r\n");
         sb.append("import io.swagger.v3.oas.annotations.Operation;\r\n");
@@ -1176,51 +1178,67 @@ public class PersistentCustomServiceImpl
         sb.append("        this.service = service;\r\n");
         sb.append("    }\r\n");
         sb.append("\r\n");
-        sb.append("    @Operation(summary = \"分页查询所有").append(poName).append("\")\r\n");
-        sb.append("    @PostMapping(value = \"page").append(poName).append("\")\r\n");
-        sb.append("    public ResultVO page(@RequestBody @Validated ").append(poName).append(" po,\r\n");
-        sb.append("                         @RequestParam(\"pageNumber\") Integer pageNumber,\r\n");
-        sb.append("                         @RequestParam(\"pageSize\") Integer pageSize) {\r\n");
-        sb.append("        return ResultVO.success(service.findAll(po, pageNumber, pageSize));\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("    @Operation(summary = \"保存").append(poName).append("\")\r\n");
-        sb.append("    @PostMapping(value = \"save").append(poName).append("\")\r\n");
-        sb.append("    public ResultVO save(@RequestBody @Validated ").append(poName).append(" po, BindingResult bindingResult) {\r\n");
-        sb.append("        if (bindingResult.hasErrors()) {\r\n");
-        sb.append("            return ResultVO.failure(bindingResult.getAllErrors().get(0));\r\n");
-        sb.append("        }\r\n");
-        sb.append("        if (po.getId() == null) {\r\n");
-        sb.append("            return ResultVO.success(service.addOne(po));\r\n");
-        sb.append("        }\r\n");
-        sb.append("        return ResultVO.success(service.updateOne(po));\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("    @Operation(summary = \"删除").append(poName).append("\")\r\n");
-        sb.append("    @PostMapping(value = \"delete").append(poName).append("\")\r\n");
-        sb.append("    public ResultVO delete(@RequestBody ").append(poName).append(" po) {\r\n");
-        sb.append("        if (po.getId() == null) {\r\n");
-        sb.append("            return ResultVO.failure();\r\n");
-        sb.append("        }\r\n");
-        sb.append("        service.deleteOne(po);\r\n");
-        sb.append("        return ResultVO.success();\r\n");
-        sb.append("    }\r\n");
-        List<Property> relationPropertyList = propertyList.stream()
-                .filter(property -> property.getPropertyRelation() == 1).collect(Collectors.toList());
-        for (Property property : relationPropertyList) {
-            String propertyCode = property.getPropertyCode();
-            //驼峰名
-            String underPropertyName = BeanUtils.underline2Camel(propertyCode);
-            //文件名
-            String propertyName = BeanUtils.captureName(underPropertyName);
+        if (isBeanFlag) {
+            sb.append("    @Operation(summary = \"分页查询所有").append(poName).append("\")\r\n");
+            sb.append("    @PostMapping(value = \"page").append(poName).append("\")\r\n");
+            sb.append("    public ResultVO page(@RequestBody @Validated ").append(poName).append(" po,\r\n");
+            sb.append("                         @RequestParam(\"pageNumber\") Integer pageNumber,\r\n");
+            sb.append("                         @RequestParam(\"pageSize\") Integer pageSize) {\r\n");
+            sb.append("        return ResultVO.success(service.findAll(po, pageNumber, pageSize));\r\n");
+            sb.append("    }\r\n");
             sb.append("\r\n");
-            sb.append("    @Operation(summary = \"根据").append(propertyName).append("查询所有").append(poName).append("\")\r\n");
-            sb.append("    @PostMapping(value = \"page").append(poName).append("By").append(propertyName).append("\")\r\n");
-            sb.append("    public ResultVO page").append(poName).append("By").append(propertyName).append("(@RequestBody @Validated ").append(poName).append(" po,\r\n");
-            sb.append("                                               @RequestParam(\"pageNumber\") Integer pageNumber,\r\n");
-            sb.append("                                               @RequestParam(\"pageSize\") Integer pageSize,\r\n");
-            sb.append("                                               @RequestParam(\"").append(underPropertyName).append("\") String ").append(underPropertyName).append(") {\r\n");
-            sb.append("        return ResultVO.success(service.page").append(poName).append("By").append(propertyName).append("(po, pageNumber, pageSize, ").append(underPropertyName).append("));\r\n");
+            sb.append("    @Operation(summary = \"保存").append(poName).append("\")\r\n");
+            sb.append("    @PostMapping(value = \"save").append(poName).append("\")\r\n");
+            sb.append("    public ResultVO save(@RequestBody @Validated ").append(poName).append(" po, BindingResult bindingResult) {\r\n");
+            sb.append("        if (bindingResult.hasErrors()) {\r\n");
+            sb.append("            return ResultVO.failure(bindingResult.getAllErrors().get(0));\r\n");
+            sb.append("        }\r\n");
+            sb.append("        if (po.getId() == null) {\r\n");
+            sb.append("            return ResultVO.success(service.addOne(po));\r\n");
+            sb.append("        }\r\n");
+            sb.append("        return ResultVO.success(service.updateOne(po));\r\n");
+            sb.append("    }\r\n");
+            sb.append("\r\n");
+            sb.append("    @Operation(summary = \"删除").append(poName).append("\")\r\n");
+            sb.append("    @PostMapping(value = \"delete").append(poName).append("\")\r\n");
+            sb.append("    public ResultVO delete(@RequestBody ").append(poName).append(" po) {\r\n");
+            sb.append("        if (po.getId() == null) {\r\n");
+            sb.append("            return ResultVO.failure();\r\n");
+            sb.append("        }\r\n");
+            sb.append("        service.deleteOne(po);\r\n");
+            sb.append("        return ResultVO.success();\r\n");
+            sb.append("    }\r\n");
+            List<Property> relationPropertyList = propertyList.stream()
+                    .filter(property -> property.getPropertyRelation() == 1).collect(Collectors.toList());
+            for (Property property : relationPropertyList) {
+                String propertyCode = property.getPropertyCode();
+                //驼峰名
+                String underPropertyName = BeanUtils.underline2Camel(propertyCode);
+                //文件名
+                String propertyName = BeanUtils.captureName(underPropertyName);
+                sb.append("\r\n");
+                sb.append("    @Operation(summary = \"根据").append(propertyName).append("查询所有").append(poName).append("\")\r\n");
+                sb.append("    @PostMapping(value = \"page").append(poName).append("By").append(propertyName).append("\")\r\n");
+                sb.append("    public ResultVO page").append(poName).append("By").append(propertyName).append("(@RequestBody @Validated ").append(poName).append(" po,\r\n");
+                sb.append("                                               @RequestParam(\"pageNumber\") Integer pageNumber,\r\n");
+                sb.append("                                               @RequestParam(\"pageSize\") Integer pageSize,\r\n");
+                sb.append("                                               @RequestParam(\"").append(underPropertyName).append("\") String ").append(underPropertyName).append(") {\r\n");
+                sb.append("        return ResultVO.success(service.page").append(poName).append("By").append(propertyName).append("(po, pageNumber, pageSize, ").append(underPropertyName).append("));\r\n");
+                sb.append("    }\r\n");
+            }
+        } else {
+            sb.append("    @Operation(summary = \"查询").append(poName).append("关联关系\")\r\n");
+            sb.append("    @PostMapping(\"get").append(poName).append("\")\r\n");
+            sb.append("    public ResultVO get").append(poName).append("(@RequestBody @Validated ").append(poName).append(" po) {\r\n");
+            sb.append("        return ResultVO.success(service.get").append(poName).append("(po));\r\n");
+            sb.append("    }\r\n");
+            sb.append("\r\n");
+            sb.append("    @Operation(summary = \"保存").append(poName).append("关联关系\")\r\n");
+            sb.append("    @PostMapping(\"set").append(poName).append("\")\r\n");
+            sb.append("    public ResultVO set").append(poName).append("(@RequestBody @Validated ").append(poName).append(" po,\r\n");
+            sb.append("                                     @RequestBody @Validated List<").append(poName).append("> poList) {\r\n");
+            sb.append("        service.set").append(poName).append("(po, poList);\r\n");
+            sb.append("        return ResultVO.success();\r\n");
             sb.append("    }\r\n");
         }
         sb.append("\r\n");

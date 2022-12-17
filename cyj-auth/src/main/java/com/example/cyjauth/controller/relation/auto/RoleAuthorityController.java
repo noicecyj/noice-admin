@@ -32,13 +32,13 @@ public class RoleAuthorityController {
     }
 
     @Operation(summary = "查询RoleAuthority关联关系")
-    @PostMapping(value = "getRoleAuthority")
+    @PostMapping("getRoleAuthority")
     public ResultVO getRoleAuthority(@RequestBody @Validated RoleAuthority po) {
         return ResultVO.success(service.getRoleAuthority(po));
     }
 
     @Operation(summary = "保存RoleAuthority关联关系")
-    @PostMapping(value = "setRoleAuthority")
+    @PostMapping("setRoleAuthority")
     public ResultVO setRoleAuthority(@RequestBody @Validated RoleAuthority po,
                                      @RequestBody @Validated List<RoleAuthority> poList) {
         service.setRoleAuthority(po, poList);
