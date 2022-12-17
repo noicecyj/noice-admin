@@ -27,42 +27,42 @@ public class PropertyCustomServiceImpl
 
     @Before(value = "execution(* com.example.cyjentitycreater.service.bean.auto.PropertyServiceImpl.addOne(..))")
     public void addOneBefore(JoinPoint joinPoint) {
-        logger.info("PropertyService.addOneBefore:{}", joinPoint);
+        logger.info("PropertyService.addOne.Before:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjentitycreater.service.bean.auto.PropertyServiceImpl.addOne(..))")
     public void addOneAfter(JoinPoint joinPoint) {
-        logger.info("PropertyService.addOneAfter:{}", joinPoint);
+        logger.info("PropertyService.addOne.After:{}", joinPoint);
     }
 
     @Before(value = "execution(* com.example.cyjentitycreater.service.bean.auto.PropertyServiceImpl.deleteOne(..))")
     public void deleteOneBefore(JoinPoint joinPoint) {
-        logger.info("PropertyService.deleteOneBefore:{}", joinPoint);
+        logger.info("PropertyService.deleteOne.Before:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjentitycreater.service.bean.auto.PropertyServiceImpl.deleteOne(..))")
     public void deleteOneAfter(JoinPoint joinPoint) {
-        logger.info("PropertyService.deleteOneAfter:{}", joinPoint);
+        logger.info("PropertyService.deleteOne.After:{}", joinPoint);
     }
 
     @Before(value = "execution(* com.example.cyjentitycreater.service.bean.auto.PropertyServiceImpl.updateOne(..))")
     public void updateOneBefore(JoinPoint joinPoint) {
-        logger.info("PropertyService.updateOneBefore:{}", joinPoint);
+        logger.info("PropertyService.updateOne.Before:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjentitycreater.service.bean.auto.PropertyServiceImpl.updateOne(..))")
     public void updateOneAfter(JoinPoint joinPoint) {
-        logger.info("PropertyService.updateOneAfter:{}", joinPoint);
+        logger.info("PropertyService.updateOne.After:{}", joinPoint);
     }
 
     @Before(value = "execution(* com.example.cyjentitycreater.service.bean.auto.PropertyServiceImpl.findAll(..))")
     public void findAllBefore(JoinPoint joinPoint) {
-        logger.info("PropertyService.findAllBefore:{}", joinPoint);
+        logger.info("PropertyService.findAll.Before:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjentitycreater.service.bean.auto.PropertyServiceImpl.findAll(..))")
     public void findAllAfter(JoinPoint joinPoint) {
-        logger.info("PropertyService.findAllAfter:{}", joinPoint);
+        logger.info("PropertyService.findAll.After:{}", joinPoint);
     }
 
 }

@@ -12,7 +12,6 @@ import com.example.cyjcommon.entity.bean.Persistent;
 import com.example.cyjcommon.entity.bean.Property;
 import com.example.cyjcommon.mapper.bean.PersistentMapper;
 import com.example.cyjcommon.utils.BeanUtils;
-import com.example.cyjdictionary.service.bean.custom.DictionaryCustomServiceImpl;
 import com.example.cyjquery.service.bean.custom.SqlCustomServiceImpl;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -46,14 +45,14 @@ public class PersistentCustomServiceImpl
     private final static String STATUS = "有效";
     private final static String SORTCODE = "10";
     private final static String commonPath = "C:/Users/noice/IdeaProjects/noice-admin/cyj-common/src/main/java/com/example/cyjcommon";
-    private DictionaryCustomServiceImpl dictionaryCustomServiceImpl;
+//    private DictionaryCustomServiceImpl dictionaryCustomServiceImpl;
     private SqlCustomServiceImpl sqlCustomServiceImpl;
 
 
-    @Autowired
-    public void setDictionaryCustomService(DictionaryCustomServiceImpl dictionaryCustomServiceImpl) {
-        this.dictionaryCustomServiceImpl = dictionaryCustomServiceImpl;
-    }
+//    @Autowired
+//    public void setDictionaryCustomService(DictionaryCustomServiceImpl dictionaryCustomServiceImpl) {
+//        this.dictionaryCustomServiceImpl = dictionaryCustomServiceImpl;
+//    }
 
     @Autowired
     public void setSqlCustomService(SqlCustomServiceImpl sqlCustomServiceImpl) {
@@ -1316,45 +1315,45 @@ public class PersistentCustomServiceImpl
         sb.append("        extends ServiceImpl<").append(poName).append("Mapper, ").append(poName).append(">\r\n");
         sb.append("        implements IService<").append(poName).append("> {\r\n");
         sb.append("\r\n");
-        sb.append("    private static final Logger logger = LoggerFactory.getLogger(").append(poName).append("CustomService.class);\r\n");
+        sb.append("    private static final Logger logger = LoggerFactory.getLogger(").append(poName).append("CustomServiceImpl.class);\r\n");
         sb.append("\r\n");
         if (isBeanFlag) {
-            sb.append("    @Before(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.addOne(..))\")\r\n");
+            sb.append("    @Before(value = \"execution(* ").append(aspectServicePath).append(poName).append("ServiceImpl.addOne(..))\")\r\n");
             sb.append("    public void addOneBefore(JoinPoint joinPoint) {\r\n");
             sb.append("        logger.info(\"").append(poName).append("Service.addOne.Before:{}\", joinPoint);\r\n");
             sb.append("    }\r\n");
             sb.append("\r\n");
-            sb.append("    @After(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.addOne(..))\")\r\n");
+            sb.append("    @After(value = \"execution(* ").append(aspectServicePath).append(poName).append("ServiceImpl.addOne(..))\")\r\n");
             sb.append("    public void addOneAfter(JoinPoint joinPoint) {\r\n");
             sb.append("        logger.info(\"").append(poName).append("Service.addOne.After:{}\", joinPoint);\r\n");
             sb.append("    }\r\n");
             sb.append("\r\n");
-            sb.append("    @Before(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.deleteOne(..))\")\r\n");
+            sb.append("    @Before(value = \"execution(* ").append(aspectServicePath).append(poName).append("ServiceImpl.deleteOne(..))\")\r\n");
             sb.append("    public void deleteOneBefore(JoinPoint joinPoint) {\r\n");
             sb.append("        logger.info(\"").append(poName).append("Service.deleteOne.Before:{}\", joinPoint);\r\n");
             sb.append("    }\r\n");
             sb.append("\r\n");
-            sb.append("    @After(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.deleteOne(..))\")\r\n");
+            sb.append("    @After(value = \"execution(* ").append(aspectServicePath).append(poName).append("ServiceImpl.deleteOne(..))\")\r\n");
             sb.append("    public void deleteOneAfter(JoinPoint joinPoint) {\r\n");
             sb.append("        logger.info(\"").append(poName).append("Service.deleteOne.After:{}\", joinPoint);\r\n");
             sb.append("    }\r\n");
             sb.append("\r\n");
-            sb.append("    @Before(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.updateOne(..))\")\r\n");
+            sb.append("    @Before(value = \"execution(* ").append(aspectServicePath).append(poName).append("ServiceImpl.updateOne(..))\")\r\n");
             sb.append("    public void updateOneBefore(JoinPoint joinPoint) {\r\n");
             sb.append("        logger.info(\"").append(poName).append("Service.updateOne.Before:{}\", joinPoint);\r\n");
             sb.append("    }\r\n");
             sb.append("\r\n");
-            sb.append("    @After(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.updateOne(..))\")\r\n");
+            sb.append("    @After(value = \"execution(* ").append(aspectServicePath).append(poName).append("ServiceImpl.updateOne(..))\")\r\n");
             sb.append("    public void updateOneAfter(JoinPoint joinPoint) {\r\n");
             sb.append("        logger.info(\"").append(poName).append("Service.updateOne.After:{}\", joinPoint);\r\n");
             sb.append("    }\r\n");
             sb.append("\r\n");
-            sb.append("    @Before(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.findAll(..))\")\r\n");
+            sb.append("    @Before(value = \"execution(* ").append(aspectServicePath).append(poName).append("ServiceImpl.findAll(..))\")\r\n");
             sb.append("    public void findAllBefore(JoinPoint joinPoint) {\r\n");
             sb.append("        logger.info(\"").append(poName).append("Service.findAll.Before:{}\", joinPoint);\r\n");
             sb.append("    }\r\n");
             sb.append("\r\n");
-            sb.append("    @After(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.findAll(..))\")\r\n");
+            sb.append("    @After(value = \"execution(* ").append(aspectServicePath).append(poName).append("ServiceImpl.findAll(..))\")\r\n");
             sb.append("    public void findAllAfter(JoinPoint joinPoint) {\r\n");
             sb.append("        logger.info(\"").append(poName).append("Service.findAll.After:{}\", joinPoint);\r\n");
             sb.append("    }\r\n");

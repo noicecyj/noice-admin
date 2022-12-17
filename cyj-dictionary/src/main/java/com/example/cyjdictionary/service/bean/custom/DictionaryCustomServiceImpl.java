@@ -27,6 +27,7 @@ import java.util.List;
 public class DictionaryCustomServiceImpl
         extends ServiceImpl<DictionaryMapper, Dictionary>
         implements IService<Dictionary> {
+
     public List<Dictionary> findCatalogByValue(String value) {
         Catalog catalog = new Catalog()
                 .selectOne(new QueryWrapper<Catalog>().lambda()
@@ -43,42 +44,42 @@ public class DictionaryCustomServiceImpl
 
     @Before(value = "execution(* com.example.cyjdictionary.service.bean.auto.DictionaryServiceImpl.addOne(..))")
     public void addOneBefore(JoinPoint joinPoint) {
-        logger.info("DictionaryService.addOneBefore:{}", joinPoint);
+        logger.info("DictionaryService.addOne.Before:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjdictionary.service.bean.auto.DictionaryServiceImpl.addOne(..))")
     public void addOneAfter(JoinPoint joinPoint) {
-        logger.info("DictionaryService.addOneAfter:{}", joinPoint);
+        logger.info("DictionaryService.addOne.After:{}", joinPoint);
     }
 
     @Before(value = "execution(* com.example.cyjdictionary.service.bean.auto.DictionaryServiceImpl.deleteOne(..))")
     public void deleteOneBefore(JoinPoint joinPoint) {
-        logger.info("DictionaryService.deleteOneBefore:{}", joinPoint);
+        logger.info("DictionaryService.deleteOne.Before:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjdictionary.service.bean.auto.DictionaryServiceImpl.deleteOne(..))")
     public void deleteOneAfter(JoinPoint joinPoint) {
-        logger.info("DictionaryService.deleteOneAfter:{}", joinPoint);
+        logger.info("DictionaryService.deleteOne.After:{}", joinPoint);
     }
 
     @Before(value = "execution(* com.example.cyjdictionary.service.bean.auto.DictionaryServiceImpl.updateOne(..))")
     public void updateOneBefore(JoinPoint joinPoint) {
-        logger.info("DictionaryService.updateOneBefore:{}", joinPoint);
+        logger.info("DictionaryService.updateOne.Before:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjdictionary.service.bean.auto.DictionaryServiceImpl.updateOne(..))")
     public void updateOneAfter(JoinPoint joinPoint) {
-        logger.info("DictionaryService.updateOneAfter:{}", joinPoint);
+        logger.info("DictionaryService.updateOne.After:{}", joinPoint);
     }
 
     @Before(value = "execution(* com.example.cyjdictionary.service.bean.auto.DictionaryServiceImpl.findAll(..))")
     public void findAllBefore(JoinPoint joinPoint) {
-        logger.info("DictionaryService.findAllBefore:{}", joinPoint);
+        logger.info("DictionaryService.findAll.Before:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjdictionary.service.bean.auto.DictionaryServiceImpl.findAll(..))")
     public void findAllAfter(JoinPoint joinPoint) {
-        logger.info("DictionaryService.findAllAfter:{}", joinPoint);
+        logger.info("DictionaryService.findAll.After:{}", joinPoint);
     }
 
 }
