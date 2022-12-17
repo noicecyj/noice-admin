@@ -1043,12 +1043,16 @@ public class PersistentCustomServiceImpl
         sb.append("import com.baomidou.mybatisplus.extension.plugins.pagination.Page;\r\n");
         sb.append("import com.baomidou.mybatisplus.extension.service.IService;\r\n");
         sb.append("import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;\r\n");
-        sb.append("import com.example.cyjcommon.entity.bean.").append(poName).append(";\r\n");
-        sb.append("import com.example.cyjcommon.mapper.bean.").append(poName).append("Mapper;\r\n");
+        sb.append("import com.example.cyjcommon.entity.").append(isBeanFlag ? "bean" : "relation").append(".").append(poName).append(";\r\n");
+        sb.append("import com.example.cyjcommon.mapper.").append(isBeanFlag ? "bean" : "relation").append(".").append(poName).append("Mapper;\r\n");
         sb.append("import org.apache.commons.lang3.StringUtils;\r\n");
         sb.append("import org.springframework.stereotype.Service;\r\n");
         sb.append("import org.springframework.transaction.annotation.Transactional;\r\n");
         sb.append("\r\n");
+        if (!isBeanFlag){
+            sb.append("import java.util.List;\r\n");
+            sb.append("\r\n");
+        }
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
         sb.append(" */\r\n");
