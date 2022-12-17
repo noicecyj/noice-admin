@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
-@RequestMapping(value = "authApi")
+@RequestMapping("authApi")
 @Tag(name = "UserRole")
 public class UserRoleCustomController {
 }

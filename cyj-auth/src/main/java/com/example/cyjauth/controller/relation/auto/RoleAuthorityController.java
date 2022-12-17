@@ -20,7 +20,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping(value = "authApi")
+@RequestMapping("authApi")
 @Tag(name = "RoleAuthority")
 public class RoleAuthorityController {
 

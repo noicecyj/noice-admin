@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
-@RequestMapping(value = "dictionaryApi")
+@RequestMapping("dictionaryApi")
 @Tag(name = "Catalog")
 public class CatalogController {
 

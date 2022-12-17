@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
-@RequestMapping(value = "sqlApi")
+@RequestMapping("sqlApi")
 @Tag(name = "Sql")
 public class SqlController {
 

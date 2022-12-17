@@ -359,10 +359,10 @@ public class PersistentCustomServiceImpl
 //            throw new RuntimeException(e);
 //        }
         Map<String, String[]> entityCustomObj = new HashMap<>();
-        entityCustomObj.put(appPath + "/service/custom",
-                serviceCustomGenerate(poName, appPath));
-        entityCustomObj.put(appPath + "/controller/custom",
-                controllerCustomGenerate(poName, appPath, appApi));
+        entityCustomObj.put(appPath + "/service" + (isBeanFlag ? "/bean" : "/relation") + "/custom",
+                serviceCustomGenerate(poName, appPath, isBeanFlag));
+        entityCustomObj.put(appPath + "/controller" + (isBeanFlag ? "/bean" : "/relation") + "/custom",
+                controllerCustomGenerate(poName, appPath, appApi, isBeanFlag));
 //        entityCustomObj.put(componentPath + poName + "/services/custom", servicesCustomGenerate(poName));
 //        entityCustomObj.put(componentPath + poName + "/models/custom", modelsCustomGenerate(poName));
 //        entityCustomObj.put(componentPath + poName + "/view/custom", viewCustomGenerate(poName));
@@ -1155,7 +1155,7 @@ public class PersistentCustomServiceImpl
         sb.append("import io.swagger.v3.oas.annotations.Operation;\r\n");
         sb.append("import io.swagger.v3.oas.annotations.tags.Tag;\r\n");
         sb.append("import org.springframework.beans.factory.annotation.Autowired;\r\n");
-        if (isBeanFlag){
+        if (isBeanFlag) {
             sb.append("import org.springframework.validation.BindingResult;\r\n");
         }
         sb.append("import org.springframework.validation.annotation.Validated;\r\n");
@@ -1163,7 +1163,7 @@ public class PersistentCustomServiceImpl
         sb.append("import org.springframework.web.bind.annotation.PostMapping;\r\n");
         sb.append("import org.springframework.web.bind.annotation.RequestBody;\r\n");
         sb.append("import org.springframework.web.bind.annotation.RequestMapping;\r\n");
-        if (isBeanFlag){
+        if (isBeanFlag) {
             sb.append("import org.springframework.web.bind.annotation.RequestParam;\r\n");
         }
         sb.append("import org.springframework.web.bind.annotation.RestController;\r\n");
@@ -1257,12 +1257,12 @@ public class PersistentCustomServiceImpl
         return new String[]{entityControllerData, poName + "Controller.java"};
     }
 
-    private String[] controllerCustomGenerate(String poName, String appPath, String appApi) {
+    private String[] controllerCustomGenerate(String poName, String appPath, String appApi, boolean isBeanFlag) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
         //controller路径
-        String poControllerPath = packetPath + ".controller.custom;\r\n";
+        String poControllerPath = packetPath + ".controller." + (isBeanFlag ? "bean" : "relation") + ".custom;\r\n";
         sb.append("package ").append(poControllerPath);
         sb.append("\r\n");
         sb.append("import io.swagger.v3.oas.annotations.tags.Tag;\r\n");
@@ -1276,24 +1276,27 @@ public class PersistentCustomServiceImpl
         sb.append("@CrossOrigin\r\n");
         sb.append("@RestController\r\n");
         sb.append("@RequestMapping(\"").append(appApi).append("\")\r\n");
-        sb.append("@Tag(name = \"AppService\")\r\n");
+        sb.append("@Tag(name = \"").append(poName).append("\")\r\n");
         sb.append("public class ").append(poName).append("CustomController {\r\n");
         sb.append("}");
         String entityControllerData = sb.toString();
         return new String[]{entityControllerData, poName + "CustomController.java"};
     }
 
-    private String[] serviceCustomGenerate(String poName, String appPath) {
+    private String[] serviceCustomGenerate(String poName, String appPath, boolean isBeanFlag) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
         //service路径
-        String poServicePath = packetPath + ".service.custom;\r\n";
+        String poServicePath = packetPath + ".service." + (isBeanFlag ? "bean" : "relation") + ".custom;\r\n";
         //service路径
-        String aspectServicePath = packetPath + ".service.auto.";
+        String aspectServicePath = packetPath + ".service." + (isBeanFlag ? "bean" : "relation") + ".auto.";
         sb.append("package ").append(poServicePath);
         sb.append("\r\n");
-        sb.append("import com.example.cyjcommon.service.BaseService;\r\n");
+        sb.append("import com.baomidou.mybatisplus.extension.service.IService;\r\n");
+        sb.append("import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;\r\n");
+        sb.append("import com.example.cyjcommon.entity.").append(isBeanFlag ? "bean" : "relation").append(".").append(poName).append(";\r\n");
+        sb.append("import com.example.cyjcommon.mapper.").append(isBeanFlag ? "bean" : "relation").append(".").append(poName).append("Mapper;\r\n");
         sb.append("import org.aspectj.lang.JoinPoint;\r\n");
         sb.append("import org.aspectj.lang.annotation.After;\r\n");
         sb.append("import org.aspectj.lang.annotation.Aspect;\r\n");
@@ -1309,53 +1312,78 @@ public class PersistentCustomServiceImpl
         sb.append("@Aspect\r\n");
         sb.append("@Service\r\n");
         sb.append("@Transactional(rollbackFor = Exception.class)\r\n");
-        sb.append("public class ").append(poName).append("CustomService extends BaseService {\r\n");
+        sb.append("public class ").append(poName).append("CustomServiceImpl\r\n");
+        sb.append("        extends ServiceImpl<").append(poName).append("Mapper, ").append(poName).append(">\r\n");
+        sb.append("        implements IService<").append(poName).append("> {\r\n");
         sb.append("\r\n");
         sb.append("    private static final Logger logger = LoggerFactory.getLogger(").append(poName).append("CustomService.class);\r\n");
         sb.append("\r\n");
-        sb.append("    @Before(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.addOne(..))\")\r\n");
-        sb.append("    public void addOneBefore(JoinPoint joinPoint) {\r\n");
-        sb.append("        logger.info(\"").append(poName).append("Service.addOne.Before:{}\", joinPoint);\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("    @After(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.addOne(..))\")\r\n");
-        sb.append("    public void addOneAfter(JoinPoint joinPoint) {\r\n");
-        sb.append("        logger.info(\"").append(poName).append("Service.addOne.After:{}\", joinPoint);\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("    @Before(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.deleteOne(..))\")\r\n");
-        sb.append("    public void deleteOneBefore(JoinPoint joinPoint) {\r\n");
-        sb.append("        logger.info(\"").append(poName).append("Service.deleteOne.Before:{}\", joinPoint);\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("    @After(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.deleteOne(..))\")\r\n");
-        sb.append("    public void deleteOneAfter(JoinPoint joinPoint) {\r\n");
-        sb.append("        logger.info(\"").append(poName).append("Service.deleteOne.After:{}\", joinPoint);\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("    @Before(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.updateOne(..))\")\r\n");
-        sb.append("    public void updateOneBefore(JoinPoint joinPoint) {\r\n");
-        sb.append("        logger.info(\"").append(poName).append("Service.updateOne.Before:{}\", joinPoint);\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("    @After(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.updateOne(..))\")\r\n");
-        sb.append("    public void updateOneAfter(JoinPoint joinPoint) {\r\n");
-        sb.append("        logger.info(\"").append(poName).append("Service.updateOne.After:{}\", joinPoint);\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("    @Before(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.findAll(..))\")\r\n");
-        sb.append("    public void findAllBefore(JoinPoint joinPoint) {\r\n");
-        sb.append("        logger.info(\"").append(poName).append("Service.findAll.Before:{}\", joinPoint);\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
-        sb.append("    @After(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.findAll(..))\")\r\n");
-        sb.append("    public void findAllAfter(JoinPoint joinPoint) {\r\n");
-        sb.append("        logger.info(\"").append(poName).append("Service.findAll.After:{}\", joinPoint);\r\n");
-        sb.append("    }\r\n");
-        sb.append("\r\n");
+        if (isBeanFlag) {
+            sb.append("    @Before(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.addOne(..))\")\r\n");
+            sb.append("    public void addOneBefore(JoinPoint joinPoint) {\r\n");
+            sb.append("        logger.info(\"").append(poName).append("Service.addOne.Before:{}\", joinPoint);\r\n");
+            sb.append("    }\r\n");
+            sb.append("\r\n");
+            sb.append("    @After(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.addOne(..))\")\r\n");
+            sb.append("    public void addOneAfter(JoinPoint joinPoint) {\r\n");
+            sb.append("        logger.info(\"").append(poName).append("Service.addOne.After:{}\", joinPoint);\r\n");
+            sb.append("    }\r\n");
+            sb.append("\r\n");
+            sb.append("    @Before(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.deleteOne(..))\")\r\n");
+            sb.append("    public void deleteOneBefore(JoinPoint joinPoint) {\r\n");
+            sb.append("        logger.info(\"").append(poName).append("Service.deleteOne.Before:{}\", joinPoint);\r\n");
+            sb.append("    }\r\n");
+            sb.append("\r\n");
+            sb.append("    @After(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.deleteOne(..))\")\r\n");
+            sb.append("    public void deleteOneAfter(JoinPoint joinPoint) {\r\n");
+            sb.append("        logger.info(\"").append(poName).append("Service.deleteOne.After:{}\", joinPoint);\r\n");
+            sb.append("    }\r\n");
+            sb.append("\r\n");
+            sb.append("    @Before(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.updateOne(..))\")\r\n");
+            sb.append("    public void updateOneBefore(JoinPoint joinPoint) {\r\n");
+            sb.append("        logger.info(\"").append(poName).append("Service.updateOne.Before:{}\", joinPoint);\r\n");
+            sb.append("    }\r\n");
+            sb.append("\r\n");
+            sb.append("    @After(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.updateOne(..))\")\r\n");
+            sb.append("    public void updateOneAfter(JoinPoint joinPoint) {\r\n");
+            sb.append("        logger.info(\"").append(poName).append("Service.updateOne.After:{}\", joinPoint);\r\n");
+            sb.append("    }\r\n");
+            sb.append("\r\n");
+            sb.append("    @Before(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.findAll(..))\")\r\n");
+            sb.append("    public void findAllBefore(JoinPoint joinPoint) {\r\n");
+            sb.append("        logger.info(\"").append(poName).append("Service.findAll.Before:{}\", joinPoint);\r\n");
+            sb.append("    }\r\n");
+            sb.append("\r\n");
+            sb.append("    @After(value = \"execution(* ").append(aspectServicePath).append(poName).append("Service.findAll(..))\")\r\n");
+            sb.append("    public void findAllAfter(JoinPoint joinPoint) {\r\n");
+            sb.append("        logger.info(\"").append(poName).append("Service.findAll.After:{}\", joinPoint);\r\n");
+            sb.append("    }\r\n");
+            sb.append("\r\n");
+        } else {
+            sb.append("    @Before(value = \"execution(* ").append(aspectServicePath).append(poName).append("ServiceImpl.get").append(poName).append("(..))\")\r\n");
+            sb.append("    public void get").append(poName).append("Before(JoinPoint joinPoint) {\r\n");
+            sb.append("        logger.info(\"").append(poName).append("Service.get").append(poName).append(".Before:{}\", joinPoint);\r\n");
+            sb.append("    }\r\n");
+            sb.append("\r\n");
+            sb.append("    @After(value = \"execution(* ").append(aspectServicePath).append(poName).append("ServiceImpl.get").append(poName).append("(..))\")\r\n");
+            sb.append("    public void get").append(poName).append("After(JoinPoint joinPoint) {\r\n");
+            sb.append("        logger.info(\"").append(poName).append("Service.get").append(poName).append(".After:{}\", joinPoint);\r\n");
+            sb.append("    }\r\n");
+            sb.append("\r\n");
+            sb.append("    @Before(value = \"execution(* ").append(aspectServicePath).append(poName).append("ServiceImpl.set").append(poName).append("(..))\")\r\n");
+            sb.append("    public void set").append(poName).append("Before(JoinPoint joinPoint) {\r\n");
+            sb.append("        logger.info(\"").append(poName).append("Service.set").append(poName).append(".Before:{}\", joinPoint);\r\n");
+            sb.append("    }\r\n");
+            sb.append("\r\n");
+            sb.append("    @After(value = \"execution(* ").append(aspectServicePath).append(poName).append("ServiceImpl.set").append(poName).append("(..))\")\r\n");
+            sb.append("    public void set").append(poName).append("After(JoinPoint joinPoint) {\r\n");
+            sb.append("        logger.info(\"").append(poName).append("Service.set").append(poName).append(".After:{}\", joinPoint);\r\n");
+            sb.append("    }\r\n");
+            sb.append("\r\n");
+        }
         sb.append("}\r\n");
         String entityServiceData = sb.toString();
-        return new String[]{entityServiceData, poName + "CustomService.java"};
+        return new String[]{entityServiceData, poName + "CustomServiceImpl.java"};
     }
 
 //    public JSONObject findDataTableAndFormByName(String persistentCode) {
