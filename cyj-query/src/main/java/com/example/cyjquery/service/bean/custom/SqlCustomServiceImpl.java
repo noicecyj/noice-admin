@@ -27,42 +27,42 @@ public class SqlCustomServiceImpl
 
     @Before(value = "execution(* com.example.cyjquery.service.bean.auto.SqlServiceImpl.addOne(..))")
     public void addOneBefore(JoinPoint joinPoint) {
-        logger.info("SqlService.addOneBefore:{}", joinPoint);
+        logger.info("SqlService.addOne.Before:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjquery.service.bean.auto.SqlServiceImpl.addOne(..))")
     public void addOneAfter(JoinPoint joinPoint) {
-        logger.info("SqlService.addOneAfter:{}", joinPoint);
+        logger.info("SqlService.addOne.After:{}", joinPoint);
     }
 
     @Before(value = "execution(* com.example.cyjquery.service.bean.auto.SqlServiceImpl.deleteOne(..))")
     public void deleteOneBefore(JoinPoint joinPoint) {
-        logger.info("SqlService.deleteOneBefore:{}", joinPoint);
+        logger.info("SqlService.deleteOne.Before:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjquery.service.bean.auto.SqlServiceImpl.deleteOne(..))")
     public void deleteOneAfter(JoinPoint joinPoint) {
-        logger.info("SqlService.deleteOneAfter:{}", joinPoint);
+        logger.info("SqlService.deleteOne.After:{}", joinPoint);
     }
 
     @Before(value = "execution(* com.example.cyjquery.service.bean.auto.SqlServiceImpl.updateOne(..))")
     public void updateOneBefore(JoinPoint joinPoint) {
-        logger.info("SqlService.updateOneBefore:{}", joinPoint);
+        logger.info("SqlService.updateOne.Before:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjquery.service.bean.auto.SqlServiceImpl.updateOne(..))")
     public void updateOneAfter(JoinPoint joinPoint) {
-        logger.info("SqlService.updateOneAfter:{}", joinPoint);
+        logger.info("SqlService.updateOne.After:{}", joinPoint);
     }
 
     @Before(value = "execution(* com.example.cyjquery.service.bean.auto.SqlServiceImpl.findAll(..))")
     public void findAllBefore(JoinPoint joinPoint) {
-        logger.info("SqlService.findAllBefore:{}", joinPoint);
+        logger.info("SqlService.findAll.Before:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjquery.service.bean.auto.SqlServiceImpl.findAll(..))")
     public void findAllAfter(JoinPoint joinPoint) {
-        logger.info("SqlService.findAllAfter:{}", joinPoint);
+        logger.info("SqlService.findAll.After:{}", joinPoint);
     }
 
 }

@@ -13,7 +13,6 @@ import com.example.cyjcommon.entity.bean.Property;
 import com.example.cyjcommon.mapper.bean.PersistentMapper;
 import com.example.cyjcommon.utils.BeanUtils;
 import com.example.cyjdictionary.service.bean.custom.DictionaryCustomServiceImpl;
-import com.example.cyjquery.service.bean.custom.SqlCustomServiceImpl;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -47,7 +46,7 @@ public class PersistentCustomServiceImpl
     private final static String SORTCODE = "10";
     private final static String commonPath = "C:/Users/noice/IdeaProjects/noice-admin/cyj-common/src/main/java/com/example/cyjcommon";
     private DictionaryCustomServiceImpl dictionaryCustomServiceImpl;
-    private SqlCustomServiceImpl sqlCustomServiceImpl;
+//    private SqlCustomServiceImpl sqlCustomServiceImpl;
 
 
     @Autowired
@@ -55,10 +54,10 @@ public class PersistentCustomServiceImpl
         this.dictionaryCustomServiceImpl = dictionaryCustomServiceImpl;
     }
 
-    @Autowired
-    public void setSqlCustomService(SqlCustomServiceImpl sqlCustomServiceImpl) {
-        this.sqlCustomServiceImpl = sqlCustomServiceImpl;
-    }
+//    @Autowired
+//    public void setSqlCustomService(SqlCustomServiceImpl sqlCustomServiceImpl) {
+//        this.sqlCustomServiceImpl = sqlCustomServiceImpl;
+//    }
 
     public void generateJavaFile(Persistent persistent) {
         if (persistent == null) {

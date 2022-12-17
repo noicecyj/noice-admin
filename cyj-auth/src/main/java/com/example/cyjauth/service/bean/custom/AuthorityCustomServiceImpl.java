@@ -27,42 +27,42 @@ public class AuthorityCustomServiceImpl
 
     @Before(value = "execution(* com.example.cyjauth.service.bean.auto.AuthorityServiceImpl.addOne(..))")
     public void addOneBefore(JoinPoint joinPoint) {
-        logger.info("AuthorityService.addOneBefore:{}", joinPoint);
+        logger.info("AuthorityService.addOne.Before:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjauth.service.bean.auto.AuthorityServiceImpl.addOne(..))")
     public void addOneAfter(JoinPoint joinPoint) {
-        logger.info("AuthorityService.addOneAfter:{}", joinPoint);
+        logger.info("AuthorityService.addOne.After:{}", joinPoint);
     }
 
     @Before(value = "execution(* com.example.cyjauth.service.bean.auto.AuthorityServiceImpl.deleteOne(..))")
     public void deleteOneBefore(JoinPoint joinPoint) {
-        logger.info("AuthorityService.deleteOneBefore:{}", joinPoint);
+        logger.info("AuthorityService.deleteOne.Before:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjauth.service.bean.auto.AuthorityServiceImpl.deleteOne(..))")
     public void deleteOneAfter(JoinPoint joinPoint) {
-        logger.info("AuthorityService.deleteOneAfter:{}", joinPoint);
+        logger.info("AuthorityService.deleteOne.After:{}", joinPoint);
     }
 
     @Before(value = "execution(* com.example.cyjauth.service.bean.auto.AuthorityServiceImpl.updateOne(..))")
     public void updateOneBefore(JoinPoint joinPoint) {
-        logger.info("AuthorityService.updateOneBefore:{}", joinPoint);
+        logger.info("AuthorityService.updateOne.Before:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjauth.service.bean.auto.AuthorityServiceImpl.updateOne(..))")
     public void updateOneAfter(JoinPoint joinPoint) {
-        logger.info("AuthorityService.updateOneAfter:{}", joinPoint);
+        logger.info("AuthorityService.updateOne.After:{}", joinPoint);
     }
 
     @Before(value = "execution(* com.example.cyjauth.service.bean.auto.AuthorityServiceImpl.findAll(..))")
     public void findAllBefore(JoinPoint joinPoint) {
-        logger.info("AuthorityService.findAllBefore:{}", joinPoint);
+        logger.info("AuthorityService.findAll.Before:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjauth.service.bean.auto.AuthorityServiceImpl.findAll(..))")
     public void findAllAfter(JoinPoint joinPoint) {
-        logger.info("AuthorityService.findAllAfter:{}", joinPoint);
+        logger.info("AuthorityService.findAll.After:{}", joinPoint);
     }
 
 }

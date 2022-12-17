@@ -27,42 +27,42 @@ public class RoleCustomServiceImpl
 
     @Before(value = "execution(* com.example.cyjauth.service.bean.auto.RoleServiceImpl.addOne(..))")
     public void addOneBefore(JoinPoint joinPoint) {
-        logger.info("RoleService.addOneBefore:{}", joinPoint);
+        logger.info("RoleService.addOne.Before:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjauth.service.bean.auto.RoleServiceImpl.addOne(..))")
     public void addOneAfter(JoinPoint joinPoint) {
-        logger.info("RoleService.addOneAfter:{}", joinPoint);
+        logger.info("RoleService.addOne.After:{}", joinPoint);
     }
 
     @Before(value = "execution(* com.example.cyjauth.service.bean.auto.RoleServiceImpl.deleteOne(..))")
     public void deleteOneBefore(JoinPoint joinPoint) {
-        logger.info("RoleService.deleteOneAfter:{}", joinPoint);
+        logger.info("RoleService.deleteOne.Before:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjauth.service.bean.auto.RoleServiceImpl.deleteOne(..))")
     public void deleteOneAfter(JoinPoint joinPoint) {
-        logger.info("RoleService.deleteOneAfter:{}", joinPoint);
+        logger.info("RoleService.deleteOne.After:{}", joinPoint);
     }
 
     @Before(value = "execution(* com.example.cyjauth.service.bean.auto.RoleServiceImpl.updateOne(..))")
     public void updateOneBefore(JoinPoint joinPoint) {
-        logger.info("RoleService.updateOneBefore:{}", joinPoint);
+        logger.info("RoleService.updateOne.Before:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjauth.service.bean.auto.RoleServiceImpl.updateOne(..))")
     public void updateOneAfter(JoinPoint joinPoint) {
-        logger.info("RoleService.updateOneAfter:{}", joinPoint);
+        logger.info("RoleService.updateOne.After:{}", joinPoint);
     }
 
     @Before(value = "execution(* com.example.cyjauth.service.bean.auto.RoleServiceImpl.findAll(..))")
     public void findAllBefore(JoinPoint joinPoint) {
-        logger.info("RoleService.findAllBefore:{}", joinPoint);
+        logger.info("RoleService.findAll.Before:{}", joinPoint);
     }
 
     @After(value = "execution(* com.example.cyjauth.service.bean.auto.RoleServiceImpl.findAll(..))")
     public void findAllAfter(JoinPoint joinPoint) {
-        logger.info("RoleService.findAllAfter:{}", joinPoint);
+        logger.info("RoleService.findAll.After:{}", joinPoint);
     }
 
 }
