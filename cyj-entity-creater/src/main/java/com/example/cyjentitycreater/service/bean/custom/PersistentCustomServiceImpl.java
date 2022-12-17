@@ -1039,8 +1039,8 @@ public class PersistentCustomServiceImpl
                 .filter(property -> property.getPropertyRelation() == 1).collect(Collectors.toList());
         sb.append("package ").append(poServicePath);
         sb.append("\r\n");
+        sb.append("import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;\r\n");
         if (isBeanFlag) {
-            sb.append("import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;\r\n");
             sb.append("import com.baomidou.mybatisplus.extension.plugins.pagination.Page;\r\n");
         }
         sb.append("import com.baomidou.mybatisplus.extension.service.IService;\r\n");
@@ -1107,7 +1107,7 @@ public class PersistentCustomServiceImpl
             }
         } else {
             sb.append("    public List<").append(poName).append("> get").append(poName).append("(").append(poName).append(" po) {\r\n");
-            sb.append("        return new ").append(poName).append("().selectList(new QueryWrapper<").append(poName).append(">().lambda()\r\n");
+            sb.append("        return new ").append(poName).append("().selectList(new LambdaQueryWrapper<").append(poName).append(">()\r\n");
             for (Property property : relationPropertyList) {
                 String propertyCode = property.getPropertyCode();
                 //驼峰名

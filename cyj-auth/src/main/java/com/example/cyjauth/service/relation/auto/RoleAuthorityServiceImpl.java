@@ -1,6 +1,6 @@
 package com.example.cyjauth.service.relation.auto;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.cyjcommon.entity.relation.RoleAuthority;
@@ -21,20 +21,20 @@ public class RoleAuthorityServiceImpl
         implements IService<RoleAuthority> {
 
     public List<RoleAuthority> getRoleAuthority(RoleAuthority po) {
-        return new RoleAuthority().selectList(new QueryWrapper<RoleAuthority>().lambda()
-                .eq(StringUtils.isNotEmpty(po.getAuthorityId()),
-                        RoleAuthority::getAuthorityId, po.getAuthorityId())
+        return new RoleAuthority().selectList(new LambdaQueryWrapper<RoleAuthority>()
                 .eq(StringUtils.isNotEmpty(po.getRoleId()),
                         RoleAuthority::getRoleId, po.getRoleId())
+                .eq(StringUtils.isNotEmpty(po.getAuthorityId()),
+                        RoleAuthority::getAuthorityId, po.getAuthorityId())
         );
     }
 
-    public void setRoleAuthority(RoleAuthority po, List<RoleAuthority> newPoList) {
+    public void setRoleAuthority(RoleAuthority po, List<RoleAuthority> newRoleAuthorityList) {
         List<RoleAuthority> oldRoleAuthorityList = getRoleAuthority(po);
         for (RoleAuthority oldRoleAuthority : oldRoleAuthorityList) {
             oldRoleAuthority.deleteById();
         }
-        for (RoleAuthority newRoleAuthority : newPoList) {
+        for (RoleAuthority newRoleAuthority : newRoleAuthorityList) {
             newRoleAuthority.insert();
         }
     }
