@@ -40,7 +40,7 @@ public class CyjEntityCreaterApplicationTest {
     private PersistentCustomServiceImpl persistentCustomServiceImpl;
 
     @Test
-    @Transactional
+//    @Transactional
     public void entityTest() {
         List<Persistent> persistentList = new Persistent().selectAll();
         for (Persistent persistent : persistentList) {
