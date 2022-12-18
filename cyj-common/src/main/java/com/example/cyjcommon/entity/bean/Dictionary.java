@@ -34,7 +34,7 @@ public class Dictionary extends Model<Dictionary> {
     private int status;
 
     @TableField("sort_code")
-    private int sortCode;
+    private long sortCode;
 
     @TableField("created_date")
     private LocalDateTime createdDate;

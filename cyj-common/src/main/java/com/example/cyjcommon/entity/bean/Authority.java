@@ -46,7 +46,7 @@ public class Authority extends Model<Authority> {
     private int status;
 
     @TableField("sort_code")
-    private int sortCode;
+    private long sortCode;
 
     @TableField("created_date")
     private LocalDateTime createdDate;

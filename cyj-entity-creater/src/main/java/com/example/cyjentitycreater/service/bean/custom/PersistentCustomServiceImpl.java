@@ -3,9 +3,10 @@ package com.example.cyjentitycreater.service.bean.custom;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.cyjcommon.contants.Constant;
 import com.example.cyjcommon.entity.bean.AppService;
 import com.example.cyjcommon.entity.bean.Authority;
 import com.example.cyjcommon.entity.bean.Persistent;
@@ -42,8 +43,7 @@ public class PersistentCustomServiceImpl
     private final static String componentPath = "C:/Users/noice/IdeaProjects/noice-admin/noice/src/pages/";
     private final static String POST = "POST";
     private final static String AUTO = "auto";
-    private final static String STATUS = "有效";
-    private final static String SORTCODE = "10";
+
     private final static String commonPath = "C:/Users/noice/IdeaProjects/noice-admin/cyj-common/src/main/java/com/example/cyjcommon";
     private DictionaryCustomServiceImpl dictionaryCustomServiceImpl;
 //    private SqlCustomServiceImpl sqlCustomServiceImpl;
@@ -74,75 +74,80 @@ public class PersistentCustomServiceImpl
         entityHandler(persistent, "delete");
     }
 
-//    private void authorityHandler(Persistent persistent) {
-//        AppService appService = new AppService().selectById(persistent.getAppServiceId());
-//        List<Property> propertyList = new Property().selectList(new QueryWrapper<Property>().lambda()
-//                .eq(Property::getPersistentId, persistent.getId()));
-////        List<Property> outPropertyList = propertyList.stream()
-////                .filter(property -> BeanUtils.YES.equals(property.getPropertyOut())).collect(Collectors.toList());
-//        //驼峰名
-//        String underPoName = BeanUtils.underline2Camel(persistent.getPersistentCode());
-//        //文件名
-//        String poName = BeanUtils.captureName(underPoName);
-//        Authority findAll = new Authority().selectOne(new QueryWrapper<Authority>().lambda()
-//                .eq(Authority::getAuthorityPath, appService.getAppServiceApi() + "/page" + poName));
-//        if (findAll == null) {
-//            findAll = new Authority();
-//            findAll.setAuthorityMethod(POST);
-//            findAll.setAuthorityPath(appService.getAppServiceApi() + "/page" + poName);
-//            findAll.setAuthorityName("查询所有" + poName);
-//            findAll.setAuthorityType(AUTO);
-//            findAll.setAuthorityDescription("查询所有" + poName);
-//            findAll.setPersistentId(persistent.getId());
-//            findAll.setAppServiceId(appService.getId());
-//            findAll.setSortCode(SORTCODE);
-//            findAll.setStatus(STATUS);
-//            findAll.insert();
-//        }
-////        for (Property property : outPropertyList) {
-////            String underPropertyPoName = BeanUtils.underline2Camel(property.getPropertyCode());
-////            String propertyPoName = BeanUtils.captureName(underPropertyPoName);
-////            if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
-////                oneToManyAuthorityHandler(appService, persistent, poName, propertyPoName);
-////            }
-////            if (BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())) {
-////                manyToManyAuthorityHandler(appService, persistent, poName, propertyPoName);
-////            }
-////        }
-//        Authority save = new Authority().selectOne(new QueryWrapper<Authority>().lambda()
-//                .eq(Authority::getAuthorityPath, appService.getAppServiceApi() + "/save" + poName));
-//        if (save == null) {
-//            save = new Authority();
-//            save.setAuthorityMethod(POST);
-//            save.setAuthorityPath(appService.getAppServiceApi() + "/save" + poName);
-//            save.setAuthorityName("保存" + poName);
-//            save.setAuthorityType(AUTO);
-//            save.setAuthorityDescription("保存" + poName);
-//            save.setPersistentId(persistent.getId());
-//            save.setAppServiceId(appService.getId());
-//            save.setSortCode(SORTCODE);
-//            save.setStatus(STATUS);
-//            save.insert();
-//        }
-//        Authority delete = new Authority().selectOne(new QueryWrapper<Authority>().lambda()
-//                .eq(Authority::getAuthorityPath, appService.getAppServiceApi() + "/delete" + poName));
-//        if (delete == null) {
-//            delete = new Authority();
-//            delete.setAuthorityMethod(POST);
-//            delete.setAuthorityPath(appService.getAppServiceApi() + "/delete" + poName);
-//            delete.setAuthorityName("删除" + poName);
-//            delete.setAuthorityType(AUTO);
-//            delete.setAuthorityDescription("删除" + poName);
-//            delete.setPersistentId(persistent.getId());
-//            delete.setAppServiceId(appService.getId());
-//            delete.setSortCode(SORTCODE);
-//            delete.setStatus(STATUS);
-//            delete.insert();
-//        }
-//    }
+    private void authorityHandler(Persistent persistent) {
+        AppService appService = new AppService().selectById(persistent.getAppServiceId());
+        //驼峰名
+        String underPoName = BeanUtils.underline2Camel(persistent.getPersistentCode());
+        //文件名
+        String poName = BeanUtils.captureName(underPoName);
+        long count = new Authority().selectCount(new LambdaQueryWrapper<Authority>()
+                .eq(Authority::getStatus, Constant.STATUS));
+        boolean delete1 = new Authority().delete(new LambdaQueryWrapper<Authority>()
+                .eq(Authority::getPersistentId, persistent.getId()));
+        logger.info("delete.authority:{}", delete1);
+        count++;
+        Authority findAll = new Authority();
+        findAll.setAuthorityCode("/page" + poName);
+        findAll.setAuthorityName("查询所有" + poName);
+        findAll.setAuthorityMethod(POST);
+        findAll.setAuthorityPath(appService.getAppServiceApi() + "/page" + poName);
+        findAll.setAuthorityType(Constant.SELECT);
+        findAll.setPersistentId(persistent.getId());
+        findAll.setAppServiceId(appService.getId());
+        findAll.setSortCode(count);
+        findAll.setStatus(Constant.STATUS);
+        findAll.insert();
+        count++;
+        Authority save = new Authority();
+        save.setAuthorityCode("/save" + poName);
+        save.setAuthorityName("保存" + poName);
+        save.setAuthorityMethod(POST);
+        save.setAuthorityPath(appService.getAppServiceApi() + "/save" + poName);
+        save.setAuthorityType(Constant.SAVE);
+        save.setPersistentId(persistent.getId());
+        save.setAppServiceId(appService.getId());
+        save.setSortCode(count);
+        save.setStatus(Constant.STATUS);
+        save.insert();
+        count++;
+        Authority delete = new Authority();
+        delete.setAuthorityCode("/delete" + poName);
+        delete.setAuthorityName("删除" + poName);
+        delete.setAuthorityMethod(POST);
+        delete.setAuthorityPath(appService.getAppServiceApi() + "/delete" + poName);
+        delete.setAuthorityType(Constant.DELETE);
+        delete.setPersistentId(persistent.getId());
+        delete.setAppServiceId(appService.getId());
+        delete.setSortCode(count);
+        delete.setStatus(Constant.STATUS);
+        delete.insert();
+        List<Property> propertyList = new Property().selectList(new LambdaQueryWrapper<Property>()
+                .eq(Property::getPersistentId, persistent.getId())
+                .eq(Property::getPropertyRelation, Constant.STATUS)
+                .eq(Property::getStatus, Constant.STATUS));
+        for (Property property : propertyList) {
+            String propertyCode = property.getPropertyCode();
+            //驼峰名
+            String underPropertyName = BeanUtils.underline2Camel(propertyCode);
+            //文件名
+            String propertyName = BeanUtils.captureName(underPropertyName);
+            count++;
+            Authority oneToManyFindAll = new Authority();
+            oneToManyFindAll.setAuthorityCode("/delete" + poName);
+            oneToManyFindAll.setAuthorityName("根据" + propertyName + "查询所有" + poName);
+            oneToManyFindAll.setAuthorityMethod(POST);
+            oneToManyFindAll.setAuthorityPath(appService.getAppServiceApi() + "/page" + propertyName + "By" + poName);
+            oneToManyFindAll.setAuthorityType(Constant.SELECT);
+            oneToManyFindAll.setPersistentId(persistent.getId());
+            oneToManyFindAll.setAppServiceId(appService.getId());
+            oneToManyFindAll.setSortCode(count);
+            oneToManyFindAll.setStatus(Constant.STATUS);
+            oneToManyFindAll.insert();
+        }
+    }
 //
 //    private void oneToManyAuthorityHandler(AppService appService, Persistent persistent, String poName, String propertyPoName) {
-//        Authority oneToManyFindAll = new Authority().selectOne(new QueryWrapper<Authority>().lambda()
+//        Authority oneToManyFindAll = new Authority().selectOne(new LambdaQueryWrapper<Authority>()
 //                .eq(Authority::getAuthorityPath, appService.getAppServiceApi() + "/page" + propertyPoName + "By" + poName));
 //        if (oneToManyFindAll == null) {
 //            oneToManyFindAll = new Authority();
@@ -160,7 +165,7 @@ public class PersistentCustomServiceImpl
 //    }
 //
 //    private void manyToManyAuthorityHandler(AppService appService, Persistent persistent, String poName, String propertyPoName) {
-//        Authority manyToManyFindAll = new Authority().selectOne(new QueryWrapper<Authority>().lambda()
+//        Authority manyToManyFindAll = new Authority().selectOne(new LambdaQueryWrapper<Authority>()
 //                .eq(Authority::getAuthorityPath, appService.getAppServiceApi() + "/" + propertyPoName + "By" + poName));
 //        if (manyToManyFindAll == null) {
 //            manyToManyFindAll = new Authority();
@@ -175,7 +180,7 @@ public class PersistentCustomServiceImpl
 //            manyToManyFindAll.setStatus(STATUS);
 //            manyToManyFindAll.insert();
 //        }
-//        Authority manyToManySave = new Authority().selectOne(new QueryWrapper<Authority>().lambda()
+//        Authority manyToManySave = new Authority().selectOne(new LambdaQueryWrapper<Authority>()
 //                .eq(Authority::getAuthorityPath, appService.getAppServiceApi() + "/" + propertyPoName + "Save" + poName));
 //        if (manyToManySave == null) {
 //            manyToManySave = new Authority();
@@ -193,7 +198,7 @@ public class PersistentCustomServiceImpl
 //    }
 
     private void oneToManyAuthorityDeleteHandler(AppService appService, String poName, String propertyPoName) {
-        Authority oneToManyFindAll = new Authority().selectOne(new QueryWrapper<Authority>().lambda()
+        Authority oneToManyFindAll = new Authority().selectOne(new LambdaQueryWrapper<Authority>()
                 .eq(Authority::getAuthorityPath, appService.getAppServiceApi() + "/page" + propertyPoName + "By" + poName));
         if (oneToManyFindAll != null) {
             oneToManyFindAll.deleteById();
@@ -201,12 +206,12 @@ public class PersistentCustomServiceImpl
     }
 
     private void manyToManyAuthorityDeleteHandler(AppService appService, String poName, String propertyPoName) {
-        Authority manyToManyFindAll = new Authority().selectOne(new QueryWrapper<Authority>().lambda()
+        Authority manyToManyFindAll = new Authority().selectOne(new LambdaQueryWrapper<Authority>()
                 .eq(Authority::getAuthorityPath, appService.getAppServiceApi() + "/" + propertyPoName + "By" + poName));
         if (manyToManyFindAll != null) {
             manyToManyFindAll.deleteById();
         }
-        Authority manyToManySave = new Authority().selectOne(new QueryWrapper<Authority>().lambda()
+        Authority manyToManySave = new Authority().selectOne(new LambdaQueryWrapper<Authority>()
                 .eq(Authority::getAuthorityPath, appService.getAppServiceApi() + "/" + propertyPoName + "Save" + poName));
         if (manyToManySave != null) {
             manyToManySave.deleteById();
@@ -217,7 +222,7 @@ public class PersistentCustomServiceImpl
         switch (handlerType) {
             case "create":
                 createEntityHandler(persistent);
-//                authorityHandler(persistent);
+                authorityHandler(persistent);
 //                sqlHandler(persistent);
                 break;
             case "delete":
@@ -232,7 +237,7 @@ public class PersistentCustomServiceImpl
 
 //    private void sqlDeleteHandler(Persistent persistent) {
 //        String dataSourceType = "DATABASE_" + persistent.getPersistentCode().toUpperCase() + "_TYPE";
-//        Sql sql = new Sql().selectOne(new QueryWrapper<Sql>().lambda().eq(Sql::getSqlDescription, dataSourceType));
+//        Sql sql = new Sql().selectOne(new LambdaQueryWrapper<Sql>().eq(Sql::getSqlDescription, dataSourceType));
 //        if (sql != null) {
 //            sql.deleteById();
 //        }
@@ -240,14 +245,14 @@ public class PersistentCustomServiceImpl
 
     private void authorityDeleteHandler(Persistent persistent) {
         AppService appService = new AppService().selectById(persistent.getAppServiceId());
-        List<Property> propertyList = new Property().selectList(new QueryWrapper<Property>().lambda()
+        List<Property> propertyList = new Property().selectList(new LambdaQueryWrapper<Property>()
                 .eq(Property::getPersistentId, persistent.getId()));
 //        List<Property> outPropertyList = propertyList.stream().filter(property -> BeanUtils.YES.equals(property.getPropertyOut())).collect(Collectors.toList());
         //驼峰名
         String underPoName = BeanUtils.underline2Camel(persistent.getPersistentCode());
         //文件名
         String poName = BeanUtils.captureName(underPoName);
-        Authority findAll = new Authority().selectOne(new QueryWrapper<Authority>().lambda()
+        Authority findAll = new Authority().selectOne(new LambdaQueryWrapper<Authority>()
                 .eq(Authority::getAuthorityPath, appService.getAppServiceApi() + "/page" + poName));
         if (findAll != null) {
             findAll.deleteById();
@@ -262,12 +267,12 @@ public class PersistentCustomServiceImpl
 //                manyToManyAuthorityDeleteHandler(appService, poName, propertyPoName);
 //            }
 //        }
-        Authority save = new Authority().selectOne(new QueryWrapper<Authority>().lambda()
+        Authority save = new Authority().selectOne(new LambdaQueryWrapper<Authority>()
                 .eq(Authority::getAuthorityPath, appService.getAppServiceApi() + "/save" + poName));
         if (save != null) {
             save.deleteById();
         }
-        Authority delete = new Authority().selectOne(new QueryWrapper<Authority>().lambda()
+        Authority delete = new Authority().selectOne(new LambdaQueryWrapper<Authority>()
                 .eq(Authority::getAuthorityPath, appService.getAppServiceApi() + "/delete" + poName));
         if (delete != null) {
             delete.deleteById();
@@ -308,7 +313,7 @@ public class PersistentCustomServiceImpl
 
 //    private void sqlHandler(Persistent persistent) {
 //        String dataSourceType = "DATABASE_" + persistent.getPersistentCode().toUpperCase() + "_TYPE";
-//        Sql sql = new Sql().selectOne(new QueryWrapper<Sql>().lambda().eq(Sql::getSqlDescription, dataSourceType));
+//        Sql sql = new Sql().selectOne(new LambdaQueryWrapper<Sql>().eq(Sql::getSqlDescription, dataSourceType));
 //        if (sql == null) {
 //            sql = new Sql();
 //            String sqlStr = "select " + persistent.getPersistentCode() + "_name as label, id as value from t_" + persistent.getPersistentCode();
@@ -335,7 +340,7 @@ public class PersistentCustomServiceImpl
         String appPath = appService.getAppServicePath();
         //服务接口
         String appApi = appService.getAppServiceApi();
-        List<Property> propertyList = new Property().selectList(new QueryWrapper<Property>().lambda()
+        List<Property> propertyList = new Property().selectList(new LambdaQueryWrapper<Property>()
                 .eq(Property::getPersistentId, persistent.getId())
                 .orderByAsc(Property::getSortCode));
         Map<String, String[]> entityObj = new HashMap<>();
@@ -993,7 +998,7 @@ public class PersistentCustomServiceImpl
             sb.append("    private int status;\r\n");
             sb.append("\r\n");
             sb.append("    @TableField(\"sort_code\")\r\n");
-            sb.append("    private int sortCode;\r\n");
+            sb.append("    private long sortCode;\r\n");
             sb.append("\r\n");
         }
         sb.append("    @TableField(\"created_date\")\r\n");
@@ -1386,12 +1391,12 @@ public class PersistentCustomServiceImpl
     }
 
 //    public JSONObject findDataTableAndFormByName(String persistentCode) {
-//        Persistent persistent = new Persistent().selectOne(new QueryWrapper<Persistent>().lambda()
+//        Persistent persistent = new Persistent().selectOne(new LambdaQueryWrapper<Persistent>()
 //                .eq(Persistent::getPersistentCode, persistentCode));
 //        if (persistent == null) {
 //            return null;
 //        }
-//        List<Property> propertyList = new Property().selectList(new QueryWrapper<Property>().lambda()
+//        List<Property> propertyList = new Property().selectList(new LambdaQueryWrapper<Property>()
 //                .eq(Property::getPersistentId, persistent.getId())
 //                .orderByAsc(Property::getSortCode));
 //        List<PropertyCustomDTO> propertyCustomDTOList = new ArrayList<>();
