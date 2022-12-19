@@ -11,6 +11,7 @@ import com.example.cyjcommon.entity.bean.AppService;
 import com.example.cyjcommon.entity.bean.Authority;
 import com.example.cyjcommon.entity.bean.Persistent;
 import com.example.cyjcommon.entity.bean.Property;
+import com.example.cyjcommon.entity.bean.Sql;
 import com.example.cyjcommon.mapper.bean.PersistentMapper;
 import com.example.cyjcommon.utils.BeanUtils;
 import com.example.cyjdictionary.service.bean.custom.DictionaryCustomServiceImpl;
@@ -223,7 +224,7 @@ public class PersistentCustomServiceImpl
             case "create":
                 createEntityHandler(persistent);
                 authorityHandler(persistent);
-//                sqlHandler(persistent);
+                sqlHandler(persistent);
                 break;
             case "delete":
 //                deleteEntityHandler(persistent);
@@ -311,20 +312,28 @@ public class PersistentCustomServiceImpl
         BeanUtils.deleteJavaFile(componentPath + poName);
     }
 
-//    private void sqlHandler(Persistent persistent) {
-//        String dataSourceType = "DATABASE_" + persistent.getPersistentCode().toUpperCase() + "_TYPE";
-//        Sql sql = new Sql().selectOne(new LambdaQueryWrapper<Sql>().eq(Sql::getSqlDescription, dataSourceType));
-//        if (sql == null) {
-//            sql = new Sql();
-//            String sqlStr = "select " + persistent.getPersistentCode() + "_name as label, id as value from t_" + persistent.getPersistentCode();
-//            sql.setSqlDescription(dataSourceType);
-//            sql.setSqlStr(sqlStr);
-//            sql.setSqlType("查询");
-//            sql.setStatus("有效");
-//            sql.setSortCode("10");
-//            sql.insert();
-//        }
-//    }
+    private void sqlHandler(Persistent persistent) {
+        //驼峰名
+        String underPoName = BeanUtils.underline2Camel(persistent.getPersistentCode());
+        //文件名
+        String poName = BeanUtils.captureName(underPoName);
+        String dataSourceType = "DATABASE_" + persistent.getPersistentCode().toUpperCase() + "_TYPE";
+        boolean delete = new Sql().delete(new LambdaQueryWrapper<Sql>()
+                .eq(Sql::getSqlCode, dataSourceType));
+        long count = new Sql().selectCount(new LambdaQueryWrapper<Sql>()
+                .eq(Sql::getStatus, Constant.STATUS));
+        count++;
+        logger.info("delete.sql:{}", delete);
+        String sqlStr = "select " + persistent.getPersistentCode() + "_name as label, id as value from t_" + persistent.getPersistentCode();
+        Sql sql = new Sql();
+        sql.setSqlCode(dataSourceType);
+        sql.setSqlName("查询" + poName);
+        sql.setSqlStr(sqlStr);
+        sql.setSqlType("查询");
+        sql.setStatus(Constant.STATUS);
+        sql.setSortCode(count);
+        sql.insert();
+    }
 
     private void createEntityHandler(Persistent persistent) {
         String persistentCode = persistent.getPersistentCode();
