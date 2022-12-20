@@ -153,27 +153,6 @@ public class PersistentCustomServiceImpl
 
     }
 
-    private void oneToManyAuthorityDeleteHandler(AppService appService, String poName, String propertyPoName) {
-        Authority oneToManyFindAll = new Authority().selectOne(new LambdaQueryWrapper<Authority>()
-                .eq(Authority::getAuthorityPath, appService.getAppServiceApi() + "/page" + propertyPoName + "By" + poName));
-        if (oneToManyFindAll != null) {
-            oneToManyFindAll.deleteById();
-        }
-    }
-
-    private void manyToManyAuthorityDeleteHandler(AppService appService, String poName, String propertyPoName) {
-        Authority manyToManyFindAll = new Authority().selectOne(new LambdaQueryWrapper<Authority>()
-                .eq(Authority::getAuthorityPath, appService.getAppServiceApi() + "/" + propertyPoName + "By" + poName));
-        if (manyToManyFindAll != null) {
-            manyToManyFindAll.deleteById();
-        }
-        Authority manyToManySave = new Authority().selectOne(new LambdaQueryWrapper<Authority>()
-                .eq(Authority::getAuthorityPath, appService.getAppServiceApi() + "/" + propertyPoName + "Save" + poName));
-        if (manyToManySave != null) {
-            manyToManySave.deleteById();
-        }
-    }
-
     public void entityHandler(Persistent persistent, String handlerType) {
         switch (handlerType) {
             case "create":
