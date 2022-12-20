@@ -8,6 +8,10 @@ public class Constant {
 
     public final static String SELECT = "select";
 
+    public final static String SET = "set";
+
+    public final static String GET = "get";
+
     public final static int STATUS = 1;
 
 }

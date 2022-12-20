@@ -76,6 +76,7 @@ public class PersistentCustomServiceImpl
     }
 
     private void authorityHandler(Persistent persistent) {
+        boolean isBeanFlag = persistent.getPersistentRelation() == 0;
         AppService appService = new AppService().selectById(persistent.getAppServiceId());
         //驼峰名
         String underPoName = BeanUtils.underline2Camel(persistent.getPersistentCode());
@@ -86,117 +87,71 @@ public class PersistentCustomServiceImpl
         boolean delete1 = new Authority().delete(new LambdaQueryWrapper<Authority>()
                 .eq(Authority::getPersistentId, persistent.getId()));
         logger.info("delete.authority:{}", delete1);
-        count++;
-        Authority findAll = new Authority();
-        findAll.setAuthorityCode("/page" + poName);
-        findAll.setAuthorityName("查询所有" + poName);
-        findAll.setAuthorityMethod(POST);
-        findAll.setAuthorityPath(appService.getAppServiceApi() + "/page" + poName);
-        findAll.setAuthorityType(Constant.SELECT);
-        findAll.setPersistentId(persistent.getId());
-        findAll.setAppServiceId(appService.getId());
-        findAll.setSortCode(count);
-        findAll.setStatus(Constant.STATUS);
-        findAll.insert();
-        count++;
-        Authority save = new Authority();
-        save.setAuthorityCode("/save" + poName);
-        save.setAuthorityName("保存" + poName);
-        save.setAuthorityMethod(POST);
-        save.setAuthorityPath(appService.getAppServiceApi() + "/save" + poName);
-        save.setAuthorityType(Constant.SAVE);
-        save.setPersistentId(persistent.getId());
-        save.setAppServiceId(appService.getId());
-        save.setSortCode(count);
-        save.setStatus(Constant.STATUS);
-        save.insert();
-        count++;
-        Authority delete = new Authority();
-        delete.setAuthorityCode("/delete" + poName);
-        delete.setAuthorityName("删除" + poName);
-        delete.setAuthorityMethod(POST);
-        delete.setAuthorityPath(appService.getAppServiceApi() + "/delete" + poName);
-        delete.setAuthorityType(Constant.DELETE);
-        delete.setPersistentId(persistent.getId());
-        delete.setAppServiceId(appService.getId());
-        delete.setSortCode(count);
-        delete.setStatus(Constant.STATUS);
-        delete.insert();
-        List<Property> propertyList = new Property().selectList(new LambdaQueryWrapper<Property>()
-                .eq(Property::getPersistentId, persistent.getId())
-                .eq(Property::getPropertyRelation, Constant.STATUS)
-                .eq(Property::getStatus, Constant.STATUS));
-        for (Property property : propertyList) {
-            String propertyCode = property.getPropertyCode();
-            //驼峰名
-            String underPropertyName = BeanUtils.underline2Camel(propertyCode);
-            //文件名
-            String propertyName = BeanUtils.captureName(underPropertyName);
+        if (isBeanFlag) {
             count++;
-            Authority oneToManyFindAll = new Authority();
-            oneToManyFindAll.setAuthorityCode("/delete" + poName);
-            oneToManyFindAll.setAuthorityName("根据" + propertyName + "查询所有" + poName);
-            oneToManyFindAll.setAuthorityMethod(POST);
-            oneToManyFindAll.setAuthorityPath(appService.getAppServiceApi() + "/page" + propertyName + "By" + poName);
-            oneToManyFindAll.setAuthorityType(Constant.SELECT);
-            oneToManyFindAll.setPersistentId(persistent.getId());
-            oneToManyFindAll.setAppServiceId(appService.getId());
-            oneToManyFindAll.setSortCode(count);
-            oneToManyFindAll.setStatus(Constant.STATUS);
-            oneToManyFindAll.insert();
+            Authority findAll = new Authority();
+            findAll.setAuthorityCode("page" + poName);
+            findAll.setAuthorityName("查询" + poName);
+            findAll.setAuthorityMethod(POST);
+            findAll.setAuthorityPath(appService.getAppServiceApi() + "/page" + poName);
+            findAll.setAuthorityType(Constant.SELECT);
+            findAll.setPersistentId(persistent.getId());
+            findAll.setAppServiceId(appService.getId());
+            findAll.setSortCode(count);
+            findAll.setStatus(Constant.STATUS);
+            findAll.insert();
+            count++;
+            Authority save = new Authority();
+            save.setAuthorityCode("save" + poName);
+            save.setAuthorityName("保存" + poName);
+            save.setAuthorityMethod(POST);
+            save.setAuthorityPath(appService.getAppServiceApi() + "/save" + poName);
+            save.setAuthorityType(Constant.SAVE);
+            save.setPersistentId(persistent.getId());
+            save.setAppServiceId(appService.getId());
+            save.setSortCode(count);
+            save.setStatus(Constant.STATUS);
+            save.insert();
+            count++;
+            Authority delete = new Authority();
+            delete.setAuthorityCode("delete" + poName);
+            delete.setAuthorityName("删除" + poName);
+            delete.setAuthorityMethod(POST);
+            delete.setAuthorityPath(appService.getAppServiceApi() + "/delete" + poName);
+            delete.setAuthorityType(Constant.DELETE);
+            delete.setPersistentId(persistent.getId());
+            delete.setAppServiceId(appService.getId());
+            delete.setSortCode(count);
+            delete.setStatus(Constant.STATUS);
+            delete.insert();
+        } else {
+            count++;
+            Authority set = new Authority();
+            set.setAuthorityCode("get" + poName);
+            set.setAuthorityName("查询" + poName + "关联关系");
+            set.setAuthorityMethod(POST);
+            set.setAuthorityPath(appService.getAppServiceApi() + "/get" + poName);
+            set.setAuthorityType(Constant.GET);
+            set.setPersistentId(persistent.getId());
+            set.setAppServiceId(appService.getId());
+            set.setSortCode(count);
+            set.setStatus(Constant.STATUS);
+            set.insert();
+            count++;
+            Authority get = new Authority();
+            get.setAuthorityCode("set" + poName);
+            get.setAuthorityName("保存" + poName + "关联关系");
+            get.setAuthorityMethod(POST);
+            get.setAuthorityPath(appService.getAppServiceApi() + "/set" + poName);
+            get.setAuthorityType(Constant.SET);
+            get.setPersistentId(persistent.getId());
+            get.setAppServiceId(appService.getId());
+            get.setSortCode(count);
+            get.setStatus(Constant.STATUS);
+            get.insert();
         }
+
     }
-//
-//    private void oneToManyAuthorityHandler(AppService appService, Persistent persistent, String poName, String propertyPoName) {
-//        Authority oneToManyFindAll = new Authority().selectOne(new LambdaQueryWrapper<Authority>()
-//                .eq(Authority::getAuthorityPath, appService.getAppServiceApi() + "/page" + propertyPoName + "By" + poName));
-//        if (oneToManyFindAll == null) {
-//            oneToManyFindAll = new Authority();
-//            oneToManyFindAll.setAuthorityMethod(POST);
-//            oneToManyFindAll.setAuthorityPath(appService.getAppServiceApi() + "/page" + propertyPoName + "By" + poName);
-//            oneToManyFindAll.setAuthorityName("根据" + propertyPoName + "查询所有" + poName);
-//            oneToManyFindAll.setAuthorityType(AUTO);
-//            oneToManyFindAll.setAuthorityDescription("根据" + propertyPoName + "查询所有" + poName);
-//            oneToManyFindAll.setPersistentId(persistent.getId());
-//            oneToManyFindAll.setAppServiceId(appService.getId());
-//            oneToManyFindAll.setSortCode(SORTCODE);
-//            oneToManyFindAll.setStatus(STATUS);
-//            oneToManyFindAll.insert();
-//        }
-//    }
-//
-//    private void manyToManyAuthorityHandler(AppService appService, Persistent persistent, String poName, String propertyPoName) {
-//        Authority manyToManyFindAll = new Authority().selectOne(new LambdaQueryWrapper<Authority>()
-//                .eq(Authority::getAuthorityPath, appService.getAppServiceApi() + "/" + propertyPoName + "By" + poName));
-//        if (manyToManyFindAll == null) {
-//            manyToManyFindAll = new Authority();
-//            manyToManyFindAll.setAuthorityMethod(POST);
-//            manyToManyFindAll.setAuthorityPath(appService.getAppServiceApi() + "/" + propertyPoName + "By" + poName);
-//            manyToManyFindAll.setAuthorityName("根据" + poName + "查询所有" + propertyPoName);
-//            manyToManyFindAll.setAuthorityType(AUTO);
-//            manyToManyFindAll.setAuthorityDescription("根据" + poName + "查询所有" + propertyPoName);
-//            manyToManyFindAll.setPersistentId(persistent.getId());
-//            manyToManyFindAll.setAppServiceId(appService.getId());
-//            manyToManyFindAll.setSortCode(SORTCODE);
-//            manyToManyFindAll.setStatus(STATUS);
-//            manyToManyFindAll.insert();
-//        }
-//        Authority manyToManySave = new Authority().selectOne(new LambdaQueryWrapper<Authority>()
-//                .eq(Authority::getAuthorityPath, appService.getAppServiceApi() + "/" + propertyPoName + "Save" + poName));
-//        if (manyToManySave == null) {
-//            manyToManySave = new Authority();
-//            manyToManySave.setAuthorityMethod(POST);
-//            manyToManySave.setAuthorityPath(appService.getAppServiceApi() + "/" + propertyPoName + "Save" + poName);
-//            manyToManySave.setAuthorityName("根据" + poName + "保存" + propertyPoName);
-//            manyToManySave.setAuthorityType(AUTO);
-//            manyToManySave.setAuthorityDescription("根据" + poName + "保存" + propertyPoName);
-//            manyToManySave.setPersistentId(persistent.getId());
-//            manyToManySave.setAppServiceId(appService.getId());
-//            manyToManySave.setSortCode(SORTCODE);
-//            manyToManySave.setStatus(STATUS);
-//            manyToManySave.insert();
-//        }
-//    }
 
     private void oneToManyAuthorityDeleteHandler(AppService appService, String poName, String propertyPoName) {
         Authority oneToManyFindAll = new Authority().selectOne(new LambdaQueryWrapper<Authority>()
