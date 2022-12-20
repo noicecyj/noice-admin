@@ -1102,24 +1102,19 @@ public class PersistentCustomServiceImpl
             sb.append("\r\n");
             sb.append("    private LambdaQueryWrapper<").append(poName).append("> searchHandler(").append(poName).append(" po) {\r\n");
             sb.append("        return new LambdaQueryWrapper<").append(poName).append(">()\r\n");
-            sb.append("                .like(StringUtils.isNotEmpty(po.get").append(poName).append("Name()),\r\n");
-            sb.append("                        ").append(poName).append("::get").append(poName).append("Name, po.get").append(poName).append("Name())\r\n");
-            sb.append("                .orderByAsc(").append(poName).append("::getSortCode);\r\n");
-            sb.append("    }\r\n");
             for (Property property : relationPropertyList) {
                 String propertyCode = property.getPropertyCode();
                 //驼峰名
                 String underPropertyName = BeanUtils.underline2Camel(propertyCode);
                 //文件名
                 String propertyName = BeanUtils.captureName(underPropertyName);
-                sb.append("\r\n");
-                sb.append("    public Page<").append(poName).append("> page").append(poName).append("By").append(propertyName).append("(").append(poName).append(" po, Integer pageNumber, Integer pageSize, String ").append(underPropertyName).append(") {\r\n");
-                sb.append("        Page<").append(poName).append("> page = new Page<>(pageNumber, pageSize);\r\n");
-                sb.append("        LambdaQueryWrapper<").append(poName).append("> queryWrapper = searchHandler(po);\r\n");
-                sb.append("        queryWrapper.eq(").append(poName).append("::get").append(propertyName).append(", ").append(underPropertyName).append(");\r\n");
-                sb.append("        return new ").append(poName).append("().selectPage(page, queryWrapper);\r\n");
-                sb.append("    }\r\n");
+                sb.append("                .eq(StringUtils.isNotEmpty(po.get").append(propertyName).append("()),\r\n");
+                sb.append("                        ").append(poName).append("::get").append(propertyName).append(", po.get").append(propertyName).append("())\r\n");
             }
+            sb.append("                .like(StringUtils.isNotEmpty(po.get").append(poName).append("Name()),\r\n");
+            sb.append("                        ").append(poName).append("::get").append(poName).append("Name, po.get").append(poName).append("Name())\r\n");
+            sb.append("                .orderByAsc(").append(poName).append("::getSortCode);\r\n");
+            sb.append("    }\r\n");
         } else {
             sb.append("    public List<").append(poName).append("> get").append(poName).append("(").append(poName).append(" po) {\r\n");
             sb.append("        return new ").append(poName).append("().selectList(new LambdaQueryWrapper<").append(poName).append(">()\r\n");
@@ -1229,26 +1224,6 @@ public class PersistentCustomServiceImpl
             sb.append("            return ResultVO.failure();\r\n");
             sb.append("        }\r\n");
             sb.append("        service.deleteOne(po);\r\n");
-            sb.append("        return ResultVO.success();\r\n");
-            sb.append("    }\r\n");
-            List<Property> relationPropertyList = propertyList.stream()
-                    .filter(property -> property.getPropertyRelation() == 1).collect(Collectors.toList());
-            for (Property property : relationPropertyList) {
-                String propertyCode = property.getPropertyCode();
-                //驼峰名
-                String underPropertyName = BeanUtils.underline2Camel(propertyCode);
-                //文件名
-                String propertyName = BeanUtils.captureName(underPropertyName);
-                sb.append("\r\n");
-                sb.append("    @Operation(summary = \"根据").append(propertyName).append("查询所有").append(poName).append("\")\r\n");
-                sb.append("    @PostMapping(value = \"page").append(poName).append("By").append(propertyName).append("\")\r\n");
-                sb.append("    public ResultVO page").append(poName).append("By").append(propertyName).append("(@RequestBody @Validated ").append(poName).append(" po,\r\n");
-                sb.append("                                               @RequestParam(\"pageNumber\") Integer pageNumber,\r\n");
-                sb.append("                                               @RequestParam(\"pageSize\") Integer pageSize,\r\n");
-                sb.append("                                               @RequestParam(\"").append(underPropertyName).append("\") String ").append(underPropertyName).append(") {\r\n");
-                sb.append("        return ResultVO.success(service.page").append(poName).append("By").append(propertyName).append("(po, pageNumber, pageSize, ").append(underPropertyName).append("));\r\n");
-                sb.append("    }\r\n");
-            }
         } else {
             sb.append("    @Operation(summary = \"查询").append(poName).append("关联关系\")\r\n");
             sb.append("    @PostMapping(\"get").append(poName).append("\")\r\n");
@@ -1261,9 +1236,9 @@ public class PersistentCustomServiceImpl
             sb.append("    public ResultVO set").append(poName).append("(@RequestBody @Validated ").append(poName).append(" po,\r\n");
             sb.append("                                     @RequestBody @Validated List<").append(poName).append("> poList) {\r\n");
             sb.append("        service.set").append(poName).append("(po, poList);\r\n");
-            sb.append("        return ResultVO.success();\r\n");
-            sb.append("    }\r\n");
         }
+        sb.append("        return ResultVO.success();\r\n");
+        sb.append("    }\r\n");
         sb.append("\r\n");
         sb.append("}\r\n");
         String entityControllerData = sb.toString();

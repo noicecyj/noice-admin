@@ -61,13 +61,4 @@ public class PropertyController {
         return ResultVO.success();
     }
 
-    @Operation(summary = "根据PersistentId查询所有Property")
-    @PostMapping(value = "pagePropertyByPersistentId")
-    public ResultVO pagePropertyByPersistentId(@RequestBody @Validated Property po,
-                                               @RequestParam("pageNumber") Integer pageNumber,
-                                               @RequestParam("pageSize") Integer pageSize,
-                                               @RequestParam("persistentId") String persistentId) {
-        return ResultVO.success(service.pagePropertyByPersistentId(po, pageNumber, pageSize, persistentId));
-    }
-
 }

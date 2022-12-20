@@ -61,13 +61,4 @@ public class UserController {
         return ResultVO.success();
     }
 
-    @Operation(summary = "根据EnterpriseId查询所有User")
-    @PostMapping(value = "pageUserByEnterpriseId")
-    public ResultVO pageUserByEnterpriseId(@RequestBody @Validated User po,
-                                               @RequestParam("pageNumber") Integer pageNumber,
-                                               @RequestParam("pageSize") Integer pageSize,
-                                               @RequestParam("enterpriseId") String enterpriseId) {
-        return ResultVO.success(service.pageUserByEnterpriseId(po, pageNumber, pageSize, enterpriseId));
-    }
-
 }

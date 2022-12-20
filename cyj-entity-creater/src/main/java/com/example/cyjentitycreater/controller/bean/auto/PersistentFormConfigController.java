@@ -61,13 +61,4 @@ public class PersistentFormConfigController {
         return ResultVO.success();
     }
 
-    @Operation(summary = "根据PersistentFormId查询所有PersistentFormConfig")
-    @PostMapping(value = "pagePersistentFormConfigByPersistentFormId")
-    public ResultVO pagePersistentFormConfigByPersistentFormId(@RequestBody @Validated PersistentFormConfig po,
-                                               @RequestParam("pageNumber") Integer pageNumber,
-                                               @RequestParam("pageSize") Integer pageSize,
-                                               @RequestParam("persistentFormId") String persistentFormId) {
-        return ResultVO.success(service.pagePersistentFormConfigByPersistentFormId(po, pageNumber, pageSize, persistentFormId));
-    }
-
 }

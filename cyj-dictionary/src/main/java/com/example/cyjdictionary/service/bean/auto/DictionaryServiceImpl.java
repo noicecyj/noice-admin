@@ -41,16 +41,11 @@ public class DictionaryServiceImpl
 
     private LambdaQueryWrapper<Dictionary> searchHandler(Dictionary po) {
         return new LambdaQueryWrapper<Dictionary>()
+                .eq(StringUtils.isNotEmpty(po.getCatalogId()),
+                        Dictionary::getCatalogId, po.getCatalogId())
                 .like(StringUtils.isNotEmpty(po.getDictionaryName()),
                         Dictionary::getDictionaryName, po.getDictionaryName())
                 .orderByAsc(Dictionary::getSortCode);
-    }
-
-    public Page<Dictionary> pageDictionaryByCatalogId(Dictionary po, Integer pageNumber, Integer pageSize, String catalogId) {
-        Page<Dictionary> page = new Page<>(pageNumber, pageSize);
-        LambdaQueryWrapper<Dictionary> queryWrapper = searchHandler(po);
-        queryWrapper.eq(Dictionary::getCatalogId, catalogId);
-        return new Dictionary().selectPage(page, queryWrapper);
     }
 
 }

@@ -41,23 +41,13 @@ public class AuthorityServiceImpl
 
     private LambdaQueryWrapper<Authority> searchHandler(Authority po) {
         return new LambdaQueryWrapper<Authority>()
+                .eq(StringUtils.isNotEmpty(po.getAppServiceId()),
+                        Authority::getAppServiceId, po.getAppServiceId())
+                .eq(StringUtils.isNotEmpty(po.getPersistentId()),
+                        Authority::getPersistentId, po.getPersistentId())
                 .like(StringUtils.isNotEmpty(po.getAuthorityName()),
                         Authority::getAuthorityName, po.getAuthorityName())
                 .orderByAsc(Authority::getSortCode);
-    }
-
-    public Page<Authority> pageAuthorityByAppServiceId(Authority po, Integer pageNumber, Integer pageSize, String appServiceId) {
-        Page<Authority> page = new Page<>(pageNumber, pageSize);
-        LambdaQueryWrapper<Authority> queryWrapper = searchHandler(po);
-        queryWrapper.eq(Authority::getAppServiceId, appServiceId);
-        return new Authority().selectPage(page, queryWrapper);
-    }
-
-    public Page<Authority> pageAuthorityByPersistentId(Authority po, Integer pageNumber, Integer pageSize, String persistentId) {
-        Page<Authority> page = new Page<>(pageNumber, pageSize);
-        LambdaQueryWrapper<Authority> queryWrapper = searchHandler(po);
-        queryWrapper.eq(Authority::getPersistentId, persistentId);
-        return new Authority().selectPage(page, queryWrapper);
     }
 
 }

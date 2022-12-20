@@ -41,16 +41,11 @@ public class PersistentFormConfigServiceImpl
 
     private LambdaQueryWrapper<PersistentFormConfig> searchHandler(PersistentFormConfig po) {
         return new LambdaQueryWrapper<PersistentFormConfig>()
+                .eq(StringUtils.isNotEmpty(po.getPersistentFormId()),
+                        PersistentFormConfig::getPersistentFormId, po.getPersistentFormId())
                 .like(StringUtils.isNotEmpty(po.getPersistentFormConfigName()),
                         PersistentFormConfig::getPersistentFormConfigName, po.getPersistentFormConfigName())
                 .orderByAsc(PersistentFormConfig::getSortCode);
-    }
-
-    public Page<PersistentFormConfig> pagePersistentFormConfigByPersistentFormId(PersistentFormConfig po, Integer pageNumber, Integer pageSize, String persistentFormId) {
-        Page<PersistentFormConfig> page = new Page<>(pageNumber, pageSize);
-        LambdaQueryWrapper<PersistentFormConfig> queryWrapper = searchHandler(po);
-        queryWrapper.eq(PersistentFormConfig::getPersistentFormId, persistentFormId);
-        return new PersistentFormConfig().selectPage(page, queryWrapper);
     }
 
 }

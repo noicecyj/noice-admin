@@ -41,16 +41,11 @@ public class UserServiceImpl
 
     private LambdaQueryWrapper<User> searchHandler(User po) {
         return new LambdaQueryWrapper<User>()
+                .eq(StringUtils.isNotEmpty(po.getEnterpriseId()),
+                        User::getEnterpriseId, po.getEnterpriseId())
                 .like(StringUtils.isNotEmpty(po.getUserName()),
                         User::getUserName, po.getUserName())
                 .orderByAsc(User::getSortCode);
-    }
-
-    public Page<User> pageUserByEnterpriseId(User po, Integer pageNumber, Integer pageSize, String enterpriseId) {
-        Page<User> page = new Page<>(pageNumber, pageSize);
-        LambdaQueryWrapper<User> queryWrapper = searchHandler(po);
-        queryWrapper.eq(User::getEnterpriseId, enterpriseId);
-        return new User().selectPage(page, queryWrapper);
     }
 
 }

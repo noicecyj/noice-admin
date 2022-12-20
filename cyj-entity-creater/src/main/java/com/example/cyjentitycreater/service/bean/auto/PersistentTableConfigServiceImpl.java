@@ -41,16 +41,11 @@ public class PersistentTableConfigServiceImpl
 
     private LambdaQueryWrapper<PersistentTableConfig> searchHandler(PersistentTableConfig po) {
         return new LambdaQueryWrapper<PersistentTableConfig>()
+                .eq(StringUtils.isNotEmpty(po.getPersistentTableId()),
+                        PersistentTableConfig::getPersistentTableId, po.getPersistentTableId())
                 .like(StringUtils.isNotEmpty(po.getPersistentTableConfigName()),
                         PersistentTableConfig::getPersistentTableConfigName, po.getPersistentTableConfigName())
                 .orderByAsc(PersistentTableConfig::getSortCode);
-    }
-
-    public Page<PersistentTableConfig> pagePersistentTableConfigByPersistentTableId(PersistentTableConfig po, Integer pageNumber, Integer pageSize, String persistentTableId) {
-        Page<PersistentTableConfig> page = new Page<>(pageNumber, pageSize);
-        LambdaQueryWrapper<PersistentTableConfig> queryWrapper = searchHandler(po);
-        queryWrapper.eq(PersistentTableConfig::getPersistentTableId, persistentTableId);
-        return new PersistentTableConfig().selectPage(page, queryWrapper);
     }
 
 }

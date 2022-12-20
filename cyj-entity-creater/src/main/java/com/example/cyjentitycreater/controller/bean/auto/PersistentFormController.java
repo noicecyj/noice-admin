@@ -61,13 +61,4 @@ public class PersistentFormController {
         return ResultVO.success();
     }
 
-    @Operation(summary = "根据PersistentId查询所有PersistentForm")
-    @PostMapping(value = "pagePersistentFormByPersistentId")
-    public ResultVO pagePersistentFormByPersistentId(@RequestBody @Validated PersistentForm po,
-                                               @RequestParam("pageNumber") Integer pageNumber,
-                                               @RequestParam("pageSize") Integer pageSize,
-                                               @RequestParam("persistentId") String persistentId) {
-        return ResultVO.success(service.pagePersistentFormByPersistentId(po, pageNumber, pageSize, persistentId));
-    }
-
 }

@@ -61,13 +61,4 @@ public class PersistentTableConfigController {
         return ResultVO.success();
     }
 
-    @Operation(summary = "根据PersistentTableId查询所有PersistentTableConfig")
-    @PostMapping(value = "pagePersistentTableConfigByPersistentTableId")
-    public ResultVO pagePersistentTableConfigByPersistentTableId(@RequestBody @Validated PersistentTableConfig po,
-                                               @RequestParam("pageNumber") Integer pageNumber,
-                                               @RequestParam("pageSize") Integer pageSize,
-                                               @RequestParam("persistentTableId") String persistentTableId) {
-        return ResultVO.success(service.pagePersistentTableConfigByPersistentTableId(po, pageNumber, pageSize, persistentTableId));
-    }
-
 }

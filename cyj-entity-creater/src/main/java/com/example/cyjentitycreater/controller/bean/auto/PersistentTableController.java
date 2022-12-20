@@ -61,13 +61,4 @@ public class PersistentTableController {
         return ResultVO.success();
     }
 
-    @Operation(summary = "根据PersistentId查询所有PersistentTable")
-    @PostMapping(value = "pagePersistentTableByPersistentId")
-    public ResultVO pagePersistentTableByPersistentId(@RequestBody @Validated PersistentTable po,
-                                               @RequestParam("pageNumber") Integer pageNumber,
-                                               @RequestParam("pageSize") Integer pageSize,
-                                               @RequestParam("persistentId") String persistentId) {
-        return ResultVO.success(service.pagePersistentTableByPersistentId(po, pageNumber, pageSize, persistentId));
-    }
-
 }
