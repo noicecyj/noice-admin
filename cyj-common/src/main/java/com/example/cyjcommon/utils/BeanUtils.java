@@ -1,7 +1,7 @@
 package com.example.cyjcommon.utils;
 
 import com.example.cyjcommon.entity.bean.AppServiceBean;
-import com.example.cyjcommon.entity.bean.Property;
+import com.example.cyjcommon.entity.bean.PropertyBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -128,8 +128,8 @@ public class BeanUtils {
         return sb.toString();
     }
 
-    public static Boolean ifDate(List<Property> poList) {
-        for (Property po : poList) {
+    public static Boolean ifDate(List<PropertyBean> poList) {
+        for (PropertyBean po : poList) {
             if ("Date".equals(po.getPropertyType())) {
                 return true;
             }
@@ -137,8 +137,8 @@ public class BeanUtils {
         return false;
     }
 
-    public static Boolean ifTimestamp(List<Property> poList) {
-        for (Property po : poList) {
+    public static Boolean ifTimestamp(List<PropertyBean> poList) {
+        for (PropertyBean po : poList) {
             if ("Timestamp".equals(po.getPropertyType())) {
                 return true;
             }
@@ -146,8 +146,8 @@ public class BeanUtils {
         return false;
     }
 
-    public static Boolean ifLocalDateTime(List<Property> poList) {
-        for (Property po : poList) {
+    public static Boolean ifLocalDateTime(List<PropertyBean> poList) {
+        for (PropertyBean po : poList) {
             if ("LocalDateTime".equals(po.getPropertyType())) {
                 return true;
             }
