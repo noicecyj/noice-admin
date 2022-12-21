@@ -1,8 +1,8 @@
 package com.example.cyjauth.controller.relation.auto;
 
-import com.example.cyjcommon.entity.relation.RoleAuthorityBean;
-import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjauth.service.relation.auto.RoleAuthorityServiceImpl;
+import com.example.cyjcommon.entity.relation.RoleAuthorityRelation;
+import com.example.cyjcommon.utils.ResultVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,14 +33,14 @@ public class RoleAuthorityController {
 
     @Operation(summary = "查询RoleAuthority关联关系")
     @PostMapping("getRoleAuthority")
-    public ResultVO getRoleAuthority(@RequestBody @Validated RoleAuthority po) {
+    public ResultVO getRoleAuthority(@RequestBody @Validated RoleAuthorityRelation po) {
         return ResultVO.success(service.getRoleAuthority(po));
     }
 
     @Operation(summary = "保存RoleAuthority关联关系")
     @PostMapping("setRoleAuthority")
-    public ResultVO setRoleAuthority(@RequestBody @Validated RoleAuthority po,
-                                     @RequestBody @Validated List<RoleAuthority> poList) {
+    public ResultVO setRoleAuthority(@RequestBody @Validated RoleAuthorityRelation po,
+                                     @RequestBody @Validated List<RoleAuthorityRelation> poList) {
         service.setRoleAuthority(po, poList);
         return ResultVO.success();
     }

@@ -3,7 +3,6 @@ package com.example.cyjauth.service.relation.auto;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.cyjcommon.entity.relation.RoleAuthorityBean;
 import com.example.cyjcommon.entity.relation.RoleAuthorityRelation;
 import com.example.cyjcommon.mapper.relation.RoleAuthorityMapper;
 import org.apache.commons.lang3.StringUtils;
@@ -30,12 +29,12 @@ public class RoleAuthorityServiceImpl
         );
     }
 
-    public void setRoleAuthority(RoleAuthority po, List<RoleAuthority> newRoleAuthorityList) {
-        List<RoleAuthority> oldRoleAuthorityList = getRoleAuthority(po);
-        for (RoleAuthority oldRoleAuthority : oldRoleAuthorityList) {
+    public void setRoleAuthority(RoleAuthorityRelation po, List<RoleAuthorityRelation> newRoleAuthorityList) {
+        List<RoleAuthorityRelation> oldRoleAuthorityList = getRoleAuthority(po);
+        for (RoleAuthorityRelation oldRoleAuthority : oldRoleAuthorityList) {
             oldRoleAuthority.deleteById();
         }
-        for (RoleAuthority newRoleAuthority : newRoleAuthorityList) {
+        for (RoleAuthorityRelation newRoleAuthority : newRoleAuthorityList) {
             newRoleAuthority.insert();
         }
     }
