@@ -1,8 +1,8 @@
 package com.example.cyjauth.controller.relation.auto;
 
-import com.example.cyjauth.service.relation.auto.UserRoleServiceImpl;
 import com.example.cyjcommon.entity.relation.UserRoleRelation;
 import com.example.cyjcommon.utils.ResultVO;
+import com.example.cyjauth.service.relation.auto.UserRoleServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ public class UserRoleController {
     @Operation(summary = "保存UserRole关联关系")
     @PostMapping("setUserRole")
     public ResultVO setUserRole(@RequestBody @Validated UserRoleRelation po,
-                                @RequestBody @Validated List<UserRoleRelation> poList) {
+                                     @RequestBody @Validated List<UserRoleRelation> poList) {
         service.setUserRole(po, poList);
         return ResultVO.success();
     }

@@ -1,8 +1,8 @@
 package com.example.cyjauth.controller.relation.auto;
 
-import com.example.cyjauth.service.relation.auto.RoleAuthorityServiceImpl;
 import com.example.cyjcommon.entity.relation.RoleAuthorityRelation;
 import com.example.cyjcommon.utils.ResultVO;
+import com.example.cyjauth.service.relation.auto.RoleAuthorityServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

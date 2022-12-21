@@ -1091,7 +1091,7 @@ public class PersistentCustomServiceImpl
         String poControllerPath = packetPath + ".controller." + (isBeanFlag ? "bean" : "relation") + ".auto;\r\n";
         sb.append("package ").append(poControllerPath);
         sb.append("\r\n");
-        sb.append("import com.example.cyjcommon.entity.").append(isBeanFlag ? "bean" : "relation").append(".").append(poName).append("Bean;\r\n");
+        sb.append("import com.example.cyjcommon.entity.").append(isBeanFlag ? "bean" : "relation").append(".").append(poName).append(isBeanFlag ? "Bean" : "Relation").append(";\r\n");
         sb.append("import com.example.cyjcommon.utils.ResultVO;\r\n");
         sb.append("import ").append(poServicePath).append(poName).append("ServiceImpl;\r\n");
         sb.append("import io.swagger.v3.oas.annotations.Operation;\r\n");
