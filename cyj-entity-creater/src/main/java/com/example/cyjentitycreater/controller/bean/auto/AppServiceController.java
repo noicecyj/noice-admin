@@ -1,6 +1,6 @@
 package com.example.cyjentitycreater.controller.bean.auto;
 
-import com.example.cyjcommon.entity.bean.AppService;
+import com.example.cyjcommon.entity.bean.AppServiceBean;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.service.bean.auto.AppServiceServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping("entityCreateApi")
-@Tag(name = "AppService")
+@Tag(name = "AppServiceBean")
 public class AppServiceController {
 
     private AppServiceServiceImpl service;
@@ -33,7 +33,7 @@ public class AppServiceController {
 
     @Operation(summary = "分页查询所有AppService")
     @PostMapping(value = "pageAppService")
-    public ResultVO page(@RequestBody @Validated AppService po,
+    public ResultVO page(@RequestBody @Validated AppServiceBean po,
                          @RequestParam("pageNumber") Integer pageNumber,
                          @RequestParam("pageSize") Integer pageSize) {
         return ResultVO.success(service.findAll(po, pageNumber, pageSize));
@@ -41,7 +41,7 @@ public class AppServiceController {
 
     @Operation(summary = "保存AppService")
     @PostMapping(value = "saveAppService")
-    public ResultVO save(@RequestBody @Validated AppService po, BindingResult bindingResult) {
+    public ResultVO save(@RequestBody @Validated AppServiceBean po, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultVO.failure(bindingResult.getAllErrors().get(0));
         }
@@ -53,7 +53,7 @@ public class AppServiceController {
 
     @Operation(summary = "删除AppService")
     @PostMapping(value = "deleteAppService")
-    public ResultVO delete(@RequestBody AppService po) {
+    public ResultVO delete(@RequestBody AppServiceBean po) {
         if (po.getId() == null) {
             return ResultVO.failure();
         }

@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.example.cyjcommon.entity.bean.AppService;
+import com.example.cyjcommon.entity.bean.AppServiceBean;
 import com.example.cyjcommon.entity.bean.Authority;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,9 +57,9 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
                             .eq(Authority::getStatus, "有效"));
             for (Authority po : authorityList) {
                 String path = po.getAuthorityPath();
-                AppService appService = new AppService().selectById(po.getAppServiceId());
-                if (appService != null) {
-                    path = "/" + appService.getAppServiceName() + "/" + path;
+                AppServiceBean appServiceBean = new AppServiceBean().selectById(po.getAppServiceId());
+                if (appServiceBean != null) {
+                    path = "/" + appServiceBean.getAppServiceName() + "/" + path;
                 }
                 ConfigAttribute configAttribute = new SecurityConfig(path);
                 configAttributes.add(configAttribute);

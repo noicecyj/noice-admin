@@ -1,13 +1,15 @@
 import {request} from 'ice';
 
 export default {
-  page(pageNumber) {
+  page(data, pageNumber, pageSize) {
     return request({
       url: '/entityCreateApi/pagePersistent',
       method: 'post',
       params: {
         pageNumber,
+        pageSize,
       },
+      data,
     });
   },
   save(data) {
@@ -22,26 +24,6 @@ export default {
       url: '/entityCreateApi/deletePersistent',
       method: 'post',
       data,
-    });
-  },
-  pageAuthorityByPersistent(pageNumber, id) {
-    return request({
-      url: '/entityCreateApi/pageAuthorityByPersistent',
-      method: 'post',
-      params: {
-        pageNumber,
-        id,
-      },
-    });
-  },
-  pagePropertyByPersistent(pageNumber, id) {
-    return request({
-      url: '/entityCreateApi/pagePropertyByPersistent',
-      method: 'post',
-      params: {
-        pageNumber,
-        id,
-      },
     });
   },
 };

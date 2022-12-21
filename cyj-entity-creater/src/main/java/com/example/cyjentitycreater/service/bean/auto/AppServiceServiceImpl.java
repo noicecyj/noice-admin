@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.cyjcommon.entity.bean.AppService;
+import com.example.cyjcommon.entity.bean.AppServiceBean;
 import com.example.cyjcommon.mapper.bean.AppServiceMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -16,34 +16,34 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class AppServiceServiceImpl
-        extends ServiceImpl<AppServiceMapper, AppService>
-        implements IService<AppService> {
+        extends ServiceImpl<AppServiceMapper, AppServiceBean>
+        implements IService<AppServiceBean> {
 
-    public AppService addOne(AppService po) {
+    public AppServiceBean addOne(AppServiceBean po) {
         po.insert();
         return po;
     }
 
-    public void deleteOne(AppService po) {
+    public void deleteOne(AppServiceBean po) {
         po.deleteById();
     }
 
-    public AppService updateOne(AppService po) {
+    public AppServiceBean updateOne(AppServiceBean po) {
         po.updateById();
         return po;
     }
 
-    public Page<AppService> findAll(AppService po, Integer pageNumber, Integer pageSize) {
-        Page<AppService> page = new Page<>(pageNumber, pageSize);
-        LambdaQueryWrapper<AppService> queryWrapper = searchHandler(po);
-        return new AppService().selectPage(page, queryWrapper);
+    public Page<AppServiceBean> findAll(AppServiceBean po, Integer pageNumber, Integer pageSize) {
+        Page<AppServiceBean> page = new Page<>(pageNumber, pageSize);
+        LambdaQueryWrapper<AppServiceBean> queryWrapper = searchHandler(po);
+        return new AppServiceBean().selectPage(page, queryWrapper);
     }
 
-    private LambdaQueryWrapper<AppService> searchHandler(AppService po) {
-        return new LambdaQueryWrapper<AppService>()
+    private LambdaQueryWrapper<AppServiceBean> searchHandler(AppServiceBean po) {
+        return new LambdaQueryWrapper<AppServiceBean>()
                 .like(StringUtils.isNotEmpty(po.getAppServiceName()),
-                        AppService::getAppServiceName, po.getAppServiceName())
-                .orderByAsc(AppService::getSortCode);
+                        AppServiceBean::getAppServiceName, po.getAppServiceName())
+                .orderByAsc(AppServiceBean::getSortCode);
     }
 
 }

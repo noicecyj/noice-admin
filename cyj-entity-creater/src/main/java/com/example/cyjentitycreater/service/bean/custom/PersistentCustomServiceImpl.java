@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.cyjcommon.contants.Constant;
-import com.example.cyjcommon.entity.bean.AppService;
+import com.example.cyjcommon.entity.bean.AppServiceBean;
 import com.example.cyjcommon.entity.bean.Authority;
 import com.example.cyjcommon.entity.bean.Persistent;
 import com.example.cyjcommon.entity.bean.Property;
@@ -77,7 +77,7 @@ public class PersistentCustomServiceImpl
 
     private void authorityHandler(Persistent persistent) {
         boolean isBeanFlag = persistent.getPersistentRelation() == 0;
-        AppService appService = new AppService().selectById(persistent.getAppServiceId());
+        AppServiceBean appServiceBean = new AppServiceBean().selectById(persistent.getAppServiceId());
         //驼峰名
         String underPoName = BeanUtils.underline2Camel(persistent.getPersistentCode());
         //文件名
@@ -93,10 +93,10 @@ public class PersistentCustomServiceImpl
             findAll.setAuthorityCode("page" + poName);
             findAll.setAuthorityName("查询" + poName);
             findAll.setAuthorityMethod(POST);
-            findAll.setAuthorityPath(appService.getAppServiceApi() + "/page" + poName);
+            findAll.setAuthorityPath(appServiceBean.getAppServiceApi() + "/page" + poName);
             findAll.setAuthorityType(Constant.SELECT);
             findAll.setPersistentId(persistent.getId());
-            findAll.setAppServiceId(appService.getId());
+            findAll.setAppServiceId(appServiceBean.getId());
             findAll.setSortCode(count);
             findAll.setStatus(Constant.STATUS);
             findAll.insert();
@@ -105,10 +105,10 @@ public class PersistentCustomServiceImpl
             save.setAuthorityCode("save" + poName);
             save.setAuthorityName("保存" + poName);
             save.setAuthorityMethod(POST);
-            save.setAuthorityPath(appService.getAppServiceApi() + "/save" + poName);
+            save.setAuthorityPath(appServiceBean.getAppServiceApi() + "/save" + poName);
             save.setAuthorityType(Constant.SAVE);
             save.setPersistentId(persistent.getId());
-            save.setAppServiceId(appService.getId());
+            save.setAppServiceId(appServiceBean.getId());
             save.setSortCode(count);
             save.setStatus(Constant.STATUS);
             save.insert();
@@ -117,10 +117,10 @@ public class PersistentCustomServiceImpl
             delete.setAuthorityCode("delete" + poName);
             delete.setAuthorityName("删除" + poName);
             delete.setAuthorityMethod(POST);
-            delete.setAuthorityPath(appService.getAppServiceApi() + "/delete" + poName);
+            delete.setAuthorityPath(appServiceBean.getAppServiceApi() + "/delete" + poName);
             delete.setAuthorityType(Constant.DELETE);
             delete.setPersistentId(persistent.getId());
-            delete.setAppServiceId(appService.getId());
+            delete.setAppServiceId(appServiceBean.getId());
             delete.setSortCode(count);
             delete.setStatus(Constant.STATUS);
             delete.insert();
@@ -130,10 +130,10 @@ public class PersistentCustomServiceImpl
             set.setAuthorityCode("get" + poName);
             set.setAuthorityName("查询" + poName + "关联关系");
             set.setAuthorityMethod(POST);
-            set.setAuthorityPath(appService.getAppServiceApi() + "/get" + poName);
+            set.setAuthorityPath(appServiceBean.getAppServiceApi() + "/get" + poName);
             set.setAuthorityType(Constant.GET);
             set.setPersistentId(persistent.getId());
-            set.setAppServiceId(appService.getId());
+            set.setAppServiceId(appServiceBean.getId());
             set.setSortCode(count);
             set.setStatus(Constant.STATUS);
             set.insert();
@@ -142,10 +142,10 @@ public class PersistentCustomServiceImpl
             get.setAuthorityCode("set" + poName);
             get.setAuthorityName("保存" + poName + "关联关系");
             get.setAuthorityMethod(POST);
-            get.setAuthorityPath(appService.getAppServiceApi() + "/set" + poName);
+            get.setAuthorityPath(appServiceBean.getAppServiceApi() + "/set" + poName);
             get.setAuthorityType(Constant.SET);
             get.setPersistentId(persistent.getId());
-            get.setAppServiceId(appService.getId());
+            get.setAppServiceId(appServiceBean.getId());
             get.setSortCode(count);
             get.setStatus(Constant.STATUS);
             get.insert();
@@ -179,7 +179,7 @@ public class PersistentCustomServiceImpl
 //    }
 
     private void authorityDeleteHandler(Persistent persistent) {
-        AppService appService = new AppService().selectById(persistent.getAppServiceId());
+        AppServiceBean appServiceBean = new AppServiceBean().selectById(persistent.getAppServiceId());
         List<Property> propertyList = new Property().selectList(new LambdaQueryWrapper<Property>()
                 .eq(Property::getPersistentId, persistent.getId()));
 //        List<Property> outPropertyList = propertyList.stream().filter(property -> BeanUtils.YES.equals(property.getPropertyOut())).collect(Collectors.toList());
@@ -188,7 +188,7 @@ public class PersistentCustomServiceImpl
         //文件名
         String poName = BeanUtils.captureName(underPoName);
         Authority findAll = new Authority().selectOne(new LambdaQueryWrapper<Authority>()
-                .eq(Authority::getAuthorityPath, appService.getAppServiceApi() + "/page" + poName));
+                .eq(Authority::getAuthorityPath, appServiceBean.getAppServiceApi() + "/page" + poName));
         if (findAll != null) {
             findAll.deleteById();
         }
@@ -196,19 +196,19 @@ public class PersistentCustomServiceImpl
 //            String underPropertyPoName = BeanUtils.underline2Camel(property.getPropertyCode());
 //            String propertyPoName = BeanUtils.captureName(underPropertyPoName);
 //            if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
-//                oneToManyAuthorityDeleteHandler(appService, poName, propertyPoName);
+//                oneToManyAuthorityDeleteHandler(appServiceBean, poName, propertyPoName);
 //            }
 //            if (BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())) {
-//                manyToManyAuthorityDeleteHandler(appService, poName, propertyPoName);
+//                manyToManyAuthorityDeleteHandler(appServiceBean, poName, propertyPoName);
 //            }
 //        }
         Authority save = new Authority().selectOne(new LambdaQueryWrapper<Authority>()
-                .eq(Authority::getAuthorityPath, appService.getAppServiceApi() + "/save" + poName));
+                .eq(Authority::getAuthorityPath, appServiceBean.getAppServiceApi() + "/save" + poName));
         if (save != null) {
             save.deleteById();
         }
         Authority delete = new Authority().selectOne(new LambdaQueryWrapper<Authority>()
-                .eq(Authority::getAuthorityPath, appService.getAppServiceApi() + "/delete" + poName));
+                .eq(Authority::getAuthorityPath, appServiceBean.getAppServiceApi() + "/delete" + poName));
         if (delete != null) {
             delete.deleteById();
         }
@@ -220,12 +220,12 @@ public class PersistentCustomServiceImpl
         String underPoName = BeanUtils.underline2Camel(persistentCode);
         //文件名
         String poName = BeanUtils.captureName(underPoName);
-        AppService appService = new AppService().selectById(persistent.getAppServiceId());
-        if (appService == null) {
+        AppServiceBean appServiceBean = new AppServiceBean().selectById(persistent.getAppServiceId());
+        if (appServiceBean == null) {
             return;
         }
         //服务路径
-        String appPath = appService.getAppServicePath();
+        String appPath = appServiceBean.getAppServicePath();
         Map<String, String> entityObj = new HashMap<>();
         entityObj.put(commonPath + "/entity", poName + ".java");
         entityObj.put(commonPath + "/dao", poName + "Dao.java");
@@ -275,14 +275,14 @@ public class PersistentCustomServiceImpl
         String underPoName = BeanUtils.underline2Camel(persistentCode);
         //文件名
         String poName = BeanUtils.captureName(underPoName);
-        AppService appService = new AppService().selectById(persistent.getAppServiceId());
-        if (appService == null) {
+        AppServiceBean appServiceBean = new AppServiceBean().selectById(persistent.getAppServiceId());
+        if (appServiceBean == null) {
             return;
         }
         //服务路径
-        String appPath = appService.getAppServicePath();
+        String appPath = appServiceBean.getAppServicePath();
         //服务接口
-        String appApi = appService.getAppServiceApi();
+        String appApi = appServiceBean.getAppServiceApi();
         List<Property> propertyList = new Property().selectList(new LambdaQueryWrapper<Property>()
                 .eq(Property::getPersistentId, persistent.getId())
                 .orderByAsc(Property::getSortCode));
@@ -926,7 +926,7 @@ public class PersistentCustomServiceImpl
         sb.append("@EqualsAndHashCode(callSuper = true)\r\n");
         sb.append("@Data\r\n");
         sb.append("@TableName(\"t_").append(persistent.getPersistentCode()).append("\")\r\n");
-        sb.append("public class ").append(poName).append(" extends Model<").append(poName).append("> {\r\n");
+        sb.append("public class ").append(poName).append("Bean extends Model<").append(poName).append("Bean> {\r\n");
         sb.append("\r\n");
         sb.append("    @TableId(value = \"id\", type = IdType.ASSIGN_UUID)\r\n");
         sb.append("    private String id;\r\n");
@@ -965,14 +965,14 @@ public class PersistentCustomServiceImpl
         String entityMapperData = "package com.example.cyjcommon.mapper." + (persistent.getPersistentRelation() == 0 ? "bean" : "relation") + ";\r\n" +
                 "\r\n" +
                 "import com.baomidou.mybatisplus.core.mapper.BaseMapper;\r\n" +
-                "import com.example.cyjcommon.entity." + (persistent.getPersistentRelation() == 0 ? "bean" : "relation") + "." + poName + ";\r\n" +
+                "import com.example.cyjcommon.entity." + (persistent.getPersistentRelation() == 0 ? "bean" : "relation") + "." + poName + "Bean;\r\n" +
                 "import org.apache.ibatis.annotations.Mapper;\r\n" +
                 "\r\n" +
                 "/**\r\n" +
                 " * @author Noice\r\n" +
                 " */\r\n" +
                 "@Mapper\r\n" +
-                "public interface " + poName + "Mapper extends BaseMapper<" + poName + "> {\r\n" +
+                "public interface " + poName + "Mapper extends BaseMapper<" + poName + "Bean> {\r\n" +
                 "\r\n" +
                 "}";
         return new String[]{entityMapperData, poName + "Mapper.java"};
@@ -994,7 +994,7 @@ public class PersistentCustomServiceImpl
         }
         sb.append("import com.baomidou.mybatisplus.extension.service.IService;\r\n");
         sb.append("import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;\r\n");
-        sb.append("import com.example.cyjcommon.entity.").append(isBeanFlag ? "bean" : "relation").append(".").append(poName).append(";\r\n");
+        sb.append("import com.example.cyjcommon.entity.").append(isBeanFlag ? "bean" : "relation").append(".").append(poName).append("Bean;\r\n");
         sb.append("import com.example.cyjcommon.mapper.").append(isBeanFlag ? "bean" : "relation").append(".").append(poName).append("Mapper;\r\n");
         sb.append("import org.apache.commons.lang3.StringUtils;\r\n");
         sb.append("import org.springframework.stereotype.Service;\r\n");
@@ -1010,32 +1010,32 @@ public class PersistentCustomServiceImpl
         sb.append("@Service\r\n");
         sb.append("@Transactional(rollbackFor = Exception.class)\r\n");
         sb.append("public class ").append(poName).append("ServiceImpl\r\n");
-        sb.append("        extends ServiceImpl<").append(poName).append("Mapper, ").append(poName).append(">\r\n");
-        sb.append("        implements IService<").append(poName).append("> {\r\n");
+        sb.append("        extends ServiceImpl<").append(poName).append("Mapper, ").append(poName).append("Bean>\r\n");
+        sb.append("        implements IService<").append(poName).append("Bean> {\r\n");
         sb.append("\r\n");
         if (isBeanFlag) {
-            sb.append("    public ").append(poName).append(" addOne(").append(poName).append(" po) {\r\n");
+            sb.append("    public ").append(poName).append("Bean addOne(").append(poName).append("Bean po) {\r\n");
             sb.append("        po.insert();\r\n");
             sb.append("        return po;\r\n");
             sb.append("    }\r\n");
             sb.append("\r\n");
-            sb.append("    public void deleteOne(").append(poName).append(" po) {\r\n");
+            sb.append("    public void deleteOne(").append(poName).append("Bean po) {\r\n");
             sb.append("        po.deleteById();\r\n");
             sb.append("    }\r\n");
             sb.append("\r\n");
-            sb.append("    public ").append(poName).append(" updateOne(").append(poName).append(" po) {\r\n");
+            sb.append("    public ").append(poName).append("Bean updateOne(").append(poName).append("Bean po) {\r\n");
             sb.append("        po.updateById();\r\n");
             sb.append("        return po;\r\n");
             sb.append("    }\r\n");
             sb.append("\r\n");
-            sb.append("    public Page<").append(poName).append("> findAll(").append(poName).append(" po, Integer pageNumber, Integer pageSize) {\r\n");
-            sb.append("        Page<").append(poName).append("> page = new Page<>(pageNumber, pageSize);\r\n");
-            sb.append("        LambdaQueryWrapper<").append(poName).append("> queryWrapper = searchHandler(po);\r\n");
-            sb.append("        return new ").append(poName).append("().selectPage(page, queryWrapper);\r\n");
+            sb.append("    public Page<").append(poName).append("Bean> findAll(").append(poName).append("Bean po, Integer pageNumber, Integer pageSize) {\r\n");
+            sb.append("        Page<").append(poName).append("Bean> page = new Page<>(pageNumber, pageSize);\r\n");
+            sb.append("        LambdaQueryWrapper<").append(poName).append("Bean> queryWrapper = searchHandler(po);\r\n");
+            sb.append("        return new ").append(poName).append("Bean().selectPage(page, queryWrapper);\r\n");
             sb.append("    }\r\n");
             sb.append("\r\n");
-            sb.append("    private LambdaQueryWrapper<").append(poName).append("> searchHandler(").append(poName).append(" po) {\r\n");
-            sb.append("        return new LambdaQueryWrapper<").append(poName).append(">()\r\n");
+            sb.append("    private LambdaQueryWrapper<").append(poName).append("Bean> searchHandler(").append(poName).append("Bean po) {\r\n");
+            sb.append("        return new LambdaQueryWrapper<").append(poName).append("Bean>()\r\n");
             for (Property property : relationPropertyList) {
                 String propertyCode = property.getPropertyCode();
                 //驼峰名
@@ -1043,11 +1043,11 @@ public class PersistentCustomServiceImpl
                 //文件名
                 String propertyName = BeanUtils.captureName(underPropertyName);
                 sb.append("                .eq(StringUtils.isNotEmpty(po.get").append(propertyName).append("()),\r\n");
-                sb.append("                        ").append(poName).append("::get").append(propertyName).append(", po.get").append(propertyName).append("())\r\n");
+                sb.append("                        ").append(poName).append("Bean::get").append(propertyName).append(", po.get").append(propertyName).append("())\r\n");
             }
             sb.append("                .like(StringUtils.isNotEmpty(po.get").append(poName).append("Name()),\r\n");
-            sb.append("                        ").append(poName).append("::get").append(poName).append("Name, po.get").append(poName).append("Name())\r\n");
-            sb.append("                .orderByAsc(").append(poName).append("::getSortCode);\r\n");
+            sb.append("                        ").append(poName).append("Bean::get").append(poName).append("Name, po.get").append(poName).append("Name())\r\n");
+            sb.append("                .orderByAsc(").append(poName).append("Bean::getSortCode);\r\n");
             sb.append("    }\r\n");
         } else {
             sb.append("    public List<").append(poName).append("> get").append(poName).append("(").append(poName).append(" po) {\r\n");
@@ -1091,7 +1091,7 @@ public class PersistentCustomServiceImpl
         String poControllerPath = packetPath + ".controller." + (isBeanFlag ? "bean" : "relation") + ".auto;\r\n";
         sb.append("package ").append(poControllerPath);
         sb.append("\r\n");
-        sb.append("import com.example.cyjcommon.entity.").append(isBeanFlag ? "bean" : "relation").append(".").append(poName).append(";\r\n");
+        sb.append("import com.example.cyjcommon.entity.").append(isBeanFlag ? "bean" : "relation").append(".").append(poName).append("Bean;\r\n");
         sb.append("import com.example.cyjcommon.utils.ResultVO;\r\n");
         sb.append("import ").append(poServicePath).append(poName).append("ServiceImpl;\r\n");
         sb.append("import io.swagger.v3.oas.annotations.Operation;\r\n");
@@ -1120,7 +1120,7 @@ public class PersistentCustomServiceImpl
         sb.append("@CrossOrigin\r\n");
         sb.append("@RestController\r\n");
         sb.append("@RequestMapping(\"").append(appApi).append("\")\r\n");
-        sb.append("@Tag(name = \"").append(poName).append("\")\r\n");
+        sb.append("@Tag(name = \"").append(poName).append("Bean\")\r\n");
         sb.append("public class ").append(poName).append("Controller {\r\n");
         sb.append("\r\n");
         sb.append("    private ").append(poName).append("ServiceImpl service;\r\n");
@@ -1133,7 +1133,7 @@ public class PersistentCustomServiceImpl
         if (isBeanFlag) {
             sb.append("    @Operation(summary = \"分页查询所有").append(poName).append("\")\r\n");
             sb.append("    @PostMapping(value = \"page").append(poName).append("\")\r\n");
-            sb.append("    public ResultVO page(@RequestBody @Validated ").append(poName).append(" po,\r\n");
+            sb.append("    public ResultVO page(@RequestBody @Validated ").append(poName).append("Bean po,\r\n");
             sb.append("                         @RequestParam(\"pageNumber\") Integer pageNumber,\r\n");
             sb.append("                         @RequestParam(\"pageSize\") Integer pageSize) {\r\n");
             sb.append("        return ResultVO.success(service.findAll(po, pageNumber, pageSize));\r\n");
@@ -1141,7 +1141,7 @@ public class PersistentCustomServiceImpl
             sb.append("\r\n");
             sb.append("    @Operation(summary = \"保存").append(poName).append("\")\r\n");
             sb.append("    @PostMapping(value = \"save").append(poName).append("\")\r\n");
-            sb.append("    public ResultVO save(@RequestBody @Validated ").append(poName).append(" po, BindingResult bindingResult) {\r\n");
+            sb.append("    public ResultVO save(@RequestBody @Validated ").append(poName).append("Bean po, BindingResult bindingResult) {\r\n");
             sb.append("        if (bindingResult.hasErrors()) {\r\n");
             sb.append("            return ResultVO.failure(bindingResult.getAllErrors().get(0));\r\n");
             sb.append("        }\r\n");
@@ -1153,7 +1153,7 @@ public class PersistentCustomServiceImpl
             sb.append("\r\n");
             sb.append("    @Operation(summary = \"删除").append(poName).append("\")\r\n");
             sb.append("    @PostMapping(value = \"delete").append(poName).append("\")\r\n");
-            sb.append("    public ResultVO delete(@RequestBody ").append(poName).append(" po) {\r\n");
+            sb.append("    public ResultVO delete(@RequestBody ").append(poName).append("Bean po) {\r\n");
             sb.append("        if (po.getId() == null) {\r\n");
             sb.append("            return ResultVO.failure();\r\n");
             sb.append("        }\r\n");
@@ -1198,7 +1198,7 @@ public class PersistentCustomServiceImpl
         sb.append("@CrossOrigin\r\n");
         sb.append("@RestController\r\n");
         sb.append("@RequestMapping(\"").append(appApi).append("\")\r\n");
-        sb.append("@Tag(name = \"").append(poName).append("\")\r\n");
+        sb.append("@Tag(name = \"").append(poName).append("Bean\")\r\n");
         sb.append("public class ").append(poName).append("CustomController {\r\n");
         sb.append("}");
         String entityControllerData = sb.toString();
@@ -1217,7 +1217,7 @@ public class PersistentCustomServiceImpl
         sb.append("\r\n");
         sb.append("import com.baomidou.mybatisplus.extension.service.IService;\r\n");
         sb.append("import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;\r\n");
-        sb.append("import com.example.cyjcommon.entity.").append(isBeanFlag ? "bean" : "relation").append(".").append(poName).append(";\r\n");
+        sb.append("import com.example.cyjcommon.entity.").append(isBeanFlag ? "bean" : "relation").append(".").append(poName).append("Bean;\r\n");
         sb.append("import com.example.cyjcommon.mapper.").append(isBeanFlag ? "bean" : "relation").append(".").append(poName).append("Mapper;\r\n");
         sb.append("import org.aspectj.lang.JoinPoint;\r\n");
         sb.append("import org.aspectj.lang.annotation.After;\r\n");
@@ -1235,8 +1235,8 @@ public class PersistentCustomServiceImpl
         sb.append("@Service\r\n");
         sb.append("@Transactional(rollbackFor = Exception.class)\r\n");
         sb.append("public class ").append(poName).append("CustomServiceImpl\r\n");
-        sb.append("        extends ServiceImpl<").append(poName).append("Mapper, ").append(poName).append(">\r\n");
-        sb.append("        implements IService<").append(poName).append("> {\r\n");
+        sb.append("        extends ServiceImpl<").append(poName).append("Mapper, ").append(poName).append("Bean>\r\n");
+        sb.append("        implements IService<").append(poName).append("Bean> {\r\n");
         sb.append("\r\n");
         sb.append("    private static final Logger logger = LoggerFactory.getLogger(").append(poName).append("CustomServiceImpl.class);\r\n");
         sb.append("\r\n");

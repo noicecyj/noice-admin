@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @TableName("t_app_service")
-public class AppService extends Model<AppService> {
+public class AppServiceBean extends Model<AppServiceBean> {
 
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;

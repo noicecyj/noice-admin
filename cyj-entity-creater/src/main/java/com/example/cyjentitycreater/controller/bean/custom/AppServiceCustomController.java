@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping("entityCreateApi")
-@Tag(name = "AppService")
+@Tag(name = "AppServiceBean")
 public class AppServiceCustomController {
 }

@@ -1,8 +1,7 @@
 package com.example.cyjcommon.utils;
 
-import com.example.cyjcommon.entity.bean.AppService;
+import com.example.cyjcommon.entity.bean.AppServiceBean;
 import com.example.cyjcommon.entity.bean.Property;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -189,7 +188,7 @@ public class BeanUtils {
 //        return false;
 //    }
 
-    public static String AppFileName(AppService po) {
+    public static String AppFileName(AppServiceBean po) {
         return BeanUtils.captureName(underline2Camel2(po.getAppServiceName())) + "Application.java";
     }
 
