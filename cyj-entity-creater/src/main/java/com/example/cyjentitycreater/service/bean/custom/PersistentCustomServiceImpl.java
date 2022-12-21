@@ -1217,7 +1217,7 @@ public class PersistentCustomServiceImpl
         sb.append("\r\n");
         sb.append("import com.baomidou.mybatisplus.extension.service.IService;\r\n");
         sb.append("import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;\r\n");
-        sb.append("import com.example.cyjcommon.entity.").append(isBeanFlag ? "bean" : "relation").append(".").append(poName).append("Bean;\r\n");
+        sb.append("import com.example.cyjcommon.entity.").append(isBeanFlag ? "bean" : "relation").append(".").append(poName).append(isBeanFlag ? "Bean" : "Relation").append(";\r\n");
         sb.append("import com.example.cyjcommon.mapper.").append(isBeanFlag ? "bean" : "relation").append(".").append(poName).append("Mapper;\r\n");
         sb.append("import org.aspectj.lang.JoinPoint;\r\n");
         sb.append("import org.aspectj.lang.annotation.After;\r\n");
@@ -1235,8 +1235,8 @@ public class PersistentCustomServiceImpl
         sb.append("@Service\r\n");
         sb.append("@Transactional(rollbackFor = Exception.class)\r\n");
         sb.append("public class ").append(poName).append("CustomServiceImpl\r\n");
-        sb.append("        extends ServiceImpl<").append(poName).append("Mapper, ").append(poName).append("Bean>\r\n");
-        sb.append("        implements IService<").append(poName).append("Bean> {\r\n");
+        sb.append("        extends ServiceImpl<").append(poName).append("Mapper, ").append(poName).append(isBeanFlag ? "Bean" : "Relation").append(">\r\n");
+        sb.append("        implements IService<").append(poName).append(isBeanFlag ? "Bean" : "Relation").append("> {\r\n");
         sb.append("\r\n");
         sb.append("    private static final Logger logger = LoggerFactory.getLogger(").append(poName).append("CustomServiceImpl.class);\r\n");
         sb.append("\r\n");
@@ -1279,8 +1279,6 @@ public class PersistentCustomServiceImpl
             sb.append("    @After(value = \"execution(* ").append(aspectServicePath).append(poName).append("ServiceImpl.findAll(..))\")\r\n");
             sb.append("    public void findAllAfter(JoinPoint joinPoint) {\r\n");
             sb.append("        logger.info(\"").append(poName).append("Service.findAll.After:{}\", joinPoint);\r\n");
-            sb.append("    }\r\n");
-            sb.append("\r\n");
         } else {
             sb.append("    @Before(value = \"execution(* ").append(aspectServicePath).append(poName).append("ServiceImpl.get").append(poName).append("(..))\")\r\n");
             sb.append("    public void get").append(poName).append("Before(JoinPoint joinPoint) {\r\n");
@@ -1300,9 +1298,9 @@ public class PersistentCustomServiceImpl
             sb.append("    @After(value = \"execution(* ").append(aspectServicePath).append(poName).append("ServiceImpl.set").append(poName).append("(..))\")\r\n");
             sb.append("    public void set").append(poName).append("After(JoinPoint joinPoint) {\r\n");
             sb.append("        logger.info(\"").append(poName).append("Service.set").append(poName).append(".After:{}\", joinPoint);\r\n");
-            sb.append("    }\r\n");
-            sb.append("\r\n");
         }
+        sb.append("    }\r\n");
+        sb.append("\r\n");
         sb.append("}\r\n");
         String entityServiceData = sb.toString();
         return new String[]{entityServiceData, poName + "CustomServiceImpl.java"};
