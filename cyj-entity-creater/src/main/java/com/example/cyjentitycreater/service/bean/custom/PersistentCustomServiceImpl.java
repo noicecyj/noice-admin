@@ -291,7 +291,7 @@ public class PersistentCustomServiceImpl
         entityObj.put(commonPath + "/entity" + (isBeanFlag ? "/bean" : "/relation"),
                 poGenerate(persistent, propertyList, poName, isBeanFlag));
         entityObj.put(commonPath + "/mapper" + (isBeanFlag ? "/bean" : "/relation"),
-                mapperGenerate(persistent, poName));
+                mapperGenerate(poName, isBeanFlag));
         entityObj.put(appPath + "/service" + (isBeanFlag ? "/bean" : "/relation") + "/auto",
                 serviceGenerate(propertyList, poName, appPath, isBeanFlag));
         entityObj.put(appPath + "/controller" + (isBeanFlag ? "/bean" : "/relation") + "/auto",
@@ -961,18 +961,18 @@ public class PersistentCustomServiceImpl
         return new String[]{entityData, poName + (isBeanFlag ? "Bean" : "Relation") + ".java"};
     }
 
-    public String[] mapperGenerate(PersistentBean persistent, String poName) {
-        String entityMapperData = "package com.example.cyjcommon.mapper." + (persistent.getPersistentRelation() == 0 ? "bean" : "relation") + ";\r\n" +
+    public String[] mapperGenerate(String poName, boolean isBeanFlag) {
+        String entityMapperData = "package com.example.cyjcommon.mapper." + (isBeanFlag ? "bean" : "relation") + ";\r\n" +
                 "\r\n" +
                 "import com.baomidou.mybatisplus.core.mapper.BaseMapper;\r\n" +
-                "import com.example.cyjcommon.entity." + (persistent.getPersistentRelation() == 0 ? "bean" : "relation") + "." + poName + "Bean;\r\n" +
+                "import com.example.cyjcommon.entity." + (isBeanFlag ? "bean" : "relation") + "." + poName + (isBeanFlag ? "Bean" : "Relation") + ";\r\n" +
                 "import org.apache.ibatis.annotations.Mapper;\r\n" +
                 "\r\n" +
                 "/**\r\n" +
                 " * @author Noice\r\n" +
                 " */\r\n" +
                 "@Mapper\r\n" +
-                "public interface " + poName + "Mapper extends BaseMapper<" + poName + "Bean> {\r\n" +
+                "public interface " + poName + "Mapper extends BaseMapper<" + poName + (isBeanFlag ? "Bean" : "Relation") + "> {\r\n" +
                 "\r\n" +
                 "}";
         return new String[]{entityMapperData, poName + "Mapper.java"};
@@ -994,7 +994,7 @@ public class PersistentCustomServiceImpl
         }
         sb.append("import com.baomidou.mybatisplus.extension.service.IService;\r\n");
         sb.append("import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;\r\n");
-        sb.append("import com.example.cyjcommon.entity.").append(isBeanFlag ? "bean" : "relation").append(".").append(poName).append("Bean;\r\n");
+        sb.append("import com.example.cyjcommon.entity.").append(isBeanFlag ? "bean" : "relation").append(".").append(poName).append(isBeanFlag ? "Bean" : "Relation").append(";\r\n");
         sb.append("import com.example.cyjcommon.mapper.").append(isBeanFlag ? "bean" : "relation").append(".").append(poName).append("Mapper;\r\n");
         sb.append("import org.apache.commons.lang3.StringUtils;\r\n");
         sb.append("import org.springframework.stereotype.Service;\r\n");
@@ -1010,8 +1010,8 @@ public class PersistentCustomServiceImpl
         sb.append("@Service\r\n");
         sb.append("@Transactional(rollbackFor = Exception.class)\r\n");
         sb.append("public class ").append(poName).append("ServiceImpl\r\n");
-        sb.append("        extends ServiceImpl<").append(poName).append("Mapper, ").append(poName).append("Bean>\r\n");
-        sb.append("        implements IService<").append(poName).append("Bean> {\r\n");
+        sb.append("        extends ServiceImpl<").append(poName).append("Mapper, ").append(poName).append(isBeanFlag ? "Bean" : "Relation").append(">\r\n");
+        sb.append("        implements IService<").append(poName).append(isBeanFlag ? "Bean" : "Relation").append("> {\r\n");
         sb.append("\r\n");
         if (isBeanFlag) {
             sb.append("    public ").append(poName).append("Bean addOne(").append(poName).append("Bean po) {\r\n");
@@ -1050,8 +1050,8 @@ public class PersistentCustomServiceImpl
             sb.append("                .orderByAsc(").append(poName).append("Bean::getSortCode);\r\n");
             sb.append("    }\r\n");
         } else {
-            sb.append("    public List<").append(poName).append("> get").append(poName).append("(").append(poName).append(" po) {\r\n");
-            sb.append("        return new ").append(poName).append("().selectList(new LambdaQueryWrapper<").append(poName).append(">()\r\n");
+            sb.append("    public List<").append(poName).append("Relation").append("> get").append(poName).append("(").append(poName).append("Relation").append(" po) {\r\n");
+            sb.append("        return new ").append(poName).append("Relation").append("().selectList(new LambdaQueryWrapper<").append(poName).append("Relation").append(">()\r\n");
             for (PropertyBean property : relationPropertyList) {
                 String propertyCode = property.getPropertyCode();
                 //驼峰名
@@ -1059,17 +1059,17 @@ public class PersistentCustomServiceImpl
                 //文件名
                 String propertyName = BeanUtils.captureName(underPropertyName);
                 sb.append("                .eq(StringUtils.isNotEmpty(po.get").append(propertyName).append("()),\r\n");
-                sb.append("                        ").append(poName).append("::get").append(propertyName).append(", po.get").append(propertyName).append("())\r\n");
+                sb.append("                        ").append(poName).append("Relation").append("::get").append(propertyName).append(", po.get").append(propertyName).append("())\r\n");
             }
             sb.append("        );\r\n");
             sb.append("    }\r\n");
             sb.append("\r\n");
-            sb.append("    public void set").append(poName).append("(").append(poName).append(" po, List<").append(poName).append("> new").append(poName).append("List) {\r\n");
-            sb.append("        List<").append(poName).append("> old").append(poName).append("List = get").append(poName).append("(po);\r\n");
-            sb.append("        for (").append(poName).append(" old").append(poName).append(" : old").append(poName).append("List) {\r\n");
+            sb.append("    public void set").append(poName).append("(").append(poName).append("Relation").append(" po, List<").append(poName).append("Relation").append("> new").append(poName).append("List) {\r\n");
+            sb.append("        List<").append(poName).append("Relation").append("> old").append(poName).append("List = get").append(poName).append("(po);\r\n");
+            sb.append("        for (").append(poName).append("Relation").append(" old").append(poName).append(" : old").append(poName).append("List) {\r\n");
             sb.append("            old").append(poName).append(".deleteById();\r\n");
             sb.append("        }\r\n");
-            sb.append("        for (").append(poName).append(" new").append(poName).append(" : new").append(poName).append("List) {\r\n");
+            sb.append("        for (").append(poName).append("Relation").append(" new").append(poName).append(" : new").append(poName).append("List) {\r\n");
             sb.append("            new").append(poName).append(".insert();\r\n");
             sb.append("        }\r\n");
             sb.append("    }\r\n");
@@ -1161,14 +1161,14 @@ public class PersistentCustomServiceImpl
         } else {
             sb.append("    @Operation(summary = \"查询").append(poName).append("关联关系\")\r\n");
             sb.append("    @PostMapping(\"get").append(poName).append("\")\r\n");
-            sb.append("    public ResultVO get").append(poName).append("(@RequestBody @Validated ").append(poName).append(" po) {\r\n");
+            sb.append("    public ResultVO get").append(poName).append("(@RequestBody @Validated ").append(poName).append("Relation").append(" po) {\r\n");
             sb.append("        return ResultVO.success(service.get").append(poName).append("(po));\r\n");
             sb.append("    }\r\n");
             sb.append("\r\n");
             sb.append("    @Operation(summary = \"保存").append(poName).append("关联关系\")\r\n");
             sb.append("    @PostMapping(\"set").append(poName).append("\")\r\n");
-            sb.append("    public ResultVO set").append(poName).append("(@RequestBody @Validated ").append(poName).append(" po,\r\n");
-            sb.append("                                     @RequestBody @Validated List<").append(poName).append("> poList) {\r\n");
+            sb.append("    public ResultVO set").append(poName).append("(@RequestBody @Validated ").append(poName).append("Relation").append(" po,\r\n");
+            sb.append("                                     @RequestBody @Validated List<").append(poName).append("Relation").append("> poList) {\r\n");
             sb.append("        service.set").append(poName).append("(po, poList);\r\n");
         }
         sb.append("        return ResultVO.success();\r\n");
