@@ -1,6 +1,6 @@
 package com.example.cyjentitycreater.controller.bean.auto;
 
-import com.example.cyjcommon.entity.bean.Property;
+import com.example.cyjcommon.entity.bean.PropertyBean;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.service.bean.auto.PropertyServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping("entityCreateApi")
-@Tag(name = "Property")
+@Tag(name = "PropertyBean")
 public class PropertyController {
 
     private PropertyServiceImpl service;
@@ -33,7 +33,7 @@ public class PropertyController {
 
     @Operation(summary = "分页查询所有Property")
     @PostMapping(value = "pageProperty")
-    public ResultVO page(@RequestBody @Validated Property po,
+    public ResultVO page(@RequestBody @Validated PropertyBean po,
                          @RequestParam("pageNumber") Integer pageNumber,
                          @RequestParam("pageSize") Integer pageSize) {
         return ResultVO.success(service.findAll(po, pageNumber, pageSize));
@@ -41,7 +41,7 @@ public class PropertyController {
 
     @Operation(summary = "保存Property")
     @PostMapping(value = "saveProperty")
-    public ResultVO save(@RequestBody @Validated Property po, BindingResult bindingResult) {
+    public ResultVO save(@RequestBody @Validated PropertyBean po, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultVO.failure(bindingResult.getAllErrors().get(0));
         }
@@ -53,7 +53,7 @@ public class PropertyController {
 
     @Operation(summary = "删除Property")
     @PostMapping(value = "deleteProperty")
-    public ResultVO delete(@RequestBody Property po) {
+    public ResultVO delete(@RequestBody PropertyBean po) {
         if (po.getId() == null) {
             return ResultVO.failure();
         }

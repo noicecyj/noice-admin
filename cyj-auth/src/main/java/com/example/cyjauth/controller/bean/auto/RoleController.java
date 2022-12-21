@@ -1,6 +1,6 @@
 package com.example.cyjauth.controller.bean.auto;
 
-import com.example.cyjcommon.entity.bean.Role;
+import com.example.cyjcommon.entity.bean.RoleBean;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjauth.service.bean.auto.RoleServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping("authApi")
-@Tag(name = "Role")
+@Tag(name = "RoleBean")
 public class RoleController {
 
     private RoleServiceImpl service;
@@ -33,7 +33,7 @@ public class RoleController {
 
     @Operation(summary = "分页查询所有Role")
     @PostMapping(value = "pageRole")
-    public ResultVO page(@RequestBody @Validated Role po,
+    public ResultVO page(@RequestBody @Validated RoleBean po,
                          @RequestParam("pageNumber") Integer pageNumber,
                          @RequestParam("pageSize") Integer pageSize) {
         return ResultVO.success(service.findAll(po, pageNumber, pageSize));
@@ -41,7 +41,7 @@ public class RoleController {
 
     @Operation(summary = "保存Role")
     @PostMapping(value = "saveRole")
-    public ResultVO save(@RequestBody @Validated Role po, BindingResult bindingResult) {
+    public ResultVO save(@RequestBody @Validated RoleBean po, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultVO.failure(bindingResult.getAllErrors().get(0));
         }
@@ -53,7 +53,7 @@ public class RoleController {
 
     @Operation(summary = "删除Role")
     @PostMapping(value = "deleteRole")
-    public ResultVO delete(@RequestBody Role po) {
+    public ResultVO delete(@RequestBody RoleBean po) {
         if (po.getId() == null) {
             return ResultVO.failure();
         }

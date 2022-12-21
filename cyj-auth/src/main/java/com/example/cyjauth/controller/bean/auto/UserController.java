@@ -1,6 +1,6 @@
 package com.example.cyjauth.controller.bean.auto;
 
-import com.example.cyjcommon.entity.bean.User;
+import com.example.cyjcommon.entity.bean.UserBean;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjauth.service.bean.auto.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping("authApi")
-@Tag(name = "User")
+@Tag(name = "UserBean")
 public class UserController {
 
     private UserServiceImpl service;
@@ -33,7 +33,7 @@ public class UserController {
 
     @Operation(summary = "分页查询所有User")
     @PostMapping(value = "pageUser")
-    public ResultVO page(@RequestBody @Validated User po,
+    public ResultVO page(@RequestBody @Validated UserBean po,
                          @RequestParam("pageNumber") Integer pageNumber,
                          @RequestParam("pageSize") Integer pageSize) {
         return ResultVO.success(service.findAll(po, pageNumber, pageSize));
@@ -41,7 +41,7 @@ public class UserController {
 
     @Operation(summary = "保存User")
     @PostMapping(value = "saveUser")
-    public ResultVO save(@RequestBody @Validated User po, BindingResult bindingResult) {
+    public ResultVO save(@RequestBody @Validated UserBean po, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultVO.failure(bindingResult.getAllErrors().get(0));
         }
@@ -53,7 +53,7 @@ public class UserController {
 
     @Operation(summary = "删除User")
     @PostMapping(value = "deleteUser")
-    public ResultVO delete(@RequestBody User po) {
+    public ResultVO delete(@RequestBody UserBean po) {
         if (po.getId() == null) {
             return ResultVO.failure();
         }

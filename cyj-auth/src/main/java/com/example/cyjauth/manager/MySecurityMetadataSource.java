@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.cyjcommon.entity.bean.AppServiceBean;
-import com.example.cyjcommon.entity.bean.Authority;
+import com.example.cyjcommon.entity.bean.AuthorityBean;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -52,10 +52,10 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
         //从redis中获取角色与权限数据
         String redisConfigAttributesPermission = redisTemplate.opsForValue().get("configAttributes:permissions");
         if (StringUtils.isBlank(redisConfigAttributesPermission)) {
-            List<Authority> authorityList = new Authority()
-                    .selectList(new QueryWrapper<Authority>().lambda()
-                            .eq(Authority::getStatus, "有效"));
-            for (Authority po : authorityList) {
+            List<AuthorityBean> authorityList = new AuthorityBean()
+                    .selectList(new QueryWrapper<AuthorityBean>().lambda()
+                            .eq(AuthorityBean::getStatus, "有效"));
+            for (AuthorityBean po : authorityList) {
                 String path = po.getAuthorityPath();
                 AppServiceBean appServiceBean = new AppServiceBean().selectById(po.getAppServiceId());
                 if (appServiceBean != null) {

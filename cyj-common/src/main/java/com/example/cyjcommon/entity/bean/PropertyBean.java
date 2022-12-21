@@ -15,23 +15,32 @@ import java.time.LocalDateTime;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@TableName("t_sql")
-public class Sql extends Model<Sql> {
+@TableName("t_property")
+public class PropertyBean extends Model<PropertyBean> {
 
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
-    @TableField("sql_code")
-    private String sqlCode;
+    @TableField("property_code")
+    private String propertyCode;
 
-    @TableField("sql_name")
-    private String sqlName;
+    @TableField("property_name")
+    private String propertyName;
 
-    @TableField("sql_str")
-    private String sqlStr;
+    @TableField("property_length")
+    private int propertyLength;
 
-    @TableField("sql_type")
-    private String sqlType;
+    @TableField("property_type")
+    private String propertyType;
+
+    @TableField("property_relation")
+    private int propertyRelation;
+
+    @TableField("property_null")
+    private int propertyNull;
+
+    @TableField("persistent_id")
+    private String persistentId;
 
     @TableField("status")
     private int status;

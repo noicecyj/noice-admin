@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.cyjcommon.entity.bean.Dictionary;
+import com.example.cyjcommon.entity.bean.DictionaryBean;
 import com.example.cyjcommon.mapper.bean.DictionaryMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -16,36 +16,36 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class DictionaryServiceImpl
-        extends ServiceImpl<DictionaryMapper, Dictionary>
-        implements IService<Dictionary> {
+        extends ServiceImpl<DictionaryMapper, DictionaryBean>
+        implements IService<DictionaryBean> {
 
-    public Dictionary addOne(Dictionary po) {
+    public DictionaryBean addOne(DictionaryBean po) {
         po.insert();
         return po;
     }
 
-    public void deleteOne(Dictionary po) {
+    public void deleteOne(DictionaryBean po) {
         po.deleteById();
     }
 
-    public Dictionary updateOne(Dictionary po) {
+    public DictionaryBean updateOne(DictionaryBean po) {
         po.updateById();
         return po;
     }
 
-    public Page<Dictionary> findAll(Dictionary po, Integer pageNumber, Integer pageSize) {
-        Page<Dictionary> page = new Page<>(pageNumber, pageSize);
-        LambdaQueryWrapper<Dictionary> queryWrapper = searchHandler(po);
-        return new Dictionary().selectPage(page, queryWrapper);
+    public Page<DictionaryBean> findAll(DictionaryBean po, Integer pageNumber, Integer pageSize) {
+        Page<DictionaryBean> page = new Page<>(pageNumber, pageSize);
+        LambdaQueryWrapper<DictionaryBean> queryWrapper = searchHandler(po);
+        return new DictionaryBean().selectPage(page, queryWrapper);
     }
 
-    private LambdaQueryWrapper<Dictionary> searchHandler(Dictionary po) {
-        return new LambdaQueryWrapper<Dictionary>()
+    private LambdaQueryWrapper<DictionaryBean> searchHandler(DictionaryBean po) {
+        return new LambdaQueryWrapper<DictionaryBean>()
                 .eq(StringUtils.isNotEmpty(po.getCatalogId()),
-                        Dictionary::getCatalogId, po.getCatalogId())
+                        DictionaryBean::getCatalogId, po.getCatalogId())
                 .like(StringUtils.isNotEmpty(po.getDictionaryName()),
-                        Dictionary::getDictionaryName, po.getDictionaryName())
-                .orderByAsc(Dictionary::getSortCode);
+                        DictionaryBean::getDictionaryName, po.getDictionaryName())
+                .orderByAsc(DictionaryBean::getSortCode);
     }
 
 }

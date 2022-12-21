@@ -2,7 +2,7 @@ package com.example.cyjentitycreater.service.bean.custom;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.cyjcommon.entity.bean.PersistentTable;
+import com.example.cyjcommon.entity.bean.PersistentTableBean;
 import com.example.cyjcommon.mapper.bean.PersistentTableMapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -20,8 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class PersistentTableCustomServiceImpl
-        extends ServiceImpl<PersistentTableMapper, PersistentTable>
-        implements IService<PersistentTable> {
+        extends ServiceImpl<PersistentTableMapper, PersistentTableBean>
+        implements IService<PersistentTableBean> {
 
     private static final Logger logger = LoggerFactory.getLogger(PersistentTableCustomServiceImpl.class);
 

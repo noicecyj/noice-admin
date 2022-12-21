@@ -15,23 +15,17 @@ import java.time.LocalDateTime;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@TableName("t_persistent_form")
-public class PersistentForm extends Model<PersistentForm> {
+@TableName("t_role")
+public class RoleBean extends Model<RoleBean> {
 
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
-    @TableField("persistent_form_name")
-    private String persistentFormName;
+    @TableField("role_code")
+    private String roleCode;
 
-    @TableField("persistent_form_type")
-    private String persistentFormType;
-
-    @TableField("persistent_form_row")
-    private int persistentFormRow;
-
-    @TableField("persistent_id")
-    private String persistentId;
+    @TableField("role_name")
+    private String roleName;
 
     @TableField("status")
     private int status;

@@ -15,17 +15,32 @@ import java.time.LocalDateTime;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@TableName("t_role")
-public class Role extends Model<Role> {
+@TableName("t_authority")
+public class AuthorityBean extends Model<AuthorityBean> {
 
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
-    @TableField("role_code")
-    private String roleCode;
+    @TableField("authority_code")
+    private String authorityCode;
 
-    @TableField("role_name")
-    private String roleName;
+    @TableField("authority_name")
+    private String authorityName;
+
+    @TableField("authority_method")
+    private String authorityMethod;
+
+    @TableField("authority_path")
+    private String authorityPath;
+
+    @TableField("authority_type")
+    private String authorityType;
+
+    @TableField("app_service_id")
+    private String appServiceId;
+
+    @TableField("persistent_id")
+    private String persistentId;
 
     @TableField("status")
     private int status;

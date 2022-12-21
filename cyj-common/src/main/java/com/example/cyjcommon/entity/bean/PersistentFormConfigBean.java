@@ -15,32 +15,35 @@ import java.time.LocalDateTime;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@TableName("t_property")
-public class Property extends Model<Property> {
+@TableName("t_persistent_form_config")
+public class PersistentFormConfigBean extends Model<PersistentFormConfigBean> {
 
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
-    @TableField("property_code")
-    private String propertyCode;
+    @TableField("persistent_form_config_name")
+    private String persistentFormConfigName;
 
-    @TableField("property_name")
-    private String propertyName;
+    @TableField("persistent_form_config_mode")
+    private String persistentFormConfigMode;
 
-    @TableField("property_length")
-    private int propertyLength;
+    @TableField("persistent_form_config_required")
+    private int persistentFormConfigRequired;
 
-    @TableField("property_type")
-    private String propertyType;
+    @TableField("persistent_form_config_default_value")
+    private String persistentFormConfigDefaultValue;
 
-    @TableField("property_relation")
-    private int propertyRelation;
+    @TableField("persistent_form_config_data_source")
+    private String persistentFormConfigDataSource;
 
-    @TableField("property_null")
-    private int propertyNull;
+    @TableField("persistent_form_config_direction")
+    private String persistentFormConfigDirection;
 
-    @TableField("persistent_id")
-    private String persistentId;
+    @TableField("persistent_form_config_edit")
+    private int persistentFormConfigEdit;
+
+    @TableField("persistent_form_id")
+    private String persistentFormId;
 
     @TableField("status")
     private int status;

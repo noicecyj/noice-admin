@@ -15,29 +15,14 @@ import java.time.LocalDateTime;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@TableName("t_authority")
-public class Authority extends Model<Authority> {
+@TableName("t_persistent_table")
+public class PersistentTableBean extends Model<PersistentTableBean> {
 
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
-    @TableField("authority_code")
-    private String authorityCode;
-
-    @TableField("authority_name")
-    private String authorityName;
-
-    @TableField("authority_method")
-    private String authorityMethod;
-
-    @TableField("authority_path")
-    private String authorityPath;
-
-    @TableField("authority_type")
-    private String authorityType;
-
-    @TableField("app_service_id")
-    private String appServiceId;
+    @TableField("persistent_table_name")
+    private String persistentTableName;
 
     @TableField("persistent_id")
     private String persistentId;

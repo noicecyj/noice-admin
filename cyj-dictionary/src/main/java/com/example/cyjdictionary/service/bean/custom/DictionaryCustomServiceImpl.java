@@ -3,8 +3,8 @@ package com.example.cyjdictionary.service.bean.custom;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.cyjcommon.entity.bean.Catalog;
-import com.example.cyjcommon.entity.bean.Dictionary;
+import com.example.cyjcommon.entity.bean.CatalogBean;
+import com.example.cyjcommon.entity.bean.DictionaryBean;
 import com.example.cyjcommon.mapper.bean.DictionaryMapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -25,19 +25,19 @@ import java.util.List;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class DictionaryCustomServiceImpl
-        extends ServiceImpl<DictionaryMapper, Dictionary>
-        implements IService<Dictionary> {
+        extends ServiceImpl<DictionaryMapper, DictionaryBean>
+        implements IService<DictionaryBean> {
 
-    public List<Dictionary> findCatalogByValue(String value) {
-        Catalog catalog = new Catalog()
-                .selectOne(new QueryWrapper<Catalog>().lambda()
-                        .eq(Catalog::getCatalogCode, value));
+    public List<DictionaryBean> findCatalogByValue(String value) {
+        CatalogBean catalog = new CatalogBean()
+                .selectOne(new QueryWrapper<CatalogBean>().lambda()
+                        .eq(CatalogBean::getCatalogCode, value));
         if (catalog == null) {
             return new ArrayList<>();
         }
-        return new Dictionary()
-                .selectList(new QueryWrapper<Dictionary>().lambda()
-                        .eq(Dictionary::getCatalogId, catalog.getId()));
+        return new DictionaryBean()
+                .selectList(new QueryWrapper<DictionaryBean>().lambda()
+                        .eq(DictionaryBean::getCatalogId, catalog.getId()));
     }
 
     private static final Logger logger = LoggerFactory.getLogger(DictionaryCustomServiceImpl.class);

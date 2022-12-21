@@ -15,23 +15,17 @@ import java.time.LocalDateTime;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@TableName("t_persistent")
-public class Persistent extends Model<Persistent> {
+@TableName("t_catalog")
+public class CatalogBean extends Model<CatalogBean> {
 
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
-    @TableField("persistent_name")
-    private String persistentName;
+    @TableField("catalog_code")
+    private String catalogCode;
 
-    @TableField("persistent_code")
-    private String persistentCode;
-
-    @TableField("persistent_relation")
-    private int persistentRelation;
-
-    @TableField("app_service_id")
-    private String appServiceId;
+    @TableField("catalog_name")
+    private String catalogName;
 
     @TableField("status")
     private int status;

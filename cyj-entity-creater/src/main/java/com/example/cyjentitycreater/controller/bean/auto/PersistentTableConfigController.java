@@ -1,6 +1,6 @@
 package com.example.cyjentitycreater.controller.bean.auto;
 
-import com.example.cyjcommon.entity.bean.PersistentTableConfig;
+import com.example.cyjcommon.entity.bean.PersistentTableConfigBean;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.service.bean.auto.PersistentTableConfigServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping("entityCreateApi")
-@Tag(name = "PersistentTableConfig")
+@Tag(name = "PersistentTableConfigBean")
 public class PersistentTableConfigController {
 
     private PersistentTableConfigServiceImpl service;
@@ -33,7 +33,7 @@ public class PersistentTableConfigController {
 
     @Operation(summary = "分页查询所有PersistentTableConfig")
     @PostMapping(value = "pagePersistentTableConfig")
-    public ResultVO page(@RequestBody @Validated PersistentTableConfig po,
+    public ResultVO page(@RequestBody @Validated PersistentTableConfigBean po,
                          @RequestParam("pageNumber") Integer pageNumber,
                          @RequestParam("pageSize") Integer pageSize) {
         return ResultVO.success(service.findAll(po, pageNumber, pageSize));
@@ -41,7 +41,7 @@ public class PersistentTableConfigController {
 
     @Operation(summary = "保存PersistentTableConfig")
     @PostMapping(value = "savePersistentTableConfig")
-    public ResultVO save(@RequestBody @Validated PersistentTableConfig po, BindingResult bindingResult) {
+    public ResultVO save(@RequestBody @Validated PersistentTableConfigBean po, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultVO.failure(bindingResult.getAllErrors().get(0));
         }
@@ -53,7 +53,7 @@ public class PersistentTableConfigController {
 
     @Operation(summary = "删除PersistentTableConfig")
     @PostMapping(value = "deletePersistentTableConfig")
-    public ResultVO delete(@RequestBody PersistentTableConfig po) {
+    public ResultVO delete(@RequestBody PersistentTableConfigBean po) {
         if (po.getId() == null) {
             return ResultVO.failure();
         }

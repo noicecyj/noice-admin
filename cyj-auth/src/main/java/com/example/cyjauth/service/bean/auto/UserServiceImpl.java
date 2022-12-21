@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.cyjcommon.entity.bean.User;
+import com.example.cyjcommon.entity.bean.UserBean;
 import com.example.cyjcommon.mapper.bean.UserMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -16,36 +16,36 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class UserServiceImpl
-        extends ServiceImpl<UserMapper, User>
-        implements IService<User> {
+        extends ServiceImpl<UserMapper, UserBean>
+        implements IService<UserBean> {
 
-    public User addOne(User po) {
+    public UserBean addOne(UserBean po) {
         po.insert();
         return po;
     }
 
-    public void deleteOne(User po) {
+    public void deleteOne(UserBean po) {
         po.deleteById();
     }
 
-    public User updateOne(User po) {
+    public UserBean updateOne(UserBean po) {
         po.updateById();
         return po;
     }
 
-    public Page<User> findAll(User po, Integer pageNumber, Integer pageSize) {
-        Page<User> page = new Page<>(pageNumber, pageSize);
-        LambdaQueryWrapper<User> queryWrapper = searchHandler(po);
-        return new User().selectPage(page, queryWrapper);
+    public Page<UserBean> findAll(UserBean po, Integer pageNumber, Integer pageSize) {
+        Page<UserBean> page = new Page<>(pageNumber, pageSize);
+        LambdaQueryWrapper<UserBean> queryWrapper = searchHandler(po);
+        return new UserBean().selectPage(page, queryWrapper);
     }
 
-    private LambdaQueryWrapper<User> searchHandler(User po) {
-        return new LambdaQueryWrapper<User>()
+    private LambdaQueryWrapper<UserBean> searchHandler(UserBean po) {
+        return new LambdaQueryWrapper<UserBean>()
                 .eq(StringUtils.isNotEmpty(po.getEnterpriseId()),
-                        User::getEnterpriseId, po.getEnterpriseId())
+                        UserBean::getEnterpriseId, po.getEnterpriseId())
                 .like(StringUtils.isNotEmpty(po.getUserName()),
-                        User::getUserName, po.getUserName())
-                .orderByAsc(User::getSortCode);
+                        UserBean::getUserName, po.getUserName())
+                .orderByAsc(UserBean::getSortCode);
     }
 
 }

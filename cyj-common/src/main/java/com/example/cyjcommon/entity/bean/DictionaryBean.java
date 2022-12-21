@@ -15,23 +15,20 @@ import java.time.LocalDateTime;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@TableName("t_user")
-public class User extends Model<User> {
+@TableName("t_dictionary")
+public class DictionaryBean extends Model<DictionaryBean> {
 
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
-    @TableField("user_code")
-    private String userCode;
+    @TableField("dictionary_code")
+    private String dictionaryCode;
 
-    @TableField("user_name")
-    private String userName;
+    @TableField("dictionary_name")
+    private String dictionaryName;
 
-    @TableField("user_password")
-    private String userPassword;
-
-    @TableField("enterprise_id")
-    private String enterpriseId;
+    @TableField("catalog_id")
+    private String catalogId;
 
     @TableField("status")
     private int status;

@@ -15,35 +15,23 @@ import java.time.LocalDateTime;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@TableName("t_persistent_form_config")
-public class PersistentFormConfig extends Model<PersistentFormConfig> {
+@TableName("t_sql")
+public class SqlBean extends Model<SqlBean> {
 
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
-    @TableField("persistent_form_config_name")
-    private String persistentFormConfigName;
+    @TableField("sql_code")
+    private String sqlCode;
 
-    @TableField("persistent_form_config_mode")
-    private String persistentFormConfigMode;
+    @TableField("sql_name")
+    private String sqlName;
 
-    @TableField("persistent_form_config_required")
-    private int persistentFormConfigRequired;
+    @TableField("sql_str")
+    private String sqlStr;
 
-    @TableField("persistent_form_config_default_value")
-    private String persistentFormConfigDefaultValue;
-
-    @TableField("persistent_form_config_data_source")
-    private String persistentFormConfigDataSource;
-
-    @TableField("persistent_form_config_direction")
-    private String persistentFormConfigDirection;
-
-    @TableField("persistent_form_config_edit")
-    private int persistentFormConfigEdit;
-
-    @TableField("persistent_form_id")
-    private String persistentFormId;
+    @TableField("sql_type")
+    private String sqlType;
 
     @TableField("status")
     private int status;

@@ -1,4 +1,4 @@
-package com.example.cyjcommon.entity.bean;
+package com.example.cyjcommon.entity.relation;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -15,32 +15,17 @@ import java.time.LocalDateTime;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@TableName("t_persistent_table_config")
-public class PersistentTableConfig extends Model<PersistentTableConfig> {
+@TableName("t_role_authority")
+public class RoleAuthorityRelation extends Model<RoleAuthorityRelation> {
 
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
-    @TableField("persistent_table_config_name")
-    private String persistentTableConfigName;
+    @TableField("role_id")
+    private String roleId;
 
-    @TableField("persistent_table_config_display")
-    private int persistentTableConfigDisplay;
-
-    @TableField("persistent_table_config_width")
-    private int persistentTableConfigWidth;
-
-    @TableField("persistent_table_config_search")
-    private int persistentTableConfigSearch;
-
-    @TableField("persistent_table_id")
-    private String persistentTableId;
-
-    @TableField("status")
-    private int status;
-
-    @TableField("sort_code")
-    private long sortCode;
+    @TableField("authority_id")
+    private String authorityId;
 
     @TableField("created_date")
     private LocalDateTime createdDate;

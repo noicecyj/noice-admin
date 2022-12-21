@@ -1,6 +1,6 @@
 package com.example.cyjentitycreater.controller.bean.auto;
 
-import com.example.cyjcommon.entity.bean.PersistentTable;
+import com.example.cyjcommon.entity.bean.PersistentTableBean;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.service.bean.auto.PersistentTableServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping("entityCreateApi")
-@Tag(name = "PersistentTable")
+@Tag(name = "PersistentTableBean")
 public class PersistentTableController {
 
     private PersistentTableServiceImpl service;
@@ -33,7 +33,7 @@ public class PersistentTableController {
 
     @Operation(summary = "分页查询所有PersistentTable")
     @PostMapping(value = "pagePersistentTable")
-    public ResultVO page(@RequestBody @Validated PersistentTable po,
+    public ResultVO page(@RequestBody @Validated PersistentTableBean po,
                          @RequestParam("pageNumber") Integer pageNumber,
                          @RequestParam("pageSize") Integer pageSize) {
         return ResultVO.success(service.findAll(po, pageNumber, pageSize));
@@ -41,7 +41,7 @@ public class PersistentTableController {
 
     @Operation(summary = "保存PersistentTable")
     @PostMapping(value = "savePersistentTable")
-    public ResultVO save(@RequestBody @Validated PersistentTable po, BindingResult bindingResult) {
+    public ResultVO save(@RequestBody @Validated PersistentTableBean po, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultVO.failure(bindingResult.getAllErrors().get(0));
         }
@@ -53,7 +53,7 @@ public class PersistentTableController {
 
     @Operation(summary = "删除PersistentTable")
     @PostMapping(value = "deletePersistentTable")
-    public ResultVO delete(@RequestBody PersistentTable po) {
+    public ResultVO delete(@RequestBody PersistentTableBean po) {
         if (po.getId() == null) {
             return ResultVO.failure();
         }

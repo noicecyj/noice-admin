@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.cyjcommon.entity.bean.PersistentTable;
+import com.example.cyjcommon.entity.bean.PersistentTableBean;
 import com.example.cyjcommon.mapper.bean.PersistentTableMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -16,36 +16,36 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class PersistentTableServiceImpl
-        extends ServiceImpl<PersistentTableMapper, PersistentTable>
-        implements IService<PersistentTable> {
+        extends ServiceImpl<PersistentTableMapper, PersistentTableBean>
+        implements IService<PersistentTableBean> {
 
-    public PersistentTable addOne(PersistentTable po) {
+    public PersistentTableBean addOne(PersistentTableBean po) {
         po.insert();
         return po;
     }
 
-    public void deleteOne(PersistentTable po) {
+    public void deleteOne(PersistentTableBean po) {
         po.deleteById();
     }
 
-    public PersistentTable updateOne(PersistentTable po) {
+    public PersistentTableBean updateOne(PersistentTableBean po) {
         po.updateById();
         return po;
     }
 
-    public Page<PersistentTable> findAll(PersistentTable po, Integer pageNumber, Integer pageSize) {
-        Page<PersistentTable> page = new Page<>(pageNumber, pageSize);
-        LambdaQueryWrapper<PersistentTable> queryWrapper = searchHandler(po);
-        return new PersistentTable().selectPage(page, queryWrapper);
+    public Page<PersistentTableBean> findAll(PersistentTableBean po, Integer pageNumber, Integer pageSize) {
+        Page<PersistentTableBean> page = new Page<>(pageNumber, pageSize);
+        LambdaQueryWrapper<PersistentTableBean> queryWrapper = searchHandler(po);
+        return new PersistentTableBean().selectPage(page, queryWrapper);
     }
 
-    private LambdaQueryWrapper<PersistentTable> searchHandler(PersistentTable po) {
-        return new LambdaQueryWrapper<PersistentTable>()
+    private LambdaQueryWrapper<PersistentTableBean> searchHandler(PersistentTableBean po) {
+        return new LambdaQueryWrapper<PersistentTableBean>()
                 .eq(StringUtils.isNotEmpty(po.getPersistentId()),
-                        PersistentTable::getPersistentId, po.getPersistentId())
+                        PersistentTableBean::getPersistentId, po.getPersistentId())
                 .like(StringUtils.isNotEmpty(po.getPersistentTableName()),
-                        PersistentTable::getPersistentTableName, po.getPersistentTableName())
-                .orderByAsc(PersistentTable::getSortCode);
+                        PersistentTableBean::getPersistentTableName, po.getPersistentTableName())
+                .orderByAsc(PersistentTableBean::getSortCode);
     }
 
 }

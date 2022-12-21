@@ -2,7 +2,7 @@ package com.example.cyjentitycreater.service.bean.custom;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.cyjcommon.entity.bean.Property;
+import com.example.cyjcommon.entity.bean.PropertyBean;
 import com.example.cyjcommon.mapper.bean.PropertyMapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -20,8 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class PropertyCustomServiceImpl
-        extends ServiceImpl<PropertyMapper, Property>
-        implements IService<Property> {
+        extends ServiceImpl<PropertyMapper, PropertyBean>
+        implements IService<PropertyBean> {
 
     private static final Logger logger = LoggerFactory.getLogger(PropertyCustomServiceImpl.class);
 

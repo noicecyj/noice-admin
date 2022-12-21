@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.cyjcommon.entity.bean.PersistentForm;
+import com.example.cyjcommon.entity.bean.PersistentFormBean;
 import com.example.cyjcommon.mapper.bean.PersistentFormMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -16,36 +16,36 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class PersistentFormServiceImpl
-        extends ServiceImpl<PersistentFormMapper, PersistentForm>
-        implements IService<PersistentForm> {
+        extends ServiceImpl<PersistentFormMapper, PersistentFormBean>
+        implements IService<PersistentFormBean> {
 
-    public PersistentForm addOne(PersistentForm po) {
+    public PersistentFormBean addOne(PersistentFormBean po) {
         po.insert();
         return po;
     }
 
-    public void deleteOne(PersistentForm po) {
+    public void deleteOne(PersistentFormBean po) {
         po.deleteById();
     }
 
-    public PersistentForm updateOne(PersistentForm po) {
+    public PersistentFormBean updateOne(PersistentFormBean po) {
         po.updateById();
         return po;
     }
 
-    public Page<PersistentForm> findAll(PersistentForm po, Integer pageNumber, Integer pageSize) {
-        Page<PersistentForm> page = new Page<>(pageNumber, pageSize);
-        LambdaQueryWrapper<PersistentForm> queryWrapper = searchHandler(po);
-        return new PersistentForm().selectPage(page, queryWrapper);
+    public Page<PersistentFormBean> findAll(PersistentFormBean po, Integer pageNumber, Integer pageSize) {
+        Page<PersistentFormBean> page = new Page<>(pageNumber, pageSize);
+        LambdaQueryWrapper<PersistentFormBean> queryWrapper = searchHandler(po);
+        return new PersistentFormBean().selectPage(page, queryWrapper);
     }
 
-    private LambdaQueryWrapper<PersistentForm> searchHandler(PersistentForm po) {
-        return new LambdaQueryWrapper<PersistentForm>()
+    private LambdaQueryWrapper<PersistentFormBean> searchHandler(PersistentFormBean po) {
+        return new LambdaQueryWrapper<PersistentFormBean>()
                 .eq(StringUtils.isNotEmpty(po.getPersistentId()),
-                        PersistentForm::getPersistentId, po.getPersistentId())
+                        PersistentFormBean::getPersistentId, po.getPersistentId())
                 .like(StringUtils.isNotEmpty(po.getPersistentFormName()),
-                        PersistentForm::getPersistentFormName, po.getPersistentFormName())
-                .orderByAsc(PersistentForm::getSortCode);
+                        PersistentFormBean::getPersistentFormName, po.getPersistentFormName())
+                .orderByAsc(PersistentFormBean::getSortCode);
     }
 
 }

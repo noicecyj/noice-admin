@@ -1,6 +1,6 @@
 package com.example.cyjdictionary.controller.bean.auto;
 
-import com.example.cyjcommon.entity.bean.Catalog;
+import com.example.cyjcommon.entity.bean.CatalogBean;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjdictionary.service.bean.auto.CatalogServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping("dictionaryApi")
-@Tag(name = "Catalog")
+@Tag(name = "CatalogBean")
 public class CatalogController {
 
     private CatalogServiceImpl service;
@@ -33,7 +33,7 @@ public class CatalogController {
 
     @Operation(summary = "分页查询所有Catalog")
     @PostMapping(value = "pageCatalog")
-    public ResultVO page(@RequestBody @Validated Catalog po,
+    public ResultVO page(@RequestBody @Validated CatalogBean po,
                          @RequestParam("pageNumber") Integer pageNumber,
                          @RequestParam("pageSize") Integer pageSize) {
         return ResultVO.success(service.findAll(po, pageNumber, pageSize));
@@ -41,7 +41,7 @@ public class CatalogController {
 
     @Operation(summary = "保存Catalog")
     @PostMapping(value = "saveCatalog")
-    public ResultVO save(@RequestBody @Validated Catalog po, BindingResult bindingResult) {
+    public ResultVO save(@RequestBody @Validated CatalogBean po, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultVO.failure(bindingResult.getAllErrors().get(0));
         }
@@ -53,7 +53,7 @@ public class CatalogController {
 
     @Operation(summary = "删除Catalog")
     @PostMapping(value = "deleteCatalog")
-    public ResultVO delete(@RequestBody Catalog po) {
+    public ResultVO delete(@RequestBody CatalogBean po) {
         if (po.getId() == null) {
             return ResultVO.failure();
         }

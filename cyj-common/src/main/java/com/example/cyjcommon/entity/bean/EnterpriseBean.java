@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @TableName("t_enterprise")
-public class Enterprise extends Model<Enterprise> {
+public class EnterpriseBean extends Model<EnterpriseBean> {
 
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;

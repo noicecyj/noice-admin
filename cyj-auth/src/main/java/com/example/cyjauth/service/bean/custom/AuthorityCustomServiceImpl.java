@@ -2,7 +2,7 @@ package com.example.cyjauth.service.bean.custom;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.cyjcommon.entity.bean.Authority;
+import com.example.cyjcommon.entity.bean.AuthorityBean;
 import com.example.cyjcommon.mapper.bean.AuthorityMapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -20,8 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class AuthorityCustomServiceImpl
-        extends ServiceImpl<AuthorityMapper, Authority>
-        implements IService<Authority> {
+        extends ServiceImpl<AuthorityMapper, AuthorityBean>
+        implements IService<AuthorityBean> {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthorityCustomServiceImpl.class);
 

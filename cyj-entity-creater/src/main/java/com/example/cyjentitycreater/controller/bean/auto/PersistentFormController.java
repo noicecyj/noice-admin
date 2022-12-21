@@ -1,6 +1,6 @@
 package com.example.cyjentitycreater.controller.bean.auto;
 
-import com.example.cyjcommon.entity.bean.PersistentForm;
+import com.example.cyjcommon.entity.bean.PersistentFormBean;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.service.bean.auto.PersistentFormServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping("entityCreateApi")
-@Tag(name = "PersistentForm")
+@Tag(name = "PersistentFormBean")
 public class PersistentFormController {
 
     private PersistentFormServiceImpl service;
@@ -33,7 +33,7 @@ public class PersistentFormController {
 
     @Operation(summary = "分页查询所有PersistentForm")
     @PostMapping(value = "pagePersistentForm")
-    public ResultVO page(@RequestBody @Validated PersistentForm po,
+    public ResultVO page(@RequestBody @Validated PersistentFormBean po,
                          @RequestParam("pageNumber") Integer pageNumber,
                          @RequestParam("pageSize") Integer pageSize) {
         return ResultVO.success(service.findAll(po, pageNumber, pageSize));
@@ -41,7 +41,7 @@ public class PersistentFormController {
 
     @Operation(summary = "保存PersistentForm")
     @PostMapping(value = "savePersistentForm")
-    public ResultVO save(@RequestBody @Validated PersistentForm po, BindingResult bindingResult) {
+    public ResultVO save(@RequestBody @Validated PersistentFormBean po, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultVO.failure(bindingResult.getAllErrors().get(0));
         }
@@ -53,7 +53,7 @@ public class PersistentFormController {
 
     @Operation(summary = "删除PersistentForm")
     @PostMapping(value = "deletePersistentForm")
-    public ResultVO delete(@RequestBody PersistentForm po) {
+    public ResultVO delete(@RequestBody PersistentFormBean po) {
         if (po.getId() == null) {
             return ResultVO.failure();
         }

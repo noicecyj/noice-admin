@@ -1,13 +1,13 @@
 package com.example.cyjcommon.mapper.bean;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.cyjcommon.entity.bean.PersistentFormConfig;
+import com.example.cyjcommon.entity.bean.PersistentFormConfigBean;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
  * @author Noice
  */
 @Mapper
-public interface PersistentFormConfigMapper extends BaseMapper<PersistentFormConfig> {
+public interface PersistentFormConfigMapper extends BaseMapper<PersistentFormConfigBean> {
 
 }

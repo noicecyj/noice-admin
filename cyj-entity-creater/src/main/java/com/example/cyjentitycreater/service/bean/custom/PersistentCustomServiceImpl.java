@@ -8,10 +8,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.cyjcommon.contants.Constant;
 import com.example.cyjcommon.entity.bean.AppServiceBean;
-import com.example.cyjcommon.entity.bean.Authority;
-import com.example.cyjcommon.entity.bean.Persistent;
-import com.example.cyjcommon.entity.bean.Property;
-import com.example.cyjcommon.entity.bean.Sql;
+import com.example.cyjcommon.entity.bean.AuthorityBean;
+import com.example.cyjcommon.entity.bean.PersistentBean;
+import com.example.cyjcommon.entity.bean.PropertyBean;
+import com.example.cyjcommon.entity.bean.SqlBean;
 import com.example.cyjcommon.mapper.bean.PersistentMapper;
 import com.example.cyjcommon.utils.BeanUtils;
 import com.example.cyjdictionary.service.bean.custom.DictionaryCustomServiceImpl;
@@ -38,8 +38,8 @@ import java.util.stream.Collectors;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class PersistentCustomServiceImpl
-        extends ServiceImpl<PersistentMapper, Persistent>
-        implements IService<Persistent> {
+        extends ServiceImpl<PersistentMapper, PersistentBean>
+        implements IService<PersistentBean> {
 
     private final static String componentPath = "C:/Users/noice/IdeaProjects/noice-admin/noice/src/pages/";
     private final static String POST = "POST";
@@ -60,7 +60,7 @@ public class PersistentCustomServiceImpl
 //        this.sqlCustomServiceImpl = sqlCustomServiceImpl;
 //    }
 
-    public void generateJavaFile(Persistent persistent) {
+    public void generateJavaFile(PersistentBean persistent) {
         if (persistent == null) {
             return;
         }
@@ -68,28 +68,28 @@ public class PersistentCustomServiceImpl
     }
 
 
-    public void deleteJavaFile(Persistent persistent) {
+    public void deleteJavaFile(PersistentBean persistent) {
         if (persistent == null) {
             return;
         }
         entityHandler(persistent, "delete");
     }
 
-    private void authorityHandler(Persistent persistent) {
+    private void authorityHandler(PersistentBean persistent) {
         boolean isBeanFlag = persistent.getPersistentRelation() == 0;
         AppServiceBean appServiceBean = new AppServiceBean().selectById(persistent.getAppServiceId());
         //驼峰名
         String underPoName = BeanUtils.underline2Camel(persistent.getPersistentCode());
         //文件名
         String poName = BeanUtils.captureName(underPoName);
-        long count = new Authority().selectCount(new LambdaQueryWrapper<Authority>()
-                .eq(Authority::getStatus, Constant.STATUS));
-        boolean delete1 = new Authority().delete(new LambdaQueryWrapper<Authority>()
-                .eq(Authority::getPersistentId, persistent.getId()));
+        long count = new AuthorityBean().selectCount(new LambdaQueryWrapper<AuthorityBean>()
+                .eq(AuthorityBean::getStatus, Constant.STATUS));
+        boolean delete1 = new AuthorityBean().delete(new LambdaQueryWrapper<AuthorityBean>()
+                .eq(AuthorityBean::getPersistentId, persistent.getId()));
         logger.info("delete.authority:{}", delete1);
         if (isBeanFlag) {
             count++;
-            Authority findAll = new Authority();
+            AuthorityBean findAll = new AuthorityBean();
             findAll.setAuthorityCode("page" + poName);
             findAll.setAuthorityName("查询" + poName);
             findAll.setAuthorityMethod(POST);
@@ -101,7 +101,7 @@ public class PersistentCustomServiceImpl
             findAll.setStatus(Constant.STATUS);
             findAll.insert();
             count++;
-            Authority save = new Authority();
+            AuthorityBean save = new AuthorityBean();
             save.setAuthorityCode("save" + poName);
             save.setAuthorityName("保存" + poName);
             save.setAuthorityMethod(POST);
@@ -113,7 +113,7 @@ public class PersistentCustomServiceImpl
             save.setStatus(Constant.STATUS);
             save.insert();
             count++;
-            Authority delete = new Authority();
+            AuthorityBean delete = new AuthorityBean();
             delete.setAuthorityCode("delete" + poName);
             delete.setAuthorityName("删除" + poName);
             delete.setAuthorityMethod(POST);
@@ -126,7 +126,7 @@ public class PersistentCustomServiceImpl
             delete.insert();
         } else {
             count++;
-            Authority set = new Authority();
+            AuthorityBean set = new AuthorityBean();
             set.setAuthorityCode("get" + poName);
             set.setAuthorityName("查询" + poName + "关联关系");
             set.setAuthorityMethod(POST);
@@ -138,7 +138,7 @@ public class PersistentCustomServiceImpl
             set.setStatus(Constant.STATUS);
             set.insert();
             count++;
-            Authority get = new Authority();
+            AuthorityBean get = new AuthorityBean();
             get.setAuthorityCode("set" + poName);
             get.setAuthorityName("保存" + poName + "关联关系");
             get.setAuthorityMethod(POST);
@@ -153,7 +153,7 @@ public class PersistentCustomServiceImpl
 
     }
 
-    public void entityHandler(Persistent persistent, String handlerType) {
+    public void entityHandler(PersistentBean persistent, String handlerType) {
         switch (handlerType) {
             case "create":
                 createEntityHandler(persistent);
@@ -178,17 +178,17 @@ public class PersistentCustomServiceImpl
 //        }
 //    }
 
-    private void authorityDeleteHandler(Persistent persistent) {
+    private void authorityDeleteHandler(PersistentBean persistent) {
         AppServiceBean appServiceBean = new AppServiceBean().selectById(persistent.getAppServiceId());
-        List<Property> propertyList = new Property().selectList(new LambdaQueryWrapper<Property>()
-                .eq(Property::getPersistentId, persistent.getId()));
+        List<PropertyBean> propertyList = new PropertyBean().selectList(new LambdaQueryWrapper<PropertyBean>()
+                .eq(PropertyBean::getPersistentId, persistent.getId()));
 //        List<Property> outPropertyList = propertyList.stream().filter(property -> BeanUtils.YES.equals(property.getPropertyOut())).collect(Collectors.toList());
         //驼峰名
         String underPoName = BeanUtils.underline2Camel(persistent.getPersistentCode());
         //文件名
         String poName = BeanUtils.captureName(underPoName);
-        Authority findAll = new Authority().selectOne(new LambdaQueryWrapper<Authority>()
-                .eq(Authority::getAuthorityPath, appServiceBean.getAppServiceApi() + "/page" + poName));
+        AuthorityBean findAll = new AuthorityBean().selectOne(new LambdaQueryWrapper<AuthorityBean>()
+                .eq(AuthorityBean::getAuthorityPath, appServiceBean.getAppServiceApi() + "/page" + poName));
         if (findAll != null) {
             findAll.deleteById();
         }
@@ -202,19 +202,19 @@ public class PersistentCustomServiceImpl
 //                manyToManyAuthorityDeleteHandler(appServiceBean, poName, propertyPoName);
 //            }
 //        }
-        Authority save = new Authority().selectOne(new LambdaQueryWrapper<Authority>()
-                .eq(Authority::getAuthorityPath, appServiceBean.getAppServiceApi() + "/save" + poName));
+        AuthorityBean save = new AuthorityBean().selectOne(new LambdaQueryWrapper<AuthorityBean>()
+                .eq(AuthorityBean::getAuthorityPath, appServiceBean.getAppServiceApi() + "/save" + poName));
         if (save != null) {
             save.deleteById();
         }
-        Authority delete = new Authority().selectOne(new LambdaQueryWrapper<Authority>()
-                .eq(Authority::getAuthorityPath, appServiceBean.getAppServiceApi() + "/delete" + poName));
+        AuthorityBean delete = new AuthorityBean().selectOne(new LambdaQueryWrapper<AuthorityBean>()
+                .eq(AuthorityBean::getAuthorityPath, appServiceBean.getAppServiceApi() + "/delete" + poName));
         if (delete != null) {
             delete.deleteById();
         }
     }
 
-    private void deleteEntityHandler(Persistent persistent) {
+    private void deleteEntityHandler(PersistentBean persistent) {
         String persistentCode = persistent.getPersistentCode();
         //驼峰名
         String underPoName = BeanUtils.underline2Camel(persistentCode);
@@ -246,20 +246,20 @@ public class PersistentCustomServiceImpl
         BeanUtils.deleteJavaFile(componentPath + poName);
     }
 
-    private void sqlHandler(Persistent persistent) {
+    private void sqlHandler(PersistentBean persistent) {
         //驼峰名
         String underPoName = BeanUtils.underline2Camel(persistent.getPersistentCode());
         //文件名
         String poName = BeanUtils.captureName(underPoName);
         String dataSourceType = "DATABASE_" + persistent.getPersistentCode().toUpperCase() + "_TYPE";
-        boolean delete = new Sql().delete(new LambdaQueryWrapper<Sql>()
-                .eq(Sql::getSqlCode, dataSourceType));
-        long count = new Sql().selectCount(new LambdaQueryWrapper<Sql>()
-                .eq(Sql::getStatus, Constant.STATUS));
+        boolean delete = new SqlBean().delete(new LambdaQueryWrapper<SqlBean>()
+                .eq(SqlBean::getSqlCode, dataSourceType));
+        long count = new SqlBean().selectCount(new LambdaQueryWrapper<SqlBean>()
+                .eq(SqlBean::getStatus, Constant.STATUS));
         count++;
         logger.info("delete.sql:{}", delete);
         String sqlStr = "select " + persistent.getPersistentCode() + "_name as label, id as value from t_" + persistent.getPersistentCode();
-        Sql sql = new Sql();
+        SqlBean sql = new SqlBean();
         sql.setSqlCode(dataSourceType);
         sql.setSqlName("查询" + poName);
         sql.setSqlStr(sqlStr);
@@ -269,7 +269,7 @@ public class PersistentCustomServiceImpl
         sql.insert();
     }
 
-    private void createEntityHandler(Persistent persistent) {
+    private void createEntityHandler(PersistentBean persistent) {
         String persistentCode = persistent.getPersistentCode();
         //驼峰名
         String underPoName = BeanUtils.underline2Camel(persistentCode);
@@ -283,9 +283,9 @@ public class PersistentCustomServiceImpl
         String appPath = appServiceBean.getAppServicePath();
         //服务接口
         String appApi = appServiceBean.getAppServiceApi();
-        List<Property> propertyList = new Property().selectList(new LambdaQueryWrapper<Property>()
-                .eq(Property::getPersistentId, persistent.getId())
-                .orderByAsc(Property::getSortCode));
+        List<PropertyBean> propertyList = new PropertyBean().selectList(new LambdaQueryWrapper<PropertyBean>()
+                .eq(PropertyBean::getPersistentId, persistent.getId())
+                .orderByAsc(PropertyBean::getSortCode));
         Map<String, String[]> entityObj = new HashMap<>();
         boolean isBeanFlag = persistent.getPersistentRelation() == 0;
         entityObj.put(commonPath + "/entity" + (isBeanFlag ? "/bean" : "/relation"),
@@ -397,7 +397,7 @@ public class PersistentCustomServiceImpl
 //        }
 //    }
 
-    private String[] storeGenerate(List<Property> outPropertyList, String underPoName, String poName) {
+    private String[] storeGenerate(List<PropertyBean> outPropertyList, String underPoName, String poName) {
         StringBuilder sb = new StringBuilder();
         sb.append("import {createStore} from 'ice';\r\n");
         sb.append("import ").append(underPoName).append(" from './models/auto/").append(poName).append("';\r\n");
@@ -415,15 +415,15 @@ public class PersistentCustomServiceImpl
         return new String[]{viewData, "store.ts"};
     }
 
-    private void storeHandler1(List<Property> outPropertyList, StringBuilder sb) {
-        for (Property property : outPropertyList) {
+    private void storeHandler1(List<PropertyBean> outPropertyList, StringBuilder sb) {
+        for (PropertyBean property : outPropertyList) {
             String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
             sb.append("  ").append(underPropertyOut).append(",\r\n");
         }
     }
 
-    private void storeHandler(List<Property> outPropertyList, StringBuilder sb) {
-        for (Property property : outPropertyList) {
+    private void storeHandler(List<PropertyBean> outPropertyList, StringBuilder sb) {
+        for (PropertyBean property : outPropertyList) {
             String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
             String propertyOut = BeanUtils.captureName(underPropertyOut);
             sb.append("import ").append(underPropertyOut).append(" from '@/pages/").append(propertyOut).append("/models/auto/").append(propertyOut).append("';\r\n");
@@ -905,7 +905,7 @@ public class PersistentCustomServiceImpl
         }
     }
 
-    public String[] poGenerate(Persistent persistent, List<Property> propertyList,
+    public String[] poGenerate(PersistentBean persistent, List<PropertyBean> propertyList,
                                String poName, boolean isBeanFlag) {
         StringBuilder sb = new StringBuilder();
         sb.append("package com.example.cyjcommon.entity.").append(isBeanFlag ? "bean" : "relation").append(";\r\n");
@@ -926,12 +926,12 @@ public class PersistentCustomServiceImpl
         sb.append("@EqualsAndHashCode(callSuper = true)\r\n");
         sb.append("@Data\r\n");
         sb.append("@TableName(\"t_").append(persistent.getPersistentCode()).append("\")\r\n");
-        sb.append("public class ").append(poName).append("Bean extends Model<").append(poName).append("Bean> {\r\n");
+        sb.append("public class ").append(poName).append(isBeanFlag ? "Bean" : "Relation").append(" extends Model<").append(poName).append(isBeanFlag ? "Bean" : "Relation").append("> {\r\n");
         sb.append("\r\n");
         sb.append("    @TableId(value = \"id\", type = IdType.ASSIGN_UUID)\r\n");
         sb.append("    private String id;\r\n");
         sb.append("\r\n");
-        for (Property property : propertyList) {
+        for (PropertyBean property : propertyList) {
             sb.append("    @TableField(\"").append(property.getPropertyCode()).append("\")\r\n");
             sb.append("    private ").append(property.getPropertyType()).append(" ").append(BeanUtils.underline2Camel(property.getPropertyCode())).append(";\r\n");
             sb.append("\r\n");
@@ -958,10 +958,10 @@ public class PersistentCustomServiceImpl
         sb.append("\r\n");
         sb.append("}");
         String entityData = sb.toString();
-        return new String[]{entityData, poName + ".java"};
+        return new String[]{entityData, poName + (isBeanFlag ? "Bean" : "Relation") + ".java"};
     }
 
-    public String[] mapperGenerate(Persistent persistent, String poName) {
+    public String[] mapperGenerate(PersistentBean persistent, String poName) {
         String entityMapperData = "package com.example.cyjcommon.mapper." + (persistent.getPersistentRelation() == 0 ? "bean" : "relation") + ";\r\n" +
                 "\r\n" +
                 "import com.baomidou.mybatisplus.core.mapper.BaseMapper;\r\n" +
@@ -978,13 +978,13 @@ public class PersistentCustomServiceImpl
         return new String[]{entityMapperData, poName + "Mapper.java"};
     }
 
-    public String[] serviceGenerate(List<Property> propertyList, String poName, String appPath, boolean isBeanFlag) {
+    public String[] serviceGenerate(List<PropertyBean> propertyList, String poName, String appPath, boolean isBeanFlag) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
         //service路径
         String poServicePath = packetPath + ".service." + (isBeanFlag ? "bean" : "relation") + ".auto;\r\n";
-        List<Property> relationPropertyList = propertyList.stream()
+        List<PropertyBean> relationPropertyList = propertyList.stream()
                 .filter(property -> property.getPropertyRelation() == 1).collect(Collectors.toList());
         sb.append("package ").append(poServicePath);
         sb.append("\r\n");
@@ -1036,7 +1036,7 @@ public class PersistentCustomServiceImpl
             sb.append("\r\n");
             sb.append("    private LambdaQueryWrapper<").append(poName).append("Bean> searchHandler(").append(poName).append("Bean po) {\r\n");
             sb.append("        return new LambdaQueryWrapper<").append(poName).append("Bean>()\r\n");
-            for (Property property : relationPropertyList) {
+            for (PropertyBean property : relationPropertyList) {
                 String propertyCode = property.getPropertyCode();
                 //驼峰名
                 String underPropertyName = BeanUtils.underline2Camel(propertyCode);
@@ -1052,7 +1052,7 @@ public class PersistentCustomServiceImpl
         } else {
             sb.append("    public List<").append(poName).append("> get").append(poName).append("(").append(poName).append(" po) {\r\n");
             sb.append("        return new ").append(poName).append("().selectList(new LambdaQueryWrapper<").append(poName).append(">()\r\n");
-            for (Property property : relationPropertyList) {
+            for (PropertyBean property : relationPropertyList) {
                 String propertyCode = property.getPropertyCode();
                 //驼峰名
                 String underPropertyName = BeanUtils.underline2Camel(propertyCode);
@@ -1080,7 +1080,7 @@ public class PersistentCustomServiceImpl
         return new String[]{entityServiceData, poName + "ServiceImpl.java"};
     }
 
-    public String[] controllerGenerate(List<Property> propertyList,
+    public String[] controllerGenerate(List<PropertyBean> propertyList,
                                        String poName, String appPath, String appApi, boolean isBeanFlag) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");

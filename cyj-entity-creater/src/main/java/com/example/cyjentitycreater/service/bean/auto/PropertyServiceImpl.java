@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.cyjcommon.entity.bean.Property;
+import com.example.cyjcommon.entity.bean.PropertyBean;
 import com.example.cyjcommon.mapper.bean.PropertyMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -16,36 +16,36 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class PropertyServiceImpl
-        extends ServiceImpl<PropertyMapper, Property>
-        implements IService<Property> {
+        extends ServiceImpl<PropertyMapper, PropertyBean>
+        implements IService<PropertyBean> {
 
-    public Property addOne(Property po) {
+    public PropertyBean addOne(PropertyBean po) {
         po.insert();
         return po;
     }
 
-    public void deleteOne(Property po) {
+    public void deleteOne(PropertyBean po) {
         po.deleteById();
     }
 
-    public Property updateOne(Property po) {
+    public PropertyBean updateOne(PropertyBean po) {
         po.updateById();
         return po;
     }
 
-    public Page<Property> findAll(Property po, Integer pageNumber, Integer pageSize) {
-        Page<Property> page = new Page<>(pageNumber, pageSize);
-        LambdaQueryWrapper<Property> queryWrapper = searchHandler(po);
-        return new Property().selectPage(page, queryWrapper);
+    public Page<PropertyBean> findAll(PropertyBean po, Integer pageNumber, Integer pageSize) {
+        Page<PropertyBean> page = new Page<>(pageNumber, pageSize);
+        LambdaQueryWrapper<PropertyBean> queryWrapper = searchHandler(po);
+        return new PropertyBean().selectPage(page, queryWrapper);
     }
 
-    private LambdaQueryWrapper<Property> searchHandler(Property po) {
-        return new LambdaQueryWrapper<Property>()
+    private LambdaQueryWrapper<PropertyBean> searchHandler(PropertyBean po) {
+        return new LambdaQueryWrapper<PropertyBean>()
                 .eq(StringUtils.isNotEmpty(po.getPersistentId()),
-                        Property::getPersistentId, po.getPersistentId())
+                        PropertyBean::getPersistentId, po.getPersistentId())
                 .like(StringUtils.isNotEmpty(po.getPropertyName()),
-                        Property::getPropertyName, po.getPropertyName())
-                .orderByAsc(Property::getSortCode);
+                        PropertyBean::getPropertyName, po.getPropertyName())
+                .orderByAsc(PropertyBean::getSortCode);
     }
 
 }

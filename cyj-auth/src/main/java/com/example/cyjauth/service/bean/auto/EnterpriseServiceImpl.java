@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.cyjcommon.entity.bean.Enterprise;
+import com.example.cyjcommon.entity.bean.EnterpriseBean;
 import com.example.cyjcommon.mapper.bean.EnterpriseMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -16,34 +16,34 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class EnterpriseServiceImpl
-        extends ServiceImpl<EnterpriseMapper, Enterprise>
-        implements IService<Enterprise> {
+        extends ServiceImpl<EnterpriseMapper, EnterpriseBean>
+        implements IService<EnterpriseBean> {
 
-    public Enterprise addOne(Enterprise po) {
+    public EnterpriseBean addOne(EnterpriseBean po) {
         po.insert();
         return po;
     }
 
-    public void deleteOne(Enterprise po) {
+    public void deleteOne(EnterpriseBean po) {
         po.deleteById();
     }
 
-    public Enterprise updateOne(Enterprise po) {
+    public EnterpriseBean updateOne(EnterpriseBean po) {
         po.updateById();
         return po;
     }
 
-    public Page<Enterprise> findAll(Enterprise po, Integer pageNumber, Integer pageSize) {
-        Page<Enterprise> page = new Page<>(pageNumber, pageSize);
-        LambdaQueryWrapper<Enterprise> queryWrapper = searchHandler(po);
-        return new Enterprise().selectPage(page, queryWrapper);
+    public Page<EnterpriseBean> findAll(EnterpriseBean po, Integer pageNumber, Integer pageSize) {
+        Page<EnterpriseBean> page = new Page<>(pageNumber, pageSize);
+        LambdaQueryWrapper<EnterpriseBean> queryWrapper = searchHandler(po);
+        return new EnterpriseBean().selectPage(page, queryWrapper);
     }
 
-    private LambdaQueryWrapper<Enterprise> searchHandler(Enterprise po) {
-        return new LambdaQueryWrapper<Enterprise>()
+    private LambdaQueryWrapper<EnterpriseBean> searchHandler(EnterpriseBean po) {
+        return new LambdaQueryWrapper<EnterpriseBean>()
                 .like(StringUtils.isNotEmpty(po.getEnterpriseName()),
-                        Enterprise::getEnterpriseName, po.getEnterpriseName())
-                .orderByAsc(Enterprise::getSortCode);
+                        EnterpriseBean::getEnterpriseName, po.getEnterpriseName())
+                .orderByAsc(EnterpriseBean::getSortCode);
     }
 
 }

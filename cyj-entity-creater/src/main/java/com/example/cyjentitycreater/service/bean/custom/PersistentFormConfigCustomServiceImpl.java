@@ -2,7 +2,7 @@ package com.example.cyjentitycreater.service.bean.custom;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.cyjcommon.entity.bean.PersistentFormConfig;
+import com.example.cyjcommon.entity.bean.PersistentFormConfigBean;
 import com.example.cyjcommon.mapper.bean.PersistentFormConfigMapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -20,8 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class PersistentFormConfigCustomServiceImpl
-        extends ServiceImpl<PersistentFormConfigMapper, PersistentFormConfig>
-        implements IService<PersistentFormConfig> {
+        extends ServiceImpl<PersistentFormConfigMapper, PersistentFormConfigBean>
+        implements IService<PersistentFormConfigBean> {
 
     private static final Logger logger = LoggerFactory.getLogger(PersistentFormConfigCustomServiceImpl.class);
 

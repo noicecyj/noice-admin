@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.cyjcommon.entity.bean.Authority;
+import com.example.cyjcommon.entity.bean.AuthorityBean;
 import com.example.cyjcommon.mapper.bean.AuthorityMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -16,38 +16,38 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class AuthorityServiceImpl
-        extends ServiceImpl<AuthorityMapper, Authority>
-        implements IService<Authority> {
+        extends ServiceImpl<AuthorityMapper, AuthorityBean>
+        implements IService<AuthorityBean> {
 
-    public Authority addOne(Authority po) {
+    public AuthorityBean addOne(AuthorityBean po) {
         po.insert();
         return po;
     }
 
-    public void deleteOne(Authority po) {
+    public void deleteOne(AuthorityBean po) {
         po.deleteById();
     }
 
-    public Authority updateOne(Authority po) {
+    public AuthorityBean updateOne(AuthorityBean po) {
         po.updateById();
         return po;
     }
 
-    public Page<Authority> findAll(Authority po, Integer pageNumber, Integer pageSize) {
-        Page<Authority> page = new Page<>(pageNumber, pageSize);
-        LambdaQueryWrapper<Authority> queryWrapper = searchHandler(po);
-        return new Authority().selectPage(page, queryWrapper);
+    public Page<AuthorityBean> findAll(AuthorityBean po, Integer pageNumber, Integer pageSize) {
+        Page<AuthorityBean> page = new Page<>(pageNumber, pageSize);
+        LambdaQueryWrapper<AuthorityBean> queryWrapper = searchHandler(po);
+        return new AuthorityBean().selectPage(page, queryWrapper);
     }
 
-    private LambdaQueryWrapper<Authority> searchHandler(Authority po) {
-        return new LambdaQueryWrapper<Authority>()
+    private LambdaQueryWrapper<AuthorityBean> searchHandler(AuthorityBean po) {
+        return new LambdaQueryWrapper<AuthorityBean>()
                 .eq(StringUtils.isNotEmpty(po.getAppServiceId()),
-                        Authority::getAppServiceId, po.getAppServiceId())
+                        AuthorityBean::getAppServiceId, po.getAppServiceId())
                 .eq(StringUtils.isNotEmpty(po.getPersistentId()),
-                        Authority::getPersistentId, po.getPersistentId())
+                        AuthorityBean::getPersistentId, po.getPersistentId())
                 .like(StringUtils.isNotEmpty(po.getAuthorityName()),
-                        Authority::getAuthorityName, po.getAuthorityName())
-                .orderByAsc(Authority::getSortCode);
+                        AuthorityBean::getAuthorityName, po.getAuthorityName())
+                .orderByAsc(AuthorityBean::getSortCode);
     }
 
 }

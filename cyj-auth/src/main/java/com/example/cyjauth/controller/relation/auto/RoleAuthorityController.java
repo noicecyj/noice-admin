@@ -1,6 +1,6 @@
 package com.example.cyjauth.controller.relation.auto;
 
-import com.example.cyjcommon.entity.relation.RoleAuthority;
+import com.example.cyjcommon.entity.relation.RoleAuthorityBean;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjauth.service.relation.auto.RoleAuthorityServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +21,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("authApi")
-@Tag(name = "RoleAuthority")
+@Tag(name = "RoleAuthorityBean")
 public class RoleAuthorityController {
 
     private RoleAuthorityServiceImpl service;

@@ -1,6 +1,6 @@
 package com.example.cyjquery.controller.bean.auto;
 
-import com.example.cyjcommon.entity.bean.Sql;
+import com.example.cyjcommon.entity.bean.SqlBean;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjquery.service.bean.auto.SqlServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping("sqlApi")
-@Tag(name = "Sql")
+@Tag(name = "SqlBean")
 public class SqlController {
 
     private SqlServiceImpl service;
@@ -33,7 +33,7 @@ public class SqlController {
 
     @Operation(summary = "分页查询所有Sql")
     @PostMapping(value = "pageSql")
-    public ResultVO page(@RequestBody @Validated Sql po,
+    public ResultVO page(@RequestBody @Validated SqlBean po,
                          @RequestParam("pageNumber") Integer pageNumber,
                          @RequestParam("pageSize") Integer pageSize) {
         return ResultVO.success(service.findAll(po, pageNumber, pageSize));
@@ -41,7 +41,7 @@ public class SqlController {
 
     @Operation(summary = "保存Sql")
     @PostMapping(value = "saveSql")
-    public ResultVO save(@RequestBody @Validated Sql po, BindingResult bindingResult) {
+    public ResultVO save(@RequestBody @Validated SqlBean po, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultVO.failure(bindingResult.getAllErrors().get(0));
         }
@@ -53,7 +53,7 @@ public class SqlController {
 
     @Operation(summary = "删除Sql")
     @PostMapping(value = "deleteSql")
-    public ResultVO delete(@RequestBody Sql po) {
+    public ResultVO delete(@RequestBody SqlBean po) {
         if (po.getId() == null) {
             return ResultVO.failure();
         }

@@ -3,7 +3,7 @@ package com.example.cyjauth.service.relation.auto;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.cyjcommon.entity.relation.UserRole;
+import com.example.cyjcommon.entity.relation.UserRoleRelation;
 import com.example.cyjcommon.mapper.relation.UserRoleMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -17,24 +17,24 @@ import java.util.List;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class UserRoleServiceImpl
-        extends ServiceImpl<UserRoleMapper, UserRole>
-        implements IService<UserRole> {
+        extends ServiceImpl<UserRoleMapper, UserRoleRelation>
+        implements IService<UserRoleRelation> {
 
-    public List<UserRole> getUserRole(UserRole po) {
-        return new UserRole().selectList(new LambdaQueryWrapper<UserRole>()
+    public List<UserRoleRelation> getUserRole(UserRoleRelation po) {
+        return new UserRoleRelation().selectList(new LambdaQueryWrapper<UserRoleRelation>()
                 .eq(StringUtils.isNotEmpty(po.getUserId()),
-                        UserRole::getUserId, po.getUserId())
+                        UserRoleRelation::getUserId, po.getUserId())
                 .eq(StringUtils.isNotEmpty(po.getRoleId()),
-                        UserRole::getRoleId, po.getRoleId())
+                        UserRoleRelation::getRoleId, po.getRoleId())
         );
     }
 
-    public void setUserRole(UserRole po, List<UserRole> newUserRoleList) {
-        List<UserRole> oldUserRoleList = getUserRole(po);
-        for (UserRole oldUserRole : oldUserRoleList) {
+    public void setUserRole(UserRoleRelation po, List<UserRoleRelation> newUserRoleList) {
+        List<UserRoleRelation> oldUserRoleList = getUserRole(po);
+        for (UserRoleRelation oldUserRole : oldUserRoleList) {
             oldUserRole.deleteById();
         }
-        for (UserRole newUserRole : newUserRoleList) {
+        for (UserRoleRelation newUserRole : newUserRoleList) {
             newUserRole.insert();
         }
     }

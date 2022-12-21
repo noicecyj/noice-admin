@@ -1,6 +1,6 @@
 package com.example.cyjentitycreater.controller.bean.auto;
 
-import com.example.cyjcommon.entity.bean.Persistent;
+import com.example.cyjcommon.entity.bean.PersistentBean;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping("entityCreateApi")
-@Tag(name = "Persistent")
+@Tag(name = "PersistentBean")
 public class PersistentController {
 
     private PersistentServiceImpl service;
@@ -33,7 +33,7 @@ public class PersistentController {
 
     @Operation(summary = "分页查询所有Persistent")
     @PostMapping(value = "pagePersistent")
-    public ResultVO page(@RequestBody @Validated Persistent po,
+    public ResultVO page(@RequestBody @Validated PersistentBean po,
                          @RequestParam("pageNumber") Integer pageNumber,
                          @RequestParam("pageSize") Integer pageSize) {
         return ResultVO.success(service.findAll(po, pageNumber, pageSize));
@@ -41,7 +41,7 @@ public class PersistentController {
 
     @Operation(summary = "保存Persistent")
     @PostMapping(value = "savePersistent")
-    public ResultVO save(@RequestBody @Validated Persistent po, BindingResult bindingResult) {
+    public ResultVO save(@RequestBody @Validated PersistentBean po, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultVO.failure(bindingResult.getAllErrors().get(0));
         }
@@ -53,7 +53,7 @@ public class PersistentController {
 
     @Operation(summary = "删除Persistent")
     @PostMapping(value = "deletePersistent")
-    public ResultVO delete(@RequestBody Persistent po) {
+    public ResultVO delete(@RequestBody PersistentBean po) {
         if (po.getId() == null) {
             return ResultVO.failure();
         }

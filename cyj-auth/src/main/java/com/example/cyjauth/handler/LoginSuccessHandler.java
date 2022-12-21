@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.cyjauth.constant.SecurityConstant;
 import com.example.cyjauth.entity.bo.AuthUserDetails;
 import com.example.cyjauth.service.bean.custom.UserCustomServiceImpl;
-import com.example.cyjcommon.entity.bean.User;
-import com.example.cyjcommon.entity.relation.UserRole;
+import com.example.cyjcommon.entity.bean.UserBean;
+import com.example.cyjcommon.entity.relation.UserRoleRelation;
 import com.example.cyjcommon.utils.ResponseUtil;
 import com.example.cyjcommon.utils.ResultCode;
 import com.example.cyjcommon.utils.ResultVO;
@@ -65,9 +65,9 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         String roleInfosMapPermission = redisTemplate.opsForValue().get("authentication:roleinfos:permissions:" + userName);
         if (StringUtils.isBlank(roleInfosMapPermission)) {
             //将角色与权限关系存入redis
-            User user = userCustomServiceImpl.findAuthUserByUsername(userName);
-            List<UserRole> userRoleList = new UserRole().selectList(new QueryWrapper<UserRole>().lambda()
-                    .eq(UserRole::getUserId, user.getId()));
+            UserBean user = userCustomServiceImpl.findAuthUserByUsername(userName);
+            List<UserRoleRelation> userRoleList = new UserRoleRelation().selectList(new QueryWrapper<UserRoleRelation>().lambda()
+                    .eq(UserRoleRelation::getUserId, user.getId()));
             redisTemplate.opsForValue()
                     .set("authentication:roleinfos:permissions:" + userName, JSON.toJSONString(userRoleList), 480, TimeUnit.MINUTES);
         }
@@ -94,9 +94,9 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         Claims claims = Jwts.claims().setSubject(authUserDetails.getUsername());
         //存入角色信息
         List<String> list = new ArrayList<>();
-        List<UserRole> userRoleList = new UserRole().selectList(new QueryWrapper<UserRole>().lambda()
-                .eq(UserRole::getUserId, authUserDetails.getId()));
-        for (UserRole userRole : userRoleList) {
+        List<UserRoleRelation> userRoleList = new UserRoleRelation().selectList(new QueryWrapper<UserRoleRelation>().lambda()
+                .eq(UserRoleRelation::getUserId, authUserDetails.getId()));
+        for (UserRoleRelation userRole : userRoleList) {
             list.add(userRole.getRoleId());
         }
         claims.put(SecurityConstant.AUTHORITIES, JSON.toJSONString(list));

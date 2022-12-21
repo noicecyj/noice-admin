@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.cyjauth.entity.bo.AuthUserDetails;
-import com.example.cyjcommon.entity.bean.User;
-import com.example.cyjcommon.entity.relation.UserRole;
+import com.example.cyjcommon.entity.bean.UserBean;
+import com.example.cyjcommon.entity.relation.UserRoleRelation;
 import com.example.cyjcommon.mapper.bean.UserMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
@@ -32,8 +32,8 @@ import java.util.List;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class UserCustomServiceImpl
-        extends ServiceImpl<UserMapper, User>
-        implements IService<User>, UserDetailsService {
+        extends ServiceImpl<UserMapper, UserBean>
+        implements IService<UserBean>, UserDetailsService {
 
     private StringRedisTemplate redisTemplate;
 
@@ -42,14 +42,14 @@ public class UserCustomServiceImpl
         this.redisTemplate = redisTemplate;
     }
 
-    public User findAuthUserByUsername(String username) {
-        return new User().selectOne(new QueryWrapper<User>().lambda()
-                .eq(User::getUserName, username));
+    public UserBean findAuthUserByUsername(String username) {
+        return new UserBean().selectOne(new QueryWrapper<UserBean>().lambda()
+                .eq(UserBean::getUserName, username));
     }
 
     public void resetPassword(String userId, String newPassword, String checkPassword) {
         if (newPassword.equals(checkPassword)) {
-            User user = new User().selectById(userId);
+            UserBean user = new UserBean().selectById(userId);
             if (user != null) {
                 BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
                 String password = passwordEncoder.encode(newPassword);
@@ -68,13 +68,13 @@ public class UserCustomServiceImpl
             throw new UsernameNotFoundException("登录错误次数超过限制");
         }
         //查询用户信息
-        User po = findAuthUserByUsername(username);
+        UserBean po = findAuthUserByUsername(username);
         if (null == po) {
             throw new UsernameNotFoundException("当前用户不存在");
         }
-        List<UserRole> userRoleList = new UserRole()
-                .selectList(new QueryWrapper<UserRole>().lambda()
-                        .eq(UserRole::getUserId, po.getId()));
+        List<UserRoleRelation> userRoleList = new UserRoleRelation()
+                .selectList(new QueryWrapper<UserRoleRelation>().lambda()
+                        .eq(UserRoleRelation::getUserId, po.getId()));
         if (userRoleList == null || userRoleList.isEmpty()) {
             throw new UsernameNotFoundException("当前用户无角色");
         }

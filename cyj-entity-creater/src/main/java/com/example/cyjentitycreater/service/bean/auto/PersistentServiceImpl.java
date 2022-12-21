@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.cyjcommon.entity.bean.Persistent;
+import com.example.cyjcommon.entity.bean.PersistentBean;
 import com.example.cyjcommon.mapper.bean.PersistentMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -16,36 +16,36 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class PersistentServiceImpl
-        extends ServiceImpl<PersistentMapper, Persistent>
-        implements IService<Persistent> {
+        extends ServiceImpl<PersistentMapper, PersistentBean>
+        implements IService<PersistentBean> {
 
-    public Persistent addOne(Persistent po) {
+    public PersistentBean addOne(PersistentBean po) {
         po.insert();
         return po;
     }
 
-    public void deleteOne(Persistent po) {
+    public void deleteOne(PersistentBean po) {
         po.deleteById();
     }
 
-    public Persistent updateOne(Persistent po) {
+    public PersistentBean updateOne(PersistentBean po) {
         po.updateById();
         return po;
     }
 
-    public Page<Persistent> findAll(Persistent po, Integer pageNumber, Integer pageSize) {
-        Page<Persistent> page = new Page<>(pageNumber, pageSize);
-        LambdaQueryWrapper<Persistent> queryWrapper = searchHandler(po);
-        return new Persistent().selectPage(page, queryWrapper);
+    public Page<PersistentBean> findAll(PersistentBean po, Integer pageNumber, Integer pageSize) {
+        Page<PersistentBean> page = new Page<>(pageNumber, pageSize);
+        LambdaQueryWrapper<PersistentBean> queryWrapper = searchHandler(po);
+        return new PersistentBean().selectPage(page, queryWrapper);
     }
 
-    private LambdaQueryWrapper<Persistent> searchHandler(Persistent po) {
-        return new LambdaQueryWrapper<Persistent>()
+    private LambdaQueryWrapper<PersistentBean> searchHandler(PersistentBean po) {
+        return new LambdaQueryWrapper<PersistentBean>()
                 .eq(StringUtils.isNotEmpty(po.getAppServiceId()),
-                        Persistent::getAppServiceId, po.getAppServiceId())
+                        PersistentBean::getAppServiceId, po.getAppServiceId())
                 .like(StringUtils.isNotEmpty(po.getPersistentName()),
-                        Persistent::getPersistentName, po.getPersistentName())
-                .orderByAsc(Persistent::getSortCode);
+                        PersistentBean::getPersistentName, po.getPersistentName())
+                .orderByAsc(PersistentBean::getSortCode);
     }
 
 }

@@ -15,17 +15,23 @@ import java.time.LocalDateTime;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@TableName("t_persistent_table")
-public class PersistentTable extends Model<PersistentTable> {
+@TableName("t_user")
+public class UserBean extends Model<UserBean> {
 
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
-    @TableField("persistent_table_name")
-    private String persistentTableName;
+    @TableField("user_code")
+    private String userCode;
 
-    @TableField("persistent_id")
-    private String persistentId;
+    @TableField("user_name")
+    private String userName;
+
+    @TableField("user_password")
+    private String userPassword;
+
+    @TableField("enterprise_id")
+    private String enterpriseId;
 
     @TableField("status")
     private int status;

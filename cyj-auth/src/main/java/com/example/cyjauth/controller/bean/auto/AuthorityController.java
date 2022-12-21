@@ -1,6 +1,6 @@
 package com.example.cyjauth.controller.bean.auto;
 
-import com.example.cyjcommon.entity.bean.Authority;
+import com.example.cyjcommon.entity.bean.AuthorityBean;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjauth.service.bean.auto.AuthorityServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping("authApi")
-@Tag(name = "Authority")
+@Tag(name = "AuthorityBean")
 public class AuthorityController {
 
     private AuthorityServiceImpl service;
@@ -33,7 +33,7 @@ public class AuthorityController {
 
     @Operation(summary = "分页查询所有Authority")
     @PostMapping(value = "pageAuthority")
-    public ResultVO page(@RequestBody @Validated Authority po,
+    public ResultVO page(@RequestBody @Validated AuthorityBean po,
                          @RequestParam("pageNumber") Integer pageNumber,
                          @RequestParam("pageSize") Integer pageSize) {
         return ResultVO.success(service.findAll(po, pageNumber, pageSize));
@@ -41,7 +41,7 @@ public class AuthorityController {
 
     @Operation(summary = "保存Authority")
     @PostMapping(value = "saveAuthority")
-    public ResultVO save(@RequestBody @Validated Authority po, BindingResult bindingResult) {
+    public ResultVO save(@RequestBody @Validated AuthorityBean po, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultVO.failure(bindingResult.getAllErrors().get(0));
         }
@@ -53,7 +53,7 @@ public class AuthorityController {
 
     @Operation(summary = "删除Authority")
     @PostMapping(value = "deleteAuthority")
-    public ResultVO delete(@RequestBody Authority po) {
+    public ResultVO delete(@RequestBody AuthorityBean po) {
         if (po.getId() == null) {
             return ResultVO.failure();
         }

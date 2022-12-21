@@ -1,4 +1,4 @@
-package com.example.cyjcommon.entity.bean;
+package com.example.cyjcommon.entity.relation;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -15,26 +15,17 @@ import java.time.LocalDateTime;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@TableName("t_dictionary")
-public class Dictionary extends Model<Dictionary> {
+@TableName("t_user_role")
+public class UserRoleRelation extends Model<UserRoleRelation> {
 
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
-    @TableField("dictionary_code")
-    private String dictionaryCode;
+    @TableField("user_id")
+    private String userId;
 
-    @TableField("dictionary_name")
-    private String dictionaryName;
-
-    @TableField("catalog_id")
-    private String catalogId;
-
-    @TableField("status")
-    private int status;
-
-    @TableField("sort_code")
-    private long sortCode;
+    @TableField("role_id")
+    private String roleId;
 
     @TableField("created_date")
     private LocalDateTime createdDate;
