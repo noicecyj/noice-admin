@@ -1105,10 +1105,6 @@ public class PersistentCustomServiceImpl
         sb.append("import org.springframework.web.bind.annotation.RequestMapping;\r\n");
         sb.append("import org.springframework.web.bind.annotation.RestController;\r\n");
         sb.append("\r\n");
-        if (!isBeanFlag) {
-            sb.append("import java.util.List;\r\n");
-            sb.append("\r\n");
-        }
         sb.append("/**\r\n");
         sb.append(" * @author Noice\r\n");
         sb.append(" */\r\n");
