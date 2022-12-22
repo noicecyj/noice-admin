@@ -1091,16 +1091,18 @@ public class PersistentCustomServiceImpl
         String poControllerPath = packetPath + ".controller." + (isBeanFlag ? "bean" : "relation") + ".auto;\r\n";
         sb.append("package ").append(poControllerPath);
         sb.append("\r\n");
+        if (isBeanFlag){
+            sb.append("import com.example.cyjcommon.entity.vo.PageBeanVo;\r\n");
+        }
         sb.append("import com.example.cyjcommon.entity.").append(isBeanFlag ? "bean" : "relation").append(".").append(poName).append(isBeanFlag ? "Bean" : "Relation").append(";\r\n");
+        if (!isBeanFlag){
+            sb.append("import com.example.cyjcommon.entity.vo.PageRelationVo;\r\n");
+        }
         sb.append("import com.example.cyjcommon.utils.ResultVO;\r\n");
         sb.append("import ").append(poServicePath).append(poName).append("ServiceImpl;\r\n");
         sb.append("import io.swagger.v3.oas.annotations.Operation;\r\n");
         sb.append("import io.swagger.v3.oas.annotations.tags.Tag;\r\n");
         sb.append("import org.springframework.beans.factory.annotation.Autowired;\r\n");
-        if (isBeanFlag) {
-            sb.append("import org.springframework.validation.BindingResult;\r\n");
-        }
-        sb.append("import org.springframework.validation.annotation.Validated;\r\n");
         sb.append("import org.springframework.web.bind.annotation.CrossOrigin;\r\n");
         sb.append("import org.springframework.web.bind.annotation.PostMapping;\r\n");
         sb.append("import org.springframework.web.bind.annotation.RequestBody;\r\n");
@@ -1133,18 +1135,13 @@ public class PersistentCustomServiceImpl
         if (isBeanFlag) {
             sb.append("    @Operation(summary = \"分页查询所有").append(poName).append("\")\r\n");
             sb.append("    @PostMapping(value = \"page").append(poName).append("\")\r\n");
-            sb.append("    public ResultVO page(@RequestBody @Validated ").append(poName).append("Bean po,\r\n");
-            sb.append("                         @RequestParam(\"pageNumber\") Integer pageNumber,\r\n");
-            sb.append("                         @RequestParam(\"pageSize\") Integer pageSize) {\r\n");
-            sb.append("        return ResultVO.success(service.findAll(po, pageNumber, pageSize));\r\n");
+            sb.append("    public ResultVO page(@RequestBody PageBeanVo<").append(poName).append("Bean> vo) {\r\n");
+            sb.append("        return ResultVO.success(service.findAll(vo.po, vo.pageNumber, vo.pageSize));\r\n");
             sb.append("    }\r\n");
             sb.append("\r\n");
             sb.append("    @Operation(summary = \"保存").append(poName).append("\")\r\n");
             sb.append("    @PostMapping(value = \"save").append(poName).append("\")\r\n");
-            sb.append("    public ResultVO save(@RequestBody @Validated ").append(poName).append("Bean po, BindingResult bindingResult) {\r\n");
-            sb.append("        if (bindingResult.hasErrors()) {\r\n");
-            sb.append("            return ResultVO.failure(bindingResult.getAllErrors().get(0));\r\n");
-            sb.append("        }\r\n");
+            sb.append("    public ResultVO save(@RequestBody ").append(poName).append("Bean po) {\r\n");
             sb.append("        if (po.getId() == null) {\r\n");
             sb.append("            return ResultVO.success(service.addOne(po));\r\n");
             sb.append("        }\r\n");
@@ -1161,15 +1158,14 @@ public class PersistentCustomServiceImpl
         } else {
             sb.append("    @Operation(summary = \"查询").append(poName).append("关联关系\")\r\n");
             sb.append("    @PostMapping(\"get").append(poName).append("\")\r\n");
-            sb.append("    public ResultVO get").append(poName).append("(@RequestBody @Validated ").append(poName).append("Relation").append(" po) {\r\n");
+            sb.append("    public ResultVO get").append(poName).append("(@RequestBody ").append(poName).append("Relation").append(" po) {\r\n");
             sb.append("        return ResultVO.success(service.get").append(poName).append("(po));\r\n");
             sb.append("    }\r\n");
             sb.append("\r\n");
             sb.append("    @Operation(summary = \"保存").append(poName).append("关联关系\")\r\n");
             sb.append("    @PostMapping(\"set").append(poName).append("\")\r\n");
-            sb.append("    public ResultVO set").append(poName).append("(@RequestBody @Validated ").append(poName).append("Relation").append(" po,\r\n");
-            sb.append("                                     @RequestBody @Validated List<").append(poName).append("Relation").append("> poList) {\r\n");
-            sb.append("        service.set").append(poName).append("(po, poList);\r\n");
+            sb.append("    public ResultVO set").append(poName).append("(@RequestBody PageRelationVo<").append(poName).append("Relation> vo) {\r\n");
+            sb.append("        service.set").append(poName).append("(vo.po, vo.poList);\r\n");
         }
         sb.append("        return ResultVO.success();\r\n");
         sb.append("    }\r\n");
