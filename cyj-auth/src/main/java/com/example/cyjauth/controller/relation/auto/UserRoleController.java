@@ -1,12 +1,12 @@
 package com.example.cyjauth.controller.relation.auto;
 
 import com.example.cyjcommon.entity.relation.UserRoleRelation;
+import com.example.cyjcommon.entity.vo.PageRelationVo;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjauth.service.relation.auto.UserRoleServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,15 +33,14 @@ public class UserRoleController {
 
     @Operation(summary = "查询UserRole关联关系")
     @PostMapping("getUserRole")
-    public ResultVO getUserRole(@RequestBody @Validated UserRoleRelation po) {
+    public ResultVO getUserRole(@RequestBody UserRoleRelation po) {
         return ResultVO.success(service.getUserRole(po));
     }
 
     @Operation(summary = "保存UserRole关联关系")
     @PostMapping("setUserRole")
-    public ResultVO setUserRole(@RequestBody @Validated UserRoleRelation po,
-                                     @RequestBody @Validated List<UserRoleRelation> poList) {
-        service.setUserRole(po, poList);
+    public ResultVO setUserRole(@RequestBody PageRelationVo<UserRoleRelation> vo) {
+        service.setUserRole(vo.po, vo.poList);
         return ResultVO.success();
     }
 

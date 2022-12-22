@@ -1,18 +1,16 @@
 package com.example.cyjentitycreater.controller.bean.auto;
 
+import com.example.cyjcommon.entity.vo.PageBeanVo;
 import com.example.cyjcommon.entity.bean.PersistentFormConfigBean;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.service.bean.auto.PersistentFormConfigServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -33,18 +31,13 @@ public class PersistentFormConfigController {
 
     @Operation(summary = "分页查询所有PersistentFormConfig")
     @PostMapping(value = "pagePersistentFormConfig")
-    public ResultVO page(@RequestBody @Validated PersistentFormConfigBean po,
-                         @RequestParam("pageNumber") Integer pageNumber,
-                         @RequestParam("pageSize") Integer pageSize) {
-        return ResultVO.success(service.findAll(po, pageNumber, pageSize));
+    public ResultVO page(@RequestBody PageBeanVo<PersistentFormConfigBean> vo) {
+        return ResultVO.success(service.findAll(vo.po, vo.pageNumber, vo.pageSize));
     }
 
     @Operation(summary = "保存PersistentFormConfig")
     @PostMapping(value = "savePersistentFormConfig")
-    public ResultVO save(@RequestBody @Validated PersistentFormConfigBean po, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return ResultVO.failure(bindingResult.getAllErrors().get(0));
-        }
+    public ResultVO save(@RequestBody PersistentFormConfigBean po) {
         if (po.getId() == null) {
             return ResultVO.success(service.addOne(po));
         }

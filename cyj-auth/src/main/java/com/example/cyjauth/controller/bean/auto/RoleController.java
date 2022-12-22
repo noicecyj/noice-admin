@@ -1,18 +1,16 @@
 package com.example.cyjauth.controller.bean.auto;
 
+import com.example.cyjcommon.entity.vo.PageBeanVo;
 import com.example.cyjcommon.entity.bean.RoleBean;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjauth.service.bean.auto.RoleServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -33,18 +31,13 @@ public class RoleController {
 
     @Operation(summary = "分页查询所有Role")
     @PostMapping(value = "pageRole")
-    public ResultVO page(@RequestBody @Validated RoleBean po,
-                         @RequestParam("pageNumber") Integer pageNumber,
-                         @RequestParam("pageSize") Integer pageSize) {
-        return ResultVO.success(service.findAll(po, pageNumber, pageSize));
+    public ResultVO page(@RequestBody PageBeanVo<RoleBean> vo) {
+        return ResultVO.success(service.findAll(vo.po, vo.pageNumber, vo.pageSize));
     }
 
     @Operation(summary = "保存Role")
     @PostMapping(value = "saveRole")
-    public ResultVO save(@RequestBody @Validated RoleBean po, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return ResultVO.failure(bindingResult.getAllErrors().get(0));
-        }
+    public ResultVO save(@RequestBody RoleBean po) {
         if (po.getId() == null) {
             return ResultVO.success(service.addOne(po));
         }
