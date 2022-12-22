@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.example.cyjcommon.entity.bean.AppServiceBean;
 import com.example.cyjcommon.entity.bean.AuthorityBean;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,12 +55,7 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
                     .selectList(new QueryWrapper<AuthorityBean>().lambda()
                             .eq(AuthorityBean::getStatus, "有效"));
             for (AuthorityBean po : authorityList) {
-                String path = po.getAuthorityPath();
-                AppServiceBean appServiceBean = new AppServiceBean().selectById(po.getAppServiceId());
-                if (appServiceBean != null) {
-                    path = "/" + appServiceBean.getAppServiceName() + "/" + path;
-                }
-                ConfigAttribute configAttribute = new SecurityConfig(path);
+                ConfigAttribute configAttribute = new SecurityConfig(po.getAuthorityPath());
                 configAttributes.add(configAttribute);
             }
             //将权限存入redis

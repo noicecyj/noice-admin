@@ -41,8 +41,6 @@ public class AuthorityServiceImpl
 
     private LambdaQueryWrapper<AuthorityBean> searchHandler(AuthorityBean po) {
         return new LambdaQueryWrapper<AuthorityBean>()
-                .eq(StringUtils.isNotEmpty(po.getAppServiceId()),
-                        AuthorityBean::getAppServiceId, po.getAppServiceId())
                 .eq(StringUtils.isNotEmpty(po.getPersistentId()),
                         AuthorityBean::getPersistentId, po.getPersistentId())
                 .like(StringUtils.isNotEmpty(po.getAuthorityName()),

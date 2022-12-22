@@ -36,9 +36,6 @@ public class AuthorityBean extends Model<AuthorityBean> {
     @TableField("authority_type")
     private String authorityType;
 
-    @TableField("app_service_id")
-    private String appServiceId;
-
     @TableField("persistent_id")
     private String persistentId;
 

@@ -87,16 +87,16 @@ public class PersistentCustomServiceImpl
         boolean delete1 = new AuthorityBean().delete(new LambdaQueryWrapper<AuthorityBean>()
                 .eq(AuthorityBean::getPersistentId, persistent.getId()));
         logger.info("delete.authority:{}", delete1);
+        String path = "/" + appServiceBean.getAppServiceCode() + "/" + appServiceBean.getAppServiceApi();
         if (isBeanFlag) {
             count++;
             AuthorityBean findAll = new AuthorityBean();
             findAll.setAuthorityCode("page" + poName);
             findAll.setAuthorityName("查询" + poName);
             findAll.setAuthorityMethod(POST);
-            findAll.setAuthorityPath(appServiceBean.getAppServiceApi() + "/page" + poName);
+            findAll.setAuthorityPath(path + "/page" + poName);
             findAll.setAuthorityType(Constant.SELECT);
             findAll.setPersistentId(persistent.getId());
-            findAll.setAppServiceId(appServiceBean.getId());
             findAll.setSortCode(count);
             findAll.setStatus(Constant.STATUS);
             findAll.insert();
@@ -105,10 +105,9 @@ public class PersistentCustomServiceImpl
             save.setAuthorityCode("save" + poName);
             save.setAuthorityName("保存" + poName);
             save.setAuthorityMethod(POST);
-            save.setAuthorityPath(appServiceBean.getAppServiceApi() + "/save" + poName);
+            save.setAuthorityPath(path + "/save" + poName);
             save.setAuthorityType(Constant.SAVE);
             save.setPersistentId(persistent.getId());
-            save.setAppServiceId(appServiceBean.getId());
             save.setSortCode(count);
             save.setStatus(Constant.STATUS);
             save.insert();
@@ -117,10 +116,9 @@ public class PersistentCustomServiceImpl
             delete.setAuthorityCode("delete" + poName);
             delete.setAuthorityName("删除" + poName);
             delete.setAuthorityMethod(POST);
-            delete.setAuthorityPath(appServiceBean.getAppServiceApi() + "/delete" + poName);
+            delete.setAuthorityPath(path + "/delete" + poName);
             delete.setAuthorityType(Constant.DELETE);
             delete.setPersistentId(persistent.getId());
-            delete.setAppServiceId(appServiceBean.getId());
             delete.setSortCode(count);
             delete.setStatus(Constant.STATUS);
             delete.insert();
@@ -130,10 +128,9 @@ public class PersistentCustomServiceImpl
             set.setAuthorityCode("get" + poName);
             set.setAuthorityName("查询" + poName + "关联关系");
             set.setAuthorityMethod(POST);
-            set.setAuthorityPath(appServiceBean.getAppServiceApi() + "/get" + poName);
+            set.setAuthorityPath(path + "/get" + poName);
             set.setAuthorityType(Constant.GET);
             set.setPersistentId(persistent.getId());
-            set.setAppServiceId(appServiceBean.getId());
             set.setSortCode(count);
             set.setStatus(Constant.STATUS);
             set.insert();
@@ -142,10 +139,9 @@ public class PersistentCustomServiceImpl
             get.setAuthorityCode("set" + poName);
             get.setAuthorityName("保存" + poName + "关联关系");
             get.setAuthorityMethod(POST);
-            get.setAuthorityPath(appServiceBean.getAppServiceApi() + "/set" + poName);
+            get.setAuthorityPath(path + "/set" + poName);
             get.setAuthorityType(Constant.SET);
             get.setPersistentId(persistent.getId());
-            get.setAppServiceId(appServiceBean.getId());
             get.setSortCode(count);
             get.setStatus(Constant.STATUS);
             get.insert();
@@ -1091,11 +1087,11 @@ public class PersistentCustomServiceImpl
         String poControllerPath = packetPath + ".controller." + (isBeanFlag ? "bean" : "relation") + ".auto;\r\n";
         sb.append("package ").append(poControllerPath);
         sb.append("\r\n");
-        if (isBeanFlag){
+        if (isBeanFlag) {
             sb.append("import com.example.cyjcommon.entity.vo.PageBeanVo;\r\n");
         }
         sb.append("import com.example.cyjcommon.entity.").append(isBeanFlag ? "bean" : "relation").append(".").append(poName).append(isBeanFlag ? "Bean" : "Relation").append(";\r\n");
-        if (!isBeanFlag){
+        if (!isBeanFlag) {
             sb.append("import com.example.cyjcommon.entity.vo.PageRelationVo;\r\n");
         }
         sb.append("import com.example.cyjcommon.utils.ResultVO;\r\n");
@@ -1107,9 +1103,6 @@ public class PersistentCustomServiceImpl
         sb.append("import org.springframework.web.bind.annotation.PostMapping;\r\n");
         sb.append("import org.springframework.web.bind.annotation.RequestBody;\r\n");
         sb.append("import org.springframework.web.bind.annotation.RequestMapping;\r\n");
-        if (isBeanFlag) {
-            sb.append("import org.springframework.web.bind.annotation.RequestParam;\r\n");
-        }
         sb.append("import org.springframework.web.bind.annotation.RestController;\r\n");
         sb.append("\r\n");
         if (!isBeanFlag) {
