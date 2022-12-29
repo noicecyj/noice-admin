@@ -156,6 +156,10 @@ public class PersistentCustomServiceImpl
         String underPoName = BeanUtils.underline2Camel(persistent.getPersistentCode());
         //文件名
         String poName = BeanUtils.captureName(underPoName);
+        List<PropertyBean> propertyList = new PropertyBean().selectList(new LambdaQueryWrapper<PropertyBean>()
+                .eq(PropertyBean::getPersistentId, persistent.getId())
+                .eq(PropertyBean::getPropertyRelation, 0)
+                .orderByAsc(PropertyBean::getSortCode));
         long countForm = new PersistentFormBean().selectCount(new LambdaQueryWrapper<PersistentFormBean>()
                 .eq(PersistentFormBean::getStatus, Constant.STATUS));
         boolean deleteFormFlag = new PersistentFormBean().delete(new LambdaQueryWrapper<PersistentFormBean>()
