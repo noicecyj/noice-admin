@@ -24,6 +24,9 @@ public class PersistentFormBean extends Model<PersistentFormBean> {
     @TableField("persistent_form_name")
     private String persistentFormName;
 
+    @TableField("persistent_form_code")
+    private String persistentFormCode;
+
     @TableField("persistent_form_type")
     private String persistentFormType;
 

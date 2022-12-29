@@ -24,6 +24,9 @@ public class PersistentTableBean extends Model<PersistentTableBean> {
     @TableField("persistent_table_name")
     private String persistentTableName;
 
+    @TableField("persistent_table_code")
+    private String persistentTableCode;
+
     @TableField("persistent_id")
     private String persistentId;
 
