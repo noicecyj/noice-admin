@@ -1,15 +1,15 @@
 import {request} from 'ice';
 
 export default {
-  page(data, pageNumber, pageSize) {
+  page(po, pageNumber, pageSize) {
     return request({
       url: '/entityCreateApi/pagePersistent',
       method: 'post',
-      params: {
+      data: {
+        po,
         pageNumber,
         pageSize,
       },
-      data,
     });
   },
   save(data) {

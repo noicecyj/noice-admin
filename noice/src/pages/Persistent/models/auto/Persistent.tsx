@@ -1,8 +1,6 @@
 import initService from '@/services/init';
 import {Message} from "@alifd/next";
 import service from '@/pages/Persistent/services/auto/Persistent';
-import authorityService from '@/pages/Authority/services/auto/Authority'
-import propertyService from '@/pages/Property/services/auto/Property'
 
 export default {
 
@@ -22,6 +20,7 @@ export default {
     divVisible: false,
     parent: "",
     select: [],
+    searchForm: {},
   },
 
   reducers: {
@@ -31,12 +30,12 @@ export default {
   },
 
   effects: (dispatch) => ({
-    async page(current) {
-      const dataRes = await service.page(current);
+    async page(data) {
+      const dataRes = await service.page(data.searchForm, data.current, 10);
       const payload = {
         tableData: dataRes.data.content,
         total: dataRes.data.totalElements,
-        current,
+        current: data.current,
         loadingVisible: false,
       };
       dispatch.persistent.setState(payload);
@@ -47,7 +46,7 @@ export default {
         Message.error(ret.data.defaultMessage);
       } else {
         Message.success('保存成功');
-        await this.page(data.current);
+        await this.page(data);
         const payload = {
           visible: false,
         };
@@ -98,104 +97,6 @@ export default {
         customData: ret.data.customData,
       };
       dispatch.persistent.setState(payload);
-    },
-    async pageAuthorityByPersistent(data) {
-      const ret = await initService.findDataTableAndFormByName('authority');
-      const dataRes = await service.pageAuthorityByPersistent(data.current, data.id);
-      const payload = {
-        table: ret.data.dataTable,
-        form: ret.data.dataForm,
-        customData: ret.data.customData,
-        tableData: dataRes.data.content,
-        total: dataRes.data.totalElements,
-        current: data.current,
-        loadingVisible: false,
-        divVisible: true,
-        parent: data.id,
-        visible: false,
-      };
-      dispatch.authority.setState(payload);
-    },
-    async saveAuthorityByPersistent(data) {
-      const ret = await authorityService.save(data.formData);
-      if (ret.code === 400) {
-        Message.error(ret.data.defaultMessage);
-      } else {
-        Message.success('保存成功');
-        await this.pageAuthorityByPersistent({
-          current: data.current,
-          id: data.id,
-        });
-        const payload = {
-          visible: false,
-        };
-        dispatch.authority.setState(payload);
-      }
-    },
-    async deleteAuthorityByPersistent(data) {
-      const ret = await authorityService.delete(data.record);
-      if (ret.code === 400) {
-        Message.error('删除失败');
-      } else {
-        Message.success('删除成功');
-        await this.pageAuthorityByPersistent({
-          current: data.current,
-          id: data.id,
-        });
-        const payload = {
-          visible: false,
-        };
-        dispatch.authority.setState(payload);
-      }
-    },
-    async pagePropertyByPersistent(data) {
-      const ret = await initService.findDataTableAndFormByName('property');
-      const dataRes = await service.pagePropertyByPersistent(data.current, data.id);
-      const payload = {
-        table: ret.data.dataTable,
-        form: ret.data.dataForm,
-        customData: ret.data.customData,
-        tableData: dataRes.data.content,
-        total: dataRes.data.totalElements,
-        current: data.current,
-        loadingVisible: false,
-        divVisible: true,
-        parent: data.id,
-        visible: false,
-      };
-      dispatch.property.setState(payload);
-    },
-    async savePropertyByPersistent(data) {
-      const ret = await propertyService.save(data.formData);
-      if (ret.code === 400) {
-        Message.error(ret.data.defaultMessage);
-      } else {
-        Message.success('保存成功');
-        await this.pagePropertyByPersistent({
-          current: data.current,
-          id: data.id,
-        });
-        const payload = {
-          visible: false,
-        };
-        dispatch.property.setState(payload);
-      }
-    },
-    async deletePropertyByPersistent(data) {
-      const ret = await propertyService.delete(data.record);
-      if (ret.code === 400) {
-        Message.error('删除失败');
-      } else {
-        Message.success('删除成功');
-        await this.pagePropertyByPersistent({
-          current: data.current,
-          id: data.id,
-        });
-        const payload = {
-          visible: false,
-        };
-        dispatch.property.setState(payload);
-      }
     },
   }),
 };

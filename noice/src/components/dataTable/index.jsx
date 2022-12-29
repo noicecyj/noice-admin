@@ -1,9 +1,10 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
-import {Box, Button, Dialog, Loading, Pagination, ResponsiveGrid, Table} from '@alifd/next';
+import {Box, Button, Dialog, Form, Input, Loading, Pagination, ResponsiveGrid, Select, Table,} from '@alifd/next';
 import styles from './index.module.scss';
 
 const {Cell} = ResponsiveGrid;
+const FormItem = Form.Item;
 
 function DataTable(props) {
   const loadingStyle = {width: '100%'};
@@ -21,36 +22,13 @@ function DataTable(props) {
     createItem,
     deleteItem,
     editItem,
-    manyToMany1,
-    manyToMany2,
-    manyToMany3,
-    manyToManyMethod1,
-    manyToManyMethod2,
-    manyToManyMethod3,
-    son1,
-    son2,
-    son3,
-    sonMethod1,
-    sonMethod2,
-    sonMethod3,
-    customMethod1,
-    customMethod2,
-    customMethod3,
-    customMethodName1,
-    customMethodName2,
-    customMethodName3,
+    searchFormValue,
   } = props;
 
   const pageRender = (value, index, record) => {
     return (
       <div className={styles.opt}>
         <Box direction="row" spacing={5}>
-          {!!sonMethod1 && <Button size="small" onClick={() => sonMethod1(record)}> {son1} </Button>}
-          {!!sonMethod2 && <Button size="small" onClick={() => sonMethod2(record)}> {son2} </Button>}
-          {!!sonMethod3 && <Button size="small" onClick={() => sonMethod3(record)}> {son3} </Button>}
-          {!!manyToManyMethod1 && <Button size="small" onClick={() => manyToManyMethod1(record)}> {manyToMany1} </Button>}
-          {!!manyToManyMethod2 && <Button size="small" onClick={() => manyToManyMethod2(record)}> {manyToMany2} </Button>}
-          {!!manyToManyMethod3 && <Button size="small" onClick={() => manyToManyMethod3(record)}> {manyToMany3} </Button>}
           {editItem !== null && customData.editEnable &&
             <Button type="primary" size="small" onClick={() => editItem(record)}> 编辑 </Button>}
           {editItem !== null && !customData.editEnable &&
@@ -73,12 +51,74 @@ function DataTable(props) {
   return (
     <ResponsiveGrid gap={20}>
       <Cell colSpan={12}>
+        <Form
+          responsive={true}
+          fullWidth
+          labelAlign="top"
+          value={searchFormValue}>
+          {items.map((item) => {
+            console.log("item====>", item)
+            if (item.propertyMode === 'Input') {
+              return (
+                <FormItem
+                  colSpan={4}
+                  label={`${item.propertyLabel}`}
+                  required={item.propertyRequired}
+                  requiredMessage={`请输入${item.propertyLabel}`}
+                  disabled={item.propertyEditEnable}
+                  key={item.id}>
+                  <Input
+                    id={item.propertyCode}
+                    name={item.propertyName}
+                    placeholder={`请输入${item.propertyLabel}`}
+                    defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
+                  />
+                </FormItem>
+              )
+            } else if (item.propertyMode === 'Select') {
+              return (
+                <FormItem
+                  colSpan={4}
+                  label={`${item.propertyLabel}`}
+                  required={item.propertyRequired}
+                  requiredMessage={`请输入${item.propertyLabel}`}
+                  key={item.id}>
+                  <Select
+                    id={item.propertyCode}
+                    name={item.propertyName}
+                    filterLocal={false}
+                    dataSource={item.propertyDataSource}
+                    defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
+                  />
+                </FormItem>)
+            } else if (item.propertyOut && item.propertyOutType === 'ManyToOne') {
+              return (
+                <FormItem
+                  colSpan={4}
+                  label={`${item.propertyLabel}`}
+                  required={item.propertyRequired}
+                  requiredMessage={`请输入${item.propertyLabel}`}
+                  key={item.id}>
+                  <Select
+                    id={item.propertyCode + "_id"}
+                    name={item.propertyName + "Id"}
+                    filterLocal={false}
+                    dataSource={item.propertyDataSource}
+                    defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
+                  />
+                </FormItem>)
+            }
+          })}
+        </Form>
         <div className={styles.Main}>
           <div className={styles.add}>
             {!!createItem && <Button type="primary" onClick={() => createItem()}> 添加 </Button>}
-            {!!customMethodName1 && <Button onClick={() => customMethod1()}> {customMethodName1} </Button>}
-            {!!customMethodName2 && <Button onClick={() => customMethod2()}> {customMethodName2} </Button>}
-            {!!customMethodName3 && <Button onClick={() => customMethod3()}> {customMethodName3} </Button>}
+          </div>
+          <div className={styles.add}>
+            {!!search && <Button type="primary" onClick={() => search()}> 查询 </Button>}
+          </div>
+          <div className={styles.add}>
+            {!!reset && <Button onClick={() => reset()}> 重置 </Button>}
           </div>
           <Loading
             tip="加载中..."
