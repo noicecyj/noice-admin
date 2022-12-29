@@ -167,20 +167,24 @@ public class PersistentCustomServiceImpl
                     .eq(PersistentFormBean::getStatus, Constant.STATUS));
             PersistentFormBean formBean = new PersistentFormBean().selectOne(new LambdaQueryWrapper<PersistentFormBean>()
                     .eq(PersistentFormBean::getPersistentFormCode, poName.toUpperCase() + "_DEFAULT_FORM"));
-            boolean persistentFormConfigFlag = new PersistentFormConfigBean()
-                    .delete(new LambdaQueryWrapper<PersistentFormConfigBean>()
-                            .eq(PersistentFormConfigBean::getPersistentFormId, formBean.getId()));
-            logger.info("delete.persistentFormConfigFlag:{}", persistentFormConfigFlag);
-            formBean.deleteById();
+            if (formBean != null) {
+                boolean persistentFormConfigFlag = new PersistentFormConfigBean()
+                        .delete(new LambdaQueryWrapper<PersistentFormConfigBean>()
+                                .eq(PersistentFormConfigBean::getPersistentFormId, formBean.getId()));
+                logger.info("delete.persistentFormConfigFlag:{}", persistentFormConfigFlag);
+                formBean.deleteById();
+            }
             long countTable = new PersistentTableBean().selectCount(new LambdaQueryWrapper<PersistentTableBean>()
                     .eq(PersistentTableBean::getStatus, Constant.STATUS));
             PersistentTableBean tableBean = new PersistentTableBean().selectOne(new LambdaQueryWrapper<PersistentTableBean>()
                     .eq(PersistentTableBean::getPersistentTableCode, poName.toUpperCase() + "_DEFAULT_TABLE"));
-            boolean persistentTableConfigFlag = new PersistentTableConfigBean()
-                    .delete(new LambdaQueryWrapper<PersistentTableConfigBean>()
-                            .eq(PersistentTableConfigBean::getPersistentTableId, tableBean.getId()));
-            logger.info("delete.persistentTableConfigFlag:{}", persistentTableConfigFlag);
-            tableBean.deleteById();
+            if (tableBean != null) {
+                boolean persistentTableConfigFlag = new PersistentTableConfigBean()
+                        .delete(new LambdaQueryWrapper<PersistentTableConfigBean>()
+                                .eq(PersistentTableConfigBean::getPersistentTableId, tableBean.getId()));
+                logger.info("delete.persistentTableConfigFlag:{}", persistentTableConfigFlag);
+                tableBean.deleteById();
+            }
             countForm++;
             PersistentFormBean persistentFormBean = new PersistentFormBean();
             persistentFormBean.setPersistentFormName(poName.toUpperCase() + "默认表单");
@@ -191,12 +195,16 @@ public class PersistentCustomServiceImpl
             persistentFormBean.setSortCode(countForm);
             persistentFormBean.setStatus(Constant.STATUS);
             persistentFormBean.insert();
-//            for (PropertyBean propertyBean : propertyList) {
-//                PersistentFormConfigBean persistentFormConfigBean = new PersistentFormConfigBean();
-//                persistentFormConfigBean.setPersistentFormId(persistentFormBean.getId());
-//                persistentFormConfigBean.setPersistentFormConfigName(propertyBean.getPropertyName());
-//
-//            }
+            for (PropertyBean propertyBean : propertyList) {
+                PersistentFormConfigBean persistentFormConfigBean = new PersistentFormConfigBean();
+                persistentFormConfigBean.setPersistentFormId(persistentFormBean.getId());
+                persistentFormConfigBean.setPersistentFormConfigName(propertyBean.getPropertyName());
+                persistentFormConfigBean.setPersistentFormConfigCode(propertyBean.getPropertyCode());
+                persistentFormConfigBean.setPersistentFormConfigMode("Input");
+                persistentFormConfigBean.setSortCode(propertyBean.getSortCode());
+                persistentFormConfigBean.setStatus(Constant.STATUS);
+                persistentFormConfigBean.insert();
+            }
             countTable++;
             PersistentTableBean persistentTableBean = new PersistentTableBean();
             persistentTableBean.setPersistentTableName(poName.toUpperCase() + "默认表格");
@@ -205,6 +213,15 @@ public class PersistentCustomServiceImpl
             persistentTableBean.setSortCode(countTable);
             persistentTableBean.setStatus(Constant.STATUS);
             persistentTableBean.insert();
+            for (PropertyBean propertyBean : propertyList) {
+                PersistentTableConfigBean persistentTableConfigBean = new PersistentTableConfigBean();
+                persistentTableConfigBean.setPersistentTableId(persistentTableBean.getId());
+                persistentTableConfigBean.setPersistentTableConfigName(propertyBean.getPropertyName());
+                persistentTableConfigBean.setPersistentTableConfigCode(propertyBean.getPropertyCode());
+                persistentTableConfigBean.setSortCode(propertyBean.getSortCode());
+                persistentTableConfigBean.setStatus(Constant.STATUS);
+                persistentTableConfigBean.insert();
+            }
         }
 
     }
