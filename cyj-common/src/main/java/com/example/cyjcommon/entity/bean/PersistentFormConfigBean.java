@@ -24,6 +24,9 @@ public class PersistentFormConfigBean extends Model<PersistentFormConfigBean> {
     @TableField("persistent_form_config_name")
     private String persistentFormConfigName;
 
+    @TableField("persistent_form_config_code")
+    private String persistentFormConfigCode;
+
     @TableField("persistent_form_config_mode")
     private String persistentFormConfigMode;
 

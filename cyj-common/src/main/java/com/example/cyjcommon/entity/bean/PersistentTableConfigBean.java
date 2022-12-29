@@ -24,6 +24,9 @@ public class PersistentTableConfigBean extends Model<PersistentTableConfigBean> 
     @TableField("persistent_table_config_name")
     private String persistentTableConfigName;
 
+    @TableField("persistent_table_config_code")
+    private String persistentTableConfigCode;
+
     @TableField("persistent_table_config_display")
     private int persistentTableConfigDisplay;
 
