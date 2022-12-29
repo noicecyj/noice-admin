@@ -10,6 +10,8 @@ import com.example.cyjcommon.contants.Constant;
 import com.example.cyjcommon.entity.bean.AppServiceBean;
 import com.example.cyjcommon.entity.bean.AuthorityBean;
 import com.example.cyjcommon.entity.bean.PersistentBean;
+import com.example.cyjcommon.entity.bean.PersistentFormBean;
+import com.example.cyjcommon.entity.bean.PersistentTableBean;
 import com.example.cyjcommon.entity.bean.PropertyBean;
 import com.example.cyjcommon.entity.bean.SqlBean;
 import com.example.cyjcommon.mapper.bean.PersistentMapper;
@@ -84,9 +86,9 @@ public class PersistentCustomServiceImpl
         String poName = BeanUtils.captureName(underPoName);
         long count = new AuthorityBean().selectCount(new LambdaQueryWrapper<AuthorityBean>()
                 .eq(AuthorityBean::getStatus, Constant.STATUS));
-        boolean delete1 = new AuthorityBean().delete(new LambdaQueryWrapper<AuthorityBean>()
+        boolean deleteFlag = new AuthorityBean().delete(new LambdaQueryWrapper<AuthorityBean>()
                 .eq(AuthorityBean::getPersistentId, persistent.getId()));
-        logger.info("delete.authority:{}", delete1);
+        logger.info("delete.authority:{}", deleteFlag);
         String path = "/" + appServiceBean.getAppServiceCode() + "/" + appServiceBean.getAppServiceApi();
         if (isBeanFlag) {
             count++;
@@ -146,6 +148,44 @@ public class PersistentCustomServiceImpl
             get.setStatus(Constant.STATUS);
             get.insert();
         }
+    }
+
+    private void formAndTableHandler(PersistentBean persistent) {
+        boolean isBeanFlag = persistent.getPersistentRelation() == 0;
+        //驼峰名
+        String underPoName = BeanUtils.underline2Camel(persistent.getPersistentCode());
+        //文件名
+        String poName = BeanUtils.captureName(underPoName);
+        long countForm = new PersistentFormBean().selectCount(new LambdaQueryWrapper<PersistentFormBean>()
+                .eq(PersistentFormBean::getStatus, Constant.STATUS));
+        boolean deleteFormFlag = new PersistentFormBean().delete(new LambdaQueryWrapper<PersistentFormBean>()
+                .eq(PersistentFormBean::getPersistentId, persistent.getId()));
+        logger.info("delete.form:{}", deleteFormFlag);
+        long countTable = new PersistentTableBean().selectCount(new LambdaQueryWrapper<PersistentTableBean>()
+                .eq(PersistentTableBean::getStatus, Constant.STATUS));
+        boolean deleteTableFlag = new PersistentTableBean().delete(new LambdaQueryWrapper<PersistentTableBean>()
+                .eq(PersistentTableBean::getPersistentId, persistent.getId()));
+        logger.info("delete.table:{}", deleteTableFlag);
+        if (isBeanFlag) {
+            countForm++;
+            PersistentFormBean persistentFormBean = new PersistentFormBean();
+            persistentFormBean.setPersistentFormName(poName.toUpperCase() + "默认表单");
+            persistentFormBean.setPersistentFormCode(poName.toUpperCase() + "_DEFAULT_FORM");
+            persistentFormBean.setPersistentFormType("default_form");
+            persistentFormBean.setPersistentFormRow(1);
+            persistentFormBean.setPersistentId(persistent.getId());
+            persistentFormBean.setSortCode(countForm);
+            persistentFormBean.setStatus(Constant.STATUS);
+            persistentFormBean.insert();
+            countTable++;
+            PersistentTableBean persistentTableBean = new PersistentTableBean();
+            persistentTableBean.setPersistentTableName(poName.toUpperCase() + "默认表格");
+            persistentTableBean.setPersistentTableCode(poName.toUpperCase() + "_DEFAULT_TABLE");
+            persistentTableBean.setPersistentId(persistent.getId());
+            persistentTableBean.setSortCode(countTable);
+            persistentTableBean.setStatus(Constant.STATUS);
+            persistentTableBean.insert();
+        }
 
     }
 
@@ -155,6 +195,7 @@ public class PersistentCustomServiceImpl
                 createEntityHandler(persistent);
                 authorityHandler(persistent);
                 sqlHandler(persistent);
+                formAndTableHandler(persistent);
                 break;
             case "delete":
 //                deleteEntityHandler(persistent);
