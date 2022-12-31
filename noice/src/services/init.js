@@ -1,12 +1,12 @@
 import {request} from 'ice';
 
 export default {
-  findDataTableAndFormByName(entityCode) {
+  findDataTableAndFormByName(persistentCode) {
     return request({
       url: '/entityCreateApi/findDataTableAndFormByName',
       method: 'post',
       params: {
-        entityCode,
+        persistentCode,
       },
     });
   },

@@ -623,7 +623,6 @@ public class PersistentCustomServiceImpl
 //        sb.append("      const payload = {\r\n");
 //        sb.append("        table: ret.data.dataTable,\r\n");
 //        sb.append("        form: ret.data.dataForm,\r\n");
-//        sb.append("        customData: ret.data.customData,\r\n");
 //        sb.append("      };\r\n");
 //        sb.append("      dispatch.").append(underPoName).append(".setState(payload);\r\n");
 //        sb.append("    },\r\n");
@@ -656,7 +655,6 @@ public class PersistentCustomServiceImpl
 //                sb.append("      const payload = {\r\n");
 //                sb.append("        table: ret.data.dataTable,\r\n");
 //                sb.append("        form: ret.data.dataForm,\r\n");
-//                sb.append("        customData: ret.data.customData,\r\n");
 //                sb.append("        tableData: dataRes.data.content,\r\n");
 //                sb.append("        total: dataRes.data.totalElements,\r\n");
 //                sb.append("        current: data.current,\r\n");
@@ -1369,69 +1367,45 @@ public class PersistentCustomServiceImpl
         return new String[]{entityServiceData, poName + "CustomServiceImpl.java"};
     }
 
-//    public JSONObject findDataTableAndFormByName(String persistentCode) {
-//        Persistent persistent = new Persistent().selectOne(new LambdaQueryWrapper<Persistent>()
-//                .eq(Persistent::getPersistentCode, persistentCode));
-//        if (persistent == null) {
-//            return null;
-//        }
-//        List<Property> propertyList = new Property().selectList(new LambdaQueryWrapper<Property>()
-//                .eq(Property::getPersistentId, persistent.getId())
-//                .orderByAsc(Property::getSortCode));
-//        List<PropertyCustomDTO> propertyCustomDTOList = new ArrayList<>();
-//        for (Property property : propertyList) {
-//            PropertyCustomDTO propertyCustomDTO = new PropertyCustomDTO();
-//            propertyCustomDTO.setId(property.getId());
-//            propertyCustomDTO.setPropertyCode(property.getPropertyCode());
-//            propertyCustomDTO.setPropertyName(BeanUtils.underline2Camel(property.getPropertyCode()));
-//            propertyCustomDTO.setPropertyDirection(property.getPropertyDirection());
-//            propertyCustomDTO.setPropertyDisplay(BeanUtils.NO.equals(property.getPropertyDisplay()));
-//            propertyCustomDTO.setPropertyDefaultValue(property.getPropertyDefaultValue());
-//            propertyCustomDTO.setPropertyLabel(property.getPropertyLabel());
-//            propertyCustomDTO.setPropertyMode(property.getPropertyMode());
-//            propertyCustomDTO.setPropertyType(property.getPropertyType());
-//            propertyCustomDTO.setPropertyWidth(property.getPropertyWidth());
-//            propertyCustomDTO.setSortCode(property.getSortCode());
-//            propertyCustomDTO.setPropertyMode(property.getPropertyMode());
-//            propertyCustomDTO.setPropertyDataSourceType(property.getPropertyDataSourceType());
-//            propertyCustomDTO.setPropertyEditEnable(BeanUtils.NO.equals(property.getPropertyEditEnable()));
-//            propertyCustomDTO.setPropertyRequired(BeanUtils.YES.equals(property.getPropertyRequired()));
-//            propertyCustomDTO.setPropertyOut(BeanUtils.YES.equals(property.getPropertyOut()));
-//            propertyCustomDTO.setPropertyOutType(property.getPropertyOutType());
-//            if (StringUtils.isNotEmpty(property.getPropertyDataSourceType())) {
-//                List<Dictionary> dictionaryDTOList = dictionaryCustomServiceImpl.findCatalogByValue(propertyCustomDTO.getPropertyDataSourceType());
-//                JSONArray mapList = new JSONArray();
-//                JSONObject mapNull = new JSONObject();
-//                mapNull.put("label", "无");
-//                mapNull.put("value", null);
-//                mapList.add(mapNull);
-//                if (dictionaryDTOList != null && dictionaryDTOList.size() != 0) {
-//                    for (Dictionary dictionary : dictionaryDTOList) {
-//                        Map<String, String> map = new HashMap<>();
-//                        map.put("label", dictionary.getDictionaryName());
-//                        map.put("value", dictionary.getDictionaryValue());
-//                        mapList.add(map);
-//                    }
-//                }
-//                JSONArray dateSourceList = sqlCustomServiceImpl.queryBySql(propertyCustomDTO.getPropertyDataSourceType());
-//                dateSourceHandler(mapList, dateSourceList);
-//                propertyCustomDTO.setPropertyDataSource(mapList);
-//            }
-//            propertyCustomDTOList.add(propertyCustomDTO);
-//        }
-//        List<PropertyCustomDTO> propertyCustomDTOS = propertyCustomDTOList.stream().sorted(Comparator.comparing(PropertyCustomDTO::getSortCode)).collect(Collectors.toList());
-//        JSONObject jsonObject = new JSONObject();
-//        jsonObject.put("dataTable", propertyCustomDTOS);
-//        jsonObject.put("dataForm", propertyCustomDTOS);
-//        JSONObject customData = new JSONObject();
-////        customData.put("customType", BeanUtils.YES.equals(persistent.getPersistentCustomTable()));
-////        customData.put("customForm", BeanUtils.YES.equals(persistent.getPersistentCustomForm()));
-////        customData.put("editEnable", BeanUtils.YES.equals(persistent.getPersistentEditEnable()));
-////        customData.put("formType", persistent.getPersistentFormType());
-////        customData.put("formCol", persistent.getPersistentFormRow());
-//        jsonObject.put("customData", customData);
-//        return jsonObject;
-//    }
+    public JSONObject findDataTableAndFormByName(String persistentCode) {
+        PersistentBean persistent = new PersistentBean().selectOne(new LambdaQueryWrapper<PersistentBean>()
+                .eq(PersistentBean::getPersistentCode, persistentCode));
+        logger.info("findDataTableAndFormByName.persistent:{}", persistent);
+        if (persistent == null) {
+            return null;
+        }
+        List<PersistentFormBean> persistentFormBeanList = new PersistentFormBean()
+                .selectList(new LambdaQueryWrapper<PersistentFormBean>()
+                        .eq(PersistentFormBean::getPersistentId, persistent.getId()));
+        JSONArray persistentFormArr = new JSONArray();
+        for (PersistentFormBean persistentFormBean : persistentFormBeanList) {
+            JSONObject persistentForm = new JSONObject();
+            persistentForm.put(persistentFormBean.getPersistentFormCode(), persistentFormBean);
+            List<PersistentFormConfigBean> persistentFormConfigBeanList = new PersistentFormConfigBean()
+                    .selectList(new LambdaQueryWrapper<PersistentFormConfigBean>()
+                            .eq(PersistentFormConfigBean::getPersistentFormId, persistentFormBean.getId()));
+            persistentForm.put(persistentFormBean.getPersistentFormCode() + "Config", persistentFormConfigBeanList);
+            persistentFormArr.add(persistentForm);
+        }
+        List<PersistentTableBean> persistentTableBeanList = new PersistentTableBean()
+                .selectList(new LambdaQueryWrapper<PersistentTableBean>()
+                        .eq(PersistentTableBean::getPersistentId, persistent.getId()));
+        JSONArray persistentTableArr = new JSONArray();
+        for (PersistentTableBean persistentTableBean : persistentTableBeanList) {
+            JSONObject persistentTable = new JSONObject();
+            persistentTable.put(persistentTableBean.getPersistentTableCode(), persistentTableBean);
+            List<PersistentTableConfigBean> persistentTableConfigBeanList = new PersistentTableConfigBean()
+                    .selectList(new LambdaQueryWrapper<PersistentTableConfigBean>()
+                            .eq(PersistentTableConfigBean::getPersistentTableId, persistentTableBean.getId()));
+            persistentTable.put(persistentTableBean.getPersistentTableCode() + "Config", persistentTableConfigBeanList);
+            persistentFormArr.add(persistentTable);
+        }
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("persistentForm", persistentFormArr);
+        jsonObject.put("persistentTable", persistentTableArr);
+        logger.info("findDataTableAndFormByName.jsonObject:{}", jsonObject);
+        return jsonObject;
+    }
 
     private void dateSourceHandler(JSONArray mapList, JSONArray dateSourceList) {
         if (dateSourceList != null && !dateSourceList.isEmpty()) {

@@ -94,7 +94,6 @@ export default {
       const payload = {
         table: ret.data.dataTable,
         form: ret.data.dataForm,
-        customData: ret.data.customData,
       };
       dispatch.enterprise.setState(payload);
     },
@@ -104,7 +103,6 @@ export default {
       const payload = {
         table: ret.data.dataTable,
         form: ret.data.dataForm,
-        customData: ret.data.customData,
         tableData: dataRes.data.content,
         total: dataRes.data.totalElements,
         current: data.current,
