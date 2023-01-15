@@ -15,23 +15,26 @@ import java.time.LocalDateTime;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@TableName("t_persistent_table_config")
-public class PersistentTableConfigBean extends Model<PersistentTableConfigBean> {
+@TableName("t_persistent_table_search_config")
+public class PersistentTableSearchConfigBean extends Model<PersistentTableSearchConfigBean> {
 
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
-    @TableField("persistent_table_config_name")
-    private String persistentTableConfigName;
+    @TableField("persistent_table_search_config_name")
+    private String persistentTableSearchConfigName;
 
-    @TableField("persistent_table_config_code")
-    private String persistentTableConfigCode;
+    @TableField("persistent_table_search_config_code")
+    private String persistentTableSearchConfigCode;
 
-    @TableField("persistent_table_config_display")
-    private int persistentTableConfigDisplay;
+    @TableField("persistent_table_search_config_display")
+    private int persistentTableSearchConfigDisplay;
 
-    @TableField("persistent_table_config_width")
-    private int persistentTableConfigWidth;
+    @TableField("persistent_table_search_config_mode")
+    private String persistentTableSearchConfigMode;
+
+    @TableField("persistent_table_search_config_data_source")
+    private String persistentTableSearchConfigDataSource;
 
     @TableField("persistent_table_id")
     private String persistentTableId;

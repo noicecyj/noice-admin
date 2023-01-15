@@ -11,8 +11,6 @@ function DataTable(props) {
 
   const {
     items,
-    customData,
-    columnRender,
     dataSource,
     rowSelection,
     primaryKey,
@@ -23,16 +21,17 @@ function DataTable(props) {
     deleteItem,
     editItem,
     searchFormValue,
+    search,
+    reset,
   } = props;
 
+  console.log("items=====>", items)
   const pageRender = (value, index, record) => {
     return (
       <div className={styles.opt}>
         <Box direction="row" spacing={5}>
-          {editItem !== null && customData.editEnable &&
+          {editItem !== null &&
             <Button type="primary" size="small" onClick={() => editItem(record)}> 编辑 </Button>}
-          {editItem !== null && !customData.editEnable &&
-            <Button type="primary" size="small" onClick={() => editItem(record)}> 预览 </Button>}
           {deleteItem !== null &&
             <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning> 删除 </Button>}
         </Box>
@@ -58,56 +57,37 @@ function DataTable(props) {
           value={searchFormValue}>
           {items.map((item) => {
             console.log("item====>", item)
-            if (item.propertyMode === 'Input') {
-              return (
-                <FormItem
-                  colSpan={4}
-                  label={`${item.propertyLabel}`}
-                  required={item.propertyRequired}
-                  requiredMessage={`请输入${item.propertyLabel}`}
-                  disabled={item.propertyEditEnable}
-                  key={item.id}>
-                  <Input
-                    id={item.propertyCode}
-                    name={item.propertyName}
-                    placeholder={`请输入${item.propertyLabel}`}
-                    defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
-                  />
-                </FormItem>
-              )
-            } else if (item.propertyMode === 'Select') {
-              return (
-                <FormItem
-                  colSpan={4}
-                  label={`${item.propertyLabel}`}
-                  required={item.propertyRequired}
-                  requiredMessage={`请输入${item.propertyLabel}`}
-                  key={item.id}>
-                  <Select
-                    id={item.propertyCode}
-                    name={item.propertyName}
-                    filterLocal={false}
-                    dataSource={item.propertyDataSource}
-                    defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
-                  />
-                </FormItem>)
-            } else if (item.propertyOut && item.propertyOutType === 'ManyToOne') {
-              return (
-                <FormItem
-                  colSpan={4}
-                  label={`${item.propertyLabel}`}
-                  required={item.propertyRequired}
-                  requiredMessage={`请输入${item.propertyLabel}`}
-                  key={item.id}>
-                  <Select
-                    id={item.propertyCode + "_id"}
-                    name={item.propertyName + "Id"}
-                    filterLocal={false}
-                    dataSource={item.propertyDataSource}
-                    defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
-                  />
-                </FormItem>)
-            }
+            console.log("item.INFO====>", item.INFO)
+            console.log("item.CONFIG====>", item.CONFIG)
+            console.log("item.SEARCH====>", item.SEARCH)
+            item.SEARCH.map((search) => {
+              if (search.searchMode === 'Input') {
+                return (
+                  <FormItem
+                    colSpan={4}
+                    label={`${search.searchName}`}
+                    key={search.id}>
+                    <Input
+                      id={search.searchCode}
+                      name={search.searchName}
+                    />
+                  </FormItem>
+                )
+              } else if (search.searchMode === 'Select' || search.searchMode === 'ManyToOne') {
+                return (
+                  <FormItem
+                    colSpan={4}
+                    label={`${search.searchName}`}
+                    key={search.id}>
+                    <Select
+                      id={search.searchCode}
+                      name={search.searchName}
+                      filterLocal={false}
+                      dataSource={search.searchDataSource}
+                    />
+                  </FormItem>)
+              }
+            })
           })}
         </Form>
         <div className={styles.Main}>
@@ -143,14 +123,6 @@ function DataTable(props) {
                   />);
                 }
               })}
-              {customData.customType && <Table.Column
-                title="自定义操作"
-                alignHeader="center"
-                align="center"
-                key="columnRender"
-                width="160px"
-                cell={columnRender}
-              />}
               <Table.Column
                 title="状态"
                 dataIndex="status"

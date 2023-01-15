@@ -90,7 +90,10 @@ export default {
     },
     async findDataTableAndFormByName() {
       const ret = await initService.findDataTableAndFormByName('persistent');
-      await this.page(1);
+      await this.page({
+        searchForm: {},
+        current: 1,
+      });
       const payload = {
         table: ret.data.dataTable,
         form: ret.data.dataForm,

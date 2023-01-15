@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import pageStore from '@/pages/Persistent/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
-import {CustomColumn} from '@/pages/Persistent/view/custom/Persistent';
 
 function Persistent() {
 
@@ -27,12 +26,6 @@ function Persistent() {
         total={state.total}
         getPage={current => dispatchers.page(current)}
         primaryKey="id"
-        customData={state.customData}
-        columnRender={(value, index, record) => {
-          return (
-            <CustomColumn value={value} index={index} record={record}/>
-          );
-        }}
       />
       <DataFormTemple
         customData={state.customData}

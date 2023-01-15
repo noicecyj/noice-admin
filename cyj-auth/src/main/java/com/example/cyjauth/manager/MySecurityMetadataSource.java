@@ -53,7 +53,7 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
         if (StringUtils.isBlank(redisConfigAttributesPermission)) {
             List<AuthorityBean> authorityList = new AuthorityBean()
                     .selectList(new QueryWrapper<AuthorityBean>().lambda()
-                            .eq(AuthorityBean::getStatus, "有效"));
+                            .eq(AuthorityBean::getStatus, 1));
             for (AuthorityBean po : authorityList) {
                 ConfigAttribute configAttribute = new SecurityConfig(po.getAuthorityPath());
                 configAttributes.add(configAttribute);

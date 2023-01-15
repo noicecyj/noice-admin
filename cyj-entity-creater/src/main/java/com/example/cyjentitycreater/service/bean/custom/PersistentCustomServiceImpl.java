@@ -1380,11 +1380,11 @@ public class PersistentCustomServiceImpl
         JSONArray persistentFormArr = new JSONArray();
         for (PersistentFormBean persistentFormBean : persistentFormBeanList) {
             JSONObject persistentForm = new JSONObject();
-            persistentForm.put(persistentFormBean.getPersistentFormCode(), persistentFormBean);
+            persistentForm.put("INFO", persistentFormBean);
             List<PersistentFormConfigBean> persistentFormConfigBeanList = new PersistentFormConfigBean()
                     .selectList(new LambdaQueryWrapper<PersistentFormConfigBean>()
                             .eq(PersistentFormConfigBean::getPersistentFormId, persistentFormBean.getId()));
-            persistentForm.put(persistentFormBean.getPersistentFormCode() + "Config", persistentFormConfigBeanList);
+            persistentForm.put("CONFIG", persistentFormConfigBeanList);
             persistentFormArr.add(persistentForm);
         }
         List<PersistentTableBean> persistentTableBeanList = new PersistentTableBean()
@@ -1393,16 +1393,17 @@ public class PersistentCustomServiceImpl
         JSONArray persistentTableArr = new JSONArray();
         for (PersistentTableBean persistentTableBean : persistentTableBeanList) {
             JSONObject persistentTable = new JSONObject();
-            persistentTable.put(persistentTableBean.getPersistentTableCode(), persistentTableBean);
+            persistentTable.put("INFO", persistentTableBean);
             List<PersistentTableConfigBean> persistentTableConfigBeanList = new PersistentTableConfigBean()
                     .selectList(new LambdaQueryWrapper<PersistentTableConfigBean>()
                             .eq(PersistentTableConfigBean::getPersistentTableId, persistentTableBean.getId()));
-            persistentTable.put(persistentTableBean.getPersistentTableCode() + "Config", persistentTableConfigBeanList);
-            persistentFormArr.add(persistentTable);
+            persistentTable.put("CONFIG", persistentTableConfigBeanList);
+//            persistentTable.put("SEARCH", persistentTableConfigSearchList);
+            persistentTableArr.add(persistentTable);
         }
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("persistentForm", persistentFormArr);
-        jsonObject.put("persistentTable", persistentTableArr);
+        jsonObject.put("dataForm", persistentFormArr);
+        jsonObject.put("dataTable", persistentTableArr);
         logger.info("findDataTableAndFormByName.jsonObject:{}", jsonObject);
         return jsonObject;
     }
