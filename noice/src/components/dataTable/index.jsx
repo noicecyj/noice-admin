@@ -50,56 +50,52 @@ function DataTable(props) {
   return (
     <ResponsiveGrid gap={20}>
       <Cell colSpan={12}>
-        <Form
-          responsive={true}
-          fullWidth
-          labelAlign="top"
-          value={searchFormValue}>
-          {items.map((item) => {
-            console.log("item====>", item)
-            console.log("item.INFO====>", item.INFO)
-            console.log("item.CONFIG====>", item.CONFIG)
-            console.log("item.SEARCH====>", item.SEARCH)
-            item.SEARCH.map((search) => {
-              if (search.searchMode === 'Input') {
-                return (
-                  <FormItem
-                    colSpan={4}
-                    label={`${search.searchName}`}
-                    key={search.id}>
-                    <Input
-                      id={search.searchCode}
-                      name={search.searchName}
-                    />
-                  </FormItem>
-                )
-              } else if (search.searchMode === 'Select' || search.searchMode === 'ManyToOne') {
-                return (
-                  <FormItem
-                    colSpan={4}
-                    label={`${search.searchName}`}
-                    key={search.id}>
-                    <Select
-                      id={search.searchCode}
-                      name={search.searchName}
-                      filterLocal={false}
-                      dataSource={search.searchDataSource}
-                    />
-                  </FormItem>)
-              }
-            })
-          })}
-        </Form>
         <div className={styles.Main}>
-          <div className={styles.add}>
+          <Form
+            responsive={true}
+            fullWidth
+            value={searchFormValue}>
             {!!createItem && <Button type="primary" onClick={() => createItem()}> 添加 </Button>}
-          </div>
-          <div className={styles.add}>
+            {items.map((item) => {
+              console.log("item====>", item)
+              console.log("item.INFO====>", item.INFO)
+              console.log("item.CONFIG====>", item.CONFIG)
+              console.log("item.SEARCH====>", item.SEARCH)
+              return item.SEARCH.map((search) => {
+                if (search.searchMode === 'Input') {
+                  console.log("item.SEARCH.Input====>", search)
+                  return (
+                    <FormItem
+                      colSpan={2}
+                      label={`${search.searchName}`}
+                      key={search.id}>
+                      <Input
+                        id={search.searchCode}
+                        name={search.searchName}
+                      />
+                    </FormItem>
+                  )
+                } else if (search.searchMode === 'Select' || search.searchMode === 'ManyToOne') {
+                  console.log("item.SEARCH.Select|ManyToOne====>", search)
+                  return (
+                    <FormItem
+                      colSpan={2}
+                      label={`${search.searchName}`}
+                      key={search.id}>
+                      <Select
+                        id={search.searchCode}
+                        name={search.searchName}
+                        filterLocal={false}
+                        dataSource={search.searchDataSource}
+                      />
+                    </FormItem>)
+                }
+              })
+            })}
             {!!search && <Button type="primary" onClick={() => search()}> 查询 </Button>}
-          </div>
-          <div className={styles.add}>
             {!!reset && <Button onClick={() => reset()}> 重置 </Button>}
-          </div>
+          </Form>
+
           <Loading
             tip="加载中..."
             visible={visibleLoading}
@@ -112,16 +108,17 @@ function DataTable(props) {
               rowSelection={rowSelection}
               primaryKey={primaryKey}
             >
-              {items.length === 0 ? null : items.map((item, index) => {
-                if (!item.propertyDisplay) {
+              {items.map((item) => {
+                console.log("item.CONFIG====>", item.CONFIG)
+                return item.CONFIG.map((config, index) => {
                   return (<Table.Column
-                    hidden={item.propertyDisplay}
-                    title={item.propertyLabel}
-                    dataIndex={item.propertyName}
-                    width={item.propertyWidth != null ? item.propertyWidth : null}
+                    hidden={config.persistentTableConfigDisplay === 0}
+                    title={config.persistentTableConfigName}
+                    dataIndex={config.persistentTableConfigName}
+                    width={config.persistentTableConfigWidth != null ? item.persistentTableConfigWidth : null}
                     key={index}
                   />);
-                }
+                })
               })}
               <Table.Column
                 title="状态"

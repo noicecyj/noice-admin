@@ -14,11 +14,14 @@ import com.example.cyjcommon.entity.bean.PersistentFormBean;
 import com.example.cyjcommon.entity.bean.PersistentFormConfigBean;
 import com.example.cyjcommon.entity.bean.PersistentTableBean;
 import com.example.cyjcommon.entity.bean.PersistentTableConfigBean;
+import com.example.cyjcommon.entity.bean.PersistentTableSearchConfigBean;
 import com.example.cyjcommon.entity.bean.PropertyBean;
 import com.example.cyjcommon.entity.bean.SqlBean;
 import com.example.cyjcommon.mapper.bean.PersistentMapper;
+import com.example.cyjcommon.mapper.bean.SqlMapper;
 import com.example.cyjcommon.utils.BeanUtils;
 import com.example.cyjdictionary.service.bean.custom.DictionaryCustomServiceImpl;
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -47,12 +50,17 @@ public class PersistentCustomServiceImpl
 
     private final static String componentPath = "C:/Users/noice/IdeaProjects/noice-admin/noice/src/pages/";
     private final static String POST = "POST";
-    private final static String AUTO = "auto";
 
     private final static String commonPath = "C:/Users/noice/IdeaProjects/noice-admin/cyj-common/src/main/java/com/example/cyjcommon";
     private DictionaryCustomServiceImpl dictionaryCustomServiceImpl;
 //    private SqlCustomServiceImpl sqlCustomServiceImpl;
 
+    private SqlMapper sqlMapper;
+
+    @Autowired
+    public void setSqlMapper(SqlMapper sqlMapper) {
+        this.sqlMapper = sqlMapper;
+    }
 
     @Autowired
     public void setDictionaryCustomService(DictionaryCustomServiceImpl dictionaryCustomServiceImpl) {
@@ -152,7 +160,7 @@ public class PersistentCustomServiceImpl
         }
     }
 
-    private void formAndTableHandler(PersistentBean persistent) {
+    private void formAndTableAndSearchHandler(PersistentBean persistent) {
         boolean isBeanFlag = persistent.getPersistentRelation() == 0;
         //驼峰名
         String underPoName = BeanUtils.underline2Camel(persistent.getPersistentCode());
@@ -160,7 +168,6 @@ public class PersistentCustomServiceImpl
         String poName = BeanUtils.captureName(underPoName);
         List<PropertyBean> propertyList = new PropertyBean().selectList(new LambdaQueryWrapper<PropertyBean>()
                 .eq(PropertyBean::getPersistentId, persistent.getId())
-                .eq(PropertyBean::getPropertyRelation, 0)
                 .orderByAsc(PropertyBean::getSortCode));
         if (isBeanFlag) {
             long countForm = new PersistentFormBean().selectCount(new LambdaQueryWrapper<PersistentFormBean>()
@@ -182,7 +189,11 @@ public class PersistentCustomServiceImpl
                 boolean persistentTableConfigFlag = new PersistentTableConfigBean()
                         .delete(new LambdaQueryWrapper<PersistentTableConfigBean>()
                                 .eq(PersistentTableConfigBean::getPersistentTableId, tableBean.getId()));
+                boolean persistentTableSearchConfigFlag = new PersistentTableSearchConfigBean()
+                        .delete(new LambdaQueryWrapper<PersistentTableSearchConfigBean>()
+                                .eq(PersistentTableSearchConfigBean::getPersistentTableId, tableBean.getId()));
                 logger.info("delete.persistentTableConfigFlag:{}", persistentTableConfigFlag);
+                logger.info("delete.persistentTableSearchConfigFlag:{}", persistentTableSearchConfigFlag);
                 tableBean.deleteById();
             }
             countForm++;
@@ -214,13 +225,39 @@ public class PersistentCustomServiceImpl
             persistentTableBean.setStatus(Constant.STATUS);
             persistentTableBean.insert();
             for (PropertyBean propertyBean : propertyList) {
-                PersistentTableConfigBean persistentTableConfigBean = new PersistentTableConfigBean();
-                persistentTableConfigBean.setPersistentTableId(persistentTableBean.getId());
-                persistentTableConfigBean.setPersistentTableConfigName(propertyBean.getPropertyName());
-                persistentTableConfigBean.setPersistentTableConfigCode(propertyBean.getPropertyCode());
-                persistentTableConfigBean.setSortCode(propertyBean.getSortCode());
-                persistentTableConfigBean.setStatus(Constant.STATUS);
-                persistentTableConfigBean.insert();
+                if (propertyBean.getPropertyRelation() == 0) {
+                    PersistentTableConfigBean persistentTableConfigBean = new PersistentTableConfigBean();
+                    persistentTableConfigBean.setPersistentTableId(persistentTableBean.getId());
+                    persistentTableConfigBean.setPersistentTableConfigName(propertyBean.getPropertyName());
+                    persistentTableConfigBean.setPersistentTableConfigCode(propertyBean.getPropertyCode());
+                    persistentTableConfigBean.setPersistentTableConfigDisplay(1);
+                    persistentTableConfigBean.setPersistentTableConfigWidth(200);
+                    persistentTableConfigBean.setSortCode(propertyBean.getSortCode());
+                    persistentTableConfigBean.setStatus(Constant.STATUS);
+                    persistentTableConfigBean.insert();
+                } else {
+                    PersistentTableSearchConfigBean persistentTableSearchConfigBean = new PersistentTableSearchConfigBean();
+                    persistentTableSearchConfigBean.setPersistentTableId(persistentTableBean.getId());
+                    persistentTableSearchConfigBean.setPersistentTableSearchConfigCode(propertyBean.getPropertyCode());
+                    persistentTableSearchConfigBean.setPersistentTableSearchConfigName(propertyBean.getPropertyName());
+                    persistentTableSearchConfigBean.setPersistentTableSearchConfigMode("ManyToOne");
+                    persistentTableSearchConfigBean.setPersistentTableSearchConfigDisplay(1);
+                    persistentTableSearchConfigBean.setPersistentTableSearchConfigDataSource(propertyBean.getPropertyCode().toUpperCase() + "@NAME_AND_ID");
+                    persistentTableSearchConfigBean.setSortCode(propertyBean.getSortCode());
+                    persistentTableSearchConfigBean.setStatus(Constant.STATUS);
+                    persistentTableSearchConfigBean.insert();
+                }
+                if (propertyBean.getPropertyCode().contains("code") || propertyBean.getPropertyCode().contains("name")) {
+                    PersistentTableSearchConfigBean persistentTableSearchConfigBean = new PersistentTableSearchConfigBean();
+                    persistentTableSearchConfigBean.setPersistentTableId(persistentTableBean.getId());
+                    persistentTableSearchConfigBean.setPersistentTableSearchConfigCode(propertyBean.getPropertyCode());
+                    persistentTableSearchConfigBean.setPersistentTableSearchConfigName(propertyBean.getPropertyName());
+                    persistentTableSearchConfigBean.setPersistentTableSearchConfigMode("Input");
+                    persistentTableSearchConfigBean.setPersistentTableSearchConfigDisplay(1);
+                    persistentTableSearchConfigBean.setSortCode(propertyBean.getSortCode());
+                    persistentTableSearchConfigBean.setStatus(Constant.STATUS);
+                    persistentTableSearchConfigBean.insert();
+                }
             }
         }
 
@@ -232,7 +269,7 @@ public class PersistentCustomServiceImpl
                 createEntityHandler(persistent);
                 authorityHandler(persistent);
                 sqlHandler(persistent);
-                formAndTableHandler(persistent);
+                formAndTableAndSearchHandler(persistent);
                 break;
             case "delete":
 //                deleteEntityHandler(persistent);
@@ -325,7 +362,7 @@ public class PersistentCustomServiceImpl
         String underPoName = BeanUtils.underline2Camel(persistent.getPersistentCode());
         //文件名
         String poName = BeanUtils.captureName(underPoName);
-        String dataSourceType = "DATABASE_" + persistent.getPersistentCode().toUpperCase() + "_TYPE";
+        String dataSourceType = persistent.getPersistentCode().toUpperCase() + "_ID@NAME_AND_ID";
         boolean delete = new SqlBean().delete(new LambdaQueryWrapper<SqlBean>()
                 .eq(SqlBean::getSqlCode, dataSourceType));
         long count = new SqlBean().selectCount(new LambdaQueryWrapper<SqlBean>()
@@ -1398,13 +1435,34 @@ public class PersistentCustomServiceImpl
                     .selectList(new LambdaQueryWrapper<PersistentTableConfigBean>()
                             .eq(PersistentTableConfigBean::getPersistentTableId, persistentTableBean.getId()));
             persistentTable.put("CONFIG", persistentTableConfigBeanList);
-//            persistentTable.put("SEARCH", persistentTableConfigSearchList);
+            List<PersistentTableSearchConfigBean> persistentTableSearchConfigBeanList = new PersistentTableSearchConfigBean()
+                    .selectList(new LambdaQueryWrapper<PersistentTableSearchConfigBean>()
+                            .eq(PersistentTableSearchConfigBean::getPersistentTableId, persistentTableBean.getId()));
+            JSONArray searchConfigArr = new JSONArray();
+            for (PersistentTableSearchConfigBean persistentTableSearchConfigBean : persistentTableSearchConfigBeanList) {
+                JSONObject searchConfig = new JSONObject();
+                searchConfig.put("id", persistentTableSearchConfigBean.getId());
+                searchConfig.put("searchMode", persistentTableSearchConfigBean.getPersistentTableSearchConfigMode());
+                searchConfig.put("searchName", persistentTableSearchConfigBean.getPersistentTableSearchConfigName());
+                searchConfig.put("searchCode", persistentTableSearchConfigBean.getPersistentTableSearchConfigCode());
+                if (StringUtils.isNotEmpty(persistentTableSearchConfigBean.getPersistentTableSearchConfigDataSource())) {
+                    SqlBean sqlBean = new SqlBean().selectOne(new LambdaQueryWrapper<SqlBean>()
+                            .eq(SqlBean::getSqlCode, persistentTableSearchConfigBean.getPersistentTableSearchConfigDataSource()));
+                    Map<String, String> sql = new HashMap<>();
+                    sql.put("sql", sqlBean.getSqlStr());
+                    List<Map> mapList = sqlMapper.executeSql(sql);
+                    searchConfig.put("searchDataSource", mapList);
+                    logger.info("searchDataSource:{}", mapList);
+                }
+                searchConfigArr.add(searchConfig);
+            }
+            persistentTable.put("SEARCH", searchConfigArr);
             persistentTableArr.add(persistentTable);
         }
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("dataForm", persistentFormArr);
         jsonObject.put("dataTable", persistentTableArr);
-        logger.info("findDataTableAndFormByName.jsonObject:{}", jsonObject);
+        //logger.info("findDataTableAndFormByName.jsonObject:{}", jsonObject);
         return jsonObject;
     }
 
