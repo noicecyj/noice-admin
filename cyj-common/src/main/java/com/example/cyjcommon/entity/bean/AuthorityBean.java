@@ -52,7 +52,7 @@ public class AuthorityBean extends Model<AuthorityBean> {
     private String createdBy;
 
     @TableField("updated_date")
-    private LocalDateTime updated_date;
+    private LocalDateTime updatedDate;
 
     @TableField("updated_by")
     private String updatedBy;

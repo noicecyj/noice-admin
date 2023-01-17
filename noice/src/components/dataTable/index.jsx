@@ -17,7 +17,7 @@ function DataTable(props) {
     total,
     getPage,
     visibleLoading,
-    createItem,
+    addItem,
     deleteItem,
     editItem,
     searchFormValue,
@@ -25,7 +25,6 @@ function DataTable(props) {
     reset,
   } = props;
 
-  console.log("items=====>", items)
   const pageRender = (value, index, record) => {
     return (
       <div className={styles.opt}>
@@ -55,7 +54,7 @@ function DataTable(props) {
             responsive={true}
             fullWidth
             value={searchFormValue}>
-            {!!createItem && <Button type="primary" onClick={() => createItem()}> 添加 </Button>}
+            {!!addItem && <Button type="primary" onClick={() => addItem()}> 添加 </Button>}
             {items.map((item) => {
               console.log("item====>", item)
               console.log("item.INFO====>", item.INFO)
@@ -112,22 +111,13 @@ function DataTable(props) {
                 console.log("item.CONFIG====>", item.CONFIG)
                 return item.CONFIG.map((config, index) => {
                   return (<Table.Column
-                    hidden={config.persistentTableConfigDisplay === 0}
                     title={config.persistentTableConfigName}
-                    dataIndex={config.persistentTableConfigName}
+                    dataIndex={config.persistentTableConfigCode}
                     width={config.persistentTableConfigWidth != null ? item.persistentTableConfigWidth : null}
                     key={index}
                   />);
                 })
               })}
-              <Table.Column
-                title="状态"
-                dataIndex="status"
-                width="65px"
-                key="status"
-                alignHeader="center"
-                align="center"
-              />
               <Table.Column
                 title="排序"
                 dataIndex="sortCode"

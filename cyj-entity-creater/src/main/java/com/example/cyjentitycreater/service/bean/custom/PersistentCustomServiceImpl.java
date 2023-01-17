@@ -33,6 +33,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -210,7 +211,9 @@ public class PersistentCustomServiceImpl
                 PersistentFormConfigBean persistentFormConfigBean = new PersistentFormConfigBean();
                 persistentFormConfigBean.setPersistentFormId(persistentFormBean.getId());
                 persistentFormConfigBean.setPersistentFormConfigName(propertyBean.getPropertyName());
-                persistentFormConfigBean.setPersistentFormConfigCode(propertyBean.getPropertyCode());
+                //驼峰名
+                String underPropertyCode = BeanUtils.underline2Camel(propertyBean.getPropertyCode());
+                persistentFormConfigBean.setPersistentFormConfigCode(underPropertyCode);
                 persistentFormConfigBean.setPersistentFormConfigMode("Input");
                 persistentFormConfigBean.setSortCode(propertyBean.getSortCode());
                 persistentFormConfigBean.setStatus(Constant.STATUS);
@@ -229,7 +232,9 @@ public class PersistentCustomServiceImpl
                     PersistentTableConfigBean persistentTableConfigBean = new PersistentTableConfigBean();
                     persistentTableConfigBean.setPersistentTableId(persistentTableBean.getId());
                     persistentTableConfigBean.setPersistentTableConfigName(propertyBean.getPropertyName());
-                    persistentTableConfigBean.setPersistentTableConfigCode(propertyBean.getPropertyCode());
+                    //驼峰名
+                    String underPropertyCode = BeanUtils.underline2Camel(propertyBean.getPropertyCode());
+                    persistentTableConfigBean.setPersistentTableConfigCode(underPropertyCode);
                     persistentTableConfigBean.setPersistentTableConfigDisplay(1);
                     persistentTableConfigBean.setPersistentTableConfigWidth(200);
                     persistentTableConfigBean.setSortCode(propertyBean.getSortCode());
@@ -238,7 +243,9 @@ public class PersistentCustomServiceImpl
                 } else {
                     PersistentTableSearchConfigBean persistentTableSearchConfigBean = new PersistentTableSearchConfigBean();
                     persistentTableSearchConfigBean.setPersistentTableId(persistentTableBean.getId());
-                    persistentTableSearchConfigBean.setPersistentTableSearchConfigCode(propertyBean.getPropertyCode());
+                    //驼峰名
+                    String underPropertyCode = BeanUtils.underline2Camel(propertyBean.getPropertyCode());
+                    persistentTableSearchConfigBean.setPersistentTableSearchConfigCode(underPropertyCode);
                     persistentTableSearchConfigBean.setPersistentTableSearchConfigName(propertyBean.getPropertyName());
                     persistentTableSearchConfigBean.setPersistentTableSearchConfigMode("ManyToOne");
                     persistentTableSearchConfigBean.setPersistentTableSearchConfigDisplay(1);
@@ -250,7 +257,9 @@ public class PersistentCustomServiceImpl
                 if (propertyBean.getPropertyCode().contains("code") || propertyBean.getPropertyCode().contains("name")) {
                     PersistentTableSearchConfigBean persistentTableSearchConfigBean = new PersistentTableSearchConfigBean();
                     persistentTableSearchConfigBean.setPersistentTableId(persistentTableBean.getId());
-                    persistentTableSearchConfigBean.setPersistentTableSearchConfigCode(propertyBean.getPropertyCode());
+                    //驼峰名
+                    String underPropertyCode = BeanUtils.underline2Camel(propertyBean.getPropertyCode());
+                    persistentTableSearchConfigBean.setPersistentTableSearchConfigCode(underPropertyCode);
                     persistentTableSearchConfigBean.setPersistentTableSearchConfigName(propertyBean.getPropertyName());
                     persistentTableSearchConfigBean.setPersistentTableSearchConfigMode("Input");
                     persistentTableSearchConfigBean.setPersistentTableSearchConfigDisplay(1);
@@ -988,7 +997,12 @@ public class PersistentCustomServiceImpl
             for (Map.Entry<String, String[]> entry : entityObj.entrySet()) {
                 String key = entry.getKey();
                 String[] value = entry.getValue();
-                BeanUtils.createJavaFile(key, value);
+                if (key.contains("entity")) {
+                    BeanUtils.createJavaFile(key, value);
+                } else {
+                    BeanUtils.createJavaFile(key, value, false);
+                }
+
             }
             for (Map.Entry<String, String[]> entry : entityCustomObj.entrySet()) {
                 String key = entry.getKey();
@@ -1060,7 +1074,7 @@ public class PersistentCustomServiceImpl
         sb.append("    private String createdBy;\r\n");
         sb.append("\r\n");
         sb.append("    @TableField(\"updated_date\")\r\n");
-        sb.append("    private LocalDateTime updated_date;\r\n");
+        sb.append("    private LocalDateTime updatedDate;\r\n");
         sb.append("\r\n");
         sb.append("    @TableField(\"updated_by\")\r\n");
         sb.append("    private String updatedBy;\r\n");
@@ -1433,11 +1447,14 @@ public class PersistentCustomServiceImpl
             persistentTable.put("INFO", persistentTableBean);
             List<PersistentTableConfigBean> persistentTableConfigBeanList = new PersistentTableConfigBean()
                     .selectList(new LambdaQueryWrapper<PersistentTableConfigBean>()
-                            .eq(PersistentTableConfigBean::getPersistentTableId, persistentTableBean.getId()));
+                            .eq(PersistentTableConfigBean::getPersistentTableId, persistentTableBean.getId())
+                            .eq(PersistentTableConfigBean::getPersistentTableConfigDisplay, 1)
+                            .orderByAsc(PersistentTableConfigBean::getSortCode));
             persistentTable.put("CONFIG", persistentTableConfigBeanList);
             List<PersistentTableSearchConfigBean> persistentTableSearchConfigBeanList = new PersistentTableSearchConfigBean()
                     .selectList(new LambdaQueryWrapper<PersistentTableSearchConfigBean>()
-                            .eq(PersistentTableSearchConfigBean::getPersistentTableId, persistentTableBean.getId()));
+                            .eq(PersistentTableSearchConfigBean::getPersistentTableId, persistentTableBean.getId())
+                            .orderByAsc(PersistentTableSearchConfigBean::getSortCode));
             JSONArray searchConfigArr = new JSONArray();
             for (PersistentTableSearchConfigBean persistentTableSearchConfigBean : persistentTableSearchConfigBeanList) {
                 JSONObject searchConfig = new JSONObject();
@@ -1456,9 +1473,26 @@ public class PersistentCustomServiceImpl
                 }
                 searchConfigArr.add(searchConfig);
             }
+            JSONObject searchStatusConfig = new JSONObject();
+            searchStatusConfig.put("id", "status_id");
+            searchStatusConfig.put("searchMode", "Select");
+            searchStatusConfig.put("searchName", "状态");
+            searchStatusConfig.put("searchCode", "status");
+            Map<String, Object> youXiaoMap = new HashMap<>();
+            youXiaoMap.put("label", "有效");
+            youXiaoMap.put("value", 1);
+            Map<String, Object> wuXiaoMap = new HashMap<>();
+            wuXiaoMap.put("label", "无效");
+            wuXiaoMap.put("value", 0);
+            List<Map> mapList = new ArrayList<>();
+            mapList.add(youXiaoMap);
+            mapList.add(wuXiaoMap);
+            searchStatusConfig.put("searchDataSource", mapList);
+            searchConfigArr.add(searchStatusConfig);
             persistentTable.put("SEARCH", searchConfigArr);
             persistentTableArr.add(persistentTable);
         }
+        logger.info("findDataTableAndFormByName.persistentTableArr:{}", persistentTableArr);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("dataForm", persistentFormArr);
         jsonObject.put("dataTable", persistentTableArr);

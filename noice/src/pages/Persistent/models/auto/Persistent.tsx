@@ -33,8 +33,8 @@ export default {
     async page(data) {
       const dataRes = await service.page(data.searchForm, data.current, 10);
       const payload = {
-        tableData: dataRes.data.content,
-        total: dataRes.data.totalElements,
+        tableData: dataRes.data.records,
+        total: dataRes.data.total,
         current: data.current,
         loadingVisible: false,
       };
@@ -79,6 +79,12 @@ export default {
         formData: data,
         title: '编辑',
         visible: true,
+      };
+      dispatch.persistent.setState(payload);
+    },
+    reset(){
+      const payload = {
+        searchForm: {},
       };
       dispatch.persistent.setState(payload);
     },

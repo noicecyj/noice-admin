@@ -61,7 +61,7 @@ public class PersistentFormConfigBean extends Model<PersistentFormConfigBean> {
     private String createdBy;
 
     @TableField("updated_date")
-    private LocalDateTime updated_date;
+    private LocalDateTime updatedDate;
 
     @TableField("updated_by")
     private String updatedBy;
