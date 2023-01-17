@@ -36,6 +36,9 @@ public class PersistentTableSearchConfigBean extends Model<PersistentTableSearch
     @TableField("persistent_table_search_config_data_source")
     private String persistentTableSearchConfigDataSource;
 
+    @TableField("persistent_table_search_config_default_value")
+    private String persistentTableSearchConfigDefaultValue;
+
     @TableField("persistent_table_id")
     private String persistentTableId;
 

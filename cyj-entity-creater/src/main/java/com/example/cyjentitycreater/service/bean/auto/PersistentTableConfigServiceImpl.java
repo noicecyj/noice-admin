@@ -45,6 +45,7 @@ public class PersistentTableConfigServiceImpl
                         PersistentTableConfigBean::getPersistentTableId, po.getPersistentTableId())
                 .like(StringUtils.isNotEmpty(po.getPersistentTableConfigName()),
                         PersistentTableConfigBean::getPersistentTableConfigName, po.getPersistentTableConfigName())
+                .eq(PersistentTableConfigBean::getStatus, po.getStatus())
                 .orderByAsc(PersistentTableConfigBean::getSortCode);
     }
 

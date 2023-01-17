@@ -45,6 +45,7 @@ public class PropertyServiceImpl
                         PropertyBean::getPersistentId, po.getPersistentId())
                 .like(StringUtils.isNotEmpty(po.getPropertyName()),
                         PropertyBean::getPropertyName, po.getPropertyName())
+                .eq(PropertyBean::getStatus, po.getStatus())
                 .orderByAsc(PropertyBean::getSortCode);
     }
 

@@ -21,6 +21,7 @@ function DataTable(props) {
     deleteItem,
     editItem,
     searchFormValue,
+    dispatchers,
     search,
     reset,
   } = props;
@@ -53,7 +54,8 @@ function DataTable(props) {
           <Form
             responsive={true}
             fullWidth
-            value={searchFormValue}>
+            value={searchFormValue}
+            onChange={(value) => dispatchers(value)}>
             {!!addItem && <Button type="primary" onClick={() => addItem()}> 添加 </Button>}
             {items.map((item) => {
               console.log("item====>", item)
@@ -70,7 +72,7 @@ function DataTable(props) {
                       key={search.id}>
                       <Input
                         id={search.searchCode}
-                        name={search.searchName}
+                        name={search.searchCode}
                       />
                     </FormItem>
                   )
@@ -83,7 +85,7 @@ function DataTable(props) {
                       key={search.id}>
                       <Select
                         id={search.searchCode}
-                        name={search.searchName}
+                        name={search.searchCode}
                         filterLocal={false}
                         dataSource={search.searchDataSource}
                       />

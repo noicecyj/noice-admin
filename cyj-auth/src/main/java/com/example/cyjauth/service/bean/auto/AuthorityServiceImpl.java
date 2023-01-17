@@ -45,6 +45,7 @@ public class AuthorityServiceImpl
                         AuthorityBean::getPersistentId, po.getPersistentId())
                 .like(StringUtils.isNotEmpty(po.getAuthorityName()),
                         AuthorityBean::getAuthorityName, po.getAuthorityName())
+                .eq(AuthorityBean::getStatus, po.getStatus())
                 .orderByAsc(AuthorityBean::getSortCode);
     }
 

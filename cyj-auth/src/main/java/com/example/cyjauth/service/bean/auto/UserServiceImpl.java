@@ -45,6 +45,7 @@ public class UserServiceImpl
                         UserBean::getEnterpriseId, po.getEnterpriseId())
                 .like(StringUtils.isNotEmpty(po.getUserName()),
                         UserBean::getUserName, po.getUserName())
+                .eq(UserBean::getStatus, po.getStatus())
                 .orderByAsc(UserBean::getSortCode);
     }
 

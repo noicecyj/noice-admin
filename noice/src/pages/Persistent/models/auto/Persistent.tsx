@@ -30,8 +30,16 @@ export default {
   },
 
   effects: (dispatch) => ({
+    async search(searchForm){
+      console.log(searchForm)
+      await this.page({
+        searchForm: searchForm,
+        current: 1,
+      });
+    },
     async page(data) {
       const dataRes = await service.page(data.searchForm, data.current, 10);
+      console.log("page=====>",dataRes)
       const payload = {
         tableData: dataRes.data.records,
         total: dataRes.data.total,
@@ -91,6 +99,12 @@ export default {
     setDataForm(data) {
       const payload = {
         formData: data,
+      };
+      dispatch.persistent.setState(payload);
+    },
+    setSearchDataForm(data) {
+      const payload = {
+        searchForm: data,
       };
       dispatch.persistent.setState(payload);
     },

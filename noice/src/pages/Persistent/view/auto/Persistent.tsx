@@ -15,7 +15,7 @@ function Persistent() {
     <>
       <DataTableTemple
         addItem={() => dispatchers.add()}
-        search={() => dispatchers.page()}
+        search={() => dispatchers.search(state.searchForm)}
         reset={() => dispatchers.reset()}
         editItem={record => dispatchers.edit(record)}
         deleteItem={record => dispatchers.delete({
@@ -29,6 +29,7 @@ function Persistent() {
         getPage={current => dispatchers.page(current)}
         primaryKey="id"
         searchFormValue={state.searchForm}
+        dispatchers={value => dispatchers.setSearchDataForm(value)}
       />
       <DataFormTemple
         customData={state.customData}

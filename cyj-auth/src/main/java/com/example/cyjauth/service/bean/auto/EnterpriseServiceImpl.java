@@ -43,6 +43,7 @@ public class EnterpriseServiceImpl
         return new LambdaQueryWrapper<EnterpriseBean>()
                 .like(StringUtils.isNotEmpty(po.getEnterpriseName()),
                         EnterpriseBean::getEnterpriseName, po.getEnterpriseName())
+                .eq(EnterpriseBean::getStatus, po.getStatus())
                 .orderByAsc(EnterpriseBean::getSortCode);
     }
 

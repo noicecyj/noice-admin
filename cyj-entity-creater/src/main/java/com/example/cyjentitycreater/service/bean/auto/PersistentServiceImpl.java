@@ -45,6 +45,7 @@ public class PersistentServiceImpl
                         PersistentBean::getAppServiceId, po.getAppServiceId())
                 .like(StringUtils.isNotEmpty(po.getPersistentName()),
                         PersistentBean::getPersistentName, po.getPersistentName())
+                .eq(PersistentBean::getStatus, po.getStatus())
                 .orderByAsc(PersistentBean::getSortCode);
     }
 
