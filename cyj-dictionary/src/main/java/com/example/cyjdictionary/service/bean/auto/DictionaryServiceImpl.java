@@ -45,6 +45,8 @@ public class DictionaryServiceImpl
                         DictionaryBean::getCatalogId, po.getCatalogId())
                 .like(StringUtils.isNotEmpty(po.getDictionaryName()),
                         DictionaryBean::getDictionaryName, po.getDictionaryName())
+                .like(StringUtils.isNotEmpty(po.getDictionaryCode()),
+                        DictionaryBean::getDictionaryCode, po.getDictionaryCode())
                 .eq(DictionaryBean::getStatus, po.getStatus())
                 .orderByAsc(DictionaryBean::getSortCode);
     }

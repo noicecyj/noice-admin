@@ -1170,6 +1170,8 @@ public class PersistentCustomServiceImpl
             }
             sb.append("                .like(StringUtils.isNotEmpty(po.get").append(poName).append("Name()),\r\n");
             sb.append("                        ").append(poName).append("Bean::get").append(poName).append("Name, po.get").append(poName).append("Name())\r\n");
+            sb.append("                .like(StringUtils.isNotEmpty(po.get").append(poName).append("Code()),\r\n");
+            sb.append("                        ").append(poName).append("Bean::get").append(poName).append("Code, po.get").append(poName).append("Code())\r\n");
             sb.append("                .eq(").append(poName).append("Bean::getStatus, po.getStatus())\r\n");
             sb.append("                .orderByAsc(").append(poName).append("Bean::getSortCode);\r\n");
             sb.append("    }\r\n");
@@ -1463,7 +1465,6 @@ public class PersistentCustomServiceImpl
                 searchConfig.put("searchMode", persistentTableSearchConfigBean.getPersistentTableSearchConfigMode());
                 searchConfig.put("searchName", persistentTableSearchConfigBean.getPersistentTableSearchConfigName());
                 searchConfig.put("searchCode", persistentTableSearchConfigBean.getPersistentTableSearchConfigCode());
-                searchConfig.put("searchDefaultValve", 1);
                 if (StringUtils.isNotEmpty(persistentTableSearchConfigBean.getPersistentTableSearchConfigDataSource())) {
                     SqlBean sqlBean = new SqlBean().selectOne(new LambdaQueryWrapper<SqlBean>()
                             .eq(SqlBean::getSqlCode, persistentTableSearchConfigBean.getPersistentTableSearchConfigDataSource()));
@@ -1480,7 +1481,6 @@ public class PersistentCustomServiceImpl
             searchStatusConfig.put("searchMode", "Select");
             searchStatusConfig.put("searchName", "状态");
             searchStatusConfig.put("searchCode", "status");
-            searchStatusConfig.put("searchDefaultValve", 1);
             Map<String, Object> youXiaoMap = new HashMap<>();
             youXiaoMap.put("label", "有效");
             youXiaoMap.put("value", 1);

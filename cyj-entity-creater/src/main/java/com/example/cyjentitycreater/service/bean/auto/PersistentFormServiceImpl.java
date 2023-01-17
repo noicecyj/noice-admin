@@ -45,6 +45,8 @@ public class PersistentFormServiceImpl
                         PersistentFormBean::getPersistentId, po.getPersistentId())
                 .like(StringUtils.isNotEmpty(po.getPersistentFormName()),
                         PersistentFormBean::getPersistentFormName, po.getPersistentFormName())
+                .like(StringUtils.isNotEmpty(po.getPersistentFormCode()),
+                        PersistentFormBean::getPersistentFormCode, po.getPersistentFormCode())
                 .eq(PersistentFormBean::getStatus, po.getStatus())
                 .orderByAsc(PersistentFormBean::getSortCode);
     }

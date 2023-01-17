@@ -43,6 +43,8 @@ public class CatalogServiceImpl
         return new LambdaQueryWrapper<CatalogBean>()
                 .like(StringUtils.isNotEmpty(po.getCatalogName()),
                         CatalogBean::getCatalogName, po.getCatalogName())
+                .like(StringUtils.isNotEmpty(po.getCatalogCode()),
+                        CatalogBean::getCatalogCode, po.getCatalogCode())
                 .eq(CatalogBean::getStatus, po.getStatus())
                 .orderByAsc(CatalogBean::getSortCode);
     }

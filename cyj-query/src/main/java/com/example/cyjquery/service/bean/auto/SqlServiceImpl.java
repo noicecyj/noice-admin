@@ -43,6 +43,8 @@ public class SqlServiceImpl
         return new LambdaQueryWrapper<SqlBean>()
                 .like(StringUtils.isNotEmpty(po.getSqlName()),
                         SqlBean::getSqlName, po.getSqlName())
+                .like(StringUtils.isNotEmpty(po.getSqlCode()),
+                        SqlBean::getSqlCode, po.getSqlCode())
                 .eq(SqlBean::getStatus, po.getStatus())
                 .orderByAsc(SqlBean::getSortCode);
     }

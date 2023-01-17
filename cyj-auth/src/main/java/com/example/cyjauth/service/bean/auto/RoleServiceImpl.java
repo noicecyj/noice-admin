@@ -43,6 +43,8 @@ public class RoleServiceImpl
         return new LambdaQueryWrapper<RoleBean>()
                 .like(StringUtils.isNotEmpty(po.getRoleName()),
                         RoleBean::getRoleName, po.getRoleName())
+                .like(StringUtils.isNotEmpty(po.getRoleCode()),
+                        RoleBean::getRoleCode, po.getRoleCode())
                 .eq(RoleBean::getStatus, po.getStatus())
                 .orderByAsc(RoleBean::getSortCode);
     }

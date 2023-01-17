@@ -45,6 +45,8 @@ public class PersistentTableSearchConfigServiceImpl
                         PersistentTableSearchConfigBean::getPersistentTableId, po.getPersistentTableId())
                 .like(StringUtils.isNotEmpty(po.getPersistentTableSearchConfigName()),
                         PersistentTableSearchConfigBean::getPersistentTableSearchConfigName, po.getPersistentTableSearchConfigName())
+                .like(StringUtils.isNotEmpty(po.getPersistentTableSearchConfigCode()),
+                        PersistentTableSearchConfigBean::getPersistentTableSearchConfigCode, po.getPersistentTableSearchConfigCode())
                 .eq(PersistentTableSearchConfigBean::getStatus, po.getStatus())
                 .orderByAsc(PersistentTableSearchConfigBean::getSortCode);
     }

@@ -30,7 +30,7 @@ export default {
   },
 
   effects: (dispatch) => ({
-    async search(searchForm){
+    async search(searchForm) {
       console.log(searchForm)
       await this.page({
         searchForm: searchForm,
@@ -39,7 +39,7 @@ export default {
     },
     async page(data) {
       const dataRes = await service.page(data.searchForm, data.current, 10);
-      console.log("page=====>",dataRes)
+      console.log("page=====>", dataRes)
       const payload = {
         tableData: dataRes.data.records,
         total: dataRes.data.total,
@@ -90,7 +90,7 @@ export default {
       };
       dispatch.persistent.setState(payload);
     },
-    reset(){
+    reset() {
       const payload = {
         searchForm: {},
       };
@@ -111,7 +111,9 @@ export default {
     async findDataTableAndFormByName() {
       const ret = await initService.findDataTableAndFormByName('persistent');
       await this.page({
-        searchForm: {},
+        searchForm: {
+          status: 1,
+        },
         current: 1,
       });
       const payload = {

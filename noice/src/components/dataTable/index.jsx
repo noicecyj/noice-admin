@@ -58,10 +58,6 @@ function DataTable(props) {
             onChange={(value) => dispatchers(value)}>
             {!!addItem && <Button type="primary" onClick={() => addItem()}> 添加 </Button>}
             {items.map((item) => {
-              console.log("item====>", item)
-              console.log("item.INFO====>", item.INFO)
-              console.log("item.CONFIG====>", item.CONFIG)
-              console.log("item.SEARCH====>", item.SEARCH)
               return item.SEARCH.map((search) => {
                 if (search.searchMode === 'Input') {
                   console.log("item.SEARCH.Input====>", search)
@@ -88,6 +84,7 @@ function DataTable(props) {
                         name={search.searchCode}
                         filterLocal={false}
                         dataSource={search.searchDataSource}
+                        defaultValue={search.searchDefaultValve === null ? "" : search.searchDefaultValve}
                       />
                     </FormItem>)
                 }

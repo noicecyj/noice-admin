@@ -43,6 +43,8 @@ public class AppServiceServiceImpl
         return new LambdaQueryWrapper<AppServiceBean>()
                 .like(StringUtils.isNotEmpty(po.getAppServiceName()),
                         AppServiceBean::getAppServiceName, po.getAppServiceName())
+                .like(StringUtils.isNotEmpty(po.getAppServiceCode()),
+                        AppServiceBean::getAppServiceCode, po.getAppServiceCode())
                 .eq(AppServiceBean::getStatus, po.getStatus())
                 .orderByAsc(AppServiceBean::getSortCode);
     }
