@@ -1465,6 +1465,7 @@ public class PersistentCustomServiceImpl
                 searchConfig.put("searchMode", persistentTableSearchConfigBean.getPersistentTableSearchConfigMode());
                 searchConfig.put("searchName", persistentTableSearchConfigBean.getPersistentTableSearchConfigName());
                 searchConfig.put("searchCode", persistentTableSearchConfigBean.getPersistentTableSearchConfigCode());
+                searchConfig.put("searchDefaultValve", persistentTableSearchConfigBean.getPersistentTableSearchConfigDefaultValue());
                 if (StringUtils.isNotEmpty(persistentTableSearchConfigBean.getPersistentTableSearchConfigDataSource())) {
                     SqlBean sqlBean = new SqlBean().selectOne(new LambdaQueryWrapper<SqlBean>()
                             .eq(SqlBean::getSqlCode, persistentTableSearchConfigBean.getPersistentTableSearchConfigDataSource()));
@@ -1481,6 +1482,7 @@ public class PersistentCustomServiceImpl
             searchStatusConfig.put("searchMode", "Select");
             searchStatusConfig.put("searchName", "状态");
             searchStatusConfig.put("searchCode", "status");
+            searchStatusConfig.put("searchDefaultValve", 1);
             Map<String, Object> youXiaoMap = new HashMap<>();
             youXiaoMap.put("label", "有效");
             youXiaoMap.put("value", 1);
