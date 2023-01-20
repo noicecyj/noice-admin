@@ -15,6 +15,7 @@ function DataTable(props) {
     rowSelection,
     primaryKey,
     total,
+    pageSize,
     getPage,
     visibleLoading,
     addItem,
@@ -144,9 +145,9 @@ function DataTable(props) {
             >
               <div className={styles.total}> 共 <span>{total}</span> 条</div>
               <Pagination
-                onChange={(current) => getPage(current)}
+                onChange={(current,e) => getPage(current,e)}
                 type="simple"
-                pageSize={13}
+                pageSize={pageSize}
                 total={total}
               />
             </Box>

@@ -26,7 +26,7 @@ function Persistent() {
         dataSource={state.tableData}
         items={state.table}
         total={state.total}
-        getPage={current => dispatchers.page(current)}
+        getPage={(current,e) => dispatchers.page(current,e)}
         primaryKey="id"
         searchFormValue={state.searchForm}
         dispatchers={value => dispatchers.setSearchDataForm(value)}
