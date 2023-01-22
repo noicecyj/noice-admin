@@ -30,9 +30,6 @@ public class PersistentTableConfigBean extends Model<PersistentTableConfigBean> 
     @TableField("persistent_table_config_display")
     private int persistentTableConfigDisplay;
 
-    @TableField("persistent_table_config_width")
-    private int persistentTableConfigWidth;
-
     @TableField("persistent_table_id")
     private String persistentTableId;
 

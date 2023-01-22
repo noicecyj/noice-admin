@@ -24,9 +24,13 @@ function Persistent() {
         })}
         visibleLoading={state.loadingVisible}
         dataSource={state.tableData}
-        items={state.table}
+        configItems={state.tableConfig}
+        searchItems={state.tableSearch}
         total={state.total}
-        getPage={(current,e) => dispatchers.page(current,e)}
+        setPage={current => dispatchers.page({
+          searchForm: state.searchForm,
+          current,
+        })}
         primaryKey="id"
         searchFormValue={state.searchForm}
         dispatchers={value => dispatchers.setSearchDataForm(value)}

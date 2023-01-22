@@ -235,8 +235,11 @@ public class PersistentCustomServiceImpl
                     //驼峰名
                     String underPropertyCode = BeanUtils.underline2Camel(propertyBean.getPropertyCode());
                     persistentTableConfigBean.setPersistentTableConfigCode(underPropertyCode);
-                    persistentTableConfigBean.setPersistentTableConfigDisplay(1);
-                    persistentTableConfigBean.setPersistentTableConfigWidth(200);
+                    if ("boolean".equals(propertyBean.getPropertyType())) {
+                        persistentTableConfigBean.setPersistentTableConfigDisplay(0);
+                    } else {
+                        persistentTableConfigBean.setPersistentTableConfigDisplay(1);
+                    }
                     persistentTableConfigBean.setSortCode(propertyBean.getSortCode());
                     persistentTableConfigBean.setStatus(Constant.STATUS);
                     persistentTableConfigBean.insert();
@@ -248,7 +251,7 @@ public class PersistentCustomServiceImpl
                     persistentTableSearchConfigBean.setPersistentTableSearchConfigCode(underPropertyCode);
                     persistentTableSearchConfigBean.setPersistentTableSearchConfigName(propertyBean.getPropertyName());
                     persistentTableSearchConfigBean.setPersistentTableSearchConfigMode("ManyToOne");
-                    persistentTableSearchConfigBean.setPersistentTableSearchConfigDisplay(1);
+                    persistentTableSearchConfigBean.setPersistentTableSearchConfigDisplay(0);
                     persistentTableSearchConfigBean.setPersistentTableSearchConfigDataSource(propertyBean.getPropertyCode().toUpperCase() + "@NAME_AND_ID");
                     persistentTableSearchConfigBean.setSortCode(propertyBean.getSortCode());
                     persistentTableSearchConfigBean.setStatus(Constant.STATUS);
@@ -1056,7 +1059,11 @@ public class PersistentCustomServiceImpl
         sb.append("\r\n");
         for (PropertyBean property : propertyList) {
             sb.append("    @TableField(\"").append(property.getPropertyCode()).append("\")\r\n");
-            sb.append("    private ").append(property.getPropertyType()).append(" ").append(BeanUtils.underline2Camel(property.getPropertyCode())).append(";\r\n");
+            if ("boolean".equals(property.getPropertyType())) {
+                sb.append("    private int ").append(BeanUtils.underline2Camel(property.getPropertyCode())).append(";\r\n");
+            } else {
+                sb.append("    private ").append(property.getPropertyType()).append(" ").append(BeanUtils.underline2Camel(property.getPropertyCode())).append(";\r\n");
+            }
             sb.append("\r\n");
         }
         if (isBeanFlag) {
@@ -1444,23 +1451,24 @@ public class PersistentCustomServiceImpl
         List<PersistentTableBean> persistentTableBeanList = new PersistentTableBean()
                 .selectList(new LambdaQueryWrapper<PersistentTableBean>()
                         .eq(PersistentTableBean::getPersistentId, persistent.getId()));
-        JSONArray persistentTableArr = new JSONArray();
+        JSONObject persistentTable = new JSONObject();
+        JSONObject searchForm = new JSONObject();
+        JSONArray searchConfigArr = new JSONArray();
+        JSONArray configArr = new JSONArray();
         for (PersistentTableBean persistentTableBean : persistentTableBeanList) {
-            JSONObject persistentTable = new JSONObject();
-            persistentTable.put("INFO", persistentTableBean);
             List<PersistentTableConfigBean> persistentTableConfigBeanList = new PersistentTableConfigBean()
                     .selectList(new LambdaQueryWrapper<PersistentTableConfigBean>()
                             .eq(PersistentTableConfigBean::getPersistentTableId, persistentTableBean.getId())
                             .eq(PersistentTableConfigBean::getPersistentTableConfigDisplay, 1)
                             .orderByAsc(PersistentTableConfigBean::getSortCode));
-            persistentTable.put("CONFIG", persistentTableConfigBeanList);
+            configArr.addAll(persistentTableConfigBeanList);
             List<PersistentTableSearchConfigBean> persistentTableSearchConfigBeanList = new PersistentTableSearchConfigBean()
                     .selectList(new LambdaQueryWrapper<PersistentTableSearchConfigBean>()
                             .eq(PersistentTableSearchConfigBean::getPersistentTableId, persistentTableBean.getId())
                             .orderByAsc(PersistentTableSearchConfigBean::getSortCode));
-            JSONArray searchConfigArr = new JSONArray();
             for (PersistentTableSearchConfigBean persistentTableSearchConfigBean : persistentTableSearchConfigBeanList) {
                 JSONObject searchConfig = new JSONObject();
+                searchForm.put(persistentTableSearchConfigBean.getPersistentTableSearchConfigCode(), "");
                 searchConfig.put("id", persistentTableSearchConfigBean.getId());
                 searchConfig.put("searchMode", persistentTableSearchConfigBean.getPersistentTableSearchConfigMode());
                 searchConfig.put("searchName", persistentTableSearchConfigBean.getPersistentTableSearchConfigName());
@@ -1477,6 +1485,7 @@ public class PersistentCustomServiceImpl
                 }
                 searchConfigArr.add(searchConfig);
             }
+            searchForm.put("status", 1);
             JSONObject searchStatusConfig = new JSONObject();
             searchStatusConfig.put("id", "status_id");
             searchStatusConfig.put("searchMode", "Select");
@@ -1494,13 +1503,14 @@ public class PersistentCustomServiceImpl
             mapList.add(wuXiaoMap);
             searchStatusConfig.put("searchDataSource", mapList);
             searchConfigArr.add(searchStatusConfig);
-            persistentTable.put("SEARCH", searchConfigArr);
-            persistentTableArr.add(persistentTable);
+
         }
-        logger.info("findDataTableAndFormByName.persistentTableArr:{}", persistentTableArr);
+        persistentTable.put("SEARCH", searchConfigArr);
+        persistentTable.put("CONFIG", configArr);
+        persistentTable.put("INFO", searchForm);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("dataForm", persistentFormArr);
-        jsonObject.put("dataTable", persistentTableArr);
+        jsonObject.put("dataTable", persistentTable);
         //logger.info("findDataTableAndFormByName.jsonObject:{}", jsonObject);
         return jsonObject;
     }

@@ -10,13 +10,13 @@ function DataTable(props) {
   const loadingStyle = {width: '100%'};
 
   const {
-    items,
+    configItems,
+    searchItems,
     dataSource,
     rowSelection,
     primaryKey,
     total,
-    pageSize,
-    getPage,
+    setPage,
     visibleLoading,
     addItem,
     deleteItem,
@@ -58,38 +58,36 @@ function DataTable(props) {
             value={searchFormValue}
             onChange={(value) => dispatchers(value)}>
             {!!addItem && <Button type="primary" onClick={() => addItem()}> 添加 </Button>}
-            {items.map((item) => {
-              return item.SEARCH.map((search) => {
-                if (search.searchMode === 'Input') {
-                  console.log("item.SEARCH.Input====>", search)
-                  return (
-                    <FormItem
-                      colSpan={2}
-                      label={`${search.searchName}`}
-                      key={search.id}>
-                      <Input
-                        id={search.searchCode}
-                        name={search.searchCode}
-                      />
-                    </FormItem>
-                  )
-                } else if (search.searchMode === 'Select' || search.searchMode === 'ManyToOne') {
-                  console.log("item.SEARCH.Select|ManyToOne====>", search)
-                  return (
-                    <FormItem
-                      colSpan={2}
-                      label={`${search.searchName}`}
-                      key={search.id}>
-                      <Select
-                        id={search.searchCode}
-                        name={search.searchCode}
-                        filterLocal={false}
-                        dataSource={search.searchDataSource}
-                        defaultValue={search.searchDefaultValve === null ? "" : search.searchDefaultValve}
-                      />
-                    </FormItem>)
-                }
-              })
+            {searchItems.map((search) => {
+              if (search.searchMode === 'Input') {
+                console.log("item.SEARCH.Input====>", search)
+                return (
+                  <FormItem
+                    colSpan={2}
+                    label={search.searchName}
+                    key={search.id}>
+                    <Input
+                      id={search.searchCode}
+                      name={search.searchCode}
+                    />
+                  </FormItem>
+                )
+              } else if (search.searchMode === 'Select' || search.searchMode === 'ManyToOne') {
+                console.log("item.SEARCH.Select|ManyToOne====>", search)
+                return (
+                  <FormItem
+                    colSpan={2}
+                    label={`${search.searchName}`}
+                    key={search.id}>
+                    <Select
+                      id={search.searchCode}
+                      name={search.searchCode}
+                      filterLocal={false}
+                      dataSource={search.searchDataSource}
+                      defaultValue={search.searchDefaultValve === null ? "" : search.searchDefaultValve}
+                    />
+                  </FormItem>)
+              }
             })}
             {!!search && <Button type="primary" onClick={() => search()}> 查询 </Button>}
             {!!reset && <Button onClick={() => reset()}> 重置 </Button>}
@@ -101,22 +99,17 @@ function DataTable(props) {
             style={loadingStyle}
           >
             <Table
-              hasBorder
               className={styles.Table}
               dataSource={dataSource}
               rowSelection={rowSelection}
               primaryKey={primaryKey}
             >
-              {items.map((item) => {
-                console.log("item.CONFIG====>", item.CONFIG)
-                return item.CONFIG.map((config, index) => {
-                  return (<Table.Column
-                    title={config.persistentTableConfigName}
-                    dataIndex={config.persistentTableConfigCode}
-                    width={config.persistentTableConfigWidth != null ? item.persistentTableConfigWidth : null}
-                    key={index}
-                  />);
-                })
+              {configItems.map((config, index) => {
+                return (<Table.Column
+                  title={config.persistentTableConfigName}
+                  dataIndex={config.persistentTableConfigCode}
+                  key={index}
+                />);
               })}
               <Table.Column
                 title="排序"
@@ -145,9 +138,9 @@ function DataTable(props) {
             >
               <div className={styles.total}> 共 <span>{total}</span> 条</div>
               <Pagination
-                onChange={(current,e) => getPage(current,e)}
+                onChange={(current) => setPage(current)}
                 type="simple"
-                pageSize={pageSize}
+                pageSize={10}
                 total={total}
               />
             </Box>
