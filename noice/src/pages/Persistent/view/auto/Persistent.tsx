@@ -15,7 +15,10 @@ function Persistent() {
     <>
       <DataTableTemple
         addItem={() => dispatchers.add()}
-        search={() => dispatchers.search(state.searchForm)}
+        search={() => dispatchers.page({
+          searchForm: state.searchForm,
+          current: 1,
+        })}
         reset={() => dispatchers.reset()}
         editItem={record => dispatchers.edit(record)}
         deleteItem={record => dispatchers.delete({

@@ -31,16 +31,8 @@ export default {
   },
 
   effects: (dispatch) => ({
-    async search(searchForm) {
-      console.log(searchForm)
-      await this.page({
-        searchForm: searchForm,
-        current: 1,
-      });
-    },
     async page(data) {
       const dataRes = await service.page(data.searchForm, data.current, 10);
-      console.log("page=====>", dataRes)
       const payload = {
         searchForm: data.searchForm,
         tableData: dataRes.data.records,
