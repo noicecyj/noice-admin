@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import pageStore from '@/pages/Persistent/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
-import {Box, Button} from "@alifd/next";
 
 function Persistent() {
 
@@ -12,28 +11,6 @@ function Persistent() {
     dispatchers.findDataTableAndFormByName().then(r => console.log(r));
   }, [dispatchers]);
 
-  const columnRender = (value, index, record) => {
-    return (
-      <Box direction="row" spacing={5}>
-        {
-          state.tableOperation.map(operation => {
-            // @ts-ignore
-            let url = operation.persistentTableConfigMethod;
-            // @ts-ignore
-            let name = operation.persistentTableConfigName;
-            return (
-              <Button
-                type="normal"
-                size="small"
-                onClick={() => dispatchers.runCustomMethod({record, url})}
-              > {name} </Button>
-            )
-          })
-        }
-      </Box>
-    );
-  };
-
   return (
     <>
       <DataTableTemple
@@ -42,7 +19,7 @@ function Persistent() {
           searchForm: state.searchForm,
           current: 1,
         })}
-        reset={() => dispatchers.reset()}
+        reset={() => dispatchers.reset(state.searchDefaultForm)}
         editItem={record => dispatchers.edit(record)}
         deleteItem={record => dispatchers.delete({
           current: state.current,
@@ -52,6 +29,8 @@ function Persistent() {
         dataSource={state.tableData}
         configItems={state.tableConfig}
         searchItems={state.tableSearch}
+        operationButton={state.tableOperation}
+        runCustomMethod={(record, url) => dispatchers.runCustomMethod(record, url)}
         total={state.total}
         setPage={current => dispatchers.page({
           searchForm: state.searchForm,
@@ -60,7 +39,6 @@ function Persistent() {
         primaryKey="id"
         searchFormValue={state.searchForm}
         dispatchers={value => dispatchers.setSearchDataForm(value)}
-        columnRender={columnRender}
       />
       <DataFormTemple
         customData={state.customData}

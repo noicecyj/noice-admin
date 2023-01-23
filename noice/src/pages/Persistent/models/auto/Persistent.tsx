@@ -23,6 +23,7 @@ export default {
     parent: "",
     select: [],
     searchForm: {},
+    searchDefaultForm: {},
   },
 
   reducers: {
@@ -85,11 +86,8 @@ export default {
       };
       dispatch.persistent.setState(payload);
     },
-    reset() {
-      const payload = {
-        searchForm: {},
-      };
-      dispatch.persistent.setState(payload);
+    reset(data) {
+      this.setSearchDataForm(data);
     },
     setDataForm(data) {
       const payload = {
@@ -110,6 +108,7 @@ export default {
         current: 1,
       });
       const payload = {
+        searchDefaultForm: ret.data.dataTable.INFO,
         tableOperation: ret.data.dataTable.OPERATION,
         tableConfig: ret.data.dataTable.CONFIG,
         tableSearch: ret.data.dataTable.SEARCH,

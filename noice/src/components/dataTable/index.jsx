@@ -12,6 +12,8 @@ function DataTable(props) {
   const {
     configItems,
     searchItems,
+    operationButton,
+    runCustomMethod,
     dataSource,
     rowSelection,
     primaryKey,
@@ -25,7 +27,6 @@ function DataTable(props) {
     dispatchers,
     search,
     reset,
-    columnRender,
   } = props;
 
   const pageRender = (value, index, record) => {
@@ -38,6 +39,28 @@ function DataTable(props) {
             <Button type="primary" size="small" onClick={() => deleteConfirm(record)} warning> 删除 </Button>}
         </Box>
       </div>
+    );
+  };
+
+  const columnRender = (value, index, record) => {
+    return (
+      <Box direction="row" spacing={5}>
+        {
+          operationButton.map(operation => {
+            // @ts-ignore
+            let url = operation.persistentTableConfigMethod;
+            // @ts-ignore
+            let name = operation.persistentTableConfigName;
+            return (
+              <Button
+                type="normal"
+                size="small"
+                onClick={() => runCustomMethod({record, url})}
+              > {name} </Button>
+            )
+          })
+        }
+      </Box>
     );
   };
 
