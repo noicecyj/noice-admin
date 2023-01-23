@@ -1489,26 +1489,25 @@ public class PersistentCustomServiceImpl
                 }
                 searchConfigArr.add(searchConfig);
             }
-            searchForm.put("status", 1);
-            JSONObject searchStatusConfig = new JSONObject();
-            searchStatusConfig.put("id", "status_id");
-            searchStatusConfig.put("searchMode", "Select");
-            searchStatusConfig.put("searchName", "状态");
-            searchStatusConfig.put("searchCode", "status");
-            searchStatusConfig.put("searchDefaultValve", 1);
-            Map<String, Object> youXiaoMap = new HashMap<>();
-            youXiaoMap.put("label", "有效");
-            youXiaoMap.put("value", 1);
-            Map<String, Object> wuXiaoMap = new HashMap<>();
-            wuXiaoMap.put("label", "无效");
-            wuXiaoMap.put("value", 0);
-            List<Map> mapList = new ArrayList<>();
-            mapList.add(youXiaoMap);
-            mapList.add(wuXiaoMap);
-            searchStatusConfig.put("searchDataSource", mapList);
-            searchConfigArr.add(searchStatusConfig);
-
         }
+        searchForm.put("status", 1);
+        JSONObject searchStatusConfig = new JSONObject();
+        searchStatusConfig.put("id", "status_id");
+        searchStatusConfig.put("searchMode", "Select");
+        searchStatusConfig.put("searchName", "状态");
+        searchStatusConfig.put("searchCode", "status");
+        searchStatusConfig.put("searchDefaultValve", 1);
+        Map<String, Object> youXiaoMap = new HashMap<>();
+        youXiaoMap.put("label", "有效");
+        youXiaoMap.put("value", 1);
+        Map<String, Object> wuXiaoMap = new HashMap<>();
+        wuXiaoMap.put("label", "无效");
+        wuXiaoMap.put("value", 0);
+        List<Map> mapList = new ArrayList<>();
+        mapList.add(youXiaoMap);
+        mapList.add(wuXiaoMap);
+        searchStatusConfig.put("searchDataSource", mapList);
+        searchConfigArr.add(searchStatusConfig);
         persistentTable.put("OPERATION", operationArr);
         persistentTable.put("SEARCH", searchConfigArr);
         persistentTable.put("CONFIG", configArr);

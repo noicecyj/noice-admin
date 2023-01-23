@@ -25,7 +25,7 @@ function Persistent() {
               <Button
                 type="normal"
                 size="small"
-                onClick={() => dispatchers.runCustomMethod(record, url)}
+                onClick={() => dispatchers.runCustomMethod({record, url})}
               > {name} </Button>
             )
           })

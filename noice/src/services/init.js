@@ -10,11 +10,12 @@ export default {
       },
     });
   },
-  runCustomMethod(data, url) {
+  runCustomMethod(data) {
+    console.log(data)
     return request({
-      url,
+      url: data.url,
       method: 'post',
-      data,
+      data: data.record,
     });
   },
 };

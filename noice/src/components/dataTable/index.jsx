@@ -118,7 +118,7 @@ function DataTable(props) {
                   alignHeader="center"
                   align="center"
                   key="columnRender"
-                  width="160px"
+                  width="140px"
                   cell={columnRender}
                 />
               }

@@ -117,8 +117,8 @@ export default {
       };
       dispatch.persistent.setState(payload);
     },
-    runCustomMethod(data, url) {
-      initService.runCustomMethod(data, url).then((res) => {
+    runCustomMethod(data) {
+      initService.runCustomMethod(data).then((res) => {
         if (res.code === 200) {
           Message.success('执行成功');
         } else {
