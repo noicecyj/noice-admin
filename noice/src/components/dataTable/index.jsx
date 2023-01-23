@@ -25,6 +25,7 @@ function DataTable(props) {
     dispatchers,
     search,
     reset,
+    columnRender,
   } = props;
 
   const pageRender = (value, index, record) => {
@@ -111,6 +112,16 @@ function DataTable(props) {
                   key={index}
                 />);
               })}
+              {
+                !!columnRender && <Table.Column
+                  title="自定义操作"
+                  alignHeader="center"
+                  align="center"
+                  key="columnRender"
+                  width="160px"
+                  cell={columnRender}
+                />
+              }
               <Table.Column
                 title="排序"
                 dataIndex="sortCode"

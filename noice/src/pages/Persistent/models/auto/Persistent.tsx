@@ -15,6 +15,7 @@ export default {
     total: 0,
     current: 1,
     form: [],
+    tableOperation: [],
     tableConfig: [],
     tableSearch: [],
     customData: {},
@@ -109,11 +110,21 @@ export default {
         current: 1,
       });
       const payload = {
+        tableOperation: ret.data.dataTable.OPERATION,
         tableConfig: ret.data.dataTable.CONFIG,
         tableSearch: ret.data.dataTable.SEARCH,
         form: ret.data.dataForm,
       };
       dispatch.persistent.setState(payload);
+    },
+    runCustomMethod(data, url) {
+      initService.runCustomMethod(data, url).then((res) => {
+        if (res.code === 200) {
+          Message.success('执行成功');
+        } else {
+          Message.error('执行失败');
+        }
+      });
     },
   }),
 };

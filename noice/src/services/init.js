@@ -10,4 +10,11 @@ export default {
       },
     });
   },
+  runCustomMethod(data, url) {
+    return request({
+      url,
+      method: 'post',
+      data,
+    });
+  },
 };

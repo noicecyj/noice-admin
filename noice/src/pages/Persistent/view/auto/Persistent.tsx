@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import pageStore from '@/pages/Persistent/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
+import {Box, Button} from "@alifd/next";
 
 function Persistent() {
 
@@ -10,6 +11,28 @@ function Persistent() {
   useEffect(() => {
     dispatchers.findDataTableAndFormByName().then(r => console.log(r));
   }, [dispatchers]);
+
+  const columnRender = (value, index, record) => {
+    return (
+      <Box direction="row" spacing={5}>
+        {
+          state.tableOperation.map(operation => {
+            // @ts-ignore
+            let url = operation.persistentTableConfigMethod;
+            // @ts-ignore
+            let name = operation.persistentTableConfigName;
+            return (
+              <Button
+                type="normal"
+                size="small"
+                onClick={() => dispatchers.runCustomMethod(record, url)}
+              > {name} </Button>
+            )
+          })
+        }
+      </Box>
+    );
+  };
 
   return (
     <>
@@ -37,6 +60,7 @@ function Persistent() {
         primaryKey="id"
         searchFormValue={state.searchForm}
         dispatchers={value => dispatchers.setSearchDataForm(value)}
+        columnRender={columnRender}
       />
       <DataFormTemple
         customData={state.customData}

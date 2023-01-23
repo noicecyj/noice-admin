@@ -54,7 +54,6 @@ public class PersistentCustomServiceImpl
 
     private final static String commonPath = "C:/Users/noice/IdeaProjects/noice-admin/cyj-common/src/main/java/com/example/cyjcommon";
     private DictionaryCustomServiceImpl dictionaryCustomServiceImpl;
-//    private SqlCustomServiceImpl sqlCustomServiceImpl;
 
     private SqlMapper sqlMapper;
 
@@ -67,11 +66,6 @@ public class PersistentCustomServiceImpl
     public void setDictionaryCustomService(DictionaryCustomServiceImpl dictionaryCustomServiceImpl) {
         this.dictionaryCustomServiceImpl = dictionaryCustomServiceImpl;
     }
-
-//    @Autowired
-//    public void setSqlCustomService(SqlCustomServiceImpl sqlCustomServiceImpl) {
-//        this.sqlCustomServiceImpl = sqlCustomServiceImpl;
-//    }
 
     public void generateJavaFile(PersistentBean persistent) {
         if (persistent == null) {
@@ -1453,6 +1447,7 @@ public class PersistentCustomServiceImpl
                         .eq(PersistentTableBean::getPersistentId, persistent.getId()));
         JSONObject persistentTable = new JSONObject();
         JSONObject searchForm = new JSONObject();
+        JSONArray operationArr = new JSONArray();
         JSONArray searchConfigArr = new JSONArray();
         JSONArray configArr = new JSONArray();
         for (PersistentTableBean persistentTableBean : persistentTableBeanList) {
@@ -1461,7 +1456,16 @@ public class PersistentCustomServiceImpl
                             .eq(PersistentTableConfigBean::getPersistentTableId, persistentTableBean.getId())
                             .eq(PersistentTableConfigBean::getPersistentTableConfigDisplay, 1)
                             .orderByAsc(PersistentTableConfigBean::getSortCode));
-            configArr.addAll(persistentTableConfigBeanList);
+            List<PersistentTableConfigBean> persistentTableConfigBeanColumnList = persistentTableConfigBeanList
+                    .stream().filter(persistentTableConfigBean ->
+                            "column".equals(persistentTableConfigBean.getPersistentTableConfigType()))
+                    .collect(Collectors.toList());
+            configArr.addAll(persistentTableConfigBeanColumnList);
+            List<PersistentTableConfigBean> persistentTableConfigBeanOperationList = persistentTableConfigBeanList
+                    .stream().filter(persistentTableConfigBean ->
+                            "operation".equals(persistentTableConfigBean.getPersistentTableConfigType()))
+                    .collect(Collectors.toList());
+            operationArr.addAll(persistentTableConfigBeanOperationList);
             List<PersistentTableSearchConfigBean> persistentTableSearchConfigBeanList = new PersistentTableSearchConfigBean()
                     .selectList(new LambdaQueryWrapper<PersistentTableSearchConfigBean>()
                             .eq(PersistentTableSearchConfigBean::getPersistentTableId, persistentTableBean.getId())
@@ -1505,6 +1509,7 @@ public class PersistentCustomServiceImpl
             searchConfigArr.add(searchStatusConfig);
 
         }
+        persistentTable.put("OPERATION", operationArr);
         persistentTable.put("SEARCH", searchConfigArr);
         persistentTable.put("CONFIG", configArr);
         persistentTable.put("INFO", searchForm);
