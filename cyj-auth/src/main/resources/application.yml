@@ -13,6 +13,9 @@ zuul:
       path: /cyj-entity-creater/**
     cyj-workflow:
       path: /cyj-workflow/**
+  host:
+    connect-timeout-millis: 15000 #ms HTTP连接超时要比Hystrix的大,否则hystrix不起作用
+    socket-timeout-millis: 60000  #ms socket通信超时
 spring:
   application:
     name: cyj-auth
@@ -27,3 +30,13 @@ spring:
     url: jdbc:mysql://localhost:3306/data_user?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: root
     password: 68762306
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
