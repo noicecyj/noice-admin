@@ -80,6 +80,7 @@ export default {
       dispatch.persistent.setState(payload);
     },
     edit(data) {
+      console.log("edit====>",data)
       const payload = {
         formData: data,
         title: '编辑',

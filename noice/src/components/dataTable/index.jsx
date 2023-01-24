@@ -68,6 +68,7 @@ function DataTable(props) {
               <Button
                 type="normal"
                 size="small"
+                key={operation.persistentTableConfigCode}
                 onClick={() => runCustomMethod({record, url})}
               > {name} </Button>
             )
@@ -142,6 +143,7 @@ function DataTable(props) {
                   <Button
                     type="normal"
                     onClick={() => runCustomMethod({url})}
+                    key={operation.persistentTableConfigCode}
                   > {name} </Button>
                 )
               })
@@ -159,11 +161,11 @@ function DataTable(props) {
               rowSelection={rowSelection}
               primaryKey={primaryKey}
             >
-              {configItems.map((config, index) => {
+              {configItems.map((config) => {
                 return (<Table.Column
                   title={config.persistentTableConfigName}
                   dataIndex={config.persistentTableConfigCode}
-                  key={index}
+                  key={config.persistentTableConfigCode}
                 />);
               })}
               {

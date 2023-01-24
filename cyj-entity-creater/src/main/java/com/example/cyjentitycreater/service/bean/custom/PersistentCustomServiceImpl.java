@@ -220,7 +220,12 @@ public class PersistentCustomServiceImpl
                 persistentFormConfigBean.setPersistentFormConfigRequired(0);
                 persistentFormConfigBean.setPersistentFormConfigEdit(0);
                 if (propertyBean.getPropertyRelation() == 0) {
-                    persistentFormConfigBean.setPersistentFormConfigMode("Input");
+                    if ("boolean".equals(propertyBean.getPropertyType())) {
+                        persistentFormConfigBean.setPersistentFormConfigMode("Select");
+                        persistentFormConfigBean.setPersistentFormConfigDataSource("YES_AND_NO");
+                    } else {
+                        persistentFormConfigBean.setPersistentFormConfigMode("Input");
+                    }
                 } else {
                     persistentFormConfigBean.setPersistentFormConfigMode("Select");
                     persistentFormConfigBean.setPersistentFormConfigDataSource(propertyBean.getPropertyCode().toUpperCase() + "@NAME_AND_ID");
@@ -1468,13 +1473,25 @@ public class PersistentCustomServiceImpl
                 formConfig.put("formDirection", persistentFormConfigBean.getPersistentFormConfigDirection());
                 formConfig.put("formEdit", persistentFormConfigBean.getPersistentFormConfigEdit() == 1);
                 if (StringUtils.isNotEmpty(persistentFormConfigBean.getPersistentFormConfigDataSource())) {
-                    SqlBean sqlBean = new SqlBean().selectOne(new LambdaQueryWrapper<SqlBean>()
-                            .eq(SqlBean::getSqlCode, persistentFormConfigBean.getPersistentFormConfigDataSource()));
-                    Map<String, String> sql = new HashMap<>();
-                    sql.put("sql", sqlBean.getSqlStr());
-                    List<Map> map = sqlMapper.executeSql(sql);
-                    formConfig.put("formDataSource", map);
-                    logger.info("formDataSource:{}", map);
+                    if ("YES_AND_NO".equals(persistentFormConfigBean.getPersistentFormConfigDataSource())) {
+                        List<Map> yesAndNo = new ArrayList<>();
+                        Map<String, Object> yes = new HashMap<>();
+                        yes.put("label", "是");
+                        yes.put("value", 1);
+                        Map<String, Object> no = new HashMap<>();
+                        no.put("label", "否");
+                        no.put("value", 0);
+                        yesAndNo.add(yes);
+                        yesAndNo.add(no);
+                        formConfig.put("formDataSource", yesAndNo);
+                    } else {
+                        SqlBean sqlBean = new SqlBean().selectOne(new LambdaQueryWrapper<SqlBean>()
+                                .eq(SqlBean::getSqlCode, persistentFormConfigBean.getPersistentFormConfigDataSource()));
+                        Map<String, String> sql = new HashMap<>();
+                        sql.put("sql", sqlBean.getSqlStr());
+                        List<Map> map = sqlMapper.executeSql(sql);
+                        formConfig.put("formDataSource", map);
+                    }
                 }
                 configFormArr.add(formConfig);
             }

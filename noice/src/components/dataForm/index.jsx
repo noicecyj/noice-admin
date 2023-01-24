@@ -60,7 +60,8 @@ function DataForm(props) {
                     key={config.id}>
                     <Input
                       id={config.formCode}
-                      name={config.formName}
+                      name={config.formCode}
+                      placeholder={`请输入${config.formName}`}
                     />
                   </FormItem>
                 )
@@ -74,7 +75,8 @@ function DataForm(props) {
                     key={config.id}>
                     <Input.Password
                       id={config.formCode}
-                      name={config.formName}
+                      name={config.formCode}
+                      placeholder={`请输入${config.formName}`}
                     />
                   </FormItem>)
               } else if (config.formMode === 'TextArea') {
@@ -87,7 +89,8 @@ function DataForm(props) {
                     key={config.id}>
                     <Input.TextArea
                       id={config.formCode}
-                      name={config.formName}
+                      name={config.formCode}
+                      placeholder={`请输入${config.formName}`}
                     />
                   </FormItem>)
               } else if (config.formMode === 'Select') {
@@ -96,11 +99,12 @@ function DataForm(props) {
                     colSpan={config.formColSpan}
                     label={config.formName}
                     required={config.formRequired}
-                    requiredMessage={`请输入${config.formName}`}
+                    requiredMessage={`请选择${config.formName}`}
                     key={config.id}>
                     <Select
                       id={config.formCode}
-                      name={config.formName}
+                      name={config.formCode}
+                      placeholder={`请选择${config.formName}`}
                       filterLocal={false}
                       dataSource={config.formDataSource}
                       defaultValue={config.formDefaultValve}
@@ -116,7 +120,7 @@ function DataForm(props) {
                     key={config.id}>
                     <NumberPicker
                       id={config.formCode}
-                      name={config.formName}
+                      name={config.formCode}
                       stringMode
                       type="inline"
                       step={10}
@@ -133,7 +137,7 @@ function DataForm(props) {
                     key={config.id}>
                     <Switch
                       id={config.formCode}
-                      name={config.formName}
+                      name={config.formCode}
                       autoWidth
                       checkedChildren={'是'}
                       unCheckedChildren={'否'}
@@ -149,7 +153,7 @@ function DataForm(props) {
                     key={config.id}>
                     <Range
                       id={config.formCode}
-                      name={config.formName}
+                      name={config.formCode}
                       defaultValue={0}
                       scales={[0, 100]}
                       marks={[0, 100]}
@@ -165,7 +169,7 @@ function DataForm(props) {
                     key={config.id}>
                     <DatePicker2
                       id={config.formCode}
-                      name={config.formName}
+                      name={config.formCode}
                       format="YYYY/MM/DD"
                       outputFormat="YYYY/MM/DD"
                     />
@@ -180,7 +184,7 @@ function DataForm(props) {
                     key={config.id}>
                     <RangePicker
                       id={config.formCode}
-                      name={config.formName}
+                      name={config.formCode}
                     />
                   </FormItem>)
               } else if (config.formMode === 'TimePicker') {
@@ -193,7 +197,7 @@ function DataForm(props) {
                     key={config.id}>
                     <TimePicker
                       id={config.formCode}
-                      name={config.formName}
+                      name={config.formCode}
                     />
                   </FormItem>)
               } else if (config.formMode === 'Checkbox') {
@@ -206,7 +210,7 @@ function DataForm(props) {
                     key={config.id}>
                     <CheckboxGroup
                       id={config.formCode}
-                      name={config.formName}
+                      name={config.formCode}
                       dataSource={config.formDataSource}
                       direction={config.formDirection}
                     />
@@ -221,7 +225,7 @@ function DataForm(props) {
                     key={config.id}>
                     <RadioGroup
                       id={config.formCode}
-                      name={config.formName}
+                      name={config.formCode}
                       dataSource={config.formDataSource}
                       direction={config.formDirection}
                     />
