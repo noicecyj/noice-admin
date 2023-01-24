@@ -2,7 +2,7 @@ import initService from '@/services/init';
 import {Message} from "@alifd/next";
 import service from '@/pages/AppService/services/auto/AppService';
 import authorityService from '@/pages/Authority/services/auto/Authority'
-import persistentService from '@/pages/Persistent/services/auto/Persistent'
+import persistentService from '@/pages/Persistent/services/Persistent'
 
 export default {
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import Persistent from '@/pages/Persistent/view/auto/Persistent';
+import Persistent from '@/pages/Persistent/view/Persistent';
 
 function PersistentPage() {
   return (

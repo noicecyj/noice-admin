@@ -1,6 +1,6 @@
 import initService from '@/services/init';
 import {Message} from "@alifd/next";
-import service from '@/pages/Persistent/services/auto/Persistent';
+import service from '@/pages/Persistent/services/Persistent';
 
 export default {
 
@@ -20,9 +20,6 @@ export default {
     titleConfig: [],
     tableSearch: [],
     customData: {},
-    divVisible: false,
-    parent: "",
-    select: [],
     searchForm: {},
     searchDefaultForm: {},
   },
