@@ -4,7 +4,7 @@ import service from '@/pages/Persistent/services/Persistent';
 
 export default {
 
-  namespace: 'persistent',
+  namespace: 'Persistent',
 
   state: {
     title: '添加',
@@ -19,7 +19,6 @@ export default {
     tableConfig: [],
     titleConfig: [],
     tableSearch: [],
-    customData: {},
     searchForm: {},
     searchDefaultForm: {},
   },
@@ -40,7 +39,7 @@ export default {
         current: data.current,
         loadingVisible: false,
       };
-      dispatch.persistent.setState(payload);
+      dispatch.Persistent.setState(payload);
     },
     async save(data) {
       const ret = await service.save(data.formData);
@@ -55,7 +54,7 @@ export default {
         const payload = {
           visible: false,
         };
-        dispatch.persistent.setState(payload);
+        dispatch.Persistent.setState(payload);
       }
     },
     async delete(data) {
@@ -71,7 +70,7 @@ export default {
         const payload = {
           visible: false,
         };
-        dispatch.persistent.setState(payload);
+        dispatch.Persistent.setState(payload);
       }
     },
     add() {
@@ -80,28 +79,27 @@ export default {
         title: '添加',
         visible: true,
       };
-      dispatch.persistent.setState(payload);
+      dispatch.Persistent.setState(payload);
     },
     edit(data) {
-      console.log("edit====>",data)
       const payload = {
         formData: data,
         title: '编辑',
         visible: true,
       };
-      dispatch.persistent.setState(payload);
+      dispatch.Persistent.setState(payload);
     },
     setDataForm(data) {
       const payload = {
         formData: data,
       };
-      dispatch.persistent.setState(payload);
+      dispatch.Persistent.setState(payload);
     },
     setSearchDataForm(data) {
       const payload = {
         searchForm: data,
       };
-      dispatch.persistent.setState(payload);
+      dispatch.Persistent.setState(payload);
     },
     async findDataTableAndFormByName() {
       const ret = await initService.findDataTableAndFormByName('persistent');
@@ -117,7 +115,7 @@ export default {
         tableSearch: ret.data.dataTable.SEARCH,
         formConfig: ret.data.dataForm.CONFIG,
       };
-      dispatch.persistent.setState(payload);
+      dispatch.Persistent.setState(payload);
     },
     runCustomMethod(data) {
       initService.runCustomMethod(data).then((res) => {

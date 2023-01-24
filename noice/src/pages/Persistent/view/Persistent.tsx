@@ -5,7 +5,7 @@ import DataTableTemple from '@/components/dataTable';
 
 function Persistent() {
 
-  const [state, dispatchers] = pageStore.useModel('persistent');
+  const [state, dispatchers] = pageStore.useModel('Persistent');
 
   useEffect(() => {
     dispatchers.findDataTableAndFormByName().then(r => console.log(r));

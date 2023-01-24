@@ -1,8 +1,8 @@
 import {createStore} from 'ice';
-import persistent from './models/Persistent';
+import Persistent from './models/Persistent';
 
 const store = createStore({
-  persistent,
+  Persistent,
 });
 
 export default store;
