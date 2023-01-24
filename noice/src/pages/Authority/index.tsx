@@ -1,5 +1,5 @@
 import React from 'react';
-import Authority from '@/pages/Authority/view/auto/Authority';
+import Authority from '@/pages/Authority/view/Authority';
 
 function AuthorityPage() {
   return (

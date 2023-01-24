@@ -1,12 +1,8 @@
 import {createStore} from 'ice';
-import dictionary from './models/auto/Dictionary';
-import dictionaryCustom from './models/custom/Dictionary';
-import catalog from '@/pages/Catalog/models/auto/Catalog';
+import Dictionary from './models/Dictionary';
 
 const store = createStore({
-  dictionary,
-  dictionaryCustom,
-  catalog,
+  Dictionary,
 });
 
 export default store;

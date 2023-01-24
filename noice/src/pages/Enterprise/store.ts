@@ -1,12 +1,8 @@
 import {createStore} from 'ice';
-import enterprise from './models/auto/Enterprise';
-import enterpriseCustom from './models/custom/Enterprise';
-import user from '@/pages/User/models/auto/User';
+import Enterprise from './models/Enterprise';
 
 const store = createStore({
-  enterprise,
-  enterpriseCustom,
-  user,
+  Enterprise,
 });
 
 export default store;

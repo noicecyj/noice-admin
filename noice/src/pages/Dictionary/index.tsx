@@ -1,5 +1,5 @@
 import React from 'react';
-import Dictionary from '@/pages/Dictionary/view/auto/Dictionary';
+import Dictionary from '@/pages/Dictionary/view/Dictionary';
 
 function DictionaryPage() {
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import Catalog from '@/pages/Catalog/view/auto/Catalog';
+import Catalog from '@/pages/Catalog/view/Catalog';
 
 function CatalogPage() {
   return (

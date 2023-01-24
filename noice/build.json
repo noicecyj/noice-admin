@@ -35,6 +35,10 @@
     },
     "/authApi": {
       "enable": true,
+      "target": "http://127.0.0.1:8100/cyj-auth"
+    },
+    "/v1": {
+      "enable": true,
       "target": "http://127.0.0.1:8100"
     }
   }

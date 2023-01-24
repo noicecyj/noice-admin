@@ -1,5 +1,5 @@
 import React from 'react';
-import Property from '@/pages/Property/view/auto/Property';
+import Property from '@/pages/Property/view/Property';
 
 function PropertyPage() {
   return (

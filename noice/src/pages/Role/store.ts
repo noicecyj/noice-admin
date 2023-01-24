@@ -1,12 +1,8 @@
 import {createStore} from 'ice';
-import role from './models/auto/Role';
-import roleCustom from './models/custom/Role';
-import authority from '@/pages/Authority/models/auto/Authority';
+import Role from './models/Role';
 
 const store = createStore({
-  role,
-  roleCustom,
-  authority,
+  Role,
 });
 
 export default store;

@@ -1,12 +1,8 @@
 import {createStore} from 'ice';
-import authority from './models/auto/Authority';
-import authorityCustom from './models/custom/Authority';
-import persistent from '@/pages/Persistent/models/Persistent';
+import Authority from './models/Authority';
 
 const store = createStore({
-  authority,
-  authorityCustom,
-  persistent,
+  Authority,
 });
 
 export default store;

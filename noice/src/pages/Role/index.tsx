@@ -1,5 +1,5 @@
 import React from 'react';
-import Role from '@/pages/Role/view/auto/Role';
+import Role from '@/pages/Role/view/Role';
 
 function RolePage() {
   return (
