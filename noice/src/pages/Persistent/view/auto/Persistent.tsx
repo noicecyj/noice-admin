@@ -29,6 +29,7 @@ function Persistent() {
         dataSource={state.tableData}
         configItems={state.tableConfig}
         searchItems={state.tableSearch}
+        titleButton={state.titleConfig}
         operationButton={state.tableOperation}
         runCustomMethod={(record, url) => dispatchers.runCustomMethod(record, url)}
         total={state.total}

@@ -42,4 +42,11 @@ public class PersistentCustomController {
         return ResultVO.success();
     }
 
+    @Operation(summary = "实体生成全部代码")
+    @PostMapping(value = "generateAllJavaFile")
+    public ResultVO generateAllJavaFile() {
+        persistentCustomService.generateAllJavaFile();
+        return ResultVO.success();
+    }
+
 }

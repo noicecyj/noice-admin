@@ -74,6 +74,15 @@ public class PersistentCustomServiceImpl
         entityHandler(persistent, "create");
     }
 
+    public void generateAllJavaFile() {
+        List<PersistentBean> persistentList = new PersistentBean()
+                .selectList(new LambdaQueryWrapper<PersistentBean>()
+                        .eq(PersistentBean::getStatus, 1));
+        for (PersistentBean persistent : persistentList) {
+            entityHandler(persistent, "create");
+        }
+    }
+
 
     public void deleteJavaFile(PersistentBean persistent) {
         if (persistent == null) {
@@ -1503,6 +1512,7 @@ public class PersistentCustomServiceImpl
         JSONObject persistentTable = new JSONObject();
         JSONObject searchForm = new JSONObject();
         JSONArray operationArr = new JSONArray();
+        JSONArray titleArr = new JSONArray();
         JSONArray searchConfigArr = new JSONArray();
         JSONArray configTableArr = new JSONArray();
         for (PersistentTableBean persistentTableBean : persistentTableBeanList) {
@@ -1521,6 +1531,11 @@ public class PersistentCustomServiceImpl
                             "operation".equals(persistentTableConfigBean.getPersistentTableConfigType()))
                     .collect(Collectors.toList());
             operationArr.addAll(persistentTableConfigBeanOperationList);
+            List<PersistentTableConfigBean> persistentTableConfigBeanTitleList = persistentTableConfigBeanList
+                    .stream().filter(persistentTableConfigBean ->
+                            "title".equals(persistentTableConfigBean.getPersistentTableConfigType()))
+                    .collect(Collectors.toList());
+            titleArr.addAll(persistentTableConfigBeanTitleList);
             List<PersistentTableSearchConfigBean> persistentTableSearchConfigBeanList = new PersistentTableSearchConfigBean()
                     .selectList(new LambdaQueryWrapper<PersistentTableSearchConfigBean>()
                             .eq(PersistentTableSearchConfigBean::getPersistentTableId, persistentTableBean.getId())
@@ -1554,6 +1569,7 @@ public class PersistentCustomServiceImpl
         searchStatusConfig.put("searchDefaultValve", 1);
         searchStatusConfig.put("searchDataSource", mapList);
         searchConfigArr.add(searchStatusConfig);
+        persistentTable.put("TITLE", titleArr);
         persistentTable.put("OPERATION", operationArr);
         persistentTable.put("SEARCH", searchConfigArr);
         persistentTable.put("CONFIG", configTableArr);

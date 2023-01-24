@@ -17,6 +17,7 @@ export default {
     formConfig: [],
     tableOperation: [],
     tableConfig: [],
+    titleConfig: [],
     tableSearch: [],
     customData: {},
     divVisible: false,
@@ -106,6 +107,7 @@ export default {
       });
       const payload = {
         searchDefaultForm: ret.data.dataTable.INFO,
+        titleConfig: ret.data.dataTable.TITLE,
         tableOperation: ret.data.dataTable.OPERATION,
         tableConfig: ret.data.dataTable.CONFIG,
         tableSearch: ret.data.dataTable.SEARCH,

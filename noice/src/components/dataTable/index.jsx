@@ -24,6 +24,7 @@ function DataTable(props) {
   const {
     configItems,
     searchItems,
+    titleButton,
     operationButton,
     runCustomMethod,
     dataSource,
@@ -129,7 +130,23 @@ function DataTable(props) {
             {!!reset && <Button onClick={() => reset()}> 重置 </Button>}
           </Form>
           <Divider/>
-          {!!addItem && <Button type="primary" onClick={() => addItem()}> 添加 </Button>}
+          <Box direction="row" spacing={15}>
+            {!!addItem && <Button type="primary" onClick={() => addItem()}> 添加 </Button>}
+            {
+              titleButton.map(operation => {
+                // @ts-ignore
+                let url = operation.persistentTableConfigMethod;
+                // @ts-ignore
+                let name = operation.persistentTableConfigName;
+                return (
+                  <Button
+                    type="normal"
+                    onClick={() => runCustomMethod({url})}
+                  > {name} </Button>
+                )
+              })
+            }
+          </Box>
           <Divider/>
           <Loading
             tip="加载中..."
