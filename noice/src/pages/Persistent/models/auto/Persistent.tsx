@@ -51,7 +51,10 @@ export default {
         Message.error(ret.data.defaultMessage);
       } else {
         Message.success('保存成功');
-        await this.page(data);
+        await this.page({
+          searchForm: data.searchForm,
+          current: data.current,
+        });
         const payload = {
           visible: false,
         };
@@ -64,7 +67,10 @@ export default {
         Message.error('删除失败');
       } else {
         Message.success('删除成功');
-        await this.page(data.current);
+        await this.page({
+          searchForm: data.searchForm,
+          current: data.current,
+        });
         const payload = {
           visible: false,
         };

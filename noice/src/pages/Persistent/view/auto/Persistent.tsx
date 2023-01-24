@@ -22,6 +22,7 @@ function Persistent() {
         reset={() => dispatchers.setSearchDataForm(state.searchDefaultForm)}
         editItem={record => dispatchers.edit(record)}
         deleteItem={record => dispatchers.delete({
+          searchForm: state.searchForm,
           current: state.current,
           record,
         })}
@@ -45,6 +46,7 @@ function Persistent() {
         configItems={state.formConfig}
         dispatchers={value => dispatchers.setDataForm(value)}
         onOk={() => dispatchers.save({
+          searchForm: state.searchForm,
           current: state.current,
           formData: state.formData,
         })}
