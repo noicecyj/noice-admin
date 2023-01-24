@@ -14,11 +14,6 @@ import {
   TimePicker,
 } from '@alifd/next';
 
-const dataSource = [
-  {value: '有效', label: '有效'},
-  {value: '无效', label: '无效'},
-];
-
 const FormItem = Form.Item;
 const {RangePicker} = DatePicker2;
 const {Group: RadioGroup} = Radio;
@@ -27,18 +22,14 @@ const {Group: CheckboxGroup} = Checkbox;
 
 function DataForm(props) {
   const {
-    items,
+    configItems,
     dispatchers,
     onOk,
     formDataValue,
     title,
     visibleDialog,
     onClose,
-    customData,
-    formSortCode,
   } = props;
-
-  const formCol = customData.formCol === 4 ? 3 : customData.formCol === 3 ? 4 : customData.formCol === 2 ? 6 : 12;
 
   return (
     <Dialog
@@ -55,237 +46,188 @@ function DataForm(props) {
             fullWidth
             labelAlign="top"
             value={formDataValue}
-            isPreview={!customData.editEnable}
             onChange={(value) => dispatchers(value)}>
-            {items.map((item) => {
-              console.log("item====>",item)
-              if (item.propertyMode === 'Input') {
+            {configItems.map((config) => {
+              console.log("item====>", config)
+              if (config.formMode === 'Input') {
                 return (
                   <FormItem
-                    colSpan={formCol}
-                    label={`${item.propertyLabel}`}
-                    required={item.propertyRequired}
-                    requiredMessage={`请输入${item.propertyLabel}`}
-                    disabled={item.propertyEditEnable}
-                    key={item.id}>
+                    colSpan={config.formColSpan}
+                    label={config.formName}
+                    required={config.formRequired}
+                    requiredMessage={`请输入${config.formName}`}
+                    disabled={config.formEdit}
+                    key={config.id}>
                     <Input
-                      id={item.propertyCode}
-                      name={item.propertyName}
-                      placeholder={`请输入${item.propertyLabel}`}
-                      defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
+                      id={config.formCode}
+                      name={config.formName}
                     />
                   </FormItem>
                 )
-              } else if (item.propertyMode === 'Password') {
+              } else if (config.formMode === 'Password') {
                 return (
                   <FormItem
-                    colSpan={formCol}
-                    label={`${item.propertyLabel}`}
-                    required={item.propertyRequired}
-                    requiredMessage={`请输入${item.propertyLabel}`}
-                    key={item.id}>
+                    colSpan={config.formColSpan}
+                    label={config.formName}
+                    required={config.formRequired}
+                    requiredMessage={`请输入${config.formName}`}
+                    key={config.id}>
                     <Input.Password
-                      id={item.propertyCode}
-                      name={item.propertyName}
-                      placeholder={`请输入${item.propertyLabel}`}
+                      id={config.formCode}
+                      name={config.formName}
                     />
                   </FormItem>)
-              } else if (item.propertyMode === 'TextArea') {
+              } else if (config.formMode === 'TextArea') {
                 return (
                   <FormItem
-                    colSpan={formCol}
-                    label={`${item.propertyLabel}`}
-                    required={item.propertyRequired}
-                    requiredMessage={`请输入${item.propertyLabel}`}
-                    key={item.id}>
+                    colSpan={config.formColSpan}
+                    label={config.formName}
+                    required={config.formRequired}
+                    requiredMessage={`请输入${config.formName}`}
+                    key={config.id}>
                     <Input.TextArea
-                      id={item.propertyCode}
-                      name={item.propertyName}
-                      placeholder={`请输入${item.propertyLabel}`}
-                      defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
+                      id={config.formCode}
+                      name={config.formName}
                     />
                   </FormItem>)
-              } else if (item.propertyMode === 'Select') {
+              } else if (config.formMode === 'Select') {
                 return (
                   <FormItem
-                    colSpan={formCol}
-                    label={`${item.propertyLabel}`}
-                    required={item.propertyRequired}
-                    requiredMessage={`请输入${item.propertyLabel}`}
-                    key={item.id}>
+                    colSpan={config.formColSpan}
+                    label={config.formName}
+                    required={config.formRequired}
+                    requiredMessage={`请输入${config.formName}`}
+                    key={config.id}>
                     <Select
-                      id={item.propertyCode}
-                      name={item.propertyName}
+                      id={config.formCode}
+                      name={config.formName}
                       filterLocal={false}
-                      dataSource={item.propertyDataSource}
-                      defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
+                      dataSource={config.formDataSource}
+                      defaultValue={config.formDefaultValve}
                     />
                   </FormItem>)
-              } else if (item.propertyMode === 'NumberPicker') {
+              } else if (config.formMode === 'NumberPicker') {
                 return (
                   <FormItem
-                    colSpan={formCol}
-                    label={`${item.propertyLabel}`}
-                    required={item.propertyRequired}
-                    requiredMessage={`请输入${item.propertyLabel}`}
-                    key={item.id}>
+                    colSpan={config.formColSpan}
+                    label={config.formName}
+                    required={config.formRequired}
+                    requiredMessage={`请输入${config.formName}`}
+                    key={config.id}>
                     <NumberPicker
-                      id={item.propertyCode}
-                      name={item.propertyName}
+                      id={config.formCode}
+                      name={config.formName}
                       stringMode
                       type="inline"
                       step={10}
-                      defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
+                      defaultValue={config.formDefaultValve}
                     />
                   </FormItem>)
-              } else if (item.propertyMode === 'Switch') {
+              } else if (config.formMode === 'Switch') {
                 return (
                   <FormItem
-                    colSpan={formCol}
-                    label={`${item.propertyLabel}`}
-                    required={item.propertyRequired}
-                    requiredMessage={`请输入${item.propertyLabel}`}
-                    key={item.id}>
+                    colSpan={config.formColSpan}
+                    label={config.formName}
+                    required={config.formRequired}
+                    requiredMessage={`请输入${config.formName}`}
+                    key={config.id}>
                     <Switch
-                      id={item.propertyCode}
-                      name={item.propertyName}
+                      id={config.formCode}
+                      name={config.formName}
                       autoWidth
                       checkedChildren={'是'}
                       unCheckedChildren={'否'}
                     />
                   </FormItem>)
-              } else if (item.propertyMode === 'Range') {
+              } else if (config.formMode === 'Range') {
                 return (
                   <FormItem
-                    colSpan={formCol}
-                    label={`${item.propertyLabel}`}
-                    required={item.propertyRequired}
-                    requiredMessage={`请输入${item.propertyLabel}`}
-                    key={item.id}>
+                    colSpan={config.formColSpan}
+                    label={config.formName}
+                    required={config.formRequired}
+                    requiredMessage={`请输入${config.formName}`}
+                    key={config.id}>
                     <Range
-                      id={item.propertyCode}
-                      name={item.propertyName}
+                      id={config.formCode}
+                      name={config.formName}
                       defaultValue={0}
                       scales={[0, 100]}
                       marks={[0, 100]}
                     />
                   </FormItem>)
-              } else if (item.propertyMode === 'DatePicker') {
+              } else if (config.formMode === 'DatePicker') {
                 return (
                   <FormItem
-                    colSpan={formCol}
-                    label={`${item.propertyLabel}`}
-                    required={item.propertyRequired}
-                    requiredMessage={`请输入${item.propertyLabel}`}
-                    key={item.id}>
+                    colSpan={config.formColSpan}
+                    label={config.formName}
+                    required={config.formRequired}
+                    requiredMessage={`请输入${config.formName}`}
+                    key={config.id}>
                     <DatePicker2
-                      id={item.propertyCode}
-                      name={item.propertyName}
+                      id={config.formCode}
+                      name={config.formName}
                       format="YYYY/MM/DD"
                       outputFormat="YYYY/MM/DD"
                     />
                   </FormItem>)
-              } else if (item.propertyMode === 'RangePicker') {
+              } else if (config.formMode === 'RangePicker') {
                 return (
                   <FormItem
-                    colSpan={formCol}
-                    label={`${item.propertyLabel}`}
-                    required={item.propertyRequired}
-                    requiredMessage={`请输入${item.propertyLabel}`}
-                    key={item.id}>
+                    colSpan={config.formColSpan}
+                    label={config.formName}
+                    required={config.formRequired}
+                    requiredMessage={`请输入${config.formName}`}
+                    key={config.id}>
                     <RangePicker
-                      id={item.propertyCode}
-                      name={item.propertyName}
+                      id={config.formCode}
+                      name={config.formName}
                     />
                   </FormItem>)
-              } else if (item.propertyMode === 'TimePicker') {
+              } else if (config.formMode === 'TimePicker') {
                 return (
                   <FormItem
-                    colSpan={formCol}
-                    label={`${item.propertyLabel}`}
-                    required={item.propertyRequired}
-                    requiredMessage={`请输入${item.propertyLabel}`}
-                    key={item.id}>
+                    colSpan={config.formColSpan}
+                    label={config.formName}
+                    required={config.formRequired}
+                    requiredMessage={`请输入${config.formName}`}
+                    key={config.id}>
                     <TimePicker
-                      id={item.propertyCode}
-                      name={item.propertyName}
+                      id={config.formCode}
+                      name={config.formName}
                     />
                   </FormItem>)
-              } else if (item.propertyMode === 'Checkbox') {
+              } else if (config.formMode === 'Checkbox') {
                 return (
                   <FormItem
-                    colSpan={formCol}
-                    label={`${item.propertyLabel}`}
-                    required={item.propertyRequired}
-                    requiredMessage={`请输入${item.propertyLabel}`}
-                    key={item.id}>
+                    colSpan={config.formColSpan}
+                    label={config.formName}
+                    required={config.formRequired}
+                    requiredMessage={`请输入${config.formName}`}
+                    key={config.id}>
                     <CheckboxGroup
-                      id={item.propertyCode}
-                      name={item.propertyName}
-                      dataSource={item.propertyDataSource}
-                      direction={item.propertyDirection}
+                      id={config.formCode}
+                      name={config.formName}
+                      dataSource={config.formDataSource}
+                      direction={config.formDirection}
                     />
                   </FormItem>)
-              } else if (item.propertyMode === 'Radio') {
+              } else if (config.formMode === 'Radio') {
                 return (
                   <FormItem
-                    colSpan={formCol}
-                    label={`${item.propertyLabel}`}
-                    required={item.propertyRequired}
-                    requiredMessage={`请输入${item.propertyLabel}`}
-                    key={item.id}>
+                    colSpan={config.formColSpan}
+                    label={config.formName}
+                    required={config.formRequired}
+                    requiredMessage={`请输入${config.formName}`}
+                    key={config.id}>
                     <RadioGroup
-                      id={item.propertyCode}
-                      name={item.propertyName}
-                      dataSource={item.propertyDataSource}
-                      direction={item.propertyDirection}
-                    />
-                  </FormItem>)
-              } else if (item.propertyOut && item.propertyOutType === 'ManyToOne') {
-                return (
-                  <FormItem
-                    colSpan={formCol}
-                    label={`${item.propertyLabel}`}
-                    required={item.propertyRequired}
-                    requiredMessage={`请输入${item.propertyLabel}`}
-                    key={item.id}>
-                    <Select
-                      id={item.propertyCode + "_id"}
-                      name={item.propertyName + "Id"}
-                      filterLocal={false}
-                      dataSource={item.propertyDataSource}
-                      defaultValue={item.propertyDefaultValue != null ? item.propertyDefaultValue : null}
+                      id={config.formCode}
+                      name={config.formName}
+                      dataSource={config.formDataSource}
+                      direction={config.formDirection}
                     />
                   </FormItem>)
               }
             })}
-            {!customData.customForm && <FormItem
-              colSpan={formCol}
-              label="状态"
-              required
-              requiredMessage="请输入状态">
-              <Select
-                id="status"
-                name="status"
-                filterLocal={false}
-                dataSource={dataSource}
-                defaultValue="有效"
-              />
-            </FormItem>}
-            {!customData.customForm && <FormItem
-              colSpan={formCol}
-              label="排序代码"
-              required
-              requiredMessage="请输入排序代码">
-              <NumberPicker
-                id="sortCode"
-                name="sortCode"
-                defaultValue={formSortCode}
-                stringMode
-                type="inline"
-                step={10}
-              />
-            </FormItem>}
           </Form>
         </Card.Content>
       </Card>

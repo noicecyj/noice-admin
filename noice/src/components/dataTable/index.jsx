@@ -1,6 +1,18 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
-import {Box, Button, Dialog, Form, Input, Loading, Pagination, ResponsiveGrid, Select, Table,} from '@alifd/next';
+import {
+  Box,
+  Button,
+  Dialog,
+  Divider,
+  Form,
+  Input,
+  Loading,
+  Pagination,
+  ResponsiveGrid,
+  Select,
+  Table
+} from '@alifd/next';
 import styles from './index.module.scss';
 
 const {Cell} = ResponsiveGrid;
@@ -76,12 +88,12 @@ function DataTable(props) {
     <ResponsiveGrid gap={20}>
       <Cell colSpan={12}>
         <div className={styles.Main}>
+          <Divider/>
           <Form
             responsive={true}
             fullWidth
             value={searchFormValue}
             onChange={(value) => dispatchers(value)}>
-            {!!addItem && <Button type="primary" onClick={() => addItem()}> 添加 </Button>}
             {searchItems.map((search) => {
               if (search.searchMode === 'Input') {
                 console.log("item.SEARCH.Input====>", search)
@@ -116,7 +128,9 @@ function DataTable(props) {
             {!!search && <Button type="primary" onClick={() => search()}> 查询 </Button>}
             {!!reset && <Button onClick={() => reset()}> 重置 </Button>}
           </Form>
-
+          <Divider/>
+          {!!addItem && <Button type="primary" onClick={() => addItem()}> 添加 </Button>}
+          <Divider/>
           <Loading
             tip="加载中..."
             visible={visibleLoading}

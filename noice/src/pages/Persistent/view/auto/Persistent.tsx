@@ -19,7 +19,7 @@ function Persistent() {
           searchForm: state.searchForm,
           current: 1,
         })}
-        reset={() => dispatchers.reset(state.searchDefaultForm)}
+        reset={() => dispatchers.setSearchDataForm(state.searchDefaultForm)}
         editItem={record => dispatchers.edit(record)}
         deleteItem={record => dispatchers.delete({
           current: state.current,
@@ -41,18 +41,16 @@ function Persistent() {
         dispatchers={value => dispatchers.setSearchDataForm(value)}
       />
       <DataFormTemple
-        customData={state.customData}
-        title={state.title}
-        visibleDialog={state.visible}
-        onClose={() => dispatchers.setState({visible: false})}
-        items={[...state.form]}
+        configItems={state.formConfig}
         dispatchers={value => dispatchers.setDataForm(value)}
         onOk={() => dispatchers.save({
           current: state.current,
           formData: state.formData,
         })}
         formDataValue={state.formData}
-        formSortCode={String(Number.parseInt(String(state.total)) + 10)}
+        title={state.title}
+        visibleDialog={state.visible}
+        onClose={() => dispatchers.setState({visible: false})}
       />
     </>
   );

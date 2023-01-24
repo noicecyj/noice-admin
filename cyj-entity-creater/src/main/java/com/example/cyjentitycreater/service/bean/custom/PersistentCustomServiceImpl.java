@@ -208,7 +208,15 @@ public class PersistentCustomServiceImpl
                 //驼峰名
                 String underPropertyCode = BeanUtils.underline2Camel(propertyBean.getPropertyCode());
                 persistentFormConfigBean.setPersistentFormConfigCode(underPropertyCode);
-                persistentFormConfigBean.setPersistentFormConfigMode("Input");
+                persistentFormConfigBean.setPersistentFormConfigRequired(0);
+                persistentFormConfigBean.setPersistentFormConfigEdit(0);
+                if (propertyBean.getPropertyRelation() == 0) {
+                    persistentFormConfigBean.setPersistentFormConfigMode("Input");
+                } else {
+                    persistentFormConfigBean.setPersistentFormConfigMode("Select");
+                    persistentFormConfigBean.setPersistentFormConfigDataSource(propertyBean.getPropertyCode().toUpperCase() + "@NAME_AND_ID");
+                }
+                persistentFormConfigBean.setPersistentFormConfigColSpan(6);
                 persistentFormConfigBean.setSortCode(propertyBean.getSortCode());
                 persistentFormConfigBean.setStatus(Constant.STATUS);
                 persistentFormConfigBean.insert();
@@ -234,6 +242,7 @@ public class PersistentCustomServiceImpl
                     } else {
                         persistentTableConfigBean.setPersistentTableConfigDisplay(1);
                     }
+                    persistentTableConfigBean.setPersistentTableConfigType("column");
                     persistentTableConfigBean.setSortCode(propertyBean.getSortCode());
                     persistentTableConfigBean.setStatus(Constant.STATUS);
                     persistentTableConfigBean.insert();
@@ -1432,16 +1441,62 @@ public class PersistentCustomServiceImpl
         List<PersistentFormBean> persistentFormBeanList = new PersistentFormBean()
                 .selectList(new LambdaQueryWrapper<PersistentFormBean>()
                         .eq(PersistentFormBean::getPersistentId, persistent.getId()));
-        JSONArray persistentFormArr = new JSONArray();
+        JSONObject persistentForm = new JSONObject();
+        JSONArray configFormArr = new JSONArray();
         for (PersistentFormBean persistentFormBean : persistentFormBeanList) {
-            JSONObject persistentForm = new JSONObject();
-            persistentForm.put("INFO", persistentFormBean);
             List<PersistentFormConfigBean> persistentFormConfigBeanList = new PersistentFormConfigBean()
                     .selectList(new LambdaQueryWrapper<PersistentFormConfigBean>()
                             .eq(PersistentFormConfigBean::getPersistentFormId, persistentFormBean.getId()));
-            persistentForm.put("CONFIG", persistentFormConfigBeanList);
-            persistentFormArr.add(persistentForm);
+            for (PersistentFormConfigBean persistentFormConfigBean : persistentFormConfigBeanList) {
+                JSONObject formConfig = new JSONObject();
+                formConfig.put("id", persistentFormConfigBean.getId());
+                formConfig.put("formMode", persistentFormConfigBean.getPersistentFormConfigMode());
+                formConfig.put("formName", persistentFormConfigBean.getPersistentFormConfigName());
+                formConfig.put("formCode", persistentFormConfigBean.getPersistentFormConfigCode());
+                formConfig.put("formDefaultValve", persistentFormConfigBean.getPersistentFormConfigDefaultValue());
+                formConfig.put("formColSpan", persistentFormConfigBean.getPersistentFormConfigColSpan());
+                formConfig.put("formRequired", persistentFormConfigBean.getPersistentFormConfigRequired() == 1);
+                formConfig.put("formDirection", persistentFormConfigBean.getPersistentFormConfigDirection());
+                formConfig.put("formEdit", persistentFormConfigBean.getPersistentFormConfigEdit() == 1);
+                if (StringUtils.isNotEmpty(persistentFormConfigBean.getPersistentFormConfigDataSource())) {
+                    SqlBean sqlBean = new SqlBean().selectOne(new LambdaQueryWrapper<SqlBean>()
+                            .eq(SqlBean::getSqlCode, persistentFormConfigBean.getPersistentFormConfigDataSource()));
+                    Map<String, String> sql = new HashMap<>();
+                    sql.put("sql", sqlBean.getSqlStr());
+                    List<Map> map = sqlMapper.executeSql(sql);
+                    formConfig.put("formDataSource", map);
+                    logger.info("formDataSource:{}", map);
+                }
+                configFormArr.add(formConfig);
+            }
         }
+        JSONObject formStatusConfig = new JSONObject();
+        formStatusConfig.put("id", "status_id");
+        formStatusConfig.put("formMode", "Select");
+        formStatusConfig.put("formName", "状态");
+        formStatusConfig.put("formCode", "status");
+        formStatusConfig.put("formDefaultValve", 1);
+        formStatusConfig.put("formColSpan", 6);
+        Map<String, Object> youXiaoMap = new HashMap<>();
+        youXiaoMap.put("label", "有效");
+        youXiaoMap.put("value", 1);
+        Map<String, Object> wuXiaoMap = new HashMap<>();
+        wuXiaoMap.put("label", "无效");
+        wuXiaoMap.put("value", 0);
+        List<Map> mapList = new ArrayList<>();
+        mapList.add(youXiaoMap);
+        mapList.add(wuXiaoMap);
+        formStatusConfig.put("formDataSource", mapList);
+        configFormArr.add(formStatusConfig);
+        JSONObject formSortCodeConfig = new JSONObject();
+        formSortCodeConfig.put("id", "sort_code_id");
+        formSortCodeConfig.put("formMode", "NumberPicker");
+        formSortCodeConfig.put("formName", "排序");
+        formSortCodeConfig.put("formCode", "sortCode");
+        formSortCodeConfig.put("formDefaultValve", 1);
+        formSortCodeConfig.put("formColSpan", 6);
+        configFormArr.add(formSortCodeConfig);
+        persistentForm.put("CONFIG", configFormArr);
         List<PersistentTableBean> persistentTableBeanList = new PersistentTableBean()
                 .selectList(new LambdaQueryWrapper<PersistentTableBean>()
                         .eq(PersistentTableBean::getPersistentId, persistent.getId()));
@@ -1449,7 +1504,7 @@ public class PersistentCustomServiceImpl
         JSONObject searchForm = new JSONObject();
         JSONArray operationArr = new JSONArray();
         JSONArray searchConfigArr = new JSONArray();
-        JSONArray configArr = new JSONArray();
+        JSONArray configTableArr = new JSONArray();
         for (PersistentTableBean persistentTableBean : persistentTableBeanList) {
             List<PersistentTableConfigBean> persistentTableConfigBeanList = new PersistentTableConfigBean()
                     .selectList(new LambdaQueryWrapper<PersistentTableConfigBean>()
@@ -1460,7 +1515,7 @@ public class PersistentCustomServiceImpl
                     .stream().filter(persistentTableConfigBean ->
                             "column".equals(persistentTableConfigBean.getPersistentTableConfigType()))
                     .collect(Collectors.toList());
-            configArr.addAll(persistentTableConfigBeanColumnList);
+            configTableArr.addAll(persistentTableConfigBeanColumnList);
             List<PersistentTableConfigBean> persistentTableConfigBeanOperationList = persistentTableConfigBeanList
                     .stream().filter(persistentTableConfigBean ->
                             "operation".equals(persistentTableConfigBean.getPersistentTableConfigType()))
@@ -1483,9 +1538,9 @@ public class PersistentCustomServiceImpl
                             .eq(SqlBean::getSqlCode, persistentTableSearchConfigBean.getPersistentTableSearchConfigDataSource()));
                     Map<String, String> sql = new HashMap<>();
                     sql.put("sql", sqlBean.getSqlStr());
-                    List<Map> mapList = sqlMapper.executeSql(sql);
-                    searchConfig.put("searchDataSource", mapList);
-                    logger.info("searchDataSource:{}", mapList);
+                    List<Map> map = sqlMapper.executeSql(sql);
+                    searchConfig.put("searchDataSource", map);
+                    logger.info("searchDataSource:{}", map);
                 }
                 searchConfigArr.add(searchConfig);
             }
@@ -1497,23 +1552,14 @@ public class PersistentCustomServiceImpl
         searchStatusConfig.put("searchName", "状态");
         searchStatusConfig.put("searchCode", "status");
         searchStatusConfig.put("searchDefaultValve", 1);
-        Map<String, Object> youXiaoMap = new HashMap<>();
-        youXiaoMap.put("label", "有效");
-        youXiaoMap.put("value", 1);
-        Map<String, Object> wuXiaoMap = new HashMap<>();
-        wuXiaoMap.put("label", "无效");
-        wuXiaoMap.put("value", 0);
-        List<Map> mapList = new ArrayList<>();
-        mapList.add(youXiaoMap);
-        mapList.add(wuXiaoMap);
         searchStatusConfig.put("searchDataSource", mapList);
         searchConfigArr.add(searchStatusConfig);
         persistentTable.put("OPERATION", operationArr);
         persistentTable.put("SEARCH", searchConfigArr);
-        persistentTable.put("CONFIG", configArr);
+        persistentTable.put("CONFIG", configTableArr);
         persistentTable.put("INFO", searchForm);
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("dataForm", persistentFormArr);
+        jsonObject.put("dataForm", persistentForm);
         jsonObject.put("dataTable", persistentTable);
         //logger.info("findDataTableAndFormByName.jsonObject:{}", jsonObject);
         return jsonObject;

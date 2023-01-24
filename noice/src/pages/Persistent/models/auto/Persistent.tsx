@@ -14,7 +14,7 @@ export default {
     loadingVisible: true,
     total: 0,
     current: 1,
-    form: [],
+    formConfig: [],
     tableOperation: [],
     tableConfig: [],
     tableSearch: [],
@@ -86,9 +86,6 @@ export default {
       };
       dispatch.persistent.setState(payload);
     },
-    reset(data) {
-      this.setSearchDataForm(data);
-    },
     setDataForm(data) {
       const payload = {
         formData: data,
@@ -112,7 +109,7 @@ export default {
         tableOperation: ret.data.dataTable.OPERATION,
         tableConfig: ret.data.dataTable.CONFIG,
         tableSearch: ret.data.dataTable.SEARCH,
-        form: ret.data.dataForm,
+        formConfig: ret.data.dataForm.CONFIG,
       };
       dispatch.persistent.setState(payload);
     },

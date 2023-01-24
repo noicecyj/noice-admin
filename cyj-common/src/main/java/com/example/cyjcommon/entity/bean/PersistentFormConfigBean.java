@@ -45,6 +45,9 @@ public class PersistentFormConfigBean extends Model<PersistentFormConfigBean> {
     @TableField("persistent_form_config_edit")
     private int persistentFormConfigEdit;
 
+    @TableField("persistent_form_config_col_span")
+    private int persistentFormConfigColSpan;
+
     @TableField("persistent_form_id")
     private String persistentFormId;
 
