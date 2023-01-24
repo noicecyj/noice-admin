@@ -1,5 +1,5 @@
 import React from 'react';
-import Sql from '@/pages/Sql/view/auto/Sql';
+import Sql from '@/pages/Sql/view/Sql';
 
 function SqlPage() {
   return (

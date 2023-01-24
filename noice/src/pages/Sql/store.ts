@@ -1,10 +1,8 @@
 import {createStore} from 'ice';
-import sql from './models/auto/Sql';
-import sqlCustom from './models/custom/Sql';
+import Sql from './models/Sql';
 
 const store = createStore({
-  sql,
-  sqlCustom,
+  Sql,
 });
 
 export default store;

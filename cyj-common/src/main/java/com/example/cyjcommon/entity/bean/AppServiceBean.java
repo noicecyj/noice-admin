@@ -36,6 +36,9 @@ public class AppServiceBean extends Model<AppServiceBean> {
     @TableField("app_service_code")
     private String appServiceCode;
 
+    @TableField("app_service_true_path")
+    private String appServiceTruePath;
+
     @TableField("status")
     private int status;
 
