@@ -95,7 +95,7 @@ public class PersistentCustomServiceImpl
         boolean deleteFlag = new AuthorityBean().delete(new LambdaQueryWrapper<AuthorityBean>()
                 .eq(AuthorityBean::getPersistentId, persistent.getId()));
         logger.info("delete.authority:{}", deleteFlag);
-        String path = "/" + appServiceBean.getAppServiceCode() + "/" + appServiceBean.getAppServiceApi();
+        String path = "/" + appServiceBean.getAppServiceTruePath() + "/" + appServiceBean.getAppServiceApi();
         if (isBeanFlag) {
             count++;
             AuthorityBean findAll = new AuthorityBean();
