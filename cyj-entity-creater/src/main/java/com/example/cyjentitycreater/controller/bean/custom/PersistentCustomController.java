@@ -42,6 +42,13 @@ public class PersistentCustomController {
         return ResultVO.success();
     }
 
+    @Operation(summary = "实体删除代码")
+    @PostMapping(value = "deleteJavaFile")
+    public ResultVO deleteJavaFile(@RequestBody PersistentBean po) {
+        persistentCustomService.deleteJavaFile(po);
+        return ResultVO.success();
+    }
+
     @Operation(summary = "实体生成全部代码")
     @PostMapping(value = "generateAllJavaFile")
     public ResultVO generateAllJavaFile() {

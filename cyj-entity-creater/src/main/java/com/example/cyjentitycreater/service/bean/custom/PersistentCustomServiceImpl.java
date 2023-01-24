@@ -1,6 +1,5 @@
 package com.example.cyjentitycreater.service.bean.custom;
 
-import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -20,7 +19,6 @@ import com.example.cyjcommon.entity.bean.SqlBean;
 import com.example.cyjcommon.mapper.bean.PersistentMapper;
 import com.example.cyjcommon.mapper.bean.SqlMapper;
 import com.example.cyjcommon.utils.BeanUtils;
-import com.example.cyjdictionary.service.bean.custom.DictionaryCustomServiceImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -53,18 +51,12 @@ public class PersistentCustomServiceImpl
     private final static String POST = "POST";
 
     private final static String commonPath = "C:/Users/noice/IdeaProjects/noice-admin/cyj-common/src/main/java/com/example/cyjcommon";
-    private DictionaryCustomServiceImpl dictionaryCustomServiceImpl;
 
     private SqlMapper sqlMapper;
 
     @Autowired
     public void setSqlMapper(SqlMapper sqlMapper) {
         this.sqlMapper = sqlMapper;
-    }
-
-    @Autowired
-    public void setDictionaryCustomService(DictionaryCustomServiceImpl dictionaryCustomServiceImpl) {
-        this.dictionaryCustomServiceImpl = dictionaryCustomServiceImpl;
     }
 
     public void generateJavaFile(PersistentBean persistent) {
@@ -289,7 +281,6 @@ public class PersistentCustomServiceImpl
                 }
             }
         }
-
     }
 
     public void entityHandler(PersistentBean persistent, String handlerType) {
@@ -301,28 +292,59 @@ public class PersistentCustomServiceImpl
                 formAndTableAndSearchHandler(persistent);
                 break;
             case "delete":
-//                deleteEntityHandler(persistent);
-//                authorityDeleteHandler(persistent);
-//                sqlDeleteHandler(persistent);
+                deleteEntityHandler(persistent);
+                authorityDeleteHandler(persistent);
+                sqlDeleteHandler(persistent);
+                formAndTableAndSearchDeleteHandler(persistent);
                 break;
             default:
                 logger.info("wtf!");
         }
     }
 
-//    private void sqlDeleteHandler(Persistent persistent) {
-//        String dataSourceType = "DATABASE_" + persistent.getPersistentCode().toUpperCase() + "_TYPE";
-//        Sql sql = new Sql().selectOne(new LambdaQueryWrapper<Sql>().eq(Sql::getSqlDescription, dataSourceType));
-//        if (sql != null) {
-//            sql.deleteById();
-//        }
-//    }
+    private void formAndTableAndSearchDeleteHandler(PersistentBean persistent) {
+        boolean isBeanFlag = persistent.getPersistentRelation() == 0;
+        //驼峰名
+        String underPoName = BeanUtils.underline2Camel(persistent.getPersistentCode());
+        //文件名
+        String poName = BeanUtils.captureName(underPoName);
+        if (isBeanFlag) {
+            PersistentFormBean formBean = new PersistentFormBean().selectOne(new LambdaQueryWrapper<PersistentFormBean>()
+                    .eq(PersistentFormBean::getPersistentFormCode, poName.toUpperCase() + "_DEFAULT_FORM"));
+            if (formBean != null) {
+                boolean persistentFormConfigFlag = new PersistentFormConfigBean()
+                        .delete(new LambdaQueryWrapper<PersistentFormConfigBean>()
+                                .eq(PersistentFormConfigBean::getPersistentFormId, formBean.getId()));
+                logger.info("delete.persistentFormConfigFlag:{}", persistentFormConfigFlag);
+                formBean.deleteById();
+            }
+            PersistentTableBean tableBean = new PersistentTableBean().selectOne(new LambdaQueryWrapper<PersistentTableBean>()
+                    .eq(PersistentTableBean::getPersistentTableCode, poName.toUpperCase() + "_DEFAULT_TABLE"));
+            if (tableBean != null) {
+                boolean persistentTableConfigFlag = new PersistentTableConfigBean()
+                        .delete(new LambdaQueryWrapper<PersistentTableConfigBean>()
+                                .eq(PersistentTableConfigBean::getPersistentTableId, tableBean.getId()));
+                boolean persistentTableSearchConfigFlag = new PersistentTableSearchConfigBean()
+                        .delete(new LambdaQueryWrapper<PersistentTableSearchConfigBean>()
+                                .eq(PersistentTableSearchConfigBean::getPersistentTableId, tableBean.getId()));
+                logger.info("delete.persistentTableConfigFlag:{}", persistentTableConfigFlag);
+                logger.info("delete.persistentTableSearchConfigFlag:{}", persistentTableSearchConfigFlag);
+                tableBean.deleteById();
+            }
+        }
+    }
+
+    private void sqlDeleteHandler(PersistentBean persistent) {
+        String dataSourceType = persistent.getPersistentCode().toUpperCase() + "_ID@NAME_AND_ID";
+        SqlBean sql = new SqlBean().selectOne(new LambdaQueryWrapper<SqlBean>()
+                .eq(SqlBean::getSqlCode, dataSourceType));
+        if (sql != null) {
+            sql.deleteById();
+        }
+    }
 
     private void authorityDeleteHandler(PersistentBean persistent) {
         AppServiceBean appServiceBean = new AppServiceBean().selectById(persistent.getAppServiceId());
-        List<PropertyBean> propertyList = new PropertyBean().selectList(new LambdaQueryWrapper<PropertyBean>()
-                .eq(PropertyBean::getPersistentId, persistent.getId()));
-//        List<Property> outPropertyList = propertyList.stream().filter(property -> BeanUtils.YES.equals(property.getPropertyOut())).collect(Collectors.toList());
         //驼峰名
         String underPoName = BeanUtils.underline2Camel(persistent.getPersistentCode());
         //文件名
@@ -332,16 +354,6 @@ public class PersistentCustomServiceImpl
         if (findAll != null) {
             findAll.deleteById();
         }
-//        for (Property property : outPropertyList) {
-//            String underPropertyPoName = BeanUtils.underline2Camel(property.getPropertyCode());
-//            String propertyPoName = BeanUtils.captureName(underPropertyPoName);
-//            if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
-//                oneToManyAuthorityDeleteHandler(appServiceBean, poName, propertyPoName);
-//            }
-//            if (BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())) {
-//                manyToManyAuthorityDeleteHandler(appServiceBean, poName, propertyPoName);
-//            }
-//        }
         AuthorityBean save = new AuthorityBean().selectOne(new LambdaQueryWrapper<AuthorityBean>()
                 .eq(AuthorityBean::getAuthorityPath, appServiceBean.getAppServiceApi() + "/save" + poName));
         if (save != null) {
@@ -379,9 +391,6 @@ public class PersistentCustomServiceImpl
         Map<String, String> entityCustomObj = new HashMap<>();
         entityCustomObj.put(appPath + "/service/custom", poName + "CustomService.java");
         entityCustomObj.put(appPath + "/controller/custom", poName + "CustomController.java");
-        entityCustomObj.put(componentPath + poName + "/services/custom", poName + ".tsx");
-        entityCustomObj.put(componentPath + poName + "/models/custom", poName + ".tsx");
-        entityCustomObj.put(componentPath + poName + "/view/custom", poName + ".tsx");
         deleteEntityCodeHandler(entityObj, entityCustomObj);
         BeanUtils.deleteJavaFile(componentPath + poName);
     }
@@ -435,7 +444,7 @@ public class PersistentCustomServiceImpl
         entityObj.put(appPath + "/service" + (isBeanFlag ? "/bean" : "/relation") + "/auto",
                 serviceGenerate(propertyList, poName, appPath, isBeanFlag));
         entityObj.put(appPath + "/controller" + (isBeanFlag ? "/bean" : "/relation") + "/auto",
-                controllerGenerate(propertyList, poName, appPath, appApi, isBeanFlag));
+                controllerGenerate(poName, appPath, appApi, isBeanFlag));
         entityObj.put(componentPath + poName + "/services", servicesGenerate(appApi, poName));
         entityObj.put(componentPath + poName + "/models", modelsGenerate(poName, persistentCode));
         entityObj.put(componentPath + poName + "/view", viewGenerate(poName));
@@ -456,93 +465,47 @@ public class PersistentCustomServiceImpl
     private String[] servicesGenerate(String appApi, String poName) {
         String viewData =
                 "import {request} from 'ice';\r\n" +
-                "\r\n" +
-                "export default {\r\n" +
-                "  page(po, pageNumber, pageSize) {\r\n" +
-                "    return request({\r\n" +
-                "      url: '/" + appApi + "/page" + poName + "',\r\n" +
-                "      method: 'post',\r\n" +
-                "      data: {\r\n" +
-                "        po,\r\n" +
-                "        pageNumber,\r\n" +
-                "        pageSize,\r\n" +
-                "      },\r\n" +
-                "    });\r\n" +
-                "  },\r\n" +
-                "  save(data) {\r\n" +
-                "    return request({\r\n" +
-                "      url: '/" + appApi + "/save" + poName + "',\r\n" +
-                "      method: 'post',\r\n" +
-                "      data,\r\n" +
-                "    });\r\n" +
-                "  },\r\n" +
-                "  delete(data) {\r\n" +
-                "    return request({\r\n" +
-                "      url: '/" + appApi + "/delete" + poName + "',\r\n" +
-                "      method: 'post',\r\n" +
-                "      data,\r\n" +
-                "    });\r\n" +
-                "  },\r\n" +
-                "};\r\n";
+                        "\r\n" +
+                        "export default {\r\n" +
+                        "  page(po, pageNumber, pageSize) {\r\n" +
+                        "    return request({\r\n" +
+                        "      url: '/" + appApi + "/page" + poName + "',\r\n" +
+                        "      method: 'post',\r\n" +
+                        "      data: {\r\n" +
+                        "        po,\r\n" +
+                        "        pageNumber,\r\n" +
+                        "        pageSize,\r\n" +
+                        "      },\r\n" +
+                        "    });\r\n" +
+                        "  },\r\n" +
+                        "  save(data) {\r\n" +
+                        "    return request({\r\n" +
+                        "      url: '/" + appApi + "/save" + poName + "',\r\n" +
+                        "      method: 'post',\r\n" +
+                        "      data,\r\n" +
+                        "    });\r\n" +
+                        "  },\r\n" +
+                        "  delete(data) {\r\n" +
+                        "    return request({\r\n" +
+                        "      url: '/" + appApi + "/delete" + poName + "',\r\n" +
+                        "      method: 'post',\r\n" +
+                        "      data,\r\n" +
+                        "    });\r\n" +
+                        "  },\r\n" +
+                        "};\r\n";
         return new String[]{viewData, poName + ".tsx"};
     }
-
-//    private void oneToManyServiceHandler(List<Property> outPropertyList, StringBuilder sb, String appApi, String poName) {
-//        for (Property property : outPropertyList) {
-//            if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
-//                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-//                String propertyOut = BeanUtils.captureName(underPropertyOut);
-//                sb.append("  page").append(propertyOut).append("By").append(poName).append("(pageNumber, id) {\r\n");
-//                sb.append("    return request({\r\n");
-//                sb.append("      url: '/").append(appApi).append("/page").append(propertyOut).append("By").append(poName).append("',\r\n");
-//                sb.append("      method: 'post',\r\n");
-//                sb.append("      params: {\r\n");
-//                sb.append("        pageNumber,\r\n");
-//                sb.append("        id,\r\n");
-//                sb.append("      },\r\n");
-//                sb.append("    });\r\n");
-//                sb.append("  },\r\n");
-//            }
-//        }
-//    }
-
-//    private void manyToManyServiceHandler(List<Property> outPropertyList, StringBuilder sb, String appApi, String poName) {
-//        for (Property property : outPropertyList) {
-//            if (BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())) {
-//                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-//                sb.append("  ").append(underPropertyOut).append("By").append(poName).append("(id) {\r\n");
-//                sb.append("    return request({\r\n");
-//                sb.append("      url: '/").append(appApi).append("/").append(underPropertyOut).append("By").append(poName).append("',\r\n");
-//                sb.append("      method: 'post',\r\n");
-//                sb.append("      params: {\r\n");
-//                sb.append("        id,\r\n");
-//                sb.append("      },\r\n");
-//                sb.append("    });\r\n");
-//                sb.append("  },\r\n");
-//                sb.append("  ").append(underPropertyOut).append("Save").append(poName).append("(id, data) {\r\n");
-//                sb.append("    return request({\r\n");
-//                sb.append("      url: '/").append(appApi).append("/").append(underPropertyOut).append("Save").append(poName).append("',\r\n");
-//                sb.append("      method: 'post',\r\n");
-//                sb.append("      params: {\r\n");
-//                sb.append("        id,\r\n");
-//                sb.append("      },\r\n");
-//                sb.append("      data,\r\n");
-//                sb.append("    });\r\n");
-//                sb.append("  },\r\n");
-//            }
-//        }
-//    }
 
     private String[] storeGenerate(String poName) {
         String viewData =
                 "import {createStore} from 'ice';\r\n" +
-                "import " + poName + " from './models/" + poName + "';\r\n" +
-                "\r\n" +
-                "const store = createStore({\r\n" +
-                "  " + poName + ",\r\n" +
-                "});\r\n" +
-                "\r\n" +
-                "export default store;\r\n";
+                        "import " + poName + " from './models/" + poName + "';\r\n" +
+                        "\r\n" +
+                        "const store = createStore({\r\n" +
+                        "  " + poName + ",\r\n" +
+                        "});\r\n" +
+                        "\r\n" +
+                        "export default store;\r\n";
         return new String[]{viewData, "store.ts"};
     }
 
@@ -554,439 +517,204 @@ public class PersistentCustomServiceImpl
     private String[] modelsGenerate(String poName, String persistentCode) {
         String viewData =
                 "import initService from '@/services/init';\r\n" +
-                "import {Message} from \"@alifd/next\";\r\n" +
-                "import service from '@/pages/" + poName + "/services/" + poName + "';\r\n" +
-                "\r\n" +
-                "export default {\r\n" +
-                "\r\n" +
-                "  namespace: '" + poName + "',\r\n" +
-                "\r\n" +
-                "  state: {\r\n" +
-                "    title: '添加',\r\n" +
-                "    tableData: [],\r\n" +
-                "    visible: false,\r\n" +
-                "    formData: {},\r\n" +
-                "    loadingVisible: true,\r\n" +
-                "    total: 0,\r\n" +
-                "    current: 1,\r\n" +
-                "    formConfig: [],\r\n" +
-                "    tableOperation: [],\r\n" +
-                "    tableConfig: [],\r\n" +
-                "    titleConfig: [],\r\n" +
-                "    tableSearch: [],\r\n" +
-                "    searchForm: {},\r\n" +
-                "    searchDefaultForm: {},\r\n" +
-                "  },\r\n" +
-                "\r\n" +
-                "  reducers: {\r\n" +
-                "    setState(prevState, payload) {\r\n" +
-                "      return {...prevState, ...payload};\r\n" +
-                "    },\r\n" +
-                "  },\r\n" +
-                "\r\n" +
-                "  effects: (dispatch) => ({\r\n" +
-                "    async page(data) {\r\n" +
-                "      const dataRes = await service.page(data.searchForm, data.current, 10);\r\n" +
-                "      const payload = {\r\n" +
-                "        searchForm: data.searchForm,\r\n" +
-                "        tableData: dataRes.data.records,\r\n" +
-                "        total: dataRes.data.total,\r\n" +
-                "        current: data.current,\r\n" +
-                "        loadingVisible: false,\r\n" +
-                "      };\r\n" +
-                "      dispatch." + poName + ".setState(payload);\r\n" +
-                "    },\r\n" +
-                "    async save(data) {\r\n" +
-                "      const ret = await service.save(data.formData);\r\n" +
-                "      if (ret.code === 400) {\r\n" +
-                "        Message.error(ret.data.defaultMessage);\r\n" +
-                "      } else {\r\n" +
-                "        Message.success('保存成功');\r\n" +
-                "        await this.page({\r\n" +
-                "          searchForm: data.searchForm,\r\n" +
-                "          current: data.current,\r\n" +
-                "        });\r\n" +
-                "        const payload = {\r\n" +
-                "          visible: false,\r\n" +
-                "        };\r\n" +
-                "        dispatch." + poName + ".setState(payload);\r\n" +
-                "      }\r\n" +
-                "    },\r\n" +
-                "    async delete(data) {\r\n" +
-                "      const ret = await service.delete(data.record);\r\n" +
-                "      if (ret.code === 400) {\r\n" +
-                "        Message.error('删除失败');\r\n" +
-                "      } else {\r\n" +
-                "        Message.success('删除成功');\r\n" +
-                "        await this.page({\r\n" +
-                "          searchForm: data.searchForm,\r\n" +
-                "          current: data.current,\r\n" +
-                "        });\r\n" +
-                "        const payload = {\r\n" +
-                "          visible: false,\r\n" +
-                "        };\r\n" +
-                "        dispatch." + poName + ".setState(payload);\r\n" +
-                "      }\r\n" +
-                "    },\r\n" +
-                "    add() {\r\n" +
-                "      const payload = {\r\n" +
-                "        formData: {},\r\n" +
-                "        title: '添加',\r\n" +
-                "        visible: true,\r\n" +
-                "      };\r\n" +
-                "      dispatch." + poName + ".setState(payload);\r\n" +
-                "    },\r\n" +
-                "    edit(data) {\r\n" +
-                "      const payload = {\r\n" +
-                "        formData: data,\r\n" +
-                "        title: '编辑',\r\n" +
-                "        visible: true,\r\n" +
-                "      };\r\n" +
-                "      dispatch." + poName + ".setState(payload);\r\n" +
-                "    },\r\n" +
-                "    setDataForm(data) {\r\n" +
-                "      const payload = {\r\n" +
-                "        formData: data,\r\n" +
-                "      };\r\n" +
-                "      dispatch." + poName + ".setState(payload);\r\n" +
-                "    },\r\n" +
-                "    setSearchDataForm(data) {\r\n" +
-                "      const payload = {\r\n" +
-                "        searchForm: data,\r\n" +
-                "      };\r\n" +
-                "      dispatch." + poName + ".setState(payload);\r\n" +
-                "    },\r\n" +
-                "    async findDataTableAndFormByName() {\r\n" +
-                "      const ret = await initService.findDataTableAndFormByName('" + persistentCode + "');\r\n" +
-                "      await this.page({\r\n" +
-                "        searchForm: ret.data.dataTable.INFO,\r\n" +
-                "        current: 1,\r\n" +
-                "      });\r\n" +
-                "      const payload = {\r\n" +
-                "        searchDefaultForm: ret.data.dataTable.INFO,\r\n" +
-                "        titleConfig: ret.data.dataTable.TITLE,\r\n" +
-                "        tableOperation: ret.data.dataTable.OPERATION,\r\n" +
-                "        tableConfig: ret.data.dataTable.CONFIG,\r\n" +
-                "        tableSearch: ret.data.dataTable.SEARCH,\r\n" +
-                "        formConfig: ret.data.dataForm.CONFIG,\r\n" +
-                "      };\r\n" +
-                "      dispatch." + poName + ".setState(payload);\r\n" +
-                "    },\r\n" +
-                "    runCustomMethod(data) {\r\n" +
-                "      initService.runCustomMethod(data).then((res) => {\r\n" +
-                "        if (res.code === 200) {\r\n" +
-                "          Message.success('执行成功');\r\n" +
-                "        } else {\r\n" +
-                "          Message.error('执行失败');\r\n" +
-                "        }\r\n" +
-                "      });\r\n" +
-                "    },\r\n" +
-                "  }),\r\n" +
-                "};\r\n";
+                        "import {Message} from \"@alifd/next\";\r\n" +
+                        "import service from '@/pages/" + poName + "/services/" + poName + "';\r\n" +
+                        "\r\n" +
+                        "export default {\r\n" +
+                        "\r\n" +
+                        "  namespace: '" + poName + "',\r\n" +
+                        "\r\n" +
+                        "  state: {\r\n" +
+                        "    title: '添加',\r\n" +
+                        "    tableData: [],\r\n" +
+                        "    visible: false,\r\n" +
+                        "    formData: {},\r\n" +
+                        "    loadingVisible: true,\r\n" +
+                        "    total: 0,\r\n" +
+                        "    current: 1,\r\n" +
+                        "    formConfig: [],\r\n" +
+                        "    tableOperation: [],\r\n" +
+                        "    tableConfig: [],\r\n" +
+                        "    titleConfig: [],\r\n" +
+                        "    tableSearch: [],\r\n" +
+                        "    searchForm: {},\r\n" +
+                        "    searchDefaultForm: {},\r\n" +
+                        "  },\r\n" +
+                        "\r\n" +
+                        "  reducers: {\r\n" +
+                        "    setState(prevState, payload) {\r\n" +
+                        "      return {...prevState, ...payload};\r\n" +
+                        "    },\r\n" +
+                        "  },\r\n" +
+                        "\r\n" +
+                        "  effects: (dispatch) => ({\r\n" +
+                        "    async page(data) {\r\n" +
+                        "      const dataRes = await service.page(data.searchForm, data.current, 10);\r\n" +
+                        "      const payload = {\r\n" +
+                        "        searchForm: data.searchForm,\r\n" +
+                        "        tableData: dataRes.data.records,\r\n" +
+                        "        total: dataRes.data.total,\r\n" +
+                        "        current: data.current,\r\n" +
+                        "        loadingVisible: false,\r\n" +
+                        "      };\r\n" +
+                        "      dispatch." + poName + ".setState(payload);\r\n" +
+                        "    },\r\n" +
+                        "    async save(data) {\r\n" +
+                        "      const ret = await service.save(data.formData);\r\n" +
+                        "      if (ret.code === 400) {\r\n" +
+                        "        Message.error(ret.data.defaultMessage);\r\n" +
+                        "      } else {\r\n" +
+                        "        Message.success('保存成功');\r\n" +
+                        "        await this.page({\r\n" +
+                        "          searchForm: data.searchForm,\r\n" +
+                        "          current: data.current,\r\n" +
+                        "        });\r\n" +
+                        "        const payload = {\r\n" +
+                        "          visible: false,\r\n" +
+                        "        };\r\n" +
+                        "        dispatch." + poName + ".setState(payload);\r\n" +
+                        "      }\r\n" +
+                        "    },\r\n" +
+                        "    async delete(data) {\r\n" +
+                        "      const ret = await service.delete(data.record);\r\n" +
+                        "      if (ret.code === 400) {\r\n" +
+                        "        Message.error('删除失败');\r\n" +
+                        "      } else {\r\n" +
+                        "        Message.success('删除成功');\r\n" +
+                        "        await this.page({\r\n" +
+                        "          searchForm: data.searchForm,\r\n" +
+                        "          current: data.current,\r\n" +
+                        "        });\r\n" +
+                        "        const payload = {\r\n" +
+                        "          visible: false,\r\n" +
+                        "        };\r\n" +
+                        "        dispatch." + poName + ".setState(payload);\r\n" +
+                        "      }\r\n" +
+                        "    },\r\n" +
+                        "    add() {\r\n" +
+                        "      const payload = {\r\n" +
+                        "        formData: {},\r\n" +
+                        "        title: '添加',\r\n" +
+                        "        visible: true,\r\n" +
+                        "      };\r\n" +
+                        "      dispatch." + poName + ".setState(payload);\r\n" +
+                        "    },\r\n" +
+                        "    edit(data) {\r\n" +
+                        "      const payload = {\r\n" +
+                        "        formData: data,\r\n" +
+                        "        title: '编辑',\r\n" +
+                        "        visible: true,\r\n" +
+                        "      };\r\n" +
+                        "      dispatch." + poName + ".setState(payload);\r\n" +
+                        "    },\r\n" +
+                        "    setDataForm(data) {\r\n" +
+                        "      const payload = {\r\n" +
+                        "        formData: data,\r\n" +
+                        "      };\r\n" +
+                        "      dispatch." + poName + ".setState(payload);\r\n" +
+                        "    },\r\n" +
+                        "    setSearchDataForm(data) {\r\n" +
+                        "      const payload = {\r\n" +
+                        "        searchForm: data,\r\n" +
+                        "      };\r\n" +
+                        "      dispatch." + poName + ".setState(payload);\r\n" +
+                        "    },\r\n" +
+                        "    async findDataTableAndFormByName() {\r\n" +
+                        "      const ret = await initService.findDataTableAndFormByName('" + persistentCode + "');\r\n" +
+                        "      await this.page({\r\n" +
+                        "        searchForm: ret.data.dataTable.INFO,\r\n" +
+                        "        current: 1,\r\n" +
+                        "      });\r\n" +
+                        "      const payload = {\r\n" +
+                        "        searchDefaultForm: ret.data.dataTable.INFO,\r\n" +
+                        "        titleConfig: ret.data.dataTable.TITLE,\r\n" +
+                        "        tableOperation: ret.data.dataTable.OPERATION,\r\n" +
+                        "        tableConfig: ret.data.dataTable.CONFIG,\r\n" +
+                        "        tableSearch: ret.data.dataTable.SEARCH,\r\n" +
+                        "        formConfig: ret.data.dataForm.CONFIG,\r\n" +
+                        "      };\r\n" +
+                        "      dispatch." + poName + ".setState(payload);\r\n" +
+                        "    },\r\n" +
+                        "    runCustomMethod(data) {\r\n" +
+                        "      initService.runCustomMethod(data).then((res) => {\r\n" +
+                        "        if (res.code === 200) {\r\n" +
+                        "          Message.success('执行成功');\r\n" +
+                        "        } else {\r\n" +
+                        "          Message.error('执行失败');\r\n" +
+                        "        }\r\n" +
+                        "      });\r\n" +
+                        "    },\r\n" +
+                        "  }),\r\n" +
+                        "};\r\n";
         return new String[]{viewData, poName + ".tsx"};
     }
-
-//    private void oneToManyModelServiceHandler(List<Property> outPropertyList, StringBuilder sb) {
-//        for (Property property : outPropertyList) {
-//            if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
-//                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-//                String propertyOut = BeanUtils.captureName(underPropertyOut);
-//                sb.append("import ").append(underPropertyOut).append("Service from '@/pages/").append(propertyOut).append("/services/auto/").append(propertyOut).append("'\r\n");
-//            }
-//        }
-//    }
-//
-//    private void oneToManyModelHandler(List<Property> outPropertyList, StringBuilder sb, String poName) {
-//        for (Property property : outPropertyList) {
-//            if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
-//                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-//                String propertyOut = BeanUtils.captureName(underPropertyOut);
-//                sb.append("    async page").append(propertyOut).append("By").append(poName).append("(data) {\r\n");
-//                sb.append("      const ret = await initService.findDataTableAndFormByName('").append(property.getPropertyCode()).append("');\r\n");
-//                sb.append("      const dataRes = await service.page").append(propertyOut).append("By").append(poName).append("(data.current, data.id);\r\n");
-//                sb.append("      const payload = {\r\n");
-//                sb.append("        table: ret.data.dataTable,\r\n");
-//                sb.append("        form: ret.data.dataForm,\r\n");
-//                sb.append("        tableData: dataRes.data.content,\r\n");
-//                sb.append("        total: dataRes.data.totalElements,\r\n");
-//                sb.append("        current: data.current,\r\n");
-//                sb.append("        loadingVisible: false,\r\n");
-//                sb.append("        divVisible: true,\r\n");
-//                sb.append("        parent: data.id,\r\n");
-//                sb.append("        visible: false,\r\n");
-//                sb.append("      };\r\n");
-//                sb.append("      dispatch.").append(underPropertyOut).append(".setState(payload);\r\n");
-//                sb.append("    },\r\n");
-//                sb.append("    async save").append(propertyOut).append("By").append(poName).append("(data) {\r\n");
-//                sb.append("      const ret = await ").append(underPropertyOut).append("Service.save(data.formData);\r\n");
-//                sb.append("      if (ret.code === 400) {\r\n");
-//                sb.append("        Message.error(ret.data.defaultMessage);\r\n");
-//                sb.append("      } else {\r\n");
-//                sb.append("        Message.success('保存成功');\r\n");
-//                sb.append("        await this.page").append(propertyOut).append("By").append(poName).append("({\r\n");
-//                sb.append("          current: data.current,\r\n");
-//                sb.append("          id: data.id,\r\n");
-//                sb.append("        });\r\n");
-//                sb.append("        const payload = {\r\n");
-//                sb.append("          visible: false,\r\n");
-//                sb.append("        };\r\n");
-//                sb.append("        dispatch.").append(underPropertyOut).append(".setState(payload);\r\n");
-//                sb.append("      }\r\n");
-//                sb.append("    },\r\n");
-//                sb.append("    async delete").append(propertyOut).append("By").append(poName).append("(data) {\r\n");
-//                sb.append("      const ret = await ").append(underPropertyOut).append("Service.delete(data.record);\r\n");
-//                sb.append("      if (ret.code === 400) {\r\n");
-//                sb.append("        Message.error('删除失败');\r\n");
-//                sb.append("      } else {\r\n");
-//                sb.append("        Message.success('删除成功');\r\n");
-//                sb.append("        await this.page").append(propertyOut).append("By").append(poName).append("({\r\n");
-//                sb.append("          current: data.current,\r\n");
-//                sb.append("          id: data.id,\r\n");
-//                sb.append("        });\r\n");
-//                sb.append("        const payload = {\r\n");
-//                sb.append("          visible: false,\r\n");
-//                sb.append("        };\r\n");
-//                sb.append("        dispatch.").append(underPropertyOut).append(".setState(payload);\r\n");
-//                sb.append("      }\r\n");
-//                sb.append("    },\r\n");
-//
-//
-//            }
-//        }
-//    }
-
-//    private void manyToManyModelHandler(List<Property> outPropertyList, StringBuilder sb, String poName) {
-//        for (Property property : outPropertyList) {
-//            if (BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())) {
-//                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-//                sb.append("    async ").append(underPropertyOut).append("By").append(poName).append("(data) {\r\n");
-//                sb.append("      await dispatch.").append(underPropertyOut).append(".findDataTableAndFormByName();\r\n");
-//                sb.append("      const ret = await service.").append(underPropertyOut).append("By").append(poName).append("(data.id);\r\n");
-//                sb.append("      if (ret.code === 400) {\r\n");
-//                sb.append("        Message.error('获取失败');\r\n");
-//                sb.append("      } else {\r\n");
-//                sb.append("        const payload = {\r\n");
-//                sb.append("          divVisible: true,\r\n");
-//                sb.append("          parent: data.id,\r\n");
-//                sb.append("          select: ret.data,\r\n");
-//                sb.append("        };\r\n");
-//                sb.append("        dispatch.").append(underPropertyOut).append(".setState(payload);\r\n");
-//                sb.append("      }\r\n");
-//                sb.append("    },\r\n");
-//                sb.append("    async ").append(underPropertyOut).append("Save").append(poName).append("(data) {\r\n");
-//                sb.append("      const ret = await service.").append(underPropertyOut).append("Save").append(poName).append("(data.parent, data.select);\r\n");
-//                sb.append("      if (ret.code === 400) {\r\n");
-//                sb.append("        Message.error('保存失败');\r\n");
-//                sb.append("      } else {\r\n");
-//                sb.append("        Message.success('保存成功');\r\n");
-//                sb.append("        const payload = {\r\n");
-//                sb.append("          divVisible: false,\r\n");
-//                sb.append("        };\r\n");
-//                sb.append("        dispatch.").append(underPropertyOut).append(".setState(payload);\r\n");
-//                sb.append("      }\r\n");
-//                sb.append("    },\r\n");
-//            }
-//        }
-//    }
 
     private String[] viewGenerate(String poName) {
         String viewData =
                 "import React, {useEffect} from 'react';\r\n" +
-                "import pageStore from '@/pages/" + poName + "/store';\r\n" +
-                "import DataFormTemple from '@/components/dataForm';\r\n" +
-                "import DataTableTemple from '@/components/dataTable';\r\n" +
-                "\r\n" +
-                "function " + poName + "() {\r\n" +
-                "\r\n" +
-                "  const [state, dispatchers] = pageStore.useModel('" + poName + "');\r\n" +
-                "\r\n" +
-                "  useEffect(() => {\r\n" +
-                "    dispatchers.findDataTableAndFormByName().then(r => console.log(r));\r\n" +
-                "  }, [dispatchers]);\r\n" +
-                "\r\n" +
-                "  return (\r\n" +
-                "    <>\r\n" +
-                "      <DataTableTemple\r\n" +
-                "        addItem={() => dispatchers.add()}\r\n" +
-                "        search={() => dispatchers.page({\r\n" +
-                "          searchForm: state.searchForm,\r\n" +
-                "          current: 1,\r\n" +
-                "        })}\r\n" +
-                "        reset={() => dispatchers.setSearchDataForm(state.searchDefaultForm)}\r\n" +
-                "        editItem={record => dispatchers.edit(record)}\r\n" +
-                "        deleteItem={record => dispatchers.delete({\r\n" +
-                "          searchForm: state.searchForm,\r\n" +
-                "          current: state.current,\r\n" +
-                "          record,\r\n" +
-                "        })}\r\n" +
-                "        visibleLoading={state.loadingVisible}\r\n" +
-                "        dataSource={state.tableData}\r\n" +
-                "        configItems={state.tableConfig}\r\n" +
-                "        searchItems={state.tableSearch}\r\n" +
-                "        titleButton={state.titleConfig}\r\n" +
-                "        operationButton={state.tableOperation}\r\n" +
-                "        runCustomMethod={(record, url) => dispatchers.runCustomMethod(record, url)}\r\n" +
-                "        total={state.total}\r\n" +
-                "        setPage={current => dispatchers.page({\r\n" +
-                "          searchForm: state.searchForm,\r\n" +
-                "          current,\r\n" +
-                "        })}\r\n" +
-                "        primaryKey=\"id\"\r\n" +
-                "        searchFormValue={state.searchForm}\r\n" +
-                "        dispatchers={value => dispatchers.setSearchDataForm(value)}\r\n" +
-                "      />\r\n" +
-                "      <DataFormTemple\r\n" +
-                "        configItems={state.formConfig}\r\n" +
-                "        dispatchers={value => dispatchers.setDataForm(value)}\r\n" +
-                "        onOk={() => dispatchers.save({\r\n" +
-                "          searchForm: state.searchForm,\r\n" +
-                "          current: state.current,\r\n" +
-                "          formData: state.formData,\r\n" +
-                "        })}\r\n" +
-                "        formDataValue={state.formData}\r\n" +
-                "        title={state.title}\r\n" +
-                "        visibleDialog={state.visible}\r\n" +
-                "        onClose={() => dispatchers.setState({visible: false})}\r\n" +
-                "      />\r\n" +
-                "    </>\r\n" +
-                "  );\r\n" +
-                "}\r\n" +
-                "\r\n" +
-                "export default " + poName + ";\r\n";
+                        "import pageStore from '@/pages/" + poName + "/store';\r\n" +
+                        "import DataFormTemple from '@/components/dataForm';\r\n" +
+                        "import DataTableTemple from '@/components/dataTable';\r\n" +
+                        "\r\n" +
+                        "function " + poName + "() {\r\n" +
+                        "\r\n" +
+                        "  const [state, dispatchers] = pageStore.useModel('" + poName + "');\r\n" +
+                        "\r\n" +
+                        "  useEffect(() => {\r\n" +
+                        "    dispatchers.findDataTableAndFormByName().then(r => console.log(r));\r\n" +
+                        "  }, [dispatchers]);\r\n" +
+                        "\r\n" +
+                        "  return (\r\n" +
+                        "    <>\r\n" +
+                        "      <DataTableTemple\r\n" +
+                        "        addItem={() => dispatchers.add()}\r\n" +
+                        "        search={() => dispatchers.page({\r\n" +
+                        "          searchForm: state.searchForm,\r\n" +
+                        "          current: 1,\r\n" +
+                        "        })}\r\n" +
+                        "        reset={() => dispatchers.setSearchDataForm(state.searchDefaultForm)}\r\n" +
+                        "        editItem={record => dispatchers.edit(record)}\r\n" +
+                        "        deleteItem={record => dispatchers.delete({\r\n" +
+                        "          searchForm: state.searchForm,\r\n" +
+                        "          current: state.current,\r\n" +
+                        "          record,\r\n" +
+                        "        })}\r\n" +
+                        "        visibleLoading={state.loadingVisible}\r\n" +
+                        "        dataSource={state.tableData}\r\n" +
+                        "        configItems={state.tableConfig}\r\n" +
+                        "        searchItems={state.tableSearch}\r\n" +
+                        "        titleButton={state.titleConfig}\r\n" +
+                        "        operationButton={state.tableOperation}\r\n" +
+                        "        runCustomMethod={(record, url) => dispatchers.runCustomMethod(record, url)}\r\n" +
+                        "        total={state.total}\r\n" +
+                        "        setPage={current => dispatchers.page({\r\n" +
+                        "          searchForm: state.searchForm,\r\n" +
+                        "          current,\r\n" +
+                        "        })}\r\n" +
+                        "        primaryKey=\"id\"\r\n" +
+                        "        searchFormValue={state.searchForm}\r\n" +
+                        "        dispatchers={value => dispatchers.setSearchDataForm(value)}\r\n" +
+                        "      />\r\n" +
+                        "      <DataFormTemple\r\n" +
+                        "        configItems={state.formConfig}\r\n" +
+                        "        dispatchers={value => dispatchers.setDataForm(value)}\r\n" +
+                        "        onOk={() => dispatchers.save({\r\n" +
+                        "          searchForm: state.searchForm,\r\n" +
+                        "          current: state.current,\r\n" +
+                        "          formData: state.formData,\r\n" +
+                        "        })}\r\n" +
+                        "        formDataValue={state.formData}\r\n" +
+                        "        title={state.title}\r\n" +
+                        "        visibleDialog={state.visible}\r\n" +
+                        "        onClose={() => dispatchers.setState({visible: false})}\r\n" +
+                        "      />\r\n" +
+                        "    </>\r\n" +
+                        "  );\r\n" +
+                        "}\r\n" +
+                        "\r\n" +
+                        "export default " + poName + ";\r\n";
         return new String[]{viewData, poName + ".tsx"};
     }
-
-//    private void ViewStoreHandler(List<Property> outPropertyList, StringBuilder sb) {
-//        for (Property property : outPropertyList) {
-//            String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-//            if (!BeanUtils.MANY_TO_ONE.equals(property.getPropertyOutType())) {
-//                sb.append("  const [").append(underPropertyOut).append("State, ").append(underPropertyOut).append("Dispatchers] = pageStore.useModel('").append(underPropertyOut).append("');\r\n");
-//                sb.append("\r\n");
-//            }
-//        }
-//    }
-//
-//    private void oneToManyViewMethodHandler(List<Property> outPropertyList, StringBuilder sb, String poName) {
-//        List<Property> oneToManyPropertyList = outPropertyList.stream().filter(property -> BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())).collect(Collectors.toList());
-//        for (int i = 0; i < oneToManyPropertyList.size(); i++) {
-//            Property property = oneToManyPropertyList.get(i);
-//            String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-//            String propertyOut = BeanUtils.captureName(underPropertyOut);
-//            sb.append("        son").append(i + 1).append("=\"").append(property.getPropertyLabel()).append("\"\r\n");
-//            sb.append("        sonMethod").append(i + 1).append("={record => dispatchers.page").append(propertyOut).append("By").append(poName).append("({\r\n");
-//            sb.append("          current: 1,\r\n");
-//            sb.append("          id: record.id,\r\n");
-//            sb.append("        })}\r\n");
-//        }
-//    }
-//
-//    private void manyToManyViewMethodHandler(List<Property> outPropertyList, StringBuilder sb, String poName) {
-//        List<Property> manyToManyPropertyList = outPropertyList.stream().filter(property -> BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())).collect(Collectors.toList());
-//        for (int i = 0; i < manyToManyPropertyList.size(); i++) {
-//            Property property = manyToManyPropertyList.get(i);
-//            String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-//            sb.append("        manyToMany").append(i + 1).append("=\"").append(property.getPropertyLabel()).append("\"\r\n");
-//            sb.append("        manyToManyMethod").append(i + 1).append("={record => dispatchers.").append(underPropertyOut).append("By").append(poName).append("(record)}\r\n");
-//        }
-//    }
-//
-//    private void manyToManyViewDialogHandler(List<Property> outPropertyList, StringBuilder sb, String poName) {
-//        for (Property property : outPropertyList) {
-//            if (BeanUtils.MANY_TO_MANY.equals(property.getPropertyOutType())) {
-//                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-//                sb.append("      <Dialog\r\n");
-//                sb.append("        v2\r\n");
-//                sb.append("        title=\"").append(property.getPropertyLabel()).append("\"\r\n");
-//                sb.append("        visible={").append(underPropertyOut).append("State.divVisible}\r\n");
-//                sb.append("        onClose={() => ").append(underPropertyOut).append("Dispatchers.setState({\r\n");
-//                sb.append("          divVisible: false,\r\n");
-//                sb.append("          parent: \"\",\r\n");
-//                sb.append("          select: [],\r\n");
-//                sb.append("        })}\r\n");
-//                sb.append("        onOk={() => dispatchers.").append(underPropertyOut).append("Save").append(poName).append("({\r\n");
-//                sb.append("          parent: ").append(underPropertyOut).append("State.parent,\r\n");
-//                sb.append("          select: ").append(underPropertyOut).append("State.select,\r\n");
-//                sb.append("        })}\r\n");
-//                sb.append("        style={{width: '90%'}}\r\n");
-//                sb.append("      >\r\n");
-//                sb.append("        <DataTableTemple\r\n");
-//                sb.append("          customData={{customType: false}}\r\n");
-//                sb.append("          visibleLoading={").append(underPropertyOut).append("State.loadingVisible}\r\n");
-//                sb.append("          dataSource={").append(underPropertyOut).append("State.tableData}\r\n");
-//                sb.append("          items={").append(underPropertyOut).append("State.table}\r\n");
-//                sb.append("          total={").append(underPropertyOut).append("State.total}\r\n");
-//                sb.append("          getPage={(current) => ").append(underPropertyOut).append("Dispatchers.page(current)}\r\n");
-//                sb.append("          primaryKey=\"id\"\r\n");
-//                sb.append("          rowSelection={{\r\n");
-//                sb.append("            onChange: (ids) => {\r\n");
-//                sb.append("              ").append(underPropertyOut).append("Dispatchers.setState({\r\n");
-//                sb.append("                select: ids,\r\n");
-//                sb.append("              })\r\n");
-//                sb.append("            },\r\n");
-//                sb.append("            selectedRowKeys: ").append(underPropertyOut).append("State.select,\r\n");
-//                sb.append("          }}\r\n");
-//                sb.append("        />\r\n");
-//                sb.append("      </Dialog>\r\n");
-//            }
-//        }
-//    }
-//
-//    private void oneToManyViewDialogHandler(List<Property> outPropertyList, StringBuilder sb, String poName, String underPoName) {
-//        for (Property property : outPropertyList) {
-//            if (BeanUtils.ONE_TO_MANY.equals(property.getPropertyOutType())) {
-//                String underPropertyOut = BeanUtils.underline2Camel(property.getPropertyCode());
-//                String propertyOut = BeanUtils.captureName(underPropertyOut);
-//                sb.append("      <Dialog\r\n");
-//                sb.append("        v2\r\n");
-//                sb.append("        visible={").append(underPropertyOut).append("State.divVisible}\r\n");
-//                sb.append("        footer={false}\r\n");
-//                sb.append("        onClose={() => ").append(underPropertyOut).append("Dispatchers.setState({\r\n");
-//                sb.append("          divVisible: false,\r\n");
-//                sb.append("          parent: \"\",\r\n");
-//                sb.append("        })}\r\n");
-//                sb.append("        style={{width: '100%'}}\r\n");
-//                sb.append("      >\r\n");
-//                sb.append("        <DataTableTemple\r\n");
-//                sb.append("          createItem={() => ").append(underPropertyOut).append("Dispatchers.add()}\r\n");
-//                sb.append("          editItem={record => ").append(underPropertyOut).append("Dispatchers.edit(record)}\r\n");
-//                sb.append("          deleteItem={record => dispatchers.delete").append(propertyOut).append("By").append(poName).append("({\r\n");
-//                sb.append("            current: ").append(underPropertyOut).append("State.current,\r\n");
-//                sb.append("            id: ").append(underPropertyOut).append("State.parent,\r\n");
-//                sb.append("            record,\r\n");
-//                sb.append("          })}\r\n");
-//                sb.append("          visibleLoading={").append(underPropertyOut).append("State.loadingVisible}\r\n");
-//                sb.append("          dataSource={").append(underPropertyOut).append("State.tableData}\r\n");
-//                sb.append("          items={").append(underPropertyOut).append("State.table}\r\n");
-//                sb.append("          total={").append(underPropertyOut).append("State.total}\r\n");
-//                sb.append("          getPage={current => dispatchers.page").append(propertyOut).append("By").append(poName).append("({\r\n");
-//                sb.append("            current,\r\n");
-//                sb.append("            id: ").append(underPropertyOut).append("State.parent,\r\n");
-//                sb.append("          })}\r\n");
-//                sb.append("          primaryKey=\"id\"\r\n");
-//                sb.append("          customData={").append(underPropertyOut).append("State.customData}\r\n");
-//                sb.append("        />\r\n");
-//                sb.append("        <DataFormTemple\r\n");
-//                sb.append("          customData={").append(underPropertyOut).append("State.customData}\r\n");
-//                sb.append("          title={").append(underPropertyOut).append("State.title}\r\n");
-//                sb.append("          visibleDialog={").append(underPropertyOut).append("State.visible}\r\n");
-//                sb.append("          onClose={() => ").append(underPropertyOut).append("Dispatchers.setState({visible: false})}\r\n");
-//                sb.append("          items={").append(underPropertyOut).append("State.form}\r\n");
-//                sb.append("          dispatchers={value => ").append(underPropertyOut).append("Dispatchers.setDataForm(value)}\r\n");
-//                sb.append("          onOk={() => dispatchers.save").append(propertyOut).append("By").append(poName).append("({\r\n");
-//                sb.append("            current: ").append(underPropertyOut).append("State.current,\r\n");
-//                sb.append("            id: ").append(underPropertyOut).append("State.parent,\r\n");
-//                sb.append("            formData: {\r\n");
-//                sb.append("              ...").append(underPropertyOut).append("State.formData,\r\n");
-//                sb.append("              ").append(underPoName).append("Id: ").append(underPropertyOut).append("State.parent,\r\n");
-//                sb.append("            },\r\n");
-//                sb.append("          })}\r\n");
-//                sb.append("          formDataValue={").append(underPropertyOut).append("State.formData}\r\n");
-//                sb.append("          formSortCode={String(Number.parseInt(String(").append(underPropertyOut).append("State.total)) + 10)}\r\n");
-//                sb.append("        />\r\n");
-//                sb.append("      </Dialog>\r\n");
-//            }
-//        }
-//    }
 
     private void createEntityCodeHandler(Map<String, String[]> entityObj, Map<String, String[]> entityCustomObj) {
         try {
@@ -1206,8 +934,7 @@ public class PersistentCustomServiceImpl
         return new String[]{entityServiceData, poName + "ServiceImpl.java"};
     }
 
-    public String[] controllerGenerate(List<PropertyBean> propertyList,
-                                       String poName, String appPath, String appApi, boolean isBeanFlag) {
+    public String[] controllerGenerate(String poName, String appPath, String appApi, boolean isBeanFlag) {
         StringBuilder sb = new StringBuilder();
         String[] PathArr = appPath.split("java");
         String packetPath = PathArr[1].substring(1).replaceAll("\\\\", ".");
@@ -1570,23 +1297,7 @@ public class PersistentCustomServiceImpl
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("dataForm", persistentForm);
         jsonObject.put("dataTable", persistentTable);
-        //logger.info("findDataTableAndFormByName.jsonObject:{}", jsonObject);
         return jsonObject;
-    }
-
-    private void dateSourceHandler(JSONArray mapList, JSONArray dateSourceList) {
-        if (dateSourceList != null && !dateSourceList.isEmpty()) {
-            for (Object dateSource : dateSourceList) {
-                JSONObject dateSourceMap = JSON.parseObject(JSON.toJSONString(dateSource));
-                JSONObject map = new JSONObject();
-                if (dateSourceMap.get("label") == null && dateSourceMap.get("value") == null) {
-                    continue;
-                }
-                map.put("label", dateSourceMap.get("label").toString());
-                map.put("value", dateSourceMap.get("value").toString());
-                mapList.add(map);
-            }
-        }
     }
 
     private static final Logger logger = LoggerFactory.getLogger(PersistentCustomServiceImpl.class);
