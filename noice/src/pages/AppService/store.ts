@@ -1,14 +1,8 @@
 import {createStore} from 'ice';
-import appService from './models/auto/AppService';
-import appServiceCustom from './models/custom/AppService';
-import authority from '@/pages/Authority/models/auto/Authority';
-import persistent from '@/pages/Persistent/models/Persistent';
+import AppService from './models/AppService';
 
 const store = createStore({
-  appService,
-  appServiceCustom,
-  authority,
-  persistent,
+  AppService,
 });
 
 export default store;

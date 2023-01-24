@@ -1,5 +1,5 @@
 import React from 'react';
-import AppService from '@/pages/AppService/view/auto/AppService';
+import AppService from '@/pages/AppService/view/AppService';
 
 function AppServicePage() {
   return (

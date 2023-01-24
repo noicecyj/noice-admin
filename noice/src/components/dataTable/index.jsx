@@ -169,7 +169,7 @@ function DataTable(props) {
                 />);
               })}
               {
-                !!columnRender && <Table.Column
+                operationButton.length !== 0 && <Table.Column
                   title="自定义操作"
                   alignHeader="center"
                   align="center"
