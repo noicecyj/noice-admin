@@ -98,7 +98,6 @@ function DataTable(props) {
             onChange={(value) => dispatchers(value)}>
             {searchItems.map((search) => {
               if (search.searchMode === 'Input') {
-                console.log("item.SEARCH.Input====>", search)
                 return (
                   <FormItem
                     colSpan={2}
@@ -111,7 +110,6 @@ function DataTable(props) {
                   </FormItem>
                 )
               } else if (search.searchMode === 'Select' || search.searchMode === 'ManyToOne') {
-                console.log("item.SEARCH.Select|ManyToOne====>", search)
                 return (
                   <FormItem
                     colSpan={2}

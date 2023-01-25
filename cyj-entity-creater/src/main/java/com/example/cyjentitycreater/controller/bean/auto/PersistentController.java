@@ -1,7 +1,7 @@
 package com.example.cyjentitycreater.controller.bean.auto;
 
-import com.example.cyjcommon.entity.vo.PageBeanVo;
 import com.example.cyjcommon.entity.bean.PersistentBean;
+import com.example.cyjcommon.entity.vo.PageBeanVo;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -37,20 +37,22 @@ public class PersistentController {
 
     @Operation(summary = "保存Persistent")
     @PostMapping(value = "savePersistent")
-    public ResultVO save(@RequestBody PersistentBean po) {
-        if (po.getId() == null) {
-            return ResultVO.success(service.addOne(po));
+    public ResultVO save(@RequestBody PageBeanVo<PersistentBean> vo) {
+        vo.po.setUpdatedBy(vo.user);
+        if (vo.po.getId() == null) {
+            vo.po.setCreatedBy(vo.user);
+            return ResultVO.success(service.addOne(vo.po));
         }
-        return ResultVO.success(service.updateOne(po));
+        return ResultVO.success(service.updateOne(vo.po));
     }
 
     @Operation(summary = "删除Persistent")
     @PostMapping(value = "deletePersistent")
-    public ResultVO delete(@RequestBody PersistentBean po) {
-        if (po.getId() == null) {
+    public ResultVO delete(@RequestBody PageBeanVo<PersistentBean> vo) {
+        if (vo.po.getId() == null) {
             return ResultVO.failure();
         }
-        service.deleteOne(po);
+        service.deleteOne(vo.po);
         return ResultVO.success();
     }
 

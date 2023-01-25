@@ -13,19 +13,12 @@
         <module name="cyj-common" />
         <module name="cyj-query" />
         <module name="cyj-entity-creater" />
+        <module name="cyj-user" />
         <module name="cyj-workflow" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="cyj-auth" target="1.8" />
-      <module name="cyj-common" target="1.8" />
-      <module name="cyj-dictionary" target="1.8" />
-      <module name="cyj-discovery" target="1.8" />
-      <module name="cyj-entity-creater" target="1.8" />
       <module name="cyj-log" target="1.8" />
-      <module name="cyj-query" target="1.8" />
-      <module name="cyj-user" target="1.8" />
-      <module name="cyj-workflow" target="1.8" />
       <module name="noice-admin" target="1.8" />
     </bytecodeTargetLevel>
   </component>

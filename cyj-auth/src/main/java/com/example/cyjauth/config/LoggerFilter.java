@@ -1,5 +1,6 @@
 package com.example.cyjauth.config;
 
+import com.example.cyjauth.constant.SecurityConstant;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import org.slf4j.Logger;
@@ -41,7 +42,7 @@ public class LoggerFilter extends ZuulFilter {
         // 通过zuul，获取请求上下文
         RequestContext rc = RequestContext.getCurrentContext();
         HttpServletRequest request = rc.getRequest();
-
+        logger.info("LogFilter.header={}", request.getHeader(SecurityConstant.HEADER));
         logger.info("LogFilter.method={},url={}", request.getMethod(), request.getRequestURL().toString());
         // 可以记录日志、鉴权，给维护人员记录提供定位协助、统计性能
         return null;

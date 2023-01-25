@@ -48,7 +48,6 @@ function DataForm(props) {
             value={formDataValue}
             onChange={(value) => dispatchers(value)}>
             {configItems.map((config) => {
-              console.log("item====>", config)
               if (config.formMode === 'Input') {
                 return (
                   <FormItem

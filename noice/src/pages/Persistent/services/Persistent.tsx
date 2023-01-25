@@ -12,11 +12,14 @@ export default {
       },
     });
   },
-  save(data) {
+  save(po, user) {
     return request({
       url: '/entityCreateApi/savePersistent',
       method: 'post',
-      data,
+      data: {
+        po,
+        user,
+      },
     });
   },
   delete(data) {

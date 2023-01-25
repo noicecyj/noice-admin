@@ -35,6 +35,7 @@
         <module>cyj-workflow</module>
         <module>cyj-query</module>
         <module>cyj-auth</module>
+        <module>cyj-user</module>
     </modules>
 
 </project>

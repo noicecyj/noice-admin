@@ -2,10 +2,13 @@ import React, {useEffect} from 'react';
 import pageStore from '@/pages/Persistent/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
+import store from "@/store";
 
 function Persistent() {
 
   const [state, dispatchers] = pageStore.useModel('Persistent');
+
+  const [userState] = store.useModel('user');
 
   useEffect(() => {
     dispatchers.findDataTableAndFormByName().then(r => console.log(r));
@@ -49,6 +52,7 @@ function Persistent() {
           searchForm: state.searchForm,
           current: state.current,
           formData: state.formData,
+          user: userState.username,
         })}
         formDataValue={state.formData}
         title={state.title}
