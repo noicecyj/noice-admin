@@ -5,7 +5,6 @@ import com.example.cyjauth.entity.bo.AuthUserDetails;
 import com.example.cyjcommon.entity.bean.UserBean;
 import com.example.cyjcommon.entity.relation.UserRoleRelation;
 import org.apache.commons.lang3.StringUtils;
-import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +19,6 @@ import java.util.List;
 /**
  * @author Noice
  */
-@Aspect
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class UserService implements UserDetailsService {
