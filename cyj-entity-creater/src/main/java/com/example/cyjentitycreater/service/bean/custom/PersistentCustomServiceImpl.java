@@ -478,11 +478,14 @@ public class PersistentCustomServiceImpl
                         "      },\r\n" +
                         "    });\r\n" +
                         "  },\r\n" +
-                        "  save(data) {\r\n" +
+                        "  save(po, user) {\r\n" +
                         "    return request({\r\n" +
                         "      url: '/" + appApi + "/save" + poName + "',\r\n" +
                         "      method: 'post',\r\n" +
-                        "      data,\r\n" +
+                        "      data: {\r\n" +
+                        "        po,\r\n" +
+                        "        user,\r\n" +
+                        "      },\r\n" +
                         "    });\r\n" +
                         "  },\r\n" +
                         "  delete(data) {\r\n" +
@@ -560,7 +563,7 @@ public class PersistentCustomServiceImpl
                         "      dispatch." + poName + ".setState(payload);\r\n" +
                         "    },\r\n" +
                         "    async save(data) {\r\n" +
-                        "      const ret = await service.save(data.formData);\r\n" +
+                        "      const ret = await service.save(data.formData, data.user);\r\n" +
                         "      if (ret.code === 400) {\r\n" +
                         "        Message.error(ret.data.defaultMessage);\r\n" +
                         "      } else {\r\n" +
@@ -655,10 +658,13 @@ public class PersistentCustomServiceImpl
                         "import pageStore from '@/pages/" + poName + "/store';\r\n" +
                         "import DataFormTemple from '@/components/dataForm';\r\n" +
                         "import DataTableTemple from '@/components/dataTable';\r\n" +
+                        "import store from \"@/store\";\r\n" +
                         "\r\n" +
                         "function " + poName + "() {\r\n" +
                         "\r\n" +
                         "  const [state, dispatchers] = pageStore.useModel('" + poName + "');\r\n" +
+                        "\r\n" +
+                        "  const [userState] = store.useModel('user');\r\n" +
                         "\r\n" +
                         "  useEffect(() => {\r\n" +
                         "    dispatchers.findDataTableAndFormByName().then(r => console.log(r));\r\n" +
@@ -702,6 +708,7 @@ public class PersistentCustomServiceImpl
                         "          searchForm: state.searchForm,\r\n" +
                         "          current: state.current,\r\n" +
                         "          formData: state.formData,\r\n" +
+                        "          user: userState.username,\r\n" +
                         "        })}\r\n" +
                         "        formDataValue={state.formData}\r\n" +
                         "        title={state.title}\r\n" +
@@ -987,20 +994,22 @@ public class PersistentCustomServiceImpl
             sb.append("\r\n");
             sb.append("    @Operation(summary = \"保存").append(poName).append("\")\r\n");
             sb.append("    @PostMapping(value = \"save").append(poName).append("\")\r\n");
-            sb.append("    public ResultVO save(@RequestBody ").append(poName).append("Bean po) {\r\n");
-            sb.append("        if (po.getId() == null) {\r\n");
-            sb.append("            return ResultVO.success(service.addOne(po));\r\n");
+            sb.append("    public ResultVO save(@RequestBody PageBeanVo<").append(poName).append("Bean> vo) {\r\n");
+            sb.append("        vo.po.setUpdatedBy(vo.user);\r\n");
+            sb.append("        if (vo.po.getId() == null) {\r\n");
+            sb.append("            vo.po.setCreatedBy(vo.user);\r\n");
+            sb.append("            return ResultVO.success(service.addOne(vo.po));\r\n");
             sb.append("        }\r\n");
-            sb.append("        return ResultVO.success(service.updateOne(po));\r\n");
+            sb.append("        return ResultVO.success(service.updateOne(vo.po));\r\n");
             sb.append("    }\r\n");
             sb.append("\r\n");
             sb.append("    @Operation(summary = \"删除").append(poName).append("\")\r\n");
             sb.append("    @PostMapping(value = \"delete").append(poName).append("\")\r\n");
-            sb.append("    public ResultVO delete(@RequestBody ").append(poName).append("Bean po) {\r\n");
-            sb.append("        if (po.getId() == null) {\r\n");
+            sb.append("    public ResultVO delete(@RequestBody PageBeanVo<").append(poName).append("Bean> vo) {\r\n");
+            sb.append("        if (vo.po.getId() == null) {\r\n");
             sb.append("            return ResultVO.failure();\r\n");
             sb.append("        }\r\n");
-            sb.append("        service.deleteOne(po);\r\n");
+            sb.append("        service.deleteOne(vo.po);\r\n");
         } else {
             sb.append("    @Operation(summary = \"查询").append(poName).append("关联关系\")\r\n");
             sb.append("    @PostMapping(\"get").append(poName).append("\")\r\n");

@@ -2,10 +2,13 @@ import React, {useEffect} from 'react';
 import pageStore from '@/pages/AppService/store';
 import DataFormTemple from '@/components/dataForm';
 import DataTableTemple from '@/components/dataTable';
+import store from "@/store";
 
 function AppService() {
 
   const [state, dispatchers] = pageStore.useModel('AppService');
+
+  const [userState] = store.useModel('user');
 
   useEffect(() => {
     dispatchers.findDataTableAndFormByName().then(r => console.log(r));
@@ -49,6 +52,7 @@ function AppService() {
           searchForm: state.searchForm,
           current: state.current,
           formData: state.formData,
+          user: userState.username,
         })}
         formDataValue={state.formData}
         title={state.title}

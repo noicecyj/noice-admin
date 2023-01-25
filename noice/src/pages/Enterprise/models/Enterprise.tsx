@@ -42,7 +42,7 @@ export default {
       dispatch.Enterprise.setState(payload);
     },
     async save(data) {
-      const ret = await service.save(data.formData);
+      const ret = await service.save(data.formData, data.user);
       if (ret.code === 400) {
         Message.error(ret.data.defaultMessage);
       } else {

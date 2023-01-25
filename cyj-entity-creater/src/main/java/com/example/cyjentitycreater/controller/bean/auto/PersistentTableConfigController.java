@@ -37,20 +37,22 @@ public class PersistentTableConfigController {
 
     @Operation(summary = "保存PersistentTableConfig")
     @PostMapping(value = "savePersistentTableConfig")
-    public ResultVO save(@RequestBody PersistentTableConfigBean po) {
-        if (po.getId() == null) {
-            return ResultVO.success(service.addOne(po));
+    public ResultVO save(@RequestBody PageBeanVo<PersistentTableConfigBean> vo) {
+        vo.po.setUpdatedBy(vo.user);
+        if (vo.po.getId() == null) {
+            vo.po.setCreatedBy(vo.user);
+            return ResultVO.success(service.addOne(vo.po));
         }
-        return ResultVO.success(service.updateOne(po));
+        return ResultVO.success(service.updateOne(vo.po));
     }
 
     @Operation(summary = "删除PersistentTableConfig")
     @PostMapping(value = "deletePersistentTableConfig")
-    public ResultVO delete(@RequestBody PersistentTableConfigBean po) {
-        if (po.getId() == null) {
+    public ResultVO delete(@RequestBody PageBeanVo<PersistentTableConfigBean> vo) {
+        if (vo.po.getId() == null) {
             return ResultVO.failure();
         }
-        service.deleteOne(po);
+        service.deleteOne(vo.po);
         return ResultVO.success();
     }
 

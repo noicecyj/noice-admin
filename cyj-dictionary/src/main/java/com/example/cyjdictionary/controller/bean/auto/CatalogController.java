@@ -37,20 +37,22 @@ public class CatalogController {
 
     @Operation(summary = "保存Catalog")
     @PostMapping(value = "saveCatalog")
-    public ResultVO save(@RequestBody CatalogBean po) {
-        if (po.getId() == null) {
-            return ResultVO.success(service.addOne(po));
+    public ResultVO save(@RequestBody PageBeanVo<CatalogBean> vo) {
+        vo.po.setUpdatedBy(vo.user);
+        if (vo.po.getId() == null) {
+            vo.po.setCreatedBy(vo.user);
+            return ResultVO.success(service.addOne(vo.po));
         }
-        return ResultVO.success(service.updateOne(po));
+        return ResultVO.success(service.updateOne(vo.po));
     }
 
     @Operation(summary = "删除Catalog")
     @PostMapping(value = "deleteCatalog")
-    public ResultVO delete(@RequestBody CatalogBean po) {
-        if (po.getId() == null) {
+    public ResultVO delete(@RequestBody PageBeanVo<CatalogBean> vo) {
+        if (vo.po.getId() == null) {
             return ResultVO.failure();
         }
-        service.deleteOne(po);
+        service.deleteOne(vo.po);
         return ResultVO.success();
     }
 

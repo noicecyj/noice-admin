@@ -37,20 +37,22 @@ public class PersistentFormConfigController {
 
     @Operation(summary = "保存PersistentFormConfig")
     @PostMapping(value = "savePersistentFormConfig")
-    public ResultVO save(@RequestBody PersistentFormConfigBean po) {
-        if (po.getId() == null) {
-            return ResultVO.success(service.addOne(po));
+    public ResultVO save(@RequestBody PageBeanVo<PersistentFormConfigBean> vo) {
+        vo.po.setUpdatedBy(vo.user);
+        if (vo.po.getId() == null) {
+            vo.po.setCreatedBy(vo.user);
+            return ResultVO.success(service.addOne(vo.po));
         }
-        return ResultVO.success(service.updateOne(po));
+        return ResultVO.success(service.updateOne(vo.po));
     }
 
     @Operation(summary = "删除PersistentFormConfig")
     @PostMapping(value = "deletePersistentFormConfig")
-    public ResultVO delete(@RequestBody PersistentFormConfigBean po) {
-        if (po.getId() == null) {
+    public ResultVO delete(@RequestBody PageBeanVo<PersistentFormConfigBean> vo) {
+        if (vo.po.getId() == null) {
             return ResultVO.failure();
         }
-        service.deleteOne(po);
+        service.deleteOne(vo.po);
         return ResultVO.success();
     }
 

@@ -3,7 +3,7 @@ import {request} from 'ice';
 export default {
   page(po, pageNumber, pageSize) {
     return request({
-      url: '/authApi/pageAuthority',
+      url: '/userApi/pageAuthority',
       method: 'post',
       data: {
         po,
@@ -12,16 +12,19 @@ export default {
       },
     });
   },
-  save(data) {
+  save(po, user) {
     return request({
-      url: '/authApi/saveAuthority',
+      url: '/userApi/saveAuthority',
       method: 'post',
-      data,
+      data: {
+        po,
+        user,
+      },
     });
   },
   delete(data) {
     return request({
-      url: '/authApi/deleteAuthority',
+      url: '/userApi/deleteAuthority',
       method: 'post',
       data,
     });

@@ -1,7 +1,7 @@
 package com.example.cyjentitycreater.controller.bean.auto;
 
-import com.example.cyjcommon.entity.bean.PersistentBean;
 import com.example.cyjcommon.entity.vo.PageBeanVo;
+import com.example.cyjcommon.entity.bean.PersistentBean;
 import com.example.cyjcommon.utils.ResultVO;
 import com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;

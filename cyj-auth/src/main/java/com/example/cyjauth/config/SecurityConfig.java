@@ -6,7 +6,7 @@ import com.example.cyjauth.filter.MyUsernamePasswordAuthenticationFilter;
 import com.example.cyjauth.filter.WebSecurityCorsFilter;
 import com.example.cyjauth.handler.EntryPointUnauthorizedHandler;
 import com.example.cyjauth.handler.RestAccessDeniedHandler;
-import com.example.cyjauth.service.bean.custom.UserCustomServiceImpl;
+import com.example.cyjauth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,7 +30,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     protected AuthenticationManager authenticationManager;
-    private UserCustomServiceImpl userCustomServiceImpl;
+    private UserService userService;
     private AuthenticationSuccessHandler successHandler;
     private AuthenticationFailureHandler failHandler;
     private RestAccessDeniedHandler accessDeniedHandler;
@@ -38,8 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private MyFilterSecurityInterceptor myFilterSecurityInterceptor;
 
     @Autowired
-    public void setUserCustomService(UserCustomServiceImpl userCustomServiceImpl) {
-        this.userCustomServiceImpl = userCustomServiceImpl;
+    public void setUserCustomService(UserService userService) {
+        this.userService = userService;
     }
 
     @Autowired
@@ -74,7 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userCustomServiceImpl).passwordEncoder(new BCryptPasswordEncoder());
+        auth.userDetailsService(userService).passwordEncoder(new BCryptPasswordEncoder());
         //密码加密使用 Spring Security 提供的BCryptPasswordEncoder.encode(user.getRawPassword().trim())
     }
 

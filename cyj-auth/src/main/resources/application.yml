@@ -13,8 +13,6 @@ zuul:
       path: /cyj-entity-creater/**
     cyj-workflow:
       path: /cyj-workflow/**
-    cyj-auth:
-      path: /cyj-auth/**
   host:
     connect-timeout-millis: 15000 #ms HTTP连接超时要比Hystrix的大,否则hystrix不起作用
     socket-timeout-millis: 60000  #ms socket通信超时
