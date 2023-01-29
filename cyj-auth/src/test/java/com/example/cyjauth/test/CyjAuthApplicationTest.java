@@ -1,7 +1,6 @@
 package com.example.cyjauth.test;
 
 import com.example.cyjauth.CyjAuthApplication;
-import com.example.cyjauth.service.bean.auto.AuthorityServiceImpl;
 import lombok.Data;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +30,6 @@ public class CyjAuthApplicationTest {
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
     }
-
-    @Autowired
-    private AuthorityServiceImpl authorityServiceImpl;
 
 
 //    @Test
