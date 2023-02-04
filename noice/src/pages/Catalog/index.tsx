@@ -1,11 +1,13 @@
 import React from 'react';
-import Catalog from '@/pages/Catalog/view/Catalog';
+import PageModel from "@/components/pageModel";
+import pageStore from "@/pages/Catalog/store";
 
 function CatalogPage() {
+
+  const [state, dispatchers] = pageStore.useModel('Catalog');
+
   return (
-    <div>
-      <Catalog/>
-    </div>
+    <PageModel state={state} dispatchers={dispatchers}/>
   );
 }
 

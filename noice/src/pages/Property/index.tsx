@@ -1,11 +1,13 @@
 import React from 'react';
-import Property from '@/pages/Property/view/Property';
+import PageModel from "@/components/pageModel";
+import pageStore from "@/pages/Property/store";
 
 function PropertyPage() {
+
+  const [state, dispatchers] = pageStore.useModel('Property');
+
   return (
-    <div>
-      <Property/>
-    </div>
+    <PageModel state={state} dispatchers={dispatchers}/>
   );
 }
 

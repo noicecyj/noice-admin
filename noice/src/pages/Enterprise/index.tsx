@@ -1,11 +1,13 @@
 import React from 'react';
-import Enterprise from '@/pages/Enterprise/view/Enterprise';
+import PageModel from "@/components/pageModel";
+import pageStore from "@/pages/Enterprise/store";
 
 function EnterprisePage() {
+
+  const [state, dispatchers] = pageStore.useModel('Enterprise');
+
   return (
-    <div>
-      <Enterprise/>
-    </div>
+    <PageModel state={state} dispatchers={dispatchers}/>
   );
 }
 

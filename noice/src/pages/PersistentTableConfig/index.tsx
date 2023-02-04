@@ -1,11 +1,13 @@
 import React from 'react';
-import PersistentTableConfig from '@/pages/PersistentTableConfig/view/PersistentTableConfig';
+import PageModel from "@/components/pageModel";
+import pageStore from "@/pages/PersistentTableConfig/store";
 
 function PersistentTableConfigPage() {
+
+  const [state, dispatchers] = pageStore.useModel('PersistentTableConfig');
+
   return (
-    <div>
-      <PersistentTableConfig/>
-    </div>
+    <PageModel state={state} dispatchers={dispatchers}/>
   );
 }
 

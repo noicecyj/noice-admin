@@ -1,11 +1,13 @@
 import React from 'react';
-import Sql from '@/pages/Sql/view/Sql';
+import PageModel from "@/components/pageModel";
+import pageStore from "@/pages/Sql/store";
 
 function SqlPage() {
+
+  const [state, dispatchers] = pageStore.useModel('Sql');
+
   return (
-    <div>
-      <Sql/>
-    </div>
+    <PageModel state={state} dispatchers={dispatchers}/>
   );
 }
 

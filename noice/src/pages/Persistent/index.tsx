@@ -1,9 +1,13 @@
 import React from 'react';
 import PageModel from "@/components/pageModel";
+import pageStore from "@/pages/Persistent/store";
 
 function PersistentPage() {
+
+  const [state, dispatchers] = pageStore.useModel('Persistent');
+
   return (
-    <PageModel pageName='Persistent'></PageModel>
+    <PageModel state={state} dispatchers={dispatchers}/>
   );
 }
 

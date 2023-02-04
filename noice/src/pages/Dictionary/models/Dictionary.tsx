@@ -1,6 +1,5 @@
 import initService from '@/services/init';
 import {Message} from "@alifd/next";
-import service from '@/pages/Dictionary/services/Dictionary';
 
 export default {
 
@@ -31,7 +30,14 @@ export default {
 
   effects: (dispatch) => ({
     async page(data) {
-      const dataRes = await service.page(data.searchForm, data.current, 10);
+      const dataRes = await initService.runCustomMethod({
+        url: '/dictionaryApi/pageDictionary',
+        obj: {
+          po: data.searchForm,
+          pageNumber: data.current,
+          pageSize: 10,
+        }
+      });
       const payload = {
         searchForm: data.searchForm,
         tableData: dataRes.data.records,
@@ -42,9 +48,15 @@ export default {
       dispatch.Dictionary.setState(payload);
     },
     async save(data) {
-      const ret = await service.save(data.formData, data.user);
-      if (ret.code === 400) {
-        Message.error(ret.data.defaultMessage);
+      const dataRes = await initService.runCustomMethod({
+        url: '/dictionaryApi/saveDictionary',
+        obj: {
+          po: data.formData,
+          user: data.user,
+        }
+      });
+      if (dataRes.code === 400) {
+        Message.error(dataRes.data.defaultMessage);
       } else {
         Message.success('保存成功');
         await this.page({
@@ -57,9 +69,14 @@ export default {
         dispatch.Dictionary.setState(payload);
       }
     },
-    async delete(data) {
-      const ret = await service.delete(data.record);
-      if (ret.code === 400) {
+    async remove(data) {
+      const dataRes = await initService.runCustomMethod({
+        url: '/dictionaryApi/deleteDictionary',
+        obj: {
+          po: data.record,
+        }
+      });
+      if (dataRes.code === 400) {
         Message.error('删除失败');
       } else {
         Message.success('删除成功');

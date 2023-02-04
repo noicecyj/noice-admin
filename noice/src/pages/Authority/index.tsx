@@ -1,11 +1,13 @@
 import React from 'react';
-import Authority from '@/pages/Authority/view/Authority';
+import PageModel from "@/components/pageModel";
+import pageStore from "@/pages/Authority/store";
 
 function AuthorityPage() {
+
+  const [state, dispatchers] = pageStore.useModel('Authority');
+
   return (
-    <div>
-      <Authority/>
-    </div>
+    <PageModel state={state} dispatchers={dispatchers}/>
   );
 }
 

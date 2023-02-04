@@ -1,11 +1,13 @@
 import React from 'react';
-import PersistentForm from '@/pages/PersistentForm/view/PersistentForm';
+import PageModel from "@/components/pageModel";
+import pageStore from "@/pages/PersistentForm/store";
 
 function PersistentFormPage() {
+
+  const [state, dispatchers] = pageStore.useModel('PersistentForm');
+
   return (
-    <div>
-      <PersistentForm/>
-    </div>
+    <PageModel state={state} dispatchers={dispatchers}/>
   );
 }
 

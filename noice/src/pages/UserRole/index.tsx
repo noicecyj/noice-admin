@@ -1,11 +1,13 @@
 import React from 'react';
-import UserRole from '@/pages/UserRole/view/UserRole';
+import PageModel from "@/components/pageModel";
+import pageStore from "@/pages/UserRole/store";
 
 function UserRolePage() {
+
+  const [state, dispatchers] = pageStore.useModel('UserRole');
+
   return (
-    <div>
-      <UserRole/>
-    </div>
+    <PageModel state={state} dispatchers={dispatchers}/>
   );
 }
 

@@ -1,278 +1,139 @@
-2023-01-24 16:16:09.449 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
-2023-01-24 16:16:10.022 [background-preinit] WARN  o.s.h.converter.json.Jackson2ObjectMapperBuilder - For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
-2023-01-24 16:16:10.519 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - No active profile set, falling back to default profiles: default
-2023-01-24 16:16:11.926 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
-2023-01-24 16:16:11.940 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2023-01-24 16:16:12.011 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 58ms. Found 0 Redis repository interfaces.
-2023-01-24 16:16:12.171 [main] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
-2023-01-24 16:16:12.489 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=1b3d6676-3578-321e-889e-2522b697b8fc
-2023-01-24 16:16:14.156 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 0 (http)
-2023-01-24 16:16:14.179 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
-2023-01-24 16:16:14.180 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2023-01-24 16:16:14.180 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
-2023-01-24 16:16:14.275 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2023-01-24 16:16:14.275 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3750 ms
-2023-01-24 16:16:14.578 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
-2023-01-24 16:16:14.605 [main] INFO  com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@34a6d9db
-2023-01-24 16:16:17.423 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
-2023-01-24 16:16:18.300 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
-2023-01-24 16:16:22.815 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses Jersey
-2023-01-24 16:16:23.005 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
-2023-01-24 16:16:23.381 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 2 endpoint(s) beneath base path '/actuator'
-2023-01-24 16:16:24.002 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
-2023-01-24 16:16:24.056 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 63552 (http) with context path ''
-2023-01-24 16:16:24.061 [main] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 63552
-2023-01-24 16:16:24.072 [main] INFO  o.s.cloud.netflix.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
-2023-01-24 16:16:24.176 [main] INFO  com.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
-2023-01-24 16:16:24.257 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON encoding codec LegacyJacksonJson
-2023-01-24 16:16:24.257 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON decoding codec LegacyJacksonJson
-2023-01-24 16:16:24.425 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML encoding codec XStreamXml
-2023-01-24 16:16:24.426 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML decoding codec XStreamXml
-2023-01-24 16:16:24.728 [main] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2023-01-24 16:16:24.997 [main] INFO  com.netflix.discovery.DiscoveryClient - Disable delta property : false
-2023-01-24 16:16:24.997 [main] INFO  com.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
-2023-01-24 16:16:24.997 [main] INFO  com.netflix.discovery.DiscoveryClient - Force full registry fetch : false
-2023-01-24 16:16:24.998 [main] INFO  com.netflix.discovery.DiscoveryClient - Application is null : false
-2023-01-24 16:16:24.998 [main] INFO  com.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
-2023-01-24 16:16:24.998 [main] INFO  com.netflix.discovery.DiscoveryClient - Application version is -1: true
-2023-01-24 16:16:24.998 [main] INFO  com.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
-2023-01-24 16:16:25.234 [main] INFO  com.netflix.discovery.DiscoveryClient - The response status is 200
-2023-01-24 16:16:25.238 [main] INFO  com.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
-2023-01-24 16:16:25.242 [main] INFO  com.netflix.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
-2023-01-24 16:16:25.246 [main] INFO  com.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1674548185245 with initial instances count: 3
-2023-01-24 16:16:25.254 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application CYJ-ENTITY-CREATER with eureka with status UP
-2023-01-24 16:16:25.255 [main] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1674548185255, current=UP, previous=STARTING]
-2023-01-24 16:16:25.259 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE.mshome.net:cyj-entity-creater:0: registering service...
-2023-01-24 16:16:25.325 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE.mshome.net:cyj-entity-creater:0 - registration status: 204
-2023-01-24 16:16:25.694 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - Started CyjEntityCreaterApplicationTest in 17.037 seconds (JVM running for 18.653)
-2023-01-24 16:16:26.078 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2023-01-24 16:16:26.302 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2023-01-24 16:16:26.424 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:16:26.458 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:16:26.485 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:16:26.507 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:16:26.507 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:16:26.596 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:16:26.617 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:16:26.632 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:16:26.648 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:16:26.648 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:16:26.712 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:16:26.733 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:16:26.754 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:16:26.778 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:16:26.779 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:16:26.827 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:16:26.843 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:16:26.858 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:16:26.899 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:16:26.900 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:16:26.986 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:16:27.006 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:16:27.018 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:16:27.032 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:16:27.032 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:16:27.122 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:16:27.138 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:16:27.149 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:16:27.159 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:16:27.160 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:16:27.235 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:16:27.251 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:16:27.264 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:16:27.279 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:16:27.281 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:16:27.336 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:16:27.353 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:16:27.364 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:16:27.375 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:16:27.375 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:16:27.454 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:16:27.468 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:16:27.493 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:16:27.509 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:16:27.524 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:16:27.540 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:16:27.540 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:16:27.599 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:16:27.622 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:16:27.640 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:16:27.657 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:16:27.657 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:16:27.710 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:16:27.728 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:16:27.748 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:16:27.769 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:16:27.770 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:16:27.855 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:16:27.871 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:16:27.885 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:16:27.903 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:16:27.903 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:16:27.982 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:16:27.994 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:16:28.005 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:16:28.017 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:16:28.017 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:16:28.079 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:16:28.093 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:16:28.102 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:16:28.116 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:16:28.116 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:16:28.148 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:16:28.160 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:16:28.174 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:16:28.190 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:16:28.190 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:16:28.238 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:16:28.247 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:16:28.268 [SpringContextShutdownHook] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Unregistering application CYJ-ENTITY-CREATER with eureka with status DOWN
-2023-01-24 16:16:28.268 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1674548188268, current=DOWN, previous=UP]
-2023-01-24 16:16:28.269 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE.mshome.net:cyj-entity-creater:0: registering service...
-2023-01-24 16:16:28.282 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE.mshome.net:cyj-entity-creater:0 - registration status: 204
-2023-01-24 16:16:28.507 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
-2023-01-24 16:16:28.512 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2023-01-24 16:16:28.522 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2023-01-24 16:16:28.525 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
-2023-01-24 16:16:31.528 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Unregistering ...
-2023-01-24 16:16:31.546 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE.mshome.net:cyj-entity-creater:0 - deregister  status: 200
-2023-01-24 16:16:31.555 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
-2023-01-24 16:22:23.685 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
-2023-01-24 16:22:24.227 [background-preinit] WARN  o.s.h.converter.json.Jackson2ObjectMapperBuilder - For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
-2023-01-24 16:22:24.677 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - No active profile set, falling back to default profiles: default
-2023-01-24 16:22:26.022 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
-2023-01-24 16:22:26.025 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2023-01-24 16:22:26.083 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 27ms. Found 0 Redis repository interfaces.
-2023-01-24 16:22:26.377 [main] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
-2023-01-24 16:22:26.791 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=1b3d6676-3578-321e-889e-2522b697b8fc
-2023-01-24 16:22:28.997 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 0 (http)
-2023-01-24 16:22:29.027 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
-2023-01-24 16:22:29.028 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2023-01-24 16:22:29.029 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
-2023-01-24 16:22:29.163 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2023-01-24 16:22:29.163 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4481 ms
-2023-01-24 16:22:29.519 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
-2023-01-24 16:22:29.546 [main] INFO  com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@34a6d9db
-2023-01-24 16:22:32.919 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
-2023-01-24 16:22:34.063 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
-2023-01-24 16:22:39.536 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses Jersey
-2023-01-24 16:22:39.768 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
-2023-01-24 16:22:40.279 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 2 endpoint(s) beneath base path '/actuator'
-2023-01-24 16:22:41.048 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
-2023-01-24 16:22:41.136 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 63792 (http) with context path ''
-2023-01-24 16:22:41.138 [main] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 63792
-2023-01-24 16:22:41.149 [main] INFO  o.s.cloud.netflix.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
-2023-01-24 16:22:41.262 [main] INFO  com.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
-2023-01-24 16:22:41.346 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON encoding codec LegacyJacksonJson
-2023-01-24 16:22:41.346 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON decoding codec LegacyJacksonJson
-2023-01-24 16:22:41.535 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML encoding codec XStreamXml
-2023-01-24 16:22:41.535 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML decoding codec XStreamXml
-2023-01-24 16:22:41.850 [main] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2023-01-24 16:22:42.131 [main] INFO  com.netflix.discovery.DiscoveryClient - Disable delta property : false
-2023-01-24 16:22:42.131 [main] INFO  com.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
-2023-01-24 16:22:42.131 [main] INFO  com.netflix.discovery.DiscoveryClient - Force full registry fetch : false
-2023-01-24 16:22:42.131 [main] INFO  com.netflix.discovery.DiscoveryClient - Application is null : false
-2023-01-24 16:22:42.131 [main] INFO  com.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
-2023-01-24 16:22:42.132 [main] INFO  com.netflix.discovery.DiscoveryClient - Application version is -1: true
-2023-01-24 16:22:42.132 [main] INFO  com.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
-2023-01-24 16:22:42.348 [main] INFO  com.netflix.discovery.DiscoveryClient - The response status is 200
-2023-01-24 16:22:42.354 [main] INFO  com.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
-2023-01-24 16:22:42.379 [main] INFO  com.netflix.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
-2023-01-24 16:22:42.385 [main] INFO  com.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1674548562383 with initial instances count: 3
-2023-01-24 16:22:42.394 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application CYJ-ENTITY-CREATER with eureka with status UP
-2023-01-24 16:22:42.395 [main] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1674548562395, current=UP, previous=STARTING]
-2023-01-24 16:22:42.399 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE.mshome.net:cyj-entity-creater:0: registering service...
-2023-01-24 16:22:42.463 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE.mshome.net:cyj-entity-creater:0 - registration status: 204
-2023-01-24 16:22:42.825 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - Started CyjEntityCreaterApplicationTest in 19.973 seconds (JVM running for 22.225)
-2023-01-24 16:22:43.178 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2023-01-24 16:22:43.399 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2023-01-24 16:22:43.525 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:22:43.566 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:22:43.590 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:22:43.612 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:22:43.612 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:22:43.722 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:22:43.746 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:22:43.770 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:22:43.800 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:22:43.800 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:22:43.862 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:22:43.882 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:22:43.906 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:22:43.923 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:22:43.924 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:22:43.973 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:22:43.993 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:22:44.012 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:22:44.026 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:22:44.026 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:22:44.109 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:22:44.133 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:22:44.153 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:22:44.169 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:22:44.170 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:22:44.270 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:22:44.283 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:22:44.295 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:22:44.309 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:22:44.309 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:22:44.386 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:22:44.403 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:22:44.418 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:22:44.438 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:22:44.438 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:22:44.499 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:22:44.517 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:22:44.532 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:22:44.546 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:22:44.547 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:22:44.649 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:22:44.662 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:22:44.684 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:22:44.699 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:22:44.710 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:22:44.724 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:22:44.724 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:22:44.779 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:22:44.792 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:22:44.809 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:22:44.823 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:22:44.823 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:22:44.877 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:22:44.893 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:22:44.908 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:22:44.925 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:22:44.925 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:22:45.014 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:22:45.030 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:22:45.042 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:22:45.061 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:22:45.061 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:22:45.135 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:22:45.150 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:22:45.162 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:22:45.179 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:22:45.179 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:22:45.251 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:22:45.268 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:22:45.280 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:22:45.294 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:22:45.294 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:22:45.332 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:22:45.347 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:22:45.362 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
-2023-01-24 16:22:45.380 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
-2023-01-24 16:22:45.380 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
-2023-01-24 16:22:45.438 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
-2023-01-24 16:22:45.450 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
-2023-01-24 16:22:45.479 [SpringContextShutdownHook] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Unregistering application CYJ-ENTITY-CREATER with eureka with status DOWN
-2023-01-24 16:22:45.479 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1674548565479, current=DOWN, previous=UP]
-2023-01-24 16:22:45.479 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE.mshome.net:cyj-entity-creater:0: registering service...
-2023-01-24 16:22:45.497 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE.mshome.net:cyj-entity-creater:0 - registration status: 204
-2023-01-24 16:22:45.764 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
-2023-01-24 16:22:45.770 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2023-01-24 16:22:45.781 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2023-01-24 16:22:45.784 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
-2023-01-24 16:22:48.797 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Unregistering ...
-2023-01-24 16:22:48.812 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE.mshome.net:cyj-entity-creater:0 - deregister  status: 200
-2023-01-24 16:22:48.822 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
+2023-02-04 19:01:07.767 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2023-02-04 19:01:08.453 [background-preinit] WARN  o.s.h.converter.json.Jackson2ObjectMapperBuilder - For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2023-02-04 19:01:09.076 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - No active profile set, falling back to default profiles: default
+2023-02-04 19:01:10.691 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2023-02-04 19:01:10.696 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-02-04 19:01:10.786 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 28ms. Found 0 Redis repository interfaces.
+2023-02-04 19:01:10.977 [main] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2023-02-04 19:01:11.319 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=28f55b39-8e87-3392-9e8b-24f66cd7d227
+2023-02-04 19:01:13.351 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 0 (http)
+2023-02-04 19:01:13.377 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
+2023-02-04 19:01:13.379 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-02-04 19:01:13.380 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
+2023-02-04 19:01:13.483 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-02-04 19:01:13.484 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4399 ms
+2023-02-04 19:01:13.826 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2023-02-04 19:01:13.893 [main] INFO  com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@48e41b5d
+2023-02-04 19:01:17.383 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2023-02-04 19:01:18.454 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2023-02-04 19:01:23.598 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses Jersey
+2023-02-04 19:01:23.771 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2023-02-04 19:01:24.310 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 2 endpoint(s) beneath base path '/actuator'
+2023-02-04 19:01:24.708 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
+2023-02-04 19:01:24.754 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 59764 (http) with context path ''
+2023-02-04 19:01:24.756 [main] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 59764
+2023-02-04 19:01:24.764 [main] INFO  o.s.cloud.netflix.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2023-02-04 19:01:24.889 [main] INFO  com.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2023-02-04 19:01:25.034 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON encoding codec LegacyJacksonJson
+2023-02-04 19:01:25.034 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON decoding codec LegacyJacksonJson
+2023-02-04 19:01:25.231 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML encoding codec XStreamXml
+2023-02-04 19:01:25.231 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML decoding codec XStreamXml
+2023-02-04 19:01:25.469 [main] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2023-02-04 19:01:25.734 [main] INFO  com.netflix.discovery.DiscoveryClient - Disable delta property : false
+2023-02-04 19:01:25.735 [main] INFO  com.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2023-02-04 19:01:25.735 [main] INFO  com.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2023-02-04 19:01:25.735 [main] INFO  com.netflix.discovery.DiscoveryClient - Application is null : false
+2023-02-04 19:01:25.735 [main] INFO  com.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2023-02-04 19:01:25.735 [main] INFO  com.netflix.discovery.DiscoveryClient - Application version is -1: true
+2023-02-04 19:01:25.735 [main] INFO  com.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2023-02-04 19:01:25.954 [main] INFO  com.netflix.discovery.DiscoveryClient - The response status is 200
+2023-02-04 19:01:25.958 [main] INFO  com.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2023-02-04 19:01:25.965 [main] INFO  com.netflix.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2023-02-04 19:01:25.970 [main] INFO  com.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1675508485969 with initial instances count: 3
+2023-02-04 19:01:25.984 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application CYJ-ENTITY-CREATER with eureka with status UP
+2023-02-04 19:01:25.986 [main] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1675508485986, current=UP, previous=STARTING]
+2023-02-04 19:01:25.990 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE.mshome.net:cyj-entity-creater:0: registering service...
+2023-02-04 19:01:26.053 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE.mshome.net:cyj-entity-creater:0 - registration status: 204
+2023-02-04 19:01:26.469 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - Started CyjEntityCreaterApplicationTest in 19.946 seconds (JVM running for 22.901)
+2023-02-04 19:01:26.975 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-02-04 19:01:27.196 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-02-04 19:01:27.318 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
+2023-02-04 19:01:27.348 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
+2023-02-04 19:01:27.378 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
+2023-02-04 19:01:27.408 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
+2023-02-04 19:01:27.408 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
+2023-02-04 19:01:27.511 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
+2023-02-04 19:01:27.540 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
+2023-02-04 19:01:27.561 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
+2023-02-04 19:01:27.582 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
+2023-02-04 19:01:27.583 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
+2023-02-04 19:01:27.665 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
+2023-02-04 19:01:27.700 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
+2023-02-04 19:01:27.730 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
+2023-02-04 19:01:27.755 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
+2023-02-04 19:01:27.755 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
+2023-02-04 19:01:27.834 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
+2023-02-04 19:01:27.853 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
+2023-02-04 19:01:27.870 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
+2023-02-04 19:01:27.895 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
+2023-02-04 19:01:27.896 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
+2023-02-04 19:01:27.996 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
+2023-02-04 19:01:28.019 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
+2023-02-04 19:01:28.037 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
+2023-02-04 19:01:28.060 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
+2023-02-04 19:01:28.060 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
+2023-02-04 19:01:28.263 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
+2023-02-04 19:01:28.285 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
+2023-02-04 19:01:28.309 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
+2023-02-04 19:01:28.332 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
+2023-02-04 19:01:28.332 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
+2023-02-04 19:01:28.427 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
+2023-02-04 19:01:28.447 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
+2023-02-04 19:01:28.463 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
+2023-02-04 19:01:28.484 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
+2023-02-04 19:01:28.486 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
+2023-02-04 19:01:28.609 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
+2023-02-04 19:01:28.629 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
+2023-02-04 19:01:28.649 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
+2023-02-04 19:01:28.665 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
+2023-02-04 19:01:28.666 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
+2023-02-04 19:01:28.838 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
+2023-02-04 19:01:28.853 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
+2023-02-04 19:01:28.883 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
+2023-02-04 19:01:28.901 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
+2023-02-04 19:01:28.918 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
+2023-02-04 19:01:28.936 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
+2023-02-04 19:01:28.936 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
+2023-02-04 19:01:29.016 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
+2023-02-04 19:01:29.037 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
+2023-02-04 19:01:29.054 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
+2023-02-04 19:01:29.076 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
+2023-02-04 19:01:29.076 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
+2023-02-04 19:01:29.160 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
+2023-02-04 19:01:29.180 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
+2023-02-04 19:01:29.195 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
+2023-02-04 19:01:29.215 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
+2023-02-04 19:01:29.215 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
+2023-02-04 19:01:29.355 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
+2023-02-04 19:01:29.376 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
+2023-02-04 19:01:29.398 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
+2023-02-04 19:01:29.421 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
+2023-02-04 19:01:29.421 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
+2023-02-04 19:01:29.515 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
+2023-02-04 19:01:29.533 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
+2023-02-04 19:01:29.555 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
+2023-02-04 19:01:29.584 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
+2023-02-04 19:01:29.584 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
+2023-02-04 19:01:29.691 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
+2023-02-04 19:01:29.711 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
+2023-02-04 19:01:29.732 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
+2023-02-04 19:01:29.751 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
+2023-02-04 19:01:29.751 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
+2023-02-04 19:01:29.810 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
+2023-02-04 19:01:29.838 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
+2023-02-04 19:01:29.856 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentFormConfigFlag:true
+2023-02-04 19:01:29.880 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableConfigFlag:true
+2023-02-04 19:01:29.881 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.persistentTableSearchConfigFlag:true
+2023-02-04 19:01:29.957 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.authority:true
+2023-02-04 19:01:29.969 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - delete.sql:true
+2023-02-04 19:01:29.999 [SpringContextShutdownHook] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Unregistering application CYJ-ENTITY-CREATER with eureka with status DOWN
+2023-02-04 19:01:29.999 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1675508489999, current=DOWN, previous=UP]
+2023-02-04 19:01:30.000 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE.mshome.net:cyj-entity-creater:0: registering service...
+2023-02-04 19:01:30.017 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE.mshome.net:cyj-entity-creater:0 - registration status: 204
+2023-02-04 19:01:30.463 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2023-02-04 19:01:30.473 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-02-04 19:01:30.493 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-02-04 19:01:30.496 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+2023-02-04 19:01:33.503 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Unregistering ...
+2023-02-04 19:01:33.522 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE.mshome.net:cyj-entity-creater:0 - deregister  status: 200
+2023-02-04 19:01:33.532 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient

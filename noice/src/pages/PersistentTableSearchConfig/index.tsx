@@ -1,11 +1,13 @@
 import React from 'react';
-import PersistentTableSearchConfig from '@/pages/PersistentTableSearchConfig/view/PersistentTableSearchConfig';
+import PageModel from "@/components/pageModel";
+import pageStore from "@/pages/PersistentTableSearchConfig/store";
 
 function PersistentTableSearchConfigPage() {
+
+  const [state, dispatchers] = pageStore.useModel('PersistentTableSearchConfig');
+
   return (
-    <div>
-      <PersistentTableSearchConfig/>
-    </div>
+    <PageModel state={state} dispatchers={dispatchers}/>
   );
 }
 

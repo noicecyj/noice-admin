@@ -1,11 +1,13 @@
 import React from 'react';
-import Dictionary from '@/pages/Dictionary/view/Dictionary';
+import PageModel from "@/components/pageModel";
+import pageStore from "@/pages/Dictionary/store";
 
 function DictionaryPage() {
+
+  const [state, dispatchers] = pageStore.useModel('Dictionary');
+
   return (
-    <div>
-      <Dictionary/>
-    </div>
+    <PageModel state={state} dispatchers={dispatchers}/>
   );
 }
 

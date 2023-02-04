@@ -1,11 +1,13 @@
 import React from 'react';
-import AppService from '@/pages/AppService/view/AppService';
+import PageModel from "@/components/pageModel";
+import pageStore from "@/pages/AppService/store";
 
 function AppServicePage() {
+
+  const [state, dispatchers] = pageStore.useModel('AppService');
+
   return (
-    <div>
-      <AppService/>
-    </div>
+    <PageModel state={state} dispatchers={dispatchers}/>
   );
 }
 

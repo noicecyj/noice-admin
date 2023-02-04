@@ -1,11 +1,13 @@
 import React from 'react';
-import PersistentTable from '@/pages/PersistentTable/view/PersistentTable';
+import PageModel from "@/components/pageModel";
+import pageStore from "@/pages/PersistentTable/store";
 
 function PersistentTablePage() {
+
+  const [state, dispatchers] = pageStore.useModel('PersistentTable');
+
   return (
-    <div>
-      <PersistentTable/>
-    </div>
+    <PageModel state={state} dispatchers={dispatchers}/>
   );
 }
 

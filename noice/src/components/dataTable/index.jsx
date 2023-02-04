@@ -1,18 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
-import {
-  Box,
-  Button,
-  Dialog,
-  Divider,
-  Form,
-  Input,
-  Loading,
-  Pagination,
-  ResponsiveGrid,
-  Select,
-  Table
-} from '@alifd/next';
+import {Box, Button, Dialog, Form, Input, Loading, Pagination, ResponsiveGrid, Select, Table} from '@alifd/next';
 import styles from './index.module.scss';
 
 const {Cell} = ResponsiveGrid;
@@ -125,11 +113,11 @@ function DataTable(props) {
               }
             })}
           </Form>
-          <Box direction="row" spacing={15} justify='flex-end'>
+          <Box direction="row" spacing={15} margin={[10, 0]} justify='flex-end'>
             {!!search && <Button type="primary" onClick={() => search()}> 查询 </Button>}
             {!!reset && <Button onClick={() => reset()}> 重置 </Button>}
           </Box>
-          <Box direction="row" spacing={15}>
+          <Box direction="row" spacing={15} margin={[10, 0]}>
             {!!addItem && <Button type="primary" onClick={() => addItem()}> 添加 </Button>}
             {
               titleButton.map(operation => {
@@ -147,8 +135,6 @@ function DataTable(props) {
               })
             }
           </Box>
-
-          <Divider/>
           <Loading
             tip="加载中..."
             visible={visibleLoading}

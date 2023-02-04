@@ -460,43 +460,6 @@ public class PersistentCustomServiceImpl
         createEntityCodeHandler(entityObj, entityCustomObj);
     }
 
-    private String[] servicesGenerate(String appApi, String poName) {
-        String viewData =
-                "import {request} from 'ice';\r\n" +
-                        "\r\n" +
-                        "export default {\r\n" +
-                        "  page(po, pageNumber, pageSize) {\r\n" +
-                        "    return request({\r\n" +
-                        "      url: '/" + appApi + "/page" + poName + "',\r\n" +
-                        "      method: 'post',\r\n" +
-                        "      data: {\r\n" +
-                        "        po,\r\n" +
-                        "        pageNumber,\r\n" +
-                        "        pageSize,\r\n" +
-                        "      },\r\n" +
-                        "    });\r\n" +
-                        "  },\r\n" +
-                        "  save(po, user) {\r\n" +
-                        "    return request({\r\n" +
-                        "      url: '/" + appApi + "/save" + poName + "',\r\n" +
-                        "      method: 'post',\r\n" +
-                        "      data: {\r\n" +
-                        "        po,\r\n" +
-                        "        user,\r\n" +
-                        "      },\r\n" +
-                        "    });\r\n" +
-                        "  },\r\n" +
-                        "  delete(data) {\r\n" +
-                        "    return request({\r\n" +
-                        "      url: '/" + appApi + "/delete" + poName + "',\r\n" +
-                        "      method: 'post',\r\n" +
-                        "      data,\r\n" +
-                        "    });\r\n" +
-                        "  },\r\n" +
-                        "};\r\n";
-        return new String[]{viewData, poName + ".tsx"};
-    }
-
     private String[] storeGenerate(String poName) {
         String viewData =
                 "import {createStore} from 'ice';\r\n" +
@@ -514,10 +477,14 @@ public class PersistentCustomServiceImpl
         String viewData =
                 "import React from 'react';\r\n" +
                         "import PageModel from \"@/components/pageModel\";\r\n" +
+                        "import pageStore from \"@/pages/" + poName + "/store\";\r\n" +
                         "\r\n" +
                         "function " + poName + "Page() {\r\n" +
+                        "\r\n" +
+                        "  const [state, dispatchers] = pageStore.useModel('" + poName + "');\r\n" +
+                        "\r\n" +
                         "  return (\r\n" +
-                        "    <PageModel pageName='" + poName + "'></PageModel>\r\n" +
+                        "    <PageModel state={state} dispatchers={dispatchers}/>\r\n" +
                         "  );\r\n" +
                         "}\r\n" +
                         "\r\n" +
@@ -674,77 +641,6 @@ public class PersistentCustomServiceImpl
                         "    },\r\n" +
                         "  }),\r\n" +
                         "};\r\n";
-        return new String[]{viewData, poName + ".tsx"};
-    }
-
-    private String[] viewGenerate(String poName) {
-        String viewData =
-                "import React, {useEffect} from 'react';\r\n" +
-                        "import pageStore from '@/pages/" + poName + "/store';\r\n" +
-                        "import DataFormTemple from '@/components/dataForm';\r\n" +
-                        "import DataTableTemple from '@/components/dataTable';\r\n" +
-                        "import store from \"@/store\";\r\n" +
-                        "\r\n" +
-                        "function " + poName + "() {\r\n" +
-                        "\r\n" +
-                        "  const [state, dispatchers] = pageStore.useModel('" + poName + "');\r\n" +
-                        "\r\n" +
-                        "  const [userState] = store.useModel('user');\r\n" +
-                        "\r\n" +
-                        "  useEffect(() => {\r\n" +
-                        "    dispatchers.findDataTableAndFormByName().then(r => console.log(r));\r\n" +
-                        "  }, [dispatchers]);\r\n" +
-                        "\r\n" +
-                        "  return (\r\n" +
-                        "    <>\r\n" +
-                        "      <DataTableTemple\r\n" +
-                        "        addItem={() => dispatchers.add()}\r\n" +
-                        "        search={() => dispatchers.page({\r\n" +
-                        "          searchForm: state.searchForm,\r\n" +
-                        "          current: 1,\r\n" +
-                        "        })}\r\n" +
-                        "        reset={() => dispatchers.setSearchDataForm(state.searchDefaultForm)}\r\n" +
-                        "        editItem={record => dispatchers.edit(record)}\r\n" +
-                        "        deleteItem={record => dispatchers.delete({\r\n" +
-                        "          searchForm: state.searchForm,\r\n" +
-                        "          current: state.current,\r\n" +
-                        "          record,\r\n" +
-                        "        })}\r\n" +
-                        "        visibleLoading={state.loadingVisible}\r\n" +
-                        "        dataSource={state.tableData}\r\n" +
-                        "        configItems={state.tableConfig}\r\n" +
-                        "        searchItems={state.tableSearch}\r\n" +
-                        "        titleButton={state.titleConfig}\r\n" +
-                        "        operationButton={state.tableOperation}\r\n" +
-                        "        runCustomMethod={(record, url) => dispatchers.runCustomMethod(record, url)}\r\n" +
-                        "        total={state.total}\r\n" +
-                        "        setPage={current => dispatchers.page({\r\n" +
-                        "          searchForm: state.searchForm,\r\n" +
-                        "          current,\r\n" +
-                        "        })}\r\n" +
-                        "        primaryKey=\"id\"\r\n" +
-                        "        searchFormValue={state.searchForm}\r\n" +
-                        "        dispatchers={value => dispatchers.setSearchDataForm(value)}\r\n" +
-                        "      />\r\n" +
-                        "      <DataFormTemple\r\n" +
-                        "        configItems={state.formConfig}\r\n" +
-                        "        dispatchers={value => dispatchers.setDataForm(value)}\r\n" +
-                        "        onOk={() => dispatchers.save({\r\n" +
-                        "          searchForm: state.searchForm,\r\n" +
-                        "          current: state.current,\r\n" +
-                        "          formData: state.formData,\r\n" +
-                        "          user: userState.username,\r\n" +
-                        "        })}\r\n" +
-                        "        formDataValue={state.formData}\r\n" +
-                        "        title={state.title}\r\n" +
-                        "        visibleDialog={state.visible}\r\n" +
-                        "        onClose={() => dispatchers.setState({visible: false})}\r\n" +
-                        "      />\r\n" +
-                        "    </>\r\n" +
-                        "  );\r\n" +
-                        "}\r\n" +
-                        "\r\n" +
-                        "export default " + poName + ";\r\n";
         return new String[]{viewData, poName + ".tsx"};
     }
 

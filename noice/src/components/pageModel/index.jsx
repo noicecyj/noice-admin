@@ -2,17 +2,15 @@ import React, {useEffect} from 'react';
 import DataTableTemple from "@/components/dataTable";
 import DataFormTemple from "@/components/dataForm";
 import store from "@/store";
-import pageStore from "@/pages/Persistent/store";
 
 function PageModel(props) {
 
   const [userState] = store.useModel('user');
 
   const {
-    pageName
+    state,
+    dispatchers,
   } = props;
-
-  const [state, dispatchers] = pageStore.useModel(pageName);
 
   const {
     findDataTableAndFormByName,
