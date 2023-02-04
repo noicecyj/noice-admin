@@ -90,7 +90,6 @@ function DataTable(props) {
     <ResponsiveGrid gap={20}>
       <Cell colSpan={12}>
         <div className={styles.Main}>
-          <Divider/>
           <Form
             responsive={true}
             fullWidth
@@ -125,10 +124,11 @@ function DataTable(props) {
                   </FormItem>)
               }
             })}
+          </Form>
+          <Box direction="row" spacing={15} justify='flex-end'>
             {!!search && <Button type="primary" onClick={() => search()}> 查询 </Button>}
             {!!reset && <Button onClick={() => reset()}> 重置 </Button>}
-          </Form>
-          <Divider/>
+          </Box>
           <Box direction="row" spacing={15}>
             {!!addItem && <Button type="primary" onClick={() => addItem()}> 添加 </Button>}
             {
@@ -147,6 +147,7 @@ function DataTable(props) {
               })
             }
           </Box>
+
           <Divider/>
           <Loading
             tip="加载中..."

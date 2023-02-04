@@ -15,7 +15,7 @@ export default {
     return request({
       url: data.url,
       method: 'post',
-      data: data.record,
+      data: data.obj,
     });
   },
 };

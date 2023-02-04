@@ -1,30 +1,46 @@
 import React, {useEffect} from 'react';
-import pageStore from '@/pages/Persistent/store';
-import DataFormTemple from '@/components/dataForm';
-import DataTableTemple from '@/components/dataTable';
+import DataTableTemple from "@/components/dataTable";
+import DataFormTemple from "@/components/dataForm";
 import store from "@/store";
+import pageStore from "@/pages/Persistent/store";
 
-function Persistent() {
-
-  const [state, dispatchers] = pageStore.useModel('Persistent');
+function PageModel(props) {
 
   const [userState] = store.useModel('user');
 
+  const {
+    pageName
+  } = props;
+
+  const [state, dispatchers] = pageStore.useModel(pageName);
+
+  const {
+    findDataTableAndFormByName,
+    add,
+    page,
+    setSearchDataForm,
+    edit,
+    remove,
+    runCustomMethod,
+    setDataForm,
+    save,
+  } = dispatchers;
+
   useEffect(() => {
-    dispatchers.findDataTableAndFormByName().then(r => console.log(r));
+    findDataTableAndFormByName().then(r => console.log(r));
   }, [dispatchers]);
 
   return (
     <>
       <DataTableTemple
-        addItem={() => dispatchers.add()}
-        search={() => dispatchers.page({
+        addItem={() => add()}
+        search={() => page({
           searchForm: state.searchForm,
           current: 1,
         })}
-        reset={() => dispatchers.setSearchDataForm(state.searchDefaultForm)}
-        editItem={record => dispatchers.edit(record)}
-        deleteItem={record => dispatchers.delete({
+        reset={() => setSearchDataForm(state.searchDefaultForm)}
+        editItem={record => edit(record)}
+        deleteItem={record => remove({
           searchForm: state.searchForm,
           current: state.current,
           record,
@@ -35,20 +51,20 @@ function Persistent() {
         searchItems={state.tableSearch}
         titleButton={state.titleConfig}
         operationButton={state.tableOperation}
-        runCustomMethod={(record, url) => dispatchers.runCustomMethod(record, url)}
+        runCustomMethod={(obj, url) => runCustomMethod(obj, url)}
         total={state.total}
-        setPage={current => dispatchers.page({
+        setPage={current => page({
           searchForm: state.searchForm,
           current,
         })}
         primaryKey="id"
         searchFormValue={state.searchForm}
-        dispatchers={value => dispatchers.setSearchDataForm(value)}
+        dispatchers={value => setSearchDataForm(value)}
       />
       <DataFormTemple
         configItems={state.formConfig}
-        dispatchers={value => dispatchers.setDataForm(value)}
-        onOk={() => dispatchers.save({
+        dispatchers={value => setDataForm(value)}
+        onOk={() => save({
           searchForm: state.searchForm,
           current: state.current,
           formData: state.formData,
@@ -63,4 +79,4 @@ function Persistent() {
   );
 }
 
-export default Persistent;
+export default PageModel;

@@ -445,9 +445,7 @@ public class PersistentCustomServiceImpl
                 serviceGenerate(propertyList, poName, appPath, isBeanFlag));
         entityObj.put(appPath + "/controller" + (isBeanFlag ? "/bean" : "/relation") + "/auto",
                 controllerGenerate(poName, appPath, appApi, isBeanFlag));
-        entityObj.put(componentPath + poName + "/services", servicesGenerate(appApi, poName));
-        entityObj.put(componentPath + poName + "/models", modelsGenerate(poName, persistentCode));
-        entityObj.put(componentPath + poName + "/view", viewGenerate(poName));
+        entityObj.put(componentPath + poName + "/models", modelsGenerate(appApi, poName, persistentCode));
         try {
             BeanUtils.createJavaFile(componentPath + poName, indexGenerate(poName));
             BeanUtils.createJavaFile(componentPath + poName, storeGenerate(poName));
@@ -513,15 +511,24 @@ public class PersistentCustomServiceImpl
     }
 
     private String[] indexGenerate(String poName) {
-        String viewData = "import React from 'react';\r\n" + "import " + poName + " from '@/pages/" + poName + "/view/" + poName + "';\r\n" + "\r\n" + "function " + poName + "Page() {\r\n" + "  return (\r\n" + "    <div>\r\n" + "      <" + poName + "/>\r\n" + "    </div>\r\n" + "  );\r\n" + "}\r\n" + "\r\n" + "export default " + poName + "Page;\r\n";
+        String viewData =
+                "import React from 'react';\r\n" +
+                        "import PageModel from \"@/components/pageModel\";\r\n" +
+                        "\r\n" +
+                        "function " + poName + "Page() {\r\n" +
+                        "  return (\r\n" +
+                        "    <PageModel pageName='" + poName + "'></PageModel>\r\n" +
+                        "  );\r\n" +
+                        "}\r\n" +
+                        "\r\n" +
+                        "export default " + poName + "Page;\r\n";
         return new String[]{viewData, "index.tsx"};
     }
 
-    private String[] modelsGenerate(String poName, String persistentCode) {
+    private String[] modelsGenerate(String appApi, String poName, String persistentCode) {
         String viewData =
                 "import initService from '@/services/init';\r\n" +
                         "import {Message} from \"@alifd/next\";\r\n" +
-                        "import service from '@/pages/" + poName + "/services/" + poName + "';\r\n" +
                         "\r\n" +
                         "export default {\r\n" +
                         "\r\n" +
@@ -552,7 +559,14 @@ public class PersistentCustomServiceImpl
                         "\r\n" +
                         "  effects: (dispatch) => ({\r\n" +
                         "    async page(data) {\r\n" +
-                        "      const dataRes = await service.page(data.searchForm, data.current, 10);\r\n" +
+                        "      const dataRes = await initService.runCustomMethod({\r\n" +
+                        "        url: '/" + appApi + "/page" + poName + "',\r\n" +
+                        "        obj: {\r\n" +
+                        "          po: data.searchForm,\r\n" +
+                        "          pageNumber: data.current,\r\n" +
+                        "          pageSize: 10,\r\n" +
+                        "        }\r\n" +
+                        "      });\r\n" +
                         "      const payload = {\r\n" +
                         "        searchForm: data.searchForm,\r\n" +
                         "        tableData: dataRes.data.records,\r\n" +
@@ -563,9 +577,15 @@ public class PersistentCustomServiceImpl
                         "      dispatch." + poName + ".setState(payload);\r\n" +
                         "    },\r\n" +
                         "    async save(data) {\r\n" +
-                        "      const ret = await service.save(data.formData, data.user);\r\n" +
-                        "      if (ret.code === 400) {\r\n" +
-                        "        Message.error(ret.data.defaultMessage);\r\n" +
+                        "      const dataRes = await initService.runCustomMethod({\r\n" +
+                        "        url: '/" + appApi + "/save" + poName + "',\r\n" +
+                        "        obj: {\r\n" +
+                        "          po: data.formData,\r\n" +
+                        "          user: data.user,\r\n" +
+                        "        }\r\n" +
+                        "      });\r\n" +
+                        "      if (dataRes.code === 400) {\r\n" +
+                        "        Message.error(dataRes.data.defaultMessage);\r\n" +
                         "      } else {\r\n" +
                         "        Message.success('保存成功');\r\n" +
                         "        await this.page({\r\n" +
@@ -578,9 +598,14 @@ public class PersistentCustomServiceImpl
                         "        dispatch." + poName + ".setState(payload);\r\n" +
                         "      }\r\n" +
                         "    },\r\n" +
-                        "    async delete(data) {\r\n" +
-                        "      const ret = await service.delete(data.record);\r\n" +
-                        "      if (ret.code === 400) {\r\n" +
+                        "    async remove(data) {\r\n" +
+                        "      const dataRes = await initService.runCustomMethod({\r\n" +
+                        "        url: '/" + appApi + "/delete" + poName + "',\r\n" +
+                        "        obj: {\r\n" +
+                        "          po: data.record,\r\n" +
+                        "        }\r\n" +
+                        "      });\r\n" +
+                        "      if (dataRes.code === 400) {\r\n" +
                         "        Message.error('删除失败');\r\n" +
                         "      } else {\r\n" +
                         "        Message.success('删除成功');\r\n" +

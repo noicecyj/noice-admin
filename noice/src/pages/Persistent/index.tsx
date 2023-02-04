@@ -1,11 +1,9 @@
 import React from 'react';
-import Persistent from '@/pages/Persistent/view/Persistent';
+import PageModel from "@/components/pageModel";
 
 function PersistentPage() {
   return (
-    <div>
-      <Persistent/>
-    </div>
+    <PageModel pageName='Persistent'></PageModel>
   );
 }
 
