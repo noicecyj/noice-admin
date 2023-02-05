@@ -6,20 +6,28 @@ const asideMenuConfig = [
     path: '/admin',
     children: [
       {
-        name: '实体生成器',
-        path: '/admin/entitycreater',
+        name: '实体',
+        path: '/admin/Persistent',
+      },
+      {
+        name: '属性',
+        path: '/admin/Property',
+      },
+      {
+        name: '数据目录',
+        path: '/admin/Catalog',
       },
       {
         name: '数据字典',
-        path: '/admin/catalog',
+        path: '/admin/Dictionary',
       },
       {
         name: 'sql查询器',
-        path: '/admin/sql',
+        path: '/admin/Sql',
       },
       {
         name: '服务管理',
-        path: '/admin/appService',
+        path: '/admin/AppService',
       },
       {
         name: '菜单管理',

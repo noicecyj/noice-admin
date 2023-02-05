@@ -437,6 +437,8 @@ public class PersistentCustomServiceImpl
                 .orderByAsc(PropertyBean::getSortCode));
         Map<String, String[]> entityObj = new HashMap<>();
         boolean isBeanFlag = persistent.getPersistentRelation() == 0;
+        entityObj.put(commonPath + "/ddl" + (isBeanFlag ? "/bean" : "/relation"),
+                ddlGenerate(persistent, propertyList, poName, isBeanFlag));
         entityObj.put(commonPath + "/entity" + (isBeanFlag ? "/bean" : "/relation"),
                 poGenerate(persistent, propertyList, poName, isBeanFlag));
         entityObj.put(commonPath + "/mapper" + (isBeanFlag ? "/bean" : "/relation"),
@@ -458,6 +460,53 @@ public class PersistentCustomServiceImpl
         entityCustomObj.put(appPath + "/controller" + (isBeanFlag ? "/bean" : "/relation") + "/custom",
                 controllerCustomGenerate(poName, appPath, appApi, isBeanFlag));
         createEntityCodeHandler(entityObj, entityCustomObj);
+    }
+
+    private String[] ddlGenerate(PersistentBean persistent, List<PropertyBean> propertyList, String poName, boolean isBeanFlag) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("create table if not exists data_user.t_").append(persistent.getPersistentCode()).append("\r\n");
+        sb.append("(\r\n");
+        sb.append("    id\r\n");
+        sb.append("        varchar(36)\r\n");
+        sb.append("        not null comment '主键'\r\n");
+        sb.append("        primary key,\r\n");
+        for (PropertyBean property : propertyList) {
+            sb.append("    ").append(property.getPropertyCode()).append("\r\n");
+            if ("int".equals(property.getPropertyType()) || "boolean".equals(property.getPropertyType())) {
+                sb.append("        int\r\n");
+            } else {
+                sb.append("        varchar(").append(property.getPropertyLength()).append(")\r\n");
+            }
+            if (property.getPropertyNull() == 0) {
+                sb.append("        null\r\n");
+            } else {
+                sb.append("        not null\r\n");
+            }
+            sb.append("        comment '").append(property.getPropertyName()).append("',\r\n");
+        }
+        sb.append("    sort_code\r\n");
+        sb.append("        int\r\n");
+        sb.append("        not null comment '排序值',\r\n");
+        sb.append("    status\r\n");
+        sb.append("        int\r\n");
+        sb.append("        not null comment '状态',\r\n");
+        sb.append("    created_date\r\n");
+        sb.append("        timestamp default CURRENT_TIMESTAMP\r\n");
+        sb.append("        null comment '创建时间',\r\n");
+        sb.append("    created_by\r\n");
+        sb.append("        varchar(255)\r\n");
+        sb.append("        null comment '创建人',\r\n");
+        sb.append("    updated_date\r\n");
+        sb.append("        timestamp default CURRENT_TIMESTAMP\r\n");
+        sb.append("        null comment '更新时间',\r\n");
+        sb.append("    updated_by\r\n");
+        sb.append("        varchar(255)\r\n");
+        sb.append("        null comment '更新人'\r\n");
+        sb.append(")\r\n");
+        sb.append("    comment '").append(persistent.getPersistentName()).append("';\r\n");
+        String ddl = sb.toString();
+        return new String[]{ddl, poName + (isBeanFlag ? "Bean" : "Relation") + ".sql"};
+
     }
 
     private String[] storeGenerate(String poName) {
