@@ -27,6 +27,12 @@ public class MenuBean extends Model<MenuBean> {
     @TableField("menu_name")
     private String menuName;
 
+    @TableField("menu_url")
+    private String menuUrl;
+
+    @TableField("menu_icon")
+    private String menuIcon;
+
     @TableField("status")
     private int status;
 

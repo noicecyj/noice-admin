@@ -12,6 +12,14 @@ create table if not exists data_user.t_menu
         varchar(255)
         null
         comment '菜单名称',
+    menu_url
+        varchar(255)
+        not null
+        comment '菜单路径',
+    menu_icon
+        varchar(255)
+        not null
+        comment '菜单图标',
     sort_code
         int
         not null comment '排序值',
