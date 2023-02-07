@@ -464,6 +464,7 @@ public class PersistentCustomServiceImpl
 
     private String[] ddlGenerate(PersistentBean persistent, List<PropertyBean> propertyList, String poName, boolean isBeanFlag) {
         StringBuilder sb = new StringBuilder();
+        sb.append("drop table if exists data_user.t_").append(persistent.getPersistentCode()).append(";\r\n");
         sb.append("create table if not exists data_user.t_").append(persistent.getPersistentCode()).append("\r\n");
         sb.append("(\r\n");
         sb.append("    id\r\n");
@@ -1136,13 +1137,15 @@ public class PersistentCustomServiceImpl
         }
         List<PersistentFormBean> persistentFormBeanList = new PersistentFormBean()
                 .selectList(new LambdaQueryWrapper<PersistentFormBean>()
-                        .eq(PersistentFormBean::getPersistentId, persistent.getId()));
+                        .eq(PersistentFormBean::getPersistentId, persistent.getId())
+                        .orderByAsc(PersistentFormBean::getSortCode));
         JSONObject persistentForm = new JSONObject();
         JSONArray configFormArr = new JSONArray();
         for (PersistentFormBean persistentFormBean : persistentFormBeanList) {
             List<PersistentFormConfigBean> persistentFormConfigBeanList = new PersistentFormConfigBean()
                     .selectList(new LambdaQueryWrapper<PersistentFormConfigBean>()
-                            .eq(PersistentFormConfigBean::getPersistentFormId, persistentFormBean.getId()));
+                            .eq(PersistentFormConfigBean::getPersistentFormId, persistentFormBean.getId())
+                            .orderByAsc(PersistentFormConfigBean::getSortCode));
             for (PersistentFormConfigBean persistentFormConfigBean : persistentFormConfigBeanList) {
                 JSONObject formConfig = new JSONObject();
                 formConfig.put("id", persistentFormConfigBean.getId());
@@ -1207,7 +1210,8 @@ public class PersistentCustomServiceImpl
         persistentForm.put("CONFIG", configFormArr);
         List<PersistentTableBean> persistentTableBeanList = new PersistentTableBean()
                 .selectList(new LambdaQueryWrapper<PersistentTableBean>()
-                        .eq(PersistentTableBean::getPersistentId, persistent.getId()));
+                        .eq(PersistentTableBean::getPersistentId, persistent.getId())
+                        .orderByAsc(PersistentTableBean::getSortCode));
         JSONObject persistentTable = new JSONObject();
         JSONObject searchForm = new JSONObject();
         JSONArray operationArr = new JSONArray();

@@ -1,3 +1,4 @@
+drop table if exists data_user.t_enterprise;
 create table if not exists data_user.t_enterprise
 (
     id

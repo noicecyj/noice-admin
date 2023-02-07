@@ -1,3 +1,4 @@
+drop table if exists data_user.t_menu;
 create table if not exists data_user.t_menu
 (
     id
@@ -20,6 +21,14 @@ create table if not exists data_user.t_menu
         varchar(255)
         not null
         comment '菜单图标',
+    menu_component
+        varchar(255)
+        not null
+        comment '菜单组件',
+    menu_parent_url
+        varchar(255)
+        not null
+        comment '菜单父路径',
     sort_code
         int
         not null comment '排序值',

@@ -1,3 +1,4 @@
+drop table if exists data_user.t_app_service;
 create table if not exists data_user.t_app_service
 (
     id

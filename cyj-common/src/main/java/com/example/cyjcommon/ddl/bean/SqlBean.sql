@@ -1,3 +1,4 @@
+drop table if exists data_user.t_sql;
 create table if not exists data_user.t_sql
 (
     id
