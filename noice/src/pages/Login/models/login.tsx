@@ -28,7 +28,7 @@ export default {
           // @ts-ignore
           cookie.save('token', res.data.accessToken);
           // @ts-ignore
-          history.push('/admin');
+          history.push('/cyj-entity-creater');
           Message.success('登录成功');
         }).catch(() => {
         Message.success('登录失败');

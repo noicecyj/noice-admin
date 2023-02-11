@@ -1,67 +1,119 @@
 import BasicLayout from '@/layouts/BasicLayout';
 import UserLayout from '@/layouts/UserLayout';
 import LoginPage from '@/pages/Login';
-import PersistentPage from '@/pages/Persistent';
-import PropertyPage from '@/pages/Property';
-import CatalogPage from '@/pages/Catalog';
-import DictionaryPage from "@/pages/Dictionary";
+import RolePage from '@/pages/Role';
 import SqlPage from '@/pages/Sql';
 import AppServicePage from '@/pages/AppService';
-import EnterprisePage from '@/pages/Enterprise';
-import UserPage from '@/pages/User';
-import RolePage from '@/pages/Role';
+import DictionaryPage from '@/pages/Dictionary';
+import PersistentFormPage from '@/pages/PersistentForm';
+import CatalogPage from '@/pages/Catalog';
+import PersistentTablePage from '@/pages/PersistentTable';
 import AuthorityPage from '@/pages/Authority';
+import PropertyPage from '@/pages/Property';
+import PersistentTableSearchConfigPage from '@/pages/PersistentTableSearchConfig';
+import PersistentPage from '@/pages/Persistent';
+import PersistentTableConfigPage from '@/pages/PersistentTableConfig';
+import UserPage from '@/pages/User';
+import EnterprisePage from '@/pages/Enterprise';
+import RoleAuthorityPage from '@/pages/RoleAuthority';
+import UserRolePage from '@/pages/UserRole';
+import PersistentFormConfigPage from '@/pages/PersistentFormConfig';
+import MenuPage from '@/pages/Menu';
 
 const routerConfig = [
   {
-    path: '/admin',
+    path: '/cyj-user',
     component: BasicLayout,
     children: [
       {
-        path: '/Persistent',
-        component: PersistentPage,
+        path: '/Role',
+        component: RolePage,
+      },
+      {
+        path: '/Authority',
+        component: AuthorityPage,
+      },
+      {
+        path: '/User',
+        component: UserPage,
+      },
+      {
+        path: '/Enterprise',
+        component: EnterprisePage,
+      },
+      {
+        path: '/RoleAuthority',
+        component: RoleAuthorityPage,
+      },
+      {
+        path: '/UserRole',
+        component: UserRolePage,
+      },
+    ],
+  },
+  {
+    path: '/cyj-entity-creater',
+    component: BasicLayout,
+    children: [
+      {
+        path: '/AppService',
+        component: AppServicePage,
+      },
+      {
+        path: '/PersistentForm',
+        component: PersistentFormPage,
+      },
+      {
+        path: '/PersistentTable',
+        component: PersistentTablePage,
       },
       {
         path: '/Property',
         component: PropertyPage,
       },
       {
-        path: '/Catalog',
-        component: CatalogPage,
+        path: '/PersistentTableSearchConfig',
+        component: PersistentTableSearchConfigPage,
       },
+      {
+        path: '/Persistent',
+        component: PersistentPage,
+      },
+      {
+        path: '/PersistentTableConfig',
+        component: PersistentTableConfigPage,
+      },
+      {
+        path: '/PersistentFormConfig',
+        component: PersistentFormConfigPage,
+      },
+      {
+        path: '/Menu',
+        component: MenuPage,
+      },
+    ],
+  },
+  {
+    path: '/cyj-dictionary',
+    component: BasicLayout,
+    children: [
       {
         path: '/Dictionary',
         component: DictionaryPage,
       },
       {
-        path: '/Sql',
-        component: SqlPage,
-      },
-      {
-        path: '/AppService',
-        component: AppServicePage,
+        path: '/Catalog',
+        component: CatalogPage,
       },
     ],
   },
   {
-    path: '/auth',
+    path: '/cyj-query',
     component: BasicLayout,
     children: [
       {
-        path: '/enterprise',
-        component: EnterprisePage,
-      },
-      {
-        path: '/user',
-        component: UserPage,
-      },
-      {
-        path: '/role',
-        component: RolePage,
-      },
-      {
-        path: '/authority',
-        component: AuthorityPage,
+        path: '/Sql',
+        component: SqlPage,
       },
     ],
   },
@@ -79,5 +131,6 @@ const routerConfig = [
     path: '/',
     redirect: '/user/login',
   },
-];
+]
+
 export default routerConfig;
