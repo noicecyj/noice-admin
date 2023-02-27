@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.cyjcommon.contants.Constant;
 import com.example.cyjcommon.entity.bean.AppServiceBean;
 import com.example.cyjcommon.entity.bean.AuthorityBean;
+import com.example.cyjcommon.entity.bean.CatalogBean;
+import com.example.cyjcommon.entity.bean.DictionaryBean;
 import com.example.cyjcommon.entity.bean.PersistentBean;
 import com.example.cyjcommon.entity.bean.PersistentFormBean;
 import com.example.cyjcommon.entity.bean.PersistentFormConfigBean;
@@ -1158,24 +1160,34 @@ public class PersistentCustomServiceImpl
                 formConfig.put("formDirection", persistentFormConfigBean.getPersistentFormConfigDirection());
                 formConfig.put("formEdit", persistentFormConfigBean.getPersistentFormConfigEdit() == 1);
                 if (StringUtils.isNotEmpty(persistentFormConfigBean.getPersistentFormConfigDataSource())) {
-                    if ("YES_AND_NO".equals(persistentFormConfigBean.getPersistentFormConfigDataSource())) {
-                        List<Map> yesAndNo = new ArrayList<>();
-                        Map<String, Object> yes = new HashMap<>();
-                        yes.put("label", "是");
-                        yes.put("value", 1);
-                        Map<String, Object> no = new HashMap<>();
-                        no.put("label", "否");
-                        no.put("value", 0);
-                        yesAndNo.add(yes);
-                        yesAndNo.add(no);
-                        formConfig.put("formDataSource", yesAndNo);
-                    } else {
-                        SqlBean sqlBean = new SqlBean().selectOne(new LambdaQueryWrapper<SqlBean>()
-                                .eq(SqlBean::getSqlCode, persistentFormConfigBean.getPersistentFormConfigDataSource()));
+                    SqlBean sqlBean = new SqlBean().selectOne(new LambdaQueryWrapper<SqlBean>()
+                            .eq(SqlBean::getSqlCode, persistentFormConfigBean.getPersistentFormConfigDataSource()));
+                    if (sqlBean != null) {
                         Map<String, String> sql = new HashMap<>();
                         sql.put("sql", sqlBean.getSqlStr());
                         List<Map> map = sqlMapper.executeSql(sql);
                         formConfig.put("formDataSource", map);
+                    } else {
+                        CatalogBean catalogBean = new CatalogBean()
+                                .selectOne(new LambdaQueryWrapper<CatalogBean>()
+                                        .eq(CatalogBean::getCatalogCode, persistentFormConfigBean.getPersistentFormConfigDataSource())
+                                        .eq(CatalogBean::getStatus, Constant.STATUS));
+                        List<DictionaryBean> dictionaryBeanList = new DictionaryBean()
+                                .selectList(new LambdaQueryWrapper<DictionaryBean>()
+                                        .eq(DictionaryBean::getCatalogId, catalogBean.getId())
+                                        .eq(DictionaryBean::getStatus, Constant.STATUS));
+                        List<Map> formDataSource = new ArrayList<>();
+                        for (DictionaryBean dictionaryBean : dictionaryBeanList) {
+                            Map<String, Object> data = new HashMap<>();
+                            data.put("label", dictionaryBean.getDictionaryName());
+                            if (StringUtils.isNumeric(dictionaryBean.getDictionaryCode())) {
+                                data.put("value", Integer.parseInt(dictionaryBean.getDictionaryCode()));
+                            } else {
+                                data.put("value", dictionaryBean.getDictionaryCode());
+                            }
+                            formDataSource.add(data);
+                        }
+                        formConfig.put("formDataSource", formDataSource);
                     }
                 }
                 configFormArr.add(formConfig);

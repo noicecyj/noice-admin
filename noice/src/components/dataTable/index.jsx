@@ -87,7 +87,7 @@ function DataTable(props) {
               if (search.searchMode === 'Input') {
                 return (
                   <FormItem
-                    colSpan={2}
+                    colSpan={3}
                     label={search.searchName}
                     key={search.id}>
                     <Input
@@ -99,7 +99,7 @@ function DataTable(props) {
               } else if (search.searchMode === 'Select' || search.searchMode === 'ManyToOne') {
                 return (
                   <FormItem
-                    colSpan={2}
+                    colSpan={3}
                     label={`${search.searchName}`}
                     key={search.id}>
                     <Select
@@ -113,28 +113,33 @@ function DataTable(props) {
               }
             })}
           </Form>
-          <Box direction="row" spacing={15} margin={[10, 0]} justify='flex-end'>
-            {!!search && <Button type="primary" onClick={() => search()}> 查询 </Button>}
-            {!!reset && <Button onClick={() => reset()}> 重置 </Button>}
+          <Box>
+            <Box direction="row" spacing={15} margin={[10, 0]} justify="right">
+              {!!search && <Button type="primary" onClick={() => search()} className={styles.boxButton}> 查询 </Button>}
+              {!!reset && <Button onClick={() => reset()}> 重置 </Button>}
+            </Box>
+            <Box direction="row" spacing={15} margin={[10, 0]}>
+              {!!addItem && <Button type="primary" onClick={() => addItem()}> 添加 </Button>}
+
+              {
+                titleButton.map(operation => {
+                  // @ts-ignore
+                  let url = operation.persistentTableConfigMethod;
+                  // @ts-ignore
+                  let name = operation.persistentTableConfigName;
+                  return (
+                    <Button
+                      type="normal"
+                      onClick={() => runCustomMethod({url})}
+                      key={operation.persistentTableConfigCode}
+                    > {name} </Button>
+                  )
+                })
+              }
+            </Box>
+
           </Box>
-          <Box direction="row" spacing={15} margin={[10, 0]}>
-            {!!addItem && <Button type="primary" onClick={() => addItem()}> 添加 </Button>}
-            {
-              titleButton.map(operation => {
-                // @ts-ignore
-                let url = operation.persistentTableConfigMethod;
-                // @ts-ignore
-                let name = operation.persistentTableConfigName;
-                return (
-                  <Button
-                    type="normal"
-                    onClick={() => runCustomMethod({url})}
-                    key={operation.persistentTableConfigCode}
-                  > {name} </Button>
-                )
-              })
-            }
-          </Box>
+
           <Loading
             tip="加载中..."
             visible={visibleLoading}
@@ -202,5 +207,6 @@ function DataTable(props) {
     </ResponsiveGrid>
   );
 }
+
 
 export default DataTable;
