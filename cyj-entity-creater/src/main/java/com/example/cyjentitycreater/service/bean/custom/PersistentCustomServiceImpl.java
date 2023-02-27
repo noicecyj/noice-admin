@@ -1174,22 +1174,7 @@ public class PersistentCustomServiceImpl
                                 .selectOne(new LambdaQueryWrapper<CatalogBean>()
                                         .eq(CatalogBean::getCatalogCode, persistentFormConfigBean.getPersistentFormConfigDataSource())
                                         .eq(CatalogBean::getStatus, Constant.STATUS));
-                        List<DictionaryBean> dictionaryBeanList = new DictionaryBean()
-                                .selectList(new LambdaQueryWrapper<DictionaryBean>()
-                                        .eq(DictionaryBean::getCatalogId, catalogBean.getId())
-                                        .eq(DictionaryBean::getStatus, Constant.STATUS));
-                        List<Map> formDataSource = new ArrayList<>();
-                        for (DictionaryBean dictionaryBean : dictionaryBeanList) {
-                            Map<String, Object> data = new HashMap<>();
-                            data.put("label", dictionaryBean.getDictionaryName());
-                            if (StringUtils.isNumeric(dictionaryBean.getDictionaryCode())) {
-                                data.put("value", Integer.parseInt(dictionaryBean.getDictionaryCode()));
-                            } else {
-                                data.put("value", dictionaryBean.getDictionaryCode());
-                            }
-                            formDataSource.add(data);
-                        }
-                        formConfig.put("formDataSource", formDataSource);
+                        formConfig.put("formDataSource", getDictionary(catalogBean));
                     }
                 }
                 configFormArr.add(formConfig);
@@ -1268,11 +1253,20 @@ public class PersistentCustomServiceImpl
                 if (StringUtils.isNotEmpty(persistentTableSearchConfigBean.getPersistentTableSearchConfigDataSource())) {
                     SqlBean sqlBean = new SqlBean().selectOne(new LambdaQueryWrapper<SqlBean>()
                             .eq(SqlBean::getSqlCode, persistentTableSearchConfigBean.getPersistentTableSearchConfigDataSource()));
-                    Map<String, String> sql = new HashMap<>();
-                    sql.put("sql", sqlBean.getSqlStr());
-                    List<Map> map = sqlMapper.executeSql(sql);
-                    searchConfig.put("searchDataSource", map);
-                    logger.info("searchDataSource:{}", map);
+                    if (sqlBean != null) {
+                        Map<String, String> sql = new HashMap<>();
+                        sql.put("sql", sqlBean.getSqlStr());
+                        List<Map> map = sqlMapper.executeSql(sql);
+                        searchConfig.put("searchDataSource", map);
+                        logger.info("searchDataSource:{}", map);
+                    } else {
+                        CatalogBean catalogBean = new CatalogBean()
+                                .selectOne(new LambdaQueryWrapper<CatalogBean>()
+                                        .eq(CatalogBean::getCatalogCode, persistentTableSearchConfigBean.getPersistentTableSearchConfigDataSource())
+                                        .eq(CatalogBean::getStatus, Constant.STATUS));
+                        searchConfig.put("searchDataSource", getDictionary(catalogBean));
+                    }
+
                 }
                 searchConfigArr.add(searchConfig);
             }
@@ -1295,6 +1289,25 @@ public class PersistentCustomServiceImpl
         jsonObject.put("dataForm", persistentForm);
         jsonObject.put("dataTable", persistentTable);
         return jsonObject;
+    }
+
+    private List<Map> getDictionary(CatalogBean catalogBean) {
+        List<DictionaryBean> dictionaryBeanList = new DictionaryBean()
+                .selectList(new LambdaQueryWrapper<DictionaryBean>()
+                        .eq(DictionaryBean::getCatalogId, catalogBean.getId())
+                        .eq(DictionaryBean::getStatus, Constant.STATUS));
+        List<Map> formDataSource = new ArrayList<>();
+        for (DictionaryBean dictionaryBean : dictionaryBeanList) {
+            Map<String, Object> data = new HashMap<>();
+            data.put("label", dictionaryBean.getDictionaryName());
+            if (StringUtils.isNumeric(dictionaryBean.getDictionaryCode())) {
+                data.put("value", Integer.parseInt(dictionaryBean.getDictionaryCode()));
+            } else {
+                data.put("value", dictionaryBean.getDictionaryCode());
+            }
+            formDataSource.add(data);
+        }
+        return formDataSource;
     }
 
     private static final Logger logger = LoggerFactory.getLogger(PersistentCustomServiceImpl.class);
