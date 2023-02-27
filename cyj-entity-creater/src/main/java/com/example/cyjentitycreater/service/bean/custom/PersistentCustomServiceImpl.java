@@ -1,5 +1,6 @@
 package com.example.cyjentitycreater.service.bean.custom;
 
+import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -24,6 +25,7 @@ import com.example.cyjcommon.utils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
@@ -1302,9 +1304,37 @@ public class PersistentCustomServiceImpl
         logger.info("PersistentService.addOneBefore:{}", joinPoint);
     }
 
-    @After(value = "execution(* com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl.addOne(..))")
+    @AfterReturning(value = "execution(* com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl.addOne(..))")
     public void addOneAfter(JoinPoint joinPoint) {
         logger.info("PersistentService.addOneAfter:{}", joinPoint);
+        PersistentBean po = JSON.parseObject(JSON.toJSONString(joinPoint.getArgs()[0]), PersistentBean.class);
+        PropertyBean propertyName = new PropertyBean();
+        propertyName.setPropertyName(po.getPersistentName() + "名称");
+        propertyName.setPropertyCode(po.getPersistentCode() + "_name");
+        propertyName.setPersistentId(po.getId());
+        propertyName.setPropertyLength(255);
+        propertyName.setPropertyNull(0);
+        propertyName.setPropertyRelation(0);
+        propertyName.setPropertyType("String");
+        propertyName.setStatus(Constant.STATUS);
+        propertyName.setSortCode(1);
+        propertyName.setCreatedBy("sys");
+        propertyName.setUpdatedBy("sys");
+        propertyName.insert();
+
+        PropertyBean propertyCode = new PropertyBean();
+        propertyCode.setPropertyName(po.getPersistentName() + "编码");
+        propertyCode.setPropertyCode(po.getPersistentCode() + "_code");
+        propertyCode.setPersistentId(po.getId());
+        propertyCode.setPropertyLength(255);
+        propertyCode.setPropertyNull(0);
+        propertyCode.setPropertyRelation(0);
+        propertyCode.setPropertyType("String");
+        propertyCode.setStatus(Constant.STATUS);
+        propertyCode.setSortCode(1);
+        propertyCode.setCreatedBy("sys");
+        propertyCode.setUpdatedBy("sys");
+        propertyCode.insert();
     }
 
     @Before(value = "execution(* com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl.deleteOne(..))")

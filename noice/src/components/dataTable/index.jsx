@@ -57,7 +57,7 @@ function DataTable(props) {
                 type="normal"
                 size="small"
                 key={operation.persistentTableConfigCode}
-                onClick={() => runCustomMethod({record, url})}
+                onClick={() => runCustomMethod({obj: record, url})}
               > {name} </Button>
             )
           })

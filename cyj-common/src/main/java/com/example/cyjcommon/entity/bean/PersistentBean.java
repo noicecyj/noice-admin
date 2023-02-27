@@ -33,6 +33,9 @@ public class PersistentBean extends Model<PersistentBean> {
     @TableField("app_service_id")
     private String appServiceId;
 
+    @TableField("persistent_id")
+    private String persistentId;
+
     @TableField("status")
     private int status;
 

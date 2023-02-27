@@ -43,6 +43,8 @@ public class PersistentServiceImpl
         return new LambdaQueryWrapper<PersistentBean>()
                 .eq(StringUtils.isNotEmpty(po.getAppServiceId()),
                         PersistentBean::getAppServiceId, po.getAppServiceId())
+                .eq(StringUtils.isNotEmpty(po.getPersistentId()),
+                        PersistentBean::getPersistentId, po.getPersistentId())
                 .like(StringUtils.isNotEmpty(po.getPersistentName()),
                         PersistentBean::getPersistentName, po.getPersistentName())
                 .like(StringUtils.isNotEmpty(po.getPersistentCode()),

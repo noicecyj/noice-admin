@@ -21,6 +21,10 @@ create table if not exists data_user.t_persistent
         varchar(36)
         null
         comment '服务id',
+    persistent_id
+        varchar(36)
+        null
+        comment '实体id',
     sort_code
         int
         not null comment '排序值',
