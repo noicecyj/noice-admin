@@ -1168,6 +1168,10 @@ public class PersistentCustomServiceImpl
                         Map<String, String> sql = new HashMap<>();
                         sql.put("sql", sqlBean.getSqlStr());
                         List<Map> map = sqlMapper.executeSql(sql);
+                        Map<String, String> wu = new HashMap<>();
+                        wu.put("label", "无");
+                        wu.put("value", null);
+                        map.add(wu);
                         formConfig.put("formDataSource", map);
                     } else {
                         CatalogBean catalogBean = new CatalogBean()
@@ -1307,6 +1311,10 @@ public class PersistentCustomServiceImpl
             }
             formDataSource.add(data);
         }
+        Map<String, String> wu = new HashMap<>();
+        wu.put("label", "无");
+        wu.put("value", null);
+        formDataSource.add(wu);
         return formDataSource;
     }
 
