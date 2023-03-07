@@ -27,9 +27,12 @@ spring:
   datasource:
     platform: mysql
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/data_user?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    url: jdbc:mysql://123.249.114.102:3306/data_user?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: root
     password: 68762306
+  #redis
+  redis:
+    host: 123.249.114.102
 ribbon:
   ReadTimeout: 10000
   ConnectTimeout: 10000

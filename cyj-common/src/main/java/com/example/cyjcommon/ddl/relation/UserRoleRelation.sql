@@ -13,12 +13,6 @@ create table if not exists data_user.t_user_role
         varchar(36)
         null
         comment '角色id',
-    sort_code
-        int
-        not null comment '排序值',
-    status
-        int
-        not null comment '状态',
     created_date
         timestamp default CURRENT_TIMESTAMP
         null comment '创建时间',
