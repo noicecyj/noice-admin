@@ -51,11 +51,7 @@ public class PersistentCustomServiceImpl
         extends ServiceImpl<PersistentMapper, PersistentBean>
         implements IService<PersistentBean> {
 
-    private final static String componentPath = "C:/Users/noice/IdeaProjects/noice-admin/noice/src/pages/";
     private final static String POST = "POST";
-
-    private final static String commonPath = "C:/Users/noice/IdeaProjects/noice-admin/cyj-common/src/main/java/com/example/cyjcommon";
-
     private SqlMapper sqlMapper;
 
     @Autowired
@@ -380,23 +376,25 @@ public class PersistentCustomServiceImpl
         if (appServiceBean == null) {
             return;
         }
+        DictionaryBean backEnd = new DictionaryBean().selectOne(new LambdaQueryWrapper<DictionaryBean>().eq(DictionaryBean::getDictionaryCode, "BACK_END"));
+        DictionaryBean frontEnd = new DictionaryBean().selectOne(new LambdaQueryWrapper<DictionaryBean>().eq(DictionaryBean::getDictionaryCode, "FRONT_END"));
         //服务路径
         String appPath = appServiceBean.getAppServicePath();
         Map<String, String> entityObj = new HashMap<>();
-        entityObj.put(commonPath + "/entity", poName + ".java");
-        entityObj.put(commonPath + "/dao", poName + "Dao.java");
+        entityObj.put(backEnd.getDictionaryCode() + "/entity", poName + ".java");
+        entityObj.put(backEnd.getDictionaryCode() + "/dao", poName + "Dao.java");
         entityObj.put(appPath + "/service/auto", poName + "Service.java");
         entityObj.put(appPath + "/controller/auto", poName + "Controller.java");
-        entityObj.put(componentPath + poName + "/services", poName + ".tsx");
-        entityObj.put(componentPath + poName + "/models", poName + ".tsx");
-        entityObj.put(componentPath + poName + "/view", poName + ".tsx");
-        BeanUtils.deleteJavaFile(componentPath + poName, "index.tsx");
-        BeanUtils.deleteJavaFile(componentPath + poName, "store.ts");
+        entityObj.put(frontEnd.getDictionaryCode() + poName + "/services", poName + ".tsx");
+        entityObj.put(frontEnd.getDictionaryCode() + poName + "/models", poName + ".tsx");
+        entityObj.put(frontEnd.getDictionaryCode() + poName + "/view", poName + ".tsx");
+        BeanUtils.deleteJavaFile(frontEnd.getDictionaryCode() + poName, "index.tsx");
+        BeanUtils.deleteJavaFile(frontEnd.getDictionaryCode() + poName, "store.ts");
         Map<String, String> entityCustomObj = new HashMap<>();
         entityCustomObj.put(appPath + "/service/custom", poName + "CustomService.java");
         entityCustomObj.put(appPath + "/controller/custom", poName + "CustomController.java");
         deleteEntityCodeHandler(entityObj, entityCustomObj);
-        BeanUtils.deleteJavaFile(componentPath + poName);
+        BeanUtils.deleteJavaFile(frontEnd.getDictionaryCode() + poName);
     }
 
     private void sqlHandler(PersistentBean persistent) {
@@ -441,20 +439,17 @@ public class PersistentCustomServiceImpl
                 .orderByAsc(PropertyBean::getSortCode));
         Map<String, String[]> entityObj = new HashMap<>();
         boolean isBeanFlag = persistent.getPersistentRelation() == 0;
-        entityObj.put(commonPath + "/ddl" + (isBeanFlag ? "/bean" : "/relation"),
-                ddlGenerate(persistent, propertyList, poName, isBeanFlag));
-        entityObj.put(commonPath + "/entity" + (isBeanFlag ? "/bean" : "/relation"),
-                poGenerate(persistent, propertyList, poName, isBeanFlag));
-        entityObj.put(commonPath + "/mapper" + (isBeanFlag ? "/bean" : "/relation"),
-                mapperGenerate(poName, isBeanFlag));
-        entityObj.put(appPath + "/service" + (isBeanFlag ? "/bean" : "/relation") + "/auto",
-                serviceGenerate(propertyList, poName, appPath, isBeanFlag));
-        entityObj.put(appPath + "/controller" + (isBeanFlag ? "/bean" : "/relation") + "/auto",
-                controllerGenerate(poName, appPath, appApi, isBeanFlag));
-        entityObj.put(componentPath + poName + "/models", modelsGenerate(appApi, poName, persistentCode));
+        DictionaryBean backEnd = new DictionaryBean().selectOne(new LambdaQueryWrapper<DictionaryBean>().eq(DictionaryBean::getDictionaryCode, "BACK_END"));
+        DictionaryBean frontEnd = new DictionaryBean().selectOne(new LambdaQueryWrapper<DictionaryBean>().eq(DictionaryBean::getDictionaryCode, "FRONT_END"));
+        entityObj.put(backEnd.getDictionaryCode() + "/ddl" + (isBeanFlag ? "/bean" : "/relation"), ddlGenerate(persistent, propertyList, poName, isBeanFlag));
+        entityObj.put(backEnd.getDictionaryCode() + "/entity" + (isBeanFlag ? "/bean" : "/relation"), poGenerate(persistent, propertyList, poName, isBeanFlag));
+        entityObj.put(backEnd.getDictionaryCode() + "/mapper" + (isBeanFlag ? "/bean" : "/relation"), mapperGenerate(poName, isBeanFlag));
+        entityObj.put(appPath + "/service" + (isBeanFlag ? "/bean" : "/relation") + "/auto", serviceGenerate(propertyList, poName, appPath, isBeanFlag));
+        entityObj.put(appPath + "/controller" + (isBeanFlag ? "/bean" : "/relation") + "/auto", controllerGenerate(poName, appPath, appApi, isBeanFlag));
+        entityObj.put(frontEnd.getDictionaryCode() + poName + "/models", modelsGenerate(appApi, poName, persistentCode));
         try {
-            BeanUtils.createJavaFile(componentPath + poName, indexGenerate(poName));
-            BeanUtils.createJavaFile(componentPath + poName, storeGenerate(poName));
+            BeanUtils.createJavaFile(frontEnd.getDictionaryCode() + poName, indexGenerate(poName));
+            BeanUtils.createJavaFile(frontEnd.getDictionaryCode() + poName, storeGenerate(poName));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
