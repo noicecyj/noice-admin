@@ -15,7 +15,7 @@ create table if not exists data_user.t_menu
         comment '菜单名称',
     menu_url
         varchar(255)
-        not null
+        null
         comment '菜单路径',
     menu_icon
         varchar(255)
@@ -27,7 +27,7 @@ create table if not exists data_user.t_menu
         comment '菜单组件',
     menu_parent_url
         varchar(255)
-        null
+        not null
         comment '菜单父路径',
     sort_code
         int
