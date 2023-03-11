@@ -36,9 +36,9 @@ public class MenuCustomServiceImpl
         extends ServiceImpl<MenuMapper, MenuBean>
         implements IService<MenuBean> {
 
-    private final static String routePath = "C:/Users/noice/IdeaProjects/noice-admin/noice/src";
+    private final static String routePath = "D:/noice-admin/noice/src";
 
-    private final static String menuConfigPath = "C:/Users/noice/IdeaProjects/noice-admin/noice/src/layouts/BasicLayout";
+    private final static String menuConfigPath = "D:/noice-admin/noice/src/layouts/BasicLayout";
 
     public void generateMenuFile() {
         List<AppServiceBean> appServiceBeanList = new AppServiceBean()
