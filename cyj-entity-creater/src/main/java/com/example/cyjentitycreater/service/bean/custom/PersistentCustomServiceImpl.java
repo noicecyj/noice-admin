@@ -1304,7 +1304,7 @@ public class PersistentCustomServiceImpl
         List<Map> formDataSource = new ArrayList<>();
         for (DictionaryBean dictionaryBean : dictionaryBeanList) {
             Map<String, Object> data = new HashMap<>();
-            data.put("label", dictionaryBean.getDictionaryName());
+            data.put("label", dictionaryBean.getDictionaryCode() + "-" + dictionaryBean.getDictionaryName());
             if (StringUtils.isNumeric(dictionaryBean.getDictionaryCode())) {
                 data.put("value", Integer.parseInt(dictionaryBean.getDictionaryCode()));
             } else {
