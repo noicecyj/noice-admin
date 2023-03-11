@@ -376,8 +376,8 @@ public class PersistentCustomServiceImpl
         if (appServiceBean == null) {
             return;
         }
-        DictionaryBean backEnd = new DictionaryBean().selectOne(new LambdaQueryWrapper<DictionaryBean>().eq(DictionaryBean::getDictionaryCode, "BACK_END"));
-        DictionaryBean frontEnd = new DictionaryBean().selectOne(new LambdaQueryWrapper<DictionaryBean>().eq(DictionaryBean::getDictionaryCode, "FRONT_END"));
+        DictionaryBean backEnd = new DictionaryBean().selectOne(new LambdaQueryWrapper<DictionaryBean>().eq(DictionaryBean::getDictionaryName, "BACK_END"));
+        DictionaryBean frontEnd = new DictionaryBean().selectOne(new LambdaQueryWrapper<DictionaryBean>().eq(DictionaryBean::getDictionaryName, "FRONT_END"));
         //服务路径
         String appPath = appServiceBean.getAppServicePath();
         Map<String, String> entityObj = new HashMap<>();
@@ -439,8 +439,8 @@ public class PersistentCustomServiceImpl
                 .orderByAsc(PropertyBean::getSortCode));
         Map<String, String[]> entityObj = new HashMap<>();
         boolean isBeanFlag = persistent.getPersistentRelation() == 0;
-        DictionaryBean backEnd = new DictionaryBean().selectOne(new LambdaQueryWrapper<DictionaryBean>().eq(DictionaryBean::getDictionaryCode, "BACK_END"));
-        DictionaryBean frontEnd = new DictionaryBean().selectOne(new LambdaQueryWrapper<DictionaryBean>().eq(DictionaryBean::getDictionaryCode, "FRONT_END"));
+        DictionaryBean backEnd = new DictionaryBean().selectOne(new LambdaQueryWrapper<DictionaryBean>().eq(DictionaryBean::getDictionaryName, "BACK_END"));
+        DictionaryBean frontEnd = new DictionaryBean().selectOne(new LambdaQueryWrapper<DictionaryBean>().eq(DictionaryBean::getDictionaryName, "FRONT_END"));
         entityObj.put(backEnd.getDictionaryCode() + "/ddl" + (isBeanFlag ? "/bean" : "/relation"), ddlGenerate(persistent, propertyList, poName, isBeanFlag));
         entityObj.put(backEnd.getDictionaryCode() + "/entity" + (isBeanFlag ? "/bean" : "/relation"), poGenerate(persistent, propertyList, poName, isBeanFlag));
         entityObj.put(backEnd.getDictionaryCode() + "/mapper" + (isBeanFlag ? "/bean" : "/relation"), mapperGenerate(poName, isBeanFlag));
@@ -484,12 +484,14 @@ public class PersistentCustomServiceImpl
             }
             sb.append("        comment '").append(property.getPropertyName()).append("',\r\n");
         }
-        sb.append("    sort_code\r\n");
-        sb.append("        int\r\n");
-        sb.append("        not null comment '排序值',\r\n");
-        sb.append("    status\r\n");
-        sb.append("        int\r\n");
-        sb.append("        not null comment '状态',\r\n");
+        if (isBeanFlag) {
+            sb.append("    sort_code\r\n");
+            sb.append("        int\r\n");
+            sb.append("        not null comment '排序值',\r\n");
+            sb.append("    status\r\n");
+            sb.append("        int\r\n");
+            sb.append("        not null comment '状态',\r\n");
+        }
         sb.append("    created_date\r\n");
         sb.append("        timestamp default CURRENT_TIMESTAMP\r\n");
         sb.append("        null comment '创建时间',\r\n");
