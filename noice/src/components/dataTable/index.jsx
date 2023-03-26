@@ -41,7 +41,7 @@ function DataTable(props) {
   const pageRender = (value, index, record) => {
     return (
       <div className={styles.opt}>
-        <Box direction="row" spacing={5} justify="right">
+        <Box direction="row" spacing={5}>
           {
             subData.map(sub => {
               // @ts-ignore
@@ -143,7 +143,7 @@ function DataTable(props) {
             })}
           </Form>
           <Box>
-            <Box direction="row" spacing={15} margin={[10, 0]} justify="right">
+            <Box direction="row" spacing={15} margin={[10, 0]} justify="center">
               {!!search && <Button type="primary" onClick={() => search()} className={styles.boxButton}> 查询 </Button>}
               {!!reset && <Button onClick={() => reset()}> 重置 </Button>}
             </Box>
