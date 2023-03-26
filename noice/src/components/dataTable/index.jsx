@@ -2,7 +2,7 @@
 import React from 'react';
 import {Box, Button, Dialog, Form, Input, Loading, Pagination, ResponsiveGrid, Select, Table} from '@alifd/next';
 import styles from './index.module.scss';
-import {useHistory, useLocation} from "ice";
+// import {useHistory, useLocation} from "ice";
 
 const {Cell} = ResponsiveGrid;
 const FormItem = Form.Item;
@@ -10,11 +10,13 @@ const FormItem = Form.Item;
 function DataTable(props) {
   const loadingStyle = {width: '100%'};
 
-  const history = useHistory();
+  // const history = useHistory();
+  //
+  // const location = useLocation();
 
-  const location = useLocation();
-  // console.log('history state', location.state);
   const {
+    history,
+    location,
     configItems,
     searchItems,
     titleButton,
@@ -35,11 +37,11 @@ function DataTable(props) {
     reset,
     subData,
   } = props;
-
+  console.log('history state', location.state);
   const pageRender = (value, index, record) => {
     return (
       <div className={styles.opt}>
-        <Box direction="row" spacing={5}>
+        <Box direction="row" spacing={5} justify="right">
           {
             subData.map(sub => {
               // @ts-ignore

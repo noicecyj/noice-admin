@@ -10,6 +10,8 @@ function PageModel(props) {
   const {
     state,
     dispatchers,
+    history,
+    location,
   } = props;
 
   const {
@@ -59,6 +61,8 @@ function PageModel(props) {
         searchFormValue={state.searchForm}
         dispatchers={value => setSearchDataForm(value)}
         subData={state.subData}
+        history={history}
+        location={location}
       />
       <DataFormTemple
         configItems={state.formConfig}

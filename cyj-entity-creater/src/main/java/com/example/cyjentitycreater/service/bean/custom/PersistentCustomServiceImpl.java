@@ -530,12 +530,14 @@ public class PersistentCustomServiceImpl
                         "import PageModel from \"@/components/pageModel\";\r\n" +
                         "import pageStore from \"@/pages/" + poName + "/store\";\r\n" +
                         "\r\n" +
-                        "function " + poName + "Page() {\r\n" +
+                        "function " + poName + "Page(props) {\r\n" +
+                        "\r\n" +
+                        "  const {history, location} = props;\r\n" +
                         "\r\n" +
                         "  const [state, dispatchers] = pageStore.useModel('" + poName + "');\r\n" +
                         "\r\n" +
                         "  return (\r\n" +
-                        "    <PageModel state={state} dispatchers={dispatchers}/>\r\n" +
+                        "    <PageModel state={state} dispatchers={dispatchers} history={history} location={location}/>\r\n" +
                         "  );\r\n" +
                         "}\r\n" +
                         "\r\n" +
