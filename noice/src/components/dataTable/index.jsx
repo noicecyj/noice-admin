@@ -2,6 +2,7 @@
 import React from 'react';
 import {Box, Button, Dialog, Form, Input, Loading, Pagination, ResponsiveGrid, Select, Table} from '@alifd/next';
 import styles from './index.module.scss';
+import {useHistory, useLocation} from "ice";
 
 const {Cell} = ResponsiveGrid;
 const FormItem = Form.Item;
@@ -9,6 +10,10 @@ const FormItem = Form.Item;
 function DataTable(props) {
   const loadingStyle = {width: '100%'};
 
+  const history = useHistory();
+
+  const location = useLocation();
+  // console.log('history state', location.state);
   const {
     configItems,
     searchItems,
@@ -28,12 +33,34 @@ function DataTable(props) {
     dispatchers,
     search,
     reset,
+    subData,
   } = props;
 
   const pageRender = (value, index, record) => {
     return (
       <div className={styles.opt}>
         <Box direction="row" spacing={5}>
+          {
+            subData.map(sub => {
+              // @ts-ignore
+              let url = sub.url;
+              // @ts-ignore
+              let name = sub.name;
+              return (
+                <Button
+                  type="normal"
+                  size="small"
+                  onClick={() => {
+                    history.push({
+                      pathname: url,
+                      state: {data: record},
+                    });
+                  }}
+                  key={sub.key}
+                > {name} </Button>
+              )
+            })
+          }
           {editItem !== null &&
             <Button type="primary" size="small" onClick={() => editItem(record)}> 编辑 </Button>}
           {deleteItem !== null &&
@@ -120,7 +147,6 @@ function DataTable(props) {
             </Box>
             <Box direction="row" spacing={15} margin={[10, 0]}>
               {!!addItem && <Button type="primary" onClick={() => addItem()}> 添加 </Button>}
-
               {
                 titleButton.map(operation => {
                   // @ts-ignore

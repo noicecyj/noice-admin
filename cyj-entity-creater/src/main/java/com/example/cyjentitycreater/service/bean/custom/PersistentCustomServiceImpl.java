@@ -567,6 +567,7 @@ public class PersistentCustomServiceImpl
                         "    tableSearch: [],\r\n" +
                         "    searchForm: {},\r\n" +
                         "    searchDefaultForm: {},\r\n" +
+                        "    subData: [],\r\n" +
                         "  },\r\n" +
                         "\r\n" +
                         "  reducers: {\r\n" +
@@ -678,6 +679,7 @@ public class PersistentCustomServiceImpl
                         "        tableConfig: ret.data.dataTable.CONFIG,\r\n" +
                         "        tableSearch: ret.data.dataTable.SEARCH,\r\n" +
                         "        formConfig: ret.data.dataForm.CONFIG,\r\n" +
+                        "        subData: ret.data.subData,\r\n" +
                         "      };\r\n" +
                         "      dispatch." + poName + ".setState(payload);\r\n" +
                         "    },\r\n" +
@@ -1129,13 +1131,7 @@ public class PersistentCustomServiceImpl
         return new String[]{entityServiceData, poName + "CustomServiceImpl.java"};
     }
 
-    public JSONObject findDataTableAndFormByName(String persistentCode) {
-        PersistentBean persistent = new PersistentBean().selectOne(new LambdaQueryWrapper<PersistentBean>()
-                .eq(PersistentBean::getPersistentCode, persistentCode));
-        logger.info("findDataTableAndFormByName.persistent:{}", persistent);
-        if (persistent == null) {
-            return null;
-        }
+    private JSONObject getDataForm(PersistentBean persistent) {
         List<PersistentFormBean> persistentFormBeanList = new PersistentFormBean()
                 .selectList(new LambdaQueryWrapper<PersistentFormBean>()
                         .eq(PersistentFormBean::getPersistentId, persistent.getId())
@@ -1208,6 +1204,10 @@ public class PersistentCustomServiceImpl
         formSortCodeConfig.put("formColSpan", 6);
         configFormArr.add(formSortCodeConfig);
         persistentForm.put("CONFIG", configFormArr);
+        return persistentForm;
+    }
+
+    private JSONObject getDataTable(PersistentBean persistent) {
         List<PersistentTableBean> persistentTableBeanList = new PersistentTableBean()
                 .selectList(new LambdaQueryWrapper<PersistentTableBean>()
                         .eq(PersistentTableBean::getPersistentId, persistent.getId())
@@ -1283,6 +1283,15 @@ public class PersistentCustomServiceImpl
         searchStatusConfig.put("searchName", "状态");
         searchStatusConfig.put("searchCode", "status");
         searchStatusConfig.put("searchDefaultValve", 1);
+        Map<String, Object> youXiaoMap = new HashMap<>();
+        youXiaoMap.put("label", "有效");
+        youXiaoMap.put("value", 1);
+        Map<String, Object> wuXiaoMap = new HashMap<>();
+        wuXiaoMap.put("label", "无效");
+        wuXiaoMap.put("value", 0);
+        List<Map> mapList = new ArrayList<>();
+        mapList.add(youXiaoMap);
+        mapList.add(wuXiaoMap);
         searchStatusConfig.put("searchDataSource", mapList);
         searchConfigArr.add(searchStatusConfig);
         persistentTable.put("TITLE", titleArr);
@@ -1290,9 +1299,41 @@ public class PersistentCustomServiceImpl
         persistentTable.put("SEARCH", searchConfigArr);
         persistentTable.put("CONFIG", configTableArr);
         persistentTable.put("INFO", searchForm);
+        return persistentTable;
+    }
+
+    public JSONObject findDataTableAndFormByName(String persistentCode) {
+        PersistentBean persistent = new PersistentBean().selectOne(new LambdaQueryWrapper<PersistentBean>()
+                .eq(PersistentBean::getPersistentCode, persistentCode));
+        logger.info("findDataTableAndFormByName.persistent:{}", persistent);
+        if (persistent == null) {
+            return null;
+        }
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("dataForm", persistentForm);
-        jsonObject.put("dataTable", persistentTable);
+        jsonObject.put("dataForm", getDataForm(persistent));
+        jsonObject.put("dataTable", getDataTable(persistent));
+        List<PersistentBean> persistentBeanList = new PersistentBean()
+                .selectList(new LambdaQueryWrapper<PersistentBean>()
+                        .eq(PersistentBean::getPersistentId, persistent.getId()));
+        JSONArray subBean = new JSONArray();
+        if (persistentBeanList.isEmpty()) {
+            jsonObject.put("subData", subBean);
+            return jsonObject;
+        } else {
+            for (PersistentBean persistentBean : persistentBeanList) {
+                AppServiceBean appServiceBean = new AppServiceBean()
+                        .selectById(persistentBean.getAppServiceId());
+                String underPoName = BeanUtils.underline2Camel(persistentBean.getPersistentCode());
+                //文件名
+                String poName = BeanUtils.captureName(underPoName);
+                JSONObject sub = new JSONObject();
+                sub.put("url", "/" + appServiceBean.getAppServiceCode() + "/" + poName);
+                sub.put("name",persistentBean.getPersistentName());
+                sub.put("key",persistentBean.getPersistentCode());
+                subBean.add(sub);
+            }
+            jsonObject.put("subData", subBean);
+        }
         return jsonObject;
     }
 

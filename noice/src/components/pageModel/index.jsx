@@ -58,6 +58,7 @@ function PageModel(props) {
         primaryKey="id"
         searchFormValue={state.searchForm}
         dispatchers={value => setSearchDataForm(value)}
+        subData={state.subData}
       />
       <DataFormTemple
         configItems={state.formConfig}
