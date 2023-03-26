@@ -20,6 +20,7 @@ export default {
     tableSearch: [],
     searchForm: {},
     searchDefaultForm: {},
+    subData: [],
   },
 
   reducers: {
@@ -131,6 +132,7 @@ export default {
         tableConfig: ret.data.dataTable.CONFIG,
         tableSearch: ret.data.dataTable.SEARCH,
         formConfig: ret.data.dataForm.CONFIG,
+        subData: ret.data.subData,
       };
       dispatch.PersistentForm.setState(payload);
     },
