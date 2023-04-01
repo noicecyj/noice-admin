@@ -27,7 +27,7 @@ function PageModel(props) {
   } = dispatchers;
 
   useEffect(() => {
-    findDataTableAndFormByName().then(r => console.log(r));
+    findDataTableAndFormByName(location.state).then(r => console.log(r));
   }, [dispatchers]);
 
   return (

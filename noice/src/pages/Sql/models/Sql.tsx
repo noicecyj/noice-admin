@@ -119,14 +119,15 @@ export default {
       };
       dispatch.Sql.setState(payload);
     },
-    async findDataTableAndFormByName() {
+    async findDataTableAndFormByName(param) {
       const ret = await initService.findDataTableAndFormByName('sql');
+      let searchParam = {...ret.data.dataTable.INFO, ...param}
       await this.page({
-        searchForm: ret.data.dataTable.INFO,
+        searchForm: searchParam,
         current: 1,
       });
       const payload = {
-        searchDefaultForm: ret.data.dataTable.INFO,
+        searchDefaultForm: searchParam,
         titleConfig: ret.data.dataTable.TITLE,
         tableOperation: ret.data.dataTable.OPERATION,
         tableConfig: ret.data.dataTable.CONFIG,

@@ -668,14 +668,15 @@ public class PersistentCustomServiceImpl
                         "      };\r\n" +
                         "      dispatch." + poName + ".setState(payload);\r\n" +
                         "    },\r\n" +
-                        "    async findDataTableAndFormByName() {\r\n" +
+                        "    async findDataTableAndFormByName(param) {\r\n" +
                         "      const ret = await initService.findDataTableAndFormByName('" + persistentCode + "');\r\n" +
+                        "      let searchParam = {...ret.data.dataTable.INFO, ...param}\r\n" +
                         "      await this.page({\r\n" +
-                        "        searchForm: ret.data.dataTable.INFO,\r\n" +
+                        "        searchForm: searchParam,\r\n" +
                         "        current: 1,\r\n" +
                         "      });\r\n" +
                         "      const payload = {\r\n" +
-                        "        searchDefaultForm: ret.data.dataTable.INFO,\r\n" +
+                        "        searchDefaultForm: searchParam,\r\n" +
                         "        titleConfig: ret.data.dataTable.TITLE,\r\n" +
                         "        tableOperation: ret.data.dataTable.OPERATION,\r\n" +
                         "        tableConfig: ret.data.dataTable.CONFIG,\r\n" +
@@ -1311,6 +1312,7 @@ public class PersistentCustomServiceImpl
         if (persistent == null) {
             return null;
         }
+        String searchKey = BeanUtils.underline2Camel(persistentCode);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("dataForm", getDataForm(persistent));
         jsonObject.put("dataTable", getDataTable(persistent));
@@ -1330,8 +1332,8 @@ public class PersistentCustomServiceImpl
                 String poName = BeanUtils.captureName(underPoName);
                 JSONObject sub = new JSONObject();
                 sub.put("url", "/" + appServiceBean.getAppServiceCode() + "/" + poName);
-                sub.put("name",persistentBean.getPersistentName());
-                sub.put("key",persistentBean.getPersistentCode());
+                sub.put("name", persistentBean.getPersistentName());
+                sub.put("key", searchKey + "Id");
                 subBean.add(sub);
             }
             jsonObject.put("subData", subBean);

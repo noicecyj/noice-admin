@@ -44,10 +44,11 @@ function DataTable(props) {
         <Box direction="row" spacing={5}>
           {
             subData.map(sub => {
-              // @ts-ignore
               let url = sub.url;
-              // @ts-ignore
               let name = sub.name;
+              let key = sub.key;
+              let obj = {};
+              obj[key] = record.id;
               return (
                 <Button
                   type="normal"
@@ -55,10 +56,10 @@ function DataTable(props) {
                   onClick={() => {
                     history.push({
                       pathname: url,
-                      state: {data: record},
+                      state: obj,
                     });
                   }}
-                  key={sub.key}
+                  key={key}
                 > {name} </Button>
               )
             })
