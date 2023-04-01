@@ -10,10 +10,6 @@ const FormItem = Form.Item;
 function DataTable(props) {
   const loadingStyle = {width: '100%'};
 
-  // const history = useHistory();
-  //
-  // const location = useLocation();
-
   const {
     history,
     location,
@@ -43,10 +39,11 @@ function DataTable(props) {
       <div className={styles.opt}>
         <Box direction="row" spacing={5}>
           {
-            subData.map(sub => {
+            subData.map((sub, i) => {
               let url = sub.url;
               let name = sub.name;
               let key = sub.key;
+              let selfFlag = sub.selfFlag;
               let obj = {};
               obj[key] = record.id;
               return (
@@ -54,12 +51,16 @@ function DataTable(props) {
                   type="normal"
                   size="small"
                   onClick={() => {
-                    history.push({
-                      pathname: url,
-                      state: obj,
-                    });
+                    if (selfFlag) {
+                      search(obj);
+                    } else {
+                      history.push({
+                        pathname: url,
+                        state: obj,
+                      });
+                    }
                   }}
-                  key={key}
+                  key={key + i}
                 > {name} </Button>
               )
             })

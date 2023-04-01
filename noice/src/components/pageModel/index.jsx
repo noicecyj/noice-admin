@@ -34,8 +34,8 @@ function PageModel(props) {
     <>
       <DataTableTemple
         addItem={() => add()}
-        search={() => page({
-          searchForm: state.searchForm,
+        search={obj => page({
+          searchForm: {...state.searchForm, ...obj},
           current: 1,
         })}
         reset={() => setSearchDataForm(state.searchDefaultForm)}

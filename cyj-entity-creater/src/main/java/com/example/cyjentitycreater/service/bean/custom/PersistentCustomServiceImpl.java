@@ -1320,6 +1320,25 @@ public class PersistentCustomServiceImpl
                 .selectList(new LambdaQueryWrapper<PersistentBean>()
                         .eq(PersistentBean::getPersistentId, persistent.getId()));
         JSONArray subBean = new JSONArray();
+        List<PropertyBean> propertyBeanList = new PropertyBean()
+                .selectList(new LambdaQueryWrapper<PropertyBean>()
+                        .eq(PropertyBean::getPersistentId, persistent.getId())
+                        .eq(PropertyBean::getPropertyRelation, 1));
+        for (PropertyBean propertyBean : propertyBeanList) {
+            if (propertyBean.getPropertyCode().equals(persistentCode + "_id")){
+                AppServiceBean appServiceBean = new AppServiceBean()
+                        .selectById(persistent.getAppServiceId());
+                String underPoName = BeanUtils.underline2Camel(persistentCode);
+                //文件名
+                String poName = BeanUtils.captureName(underPoName);
+                JSONObject sub = new JSONObject();
+                sub.put("url", "/" + appServiceBean.getAppServiceCode() + "/" + poName);
+                sub.put("name", persistent.getPersistentName());
+                sub.put("key", searchKey + "Id");
+                sub.put("selfFlag", true);
+                subBean.add(sub);
+            }
+        }
         if (persistentBeanList.isEmpty()) {
             jsonObject.put("subData", subBean);
             return jsonObject;
@@ -1334,6 +1353,7 @@ public class PersistentCustomServiceImpl
                 sub.put("url", "/" + appServiceBean.getAppServiceCode() + "/" + poName);
                 sub.put("name", persistentBean.getPersistentName());
                 sub.put("key", searchKey + "Id");
+                sub.put("selfFlag", false);
                 subBean.add(sub);
             }
             jsonObject.put("subData", subBean);
