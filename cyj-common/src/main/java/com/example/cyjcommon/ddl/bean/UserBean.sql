@@ -41,3 +41,15 @@ create table if not exists data_user.t_user
         null comment '更新人'
 )
     comment '用户';
+ALTER TABLE data_user.t_user DROP user_code;
+ALTER TABLE data_user.t_user ADD user_code varchar(255) null comment '用户编码';
+
+ALTER TABLE data_user.t_user DROP user_name;
+ALTER TABLE data_user.t_user ADD user_name varchar(255) not null comment '用户名称';
+
+ALTER TABLE data_user.t_user DROP user_password;
+ALTER TABLE data_user.t_user ADD user_password varchar(255) null comment '用户密码';
+
+ALTER TABLE data_user.t_user DROP enterprise_id;
+ALTER TABLE data_user.t_user ADD enterprise_id varchar(36) null comment '企业id';
+

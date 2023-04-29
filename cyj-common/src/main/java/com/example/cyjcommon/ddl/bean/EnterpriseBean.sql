@@ -33,3 +33,9 @@ create table if not exists data_user.t_enterprise
         null comment '更新人'
 )
     comment '企业';
+ALTER TABLE data_user.t_enterprise DROP enterprise_code;
+ALTER TABLE data_user.t_enterprise ADD enterprise_code varchar(255) not null comment '企业编码';
+
+ALTER TABLE data_user.t_enterprise DROP enterprise_name;
+ALTER TABLE data_user.t_enterprise ADD enterprise_name varchar(255) not null comment '企业名称';
+

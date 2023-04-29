@@ -27,3 +27,9 @@ create table if not exists data_user.t_role_authority
         null comment '更新人'
 )
     comment '角色权限';
+ALTER TABLE data_user.t_role_authority DROP role_id;
+ALTER TABLE data_user.t_role_authority ADD role_id varchar(36) null comment '角色id';
+
+ALTER TABLE data_user.t_role_authority DROP authority_id;
+ALTER TABLE data_user.t_role_authority ADD authority_id varchar(36) null comment '权限id';
+

@@ -45,3 +45,18 @@ create table if not exists data_user.t_persistent_form
         null comment '更新人'
 )
     comment '实体表单';
+ALTER TABLE data_user.t_persistent_form DROP persistent_form_name;
+ALTER TABLE data_user.t_persistent_form ADD persistent_form_name varchar(255) null comment '实体表单名称';
+
+ALTER TABLE data_user.t_persistent_form DROP persistent_form_code;
+ALTER TABLE data_user.t_persistent_form ADD persistent_form_code varchar(255) null comment '实体表单编码';
+
+ALTER TABLE data_user.t_persistent_form DROP persistent_form_type;
+ALTER TABLE data_user.t_persistent_form ADD persistent_form_type varchar(255) null comment '实体表单类型';
+
+ALTER TABLE data_user.t_persistent_form DROP persistent_form_row;
+ALTER TABLE data_user.t_persistent_form ADD persistent_form_row int null comment '实体表单列数';
+
+ALTER TABLE data_user.t_persistent_form DROP persistent_id;
+ALTER TABLE data_user.t_persistent_form ADD persistent_id varchar(36) null comment '实体id';
+

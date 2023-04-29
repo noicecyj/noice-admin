@@ -37,3 +37,12 @@ create table if not exists data_user.t_persistent_table
         null comment '更新人'
 )
     comment '实体表格';
+ALTER TABLE data_user.t_persistent_table DROP persistent_table_name;
+ALTER TABLE data_user.t_persistent_table ADD persistent_table_name varchar(255) null comment '实体表格名称';
+
+ALTER TABLE data_user.t_persistent_table DROP persistent_table_code;
+ALTER TABLE data_user.t_persistent_table ADD persistent_table_code varchar(255) null comment '实体表格编码';
+
+ALTER TABLE data_user.t_persistent_table DROP persistent_id;
+ALTER TABLE data_user.t_persistent_table ADD persistent_id varchar(36) null comment '实体id';
+

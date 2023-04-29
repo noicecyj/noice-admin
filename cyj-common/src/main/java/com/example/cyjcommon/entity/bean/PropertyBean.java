@@ -33,11 +33,14 @@ public class PropertyBean extends Model<PropertyBean> {
     @TableField("property_type")
     private String propertyType;
 
+    @TableField("property_null")
+    private int propertyNull;
+
     @TableField("property_relation")
     private int propertyRelation;
 
-    @TableField("property_null")
-    private int propertyNull;
+    @TableField("property_multiple_relation")
+    private int propertyMultipleRelation;
 
     @TableField("persistent_id")
     private String persistentId;

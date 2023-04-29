@@ -33,3 +33,9 @@ create table if not exists data_user.t_catalog
         null comment '更新人'
 )
     comment '目录';
+ALTER TABLE data_user.t_catalog DROP catalog_code;
+ALTER TABLE data_user.t_catalog ADD catalog_code varchar(255) null comment '目录编码';
+
+ALTER TABLE data_user.t_catalog DROP catalog_name;
+ALTER TABLE data_user.t_catalog ADD catalog_name varchar(255) null comment '目录名称';
+

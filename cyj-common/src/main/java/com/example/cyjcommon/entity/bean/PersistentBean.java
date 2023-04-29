@@ -30,6 +30,9 @@ public class PersistentBean extends Model<PersistentBean> {
     @TableField("persistent_relation")
     private int persistentRelation;
 
+    @TableField("persistent_multiple_relation")
+    private int persistentMultipleRelation;
+
     @TableField("app_service_id")
     private String appServiceId;
 

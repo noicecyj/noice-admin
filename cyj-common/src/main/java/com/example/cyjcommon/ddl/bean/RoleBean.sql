@@ -33,3 +33,9 @@ create table if not exists data_user.t_role
         null comment '更新人'
 )
     comment '角色';
+ALTER TABLE data_user.t_role DROP role_code;
+ALTER TABLE data_user.t_role ADD role_code varchar(255) not null comment '角色编码';
+
+ALTER TABLE data_user.t_role DROP role_name;
+ALTER TABLE data_user.t_role ADD role_name varchar(255) not null comment '角色名称';
+

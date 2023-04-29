@@ -49,3 +49,21 @@ create table if not exists data_user.t_authority
         null comment '更新人'
 )
     comment '权限';
+ALTER TABLE data_user.t_authority DROP authority_code;
+ALTER TABLE data_user.t_authority ADD authority_code varchar(255) null comment '权限编码';
+
+ALTER TABLE data_user.t_authority DROP authority_name;
+ALTER TABLE data_user.t_authority ADD authority_name varchar(255) not null comment '权限名称';
+
+ALTER TABLE data_user.t_authority DROP authority_method;
+ALTER TABLE data_user.t_authority ADD authority_method varchar(255) not null comment '权限请求模式';
+
+ALTER TABLE data_user.t_authority DROP authority_path;
+ALTER TABLE data_user.t_authority ADD authority_path varchar(255) not null comment '权限路径';
+
+ALTER TABLE data_user.t_authority DROP authority_type;
+ALTER TABLE data_user.t_authority ADD authority_type varchar(255) null comment '权限类型';
+
+ALTER TABLE data_user.t_authority DROP persistent_id;
+ALTER TABLE data_user.t_authority ADD persistent_id varchar(36) null comment '实体id';
+

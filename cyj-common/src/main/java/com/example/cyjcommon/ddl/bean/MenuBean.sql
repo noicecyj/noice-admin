@@ -49,3 +49,21 @@ create table if not exists data_user.t_menu
         null comment '更新人'
 )
     comment '菜单';
+ALTER TABLE data_user.t_menu DROP menu_code;
+ALTER TABLE data_user.t_menu ADD menu_code varchar(255) null comment '菜单编码';
+
+ALTER TABLE data_user.t_menu DROP menu_name;
+ALTER TABLE data_user.t_menu ADD menu_name varchar(255) null comment '菜单名称';
+
+ALTER TABLE data_user.t_menu DROP menu_url;
+ALTER TABLE data_user.t_menu ADD menu_url varchar(255) null comment '菜单路径';
+
+ALTER TABLE data_user.t_menu DROP menu_icon;
+ALTER TABLE data_user.t_menu ADD menu_icon varchar(255) null comment '菜单图标';
+
+ALTER TABLE data_user.t_menu DROP menu_component;
+ALTER TABLE data_user.t_menu ADD menu_component varchar(255) null comment '菜单组件';
+
+ALTER TABLE data_user.t_menu DROP menu_parent_url;
+ALTER TABLE data_user.t_menu ADD menu_parent_url varchar(255) not null comment '菜单父路径';
+

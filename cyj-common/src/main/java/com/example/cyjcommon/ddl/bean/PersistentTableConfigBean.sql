@@ -49,3 +49,21 @@ create table if not exists data_user.t_persistent_table_config
         null comment '更新人'
 )
     comment '实体表格配置';
+ALTER TABLE data_user.t_persistent_table_config DROP persistent_table_config_name;
+ALTER TABLE data_user.t_persistent_table_config ADD persistent_table_config_name varchar(255) null comment '实体表格配置组件名称';
+
+ALTER TABLE data_user.t_persistent_table_config DROP persistent_table_config_code;
+ALTER TABLE data_user.t_persistent_table_config ADD persistent_table_config_code varchar(255) null comment '实体表格配置组件编码';
+
+ALTER TABLE data_user.t_persistent_table_config DROP persistent_table_config_display;
+ALTER TABLE data_user.t_persistent_table_config ADD persistent_table_config_display int null comment '实体表格配置是否展示';
+
+ALTER TABLE data_user.t_persistent_table_config DROP persistent_table_config_type;
+ALTER TABLE data_user.t_persistent_table_config ADD persistent_table_config_type varchar(255) null comment '实体表格配置组件类型';
+
+ALTER TABLE data_user.t_persistent_table_config DROP persistent_table_config_method;
+ALTER TABLE data_user.t_persistent_table_config ADD persistent_table_config_method varchar(255) null comment '实体表格配置组件方法';
+
+ALTER TABLE data_user.t_persistent_table_config DROP persistent_table_id;
+ALTER TABLE data_user.t_persistent_table_config ADD persistent_table_id varchar(36) null comment '实体表格id';
+

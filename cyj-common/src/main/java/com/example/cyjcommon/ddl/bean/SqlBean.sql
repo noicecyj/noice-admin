@@ -41,3 +41,15 @@ create table if not exists data_user.t_sql
         null comment '更新人'
 )
     comment '查询';
+ALTER TABLE data_user.t_sql DROP sql_code;
+ALTER TABLE data_user.t_sql ADD sql_code varchar(255) null comment '查询编码';
+
+ALTER TABLE data_user.t_sql DROP sql_name;
+ALTER TABLE data_user.t_sql ADD sql_name varchar(255) null comment '查询名称';
+
+ALTER TABLE data_user.t_sql DROP sql_str;
+ALTER TABLE data_user.t_sql ADD sql_str varchar(255) not null comment '查询语句';
+
+ALTER TABLE data_user.t_sql DROP sql_type;
+ALTER TABLE data_user.t_sql ADD sql_type varchar(255) not null comment '查询类型';
+

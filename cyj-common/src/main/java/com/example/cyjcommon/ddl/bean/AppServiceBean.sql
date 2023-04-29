@@ -49,3 +49,21 @@ create table if not exists data_user.t_app_service
         null comment '更新人'
 )
     comment '服务';
+ALTER TABLE data_user.t_app_service DROP app_service_name;
+ALTER TABLE data_user.t_app_service ADD app_service_name varchar(255) null comment '服务名称';
+
+ALTER TABLE data_user.t_app_service DROP app_service_api;
+ALTER TABLE data_user.t_app_service ADD app_service_api varchar(255) null comment '服务接口';
+
+ALTER TABLE data_user.t_app_service DROP app_service_path;
+ALTER TABLE data_user.t_app_service ADD app_service_path varchar(255) null comment '服务路径';
+
+ALTER TABLE data_user.t_app_service DROP app_service_port;
+ALTER TABLE data_user.t_app_service ADD app_service_port varchar(255) null comment '服务端口';
+
+ALTER TABLE data_user.t_app_service DROP app_service_code;
+ALTER TABLE data_user.t_app_service ADD app_service_code varchar(255) null comment '服务编码';
+
+ALTER TABLE data_user.t_app_service DROP app_service_true_path;
+ALTER TABLE data_user.t_app_service ADD app_service_true_path varchar(255) null comment '服务挂载路径';
+
