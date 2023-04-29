@@ -518,6 +518,7 @@ public class PersistentCustomServiceImpl
             } else {
                 propertyStr = propertyStr + " not null";
             }
+            sb.append("ALTER TABLE data_user.t_").append(persistent.getPersistentCode()).append(" DROP ").append(property.getPropertyCode()).append(";\r\n");
             sb.append("ALTER TABLE data_user.t_").append(persistent.getPersistentCode()).append(" ADD ").append(propertyStr).append(" comment '").append(property.getPropertyName()).append("';\r\n");
             sb.append("\r\n");
         }
