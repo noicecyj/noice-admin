@@ -506,6 +506,21 @@ public class PersistentCustomServiceImpl
         sb.append("        null comment '更新人'\r\n");
         sb.append(")\r\n");
         sb.append("    comment '").append(persistent.getPersistentName()).append("';\r\n");
+        for (PropertyBean property : propertyList) {
+            String propertyStr;
+            if ("int".equals(property.getPropertyType()) || "boolean".equals(property.getPropertyType())) {
+                propertyStr = property.getPropertyCode() + " int";
+            } else {
+                propertyStr = property.getPropertyCode() + " varchar(" + property.getPropertyLength() + ")";
+            }
+            if (property.getPropertyNull() == 0) {
+                propertyStr = propertyStr + " null";
+            } else {
+                propertyStr = propertyStr + " not null";
+            }
+            sb.append("ALTER TABLE data_user.t_").append(persistent.getPersistentCode()).append(" ADD ").append(propertyStr).append(";\r\n");
+            sb.append("\r\n");
+        }
         String ddl = sb.toString();
         return new String[]{ddl, poName + (isBeanFlag ? "Bean" : "Relation") + ".sql"};
 
