@@ -1,0 +1,24 @@
+[
+  {
+    "className": "$PersistentCode$Converter",
+    "packageName": "package noice.converter.bean;",
+    "classNote": [
+      "/**",
+      " * @author Noice",
+      " */"
+    ],
+    "classStatement": "public",
+    "classType": "interface",
+    "importPackageList": [
+      "import noice.common.converter.bean.BaseBeanConverter;",
+      "import noice.entity.dto.bean.$PersistentCode$Dto;",
+      "import noice.entity.po.bean.$PersistentCode$Po;",
+      "import noice.entity.vo.bean.$PersistentCode$Vo;",
+      "import org.mapstruct.Mapper;"
+    ],
+    "classAnnotationList": [
+      "@Mapper(componentModel = \"spring\")"
+    ],
+    "extendsClassName": "extends BaseBeanConverter<$PersistentCode$Po, $PersistentCode$Dto, $PersistentCode$Vo>"
+  }
+]

@@ -1,0 +1,67 @@
+server:
+  port: 8100
+spring:
+  main:
+    web-application-type: reactive
+  application:
+    name: cyj-auth
+  jpa:
+    generate-ddl: false
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 123.249.114.102:8848 #这个地址是nacos的地址
+      config:
+        server-addr: 123.249.114.102:8848   #配置中心地址
+        group: DEFAULT_GROUP
+        file-extension: yaml
+        enabled: true
+        refresh-enabled: true
+        import-check:
+          enabled: false
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: cyj-entity-creater
+          uri: lb://cyj-entity-creater
+          predicates:
+            - Path=/entityCreateApi/**,/userApi/**
+        - id: cyj-workflow
+          uri: lb://cyj-workflow
+          predicates:
+            - Path=/workflowApi/**
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://123.249.114.102:3306/data_user?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: 68762306
+    hikari:
+      connection-timeout: 10000
+      validation-timeout: 3000
+      idle-timeout: 60000
+      login-timeout: 5
+      max-lifetime: 60000
+      maximum-pool-size: 10
+      minimum-idle: 5
+      read-only: false
+  #redis
+  sql:
+    init:
+      platform: mysql
+  data:
+    redis:
+      host: 123.249.114.102
+      jedis:
+        pool:
+          max-active: 10  # 连接池中最大连接数（默认8）
+          max-idle: 8     # 连接池中最大空闲连接数（默认8）
+          min-idle: 0     # 连接池中最少空闲连接数（默认0）
+          max-wait: -1    # 当连接池资源耗尽时，调用者最大阻塞的时间（毫秒），-1表示永不超时
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

@@ -1,0 +1,248 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class node10 as "t_app_service  /* 服务 */" {
+   app_service_name  /* 服务名称 */: varchar(255)
+   app_service_api  /* 服务接口 */: varchar(255)
+   app_service_path  /* 服务路径 */: varchar(255)
+   app_service_port  /* 服务端口 */: varchar(255)
+   app_service_code  /* 服务编码 */: varchar(255)
+   app_service_true_path  /* 服务挂载路径 */: varchar(255)
+   sort_code  /* 排序值 */: int
+   status  /* 状态 */: int
+   created_date  /* 创建时间 */: timestamp
+   created_by  /* 创建人 */: varchar(255)
+   updated_date  /* 更新时间 */: timestamp
+   updated_by  /* 更新人 */: varchar(255)
+   id  /* 主键 */: varchar(36)
+}
+class node5 as "t_authority  /* 权限 */" {
+   authority_code  /* 权限编码 */: varchar(255)
+   authority_name  /* 权限名称 */: varchar(255)
+   authority_method  /* 权限请求模式 */: varchar(255)
+   authority_path  /* 权限路径 */: varchar(255)
+   authority_type  /* 权限类型 */: varchar(255)
+   persistent_id  /* 实体id */: varchar(36)
+   sort_code  /* 排序值 */: int
+   status  /* 状态 */: int
+   created_date  /* 创建时间 */: timestamp
+   created_by  /* 创建人 */: varchar(255)
+   updated_date  /* 更新时间 */: timestamp
+   updated_by  /* 更新人 */: varchar(255)
+   id  /* 主键 */: varchar(36)
+}
+class node13 as "t_catalog  /* 目录 */" {
+   catalog_code  /* 目录编码 */: varchar(255)
+   catalog_name  /* 目录名称 */: varchar(255)
+   sort_code  /* 排序值 */: int
+   status  /* 状态 */: int
+   created_date  /* 创建时间 */: timestamp
+   created_by  /* 创建人 */: varchar(255)
+   updated_date  /* 更新时间 */: timestamp
+   updated_by  /* 更新人 */: varchar(255)
+   id  /* 主键 */: varchar(36)
+}
+class node0 as "t_dictionary  /* 字典 */" {
+   dictionary_code  /* 字典编码 */: varchar(255)
+   dictionary_name  /* 字典名称 */: varchar(255)
+   catalog_id  /* 目录id */: varchar(36)
+   sort_code  /* 排序值 */: int
+   status  /* 状态 */: int
+   created_date  /* 创建时间 */: timestamp
+   created_by  /* 创建人 */: varchar(255)
+   updated_date  /* 更新时间 */: timestamp
+   updated_by  /* 更新人 */: varchar(255)
+   id  /* 主键 */: varchar(36)
+}
+class node8 as "t_enterprise  /* 企业 */" {
+   enterprise_code  /* 企业编码 */: varchar(255)
+   enterprise_name  /* 企业名称 */: varchar(255)
+   sort_code  /* 排序值 */: int
+   status  /* 状态 */: int
+   created_date  /* 创建时间 */: timestamp
+   created_by  /* 创建人 */: varchar(255)
+   updated_date  /* 更新时间 */: timestamp
+   updated_by  /* 更新人 */: varchar(255)
+   id  /* 主键 */: varchar(36)
+}
+class node17 as "t_menu  /* 菜单 */" {
+   menu_code  /* 菜单编码 */: varchar(255)
+   menu_name  /* 菜单名称 */: varchar(255)
+   menu_url  /* 菜单路径 */: varchar(255)
+   menu_icon  /* 菜单图标 */: varchar(255)
+   menu_component  /* 菜单组件 */: varchar(255)
+   menu_parent_url  /* 菜单父路径 */: varchar(255)
+   sort_code  /* 排序值 */: int
+   status  /* 状态 */: int
+   created_date  /* 创建时间 */: timestamp
+   created_by  /* 创建人 */: varchar(255)
+   updated_date  /* 更新时间 */: timestamp
+   updated_by  /* 更新人 */: varchar(255)
+   id  /* 主键 */: varchar(36)
+}
+class node3 as "t_persistent  /* 实体 */" {
+   persistent_name  /* 实体名称 */: varchar(255)
+   persistent_code  /* 实体编码 */: varchar(255)
+   persistent_relation  /* 实体是否关联表 */: int
+   app_service_id  /* 服务id */: varchar(36)
+   persistent_id  /* 实体id */: varchar(36)
+   sort_code  /* 排序值 */: int
+   status  /* 状态 */: int
+   created_date  /* 创建时间 */: timestamp
+   created_by  /* 创建人 */: varchar(255)
+   updated_date  /* 更新时间 */: timestamp
+   updated_by  /* 更新人 */: varchar(255)
+   id  /* 主键 */: varchar(36)
+}
+class node12 as "t_persistent_form  /* 实体表单 */" {
+   persistent_form_name  /* 实体表单名称 */: varchar(255)
+   persistent_form_code  /* 实体表单编码 */: varchar(255)
+   persistent_form_type  /* 实体表单类型 */: varchar(255)
+   persistent_form_row  /* 实体表单列数 */: int
+   persistent_id  /* 实体id */: varchar(36)
+   sort_code  /* 排序值 */: int
+   status  /* 状态 */: int
+   created_date  /* 创建时间 */: timestamp
+   created_by  /* 创建人 */: varchar(255)
+   updated_date  /* 更新时间 */: timestamp
+   updated_by  /* 更新人 */: varchar(255)
+   id  /* 主键 */: varchar(36)
+}
+class node2 as "t_persistent_form_config  /* 实体表单配置 */" {
+   persistent_form_config_name  /* 实体表单配置组件名称 */: varchar(255)
+   persistent_form_config_code  /* 实体表单配置组件编码 */: varchar(255)
+   persistent_form_config_mode  /* 实体表单配置组件 */: varchar(255)
+   persistent_form_config_required  /* 实体表单配置组件是否必填 */: int
+   persistent_form_config_default_value  /* 实体表单配置组件默认值 */: varchar(255)
+   persistent_form_config_data_source  /* 实体表单配置组件数据源 */: varchar(255)
+   persistent_form_config_direction  /* 实体表单配置组件方向 */: varchar(255)
+   persistent_form_config_edit  /* 实体表单配置组件是否可编辑 */: int
+   persistent_form_config_col_span  /* 实体表单配置组件占用列数 */: int
+   persistent_form_id  /* 实体表单id */: varchar(36)
+   sort_code  /* 排序值 */: int
+   status  /* 状态 */: int
+   created_date  /* 创建时间 */: timestamp
+   created_by  /* 创建人 */: varchar(255)
+   updated_date  /* 更新时间 */: timestamp
+   updated_by  /* 更新人 */: varchar(255)
+   id  /* 主键 */: varchar(36)
+}
+class node9 as "t_persistent_table  /* 实体表格 */" {
+   persistent_table_name  /* 实体表格名称 */: varchar(255)
+   persistent_table_code  /* 实体表格编码 */: varchar(255)
+   persistent_id  /* 实体id */: varchar(36)
+   sort_code  /* 排序值 */: int
+   status  /* 状态 */: int
+   created_date  /* 创建时间 */: timestamp
+   created_by  /* 创建人 */: varchar(255)
+   updated_date  /* 更新时间 */: timestamp
+   updated_by  /* 更新人 */: varchar(255)
+   id  /* 主键 */: varchar(36)
+}
+class node16 as "t_persistent_table_config  /* 实体表格配置 */" {
+   persistent_table_config_name  /* 实体表格配置组件名称 */: varchar(255)
+   persistent_table_config_code  /* 实体表格配置组件编码 */: varchar(255)
+   persistent_table_config_display  /* 实体表格配置是否展示 */: int
+   persistent_table_config_type  /* 实体表格配置组件类型 */: varchar(255)
+   persistent_table_config_method  /* 实体表格配置组件方法 */: varchar(255)
+   persistent_table_id  /* 实体表格id */: varchar(36)
+   sort_code  /* 排序值 */: int
+   status  /* 状态 */: int
+   created_date  /* 创建时间 */: timestamp
+   created_by  /* 创建人 */: varchar(255)
+   updated_date  /* 更新时间 */: timestamp
+   updated_by  /* 更新人 */: varchar(255)
+   id  /* 主键 */: varchar(36)
+}
+class node7 as "t_persistent_table_search_config  /* 实体表格搜索配置 */" {
+   persistent_table_search_config_name  /* 实体表格搜索配置名称 */: varchar(255)
+   persistent_table_search_config_code  /* 实体表格搜索配置编码 */: varchar(255)
+   persistent_table_search_config_display  /* 实体表格搜索配置是否展示 */: int
+   persistent_table_search_config_mode  /* 实体表格搜索配置类型 */: varchar(255)
+   persistent_table_search_config_data_source  /* 实体表格搜索配置数据源 */: varchar(255)
+   persistent_table_search_config_default_value  /* 实体表格搜索配置默认值 */: varchar(255)
+   persistent_table_id  /* 实体表格id */: varchar(36)
+   sort_code  /* 排序值 */: int
+   status  /* 状态 */: int
+   created_date  /* 创建时间 */: timestamp
+   created_by  /* 创建人 */: varchar(255)
+   updated_date  /* 更新时间 */: timestamp
+   updated_by  /* 更新人 */: varchar(255)
+   id  /* 主键 */: varchar(36)
+}
+class node6 as "t_property  /* 属性 */" {
+   property_code  /* 属性编码 */: varchar(255)
+   property_name  /* 属性名称 */: varchar(255)
+   property_length  /* 属性长度 */: int
+   property_type  /* 属性类型 */: varchar(255)
+   property_relation  /* 属性是否关联字段 */: int
+   property_null  /* 属性是否为空 */: int
+   persistent_id  /* 实体id */: varchar(36)
+   sort_code  /* 排序值 */: int
+   status  /* 状态 */: int
+   created_date  /* 创建时间 */: timestamp
+   created_by  /* 创建人 */: varchar(255)
+   updated_date  /* 更新时间 */: timestamp
+   updated_by  /* 更新人 */: varchar(255)
+   id  /* 主键 */: varchar(36)
+}
+class node14 as "t_role  /* 角色 */" {
+   role_code  /* 角色编码 */: varchar(255)
+   role_name  /* 角色名称 */: varchar(255)
+   sort_code  /* 排序值 */: int
+   status  /* 状态 */: int
+   created_date  /* 创建时间 */: timestamp
+   created_by  /* 创建人 */: varchar(255)
+   updated_date  /* 更新时间 */: timestamp
+   updated_by  /* 更新人 */: varchar(255)
+   id  /* 主键 */: varchar(36)
+}
+class node4 as "t_role_authority  /* 角色权限 */" {
+   role_id  /* 角色id */: varchar(36)
+   authority_id  /* 权限id */: varchar(36)
+   created_date  /* 创建时间 */: timestamp
+   created_by  /* 创建人 */: varchar(255)
+   updated_date  /* 更新时间 */: timestamp
+   updated_by  /* 更新人 */: varchar(255)
+   id  /* 主键 */: varchar(36)
+}
+class node1 as "t_sql  /* 查询 */" {
+   sql_code  /* 查询编码 */: varchar(255)
+   sql_name  /* 查询名称 */: varchar(255)
+   sql_str  /* 查询语句 */: varchar(255)
+   sql_type  /* 查询类型 */: varchar(255)
+   sort_code  /* 排序值 */: int
+   status  /* 状态 */: int
+   created_date  /* 创建时间 */: timestamp
+   created_by  /* 创建人 */: varchar(255)
+   updated_date  /* 更新时间 */: timestamp
+   updated_by  /* 更新人 */: varchar(255)
+   id  /* 主键 */: varchar(36)
+}
+class node11 as "t_user  /* 用户 */" {
+   user_code  /* 用户编码 */: varchar(255)
+   user_name  /* 用户名称 */: varchar(255)
+   user_password  /* 用户密码 */: varchar(255)
+   enterprise_id  /* 企业id */: varchar(36)
+   sort_code  /* 排序值 */: int
+   status  /* 状态 */: int
+   created_date  /* 创建时间 */: timestamp
+   created_by  /* 创建人 */: varchar(255)
+   updated_date  /* 更新时间 */: timestamp
+   updated_by  /* 更新人 */: varchar(255)
+   id  /* 主键 */: varchar(36)
+}
+class node15 as "t_user_role  /* 用户角色 */" {
+   user_id  /* 用户id */: varchar(36)
+   role_id  /* 角色id */: varchar(36)
+   created_date  /* 创建时间 */: timestamp
+   created_by  /* 创建人 */: varchar(255)
+   updated_date  /* 更新时间 */: timestamp
+   updated_by  /* 更新人 */: varchar(255)
+   id  /* 主键 */: varchar(36)
+}
+
+@enduml

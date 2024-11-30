@@ -1,0 +1,51 @@
+[
+  {
+    "className": "$PersistentCode$Repository",
+    "packageName": "package noice.repository.bean;",
+    "classNote": [
+      "/**",
+      " * @author Noice",
+      " */"
+    ],
+    "classStatement": "public",
+    "classType": "class",
+    "importPackageList": [
+      "import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;",
+      "import com.baomidou.mybatisplus.core.metadata.IPage;",
+      "import noice.entity.po.bean.$PersistentCode$Po;",
+      "import noice.handler.bean.BaseBeanRepositoryImpl;",
+      "import noice.mapper.bean.$PersistentCode$Mapper;",
+      "import org.apache.commons.lang3.StringUtils;",
+      "import org.springframework.stereotype.Repository;"
+    ],
+    "classAnnotationList": [
+      "@Repository"
+    ],
+    "extendsClassName": "extends BaseBeanRepositoryImpl<$PersistentCode$Mapper, $PersistentCode$Po>",
+    "methodList": [
+      {
+        "methodStatement": "public",
+        "methodReturnType": "IPage<$PersistentCode$Po>",
+        "methodName": "findPage",
+        "methodParamSet": [
+          "IPage<$PersistentCode$Po> page",
+          "$PersistentCode$Po po"
+        ],
+        "methodReturnBody": "return findPage(page, queryWrapperForPage(po));"
+      },
+      {
+        "methodStatement": "public",
+        "methodReturnType": "QueryWrapper<$PersistentCode$Po>",
+        "methodName": "queryWrapperForPage",
+        "methodParamSet": [
+          "$PersistentCode$Po po"
+        ],
+        "methodBody": [
+          "QueryWrapper<AppServicePo> queryWrapper = getQueryWrapper();",
+          "%queryWrapper.lambda().like(StringUtils.isNotEmpty(po.get<$PersistentPropertyCode$()), AppServicePo::get$PersistentPropertyCode$, po.get$PersistentPropertyCode$());%"
+        ],
+        "methodReturnBody": "return baseQueryWrapper(po, queryWrapper);"
+      }
+    ]
+  }
+]

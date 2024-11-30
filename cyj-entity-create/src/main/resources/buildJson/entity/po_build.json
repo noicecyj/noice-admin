@@ -1,0 +1,39 @@
+[
+  {
+    "className": "$PersistentCode$Po",
+    "packageName": "package noice.entity.po.bean;",
+    "classNote": [
+      "/**",
+      " * @author Noice",
+      " */"
+    ],
+    "classStatement": "public",
+    "classType": "class",
+    "importPackageList": [
+      "import com.baomidou.mybatisplus.annotation.TableField;",
+      "import com.baomidou.mybatisplus.annotation.TableName;",
+      "import lombok.Data;",
+      "import lombok.EqualsAndHashCode;",
+      "import lombok.experimental.FieldNameConstants;",
+      "import noice.common.entity.po.BasePoBean;"
+    ],
+    "classAnnotationList": [
+      "@EqualsAndHashCode(callSuper = true)",
+      "@Data",
+      "@FieldNameConstants",
+      "@TableName(\"t_#PersistentCode#\")"
+    ],
+    "extendsClassName": "extends BasePoBean<\"$PersistentCode$Po\">",
+    "fieldList": [
+      {
+        "fieldAnnotationList": [
+          "@TableField(\"#PersistentPropertyCode#\")"
+        ],
+        "fieldStatement": "private",
+        "fieldType": "#PersistentPropertyCode#",
+        "fieldName": "$PersistentPropertyCode$",
+        "staticType": "#PersistentPropertyType#"
+      }
+    ]
+  }
+]

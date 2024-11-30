@@ -1,0 +1,7 @@
+{
+  "nodejs.editor.formatOnSave.eslint.mode": "Auto",
+  "prettier.mode": "Auto",
+  "prettier.applicableFilesGlob": "{**/*,*}.{js,ts,jsx,tsx,css}",
+  "nodejs.editor.formatOnSave.eslint.glob": "{**/*,*}.{js,ts,jsx,tsx,css}",
+  "editor.formatOnSave": false
+}

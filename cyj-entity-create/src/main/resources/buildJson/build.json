@@ -1,0 +1,43 @@
+[
+  {
+    "className": "",
+    "packageName": "",
+    "classNote": [],
+    "classStatement": "",
+    "classType": "",
+    "importPackageList": [
+      ""
+    ],
+    "classAnnotationList": [
+      ""
+    ],
+    "extendsClassName": "",
+    "fieldList": [
+      {
+        "fieldAnnotationList": [
+          ""
+        ],
+        "fieldStatement": "",
+        "fieldType": "",
+        "fieldName": "",
+        "staticType": "",
+        "finalType": "",
+        "defaultValue": ""
+      }
+    ],
+    "methodList": [
+      {
+        "methodStatement": "",
+        "methodReturnType": "",
+        "methodName": "",
+        "methodParamSet": [
+          ""
+        ],
+        "methodBody": [
+          ""
+        ],
+        "methodReturnBody": ""
+      }
+    ]
+  }
+]

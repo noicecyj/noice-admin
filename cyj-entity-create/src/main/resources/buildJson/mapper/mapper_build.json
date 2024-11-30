@@ -1,0 +1,22 @@
+[
+  {
+    "className": "$PersistentCode$Mapper",
+    "packageName": "package noice.mapper.bean;",
+    "classNote": [
+      "/**",
+      " * @author Noice",
+      " */"
+    ],
+    "classStatement": "public",
+    "classType": "interface",
+    "importPackageList": [
+      "import com.baomidou.mybatisplus.core.mapper.BaseMapper;",
+      "import noice.entity.po.bean.$PersistentCode$Po;",
+      "import org.apache.ibatis.annotations.Mapper;"
+    ],
+    "classAnnotationList": [
+      "@Mapper"
+    ],
+    "extendsClassName": "extends BaseMapper<$PersistentCode$Po>"
+  }
+]

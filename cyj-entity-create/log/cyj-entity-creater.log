@@ -1,0 +1,1532 @@
+2023-11-24 00:25:00.880 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2023-11-24 00:25:02.273 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - No active profile set, falling back to default profiles: default
+2023-11-24 00:25:04.527 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2023-11-24 00:25:04.532 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-11-24 00:25:04.618 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 62ms. Found 0 Redis repository interfaces.
+2023-11-24 00:25:04.794 [main] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2023-11-24 00:25:05.150 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=e6cf305b-236e-33a2-a98d-88f7111c0671
+2023-11-24 00:25:06.974 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 0 (http)
+2023-11-24 00:25:06.991 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
+2023-11-24 00:25:06.991 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-11-24 00:25:06.992 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
+2023-11-24 00:25:07.085 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-11-24 00:25:07.085 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4806 ms
+2023-11-24 00:25:07.462 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2023-11-24 00:25:07.487 [main] INFO  com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@55c1ced9
+2023-11-24 00:25:08.282 [main] INFO  c.g.y.a.MybatisPlusJoinAutoConfiguration - MPJSqlInjector init
+2023-11-24 00:25:11.384 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2023-11-24 00:25:12.881 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2023-11-24 00:25:17.910 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses Jersey
+2023-11-24 00:25:18.085 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2023-11-24 00:25:18.493 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 2 endpoint(s) beneath base path '/actuator'
+2023-11-24 00:25:18.999 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
+2023-11-24 00:25:19.039 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 9091 (http) with context path ''
+2023-11-24 00:25:19.040 [main] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 9091
+2023-11-24 00:25:19.046 [main] INFO  o.s.cloud.netflix.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2023-11-24 00:25:19.126 [main] INFO  com.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2023-11-24 00:25:19.187 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON encoding codec LegacyJacksonJson
+2023-11-24 00:25:19.187 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON decoding codec LegacyJacksonJson
+2023-11-24 00:25:19.347 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML encoding codec XStreamXml
+2023-11-24 00:25:19.348 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML decoding codec XStreamXml
+2023-11-24 00:25:19.543 [main] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2023-11-24 00:25:19.713 [main] INFO  com.netflix.discovery.DiscoveryClient - Disable delta property : false
+2023-11-24 00:25:19.713 [main] INFO  com.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2023-11-24 00:25:19.713 [main] INFO  com.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2023-11-24 00:25:19.713 [main] INFO  com.netflix.discovery.DiscoveryClient - Application is null : false
+2023-11-24 00:25:19.713 [main] INFO  com.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2023-11-24 00:25:19.713 [main] INFO  com.netflix.discovery.DiscoveryClient - Application version is -1: true
+2023-11-24 00:25:19.713 [main] INFO  com.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2023-11-24 00:25:19.900 [main] INFO  com.netflix.discovery.DiscoveryClient - The response status is 200
+2023-11-24 00:25:19.903 [main] INFO  com.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2023-11-24 00:25:19.906 [main] INFO  com.netflix.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2023-11-24 00:25:19.909 [main] INFO  com.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1700756719908 with initial instances count: 0
+2023-11-24 00:25:19.918 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application CYJ-ENTITY-CREATER with eureka with status UP
+2023-11-24 00:25:19.920 [main] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1700756719920, current=UP, previous=STARTING]
+2023-11-24 00:25:19.926 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0: registering service...
+2023-11-24 00:25:20.074 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - registration status: 204
+2023-11-24 00:25:20.210 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - Started CyjEntityCreaterApplicationTest in 20.234 seconds (JVM running for 22.856)
+2023-11-24 00:25:20.529 [main] WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - idleTimeout is close to or more than maxLifetime, disabling it.
+2023-11-24 00:25:20.530 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-11-24 00:25:23.021 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-11-24 00:25:23.289 [main] INFO  com.example.cyjcommon.aspect.BaseAspect - BaseAspect.doAroundBefore:AppServiceDto(appServiceName=null, appServiceApi=null, appServicePath=null, appServicePort=null, appServiceCode=null, appServiceTruePath=null)
+2023-11-24 00:25:23.290 [main] INFO  com.example.cyjcommon.aspect.BaseAspect - BaseAspect.doBefore:AppServiceDto(appServiceName=null, appServiceApi=null, appServicePath=null, appServicePort=null, appServiceCode=null, appServiceTruePath=null)
+2023-11-24 00:25:23.530 [main] INFO  com.example.cyjcommon.aspect.BaseAspect - BaseAspect.doAfterReturning:AppServiceDto(appServiceName=null, appServiceApi=null, appServicePath=null, appServicePort=null, appServiceCode=null, appServiceTruePath=null)
+2023-11-24 00:25:23.530 [main] INFO  com.example.cyjcommon.aspect.BaseAspect - BaseAspect.doAfter:AppServiceDto(appServiceName=null, appServiceApi=null, appServicePath=null, appServicePort=null, appServiceCode=null, appServiceTruePath=null)
+2023-11-24 00:25:23.530 [main] INFO  com.example.cyjcommon.aspect.BaseAspect - BaseAspect.doAroundAfter:AppServiceDto(appServiceName=null, appServiceApi=null, appServicePath=null, appServicePort=null, appServiceCode=null, appServiceTruePath=null)
+2023-11-24 00:25:23.619 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - byAppServiceIdTest.appServicePoPage:{"current":10,"optimizeCountSql":true,"orders":[],"pages":0,"records":[{"appServiceApi":"sqlApi","appServiceCode":"cyj-query","appServiceName":"查询服务","appServicePath":"C:\\Users\\noice\\IdeaProjects\\noice-admin\\cyj-query\\src\\main\\java\\com\\example\\cyjquery","appServiceTruePath":"cyj-entity-creater","createdBy":"","createdDate":1670765950000,"id":"17d6157d-1ca1-452e-bc4f-dec67d7a6db9","sortCode":40,"status":1,"updatedBy":"","updatedDate":1670765950000},{"appServiceApi":"dictionaryApi","appServiceCode":"cyj-dictionary","appServiceName":"数据服务","appServicePath":"C:\\Users\\noice\\IdeaProjects\\noice-admin\\cyj-dictionary\\src\\main\\java\\com\\example\\cyjdictionary","appServiceTruePath":"cyj-entity-creater","createdBy":"","createdDate":1670765950000,"id":"5e398def-1513-4bcc-8f9a-560756e13237","sortCode":30,"status":1,"updatedBy":"","updatedDate":1670765950000},{"appServiceApi":"workFlowApi","appServiceCode":"cyj-workflow","appServiceName":"流程服务","appServicePath":"C:\\Users\\noice\\IdeaProjects\\noice-admin\\cyj-workflow\\src\\main\\java\\com\\example\\cyjworkflow","appServicePort":"8060","appServiceTruePath":"cyj-workflow","createdBy":"","createdDate":1670765950000,"id":"8f8fbe4f-5a57-42b7-a577-86492ed79426","sortCode":50,"status":1,"updatedBy":"123123","updatedDate":1670765950000},{"appServiceApi":"entityCreateApi","appServiceCode":"cyj-entity-creater","appServiceName":"开发服务","appServicePath":"C:\\Users\\noice\\IdeaProjects\\noice-admin\\cyj-entity-creater\\src\\main\\java\\com\\example\\cyjentitycreater","appServicePort":"8020","appServiceTruePath":"cyj-entity-creater","createdBy":"","createdDate":1670765950000,"id":"a646a940-09ee-4186-8c8c-8c3d79b24d9f","sortCode":20,"status":1,"updatedBy":"","updatedDate":1670765950000},{"appServiceApi":"userApi","appServiceCode":"cyj-user","appServiceName":"用户服务","appServicePath":"C:\\Users\\noice\\IdeaProjects\\noice-admin\\cyj-user\\src\\main\\java\\com\\example\\cyjuser","appServiceTruePath":"cyj-entity-creater","createdBy":"123123","createdDate":1674665103000,"id":"d9d7c8dc42f365f0d67dfe60d93d141f","sortCode":51,"status":1,"updatedBy":"","updatedDate":1674665103000}],"searchCount":true,"size":-1,"total":0}
+2023-11-24 00:25:23.634 [SpringContextShutdownHook] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Unregistering application CYJ-ENTITY-CREATER with eureka with status DOWN
+2023-11-24 00:25:23.635 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1700756723635, current=DOWN, previous=UP]
+2023-11-24 00:25:23.635 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0: registering service...
+2023-11-24 00:25:23.672 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - registration status: 204
+2023-11-24 00:25:23.852 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2023-11-24 00:25:23.860 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-11-24 00:25:25.409 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-11-24 00:25:25.413 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+2023-11-24 00:25:28.422 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Unregistering ...
+2023-11-24 00:25:28.471 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - deregister  status: 200
+2023-11-24 00:25:28.486 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
+2023-11-24 01:52:58.555 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2023-11-24 01:52:59.664 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - No active profile set, falling back to default profiles: default
+2023-11-24 01:53:01.292 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2023-11-24 01:53:01.296 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-11-24 01:53:01.382 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 71ms. Found 0 Redis repository interfaces.
+2023-11-24 01:53:01.536 [main] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2023-11-24 01:53:01.825 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=d335a6e7-1f77-31d8-84e0-7bd0e3ee761c
+2023-11-24 01:53:03.397 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 0 (http)
+2023-11-24 01:53:03.414 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
+2023-11-24 01:53:03.415 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-11-24 01:53:03.415 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
+2023-11-24 01:53:03.498 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-11-24 01:53:03.498 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3823 ms
+2023-11-24 01:53:03.833 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2023-11-24 01:53:03.863 [main] INFO  com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@642c6461
+2023-11-24 01:53:04.507 [main] INFO  c.g.y.a.MybatisPlusJoinAutoConfiguration - MPJSqlInjector init
+2023-11-24 01:53:07.129 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2023-11-24 01:53:08.209 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2023-11-24 01:53:12.426 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses Jersey
+2023-11-24 01:53:12.588 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2023-11-24 01:53:12.985 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 2 endpoint(s) beneath base path '/actuator'
+2023-11-24 01:53:13.352 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
+2023-11-24 01:53:13.391 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 10145 (http) with context path ''
+2023-11-24 01:53:13.392 [main] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 10145
+2023-11-24 01:53:13.398 [main] INFO  o.s.cloud.netflix.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2023-11-24 01:53:13.471 [main] INFO  com.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2023-11-24 01:53:13.539 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON encoding codec LegacyJacksonJson
+2023-11-24 01:53:13.539 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON decoding codec LegacyJacksonJson
+2023-11-24 01:53:13.710 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML encoding codec XStreamXml
+2023-11-24 01:53:13.710 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML decoding codec XStreamXml
+2023-11-24 01:53:13.942 [main] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2023-11-24 01:53:14.121 [main] INFO  com.netflix.discovery.DiscoveryClient - Disable delta property : false
+2023-11-24 01:53:14.122 [main] INFO  com.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2023-11-24 01:53:14.122 [main] INFO  com.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2023-11-24 01:53:14.122 [main] INFO  com.netflix.discovery.DiscoveryClient - Application is null : false
+2023-11-24 01:53:14.122 [main] INFO  com.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2023-11-24 01:53:14.122 [main] INFO  com.netflix.discovery.DiscoveryClient - Application version is -1: true
+2023-11-24 01:53:14.122 [main] INFO  com.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2023-11-24 01:53:14.305 [main] INFO  com.netflix.discovery.DiscoveryClient - The response status is 200
+2023-11-24 01:53:14.306 [main] INFO  com.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2023-11-24 01:53:14.310 [main] INFO  com.netflix.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2023-11-24 01:53:14.313 [main] INFO  com.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1700761994312 with initial instances count: 0
+2023-11-24 01:53:14.321 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application CYJ-ENTITY-CREATER with eureka with status UP
+2023-11-24 01:53:14.321 [main] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1700761994321, current=UP, previous=STARTING]
+2023-11-24 01:53:14.324 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0: registering service...
+2023-11-24 01:53:14.443 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - registration status: 204
+2023-11-24 01:53:14.601 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - Started CyjEntityCreaterApplicationTest in 16.85 seconds (JVM running for 19.07)
+2023-11-24 01:53:14.641 [main] WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - idleTimeout is close to or more than maxLifetime, disabling it.
+2023-11-24 01:53:14.642 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-11-24 01:53:17.171 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-11-24 01:53:17.214 [main] INFO  o.s.test.context.transaction.TransactionContext - Began transaction (1) for test context [DefaultTestContext@65f095f8 testClass = CyjEntityCreaterApplicationTest, testInstance = CyjEntityCreaterApplicationTest(wac=org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@79e18e38, started on Fri Nov 24 01:52:59 CST 2023, parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@59e32960, mockMvc=null, persistentCustomServiceImpl=com.example.cyjentitycreater.service.bean.custom.PersistentCustomServiceImpl@7cb4fc46, persistentService=com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl@64b6d6dd, appServiceService=com.example.cyjentitycreater.service.bean.auto.AppServiceServiceImpl@1181a376, persistentRepository=com.example.cyjentitycreater.repository.bean.PersistentRepository@ef09e1, menuCustomService=com.example.cyjentitycreater.service.bean.custom.MenuCustomServiceImpl@5b628376), testMethod = beanBuilderTest@CyjEntityCreaterApplicationTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@59af0466 testClass = CyjEntityCreaterApplicationTest, locations = '{}', classes = '{class com.example.cyjentitycreater.CyjEntityCreaterApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}', contextCustomizers = set[org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@797badd3, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@221af3c0, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@7fe8ea47, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@2357d90a, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@5579bb86], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> false]]; transaction manager [org.springframework.jdbc.datasource.DataSourceTransactionManager@930b6f9]; rollback [true]
+2023-11-24 01:53:17.664 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - PersistentService.findAllBefore:execution(Page com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl.findAll(PersistentDto))
+2023-11-24 01:53:17.776 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - PersistentService.findAllAfter:execution(Page com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl.findAll(PersistentDto))
+2023-11-24 01:53:17.869 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjquery.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.SqlDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class SqlAspectHandler {
+
+    public static class addOne extends BaseAspect<SqlDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<SqlDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<SqlDto> {
+
+    }
+
+}
+2023-11-24 01:53:17.948 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjdictionary.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.DictionaryDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class DictionaryAspectHandler {
+
+    public static class addOne extends BaseAspect<DictionaryDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<DictionaryDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<DictionaryDto> {
+
+    }
+
+}
+2023-11-24 01:53:17.990 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjdictionary.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.CatalogDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class CatalogAspectHandler {
+
+    public static class addOne extends BaseAspect<CatalogDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<CatalogDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<CatalogDto> {
+
+    }
+
+}
+2023-11-24 01:53:18.064 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjentitycreater.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.PersistentTableConfigDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class PersistentTableConfigAspectHandler {
+
+    public static class addOne extends BaseAspect<PersistentTableConfigDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<PersistentTableConfigDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<PersistentTableConfigDto> {
+
+    }
+
+}
+2023-11-24 01:53:18.108 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjentitycreater.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.PersistentFormConfigDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class PersistentFormConfigAspectHandler {
+
+    public static class addOne extends BaseAspect<PersistentFormConfigDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<PersistentFormConfigDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<PersistentFormConfigDto> {
+
+    }
+
+}
+2023-11-24 01:53:18.149 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjentitycreater.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.AppServiceDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class AppServiceAspectHandler {
+
+    public static class addOne extends BaseAspect<AppServiceDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<AppServiceDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<AppServiceDto> {
+
+    }
+
+}
+2023-11-24 01:53:18.188 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjentitycreater.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.PersistentTableDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class PersistentTableAspectHandler {
+
+    public static class addOne extends BaseAspect<PersistentTableDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<PersistentTableDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<PersistentTableDto> {
+
+    }
+
+}
+2023-11-24 01:53:18.232 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjentitycreater.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.PropertyDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class PropertyAspectHandler {
+
+    public static class addOne extends BaseAspect<PropertyDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<PropertyDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<PropertyDto> {
+
+    }
+
+}
+2023-11-24 01:53:18.269 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjentitycreater.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.PersistentDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class PersistentAspectHandler {
+
+    public static class addOne extends BaseAspect<PersistentDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<PersistentDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<PersistentDto> {
+
+    }
+
+}
+2023-11-24 01:53:18.356 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjuser.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.EnterpriseDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class EnterpriseAspectHandler {
+
+    public static class addOne extends BaseAspect<EnterpriseDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<EnterpriseDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<EnterpriseDto> {
+
+    }
+
+}
+2023-11-24 01:53:18.396 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjentitycreater.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.PersistentTableSearchConfigDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class PersistentTableSearchConfigAspectHandler {
+
+    public static class addOne extends BaseAspect<PersistentTableSearchConfigDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<PersistentTableSearchConfigDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<PersistentTableSearchConfigDto> {
+
+    }
+
+}
+2023-11-24 01:53:18.433 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjuser.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.AuthorityDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class AuthorityAspectHandler {
+
+    public static class addOne extends BaseAspect<AuthorityDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<AuthorityDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<AuthorityDto> {
+
+    }
+
+}
+2023-11-24 01:53:18.470 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjentitycreater.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.PersistentFormDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class PersistentFormAspectHandler {
+
+    public static class addOne extends BaseAspect<PersistentFormDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<PersistentFormDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<PersistentFormDto> {
+
+    }
+
+}
+2023-11-24 01:53:18.563 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjworkflow.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.WorkFlowDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class WorkFlowAspectHandler {
+
+    public static class addOne extends BaseAspect<WorkFlowDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<WorkFlowDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<WorkFlowDto> {
+
+    }
+
+}
+2023-11-24 01:53:18.610 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjuser.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.RoleDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class RoleAspectHandler {
+
+    public static class addOne extends BaseAspect<RoleDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<RoleDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<RoleDto> {
+
+    }
+
+}
+2023-11-24 01:53:18.648 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjuser.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.UserDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class UserAspectHandler {
+
+    public static class addOne extends BaseAspect<UserDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<UserDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<UserDto> {
+
+    }
+
+}
+2023-11-24 01:53:18.687 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjentitycreater.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.MenuDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class MenuAspectHandler {
+
+    public static class addOne extends BaseAspect<MenuDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<MenuDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<MenuDto> {
+
+    }
+
+}
+2023-11-24 01:53:18.767 [main] INFO  o.s.test.context.transaction.TransactionContext - Rolled back transaction for test: [DefaultTestContext@65f095f8 testClass = CyjEntityCreaterApplicationTest, testInstance = CyjEntityCreaterApplicationTest(wac=org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@79e18e38, started on Fri Nov 24 01:52:59 CST 2023, parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@59e32960, mockMvc=null, persistentCustomServiceImpl=com.example.cyjentitycreater.service.bean.custom.PersistentCustomServiceImpl@7cb4fc46, persistentService=com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl@64b6d6dd, appServiceService=com.example.cyjentitycreater.service.bean.auto.AppServiceServiceImpl@1181a376, persistentRepository=com.example.cyjentitycreater.repository.bean.PersistentRepository@ef09e1, menuCustomService=com.example.cyjentitycreater.service.bean.custom.MenuCustomServiceImpl@5b628376), testMethod = beanBuilderTest@CyjEntityCreaterApplicationTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@59af0466 testClass = CyjEntityCreaterApplicationTest, locations = '{}', classes = '{class com.example.cyjentitycreater.CyjEntityCreaterApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}', contextCustomizers = set[org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@797badd3, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@221af3c0, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@7fe8ea47, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@2357d90a, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@5579bb86], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> false]]
+2023-11-24 01:53:18.775 [SpringContextShutdownHook] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Unregistering application CYJ-ENTITY-CREATER with eureka with status DOWN
+2023-11-24 01:53:18.775 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1700761998775, current=DOWN, previous=UP]
+2023-11-24 01:53:18.776 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0: registering service...
+2023-11-24 01:53:18.814 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - registration status: 204
+2023-11-24 01:53:18.951 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2023-11-24 01:53:18.956 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-11-24 01:53:19.541 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-11-24 01:53:19.543 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+2023-11-24 01:53:22.555 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Unregistering ...
+2023-11-24 01:53:22.601 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - deregister  status: 200
+2023-11-24 01:53:22.611 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
+2023-11-24 01:54:48.690 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2023-11-24 01:54:49.541 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - No active profile set, falling back to default profiles: default
+2023-11-24 01:54:51.050 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2023-11-24 01:54:51.053 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-11-24 01:54:51.122 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 57ms. Found 0 Redis repository interfaces.
+2023-11-24 01:54:51.338 [main] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2023-11-24 01:54:51.605 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=d335a6e7-1f77-31d8-84e0-7bd0e3ee761c
+2023-11-24 01:54:53.177 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 0 (http)
+2023-11-24 01:54:53.192 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
+2023-11-24 01:54:53.193 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-11-24 01:54:53.194 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
+2023-11-24 01:54:53.275 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-11-24 01:54:53.275 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3727 ms
+2023-11-24 01:54:53.568 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2023-11-24 01:54:53.592 [main] INFO  com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@642c6461
+2023-11-24 01:54:54.225 [main] INFO  c.g.y.a.MybatisPlusJoinAutoConfiguration - MPJSqlInjector init
+2023-11-24 01:54:56.889 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2023-11-24 01:54:57.779 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2023-11-24 01:55:01.859 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses Jersey
+2023-11-24 01:55:02.051 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2023-11-24 01:55:02.461 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 2 endpoint(s) beneath base path '/actuator'
+2023-11-24 01:55:02.853 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
+2023-11-24 01:55:02.891 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 10191 (http) with context path ''
+2023-11-24 01:55:02.892 [main] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 10191
+2023-11-24 01:55:02.900 [main] INFO  o.s.cloud.netflix.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2023-11-24 01:55:02.976 [main] INFO  com.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2023-11-24 01:55:03.044 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON encoding codec LegacyJacksonJson
+2023-11-24 01:55:03.044 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON decoding codec LegacyJacksonJson
+2023-11-24 01:55:03.211 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML encoding codec XStreamXml
+2023-11-24 01:55:03.211 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML decoding codec XStreamXml
+2023-11-24 01:55:03.462 [main] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2023-11-24 01:55:03.628 [main] INFO  com.netflix.discovery.DiscoveryClient - Disable delta property : false
+2023-11-24 01:55:03.629 [main] INFO  com.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2023-11-24 01:55:03.629 [main] INFO  com.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2023-11-24 01:55:03.629 [main] INFO  com.netflix.discovery.DiscoveryClient - Application is null : false
+2023-11-24 01:55:03.629 [main] INFO  com.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2023-11-24 01:55:03.629 [main] INFO  com.netflix.discovery.DiscoveryClient - Application version is -1: true
+2023-11-24 01:55:03.629 [main] INFO  com.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2023-11-24 01:55:03.835 [main] INFO  com.netflix.discovery.DiscoveryClient - The response status is 200
+2023-11-24 01:55:03.837 [main] INFO  com.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2023-11-24 01:55:03.839 [main] INFO  com.netflix.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2023-11-24 01:55:03.843 [main] INFO  com.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1700762103842 with initial instances count: 0
+2023-11-24 01:55:03.853 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application CYJ-ENTITY-CREATER with eureka with status UP
+2023-11-24 01:55:03.854 [main] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1700762103854, current=UP, previous=STARTING]
+2023-11-24 01:55:03.857 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0: registering service...
+2023-11-24 01:55:03.973 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - registration status: 204
+2023-11-24 01:55:04.136 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - Started CyjEntityCreaterApplicationTest in 16.085 seconds (JVM running for 17.544)
+2023-11-24 01:55:04.170 [main] WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - idleTimeout is close to or more than maxLifetime, disabling it.
+2023-11-24 01:55:04.170 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-11-24 01:55:06.699 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-11-24 01:55:06.742 [main] INFO  o.s.test.context.transaction.TransactionContext - Began transaction (1) for test context [DefaultTestContext@65f095f8 testClass = CyjEntityCreaterApplicationTest, testInstance = CyjEntityCreaterApplicationTest(wac=org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@79e18e38, started on Fri Nov 24 01:54:49 CST 2023, parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@59e32960, mockMvc=null, persistentCustomServiceImpl=com.example.cyjentitycreater.service.bean.custom.PersistentCustomServiceImpl@7cb4fc46, persistentService=com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl@64b6d6dd, appServiceService=com.example.cyjentitycreater.service.bean.auto.AppServiceServiceImpl@1181a376, persistentRepository=com.example.cyjentitycreater.repository.bean.PersistentRepository@ef09e1, menuCustomService=com.example.cyjentitycreater.service.bean.custom.MenuCustomServiceImpl@5b628376), testMethod = beanBuilderTest@CyjEntityCreaterApplicationTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@59af0466 testClass = CyjEntityCreaterApplicationTest, locations = '{}', classes = '{class com.example.cyjentitycreater.CyjEntityCreaterApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}', contextCustomizers = set[org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@797badd3, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@221af3c0, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@7fe8ea47, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@2357d90a, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@5579bb86], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> false]]; transaction manager [org.springframework.jdbc.datasource.DataSourceTransactionManager@930b6f9]; rollback [true]
+2023-11-24 01:55:07.175 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - PersistentService.findAllBefore:execution(Page com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl.findAll(PersistentDto))
+2023-11-24 01:55:07.255 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - PersistentService.findAllAfter:execution(Page com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl.findAll(PersistentDto))
+2023-11-24 01:55:07.344 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjquery.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.SqlDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class SqlAspectHandler {
+
+    public static class addOne extends BaseAspect<SqlDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<SqlDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<SqlDto> {
+
+    }
+
+}
+2023-11-24 01:55:07.352 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成路径文件夹
+2023-11-24 01:55:07.353 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-query\src\main\java\com\example\cyjquery/service/bean/aspect/SqlAspectHandler.java
+2023-11-24 01:55:07.434 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjdictionary.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.DictionaryDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class DictionaryAspectHandler {
+
+    public static class addOne extends BaseAspect<DictionaryDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<DictionaryDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<DictionaryDto> {
+
+    }
+
+}
+2023-11-24 01:55:07.436 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成路径文件夹
+2023-11-24 01:55:07.438 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-dictionary\src\main\java\com\example\cyjdictionary/service/bean/aspect/DictionaryAspectHandler.java
+2023-11-24 01:55:07.475 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjdictionary.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.CatalogDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class CatalogAspectHandler {
+
+    public static class addOne extends BaseAspect<CatalogDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<CatalogDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<CatalogDto> {
+
+    }
+
+}
+2023-11-24 01:55:07.477 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-dictionary\src\main\java\com\example\cyjdictionary/service/bean/aspect/CatalogAspectHandler.java
+2023-11-24 01:55:07.555 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjentitycreater.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.PersistentTableConfigDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class PersistentTableConfigAspectHandler {
+
+    public static class addOne extends BaseAspect<PersistentTableConfigDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<PersistentTableConfigDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<PersistentTableConfigDto> {
+
+    }
+
+}
+2023-11-24 01:55:07.556 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-entity-creater\src\main\java\com\example\cyjentitycreater/service/bean/aspect/PersistentTableConfigAspectHandler.java
+2023-11-24 01:55:07.602 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjentitycreater.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.PersistentFormConfigDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class PersistentFormConfigAspectHandler {
+
+    public static class addOne extends BaseAspect<PersistentFormConfigDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<PersistentFormConfigDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<PersistentFormConfigDto> {
+
+    }
+
+}
+2023-11-24 01:55:07.604 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-entity-creater\src\main\java\com\example\cyjentitycreater/service/bean/aspect/PersistentFormConfigAspectHandler.java
+2023-11-24 01:55:07.645 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjentitycreater.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.AppServiceDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class AppServiceAspectHandler {
+
+    public static class addOne extends BaseAspect<AppServiceDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<AppServiceDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<AppServiceDto> {
+
+    }
+
+}
+2023-11-24 01:55:07.684 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjentitycreater.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.PersistentTableDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class PersistentTableAspectHandler {
+
+    public static class addOne extends BaseAspect<PersistentTableDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<PersistentTableDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<PersistentTableDto> {
+
+    }
+
+}
+2023-11-24 01:55:07.685 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-entity-creater\src\main\java\com\example\cyjentitycreater/service/bean/aspect/PersistentTableAspectHandler.java
+2023-11-24 01:55:07.725 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjentitycreater.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.PropertyDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class PropertyAspectHandler {
+
+    public static class addOne extends BaseAspect<PropertyDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<PropertyDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<PropertyDto> {
+
+    }
+
+}
+2023-11-24 01:55:07.726 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-entity-creater\src\main\java\com\example\cyjentitycreater/service/bean/aspect/PropertyAspectHandler.java
+2023-11-24 01:55:07.767 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjentitycreater.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.PersistentDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class PersistentAspectHandler {
+
+    public static class addOne extends BaseAspect<PersistentDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<PersistentDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<PersistentDto> {
+
+    }
+
+}
+2023-11-24 01:55:07.768 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-entity-creater\src\main\java\com\example\cyjentitycreater/service/bean/aspect/PersistentAspectHandler.java
+2023-11-24 01:55:07.847 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjuser.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.EnterpriseDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class EnterpriseAspectHandler {
+
+    public static class addOne extends BaseAspect<EnterpriseDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<EnterpriseDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<EnterpriseDto> {
+
+    }
+
+}
+2023-11-24 01:55:07.847 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成路径文件夹
+2023-11-24 01:55:07.848 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-user\src\main\java\com\example\cyjuser/service/bean/aspect/EnterpriseAspectHandler.java
+2023-11-24 01:55:07.886 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjentitycreater.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.PersistentTableSearchConfigDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class PersistentTableSearchConfigAspectHandler {
+
+    public static class addOne extends BaseAspect<PersistentTableSearchConfigDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<PersistentTableSearchConfigDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<PersistentTableSearchConfigDto> {
+
+    }
+
+}
+2023-11-24 01:55:07.888 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-entity-creater\src\main\java\com\example\cyjentitycreater/service/bean/aspect/PersistentTableSearchConfigAspectHandler.java
+2023-11-24 01:55:07.931 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjuser.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.AuthorityDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class AuthorityAspectHandler {
+
+    public static class addOne extends BaseAspect<AuthorityDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<AuthorityDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<AuthorityDto> {
+
+    }
+
+}
+2023-11-24 01:55:07.932 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-user\src\main\java\com\example\cyjuser/service/bean/aspect/AuthorityAspectHandler.java
+2023-11-24 01:55:07.974 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjentitycreater.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.PersistentFormDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class PersistentFormAspectHandler {
+
+    public static class addOne extends BaseAspect<PersistentFormDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<PersistentFormDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<PersistentFormDto> {
+
+    }
+
+}
+2023-11-24 01:55:07.976 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-entity-creater\src\main\java\com\example\cyjentitycreater/service/bean/aspect/PersistentFormAspectHandler.java
+2023-11-24 01:55:08.051 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjworkflow.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.WorkFlowDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class WorkFlowAspectHandler {
+
+    public static class addOne extends BaseAspect<WorkFlowDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<WorkFlowDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<WorkFlowDto> {
+
+    }
+
+}
+2023-11-24 01:55:08.053 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成路径文件夹
+2023-11-24 01:55:08.054 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-workflow\src\main\java\com\example\cyjworkflow/service/bean/aspect/WorkFlowAspectHandler.java
+2023-11-24 01:55:08.091 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjuser.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.RoleDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class RoleAspectHandler {
+
+    public static class addOne extends BaseAspect<RoleDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<RoleDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<RoleDto> {
+
+    }
+
+}
+2023-11-24 01:55:08.092 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-user\src\main\java\com\example\cyjuser/service/bean/aspect/RoleAspectHandler.java
+2023-11-24 01:55:08.133 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjuser.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.UserDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class UserAspectHandler {
+
+    public static class addOne extends BaseAspect<UserDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<UserDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<UserDto> {
+
+    }
+
+}
+2023-11-24 01:55:08.134 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-user\src\main\java\com\example\cyjuser/service/bean/aspect/UserAspectHandler.java
+2023-11-24 01:55:08.171 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
+package com.example.cyjentitycreater.service.bean.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.bean.MenuDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class MenuAspectHandler {
+
+    public static class addOne extends BaseAspect<MenuDto> {
+
+    }
+
+    public static class deleteOne extends BaseAspect<String> {
+
+    }
+
+    public static class updateOne extends BaseAspect<MenuDto> {
+
+    }
+
+    public static class findAll extends BaseAspect<MenuDto> {
+
+    }
+
+}
+2023-11-24 01:55:08.172 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-entity-creater\src\main\java\com\example\cyjentitycreater/service/bean/aspect/MenuAspectHandler.java
+2023-11-24 01:55:08.253 [main] INFO  o.s.test.context.transaction.TransactionContext - Rolled back transaction for test: [DefaultTestContext@65f095f8 testClass = CyjEntityCreaterApplicationTest, testInstance = CyjEntityCreaterApplicationTest(wac=org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@79e18e38, started on Fri Nov 24 01:54:49 CST 2023, parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@59e32960, mockMvc=null, persistentCustomServiceImpl=com.example.cyjentitycreater.service.bean.custom.PersistentCustomServiceImpl@7cb4fc46, persistentService=com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl@64b6d6dd, appServiceService=com.example.cyjentitycreater.service.bean.auto.AppServiceServiceImpl@1181a376, persistentRepository=com.example.cyjentitycreater.repository.bean.PersistentRepository@ef09e1, menuCustomService=com.example.cyjentitycreater.service.bean.custom.MenuCustomServiceImpl@5b628376), testMethod = beanBuilderTest@CyjEntityCreaterApplicationTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@59af0466 testClass = CyjEntityCreaterApplicationTest, locations = '{}', classes = '{class com.example.cyjentitycreater.CyjEntityCreaterApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}', contextCustomizers = set[org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@797badd3, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@221af3c0, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@7fe8ea47, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@2357d90a, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@5579bb86], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> false]]
+2023-11-24 01:55:08.259 [SpringContextShutdownHook] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Unregistering application CYJ-ENTITY-CREATER with eureka with status DOWN
+2023-11-24 01:55:08.259 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1700762108259, current=DOWN, previous=UP]
+2023-11-24 01:55:08.260 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0: registering service...
+2023-11-24 01:55:08.305 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - registration status: 204
+2023-11-24 01:55:08.475 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2023-11-24 01:55:08.481 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-11-24 01:55:09.090 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-11-24 01:55:09.092 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+2023-11-24 01:55:12.109 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Unregistering ...
+2023-11-24 01:55:12.158 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - deregister  status: 200
+2023-11-24 01:55:12.173 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
+2023-11-24 01:57:13.662 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2023-11-24 01:57:14.498 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - No active profile set, falling back to default profiles: default
+2023-11-24 01:57:16.145 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2023-11-24 01:57:16.148 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-11-24 01:57:16.231 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 66ms. Found 0 Redis repository interfaces.
+2023-11-24 01:57:16.380 [main] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2023-11-24 01:57:16.625 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=a8ff1c07-4767-351a-961d-972feae4f846
+2023-11-24 01:57:18.155 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 0 (http)
+2023-11-24 01:57:18.169 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
+2023-11-24 01:57:18.170 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-11-24 01:57:18.171 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
+2023-11-24 01:57:18.243 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-11-24 01:57:18.243 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3738 ms
+2023-11-24 01:57:18.537 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2023-11-24 01:57:18.563 [main] INFO  com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@12567179
+2023-11-24 01:57:19.225 [main] INFO  c.g.y.a.MybatisPlusJoinAutoConfiguration - MPJSqlInjector init
+2023-11-24 01:57:21.826 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2023-11-24 01:57:22.832 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2023-11-24 01:57:27.009 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses Jersey
+2023-11-24 01:57:27.160 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2023-11-24 01:57:27.531 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 2 endpoint(s) beneath base path '/actuator'
+2023-11-24 01:57:27.908 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
+2023-11-24 01:57:27.959 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 10249 (http) with context path ''
+2023-11-24 01:57:27.961 [main] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 10249
+2023-11-24 01:57:27.969 [main] INFO  o.s.cloud.netflix.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2023-11-24 01:57:28.067 [main] INFO  com.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2023-11-24 01:57:28.146 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON encoding codec LegacyJacksonJson
+2023-11-24 01:57:28.147 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON decoding codec LegacyJacksonJson
+2023-11-24 01:57:28.311 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML encoding codec XStreamXml
+2023-11-24 01:57:28.311 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML decoding codec XStreamXml
+2023-11-24 01:57:28.523 [main] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2023-11-24 01:57:28.700 [main] INFO  com.netflix.discovery.DiscoveryClient - Disable delta property : false
+2023-11-24 01:57:28.700 [main] INFO  com.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2023-11-24 01:57:28.701 [main] INFO  com.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2023-11-24 01:57:28.701 [main] INFO  com.netflix.discovery.DiscoveryClient - Application is null : false
+2023-11-24 01:57:28.701 [main] INFO  com.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2023-11-24 01:57:28.701 [main] INFO  com.netflix.discovery.DiscoveryClient - Application version is -1: true
+2023-11-24 01:57:28.701 [main] INFO  com.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2023-11-24 01:57:28.882 [main] INFO  com.netflix.discovery.DiscoveryClient - The response status is 200
+2023-11-24 01:57:28.883 [main] INFO  com.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2023-11-24 01:57:28.886 [main] INFO  com.netflix.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2023-11-24 01:57:28.889 [main] INFO  com.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1700762248888 with initial instances count: 0
+2023-11-24 01:57:28.896 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application CYJ-ENTITY-CREATER with eureka with status UP
+2023-11-24 01:57:28.897 [main] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1700762248896, current=UP, previous=STARTING]
+2023-11-24 01:57:28.899 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0: registering service...
+2023-11-24 01:57:29.008 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - registration status: 204
+2023-11-24 01:57:29.190 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - Started CyjEntityCreaterApplicationTest in 16.359 seconds (JVM running for 18.908)
+2023-11-24 01:57:29.220 [main] WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - idleTimeout is close to or more than maxLifetime, disabling it.
+2023-11-24 01:57:29.220 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-11-24 01:57:31.707 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-11-24 01:57:31.745 [main] INFO  o.s.test.context.transaction.TransactionContext - Began transaction (1) for test context [DefaultTestContext@65f095f8 testClass = CyjEntityCreaterApplicationTest, testInstance = CyjEntityCreaterApplicationTest(wac=org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@79e18e38, started on Fri Nov 24 01:57:14 CST 2023, parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@59e32960, mockMvc=null, persistentCustomServiceImpl=com.example.cyjentitycreater.service.bean.custom.PersistentCustomServiceImpl@6f914212, persistentService=com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl@22726bc7, appServiceService=com.example.cyjentitycreater.service.bean.auto.AppServiceServiceImpl@294a150c, persistentRepository=com.example.cyjentitycreater.repository.bean.PersistentRepository@2fef413c, menuCustomService=com.example.cyjentitycreater.service.bean.custom.MenuCustomServiceImpl@4a0b1701), testMethod = relationBuilderTest@CyjEntityCreaterApplicationTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@59af0466 testClass = CyjEntityCreaterApplicationTest, locations = '{}', classes = '{class com.example.cyjentitycreater.CyjEntityCreaterApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}', contextCustomizers = set[org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@797badd3, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@221af3c0, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@7fe8ea47, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@2357d90a, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@5579bb86], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> false]]; transaction manager [org.springframework.jdbc.datasource.DataSourceTransactionManager@7b9661d4]; rollback [true]
+2023-11-24 01:57:32.471 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - PersistentService.findAllBefore:execution(Page com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl.findAll(PersistentDto))
+2023-11-24 01:57:32.537 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - PersistentService.findAllAfter:execution(Page com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl.findAll(PersistentDto))
+2023-11-24 01:57:32.613 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - relationBuilderTest.serviceAspectRelationBuilder:
+package com.example.cyjuser.service.relation.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.relation.UserRoleDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class UserRoleAspectHandler {
+
+    public static class getUserRole extends BaseAspect<UserRoleDto> {
+
+    }
+
+    public static class setUserRole extends BaseAspect<UserRoleDto> {
+
+    }
+
+}
+2023-11-24 01:57:32.648 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - relationBuilderTest.serviceAspectRelationBuilder:
+package com.example.cyjuser.service.relation.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.relation.RoleAuthorityDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class RoleAuthorityAspectHandler {
+
+    public static class getRoleAuthority extends BaseAspect<RoleAuthorityDto> {
+
+    }
+
+    public static class setRoleAuthority extends BaseAspect<RoleAuthorityDto> {
+
+    }
+
+}
+2023-11-24 01:57:32.720 [main] INFO  o.s.test.context.transaction.TransactionContext - Rolled back transaction for test: [DefaultTestContext@65f095f8 testClass = CyjEntityCreaterApplicationTest, testInstance = CyjEntityCreaterApplicationTest(wac=org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@79e18e38, started on Fri Nov 24 01:57:14 CST 2023, parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@59e32960, mockMvc=null, persistentCustomServiceImpl=com.example.cyjentitycreater.service.bean.custom.PersistentCustomServiceImpl@6f914212, persistentService=com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl@22726bc7, appServiceService=com.example.cyjentitycreater.service.bean.auto.AppServiceServiceImpl@294a150c, persistentRepository=com.example.cyjentitycreater.repository.bean.PersistentRepository@2fef413c, menuCustomService=com.example.cyjentitycreater.service.bean.custom.MenuCustomServiceImpl@4a0b1701), testMethod = relationBuilderTest@CyjEntityCreaterApplicationTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@59af0466 testClass = CyjEntityCreaterApplicationTest, locations = '{}', classes = '{class com.example.cyjentitycreater.CyjEntityCreaterApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}', contextCustomizers = set[org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@797badd3, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@221af3c0, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@7fe8ea47, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@2357d90a, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@5579bb86], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> false]]
+2023-11-24 01:57:32.727 [SpringContextShutdownHook] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Unregistering application CYJ-ENTITY-CREATER with eureka with status DOWN
+2023-11-24 01:57:32.727 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1700762252727, current=DOWN, previous=UP]
+2023-11-24 01:57:32.727 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0: registering service...
+2023-11-24 01:57:32.770 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - registration status: 204
+2023-11-24 01:57:32.894 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2023-11-24 01:57:32.900 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-11-24 01:57:34.078 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-11-24 01:57:34.082 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+2023-11-24 01:57:37.091 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Unregistering ...
+2023-11-24 01:57:37.137 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - deregister  status: 200
+2023-11-24 01:57:37.151 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
+2023-11-24 02:00:49.182 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2023-11-24 02:00:50.023 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - No active profile set, falling back to default profiles: default
+2023-11-24 02:00:51.583 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2023-11-24 02:00:51.588 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-11-24 02:00:51.669 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 62ms. Found 0 Redis repository interfaces.
+2023-11-24 02:00:51.812 [main] WARN  o.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2023-11-24 02:00:52.141 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=a8ff1c07-4767-351a-961d-972feae4f846
+2023-11-24 02:00:53.720 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 0 (http)
+2023-11-24 02:00:53.738 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
+2023-11-24 02:00:53.740 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-11-24 02:00:53.740 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
+2023-11-24 02:00:53.826 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-11-24 02:00:53.827 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3799 ms
+2023-11-24 02:00:54.103 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2023-11-24 02:00:54.124 [main] INFO  com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@12567179
+2023-11-24 02:00:54.805 [main] INFO  c.g.y.a.MybatisPlusJoinAutoConfiguration - MPJSqlInjector init
+2023-11-24 02:00:57.439 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2023-11-24 02:00:58.450 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2023-11-24 02:01:02.644 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses Jersey
+2023-11-24 02:01:02.823 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2023-11-24 02:01:03.200 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 2 endpoint(s) beneath base path '/actuator'
+2023-11-24 02:01:03.589 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
+2023-11-24 02:01:03.627 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 10285 (http) with context path ''
+2023-11-24 02:01:03.628 [main] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 10285
+2023-11-24 02:01:03.637 [main] INFO  o.s.cloud.netflix.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2023-11-24 02:01:03.727 [main] INFO  com.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2023-11-24 02:01:03.804 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON encoding codec LegacyJacksonJson
+2023-11-24 02:01:03.804 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using JSON decoding codec LegacyJacksonJson
+2023-11-24 02:01:03.936 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML encoding codec XStreamXml
+2023-11-24 02:01:03.936 [main] INFO  c.n.discovery.provider.DiscoveryJerseyProvider - Using XML decoding codec XStreamXml
+2023-11-24 02:01:04.129 [main] INFO  c.n.d.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2023-11-24 02:01:04.291 [main] INFO  com.netflix.discovery.DiscoveryClient - Disable delta property : false
+2023-11-24 02:01:04.291 [main] INFO  com.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2023-11-24 02:01:04.291 [main] INFO  com.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2023-11-24 02:01:04.291 [main] INFO  com.netflix.discovery.DiscoveryClient - Application is null : false
+2023-11-24 02:01:04.291 [main] INFO  com.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2023-11-24 02:01:04.291 [main] INFO  com.netflix.discovery.DiscoveryClient - Application version is -1: true
+2023-11-24 02:01:04.291 [main] INFO  com.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2023-11-24 02:01:04.470 [main] INFO  com.netflix.discovery.DiscoveryClient - The response status is 200
+2023-11-24 02:01:04.473 [main] INFO  com.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2023-11-24 02:01:04.475 [main] INFO  com.netflix.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2023-11-24 02:01:04.480 [main] INFO  com.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1700762464479 with initial instances count: 0
+2023-11-24 02:01:04.492 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application CYJ-ENTITY-CREATER with eureka with status UP
+2023-11-24 02:01:04.494 [main] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1700762464494, current=UP, previous=STARTING]
+2023-11-24 02:01:04.497 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0: registering service...
+2023-11-24 02:01:04.640 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - registration status: 204
+2023-11-24 02:01:04.818 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - Started CyjEntityCreaterApplicationTest in 16.309 seconds (JVM running for 18.087)
+2023-11-24 02:01:04.859 [main] WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - idleTimeout is close to or more than maxLifetime, disabling it.
+2023-11-24 02:01:04.860 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-11-24 02:01:07.340 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-11-24 02:01:07.377 [main] INFO  o.s.test.context.transaction.TransactionContext - Began transaction (1) for test context [DefaultTestContext@65f095f8 testClass = CyjEntityCreaterApplicationTest, testInstance = CyjEntityCreaterApplicationTest(wac=org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@79e18e38, started on Fri Nov 24 02:00:50 CST 2023, parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@59e32960, mockMvc=null, persistentCustomServiceImpl=com.example.cyjentitycreater.service.bean.custom.PersistentCustomServiceImpl@6f914212, persistentService=com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl@22726bc7, appServiceService=com.example.cyjentitycreater.service.bean.auto.AppServiceServiceImpl@294a150c, persistentRepository=com.example.cyjentitycreater.repository.bean.PersistentRepository@2fef413c, menuCustomService=com.example.cyjentitycreater.service.bean.custom.MenuCustomServiceImpl@4a0b1701), testMethod = relationBuilderTest@CyjEntityCreaterApplicationTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@59af0466 testClass = CyjEntityCreaterApplicationTest, locations = '{}', classes = '{class com.example.cyjentitycreater.CyjEntityCreaterApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}', contextCustomizers = set[org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@797badd3, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@221af3c0, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@7fe8ea47, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@2357d90a, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@5579bb86], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> false]]; transaction manager [org.springframework.jdbc.datasource.DataSourceTransactionManager@7b9661d4]; rollback [true]
+2023-11-24 02:01:07.837 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - PersistentService.findAllBefore:execution(Page com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl.findAll(PersistentDto))
+2023-11-24 02:01:07.905 [main] INFO  c.e.c.s.bean.custom.PersistentCustomServiceImpl - PersistentService.findAllAfter:execution(Page com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl.findAll(PersistentDto))
+2023-11-24 02:01:07.988 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - relationBuilderTest.serviceAspectRelationBuilder:
+package com.example.cyjuser.service.relation.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.relation.UserRoleDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class UserRoleAspectHandler {
+
+    public static class getUserRole extends BaseAspect<UserRoleDto> {
+
+    }
+
+    public static class setUserRole extends BaseAspect<UserRoleDto> {
+
+    }
+
+}
+2023-11-24 02:01:07.991 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-user\src\main\java\com\example\cyjuser/service/relation/aspect/UserRoleAspectHandler.java
+2023-11-24 02:01:08.025 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - relationBuilderTest.serviceAspectRelationBuilder:
+package com.example.cyjuser.service.relation.aspect;
+
+import com.example.cyjcommon.aspect.BaseAspect;
+import com.example.cyjcommon.dto.relation.RoleAuthorityDto;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Noice
+ */
+@Component
+@Transactional(rollbackFor = Exception.class)
+public class RoleAuthorityAspectHandler {
+
+    public static class getRoleAuthority extends BaseAspect<RoleAuthorityDto> {
+
+    }
+
+    public static class setRoleAuthority extends BaseAspect<RoleAuthorityDto> {
+
+    }
+
+}
+2023-11-24 02:01:08.117 [main] INFO  o.s.test.context.transaction.TransactionContext - Rolled back transaction for test: [DefaultTestContext@65f095f8 testClass = CyjEntityCreaterApplicationTest, testInstance = CyjEntityCreaterApplicationTest(wac=org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@79e18e38, started on Fri Nov 24 02:00:50 CST 2023, parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@59e32960, mockMvc=null, persistentCustomServiceImpl=com.example.cyjentitycreater.service.bean.custom.PersistentCustomServiceImpl@6f914212, persistentService=com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl@22726bc7, appServiceService=com.example.cyjentitycreater.service.bean.auto.AppServiceServiceImpl@294a150c, persistentRepository=com.example.cyjentitycreater.repository.bean.PersistentRepository@2fef413c, menuCustomService=com.example.cyjentitycreater.service.bean.custom.MenuCustomServiceImpl@4a0b1701), testMethod = relationBuilderTest@CyjEntityCreaterApplicationTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@59af0466 testClass = CyjEntityCreaterApplicationTest, locations = '{}', classes = '{class com.example.cyjentitycreater.CyjEntityCreaterApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}', contextCustomizers = set[org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@797badd3, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@221af3c0, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@7fe8ea47, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@2357d90a, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@5579bb86], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> false]]
+2023-11-24 02:01:08.123 [SpringContextShutdownHook] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Unregistering application CYJ-ENTITY-CREATER with eureka with status DOWN
+2023-11-24 02:01:08.124 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1700762468124, current=DOWN, previous=UP]
+2023-11-24 02:01:08.124 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0: registering service...
+2023-11-24 02:01:08.166 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - registration status: 204
+2023-11-24 02:01:08.325 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2023-11-24 02:01:08.332 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-11-24 02:01:09.729 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-11-24 02:01:09.734 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+2023-11-24 02:01:12.742 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Unregistering ...
+2023-11-24 02:01:12.790 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - deregister  status: 200
+2023-11-24 02:01:12.808 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient

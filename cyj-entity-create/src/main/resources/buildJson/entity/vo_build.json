@@ -1,0 +1,31 @@
+[
+  {
+    "className": "$PersistentCode$Vo",
+    "packageName": "package noice.entity.vo.bean;",
+    "classNote": [
+      "/**",
+      " * @author Noice",
+      " */"
+    ],
+    "classStatement": "public",
+    "classType": "class",
+    "importPackageList": [
+      "import lombok.Data;",
+      "import lombok.EqualsAndHashCode;",
+      "import noice.common.entity.vo.BaseVoBean;"
+    ],
+    "classAnnotationList": [
+      "@EqualsAndHashCode(callSuper = true)",
+      "@Data"
+    ],
+    "extendsClassName": "extends BaseVoBean<\"$PersistentCode$Vo\">",
+    "fieldList": [
+      {
+        "fieldStatement": "private",
+        "fieldType": "#PersistentPropertyCode#",
+        "fieldName": "$PersistentPropertyCode$",
+        "staticType": "#PersistentPropertyType#"
+      }
+    ]
+  }
+]

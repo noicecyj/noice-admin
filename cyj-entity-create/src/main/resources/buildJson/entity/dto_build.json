@@ -1,0 +1,31 @@
+[
+  {
+    "className": "$PersistentCode$Dto",
+    "packageName": "package noice.entity.dto.bean;",
+    "classNote": [
+      "/**",
+      " * @author Noice",
+      " */"
+    ],
+    "classStatement": "public",
+    "classType": "class",
+    "importPackageList": [
+      "import lombok.Data;",
+      "import lombok.EqualsAndHashCode;",
+      "import noice.common.entity.dto.BaseDtoBean;"
+    ],
+    "classAnnotationList": [
+      "@EqualsAndHashCode(callSuper = true)",
+      "@Data"
+    ],
+    "extendsClassName": "extends BaseDtoBean<\"$PersistentCode$Dto\">",
+    "fieldList": [
+      {
+        "fieldStatement": "private",
+        "fieldType": "#PersistentPropertyCode#",
+        "fieldName": "$PersistentPropertyCode$",
+        "staticType": "#PersistentPropertyType#"
+      }
+    ]
+  }
+]
