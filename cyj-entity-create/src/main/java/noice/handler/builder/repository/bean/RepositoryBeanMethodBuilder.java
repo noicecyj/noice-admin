@@ -135,7 +135,7 @@ public class RepositoryBeanMethodBuilder extends MethodBase {
 
             public void setMethodBody() {
                 List<String> methodBodyList = new ArrayList<>();
-                methodBodyList.add("poList.forEach(po -> po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));\n");
+                methodBodyList.add("poList.forEach(po -> po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));");
                 this.setMethodBody(methodBodyList);
             }
 
@@ -410,7 +410,7 @@ public class RepositoryBeanMethodBuilder extends MethodBase {
 
             public void setMethodBody() {
                 List<String> methodBodyList = new ArrayList<>();
-                methodBodyList.add("poList.forEach(po -> po.eqUpdatedBy(UserContext.getUser().getString(USER_ID)));\n");
+                methodBodyList.add("poList.forEach(po -> po.eqUpdatedBy(UserContext.getUser().getString(USER_ID)));");
                 this.setMethodBody(methodBodyList);
             }
 
