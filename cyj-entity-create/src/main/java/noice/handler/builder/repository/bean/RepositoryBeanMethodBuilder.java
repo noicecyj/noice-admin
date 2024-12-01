@@ -393,7 +393,7 @@ public class RepositoryBeanMethodBuilder extends MethodBase {
                 this.setMethodAnnotationList();
                 this.setMethodName("findList");
                 this.setMethodParamSet();
-                this.setMethodReturnBody("return mapper.selectBatchIds(ids);");
+                this.setMethodReturnBody("return mapper.selectByIds(ids);");
                 return this;
             }
 

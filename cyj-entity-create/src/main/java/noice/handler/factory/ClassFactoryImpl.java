@@ -470,21 +470,21 @@ public abstract class ClassFactoryImpl implements ClassFactory {
                     List<String> appServiceAndPersistent = split.subList(1, split.size());
                     String code = String.join("_", appServiceAndPersistent);
                     if (ObjectUtil.isNotNull(operation)) {
-                        this.createInterfaceType(code, operation.summary(), pathPattern.getPatternString());
+                        this.createInterfaceType(code, operation.summary(), pathPattern.getPatternString(), requestMappingInfo.getMethodsCondition().getMethods().toString());
                     }
                 }
             }
         }
     }
 
-    public void createInterfaceType(String code, String name, String path) {
+    public void createInterfaceType(String code, String name, String path, String type) {
         String authorityId = authorityCreate(code, name, "interface");
         InterfacePo interfacePo = new InterfacePo();
         interfacePo = interfaceRepository.find(interfacePo.eqInterfaceCode(code).eqInterfaceName(name).getQueryWrapper());
         if (ObjectUtil.isNull(interfacePo)) {
             interfacePo = new InterfacePo().eqInterfaceCode(code).eqInterfaceName(name);
             interfacePo.setInterfacePath(path);
-            interfacePo.setInterfaceType(code);
+            interfacePo.setInterfaceType(type);
             interfacePo.setAuthorityId(authorityId);
             interfacePo.setCreatedBy("123123");
             interfacePo.setUpdatedBy("123123");
@@ -499,7 +499,7 @@ public abstract class ClassFactoryImpl implements ClassFactory {
         } else {
             logger.info("{}:接口已存在", name);
             interfacePo.setInterfacePath(path);
-            interfacePo.setInterfaceType(code);
+            interfacePo.setInterfaceType(type);
             interfacePo.setAuthorityId(authorityId);
             interfacePo.setUpdatedBy("123123");
             interfacePo.setSortCode(1L);

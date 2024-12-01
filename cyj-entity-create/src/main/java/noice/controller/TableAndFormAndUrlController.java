@@ -44,4 +44,10 @@ public class TableAndFormAndUrlController {
         return ResultVO.success(formAndTableControllerAssembler.dtoToVo(TableAndFormAndUrlService.getForm(persistentCode)));
     }
 
+//    @Operation(summary = "获取接口")
+//    @GetMapping(value = "getUrl/{persistentCode}")
+//    public ResultVO getUrl(@PathVariable("persistentCode") String persistentCode) {
+//        return ResultVO.success(formAndTableControllerAssembler.dtoToVo(TableAndFormAndUrlService.getUrl(persistentCode)));
+//    }
+
 }
