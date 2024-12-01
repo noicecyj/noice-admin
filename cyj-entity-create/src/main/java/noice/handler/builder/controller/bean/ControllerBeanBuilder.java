@@ -150,6 +150,7 @@ public class ControllerBeanBuilder extends ClassBase {
         importPackageList.add("import io.swagger.v3.oas.annotations.Operation;");
         importPackageList.add("import io.swagger.v3.oas.annotations.tags.Tag;");
         importPackageList.add("import noice.assembler.bean." + poName + "ControllerAssembler;");
+        importPackageList.add("import noice.common.entity.vo.OptionVO;");
         importPackageList.add("import noice.common.entity.vo.ResultVO;");
         importPackageList.add("import noice.converter.bean." + poName + "ControllerConverter;");
         importPackageList.add("import noice.entity.vo.bean." + poName + "Vo;");
@@ -162,7 +163,9 @@ public class ControllerBeanBuilder extends ClassBase {
         importPackageList.add("import org.springframework.web.bind.annotation.RequestMapping;");
         importPackageList.add("import org.springframework.web.bind.annotation.RestController;");
         importPackageList.add("");
+        importPackageList.add("import java.util.Collections;");
         importPackageList.add("import java.util.List;");
+        importPackageList.add("import java.util.stream.Collectors;");
     }
 
     public void setClassAnnotationList(String poName, String appApi) {

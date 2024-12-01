@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化日志级别，统一使用debug">
-      <change afterPath="$PROJECT_DIR$/noice-ice/src/models/entity.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/builder/controller/bean/ControllerBeanMethodBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/builder/controller/bean/ControllerBeanMethodBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/components/DataForm/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/components/DataForm/index.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="添加获取ValueEnum和Options接口，优化代码结构" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -176,7 +172,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CyjEntityCreaterApplicationTest.menuBeanTest">
+  <component name="RunManager" selected="JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest">
     <configuration name="CyjEntityCreaterApplicationTest.PersistentBeanAspect" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cyj-entity-create" />
       <extension name="coverage">
@@ -286,8 +282,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest2" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest" />
+        <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest2" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.menuBeanTest" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.PersistentBeanAspect" />
@@ -393,15 +389,7 @@
       <workItem from="1732972621922" duration="878000" />
       <workItem from="1732973522532" duration="106000" />
       <workItem from="1732973638203" duration="1281000" />
-      <workItem from="1733013178667" duration="2089000" />
-    </task>
-    <task id="LOCAL-00096" summary="优化ServiceBeanBuilder查找方法结构">
-      <option name="closed" value="true" />
-      <created>1731216325031</created>
-      <option name="number" value="00096" />
-      <option name="presentableId" value="LOCAL-00096" />
-      <option name="project" value="LOCAL" />
-      <updated>1731216325031</updated>
+      <workItem from="1733013178667" duration="3487000" />
     </task>
     <task id="LOCAL-00097" summary="优化ServiceBeanBuilder查找方法结构">
       <option name="closed" value="true" />
@@ -787,7 +775,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732973346001</updated>
     </task>
-    <option name="localTasksCounter" value="145" />
+    <task id="LOCAL-00145" summary="添加获取ValueEnum和Options接口，优化代码结构">
+      <option name="closed" value="true" />
+      <created>1733016943208</created>
+      <option name="number" value="00145" />
+      <option name="presentableId" value="LOCAL-00145" />
+      <option name="project" value="LOCAL" />
+      <updated>1733016943209</updated>
+    </task>
+    <option name="localTasksCounter" value="146" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -838,7 +834,8 @@
     <MESSAGE value="优化字段构建逻辑并添加查询及更新功能" />
     <MESSAGE value="移除冗余表单配置，优化数据展示逻辑" />
     <MESSAGE value="优化日志级别，统一使用debug" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化日志级别，统一使用debug" />
+    <MESSAGE value="添加获取ValueEnum和Options接口，优化代码结构" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加获取ValueEnum和Options接口，优化代码结构" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
