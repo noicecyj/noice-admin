@@ -78,7 +78,7 @@ public class RepositoryBeanMethodBuilder extends MethodBase {
         @EqualsAndHashCode(callSuper = true)
         @Component
         @Data
-        public static class RepositoryBeanAddOneBuilder extends RepositoryBeanAddBuilder {
+        public static class RepositoryBeanAddOneBuilder extends RepositoryBeanMethodBuilder {
 
             public RepositoryBeanAddOneBuilder builder(PersistentPo persistentPo) {
                 String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
@@ -113,7 +113,7 @@ public class RepositoryBeanMethodBuilder extends MethodBase {
         @EqualsAndHashCode(callSuper = true)
         @Component
         @Data
-        public static class RepositoryBeanAddBatchBuilder extends RepositoryBeanAddBuilder {
+        public static class RepositoryBeanAddBatchBuilder extends RepositoryBeanMethodBuilder {
 
             public RepositoryBeanAddBatchBuilder builder(PersistentPo persistentPo) {
                 String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
@@ -173,7 +173,7 @@ public class RepositoryBeanMethodBuilder extends MethodBase {
         @EqualsAndHashCode(callSuper = true)
         @Component
         @Data
-        public static class RepositoryBeanDeleteByIdBuilder extends RepositoryBeanDeleteBuilder {
+        public static class RepositoryBeanDeleteByIdBuilder extends RepositoryBeanMethodBuilder {
 
             public RepositoryBeanDeleteByIdBuilder builder() {
                 this.setMethodStatement(StatementEnum.PUBLIC);
@@ -207,7 +207,7 @@ public class RepositoryBeanMethodBuilder extends MethodBase {
         @EqualsAndHashCode(callSuper = true)
         @Component
         @Data
-        public static class RepositoryBeanDeleteWrapperBuilder extends RepositoryBeanDeleteBuilder {
+        public static class RepositoryBeanDeleteWrapperBuilder extends RepositoryBeanMethodBuilder {
 
             public RepositoryBeanDeleteWrapperBuilder builder(PersistentPo persistentPo) {
                 String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
@@ -242,7 +242,7 @@ public class RepositoryBeanMethodBuilder extends MethodBase {
         @EqualsAndHashCode(callSuper = true)
         @Component
         @Data
-        public static class RepositoryBeanDeleteByIdsBuilder extends RepositoryBeanDeleteBuilder {
+        public static class RepositoryBeanDeleteByIdsBuilder extends RepositoryBeanMethodBuilder {
 
             public RepositoryBeanDeleteByIdsBuilder builder() {
                 this.setMethodStatement(StatementEnum.PUBLIC);
@@ -318,7 +318,7 @@ public class RepositoryBeanMethodBuilder extends MethodBase {
         @EqualsAndHashCode(callSuper = true)
         @Component
         @Data
-        public static class RepositoryBeanUpdateOneBuilder extends RepositoryBeanUpdateBuilder {
+        public static class RepositoryBeanUpdateOneBuilder extends RepositoryBeanMethodBuilder {
 
             public RepositoryBeanUpdateOneBuilder builder(PersistentPo persistentPo) {
                 String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
@@ -353,7 +353,7 @@ public class RepositoryBeanMethodBuilder extends MethodBase {
         @EqualsAndHashCode(callSuper = true)
         @Component
         @Data
-        public static class RepositoryBeanUpdateAndAddBuilder extends RepositoryBeanUpdateBuilder {
+        public static class RepositoryBeanUpdateAndAddBuilder extends RepositoryBeanMethodBuilder {
 
             public RepositoryBeanUpdateAndAddBuilder builder(PersistentPo persistentPo) {
                 String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
@@ -388,7 +388,7 @@ public class RepositoryBeanMethodBuilder extends MethodBase {
         @EqualsAndHashCode(callSuper = true)
         @Component
         @Data
-        public static class RepositoryBeanUpdateBatchBuilder extends RepositoryBeanUpdateBuilder {
+        public static class RepositoryBeanUpdateBatchBuilder extends RepositoryBeanMethodBuilder {
 
             public RepositoryBeanUpdateBatchBuilder builder(PersistentPo persistentPo) {
                 String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
