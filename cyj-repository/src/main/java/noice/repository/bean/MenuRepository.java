@@ -65,7 +65,7 @@ public class MenuRepository implements BeanRepository<MenuPo> {
 
     @Override
     public List<MenuPo> findList(List<String> ids) {
-        return mapper.selectBatchIds(ids);
+        return mapper.selectByIds(ids);
     }
 
     @Override

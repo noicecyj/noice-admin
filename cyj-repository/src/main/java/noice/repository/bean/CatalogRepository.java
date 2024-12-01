@@ -65,7 +65,7 @@ public class CatalogRepository implements BeanRepository<CatalogPo> {
 
     @Override
     public List<CatalogPo> findList(List<String> ids) {
-        return mapper.selectBatchIds(ids);
+        return mapper.selectByIds(ids);
     }
 
     @Override

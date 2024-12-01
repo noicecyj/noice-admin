@@ -65,7 +65,7 @@ public class InterfaceRepository implements BeanRepository<InterfacePo> {
 
     @Override
     public List<InterfacePo> findList(List<String> ids) {
-        return mapper.selectBatchIds(ids);
+        return mapper.selectByIds(ids);
     }
 
     @Override

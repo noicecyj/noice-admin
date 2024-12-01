@@ -65,7 +65,7 @@ public class PersistentFormRepository implements BeanRepository<PersistentFormPo
 
     @Override
     public List<PersistentFormPo> findList(List<String> ids) {
-        return mapper.selectBatchIds(ids);
+        return mapper.selectByIds(ids);
     }
 
     @Override

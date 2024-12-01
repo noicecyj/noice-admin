@@ -65,7 +65,7 @@ public class AppServiceRepository implements BeanRepository<AppServicePo> {
 
     @Override
     public List<AppServicePo> findList(List<String> ids) {
-        return mapper.selectBatchIds(ids);
+        return mapper.selectByIds(ids);
     }
 
     @Override

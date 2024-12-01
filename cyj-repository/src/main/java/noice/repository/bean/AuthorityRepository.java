@@ -65,7 +65,7 @@ public class AuthorityRepository implements BeanRepository<AuthorityPo> {
 
     @Override
     public List<AuthorityPo> findList(List<String> ids) {
-        return mapper.selectBatchIds(ids);
+        return mapper.selectByIds(ids);
     }
 
     @Override

@@ -65,7 +65,7 @@ public class RoleRepository implements BeanRepository<RolePo> {
 
     @Override
     public List<RolePo> findList(List<String> ids) {
-        return mapper.selectBatchIds(ids);
+        return mapper.selectByIds(ids);
     }
 
     @Override

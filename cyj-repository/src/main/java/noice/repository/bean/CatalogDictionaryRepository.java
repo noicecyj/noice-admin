@@ -65,7 +65,7 @@ public class CatalogDictionaryRepository implements BeanRepository<CatalogDictio
 
     @Override
     public List<CatalogDictionaryPo> findList(List<String> ids) {
-        return mapper.selectBatchIds(ids);
+        return mapper.selectByIds(ids);
     }
 
     @Override

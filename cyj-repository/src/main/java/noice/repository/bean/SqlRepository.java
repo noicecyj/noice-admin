@@ -65,7 +65,7 @@ public class SqlRepository implements BeanRepository<SqlPo> {
 
     @Override
     public List<SqlPo> findList(List<String> ids) {
-        return mapper.selectBatchIds(ids);
+        return mapper.selectByIds(ids);
     }
 
     @Override

@@ -65,7 +65,7 @@ public class EnterpriseRepository implements BeanRepository<EnterprisePo> {
 
     @Override
     public List<EnterprisePo> findList(List<String> ids) {
-        return mapper.selectBatchIds(ids);
+        return mapper.selectByIds(ids);
     }
 
     @Override

@@ -65,7 +65,7 @@ public class PersistentTableConfigRepository implements BeanRepository<Persisten
 
     @Override
     public List<PersistentTableConfigPo> findList(List<String> ids) {
-        return mapper.selectBatchIds(ids);
+        return mapper.selectByIds(ids);
     }
 
     @Override

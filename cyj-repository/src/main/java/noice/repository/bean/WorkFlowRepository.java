@@ -65,7 +65,7 @@ public class WorkFlowRepository implements BeanRepository<WorkFlowPo> {
 
     @Override
     public List<WorkFlowPo> findList(List<String> ids) {
-        return mapper.selectBatchIds(ids);
+        return mapper.selectByIds(ids);
     }
 
     @Override

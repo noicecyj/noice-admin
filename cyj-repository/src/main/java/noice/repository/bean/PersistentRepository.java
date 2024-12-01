@@ -65,7 +65,7 @@ public class PersistentRepository implements BeanRepository<PersistentPo> {
 
     @Override
     public List<PersistentPo> findList(List<String> ids) {
-        return mapper.selectBatchIds(ids);
+        return mapper.selectByIds(ids);
     }
 
     @Override

@@ -5,14 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="添加获取ValueEnum和Options接口，优化代码结构">
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/entity/vo/UrlVo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/controller/TableAndFormAndUrlController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/controller/TableAndFormAndUrlController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/factory/ClassFactoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/factory/ClassFactoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/service/TableAndFormAndUrlService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/service/TableAndFormAndUrlService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/InterfaceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/InterfaceRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-common/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +179,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CyjEntityCreaterApplicationTest.menuBeanTest">
+  <component name="RunManager" selected="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest2">
     <configuration name="CyjEntityCreaterApplicationTest.PersistentBeanAspect" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cyj-entity-create" />
       <extension name="coverage">
@@ -295,9 +289,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest2" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.menuBeanTest" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest" />
-        <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest2" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.PersistentBeanAspect" />
       </list>
@@ -402,15 +396,7 @@
       <workItem from="1732972621922" duration="878000" />
       <workItem from="1732973522532" duration="106000" />
       <workItem from="1732973638203" duration="1281000" />
-      <workItem from="1733013178667" duration="11133000" />
-    </task>
-    <task id="LOCAL-00102" summary="重构用户上下文及权限缓存逻辑">
-      <option name="closed" value="true" />
-      <created>1731231120656</created>
-      <option name="number" value="00102" />
-      <option name="presentableId" value="LOCAL-00102" />
-      <option name="project" value="LOCAL" />
-      <updated>1731231120656</updated>
+      <workItem from="1733013178667" duration="12124000" />
     </task>
     <task id="LOCAL-00103" summary="重构用户上下文及权限缓存逻辑">
       <option name="closed" value="true" />
@@ -796,7 +782,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733032670759</updated>
     </task>
-    <option name="localTasksCounter" value="151" />
+    <task id="LOCAL-00151" summary="添加获取ValueEnum和Options接口，优化代码结构">
+      <option name="closed" value="true" />
+      <created>1733035662736</created>
+      <option name="number" value="00151" />
+      <option name="presentableId" value="LOCAL-00151" />
+      <option name="project" value="LOCAL" />
+      <updated>1733035662736</updated>
+    </task>
+    <option name="localTasksCounter" value="152" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

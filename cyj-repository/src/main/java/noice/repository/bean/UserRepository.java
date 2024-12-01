@@ -65,7 +65,7 @@ public class UserRepository implements BeanRepository<UserPo> {
 
     @Override
     public List<UserPo> findList(List<String> ids) {
-        return mapper.selectBatchIds(ids);
+        return mapper.selectByIds(ids);
     }
 
     @Override
