@@ -27,15 +27,23 @@ public class RepositoryBeanBuilder extends ClassBase {
 
     private RepositoryBeanMethodBuilder.RepositoryBeanSetBuilder repositoryBeanSetBuilder;
 
-    private RepositoryBeanMethodBuilder.RepositoryBeanAddBuilder repositoryBeanAddBuilder;
+    private RepositoryBeanMethodBuilder.RepositoryBeanAddBuilder.RepositoryBeanAddOneBuilder repositoryBeanAddOneBuilder;
+
+    private RepositoryBeanMethodBuilder.RepositoryBeanAddBuilder.RepositoryBeanAddBatchBuilder repositoryBeanAddBatchBuilder;
 
     private RepositoryBeanMethodBuilder.RepositoryBeanDeleteBuilder.RepositoryBeanDeleteByIdBuilder repositoryBeanDeleteByIdBuilder;
 
     private RepositoryBeanMethodBuilder.RepositoryBeanDeleteBuilder.RepositoryBeanDeleteWrapperBuilder repositoryBeanDeleteWrapperBuilder;
 
+    private RepositoryBeanMethodBuilder.RepositoryBeanDeleteBuilder.RepositoryBeanDeleteByIdsBuilder repositoryBeanDeleteByIdsBuilder;
+
     private RepositoryBeanMethodBuilder.RepositoryBeanCountBuilder repositoryBeanCountBuilder;
 
-    private RepositoryBeanMethodBuilder.RepositoryBeanUpdateBuilder repositoryBeanUpdateBuilder;
+    private RepositoryBeanMethodBuilder.RepositoryBeanUpdateBuilder.RepositoryBeanUpdateOneBuilder repositoryBeanUpdateOneBuilder;
+
+    private RepositoryBeanMethodBuilder.RepositoryBeanUpdateBuilder.RepositoryBeanUpdateAndAddBuilder repositoryBeanUpdateAndAddBuilder;
+
+    private RepositoryBeanMethodBuilder.RepositoryBeanUpdateBuilder.RepositoryBeanUpdateBatchBuilder repositoryBeanUpdateBatchBuilder;
 
     private RepositoryBeanMethodBuilder.RepositoryBeanFindBuilder.RepositoryBeanFindIdBuilder repositoryBeanFindIdBuilder;
 
@@ -65,8 +73,13 @@ public class RepositoryBeanBuilder extends ClassBase {
     }
 
     @Autowired
-    public void setRepositoryBeanAddBuilder(RepositoryBeanMethodBuilder.RepositoryBeanAddBuilder repositoryBeanAddBuilder) {
-        this.repositoryBeanAddBuilder = repositoryBeanAddBuilder;
+    public void setRepositoryBeanAddOneBuilder(RepositoryBeanMethodBuilder.RepositoryBeanAddBuilder.RepositoryBeanAddOneBuilder repositoryBeanAddOneBuilder) {
+        this.repositoryBeanAddOneBuilder = repositoryBeanAddOneBuilder;
+    }
+
+    @Autowired
+    public void setRepositoryBeanAddBatchBuilder(RepositoryBeanMethodBuilder.RepositoryBeanAddBuilder.RepositoryBeanAddBatchBuilder repositoryBeanAddBatchBuilder) {
+        this.repositoryBeanAddBatchBuilder = repositoryBeanAddBatchBuilder;
     }
 
     @Autowired
@@ -80,8 +93,23 @@ public class RepositoryBeanBuilder extends ClassBase {
     }
 
     @Autowired
-    public void setRepositoryBeanUpdateBuilder(RepositoryBeanMethodBuilder.RepositoryBeanUpdateBuilder repositoryBeanUpdateBuilder) {
-        this.repositoryBeanUpdateBuilder = repositoryBeanUpdateBuilder;
+    public void setRepositoryBeanDeleteByIdsBuilder(RepositoryBeanMethodBuilder.RepositoryBeanDeleteBuilder.RepositoryBeanDeleteByIdsBuilder repositoryBeanDeleteByIdsBuilder) {
+        this.repositoryBeanDeleteByIdsBuilder = repositoryBeanDeleteByIdsBuilder;
+    }
+
+    @Autowired
+    public void setRepositoryBeanUpdateOneBuilder(RepositoryBeanMethodBuilder.RepositoryBeanUpdateBuilder.RepositoryBeanUpdateOneBuilder repositoryBeanUpdateOneBuilder) {
+        this.repositoryBeanUpdateOneBuilder = repositoryBeanUpdateOneBuilder;
+    }
+
+    @Autowired
+    public void setRepositoryBeanUpdateAndAddBuilder(RepositoryBeanMethodBuilder.RepositoryBeanUpdateBuilder.RepositoryBeanUpdateAndAddBuilder repositoryBeanUpdateAndAddBuilder) {
+        this.repositoryBeanUpdateAndAddBuilder = repositoryBeanUpdateAndAddBuilder;
+    }
+
+    @Autowired
+    public void setRepositoryBeanUpdateBatchBuilder(RepositoryBeanMethodBuilder.RepositoryBeanUpdateBuilder.RepositoryBeanUpdateBatchBuilder repositoryBeanUpdateBatchBuilder) {
+        this.repositoryBeanUpdateBatchBuilder = repositoryBeanUpdateBatchBuilder;
     }
 
     @Autowired
@@ -180,13 +208,21 @@ public class RepositoryBeanBuilder extends ClassBase {
         sb.append("\n");
         sb.append(repositoryBeanSetBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");
-        sb.append(repositoryBeanAddBuilder.builder(getPersistentPo())).append("\n");
+        sb.append(repositoryBeanAddOneBuilder.builder(getPersistentPo())).append("\n");
+        sb.append("\n");
+        sb.append(repositoryBeanAddBatchBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");
         sb.append(repositoryBeanDeleteByIdBuilder.builder()).append("\n");
         sb.append("\n");
         sb.append(repositoryBeanDeleteWrapperBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");
-        sb.append(repositoryBeanUpdateBuilder.builder(getPersistentPo())).append("\n");
+        sb.append(repositoryBeanDeleteByIdsBuilder.builder()).append("\n");
+        sb.append("\n");
+        sb.append(repositoryBeanUpdateOneBuilder.builder(getPersistentPo())).append("\n");
+        sb.append("\n");
+        sb.append(repositoryBeanUpdateAndAddBuilder.builder(getPersistentPo())).append("\n");
+        sb.append("\n");
+        sb.append(repositoryBeanUpdateBatchBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");
         sb.append(repositoryBeanCountBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");
