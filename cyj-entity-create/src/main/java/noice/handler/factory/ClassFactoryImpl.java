@@ -213,9 +213,8 @@ public abstract class ClassFactoryImpl implements ClassFactory {
     public void createAndSaveHistory(String path, String historyPath, String className, String fileString) throws IOException {
         String javaFileToString = BeanUtils.JavaFileToString(path, className);
         if (StrUtil.removeAllLineBreaks(javaFileToString).equals(StrUtil.removeAllLineBreaks(fileString))) {
-            logger.info(className + ":java文本相同,不生成代码");
+            logger.info("{}:java文本相同,不生成代码", className);
         } else {
-            logger.info("生成文本" + className + ":\n{}", fileString);
             BeanUtils.createMdFile(historyPath, className, BeanUtils.mdStrBuilder(OPERATOR, ENV_TIP, javaFileToString, "java"));
             BeanUtils.createJavaFile(path, className, fileString);
         }
@@ -224,9 +223,8 @@ public abstract class ClassFactoryImpl implements ClassFactory {
     public void createAndSaveHistorySql(String path, String historyPath, String className, String fileString) throws IOException {
         String sqlFileToString = BeanUtils.SqlFileToString(path, className);
         if (sqlFileToString.equals(fileString)) {
-            logger.info(className + "sql文本相同不生成代码");
+            logger.info("{}sql文本相同不生成代码", className);
         } else {
-            logger.info("生成文本" + className + ":\n{}", fileString);
             BeanUtils.createMdFile(historyPath, className, BeanUtils.mdStrBuilder(OPERATOR, ENV_TIP, sqlFileToString, "sql"));
             BeanUtils.createSqlFile(path, className, fileString);
         }
@@ -258,12 +256,12 @@ public abstract class ClassFactoryImpl implements ClassFactory {
             authorityPo.setStatus(true);
             int authorityAdd = authorityRepository.add(authorityPo);
             if (authorityAdd == 1) {
-                logger.info(tagName + ":权限添加成功");
+                logger.info("{}:权限添加成功", tagName);
             } else {
-                logger.info(tagName + ":权限添加失败");
+                logger.info("{}:权限添加失败", tagName);
             }
         } else {
-            logger.info(tagName + ":权限已存在");
+            logger.info("{}:权限已存在", tagName);
         }
         this.createRootRoleAuthority(authorityPo.getId());
         return authorityPo.getId();
@@ -279,12 +277,12 @@ public abstract class ClassFactoryImpl implements ClassFactory {
             roleAuthorityPo.setUpdatedBy("123123");
             int authorityAdd = roleAuthorityRepository.add(roleAuthorityPo);
             if (authorityAdd == 1) {
-                logger.info(rolePo.getRoleName() + ":权限绑定成功");
+                logger.info("{}:权限绑定成功", rolePo.getRoleName());
             } else {
-                logger.info(rolePo.getRoleName() + ":权限绑定失败");
+                logger.info("{}:权限绑定失败", rolePo.getRoleName());
             }
         } else {
-            logger.info(rolePo.getRoleName() + ":权限已绑定");
+            logger.info("{}:权限已绑定", rolePo.getRoleName());
         }
     }
 
@@ -304,12 +302,12 @@ public abstract class ClassFactoryImpl implements ClassFactory {
             persistentFormPo.setStatus(true);
             int persistentFormAdd = persistentFormRepository.add(persistentFormPo);
             if (persistentFormAdd == 1) {
-                logger.info(tagName + ":表单添加成功");
+                logger.info("{}:表单添加成功", tagName);
             } else {
-                logger.info(tagName + ":表单添加失败");
+                logger.info("{}:表单添加失败", tagName);
             }
         } else {
-            logger.info(tagName + ":表单已存在");
+            logger.info("{}:表单已存在", tagName);
         }
         return persistentFormPo.getId();
     }
@@ -348,9 +346,9 @@ public abstract class ClassFactoryImpl implements ClassFactory {
             persistentFormConfigPo.setStatus(true);
             int add = persistentFormConfigRepository.add(persistentFormConfigPo);
             if (add == 1) {
-                logger.info(tagName + ":表单字段添加成功");
+                logger.info("{}:表单字段添加成功", tagName);
             } else {
-                logger.info(tagName + ":表单字段添加失败");
+                logger.info("{}:表单字段添加失败", tagName);
             }
         } else {
             logger.info(tagName + ":表单字段已存在");
@@ -379,9 +377,9 @@ public abstract class ClassFactoryImpl implements ClassFactory {
             persistentFormConfigPo.setStatus(true);
             int update = persistentFormConfigRepository.update(persistentFormConfigPo);
             if (update == 1) {
-                logger.info(tagName + ":表单字段更新成功");
+                logger.info("{}:表单字段更新成功", tagName);
             } else {
-                logger.info(tagName + ":表单字段更新失败");
+                logger.info("{}:表单字段更新失败", tagName);
             }
         }
     }
@@ -400,12 +398,12 @@ public abstract class ClassFactoryImpl implements ClassFactory {
             persistentTablePo.setStatus(true);
             int PersistentTableAdd = persistentTableRepository.add(persistentTablePo);
             if (PersistentTableAdd == 1) {
-                logger.info(tagName + ":表格添加成功");
+                logger.info("{}:表格添加成功", tagName);
             } else {
-                logger.info(tagName + ":表格添加失败");
+                logger.info("{}:表格添加失败", tagName);
             }
         } else {
-            logger.info(tagName + ":表格已存在");
+            logger.info("{}:表格已存在", tagName);
         }
         return persistentTablePo.getId();
     }
@@ -427,12 +425,12 @@ public abstract class ClassFactoryImpl implements ClassFactory {
             persistentTableConfigPo.setStatus(true);
             int add = persistentTableConfigRepository.add(persistentTableConfigPo);
             if (add == 1) {
-                logger.info(tagName + ":表格字段添加成功");
+                logger.info("{}:表格字段添加成功", tagName);
             } else {
-                logger.info(tagName + ":表格字段添加失败");
+                logger.info("{}:表格字段添加失败", tagName);
             }
         } else {
-            logger.info(tagName + ":表格字段已存在");
+            logger.info("{}:表格字段已存在", tagName);
             persistentTableConfigPo.setAuthorityId(authorityId);
             persistentTableConfigPo.setPersistentTableId(tableId);
             persistentTableConfigPo.setPersistentTableConfigDisplay(!StrUtil.isNotEmpty(persistentPropertyPo.getRelationPersistentId()));
@@ -441,9 +439,9 @@ public abstract class ClassFactoryImpl implements ClassFactory {
             persistentTableConfigPo.setStatus(true);
             int update = persistentTableConfigRepository.update(persistentTableConfigPo);
             if (update == 1) {
-                logger.info(tagName + ":表格字段更新成功");
+                logger.info("{}:表格字段更新成功", tagName);
             } else {
-                logger.info(tagName + ":表格字段更新失败");
+                logger.info("{}:表格字段更新失败", tagName);
             }
         }
     }
@@ -466,12 +464,14 @@ public abstract class ClassFactoryImpl implements ClassFactory {
             RequestMappingInfo requestMappingInfo = entry.getKey();
             HandlerMethod handlerMethod = entry.getValue();
             Operation operation = handlerMethod.getMethodAnnotation(Operation.class);
-            for (PathPattern pathPattern : requestMappingInfo.getPathPatternsCondition().getPatterns()) {
-                List<String> split = StrUtil.split(pathPattern.getPatternString(), "/");
-                List<String> appServiceAndPersistent = split.subList(1, split.size());
-                String code = String.join("_", appServiceAndPersistent);
-                if (ObjectUtil.isNotNull(operation)) {
-                    this.createInterfaceType(code, operation.summary(), pathPattern.getPatternString());
+            if (requestMappingInfo.getPathPatternsCondition() != null) {
+                for (PathPattern pathPattern : requestMappingInfo.getPathPatternsCondition().getPatterns()) {
+                    List<String> split = StrUtil.split(pathPattern.getPatternString(), "/");
+                    List<String> appServiceAndPersistent = split.subList(1, split.size());
+                    String code = String.join("_", appServiceAndPersistent);
+                    if (ObjectUtil.isNotNull(operation)) {
+                        this.createInterfaceType(code, operation.summary(), pathPattern.getPatternString());
+                    }
                 }
             }
         }
@@ -490,14 +490,26 @@ public abstract class ClassFactoryImpl implements ClassFactory {
             interfacePo.setUpdatedBy("123123");
             interfacePo.setSortCode(1L);
             interfacePo.setStatus(true);
-            int interfaceAdd = interfaceRepository.add(interfacePo);
-            if (interfaceAdd == 1) {
-                logger.info(name + ":接口添加成功");
+            int add = interfaceRepository.add(interfacePo);
+            if (add == 1) {
+                logger.info("{}:接口添加成功", name);
             } else {
-                logger.info(name + ":接口添加失败");
+                logger.info("{}:接口添加失败", name);
             }
         } else {
-            logger.info(name + ":接口已存在");
+            logger.info("{}:接口已存在", name);
+            interfacePo.setInterfacePath(path);
+            interfacePo.setInterfaceType(code);
+            interfacePo.setAuthorityId(authorityId);
+            interfacePo.setUpdatedBy("123123");
+            interfacePo.setSortCode(1L);
+            interfacePo.setStatus(true);
+            int update = interfaceRepository.update(interfacePo);
+            if (update == 1) {
+                logger.info("{}:接口更新成功", name);
+            } else {
+                logger.info("{}:接口更新失败", name);
+            }
         }
     }
 

@@ -202,18 +202,18 @@ public class ClassBeanFactoryImpl extends ClassFactoryImpl {
 
     @Override
     public void initData() {
-//        super.createBeanInterface();
+        super.createBeanInterface();
 //        super.createMenu();
-        for (PersistentPo persistentPo : super.findByType(BEAN)) {
-            List<PersistentPropertyPo> persistentPropertyPoList = super.findByPersistentId(persistentPo.getId());
-            if (persistentPo.getStatus()) {
-//                this.createBeanInterface(persistentPo);
-                this.createFormAndTable(persistentPo, persistentPropertyPoList);
-            } else {
-//                this.deleteBeanInterface(persistentPo);
-//                this.deleteFormAndTable(persistentPo, persistentPropertyPoList);
-            }
-        }
+//        for (PersistentPo persistentPo : super.findByType(BEAN)) {
+//            List<PersistentPropertyPo> persistentPropertyPoList = super.findByPersistentId(persistentPo.getId());
+//            if (persistentPo.getStatus()) {
+////                this.createBeanInterface(persistentPo);
+//                this.createFormAndTable(persistentPo, persistentPropertyPoList);
+//            } else {
+////                this.deleteBeanInterface(persistentPo);
+////                this.deleteFormAndTable(persistentPo, persistentPropertyPoList);
+//            }
+//        }
     }
 
 //    private void deleteFormAndTable(PersistentPo persistentPo, List<PersistentPropertyPo> persistentPropertyPoList) {
