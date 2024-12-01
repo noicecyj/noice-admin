@@ -7,6 +7,7 @@ import noice.entity.po.bean.PersistentPo;
 import noice.entity.po.bean.PersistentPropertyPo;
 import noice.handler.base.MethodBase;
 import noice.handler.base.enumType.StatementEnum;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -19,10 +20,36 @@ public class ControllerBeanMethodBuilder extends MethodBase {
 
     private List<PersistentPropertyPo> persistentPropertyPoList;
 
+    @NotNull
+    private static String getString(List<String> methodAnnotationList, StatementEnum methodStatement, String methodReturnType, String methodName, List<String> methodParamSet, String methodReturnBody) {
+        StringBuilder sb = new StringBuilder();
+        for (String methodAnnotation : methodAnnotationList) {
+            sb.append("    ").append(methodAnnotation).append("\n");
+        }
+        sb.append("    ").append(methodStatement.getStatement()).append(" ").append(methodReturnType).append(" ").append(methodName).append("(").append(String.join(", ", methodParamSet)).append(") {\n");
+        sb.append("        ").append(methodReturnBody).append("\n");
+        sb.append("    }");
+        return sb.toString();
+    }
+
     @EqualsAndHashCode(callSuper = true)
     @Component
     @Data
     public static class ControllerBeanSetBuilder extends ControllerBeanMethodBuilder {
+
+        @NotNull
+        private static String getString(List<String> methodAnnotationList, StatementEnum methodStatement, String methodReturnType, String methodName, List<String> methodParamSet, List<String> methodBody2) {
+            StringBuilder sb = new StringBuilder();
+            for (String methodAnnotation : methodAnnotationList) {
+                sb.append("    ").append(methodAnnotation).append("\n");
+            }
+            sb.append("    ").append(methodStatement.getStatement()).append(" ").append(methodReturnType).append(" ").append(methodName).append("(").append(String.join(", ", methodParamSet)).append(") {\n");
+            for (String methodBody : methodBody2) {
+                sb.append("        ").append(methodBody).append("\n");
+            }
+            sb.append("    }");
+            return sb.toString();
+        }
 
         @EqualsAndHashCode(callSuper = true)
         @Component
@@ -60,16 +87,7 @@ public class ControllerBeanMethodBuilder extends MethodBase {
 
             @Override
             public String toString() {
-                StringBuilder sb = new StringBuilder();
-                for (String methodAnnotation : getMethodAnnotationList()) {
-                    sb.append("    ").append(methodAnnotation).append("\n");
-                }
-                sb.append("    ").append(getMethodStatement().getStatement()).append(" ").append(getMethodReturnType()).append(" ").append(getMethodName()).append("(").append(String.join(", ", getMethodParamSet())).append(") {\n");
-                for (String methodBody : getMethodBody()) {
-                    sb.append("        ").append(methodBody).append("\n");
-                }
-                sb.append("    }");
-                return sb.toString();
+                return getString(getMethodAnnotationList(), getMethodStatement(), getMethodReturnType(), getMethodName(), getMethodParamSet(), getMethodBody());
             }
 
         }
@@ -110,16 +128,7 @@ public class ControllerBeanMethodBuilder extends MethodBase {
 
             @Override
             public String toString() {
-                StringBuilder sb = new StringBuilder();
-                for (String methodAnnotation : getMethodAnnotationList()) {
-                    sb.append("    ").append(methodAnnotation).append("\n");
-                }
-                sb.append("    ").append(getMethodStatement().getStatement()).append(" ").append(getMethodReturnType()).append(" ").append(getMethodName()).append("(").append(String.join(", ", getMethodParamSet())).append(") {\n");
-                for (String methodBody : getMethodBody()) {
-                    sb.append("        ").append(methodBody).append("\n");
-                }
-                sb.append("    }");
-                return sb.toString();
+                return getString(getMethodAnnotationList(), getMethodStatement(), getMethodReturnType(), getMethodName(), getMethodParamSet(), getMethodBody());
             }
 
         }
@@ -160,16 +169,7 @@ public class ControllerBeanMethodBuilder extends MethodBase {
 
             @Override
             public String toString() {
-                StringBuilder sb = new StringBuilder();
-                for (String methodAnnotation : getMethodAnnotationList()) {
-                    sb.append("    ").append(methodAnnotation).append("\n");
-                }
-                sb.append("    ").append(getMethodStatement().getStatement()).append(" ").append(getMethodReturnType()).append(" ").append(getMethodName()).append("(").append(String.join(", ", getMethodParamSet())).append(") {\n");
-                for (String methodBody : getMethodBody()) {
-                    sb.append("        ").append(methodBody).append("\n");
-                }
-                sb.append("    }");
-                return sb.toString();
+                return getString(getMethodAnnotationList(), getMethodStatement(), getMethodReturnType(), getMethodName(), getMethodParamSet(), getMethodBody());
             }
 
         }
@@ -208,14 +208,7 @@ public class ControllerBeanMethodBuilder extends MethodBase {
 
         @Override
         public String toString() {
-            StringBuilder sb = new StringBuilder();
-            for (String methodAnnotation : getMethodAnnotationList()) {
-                sb.append("    ").append(methodAnnotation).append("\n");
-            }
-            sb.append("    ").append(getMethodStatement().getStatement()).append(" ").append(getMethodReturnType()).append(" ").append(getMethodName()).append("(").append(String.join(", ", getMethodParamSet())).append(") {\n");
-            sb.append("        ").append(getMethodReturnBody()).append("\n");
-            sb.append("    }");
-            return sb.toString();
+            return getString(getMethodAnnotationList(), getMethodStatement(), getMethodReturnType(), getMethodName(), getMethodParamSet(), getMethodReturnBody());
         }
 
     }
@@ -251,14 +244,7 @@ public class ControllerBeanMethodBuilder extends MethodBase {
 
         @Override
         public String toString() {
-            StringBuilder sb = new StringBuilder();
-            for (String methodAnnotation : getMethodAnnotationList()) {
-                sb.append("    ").append(methodAnnotation).append("\n");
-            }
-            sb.append("    ").append(getMethodStatement().getStatement()).append(" ").append(getMethodReturnType()).append(" ").append(getMethodName()).append("(").append(String.join(", ", getMethodParamSet())).append(") {\n");
-            sb.append("        ").append(getMethodReturnBody()).append("\n");
-            sb.append("    }");
-            return sb.toString();
+            return getString(getMethodAnnotationList(), getMethodStatement(), getMethodReturnType(), getMethodName(), getMethodParamSet(), getMethodReturnBody());
         }
 
     }
@@ -295,14 +281,7 @@ public class ControllerBeanMethodBuilder extends MethodBase {
 
         @Override
         public String toString() {
-            StringBuilder sb = new StringBuilder();
-            for (String methodAnnotation : getMethodAnnotationList()) {
-                sb.append("    ").append(methodAnnotation).append("\n");
-            }
-            sb.append("    ").append(getMethodStatement().getStatement()).append(" ").append(getMethodReturnType()).append(" ").append(getMethodName()).append("(").append(String.join(", ", getMethodParamSet())).append(") {\n");
-            sb.append("        ").append(getMethodReturnBody()).append("\n");
-            sb.append("    }");
-            return sb.toString();
+            return getString(getMethodAnnotationList(), getMethodStatement(), getMethodReturnType(), getMethodName(), getMethodParamSet(), getMethodReturnBody());
         }
 
     }
@@ -338,14 +317,7 @@ public class ControllerBeanMethodBuilder extends MethodBase {
 
         @Override
         public String toString() {
-            StringBuilder sb = new StringBuilder();
-            for (String methodAnnotation : getMethodAnnotationList()) {
-                sb.append("    ").append(methodAnnotation).append("\n");
-            }
-            sb.append("    ").append(getMethodStatement().getStatement()).append(" ").append(getMethodReturnType()).append(" ").append(getMethodName()).append("(").append(String.join(", ", getMethodParamSet())).append(") {\n");
-            sb.append("        ").append(getMethodReturnBody()).append("\n");
-            sb.append("    }");
-            return sb.toString();
+            return getString(getMethodAnnotationList(), getMethodStatement(), getMethodReturnType(), getMethodName(), getMethodParamSet(), getMethodReturnBody());
         }
 
     }
@@ -381,14 +353,7 @@ public class ControllerBeanMethodBuilder extends MethodBase {
 
         @Override
         public String toString() {
-            StringBuilder sb = new StringBuilder();
-            for (String methodAnnotation : getMethodAnnotationList()) {
-                sb.append("    ").append(methodAnnotation).append("\n");
-            }
-            sb.append("    ").append(getMethodStatement().getStatement()).append(" ").append(getMethodReturnType()).append(" ").append(getMethodName()).append("(").append(String.join(", ", getMethodParamSet())).append(") {\n");
-            sb.append("        ").append(getMethodReturnBody()).append("\n");
-            sb.append("    }");
-            return sb.toString();
+            return getString(getMethodAnnotationList(), getMethodStatement(), getMethodReturnType(), getMethodName(), getMethodParamSet(), getMethodReturnBody());
         }
 
     }
@@ -425,14 +390,7 @@ public class ControllerBeanMethodBuilder extends MethodBase {
 
         @Override
         public String toString() {
-            StringBuilder sb = new StringBuilder();
-            for (String methodAnnotation : getMethodAnnotationList()) {
-                sb.append("    ").append(methodAnnotation).append("\n");
-            }
-            sb.append("    ").append(getMethodStatement().getStatement()).append(" ").append(getMethodReturnType()).append(" ").append(getMethodName()).append("(").append(String.join(", ", getMethodParamSet())).append(") {\n");
-            sb.append("        ").append(getMethodReturnBody()).append("\n");
-            sb.append("    }");
-            return sb.toString();
+            return getString(getMethodAnnotationList(), getMethodStatement(), getMethodReturnType(), getMethodName(), getMethodParamSet(), getMethodReturnBody());
         }
 
     }
@@ -468,14 +426,81 @@ public class ControllerBeanMethodBuilder extends MethodBase {
 
         @Override
         public String toString() {
-            StringBuilder sb = new StringBuilder();
-            for (String methodAnnotation : getMethodAnnotationList()) {
-                sb.append("    ").append(methodAnnotation).append("\n");
-            }
-            sb.append("    ").append(getMethodStatement().getStatement()).append(" ").append(getMethodReturnType()).append(" ").append(getMethodName()).append("(").append(String.join(", ", getMethodParamSet())).append(") {\n");
-            sb.append("        ").append(getMethodReturnBody()).append("\n");
-            sb.append("    }");
-            return sb.toString();
+            return getString(getMethodAnnotationList(), getMethodStatement(), getMethodReturnType(), getMethodName(), getMethodParamSet(), getMethodReturnBody());
+        }
+
+    }
+
+    @EqualsAndHashCode(callSuper = true)
+    @Component
+    @Data
+    public static class ControllerBeanValueEnumBuilder extends ControllerBeanMethodBuilder {
+
+        public ControllerBeanValueEnumBuilder builder(PersistentPo persistentPo) {
+            String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
+            this.setMethodStatement(StatementEnum.PUBLIC);
+            this.setMethodReturnType("ResultVO");
+            this.setMethodAnnotationList(persistentPo.getPersistentName());
+            this.setMethodName("getValueEnum");
+            this.setMethodParamSet(poName);
+            this.setMethodReturnBody("return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().map(valueEnum -> OptionVO.builder().label(valueEnum.get" + poName + "Name()).value(valueEnum.getId()).build()).toList());");
+            return this;
+        }
+
+        public void setMethodParamSet(String poName) {
+            List<String> methodParamSet = new ArrayList<>();
+            methodParamSet.add("@RequestBody " + poName + "Vo vo");
+            super.setMethodParamSet(methodParamSet);
+        }
+
+        public void setMethodAnnotationList(String name) {
+            List<String> methodAnnotationList = new ArrayList<>();
+            methodAnnotationList.add("@Operation(summary = \"" + name + "_获取ValueEnum\")");
+            methodAnnotationList.add("@PostMapping(value = \"getValueEnum\")");
+            methodAnnotationList.add("@Override");
+            super.setMethodAnnotationList(methodAnnotationList);
+        }
+
+        @Override
+        public String toString() {
+            return getString(getMethodAnnotationList(), getMethodStatement(), getMethodReturnType(), getMethodName(), getMethodParamSet(), getMethodReturnBody());
+        }
+
+    }
+
+    @EqualsAndHashCode(callSuper = true)
+    @Component
+    @Data
+    public static class ControllerBeanOptionsBuilder extends ControllerBeanMethodBuilder {
+
+        public ControllerBeanOptionsBuilder builder(PersistentPo persistentPo) {
+            String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
+            this.setMethodStatement(StatementEnum.PUBLIC);
+            this.setMethodReturnType("ResultVO");
+            this.setMethodAnnotationList(persistentPo.getPersistentName());
+            this.setMethodName("getOptions");
+            this.setMethodParamSet(poName);
+            this.setMethodReturnBody("return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(" + poName + "Vo::getId, option -> Collections.singletonMap(\"text\", option.get" + poName + "Name()))));");
+            return this;
+        }
+
+        public void setMethodParamSet(String poName) {
+            List<String> methodParamSet = new ArrayList<>();
+            methodParamSet.add("@RequestBody " + poName + "Vo vo");
+            super.setMethodParamSet(methodParamSet);
+        }
+
+        public void setMethodAnnotationList(String name) {
+            List<String> methodAnnotationList = new ArrayList<>();
+            methodAnnotationList.add("@Operation(summary = \"" + name + "_获取Options\")");
+            methodAnnotationList.add("@PostMapping(value = \"getOptions\")");
+            methodAnnotationList.add("@Override");
+            super.setMethodAnnotationList(methodAnnotationList);
+        }
+
+        @Override
+        public String toString() {
+            return getString(getMethodAnnotationList(), getMethodStatement(), getMethodReturnType(), getMethodName(), getMethodParamSet(), getMethodReturnBody());
         }
 
     }

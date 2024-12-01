@@ -102,6 +102,7 @@ function DataForm(props: {
               key={item.id}
               initialValue={item.persistentFormConfigDefaultValue}
               disabled={item.persistentFormConfigEdit}
+              request={dispatchers.getOptions(item.persistentFormConfigDataSource)}
             />
           )
         } else if (item.persistentFormConfigMode === 'NumberPicker') {
@@ -184,6 +185,7 @@ function DataForm(props: {
               key={item.id}
               initialValue={item.persistentFormConfigDefaultValue}
               disabled={item.persistentFormConfigEdit}
+              request={dispatchers.getOptions(item.persistentFormConfigDataSource)}
             />
           )
         } else if (item.persistentFormConfigMode === 'Radio') {
@@ -196,6 +198,7 @@ function DataForm(props: {
               key={item.id}
               initialValue={item.persistentFormConfigDefaultValue}
               disabled={item.persistentFormConfigEdit}
+              request={dispatchers.getOptions(item.persistentFormConfigDataSource)}
             />
           )
         } else {
