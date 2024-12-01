@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="添加获取ValueEnum和Options接口，优化代码结构">
+    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="架构优化">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/AppServiceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/AppServiceRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -396,15 +396,7 @@
       <workItem from="1732972621922" duration="878000" />
       <workItem from="1732973522532" duration="106000" />
       <workItem from="1732973638203" duration="1281000" />
-      <workItem from="1733013178667" duration="12124000" />
-    </task>
-    <task id="LOCAL-00103" summary="重构用户上下文及权限缓存逻辑">
-      <option name="closed" value="true" />
-      <created>1731396660278</created>
-      <option name="number" value="00103" />
-      <option name="presentableId" value="LOCAL-00103" />
-      <option name="project" value="LOCAL" />
-      <updated>1731396660278</updated>
+      <workItem from="1733013178667" duration="13447000" />
     </task>
     <task id="LOCAL-00104" summary="重构用户上下文及权限缓存逻辑">
       <option name="closed" value="true" />
@@ -790,7 +782,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733035662736</updated>
     </task>
-    <option name="localTasksCounter" value="152" />
+    <task id="LOCAL-00152" summary="架构优化">
+      <option name="closed" value="true" />
+      <created>1733036273917</created>
+      <option name="number" value="00152" />
+      <option name="presentableId" value="LOCAL-00152" />
+      <option name="project" value="LOCAL" />
+      <updated>1733036273917</updated>
+    </task>
+    <option name="localTasksCounter" value="153" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -842,7 +842,8 @@
     <MESSAGE value="移除冗余表单配置，优化数据展示逻辑" />
     <MESSAGE value="优化日志级别，统一使用debug" />
     <MESSAGE value="添加获取ValueEnum和Options接口，优化代码结构" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加获取ValueEnum和Options接口，优化代码结构" />
+    <MESSAGE value="架构优化" />
+    <option name="LAST_COMMIT_MESSAGE" value="架构优化" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
