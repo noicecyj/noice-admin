@@ -3,6 +3,7 @@ package noice.controller.bean;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import noice.assembler.bean.RoleControllerAssembler;
+import noice.common.entity.vo.OptionVO;
 import noice.common.entity.vo.ResultVO;
 import noice.converter.bean.RoleControllerConverter;
 import noice.entity.vo.bean.RoleVo;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Noice
@@ -99,6 +102,20 @@ public class RoleController implements BeanController<RoleVo> {
     @PostMapping(value = "getListByAuthorityIds")
     public ResultVO getListByAuthorityIds(List<String> ids) {
         return ResultVO.success(assembler.dtoListToVoList(service.findListByAuthorityIds(ids)));
+    }
+
+    @Operation(summary = "角色_获取ValueEnum")
+    @PostMapping(value = "getValueEnum")
+    @Override
+    public ResultVO getValueEnum(@RequestBody RoleVo vo) {
+        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().map(valueEnum -> OptionVO.builder().label(valueEnum.getRoleName()).value(valueEnum.getId()).build()).toList());
+    }
+
+    @Operation(summary = "角色_获取Options")
+    @PostMapping(value = "getOptions")
+    @Override
+    public ResultVO getOptions(@RequestBody RoleVo vo) {
+        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(RoleVo::getId, option -> Collections.singletonMap("text", option.getRoleName()))));
     }
 
 }

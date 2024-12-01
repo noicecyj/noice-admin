@@ -22,5 +22,9 @@ public interface BeanController<VO extends BaseVoBean> {
 
     ResultVO delete(String id);
 
+    ResultVO getValueEnum(VO vo);
+
+    ResultVO getOptions(VO vo);
+
 
 }

@@ -3,6 +3,7 @@ package noice.controller.bean;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import noice.assembler.bean.PersistentFormConfigControllerAssembler;
+import noice.common.entity.vo.OptionVO;
 import noice.common.entity.vo.ResultVO;
 import noice.converter.bean.PersistentFormConfigControllerConverter;
 import noice.entity.vo.bean.PersistentFormConfigVo;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Noice
@@ -87,6 +90,20 @@ public class PersistentFormConfigController implements BeanController<Persistent
     @Override
     public ResultVO page(@RequestBody PersistentFormConfigVo vo) {
         return ResultVO.success(service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto)));
+    }
+
+    @Operation(summary = "实体表单配置_获取ValueEnum")
+    @PostMapping(value = "getValueEnum")
+    @Override
+    public ResultVO getValueEnum(@RequestBody PersistentFormConfigVo vo) {
+        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().map(valueEnum -> OptionVO.builder().label(valueEnum.getPersistentFormConfigName()).value(valueEnum.getId()).build()).toList());
+    }
+
+    @Operation(summary = "实体表单配置_获取Options")
+    @PostMapping(value = "getOptions")
+    @Override
+    public ResultVO getOptions(@RequestBody PersistentFormConfigVo vo) {
+        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(PersistentFormConfigVo::getId, option -> Collections.singletonMap("text", option.getPersistentFormConfigName()))));
     }
 
 }

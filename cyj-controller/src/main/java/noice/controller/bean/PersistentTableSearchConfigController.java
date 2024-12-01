@@ -3,6 +3,7 @@ package noice.controller.bean;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import noice.assembler.bean.PersistentTableSearchConfigControllerAssembler;
+import noice.common.entity.vo.OptionVO;
 import noice.common.entity.vo.ResultVO;
 import noice.converter.bean.PersistentTableSearchConfigControllerConverter;
 import noice.entity.vo.bean.PersistentTableSearchConfigVo;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Noice
@@ -87,6 +90,20 @@ public class PersistentTableSearchConfigController implements BeanController<Per
     @Override
     public ResultVO page(@RequestBody PersistentTableSearchConfigVo vo) {
         return ResultVO.success(service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto)));
+    }
+
+    @Operation(summary = "实体表格搜索配置_获取ValueEnum")
+    @PostMapping(value = "getValueEnum")
+    @Override
+    public ResultVO getValueEnum(@RequestBody PersistentTableSearchConfigVo vo) {
+        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().map(valueEnum -> OptionVO.builder().label(valueEnum.getPersistentTableSearchConfigName()).value(valueEnum.getId()).build()).toList());
+    }
+
+    @Operation(summary = "实体表格搜索配置_获取Options")
+    @PostMapping(value = "getOptions")
+    @Override
+    public ResultVO getOptions(@RequestBody PersistentTableSearchConfigVo vo) {
+        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(PersistentTableSearchConfigVo::getId, option -> Collections.singletonMap("text", option.getPersistentTableSearchConfigName()))));
     }
 
 }

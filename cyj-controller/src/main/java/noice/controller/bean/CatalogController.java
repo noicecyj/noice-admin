@@ -3,6 +3,7 @@ package noice.controller.bean;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import noice.assembler.bean.CatalogControllerAssembler;
+import noice.common.entity.vo.OptionVO;
 import noice.common.entity.vo.ResultVO;
 import noice.converter.bean.CatalogControllerConverter;
 import noice.entity.vo.bean.CatalogVo;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Noice
@@ -87,6 +90,20 @@ public class CatalogController implements BeanController<CatalogVo> {
     @Override
     public ResultVO page(@RequestBody CatalogVo vo) {
         return ResultVO.success(service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto)));
+    }
+
+    @Operation(summary = "目录_获取ValueEnum")
+    @PostMapping(value = "getValueEnum")
+    @Override
+    public ResultVO getValueEnum(@RequestBody CatalogVo vo) {
+        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().map(valueEnum -> OptionVO.builder().label(valueEnum.getCatalogName()).value(valueEnum.getId()).build()).toList());
+    }
+
+    @Operation(summary = "目录_获取Options")
+    @PostMapping(value = "getOptions")
+    @Override
+    public ResultVO getOptions(@RequestBody CatalogVo vo) {
+        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(CatalogVo::getId, option -> Collections.singletonMap("text", option.getCatalogName()))));
     }
 
 }
