@@ -27,9 +27,9 @@ public class RepositoryBeanBuilder extends ClassBase {
 
     private RepositoryBeanMethodBuilder.RepositoryBeanSetBuilder repositoryBeanSetBuilder;
 
-    private RepositoryBeanMethodBuilder.RepositoryBeanAddBuilder.RepositoryBeanAddOneBuilder repositoryBeanAddOneBuilder;
+    private RepositoryBeanMethodBuilder.RepositoryBeanAddOnceBuilder repositoryBeanAddOnceBuilder;
 
-    private RepositoryBeanMethodBuilder.RepositoryBeanAddBuilder.RepositoryBeanAddBatchBuilder repositoryBeanAddBatchBuilder;
+    private RepositoryBeanMethodBuilder.RepositoryBeanAddsBuilder repositoryBeanAddsBuilder;
 
     private RepositoryBeanMethodBuilder.RepositoryBeanDeleteBuilder.RepositoryBeanDeleteByIdBuilder repositoryBeanDeleteByIdBuilder;
 
@@ -73,13 +73,13 @@ public class RepositoryBeanBuilder extends ClassBase {
     }
 
     @Autowired
-    public void setRepositoryBeanAddOneBuilder(RepositoryBeanMethodBuilder.RepositoryBeanAddBuilder.RepositoryBeanAddOneBuilder repositoryBeanAddOneBuilder) {
-        this.repositoryBeanAddOneBuilder = repositoryBeanAddOneBuilder;
+    public void setRepositoryBeanAddOnceBuilder(RepositoryBeanMethodBuilder.RepositoryBeanAddOnceBuilder repositoryBeanAddOnceBuilder) {
+        this.repositoryBeanAddOnceBuilder = repositoryBeanAddOnceBuilder;
     }
 
     @Autowired
-    public void setRepositoryBeanAddBatchBuilder(RepositoryBeanMethodBuilder.RepositoryBeanAddBuilder.RepositoryBeanAddBatchBuilder repositoryBeanAddBatchBuilder) {
-        this.repositoryBeanAddBatchBuilder = repositoryBeanAddBatchBuilder;
+    public void setRepositoryBeanAddsBuilder(RepositoryBeanMethodBuilder.RepositoryBeanAddsBuilder repositoryBeanAddsBuilder) {
+        this.repositoryBeanAddsBuilder = repositoryBeanAddsBuilder;
     }
 
     @Autowired
@@ -208,9 +208,9 @@ public class RepositoryBeanBuilder extends ClassBase {
         sb.append("\n");
         sb.append(repositoryBeanSetBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");
-        sb.append(repositoryBeanAddOneBuilder.builder(getPersistentPo())).append("\n");
+        sb.append(repositoryBeanAddOnceBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");
-        sb.append(repositoryBeanAddBatchBuilder.builder(getPersistentPo())).append("\n");
+        sb.append(repositoryBeanAddsBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");
         sb.append(repositoryBeanDeleteByIdBuilder.builder()).append("\n");
         sb.append("\n");

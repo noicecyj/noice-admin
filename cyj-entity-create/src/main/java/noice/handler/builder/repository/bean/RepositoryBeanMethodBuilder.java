@@ -73,93 +73,86 @@ public class RepositoryBeanMethodBuilder extends MethodBase {
     @EqualsAndHashCode(callSuper = true)
     @Component
     @Data
-    public static class RepositoryBeanAddBuilder extends RepositoryBeanMethodBuilder {
+    public static class RepositoryBeanAddOnceBuilder extends RepositoryBeanMethodBuilder {
 
-        @EqualsAndHashCode(callSuper = true)
-        @Component
-        @Data
-        public static class RepositoryBeanAddOneBuilder extends RepositoryBeanMethodBuilder {
-
-            public RepositoryBeanAddOneBuilder builder(PersistentPo persistentPo) {
-                String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
-                this.setMethodStatement(StatementEnum.PUBLIC);
-                this.setMethodReturnType("int");
-                this.setMethodAnnotationList();
-                this.setMethodName("add");
-                this.setMethodParamSet(poName);
-                this.setMethodReturnBody("return mapper.insert(po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));");
-                return this;
-            }
-
-            public void setMethodParamSet(String poName) {
-                List<String> methodParamSet = new ArrayList<>();
-                methodParamSet.add(poName + "Po po");
-                super.setMethodParamSet(methodParamSet);
-            }
-
-            public void setMethodAnnotationList() {
-                List<String> methodAnnotationList = new ArrayList<>();
-                methodAnnotationList.add("@Override");
-                super.setMethodAnnotationList(methodAnnotationList);
-            }
-
-            @Override
-            public String toString() {
-                return getString(getMethodAnnotationList(), getMethodStatement(), getMethodReturnType(), getMethodName(), getMethodParamSet(), getMethodReturnBody());
-            }
-
+        public RepositoryBeanAddOnceBuilder builder(PersistentPo persistentPo) {
+            String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
+            this.setMethodStatement(StatementEnum.PUBLIC);
+            this.setMethodReturnType("int");
+            this.setMethodAnnotationList();
+            this.setMethodName("add");
+            this.setMethodParamSet(poName);
+            this.setMethodReturnBody("return mapper.insert(po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));");
+            return this;
         }
 
-        @EqualsAndHashCode(callSuper = true)
-        @Component
-        @Data
-        public static class RepositoryBeanAddBatchBuilder extends RepositoryBeanMethodBuilder {
+        public void setMethodParamSet(String poName) {
+            List<String> methodParamSet = new ArrayList<>();
+            methodParamSet.add(poName + "Po po");
+            super.setMethodParamSet(methodParamSet);
+        }
 
-            public RepositoryBeanAddBatchBuilder builder(PersistentPo persistentPo) {
-                String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
-                this.setMethodStatement(StatementEnum.PUBLIC);
-                this.setMethodReturnType("int");
-                this.setMethodAnnotationList();
-                this.setMethodName("addBatch");
-                this.setMethodParamSet(poName);
-                this.setMethodBody();
-                this.setMethodReturnBody("return mapper.insert(poList, 100).size();");
-                return this;
+        public void setMethodAnnotationList() {
+            List<String> methodAnnotationList = new ArrayList<>();
+            methodAnnotationList.add("@Override");
+            super.setMethodAnnotationList(methodAnnotationList);
+        }
+
+        @Override
+        public String toString() {
+            return getString(getMethodAnnotationList(), getMethodStatement(), getMethodReturnType(), getMethodName(), getMethodParamSet(), getMethodReturnBody());
+        }
+
+    }
+
+    @EqualsAndHashCode(callSuper = true)
+    @Component
+    @Data
+    public static class RepositoryBeanAddsBuilder extends RepositoryBeanMethodBuilder {
+
+        public RepositoryBeanAddsBuilder builder(PersistentPo persistentPo) {
+            String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
+            this.setMethodStatement(StatementEnum.PUBLIC);
+            this.setMethodReturnType("int");
+            this.setMethodAnnotationList();
+            this.setMethodName("addBatch");
+            this.setMethodParamSet(poName);
+            this.setMethodBody();
+            this.setMethodReturnBody("return mapper.insert(poList, 100).size();");
+            return this;
+        }
+
+        public void setMethodParamSet(String poName) {
+            List<String> methodParamSet = new ArrayList<>();
+            methodParamSet.add("List<" + poName + "Po> poList");
+            super.setMethodParamSet(methodParamSet);
+        }
+
+        public void setMethodBody() {
+            List<String> methodBodyList = new ArrayList<>();
+            methodBodyList.add("poList.forEach(po -> po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));");
+            super.setMethodBody(methodBodyList);
+        }
+
+        public void setMethodAnnotationList() {
+            List<String> methodAnnotationList = new ArrayList<>();
+            methodAnnotationList.add("@Override");
+            super.setMethodAnnotationList(methodAnnotationList);
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            for (String methodAnnotation : getMethodAnnotationList()) {
+                sb.append("    ").append(methodAnnotation).append("\n");
             }
-
-            public void setMethodParamSet(String poName) {
-                List<String> methodParamSet = new ArrayList<>();
-                methodParamSet.add("List<" + poName + "Po> poList");
-                super.setMethodParamSet(methodParamSet);
+            sb.append("    ").append(getMethodStatement().getStatement()).append(" ").append(getMethodReturnType()).append(" ").append(getMethodName()).append("(").append(String.join(", ", getMethodParamSet())).append(") {\n");
+            for (String methodBody : getMethodBody()) {
+                sb.append("        ").append(methodBody).append("\n");
             }
-
-            public void setMethodBody() {
-                List<String> methodBodyList = new ArrayList<>();
-                methodBodyList.add("poList.forEach(po -> po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));");
-                this.setMethodBody(methodBodyList);
-            }
-
-            public void setMethodAnnotationList() {
-                List<String> methodAnnotationList = new ArrayList<>();
-                methodAnnotationList.add("@Override");
-                super.setMethodAnnotationList(methodAnnotationList);
-            }
-
-            @Override
-            public String toString() {
-                StringBuilder sb = new StringBuilder();
-                for (String methodAnnotation : getMethodAnnotationList()) {
-                    sb.append("    ").append(methodAnnotation).append("\n");
-                }
-                sb.append("    ").append(getMethodStatement().getStatement()).append(" ").append(getMethodReturnType()).append(" ").append(getMethodName()).append("(").append(String.join(", ", getMethodParamSet())).append(") {\n");
-                for (String methodBody : getMethodBody()) {
-                    sb.append("        ").append(methodBody).append("\n");
-                }
-                sb.append("        ").append(getMethodReturnBody()).append("\n");
-                sb.append("    }");
-                return sb.toString();
-            }
-
+            sb.append("        ").append(getMethodReturnBody()).append("\n");
+            sb.append("    }");
+            return sb.toString();
         }
 
     }

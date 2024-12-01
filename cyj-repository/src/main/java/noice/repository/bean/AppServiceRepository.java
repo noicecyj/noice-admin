@@ -33,6 +33,7 @@ public class AppServiceRepository implements BeanRepository<AppServicePo> {
         return mapper.insert(po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
     }
 
+    @Override
     public int addBatch(List<AppServicePo> poList) {
         poList.forEach(po -> po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
         return mapper.insert(poList, 100).size();
@@ -48,6 +49,7 @@ public class AppServiceRepository implements BeanRepository<AppServicePo> {
         return mapper.delete(baseQueryWrapper);
     }
 
+    @Override
     public int deleteBatch(List<String> ids) {
         return mapper.deleteByIds(ids);
     }
@@ -57,10 +59,12 @@ public class AppServiceRepository implements BeanRepository<AppServicePo> {
         return mapper.updateById(po.eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
     }
 
+    @Override
     public boolean insertOrUpdate(AppServicePo po) {
         return mapper.insertOrUpdate(po.eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
     }
 
+    @Override
     public int updateBatch(List<AppServicePo> poList) {
         poList.forEach(po -> po.eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
         return mapper.updateById(poList, 100).size();

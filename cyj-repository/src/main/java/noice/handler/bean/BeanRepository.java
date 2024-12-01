@@ -13,11 +13,19 @@ public interface BeanRepository<PO extends BasePoBean> {
 
     int add(PO po);
 
+    int addBatch(List<PO> poList);
+
     int delete(String id);
 
     int delete(QueryWrapper<PO> queryWrapper);
 
+    int deleteBatch(List<String> ids);
+
     int update(PO po);
+
+    boolean insertOrUpdate(PO po);
+
+    int updateBatch(List<PO> poList);
 
     long count(QueryWrapper<PO> queryWrapper);
 

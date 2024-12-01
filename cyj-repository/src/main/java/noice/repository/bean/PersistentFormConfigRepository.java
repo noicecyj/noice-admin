@@ -34,6 +34,12 @@ public class PersistentFormConfigRepository implements BeanRepository<Persistent
     }
 
     @Override
+    public int addBatch(List<PersistentFormConfigPo> poList) {
+        poList.forEach(po -> po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+        return mapper.insert(poList, 100).size();
+    }
+
+    @Override
     public int delete(String id) {
         return mapper.deleteById(id);
     }
@@ -44,8 +50,24 @@ public class PersistentFormConfigRepository implements BeanRepository<Persistent
     }
 
     @Override
+    public int deleteBatch(List<String> ids) {
+        return mapper.deleteByIds(ids);
+    }
+
+    @Override
     public int update(PersistentFormConfigPo po) {
         return mapper.updateById(po.eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+    }
+
+    @Override
+    public boolean insertOrUpdate(PersistentFormConfigPo po) {
+        return mapper.insertOrUpdate(po.eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+    }
+
+    @Override
+    public int updateBatch(List<PersistentFormConfigPo> poList) {
+        poList.forEach(po -> po.eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+        return mapper.updateById(poList, 100).size();
     }
 
     @Override

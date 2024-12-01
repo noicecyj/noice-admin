@@ -34,6 +34,12 @@ public class SqlRepository implements BeanRepository<SqlPo> {
     }
 
     @Override
+    public int addBatch(List<SqlPo> poList) {
+        poList.forEach(po -> po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+        return mapper.insert(poList, 100).size();
+    }
+
+    @Override
     public int delete(String id) {
         return mapper.deleteById(id);
     }
@@ -44,8 +50,24 @@ public class SqlRepository implements BeanRepository<SqlPo> {
     }
 
     @Override
+    public int deleteBatch(List<String> ids) {
+        return mapper.deleteByIds(ids);
+    }
+
+    @Override
     public int update(SqlPo po) {
         return mapper.updateById(po.eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+    }
+
+    @Override
+    public boolean insertOrUpdate(SqlPo po) {
+        return mapper.insertOrUpdate(po.eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+    }
+
+    @Override
+    public int updateBatch(List<SqlPo> poList) {
+        poList.forEach(po -> po.eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+        return mapper.updateById(poList, 100).size();
     }
 
     @Override
