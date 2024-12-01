@@ -1,7 +1,7 @@
 import type {ActionType} from '@ant-design/pro-components';
 import {ProTable} from '@ant-design/pro-components';
-import {Button} from 'antd';
 import {ReactNode, useRef} from 'react';
+import store from "@/store";
 
 
 function DataTable<T extends Record<string, any>>(props: {
@@ -11,6 +11,8 @@ function DataTable<T extends Record<string, any>>(props: {
   toolBar: ReactNode[]
 }) {
   const actionRef = useRef<ActionType>();
+
+  const [entityState, entityDispatcher] = store.useModel('entity');
 
   const {
     states,
@@ -34,7 +36,10 @@ function DataTable<T extends Record<string, any>>(props: {
         ) => {
           // 这里需要返回一个 Promise,在返回之前你可以进行数据转化
           // 如果需要转化参数可以在这里进行修改
-          return search(params, sort, filter, states);
+          return entityDispatcher.page({
+            params: params,
+            pageUrl: "/entityCreateApi/Persistent/page"
+          });
         }}
         editable={{
           type: 'multiple',

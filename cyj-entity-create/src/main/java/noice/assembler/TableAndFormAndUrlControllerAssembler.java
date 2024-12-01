@@ -18,7 +18,7 @@ import java.util.List;
  * @author Noice
  */
 @Mapper(componentModel = "spring", config = BaseBeanAssembler.class)
-public interface FormAndTableControllerAssembler {
+public interface TableAndFormAndUrlControllerAssembler {
 
     @Mapping(target = "formConfigVoList", source = "dto.formConfigDtoList")
     FormVo dtoToVo(FormDto dto);

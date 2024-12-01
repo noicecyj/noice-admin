@@ -1,6 +1,6 @@
 package noice.service;
 
-import noice.assembler.FormAndTableServiceAssembler;
+import noice.assembler.TableAndFormAndUrlServiceAssembler;
 import noice.common.contants.UserContext;
 import noice.entity.dto.FormConfigDto;
 import noice.entity.dto.FormDto;
@@ -27,7 +27,7 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class TableAndFormService {
+public class TableAndFormAndUrlService {
 
     private PersistentTableRepository persistentTableRepository;
 
@@ -37,13 +37,13 @@ public class TableAndFormService {
 
     private PersistentFormConfigRepository persistentFormConfigRepository;
 
-    private FormAndTableServiceAssembler formAndTableServiceAssembler;
-    // 权限Repository
+    private TableAndFormAndUrlServiceAssembler tableAndFormAndUrlServiceAssembler;
+
     private AuthorityRepository authorityRepository;
 
     @Autowired
-    public void setFormAndTableServiceAssembler(FormAndTableServiceAssembler formAndTableServiceAssembler) {
-        this.formAndTableServiceAssembler = formAndTableServiceAssembler;
+    public void setFormAndTableServiceAssembler(TableAndFormAndUrlServiceAssembler tableAndFormAndUrlServiceAssembler) {
+        this.tableAndFormAndUrlServiceAssembler = tableAndFormAndUrlServiceAssembler;
     }
 
     @Autowired
@@ -81,7 +81,7 @@ public class TableAndFormService {
             if (persistentTablePo == null) {
                 return null;
             }
-            TableDto tableDto = formAndTableServiceAssembler.poToDto(persistentTablePo);
+            TableDto tableDto = tableAndFormAndUrlServiceAssembler.poToDto(persistentTablePo);
             AuthorityPo authorityPo = new AuthorityPo();
             if (!"allAuthority".equals(String.join("", tableCodeList))) {
                 authorityPo.inAuthorityCode(tableCodeList);
@@ -92,7 +92,7 @@ public class TableAndFormService {
                     .findList(new PersistentTableConfigPo()
                             .eqPersistentTableId(persistentTablePo.getId())
                             .inAuthorityId(authorityId).getQueryWrapper());
-            List<TableConfigDto> tableConfigDtoList = formAndTableServiceAssembler.poTableListToDtoTableList(persistentTableConfigPoList);
+            List<TableConfigDto> tableConfigDtoList = tableAndFormAndUrlServiceAssembler.poTableListToDtoTableList(persistentTableConfigPoList);
             tableDto.setTableConfigDtoList(tableConfigDtoList);
             return tableDto;
         }
@@ -108,7 +108,7 @@ public class TableAndFormService {
             if (persistentFormPo == null) {
                 return null;
             }
-            FormDto formDto = formAndTableServiceAssembler.poToDto(persistentFormPo);
+            FormDto formDto = tableAndFormAndUrlServiceAssembler.poToDto(persistentFormPo);
             AuthorityPo authorityPo = new AuthorityPo();
             if (!"allAuthority".equals(String.join("", tableCodeList))) {
                 authorityPo.inAuthorityCode(tableCodeList);
@@ -119,7 +119,7 @@ public class TableAndFormService {
                     .findList(new PersistentFormConfigPo()
                             .eqPersistentFormId(persistentFormPo.getId())
                             .inAuthorityId(authorityId).getQueryWrapper());
-            List<FormConfigDto> formConfigDtoList = formAndTableServiceAssembler.poFormListToDtoFormList(persistentFormConfigPoList);
+            List<FormConfigDto> formConfigDtoList = tableAndFormAndUrlServiceAssembler.poFormListToDtoFormList(persistentFormConfigPoList);
             formDto.setFormConfigDtoList(formConfigDtoList);
             return formDto;
         }

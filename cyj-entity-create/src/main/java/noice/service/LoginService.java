@@ -1,7 +1,7 @@
 package noice.service;
 
 import com.alibaba.fastjson2.JSONObject;
-import noice.assembler.FormAndTableServiceAssembler;
+import noice.assembler.TableAndFormAndUrlServiceAssembler;
 import noice.assembler.TreeMenuServiceAssembler;
 import noice.common.contants.UserContext;
 import noice.entity.dto.LoginDto;
@@ -61,7 +61,7 @@ public class LoginService {
     private PersistentFormConfigRepository persistentFormConfigRepository;
 
     // 权限表单和表和URLServiceAssembler
-    private FormAndTableServiceAssembler formAndTableServiceAssembler;
+    private TableAndFormAndUrlServiceAssembler tableAndFormAndUrlServiceAssembler;
 
     // 持久化表配置Repository
     private PersistentTableConfigRepository persistentTableConfigRepository;
@@ -96,8 +96,8 @@ public class LoginService {
     }
 
     @Autowired
-    public void setAuthFormAndTableAndUrlServiceAssembler(FormAndTableServiceAssembler formAndTableServiceAssembler) {
-        this.formAndTableServiceAssembler = formAndTableServiceAssembler;
+    public void setAuthFormAndTableAndUrlServiceAssembler(TableAndFormAndUrlServiceAssembler tableAndFormAndUrlServiceAssembler) {
+        this.tableAndFormAndUrlServiceAssembler = tableAndFormAndUrlServiceAssembler;
     }
 
     @Autowired

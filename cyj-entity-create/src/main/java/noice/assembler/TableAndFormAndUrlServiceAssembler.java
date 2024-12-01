@@ -17,7 +17,7 @@ import java.util.List;
  * @author Noice
  */
 @Mapper(componentModel = "spring", config = BaseBeanAssembler.class)
-public interface FormAndTableServiceAssembler {
+public interface TableAndFormAndUrlServiceAssembler {
 
     FormDto poToDto(PersistentFormPo po);
 

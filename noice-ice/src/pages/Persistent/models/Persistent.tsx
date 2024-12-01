@@ -46,7 +46,11 @@ export default {
         total: dataRes.data.total,
       };
     },
-
+    async getOptions(dataSource: any, params: any) {
+      return {
+        data: dataSource,
+      };
+    },
     // async save(data: {
     //     formData: any;
     //     user: any;

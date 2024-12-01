@@ -1,16 +1,26 @@
-import { createModel } from 'ice';
+import {createModel} from 'ice';
 import initService from "@/services/init";
 
 interface Entity {
-  name: string;
-  id: string;
+  pageResult: {
+    data: any
+    success: boolean;
+    total: number;
+  },
+  saveResult: {
+    success: boolean;
+  },
+  removeResult: {
+    success: boolean;
+  }
 }
 
 export default createModel({
   // 定义  model 的初始 state
   state: {
-    name: '',
-    id: '',
+    pageResult: {},
+    saveResult: {},
+    removeResult: {},
   } as Entity,
   // 定义改变该 model 状态的纯函数
   reducers: {
@@ -21,14 +31,13 @@ export default createModel({
       };
     },
   },
-  // 定义处理该 model 副作用的函数
   effects: (dispatch) => ({
-    async page(params: any, sort: any, filter: any, data: any) {
-      console.log(sort);
+    async page(data: any) {
+      console.log('page', data);
       const dataRes = await initService.http({
-        // url: data.pageUrl,
-        url: '/entityCreateApi/Persistent/page',
-        obj: params,
+        url: data.pageUrl,
+        // url: '/entityCreateApi/Persistent/page',
+        obj: data.params,
       });
       return {
         data: dataRes.data.records,
@@ -38,13 +47,51 @@ export default createModel({
         total: dataRes.data.total,
       };
     },
-    async getUserInfo() {
-      await delay(1000);
+    async save(data: {
+      formData: any;
+      saveUrl: any;
+    }) {
+      const dataRes = await initService.http({
+        url: data.saveUrl,
+        obj: {
+          po: data.formData,
+        }
+      });
       this.update({
-        name: 'taobao',
-        id: '123',
+        saveResult: {
+          success: dataRes.code == 200,
+        }
       });
     },
-
+    async remove(data: {
+      record: string;
+      deleteUrl: any;
+    }) {
+      const dataRes = await initService.http({
+        url: data.deleteUrl + data.record,
+        method: 'get'
+      });
+      this.update({
+        removeResult: {
+          success: dataRes.code == 200,
+        }
+      });
+    },
+    add() {
+      const payload = {
+        formData: {},
+        title: '添加',
+        visible: true,
+      };
+      dispatch.Entity.setState(payload);
+    },
+    edit(data: any) {
+      const payload = {
+        formData: data,
+        title: '编辑',
+        visible: true,
+      };
+      dispatch.Entity.setState(payload);
+    },
   }),
 })
