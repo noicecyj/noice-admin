@@ -10,14 +10,14 @@ public class TableConfigVo {
 
     private String id;
 
-    private String persistentTableConfigCode;
+    private String dataIndex;
 
-    private boolean persistentTableConfigDisplay;
+    private boolean hideInTable;
 
-    private String persistentTableConfigMethod;
+    private String title;
 
-    private String persistentTableConfigName;
+    private String valueType;
 
-    private String persistentTableConfigType;
+    private int width;
 
 }

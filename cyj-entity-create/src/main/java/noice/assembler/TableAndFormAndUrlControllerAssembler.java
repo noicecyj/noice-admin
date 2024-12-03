@@ -30,6 +30,10 @@ public interface TableAndFormAndUrlControllerAssembler {
     @Mapping(target = "tableConfigVoList", source = "dto.tableConfigDtoList")
     TableVo dtoToVo(TableDto dto);
 
+    @Mapping(target = "dataIndex", source = "dto.persistentTableConfigCode")
+    @Mapping(target = "hideInTable", source = "dto.persistentTableConfigDisplay")
+    @Mapping(target = "title", source = "dto.persistentTableConfigName")
+    @Mapping(target = "valueType", source = "dto.persistentTableConfigType")
     TableConfigVo dtoToVo(TableConfigDto dto);
 
     List<TableConfigVo> dtoTableListToVoTableList(List<TableConfigDto> dtoList);

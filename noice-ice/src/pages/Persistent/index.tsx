@@ -25,20 +25,14 @@ const tableColumns: ProColumns<PersistentItem>[] = [
   {
     title: '实体名称',
     dataIndex: 'persistentName',
-    copyable: false,
-    ellipsis: false,
   },
   {
     title: '实体编码',
     dataIndex: 'persistentCode',
-    copyable: false,
-    ellipsis: false,
   },
   {
     title: '实体类型',
     dataIndex: 'persistentType',
-    copyable: false,
-    ellipsis: false,
     valueType: 'select',
     valueEnum: {
       Bean: {
@@ -52,16 +46,12 @@ const tableColumns: ProColumns<PersistentItem>[] = [
   {
     title: '排序',
     dataIndex: 'sortCode',
-    copyable: false,
-    ellipsis: false,
     valueType: 'digit',
     width: 60,
   },
   {
     title: '状态',
     dataIndex: 'status',
-    copyable: false,
-    ellipsis: false,
     width: 60,
     valueType: 'select',
     valueEnum: {
