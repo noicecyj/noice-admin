@@ -12,7 +12,10 @@ interface Entity {
   },
   removeResult: {
     success: boolean;
-  }
+  },
+  formData: any,
+  title: string,
+  visible: boolean,
 }
 
 export default createModel({
@@ -21,6 +24,9 @@ export default createModel({
     pageResult: {},
     saveResult: {},
     removeResult: {},
+    formData: {},
+    title: '添加',
+    visible: false,
   } as Entity,
   // 定义改变该 model 状态的纯函数
   reducers: {
@@ -31,8 +37,11 @@ export default createModel({
       };
     },
   },
-  effects: (dispatch) => ({
-    async page(data: any) {
+  effects: () => ({
+    async page(data: {
+      pageUrl: string;
+      params: object;
+    }) {
       console.log('page', data);
       const dataRes = await initService.http({
         url: data.pageUrl,
@@ -48,50 +57,40 @@ export default createModel({
       };
     },
     async save(data: {
-      formData: any;
       saveUrl: any;
+      formData: any;
     }) {
       const dataRes = await initService.http({
         url: data.saveUrl,
-        obj: {
-          po: data.formData,
-        }
+        obj: data.formData
       });
-      this.update({
-        saveResult: {
-          success: dataRes.code == 200,
-        }
-      });
+      return dataRes.code == 200;
     },
     async remove(data: {
       record: string;
-      deleteUrl: any;
+      deleteUrl: string;
     }) {
       const dataRes = await initService.http({
-        url: data.deleteUrl + data.record,
-        method: 'get'
-      });
-      this.update({
-        removeResult: {
-          success: dataRes.code == 200,
+        url: data.deleteUrl,
+        obj: {
+          id: data.record,
         }
       });
+      return dataRes.code == 200;
     },
     add() {
-      const payload = {
+      this.update({
         formData: {},
         title: '添加',
         visible: true,
-      };
-      dispatch.Entity.setState(payload);
+      });
     },
     edit(data: any) {
-      const payload = {
+      this.update({
         formData: data,
         title: '编辑',
         visible: true,
-      };
-      dispatch.Entity.setState(payload);
+      });
     },
   }),
 })

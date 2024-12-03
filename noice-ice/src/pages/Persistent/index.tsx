@@ -5,7 +5,7 @@ import DataTable from "@/components/DataTable";
 import DataForm from "@/components/DataForm";
 import {PlusOutlined} from "@ant-design/icons";
 import {defineDataLoader} from "@ice/runtime/data-loader";
-import {getForm} from "@/services/form";
+import {getForm, getTable} from "@/services/formAndTableAndUrl";
 import {useData} from "@ice/runtime/router";
 
 type PersistentItem = {
@@ -43,11 +43,9 @@ const tableColumns: ProColumns<PersistentItem>[] = [
     valueEnum: {
       Bean: {
         text: 'Bean',
-        status: 'Bean',
       },
       Relation: {
         text: 'Relation',
-        status: 'Relation',
       },
     },
   },
@@ -131,8 +129,9 @@ const valueEnum = {
 export default function Persistent() {
 
   const [persistentState, persistentDispatchers] = pageStore.useModel('Persistent');
-  const form = useData();
-  console.log("dataLoader", form.data);
+  const [form, table] = useData();
+  console.log("dataLoader.form", form.data);
+  console.log("dataLoader.table", table.data);
   return (
     <>
       <DataTable<PersistentItem>
@@ -162,9 +161,14 @@ export default function Persistent() {
   );
 }
 
-export const dataLoader = defineDataLoader(async (ctx) => {
-  return await getForm(ctx.pathname);
-});
+export const dataLoader = defineDataLoader([
+  async (ctx) => {
+    return await getForm(ctx.pathname);
+  },
+  async (ctx) => {
+    return await getTable(ctx.pathname);
+  },
+]);
 
 // export const pageConfig = definePageConfig(() => {
 //     return {

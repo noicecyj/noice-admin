@@ -120,6 +120,20 @@ public class TableAndFormAndUrlService {
                             .eqPersistentFormId(persistentFormPo.getId())
                             .inAuthorityId(authorityId).getQueryWrapper());
             List<FormConfigDto> formConfigDtoList = tableAndFormAndUrlServiceAssembler.poFormListToDtoFormList(persistentFormConfigPoList);
+            FormConfigDto sortCodeFormConfig = new FormConfigDto();
+            sortCodeFormConfig.setPersistentFormConfigCode("sortCode");
+            sortCodeFormConfig.setPersistentFormConfigName("排序码");
+            sortCodeFormConfig.setPersistentFormConfigMode("NumberPicker");
+            sortCodeFormConfig.setPersistentFormConfigColSpan(12);
+            sortCodeFormConfig.setPersistentFormConfigEdit(true);
+            formConfigDtoList.add(sortCodeFormConfig);
+            FormConfigDto statusFormConfig = new FormConfigDto();
+            statusFormConfig.setPersistentFormConfigCode("status");
+            statusFormConfig.setPersistentFormConfigName("状态");
+            statusFormConfig.setPersistentFormConfigMode("Select");
+            statusFormConfig.setPersistentFormConfigColSpan(12);
+            statusFormConfig.setPersistentFormConfigEdit(true);
+            formConfigDtoList.add(statusFormConfig);
             formDto.setFormConfigDtoList(formConfigDtoList);
             return formDto;
         }

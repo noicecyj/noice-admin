@@ -1,7 +1,8 @@
 import {ModalForm, ProFormDateRangePicker, ProFormSelect, ProFormText,} from '@ant-design/pro-components';
-import {message} from 'antd';
+import {Button, message} from 'antd';
 import {ProFormDigit, ProFormDigitRange, ProFormTextArea, ProFormTimePicker} from "@ant-design/pro-form/lib";
-import {ProFormCheckbox, ProFormDatePicker, ProFormRadio, ProFormSwitch} from "@ant-design/pro-form";
+import {ProForm, ProFormCheckbox, ProFormDatePicker, ProFormRadio, ProFormSwitch} from "@ant-design/pro-form";
+import store from "@/store";
 
 type FormConfig = {
   persistentFormConfigName: string;
@@ -31,6 +32,8 @@ function DataForm(props: {
   state: any;
 }) {
 
+  const [entityState, entityDispatcher] = store.useModel('entity');
+
   const {
     config,
     dispatchers,
@@ -48,6 +51,10 @@ function DataForm(props: {
         dispatchers.setState({visible: open});
       }}
       onFinish={async (values: any) => {
+        await entityDispatcher.save({
+          saveUrl: '/entityCreateApi/Persistent/add',
+          formData: values,
+        })
         console.log(values);
         message.success('提交成功');
       }}
@@ -114,7 +121,7 @@ function DataForm(props: {
               label={item.persistentFormConfigName}
               key={item.id}
               initialValue={item.persistentFormConfigDefaultValue}
-              disabled={item.persistentFormConfigEdit}
+              disabled={!item.persistentFormConfigEdit}
             />
           )
         } else if (item.persistentFormConfigMode === 'Switch') {
@@ -200,6 +207,22 @@ function DataForm(props: {
               disabled={item.persistentFormConfigEdit}
               request={dispatchers.getOptions(item.persistentFormConfigDataSource)}
             />
+          )
+        } else if (item.persistentFormConfigMode === 'SelectForm') {
+          return (
+            <ProForm.Group>
+              <ProFormText
+                colProps={{md: item.persistentFormConfigColSpan}}
+                name={item.persistentFormConfigCode}
+                label={item.persistentFormConfigName}
+                key={item.id}
+                initialValue={item.persistentFormConfigDefaultValue}
+                disabled={item.persistentFormConfigEdit}
+              />
+              <Button type="primary" htmlType="submit">
+                选择
+              </Button>
+            </ProForm.Group>
           )
         } else {
           return (
