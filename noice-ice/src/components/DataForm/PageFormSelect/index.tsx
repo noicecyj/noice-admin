@@ -1,87 +1,130 @@
-import {ActionType, ModalForm, ProTable,} from '@ant-design/pro-components';
-import store from "@/store";
-import {useRef} from "react";
+import React, {useState} from 'react';
+import {Button, Input, Modal} from 'antd';
+import debounce from 'lodash/debounce';
+import {DrawerForm, ProTable} from "@ant-design/pro-components";
+import {PlusOutlined} from "@ant-design/icons";
 
-function PageFormSelect<T extends Record<string, any>>(props: {
-  tableColumns: any[]
-}) {
+const {confirm} = Modal;
 
-  const actionRef = useRef<ActionType>();
+interface PageFormSelectProps {
+  key: string,
+  colProps?: { md: number | undefined },
+  name?: string,
+  label?: string,
+  initialValue?: string | undefined,
+  disabled?: boolean | undefined
+}
 
-  const [entityState, entityDispatcher] = store.useModel('entity');
+const PageFormSelect = ({colProps, name, label, initialValue, disabled, key}: PageFormSelectProps) => {
+  const [visible, setVisible] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+  const [fetching, setFetching] = useState(false);
 
+  console.log('PageFormSelect', colProps, name, label, initialValue, disabled, key);
+  // 模拟 API 请求
+  const fetchData = async (params) => {
+    setFetching(true);
+    // 模拟延时
+    setTimeout(() => {
+      setFetching(false);
+      // 你可以在这里替换成你的真实 API 请求
+      const data = Array.from({length: 10}, (_, i) => ({
+        key: i,
+        name: `Item ${i + 1}`,
+        age: Math.floor(Math.random() * 100),
+        address: 'Some Address',
+      })).filter(item => item.name.includes(params.search || ''));
+
+      return {
+        success: true,
+        data: data.slice((params.current - 1) * params.pageSize, params.current * params.pageSize),
+        total: data.length,
+      };
+    }, 1000);
+  };
+
+  const handleSearch = debounce((value) => {
+    // 你可以在这里处理输入框的搜索逻辑，比如调用 API 获取数据
+    console.log('Search Value:', value);
+  }, 800);
+
+  const handleOpenModal = () => {
+    setVisible(true);
+  };
+
+  const handleOk = async () => {
+    setVisible(false);
+    // 你可以在这里处理选择后的逻辑
+  };
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
+
+  const columns = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: 'Age',
+      dataIndex: 'age',
+      key: 'age',
+    },
+    {
+      title: 'Address',
+      dataIndex: 'address',
+      key: 'address',
+    },
+  ];
 
   return (
-    <>
-      <ModalForm
-        // @ts-ignore
-        labelWidth="auto"
+    <div style={{display: 'flex', alignItems: 'center'}}>
+      <Input disabled={disabled}/>
+      <DrawerForm<{
+        name: string;
+        company: string;
+      }>
+        title="选择"
+        resize={{
+          onResize() {
+            console.log('resize!');
+          },
+          maxWidth: window.innerWidth * 0.8,
+          minWidth: 300,
+        }}
+        trigger={
+          <Button type="primary">
+            <PlusOutlined/>
+            选择
+          </Button>
+        }
+        autoFocusFirstInput
+        drawerProps={{
+          destroyOnClose: true,
+        }}
+        submitTimeout={2000}
+        onFinish={async (values) => {
+          handleOk()
+          // 不返回不会关闭弹框
+          return true;
+        }}
       >
-        <ProTable<T>
-          columns={props.tableColumns}
-          actionRef={actionRef}
-          cardBordered
-          request={async (
-            // 第一个参数 params 查询表单和 params 参数的结合
-            // 第一个参数中一定会有 pageSize 和  current ，这两个参数是 antd 的规范
-            params,
-            sort,
-            filter
-          ) => {
-            // 这里需要返回一个 Promise,在返回之前你可以进行数据转化
-            // 如果需要转化参数可以在这里进行修改
-            return entityDispatcher.page({
-              params: params,
-              pageUrl: "/entityCreateApi/Persistent/page"
-            });
-          }}
-          editable={{
-            type: 'multiple',
-          }}
-          columnsState={{
-            persistenceKey: 'pro-table-singe-demos',
-            persistenceType: 'localStorage',
-            defaultValue: {
-              option: {
-                fixed: 'right',
-                disable: true
-              },
-            },
-            onChange(value) {
-              console.log('value: ', value);
-            },
-          }}
-          // rowKey="id"
-          search={{
-            labelWidth: 'auto',
-          }}
-          options={{
-            setting: {
-              listsHeight: 400,
-            },
-          }}
-          form={{
-            // 由于配置了 transform，提交的参数与定义的不同这里需要转化一下
-            syncToUrl: (values, type) => {
-              if (type === 'get') {
-                return {
-                  ...values,
-                  created_at: [values.startTime, values.endTime],
-                };
-              }
-              return values;
-            },
-          }}
+        <ProTable
+          columns={columns}
+          request={(params) => fetchData(params)}
+          rowKey="key"
           pagination={{
-            pageSize: 11,
-            onChange: (page) => console.log(page),
+            pageSize: 5,
           }}
+          loading={fetching}
           dateFormatter="string"
-          headerTitle="选择"
+
         />
-      </ModalForm>
-    </>
+      </DrawerForm>
+    </div>
   );
-}
+};
 
 export default PageFormSelect;

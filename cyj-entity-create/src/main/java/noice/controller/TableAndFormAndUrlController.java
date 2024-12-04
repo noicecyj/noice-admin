@@ -38,6 +38,12 @@ public class TableAndFormAndUrlController {
         return ResultVO.success(formAndTableControllerAssembler.dtoToVo(TableAndFormAndUrlService.getTable(persistentCode)));
     }
 
+    @Operation(summary = "获取选择表格")
+    @GetMapping(value = "getTableSelect/{persistentCode}")
+    public ResultVO getTableSelect(@PathVariable("persistentCode") String persistentCode) {
+        return ResultVO.success(formAndTableControllerAssembler.dtoToVo(TableAndFormAndUrlService.getTableSelect(persistentCode)));
+    }
+
     @Operation(summary = "获取表单")
     @GetMapping(value = "getForm/{persistentCode}")
     public ResultVO getForm(@PathVariable("persistentCode") String persistentCode) {

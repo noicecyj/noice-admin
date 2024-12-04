@@ -20,6 +20,6 @@ public class FormVo {
 
     private String persistentFormType;
 
-    private List<FormConfigVo> formConfigVoList;
+    private List<FormConfigRowVo> formConfigRowVoList;
 
 }

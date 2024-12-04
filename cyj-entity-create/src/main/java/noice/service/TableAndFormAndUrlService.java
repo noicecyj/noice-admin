@@ -98,6 +98,16 @@ public class TableAndFormAndUrlService {
         }
     }
 
+    public TableDto getTableSelect(String tableCode) {
+        TableDto table = getTable(tableCode);
+        List<TableConfigDto> list = table.getTableConfigDtoList().stream().filter(tableConfigDto ->
+                tableConfigDto.getPersistentTableConfigCode().contains("Code") ||
+                        tableConfigDto.getPersistentTableConfigCode().contains("Name") ||
+                        "id".equals(tableConfigDto.getPersistentTableConfigCode())).toList();
+        table.setTableConfigDtoList(list);
+        return table;
+    }
+
     public FormDto getForm(String formCode) {
         List<String> tableCodeList = UserContext.getUserTable();
         if (tableCodeList.isEmpty()) {
@@ -134,7 +144,7 @@ public class TableAndFormAndUrlService {
             statusFormConfig.setPersistentFormConfigColSpan(12);
             statusFormConfig.setPersistentFormConfigEdit(true);
             formConfigDtoList.add(statusFormConfig);
-            formDto.setFormConfigDtoList(formConfigDtoList);
+//            formDto.setFormConfigDtoList(formConfigDtoList);
             return formDto;
         }
     }

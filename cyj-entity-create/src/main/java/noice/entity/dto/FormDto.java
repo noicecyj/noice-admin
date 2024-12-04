@@ -20,6 +20,6 @@ public class FormDto {
 
     private String persistentFormType;
 
-    private List<FormConfigDto> formConfigDtoList;
+    private List<FormConfigRowDto> formConfigRowDtoList;
 
 }

@@ -3,6 +3,7 @@ import {Button, message} from 'antd';
 import {ProFormDigit, ProFormDigitRange, ProFormTextArea, ProFormTimePicker} from "@ant-design/pro-form/lib";
 import {ProForm, ProFormCheckbox, ProFormDatePicker, ProFormRadio, ProFormSwitch} from "@ant-design/pro-form";
 import store from "@/store";
+import PageFormSelect from "@/components/DataForm/PageFormSelect";
 
 type FormConfig = {
   persistentFormConfigName: string;
@@ -45,7 +46,7 @@ function DataForm(props: {
     <ModalForm
       // @ts-ignore
       labelWidth="auto"
-      grid={true}
+      grid={false}
       open={state.visible}
       onOpenChange={open => {
         dispatchers.setState({visible: open});
@@ -210,8 +211,14 @@ function DataForm(props: {
           )
         } else if (item.persistentFormConfigMode === 'SelectForm') {
           return (
-            <ProForm.Group>
-              <ProFormText
+            <ProForm.Item
+              label={item.persistentFormConfigName}
+              key={item.id}
+              initialValue={item.persistentFormConfigDefaultValue}
+              labelCol={{ span: 24 }}
+              wrapperCol={{ span: 24 }}
+            >
+              <PageFormSelect
                 colProps={{md: item.persistentFormConfigColSpan}}
                 name={item.persistentFormConfigCode}
                 label={item.persistentFormConfigName}
@@ -219,10 +226,7 @@ function DataForm(props: {
                 initialValue={item.persistentFormConfigDefaultValue}
                 disabled={item.persistentFormConfigEdit}
               />
-              <Button type="primary" htmlType="submit">
-                选择
-              </Button>
-            </ProForm.Group>
+            </ProForm.Item>
           )
         } else {
           return (

@@ -1,9 +1,11 @@
 package noice.assembler;
 
 import noice.entity.dto.FormConfigDto;
+import noice.entity.dto.FormConfigRowDto;
 import noice.entity.dto.FormDto;
 import noice.entity.dto.TableConfigDto;
 import noice.entity.dto.TableDto;
+import noice.entity.vo.FormConfigRowVo;
 import noice.entity.vo.FormConfigVo;
 import noice.entity.vo.FormVo;
 import noice.entity.vo.TableConfigVo;
@@ -20,10 +22,15 @@ import java.util.List;
 @Mapper(componentModel = "spring", config = BaseBeanAssembler.class)
 public interface TableAndFormAndUrlControllerAssembler {
 
-    @Mapping(target = "formConfigVoList", source = "dto.formConfigDtoList")
+    @Mapping(target = "formConfigRowVoList", source = "dto.formConfigRowDtoList")
     FormVo dtoToVo(FormDto dto);
 
     FormConfigVo dtoToVo(FormConfigDto dto);
+
+    @Mapping(target = "formConfigVoList", source = "dto.formConfigDtoList")
+    FormConfigRowVo dtoToVo(FormConfigRowDto dto);
+
+    List<FormConfigRowVo> dtotFormRowListToVoFormRowList(List<FormConfigRowDto> dtoList);
 
     List<FormConfigVo> dtotFormListToVoFormList(List<FormConfigDto> dtoList);
 
