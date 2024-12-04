@@ -96,14 +96,14 @@ public class SqlController implements BeanController<SqlVo> {
     @PostMapping(value = "getValueEnum")
     @Override
     public ResultVO getValueEnum(@RequestBody SqlVo vo) {
-        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().map(valueEnum -> OptionVO.builder().label(valueEnum.getSqlName()).value(valueEnum.getId()).build()).toList());
+        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(SqlVo::getId, option -> Collections.singletonMap("text", option.getSqlName()))));
     }
 
     @Operation(summary = "查询_获取Options")
     @PostMapping(value = "getOptions")
     @Override
     public ResultVO getOptions(@RequestBody SqlVo vo) {
-        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(SqlVo::getId, option -> Collections.singletonMap("text", option.getSqlName()))));
+        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().map(valueEnum -> OptionVO.builder().label(valueEnum.getSqlName()).value(valueEnum.getId()).build()).toList());
     }
 
 }

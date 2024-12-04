@@ -102,14 +102,14 @@ public class AuthorityController implements BeanController<AuthorityVo> {
     @PostMapping(value = "getValueEnum")
     @Override
     public ResultVO getValueEnum(@RequestBody AuthorityVo vo) {
-        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().map(valueEnum -> OptionVO.builder().label(valueEnum.getAuthorityName()).value(valueEnum.getId()).build()).toList());
+        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(AuthorityVo::getId, option -> Collections.singletonMap("text", option.getAuthorityName()))));
     }
 
     @Operation(summary = "权限_获取Options")
     @PostMapping(value = "getOptions")
     @Override
     public ResultVO getOptions(@RequestBody AuthorityVo vo) {
-        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(AuthorityVo::getId, option -> Collections.singletonMap("text", option.getAuthorityName()))));
+        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().map(valueEnum -> OptionVO.builder().label(valueEnum.getAuthorityName()).value(valueEnum.getId()).build()).toList());
     }
 
 }

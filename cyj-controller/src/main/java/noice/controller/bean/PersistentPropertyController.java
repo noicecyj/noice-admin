@@ -96,14 +96,14 @@ public class PersistentPropertyController implements BeanController<PersistentPr
     @PostMapping(value = "getValueEnum")
     @Override
     public ResultVO getValueEnum(@RequestBody PersistentPropertyVo vo) {
-        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().map(valueEnum -> OptionVO.builder().label(valueEnum.getPersistentPropertyName()).value(valueEnum.getId()).build()).toList());
+        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(PersistentPropertyVo::getId, option -> Collections.singletonMap("text", option.getPersistentPropertyName()))));
     }
 
     @Operation(summary = "实体属性_获取Options")
     @PostMapping(value = "getOptions")
     @Override
     public ResultVO getOptions(@RequestBody PersistentPropertyVo vo) {
-        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(PersistentPropertyVo::getId, option -> Collections.singletonMap("text", option.getPersistentPropertyName()))));
+        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().map(valueEnum -> OptionVO.builder().label(valueEnum.getPersistentPropertyName()).value(valueEnum.getId()).build()).toList());
     }
 
 }

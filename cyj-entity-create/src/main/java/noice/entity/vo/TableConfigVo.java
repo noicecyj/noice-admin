@@ -12,12 +12,12 @@ public class TableConfigVo {
 
     private String dataIndex;
 
-    private boolean hideInTable;
+    private Boolean hideInTable;
 
     private String title;
 
     private String valueType;
 
-    private int width;
+    private Integer width;
 
 }

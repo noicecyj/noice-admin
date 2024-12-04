@@ -443,7 +443,7 @@ public class ControllerBeanMethodBuilder extends MethodBase {
             this.setMethodAnnotationList(persistentPo.getPersistentName());
             this.setMethodName("getValueEnum");
             this.setMethodParamSet(poName);
-            this.setMethodReturnBody("return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().map(valueEnum -> OptionVO.builder().label(valueEnum.get" + poName + "Name()).value(valueEnum.getId()).build()).toList());");
+            this.setMethodReturnBody("return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(" + poName + "Vo::getId, option -> Collections.singletonMap(\"text\", option.get" + poName + "Name()))));");
             return this;
         }
 
@@ -480,7 +480,7 @@ public class ControllerBeanMethodBuilder extends MethodBase {
             this.setMethodAnnotationList(persistentPo.getPersistentName());
             this.setMethodName("getOptions");
             this.setMethodParamSet(poName);
-            this.setMethodReturnBody("return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(" + poName + "Vo::getId, option -> Collections.singletonMap(\"text\", option.get" + poName + "Name()))));");
+            this.setMethodReturnBody("return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().map(valueEnum -> OptionVO.builder().label(valueEnum.get" + poName + "Name()).value(valueEnum.getId()).build()).toList());");
             return this;
         }
 

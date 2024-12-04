@@ -96,14 +96,14 @@ public class PersistentTableSearchConfigController implements BeanController<Per
     @PostMapping(value = "getValueEnum")
     @Override
     public ResultVO getValueEnum(@RequestBody PersistentTableSearchConfigVo vo) {
-        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().map(valueEnum -> OptionVO.builder().label(valueEnum.getPersistentTableSearchConfigName()).value(valueEnum.getId()).build()).toList());
+        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(PersistentTableSearchConfigVo::getId, option -> Collections.singletonMap("text", option.getPersistentTableSearchConfigName()))));
     }
 
     @Operation(summary = "实体表格搜索配置_获取Options")
     @PostMapping(value = "getOptions")
     @Override
     public ResultVO getOptions(@RequestBody PersistentTableSearchConfigVo vo) {
-        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(PersistentTableSearchConfigVo::getId, option -> Collections.singletonMap("text", option.getPersistentTableSearchConfigName()))));
+        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().map(valueEnum -> OptionVO.builder().label(valueEnum.getPersistentTableSearchConfigName()).value(valueEnum.getId()).build()).toList());
     }
 
 }

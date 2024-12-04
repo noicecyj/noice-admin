@@ -96,14 +96,14 @@ public class CatalogDictionaryController implements BeanController<CatalogDictio
     @PostMapping(value = "getValueEnum")
     @Override
     public ResultVO getValueEnum(@RequestBody CatalogDictionaryVo vo) {
-        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().map(valueEnum -> OptionVO.builder().label(valueEnum.getCatalogDictionaryName()).value(valueEnum.getId()).build()).toList());
+        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(CatalogDictionaryVo::getId, option -> Collections.singletonMap("text", option.getCatalogDictionaryName()))));
     }
 
     @Operation(summary = "目录字典_获取Options")
     @PostMapping(value = "getOptions")
     @Override
     public ResultVO getOptions(@RequestBody CatalogDictionaryVo vo) {
-        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(CatalogDictionaryVo::getId, option -> Collections.singletonMap("text", option.getCatalogDictionaryName()))));
+        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().map(valueEnum -> OptionVO.builder().label(valueEnum.getCatalogDictionaryName()).value(valueEnum.getId()).build()).toList());
     }
 
 }

@@ -179,9 +179,9 @@ public class ClassBeanFactoryImpl extends ClassFactoryImpl {
 //                this.createMapper(root, persistentPo);
 //                this.createConverter(root, persistentPo, persistentPropertyPoList);
 //                this.createAssembler(root, persistentPo, persistentPropertyPoList, poList);
-                this.createRepository(root, persistentPo, persistentPropertyPoList);
+//                this.createRepository(root, persistentPo, persistentPropertyPoList);
 //                this.createService(root, persistentPo, persistentPropertyPoList, poList);
-//                this.createController(root, persistentPo, poList);
+                this.createController(root, persistentPo, poList);
             } else {
 //                deleteEntityDML(root, persistentPo, persistentPropertyPoList);
 //                deleteEntityPO(root, persistentPo, persistentPropertyPoList);
