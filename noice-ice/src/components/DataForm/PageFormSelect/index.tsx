@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
-import {Button, Input, Modal} from 'antd';
+import {Button, Input, Modal, Space, Table} from 'antd';
 import debounce from 'lodash/debounce';
 import {DrawerForm, ProTable} from "@ant-design/pro-components";
 import store from "@/store";
 import _ from "lodash";
+import {DataType} from "@ice/runtime";
+import {TableRowSelection} from "antd/es/table/interface";
 
 const {confirm} = Modal;
 
@@ -21,6 +23,8 @@ const PageFormSelect = ({colProps, name, label, initialValue, disabled, key, dat
   const [visible, setVisible] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [fetching, setFetching] = useState(false);
+
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
 
 
   const [entityState, entityDispatcher] = store.useModel('entity');
@@ -66,6 +70,16 @@ const PageFormSelect = ({colProps, name, label, initialValue, disabled, key, dat
     setVisible(false);
   };
 
+  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
+    console.log('selectedRowKeys changed: ', newSelectedRowKeys);
+    setSelectedRowKeys(newSelectedRowKeys);
+  };
+
+  const rowSelection: TableRowSelection<DataType> = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+  };
+
   const columns = (code: string) => [
     {
       title: '名称',
@@ -87,7 +101,7 @@ const PageFormSelect = ({colProps, name, label, initialValue, disabled, key, dat
         company: string;
       }>
         title="选择"
-        width={window.innerWidth * 0.8}
+        width={window.innerWidth * 0.4}
         trigger={
           <Button>
             选择
@@ -106,6 +120,15 @@ const PageFormSelect = ({colProps, name, label, initialValue, disabled, key, dat
       >
         <ProTable
           columns={columns(dataSource)}
+          rowSelection={rowSelection}
+          tableAlertOptionRender={() => {
+            return (
+              <Space size={16}>
+                <a>批量删除</a>
+                <a>导出数据</a>
+              </Space>
+            );
+          }}
           request={async (
             // 第一个参数 params 查询表单和 params 参数的结合
             // 第一个参数中一定会有 pageSize 和  current ，这两个参数是 antd 的规范
@@ -122,11 +145,13 @@ const PageFormSelect = ({colProps, name, label, initialValue, disabled, key, dat
           }}
           rowKey="key"
           pagination={{
-            pageSize: 5,
+            pageSize: 10,
           }}
           loading={fetching}
           dateFormatter="string"
-
+          search={{
+            labelWidth: 'auto',
+          }}
         />
       </DrawerForm>
     </div>

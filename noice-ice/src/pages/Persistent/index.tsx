@@ -121,7 +121,7 @@ export default function Persistent() {
   const [persistentState, persistentDispatchers] = pageStore.useModel('Persistent');
   const [form, table] = useData();
   console.log("dataLoader.form", form.data);
-  console.log("dataLoader.table", table.data);
+  console.log("dataLoader.table", table.data.tableConfigVoList);
   return (
     <>
       <DataTable<PersistentItem>
@@ -129,7 +129,7 @@ export default function Persistent() {
         search={() => {
           return persistentDispatchers.page(persistentState)
         }}
-        tableColumns={tableColumns}
+        tableColumns={table.data.tableConfigVoList}
         toolBar={[
           <Button
             key="button"
@@ -139,7 +139,6 @@ export default function Persistent() {
             }}
             type="primary"
           >
-            <PlusOutlined/>
             新建
           </Button>
         ]}/>

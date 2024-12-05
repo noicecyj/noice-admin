@@ -6,14 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/noice-ice/src/components/DataForm/PageFormSelect/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/components/DataForm/PageFormSelect/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/components/DataForm/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/components/DataForm/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/models/entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/models/entity.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/models/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/models/user.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/services/formAndTableAndUrl.ts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/services/formAndTableAndUrl.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-ice/src/pages/Persistent/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/pages/Persistent/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -409,15 +403,7 @@
       <workItem from="1733189575743" duration="8880000" />
       <workItem from="1733272785652" duration="9272000" />
       <workItem from="1733296164103" duration="8479000" />
-      <workItem from="1733358261786" duration="11028000" />
-    </task>
-    <task id="LOCAL-00115" summary="添加表字段查询及更新功能，优化字段构建逻辑">
-      <option name="closed" value="true" />
-      <created>1731576657960</created>
-      <option name="number" value="00115" />
-      <option name="presentableId" value="LOCAL-00115" />
-      <option name="project" value="LOCAL" />
-      <updated>1731576657960</updated>
+      <workItem from="1733358261786" duration="12851000" />
     </task>
     <task id="LOCAL-00116" summary="添加表字段查询及更新功能，优化字段构建逻辑">
       <option name="closed" value="true" />
@@ -803,7 +789,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733378206571</updated>
     </task>
-    <option name="localTasksCounter" value="164" />
+    <task id="LOCAL-00164" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1733388168206</created>
+      <option name="number" value="00164" />
+      <option name="presentableId" value="LOCAL-00164" />
+      <option name="project" value="LOCAL" />
+      <updated>1733388168206</updated>
+    </task>
+    <option name="localTasksCounter" value="165" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
