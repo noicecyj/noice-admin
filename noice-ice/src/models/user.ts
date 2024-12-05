@@ -9,7 +9,9 @@ interface ModelState {
 
 export default createModel({
   state: {
-    currentUser: {},
+    currentUser: {
+      userName: '123',
+    },
     currentUserAuth: [],
   } as ModelState,
   reducers: {

@@ -6,10 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="重构表单服务及组件，优化字段逻辑">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/controller/TableAndFormAndUrlController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/controller/TableAndFormAndUrlController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/service/TableAndFormAndUrlService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/service/TableAndFormAndUrlService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/components/DataForm/PageFormSelect/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/components/DataForm/PageFormSelect/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/noice-ice/src/components/DataForm/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/components/DataForm/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-ice/src/models/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/models/user.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-ice/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/pages/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-ice/src/pages/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/pages/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-ice/src/pages/login/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/pages/login/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,11 +170,11 @@
       <recent name="D:\noice-admin\noice-ice\src\pages\login" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="noice.entity.vo" />
+      <recent name="noice.entity.dto" />
       <recent name="noice.common.entity.vo" />
       <recent name="noice.aspect.bean" />
       <recent name="noice.common.contants" />
-      <recent name="noice.service" />
-      <recent name="noice.controller" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -404,15 +406,8 @@
       <workItem from="1733116006978" duration="8051000" />
       <workItem from="1733189575743" duration="8880000" />
       <workItem from="1733272785652" duration="9272000" />
-      <workItem from="1733296164103" duration="1920000" />
-    </task>
-    <task id="LOCAL-00112" summary="添加表字段查询及更新功能，优化字段构建逻辑">
-      <option name="closed" value="true" />
-      <created>1731576018752</created>
-      <option name="number" value="00112" />
-      <option name="presentableId" value="LOCAL-00112" />
-      <option name="project" value="LOCAL" />
-      <updated>1731576018752</updated>
+      <workItem from="1733296164103" duration="8479000" />
+      <workItem from="1733358261786" duration="2082000" />
     </task>
     <task id="LOCAL-00113" summary="添加表字段查询及更新功能，优化字段构建逻辑">
       <option name="closed" value="true" />
@@ -798,7 +793,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733273967376</updated>
     </task>
-    <option name="localTasksCounter" value="161" />
+    <task id="LOCAL-00161" summary="重构表单服务及组件，优化字段逻辑">
+      <option name="closed" value="true" />
+      <created>1733300725364</created>
+      <option name="number" value="00161" />
+      <option name="presentableId" value="LOCAL-00161" />
+      <option name="project" value="LOCAL" />
+      <updated>1733300725365</updated>
+    </task>
+    <option name="localTasksCounter" value="162" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -861,6 +864,11 @@
           <url>file://$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/PersistentController.java</url>
           <line>56</line>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/entity/dto/FormConfigRowDto.java</url>
+          <line>10</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

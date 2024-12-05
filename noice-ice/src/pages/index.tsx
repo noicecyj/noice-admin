@@ -6,8 +6,18 @@ import CardLineChart from '@/components/CardLineChart';
 import CardRankChart from '@/components/CardRankChart';
 import CardPieChart from '@/components/CardPieChart';
 import CardGroupBarChart from '@/components/CardGroupBarChart';
+import {useSessionStorageState} from "ahooks";
+import {UserInfo} from "@/interfaces/user";
+import {history} from 'ice';
 
 export default function Dashboard() {
+
+  const [userInfoLocal] = useSessionStorageState<UserInfo>('userInfo');
+
+  if (userInfoLocal === undefined){
+    console.log('userInfoLocal2', userInfoLocal);
+    history?.push('/login');
+  }
   // const data = useData();
   // console.log("data", data);
   return (

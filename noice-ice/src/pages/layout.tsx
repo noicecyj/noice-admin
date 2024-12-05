@@ -1,4 +1,4 @@
-import {Link, Outlet, useLocation} from 'ice';
+import {history, Link, Outlet, useLocation} from 'ice';
 import ProLayout from '@ant-design/pro-layout';
 // import {asideMenuConfig} from '@/menuConfig';
 import AvatarDropdown from '@/components/AvatarDropdown';
@@ -15,11 +15,19 @@ export default function Layout() {
   const [userState, userDispatcher] = store.useModel('user');
   const [userInfoLocal] = useSessionStorageState<UserInfo>('userInfo');
   const [userMenuLocal] = useSessionStorageState('userMenu');
-  userDispatcher.updateCurrentUser(userInfoLocal);
-  userDispatcher.updateCurrentUserAuth(userMenuLocal);
+  if (userInfoLocal === undefined){
+    console.log('userInfoLocal2', userInfoLocal);
+    // history?.push('/login');
+  }else {
+    console.log('userInfoLocal1', userInfoLocal);
+    console.log('userMenuLocal1', userMenuLocal);
+    userDispatcher.updateCurrentUser(userInfoLocal);
+    userDispatcher.updateCurrentUserAuth(userMenuLocal);
+  }
+
   const userInfo = userState.currentUser;
   const asideMenuConfig = userState.currentUserAuth;
-
+  console.log(userInfo)
   if (['/login'].includes(location.pathname)) {
     return <Outlet/>;
   }

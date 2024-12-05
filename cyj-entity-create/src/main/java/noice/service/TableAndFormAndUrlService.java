@@ -1,8 +1,10 @@
 package noice.service;
 
+import cn.hutool.core.collection.CollUtil;
 import noice.assembler.TableAndFormAndUrlServiceAssembler;
 import noice.common.contants.UserContext;
 import noice.entity.dto.FormConfigDto;
+import noice.entity.dto.FormConfigRowDto;
 import noice.entity.dto.FormDto;
 import noice.entity.dto.TableConfigDto;
 import noice.entity.dto.TableDto;
@@ -20,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -130,23 +133,61 @@ public class TableAndFormAndUrlService {
                             .eqPersistentFormId(persistentFormPo.getId())
                             .inAuthorityId(authorityId).getQueryWrapper());
             List<FormConfigDto> formConfigDtoList = tableAndFormAndUrlServiceAssembler.poFormListToDtoFormList(persistentFormConfigPoList);
-            FormConfigDto sortCodeFormConfig = new FormConfigDto();
-            sortCodeFormConfig.setPersistentFormConfigCode("sortCode");
-            sortCodeFormConfig.setPersistentFormConfigName("排序码");
-            sortCodeFormConfig.setPersistentFormConfigMode("NumberPicker");
-            sortCodeFormConfig.setPersistentFormConfigColSpan(12);
-            sortCodeFormConfig.setPersistentFormConfigEdit(true);
-            formConfigDtoList.add(sortCodeFormConfig);
-            FormConfigDto statusFormConfig = new FormConfigDto();
-            statusFormConfig.setPersistentFormConfigCode("status");
-            statusFormConfig.setPersistentFormConfigName("状态");
-            statusFormConfig.setPersistentFormConfigMode("Select");
-            statusFormConfig.setPersistentFormConfigColSpan(12);
-            statusFormConfig.setPersistentFormConfigEdit(true);
-            formConfigDtoList.add(statusFormConfig);
-//            formDto.setFormConfigDtoList(formConfigDtoList);
+            List<FormConfigRowDto> formConfigRowDtoList = setFormConfigRow(formConfigDtoList);
+            formConfigRowDtoList.add(setBaseFormConfigRow());
+            formDto.setFormConfigRowDtoList(formConfigRowDtoList);
             return formDto;
         }
+    }
+
+    private List<FormConfigRowDto> setFormConfigRow(List<FormConfigDto> formConfigDtoList) {
+        List<FormConfigRowDto> formConfigRowDtoList = new ArrayList<>();
+        if (!CollUtil.isEmpty(formConfigDtoList)) {
+            int currentRowCol = 0;
+            List<FormConfigDto> row = new ArrayList<>();
+            for (FormConfigDto formConfigDto : formConfigDtoList) {
+                currentRowCol += formConfigDto.getPersistentFormConfigColSpan();
+                if (currentRowCol <= 24) {
+                    row.add(formConfigDto);
+                } else {
+                    FormConfigRowDto formConfigRowDto = new FormConfigRowDto();
+                    List<FormConfigDto> rowData = new ArrayList<>(row);
+                    formConfigRowDto.setFormConfigDtoList(rowData);
+                    formConfigRowDtoList.add(formConfigRowDto);
+                    row.clear();
+                    currentRowCol = formConfigDto.getPersistentFormConfigColSpan();
+                    row.add(formConfigDto);
+                }
+            }
+            if (!row.isEmpty()) {
+                FormConfigRowDto formConfigRowDto = new FormConfigRowDto();
+                List<FormConfigDto> rowData = new ArrayList<>(row);
+                formConfigRowDto.setFormConfigDtoList(rowData);
+                formConfigRowDtoList.add(formConfigRowDto);
+            }
+        }
+        return formConfigRowDtoList;
+    }
+
+    private FormConfigRowDto setBaseFormConfigRow() {
+        FormConfigRowDto baseFormConfigRowDto = new FormConfigRowDto();
+        List<FormConfigDto> baseFormConfigDtoList = new ArrayList<>();
+        FormConfigDto sortCodeFormConfig = new FormConfigDto();
+        sortCodeFormConfig.setPersistentFormConfigCode("sortCode");
+        sortCodeFormConfig.setPersistentFormConfigName("排序码");
+        sortCodeFormConfig.setPersistentFormConfigMode("NumberPicker");
+        sortCodeFormConfig.setPersistentFormConfigColSpan(12);
+        sortCodeFormConfig.setPersistentFormConfigEdit(true);
+        baseFormConfigDtoList.add(sortCodeFormConfig);
+        FormConfigDto statusFormConfig = new FormConfigDto();
+        statusFormConfig.setPersistentFormConfigCode("status");
+        statusFormConfig.setPersistentFormConfigName("状态");
+        statusFormConfig.setPersistentFormConfigMode("Select");
+        statusFormConfig.setPersistentFormConfigColSpan(12);
+        statusFormConfig.setPersistentFormConfigEdit(true);
+        baseFormConfigDtoList.add(statusFormConfig);
+        baseFormConfigRowDto.setFormConfigDtoList(baseFormConfigDtoList);
+        return baseFormConfigRowDto;
     }
 
 //    public TableConfigDto getUrl(String persistentCode) {

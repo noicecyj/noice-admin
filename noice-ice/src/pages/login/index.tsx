@@ -50,7 +50,6 @@ const Login: React.FC = () => {
     setUserInfoLocal(userInfo.data);
     setUserMenuLocal(userMenu.data);
     console.log('userInfoLocal', userInfoLocal);
-
     console.log('userMenuLocal', userMenuLocal);
   }
 
