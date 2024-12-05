@@ -207,6 +207,7 @@ function DataForm(props: {
             name={item.persistentFormConfigCode}
             label={item.persistentFormConfigName}
             key={item.id}
+            dataSource={item.persistentFormConfigDataSource}
             initialValue={item.persistentFormConfigDefaultValue}
             disabled={item.persistentFormConfigEdit}
           />

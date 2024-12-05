@@ -1,18 +1,9 @@
 import {createModel} from 'ice';
 import initService from "@/services/init";
+import {getTableSelect} from "@/services/formAndTableAndUrl";
+import {ProColumns} from "@ant-design/pro-table/es/typing";
 
 interface Entity {
-  pageResult: {
-    data: any
-    success: boolean;
-    total: number;
-  },
-  saveResult: {
-    success: boolean;
-  },
-  removeResult: {
-    success: boolean;
-  },
   formData: any,
   title: string,
   visible: boolean,
@@ -21,9 +12,6 @@ interface Entity {
 export default createModel({
   // 定义  model 的初始 state
   state: {
-    pageResult: {},
-    saveResult: {},
-    removeResult: {},
     formData: {},
     title: '添加',
     visible: false,

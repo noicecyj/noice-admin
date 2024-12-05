@@ -10,6 +10,7 @@
     "@ant-design/pro-layout": "^7.1.6",
     "@ant-design/pro-table": "^3.0.17",
     "@ice/runtime": "^1.4.0",
+    "@types/lodash": "^4.17.13",
     "ahooks": "^3.8.1",
     "antd": "^4.24.0",
     "lodash": "^4.17.21",

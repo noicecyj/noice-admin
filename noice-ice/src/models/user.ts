@@ -2,6 +2,7 @@
 import {UserInfo} from '@/interfaces/user';
 import {createModel} from 'ice';
 import {useSessionStorageState} from "ahooks";
+import {getTableSelect} from "@/services/formAndTableAndUrl";
 
 interface ModelState {
   currentUser: UserInfo;
