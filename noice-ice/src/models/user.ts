@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
 import {UserInfo} from '@/interfaces/user';
 import {createModel} from 'ice';
+import {useSessionStorageState} from "ahooks";
 
 interface ModelState {
   currentUser: UserInfo;
@@ -22,4 +23,18 @@ export default createModel({
       prevState.currentUserAuth = payload;
     },
   },
+  effects: (dispatch: any) => ({
+    init() {
+      const [userInfoLocal] = useSessionStorageState<UserInfo>('userInfo');
+      const [userMenuLocal] = useSessionStorageState('userMenu');
+
+      if (userInfoLocal) {
+        this.updateCurrentUser(userInfoLocal);
+      }
+
+      if (userMenuLocal) {
+        this.updateCurrentUserAuth(userMenuLocal);
+      }
+    },
+  }),
 });

@@ -248,14 +248,16 @@ function DataForm(props: {
     >
       {config.formConfigRowVoList.map((row: FormRow) => {
         return (
-          <Row>
-            <Col span={24}>
-              {
-                row.formConfigVoList.map((item: FormConfig) => {
-                  return (components(item));
-                })
-              }
-            </Col>
+          <Row gutter={16}>
+            {
+              row.formConfigVoList.map((item: FormConfig) => {
+                return (
+                  <Col className="gutter-row" span={item.persistentFormConfigColSpan}>
+                    {components(item)}
+                  </Col>
+                );
+              })
+            }
           </Row>
         );
       })}

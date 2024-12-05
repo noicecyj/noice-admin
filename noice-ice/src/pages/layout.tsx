@@ -5,7 +5,7 @@ import AvatarDropdown from '@/components/AvatarDropdown';
 import logo from '@/assets/logo.png';
 import styles from './layout.module.css';
 import store from '@/store';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useSessionStorageState} from 'ahooks';
 import {UserInfo} from "@/interfaces/user";
 
@@ -13,17 +13,21 @@ export default function Layout() {
   const location = useLocation();
 
   const [userState, userDispatcher] = store.useModel('user');
-  const [userInfoLocal] = useSessionStorageState<UserInfo>('userInfo');
-  const [userMenuLocal] = useSessionStorageState('userMenu');
-  if (userInfoLocal === undefined){
-    console.log('userInfoLocal2', userInfoLocal);
-    // history?.push('/login');
-  }else {
-    console.log('userInfoLocal1', userInfoLocal);
-    console.log('userMenuLocal1', userMenuLocal);
-    userDispatcher.updateCurrentUser(userInfoLocal);
-    userDispatcher.updateCurrentUserAuth(userMenuLocal);
-  }
+  userDispatcher.init();
+  // useEffect(() => {
+  //
+  // }, []);
+  // const [userInfoLocal] = useSessionStorageState<UserInfo>('userInfo');
+  // const [userMenuLocal] = useSessionStorageState('userMenu');
+  // if (userInfoLocal === undefined){
+  //   console.log('userInfoLocal2', userInfoLocal);
+  //   // history?.push('/login');
+  // }else {
+  //   console.log('userInfoLocal1', userInfoLocal);
+  //   console.log('userMenuLocal1', userMenuLocal);
+  //   userDispatcher.updateCurrentUser(userInfoLocal);
+  //   userDispatcher.updateCurrentUserAuth(userMenuLocal);
+  // }
 
   const userInfo = userState.currentUser;
   const asideMenuConfig = userState.currentUserAuth;
@@ -43,7 +47,7 @@ export default function Layout() {
       }}
       layout="mix"
       actionsRender={() => (
-        <AvatarDropdown name={userInfo.userName}/>
+        <AvatarDropdown name={userInfo?.userName || "123"}/>
       )}
       menuDataRender={() => asideMenuConfig}
       menuItemRender={(item, defaultDom) => {

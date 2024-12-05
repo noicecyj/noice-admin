@@ -13,7 +13,7 @@ import {history} from 'ice';
 export default function Dashboard() {
 
   const [userInfoLocal] = useSessionStorageState<UserInfo>('userInfo');
-
+  console.log('userInfoLocal12312', userInfoLocal);
   if (userInfoLocal === undefined){
     console.log('userInfoLocal2', userInfoLocal);
     history?.push('/login');

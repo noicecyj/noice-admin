@@ -87,16 +87,16 @@ const PageFormSelect = ({colProps, name, label, initialValue, disabled, key}: Pa
         company: string;
       }>
         title="选择"
-        resize={{
-          onResize() {
-            console.log('resize!');
-          },
-          maxWidth: window.innerWidth * 0.8,
-          minWidth: 300,
-        }}
+        width={window.innerWidth * 0.8}
+        // resize={{
+        //   onResize() {
+        //     console.log('resize!');
+        //   },
+        //   maxWidth: window.innerWidth * 0.8,
+        //   minWidth: 300,
+        // }}
         trigger={
-          <Button type="primary">
-            <PlusOutlined/>
+          <Button>
             选择
           </Button>
         }
