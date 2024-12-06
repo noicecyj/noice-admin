@@ -257,9 +257,7 @@ public class AssemblerBeanBuilder extends ClassBase {
                 }
             }
             importPackageList.add("import org.mapstruct.Mapper;");
-            if (CollUtil.isNotEmpty(poNameList)) {
-                importPackageList.add("import org.mapstruct.Mapping;");
-            }
+            importPackageList.add("import org.mapstruct.Mapping;");
             importPackageList.add("");
             importPackageList.add("import java.util.List;");
             importPackageList.add("import java.util.Set;");

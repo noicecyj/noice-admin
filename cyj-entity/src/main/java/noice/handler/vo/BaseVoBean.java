@@ -17,6 +17,8 @@ public class BaseVoBean {
 
     private String id;
 
+    private String key;
+
     private Boolean status;
 
     private Long sortCode;

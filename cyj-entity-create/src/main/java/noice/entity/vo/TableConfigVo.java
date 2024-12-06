@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class TableConfigVo {
 
-    private String id;
+    private String key;
 
     private String dataIndex;
 

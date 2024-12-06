@@ -233,6 +233,7 @@ public class AssemblerBeanMethodBuilder extends MethodBase {
 
         public void setMethodAnnotationList() {
             List<String> methodAnnotationList = new ArrayList<>();
+            methodAnnotationList.add("@Mapping(target = \"key\", source = \"dto.id\")");
             if (CollUtil.isNotEmpty(getPersistentPropertyPoList())) {
                 for (PersistentPropertyPo persistentPropertyPo : getPersistentPropertyPoList()) {
                     if (StrUtil.isNotEmpty(persistentPropertyPo.getRelationPersistentId())) {
