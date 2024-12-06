@@ -16,6 +16,7 @@ import java.util.Set;
 @Mapper(componentModel = "spring", config = BaseBeanAssembler.class, uses = {RoleServiceAssembler.class})
 public interface AuthorityControllerAssembler {
 
+    @Mapping(target = "key", source = "dto.id")
     @Mapping(target = "roleDtoList", source = "dto.rolePoList")
     AuthorityVo dtoToVo(AuthorityDto dto);
 

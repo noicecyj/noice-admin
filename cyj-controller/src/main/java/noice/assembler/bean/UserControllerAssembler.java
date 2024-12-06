@@ -16,6 +16,7 @@ import java.util.Set;
 @Mapper(componentModel = "spring", config = BaseBeanAssembler.class, uses = {EnterpriseServiceAssembler.class, RoleServiceAssembler.class})
 public interface UserControllerAssembler {
 
+    @Mapping(target = "key", source = "dto.id")
     @Mapping(target = "enterpriseDto", source = "dto.enterprisePo")
     @Mapping(target = "roleDtoList", source = "dto.rolePoList")
     UserVo dtoToVo(UserDto dto);

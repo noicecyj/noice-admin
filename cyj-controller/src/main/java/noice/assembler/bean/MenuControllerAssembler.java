@@ -15,6 +15,7 @@ import java.util.Set;
 @Mapper(componentModel = "spring", config = BaseBeanAssembler.class, uses = {AuthorityServiceAssembler.class, MenuServiceAssembler.class})
 public interface MenuControllerAssembler {
 
+    @Mapping(target = "key", source = "dto.id")
     @Mapping(target = "authorityDto", source = "dto.authorityPo")
     @Mapping(target = "menuDto", source = "dto.menuPo")
     MenuVo dtoToVo(MenuDto dto);

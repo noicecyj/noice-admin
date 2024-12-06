@@ -15,6 +15,7 @@ import java.util.Set;
 @Mapper(componentModel = "spring", config = BaseBeanAssembler.class, uses = {AuthorityServiceAssembler.class, PersistentFormServiceAssembler.class})
 public interface PersistentFormConfigControllerAssembler {
 
+    @Mapping(target = "key", source = "dto.id")
     @Mapping(target = "authorityDto", source = "dto.authorityPo")
     @Mapping(target = "persistentFormDto", source = "dto.persistentFormPo")
     PersistentFormConfigVo dtoToVo(PersistentFormConfigDto dto);

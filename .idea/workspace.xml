@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/assembler/bean/AppServiceControllerAssembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/assembler/bean/AppServiceControllerAssembler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/assembler/TableAndFormAndUrlControllerAssembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/assembler/TableAndFormAndUrlControllerAssembler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/entity/vo/TableConfigVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/entity/vo/TableConfigVo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity/src/main/java/noice/handler/vo/BaseVoBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity/src/main/java/noice/handler/vo/BaseVoBean.java" afterDir="false" />
-    </list>
+    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -182,7 +176,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest2">
+  <component name="RunManager" selected="JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest">
     <configuration name="CyjEntityCreaterApplicationTest.PersistentBeanAspect" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cyj-entity-create" />
       <extension name="coverage">
@@ -292,9 +286,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest2" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.menuBeanTest" />
-        <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.PersistentBeanAspect" />
       </list>
@@ -407,23 +401,7 @@
       <workItem from="1733296164103" duration="8479000" />
       <workItem from="1733358261786" duration="13479000" />
       <workItem from="1733445124662" duration="2173000" />
-      <workItem from="1733449960897" duration="1901000" />
-    </task>
-    <task id="LOCAL-00117" summary="添加表字段查询及更新功能，优化字段构建逻辑">
-      <option name="closed" value="true" />
-      <created>1731576876136</created>
-      <option name="number" value="00117" />
-      <option name="presentableId" value="LOCAL-00117" />
-      <option name="project" value="LOCAL" />
-      <updated>1731576876136</updated>
-    </task>
-    <task id="LOCAL-00118" summary="添加表字段查询及更新功能，优化字段构建逻辑">
-      <option name="closed" value="true" />
-      <created>1731663462368</created>
-      <option name="number" value="00118" />
-      <option name="presentableId" value="LOCAL-00118" />
-      <option name="project" value="LOCAL" />
-      <updated>1731663462368</updated>
+      <workItem from="1733449960897" duration="2322000" />
     </task>
     <task id="LOCAL-00119" summary="优化字段构建逻辑并添加查询及更新功能">
       <option name="closed" value="true" />
@@ -801,7 +779,23 @@
       <option name="project" value="LOCAL" />
       <updated>1733391523195</updated>
     </task>
-    <option name="localTasksCounter" value="166" />
+    <task id="LOCAL-00166" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1733452570231</created>
+      <option name="number" value="00166" />
+      <option name="presentableId" value="LOCAL-00166" />
+      <option name="project" value="LOCAL" />
+      <updated>1733452570231</updated>
+    </task>
+    <task id="LOCAL-00167" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1733452684591</created>
+      <option name="number" value="00167" />
+      <option name="presentableId" value="LOCAL-00167" />
+      <option name="project" value="LOCAL" />
+      <updated>1733452684591</updated>
+    </task>
+    <option name="localTasksCounter" value="168" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
