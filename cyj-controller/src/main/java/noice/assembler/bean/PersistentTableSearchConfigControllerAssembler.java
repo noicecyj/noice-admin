@@ -15,7 +15,6 @@ import java.util.Set;
 @Mapper(componentModel = "spring", config = BaseBeanAssembler.class, uses = {AuthorityServiceAssembler.class, PersistentTableServiceAssembler.class})
 public interface PersistentTableSearchConfigControllerAssembler {
 
-    @Mapping(target = "key", source = "dto.id")
     @Mapping(target = "authorityDto", source = "dto.authorityPo")
     @Mapping(target = "persistentTableDto", source = "dto.persistentTablePo")
     PersistentTableSearchConfigVo dtoToVo(PersistentTableSearchConfigDto dto);

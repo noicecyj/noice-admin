@@ -15,7 +15,6 @@ import java.util.Set;
 @Mapper(componentModel = "spring", config = BaseBeanAssembler.class, uses = {AuthorityServiceAssembler.class})
 public interface InterfaceControllerAssembler {
 
-    @Mapping(target = "key", source = "dto.id")
     @Mapping(target = "authorityDto", source = "dto.authorityPo")
     InterfaceVo dtoToVo(InterfaceDto dto);
 

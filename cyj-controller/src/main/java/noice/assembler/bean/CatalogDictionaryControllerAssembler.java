@@ -15,7 +15,6 @@ import java.util.Set;
 @Mapper(componentModel = "spring", config = BaseBeanAssembler.class, uses = {CatalogServiceAssembler.class})
 public interface CatalogDictionaryControllerAssembler {
 
-    @Mapping(target = "key", source = "dto.id")
     @Mapping(target = "catalogDto", source = "dto.catalogPo")
     CatalogDictionaryVo dtoToVo(CatalogDictionaryDto dto);
 
