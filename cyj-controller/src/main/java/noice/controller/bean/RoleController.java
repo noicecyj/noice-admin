@@ -1,5 +1,7 @@
 package noice.controller.bean;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import noice.assembler.bean.RoleControllerAssembler;
@@ -115,7 +117,8 @@ public class RoleController implements BeanController<RoleVo> {
     @PostMapping(value = "getOptions")
     @Override
     public ResultVO getOptions(@RequestBody RoleVo vo) {
-        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().map(valueEnum -> OptionVO.builder().label(valueEnum.getRoleName()).value(valueEnum.getId()).build()).toList());
+        IPage<RoleVo> convert = service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto));
+        return ResultVO.success(new Page<OptionVO>(vo.getCurrent(), vo.getPageSize()).setTotal(convert.getTotal()).setRecords(convert.getRecords().stream().map(valueEnum -> OptionVO.builder().label(valueEnum.getRoleName()).value(valueEnum.getId()).build()).toList()));
     }
 
 }
