@@ -1,12 +1,16 @@
 import {createModel} from 'ice';
 import initService from "@/services/init";
-import {getTableSelect} from "@/services/formAndTableAndUrl";
-import {ProColumns} from "@ant-design/pro-table/es/typing";
 
 interface Entity {
   formData: any,
   title: string,
   visible: boolean,
+}
+
+interface pageResult {
+  data: [],
+  success: boolean,
+  total: number
 }
 
 export default createModel({
@@ -42,7 +46,7 @@ export default createModel({
         // 不然 table 会停止解析数据，即使有数据
         success: dataRes.code == 200,
         total: dataRes.data.total,
-      };
+      } as pageResult;
     },
     async save(data: {
       saveUrl: any;

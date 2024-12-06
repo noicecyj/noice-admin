@@ -1,5 +1,7 @@
 package noice.controller.bean;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import noice.assembler.bean.AppServiceControllerAssembler;
@@ -103,7 +105,11 @@ public class AppServiceController implements BeanController<AppServiceVo> {
     @PostMapping(value = "getOptions")
     @Override
     public ResultVO getOptions(@RequestBody AppServiceVo vo) {
-        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().map(valueEnum -> OptionVO.builder().label(valueEnum.getAppServiceName()).value(valueEnum.getId()).build()).toList());
+        IPage<AppServiceVo> convert = service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto));
+        IPage<OptionVO> page = new Page<>(vo.getCurrent(), vo.getPageSize());
+        page.setRecords(convert.getRecords().stream().map(valueEnum -> OptionVO.builder().label(valueEnum.getAppServiceName()).value(valueEnum.getId()).build()).toList());
+        page.setTotal(convert.getTotal());
+        return ResultVO.success(page);
     }
 
 }
