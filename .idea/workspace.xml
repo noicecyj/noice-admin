@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-ice/src/components/DataForm/PageFormSelect/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/components/DataForm/PageFormSelect/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -403,23 +404,7 @@
       <workItem from="1733296164103" duration="8479000" />
       <workItem from="1733358261786" duration="13479000" />
       <workItem from="1733445124662" duration="2173000" />
-      <workItem from="1733449960897" duration="9595000" />
-    </task>
-    <task id="LOCAL-00121" summary="优化字段构建逻辑并添加查询及更新功能">
-      <option name="closed" value="true" />
-      <created>1731771183584</created>
-      <option name="number" value="00121" />
-      <option name="presentableId" value="LOCAL-00121" />
-      <option name="project" value="LOCAL" />
-      <updated>1731771183585</updated>
-    </task>
-    <task id="LOCAL-00122" summary="优化字段构建逻辑并添加查询及更新功能">
-      <option name="closed" value="true" />
-      <created>1731771512568</created>
-      <option name="number" value="00122" />
-      <option name="presentableId" value="LOCAL-00122" />
-      <option name="project" value="LOCAL" />
-      <updated>1731771512568</updated>
+      <workItem from="1733449960897" duration="11848000" />
     </task>
     <task id="LOCAL-00123" summary="java&#10;public class UserRepository {&#10;    public void save(User user) {&#10;        // 将 user 对象转换为 JSON 格式字符串&#10;        String userJson = new ObjectMapper().writeValueAsString(user);&#10;        // 将 JSON 格式字符串保存到数据库&#10;        jdbcTemplate.update(&quot;INSERT INTO user (user_json) VALUES (?)&quot;, userJson);&#10;    }&#10;}">
       <option name="closed" value="true" />
@@ -797,7 +782,23 @@
       <option name="project" value="LOCAL" />
       <updated>1733472125300</updated>
     </task>
-    <option name="localTasksCounter" value="170" />
+    <task id="LOCAL-00170" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1733472681077</created>
+      <option name="number" value="00170" />
+      <option name="presentableId" value="LOCAL-00170" />
+      <option name="project" value="LOCAL" />
+      <updated>1733472681077</updated>
+    </task>
+    <task id="LOCAL-00171" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1733472756265</created>
+      <option name="number" value="00171" />
+      <option name="presentableId" value="LOCAL-00171" />
+      <option name="project" value="LOCAL" />
+      <updated>1733472756265</updated>
+    </task>
+    <option name="localTasksCounter" value="172" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

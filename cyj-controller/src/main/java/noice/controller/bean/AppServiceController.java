@@ -106,10 +106,7 @@ public class AppServiceController implements BeanController<AppServiceVo> {
     @Override
     public ResultVO getOptions(@RequestBody AppServiceVo vo) {
         IPage<AppServiceVo> convert = service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto));
-        IPage<OptionVO> page = new Page<>(vo.getCurrent(), vo.getPageSize());
-        page.setRecords(convert.getRecords().stream().map(valueEnum -> OptionVO.builder().label(valueEnum.getAppServiceName()).value(valueEnum.getId()).build()).toList());
-        page.setTotal(convert.getTotal());
-        return ResultVO.success(page);
+        return ResultVO.success(new Page<OptionVO>(vo.getCurrent(), vo.getPageSize()).setTotal(convert.getTotal()).setRecords(convert.getRecords().stream().map(valueEnum -> OptionVO.builder().label(valueEnum.getAppServiceName()).value(valueEnum.getId()).build()).toList()));
     }
 
 }

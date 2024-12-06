@@ -64,11 +64,7 @@ const PageFormSelect = ({colProps, name, label, initialValue, disabled, key, dat
         disabled={true}
         value={selectedRowKeys}
       />
-      {/*<Input disabled={disabled}/>*/}
-      <DrawerForm<{
-        name: string;
-        company: string;
-      }>
+      <DrawerForm
         title="选择"
         width={window.innerWidth * 0.3}
         trigger={
@@ -81,10 +77,8 @@ const PageFormSelect = ({colProps, name, label, initialValue, disabled, key, dat
           destroyOnClose: true,
         }}
         submitTimeout={2000}
-        onFinish={async (values) => {
-          console.log(values);
-          handleOk()
-          // 不返回不会关闭弹框
+        onFinish={async () => {
+          await handleOk()
           return true;
         }}
       >
