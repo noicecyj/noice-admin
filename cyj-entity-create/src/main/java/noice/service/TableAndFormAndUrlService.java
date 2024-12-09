@@ -8,6 +8,7 @@ import noice.entity.dto.FormConfigRowDto;
 import noice.entity.dto.FormDto;
 import noice.entity.dto.TableConfigDto;
 import noice.entity.dto.TableDto;
+import noice.entity.dto.UrlDto;
 import noice.entity.po.bean.AuthorityPo;
 import noice.entity.po.bean.PersistentFormConfigPo;
 import noice.entity.po.bean.PersistentFormPo;
@@ -192,7 +193,8 @@ public class TableAndFormAndUrlService {
         return baseFormConfigRowDto;
     }
 
-//    public TableConfigDto getUrl(String persistentCode) {
-//
-//    }
+    public List<UrlDto> getUrl(String persistentCode) {
+
+        return null;
+    }
 }

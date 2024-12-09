@@ -5,11 +5,13 @@ import noice.entity.dto.FormConfigRowDto;
 import noice.entity.dto.FormDto;
 import noice.entity.dto.TableConfigDto;
 import noice.entity.dto.TableDto;
+import noice.entity.dto.UrlDto;
 import noice.entity.vo.FormConfigRowVo;
 import noice.entity.vo.FormConfigVo;
 import noice.entity.vo.FormVo;
 import noice.entity.vo.TableConfigVo;
 import noice.entity.vo.TableVo;
+import noice.entity.vo.UrlVo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -24,6 +26,10 @@ public interface TableAndFormAndUrlControllerAssembler {
 
     @Mapping(target = "formConfigRowVoList", source = "dto.formConfigRowDtoList")
     FormVo dtoToVo(FormDto dto);
+
+    UrlVo dtoToVo(UrlDto dto);
+
+    List<UrlVo> dtoUrlListToVoUrlList(List<UrlDto> dtoList);
 
     FormConfigVo dtoToVo(FormConfigDto dto);
 

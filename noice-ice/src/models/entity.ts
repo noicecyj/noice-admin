@@ -37,13 +37,10 @@ export default createModel({
       console.log('page', data);
       const dataRes = await initService.http({
         url: data.pageUrl,
-        // url: '/entityCreateApi/Persistent/page',
         obj: data.params,
       });
       return {
         data: dataRes.data.records,
-        // success 请返回 true，
-        // 不然 table 会停止解析数据，即使有数据
         success: dataRes.code == 200,
         total: dataRes.data.total,
       } as pageResult;
@@ -84,5 +81,11 @@ export default createModel({
         visible: true,
       });
     },
+    async getOption(data: any) {
+      const dataRes = await initService.http({
+        url: data.pageUrl,
+        obj: data.params,
+      });
+    }
   }),
 })
