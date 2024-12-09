@@ -1,8 +1,21 @@
 package noice.entity.vo;
 
+import lombok.Data;
+
+/**
+ * @author Noice
+ */
+@Data
 public class UrlVo {
-    private String url;
-    private String name;
-    private String type;
-    private String code;
+
+    private String id;
+
+    private String interfaceCode;
+
+    private String interfaceName;
+
+    private String interfacePath;
+
+    private String interfaceType;
+
 }

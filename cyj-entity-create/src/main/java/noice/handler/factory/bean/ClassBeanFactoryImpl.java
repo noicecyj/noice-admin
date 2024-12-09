@@ -172,15 +172,15 @@ public class ClassBeanFactoryImpl extends ClassFactoryImpl {
             List<PersistentPropertyPo> persistentPropertyPoList = super.findByPersistentId(persistentPo.getId());
             List<Map<String, PersistentPo>> poList = findNtoNAndRelationById(persistentPo.getId());
             if (persistentPo.getStatus()) {
-//                this.createEntityDML(root, persistentPo, persistentPropertyPoList);
-//                this.createEntityPO(root, persistentPo, persistentPropertyPoList);
-//                this.createEntityDTO(root, persistentPo, persistentPropertyPoList, poList);
-//                this.createEntityVO(root, persistentPo, persistentPropertyPoList, poList);
-//                this.createMapper(root, persistentPo);
-//                this.createConverter(root, persistentPo, persistentPropertyPoList);
-//                this.createAssembler(root, persistentPo, persistentPropertyPoList, poList);
-//                this.createRepository(root, persistentPo, persistentPropertyPoList);
-//                this.createService(root, persistentPo, persistentPropertyPoList, poList);
+                this.createEntityDML(root, persistentPo, persistentPropertyPoList);
+                this.createEntityPO(root, persistentPo, persistentPropertyPoList);
+                this.createEntityDTO(root, persistentPo, persistentPropertyPoList, poList);
+                this.createEntityVO(root, persistentPo, persistentPropertyPoList, poList);
+                this.createMapper(root, persistentPo);
+                this.createConverter(root, persistentPo, persistentPropertyPoList);
+                this.createAssembler(root, persistentPo, persistentPropertyPoList, poList);
+                this.createRepository(root, persistentPo, persistentPropertyPoList);
+                this.createService(root, persistentPo, persistentPropertyPoList, poList);
                 this.createController(root, persistentPo, poList);
             } else {
 //                deleteEntityDML(root, persistentPo, persistentPropertyPoList);

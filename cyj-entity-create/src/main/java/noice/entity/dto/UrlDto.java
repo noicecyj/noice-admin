@@ -1,8 +1,21 @@
 package noice.entity.dto;
 
+import lombok.Data;
+
+/**
+ * @author Noice
+ */
+@Data
 public class UrlDto {
-    private String url;
-    private String name;
-    private String type;
-    private String code;
+
+    private String id;
+
+    private String interfaceCode;
+
+    private String interfaceName;
+
+    private String interfacePath;
+
+    private String interfaceType;
+
 }

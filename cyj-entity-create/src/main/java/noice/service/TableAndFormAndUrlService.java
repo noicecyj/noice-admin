@@ -10,11 +10,13 @@ import noice.entity.dto.TableConfigDto;
 import noice.entity.dto.TableDto;
 import noice.entity.dto.UrlDto;
 import noice.entity.po.bean.AuthorityPo;
+import noice.entity.po.bean.InterfacePo;
 import noice.entity.po.bean.PersistentFormConfigPo;
 import noice.entity.po.bean.PersistentFormPo;
 import noice.entity.po.bean.PersistentTableConfigPo;
 import noice.entity.po.bean.PersistentTablePo;
 import noice.repository.bean.AuthorityRepository;
+import noice.repository.bean.InterfaceRepository;
 import noice.repository.bean.PersistentFormConfigRepository;
 import noice.repository.bean.PersistentFormRepository;
 import noice.repository.bean.PersistentTableConfigRepository;
@@ -41,14 +43,11 @@ public class TableAndFormAndUrlService {
 
     private PersistentFormConfigRepository persistentFormConfigRepository;
 
+    private InterfaceRepository interfaceRepository;
+
     private TableAndFormAndUrlServiceAssembler tableAndFormAndUrlServiceAssembler;
 
     private AuthorityRepository authorityRepository;
-
-    @Autowired
-    public void setFormAndTableServiceAssembler(TableAndFormAndUrlServiceAssembler tableAndFormAndUrlServiceAssembler) {
-        this.tableAndFormAndUrlServiceAssembler = tableAndFormAndUrlServiceAssembler;
-    }
 
     @Autowired
     public void setPersistentTableRepository(PersistentTableRepository persistentTableRepository) {
@@ -73,6 +72,16 @@ public class TableAndFormAndUrlService {
     @Autowired
     public void setPersistentFormConfigRepository(PersistentFormConfigRepository persistentFormConfigRepository) {
         this.persistentFormConfigRepository = persistentFormConfigRepository;
+    }
+
+    @Autowired
+    public void setInterfaceRepository(InterfaceRepository interfaceRepository) {
+        this.interfaceRepository = interfaceRepository;
+    }
+
+    @Autowired
+    public void setTableAndFormAndUrlServiceAssembler(TableAndFormAndUrlServiceAssembler tableAndFormAndUrlServiceAssembler) {
+        this.tableAndFormAndUrlServiceAssembler = tableAndFormAndUrlServiceAssembler;
     }
 
     public TableDto getTable(String tableCode) {
@@ -102,19 +111,9 @@ public class TableAndFormAndUrlService {
         }
     }
 
-    public TableDto getTableSelect(String tableCode) {
-        TableDto table = getTable(tableCode);
-        List<TableConfigDto> list = table.getTableConfigDtoList().stream().filter(tableConfigDto ->
-                tableConfigDto.getPersistentTableConfigCode().contains("Code") ||
-                        tableConfigDto.getPersistentTableConfigCode().contains("Name") ||
-                        "id".equals(tableConfigDto.getPersistentTableConfigCode())).toList();
-        table.setTableConfigDtoList(list);
-        return table;
-    }
-
     public FormDto getForm(String formCode) {
-        List<String> tableCodeList = UserContext.getUserTable();
-        if (tableCodeList.isEmpty()) {
+        List<String> formCodeList = UserContext.getUserForm();
+        if (formCodeList.isEmpty()) {
             return null;
         } else {
             PersistentFormPo persistentFormPo = persistentFormRepository
@@ -124,8 +123,8 @@ public class TableAndFormAndUrlService {
             }
             FormDto formDto = tableAndFormAndUrlServiceAssembler.poToDto(persistentFormPo);
             AuthorityPo authorityPo = new AuthorityPo();
-            if (!"allAuthority".equals(String.join("", tableCodeList))) {
-                authorityPo.inAuthorityCode(tableCodeList);
+            if (!"allAuthority".equals(String.join("", formCodeList))) {
+                authorityPo.inAuthorityCode(formCodeList);
             }
             List<String> authorityId = authorityRepository
                     .findList(authorityPo.getQueryWrapper()).stream().map(AuthorityPo::getId).toList();
@@ -194,6 +193,21 @@ public class TableAndFormAndUrlService {
     }
 
     public List<UrlDto> getUrl(String persistentCode) {
+        List<String> userInterfaceList = UserContext.getUserInterface();
+        if (userInterfaceList.isEmpty()) {
+            return null;
+        } else {
+            AuthorityPo authorityPo = new AuthorityPo();
+            if (!"allAuthority".equals(String.join("", userInterfaceList))) {
+                authorityPo.inAuthorityCode(userInterfaceList);
+            }
+            List<String> authorityId = authorityRepository
+                    .findList(authorityPo.getQueryWrapper()).stream().map(AuthorityPo::getId).toList();
+            List<InterfacePo> interfacePoList = interfaceRepository
+                    .findList(new InterfacePo().inAuthorityId(authorityId).getQueryWrapper());
+            List<UrlDto> urlDtoList = tableAndFormAndUrlServiceAssembler.poUrlListToDtoUrlList(interfacePoList);
+
+        }
 
         return null;
     }

@@ -4,6 +4,8 @@ import noice.entity.dto.FormConfigDto;
 import noice.entity.dto.FormDto;
 import noice.entity.dto.TableConfigDto;
 import noice.entity.dto.TableDto;
+import noice.entity.dto.UrlDto;
+import noice.entity.po.bean.InterfacePo;
 import noice.entity.po.bean.PersistentFormConfigPo;
 import noice.entity.po.bean.PersistentFormPo;
 import noice.entity.po.bean.PersistentTableConfigPo;
@@ -30,6 +32,10 @@ public interface TableAndFormAndUrlServiceAssembler {
     TableConfigDto poToDto(PersistentTableConfigPo po);
 
     List<TableConfigDto> poTableListToDtoTableList(List<PersistentTableConfigPo> poList);
+
+    UrlDto poToDto(InterfacePo po);
+
+    List<UrlDto> poUrlListToDtoUrlList(List<InterfacePo> poList);
 
 
 }
