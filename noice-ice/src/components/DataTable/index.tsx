@@ -5,18 +5,15 @@ import store from "@/store";
 
 
 function DataTable<T extends Record<string, any>>(props: {
-  states: any;
-  search: any;
-  tableColumns: any;
-  toolBar: ReactNode[]
+  tableColumns: any,
+  toolBar: ReactNode[],
+  url?: []
 }) {
   const actionRef = useRef<ActionType>();
 
   const [entityState, entityDispatcher] = store.useModel('entity');
 
   const {
-    states,
-    search,
     tableColumns,
     toolBar,
   } = props;

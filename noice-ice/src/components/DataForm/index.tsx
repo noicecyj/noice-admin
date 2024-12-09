@@ -32,9 +32,10 @@ type FormRow = {
 }
 
 function DataForm(props: {
-  config: Form;
-  dispatchers: any;
-  state: any;
+  config: Form,
+  dispatchers: any,
+  state: any,
+  url?: []
 }) {
 
   const entityDispatcher = store.useModelDispatchers('entity');
