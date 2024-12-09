@@ -178,6 +178,7 @@ public class TableAndFormAndUrlService {
         sortCodeFormConfig.setPersistentFormConfigMode("NumberPicker");
         sortCodeFormConfig.setPersistentFormConfigColSpan(12);
         sortCodeFormConfig.setPersistentFormConfigEdit(true);
+        sortCodeFormConfig.setPersistentFormConfigRequired(true);
         baseFormConfigDtoList.add(sortCodeFormConfig);
         FormConfigDto statusFormConfig = new FormConfigDto();
         statusFormConfig.setPersistentFormConfigCode("status");
@@ -185,6 +186,7 @@ public class TableAndFormAndUrlService {
         statusFormConfig.setPersistentFormConfigMode("Select");
         statusFormConfig.setPersistentFormConfigColSpan(12);
         statusFormConfig.setPersistentFormConfigEdit(true);
+        statusFormConfig.setPersistentFormConfigRequired(true);
         baseFormConfigDtoList.add(statusFormConfig);
         baseFormConfigRowDto.setFormConfigDtoList(baseFormConfigDtoList);
         return baseFormConfigRowDto;

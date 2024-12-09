@@ -17,17 +17,6 @@ export default function Layout() {
   // useEffect(() => {
   //
   // }, []);
-  // const [userInfoLocal] = useSessionStorageState<UserInfo>('userInfo');
-  // const [userMenuLocal] = useSessionStorageState('userMenu');
-  // if (userInfoLocal === undefined){
-  //   console.log('userInfoLocal2', userInfoLocal);
-  //   // history?.push('/login');
-  // }else {
-  //   console.log('userInfoLocal1', userInfoLocal);
-  //   console.log('userMenuLocal1', userMenuLocal);
-  //   userDispatcher.updateCurrentUser(userInfoLocal);
-  //   userDispatcher.updateCurrentUserAuth(userMenuLocal);
-  // }
 
   const userInfo = userState.currentUser;
   const asideMenuConfig = userState.currentUserAuth;

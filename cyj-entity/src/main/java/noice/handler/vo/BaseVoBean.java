@@ -2,6 +2,7 @@ package noice.handler.vo;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.util.HashMap;
@@ -17,8 +18,10 @@ public class BaseVoBean {
 
     private String id;
 
+    @NotNull
     private Boolean status;
 
+    @NotNull
     private Long sortCode;
 
     private Integer current = 10;

@@ -37,7 +37,7 @@ function DataForm(props: {
   state: any;
 }) {
 
-  const [entityState, entityDispatcher] = store.useModel('entity');
+  const entityDispatcher = store.useModelDispatchers('entity');
 
   const {
     config,
@@ -55,6 +55,8 @@ function DataForm(props: {
           key={item.id}
           initialValue={item.persistentFormConfigDefaultValue}
           disabled={item.persistentFormConfigEdit}
+          required={item.persistentFormConfigRequired}
+          rules={[{required: item.persistentFormConfigRequired, message: '请输入' + item.persistentFormConfigName}]}
         />
       )
     } else if (item.persistentFormConfigMode === 'Password') {
@@ -68,6 +70,8 @@ function DataForm(props: {
           key={item.id}
           initialValue={item.persistentFormConfigDefaultValue}
           disabled={item.persistentFormConfigEdit}
+          required={item.persistentFormConfigRequired}
+          rules={[{required: item.persistentFormConfigRequired, message: '请输入' + item.persistentFormConfigName}]}
         />
       )
     } else if (item.persistentFormConfigMode === 'TextArea') {
@@ -81,6 +85,8 @@ function DataForm(props: {
           key={item.id}
           initialValue={item.persistentFormConfigDefaultValue}
           disabled={item.persistentFormConfigEdit}
+          required={item.persistentFormConfigRequired}
+          rules={[{required: item.persistentFormConfigRequired, message: '请输入' + item.persistentFormConfigName}]}
         />
       )
     } else if (item.persistentFormConfigMode === 'Select') {
@@ -93,8 +99,10 @@ function DataForm(props: {
           placeholder={`请选择${item.persistentFormConfigName}`}
           key={item.id}
           initialValue={item.persistentFormConfigDefaultValue}
-          disabled={item.persistentFormConfigEdit}
+          disabled={!item.persistentFormConfigEdit}
           request={dispatchers.getOptions(item.persistentFormConfigDataSource)}
+          required={item.persistentFormConfigRequired}
+          rules={[{required: item.persistentFormConfigRequired, message: '请输入' + item.persistentFormConfigName}]}
         />
       )
     } else if (item.persistentFormConfigMode === 'NumberPicker') {
@@ -107,6 +115,8 @@ function DataForm(props: {
           key={item.id}
           initialValue={item.persistentFormConfigDefaultValue}
           disabled={!item.persistentFormConfigEdit}
+          required={item.persistentFormConfigRequired}
+          rules={[{required: item.persistentFormConfigRequired, message: '请输入' + item.persistentFormConfigName}]}
         />
       )
     } else if (item.persistentFormConfigMode === 'Switch') {
@@ -119,6 +129,8 @@ function DataForm(props: {
           key={item.id}
           initialValue={item.persistentFormConfigDefaultValue}
           disabled={item.persistentFormConfigEdit}
+          required={item.persistentFormConfigRequired}
+          rules={[{required: item.persistentFormConfigRequired, message: '请输入' + item.persistentFormConfigName}]}
         />
       )
     } else if (item.persistentFormConfigMode === 'Range') {
@@ -131,6 +143,8 @@ function DataForm(props: {
           key={item.id}
           initialValue={item.persistentFormConfigDefaultValue}
           disabled={item.persistentFormConfigEdit}
+          required={item.persistentFormConfigRequired}
+          rules={[{required: item.persistentFormConfigRequired, message: '请输入' + item.persistentFormConfigName}]}
         />
       )
     } else if (item.persistentFormConfigMode === 'DatePicker') {
@@ -143,6 +157,8 @@ function DataForm(props: {
           key={item.id}
           initialValue={item.persistentFormConfigDefaultValue}
           disabled={item.persistentFormConfigEdit}
+          required={item.persistentFormConfigRequired}
+          rules={[{required: item.persistentFormConfigRequired, message: '请输入' + item.persistentFormConfigName}]}
         />)
     } else if (item.persistentFormConfigMode === 'RangePicker') {
       return (
@@ -154,6 +170,8 @@ function DataForm(props: {
           key={item.id}
           initialValue={item.persistentFormConfigDefaultValue}
           disabled={item.persistentFormConfigEdit}
+          required={item.persistentFormConfigRequired}
+          rules={[{required: item.persistentFormConfigRequired, message: '请输入' + item.persistentFormConfigName}]}
         />)
     } else if (item.persistentFormConfigMode === 'TimePicker') {
       return (
@@ -165,6 +183,8 @@ function DataForm(props: {
           key={item.id}
           initialValue={item.persistentFormConfigDefaultValue}
           disabled={item.persistentFormConfigEdit}
+          required={item.persistentFormConfigRequired}
+          rules={[{required: item.persistentFormConfigRequired, message: '请输入' + item.persistentFormConfigName}]}
         />
       )
     } else if (item.persistentFormConfigMode === 'Checkbox') {
@@ -178,6 +198,8 @@ function DataForm(props: {
           initialValue={item.persistentFormConfigDefaultValue}
           disabled={item.persistentFormConfigEdit}
           request={dispatchers.getOptions(item.persistentFormConfigDataSource)}
+          required={item.persistentFormConfigRequired}
+          rules={[{required: item.persistentFormConfigRequired, message: '请输入' + item.persistentFormConfigName}]}
         />
       )
     } else if (item.persistentFormConfigMode === 'Radio') {
@@ -191,21 +213,23 @@ function DataForm(props: {
           initialValue={item.persistentFormConfigDefaultValue}
           disabled={item.persistentFormConfigEdit}
           request={dispatchers.getOptions(item.persistentFormConfigDataSource)}
+          required={item.persistentFormConfigRequired}
+          rules={[{required: item.persistentFormConfigRequired, message: '请输入' + item.persistentFormConfigName}]}
         />
       )
     } else if (item.persistentFormConfigMode === 'SelectForm') {
       return (
         <ProForm.Item
+          name={item.persistentFormConfigCode}
           label={item.persistentFormConfigName}
           key={item.id}
           initialValue={item.persistentFormConfigDefaultValue}
           labelCol={{span: 24}}
           wrapperCol={{span: 24}}
+          rules={[{required: item.persistentFormConfigRequired, message: '请选择'}]}
         >
           <PageFormSelect
             colProps={{md: item.persistentFormConfigColSpan}}
-            name={item.persistentFormConfigCode}
-            label={item.persistentFormConfigName}
             key={item.id}
             dataSource={item.persistentFormConfigDataSource}
             initialValue={item.persistentFormConfigDefaultValue}
@@ -222,11 +246,16 @@ function DataForm(props: {
           key={item.id}
           initialValue={item.persistentFormConfigDefaultValue}
           disabled={item.persistentFormConfigEdit}
+          required={item.persistentFormConfigRequired}
+          rules={[{required: item.persistentFormConfigRequired, message: '请输入' + item.persistentFormConfigName}]}
         />
       )
     }
   }
 
+  const [form] = ProForm.useForm();
+
+  form.validateFields
 
   return (
     <ModalForm

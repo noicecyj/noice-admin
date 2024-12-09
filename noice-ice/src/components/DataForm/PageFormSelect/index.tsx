@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
-import {Button, Modal, Select} from 'antd';
-import {DrawerForm, ProTable} from "@ant-design/pro-components";
+import {Button, Drawer, Select, Space} from 'antd';
+import {ProTable} from "@ant-design/pro-components";
 import store from "@/store";
 import {DataType} from "@ice/runtime";
 import {TableRowSelection} from "antd/es/table/interface";
-
-const {confirm} = Modal;
 
 interface PageFormSelectProps {
   key: string,
@@ -14,7 +12,9 @@ interface PageFormSelectProps {
   label?: string,
   initialValue?: string | undefined,
   disabled?: boolean | undefined,
-  dataSource?: string | undefined
+  dataSource?: string | undefined,
+  value?: [],
+  onChange?: (value: React.Key) => void
 }
 
 interface Option {
@@ -22,22 +22,39 @@ interface Option {
   value: string
 }
 
-const PageFormSelect = ({colProps, name, label, initialValue, disabled, key, dataSource = ""}: PageFormSelectProps) => {
-  const [visible, setVisible] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
-  const [fetching, setFetching] = useState(false);
+const PageFormSelect = ({
+                          colProps,
+                          name,
+                          label,
+                          initialValue,
+                          disabled,
+                          key,
+                          dataSource = "",
+                          value = [],
+                          onChange
+                        }: PageFormSelectProps) => {
 
+  const handleChange = (newValue: React.Key[]) => {
+    if (onChange) {
+      onChange(newValue[0]);
+    }
+  };
+
+  const [open, setOpen] = useState(false);
+
+  const showDrawer = () => {
+    setOpen(true);
+  };
+
+  const onClose = () => {
+    handleChange(selectedRowKeys)
+    setOpen(false);
+  };
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-
   const [options, setOptions] = useState<Option[]>([]);
-  const [entityState, entityDispatcher] = store.useModel('entity');
+  const entityDispatcher = store.useModelDispatchers('entity');
 
   console.log('PageFormSelect', colProps, name, label, initialValue, disabled, key);
-
-  const handleOk = async () => {
-    setVisible(false);
-    // 你可以在这里处理选择后的逻辑
-  };
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     console.log('selectedRowKeys changed: ', newSelectedRowKeys);
@@ -62,25 +79,25 @@ const PageFormSelect = ({colProps, name, label, initialValue, disabled, key, dat
       <Select
         options={options}
         disabled={true}
-        value={selectedRowKeys}
+        value={value}
+        onChange={handleChange}
       />
-      <DrawerForm
+      <Button disabled={disabled} onClick={showDrawer}>
+        选择
+      </Button>
+      <Drawer
         title="选择"
         width={window.innerWidth * 0.3}
-        trigger={
-          <Button disabled={disabled}>
-            选择
-          </Button>
+        onClose={onClose}
+        open={open}
+        extra={
+          <Space>
+            <Button onClick={onClose}>取消</Button>
+            <Button type="primary" onClick={onClose}>
+              确认
+            </Button>
+          </Space>
         }
-        autoFocusFirstInput
-        drawerProps={{
-          destroyOnClose: true,
-        }}
-        submitTimeout={2000}
-        onFinish={async () => {
-          await handleOk()
-          return true;
-        }}
       >
         <ProTable
           columns={columns}
@@ -100,7 +117,7 @@ const PageFormSelect = ({colProps, name, label, initialValue, disabled, key, dat
               pageUrl: "/entityCreateApi/" + dataSource + "/getOptions"
             }).then(res => {
               setOptions(res.data);
-              return new Promise((resolve, reject) => {
+              return new Promise((resolve) => {
                 resolve(res);
               });
             });
@@ -109,13 +126,12 @@ const PageFormSelect = ({colProps, name, label, initialValue, disabled, key, dat
           pagination={{
             pageSize: 10,
           }}
-          loading={fetching}
           dateFormatter="string"
           search={{
             labelWidth: 'auto',
           }}
         />
-      </DrawerForm>
+      </Drawer>
     </div>
   );
 };
