@@ -467,10 +467,10 @@ public abstract class ClassFactoryImpl implements ClassFactory {
             if (requestMappingInfo.getPathPatternsCondition() != null) {
                 for (PathPattern pathPattern : requestMappingInfo.getPathPatternsCondition().getPatterns()) {
                     List<String> split = StrUtil.split(pathPattern.getPatternString(), "/");
-                    List<String> appServiceAndPersistent = split.subList(1, split.size());
+                    List<String> appServiceAndPersistent = split.subList(2, split.size());
                     String persistentId = "1";
-                    if (appServiceAndPersistent.size() > 2) {
-                        String persistentCode = StrUtil.toUnderlineCase(StrUtil.lowerFirst(appServiceAndPersistent.get(1)));
+                    if (appServiceAndPersistent.size() >= 2) {
+                        String persistentCode = StrUtil.toUnderlineCase(StrUtil.lowerFirst(appServiceAndPersistent.get(0)));
                         PersistentPo persistentPo = persistentRepository.find(new PersistentPo().eqPersistentCode(persistentCode).getQueryWrapper());
                         if (ObjectUtil.isNotNull(persistentPo)) {
                             persistentId = persistentPo.getId();

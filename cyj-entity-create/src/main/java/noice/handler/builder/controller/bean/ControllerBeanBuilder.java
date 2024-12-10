@@ -50,8 +50,6 @@ public class ControllerBeanBuilder extends ClassBase {
 
     private ControllerBeanMethodBuilder.ControllerBeanFindRelationBuilder controllerBeanFindRelationBuilder;
 
-    private ControllerBeanMethodBuilder.ControllerBeanValueEnumBuilder controllerBeanValueEnumBuilder;
-
     private ControllerBeanMethodBuilder.ControllerBeanOptionsBuilder controllerBeanOptionsBuilder;
 
     @Autowired
@@ -118,11 +116,6 @@ public class ControllerBeanBuilder extends ClassBase {
     @Autowired
     public void setControllerBeanFindRelationBuilder(ControllerBeanMethodBuilder.ControllerBeanFindRelationBuilder controllerBeanFindRelationBuilder) {
         this.controllerBeanFindRelationBuilder = controllerBeanFindRelationBuilder;
-    }
-
-    @Autowired
-    public void setControllerBeanValueEnumBuilder(ControllerBeanMethodBuilder.ControllerBeanValueEnumBuilder controllerBeanValueEnumBuilder) {
-        this.controllerBeanValueEnumBuilder = controllerBeanValueEnumBuilder;
     }
 
     @Autowired
@@ -226,8 +219,6 @@ public class ControllerBeanBuilder extends ClassBase {
             sb.append(controllerBeanFindRelationBuilder.builder(NtoNMap.get("NtoN"))).append("\n");
             sb.append("\n");
         }
-        sb.append(controllerBeanValueEnumBuilder.builder(getPersistentPo())).append("\n");
-        sb.append("\n");
         sb.append(controllerBeanOptionsBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");
         sb.append("}");

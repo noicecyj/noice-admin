@@ -449,43 +449,6 @@ public class ControllerBeanMethodBuilder extends MethodBase {
     @EqualsAndHashCode(callSuper = true)
     @Component
     @Data
-    public static class ControllerBeanValueEnumBuilder extends ControllerBeanMethodBuilder {
-
-        public ControllerBeanValueEnumBuilder builder(PersistentPo persistentPo) {
-            String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
-            this.setMethodStatement(StatementEnum.PUBLIC);
-            this.setMethodReturnType("ResultVO");
-            this.setMethodAnnotationList(persistentPo.getPersistentName());
-            this.setMethodName("getValueEnum");
-            this.setMethodParamSet(poName);
-            this.setMethodReturnBody("return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(" + poName + "Vo::getId, option -> Collections.singletonMap(\"text\", option.get" + poName + "Name()))));");
-            return this;
-        }
-
-        public void setMethodParamSet(String poName) {
-            List<String> methodParamSet = new ArrayList<>();
-            methodParamSet.add("@RequestBody " + poName + "Vo vo");
-            super.setMethodParamSet(methodParamSet);
-        }
-
-        public void setMethodAnnotationList(String name) {
-            List<String> methodAnnotationList = new ArrayList<>();
-            methodAnnotationList.add("@Operation(summary = \"" + name + "_获取ValueEnum\")");
-            methodAnnotationList.add("@PostMapping(value = \"getValueEnum\")");
-            methodAnnotationList.add("@Override");
-            super.setMethodAnnotationList(methodAnnotationList);
-        }
-
-        @Override
-        public String toString() {
-            return getString(getMethodAnnotationList(), getMethodStatement(), getMethodReturnType(), getMethodName(), getMethodParamSet(), getMethodReturnBody());
-        }
-
-    }
-
-    @EqualsAndHashCode(callSuper = true)
-    @Component
-    @Data
     public static class ControllerBeanOptionsBuilder extends ControllerBeanMethodBuilder {
 
         public ControllerBeanOptionsBuilder builder(PersistentPo persistentPo) {
