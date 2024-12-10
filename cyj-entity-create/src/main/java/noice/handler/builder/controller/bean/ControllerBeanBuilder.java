@@ -158,9 +158,7 @@ public class ControllerBeanBuilder extends ClassBase {
         importPackageList.add("import org.springframework.web.bind.annotation.RequestMapping;");
         importPackageList.add("import org.springframework.web.bind.annotation.RestController;");
         importPackageList.add("");
-        importPackageList.add("import java.util.Collections;");
         importPackageList.add("import java.util.List;");
-        importPackageList.add("import java.util.stream.Collectors;");
     }
 
     public void setClassAnnotationList(String poName, String appApi) {
