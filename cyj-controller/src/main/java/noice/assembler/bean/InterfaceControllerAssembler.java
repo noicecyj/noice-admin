@@ -12,10 +12,11 @@ import java.util.Set;
 /**
  * @author Noice
  */
-@Mapper(componentModel = "spring", config = BaseBeanAssembler.class, uses = {AuthorityServiceAssembler.class})
+@Mapper(componentModel = "spring", config = BaseBeanAssembler.class, uses = {AuthorityServiceAssembler.class, PersistentServiceAssembler.class})
 public interface InterfaceControllerAssembler {
 
     @Mapping(target = "authorityDto", source = "dto.authorityPo")
+    @Mapping(target = "persistentDto", source = "dto.persistentPo")
     InterfaceVo dtoToVo(InterfaceDto dto);
 
     List<InterfaceVo> dtoListToVoList(List<InterfaceDto> dtoList);

@@ -468,16 +468,25 @@ public abstract class ClassFactoryImpl implements ClassFactory {
                 for (PathPattern pathPattern : requestMappingInfo.getPathPatternsCondition().getPatterns()) {
                     List<String> split = StrUtil.split(pathPattern.getPatternString(), "/");
                     List<String> appServiceAndPersistent = split.subList(1, split.size());
+                    String persistentId = "1";
+                    if (appServiceAndPersistent.size() > 2) {
+                        String persistentCode = StrUtil.toUnderlineCase(StrUtil.lowerFirst(appServiceAndPersistent.get(1)));
+                        PersistentPo persistentPo = persistentRepository.find(new PersistentPo().eqPersistentCode(persistentCode).getQueryWrapper());
+                        if (ObjectUtil.isNotNull(persistentPo)) {
+                            persistentId = persistentPo.getId();
+                        }
+                    }
                     String code = String.join("_", appServiceAndPersistent);
                     if (ObjectUtil.isNotNull(operation)) {
-                        this.createInterfaceType(code, operation.summary(), pathPattern.getPatternString(), requestMappingInfo.getMethodsCondition().getMethods().toString());
+                        this.createInterfaceType(code, operation.summary(), pathPattern.getPatternString(),
+                                requestMappingInfo.getMethodsCondition().getMethods().toString(), persistentId);
                     }
                 }
             }
         }
     }
 
-    public void createInterfaceType(String code, String name, String path, String type) {
+    public void createInterfaceType(String code, String name, String path, String type, String persistentId) {
         String authorityId = authorityCreate(code, name, "interface");
         InterfacePo interfacePo = new InterfacePo();
         interfacePo = interfaceRepository.find(interfacePo.eqInterfaceCode(code).eqInterfaceName(name).getQueryWrapper());
@@ -486,6 +495,7 @@ public abstract class ClassFactoryImpl implements ClassFactory {
             interfacePo.setInterfacePath(path);
             interfacePo.setInterfaceType(type);
             interfacePo.setAuthorityId(authorityId);
+            interfacePo.setPersistentId(persistentId);
             interfacePo.setCreatedBy("123123");
             interfacePo.setUpdatedBy("123123");
             interfacePo.setSortCode(1L);
@@ -501,6 +511,7 @@ public abstract class ClassFactoryImpl implements ClassFactory {
             interfacePo.setInterfacePath(path);
             interfacePo.setInterfaceType(type);
             interfacePo.setAuthorityId(authorityId);
+            interfacePo.setPersistentId(persistentId);
             interfacePo.setUpdatedBy("123123");
             interfacePo.setSortCode(1L);
             interfacePo.setStatus(true);

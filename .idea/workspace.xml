@@ -6,12 +6,22 @@
   <component name="ChangeListManager">
     <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="添加UrlDto类及接口获取功能">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/assembler/TableAndFormAndUrlServiceAssembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/assembler/TableAndFormAndUrlServiceAssembler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/entity/dto/UrlDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/entity/dto/UrlDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/entity/vo/UrlVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/entity/vo/UrlVo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/service/TableAndFormAndUrlService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/service/TableAndFormAndUrlService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/assembler/bean/InterfaceControllerAssembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/assembler/bean/InterfaceControllerAssembler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/converter/bean/InterfaceControllerConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/converter/bean/InterfaceControllerConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/assembler/bean/InterfaceControllerAssembler.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/assembler/bean/InterfaceControllerAssembler.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/converter/bean/InterfaceControllerConverter.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/converter/bean/InterfaceControllerConverter.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/factory/ClassFactoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/factory/ClassFactoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity/src/main/java/noice/entity/dml/bean/InterfaceDML.sql" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity/src/main/java/noice/entity/dml/bean/InterfaceDML.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity/src/main/java/noice/entity/dto/bean/InterfaceDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity/src/main/java/noice/entity/dto/bean/InterfaceDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity/src/main/java/noice/entity/po/bean/InterfacePo.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity/src/main/java/noice/entity/po/bean/InterfacePo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity/src/main/java/noice/entity/vo/bean/InterfaceVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity/src/main/java/noice/entity/vo/bean/InterfaceVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity/src/test/resources/history/entity/bean/dml/InterfaceDML.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity/src/test/resources/history/entity/bean/dml/InterfaceDML.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity/src/test/resources/history/entity/bean/dto/InterfaceDto.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity/src/test/resources/history/entity/bean/dto/InterfaceDto.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity/src/test/resources/history/entity/bean/po/InterfacePo.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity/src/test/resources/history/entity/bean/po/InterfacePo.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity/src/test/resources/history/entity/bean/vo/InterfaceVo.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity/src/test/resources/history/entity/bean/vo/InterfaceVo.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/assembler/bean/InterfaceServiceAssembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/assembler/bean/InterfaceServiceAssembler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-service/src/test/resources/history/assembler/bean/InterfaceServiceAssembler.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/test/resources/history/assembler/bean/InterfaceServiceAssembler.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,58 +111,58 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "JUnit.CyjEntityCreaterApplicationTest.PersistentBeanAspect.executor": "Debug",
-    "JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest.executor": "Debug",
-    "JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest.executor": "Debug",
-    "JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest2.executor": "Debug",
-    "JUnit.CyjEntityCreaterApplicationTest.menuBeanTest.executor": "Debug",
-    "Maven.cyj [clean].executor": "Run",
-    "Maven.cyj [compile].executor": "Run",
-    "Maven.cyj-common [compile].executor": "Run",
-    "Maven.cyj-common [deploy].executor": "Run",
-    "Maven.cyj-entity [compile].executor": "Run",
-    "Notification.DisplayName-DoNotAsk-Database detector": "数据库检测器",
-    "Notification.DoNotAsk-Database detector": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.CyjAuthApplication.executor": "Debug",
-    "Spring Boot.CyjEntityCreaterApplication.executor": "Debug",
-    "com.dong.plugin.gui.FormatDialog": "true",
-    "extract.method.default.visibility": "private",
-    "git-widget-placeholder": "github",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/noice-admin/cyj-entity-create/src/main/resources/application.yml",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "模块",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "D:\\noice-admin\\noice-ice\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;JUnit.CyjEntityCreaterApplicationTest.PersistentBeanAspect.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest2.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.CyjEntityCreaterApplicationTest.menuBeanTest.executor&quot;: &quot;Debug&quot;,
+    &quot;Maven.cyj [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.cyj [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.cyj-common [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.cyj-common [deploy].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.cyj-entity [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Notification.DisplayName-DoNotAsk-Database detector&quot;: &quot;数据库检测器&quot;,
+    &quot;Notification.DoNotAsk-Database detector&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.CyjAuthApplication.executor&quot;: &quot;Debug&quot;,
+    &quot;Spring Boot.CyjEntityCreaterApplication.executor&quot;: &quot;Debug&quot;,
+    &quot;com.dong.plugin.gui.FormatDialog&quot;: &quot;true&quot;,
+    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;github&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/noice-admin/cyj-entity-create/src/main/resources/application.yml&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\noice-admin\\noice-ice\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql",
-      "redis"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;,
+      &quot;redis&quot;
     ],
-    "com.intellij.ide.scratch.LRUPopupBuilder$1/SQL 方言": [
-      "MySQL"
+    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/SQL 方言&quot;: [
+      &quot;MySQL&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -185,7 +195,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest">
+  <component name="RunManager" selected="JUnit.CyjEntityCreaterApplicationTest.menuBeanTest">
     <configuration name="CyjEntityCreaterApplicationTest.PersistentBeanAspect" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cyj-entity-create" />
       <extension name="coverage">
@@ -295,9 +305,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.menuBeanTest" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest2" />
-        <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.menuBeanTest" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.PersistentBeanAspect" />
       </list>
@@ -414,15 +424,8 @@
       <workItem from="1733580363561" duration="1542000" />
       <workItem from="1733707688131" duration="8886000" />
       <workItem from="1733730329219" duration="1654000" />
-      <workItem from="1733732152778" duration="5280000" />
-    </task>
-    <task id="LOCAL-00127" summary="优化日志信息，明确Service与Repository边界">
-      <option name="closed" value="true" />
-      <created>1732191085809</created>
-      <option name="number" value="00127" />
-      <option name="presentableId" value="LOCAL-00127" />
-      <option name="project" value="LOCAL" />
-      <updated>1732191085809</updated>
+      <workItem from="1733732152778" duration="5474000" />
+      <workItem from="1733791456272" duration="3717000" />
     </task>
     <task id="LOCAL-00128" summary="优化日志信息，明确Service与Repository边界">
       <option name="closed" value="true" />
@@ -808,7 +811,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733732794075</updated>
     </task>
-    <option name="localTasksCounter" value="176" />
+    <task id="LOCAL-00176" summary="添加UrlDto类及接口获取功能">
+      <option name="closed" value="true" />
+      <created>1733737924538</created>
+      <option name="number" value="00176" />
+      <option name="presentableId" value="LOCAL-00176" />
+      <option name="project" value="LOCAL" />
+      <updated>1733737924538</updated>
+    </task>
+    <option name="localTasksCounter" value="177" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

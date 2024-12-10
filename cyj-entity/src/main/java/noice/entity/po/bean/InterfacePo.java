@@ -41,6 +41,9 @@ public class InterfacePo extends BasePoBean<InterfacePo> {
     @TableField("interface_type")
     private String interfaceType;
 
+    @TableField("persistent_id")
+    private String persistentId;
+
     @JsonIgnore
     @TableField(exist = false)
     private QueryWrapper<InterfacePo> queryWrapper = new QueryWrapper<>();
@@ -264,6 +267,27 @@ public class InterfacePo extends BasePoBean<InterfacePo> {
         return this;
     }
 
+    public InterfacePo selectPersistentId() {
+        this.queryWrapper.lambda().select(InterfacePo::getPersistentId);
+        return this;
+    }
+
+    public InterfacePo eqPersistentId() {
+        this.queryWrapper.lambda().eq(StrUtil.isNotEmpty(getPersistentId()), InterfacePo::getPersistentId, getPersistentId());
+        return this;
+    }
+
+    public InterfacePo eqPersistentId(String value) {
+        this.setPersistentId(value);
+        this.queryWrapper.lambda().eq(StrUtil.isNotEmpty(getPersistentId()), InterfacePo::getPersistentId, getPersistentId());
+        return this;
+    }
+
+    public InterfacePo inPersistentId(List<String> valueList) {
+        this.queryWrapper.lambda().in(CollUtil.isNotEmpty(valueList), InterfacePo::getPersistentId, valueList);
+        return this;
+    }
+
     public InterfacePo selectId() {
         this.queryWrapper.lambda().select(InterfacePo::getId);
         return this;
@@ -375,11 +399,11 @@ public class InterfacePo extends BasePoBean<InterfacePo> {
     }
 
     public InterfacePo eqAuto() {
-        return this.eqAuthorityId().eqInterfaceCode().eqInterfaceName().eqInterfacePath().eqInterfaceType();
+        return this.eqAuthorityId().eqInterfaceCode().eqInterfaceName().eqInterfacePath().eqInterfaceType().eqPersistentId();
     }
 
     public InterfacePo likeAuto() {
-        return this.eqAuthorityId().likeInterfaceCode().likeInterfaceName().likeInterfacePath().likeInterfaceType();
+        return this.eqAuthorityId().likeInterfaceCode().likeInterfaceName().likeInterfacePath().likeInterfaceType().eqPersistentId();
     }
 
     public InterfacePo baseQueryWrapper() {

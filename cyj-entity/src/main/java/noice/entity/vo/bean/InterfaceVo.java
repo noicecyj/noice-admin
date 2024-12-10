@@ -3,6 +3,7 @@ package noice.entity.vo.bean;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import noice.entity.dto.bean.AuthorityDto;
+import noice.entity.dto.bean.PersistentDto;
 import noice.handler.vo.BaseVoBean;
 
 
@@ -26,5 +27,9 @@ public class InterfaceVo extends BaseVoBean {
     private String interfacePath;
 
     private String interfaceType;
+
+    private String persistentId;
+
+    private PersistentDto persistentDto;
 
 }

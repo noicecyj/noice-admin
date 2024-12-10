@@ -27,6 +27,10 @@ create table if not exists data_user.t_interface
         varchar(255)
         null
         comment '接口类型',
+    persistent_id
+        varchar(36)
+        not null
+        comment '实体id',
     sort_code
         int default 1
         not null
@@ -129,4 +133,19 @@ ALTER TABLE data_user.t_interface
         varchar(255)
         null
         comment '接口类型';
+
+ALTER TABLE data_user.t_interface
+    DROP persistent_id;
+
+ALTER TABLE data_user.t_interface
+    ADD persistent_id
+        varchar(36)
+        not null
+        comment '实体id';
+
+ALTER TABLE data_user.t_interface
+    MODIFY persistent_id
+        varchar(36)
+        not null
+        comment '实体id';
 

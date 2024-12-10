@@ -3,6 +3,7 @@ package noice.entity.dto.bean;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import noice.entity.po.bean.AuthorityPo;
+import noice.entity.po.bean.PersistentPo;
 import noice.handler.dto.BaseDtoBean;
 
 
@@ -26,5 +27,9 @@ public class InterfaceDto extends BaseDtoBean {
     private String interfacePath;
 
     private String interfaceType;
+
+    private String persistentId;
+
+    private PersistentPo persistentPo;
 
 }

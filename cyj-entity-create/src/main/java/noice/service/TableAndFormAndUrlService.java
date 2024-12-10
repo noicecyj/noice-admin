@@ -1,6 +1,8 @@
 package noice.service;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import noice.assembler.TableAndFormAndUrlServiceAssembler;
 import noice.common.contants.UserContext;
 import noice.entity.dto.FormConfigDto;
@@ -13,12 +15,14 @@ import noice.entity.po.bean.AuthorityPo;
 import noice.entity.po.bean.InterfacePo;
 import noice.entity.po.bean.PersistentFormConfigPo;
 import noice.entity.po.bean.PersistentFormPo;
+import noice.entity.po.bean.PersistentPo;
 import noice.entity.po.bean.PersistentTableConfigPo;
 import noice.entity.po.bean.PersistentTablePo;
 import noice.repository.bean.AuthorityRepository;
 import noice.repository.bean.InterfaceRepository;
 import noice.repository.bean.PersistentFormConfigRepository;
 import noice.repository.bean.PersistentFormRepository;
+import noice.repository.bean.PersistentRepository;
 import noice.repository.bean.PersistentTableConfigRepository;
 import noice.repository.bean.PersistentTableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +47,8 @@ public class TableAndFormAndUrlService {
 
     private PersistentFormConfigRepository persistentFormConfigRepository;
 
+    private PersistentRepository persistentRepository;
+
     private InterfaceRepository interfaceRepository;
 
     private TableAndFormAndUrlServiceAssembler tableAndFormAndUrlServiceAssembler;
@@ -57,6 +63,11 @@ public class TableAndFormAndUrlService {
     @Autowired
     public void setPersistentTableConfigRepository(PersistentTableConfigRepository persistentTableConfigRepository) {
         this.persistentTableConfigRepository = persistentTableConfigRepository;
+    }
+
+    @Autowired
+    public void setPersistentRepository(PersistentRepository persistentRepository) {
+        this.persistentRepository = persistentRepository;
     }
 
     @Autowired
@@ -201,14 +212,17 @@ public class TableAndFormAndUrlService {
             if (!"allAuthority".equals(String.join("", userInterfaceList))) {
                 authorityPo.inAuthorityCode(userInterfaceList);
             }
-            List<String> authorityId = authorityRepository
-                    .findList(authorityPo.getQueryWrapper()).stream().map(AuthorityPo::getId).toList();
-            List<InterfacePo> interfacePoList = interfaceRepository
-                    .findList(new InterfacePo().inAuthorityId(authorityId).getQueryWrapper());
-            List<UrlDto> urlDtoList = tableAndFormAndUrlServiceAssembler.poUrlListToDtoUrlList(interfacePoList);
-
+            StrUtil.toUnderlineCase(StrUtil.lowerFirst(persistentCode));
+            PersistentPo persistentPo = persistentRepository.find(new PersistentPo().eqPersistentCode(persistentCode).getQueryWrapper());
+            if (ObjectUtil.isNotNull(persistentPo)) {
+                List<String> authorityId = authorityRepository
+                        .findList(authorityPo.getQueryWrapper()).stream().map(AuthorityPo::getId).toList();
+                List<InterfacePo> interfacePoList = interfaceRepository
+                        .findList(new InterfacePo().inAuthorityId(authorityId)
+                                .eqPersistentId(persistentPo.getId()).getQueryWrapper());
+                return tableAndFormAndUrlServiceAssembler.poUrlListToDtoUrlList(interfacePoList);
+            }
         }
-
         return null;
     }
 }
