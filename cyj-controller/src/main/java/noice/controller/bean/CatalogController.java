@@ -94,13 +94,6 @@ public class CatalogController implements BeanController<CatalogVo> {
         return ResultVO.success(service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto)));
     }
 
-    @Operation(summary = "目录_获取ValueEnum")
-    @PostMapping(value = "getValueEnum")
-    @Override
-    public ResultVO getValueEnum(@RequestBody CatalogVo vo) {
-        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(CatalogVo::getId, option -> Collections.singletonMap("text", option.getCatalogName()))));
-    }
-
     @Operation(summary = "目录_获取Options")
     @PostMapping(value = "getOptions")
     @Override

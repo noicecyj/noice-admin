@@ -100,13 +100,6 @@ public class AuthorityController implements BeanController<AuthorityVo> {
         return ResultVO.success(assembler.dtoListToVoList(service.findListByRoleIds(ids)));
     }
 
-    @Operation(summary = "权限_获取ValueEnum")
-    @PostMapping(value = "getValueEnum")
-    @Override
-    public ResultVO getValueEnum(@RequestBody AuthorityVo vo) {
-        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(AuthorityVo::getId, option -> Collections.singletonMap("text", option.getAuthorityName()))));
-    }
-
     @Operation(summary = "权限_获取Options")
     @PostMapping(value = "getOptions")
     @Override

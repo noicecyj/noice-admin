@@ -94,13 +94,6 @@ public class EnterpriseController implements BeanController<EnterpriseVo> {
         return ResultVO.success(service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto)));
     }
 
-    @Operation(summary = "企业_获取ValueEnum")
-    @PostMapping(value = "getValueEnum")
-    @Override
-    public ResultVO getValueEnum(@RequestBody EnterpriseVo vo) {
-        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(EnterpriseVo::getId, option -> Collections.singletonMap("text", option.getEnterpriseName()))));
-    }
-
     @Operation(summary = "企业_获取Options")
     @PostMapping(value = "getOptions")
     @Override

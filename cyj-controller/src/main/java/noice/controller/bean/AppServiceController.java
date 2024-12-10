@@ -94,13 +94,6 @@ public class AppServiceController implements BeanController<AppServiceVo> {
         return ResultVO.success(service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto)));
     }
 
-    @Operation(summary = "服务_获取ValueEnum")
-    @PostMapping(value = "getValueEnum")
-    @Override
-    public ResultVO getValueEnum(@RequestBody AppServiceVo vo) {
-        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(AppServiceVo::getId, option -> Collections.singletonMap("text", option.getAppServiceName()))));
-    }
-
     @Operation(summary = "服务_获取Options")
     @PostMapping(value = "getOptions")
     @Override

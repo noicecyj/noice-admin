@@ -100,13 +100,6 @@ public class UserController implements BeanController<UserVo> {
         return ResultVO.success(assembler.dtoListToVoList(service.findListByRoleIds(ids)));
     }
 
-    @Operation(summary = "用户_获取ValueEnum")
-    @PostMapping(value = "getValueEnum")
-    @Override
-    public ResultVO getValueEnum(@RequestBody UserVo vo) {
-        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(UserVo::getId, option -> Collections.singletonMap("text", option.getUserName()))));
-    }
-
     @Operation(summary = "用户_获取Options")
     @PostMapping(value = "getOptions")
     @Override

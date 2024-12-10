@@ -94,13 +94,6 @@ public class InterfaceController implements BeanController<InterfaceVo> {
         return ResultVO.success(service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto)));
     }
 
-    @Operation(summary = "接口_获取ValueEnum")
-    @PostMapping(value = "getValueEnum")
-    @Override
-    public ResultVO getValueEnum(@RequestBody InterfaceVo vo) {
-        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(InterfaceVo::getId, option -> Collections.singletonMap("text", option.getInterfaceName()))));
-    }
-
     @Operation(summary = "接口_获取Options")
     @PostMapping(value = "getOptions")
     @Override

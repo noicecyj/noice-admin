@@ -94,13 +94,6 @@ public class SqlController implements BeanController<SqlVo> {
         return ResultVO.success(service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto)));
     }
 
-    @Operation(summary = "查询_获取ValueEnum")
-    @PostMapping(value = "getValueEnum")
-    @Override
-    public ResultVO getValueEnum(@RequestBody SqlVo vo) {
-        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(SqlVo::getId, option -> Collections.singletonMap("text", option.getSqlName()))));
-    }
-
     @Operation(summary = "查询_获取Options")
     @PostMapping(value = "getOptions")
     @Override

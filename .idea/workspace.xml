@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="java&#10;添加UrlDto类及接口获取功能">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/factory/ClassFactoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/factory/ClassFactoryImpl.java" afterDir="false" />
-    </list>
+    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="java&#10;添加UrlDto类及接口获取功能" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -180,7 +177,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CyjEntityCreaterApplicationTest.menuBeanTest">
+  <component name="RunManager" selected="JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest">
     <configuration name="CyjEntityCreaterApplicationTest.PersistentBeanAspect" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cyj-entity-create" />
       <extension name="coverage">
@@ -290,8 +287,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.menuBeanTest" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest" />
+        <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.menuBeanTest" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest2" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.PersistentBeanAspect" />
@@ -410,15 +407,7 @@
       <workItem from="1733707688131" duration="8886000" />
       <workItem from="1733730329219" duration="1654000" />
       <workItem from="1733732152778" duration="5474000" />
-      <workItem from="1733791456272" duration="7891000" />
-    </task>
-    <task id="LOCAL-00129" summary="优化日志信息，统一Service前缀命名">
-      <option name="closed" value="true" />
-      <created>1732192305255</created>
-      <option name="number" value="00129" />
-      <option name="presentableId" value="LOCAL-00129" />
-      <option name="project" value="LOCAL" />
-      <updated>1732192305255</updated>
+      <workItem from="1733791456272" duration="8561000" />
     </task>
     <task id="LOCAL-00130" summary="添加AppServiceRepositoryAspect并优化OperateTableService代码">
       <option name="closed" value="true" />
@@ -804,7 +793,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733806155364</updated>
     </task>
-    <option name="localTasksCounter" value="178" />
+    <task id="LOCAL-00178" summary="java&#10;添加UrlDto类及接口获取功能">
+      <option name="closed" value="true" />
+      <created>1733812330219</created>
+      <option name="number" value="00178" />
+      <option name="presentableId" value="LOCAL-00178" />
+      <option name="project" value="LOCAL" />
+      <updated>1733812330219</updated>
+    </task>
+    <option name="localTasksCounter" value="179" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

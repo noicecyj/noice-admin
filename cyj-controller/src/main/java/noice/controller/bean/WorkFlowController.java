@@ -94,13 +94,6 @@ public class WorkFlowController implements BeanController<WorkFlowVo> {
         return ResultVO.success(service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto)));
     }
 
-    @Operation(summary = "流程_获取ValueEnum")
-    @PostMapping(value = "getValueEnum")
-    @Override
-    public ResultVO getValueEnum(@RequestBody WorkFlowVo vo) {
-        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(WorkFlowVo::getId, option -> Collections.singletonMap("text", option.getWorkFlowName()))));
-    }
-
     @Operation(summary = "流程_获取Options")
     @PostMapping(value = "getOptions")
     @Override

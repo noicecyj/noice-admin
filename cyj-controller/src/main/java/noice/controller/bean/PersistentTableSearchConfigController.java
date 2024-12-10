@@ -94,13 +94,6 @@ public class PersistentTableSearchConfigController implements BeanController<Per
         return ResultVO.success(service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto)));
     }
 
-    @Operation(summary = "实体表格搜索配置_获取ValueEnum")
-    @PostMapping(value = "getValueEnum")
-    @Override
-    public ResultVO getValueEnum(@RequestBody PersistentTableSearchConfigVo vo) {
-        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(PersistentTableSearchConfigVo::getId, option -> Collections.singletonMap("text", option.getPersistentTableSearchConfigName()))));
-    }
-
     @Operation(summary = "实体表格搜索配置_获取Options")
     @PostMapping(value = "getOptions")
     @Override

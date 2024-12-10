@@ -94,13 +94,6 @@ public class PersistentTableController implements BeanController<PersistentTable
         return ResultVO.success(service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto)));
     }
 
-    @Operation(summary = "实体表格_获取ValueEnum")
-    @PostMapping(value = "getValueEnum")
-    @Override
-    public ResultVO getValueEnum(@RequestBody PersistentTableVo vo) {
-        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(PersistentTableVo::getId, option -> Collections.singletonMap("text", option.getPersistentTableName()))));
-    }
-
     @Operation(summary = "实体表格_获取Options")
     @PostMapping(value = "getOptions")
     @Override

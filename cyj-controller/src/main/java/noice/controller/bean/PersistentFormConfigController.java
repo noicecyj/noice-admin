@@ -94,13 +94,6 @@ public class PersistentFormConfigController implements BeanController<Persistent
         return ResultVO.success(service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto)));
     }
 
-    @Operation(summary = "实体表单配置_获取ValueEnum")
-    @PostMapping(value = "getValueEnum")
-    @Override
-    public ResultVO getValueEnum(@RequestBody PersistentFormConfigVo vo) {
-        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(PersistentFormConfigVo::getId, option -> Collections.singletonMap("text", option.getPersistentFormConfigName()))));
-    }
-
     @Operation(summary = "实体表单配置_获取Options")
     @PostMapping(value = "getOptions")
     @Override

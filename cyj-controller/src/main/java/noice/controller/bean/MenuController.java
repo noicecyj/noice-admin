@@ -94,13 +94,6 @@ public class MenuController implements BeanController<MenuVo> {
         return ResultVO.success(service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto)));
     }
 
-    @Operation(summary = "菜单_获取ValueEnum")
-    @PostMapping(value = "getValueEnum")
-    @Override
-    public ResultVO getValueEnum(@RequestBody MenuVo vo) {
-        return ResultVO.success(assembler.dtoListToVoList(service.findList(converter.voToDto(vo))).stream().collect(Collectors.toMap(MenuVo::getId, option -> Collections.singletonMap("text", option.getMenuName()))));
-    }
-
     @Operation(summary = "菜单_获取Options")
     @PostMapping(value = "getOptions")
     @Override
