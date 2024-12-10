@@ -24,22 +24,11 @@ function DataTable<T extends Record<string, any>>(props: {
         columns={tableColumns}
         actionRef={actionRef}
         cardBordered
-        request={async (
-          // 第一个参数 params 查询表单和 params 参数的结合
-          // 第一个参数中一定会有 pageSize 和  current ，这两个参数是 antd 的规范
-          params,
-          sort,
-          filter
-        ) => {
-          // 这里需要返回一个 Promise,在返回之前你可以进行数据转化
-          // 如果需要转化参数可以在这里进行修改
+        request={async (params) => {
           return entityDispatcher.page({
             params: params,
             pageUrl: "/entityCreateApi/Persistent/page"
           });
-        }}
-        editable={{
-          type: 'multiple',
         }}
         columnsState={{
           persistenceKey: 'pro-table-singe-demos',

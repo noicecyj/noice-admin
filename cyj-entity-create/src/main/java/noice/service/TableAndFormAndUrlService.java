@@ -31,6 +31,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author Noice
@@ -203,7 +205,7 @@ public class TableAndFormAndUrlService {
         return baseFormConfigRowDto;
     }
 
-    public List<UrlDto> getUrl(String persistentCode) {
+    public UrlDto getUrl(String persistentCode) {
         List<String> userInterfaceList = UserContext.getUserInterface();
         if (userInterfaceList.isEmpty()) {
             return null;
@@ -220,7 +222,20 @@ public class TableAndFormAndUrlService {
                 List<InterfacePo> interfacePoList = interfaceRepository
                         .findList(new InterfacePo().inAuthorityId(authorityId)
                                 .eqPersistentId(persistentPo.getId()).getQueryWrapper());
-                return tableAndFormAndUrlServiceAssembler.poUrlListToDtoUrlList(interfacePoList);
+                UrlDto urlDto = new UrlDto();
+                if (ObjectUtil.isNotNull(interfacePoList)) {
+                    Map<String, String> urlMap = interfacePoList.stream().collect(Collectors.toMap(InterfacePo::getInterfaceCode, InterfacePo::getInterfacePath));
+                    urlDto.setPage(urlMap.get(persistentCode + "_page"));
+                    urlDto.setAdd(urlMap.get(persistentCode + "_add"));
+                    urlDto.setUpdate(urlMap.get(persistentCode + "_update"));
+                    urlDto.setDelete(urlMap.get(persistentCode + "_delete"));
+                    urlDto.setSet(urlMap.get(persistentCode + "_set"));
+                    urlDto.setGet(urlMap.get(persistentCode + "_get"));
+                    urlDto.setGetList(urlMap.get(persistentCode + "_getList"));
+                    urlDto.setGetOptions(urlMap.get(persistentCode + "_getOptions"));
+                    urlDto.setAllUrl(urlMap);
+                }
+                return urlDto;
             }
         }
         return null;

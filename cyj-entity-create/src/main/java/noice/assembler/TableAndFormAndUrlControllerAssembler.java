@@ -29,8 +29,6 @@ public interface TableAndFormAndUrlControllerAssembler {
 
     UrlVo dtoToVo(UrlDto dto);
 
-    List<UrlVo> dtoUrlListToVoUrlList(List<UrlDto> dtoList);
-
     FormConfigVo dtoToVo(FormConfigDto dto);
 
     @Mapping(target = "formConfigVoList", source = "dto.formConfigDtoList")

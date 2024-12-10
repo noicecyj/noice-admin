@@ -48,7 +48,7 @@ public class TableAndFormAndUrlController {
     @Operation(summary = "获取接口")
     @GetMapping(value = "getUrl/{persistentCode}")
     public ResultVO getUrl(@PathVariable("persistentCode") String persistentCode) {
-        return ResultVO.success(tableAndFormAndUrlControllerAssembler.dtoUrlListToVoUrlList(tableAndFormAndUrlService.getUrl(persistentCode)));
+        return ResultVO.success(tableAndFormAndUrlControllerAssembler.dtoToVo(tableAndFormAndUrlService.getUrl(persistentCode)));
     }
 
 }

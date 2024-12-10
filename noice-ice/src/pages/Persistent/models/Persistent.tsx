@@ -31,8 +31,7 @@ export default {
   },
 
   effects: (dispatch: any) => ({
-    async page(params: any, sort: any, filter: any, data: any) {
-      console.log(sort);
+    async page(params: any) {
       const dataRes = await initService.http({
         // url: data.pageUrl,
         url: '/entityCreateApi/Persistent/page',

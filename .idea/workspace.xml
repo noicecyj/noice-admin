@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="java&#10;添加UrlDto类及接口获取功能" />
+    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="java&#10;添加UrlDto类及接口获取功能">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/assembler/TableAndFormAndUrlControllerAssembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/assembler/TableAndFormAndUrlControllerAssembler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/assembler/TableAndFormAndUrlServiceAssembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/assembler/TableAndFormAndUrlServiceAssembler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/controller/TableAndFormAndUrlController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/controller/TableAndFormAndUrlController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/entity/dto/UrlDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/entity/dto/UrlDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/entity/vo/UrlVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/entity/vo/UrlVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/service/TableAndFormAndUrlService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/service/TableAndFormAndUrlService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-ice/src/components/DataTable/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/components/DataTable/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-ice/src/pages/Persistent/models/Persistent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/pages/Persistent/models/Persistent.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -407,31 +417,7 @@
       <workItem from="1733707688131" duration="8886000" />
       <workItem from="1733730329219" duration="1654000" />
       <workItem from="1733732152778" duration="5474000" />
-      <workItem from="1733791456272" duration="8561000" />
-    </task>
-    <task id="LOCAL-00130" summary="添加AppServiceRepositoryAspect并优化OperateTableService代码">
-      <option name="closed" value="true" />
-      <created>1732282587403</created>
-      <option name="number" value="00130" />
-      <option name="presentableId" value="LOCAL-00130" />
-      <option name="project" value="LOCAL" />
-      <updated>1732282587404</updated>
-    </task>
-    <task id="LOCAL-00131" summary="优化Service与Repository日志处理逻辑">
-      <option name="closed" value="true" />
-      <created>1732289614599</created>
-      <option name="number" value="00131" />
-      <option name="presentableId" value="LOCAL-00131" />
-      <option name="project" value="LOCAL" />
-      <updated>1732289614599</updated>
-    </task>
-    <task id="LOCAL-00132" summary="优化Service与Repository日志处理逻辑">
-      <option name="closed" value="true" />
-      <created>1732338035681</created>
-      <option name="number" value="00132" />
-      <option name="presentableId" value="LOCAL-00132" />
-      <option name="project" value="LOCAL" />
-      <updated>1732338035681</updated>
+      <workItem from="1733791456272" duration="15521000" />
     </task>
     <task id="LOCAL-00133" summary="优化Service与Repository日志处理逻辑">
       <option name="closed" value="true" />
@@ -801,7 +787,31 @@
       <option name="project" value="LOCAL" />
       <updated>1733812330219</updated>
     </task>
-    <option name="localTasksCounter" value="179" />
+    <task id="LOCAL-00179" summary="java&#10;添加UrlDto类及接口获取功能">
+      <option name="closed" value="true" />
+      <created>1733812421789</created>
+      <option name="number" value="00179" />
+      <option name="presentableId" value="LOCAL-00179" />
+      <option name="project" value="LOCAL" />
+      <updated>1733812421789</updated>
+    </task>
+    <task id="LOCAL-00180" summary="java&#10;添加UrlDto类及接口获取功能">
+      <option name="closed" value="true" />
+      <created>1733812448025</created>
+      <option name="number" value="00180" />
+      <option name="presentableId" value="LOCAL-00180" />
+      <option name="project" value="LOCAL" />
+      <updated>1733812448025</updated>
+    </task>
+    <task id="LOCAL-00181" summary="java&#10;添加UrlDto类及接口获取功能">
+      <option name="closed" value="true" />
+      <created>1733812519256</created>
+      <option name="number" value="00181" />
+      <option name="presentableId" value="LOCAL-00181" />
+      <option name="project" value="LOCAL" />
+      <updated>1733812519257</updated>
+    </task>
+    <option name="localTasksCounter" value="182" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
