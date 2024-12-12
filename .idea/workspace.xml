@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="java&#10;添加UrlDto类及接口获取功能">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/components/DataForm/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/components/DataForm/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/noice-ice/src/components/DataTable/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/components/DataTable/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/noice-ice/src/models/entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/models/entity.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/pages/Persistent/models/Persistent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/pages/Persistent/models/Persistent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -418,14 +415,7 @@
       <workItem from="1733879568655" duration="2540000" />
       <workItem from="1733967930234" duration="4441000" />
       <workItem from="1734014925677" duration="597000" />
-    </task>
-    <task id="LOCAL-00134" summary="优化日志级别，统一使用debug">
-      <option name="closed" value="true" />
-      <created>1732340548622</created>
-      <option name="number" value="00134" />
-      <option name="presentableId" value="LOCAL-00134" />
-      <option name="project" value="LOCAL" />
-      <updated>1732340548622</updated>
+      <workItem from="1734018874077" duration="1348000" />
     </task>
     <task id="LOCAL-00135" summary="优化字段构建逻辑并添加查询及更新功能">
       <option name="closed" value="true" />
@@ -811,7 +801,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733825243894</updated>
     </task>
-    <option name="localTasksCounter" value="183" />
+    <task id="LOCAL-00183" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1734022782855</created>
+      <option name="number" value="00183" />
+      <option name="presentableId" value="LOCAL-00183" />
+      <option name="project" value="LOCAL" />
+      <updated>1734022782855</updated>
+    </task>
+    <option name="localTasksCounter" value="184" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -865,10 +863,10 @@
     <MESSAGE value="添加获取ValueEnum和Options接口，优化代码结构" />
     <MESSAGE value="架构优化" />
     <MESSAGE value="重构表单服务及组件，优化字段逻辑" />
-    <MESSAGE value="优化表单布局及字段逻辑" />
     <MESSAGE value="添加UrlDto类及接口获取功能" />
     <MESSAGE value="java&#10;添加UrlDto类及接口获取功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="java&#10;添加UrlDto类及接口获取功能" />
+    <MESSAGE value="优化表单布局及字段逻辑" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化表单布局及字段逻辑" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -877,6 +875,11 @@
           <url>file://$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/entity/dto/FormConfigRowDto.java</url>
           <line>10</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/AppServiceService.java</url>
+          <line>61</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

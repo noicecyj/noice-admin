@@ -34,7 +34,6 @@ export default createModel({
       pageUrl: string;
       params: object;
     }) {
-      console.log('page', data);
       const dataRes = await initService.http({
         url: data.pageUrl,
         obj: data.params,
@@ -74,12 +73,20 @@ export default createModel({
         visible: true,
       });
     },
-    edit(data: any) {
-      this.update({
-        formData: data,
-        title: '编辑',
-        visible: true,
+    async edit(data: {
+      id: string;
+      getUrl: string;
+    }) {
+      const dataRes = await initService.http({
+        url: data.getUrl,
+        obj: data.id,
       });
+      console.log(dataRes);
+      // this.update({
+      //   formData: dataRes.data,
+      //   title: '编辑',
+      //   visible: true,
+      // });
     },
     async getOption(data: any) {
       return await initService.http({

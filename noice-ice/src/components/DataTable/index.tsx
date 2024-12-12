@@ -10,6 +10,7 @@ function DataTable<T extends Record<string, any>>(props: {
   toolBar?: ReactNode[],
   url?: {
     page: string,
+    get: string,
   }
 }) {
   const actionRef = useRef<ActionType>();
@@ -20,7 +21,8 @@ function DataTable<T extends Record<string, any>>(props: {
     tableColumns,
     toolBar = [],
     url = {
-      page: ''
+      page: '',
+      get: '',
     },
   } = props;
 
@@ -32,7 +34,10 @@ function DataTable<T extends Record<string, any>>(props: {
     render: (text, record, index, action) => [
       <Button key="edit" size="small" onClick={() => {
         console.log(record);
-        entityDispatcher.edit(record);
+        entityDispatcher.edit({
+          id: record.id,
+          getUrl: url.get
+        });
       }}
       >
         编辑
