@@ -1,4 +1,3 @@
-import {Button} from 'antd';
 import pageStore from './store';
 import DataTable from "@/components/DataTable";
 import DataForm from "@/components/DataForm";
@@ -23,18 +22,7 @@ export default function Persistent() {
       <DataTable<PersistentItem>
         tableColumns={table.data.tableConfigVoList}
         url={url.data}
-        toolBar={[
-          <Button
-            key="button"
-            onClick={() => {
-              console.log("click")
-              persistentDispatchers.setState({visible: true})
-            }}
-            type="primary"
-          >
-            新建
-          </Button>
-        ]}/>
+      />
       <DataForm
         url={url.data}
         config={form.data}

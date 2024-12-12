@@ -2,12 +2,15 @@ import type {ActionType} from '@ant-design/pro-components';
 import {ProTable} from '@ant-design/pro-components';
 import {ReactNode, useRef} from 'react';
 import store from "@/store";
-
+import {ProColumns} from "@ant-design/pro-table/lib";
+import {Button} from "antd";
 
 function DataTable<T extends Record<string, any>>(props: {
-  tableColumns: any,
-  toolBar: ReactNode[],
-  url?: []
+  tableColumns: ProColumns[],
+  toolBar?: ReactNode[],
+  url?: {
+    page: string,
+  }
 }) {
   const actionRef = useRef<ActionType>();
 
@@ -15,19 +18,56 @@ function DataTable<T extends Record<string, any>>(props: {
 
   const {
     tableColumns,
-    toolBar,
+    toolBar = [],
+    url = {
+      page: ''
+    },
   } = props;
+
+  const tableColumnsOption = tableColumns.concat({
+    title: '操作',
+    width: 150,
+    valueType: 'option',
+    key: 'option',
+    render: (text, record, index, action) => [
+      <Button key="edit" size="small" onClick={() => {
+        console.log(record);
+        entityDispatcher.edit(record);
+      }}
+      >
+        编辑
+      </Button>,
+      <Button key="view" size="small">
+        查看
+      </Button>,
+      <Button danger key="delete" size="small">
+        删除
+      </Button>
+    ],
+  });
+
+  const addButton: ReactNode = <Button
+    key="button"
+    onClick={() => {
+      console.log("click")
+      entityDispatcher.add();
+    }}
+    type="primary"
+  >
+    新建
+  </Button>
+
 
   return (
     <>
       <ProTable<T>
-        columns={tableColumns}
+        columns={tableColumnsOption}
         actionRef={actionRef}
         cardBordered
         request={async (params) => {
           return entityDispatcher.page({
             params: params,
-            pageUrl: "/entityCreateApi/Persistent/page"
+            pageUrl: url.page,
           });
         }}
         columnsState={{
@@ -70,7 +110,7 @@ function DataTable<T extends Record<string, any>>(props: {
         }}
         dateFormatter="string"
         headerTitle="实体"
-        toolBarRender={() => toolBar}
+        toolBarRender={() => toolBar.concat(addButton)}
       />
     </>
   );

@@ -35,15 +35,20 @@ function DataForm(props: {
   config: Form,
   dispatchers: any,
   state: any,
-  url?: []
+  url?: {
+    add: string,
+  }
 }) {
 
-  const entityDispatcher = store.useModelDispatchers('entity');
+  const [entityState, entityDispatcher] = store.useModel('entity');
 
   const {
     config,
     dispatchers,
     state,
+    url = {
+      add: '',
+    }
   } = props;
 
   const components = (item: FormConfig) => {
@@ -101,7 +106,9 @@ function DataForm(props: {
           key={item.id}
           initialValue={item.persistentFormConfigDefaultValue}
           disabled={!item.persistentFormConfigEdit}
-          request={dispatchers.getOptions(item.persistentFormConfigDataSource)}
+          request={async () => {
+            return entityDispatcher.getOption(item.persistentFormConfigDataSource);
+          }}
           required={item.persistentFormConfigRequired}
           rules={[{required: item.persistentFormConfigRequired, message: '请输入' + item.persistentFormConfigName}]}
         />
@@ -198,7 +205,9 @@ function DataForm(props: {
           key={item.id}
           initialValue={item.persistentFormConfigDefaultValue}
           disabled={item.persistentFormConfigEdit}
-          request={dispatchers.getOptions(item.persistentFormConfigDataSource)}
+          request={async () => {
+            return entityDispatcher.getOption(item.persistentFormConfigDataSource);
+          }}
           required={item.persistentFormConfigRequired}
           rules={[{required: item.persistentFormConfigRequired, message: '请输入' + item.persistentFormConfigName}]}
         />
@@ -213,7 +222,9 @@ function DataForm(props: {
           key={item.id}
           initialValue={item.persistentFormConfigDefaultValue}
           disabled={item.persistentFormConfigEdit}
-          request={dispatchers.getOptions(item.persistentFormConfigDataSource)}
+          request={async () => {
+            return entityDispatcher.getOption(item.persistentFormConfigDataSource);
+          }}
           required={item.persistentFormConfigRequired}
           rules={[{required: item.persistentFormConfigRequired, message: '请输入' + item.persistentFormConfigName}]}
         />
@@ -263,19 +274,20 @@ function DataForm(props: {
       // @ts-ignore
       labelWidth="auto"
       grid={false}
-      open={state.visible}
+      title={entityState.title}
+      open={entityState.visible}
       onOpenChange={open => {
-        dispatchers.setState({visible: open});
+        entityDispatcher.update({visible: open});
       }}
       onFinish={async (values: any) => {
         await entityDispatcher.save({
-          saveUrl: '/entityCreateApi/Persistent/add',
+          saveUrl: url.add,
           formData: values,
         })
         console.log(values);
         message.success('提交成功');
       }}
-      initialValues={state}
+      initialValues={entityState.formData}
     >
       {config.formConfigRowVoList.map((row: FormRow) => {
         return (

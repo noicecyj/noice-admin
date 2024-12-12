@@ -82,7 +82,7 @@ export default createModel({
       });
     },
     async getOption(data: any) {
-      const dataRes = await initService.http({
+      return await initService.http({
         url: data.pageUrl,
         obj: data.params,
       });
