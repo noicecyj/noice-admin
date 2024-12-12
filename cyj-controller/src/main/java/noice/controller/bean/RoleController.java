@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.NotNull;
 import noice.assembler.bean.RoleControllerAssembler;
 import noice.common.entity.vo.OptionVO;
 import noice.common.entity.vo.ResultVO;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -60,7 +62,7 @@ public class RoleController implements BeanController<RoleVo> {
     @Operation(summary = "角色_删除")
     @PostMapping(value = "delete")
     @Override
-    public ResultVO delete(String id) {
+    public ResultVO delete(@RequestParam @NotNull String id) {
         return ResultVO.success(service.deleteOne(id));
     }
 
@@ -74,14 +76,14 @@ public class RoleController implements BeanController<RoleVo> {
     @Operation(summary = "角色_id查询")
     @PostMapping(value = "get")
     @Override
-    public ResultVO get(String id) {
+    public ResultVO get(@RequestParam @NotNull String id) {
         return ResultVO.success(assembler.dtoToVo(service.findOne(id)));
     }
 
     @Operation(summary = "角色_ids查询")
     @PostMapping(value = "getList")
     @Override
-    public ResultVO getList(List<String> ids) {
+    public ResultVO getList(@RequestBody List<String> ids) {
         return ResultVO.success(assembler.dtoListToVoList(service.findList(ids)));
     }
 
@@ -94,13 +96,13 @@ public class RoleController implements BeanController<RoleVo> {
 
     @Operation(summary = "UserIds查询")
     @PostMapping(value = "getListByUserIds")
-    public ResultVO getListByUserIds(List<String> ids) {
+    public ResultVO getListByUserIds(@RequestBody List<String> ids) {
         return ResultVO.success(assembler.dtoListToVoList(service.findListByUserIds(ids)));
     }
 
     @Operation(summary = "AuthorityIds查询")
     @PostMapping(value = "getListByAuthorityIds")
-    public ResultVO getListByAuthorityIds(List<String> ids) {
+    public ResultVO getListByAuthorityIds(@RequestBody List<String> ids) {
         return ResultVO.success(assembler.dtoListToVoList(service.findListByAuthorityIds(ids)));
     }
 
