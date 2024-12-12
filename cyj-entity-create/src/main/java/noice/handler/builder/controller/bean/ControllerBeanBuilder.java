@@ -144,6 +144,7 @@ public class ControllerBeanBuilder extends ClassBase {
         importPackageList.add("import com.baomidou.mybatisplus.extension.plugins.pagination.Page;");
         importPackageList.add("import io.swagger.v3.oas.annotations.Operation;");
         importPackageList.add("import io.swagger.v3.oas.annotations.tags.Tag;");
+        importPackageList.add("import jakarta.validation.constraints.NotNull;");
         importPackageList.add("import noice.assembler.bean." + poName + "ControllerAssembler;");
         importPackageList.add("import noice.common.entity.vo.OptionVO;");
         importPackageList.add("import noice.common.entity.vo.ResultVO;");
@@ -156,6 +157,7 @@ public class ControllerBeanBuilder extends ClassBase {
         importPackageList.add("import org.springframework.web.bind.annotation.PostMapping;");
         importPackageList.add("import org.springframework.web.bind.annotation.RequestBody;");
         importPackageList.add("import org.springframework.web.bind.annotation.RequestMapping;");
+        importPackageList.add("import org.springframework.web.bind.annotation.RequestParam;");
         importPackageList.add("import org.springframework.web.bind.annotation.RestController;");
         importPackageList.add("");
         importPackageList.add("import java.util.List;");
