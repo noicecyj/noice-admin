@@ -4,7 +4,45 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑" />
+    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/AppServiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/AppServiceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/AuthorityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/AuthorityController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/CatalogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/CatalogController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/CatalogDictionaryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/CatalogDictionaryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/EnterpriseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/EnterpriseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/InterfaceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/InterfaceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/PersistentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/PersistentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/PersistentFormConfigController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/PersistentFormConfigController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/PersistentFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/PersistentFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/PersistentPropertyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/PersistentPropertyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/PersistentTableConfigController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/PersistentTableConfigController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/PersistentTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/PersistentTableController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/PersistentTableSearchConfigController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/PersistentTableSearchConfigController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/RoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/RoleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/SqlController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/SqlController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/WorkFlowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/bean/WorkFlowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/AppServiceController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/AppServiceController.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/AuthorityController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/AuthorityController.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/CatalogController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/CatalogController.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/CatalogDictionaryController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/CatalogDictionaryController.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/EnterpriseController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/EnterpriseController.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/InterfaceController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/InterfaceController.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/MenuController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/MenuController.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentController.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentFormConfigController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentFormConfigController.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentFormController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentFormController.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentPropertyController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentPropertyController.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentTableConfigController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentTableConfigController.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentTableController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentTableController.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentTableSearchConfigController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentTableSearchConfigController.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/RoleController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/RoleController.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/SqlController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/SqlController.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/UserController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/UserController.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/WorkFlowController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/WorkFlowController.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -412,23 +450,7 @@
       <workItem from="1733967930234" duration="4441000" />
       <workItem from="1734014925677" duration="597000" />
       <workItem from="1734018874077" duration="2327000" />
-      <workItem from="1734068013017" duration="2056000" />
-    </task>
-    <task id="LOCAL-00139" summary="优化日志级别，统一使用debug">
-      <option name="closed" value="true" />
-      <created>1732588334716</created>
-      <option name="number" value="00139" />
-      <option name="presentableId" value="LOCAL-00139" />
-      <option name="project" value="LOCAL" />
-      <updated>1732588334716</updated>
-    </task>
-    <task id="LOCAL-00140" summary="优化日志级别，统一使用debug">
-      <option name="closed" value="true" />
-      <created>1732813681824</created>
-      <option name="number" value="00140" />
-      <option name="presentableId" value="LOCAL-00140" />
-      <option name="project" value="LOCAL" />
-      <updated>1732813681824</updated>
+      <workItem from="1734068013017" duration="3035000" />
     </task>
     <task id="LOCAL-00141" summary="优化日志级别，统一使用debug">
       <option name="closed" value="true" />
@@ -806,7 +828,23 @@
       <option name="project" value="LOCAL" />
       <updated>1734075648076</updated>
     </task>
-    <option name="localTasksCounter" value="188" />
+    <task id="LOCAL-00188" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1734075737458</created>
+      <option name="number" value="00188" />
+      <option name="presentableId" value="LOCAL-00188" />
+      <option name="project" value="LOCAL" />
+      <updated>1734075737458</updated>
+    </task>
+    <task id="LOCAL-00189" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1734076060327</created>
+      <option name="number" value="00189" />
+      <option name="presentableId" value="LOCAL-00189" />
+      <option name="project" value="LOCAL" />
+      <updated>1734076060327</updated>
+    </task>
+    <option name="localTasksCounter" value="190" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

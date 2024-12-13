@@ -62,7 +62,7 @@ public class UserController implements BeanController<UserVo> {
     @Operation(summary = "用户_删除")
     @PostMapping(value = "delete")
     @Override
-    public ResultVO delete(@RequestParam @NotNull String id) {
+    public ResultVO delete(@RequestParam("id") @NotNull String id) {
         return ResultVO.success(service.deleteOne(id));
     }
 
@@ -76,7 +76,7 @@ public class UserController implements BeanController<UserVo> {
     @Operation(summary = "用户_id查询")
     @PostMapping(value = "get")
     @Override
-    public ResultVO get(@RequestParam @NotNull String id) {
+    public ResultVO get(@RequestParam("id") @NotNull String id) {
         return ResultVO.success(assembler.dtoToVo(service.findOne(id)));
     }
 
