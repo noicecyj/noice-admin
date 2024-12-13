@@ -1,5 +1,6 @@
 import {createModel} from 'ice';
 import initService from "@/services/init";
+import {getUrl} from "@/services/formAndTableAndUrl";
 
 interface Entity {
   formData: any,
@@ -74,23 +75,31 @@ export default createModel({
       });
     },
     async edit(data: {
+      id: string;
       getUrl: string;
     }) {
       const dataRes = await initService.http({
-        url: data.getUrl,
+        url: data.getUrl + "?id=" + data.id,
       });
       console.log(dataRes);
-      // this.update({
-      //   formData: dataRes.data,
-      //   title: '编辑',
-      //   visible: true,
-      // });
-    },
-    async getOption(data: any) {
-      return await initService.http({
-        url: data.pageUrl,
-        obj: data.params,
+      this.update({
+        formData: dataRes.data,
+        title: '编辑',
+        visible: true,
       });
+    },
+    async getOption(dataSourceCode: string | undefined) {
+      if (dataSourceCode) {
+        if (dataSourceCode === "status") {
+          return [{label: '有效', value: 1}, {label: '无效', value: 0}];
+        } else {
+          let newVar = await getUrl(dataSourceCode);
+          console.log(newVar);
+          return newVar.data;
+        }
+      } else {
+        return [];
+      }
     }
   }),
 })

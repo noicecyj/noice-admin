@@ -1,11 +1,13 @@
 package noice.assembler;
 
+import noice.common.entity.vo.OptionVO;
 import noice.entity.dto.FormConfigDto;
 import noice.entity.dto.FormConfigRowDto;
 import noice.entity.dto.FormDto;
 import noice.entity.dto.TableConfigDto;
 import noice.entity.dto.TableDto;
 import noice.entity.dto.UrlDto;
+import noice.entity.dto.bean.CatalogDictionaryDto;
 import noice.entity.vo.FormConfigRowVo;
 import noice.entity.vo.FormConfigVo;
 import noice.entity.vo.FormVo;
@@ -33,6 +35,10 @@ public interface TableAndFormAndUrlControllerAssembler {
 
     @Mapping(target = "formConfigVoList", source = "dto.formConfigDtoList")
     FormConfigRowVo dtoToVo(FormConfigRowDto dto);
+
+    OptionVO dtoToVo(CatalogDictionaryDto dto);
+
+    List<OptionVO> dtoCatalogDictionaryListToVoOptionList(List<CatalogDictionaryDto> dtoList);
 
     List<FormConfigRowVo> dtotFormRowListToVoFormRowList(List<FormConfigRowDto> dtoList);
 

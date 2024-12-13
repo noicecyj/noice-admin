@@ -11,7 +11,7 @@ type FormConfig = {
   persistentFormConfigMode: string;
   id: string;
   persistentFormConfigColSpan?: number;
-  persistentFormConfigDataSource?: string;
+  persistentFormConfigDataSource?: string | undefined;
   persistentFormConfigDefaultValue?: string;
   persistentFormConfigDirection?: string;
   persistentFormConfigEdit?: boolean;
@@ -33,8 +33,6 @@ type FormRow = {
 
 function DataForm(props: {
   config: Form,
-  dispatchers: any,
-  state: any,
   url?: {
     add: string,
   }
@@ -44,8 +42,6 @@ function DataForm(props: {
 
   const {
     config,
-    dispatchers,
-    state,
     url = {
       add: '',
     }

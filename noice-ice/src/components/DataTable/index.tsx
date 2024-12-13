@@ -35,7 +35,8 @@ function DataTable<T extends Record<string, any>>(props: {
       <Button key="edit" size="small" onClick={() => {
         console.log(record);
         entityDispatcher.edit({
-          getUrl: url.get + "/" + record.id,
+          id: record.id,
+          getUrl: url.get
         });
       }}
       >

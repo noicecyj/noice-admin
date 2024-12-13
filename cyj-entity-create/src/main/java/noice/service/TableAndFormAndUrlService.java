@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import noice.assembler.TableAndFormAndUrlServiceAssembler;
+import noice.assembler.bean.CatalogDictionaryServiceAssembler;
 import noice.common.contants.UserContext;
 import noice.entity.dto.FormConfigDto;
 import noice.entity.dto.FormConfigRowDto;
@@ -11,7 +12,10 @@ import noice.entity.dto.FormDto;
 import noice.entity.dto.TableConfigDto;
 import noice.entity.dto.TableDto;
 import noice.entity.dto.UrlDto;
+import noice.entity.dto.bean.CatalogDictionaryDto;
 import noice.entity.po.bean.AuthorityPo;
+import noice.entity.po.bean.CatalogDictionaryPo;
+import noice.entity.po.bean.CatalogPo;
 import noice.entity.po.bean.InterfacePo;
 import noice.entity.po.bean.PersistentFormConfigPo;
 import noice.entity.po.bean.PersistentFormPo;
@@ -19,6 +23,8 @@ import noice.entity.po.bean.PersistentPo;
 import noice.entity.po.bean.PersistentTableConfigPo;
 import noice.entity.po.bean.PersistentTablePo;
 import noice.repository.bean.AuthorityRepository;
+import noice.repository.bean.CatalogDictionaryRepository;
+import noice.repository.bean.CatalogRepository;
 import noice.repository.bean.InterfaceRepository;
 import noice.repository.bean.PersistentFormConfigRepository;
 import noice.repository.bean.PersistentFormRepository;
@@ -56,6 +62,27 @@ public class TableAndFormAndUrlService {
     private TableAndFormAndUrlServiceAssembler tableAndFormAndUrlServiceAssembler;
 
     private AuthorityRepository authorityRepository;
+
+    private CatalogRepository catalogRepository;
+
+    private CatalogDictionaryRepository catalogDictionaryRepository;
+
+    private CatalogDictionaryServiceAssembler catalogDictionaryServiceAssembler;
+
+    @Autowired
+    public void setCatalogDictionaryServiceAssembler(CatalogDictionaryServiceAssembler catalogDictionaryServiceAssembler) {
+        this.catalogDictionaryServiceAssembler = catalogDictionaryServiceAssembler;
+    }
+
+    @Autowired
+    public void setCatalogRepository(CatalogRepository catalogRepository) {
+        this.catalogRepository = catalogRepository;
+    }
+
+    @Autowired
+    public void setCatalogDictionaryRepository(CatalogDictionaryRepository catalogDictionaryRepository) {
+        this.catalogDictionaryRepository = catalogDictionaryRepository;
+    }
 
     @Autowired
     public void setPersistentTableRepository(PersistentTableRepository persistentTableRepository) {
@@ -197,6 +224,7 @@ public class TableAndFormAndUrlService {
         statusFormConfig.setPersistentFormConfigCode("status");
         statusFormConfig.setPersistentFormConfigName("状态");
         statusFormConfig.setPersistentFormConfigMode("Select");
+        statusFormConfig.setPersistentFormConfigDataSource("status");
         statusFormConfig.setPersistentFormConfigColSpan(12);
         statusFormConfig.setPersistentFormConfigEdit(true);
         statusFormConfig.setPersistentFormConfigRequired(true);
@@ -237,6 +265,16 @@ public class TableAndFormAndUrlService {
                 }
                 return urlDto;
             }
+        }
+        return null;
+    }
+
+
+    public List<CatalogDictionaryDto> getDict(String dataSourceCode) {
+        CatalogPo catalogPo = catalogRepository.find(new CatalogPo().eqCatalogCode(dataSourceCode).getQueryWrapper());
+        if (ObjectUtil.isNotNull(catalogPo)) {
+            return catalogDictionaryServiceAssembler.poListToDtoList(catalogDictionaryRepository
+                    .findList(new CatalogDictionaryPo().eqCatalogId(catalogPo.getId()).getQueryWrapper()));
         }
         return null;
     }

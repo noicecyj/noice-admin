@@ -26,8 +26,7 @@ export default function Persistent() {
       <DataForm
         url={url.data}
         config={form.data}
-        dispatchers={persistentDispatchers}
-        state={persistentState}/>
+      />
     </>
   );
 }

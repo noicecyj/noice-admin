@@ -4,6 +4,7 @@ import {ProTable} from "@ant-design/pro-components";
 import store from "@/store";
 import {DataType} from "@ice/runtime";
 import {TableRowSelection} from "antd/es/table/interface";
+import {LabeledValue} from "antd/es/select";
 
 interface PageFormSelectProps {
   key: string,
@@ -13,8 +14,8 @@ interface PageFormSelectProps {
   initialValue?: string | undefined,
   disabled?: boolean | undefined,
   dataSource?: string | undefined,
-  value?: [],
-  onChange?: (value: React.Key) => void
+  value?: React.Key[] | LabeledValue[],
+  onChange?: (value: React.Key | LabeledValue) => void
 }
 
 interface Option {
@@ -34,7 +35,7 @@ const PageFormSelect = ({
                           onChange
                         }: PageFormSelectProps) => {
 
-  const handleChange = (newValue: React.Key[]) => {
+  const handleChange = (newValue: React.Key[] | LabeledValue[]) => {
     if (onChange) {
       onChange(newValue[0]);
     }
