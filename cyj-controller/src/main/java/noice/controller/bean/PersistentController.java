@@ -14,6 +14,7 @@ import noice.handler.bean.BeanController;
 import noice.service.bean.PersistentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,9 +61,9 @@ public class PersistentController implements BeanController<PersistentVo> {
     }
 
     @Operation(summary = "实体_删除")
-    @PostMapping(value = "delete")
+    @GetMapping(value = "delete")
     @Override
-    public ResultVO delete(@RequestParam @NotNull String id) {
+    public ResultVO delete(@RequestParam("id") @NotNull String id) {
         return ResultVO.success(service.deleteOne(id));
     }
 
@@ -76,7 +77,7 @@ public class PersistentController implements BeanController<PersistentVo> {
     @Operation(summary = "实体_id查询")
     @PostMapping(value = "get")
     @Override
-    public ResultVO get(@RequestParam @NotNull String id) {
+    public ResultVO get(@RequestParam("id") @NotNull String id) {
         return ResultVO.success(assembler.dtoToVo(service.findOne(id)));
     }
 

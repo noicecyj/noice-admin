@@ -245,7 +245,7 @@ public class ControllerBeanMethodBuilder extends MethodBase {
 
         public void setMethodParamSet() {
             List<String> methodParamSet = new ArrayList<>();
-            methodParamSet.add("@RequestParam @NotNull String id");
+            methodParamSet.add("@RequestParam(\"id\") @NotNull String id");
             super.setMethodParamSet(methodParamSet);
         }
 
@@ -318,7 +318,7 @@ public class ControllerBeanMethodBuilder extends MethodBase {
 
         public void setMethodParamSet() {
             List<String> methodParamSet = new ArrayList<>();
-            methodParamSet.add("@RequestParam @NotNull String id");
+            methodParamSet.add("@RequestParam(\"id\") @NotNull String id");
             super.setMethodParamSet(methodParamSet);
         }
 
