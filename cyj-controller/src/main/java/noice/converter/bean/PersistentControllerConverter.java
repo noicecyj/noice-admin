@@ -7,6 +7,7 @@ import noice.repository.bean.AppServiceRepository;
 import noice.repository.bean.PersistentRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.springframework.context.annotation.Primary;
 
 import java.util.List;
 import java.util.Set;
@@ -14,6 +15,7 @@ import java.util.Set;
 /**
  * @author Noice
  */
+@Primary
 @Mapper(componentModel = "spring", config = BaseBeanConverter.class, uses = {AppServiceRepository.class, PersistentRepository.class})
 public interface PersistentControllerConverter {
 

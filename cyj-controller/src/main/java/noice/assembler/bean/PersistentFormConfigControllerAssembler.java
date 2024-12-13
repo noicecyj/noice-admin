@@ -5,6 +5,7 @@ import noice.entity.vo.bean.PersistentFormConfigVo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.springframework.context.annotation.Primary;
 
 import java.util.List;
 import java.util.Set;
@@ -12,6 +13,7 @@ import java.util.Set;
 /**
  * @author Noice
  */
+@Primary
 @Mapper(componentModel = "spring", config = BaseBeanAssembler.class, uses = {AuthorityServiceAssembler.class, PersistentFormServiceAssembler.class})
 public interface PersistentFormConfigControllerAssembler {
 

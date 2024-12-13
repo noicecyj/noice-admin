@@ -7,6 +7,7 @@ import noice.repository.bean.AuthorityRepository;
 import noice.repository.bean.MenuRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.springframework.context.annotation.Primary;
 
 import java.util.List;
 import java.util.Set;
@@ -14,6 +15,7 @@ import java.util.Set;
 /**
  * @author Noice
  */
+@Primary
 @Mapper(componentModel = "spring", config = BaseBeanConverter.class, uses = {AuthorityRepository.class, MenuRepository.class})
 public interface MenuControllerConverter {
 

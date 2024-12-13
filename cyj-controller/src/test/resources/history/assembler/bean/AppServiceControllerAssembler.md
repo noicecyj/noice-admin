@@ -77,3 +77,31 @@ public interface AppServiceControllerAssembler {
 }
 ```
 
+## 2024-12-13 15:41:47 noice 作者大大 曹元杰 天才 笔记本
+
+```java
+package noice.assembler.bean;
+
+import noice.entity.dto.bean.AppServiceDto;
+import noice.entity.vo.bean.AppServiceVo;
+import noice.handler.assembler.bean.BaseBeanAssembler;
+import org.mapstruct.Mapper;
+
+import java.util.List;
+import java.util.Set;
+
+/**
+ * @author Noice
+ */
+@Mapper(componentModel = "spring", config = BaseBeanAssembler.class)
+public interface AppServiceControllerAssembler {
+
+    AppServiceVo dtoToVo(AppServiceDto dto);
+
+    List<AppServiceVo> dtoListToVoList(List<AppServiceDto> dtoList);
+
+    Set<AppServiceVo> dtoSetToVoSet(Set<AppServiceDto> dtoList);
+
+}
+```
+
