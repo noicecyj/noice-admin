@@ -35,8 +35,7 @@ function DataTable<T extends Record<string, any>>(props: {
       <Button key="edit" size="small" onClick={() => {
         console.log(record);
         entityDispatcher.edit({
-          id: record.id,
-          getUrl: url.get
+          getUrl: url.get + "/" + record.id,
         });
       }}
       >
@@ -92,11 +91,7 @@ function DataTable<T extends Record<string, any>>(props: {
         search={{
           labelWidth: 'auto',
         }}
-        options={{
-          setting: {
-            listsHeight: 400,
-          },
-        }}
+        options={false}
         form={{
           // 由于配置了 transform，提交的参数与定义的不同这里需要转化一下
           syncToUrl: (values, type) => {

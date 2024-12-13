@@ -120,6 +120,7 @@ public class AssemblerBeanBuilder extends ClassBase {
             if (CollUtil.isNotEmpty(poNameList)) {
                 importPackageList.add("import org.mapstruct.Mapping;");
             }
+            importPackageList.add("import org.springframework.context.annotation.Primary;");
             importPackageList.add("");
             importPackageList.add("import java.util.List;");
             importPackageList.add("import java.util.Set;");
@@ -137,6 +138,7 @@ public class AssemblerBeanBuilder extends ClassBase {
                     }
                 }
             }
+            classAnnotationList.add("@Primary");
             if (CollUtil.isNotEmpty(poNameList)) {
                 classAnnotationList.add("@Mapper(componentModel = \"spring\", config = BaseBeanAssembler.class, uses = {" + String.join(", ", poNameList) + "})");
             } else {
@@ -260,6 +262,7 @@ public class AssemblerBeanBuilder extends ClassBase {
             if (CollUtil.isNotEmpty(poNameList)) {
                 importPackageList.add("import org.mapstruct.Mapping;");
             }
+            importPackageList.add("import org.springframework.context.annotation.Primary;");
             importPackageList.add("");
             importPackageList.add("import java.util.List;");
             importPackageList.add("import java.util.Set;");
@@ -284,6 +287,7 @@ public class AssemblerBeanBuilder extends ClassBase {
                     poNameList.add(NtoNpoName);
                 }
             }
+            classAnnotationList.add("@Primary");
             if (CollUtil.isNotEmpty(poNameList)) {
                 classAnnotationList.add("@Mapper(componentModel = \"spring\", config = BaseBeanAssembler.class, uses = {" + String.join(", ", poNameList) + "})");
             } else {

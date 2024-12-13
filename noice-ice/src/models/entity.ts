@@ -74,12 +74,10 @@ export default createModel({
       });
     },
     async edit(data: {
-      id: string;
       getUrl: string;
     }) {
       const dataRes = await initService.http({
         url: data.getUrl,
-        obj: data.id,
       });
       console.log(dataRes);
       // this.update({

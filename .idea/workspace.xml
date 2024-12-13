@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑" />
+    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-ice/src/components/DataTable/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/components/DataTable/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-ice/src/models/entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/models/entity.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -411,15 +415,8 @@
       <workItem from="1733879568655" duration="2540000" />
       <workItem from="1733967930234" duration="4441000" />
       <workItem from="1734014925677" duration="597000" />
-      <workItem from="1734018874077" duration="2226000" />
-    </task>
-    <task id="LOCAL-00137" summary="移除冗余表单配置，优化数据展示逻辑">
-      <option name="closed" value="true" />
-      <created>1732533099530</created>
-      <option name="number" value="00137" />
-      <option name="presentableId" value="LOCAL-00137" />
-      <option name="project" value="LOCAL" />
-      <updated>1732533099530</updated>
+      <workItem from="1734018874077" duration="2327000" />
+      <workItem from="1734068013017" duration="1548000" />
     </task>
     <task id="LOCAL-00138" summary="优化日志级别，统一使用debug">
       <option name="closed" value="true" />
@@ -805,7 +802,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734024264015</updated>
     </task>
-    <option name="localTasksCounter" value="186" />
+    <task id="LOCAL-00186" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1734024346346</created>
+      <option name="number" value="00186" />
+      <option name="presentableId" value="LOCAL-00186" />
+      <option name="project" value="LOCAL" />
+      <updated>1734024346346</updated>
+    </task>
+    <option name="localTasksCounter" value="187" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

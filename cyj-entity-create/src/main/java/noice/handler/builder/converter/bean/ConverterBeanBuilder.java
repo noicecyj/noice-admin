@@ -71,6 +71,7 @@ public class ConverterBeanBuilder extends ClassBase {
             importPackageList.add("import noice.entity.po.bean." + poName + "Po;");
             importPackageList.add("import noice.handler.converter.bean.BaseBeanConverter;");
             importPackageList.add("import org.mapstruct.Mapper;");
+            importPackageList.add("import org.springframework.context.annotation.Primary;");
             importPackageList.add("");
             importPackageList.add("import java.util.List;");
             importPackageList.add("import java.util.Set;");
@@ -79,6 +80,7 @@ public class ConverterBeanBuilder extends ClassBase {
 
         public void setClassAnnotationList() {
             classAnnotationList = new ArrayList<>();
+            classAnnotationList.add("@Primary");
             classAnnotationList.add("@Mapper(componentModel = \"spring\", config = BaseBeanConverter.class)");
         }
 
@@ -182,6 +184,7 @@ public class ConverterBeanBuilder extends ClassBase {
             if (CollUtil.isNotEmpty(poNameList)) {
                 importPackageList.add("import org.mapstruct.Mapping;");
             }
+            importPackageList.add("import org.springframework.context.annotation.Primary;");
             importPackageList.add("");
             importPackageList.add("import java.util.List;");
             importPackageList.add("import java.util.Set;");
@@ -199,6 +202,7 @@ public class ConverterBeanBuilder extends ClassBase {
                     }
                 }
             }
+            classAnnotationList.add("@Primary");
             if (CollUtil.isNotEmpty(poNameList)) {
                 classAnnotationList.add("@Mapper(componentModel = \"spring\", config = BaseBeanConverter.class, uses = {" + String.join(", ", poNameList) + "})");
             } else {
