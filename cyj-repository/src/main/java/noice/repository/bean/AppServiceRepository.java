@@ -96,6 +96,11 @@ public class AppServiceRepository implements BeanRepository<AppServicePo> {
     }
 
     @Override
+    public List<AppServicePo> findAll() {
+        return mapper.selectList(new AppServicePo().getQueryWrapper());
+    }
+
+    @Override
     public IPage<AppServicePo> findPage(IPage<AppServicePo> page, QueryWrapper<AppServicePo> baseQueryWrapper) {
         return mapper.selectPage(page, baseQueryWrapper);
     }

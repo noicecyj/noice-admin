@@ -95,7 +95,7 @@ public class PersistentRepository implements BeanRepository<PersistentPo> {
         return mapper.selectList(baseQueryWrapper);
     }
 
-
+    @Override
     public List<PersistentPo> findAll() {
         return mapper.selectList(new PersistentPo().getQueryWrapper());
     }

@@ -96,6 +96,11 @@ public class AuthorityRepository implements BeanRepository<AuthorityPo> {
     }
 
     @Override
+    public List<AuthorityPo> findAll() {
+        return mapper.selectList(new AuthorityPo().getQueryWrapper());
+    }
+
+    @Override
     public IPage<AuthorityPo> findPage(IPage<AuthorityPo> page, QueryWrapper<AuthorityPo> baseQueryWrapper) {
         return mapper.selectPage(page, baseQueryWrapper);
     }

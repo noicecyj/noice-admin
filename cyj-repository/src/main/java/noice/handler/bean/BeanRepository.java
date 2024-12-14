@@ -37,6 +37,8 @@ public interface BeanRepository<PO extends BasePoBean> {
 
     List<PO> findList(QueryWrapper<PO> queryWrapper);
 
+    List<PO> findAll();
+
     IPage<PO> findPage(IPage<PO> page, QueryWrapper<PO> queryWrapper);
 
     IPage<PO> findPage(IPage<PO> page, PO po);

@@ -96,6 +96,11 @@ public class PersistentTableRepository implements BeanRepository<PersistentTable
     }
 
     @Override
+    public List<PersistentTablePo> findAll() {
+        return mapper.selectList(new PersistentTablePo().getQueryWrapper());
+    }
+
+    @Override
     public IPage<PersistentTablePo> findPage(IPage<PersistentTablePo> page, QueryWrapper<PersistentTablePo> baseQueryWrapper) {
         return mapper.selectPage(page, baseQueryWrapper);
     }

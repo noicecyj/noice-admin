@@ -96,6 +96,11 @@ public class CatalogDictionaryRepository implements BeanRepository<CatalogDictio
     }
 
     @Override
+    public List<CatalogDictionaryPo> findAll() {
+        return mapper.selectList(new CatalogDictionaryPo().getQueryWrapper());
+    }
+
+    @Override
     public IPage<CatalogDictionaryPo> findPage(IPage<CatalogDictionaryPo> page, QueryWrapper<CatalogDictionaryPo> baseQueryWrapper) {
         return mapper.selectPage(page, baseQueryWrapper);
     }

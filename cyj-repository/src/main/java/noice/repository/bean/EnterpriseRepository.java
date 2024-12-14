@@ -96,6 +96,11 @@ public class EnterpriseRepository implements BeanRepository<EnterprisePo> {
     }
 
     @Override
+    public List<EnterprisePo> findAll() {
+        return mapper.selectList(new EnterprisePo().getQueryWrapper());
+    }
+
+    @Override
     public IPage<EnterprisePo> findPage(IPage<EnterprisePo> page, QueryWrapper<EnterprisePo> baseQueryWrapper) {
         return mapper.selectPage(page, baseQueryWrapper);
     }

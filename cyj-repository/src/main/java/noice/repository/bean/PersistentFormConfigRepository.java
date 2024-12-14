@@ -96,6 +96,11 @@ public class PersistentFormConfigRepository implements BeanRepository<Persistent
     }
 
     @Override
+    public List<PersistentFormConfigPo> findAll() {
+        return mapper.selectList(new PersistentFormConfigPo().getQueryWrapper());
+    }
+
+    @Override
     public IPage<PersistentFormConfigPo> findPage(IPage<PersistentFormConfigPo> page, QueryWrapper<PersistentFormConfigPo> baseQueryWrapper) {
         return mapper.selectPage(page, baseQueryWrapper);
     }

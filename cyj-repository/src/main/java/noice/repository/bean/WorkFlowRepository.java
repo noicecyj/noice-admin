@@ -96,6 +96,11 @@ public class WorkFlowRepository implements BeanRepository<WorkFlowPo> {
     }
 
     @Override
+    public List<WorkFlowPo> findAll() {
+        return mapper.selectList(new WorkFlowPo().getQueryWrapper());
+    }
+
+    @Override
     public IPage<WorkFlowPo> findPage(IPage<WorkFlowPo> page, QueryWrapper<WorkFlowPo> baseQueryWrapper) {
         return mapper.selectPage(page, baseQueryWrapper);
     }

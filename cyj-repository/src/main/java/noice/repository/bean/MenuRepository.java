@@ -96,6 +96,11 @@ public class MenuRepository implements BeanRepository<MenuPo> {
     }
 
     @Override
+    public List<MenuPo> findAll() {
+        return mapper.selectList(new MenuPo().getQueryWrapper());
+    }
+
+    @Override
     public IPage<MenuPo> findPage(IPage<MenuPo> page, QueryWrapper<MenuPo> baseQueryWrapper) {
         return mapper.selectPage(page, baseQueryWrapper);
     }

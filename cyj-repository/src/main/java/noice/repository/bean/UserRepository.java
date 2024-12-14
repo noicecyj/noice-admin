@@ -96,6 +96,11 @@ public class UserRepository implements BeanRepository<UserPo> {
     }
 
     @Override
+    public List<UserPo> findAll() {
+        return mapper.selectList(new UserPo().getQueryWrapper());
+    }
+
+    @Override
     public IPage<UserPo> findPage(IPage<UserPo> page, QueryWrapper<UserPo> baseQueryWrapper) {
         return mapper.selectPage(page, baseQueryWrapper);
     }

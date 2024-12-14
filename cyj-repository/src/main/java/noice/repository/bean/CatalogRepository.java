@@ -96,6 +96,11 @@ public class CatalogRepository implements BeanRepository<CatalogPo> {
     }
 
     @Override
+    public List<CatalogPo> findAll() {
+        return mapper.selectList(new CatalogPo().getQueryWrapper());
+    }
+
+    @Override
     public IPage<CatalogPo> findPage(IPage<CatalogPo> page, QueryWrapper<CatalogPo> baseQueryWrapper) {
         return mapper.selectPage(page, baseQueryWrapper);
     }

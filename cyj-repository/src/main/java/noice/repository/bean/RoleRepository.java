@@ -96,6 +96,11 @@ public class RoleRepository implements BeanRepository<RolePo> {
     }
 
     @Override
+    public List<RolePo> findAll() {
+        return mapper.selectList(new RolePo().getQueryWrapper());
+    }
+
+    @Override
     public IPage<RolePo> findPage(IPage<RolePo> page, QueryWrapper<RolePo> baseQueryWrapper) {
         return mapper.selectPage(page, baseQueryWrapper);
     }

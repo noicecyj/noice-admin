@@ -96,6 +96,11 @@ public class InterfaceRepository implements BeanRepository<InterfacePo> {
     }
 
     @Override
+    public List<InterfacePo> findAll() {
+        return mapper.selectList(new InterfacePo().getQueryWrapper());
+    }
+
+    @Override
     public IPage<InterfacePo> findPage(IPage<InterfacePo> page, QueryWrapper<InterfacePo> baseQueryWrapper) {
         return mapper.selectPage(page, baseQueryWrapper);
     }

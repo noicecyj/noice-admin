@@ -96,6 +96,11 @@ public class SqlRepository implements BeanRepository<SqlPo> {
     }
 
     @Override
+    public List<SqlPo> findAll() {
+        return mapper.selectList(new SqlPo().getQueryWrapper());
+    }
+
+    @Override
     public IPage<SqlPo> findPage(IPage<SqlPo> page, QueryWrapper<SqlPo> baseQueryWrapper) {
         return mapper.selectPage(page, baseQueryWrapper);
     }
