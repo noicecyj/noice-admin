@@ -3,6 +3,7 @@ package noice.service;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.extra.spring.SpringUtil;
 import noice.assembler.TableAndFormAndUrlServiceAssembler;
 import noice.assembler.bean.CatalogDictionaryServiceAssembler;
 import noice.common.contants.UserContext;
@@ -23,6 +24,7 @@ import noice.entity.po.bean.PersistentFormPo;
 import noice.entity.po.bean.PersistentPo;
 import noice.entity.po.bean.PersistentTableConfigPo;
 import noice.entity.po.bean.PersistentTablePo;
+import noice.handler.bean.BeanRepository;
 import noice.repository.bean.AuthorityRepository;
 import noice.repository.bean.CatalogDictionaryRepository;
 import noice.repository.bean.CatalogRepository;
@@ -268,8 +270,20 @@ public class TableAndFormAndUrlService {
     }
 
     @Named("dataSourceToOptionList")
-    public List<OptionDTO> dataSourceToOptionList(String dataSourceCode) {
-        List<CatalogDictionaryDto> dict = this.getDict(dataSourceCode);
-        return tableAndFormAndUrlServiceAssembler.dtoCatalogDictionaryListToDtoOptionList(dict);
+    public List<OptionDTO> dataSourceToOptionList(String dataSourceCode) throws ClassNotFoundException {
+        List<String> split = StrUtil.split(dataSourceCode, "#");
+        String type = split.get(0);
+        String name = split.get(1);
+        if ("Entity".equals(type)) {
+            Map<String, BeanRepository> beansOfType = SpringUtil.getBeansOfType(BeanRepository.class);
+            BeanRepository beanRepository = beansOfType.get(StrUtil.lowerFirst(name) + "Repository");
+            if (ObjectUtil.isNotNull(beanRepository)) {
+//                beanRepository.findList();
+            }
+        } else if ("Dict".equals(type)) {
+            List<CatalogDictionaryDto> dict = this.getDict(dataSourceCode);
+            return tableAndFormAndUrlServiceAssembler.dtoCatalogDictionaryListToDtoOptionList(dict);
+        }
+        return null;
     }
 }

@@ -95,6 +95,11 @@ public class PersistentRepository implements BeanRepository<PersistentPo> {
         return mapper.selectList(baseQueryWrapper);
     }
 
+
+    public List<PersistentPo> findAll() {
+        return mapper.selectList(new PersistentPo().getQueryWrapper());
+    }
+
     @Override
     public IPage<PersistentPo> findPage(IPage<PersistentPo> page, QueryWrapper<PersistentPo> baseQueryWrapper) {
         return mapper.selectPage(page, baseQueryWrapper);
