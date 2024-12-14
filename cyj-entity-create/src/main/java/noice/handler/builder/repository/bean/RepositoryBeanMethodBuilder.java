@@ -584,6 +584,34 @@ public class RepositoryBeanMethodBuilder extends MethodBase {
 
         }
 
+        @EqualsAndHashCode(callSuper = true)
+        @Component
+        @Data
+        public static class RepositoryBeanFindAllWrapperBuilder extends RepositoryBeanMethodBuilder {
+
+            public RepositoryBeanFindAllWrapperBuilder builder(PersistentPo persistentPo) {
+                String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
+                this.setMethodStatement(StatementEnum.PUBLIC);
+                this.setMethodReturnType("List<" + poName + "Po>");
+                this.setMethodAnnotationList();
+                this.setMethodName("findAll");
+                this.setMethodReturnBody("return mapper.selectList(new " + poName + "Po().getQueryWrapper());");
+                return this;
+            }
+
+            public void setMethodAnnotationList() {
+                List<String> methodAnnotationList = new ArrayList<>();
+                methodAnnotationList.add("@Override");
+                super.setMethodAnnotationList(methodAnnotationList);
+            }
+
+            @Override
+            public String toString() {
+                return getString(getMethodAnnotationList(), getMethodStatement(), getMethodReturnType(), getMethodName(), getMethodParamSet(), getMethodReturnBody());
+            }
+
+        }
+
     }
 
     @EqualsAndHashCode(callSuper = true)
