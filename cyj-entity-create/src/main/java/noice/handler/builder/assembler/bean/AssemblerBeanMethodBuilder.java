@@ -81,6 +81,55 @@ public class AssemblerBeanMethodBuilder extends MethodBase {
     @EqualsAndHashCode(callSuper = true)
     @Component
     @Data
+    public static class poToOptionDtoBuilder extends AssemblerBeanMethodBuilder {
+
+        public PersistentRepository persistentRepository;
+
+        @Autowired
+        public void setPersistentRepository(PersistentRepository persistentRepository) {
+            this.persistentRepository = persistentRepository;
+        }
+
+        public poToOptionDtoBuilder builder(PersistentPo persistentPo) {
+            String underPoName = StrUtil.toCamelCase(persistentPo.getPersistentCode());
+            String poName = StrUtil.upperFirst(underPoName);
+            this.setMethodStatement(StatementEnum.PUBLIC);
+            this.setMethodReturnType("OptionDTO");
+            this.setMethodName("poToOptionDto");
+            this.setMethodParamSet(poName);
+            this.setMethodAnnotationList(underPoName);
+            return this;
+        }
+
+        public void setMethodParamSet(String poName) {
+            List<String> methodParamSet = new ArrayList<>();
+            methodParamSet.add(poName + "Po po");
+            this.setMethodParamSet(methodParamSet);
+        }
+
+        public void setMethodAnnotationList(String persistentCode) {
+            List<String> methodAnnotationList = new ArrayList<>();
+            methodAnnotationList.add("@Mapping(target = \"label\", source = \"po." + persistentCode + "Name\")");
+            methodAnnotationList.add("@Mapping(target = \"value\", source = \"po.id\")");
+            super.setMethodAnnotationList(methodAnnotationList);
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            List<String> methodAnnotationList = getMethodAnnotationList();
+            for (String methodAnnotation : methodAnnotationList) {
+                sb.append("    ").append(methodAnnotation).append("\n");
+            }
+            sb.append("    ").append(getMethodReturnType()).append(" ").append(getMethodName()).append("(").append(String.join(", ", getMethodParamSet())).append(");");
+            return sb.toString();
+        }
+
+    }
+
+    @EqualsAndHashCode(callSuper = true)
+    @Component
+    @Data
     public static class poToDtoNtoNBuilder extends AssemblerBeanMethodBuilder {
 
         public PersistentRepository persistentRepository;
@@ -155,6 +204,33 @@ public class AssemblerBeanMethodBuilder extends MethodBase {
             this.setMethodStatement(StatementEnum.PUBLIC);
             this.setMethodReturnType("List<" + poName + "Dto>");
             this.setMethodName("poListToDtoList");
+            this.setMethodParamSet(poName);
+            return this;
+        }
+
+        public void setMethodParamSet(String poName) {
+            List<String> methodParamSet = new ArrayList<>();
+            methodParamSet.add("List<" + poName + "Po> poList");
+            this.setMethodParamSet(methodParamSet);
+        }
+
+        @Override
+        public String toString() {
+            return "    " + getMethodReturnType() + " " + getMethodName() + "(" + String.join(", ", getMethodParamSet()) + ");";
+        }
+
+    }
+
+    @EqualsAndHashCode(callSuper = true)
+    @Component
+    @Data
+    public static class poListToDtoOptionListBuilder extends AssemblerBeanMethodBuilder {
+
+        public poListToDtoOptionListBuilder builder(PersistentPo persistentPo) {
+            String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
+            this.setMethodStatement(StatementEnum.PUBLIC);
+            this.setMethodReturnType("List<OptionDTO>");
+            this.setMethodName("poListToDtoOptionList");
             this.setMethodParamSet(poName);
             return this;
         }

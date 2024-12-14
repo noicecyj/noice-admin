@@ -46,6 +46,20 @@ public class AssemblerBeanBuilder extends ClassBase {
 
         private AssemblerBeanMethodBuilder.poSetToDtoSetBuilder poSetToDtoSetBuilder;
 
+        private AssemblerBeanMethodBuilder.poToOptionDtoBuilder poToOptionDtoBuilder;
+
+        private AssemblerBeanMethodBuilder.poListToDtoOptionListBuilder poListToDtoOptionListBuilder;
+
+        @Autowired
+        public void setPoToOptionDtoBuilder(AssemblerBeanMethodBuilder.poToOptionDtoBuilder poToOptionDtoBuilder) {
+            this.poToOptionDtoBuilder = poToOptionDtoBuilder;
+        }
+
+        @Autowired
+        public void setPoListToDtoOptionListBuilder(AssemblerBeanMethodBuilder.poListToDtoOptionListBuilder poListToDtoOptionListBuilder) {
+            this.poListToDtoOptionListBuilder = poListToDtoOptionListBuilder;
+        }
+
         @Autowired
         public void setPersistentRepository(PersistentRepository persistentRepository) {
             this.persistentRepository = persistentRepository;
@@ -94,7 +108,7 @@ public class AssemblerBeanBuilder extends ClassBase {
 
         public void setImportList(String poName) {
             importPackageList = new ArrayList<>();
-
+            importPackageList.add("import noice.common.entity.dto.OptionDTO;");
             importPackageList.add("import noice.entity.dto.bean." + poName + "Dto;");
             List<String> poNameList = new ArrayList<>();
             for (Map<String, PersistentPo> NtoNMap : getPoList()) {
@@ -175,6 +189,10 @@ public class AssemblerBeanBuilder extends ClassBase {
             sb.append(poListToDtoListBuilder.builder(getPersistentPo())).append("\n");
             sb.append("\n");
             sb.append(poSetToDtoSetBuilder.builder(getPersistentPo())).append("\n");
+            sb.append("\n");
+            sb.append(poToOptionDtoBuilder.builder(getPersistentPo())).append("\n");
+            sb.append("\n");
+            sb.append(poListToDtoOptionListBuilder.builder(getPersistentPo())).append("\n");
             sb.append("\n");
             sb.append("}");
             return sb.toString();
