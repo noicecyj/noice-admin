@@ -587,9 +587,9 @@ public class RepositoryBeanMethodBuilder extends MethodBase {
         @EqualsAndHashCode(callSuper = true)
         @Component
         @Data
-        public static class RepositoryBeanFindAllWrapperBuilder extends RepositoryBeanMethodBuilder {
+        public static class RepositoryBeanFindAllBuilder extends RepositoryBeanMethodBuilder {
 
-            public RepositoryBeanFindAllWrapperBuilder builder(PersistentPo persistentPo) {
+            public RepositoryBeanFindAllBuilder builder(PersistentPo persistentPo) {
                 String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
                 this.setMethodStatement(StatementEnum.PUBLIC);
                 this.setMethodReturnType("List<" + poName + "Po>");

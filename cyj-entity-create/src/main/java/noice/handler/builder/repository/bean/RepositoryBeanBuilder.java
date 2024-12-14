@@ -53,7 +53,7 @@ public class RepositoryBeanBuilder extends ClassBase {
 
     private RepositoryBeanMethodBuilder.RepositoryBeanFindListBuilder.RepositoryBeanFindListWrapperBuilder repositoryBeanFindListWrapperBuilder;
 
-    private RepositoryBeanMethodBuilder.RepositoryBeanFindListBuilder.RepositoryBeanFindAllWrapperBuilder repositoryBeanFindAllWrapperBuilder;
+    private RepositoryBeanMethodBuilder.RepositoryBeanFindListBuilder.RepositoryBeanFindAllBuilder repositoryBeanFindAllBuilder;
 
     private RepositoryBeanMethodBuilder.RepositoryBeanFindPageBuilder.RepositoryBeanFindPageWrapperBuilder repositoryBeanFindPageWrapperBuilder;
 
@@ -135,8 +135,8 @@ public class RepositoryBeanBuilder extends ClassBase {
     }
 
     @Autowired
-    public void setRepositoryBeanFindAllWrapperBuilder(RepositoryBeanMethodBuilder.RepositoryBeanFindListBuilder.RepositoryBeanFindAllWrapperBuilder repositoryBeanFindAllWrapperBuilder) {
-        this.repositoryBeanFindAllWrapperBuilder = repositoryBeanFindAllWrapperBuilder;
+    public void setRepositoryBeanFindAllBuilder(RepositoryBeanMethodBuilder.RepositoryBeanFindListBuilder.RepositoryBeanFindAllBuilder repositoryBeanFindAllBuilder) {
+        this.repositoryBeanFindAllBuilder = repositoryBeanFindAllBuilder;
     }
 
     @Autowired
@@ -241,7 +241,7 @@ public class RepositoryBeanBuilder extends ClassBase {
         sb.append("\n");
         sb.append(repositoryBeanFindListWrapperBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");
-        sb.append(repositoryBeanFindAllWrapperBuilder.builder(getPersistentPo())).append("\n");
+        sb.append(repositoryBeanFindAllBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");
         sb.append(repositoryBeanFindPageWrapperBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");
