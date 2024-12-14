@@ -1,5 +1,6 @@
 package noice.assembler.bean;
 
+import noice.common.entity.dto.OptionDTO;
 import noice.entity.dto.bean.PersistentFormConfigDto;
 import noice.entity.po.bean.PersistentFormConfigPo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
@@ -26,5 +27,11 @@ public interface PersistentFormConfigServiceAssembler {
     List<PersistentFormConfigDto> poListToDtoList(List<PersistentFormConfigPo> poList);
 
     Set<PersistentFormConfigDto> poSetToDtoSet(Set<PersistentFormConfigPo> poSet);
+
+    @Mapping(target = "label", source = "po.persistentFormConfigName")
+    @Mapping(target = "value", source = "po.id")
+    OptionDTO poToOptionDto(PersistentFormConfigPo po);
+
+    List<OptionDTO> poListToDtoOptionList(List<PersistentFormConfigPo> poList);
 
 }

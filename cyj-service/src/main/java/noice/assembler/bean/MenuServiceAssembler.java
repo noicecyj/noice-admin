@@ -1,5 +1,6 @@
 package noice.assembler.bean;
 
+import noice.common.entity.dto.OptionDTO;
 import noice.entity.dto.bean.MenuDto;
 import noice.entity.po.bean.MenuPo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
@@ -26,5 +27,11 @@ public interface MenuServiceAssembler {
     List<MenuDto> poListToDtoList(List<MenuPo> poList);
 
     Set<MenuDto> poSetToDtoSet(Set<MenuPo> poSet);
+
+    @Mapping(target = "label", source = "po.menuName")
+    @Mapping(target = "value", source = "po.id")
+    OptionDTO poToOptionDto(MenuPo po);
+
+    List<OptionDTO> poListToDtoOptionList(List<MenuPo> poList);
 
 }

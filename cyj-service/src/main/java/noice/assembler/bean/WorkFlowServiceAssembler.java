@@ -1,9 +1,11 @@
 package noice.assembler.bean;
 
+import noice.common.entity.dto.OptionDTO;
 import noice.entity.dto.bean.WorkFlowDto;
 import noice.entity.po.bean.WorkFlowPo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.springframework.context.annotation.Primary;
 
 import java.util.List;
@@ -21,5 +23,11 @@ public interface WorkFlowServiceAssembler {
     List<WorkFlowDto> poListToDtoList(List<WorkFlowPo> poList);
 
     Set<WorkFlowDto> poSetToDtoSet(Set<WorkFlowPo> poSet);
+
+    @Mapping(target = "label", source = "po.workFlowName")
+    @Mapping(target = "value", source = "po.id")
+    OptionDTO poToOptionDto(WorkFlowPo po);
+
+    List<OptionDTO> poListToDtoOptionList(List<WorkFlowPo> poList);
 
 }

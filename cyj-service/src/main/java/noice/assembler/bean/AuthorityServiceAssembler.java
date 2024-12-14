@@ -1,5 +1,6 @@
 package noice.assembler.bean;
 
+import noice.common.entity.dto.OptionDTO;
 import noice.entity.dto.bean.AuthorityDto;
 import noice.entity.po.bean.RolePo;
 import noice.entity.po.bean.AuthorityPo;
@@ -26,5 +27,11 @@ public interface AuthorityServiceAssembler {
     List<AuthorityDto> poListToDtoList(List<AuthorityPo> poList);
 
     Set<AuthorityDto> poSetToDtoSet(Set<AuthorityPo> poSet);
+
+    @Mapping(target = "label", source = "po.authorityName")
+    @Mapping(target = "value", source = "po.id")
+    OptionDTO poToOptionDto(AuthorityPo po);
+
+    List<OptionDTO> poListToDtoOptionList(List<AuthorityPo> poList);
 
 }

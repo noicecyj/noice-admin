@@ -1,5 +1,6 @@
 package noice.assembler.bean;
 
+import noice.common.entity.dto.OptionDTO;
 import noice.entity.dto.bean.PersistentTableConfigDto;
 import noice.entity.po.bean.PersistentTableConfigPo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
@@ -26,5 +27,11 @@ public interface PersistentTableConfigServiceAssembler {
     List<PersistentTableConfigDto> poListToDtoList(List<PersistentTableConfigPo> poList);
 
     Set<PersistentTableConfigDto> poSetToDtoSet(Set<PersistentTableConfigPo> poSet);
+
+    @Mapping(target = "label", source = "po.persistentTableConfigName")
+    @Mapping(target = "value", source = "po.id")
+    OptionDTO poToOptionDto(PersistentTableConfigPo po);
+
+    List<OptionDTO> poListToDtoOptionList(List<PersistentTableConfigPo> poList);
 
 }

@@ -1,5 +1,6 @@
 package noice.assembler.bean;
 
+import noice.common.entity.dto.OptionDTO;
 import noice.entity.dto.bean.CatalogDictionaryDto;
 import noice.entity.po.bean.CatalogDictionaryPo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
@@ -24,5 +25,11 @@ public interface CatalogDictionaryServiceAssembler {
     List<CatalogDictionaryDto> poListToDtoList(List<CatalogDictionaryPo> poList);
 
     Set<CatalogDictionaryDto> poSetToDtoSet(Set<CatalogDictionaryPo> poSet);
+
+    @Mapping(target = "label", source = "po.catalogDictionaryName")
+    @Mapping(target = "value", source = "po.id")
+    OptionDTO poToOptionDto(CatalogDictionaryPo po);
+
+    List<OptionDTO> poListToDtoOptionList(List<CatalogDictionaryPo> poList);
 
 }

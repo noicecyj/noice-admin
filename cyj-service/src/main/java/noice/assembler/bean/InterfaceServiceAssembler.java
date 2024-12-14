@@ -1,5 +1,6 @@
 package noice.assembler.bean;
 
+import noice.common.entity.dto.OptionDTO;
 import noice.entity.dto.bean.InterfaceDto;
 import noice.entity.po.bean.InterfacePo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
@@ -26,5 +27,11 @@ public interface InterfaceServiceAssembler {
     List<InterfaceDto> poListToDtoList(List<InterfacePo> poList);
 
     Set<InterfaceDto> poSetToDtoSet(Set<InterfacePo> poSet);
+
+    @Mapping(target = "label", source = "po.interfaceName")
+    @Mapping(target = "value", source = "po.id")
+    OptionDTO poToOptionDto(InterfacePo po);
+
+    List<OptionDTO> poListToDtoOptionList(List<InterfacePo> poList);
 
 }
