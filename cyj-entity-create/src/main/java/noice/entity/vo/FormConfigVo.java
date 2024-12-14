@@ -1,6 +1,9 @@
 package noice.entity.vo;
 
 import lombok.Data;
+import noice.common.entity.dto.OptionDTO;
+
+import java.util.List;
 
 /**
  * @author Noice
@@ -14,7 +17,7 @@ public class FormConfigVo {
 
     private int persistentFormConfigColSpan;
 
-    private String persistentFormConfigDataSource;
+    private List<OptionDTO> persistentFormConfigDataSource;
 
     private String persistentFormConfigDefaultValue;
 

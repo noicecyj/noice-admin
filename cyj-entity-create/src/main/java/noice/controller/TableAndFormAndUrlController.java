@@ -51,10 +51,10 @@ public class TableAndFormAndUrlController {
         return ResultVO.success(tableAndFormAndUrlControllerAssembler.dtoToVo(tableAndFormAndUrlService.getUrl(persistentCode)));
     }
 
-    @Operation(summary = "获取字典")
-    @GetMapping(value = "getDict/{dataSourceCode}")
-    public ResultVO getDict(@PathVariable("dataSourceCode") String dataSourceCode) {
-        return ResultVO.success(tableAndFormAndUrlControllerAssembler.dtoCatalogDictionaryListToVoOptionList(tableAndFormAndUrlService.getDict(dataSourceCode)));
-    }
+//    @Operation(summary = "获取字典")
+//    @GetMapping(value = "getDict/{dataSourceCode}")
+//    public ResultVO getDict(@PathVariable("dataSourceCode") String dataSourceCode) {
+//        return ResultVO.success(tableAndFormAndUrlControllerAssembler.dtoCatalogDictionaryListToVoOptionList(tableAndFormAndUrlService.getDict(dataSourceCode)));
+//    }
 
 }

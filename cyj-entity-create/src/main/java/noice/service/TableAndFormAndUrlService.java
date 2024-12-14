@@ -6,6 +6,7 @@ import cn.hutool.core.util.StrUtil;
 import noice.assembler.TableAndFormAndUrlServiceAssembler;
 import noice.assembler.bean.CatalogDictionaryServiceAssembler;
 import noice.common.contants.UserContext;
+import noice.common.entity.dto.OptionDTO;
 import noice.entity.dto.FormConfigDto;
 import noice.entity.dto.FormConfigRowDto;
 import noice.entity.dto.FormDto;
@@ -31,6 +32,7 @@ import noice.repository.bean.PersistentFormRepository;
 import noice.repository.bean.PersistentRepository;
 import noice.repository.bean.PersistentTableConfigRepository;
 import noice.repository.bean.PersistentTableRepository;
+import org.mapstruct.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -129,8 +131,7 @@ public class TableAndFormAndUrlService {
         if (tableCodeList.isEmpty()) {
             return null;
         } else {
-            PersistentTablePo persistentTablePo = persistentTableRepository
-                    .find(new PersistentTablePo().eqPersistentTableCode(tableCode).getQueryWrapper());
+            PersistentTablePo persistentTablePo = persistentTableRepository.find(new PersistentTablePo().eqPersistentTableCode(tableCode).getQueryWrapper());
             if (persistentTablePo == null) {
                 return null;
             }
@@ -139,12 +140,8 @@ public class TableAndFormAndUrlService {
             if (!"allAuthority".equals(String.join("", tableCodeList))) {
                 authorityPo.inAuthorityCode(tableCodeList);
             }
-            List<String> authorityId = authorityRepository
-                    .findList(authorityPo.getQueryWrapper()).stream().map(AuthorityPo::getId).toList();
-            List<PersistentTableConfigPo> persistentTableConfigPoList = persistentTableConfigRepository
-                    .findList(new PersistentTableConfigPo()
-                            .eqPersistentTableId(persistentTablePo.getId())
-                            .inAuthorityId(authorityId).getQueryWrapper());
+            List<String> authorityId = authorityRepository.findList(authorityPo.getQueryWrapper()).stream().map(AuthorityPo::getId).toList();
+            List<PersistentTableConfigPo> persistentTableConfigPoList = persistentTableConfigRepository.findList(new PersistentTableConfigPo().eqPersistentTableId(persistentTablePo.getId()).inAuthorityId(authorityId).getQueryWrapper());
             List<TableConfigDto> tableConfigDtoList = tableAndFormAndUrlServiceAssembler.poTableListToDtoTableList(persistentTableConfigPoList);
             tableDto.setTableConfigDtoList(tableConfigDtoList);
             return tableDto;
@@ -156,8 +153,7 @@ public class TableAndFormAndUrlService {
         if (formCodeList.isEmpty()) {
             return null;
         } else {
-            PersistentFormPo persistentFormPo = persistentFormRepository
-                    .find(new PersistentFormPo().eqPersistentFormCode(formCode).getQueryWrapper());
+            PersistentFormPo persistentFormPo = persistentFormRepository.find(new PersistentFormPo().eqPersistentFormCode(formCode).getQueryWrapper());
             if (persistentFormPo == null) {
                 return null;
             }
@@ -166,12 +162,8 @@ public class TableAndFormAndUrlService {
             if (!"allAuthority".equals(String.join("", formCodeList))) {
                 authorityPo.inAuthorityCode(formCodeList);
             }
-            List<String> authorityId = authorityRepository
-                    .findList(authorityPo.getQueryWrapper()).stream().map(AuthorityPo::getId).toList();
-            List<PersistentFormConfigPo> persistentFormConfigPoList = persistentFormConfigRepository
-                    .findList(new PersistentFormConfigPo()
-                            .eqPersistentFormId(persistentFormPo.getId())
-                            .inAuthorityId(authorityId).getQueryWrapper());
+            List<String> authorityId = authorityRepository.findList(authorityPo.getQueryWrapper()).stream().map(AuthorityPo::getId).toList();
+            List<PersistentFormConfigPo> persistentFormConfigPoList = persistentFormConfigRepository.findList(new PersistentFormConfigPo().eqPersistentFormId(persistentFormPo.getId()).inAuthorityId(authorityId).getQueryWrapper());
             List<FormConfigDto> formConfigDtoList = tableAndFormAndUrlServiceAssembler.poFormListToDtoFormList(persistentFormConfigPoList);
             List<FormConfigRowDto> formConfigRowDtoList = setFormConfigRow(formConfigDtoList);
             formConfigRowDtoList.add(setBaseFormConfigRow());
@@ -245,11 +237,8 @@ public class TableAndFormAndUrlService {
             StrUtil.toUnderlineCase(StrUtil.lowerFirst(persistentCode));
             PersistentPo persistentPo = persistentRepository.find(new PersistentPo().eqPersistentCode(persistentCode).getQueryWrapper());
             if (ObjectUtil.isNotNull(persistentPo)) {
-                List<String> authorityId = authorityRepository
-                        .findList(authorityPo.getQueryWrapper()).stream().map(AuthorityPo::getId).toList();
-                List<InterfacePo> interfacePoList = interfaceRepository
-                        .findList(new InterfacePo().inAuthorityId(authorityId)
-                                .eqPersistentId(persistentPo.getId()).getQueryWrapper());
+                List<String> authorityId = authorityRepository.findList(authorityPo.getQueryWrapper()).stream().map(AuthorityPo::getId).toList();
+                List<InterfacePo> interfacePoList = interfaceRepository.findList(new InterfacePo().inAuthorityId(authorityId).eqPersistentId(persistentPo.getId()).getQueryWrapper());
                 UrlDto urlDto = new UrlDto();
                 if (ObjectUtil.isNotNull(interfacePoList)) {
                     Map<String, String> urlMap = interfacePoList.stream().collect(Collectors.toMap(InterfacePo::getInterfaceCode, InterfacePo::getInterfacePath));
@@ -273,9 +262,14 @@ public class TableAndFormAndUrlService {
     public List<CatalogDictionaryDto> getDict(String dataSourceCode) {
         CatalogPo catalogPo = catalogRepository.find(new CatalogPo().eqCatalogCode(dataSourceCode).getQueryWrapper());
         if (ObjectUtil.isNotNull(catalogPo)) {
-            return catalogDictionaryServiceAssembler.poListToDtoList(catalogDictionaryRepository
-                    .findList(new CatalogDictionaryPo().eqCatalogId(catalogPo.getId()).getQueryWrapper()));
+            return catalogDictionaryServiceAssembler.poListToDtoList(catalogDictionaryRepository.findList(new CatalogDictionaryPo().eqCatalogId(catalogPo.getId()).getQueryWrapper()));
         }
         return null;
+    }
+
+    @Named("dataSourceToOptionList")
+    public List<OptionDTO> dataSourceToOptionList(String dataSourceCode) {
+        List<CatalogDictionaryDto> dict = this.getDict(dataSourceCode);
+        return tableAndFormAndUrlServiceAssembler.dtoCatalogDictionaryListToDtoOptionList(dict);
     }
 }
