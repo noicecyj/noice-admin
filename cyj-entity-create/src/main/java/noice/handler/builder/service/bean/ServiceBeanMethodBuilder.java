@@ -617,7 +617,7 @@ public class ServiceBeanMethodBuilder extends MethodBase {
         public ServiceBeanGetOptionsBuilder builder(PersistentPo persistentPo) {
             String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
             this.setMethodStatement(StatementEnum.PUBLIC);
-            this.setMethodReturnType("List<OptionDTO>");
+            this.setMethodReturnType("List<OptionDTO<String>>");
             this.setMethodName("getOptions");
             this.setMethodAnnotationList();
             this.setMethodReturnBody("return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new " + poName + "Dto()).eqAuto().getQueryWrapper()));");
