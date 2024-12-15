@@ -3,6 +3,7 @@ package noice.service.bean;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import noice.assembler.bean.AuthorityServiceAssembler;
+import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.AuthorityServiceConverter;
 import noice.entity.dto.bean.AuthorityDto;
 import noice.entity.po.relation.RoleAuthorityPo;
@@ -89,6 +90,11 @@ public class AuthorityService implements BeanService<AuthorityDto> {
     @Override
     public IPage<AuthorityDto> findPage(@NotNull AuthorityDto dto) {
         return repository.findPage(new Page<>(dto.getCurrent(), dto.getPageSize()), converter.dtoToPo(dto)).convert(po -> assembler.poToDto(po));
+    }
+
+    @Override
+    public List<OptionDTO> getOptions() {
+        return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new AuthorityDto()).eqAuto().getQueryWrapper()));
     }
 
     public List<AuthorityDto> findListByRoleIds(List<String> ids) {

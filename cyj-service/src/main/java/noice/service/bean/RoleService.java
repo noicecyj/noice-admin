@@ -3,6 +3,7 @@ package noice.service.bean;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import noice.assembler.bean.RoleServiceAssembler;
+import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.RoleServiceConverter;
 import noice.entity.dto.bean.RoleDto;
 import noice.entity.po.relation.UserRolePo;
@@ -98,6 +99,11 @@ public class RoleService implements BeanService<RoleDto> {
     @Override
     public IPage<RoleDto> findPage(@NotNull RoleDto dto) {
         return repository.findPage(new Page<>(dto.getCurrent(), dto.getPageSize()), converter.dtoToPo(dto)).convert(po -> assembler.poToDto(po));
+    }
+
+    @Override
+    public List<OptionDTO> getOptions() {
+        return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new RoleDto()).eqAuto().getQueryWrapper()));
     }
 
     public List<RoleDto> findListByUserIds(List<String> ids) {

@@ -3,6 +3,7 @@ package noice.service.bean;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import noice.assembler.bean.InterfaceServiceAssembler;
+import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.InterfaceServiceConverter;
 import noice.entity.dto.bean.InterfaceDto;
 import noice.handler.bean.BeanService;
@@ -80,6 +81,11 @@ public class InterfaceService implements BeanService<InterfaceDto> {
     @Override
     public IPage<InterfaceDto> findPage(@NotNull InterfaceDto dto) {
         return repository.findPage(new Page<>(dto.getCurrent(), dto.getPageSize()), converter.dtoToPo(dto)).convert(po -> assembler.poToDto(po));
+    }
+
+    @Override
+    public List<OptionDTO> getOptions() {
+        return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new InterfaceDto()).eqAuto().getQueryWrapper()));
     }
 
 }

@@ -3,6 +3,7 @@ package noice.service.bean;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import noice.assembler.bean.PersistentTableServiceAssembler;
+import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.PersistentTableServiceConverter;
 import noice.entity.dto.bean.PersistentTableDto;
 import noice.handler.bean.BeanService;
@@ -80,6 +81,11 @@ public class PersistentTableService implements BeanService<PersistentTableDto> {
     @Override
     public IPage<PersistentTableDto> findPage(@NotNull PersistentTableDto dto) {
         return repository.findPage(new Page<>(dto.getCurrent(), dto.getPageSize()), converter.dtoToPo(dto)).convert(po -> assembler.poToDto(po));
+    }
+
+    @Override
+    public List<OptionDTO> getOptions() {
+        return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new PersistentTableDto()).eqAuto().getQueryWrapper()));
     }
 
 }

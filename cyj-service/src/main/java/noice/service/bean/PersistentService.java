@@ -83,6 +83,7 @@ public class PersistentService implements BeanService<PersistentDto> {
         return repository.findPage(new Page<>(dto.getCurrent(), dto.getPageSize()), converter.dtoToPo(dto)).convert(po -> assembler.poToDto(po));
     }
 
+    @Override
     public List<OptionDTO> getOptions() {
         return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new PersistentDto()).eqAuto().getQueryWrapper()));
     }

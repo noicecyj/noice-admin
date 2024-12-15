@@ -1,6 +1,7 @@
 package noice.handler.bean;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import noice.common.entity.dto.OptionDTO;
 import noice.handler.dto.BaseDtoBean;
 
 import java.util.List;
@@ -25,5 +26,7 @@ public interface BeanService<DTO extends BaseDtoBean> {
     int deleteOne(String id);
 
     int updateOne(DTO dto);
+
+    List<OptionDTO> getOptions();
 
 }

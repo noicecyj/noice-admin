@@ -3,6 +3,7 @@ package noice.service.bean;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import noice.assembler.bean.CatalogDictionaryServiceAssembler;
+import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.CatalogDictionaryServiceConverter;
 import noice.entity.dto.bean.CatalogDictionaryDto;
 import noice.handler.bean.BeanService;
@@ -80,6 +81,11 @@ public class CatalogDictionaryService implements BeanService<CatalogDictionaryDt
     @Override
     public IPage<CatalogDictionaryDto> findPage(@NotNull CatalogDictionaryDto dto) {
         return repository.findPage(new Page<>(dto.getCurrent(), dto.getPageSize()), converter.dtoToPo(dto)).convert(po -> assembler.poToDto(po));
+    }
+
+    @Override
+    public List<OptionDTO> getOptions() {
+        return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new CatalogDictionaryDto()).eqAuto().getQueryWrapper()));
     }
 
 }

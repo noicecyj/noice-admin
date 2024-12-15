@@ -3,6 +3,7 @@ package noice.service.bean;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import noice.assembler.bean.MenuServiceAssembler;
+import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.MenuServiceConverter;
 import noice.entity.dto.bean.MenuDto;
 import noice.handler.bean.BeanService;
@@ -80,6 +81,11 @@ public class MenuService implements BeanService<MenuDto> {
     @Override
     public IPage<MenuDto> findPage(@NotNull MenuDto dto) {
         return repository.findPage(new Page<>(dto.getCurrent(), dto.getPageSize()), converter.dtoToPo(dto)).convert(po -> assembler.poToDto(po));
+    }
+
+    @Override
+    public List<OptionDTO> getOptions() {
+        return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new MenuDto()).eqAuto().getQueryWrapper()));
     }
 
 }
