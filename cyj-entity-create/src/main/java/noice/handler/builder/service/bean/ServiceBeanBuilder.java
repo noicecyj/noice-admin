@@ -59,6 +59,8 @@ public class ServiceBeanBuilder extends ClassBase {
 
     private ServiceBeanMethodBuilder.ServiceBeanFindListBuilder.ServiceBeanFindListByConditionBuilder serviceBeanFindListByConditionBuilder;
 
+    private ServiceBeanMethodBuilder.ServiceBeanGetOptionsBuilder serviceBeanGetOptionsBuilder;
+
     private ServiceBeanMethodBuilder.ServiceBeanFindPageBuilder serviceBeanFindPageBuilder;
 
     private ServiceBeanMethodBuilder.ServiceBeanFindRelationBuilder serviceBeanFindRelationBuilder;
@@ -144,6 +146,11 @@ public class ServiceBeanBuilder extends ClassBase {
     }
 
     @Autowired
+    public void setServiceBeanGetOptionsBuilder(ServiceBeanMethodBuilder.ServiceBeanGetOptionsBuilder serviceBeanGetOptionsBuilder) {
+        this.serviceBeanGetOptionsBuilder = serviceBeanGetOptionsBuilder;
+    }
+
+    @Autowired
     public void setServiceBeanFindRelationBuilder(ServiceBeanMethodBuilder.ServiceBeanFindRelationBuilder serviceBeanFindRelationBuilder) {
         this.serviceBeanFindRelationBuilder = serviceBeanFindRelationBuilder;
     }
@@ -174,6 +181,7 @@ public class ServiceBeanBuilder extends ClassBase {
         importPackageList.add("import com.baomidou.mybatisplus.core.metadata.IPage;");
         importPackageList.add("import com.baomidou.mybatisplus.extension.plugins.pagination.Page;");
         importPackageList.add("import noice.assembler.bean." + poName + "ServiceAssembler;");
+        importPackageList.add("import noice.common.entity.dto.OptionDTO;");
         importPackageList.add("import noice.converter.bean." + poName + "ServiceConverter;");
         importPackageList.add("import noice.entity.dto.bean." + poName + "Dto;");
         for (Map<String, PersistentPo> relationMap : getPoList()) {
@@ -253,6 +261,8 @@ public class ServiceBeanBuilder extends ClassBase {
         sb.append(serviceBeanFindListByConditionBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");
         sb.append(serviceBeanFindPageBuilder.builder(getPersistentPo())).append("\n");
+        sb.append("\n");
+        sb.append(serviceBeanGetOptionsBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");
         for (Map<String, PersistentPo> poMap : getPoList()) {
             sb.append(serviceBeanFindRelationBuilder.builder(getPersistentPo(), poMap.get("NtoN"), poMap.get("relation"))).append("\n");

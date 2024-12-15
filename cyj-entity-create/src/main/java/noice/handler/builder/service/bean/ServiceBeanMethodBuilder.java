@@ -609,4 +609,39 @@ public class ServiceBeanMethodBuilder extends MethodBase {
 
     }
 
+    @EqualsAndHashCode(callSuper = true)
+    @Component
+    @Data
+    public static class ServiceBeanGetOptionsBuilder extends ServiceBeanMethodBuilder {
+
+        public ServiceBeanGetOptionsBuilder builder(PersistentPo persistentPo) {
+            String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
+            this.setMethodStatement(StatementEnum.PUBLIC);
+            this.setMethodReturnType("List<OptionDTO>");
+            this.setMethodName("getOptions");
+            this.setMethodAnnotationList();
+            this.setMethodReturnBody("return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new " + poName + "Dto()).eqAuto().getQueryWrapper()));");
+            return this;
+        }
+
+        public void setMethodAnnotationList() {
+            List<String> methodAnnotationList = new ArrayList<>();
+            methodAnnotationList.add("@Override");
+            super.setMethodAnnotationList(methodAnnotationList);
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            for (String methodAnnotation : getMethodAnnotationList()) {
+                sb.append("    ").append(methodAnnotation).append("\n");
+            }
+            sb.append("    ").append(getMethodStatement().getStatement()).append(" ").append(getMethodReturnType()).append(" ").append(getMethodName()).append("() {\n");
+            sb.append("        ").append(getMethodReturnBody()).append("\n");
+            sb.append("    }");
+            return sb.toString();
+        }
+
+    }
+
 }

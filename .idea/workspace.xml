@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/service/TableAndFormAndUrlService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/service/TableAndFormAndUrlService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -415,14 +416,7 @@
       <workItem from="1734014925677" duration="597000" />
       <workItem from="1734018874077" duration="2327000" />
       <workItem from="1734068013017" duration="18548000" />
-    </task>
-    <task id="LOCAL-00149" summary="添加获取ValueEnum和Options接口，优化代码结构">
-      <option name="closed" value="true" />
-      <created>1733031660827</created>
-      <option name="number" value="00149" />
-      <option name="presentableId" value="LOCAL-00149" />
-      <option name="project" value="LOCAL" />
-      <updated>1733031660827</updated>
+      <workItem from="1734230518885" duration="1772000" />
     </task>
     <task id="LOCAL-00150" summary="添加获取ValueEnum和Options接口，优化代码结构">
       <option name="closed" value="true" />
@@ -808,7 +802,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734183166053</updated>
     </task>
-    <option name="localTasksCounter" value="198" />
+    <task id="LOCAL-00198" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1734183254693</created>
+      <option name="number" value="00198" />
+      <option name="presentableId" value="LOCAL-00198" />
+      <option name="project" value="LOCAL" />
+      <updated>1734183254693</updated>
+    </task>
+    <option name="localTasksCounter" value="199" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

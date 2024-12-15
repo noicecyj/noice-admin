@@ -275,10 +275,11 @@ public class TableAndFormAndUrlService {
         String type = split.get(0);
         String name = split.get(1);
         if ("Entity".equals(type)) {
+            Class<?> clazz = Class.forName(name);
             Map<String, BeanRepository> beansOfType = SpringUtil.getBeansOfType(BeanRepository.class);
             BeanRepository beanRepository = beansOfType.get(StrUtil.lowerFirst(name) + "Repository");
             if (ObjectUtil.isNotNull(beanRepository)) {
-//                beanRepository.findList();
+                List all = beanRepository.findAll();
             }
         } else if ("Dict".equals(type)) {
             List<CatalogDictionaryDto> dict = this.getDict(dataSourceCode);
