@@ -26,8 +26,8 @@ public interface SqlServiceAssembler {
 
     @Mapping(target = "label", source = "po.sqlName")
     @Mapping(target = "value", source = "po.id")
-    OptionDTO poToOptionDto(SqlPo po);
+    OptionDTO<String> poToOptionDto(SqlPo po);
 
-    List<OptionDTO> poListToDtoOptionList(List<SqlPo> poList);
+    List<OptionDTO<String>> poListToDtoOptionList(List<SqlPo> poList);
 
 }

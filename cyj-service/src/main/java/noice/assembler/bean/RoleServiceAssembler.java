@@ -2,9 +2,9 @@ package noice.assembler.bean;
 
 import noice.common.entity.dto.OptionDTO;
 import noice.entity.dto.bean.RoleDto;
-import noice.entity.po.bean.UserPo;
 import noice.entity.po.bean.AuthorityPo;
 import noice.entity.po.bean.RolePo;
+import noice.entity.po.bean.UserPo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -32,8 +32,8 @@ public interface RoleServiceAssembler {
 
     @Mapping(target = "label", source = "po.roleName")
     @Mapping(target = "value", source = "po.id")
-    OptionDTO poToOptionDto(RolePo po);
+    OptionDTO<String> poToOptionDto(RolePo po);
 
-    List<OptionDTO> poListToDtoOptionList(List<RolePo> poList);
+    List<OptionDTO<String>> poListToDtoOptionList(List<RolePo> poList);
 
 }

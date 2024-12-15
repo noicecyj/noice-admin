@@ -30,8 +30,8 @@ public interface PersistentFormConfigServiceAssembler {
 
     @Mapping(target = "label", source = "po.persistentFormConfigName")
     @Mapping(target = "value", source = "po.id")
-    OptionDTO poToOptionDto(PersistentFormConfigPo po);
+    OptionDTO<String> poToOptionDto(PersistentFormConfigPo po);
 
-    List<OptionDTO> poListToDtoOptionList(List<PersistentFormConfigPo> poList);
+    List<OptionDTO<String>> poListToDtoOptionList(List<PersistentFormConfigPo> poList);
 
 }

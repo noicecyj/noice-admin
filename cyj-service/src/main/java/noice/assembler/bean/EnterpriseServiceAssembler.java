@@ -26,8 +26,8 @@ public interface EnterpriseServiceAssembler {
 
     @Mapping(target = "label", source = "po.enterpriseName")
     @Mapping(target = "value", source = "po.id")
-    OptionDTO poToOptionDto(EnterprisePo po);
+    OptionDTO<String> poToOptionDto(EnterprisePo po);
 
-    List<OptionDTO> poListToDtoOptionList(List<EnterprisePo> poList);
+    List<OptionDTO<String>> poListToDtoOptionList(List<EnterprisePo> poList);
 
 }

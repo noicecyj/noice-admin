@@ -85,7 +85,7 @@ public class CatalogRepository implements BeanRepository<CatalogPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -95,7 +95,7 @@ public class CatalogRepository implements BeanRepository<CatalogPo> {
     }
 
     @Override
-    public CatalogPo find(String id) {
+    public CatalogPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -165,7 +165,7 @@ public class CatalogRepository implements BeanRepository<CatalogPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -175,7 +175,7 @@ public class CatalogRepository implements BeanRepository<CatalogPo> {
     }
 
     @Override
-    public CatalogPo find(String id) {
+    public CatalogPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -241,7 +241,7 @@ public class CatalogRepository implements BeanRepository<CatalogPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -256,7 +256,7 @@ public class CatalogRepository implements BeanRepository<CatalogPo> {
     }
 
     @Override
-    public CatalogPo find(String id) {
+    public CatalogPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -324,7 +324,7 @@ public class CatalogRepository implements BeanRepository<CatalogPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -339,7 +339,7 @@ public class CatalogRepository implements BeanRepository<CatalogPo> {
     }
 
     @Override
-    public CatalogPo find(String id) {
+    public CatalogPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -407,7 +407,7 @@ public class CatalogRepository implements BeanRepository<CatalogPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -422,7 +422,7 @@ public class CatalogRepository implements BeanRepository<CatalogPo> {
     }
 
     @Override
-    public CatalogPo find(String id) {
+    public CatalogPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -493,7 +493,7 @@ public class CatalogRepository implements BeanRepository<CatalogPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -508,7 +508,7 @@ public class CatalogRepository implements BeanRepository<CatalogPo> {
     }
 
     @Override
-    public CatalogPo find(String id) {
+    public CatalogPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -579,7 +579,7 @@ public class CatalogRepository implements BeanRepository<CatalogPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -594,7 +594,7 @@ public class CatalogRepository implements BeanRepository<CatalogPo> {
     }
 
     @Override
-    public CatalogPo find(String id) {
+    public CatalogPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -665,7 +665,7 @@ public class CatalogRepository implements BeanRepository<CatalogPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -685,7 +685,7 @@ public class CatalogRepository implements BeanRepository<CatalogPo> {
     }
 
     @Override
-    public CatalogPo find(String id) {
+    public CatalogPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -756,7 +756,7 @@ public class CatalogRepository implements BeanRepository<CatalogPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -776,7 +776,7 @@ public class CatalogRepository implements BeanRepository<CatalogPo> {
     }
 
     @Override
-    public CatalogPo find(String id) {
+    public CatalogPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -853,7 +853,7 @@ public class CatalogRepository implements BeanRepository<CatalogPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -889,7 +889,7 @@ public class CatalogRepository implements BeanRepository<CatalogPo> {
     }
 
     @Override
-    public CatalogPo find(String id) {
+    public CatalogPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 

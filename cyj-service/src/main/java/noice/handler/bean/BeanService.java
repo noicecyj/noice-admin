@@ -27,6 +27,6 @@ public interface BeanService<DTO extends BaseDtoBean> {
 
     int updateOne(DTO dto);
 
-    List<OptionDTO> getOptions();
+    List<OptionDTO<String>> getOptions();
 
 }

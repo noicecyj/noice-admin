@@ -6,6 +6,11 @@ import {DataType} from "@ice/runtime";
 import {TableRowSelection} from "antd/es/table/interface";
 import {LabeledValue} from "antd/es/select";
 
+interface Option {
+  label: string,
+  value: string
+}
+
 interface PageFormSelectProps {
   key: string,
   colProps?: { md: number | undefined },
@@ -13,15 +18,11 @@ interface PageFormSelectProps {
   label?: string,
   initialValue?: string | undefined,
   disabled?: boolean | undefined,
-  dataSource?: string | undefined,
+  dataSource?: Option[],
   value?: React.Key[] | LabeledValue[],
   onChange?: (value: React.Key | LabeledValue) => void
 }
 
-interface Option {
-  label: string,
-  value: string
-}
 
 const PageFormSelect = ({
                           colProps,
@@ -30,7 +31,7 @@ const PageFormSelect = ({
                           initialValue,
                           disabled,
                           key,
-                          dataSource = "",
+                          dataSource = [],
                           value = [],
                           onChange
                         }: PageFormSelectProps) => {
@@ -78,7 +79,7 @@ const PageFormSelect = ({
   return (
     <div style={{display: 'flex', alignItems: 'center'}}>
       <Select
-        options={options}
+        options={dataSource}
         disabled={true}
         value={value}
         onChange={handleChange}

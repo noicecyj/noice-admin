@@ -89,7 +89,7 @@ public class AuthorityRepository implements BeanRepository<AuthorityPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -99,7 +99,7 @@ public class AuthorityRepository implements BeanRepository<AuthorityPo> {
     }
 
     @Override
-    public AuthorityPo find(String id) {
+    public AuthorityPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -169,7 +169,7 @@ public class AuthorityRepository implements BeanRepository<AuthorityPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -179,7 +179,7 @@ public class AuthorityRepository implements BeanRepository<AuthorityPo> {
     }
 
     @Override
-    public AuthorityPo find(String id) {
+    public AuthorityPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -245,7 +245,7 @@ public class AuthorityRepository implements BeanRepository<AuthorityPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -255,7 +255,7 @@ public class AuthorityRepository implements BeanRepository<AuthorityPo> {
     }
 
     @Override
-    public AuthorityPo find(String id) {
+    public AuthorityPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -321,7 +321,7 @@ public class AuthorityRepository implements BeanRepository<AuthorityPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -336,7 +336,7 @@ public class AuthorityRepository implements BeanRepository<AuthorityPo> {
     }
 
     @Override
-    public AuthorityPo find(String id) {
+    public AuthorityPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -404,7 +404,7 @@ public class AuthorityRepository implements BeanRepository<AuthorityPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -419,7 +419,7 @@ public class AuthorityRepository implements BeanRepository<AuthorityPo> {
     }
 
     @Override
-    public AuthorityPo find(String id) {
+    public AuthorityPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -487,7 +487,7 @@ public class AuthorityRepository implements BeanRepository<AuthorityPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -502,7 +502,7 @@ public class AuthorityRepository implements BeanRepository<AuthorityPo> {
     }
 
     @Override
-    public AuthorityPo find(String id) {
+    public AuthorityPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -573,7 +573,7 @@ public class AuthorityRepository implements BeanRepository<AuthorityPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -588,7 +588,7 @@ public class AuthorityRepository implements BeanRepository<AuthorityPo> {
     }
 
     @Override
-    public AuthorityPo find(String id) {
+    public AuthorityPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -659,7 +659,7 @@ public class AuthorityRepository implements BeanRepository<AuthorityPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -674,7 +674,7 @@ public class AuthorityRepository implements BeanRepository<AuthorityPo> {
     }
 
     @Override
-    public AuthorityPo find(String id) {
+    public AuthorityPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -745,7 +745,7 @@ public class AuthorityRepository implements BeanRepository<AuthorityPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -765,7 +765,7 @@ public class AuthorityRepository implements BeanRepository<AuthorityPo> {
     }
 
     @Override
-    public AuthorityPo find(String id) {
+    public AuthorityPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -836,7 +836,7 @@ public class AuthorityRepository implements BeanRepository<AuthorityPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -856,7 +856,7 @@ public class AuthorityRepository implements BeanRepository<AuthorityPo> {
     }
 
     @Override
-    public AuthorityPo find(String id) {
+    public AuthorityPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -933,7 +933,7 @@ public class AuthorityRepository implements BeanRepository<AuthorityPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -969,7 +969,7 @@ public class AuthorityRepository implements BeanRepository<AuthorityPo> {
     }
 
     @Override
-    public AuthorityPo find(String id) {
+    public AuthorityPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 

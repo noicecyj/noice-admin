@@ -29,8 +29,8 @@ public interface PersistentPropertyServiceAssembler {
 
     @Mapping(target = "label", source = "po.persistentPropertyName")
     @Mapping(target = "value", source = "po.id")
-    OptionDTO poToOptionDto(PersistentPropertyPo po);
+    OptionDTO<String> poToOptionDto(PersistentPropertyPo po);
 
-    List<OptionDTO> poListToDtoOptionList(List<PersistentPropertyPo> poList);
+    List<OptionDTO<String>> poListToDtoOptionList(List<PersistentPropertyPo> poList);
 
 }

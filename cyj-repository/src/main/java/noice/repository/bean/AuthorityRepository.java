@@ -8,6 +8,7 @@ import noice.handler.bean.BeanRepository;
 import noice.mapper.bean.AuthorityMapper;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -40,7 +41,7 @@ public class AuthorityRepository implements BeanRepository<AuthorityPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -76,7 +77,7 @@ public class AuthorityRepository implements BeanRepository<AuthorityPo> {
     }
 
     @Override
-    public AuthorityPo find(String id) {
+    public AuthorityPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 

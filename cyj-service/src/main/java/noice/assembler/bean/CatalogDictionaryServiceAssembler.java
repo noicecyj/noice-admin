@@ -28,8 +28,8 @@ public interface CatalogDictionaryServiceAssembler {
 
     @Mapping(target = "label", source = "po.catalogDictionaryName")
     @Mapping(target = "value", source = "po.id")
-    OptionDTO poToOptionDto(CatalogDictionaryPo po);
+    OptionDTO<String> poToOptionDto(CatalogDictionaryPo po);
 
-    List<OptionDTO> poListToDtoOptionList(List<CatalogDictionaryPo> poList);
+    List<OptionDTO<String>> poListToDtoOptionList(List<CatalogDictionaryPo> poList);
 
 }

@@ -30,8 +30,8 @@ public interface MenuServiceAssembler {
 
     @Mapping(target = "label", source = "po.menuName")
     @Mapping(target = "value", source = "po.id")
-    OptionDTO poToOptionDto(MenuPo po);
+    OptionDTO<String> poToOptionDto(MenuPo po);
 
-    List<OptionDTO> poListToDtoOptionList(List<MenuPo> poList);
+    List<OptionDTO<String>> poListToDtoOptionList(List<MenuPo> poList);
 
 }

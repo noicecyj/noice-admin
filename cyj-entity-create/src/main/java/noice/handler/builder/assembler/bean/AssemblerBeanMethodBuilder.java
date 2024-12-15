@@ -94,7 +94,7 @@ public class AssemblerBeanMethodBuilder extends MethodBase {
             String underPoName = StrUtil.toCamelCase(persistentPo.getPersistentCode());
             String poName = StrUtil.upperFirst(underPoName);
             this.setMethodStatement(StatementEnum.PUBLIC);
-            this.setMethodReturnType("OptionDTO");
+            this.setMethodReturnType("OptionDTO<String>");
             this.setMethodName("poToOptionDto");
             this.setMethodParamSet(poName);
             this.setMethodAnnotationList(underPoName);
@@ -229,7 +229,7 @@ public class AssemblerBeanMethodBuilder extends MethodBase {
         public poListToDtoOptionListBuilder builder(PersistentPo persistentPo) {
             String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
             this.setMethodStatement(StatementEnum.PUBLIC);
-            this.setMethodReturnType("List<OptionDTO>");
+            this.setMethodReturnType("List<OptionDTO<String>>");
             this.setMethodName("poListToDtoOptionList");
             this.setMethodParamSet(poName);
             return this;

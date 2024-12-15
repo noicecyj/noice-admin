@@ -30,8 +30,8 @@ public interface PersistentServiceAssembler {
 
     @Mapping(target = "label", source = "po.persistentName")
     @Mapping(target = "value", source = "po.id")
-    OptionDTO poToOptionDto(PersistentPo po);
+    OptionDTO<String> poToOptionDto(PersistentPo po);
 
-    List<OptionDTO> poListToDtoOptionList(List<PersistentPo> poList);
+    List<OptionDTO<String>> poListToDtoOptionList(List<PersistentPo> poList);
 
 }

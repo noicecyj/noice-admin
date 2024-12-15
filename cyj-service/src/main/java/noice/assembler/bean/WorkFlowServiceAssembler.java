@@ -26,8 +26,8 @@ public interface WorkFlowServiceAssembler {
 
     @Mapping(target = "label", source = "po.workFlowName")
     @Mapping(target = "value", source = "po.id")
-    OptionDTO poToOptionDto(WorkFlowPo po);
+    OptionDTO<String> poToOptionDto(WorkFlowPo po);
 
-    List<OptionDTO> poListToDtoOptionList(List<WorkFlowPo> poList);
+    List<OptionDTO<String>> poListToDtoOptionList(List<WorkFlowPo> poList);
 
 }

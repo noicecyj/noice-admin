@@ -89,7 +89,7 @@ public class EnterpriseRepository implements BeanRepository<EnterprisePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -99,7 +99,7 @@ public class EnterpriseRepository implements BeanRepository<EnterprisePo> {
     }
 
     @Override
-    public EnterprisePo find(String id) {
+    public EnterprisePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -165,7 +165,7 @@ public class EnterpriseRepository implements BeanRepository<EnterprisePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -180,7 +180,7 @@ public class EnterpriseRepository implements BeanRepository<EnterprisePo> {
     }
 
     @Override
-    public EnterprisePo find(String id) {
+    public EnterprisePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -248,7 +248,7 @@ public class EnterpriseRepository implements BeanRepository<EnterprisePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -263,7 +263,7 @@ public class EnterpriseRepository implements BeanRepository<EnterprisePo> {
     }
 
     @Override
-    public EnterprisePo find(String id) {
+    public EnterprisePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -331,7 +331,7 @@ public class EnterpriseRepository implements BeanRepository<EnterprisePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -346,7 +346,7 @@ public class EnterpriseRepository implements BeanRepository<EnterprisePo> {
     }
 
     @Override
-    public EnterprisePo find(String id) {
+    public EnterprisePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -417,7 +417,7 @@ public class EnterpriseRepository implements BeanRepository<EnterprisePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -432,7 +432,7 @@ public class EnterpriseRepository implements BeanRepository<EnterprisePo> {
     }
 
     @Override
-    public EnterprisePo find(String id) {
+    public EnterprisePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -503,7 +503,7 @@ public class EnterpriseRepository implements BeanRepository<EnterprisePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -518,7 +518,7 @@ public class EnterpriseRepository implements BeanRepository<EnterprisePo> {
     }
 
     @Override
-    public EnterprisePo find(String id) {
+    public EnterprisePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -589,7 +589,7 @@ public class EnterpriseRepository implements BeanRepository<EnterprisePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -609,7 +609,7 @@ public class EnterpriseRepository implements BeanRepository<EnterprisePo> {
     }
 
     @Override
-    public EnterprisePo find(String id) {
+    public EnterprisePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -680,7 +680,7 @@ public class EnterpriseRepository implements BeanRepository<EnterprisePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -700,7 +700,7 @@ public class EnterpriseRepository implements BeanRepository<EnterprisePo> {
     }
 
     @Override
-    public EnterprisePo find(String id) {
+    public EnterprisePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -777,7 +777,7 @@ public class EnterpriseRepository implements BeanRepository<EnterprisePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -813,7 +813,7 @@ public class EnterpriseRepository implements BeanRepository<EnterprisePo> {
     }
 
     @Override
-    public EnterprisePo find(String id) {
+    public EnterprisePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 

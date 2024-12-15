@@ -30,8 +30,8 @@ public interface PersistentTableSearchConfigServiceAssembler {
 
     @Mapping(target = "label", source = "po.persistentTableSearchConfigName")
     @Mapping(target = "value", source = "po.id")
-    OptionDTO poToOptionDto(PersistentTableSearchConfigPo po);
+    OptionDTO<String> poToOptionDto(PersistentTableSearchConfigPo po);
 
-    List<OptionDTO> poListToDtoOptionList(List<PersistentTableSearchConfigPo> poList);
+    List<OptionDTO<String>> poListToDtoOptionList(List<PersistentTableSearchConfigPo> poList);
 
 }

@@ -39,7 +39,7 @@ public class InterfaceRepository implements BeanRepository<InterfacePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -49,7 +49,7 @@ public class InterfaceRepository implements BeanRepository<InterfacePo> {
     }
 
     @Override
-    public InterfacePo find(String id) {
+    public InterfacePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -115,7 +115,7 @@ public class InterfaceRepository implements BeanRepository<InterfacePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -130,7 +130,7 @@ public class InterfaceRepository implements BeanRepository<InterfacePo> {
     }
 
     @Override
-    public InterfacePo find(String id) {
+    public InterfacePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -198,7 +198,7 @@ public class InterfaceRepository implements BeanRepository<InterfacePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -213,7 +213,7 @@ public class InterfaceRepository implements BeanRepository<InterfacePo> {
     }
 
     @Override
-    public InterfacePo find(String id) {
+    public InterfacePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -281,7 +281,7 @@ public class InterfaceRepository implements BeanRepository<InterfacePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -296,7 +296,7 @@ public class InterfaceRepository implements BeanRepository<InterfacePo> {
     }
 
     @Override
-    public InterfacePo find(String id) {
+    public InterfacePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -364,7 +364,7 @@ public class InterfaceRepository implements BeanRepository<InterfacePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -379,7 +379,7 @@ public class InterfaceRepository implements BeanRepository<InterfacePo> {
     }
 
     @Override
-    public InterfacePo find(String id) {
+    public InterfacePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -450,7 +450,7 @@ public class InterfaceRepository implements BeanRepository<InterfacePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -465,7 +465,7 @@ public class InterfaceRepository implements BeanRepository<InterfacePo> {
     }
 
     @Override
-    public InterfacePo find(String id) {
+    public InterfacePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -536,7 +536,7 @@ public class InterfaceRepository implements BeanRepository<InterfacePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -551,7 +551,7 @@ public class InterfaceRepository implements BeanRepository<InterfacePo> {
     }
 
     @Override
-    public InterfacePo find(String id) {
+    public InterfacePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -622,7 +622,7 @@ public class InterfaceRepository implements BeanRepository<InterfacePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -642,7 +642,7 @@ public class InterfaceRepository implements BeanRepository<InterfacePo> {
     }
 
     @Override
-    public InterfacePo find(String id) {
+    public InterfacePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -713,7 +713,7 @@ public class InterfaceRepository implements BeanRepository<InterfacePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -733,7 +733,7 @@ public class InterfaceRepository implements BeanRepository<InterfacePo> {
     }
 
     @Override
-    public InterfacePo find(String id) {
+    public InterfacePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -810,7 +810,7 @@ public class InterfaceRepository implements BeanRepository<InterfacePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -846,7 +846,7 @@ public class InterfaceRepository implements BeanRepository<InterfacePo> {
     }
 
     @Override
-    public InterfacePo find(String id) {
+    public InterfacePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 

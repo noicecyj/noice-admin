@@ -84,7 +84,7 @@ public class InterfaceService implements BeanService<InterfaceDto> {
     }
 
     @Override
-    public List<OptionDTO> getOptions() {
+    public List<OptionDTO<String>> getOptions() {
         return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new InterfaceDto()).eqAuto().getQueryWrapper()));
     }
 

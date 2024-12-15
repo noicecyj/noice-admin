@@ -7,7 +7,6 @@ import cn.hutool.extra.spring.SpringUtil;
 import noice.assembler.TableAndFormAndUrlServiceAssembler;
 import noice.assembler.bean.CatalogDictionaryServiceAssembler;
 import noice.common.contants.UserContext;
-import noice.common.entity.dto.OptionDTO;
 import noice.entity.dto.FormConfigDto;
 import noice.entity.dto.FormConfigRowDto;
 import noice.entity.dto.FormDto;
@@ -24,7 +23,7 @@ import noice.entity.po.bean.PersistentFormPo;
 import noice.entity.po.bean.PersistentPo;
 import noice.entity.po.bean.PersistentTableConfigPo;
 import noice.entity.po.bean.PersistentTablePo;
-import noice.handler.bean.BeanRepository;
+import noice.handler.bean.BeanService;
 import noice.repository.bean.AuthorityRepository;
 import noice.repository.bean.CatalogDictionaryRepository;
 import noice.repository.bean.CatalogRepository;
@@ -218,7 +217,7 @@ public class TableAndFormAndUrlService {
         statusFormConfig.setPersistentFormConfigCode("status");
         statusFormConfig.setPersistentFormConfigName("状态");
         statusFormConfig.setPersistentFormConfigMode("Select");
-        statusFormConfig.setPersistentFormConfigDataSource("status");
+        statusFormConfig.setPersistentFormConfigDataSource("Dict#STATUS_TYPE");
         statusFormConfig.setPersistentFormConfigColSpan(12);
         statusFormConfig.setPersistentFormConfigEdit(true);
         statusFormConfig.setPersistentFormConfigRequired(true);
@@ -270,21 +269,34 @@ public class TableAndFormAndUrlService {
     }
 
     @Named("dataSourceToOptionList")
-    public List<OptionDTO> dataSourceToOptionList(String dataSourceCode) throws ClassNotFoundException {
+    public List dataSourceToOptionList(String dataSourceCode) throws ClassNotFoundException {
+        if (StrUtil.isEmpty(dataSourceCode)) {
+            return null;
+        }
         List<String> split = StrUtil.split(dataSourceCode, "#");
         String type = split.get(0);
         String name = split.get(1);
         if ("Entity".equals(type)) {
-            Class<?> clazz = Class.forName(name);
-            Map<String, BeanRepository> beansOfType = SpringUtil.getBeansOfType(BeanRepository.class);
-            BeanRepository beanRepository = beansOfType.get(StrUtil.lowerFirst(name) + "Repository");
-            if (ObjectUtil.isNotNull(beanRepository)) {
-                List all = beanRepository.findAll();
+            Map<String, BeanService> beansOfType = SpringUtil.getBeansOfType(BeanService.class);
+            BeanService beanService = beansOfType.get(StrUtil.lowerFirst(name) + "Service");
+            if (ObjectUtil.isNotNull(beanService)) {
+                return beanService.getOptions();
             }
         } else if ("Dict".equals(type)) {
-            List<CatalogDictionaryDto> dict = this.getDict(dataSourceCode);
+            List<CatalogDictionaryDto> dict = this.getDict(name);
             return tableAndFormAndUrlServiceAssembler.dtoCatalogDictionaryListToDtoOptionList(dict);
         }
         return null;
     }
+
+    @Named("catalogDictionaryCodeToValue")
+    public Object catalogDictionaryCodeToValue(String value) {
+        if ("true".equals(value)) {
+            return true;
+        } else if ("false".equals(value)) {
+            return false;
+        }
+        return value;
+    }
+
 }

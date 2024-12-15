@@ -6,6 +6,7 @@ import noice.handler.relation.RelationRepository;
 import noice.mapper.relation.UserRoleMapper;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class UserRoleRepository implements RelationRepository<UserRolePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 

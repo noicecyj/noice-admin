@@ -26,8 +26,8 @@ public interface CatalogServiceAssembler {
 
     @Mapping(target = "label", source = "po.catalogName")
     @Mapping(target = "value", source = "po.id")
-    OptionDTO poToOptionDto(CatalogPo po);
+    OptionDTO<String> poToOptionDto(CatalogPo po);
 
-    List<OptionDTO> poListToDtoOptionList(List<CatalogPo> poList);
+    List<OptionDTO<String>> poListToDtoOptionList(List<CatalogPo> poList);
 
 }

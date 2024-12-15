@@ -12,7 +12,3 @@ export async function getTable(formCode: string) {
 export async function getUrl(formCode: string) {
   return await request.get('/entityCreateApi/TableAndFormAndUrl/getUrl' + formCode);
 }
-
-export async function getDict(dataSourceCode: string) {
-  return await request.get('/entityCreateApi/TableAndFormAndUrl/getDict' + dataSourceCode);
-}

@@ -5,13 +5,18 @@ import {ProForm, ProFormCheckbox, ProFormDatePicker, ProFormRadio, ProFormSwitch
 import store from "@/store";
 import PageFormSelect from "@/components/DataForm/PageFormSelect";
 
+interface Option {
+  label: string,
+  value: string
+}
+
 type FormConfig = {
   persistentFormConfigName: string;
   persistentFormConfigCode: string;
   persistentFormConfigMode: string;
   id: string;
   persistentFormConfigColSpan?: number;
-  persistentFormConfigDataSource?: string | undefined;
+  persistentFormConfigDataSource?: Option[];
   persistentFormConfigDefaultValue?: string;
   persistentFormConfigDirection?: string;
   persistentFormConfigEdit?: boolean;
@@ -102,9 +107,7 @@ function DataForm(props: {
           key={item.id}
           initialValue={item.persistentFormConfigDefaultValue}
           disabled={!item.persistentFormConfigEdit}
-          request={async () => {
-            return entityDispatcher.getOption(item.persistentFormConfigDataSource);
-          }}
+          options={item.persistentFormConfigDataSource}
           required={item.persistentFormConfigRequired}
           rules={[{required: item.persistentFormConfigRequired, message: '请输入' + item.persistentFormConfigName}]}
         />
@@ -201,9 +204,7 @@ function DataForm(props: {
           key={item.id}
           initialValue={item.persistentFormConfigDefaultValue}
           disabled={item.persistentFormConfigEdit}
-          request={async () => {
-            return entityDispatcher.getOption(item.persistentFormConfigDataSource);
-          }}
+          options={item.persistentFormConfigDataSource}
           required={item.persistentFormConfigRequired}
           rules={[{required: item.persistentFormConfigRequired, message: '请输入' + item.persistentFormConfigName}]}
         />
@@ -218,9 +219,7 @@ function DataForm(props: {
           key={item.id}
           initialValue={item.persistentFormConfigDefaultValue}
           disabled={item.persistentFormConfigEdit}
-          request={async () => {
-            return entityDispatcher.getOption(item.persistentFormConfigDataSource);
-          }}
+          options={item.persistentFormConfigDataSource}
           required={item.persistentFormConfigRequired}
           rules={[{required: item.persistentFormConfigRequired, message: '请输入' + item.persistentFormConfigName}]}
         />

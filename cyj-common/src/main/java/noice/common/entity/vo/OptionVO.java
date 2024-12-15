@@ -8,6 +8,6 @@ import lombok.Data;
 public class OptionVO {
 
     private String label;
-    private String value;
+    private Object value;
 
 }

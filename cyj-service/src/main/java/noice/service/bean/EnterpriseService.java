@@ -84,7 +84,7 @@ public class EnterpriseService implements BeanService<EnterpriseDto> {
     }
 
     @Override
-    public List<OptionDTO> getOptions() {
+    public List<OptionDTO<String>> getOptions() {
         return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new EnterpriseDto()).eqAuto().getQueryWrapper()));
     }
 

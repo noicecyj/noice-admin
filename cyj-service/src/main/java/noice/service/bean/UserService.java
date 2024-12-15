@@ -93,7 +93,7 @@ public class UserService implements BeanService<UserDto> {
     }
 
     @Override
-    public List<OptionDTO> getOptions() {
+    public List<OptionDTO<String>> getOptions() {
         return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new UserDto()).eqAuto().getQueryWrapper()));
     }
 

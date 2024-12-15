@@ -41,7 +41,7 @@ public class UserRoleRepository implements RelationRepository<UserRolePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -83,7 +83,7 @@ public class UserRoleRepository implements RelationRepository<UserRolePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 

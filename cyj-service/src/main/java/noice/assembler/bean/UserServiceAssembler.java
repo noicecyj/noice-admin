@@ -33,8 +33,8 @@ public interface UserServiceAssembler {
 
     @Mapping(target = "label", source = "po.userName")
     @Mapping(target = "value", source = "po.id")
-    OptionDTO poToOptionDto(UserPo po);
+    OptionDTO<String> poToOptionDto(UserPo po);
 
-    List<OptionDTO> poListToDtoOptionList(List<UserPo> poList);
+    List<OptionDTO<String>> poListToDtoOptionList(List<UserPo> poList);
 
 }

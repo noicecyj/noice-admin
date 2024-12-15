@@ -101,7 +101,7 @@ public class AppServiceRepository implements BeanRepository<AppServicePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -111,7 +111,7 @@ public class AppServiceRepository implements BeanRepository<AppServicePo> {
     }
 
     @Override
-    public AppServicePo find(String id) {
+    public AppServicePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -181,7 +181,7 @@ public class AppServiceRepository implements BeanRepository<AppServicePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -191,7 +191,7 @@ public class AppServiceRepository implements BeanRepository<AppServicePo> {
     }
 
     @Override
-    public AppServicePo find(String id) {
+    public AppServicePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -257,7 +257,7 @@ public class AppServiceRepository implements BeanRepository<AppServicePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -272,7 +272,7 @@ public class AppServiceRepository implements BeanRepository<AppServicePo> {
     }
 
     @Override
-    public AppServicePo find(String id) {
+    public AppServicePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -343,7 +343,7 @@ public class AppServiceRepository implements BeanRepository<AppServicePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -358,7 +358,7 @@ public class AppServiceRepository implements BeanRepository<AppServicePo> {
     }
 
     @Override
-    public AppServicePo find(String id) {
+    public AppServicePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -429,7 +429,7 @@ public class AppServiceRepository implements BeanRepository<AppServicePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -448,7 +448,7 @@ public class AppServiceRepository implements BeanRepository<AppServicePo> {
     }
 
     @Override
-    public AppServicePo find(String id) {
+    public AppServicePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -519,7 +519,7 @@ public class AppServiceRepository implements BeanRepository<AppServicePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -539,7 +539,7 @@ public class AppServiceRepository implements BeanRepository<AppServicePo> {
     }
 
     @Override
-    public AppServicePo find(String id) {
+    public AppServicePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -615,7 +615,7 @@ public class AppServiceRepository implements BeanRepository<AppServicePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -648,7 +648,7 @@ public class AppServiceRepository implements BeanRepository<AppServicePo> {
     }
 
     @Override
-    public AppServicePo find(String id) {
+    public AppServicePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -725,7 +725,7 @@ public class AppServiceRepository implements BeanRepository<AppServicePo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -761,7 +761,7 @@ public class AppServiceRepository implements BeanRepository<AppServicePo> {
     }
 
     @Override
-    public AppServicePo find(String id) {
+    public AppServicePo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 

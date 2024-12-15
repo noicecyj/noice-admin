@@ -28,8 +28,8 @@ public interface PersistentFormServiceAssembler {
 
     @Mapping(target = "label", source = "po.persistentFormName")
     @Mapping(target = "value", source = "po.id")
-    OptionDTO poToOptionDto(PersistentFormPo po);
+    OptionDTO<String> poToOptionDto(PersistentFormPo po);
 
-    List<OptionDTO> poListToDtoOptionList(List<PersistentFormPo> poList);
+    List<OptionDTO<String>> poListToDtoOptionList(List<PersistentFormPo> poList);
 
 }

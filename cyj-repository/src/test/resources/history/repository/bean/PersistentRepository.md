@@ -89,7 +89,7 @@ public class PersistentRepository implements BeanRepository<PersistentPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -99,7 +99,7 @@ public class PersistentRepository implements BeanRepository<PersistentPo> {
     }
 
     @Override
-    public PersistentPo find(String id) {
+    public PersistentPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -169,7 +169,7 @@ public class PersistentRepository implements BeanRepository<PersistentPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -179,7 +179,7 @@ public class PersistentRepository implements BeanRepository<PersistentPo> {
     }
 
     @Override
-    public PersistentPo find(String id) {
+    public PersistentPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -245,7 +245,7 @@ public class PersistentRepository implements BeanRepository<PersistentPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -260,7 +260,7 @@ public class PersistentRepository implements BeanRepository<PersistentPo> {
     }
 
     @Override
-    public PersistentPo find(String id) {
+    public PersistentPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -328,7 +328,7 @@ public class PersistentRepository implements BeanRepository<PersistentPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -343,7 +343,7 @@ public class PersistentRepository implements BeanRepository<PersistentPo> {
     }
 
     @Override
-    public PersistentPo find(String id) {
+    public PersistentPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -414,7 +414,7 @@ public class PersistentRepository implements BeanRepository<PersistentPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -429,7 +429,7 @@ public class PersistentRepository implements BeanRepository<PersistentPo> {
     }
 
     @Override
-    public PersistentPo find(String id) {
+    public PersistentPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -500,7 +500,7 @@ public class PersistentRepository implements BeanRepository<PersistentPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -515,7 +515,7 @@ public class PersistentRepository implements BeanRepository<PersistentPo> {
     }
 
     @Override
-    public PersistentPo find(String id) {
+    public PersistentPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -586,7 +586,7 @@ public class PersistentRepository implements BeanRepository<PersistentPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -606,7 +606,7 @@ public class PersistentRepository implements BeanRepository<PersistentPo> {
     }
 
     @Override
-    public PersistentPo find(String id) {
+    public PersistentPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -677,7 +677,7 @@ public class PersistentRepository implements BeanRepository<PersistentPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -697,7 +697,7 @@ public class PersistentRepository implements BeanRepository<PersistentPo> {
     }
 
     @Override
-    public PersistentPo find(String id) {
+    public PersistentPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -774,7 +774,7 @@ public class PersistentRepository implements BeanRepository<PersistentPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -810,7 +810,7 @@ public class PersistentRepository implements BeanRepository<PersistentPo> {
     }
 
     @Override
-    public PersistentPo find(String id) {
+    public PersistentPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 

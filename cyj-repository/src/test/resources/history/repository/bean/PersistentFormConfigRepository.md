@@ -89,7 +89,7 @@ public class PersistentFormConfigRepository implements BeanRepository<Persistent
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -104,7 +104,7 @@ public class PersistentFormConfigRepository implements BeanRepository<Persistent
     }
 
     @Override
-    public PersistentFormConfigPo find(String id) {
+    public PersistentFormConfigPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -172,7 +172,7 @@ public class PersistentFormConfigRepository implements BeanRepository<Persistent
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -187,7 +187,7 @@ public class PersistentFormConfigRepository implements BeanRepository<Persistent
     }
 
     @Override
-    public PersistentFormConfigPo find(String id) {
+    public PersistentFormConfigPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -255,7 +255,7 @@ public class PersistentFormConfigRepository implements BeanRepository<Persistent
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -270,7 +270,7 @@ public class PersistentFormConfigRepository implements BeanRepository<Persistent
     }
 
     @Override
-    public PersistentFormConfigPo find(String id) {
+    public PersistentFormConfigPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -341,7 +341,7 @@ public class PersistentFormConfigRepository implements BeanRepository<Persistent
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -356,7 +356,7 @@ public class PersistentFormConfigRepository implements BeanRepository<Persistent
     }
 
     @Override
-    public PersistentFormConfigPo find(String id) {
+    public PersistentFormConfigPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -427,7 +427,7 @@ public class PersistentFormConfigRepository implements BeanRepository<Persistent
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -442,7 +442,7 @@ public class PersistentFormConfigRepository implements BeanRepository<Persistent
     }
 
     @Override
-    public PersistentFormConfigPo find(String id) {
+    public PersistentFormConfigPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -513,7 +513,7 @@ public class PersistentFormConfigRepository implements BeanRepository<Persistent
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -533,7 +533,7 @@ public class PersistentFormConfigRepository implements BeanRepository<Persistent
     }
 
     @Override
-    public PersistentFormConfigPo find(String id) {
+    public PersistentFormConfigPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -604,7 +604,7 @@ public class PersistentFormConfigRepository implements BeanRepository<Persistent
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -624,7 +624,7 @@ public class PersistentFormConfigRepository implements BeanRepository<Persistent
     }
 
     @Override
-    public PersistentFormConfigPo find(String id) {
+    public PersistentFormConfigPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -701,7 +701,7 @@ public class PersistentFormConfigRepository implements BeanRepository<Persistent
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -737,7 +737,7 @@ public class PersistentFormConfigRepository implements BeanRepository<Persistent
     }
 
     @Override
-    public PersistentFormConfigPo find(String id) {
+    public PersistentFormConfigPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 

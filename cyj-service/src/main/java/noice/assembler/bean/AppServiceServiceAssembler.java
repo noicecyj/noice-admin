@@ -26,8 +26,8 @@ public interface AppServiceServiceAssembler {
 
     @Mapping(target = "label", source = "po.appServiceName")
     @Mapping(target = "value", source = "po.id")
-    OptionDTO poToOptionDto(AppServicePo po);
+    OptionDTO<String> poToOptionDto(AppServicePo po);
 
-    List<OptionDTO> poListToDtoOptionList(List<AppServicePo> poList);
+    List<OptionDTO<String>> poListToDtoOptionList(List<AppServicePo> poList);
 
 }

@@ -30,8 +30,8 @@ public interface InterfaceServiceAssembler {
 
     @Mapping(target = "label", source = "po.interfaceName")
     @Mapping(target = "value", source = "po.id")
-    OptionDTO poToOptionDto(InterfacePo po);
+    OptionDTO<String> poToOptionDto(InterfacePo po);
 
-    List<OptionDTO> poListToDtoOptionList(List<InterfacePo> poList);
+    List<OptionDTO<String>> poListToDtoOptionList(List<InterfacePo> poList);
 
 }

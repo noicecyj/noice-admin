@@ -89,7 +89,7 @@ public class UserRepository implements BeanRepository<UserPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -99,7 +99,7 @@ public class UserRepository implements BeanRepository<UserPo> {
     }
 
     @Override
-    public UserPo find(String id) {
+    public UserPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -169,7 +169,7 @@ public class UserRepository implements BeanRepository<UserPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -179,7 +179,7 @@ public class UserRepository implements BeanRepository<UserPo> {
     }
 
     @Override
-    public UserPo find(String id) {
+    public UserPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -245,7 +245,7 @@ public class UserRepository implements BeanRepository<UserPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -260,7 +260,7 @@ public class UserRepository implements BeanRepository<UserPo> {
     }
 
     @Override
-    public UserPo find(String id) {
+    public UserPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -328,7 +328,7 @@ public class UserRepository implements BeanRepository<UserPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -343,7 +343,7 @@ public class UserRepository implements BeanRepository<UserPo> {
     }
 
     @Override
-    public UserPo find(String id) {
+    public UserPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -411,7 +411,7 @@ public class UserRepository implements BeanRepository<UserPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -426,7 +426,7 @@ public class UserRepository implements BeanRepository<UserPo> {
     }
 
     @Override
-    public UserPo find(String id) {
+    public UserPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -497,7 +497,7 @@ public class UserRepository implements BeanRepository<UserPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -512,7 +512,7 @@ public class UserRepository implements BeanRepository<UserPo> {
     }
 
     @Override
-    public UserPo find(String id) {
+    public UserPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -583,7 +583,7 @@ public class UserRepository implements BeanRepository<UserPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -598,7 +598,7 @@ public class UserRepository implements BeanRepository<UserPo> {
     }
 
     @Override
-    public UserPo find(String id) {
+    public UserPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -669,7 +669,7 @@ public class UserRepository implements BeanRepository<UserPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -689,7 +689,7 @@ public class UserRepository implements BeanRepository<UserPo> {
     }
 
     @Override
-    public UserPo find(String id) {
+    public UserPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -760,7 +760,7 @@ public class UserRepository implements BeanRepository<UserPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -780,7 +780,7 @@ public class UserRepository implements BeanRepository<UserPo> {
     }
 
     @Override
-    public UserPo find(String id) {
+    public UserPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
@@ -857,7 +857,7 @@ public class UserRepository implements BeanRepository<UserPo> {
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(@Qualifier("delete") String id) {
         return mapper.deleteById(id);
     }
 
@@ -893,7 +893,7 @@ public class UserRepository implements BeanRepository<UserPo> {
     }
 
     @Override
-    public UserPo find(String id) {
+    public UserPo find(@Qualifier("find") String id) {
         return mapper.selectById(id);
     }
 
