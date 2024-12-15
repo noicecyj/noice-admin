@@ -8,7 +8,6 @@ import noice.handler.bean.BeanRepository;
 import noice.mapper.bean.MenuMapper;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -41,7 +40,7 @@ public class MenuRepository implements BeanRepository<MenuPo> {
     }
 
     @Override
-    public int delete(@Qualifier("delete") String id) {
+    public int delete(String id) {
         return mapper.deleteById(id);
     }
 
@@ -77,7 +76,7 @@ public class MenuRepository implements BeanRepository<MenuPo> {
     }
 
     @Override
-    public MenuPo find(@Qualifier("find") String id) {
+    public MenuPo find(String id) {
         return mapper.selectById(id);
     }
 

@@ -8,7 +8,6 @@ import noice.handler.bean.BeanRepository;
 import noice.mapper.bean.WorkFlowMapper;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -41,7 +40,7 @@ public class WorkFlowRepository implements BeanRepository<WorkFlowPo> {
     }
 
     @Override
-    public int delete(@Qualifier("delete") String id) {
+    public int delete(String id) {
         return mapper.deleteById(id);
     }
 
@@ -77,7 +76,7 @@ public class WorkFlowRepository implements BeanRepository<WorkFlowPo> {
     }
 
     @Override
-    public WorkFlowPo find(@Qualifier("find") String id) {
+    public WorkFlowPo find(String id) {
         return mapper.selectById(id);
     }
 

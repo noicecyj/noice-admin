@@ -8,7 +8,6 @@ import noice.handler.bean.BeanRepository;
 import noice.mapper.bean.PersistentFormMapper;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -41,7 +40,7 @@ public class PersistentFormRepository implements BeanRepository<PersistentFormPo
     }
 
     @Override
-    public int delete(@Qualifier("delete") String id) {
+    public int delete(String id) {
         return mapper.deleteById(id);
     }
 
@@ -102,8 +101,7 @@ public class PersistentFormRepository implements BeanRepository<PersistentFormPo
     }
 
     @Override
-    public IPage<PersistentFormPo> findPage
-            (IPage<PersistentFormPo> page, QueryWrapper<PersistentFormPo> baseQueryWrapper) {
+    public IPage<PersistentFormPo> findPage(IPage<PersistentFormPo> page, QueryWrapper<PersistentFormPo> baseQueryWrapper) {
         return mapper.selectPage(page, baseQueryWrapper);
     }
 

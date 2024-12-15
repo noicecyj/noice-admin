@@ -8,7 +8,6 @@ import noice.handler.bean.BeanRepository;
 import noice.mapper.bean.PersistentPropertyMapper;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -41,7 +40,7 @@ public class PersistentPropertyRepository implements BeanRepository<PersistentPr
     }
 
     @Override
-    public int delete(@Qualifier("delete") String id) {
+    public int delete(String id) {
         return mapper.deleteById(id);
     }
 
@@ -102,14 +101,12 @@ public class PersistentPropertyRepository implements BeanRepository<PersistentPr
     }
 
     @Override
-    public IPage<PersistentPropertyPo> findPage
-            (IPage<PersistentPropertyPo> page, QueryWrapper<PersistentPropertyPo> baseQueryWrapper) {
+    public IPage<PersistentPropertyPo> findPage(IPage<PersistentPropertyPo> page, QueryWrapper<PersistentPropertyPo> baseQueryWrapper) {
         return mapper.selectPage(page, baseQueryWrapper);
     }
 
     @Override
-    public IPage<PersistentPropertyPo> findPage(IPage<PersistentPropertyPo> page, @NotNull PersistentPropertyPo
-            po) {
+    public IPage<PersistentPropertyPo> findPage(IPage<PersistentPropertyPo> page, @NotNull PersistentPropertyPo po) {
         return findPage(page, po.baseQueryWrapper().likeAuto().getQueryWrapper());
     }
 
