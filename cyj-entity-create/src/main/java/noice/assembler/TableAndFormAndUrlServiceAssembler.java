@@ -11,7 +11,6 @@ import noice.entity.po.bean.PersistentFormPo;
 import noice.entity.po.bean.PersistentTableConfigPo;
 import noice.entity.po.bean.PersistentTablePo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
-import noice.service.TableAndFormAndUrlService;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -20,7 +19,7 @@ import java.util.List;
 /**
  * @author Noice
  */
-@Mapper(componentModel = "spring", config = BaseBeanAssembler.class, uses = {TableAndFormAndUrlService.class})
+@Mapper(componentModel = "spring", config = BaseBeanAssembler.class, uses = {TableAndFormAndUrlServiceAssemblerComponent.class})
 public interface TableAndFormAndUrlServiceAssembler {
 
     FormDto poToDto(PersistentFormPo po);

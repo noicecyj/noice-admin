@@ -15,7 +15,6 @@ import noice.entity.vo.TableConfigVo;
 import noice.entity.vo.TableVo;
 import noice.entity.vo.UrlVo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
-import noice.service.TableAndFormAndUrlService;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -24,7 +23,7 @@ import java.util.List;
 /**
  * @author Noice
  */
-@Mapper(componentModel = "spring", config = BaseBeanAssembler.class, uses = {TableAndFormAndUrlService.class})
+@Mapper(componentModel = "spring", config = BaseBeanAssembler.class, uses = {TableAndFormAndUrlControllerAssemblerComponent.class})
 public interface TableAndFormAndUrlControllerAssembler {
 
     @Mapping(target = "formConfigRowVoList", source = "dto.formConfigRowDtoList")
