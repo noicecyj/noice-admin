@@ -53,7 +53,7 @@ const PageFormSelect = ({
     setOpen(false);
   };
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-  const [options, setOptions] = useState<Option[]>([]);
+  const [options, setOptions] = useState<Option[]>(dataSource);
   const entityDispatcher = store.useModelDispatchers('entity');
 
   console.log('PageFormSelect', colProps, name, label, initialValue, disabled, key);
@@ -79,7 +79,7 @@ const PageFormSelect = ({
   return (
     <div style={{display: 'flex', alignItems: 'center'}}>
       <Select
-        options={dataSource}
+        options={options}
         disabled={true}
         value={value}
         onChange={handleChange}
@@ -107,22 +107,15 @@ const PageFormSelect = ({
             type: 'radio',
             ...rowSelection
           }}
-          request={async (
-            // 第一个参数 params 查询表单和 params 参数的结合
-            // 第一个参数中一定会有 pageSize 和  current ，这两个参数是 antd 的规范
-            params
-          ) => {
-            // 这里需要返回一个 Promise,在返回之前你可以进行数据转化
-            // 如果需要转化参数可以在这里进行修改
-            return entityDispatcher.page({
-              params: params,
-              pageUrl: "/entityCreateApi/" + dataSource + "/getOptions"
-            }).then(res => {
-              setOptions(res.data);
-              return new Promise((resolve) => {
-                resolve(res);
-              });
-            });
+          request={async (params) => {
+            console.log(params);
+            return entityDispatcher.setPageData({
+              data: {
+                records: options,
+                total: options.length,
+              },
+              code: 200,
+            })
           }}
           rowKey="value"
           pagination={{

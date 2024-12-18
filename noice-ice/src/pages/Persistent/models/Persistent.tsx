@@ -1,27 +1,17 @@
-import initService from '@/services/init';
+interface PersistentItem {
+  appServiceId: string;
+  persistentCode: string;
+  persistentId: string;
+  persistentName: string;
+  persistentType: string;
+}
 
 export default {
 
   namespace: 'Persistent',
 
   state: {
-    title: '添加',
-    tableData: [],
-    visible: false,
-    formData: {},
-    loadingVisible: true,
-    total: 0,
-    current: 1,
-    formConfig: [],
-    tableOperation: [],
-    tableConfig: [],
-    titleConfig: [],
-    tableSearch: [],
-    urlMap: {},
-    searchForm: {},
-    moreSearchForm: {},
-    searchDefaultForm: {},
-    subData: [],
+    formData: {} as PersistentItem,
   },
 
   reducers: {

@@ -1,9 +1,11 @@
+import type {ProFormInstance} from '@ant-design/pro-components';
 import {ModalForm, ProFormDateRangePicker, ProFormSelect, ProFormText,} from '@ant-design/pro-components';
 import {Col, message, Row} from 'antd';
 import {ProFormDigit, ProFormDigitRange, ProFormTextArea, ProFormTimePicker} from "@ant-design/pro-form/lib";
 import {ProForm, ProFormCheckbox, ProFormDatePicker, ProFormRadio, ProFormSwitch} from "@ant-design/pro-form";
 import store from "@/store";
 import PageFormSelect from "@/components/DataForm/PageFormSelect";
+import React, {useRef} from "react";
 
 interface Option {
   label: string,
@@ -36,7 +38,7 @@ type FormRow = {
   formConfigVoList: FormConfig[];
 }
 
-function DataForm(props: {
+function DataForm<T extends Record<string, any>>(props: {
   config: Form,
   url?: {
     add: string,
@@ -259,19 +261,25 @@ function DataForm(props: {
       )
     }
   }
-
-  const [form] = ProForm.useForm();
-
-  form.validateFields
-
+  const formRef = useRef<ProFormInstance>();
+  // const [form] = ProForm.useForm();
+  //
+  // console.log("form", form.getFieldsValue());
+  // console.log("data", entityState.formData);
+  // form.setFieldsValue(entityState.formData);
   return (
     <ModalForm
+      formRef={formRef}
       // @ts-ignore
       labelWidth="auto"
       grid={false}
       title={entityState.title}
       open={entityState.visible}
       onOpenChange={open => {
+        if (open) {
+          console.log("open",entityState.formData);
+          formRef.current?.setFieldsValue(entityState.formData);
+        }
         entityDispatcher.update({visible: open});
       }}
       onFinish={async (values: any) => {
@@ -282,7 +290,6 @@ function DataForm(props: {
         console.log(values);
         message.success('提交成功');
       }}
-      initialValues={entityState.formData}
     >
       {config.formConfigRowVoList.map((row: FormRow) => {
         return (

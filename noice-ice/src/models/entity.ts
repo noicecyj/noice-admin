@@ -1,9 +1,7 @@
 import {createModel} from 'ice';
 import initService from "@/services/init";
-import {getUrl} from "@/services/formAndTableAndUrl";
 
 interface Entity {
-  formData: any,
   title: string,
   visible: boolean,
 }
@@ -17,7 +15,6 @@ interface pageResult {
 export default createModel({
   // 定义  model 的初始 state
   state: {
-    formData: {},
     title: '添加',
     visible: false,
   } as Entity,
@@ -39,6 +36,9 @@ export default createModel({
         url: data.pageUrl,
         obj: data.params,
       });
+      return this.setPageData(dataRes);
+    },
+    setPageData(dataRes: any) {
       return {
         data: dataRes.data.records,
         success: dataRes.code == 200,
@@ -69,7 +69,6 @@ export default createModel({
     },
     add() {
       this.update({
-        formData: {},
         title: '添加',
         visible: true,
       });
@@ -78,28 +77,13 @@ export default createModel({
       id: string;
       getUrl: string;
     }) {
-      const dataRes = await initService.http({
-        url: data.getUrl + "?id=" + data.id,
-      });
-      console.log(dataRes);
       this.update({
-        formData: dataRes.data,
         title: '编辑',
         visible: true,
       });
+      return await initService.http({
+        url: data.getUrl + "?id=" + data.id,
+      });
     },
-    async getOption(dataSourceCode: string | undefined) {
-      if (dataSourceCode) {
-        if (dataSourceCode === "status") {
-          return [{label: '有效', value: 1}, {label: '无效', value: 0}];
-        } else {
-          let newVar = await getUrl(dataSourceCode);
-          console.log(newVar);
-          return newVar.data;
-        }
-      } else {
-        return [];
-      }
-    }
   }),
 })
