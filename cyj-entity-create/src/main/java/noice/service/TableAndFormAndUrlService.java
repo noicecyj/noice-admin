@@ -189,6 +189,7 @@ public class TableAndFormAndUrlService {
         statusFormConfig.setPersistentFormConfigMode("Select");
         statusFormConfig.setPersistentFormConfigDataSource("Dict#STATUS_TYPE");
         statusFormConfig.setPersistentFormConfigColSpan(12);
+        statusFormConfig.setPersistentFormConfigDefaultValue("true");
         statusFormConfig.setPersistentFormConfigEdit(true);
         statusFormConfig.setPersistentFormConfigRequired(true);
         baseFormConfigDtoList.add(statusFormConfig);

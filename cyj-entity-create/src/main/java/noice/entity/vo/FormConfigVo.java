@@ -19,7 +19,7 @@ public class FormConfigVo {
 
     private List<OptionDTO> persistentFormConfigDataSource;
 
-    private String persistentFormConfigDefaultValue;
+    private Object persistentFormConfigDefaultValue;
 
     private String persistentFormConfigDirection;
 

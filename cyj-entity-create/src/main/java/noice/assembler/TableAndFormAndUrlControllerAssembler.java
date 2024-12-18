@@ -32,6 +32,7 @@ public interface TableAndFormAndUrlControllerAssembler {
     UrlVo dtoToVo(UrlDto dto);
 
     @Mapping(target = "persistentFormConfigDataSource", source = "dto.persistentFormConfigDataSource", qualifiedByName = "dataSourceToOptionList")
+    @Mapping(target = "persistentFormConfigDefaultValue", source = "dto.persistentFormConfigDefaultValue", qualifiedByName = "defaultValueStringToObject")
     FormConfigVo dtoToVo(FormConfigDto dto);
 
     @Mapping(target = "formConfigVoList", source = "dto.formConfigDtoList")

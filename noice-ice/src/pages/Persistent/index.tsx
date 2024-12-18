@@ -21,10 +21,12 @@ export default function Persistent() {
   return (
     <>
       <DataTable<PersistentItem>
+        // dispatchers={persistentDispatchers}
         tableColumns={table.data.tableConfigVoList}
         url={url.data}
       />
       <DataForm<PersistentItem>
+        // data={persistentState}
         url={url.data}
         config={form.data}
       />

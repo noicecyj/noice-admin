@@ -60,7 +60,7 @@ public class TableAndFormAndUrlControllerAssemblerComponent {
     }
 
     @Named("dataSourceToOptionList")
-    public List dataSourceToOptionList(String dataSourceCode) throws ClassNotFoundException {
+    public List dataSourceToOptionList(String dataSourceCode) {
         if (StrUtil.isEmpty(dataSourceCode)) {
             return null;
         }
@@ -78,6 +78,16 @@ public class TableAndFormAndUrlControllerAssemblerComponent {
             return tableAndFormAndUrlServiceAssembler.dtoCatalogDictionaryListToDtoOptionList(dict);
         }
         return null;
+    }
+
+    @Named("defaultValueStringToObject")
+    public Object defaultValueStringToObject(String defaultValue) {
+        if ("true".equals(defaultValue)) {
+            return true;
+        } else if ("false".equals(defaultValue)) {
+            return false;
+        }
+        return defaultValue;
     }
 
 }

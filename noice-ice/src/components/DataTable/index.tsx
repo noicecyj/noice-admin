@@ -11,7 +11,7 @@ function DataTable<T extends Record<string, any>>(props: {
   url?: {
     page: string,
     get: string,
-  }
+  },
 }) {
   const actionRef = useRef<ActionType>();
 

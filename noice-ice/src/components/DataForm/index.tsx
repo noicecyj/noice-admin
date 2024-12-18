@@ -42,7 +42,8 @@ function DataForm<T extends Record<string, any>>(props: {
   config: Form,
   url?: {
     add: string,
-  }
+  },
+  // data?: T
 }) {
 
   const [entityState, entityDispatcher] = store.useModel('entity');
@@ -51,7 +52,8 @@ function DataForm<T extends Record<string, any>>(props: {
     config,
     url = {
       add: '',
-    }
+    },
+    // data
   } = props;
 
   const components = (item: FormConfig) => {
@@ -262,11 +264,7 @@ function DataForm<T extends Record<string, any>>(props: {
     }
   }
   const formRef = useRef<ProFormInstance>();
-  // const [form] = ProForm.useForm();
-  //
-  // console.log("form", form.getFieldsValue());
-  // console.log("data", entityState.formData);
-  // form.setFieldsValue(entityState.formData);
+
   return (
     <ModalForm
       formRef={formRef}
@@ -277,7 +275,7 @@ function DataForm<T extends Record<string, any>>(props: {
       open={entityState.visible}
       onOpenChange={open => {
         if (open) {
-          console.log("open",entityState.formData);
+          // console.log("open",data);
           formRef.current?.setFieldsValue(entityState.formData);
         }
         entityDispatcher.update({visible: open});

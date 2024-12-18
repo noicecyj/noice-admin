@@ -11,16 +11,19 @@ export default {
   namespace: 'Persistent',
 
   state: {
-    formData: {} as PersistentItem,
-  },
+    appServiceId: '',
+    persistentCode: '',
+    persistentId: '',
+    persistentName: '',
+    persistentType: '',
+  } as PersistentItem,
 
   reducers: {
-    setState(prevState: any, payload: any) {
-      return {...prevState, ...payload};
+    update(state: any, payload: any) {
+      return {
+        ...state,
+        ...payload,
+      };
     },
   },
-
-  effects: (dispatch: any) => ({
-    //自定义方法
-  }),
 };

@@ -1,7 +1,9 @@
 import {createModel} from 'ice';
 import initService from "@/services/init";
+import {getUrl} from "@/services/formAndTableAndUrl";
 
 interface Entity {
+  formData: object,
   title: string,
   visible: boolean,
 }
@@ -15,6 +17,7 @@ interface pageResult {
 export default createModel({
   // 定义  model 的初始 state
   state: {
+    formData: {},
     title: '添加',
     visible: false,
   } as Entity,
@@ -69,6 +72,7 @@ export default createModel({
     },
     add() {
       this.update({
+        formData: {},
         title: '添加',
         visible: true,
       });
@@ -77,12 +81,14 @@ export default createModel({
       id: string;
       getUrl: string;
     }) {
+      const dataRes = await initService.http({
+        url: data.getUrl + "?id=" + data.id,
+      });
+      console.log(dataRes);
       this.update({
+        formData: dataRes.data,
         title: '编辑',
         visible: true,
-      });
-      return await initService.http({
-        url: data.getUrl + "?id=" + data.id,
       });
     },
   }),
