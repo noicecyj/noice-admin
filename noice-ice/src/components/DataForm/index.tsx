@@ -282,16 +282,24 @@ function DataForm(props: {
               });
             })
           })
+        } else {
+          entityDispatcher.update({
+            readonly: open
+          });
         }
-        entityDispatcher.update({visible: open});
+        entityDispatcher.update({
+          visible: open
+        });
       }}
       onFinish={async (values: any) => {
         await entityDispatcher.save({
           saveUrl: url.add,
           formData: values,
         })
-        console.log(values);
-        message.success('提交成功');
+        message.success('添加成功');
+        entityDispatcher.update({
+          visible: false
+        });
       }}
     >
       {config.formConfigRowVoList.map((row: FormRow) => {

@@ -3,7 +3,7 @@ import {ProTable} from '@ant-design/pro-components';
 import {ReactNode, useRef} from 'react';
 import store from "@/store";
 import {ProColumns} from "@ant-design/pro-table/lib";
-import {Button} from "antd";
+import {Button, Popconfirm} from "antd";
 
 function DataTable(props: {
   tableColumns: ProColumns[],
@@ -11,6 +11,7 @@ function DataTable(props: {
   url?: {
     page: string,
     get: string,
+    delete: string,
   },
 }) {
   const actionRef = useRef<ActionType>();
@@ -22,6 +23,7 @@ function DataTable(props: {
     url = {
       page: '',
       get: '',
+      delete: '',
     },
   } = props;
 
@@ -50,11 +52,24 @@ function DataTable(props: {
       }}>
         查看
       </Button>,
-      <Button danger key="delete" size="small" onClick={() => {
-        console.log(record);
-      }}>
-        删除
-      </Button>
+      <Popconfirm
+        title="删除"
+        description="是否确认删除？"
+        onConfirm={async () => {
+          await entityDispatcher.remove({
+            id: record.id,
+            deleteUrl: url.delete,
+          })
+          actionRef?.current?.reload();
+        }}
+      >
+        <Button danger key="delete" size="small" onClick={() => {
+          console.log(record);
+        }}>
+          删除
+        </Button>
+      </Popconfirm>
+
     ],
   });
 
@@ -100,18 +115,6 @@ function DataTable(props: {
           labelWidth: 'auto',
         }}
         options={false}
-        form={{
-          // 由于配置了 transform，提交的参数与定义的不同这里需要转化一下
-          syncToUrl: (values, type) => {
-            if (type === 'get') {
-              return {
-                ...values,
-                created_at: [values.startTime, values.endTime],
-              };
-            }
-            return values;
-          },
-        }}
         pagination={{
           pageSize: 11,
           onChange: (page) => console.log(page),

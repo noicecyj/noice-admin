@@ -60,14 +60,11 @@ export default createModel({
       return dataRes.code == 200;
     },
     async remove(data: {
-      record: string;
+      id: string;
       deleteUrl: string;
     }) {
       const dataRes = await initService.http({
-        url: data.deleteUrl,
-        obj: {
-          id: data.record,
-        }
+        url: data.deleteUrl + "?id=" + data.id,
       });
       return dataRes.code == 200;
     },
