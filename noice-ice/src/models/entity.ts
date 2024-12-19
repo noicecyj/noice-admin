@@ -1,11 +1,11 @@
 import {createModel} from 'ice';
 import initService from "@/services/init";
-import {getUrl} from "@/services/formAndTableAndUrl";
 
 interface Entity {
   formData: object,
   title: string,
   visible: boolean,
+  readonly: boolean,
 }
 
 interface pageResult {
@@ -20,6 +20,7 @@ export default createModel({
     formData: {},
     title: '添加',
     visible: false,
+    readonly: false,
   } as Entity,
   // 定义改变该 model 状态的纯函数
   reducers: {
@@ -80,6 +81,7 @@ export default createModel({
     async edit(data: {
       id: string;
       getUrl: string;
+      readonly: boolean;
     }) {
       const dataRes = await initService.http({
         url: data.getUrl + "?id=" + data.id,
@@ -89,6 +91,7 @@ export default createModel({
         formData: dataRes.data,
         title: '编辑',
         visible: true,
+        readonly: data.readonly,
       });
     },
   }),

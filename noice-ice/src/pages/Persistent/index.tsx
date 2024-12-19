@@ -5,14 +5,6 @@ import {defineDataLoader} from "@ice/runtime/data-loader";
 import {getForm, getTable, getUrl} from "@/services/formAndTableAndUrl";
 import {useData} from "@ice/runtime/router";
 
-interface PersistentItem {
-  appServiceId: string;
-  persistentCode: string;
-  persistentId: string;
-  persistentName: string;
-  persistentType: string;
-}
-
 export default function Persistent() {
 
   const [persistentState, persistentDispatchers] = pageStore.useModel('Persistent');
@@ -20,13 +12,11 @@ export default function Persistent() {
 
   return (
     <>
-      <DataTable<PersistentItem>
-        // dispatchers={persistentDispatchers}
+      <DataTable
         tableColumns={table.data.tableConfigVoList}
         url={url.data}
       />
-      <DataForm<PersistentItem>
-        // data={persistentState}
+      <DataForm
         url={url.data}
         config={form.data}
       />

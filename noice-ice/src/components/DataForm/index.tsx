@@ -38,12 +38,11 @@ type FormRow = {
   formConfigVoList: FormConfig[];
 }
 
-function DataForm<T extends Record<string, any>>(props: {
+function DataForm(props: {
   config: Form,
   url?: {
     add: string,
   },
-  // data?: T
 }) {
 
   const [entityState, entityDispatcher] = store.useModel('entity');
@@ -53,7 +52,6 @@ function DataForm<T extends Record<string, any>>(props: {
     url = {
       add: '',
     },
-    // data
   } = props;
 
   const components = (item: FormConfig) => {
@@ -268,15 +266,20 @@ function DataForm<T extends Record<string, any>>(props: {
   return (
     <ModalForm
       formRef={formRef}
-      // @ts-ignore
-      labelWidth="auto"
+      readonly={entityState.readonly}
       grid={false}
       title={entityState.title}
       open={entityState.visible}
       onOpenChange={open => {
         if (open) {
-          // console.log("open",data);
-          formRef.current?.setFieldsValue(entityState.formData);
+          config.formConfigRowVoList.map((row: FormRow) => {
+            row.formConfigVoList.map((item: FormConfig) => {
+              formRef.current?.setFieldValue(item.persistentFormConfigCode, null);
+              Object.keys(entityState.formData).forEach(key => {
+                formRef.current?.setFieldValue(key, entityState.formData[key]);
+              });
+            })
+          })
         }
         entityDispatcher.update({visible: open});
       }}

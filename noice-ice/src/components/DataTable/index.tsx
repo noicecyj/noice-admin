@@ -1,11 +1,11 @@
 import type {ActionType} from '@ant-design/pro-components';
 import {ProTable} from '@ant-design/pro-components';
-import {ReactNode, useRef} from 'react';
+import {ReactNode, useRef, useState} from 'react';
 import store from "@/store";
 import {ProColumns} from "@ant-design/pro-table/lib";
 import {Button} from "antd";
 
-function DataTable<T extends Record<string, any>>(props: {
+function DataTable(props: {
   tableColumns: ProColumns[],
   toolBar?: ReactNode[],
   url?: {
@@ -14,7 +14,6 @@ function DataTable<T extends Record<string, any>>(props: {
   },
 }) {
   const actionRef = useRef<ActionType>();
-
   const [entityState, entityDispatcher] = store.useModel('entity');
 
   const {
@@ -36,13 +35,21 @@ function DataTable<T extends Record<string, any>>(props: {
         console.log(record);
         entityDispatcher.edit({
           id: record.id,
-          getUrl: url.get
+          getUrl: url.get,
+          readonly: false,
         });
       }}
       >
         编辑
       </Button>,
-      <Button key="view" size="small">
+      <Button key="view" size="small" onClick={() => {
+        console.log(record);
+        entityDispatcher.edit({
+          id: record.id,
+          getUrl: url.get,
+          readonly: true,
+        });
+      }}>
         查看
       </Button>,
       <Button danger key="delete" size="small">
@@ -65,7 +72,7 @@ function DataTable<T extends Record<string, any>>(props: {
 
   return (
     <>
-      <ProTable<T>
+      <ProTable
         columns={tableColumnsOption}
         actionRef={actionRef}
         cardBordered
