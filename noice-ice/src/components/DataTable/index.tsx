@@ -1,6 +1,6 @@
 import type {ActionType} from '@ant-design/pro-components';
 import {ProTable} from '@ant-design/pro-components';
-import {ReactNode, useRef, useState} from 'react';
+import {ReactNode, useRef} from 'react';
 import store from "@/store";
 import {ProColumns} from "@ant-design/pro-table/lib";
 import {Button} from "antd";
@@ -32,7 +32,6 @@ function DataTable(props: {
     key: 'option',
     render: (text, record, index, action) => [
       <Button key="edit" size="small" onClick={() => {
-        console.log(record);
         entityDispatcher.edit({
           id: record.id,
           getUrl: url.get,
@@ -43,7 +42,6 @@ function DataTable(props: {
         编辑
       </Button>,
       <Button key="view" size="small" onClick={() => {
-        console.log(record);
         entityDispatcher.edit({
           id: record.id,
           getUrl: url.get,
@@ -52,7 +50,9 @@ function DataTable(props: {
       }}>
         查看
       </Button>,
-      <Button danger key="delete" size="small">
+      <Button danger key="delete" size="small" onClick={() => {
+        console.log(record);
+      }}>
         删除
       </Button>
     ],

@@ -1,26 +1,18 @@
-import pageStore from './store';
-import DataTable from "@/components/DataTable";
-import DataForm from "@/components/DataForm";
 import {defineDataLoader} from "@ice/runtime/data-loader";
 import {getForm, getTable, getUrl} from "@/services/formAndTableAndUrl";
 import {useData} from "@ice/runtime/router";
+import PageModel from "@/components/PageModel";
 
 export default function Persistent() {
 
-  const [persistentState, persistentDispatchers] = pageStore.useModel('Persistent');
   const [form, table, url] = useData();
 
   return (
-    <>
-      <DataTable
-        tableColumns={table.data.tableConfigVoList}
-        url={url.data}
-      />
-      <DataForm
-        url={url.data}
-        config={form.data}
-      />
-    </>
+    <PageModel
+      url={url}
+      table={table}
+      form={form}
+    />
   );
 }
 
