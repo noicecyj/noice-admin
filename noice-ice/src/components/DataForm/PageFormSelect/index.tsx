@@ -19,8 +19,9 @@ interface PageFormSelectProps {
   initialValue?: string | undefined,
   disabled?: boolean | undefined,
   dataSource?: Option[],
-  value?: React.Key[] | LabeledValue[],
-  onChange?: (value: React.Key | LabeledValue) => void
+  value?: React.Key | LabeledValue,
+  onChange?: (value: React.Key | LabeledValue) => void,
+  readonly?: boolean
 }
 
 
@@ -32,15 +33,41 @@ const PageFormSelect = ({
                           disabled,
                           key,
                           dataSource = [],
-                          value = [],
-                          onChange
+                          value = '',
+                          onChange,
+                          readonly
                         }: PageFormSelectProps) => {
 
-  const handleChange = (newValue: React.Key[] | LabeledValue[]) => {
+  const handleChange = (newValue: React.Key | LabeledValue) => {
     if (onChange) {
-      onChange(newValue[0]);
+      onChange(newValue);
     }
   };
+
+  const readOnlyCheck = (readonly: boolean) => {
+    if (readonly) {
+      return (<div>
+        {options.map(option => {
+          if (option.value === value) {
+            return (<div>{option.label}</div>)
+          } else {
+            return (<div></div>)
+          }
+        })}
+      </div>)
+    } else {
+      return (<>
+        <Select
+          options={options}
+          disabled={true}
+          value={value}
+          onChange={handleChange}/>
+        <Button disabled={disabled} onClick={showDrawer}>
+          选择
+        </Button>
+      </>)
+    }
+  }
 
   const [open, setOpen] = useState(false);
 
@@ -49,11 +76,11 @@ const PageFormSelect = ({
   };
 
   const onClose = () => {
-    handleChange(selectedRowKeys)
+    handleChange(selectedRowKeys[0])
     setOpen(false);
   };
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-  const [options, setOptions] = useState<Option[]>(dataSource);
+  const [options] = useState<Option[]>(dataSource);
   const entityDispatcher = store.useModelDispatchers('entity');
 
   console.log('PageFormSelect', colProps, name, label, initialValue, disabled, key);
@@ -78,15 +105,16 @@ const PageFormSelect = ({
 
   return (
     <div style={{display: 'flex', alignItems: 'center'}}>
-      <Select
-        options={options}
-        disabled={true}
-        value={value}
-        onChange={handleChange}
-      />
-      <Button disabled={disabled} onClick={showDrawer}>
-        选择
-      </Button>
+      {readOnlyCheck(typeof readonly === "boolean" ? readonly : false)}
+      {/*<Select*/}
+      {/*  options={options}*/}
+      {/*  disabled={true}*/}
+      {/*  value={value}*/}
+      {/*  onChange={handleChange}*/}
+      {/*/>*/}
+      {/*<Button disabled={disabled} onClick={showDrawer}>*/}
+      {/*  选择*/}
+      {/*</Button>*/}
       <Drawer
         title="选择"
         width={window.innerWidth * 0.3}

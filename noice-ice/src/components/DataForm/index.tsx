@@ -125,6 +125,7 @@ function DataForm(props: {
           initialValue={item.persistentFormConfigDefaultValue}
           disabled={!item.persistentFormConfigEdit}
           required={item.persistentFormConfigRequired}
+          readonly={entityState.readonly}
           rules={[{required: item.persistentFormConfigRequired, message: '请输入' + item.persistentFormConfigName}]}
         />
       )
@@ -243,6 +244,7 @@ function DataForm(props: {
             dataSource={item.persistentFormConfigDataSource}
             initialValue={item.persistentFormConfigDefaultValue}
             disabled={item.persistentFormConfigEdit}
+            readonly={entityState.readonly}
           />
         </ProForm.Item>
       )
