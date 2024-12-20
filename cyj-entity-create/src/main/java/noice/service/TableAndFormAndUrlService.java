@@ -206,8 +206,8 @@ public class TableAndFormAndUrlService {
             if (!"allAuthority".equals(String.join("", userInterfaceList))) {
                 authorityPo.inAuthorityCode(userInterfaceList);
             }
-            StrUtil.toUnderlineCase(StrUtil.lowerFirst(persistentCode));
-            PersistentPo persistentPo = persistentRepository.find(new PersistentPo().eqPersistentCode(persistentCode).getQueryWrapper());
+            String underlineCase = StrUtil.toUnderlineCase(StrUtil.lowerFirst(persistentCode));
+            PersistentPo persistentPo = persistentRepository.find(new PersistentPo().eqPersistentCode(underlineCase).getQueryWrapper());
             if (ObjectUtil.isNotNull(persistentPo)) {
                 List<String> authorityId = authorityRepository.findList(authorityPo.getQueryWrapper()).stream().map(AuthorityPo::getId).toList();
                 List<InterfacePo> interfacePoList = interfaceRepository.findList(new InterfacePo().inAuthorityId(authorityId).eqPersistentId(persistentPo.getId()).getQueryWrapper());

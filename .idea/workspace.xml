@@ -5,13 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑">
+      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/Catalog/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/Catalog/models/Info.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/Catalog/store.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/CatalogDictionary/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/CatalogDictionary/models/Info.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/CatalogDictionary/store.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/Persistent/models/Info.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/service/TableAndFormAndUrlService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/service/TableAndFormAndUrlService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/noice-ice/src/components/DataForm/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/components/DataForm/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/noice-ice/src/components/DataTable/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/components/DataTable/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/global.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/noice-ice/src/models/entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/models/entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-ice/src/pages/Persistent/models/Persistent.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-ice/src/pages/Persistent/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/pages/Persistent/store.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -306,8 +314,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.145" />
-        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.145" />
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.218" />
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.218" />
       </set>
     </attachedChunks>
   </component>
@@ -424,15 +432,10 @@
       <workItem from="1734230518885" duration="16235000" />
       <workItem from="1734329601230" duration="1334000" />
       <workItem from="1734403852850" duration="14482000" />
-      <workItem from="1734570901606" duration="7333000" />
-    </task>
-    <task id="LOCAL-00161" summary="重构表单服务及组件，优化字段逻辑">
-      <option name="closed" value="true" />
-      <created>1733300725364</created>
-      <option name="number" value="00161" />
-      <option name="presentableId" value="LOCAL-00161" />
-      <option name="project" value="LOCAL" />
-      <updated>1733300725365</updated>
+      <workItem from="1734570901606" duration="10488000" />
+      <workItem from="1734598805670" duration="1946000" />
+      <workItem from="1734659427927" duration="1502000" />
+      <workItem from="1734698578112" duration="6833000" />
     </task>
     <task id="LOCAL-00162" summary="优化表单布局及字段逻辑">
       <option name="closed" value="true" />
@@ -818,7 +821,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734587316032</updated>
     </task>
-    <option name="localTasksCounter" value="210" />
+    <task id="LOCAL-00210" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1734591620836</created>
+      <option name="number" value="00210" />
+      <option name="presentableId" value="LOCAL-00210" />
+      <option name="project" value="LOCAL" />
+      <updated>1734591620836</updated>
+    </task>
+    <option name="localTasksCounter" value="211" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

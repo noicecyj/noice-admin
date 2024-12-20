@@ -1,6 +1,6 @@
 import type {ActionType} from '@ant-design/pro-components';
 import {ProTable} from '@ant-design/pro-components';
-import {ReactNode, useRef} from 'react';
+import {ReactNode, useEffect, useRef} from 'react';
 import store from "@/store";
 import {ProColumns} from "@ant-design/pro-table/lib";
 import {Button, Popconfirm} from "antd";
@@ -16,6 +16,13 @@ function DataTable(props: {
 }) {
   const actionRef = useRef<ActionType>();
   const [entityState, entityDispatcher] = store.useModel('entity');
+
+  useEffect(() => {
+    console.log('Count changed to:', entityState.status);
+    if (entityState.status === 'page') {
+      actionRef?.current?.reload();
+    }
+  }, [entityState.status]);
 
   const {
     tableColumns,

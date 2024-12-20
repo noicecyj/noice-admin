@@ -42,6 +42,7 @@ function DataForm(props: {
   config: Form,
   url?: {
     add: string,
+    update: string,
   },
 }) {
 
@@ -51,6 +52,7 @@ function DataForm(props: {
     config,
     url = {
       add: '',
+      update: '',
     },
   } = props;
 
@@ -292,13 +294,12 @@ function DataForm(props: {
         });
       }}
       onFinish={async (values: any) => {
-        await entityDispatcher.save({
-          saveUrl: url.add,
-          formData: values,
-        })
-        message.success('添加成功');
-        entityDispatcher.update({
-          visible: false
+        entityDispatcher.save({
+          saveUrl: entityState.status === 'add' ? url.add : url.update,
+          formData: {
+            ...values,
+            id: entityState.formData.id,
+          },
         });
       }}
     >
