@@ -1,12 +1,9 @@
 package noice.controller.bean;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotNull;
 import noice.assembler.bean.PersistentTableSearchConfigControllerAssembler;
-import noice.common.entity.vo.OptionVO;
 import noice.common.entity.vo.ResultVO;
 import noice.converter.bean.PersistentTableSearchConfigControllerConverter;
 import noice.entity.vo.bean.PersistentTableSearchConfigVo;
@@ -92,14 +89,6 @@ public class PersistentTableSearchConfigController implements BeanController<Per
     @Override
     public ResultVO page(@RequestBody PersistentTableSearchConfigVo vo) {
         return ResultVO.success(service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto)));
-    }
-
-    @Operation(summary = "实体表格搜索配置_获取Options")
-    @PostMapping(value = "getOptions")
-    @Override
-    public ResultVO getOptions(@RequestBody PersistentTableSearchConfigVo vo) {
-        IPage<PersistentTableSearchConfigVo> convert = service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto));
-        return ResultVO.success(new Page<OptionVO>(vo.getCurrent(), vo.getPageSize()).setTotal(convert.getTotal()).setRecords(convert.getRecords().stream().map(valueEnum -> OptionVO.builder().label(valueEnum.getPersistentTableSearchConfigName()).value(valueEnum.getId()).build()).toList()));
     }
 
 }

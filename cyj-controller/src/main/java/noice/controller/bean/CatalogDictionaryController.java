@@ -1,12 +1,9 @@
 package noice.controller.bean;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotNull;
 import noice.assembler.bean.CatalogDictionaryControllerAssembler;
-import noice.common.entity.vo.OptionVO;
 import noice.common.entity.vo.ResultVO;
 import noice.converter.bean.CatalogDictionaryControllerConverter;
 import noice.entity.vo.bean.CatalogDictionaryVo;
@@ -92,14 +89,6 @@ public class CatalogDictionaryController implements BeanController<CatalogDictio
     @Override
     public ResultVO page(@RequestBody CatalogDictionaryVo vo) {
         return ResultVO.success(service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto)));
-    }
-
-    @Operation(summary = "目录字典_获取Options")
-    @PostMapping(value = "getOptions")
-    @Override
-    public ResultVO getOptions(@RequestBody CatalogDictionaryVo vo) {
-        IPage<CatalogDictionaryVo> convert = service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto));
-        return ResultVO.success(new Page<OptionVO>(vo.getCurrent(), vo.getPageSize()).setTotal(convert.getTotal()).setRecords(convert.getRecords().stream().map(valueEnum -> OptionVO.builder().label(valueEnum.getCatalogDictionaryName()).value(valueEnum.getId()).build()).toList()));
     }
 
 }

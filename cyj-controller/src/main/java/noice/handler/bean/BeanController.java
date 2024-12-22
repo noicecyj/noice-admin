@@ -22,6 +22,4 @@ public interface BeanController<VO extends BaseVoBean> {
 
     ResultVO delete(String id);
 
-    ResultVO getOptions(VO vo);
-
 }

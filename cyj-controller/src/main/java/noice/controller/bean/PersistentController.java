@@ -1,12 +1,9 @@
 package noice.controller.bean;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotNull;
 import noice.assembler.bean.PersistentControllerAssembler;
-import noice.common.entity.vo.OptionVO;
 import noice.common.entity.vo.ResultVO;
 import noice.converter.bean.PersistentControllerConverter;
 import noice.entity.vo.bean.PersistentVo;
@@ -92,14 +89,6 @@ public class PersistentController implements BeanController<PersistentVo> {
     @Override
     public ResultVO page(@RequestBody PersistentVo vo) {
         return ResultVO.success(service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto)));
-    }
-
-    @Operation(summary = "实体_获取Options")
-    @PostMapping(value = "getOptions")
-    @Override
-    public ResultVO getOptions(@RequestBody PersistentVo vo) {
-        IPage<PersistentVo> convert = service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto));
-        return ResultVO.success(new Page<OptionVO>(vo.getCurrent(), vo.getPageSize()).setTotal(convert.getTotal()).setRecords(convert.getRecords().stream().map(valueEnum -> OptionVO.builder().label(valueEnum.getPersistentName()).value(valueEnum.getId()).build()).toList()));
     }
 
 }
