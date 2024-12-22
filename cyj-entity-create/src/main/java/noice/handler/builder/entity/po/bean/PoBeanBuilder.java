@@ -218,17 +218,21 @@ public class PoBeanBuilder extends ClassBase {
                 sb.append(poBeanInBuilder.builder(getPersistentPo(), persistentPropertyPo)).append("\n");
                 sb.append("\n");
             }
-            if (!"id".equals(persistentPropertyPo.getPersistentPropertyType()) && "String".equals(persistentPropertyPo.getPersistentPropertyType())) {
-                sb.append(poBeanLikeBuilder.builder(getPersistentPo(), persistentPropertyPo)).append("\n");
-                sb.append("\n");
-                sb.append(poBeanLikeSetBuilder.builder(getPersistentPo(), persistentPropertyPo)).append("\n");
-                sb.append("\n");
+            if (!"id".equals(persistentPropertyPo.getPersistentPropertyCode()) && "String".equals(persistentPropertyPo.getPersistentPropertyType())) {
+                if (!persistentPropertyPo.getPersistentPropertyCode().contains("_id")) {
+                    sb.append(poBeanLikeBuilder.builder(getPersistentPo(), persistentPropertyPo)).append("\n");
+                    sb.append("\n");
+                    sb.append(poBeanLikeSetBuilder.builder(getPersistentPo(), persistentPropertyPo)).append("\n");
+                    sb.append("\n");
+                }
                 sb.append(poBeanOrderByBuilder.builder(getPersistentPo(), persistentPropertyPo)).append("\n");
                 sb.append("\n");
-                sb.append(poBeanOrderByAscBuilder.builder(getPersistentPo(), persistentPropertyPo)).append("\n");
-                sb.append("\n");
-                sb.append(poBeanOrderByDescBuilder.builder(getPersistentPo(), persistentPropertyPo)).append("\n");
-                sb.append("\n");
+                if (!persistentPropertyPo.getPersistentPropertyCode().contains("_id")) {
+                    sb.append(poBeanOrderByAscBuilder.builder(getPersistentPo(), persistentPropertyPo)).append("\n");
+                    sb.append("\n");
+                    sb.append(poBeanOrderByDescBuilder.builder(getPersistentPo(), persistentPropertyPo)).append("\n");
+                    sb.append("\n");
+                }
             }
         }
         PersistentPropertyPo idProperty = new PersistentPropertyPo();
