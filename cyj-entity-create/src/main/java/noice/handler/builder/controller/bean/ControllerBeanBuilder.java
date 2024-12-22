@@ -133,13 +133,10 @@ public class ControllerBeanBuilder extends ClassBase {
 
     public void setImportList(String poName) {
         importPackageList = new ArrayList<>();
-        importPackageList.add("import com.baomidou.mybatisplus.core.metadata.IPage;");
-        importPackageList.add("import com.baomidou.mybatisplus.extension.plugins.pagination.Page;");
         importPackageList.add("import io.swagger.v3.oas.annotations.Operation;");
         importPackageList.add("import io.swagger.v3.oas.annotations.tags.Tag;");
         importPackageList.add("import jakarta.validation.constraints.NotNull;");
         importPackageList.add("import noice.assembler.bean." + poName + "ControllerAssembler;");
-        importPackageList.add("import noice.common.entity.vo.OptionVO;");
         importPackageList.add("import noice.common.entity.vo.ResultVO;");
         importPackageList.add("import noice.converter.bean." + poName + "ControllerConverter;");
         importPackageList.add("import noice.entity.vo.bean." + poName + "Vo;");
