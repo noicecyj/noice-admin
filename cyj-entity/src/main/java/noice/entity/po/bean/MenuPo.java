@@ -79,6 +79,11 @@ public class MenuPo extends BasePoBean<MenuPo> {
         return this;
     }
 
+    public MenuPo orderByAuthorityId(boolean isAsc) {
+        this.queryWrapper.lambda().orderBy(true, isAsc, MenuPo::getAuthorityId);
+        return this;
+    }
+
     public MenuPo selectMenuCode() {
         this.queryWrapper.lambda().select(MenuPo::getMenuCode);
         return this;
@@ -191,6 +196,11 @@ public class MenuPo extends BasePoBean<MenuPo> {
 
     public MenuPo inMenuId(List<String> valueList) {
         this.queryWrapper.lambda().in(CollUtil.isNotEmpty(valueList), MenuPo::getMenuId, valueList);
+        return this;
+    }
+
+    public MenuPo orderByMenuId(boolean isAsc) {
+        this.queryWrapper.lambda().orderBy(true, isAsc, MenuPo::getMenuId);
         return this;
     }
 

@@ -94,6 +94,11 @@ public class PersistentFormConfigPo extends BasePoBean<PersistentFormConfigPo> {
         return this;
     }
 
+    public PersistentFormConfigPo orderByAuthorityId(boolean isAsc) {
+        this.queryWrapper.lambda().orderBy(true, isAsc, PersistentFormConfigPo::getAuthorityId);
+        return this;
+    }
+
     public PersistentFormConfigPo selectPersistentFormConfigCode() {
         this.queryWrapper.lambda().select(PersistentFormConfigPo::getPersistentFormConfigCode);
         return this;
@@ -442,6 +447,11 @@ public class PersistentFormConfigPo extends BasePoBean<PersistentFormConfigPo> {
 
     public PersistentFormConfigPo inPersistentFormId(List<String> valueList) {
         this.queryWrapper.lambda().in(CollUtil.isNotEmpty(valueList), PersistentFormConfigPo::getPersistentFormId, valueList);
+        return this;
+    }
+
+    public PersistentFormConfigPo orderByPersistentFormId(boolean isAsc) {
+        this.queryWrapper.lambda().orderBy(true, isAsc, PersistentFormConfigPo::getPersistentFormId);
         return this;
     }
 

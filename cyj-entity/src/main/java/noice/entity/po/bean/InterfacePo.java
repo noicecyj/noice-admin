@@ -79,6 +79,11 @@ public class InterfacePo extends BasePoBean<InterfacePo> {
         return this;
     }
 
+    public InterfacePo orderByAuthorityId(boolean isAsc) {
+        this.queryWrapper.lambda().orderBy(true, isAsc, InterfacePo::getAuthorityId);
+        return this;
+    }
+
     public InterfacePo selectInterfaceCode() {
         this.queryWrapper.lambda().select(InterfacePo::getInterfaceCode);
         return this;
@@ -285,6 +290,11 @@ public class InterfacePo extends BasePoBean<InterfacePo> {
 
     public InterfacePo inPersistentId(List<String> valueList) {
         this.queryWrapper.lambda().in(CollUtil.isNotEmpty(valueList), InterfacePo::getPersistentId, valueList);
+        return this;
+    }
+
+    public InterfacePo orderByPersistentId(boolean isAsc) {
+        this.queryWrapper.lambda().orderBy(true, isAsc, InterfacePo::getPersistentId);
         return this;
     }
 

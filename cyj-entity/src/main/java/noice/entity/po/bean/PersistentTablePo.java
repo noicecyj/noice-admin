@@ -70,6 +70,11 @@ public class PersistentTablePo extends BasePoBean<PersistentTablePo> {
         return this;
     }
 
+    public PersistentTablePo orderByPersistentId(boolean isAsc) {
+        this.queryWrapper.lambda().orderBy(true, isAsc, PersistentTablePo::getPersistentId);
+        return this;
+    }
+
     public PersistentTablePo selectPersistentTableCode() {
         this.queryWrapper.lambda().select(PersistentTablePo::getPersistentTableCode);
         return this;

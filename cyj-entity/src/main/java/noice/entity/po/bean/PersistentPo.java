@@ -76,6 +76,11 @@ public class PersistentPo extends BasePoBean<PersistentPo> {
         return this;
     }
 
+    public PersistentPo orderByAppServiceId(boolean isAsc) {
+        this.queryWrapper.lambda().orderBy(true, isAsc, PersistentPo::getAppServiceId);
+        return this;
+    }
+
     public PersistentPo selectPersistentCode() {
         this.queryWrapper.lambda().select(PersistentPo::getPersistentCode);
         return this;
@@ -141,6 +146,11 @@ public class PersistentPo extends BasePoBean<PersistentPo> {
 
     public PersistentPo inPersistentId(List<String> valueList) {
         this.queryWrapper.lambda().in(CollUtil.isNotEmpty(valueList), PersistentPo::getPersistentId, valueList);
+        return this;
+    }
+
+    public PersistentPo orderByPersistentId(boolean isAsc) {
+        this.queryWrapper.lambda().orderBy(true, isAsc, PersistentPo::getPersistentId);
         return this;
     }
 

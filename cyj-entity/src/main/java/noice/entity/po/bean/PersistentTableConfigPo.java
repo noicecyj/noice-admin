@@ -82,6 +82,11 @@ public class PersistentTableConfigPo extends BasePoBean<PersistentTableConfigPo>
         return this;
     }
 
+    public PersistentTableConfigPo orderByAuthorityId(boolean isAsc) {
+        this.queryWrapper.lambda().orderBy(true, isAsc, PersistentTableConfigPo::getAuthorityId);
+        return this;
+    }
+
     public PersistentTableConfigPo selectPersistentTableConfigCode() {
         this.queryWrapper.lambda().select(PersistentTableConfigPo::getPersistentTableConfigCode);
         return this;
@@ -304,6 +309,11 @@ public class PersistentTableConfigPo extends BasePoBean<PersistentTableConfigPo>
 
     public PersistentTableConfigPo inPersistentTableId(List<String> valueList) {
         this.queryWrapper.lambda().in(CollUtil.isNotEmpty(valueList), PersistentTableConfigPo::getPersistentTableId, valueList);
+        return this;
+    }
+
+    public PersistentTableConfigPo orderByPersistentTableId(boolean isAsc) {
+        this.queryWrapper.lambda().orderBy(true, isAsc, PersistentTableConfigPo::getPersistentTableId);
         return this;
     }
 

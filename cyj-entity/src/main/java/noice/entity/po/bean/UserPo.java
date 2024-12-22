@@ -73,6 +73,11 @@ public class UserPo extends BasePoBean<UserPo> {
         return this;
     }
 
+    public UserPo orderByEnterpriseId(boolean isAsc) {
+        this.queryWrapper.lambda().orderBy(true, isAsc, UserPo::getEnterpriseId);
+        return this;
+    }
+
     public UserPo selectUserCode() {
         this.queryWrapper.lambda().select(UserPo::getUserCode);
         return this;

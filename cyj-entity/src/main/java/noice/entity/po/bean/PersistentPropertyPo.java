@@ -85,6 +85,11 @@ public class PersistentPropertyPo extends BasePoBean<PersistentPropertyPo> {
         return this;
     }
 
+    public PersistentPropertyPo orderByPersistentId(boolean isAsc) {
+        this.queryWrapper.lambda().orderBy(true, isAsc, PersistentPropertyPo::getPersistentId);
+        return this;
+    }
+
     public PersistentPropertyPo selectPersistentPropertyCode() {
         this.queryWrapper.lambda().select(PersistentPropertyPo::getPersistentPropertyCode);
         return this;
@@ -323,6 +328,11 @@ public class PersistentPropertyPo extends BasePoBean<PersistentPropertyPo> {
 
     public PersistentPropertyPo inRelationPersistentId(List<String> valueList) {
         this.queryWrapper.lambda().in(CollUtil.isNotEmpty(valueList), PersistentPropertyPo::getRelationPersistentId, valueList);
+        return this;
+    }
+
+    public PersistentPropertyPo orderByRelationPersistentId(boolean isAsc) {
+        this.queryWrapper.lambda().orderBy(true, isAsc, PersistentPropertyPo::getRelationPersistentId);
         return this;
     }
 

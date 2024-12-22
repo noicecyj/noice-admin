@@ -233,6 +233,11 @@ public class PersistentFormPo extends BasePoBean<PersistentFormPo> {
         return this;
     }
 
+    public PersistentFormPo orderByPersistentId(boolean isAsc) {
+        this.queryWrapper.lambda().orderBy(true, isAsc, PersistentFormPo::getPersistentId);
+        return this;
+    }
+
     public PersistentFormPo selectId() {
         this.queryWrapper.lambda().select(PersistentFormPo::getId);
         return this;

@@ -164,6 +164,11 @@ public class CatalogDictionaryPo extends BasePoBean<CatalogDictionaryPo> {
         return this;
     }
 
+    public CatalogDictionaryPo orderByCatalogId(boolean isAsc) {
+        this.queryWrapper.lambda().orderBy(true, isAsc, CatalogDictionaryPo::getCatalogId);
+        return this;
+    }
+
     public CatalogDictionaryPo selectId() {
         this.queryWrapper.lambda().select(CatalogDictionaryPo::getId);
         return this;
