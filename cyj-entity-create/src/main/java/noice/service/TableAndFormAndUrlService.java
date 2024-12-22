@@ -114,6 +114,18 @@ public class TableAndFormAndUrlService {
             List<String> authorityId = authorityRepository.findList(authorityPo.getQueryWrapper()).stream().map(AuthorityPo::getId).toList();
             List<PersistentTableConfigPo> persistentTableConfigPoList = persistentTableConfigRepository.findList(new PersistentTableConfigPo().eqPersistentTableId(persistentTablePo.getId()).inAuthorityId(authorityId).getQueryWrapper());
             List<TableConfigDto> tableConfigDtoList = tableAndFormAndUrlServiceAssembler.poTableListToDtoTableList(persistentTableConfigPoList);
+            TableConfigDto sortCodeCol = new TableConfigDto();
+            sortCodeCol.setId("sortCodeKey");
+            sortCodeCol.setPersistentTableConfigCode("sortCode");
+            sortCodeCol.setPersistentTableConfigName("排序");
+            sortCodeCol.setPersistentTableConfigDisplay(false);
+            tableConfigDtoList.add(sortCodeCol);
+            TableConfigDto statusCol = new TableConfigDto();
+            statusCol.setId("statusKey");
+            statusCol.setPersistentTableConfigCode("status");
+            statusCol.setPersistentTableConfigName("状态");
+            statusCol.setPersistentTableConfigDisplay(false);
+            tableConfigDtoList.add(statusCol);
             tableDto.setTableConfigDtoList(tableConfigDtoList);
             return tableDto;
         }

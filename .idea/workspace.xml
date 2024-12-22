@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/components/DataForm/PageFormSelect/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/components/DataForm/PageFormSelect/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/components/DataForm/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/components/DataForm/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/services/list.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/service/TableAndFormAndUrlService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/service/TableAndFormAndUrlService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -427,22 +425,6 @@
       <workItem from="1734698578112" duration="7597000" />
       <workItem from="1734865880643" duration="1852000" />
     </task>
-    <task id="LOCAL-00163" summary="优化表单布局及字段逻辑">
-      <option name="closed" value="true" />
-      <created>1733378206571</created>
-      <option name="number" value="00163" />
-      <option name="presentableId" value="LOCAL-00163" />
-      <option name="project" value="LOCAL" />
-      <updated>1733378206571</updated>
-    </task>
-    <task id="LOCAL-00164" summary="优化表单布局及字段逻辑">
-      <option name="closed" value="true" />
-      <created>1733388168206</created>
-      <option name="number" value="00164" />
-      <option name="presentableId" value="LOCAL-00164" />
-      <option name="project" value="LOCAL" />
-      <updated>1733388168206</updated>
-    </task>
     <task id="LOCAL-00165" summary="优化表单布局及字段逻辑">
       <option name="closed" value="true" />
       <created>1733391523195</created>
@@ -819,7 +801,23 @@
       <option name="project" value="LOCAL" />
       <updated>1734711276203</updated>
     </task>
-    <option name="localTasksCounter" value="212" />
+    <task id="LOCAL-00212" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1734871134789</created>
+      <option name="number" value="00212" />
+      <option name="presentableId" value="LOCAL-00212" />
+      <option name="project" value="LOCAL" />
+      <updated>1734871134789</updated>
+    </task>
+    <task id="LOCAL-00213" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1734871196994</created>
+      <option name="number" value="00213" />
+      <option name="presentableId" value="LOCAL-00213" />
+      <option name="project" value="LOCAL" />
+      <updated>1734871196994</updated>
+    </task>
+    <option name="localTasksCounter" value="214" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
