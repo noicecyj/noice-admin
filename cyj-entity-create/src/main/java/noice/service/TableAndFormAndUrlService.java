@@ -112,7 +112,7 @@ public class TableAndFormAndUrlService {
                 authorityPo.inAuthorityCode(tableCodeList);
             }
             List<String> authorityId = authorityRepository.findList(authorityPo.getQueryWrapper()).stream().map(AuthorityPo::getId).toList();
-            List<PersistentTableConfigPo> persistentTableConfigPoList = persistentTableConfigRepository.findList(new PersistentTableConfigPo().eqPersistentTableId(persistentTablePo.getId()).inAuthorityId(authorityId).getQueryWrapper());
+            List<PersistentTableConfigPo> persistentTableConfigPoList = persistentTableConfigRepository.findList(new PersistentTableConfigPo().eqPersistentTableId(persistentTablePo.getId()).inAuthorityId(authorityId).orderBySortCode(true).getQueryWrapper());
             List<TableConfigDto> tableConfigDtoList = tableAndFormAndUrlServiceAssembler.poTableListToDtoTableList(persistentTableConfigPoList);
             TableConfigDto sortCodeCol = new TableConfigDto();
             sortCodeCol.setId("sortCodeKey");

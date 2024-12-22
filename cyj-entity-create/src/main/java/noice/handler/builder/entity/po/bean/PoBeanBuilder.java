@@ -218,7 +218,7 @@ public class PoBeanBuilder extends ClassBase {
                 sb.append(poBeanInBuilder.builder(getPersistentPo(), persistentPropertyPo)).append("\n");
                 sb.append("\n");
             }
-            if (!persistentPropertyPo.getPersistentPropertyCode().contains("id") && "String".equals(persistentPropertyPo.getPersistentPropertyType())) {
+            if (!"id".equals(persistentPropertyPo.getPersistentPropertyType()) && "String".equals(persistentPropertyPo.getPersistentPropertyType())) {
                 sb.append(poBeanLikeBuilder.builder(getPersistentPo(), persistentPropertyPo)).append("\n");
                 sb.append("\n");
                 sb.append(poBeanLikeSetBuilder.builder(getPersistentPo(), persistentPropertyPo)).append("\n");
