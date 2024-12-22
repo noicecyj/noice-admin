@@ -302,7 +302,7 @@ public class PoBeanBuilder extends ClassBase {
         sb.append("\n");
         sb.append(poBeanLikeAutoBuilder.builder(getPersistentPo(), getPersistentPropertyPoList())).append("\n");
         sb.append("\n");
-        sb.append(poBeanBaseBuilder.builder(getPersistentPo())).append("\n");
+        sb.append(poBeanBaseBuilder.builder(getPersistentPo(), getPersistentPropertyPoList())).append("\n");
         sb.append("\n");
         sb.append("}");
         return sb.toString();

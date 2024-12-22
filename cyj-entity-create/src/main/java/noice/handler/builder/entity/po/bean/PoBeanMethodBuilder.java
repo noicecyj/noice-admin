@@ -378,13 +378,23 @@ public class PoBeanMethodBuilder extends MethodBase {
     @Data
     public static class PoBeanBaseBuilder extends PoBeanMethodBuilder {
 
-        public PoBeanBaseBuilder builder(PersistentPo persistentPo) {
+        public PoBeanBaseBuilder builder(PersistentPo persistentPo, List<PersistentPropertyPo> persistentPropertyPoList) {
             String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
             this.setMethodStatement(StatementEnum.PUBLIC);
             this.setMethodReturnType(poName + "Po");
             this.setMethodName("baseQueryWrapper");
-            this.setMethodReturnBody("return this.eqId().eqCreatedBy().eqUpdatedBy().eqStatus().eqSortCode().orderBySortCode(true).orderByCreatedDate(true).orderByUpdatedDate(true);");
+            this.setMethodReturnBody(persistentPropertyPoList);
             return this;
+        }
+
+        public void setMethodReturnBody(List<PersistentPropertyPo> persistentPropertyPoList) {
+            List<String> methodParamSet = new ArrayList<>();
+            for (PersistentPropertyPo persistentPropertyPo : persistentPropertyPoList.stream()
+                    .filter(persistentPropertyPo -> StrUtil.isNotEmpty(persistentPropertyPo.getRelationPersistentId())).toList()) {
+                String propertyName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPropertyPo.getPersistentPropertyCode()));
+                methodParamSet.add("orderBy" + propertyName + "()");
+            }
+            this.setMethodReturnBody("return this.eqId().eqCreatedBy().eqUpdatedBy().eqStatus().eqSortCode()." + String.join(".", methodParamSet) + ".orderBySortCode(true).orderByCreatedDate(true).orderByUpdatedDate(true);");
         }
 
         @Override
