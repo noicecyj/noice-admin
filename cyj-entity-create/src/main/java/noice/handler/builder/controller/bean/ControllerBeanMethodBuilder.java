@@ -446,48 +446,4 @@ public class ControllerBeanMethodBuilder extends MethodBase {
 
     }
 
-    @EqualsAndHashCode(callSuper = true)
-    @Component
-    @Data
-    public static class ControllerBeanOptionsBuilder extends ControllerBeanMethodBuilder {
-
-        public ControllerBeanOptionsBuilder builder(PersistentPo persistentPo) {
-            String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
-            this.setMethodStatement(StatementEnum.PUBLIC);
-            this.setMethodReturnType("ResultVO");
-            this.setMethodAnnotationList(persistentPo.getPersistentName());
-            this.setMethodName("getOptions");
-            this.setMethodParamSet(poName);
-            this.setMethodBody(poName);
-            this.setMethodReturnBody("return ResultVO.success(new Page<OptionVO>(vo.getCurrent(), vo.getPageSize()).setTotal(convert.getTotal()).setRecords(convert.getRecords().stream().map(valueEnum -> OptionVO.builder().label(valueEnum.get" + poName + "Name()).value(valueEnum.getId()).build()).toList()));");
-            return this;
-        }
-
-        public void setMethodBody(String poName) {
-            List<String> methodBodyList = new ArrayList<>();
-            methodBodyList.add("IPage<" + poName + "Vo> convert = service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto));");
-            this.setMethodBody(methodBodyList);
-        }
-
-        public void setMethodParamSet(String poName) {
-            List<String> methodParamSet = new ArrayList<>();
-            methodParamSet.add("@RequestBody " + poName + "Vo vo");
-            super.setMethodParamSet(methodParamSet);
-        }
-
-        public void setMethodAnnotationList(String name) {
-            List<String> methodAnnotationList = new ArrayList<>();
-            methodAnnotationList.add("@Operation(summary = \"" + name + "_获取Options\")");
-            methodAnnotationList.add("@PostMapping(value = \"getOptions\")");
-            methodAnnotationList.add("@Override");
-            super.setMethodAnnotationList(methodAnnotationList);
-        }
-
-        @Override
-        public String toString() {
-            return getString(getMethodAnnotationList(), getMethodStatement(), getMethodReturnType(), getMethodName(), getMethodParamSet(), getMethodReturnBody(), getMethodBody());
-        }
-
-    }
-
 }
