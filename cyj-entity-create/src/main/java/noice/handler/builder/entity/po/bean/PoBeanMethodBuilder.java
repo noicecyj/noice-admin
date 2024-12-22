@@ -393,7 +393,7 @@ public class PoBeanMethodBuilder extends MethodBase {
             for (PersistentPropertyPo persistentPropertyPo : persistentPropertyPoList.stream()
                     .filter(persistentPropertyPo -> StrUtil.isNotEmpty(persistentPropertyPo.getRelationPersistentId())).toList()) {
                 String propertyName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPropertyPo.getPersistentPropertyCode()));
-                methodParamSet.add("orderBy" + propertyName + "()");
+                methodParamSet.add("orderBy" + propertyName + "(true)");
             }
             if (CollectionUtil.isNotEmpty(methodParamSet)) {
                 this.setMethodReturnBody("return this.eqId().eqCreatedBy().eqUpdatedBy().eqStatus().eqSortCode()." + String.join(".", methodParamSet) + ".orderBySortCode(true).orderByCreatedDate(true).orderByUpdatedDate(true);");
