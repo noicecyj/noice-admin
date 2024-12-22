@@ -1,5 +1,6 @@
 package noice.handler.builder.entity.po.bean;
 
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -394,7 +395,11 @@ public class PoBeanMethodBuilder extends MethodBase {
                 String propertyName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPropertyPo.getPersistentPropertyCode()));
                 methodParamSet.add("orderBy" + propertyName + "()");
             }
-            this.setMethodReturnBody("return this.eqId().eqCreatedBy().eqUpdatedBy().eqStatus().eqSortCode()." + String.join(".", methodParamSet) + ".orderBySortCode(true).orderByCreatedDate(true).orderByUpdatedDate(true);");
+            if (CollectionUtil.isNotEmpty(methodParamSet)) {
+                this.setMethodReturnBody("return this.eqId().eqCreatedBy().eqUpdatedBy().eqStatus().eqSortCode()." + String.join(".", methodParamSet) + ".orderBySortCode(true).orderByCreatedDate(true).orderByUpdatedDate(true);");
+            } else {
+                this.setMethodReturnBody("return this.eqId().eqCreatedBy().eqUpdatedBy().eqStatus().eqSortCode().orderBySortCode(true).orderByCreatedDate(true).orderByUpdatedDate(true);");
+            }
         }
 
         @Override
