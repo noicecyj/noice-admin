@@ -288,7 +288,7 @@ public class CatalogDictionaryPo extends BasePoBean<CatalogDictionaryPo> {
     }
 
     public CatalogDictionaryPo baseQueryWrapper() {
-        return this.eqId().eqCreatedBy().eqUpdatedBy().eqStatus().eqSortCode().orderBySortCode(true).orderByCreatedDate(true).orderByUpdatedDate(true);
+        return this.eqId().eqCreatedBy().eqUpdatedBy().eqStatus().eqSortCode().orderByCatalogId(true).orderBySortCode(true).orderByCreatedDate(true).orderByUpdatedDate(true);
     }
 
 }

@@ -574,7 +574,7 @@ public class PersistentFormConfigPo extends BasePoBean<PersistentFormConfigPo> {
     }
 
     public PersistentFormConfigPo baseQueryWrapper() {
-        return this.eqId().eqCreatedBy().eqUpdatedBy().eqStatus().eqSortCode().orderBySortCode(true).orderByCreatedDate(true).orderByUpdatedDate(true);
+        return this.eqId().eqCreatedBy().eqUpdatedBy().eqStatus().eqSortCode().orderByAuthorityId(true).orderByPersistentFormId(true).orderBySortCode(true).orderByCreatedDate(true).orderByUpdatedDate(true);
     }
 
 }

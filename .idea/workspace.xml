@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑">
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/builder/entity/po/bean/PoBeanBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/builder/entity/po/bean/PoBeanBuilder.java" afterDir="false" />
-    </list>
+    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -424,14 +422,6 @@
       <workItem from="1734698578112" duration="7597000" />
       <workItem from="1734865880643" duration="1852000" />
     </task>
-    <task id="LOCAL-00168" summary="优化表单布局及字段逻辑">
-      <option name="closed" value="true" />
-      <created>1733452753755</created>
-      <option name="number" value="00168" />
-      <option name="presentableId" value="LOCAL-00168" />
-      <option name="project" value="LOCAL" />
-      <updated>1733452753755</updated>
-    </task>
     <task id="LOCAL-00169" summary="优化表单布局及字段逻辑">
       <option name="closed" value="true" />
       <created>1733472125300</created>
@@ -816,7 +806,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734875914764</updated>
     </task>
-    <option name="localTasksCounter" value="217" />
+    <task id="LOCAL-00217" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1734884888768</created>
+      <option name="number" value="00217" />
+      <option name="presentableId" value="LOCAL-00217" />
+      <option name="project" value="LOCAL" />
+      <updated>1734884888769</updated>
+    </task>
+    <option name="localTasksCounter" value="218" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -417,7 +417,7 @@ public class MenuPo extends BasePoBean<MenuPo> {
     }
 
     public MenuPo baseQueryWrapper() {
-        return this.eqId().eqCreatedBy().eqUpdatedBy().eqStatus().eqSortCode().orderBySortCode(true).orderByCreatedDate(true).orderByUpdatedDate(true);
+        return this.eqId().eqCreatedBy().eqUpdatedBy().eqStatus().eqSortCode().orderByAuthorityId(true).orderByMenuId(true).orderBySortCode(true).orderByCreatedDate(true).orderByUpdatedDate(true);
     }
 
 }

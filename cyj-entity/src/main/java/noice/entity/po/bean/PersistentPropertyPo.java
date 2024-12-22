@@ -455,7 +455,7 @@ public class PersistentPropertyPo extends BasePoBean<PersistentPropertyPo> {
     }
 
     public PersistentPropertyPo baseQueryWrapper() {
-        return this.eqId().eqCreatedBy().eqUpdatedBy().eqStatus().eqSortCode().orderBySortCode(true).orderByCreatedDate(true).orderByUpdatedDate(true);
+        return this.eqId().eqCreatedBy().eqUpdatedBy().eqStatus().eqSortCode().orderByPersistentId(true).orderByRelationPersistentId(true).orderBySortCode(true).orderByCreatedDate(true).orderByUpdatedDate(true);
     }
 
 }

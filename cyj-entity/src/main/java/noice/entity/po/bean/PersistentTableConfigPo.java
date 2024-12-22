@@ -436,7 +436,7 @@ public class PersistentTableConfigPo extends BasePoBean<PersistentTableConfigPo>
     }
 
     public PersistentTableConfigPo baseQueryWrapper() {
-        return this.eqId().eqCreatedBy().eqUpdatedBy().eqStatus().eqSortCode().orderBySortCode(true).orderByCreatedDate(true).orderByUpdatedDate(true);
+        return this.eqId().eqCreatedBy().eqUpdatedBy().eqStatus().eqSortCode().orderByAuthorityId(true).orderByPersistentTableId(true).orderBySortCode(true).orderByCreatedDate(true).orderByUpdatedDate(true);
     }
 
 }
