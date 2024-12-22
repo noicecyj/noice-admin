@@ -13,10 +13,6 @@ interface Option {
 
 interface PageFormSelectProps {
   key: string,
-  colProps?: { md: number | undefined },
-  name?: string,
-  label?: string,
-  initialValue?: string | undefined,
   disabled?: boolean | undefined,
   dataSource?: Option[],
   value?: React.Key | LabeledValue,
@@ -26,10 +22,6 @@ interface PageFormSelectProps {
 
 
 const PageFormSelect = ({
-                          colProps,
-                          name,
-                          label,
-                          initialValue,
                           disabled,
                           key,
                           dataSource = [],
@@ -46,7 +38,7 @@ const PageFormSelect = ({
 
   const readOnlyCheck = (readonly: boolean) => {
     if (readonly) {
-      return (<div>
+      return (<div key={key}>
         {options.map(option => {
           if (option.value === value) {
             return (<div>{option.label}</div>)
@@ -58,6 +50,7 @@ const PageFormSelect = ({
     } else {
       return (<>
         <Select
+          key={key}
           options={options}
           disabled={true}
           value={value}
@@ -79,14 +72,14 @@ const PageFormSelect = ({
     handleChange(selectedRowKeys[0])
     setOpen(false);
   };
+
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+
   const [options] = useState<Option[]>(dataSource);
+
   const entityDispatcher = store.useModelDispatchers('entity');
 
-  console.log('PageFormSelect', colProps, name, label, initialValue, disabled, key);
-
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    console.log('selectedRowKeys changed: ', newSelectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
   };
 
@@ -106,15 +99,6 @@ const PageFormSelect = ({
   return (
     <div style={{display: 'flex', alignItems: 'center'}}>
       {readOnlyCheck(typeof readonly === "boolean" ? readonly : false)}
-      {/*<Select*/}
-      {/*  options={options}*/}
-      {/*  disabled={true}*/}
-      {/*  value={value}*/}
-      {/*  onChange={handleChange}*/}
-      {/*/>*/}
-      {/*<Button disabled={disabled} onClick={showDrawer}>*/}
-      {/*  选择*/}
-      {/*</Button>*/}
       <Drawer
         title="选择"
         width={window.innerWidth * 0.3}

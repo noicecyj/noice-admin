@@ -5,21 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑">
-      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/Catalog/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/Catalog/models/Info.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/Catalog/store.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/CatalogDictionary/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/CatalogDictionary/models/Info.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/CatalogDictionary/store.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/Persistent/models/Info.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/service/TableAndFormAndUrlService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/service/TableAndFormAndUrlService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-ice/src/components/DataForm/PageFormSelect/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/components/DataForm/PageFormSelect/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/noice-ice/src/components/DataForm/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/components/DataForm/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/components/DataTable/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/components/DataTable/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/models/entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/models/entity.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/pages/Persistent/models/Persistent.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/pages/Persistent/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/pages/Persistent/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-ice/src/services/list.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -435,15 +424,8 @@
       <workItem from="1734570901606" duration="10488000" />
       <workItem from="1734598805670" duration="1946000" />
       <workItem from="1734659427927" duration="1502000" />
-      <workItem from="1734698578112" duration="6833000" />
-    </task>
-    <task id="LOCAL-00162" summary="优化表单布局及字段逻辑">
-      <option name="closed" value="true" />
-      <created>1733368470634</created>
-      <option name="number" value="00162" />
-      <option name="presentableId" value="LOCAL-00162" />
-      <option name="project" value="LOCAL" />
-      <updated>1733368470634</updated>
+      <workItem from="1734698578112" duration="7597000" />
+      <workItem from="1734865880643" duration="1852000" />
     </task>
     <task id="LOCAL-00163" summary="优化表单布局及字段逻辑">
       <option name="closed" value="true" />
@@ -829,7 +811,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734591620836</updated>
     </task>
-    <option name="localTasksCounter" value="211" />
+    <task id="LOCAL-00211" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1734711276202</created>
+      <option name="number" value="00211" />
+      <option name="presentableId" value="LOCAL-00211" />
+      <option name="project" value="LOCAL" />
+      <updated>1734711276203</updated>
+    </task>
+    <option name="localTasksCounter" value="212" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
