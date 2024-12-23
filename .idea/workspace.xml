@@ -5,20 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑">
-      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/PersistentForm/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/PersistentForm/models/Info.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/PersistentForm/store.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/PersistentFormConfig/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/PersistentFormConfig/models/Info.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/PersistentFormConfig/store.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/PersistentTable/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/PersistentTable/models/Info.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/PersistentTable/store.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/PersistentTableConfig/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/PersistentTableConfig/models/Info.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/PersistentTableConfig/store.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-aop-doc/aop热插拔技术文档.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-aop-doc/img.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/components/DataTable/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/components/DataTable/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,58 +97,58 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
-    &quot;JUnit.CyjEntityCreaterApplicationTest.PersistentBeanAspect.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest2.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.CyjEntityCreaterApplicationTest.menuBeanTest.executor&quot;: &quot;Debug&quot;,
-    &quot;Maven.cyj [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.cyj [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.cyj-common [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.cyj-common [deploy].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.cyj-entity [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Notification.DisplayName-DoNotAsk-Database detector&quot;: &quot;数据库检测器&quot;,
-    &quot;Notification.DoNotAsk-Database detector&quot;: &quot;true&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.CyjAuthApplication.executor&quot;: &quot;Debug&quot;,
-    &quot;Spring Boot.CyjEntityCreaterApplication.executor&quot;: &quot;Debug&quot;,
-    &quot;com.dong.plugin.gui.FormatDialog&quot;: &quot;true&quot;,
-    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;github&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/noice-admin/cyj-entity-create/src/main/resources/application.yml&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\noice-admin\\noice-ice\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "JUnit.CyjEntityCreaterApplicationTest.PersistentBeanAspect.executor": "Debug",
+    "JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest.executor": "Debug",
+    "JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest.executor": "Debug",
+    "JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest2.executor": "Debug",
+    "JUnit.CyjEntityCreaterApplicationTest.menuBeanTest.executor": "Debug",
+    "Maven.cyj [clean].executor": "Run",
+    "Maven.cyj [compile].executor": "Run",
+    "Maven.cyj-common [compile].executor": "Run",
+    "Maven.cyj-common [deploy].executor": "Run",
+    "Maven.cyj-entity [compile].executor": "Run",
+    "Notification.DisplayName-DoNotAsk-Database detector": "数据库检测器",
+    "Notification.DoNotAsk-Database detector": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.CyjAuthApplication.executor": "Debug",
+    "Spring Boot.CyjEntityCreaterApplication.executor": "Debug",
+    "com.dong.plugin.gui.FormatDialog": "true",
+    "extract.method.default.visibility": "private",
+    "git-widget-placeholder": "github",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/noice-admin/热插拔技术方案/img.png",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "模块",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "D:\\noice-admin\\noice-ice\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;,
-      &quot;redis&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql",
+      "redis"
     ],
-    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/SQL 方言&quot;: [
-      &quot;MySQL&quot;
+    "com.intellij.ide.scratch.LRUPopupBuilder$1/SQL 方言": [
+      "MySQL"
     ]
   }
-}</component>
+}]]></component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -175,6 +164,7 @@
       <recent name="D:\noice-admin\cyj-service\src\main\java\noice\handler\bean" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\noice-admin\热插拔技术方案" />
       <recent name="D:\noice-admin\noice-ice\src\pages\login" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -436,15 +426,7 @@
       <workItem from="1734659427927" duration="1502000" />
       <workItem from="1734698578112" duration="7597000" />
       <workItem from="1734865880643" duration="1852000" />
-      <workItem from="1734919992837" duration="1249000" />
-    </task>
-    <task id="LOCAL-00170" summary="优化表单布局及字段逻辑">
-      <option name="closed" value="true" />
-      <created>1733472681077</created>
-      <option name="number" value="00170" />
-      <option name="presentableId" value="LOCAL-00170" />
-      <option name="project" value="LOCAL" />
-      <updated>1733472681077</updated>
+      <workItem from="1734919992837" duration="3928000" />
     </task>
     <task id="LOCAL-00171" summary="优化表单布局及字段逻辑">
       <option name="closed" value="true" />
@@ -830,7 +812,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734885773379</updated>
     </task>
-    <option name="localTasksCounter" value="219" />
+    <task id="LOCAL-00219" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1734922348917</created>
+      <option name="number" value="00219" />
+      <option name="presentableId" value="LOCAL-00219" />
+      <option name="project" value="LOCAL" />
+      <updated>1734922348918</updated>
+    </task>
+    <option name="localTasksCounter" value="220" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
