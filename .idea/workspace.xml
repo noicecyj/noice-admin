@@ -4,7 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑" />
+    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑">
+      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/PersistentForm/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/PersistentForm/models/Info.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/PersistentForm/store.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/PersistentFormConfig/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/PersistentFormConfig/models/Info.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/PersistentFormConfig/store.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/PersistentTable/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/PersistentTable/models/Info.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/PersistentTable/store.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/PersistentTableConfig/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/PersistentTableConfig/models/Info.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-ice/src/pages/PersistentTableConfig/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-ice/src/components/DataTable/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/components/DataTable/index.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -421,14 +436,7 @@
       <workItem from="1734659427927" duration="1502000" />
       <workItem from="1734698578112" duration="7597000" />
       <workItem from="1734865880643" duration="1852000" />
-    </task>
-    <task id="LOCAL-00169" summary="优化表单布局及字段逻辑">
-      <option name="closed" value="true" />
-      <created>1733472125300</created>
-      <option name="number" value="00169" />
-      <option name="presentableId" value="LOCAL-00169" />
-      <option name="project" value="LOCAL" />
-      <updated>1733472125300</updated>
+      <workItem from="1734919992837" duration="1249000" />
     </task>
     <task id="LOCAL-00170" summary="优化表单布局及字段逻辑">
       <option name="closed" value="true" />
@@ -814,7 +822,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734884888769</updated>
     </task>
-    <option name="localTasksCounter" value="218" />
+    <task id="LOCAL-00218" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1734885773379</created>
+      <option name="number" value="00218" />
+      <option name="presentableId" value="LOCAL-00218" />
+      <option name="project" value="LOCAL" />
+      <updated>1734885773379</updated>
+    </task>
+    <option name="localTasksCounter" value="219" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

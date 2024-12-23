@@ -6,7 +6,10 @@ import {ProColumns} from "@ant-design/pro-table/lib";
 import {Button, Popconfirm} from "antd";
 
 function DataTable(props: {
-  tableColumns: ProColumns[],
+  table: {
+    persistentTableName: string,
+    tableConfigVoList: ProColumns[],
+  }
   toolBar?: ReactNode[],
   url?: {
     page: string,
@@ -25,7 +28,7 @@ function DataTable(props: {
   }, [entityState.status]);
 
   const {
-    tableColumns,
+    table,
     toolBar = [],
     url = {
       page: '',
@@ -34,7 +37,7 @@ function DataTable(props: {
     },
   } = props;
 
-  const tableColumnsOption = tableColumns.concat({
+  const tableColumnsOption = table.tableConfigVoList.concat({
     title: '操作',
     width: 150,
     valueType: 'option',
@@ -127,7 +130,7 @@ function DataTable(props: {
           onChange: (page) => console.log(page),
         }}
         dateFormatter="string"
-        headerTitle="实体"
+        headerTitle={table.persistentTableName}
         toolBarRender={() => toolBar.concat(addButton)}
       />
     </>

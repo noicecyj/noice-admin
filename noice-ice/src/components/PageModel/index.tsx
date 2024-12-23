@@ -17,7 +17,7 @@ function PageModel(props: {
   return (
     <>
       <DataTable
-        tableColumns={table.data.tableConfigVoList}
+        table={table.data}
         url={url.data}
       />
       <DataForm
