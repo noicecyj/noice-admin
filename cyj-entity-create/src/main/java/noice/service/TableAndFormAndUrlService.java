@@ -226,14 +226,14 @@ public class TableAndFormAndUrlService {
                 UrlDto urlDto = new UrlDto();
                 if (ObjectUtil.isNotNull(interfacePoList)) {
                     Map<String, String> urlMap = interfacePoList.stream().collect(Collectors.toMap(InterfacePo::getInterfaceCode, InterfacePo::getInterfacePath));
-                    urlDto.setPage(urlMap.get(persistentCode + "_page"));
-                    urlDto.setAdd(urlMap.get(persistentCode + "_add"));
-                    urlDto.setUpdate(urlMap.get(persistentCode + "_update"));
-                    urlDto.setDelete(urlMap.get(persistentCode + "_delete"));
-                    urlDto.setSet(urlMap.get(persistentCode + "_set"));
-                    urlDto.setGet(urlMap.get(persistentCode + "_get"));
-                    urlDto.setGetList(urlMap.get(persistentCode + "_getList"));
-                    urlDto.setGetOptions(urlMap.get(persistentCode + "_getOptions"));
+                    urlDto.setPage(urlMap.getOrDefault(persistentCode + "_page", "noAuth"));
+                    urlDto.setAdd(urlMap.getOrDefault(persistentCode + "_add", "noAuth"));
+                    urlDto.setUpdate(urlMap.getOrDefault(persistentCode + "_update", "noAuth"));
+                    urlDto.setDelete(urlMap.getOrDefault(persistentCode + "_delete", "noAuth"));
+                    urlDto.setSet(urlMap.getOrDefault(persistentCode + "_set", "noAuth"));
+                    urlDto.setGet(urlMap.getOrDefault(persistentCode + "_get", "noAuth"));
+                    urlDto.setGetList(urlMap.getOrDefault(persistentCode + "_getList", "noAuth"));
+                    urlDto.setGetOptions(urlMap.getOrDefault(persistentCode + "_getOptions", "noAuth"));
                     urlDto.setAllUrl(urlMap);
                 }
                 return urlDto;
