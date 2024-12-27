@@ -8,6 +8,7 @@ import store from '@/store';
 import React, {useEffect} from 'react';
 import {useSessionStorageState} from 'ahooks';
 import {UserInfo} from "@/interfaces/user";
+import {getUserMenu} from "@/services/user";
 
 export default function Layout() {
   const location = useLocation();
@@ -27,7 +28,7 @@ export default function Layout() {
 
   return (
     <ProLayout
-      menu={{defaultOpenAll: true}}
+      // menu={{defaultOpenAll: true}}
       className={styles.layout}
       logo={<img src={logo} alt="logo"/>}
       title="ICE Pro"
@@ -38,7 +39,13 @@ export default function Layout() {
       actionsRender={() => (
         <AvatarDropdown name={userInfo?.userName || "123"}/>
       )}
-      menuDataRender={() => asideMenuConfig}
+      // menuDataRender={() => asideMenuConfig}
+      menu={{
+        request: async () => {
+          const userMenu = await getUserMenu();
+          return userMenu.data;
+        },
+      }}
       menuItemRender={(item, defaultDom) => {
         if (!item.path) {
           return defaultDom;

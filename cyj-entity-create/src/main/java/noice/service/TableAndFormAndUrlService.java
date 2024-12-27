@@ -221,8 +221,14 @@ public class TableAndFormAndUrlService {
             String underlineCase = StrUtil.toUnderlineCase(StrUtil.lowerFirst(persistentCode));
             PersistentPo persistentPo = persistentRepository.find(new PersistentPo().eqPersistentCode(underlineCase).getQueryWrapper());
             if (ObjectUtil.isNotNull(persistentPo)) {
-                List<String> authorityId = authorityRepository.findList(authorityPo.getQueryWrapper()).stream().map(AuthorityPo::getId).toList();
-                List<InterfacePo> interfacePoList = interfaceRepository.findList(new InterfacePo().inAuthorityId(authorityId).eqPersistentId(persistentPo.getId()).getQueryWrapper());
+                List<String> authorityIds = authorityRepository.findList(authorityPo.getQueryWrapper()).stream().map(AuthorityPo::getId).toList();
+                List<InterfacePo> interfacePoList = interfaceRepository
+                        .findList(new InterfacePo().eqPersistentId(persistentPo.getId()).getQueryWrapper());
+                interfacePoList.forEach(interfacePo -> {
+                    if (!authorityIds.contains(interfacePo.getAuthorityId())) {
+                        interfacePo.setInterfacePath("noAuth");
+                    }
+                });
                 UrlDto urlDto = new UrlDto();
                 if (ObjectUtil.isNotNull(interfacePoList)) {
                     Map<String, String> urlMap = interfacePoList.stream().collect(Collectors.toMap(InterfacePo::getInterfaceCode, InterfacePo::getInterfacePath));

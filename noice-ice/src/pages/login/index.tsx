@@ -5,7 +5,7 @@ import {LockOutlined, UserOutlined} from '@ant-design/icons';
 import {LoginForm, ProFormCheckbox, ProFormText} from '@ant-design/pro-form';
 import styles from './index.module.css';
 import type {LoginParams, LoginResult, UserInfo} from '@/interfaces/user';
-import {fetchUserInfo, getUserMenu, login} from '@/services/user';
+import {fetchUserInfo, login} from '@/services/user';
 import store from '@/store';
 import logo from '@/assets/logo.png';
 import cookie from 'react-cookies';
@@ -36,21 +36,13 @@ const Login: React.FC = () => {
       userCode: '',
     },
   });
-  const [userMenuLocal, setUserMenuLocal] = useSessionStorageState('userMenu', {
-    defaultValue: [],
-  });
 
   async function updateUserInfo() {
     const userInfo = await fetchUserInfo();
-    const userMenu = await getUserMenu();
     console.log(userInfo.data);
-    console.log(userMenu.data);
     userDispatcher.updateCurrentUser(userInfo.data);
-    userDispatcher.updateCurrentUserAuth(userMenu.data);
     setUserInfoLocal(userInfo.data);
-    setUserMenuLocal(userMenu.data);
     console.log('userInfoLocal', userInfoLocal);
-    console.log('userMenuLocal', userMenuLocal);
   }
 
   async function handleSubmit(values: LoginParams) {
