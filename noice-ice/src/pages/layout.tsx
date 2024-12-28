@@ -1,34 +1,40 @@
-import {history, Link, Outlet, useLocation} from 'ice';
+import {Link, Outlet, useLocation} from 'ice';
 import ProLayout from '@ant-design/pro-layout';
 // import {asideMenuConfig} from '@/menuConfig';
 import AvatarDropdown from '@/components/AvatarDropdown';
 import logo from '@/assets/logo.png';
 import styles from './layout.module.css';
 import store from '@/store';
-import React, {useEffect} from 'react';
-import {useSessionStorageState} from 'ahooks';
-import {UserInfo} from "@/interfaces/user";
+import React, {useState} from 'react';
 import {getUserMenu} from "@/services/user";
+import {Tabs, TabsProps} from "antd";
 
 export default function Layout() {
   const location = useLocation();
 
   const [userState, userDispatcher] = store.useModel('user');
   userDispatcher.init();
-  // useEffect(() => {
-  //
-  // }, []);
 
   const userInfo = userState.currentUser;
-  const asideMenuConfig = userState.currentUserAuth;
-  console.log(userInfo)
   if (['/login'].includes(location.pathname)) {
     return <Outlet/>;
   }
 
+  const onChange = (key: string) => {
+    console.log(key);
+  };
+
+  const items: TabsProps['items'] = [
+    {
+      key: 'index',
+      label: '首页',
+    },
+  ];
+
+  const [tabs, setTabs] = useState<TabsProps['items']>(items);
+
   return (
     <ProLayout
-      // menu={{defaultOpenAll: true}}
       className={styles.layout}
       logo={<img src={logo} alt="logo"/>}
       title="ICE Pro"
@@ -39,7 +45,6 @@ export default function Layout() {
       actionsRender={() => (
         <AvatarDropdown name={userInfo?.userName || "123"}/>
       )}
-      // menuDataRender={() => asideMenuConfig}
       menu={{
         request: async () => {
           const userMenu = await getUserMenu();
@@ -52,7 +57,20 @@ export default function Layout() {
         }
         return <Link to={item.path}>{defaultDom}</Link>;
       }}
+      onPageChange={(location: Location) => {
+        console.log('location', location);
+        items.push({
+          key: location.pathname,
+          label: location.pathname,
+        })
+        setTabs(items);
+      }}
     >
+      <Tabs
+        defaultActiveKey="1"
+        type="card"
+        items={tabs}
+        onChange={onChange}/>
       <Outlet/>
     </ProLayout>
   );

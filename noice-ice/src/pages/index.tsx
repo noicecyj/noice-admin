@@ -1,4 +1,4 @@
-import {Col, Row} from 'antd';
+import {Button, Col, Dropdown, Row} from 'antd';
 import CardBarChart from '@/components/CardBarChart';
 import CardAreaChart from '@/components/CardAreaChart';
 import CardTypebarChart from '@/components/CardTypebarChart';
@@ -9,17 +9,16 @@ import CardGroupBarChart from '@/components/CardGroupBarChart';
 import {useSessionStorageState} from "ahooks";
 import {UserInfo} from "@/interfaces/user";
 import {history} from 'ice';
+import {PageContainer} from "@ant-design/pro-layout";
+import {EllipsisOutlined} from "@ant-design/icons";
 
 export default function Dashboard() {
 
   const [userInfoLocal] = useSessionStorageState<UserInfo>('userInfo');
-  const [userMenuLocal] = useSessionStorageState('userMenu');
-  if (userInfoLocal === undefined || userMenuLocal === undefined){
+  if (userInfoLocal === undefined) {
     console.log('userInfoLocal2', userInfoLocal);
     history?.push('/login');
   }
-  // const data = useData();
-  // console.log("data", data);
   return (
     <Row gutter={[16, 16]}>
       <Col xs={24} sm={12} md={6}>
@@ -46,15 +45,3 @@ export default function Dashboard() {
     </Row>
   );
 }
-
-// export const dataLoader = defineDataLoader(async () => {
-//   const data = { asd: "asd" };
-//   console.log("dataLoader", data);
-//   return data;
-// });
-
-// export const pageConfig = definePageConfig(() => {
-//     return {
-//         auth: ['admin'],
-//     };
-// });

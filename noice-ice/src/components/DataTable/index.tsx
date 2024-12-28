@@ -100,13 +100,14 @@ function DataTable(props: {
       <ProTable
         columns={tableColumnsOption}
         actionRef={actionRef}
-        cardBordered
+        cardBordered={false}
         request={async (params) => {
           return entityDispatcher.page({
             params: params,
             pageUrl: url.page,
           });
         }}
+        defaultSize={'small'}
         columnsState={{
           persistenceKey: 'pro-table-singe-demos',
           persistenceType: 'localStorage',
@@ -126,7 +127,7 @@ function DataTable(props: {
         }}
         options={false}
         pagination={{
-          pageSize: 11,
+          pageSize: 10,
           onChange: (page) => console.log(page),
         }}
         dateFormatter="string"

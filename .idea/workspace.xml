@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/816cf4cc-84bd-4b77-bb61-b4fcd51d574a.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/816cf4cc-84bd-4b77-bb61-b4fcd51d574a.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/service/TableAndFormAndUrlService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/service/TableAndFormAndUrlService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-ice/src/components/DataTable/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/components/DataTable/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-ice/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/pages/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/noice-ice/src/pages/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/pages/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/pages/login/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/pages/login/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -430,15 +428,9 @@
       <workItem from="1734698578112" duration="7597000" />
       <workItem from="1734865880643" duration="1852000" />
       <workItem from="1734919992837" duration="19227000" />
-      <workItem from="1735305987123" duration="2933000" />
-    </task>
-    <task id="LOCAL-00173" summary="优化表单布局及字段逻辑">
-      <option name="closed" value="true" />
-      <created>1733493637737</created>
-      <option name="number" value="00173" />
-      <option name="presentableId" value="LOCAL-00173" />
-      <option name="project" value="LOCAL" />
-      <updated>1733493637737</updated>
+      <workItem from="1735305987123" duration="3135000" />
+      <workItem from="1735366735072" duration="1298000" />
+      <workItem from="1735369883315" duration="4259000" />
     </task>
     <task id="LOCAL-00174" summary="优化表单布局及字段逻辑">
       <option name="closed" value="true" />
@@ -824,7 +816,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735034340516</updated>
     </task>
-    <option name="localTasksCounter" value="222" />
+    <task id="LOCAL-00222" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1735318624457</created>
+      <option name="number" value="00222" />
+      <option name="presentableId" value="LOCAL-00222" />
+      <option name="project" value="LOCAL" />
+      <updated>1735318624457</updated>
+    </task>
+    <option name="localTasksCounter" value="223" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
