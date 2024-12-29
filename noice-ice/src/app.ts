@@ -73,22 +73,3 @@ export const requestConfig = defineRequestConfig({
     },
   },
 });
-
-// export const dataLoader = defineDataLoader(async () => {
-//     const userInfo = await getUserInfo();
-//     const userMenu = await getUserMenu();
-//     return {
-//         userInfo,
-//         userMenu,
-//     };
-// });
-
-async function getUserInfo() {
-  try {
-    return await fetchUserInfo();
-  } catch (error) {
-    return {
-      error,
-    };
-  }
-}

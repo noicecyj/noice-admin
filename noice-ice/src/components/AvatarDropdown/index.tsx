@@ -6,6 +6,7 @@ import type {MenuInfo} from 'rc-menu/lib/interface';
 import styles from './index.module.css';
 import {logout} from '@/services/user';
 import store from '@/store';
+import {UserInfo} from "@/interfaces/user";
 
 interface AvatarDropdownProps {
   name: string;
@@ -22,8 +23,10 @@ const AvatarDropdown: React.FC<AvatarDropdownProps> = ({name}) => {
   const onMenuClick = useCallback((event: MenuInfo) => {
     const {key} = event;
     if (key === 'logout') {
-      userDispatcher.updateCurrentUser({});
-      loginOut();
+      userDispatcher.updateCurrentUser({} as UserInfo);
+      loginOut().then(r => {
+        console.log(r)
+      });
     }
   }, []);
 

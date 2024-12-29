@@ -16,13 +16,15 @@
       </schema-mapping>
     </data-source>
     <data-source name="data_user_redis@123.249.114.102" uuid="b71e9e57-07e4-4c22-a427-5bae5e789397">
-      <database-info product="Redis Standalone" version="6.0.16" jdbc-version="4.2" driver-name="Redis JDBC Driver" driver-version="1.5" dbms="REDIS" exact-version="6.0.16" exact-driver-version="1.5" />
+      <database-info product="Redis Standalone" version="6.0.16" jdbc-version="4.2" driver-name="Redis JDBC Driver" driver-version="1.5" dbms="REDIS" exact-version="6.0.16" exact-driver-version="1.5">
+        <jdbc-catalog-is-schema>true</jdbc-catalog-is-schema>
+      </database-info>
       <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
       <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
       <schema-mapping>
         <introspection-scope>
-          <node kind="schema" negative="1" />
+          <node kind="schema" qname="0" />
         </introspection-scope>
       </schema-mapping>
     </data-source>

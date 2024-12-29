@@ -5,33 +5,18 @@ import AvatarDropdown from '@/components/AvatarDropdown';
 import logo from '@/assets/logo.png';
 import styles from './layout.module.css';
 import store from '@/store';
-import React, {useState} from 'react';
+import React from 'react';
 import {getUserMenu} from "@/services/user";
-import {Tabs, TabsProps} from "antd";
 
 export default function Layout() {
   const location = useLocation();
 
-  const [userState, userDispatcher] = store.useModel('user');
-  userDispatcher.init();
+  const [userState] = store.useModel('user');
 
   const userInfo = userState.currentUser;
   if (['/login'].includes(location.pathname)) {
     return <Outlet/>;
   }
-
-  const onChange = (key: string) => {
-    console.log(key);
-  };
-
-  const items: TabsProps['items'] = [
-    {
-      key: 'index',
-      label: '首页',
-    },
-  ];
-
-  const [tabs, setTabs] = useState<TabsProps['items']>(items);
 
   return (
     <ProLayout
@@ -59,18 +44,8 @@ export default function Layout() {
       }}
       onPageChange={(location: Location) => {
         console.log('location', location);
-        items.push({
-          key: location.pathname,
-          label: location.pathname,
-        })
-        setTabs(items);
       }}
     >
-      <Tabs
-        defaultActiveKey="1"
-        type="card"
-        items={tabs}
-        onChange={onChange}/>
       <Outlet/>
     </ProLayout>
   );

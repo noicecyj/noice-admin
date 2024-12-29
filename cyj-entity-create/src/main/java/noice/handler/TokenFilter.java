@@ -47,7 +47,7 @@ public class TokenFilter extends OncePerRequestFilter {
         } else {
             // 如果 Token 不合法，返回错误响应
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().write("无效的 Token");
+            response.getWriter().write("Invalid Token");
         }
     }
 

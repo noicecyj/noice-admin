@@ -1,9 +1,9 @@
 import type {ActionType} from '@ant-design/pro-components';
 import {ProTable} from '@ant-design/pro-components';
-import {ReactNode, useEffect, useRef} from 'react';
+import React, {ReactNode, useEffect, useRef, useState} from 'react';
 import store from "@/store";
 import {ProColumns} from "@ant-design/pro-table/lib";
-import {Button, Popconfirm} from "antd";
+import {Button, Popconfirm, Tabs, TabsProps} from "antd";
 
 function DataTable(props: {
   table: {
@@ -94,9 +94,26 @@ function DataTable(props: {
     新建
   </Button>
 
+  const onChange = (key: string) => {
+    console.log(key);
+  };
+
+  const items: TabsProps['items'] = [
+    {
+      key: 'index',
+      label: '首页',
+    },
+  ];
+
+  const [tabs, setTabs] = useState<TabsProps['items']>(items);
 
   return (
     <>
+      <Tabs
+        defaultActiveKey="1"
+        type="card"
+        items={tabs}
+        onChange={onChange}/>
       <ProTable
         columns={tableColumnsOption}
         actionRef={actionRef}
