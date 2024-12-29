@@ -10,6 +10,8 @@ interface Entity {
   visible: boolean,
   readonly: boolean,
   status: string,
+  name: string,
+  path: string,
 }
 
 interface pageResult {
@@ -26,6 +28,8 @@ export default createModel({
     visible: false,
     readonly: false,
     status: '',
+    name: '',
+    path: '',
   } as Entity,
   // 定义改变该 model 状态的纯函数
   reducers: {

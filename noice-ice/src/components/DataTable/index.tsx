@@ -3,7 +3,7 @@ import {ProTable} from '@ant-design/pro-components';
 import React, {ReactNode, useEffect, useRef, useState} from 'react';
 import store from "@/store";
 import {ProColumns} from "@ant-design/pro-table/lib";
-import {Button, Popconfirm, Tabs, TabsProps} from "antd";
+import {Button, Popconfirm, Tabs} from "antd";
 
 function DataTable(props: {
   table: {
@@ -18,14 +18,26 @@ function DataTable(props: {
   },
 }) {
   const actionRef = useRef<ActionType>();
-  const [entityState, entityDispatcher] = store.useModel('entity');
 
+  const [entityState, entityDispatcher] = store.useModel('entity');
+  const [userState, userDispatcher] = store.useModel('user');
   useEffect(() => {
     console.log('Count changed to:', entityState.status);
     if (entityState.status === 'page') {
       actionRef?.current?.reload();
     }
   }, [entityState.status]);
+
+  useEffect(() => {
+    if (!userState.tabs?.some(tab => tab.key === table.persistentTableName)) {
+      console.log('tab not exist');
+      userDispatcher.updateTabs(userState.tabs?.concat({
+        key: table.persistentTableName,
+        label: table.persistentTableName,
+        closable: true,
+      }));
+    }
+  }, []);
 
   const {
     table,
@@ -94,26 +106,51 @@ function DataTable(props: {
     新建
   </Button>
 
+
+  const [activeKey, setActiveKey] = useState('index');
+  const newTabIndex = useRef(0);
+
   const onChange = (key: string) => {
-    console.log(key);
+    setActiveKey(key);
   };
 
-  const items: TabsProps['items'] = [
-    {
-      key: 'index',
-      label: '首页',
-    },
-  ];
+  const add = () => {
+    const newActiveKey = `newTab${newTabIndex.current++}`;
+    // setItems([...items, { label: 'New Tab', children: 'New Tab Pane', key: newActiveKey }]);
+    setActiveKey(newActiveKey);
+  };
 
-  const [tabs, setTabs] = useState<TabsProps['items']>(items);
+  const remove = (targetKey: any) => {
+    console.log('targetKey', targetKey)
+    const targetIndex = userState.tabs?.findIndex((pane) => pane.key === targetKey);
+    const newPanes = userState.tabs?.filter((pane) => pane.key !== targetKey);
+    if (newPanes?.length && targetKey === activeKey) {
+      // @ts-ignore
+      const { key } = newPanes[targetIndex === newPanes.length ? targetIndex - 1 : targetIndex];
+      setActiveKey(key);
+    }
+    userDispatcher.updateTabs(newPanes);
+  };
+
+  const onEdit = (targetKey: any, action: 'add' | 'remove') => {
+    if (action === 'add') {
+      add();
+    } else {
+      remove(targetKey);
+    }
+  };
+
 
   return (
     <>
       <Tabs
-        defaultActiveKey="1"
-        type="card"
-        items={tabs}
-        onChange={onChange}/>
+        hideAdd
+        type="editable-card"
+        activeKey={activeKey}
+        items={userState.tabs}
+        onChange={onChange}
+        onEdit={onEdit}
+      />
       <ProTable
         columns={tableColumnsOption}
         actionRef={actionRef}
