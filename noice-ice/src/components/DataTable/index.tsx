@@ -4,6 +4,7 @@ import React, {ReactNode, useEffect, useRef} from 'react';
 import store from "@/store";
 import {ProColumns} from "@ant-design/pro-table/lib";
 import {Button, Popconfirm, Tabs} from "antd";
+import {history} from "ice";
 
 function DataTable(props: {
   table: {
@@ -38,6 +39,7 @@ function DataTable(props: {
         label: infoState.name,
         closable: true,
       }));
+      userDispatcher.updateActiveKey(infoState.code);
     }
   }, []);
 
@@ -111,6 +113,7 @@ function DataTable(props: {
   </Button>
 
   const onChange = (key: string) => {
+    history?.push('/' + key);
     userDispatcher.updateActiveKey(key);
   };
 
