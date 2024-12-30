@@ -1,6 +1,6 @@
 import type {ActionType} from '@ant-design/pro-components';
 import {ProTable} from '@ant-design/pro-components';
-import React, {ReactNode, useEffect, useRef, useState} from 'react';
+import React, {ReactNode, useEffect, useRef} from 'react';
 import store from "@/store";
 import {ProColumns} from "@ant-design/pro-table/lib";
 import {Button, Popconfirm, Tabs} from "antd";
@@ -110,23 +110,23 @@ function DataTable(props: {
   const newTabIndex = useRef(0);
 
   const onChange = (key: string) => {
-    setActiveKey(key);
+    userDispatcher.updateActiveKey(key);
   };
 
   const add = () => {
     const newActiveKey = `newTab${newTabIndex.current++}`;
     // setItems([...items, { label: 'New Tab', children: 'New Tab Pane', key: newActiveKey }]);
-    setActiveKey(newActiveKey);
+    userDispatcher.updateActiveKey(newActiveKey);
   };
 
   const remove = (targetKey: any) => {
     console.log('targetKey', targetKey)
     const targetIndex = userState.tabs?.findIndex((pane) => pane.key === targetKey);
     const newPanes = userState.tabs?.filter((pane) => pane.key !== targetKey);
-    if (newPanes?.length && targetKey === activeKey) {
+    if (newPanes?.length && targetKey === userState.activeKey) {
       // @ts-ignore
-      const { key } = newPanes[targetIndex === newPanes.length ? targetIndex - 1 : targetIndex];
-      setActiveKey(key);
+      const {key} = newPanes[targetIndex === newPanes.length ? targetIndex - 1 : targetIndex];
+      userDispatcher.updateActiveKey(key);
     }
     userDispatcher.updateTabs(newPanes);
   };
@@ -145,7 +145,7 @@ function DataTable(props: {
       <Tabs
         hideAdd
         type="editable-card"
-        activeKey={activeKey}
+        activeKey={userState.activeKey}
         items={userState.tabs}
         onChange={onChange}
         onEdit={onEdit}

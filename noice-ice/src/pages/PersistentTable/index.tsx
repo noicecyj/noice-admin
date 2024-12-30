@@ -6,9 +6,12 @@ import PageModel from "@/components/PageModel";
 export default function PersistentTable() {
 
   const [form, table, url] = useData();
+  const [infoState, infoDispatchers] = pageStore.useModel('Info');
 
   return (
     <PageModel
+      infoState={infoState}
+      infoDispatchers={infoDispatchers}
       url={url}
       table={table}
       form={form}

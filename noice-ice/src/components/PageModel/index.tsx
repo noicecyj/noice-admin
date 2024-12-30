@@ -3,9 +3,11 @@ import DataTable from "@/components/DataTable";
 import DataForm from "@/components/DataForm";
 
 function PageModel(props: {
-  url: any;
-  table: any;
-  form: any;
+  url: any,
+  table: any,
+  form: any,
+  infoState: any,
+  infoDispatchers: any
 }) {
 
   const {

@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/components/DataTable/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/components/DataTable/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/components/PageModel/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/components/PageModel/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/models/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/models/user.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/pages/Persistent/models/Info.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/pages/Persistent/models/Info.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/pages/PersistentForm/models/Info.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/pages/PersistentForm/models/Info.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/pages/PersistentProperty/models/Info.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/pages/PersistentProperty/models/Info.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -437,15 +429,7 @@
       <workItem from="1735441499968" duration="306000" />
       <workItem from="1735441831940" duration="323000" />
       <workItem from="1735442194177" duration="7842000" />
-      <workItem from="1735529787253" duration="823000" />
-    </task>
-    <task id="LOCAL-00177" summary="java&#10;添加UrlDto类及接口获取功能">
-      <option name="closed" value="true" />
-      <created>1733806155364</created>
-      <option name="number" value="00177" />
-      <option name="presentableId" value="LOCAL-00177" />
-      <option name="project" value="LOCAL" />
-      <updated>1733806155364</updated>
+      <workItem from="1735529787253" duration="1149000" />
     </task>
     <task id="LOCAL-00178" summary="java&#10;添加UrlDto类及接口获取功能">
       <option name="closed" value="true" />
@@ -831,7 +815,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735457214030</updated>
     </task>
-    <option name="localTasksCounter" value="226" />
+    <task id="LOCAL-00226" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1735531048235</created>
+      <option name="number" value="00226" />
+      <option name="presentableId" value="LOCAL-00226" />
+      <option name="project" value="LOCAL" />
+      <updated>1735531048235</updated>
+    </task>
+    <option name="localTasksCounter" value="227" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

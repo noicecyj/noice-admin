@@ -2,13 +2,17 @@ import {defineDataLoader} from "@ice/runtime/data-loader";
 import {getForm, getTable, getUrl} from "@/services/formAndTableAndUrl";
 import {useData} from "@ice/runtime/router";
 import PageModel from "@/components/PageModel";
+import pageStore from "@/pages/Persistent/store";
 
 export default function PersistentFormConfig() {
 
   const [form, table, url] = useData();
+  const [infoState, infoDispatchers] = pageStore.useModel('Info');
 
   return (
     <PageModel
+      infoState={infoState}
+      infoDispatchers={infoDispatchers}
       url={url}
       table={table}
       form={form}
