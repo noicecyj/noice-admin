@@ -1,6 +1,9 @@
 export default {
 
-  state: {},
+  state: {
+    name: '实体表单配置',
+    code: 'PersistentFormConfig',
+  },
 
   reducers: {
     update(state: any, payload: any) {

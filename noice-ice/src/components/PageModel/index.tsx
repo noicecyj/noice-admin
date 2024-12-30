@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import DataTable from "@/components/DataTable";
 import DataForm from "@/components/DataForm";
-import {Tabs, TabsProps} from "antd";
 
 function PageModel(props: {
   url: any;

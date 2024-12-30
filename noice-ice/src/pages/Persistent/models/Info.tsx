@@ -1,6 +1,9 @@
 export default {
 
-  state: {},
+  state: {
+    name: '实体',
+    code: 'Persistent',
+  },
 
   reducers: {
     update(state: any, payload: any) {

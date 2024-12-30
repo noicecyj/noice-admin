@@ -1,6 +1,9 @@
 export default {
 
-  state: {},
+  state: {
+    name: '目录',
+    code: 'Catalog',
+  },
 
   reducers: {
     update(state: any, payload: any) {

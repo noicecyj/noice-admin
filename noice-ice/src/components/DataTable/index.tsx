@@ -107,7 +107,6 @@ function DataTable(props: {
   </Button>
 
 
-  const [activeKey, setActiveKey] = useState('index');
   const newTabIndex = useRef(0);
 
   const onChange = (key: string) => {

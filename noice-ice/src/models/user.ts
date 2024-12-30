@@ -5,6 +5,7 @@ import {TabsProps} from "antd";
 interface ModelState {
   currentUser: UserInfo;
   tabs: TabsProps['items'];
+  activeKey: string;
 }
 
 export default createModel({
@@ -17,6 +18,7 @@ export default createModel({
       label: '首页',
       closable: false,
     }],
+    activeKey: 'index',
   } as ModelState,
   reducers: {
     updateCurrentUser(prevState: ModelState, payload: UserInfo) {
@@ -24,6 +26,9 @@ export default createModel({
     },
     updateTabs(prevState: ModelState, payload: TabsProps['items']) {
       prevState.tabs = payload;
+    },
+    updateActiveKey(prevState: ModelState, payload: string) {
+      prevState.activeKey = payload;
     },
   },
 });
