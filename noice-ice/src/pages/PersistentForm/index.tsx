@@ -2,7 +2,7 @@ import {defineDataLoader} from "@ice/runtime/data-loader";
 import {getForm, getTable, getUrl} from "@/services/formAndTableAndUrl";
 import {useData} from "@ice/runtime/router";
 import PageModel from "@/components/PageModel";
-import pageStore from "@/pages/Persistent/store";
+import pageStore from "@/pages/PersistentForm/store";
 
 export default function PersistentForm() {
 

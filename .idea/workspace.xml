@@ -429,15 +429,7 @@
       <workItem from="1735441499968" duration="306000" />
       <workItem from="1735441831940" duration="323000" />
       <workItem from="1735442194177" duration="7842000" />
-      <workItem from="1735529787253" duration="1149000" />
-    </task>
-    <task id="LOCAL-00178" summary="java&#10;添加UrlDto类及接口获取功能">
-      <option name="closed" value="true" />
-      <created>1733812330219</created>
-      <option name="number" value="00178" />
-      <option name="presentableId" value="LOCAL-00178" />
-      <option name="project" value="LOCAL" />
-      <updated>1733812330219</updated>
+      <workItem from="1735529787253" duration="2030000" />
     </task>
     <task id="LOCAL-00179" summary="java&#10;添加UrlDto类及接口获取功能">
       <option name="closed" value="true" />
@@ -823,7 +815,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735531048235</updated>
     </task>
-    <option name="localTasksCounter" value="227" />
+    <task id="LOCAL-00227" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1735538958293</created>
+      <option name="number" value="00227" />
+      <option name="presentableId" value="LOCAL-00227" />
+      <option name="project" value="LOCAL" />
+      <updated>1735538958293</updated>
+    </task>
+    <option name="localTasksCounter" value="228" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

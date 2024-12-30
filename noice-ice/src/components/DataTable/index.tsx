@@ -16,6 +16,8 @@ function DataTable(props: {
     get: string,
     delete: string,
   },
+  infoState: any,
+  infoDispatchers: any
 }) {
   const actionRef = useRef<ActionType>();
 
@@ -29,11 +31,11 @@ function DataTable(props: {
   }, [entityState.status]);
 
   useEffect(() => {
-    if (!userState.tabs?.some(tab => tab.key === table.persistentTableName)) {
+    if (!userState.tabs?.some(tab => tab.key === infoState.code)) {
       console.log('tab not exist');
       userDispatcher.updateTabs(userState.tabs?.concat({
-        key: table.persistentTableName,
-        label: table.persistentTableName,
+        key: infoState.code,
+        label: infoState.name,
         closable: true,
       }));
     }
@@ -47,6 +49,8 @@ function DataTable(props: {
       get: '',
       delete: '',
     },
+    infoState,
+    infoDispatchers,
   } = props;
 
   const tableColumnsOption = table.tableConfigVoList.concat({
@@ -106,17 +110,8 @@ function DataTable(props: {
     新建
   </Button>
 
-
-  const newTabIndex = useRef(0);
-
   const onChange = (key: string) => {
     userDispatcher.updateActiveKey(key);
-  };
-
-  const add = () => {
-    const newActiveKey = `newTab${newTabIndex.current++}`;
-    // setItems([...items, { label: 'New Tab', children: 'New Tab Pane', key: newActiveKey }]);
-    userDispatcher.updateActiveKey(newActiveKey);
   };
 
   const remove = (targetKey: any) => {
@@ -131,12 +126,8 @@ function DataTable(props: {
     userDispatcher.updateTabs(newPanes);
   };
 
-  const onEdit = (targetKey: any, action: 'add' | 'remove') => {
-    if (action === 'add') {
-      add();
-    } else {
-      remove(targetKey);
-    }
+  const onEdit = (targetKey: any) => {
+    remove(targetKey);
   };
 
 

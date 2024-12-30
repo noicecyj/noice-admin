@@ -2,6 +2,8 @@ import {defineDataLoader} from "@ice/runtime/data-loader";
 import {getForm, getTable, getUrl} from "@/services/formAndTableAndUrl";
 import {useData} from "@ice/runtime/router";
 import PageModel from "@/components/PageModel";
+import pageStore from "@/pages/PersistentTable/store";
+
 
 export default function PersistentTable() {
 

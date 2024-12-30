@@ -14,6 +14,8 @@ function PageModel(props: {
     url,
     table,
     form,
+    infoState,
+    infoDispatchers,
   } = props;
 
   return (
@@ -21,6 +23,8 @@ function PageModel(props: {
       <DataTable
         table={table.data}
         url={url.data}
+        infoState={infoState}
+        infoDispatchers={infoDispatchers}
       />
       <DataForm
         url={url.data}
