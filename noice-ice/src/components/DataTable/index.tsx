@@ -60,7 +60,7 @@ function DataTable(props: {
     width: 150,
     valueType: 'option',
     key: 'option',
-    render: (text, record, index, action) => [
+    render: (text, record) => [
       <Button key="edit" size="small" onClick={() => {
         entityDispatcher.edit({
           id: record.id,
@@ -97,7 +97,6 @@ function DataTable(props: {
           删除
         </Button>
       </Popconfirm>
-
     ],
   });
 
