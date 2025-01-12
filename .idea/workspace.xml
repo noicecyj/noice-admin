@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑">
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/entity/dto/TableConfigDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/entity/dto/TableConfigDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/entity/vo/TableConfigVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/entity/vo/TableConfigVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/factory/ClassFactoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/factory/ClassFactoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/factory/bean/ClassBeanFactoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/factory/bean/ClassBeanFactoryImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,7 +182,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest">
+  <component name="RunManager" selected="JUnit.CyjEntityCreaterApplicationTest.menuBeanTest">
     <configuration name="CyjEntityCreaterApplicationTest.PersistentBeanAspect" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cyj-entity-create" />
       <extension name="coverage">
@@ -291,8 +292,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.menuBeanTest" />
+        <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest2" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.PersistentBeanAspect" />
@@ -435,15 +436,7 @@
       <workItem from="1735529787253" duration="3809000" />
       <workItem from="1736139099532" duration="6520000" />
       <workItem from="1736606688646" duration="330000" />
-      <workItem from="1736607149615" duration="12506000" />
-    </task>
-    <task id="LOCAL-00184" summary="优化表单布局及字段逻辑">
-      <option name="closed" value="true" />
-      <created>1734024071271</created>
-      <option name="number" value="00184" />
-      <option name="presentableId" value="LOCAL-00184" />
-      <option name="project" value="LOCAL" />
-      <updated>1734024071271</updated>
+      <workItem from="1736607149615" duration="17239000" />
     </task>
     <task id="LOCAL-00185" summary="优化表单布局及字段逻辑">
       <option name="closed" value="true" />
@@ -829,7 +822,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736660165357</updated>
     </task>
-    <option name="localTasksCounter" value="233" />
+    <task id="LOCAL-00233" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1736661992984</created>
+      <option name="number" value="00233" />
+      <option name="presentableId" value="LOCAL-00233" />
+      <option name="project" value="LOCAL" />
+      <updated>1736661992984</updated>
+    </task>
+    <option name="localTasksCounter" value="234" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

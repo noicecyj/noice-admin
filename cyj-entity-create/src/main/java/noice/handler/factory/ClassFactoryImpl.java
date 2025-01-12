@@ -326,13 +326,13 @@ public abstract class ClassFactoryImpl implements ClassFactory {
             switch (persistentPropertyPo.getPersistentPropertyType()) {
                 case "boolean":
                     persistentFormConfigPo.setPersistentFormConfigMode("Select");
-                    persistentFormConfigPo.setPersistentFormConfigDataSource("YES_AND_NO");
+                    persistentFormConfigPo.setPersistentFormConfigDataSource("Dict#YES_AND_NO");
                     break;
                 case "String":
                     if (StrUtil.isNotEmpty(persistentPropertyPo.getRelationPersistentId())) {
                         persistentFormConfigPo.setPersistentFormConfigMode("Select");
                         PersistentPo relationPo = persistentRepository.find(persistentPropertyPo.getRelationPersistentId());
-                        persistentFormConfigPo.setPersistentFormConfigDataSource(relationPo.getPersistentCode() + "@NAME_AND_ID");
+                        persistentFormConfigPo.setPersistentFormConfigDataSource("Entity#" + StrUtil.upperFirst(StrUtil.toCamelCase(relationPo.getPersistentCode())));
                     }
                     break;
                 default:
@@ -358,13 +358,13 @@ public abstract class ClassFactoryImpl implements ClassFactory {
             switch (persistentPropertyPo.getPersistentPropertyType()) {
                 case "boolean":
                     persistentFormConfigPo.setPersistentFormConfigMode("Select");
-                    persistentFormConfigPo.setPersistentFormConfigDataSource("YES_AND_NO");
+                    persistentFormConfigPo.setPersistentFormConfigDataSource("Dict#YES_AND_NO");
                     break;
                 case "String":
                     if (StrUtil.isNotEmpty(persistentPropertyPo.getRelationPersistentId())) {
                         persistentFormConfigPo.setPersistentFormConfigMode("Select");
                         PersistentPo relationPo = persistentRepository.find(persistentPropertyPo.getRelationPersistentId());
-                        persistentFormConfigPo.setPersistentFormConfigDataSource(relationPo.getPersistentCode() + "@NAME_AND_ID");
+                        persistentFormConfigPo.setPersistentFormConfigDataSource("Entity#" + StrUtil.upperFirst(StrUtil.toCamelCase(relationPo.getPersistentCode())));
                     }
                     break;
                 default:
@@ -418,7 +418,22 @@ public abstract class ClassFactoryImpl implements ClassFactory {
             persistentTableConfigPo = new PersistentTableConfigPo().eqPersistentTableConfigCode(tagCode).eqPersistentTableConfigName(tagName);
             persistentTableConfigPo.setAuthorityId(authorityId);
             persistentTableConfigPo.setPersistentTableId(tableId);
-            persistentTableConfigPo.setPersistentTableConfigDisplay(!StrUtil.isNotEmpty(persistentPropertyPo.getRelationPersistentId()));
+            switch (persistentPropertyPo.getPersistentPropertyType()) {
+                case "boolean":
+                    persistentTableConfigPo.setPersistentTableConfigType("select");
+                    persistentTableConfigPo.setPersistentTableConfigDataSource("Dict#YES_AND_NO");
+                    break;
+                case "String":
+                    if (StrUtil.isNotEmpty(persistentPropertyPo.getRelationPersistentId())) {
+                        persistentTableConfigPo.setPersistentTableConfigType("select");
+                        PersistentPo relationPo = persistentRepository.find(persistentPropertyPo.getRelationPersistentId());
+                        persistentTableConfigPo.setPersistentTableConfigDataSource("Entity#" + StrUtil.upperFirst(StrUtil.toCamelCase(relationPo.getPersistentCode())));
+                    }
+                    break;
+                default:
+                    persistentTableConfigPo.setPersistentTableConfigType("text");
+            }
+            persistentTableConfigPo.setPersistentTableConfigDisplay(StrUtil.isNotEmpty(persistentPropertyPo.getRelationPersistentId()));
             persistentTableConfigPo.setCreatedBy("123123");
             persistentTableConfigPo.setUpdatedBy("123123");
             persistentTableConfigPo.setSortCode(1L);
@@ -433,7 +448,22 @@ public abstract class ClassFactoryImpl implements ClassFactory {
             logger.info("{}:表格字段已存在", tagName);
             persistentTableConfigPo.setAuthorityId(authorityId);
             persistentTableConfigPo.setPersistentTableId(tableId);
-            persistentTableConfigPo.setPersistentTableConfigDisplay(!StrUtil.isNotEmpty(persistentPropertyPo.getRelationPersistentId()));
+            switch (persistentPropertyPo.getPersistentPropertyType()) {
+                case "boolean":
+                    persistentTableConfigPo.setPersistentTableConfigType("select");
+                    persistentTableConfigPo.setPersistentTableConfigDataSource("Dict#YES_AND_NO");
+                    break;
+                case "String":
+                    if (StrUtil.isNotEmpty(persistentPropertyPo.getRelationPersistentId())) {
+                        persistentTableConfigPo.setPersistentTableConfigType("select");
+                        PersistentPo relationPo = persistentRepository.find(persistentPropertyPo.getRelationPersistentId());
+                        persistentTableConfigPo.setPersistentTableConfigDataSource("Entity#" + StrUtil.upperFirst(StrUtil.toCamelCase(relationPo.getPersistentCode())));
+                    }
+                    break;
+                default:
+                    persistentTableConfigPo.setPersistentTableConfigType("text");
+            }
+            persistentTableConfigPo.setPersistentTableConfigDisplay(StrUtil.isNotEmpty(persistentPropertyPo.getRelationPersistentId()));
             persistentTableConfigPo.setUpdatedBy("123123");
             persistentTableConfigPo.setSortCode(1L);
             persistentTableConfigPo.setStatus(true);
