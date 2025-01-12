@@ -433,7 +433,7 @@ public abstract class ClassFactoryImpl implements ClassFactory {
                 default:
                     persistentTableConfigPo.setPersistentTableConfigType("text");
             }
-            persistentTableConfigPo.setPersistentTableConfigDisplay(StrUtil.isNotEmpty(persistentPropertyPo.getRelationPersistentId()));
+            persistentTableConfigPo.setPersistentTableConfigDisplay(false);
             persistentTableConfigPo.setCreatedBy("123123");
             persistentTableConfigPo.setUpdatedBy("123123");
             persistentTableConfigPo.setSortCode(1L);
@@ -463,7 +463,7 @@ public abstract class ClassFactoryImpl implements ClassFactory {
                 default:
                     persistentTableConfigPo.setPersistentTableConfigType("text");
             }
-            persistentTableConfigPo.setPersistentTableConfigDisplay(StrUtil.isNotEmpty(persistentPropertyPo.getRelationPersistentId()));
+            persistentTableConfigPo.setPersistentTableConfigDisplay(false);
             persistentTableConfigPo.setUpdatedBy("123123");
             persistentTableConfigPo.setSortCode(1L);
             persistentTableConfigPo.setStatus(true);

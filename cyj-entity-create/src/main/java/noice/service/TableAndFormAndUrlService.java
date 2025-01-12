@@ -124,6 +124,8 @@ public class TableAndFormAndUrlService {
             statusCol.setId("statusKey");
             statusCol.setPersistentTableConfigCode("status");
             statusCol.setPersistentTableConfigName("状态");
+            statusCol.setPersistentTableConfigType("select");
+            statusCol.setPersistentTableConfigDataSource("Dict#STATUS_TYPE");
             statusCol.setPersistentTableConfigDisplay(false);
             tableConfigDtoList.add(statusCol);
             tableDto.setTableConfigDtoList(tableConfigDtoList);
