@@ -6,6 +6,7 @@ import noice.entity.po.bean.AuthorityPo;
 import noice.entity.po.bean.PersistentTablePo;
 import noice.handler.dto.BaseDtoBean;
 
+
 /**
  * @author Noice
  */
@@ -20,6 +21,8 @@ public class PersistentTableConfigDto extends BaseDtoBean {
     private AuthorityPo authorityPo;
 
     private String persistentTableConfigCode;
+
+    private String persistentTableConfigDataSource;
 
     private boolean persistentTableConfigDisplay;
 

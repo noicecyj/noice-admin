@@ -32,6 +32,9 @@ public class PersistentTableConfigPo extends BasePoBean<PersistentTableConfigPo>
     @TableField("persistent_table_config_code")
     private String persistentTableConfigCode;
 
+    @TableField("persistent_table_config_data_source")
+    private String persistentTableConfigDataSource;
+
     @TableField("persistent_table_config_display")
     private boolean persistentTableConfigDisplay;
 
@@ -131,6 +134,53 @@ public class PersistentTableConfigPo extends BasePoBean<PersistentTableConfigPo>
 
     public PersistentTableConfigPo orderByPersistentTableConfigCodeDesc() {
         this.queryWrapper.lambda().orderBy(true, false, PersistentTableConfigPo::getPersistentTableConfigCode);
+        return this;
+    }
+
+    public PersistentTableConfigPo selectPersistentTableConfigDataSource() {
+        this.queryWrapper.lambda().select(PersistentTableConfigPo::getPersistentTableConfigDataSource);
+        return this;
+    }
+
+    public PersistentTableConfigPo eqPersistentTableConfigDataSource() {
+        this.queryWrapper.lambda().eq(StrUtil.isNotEmpty(getPersistentTableConfigDataSource()), PersistentTableConfigPo::getPersistentTableConfigDataSource, getPersistentTableConfigDataSource());
+        return this;
+    }
+
+    public PersistentTableConfigPo eqPersistentTableConfigDataSource(String value) {
+        this.setPersistentTableConfigDataSource(value);
+        this.queryWrapper.lambda().eq(StrUtil.isNotEmpty(getPersistentTableConfigDataSource()), PersistentTableConfigPo::getPersistentTableConfigDataSource, getPersistentTableConfigDataSource());
+        return this;
+    }
+
+    public PersistentTableConfigPo inPersistentTableConfigDataSource(List<String> valueList) {
+        this.queryWrapper.lambda().in(CollUtil.isNotEmpty(valueList), PersistentTableConfigPo::getPersistentTableConfigDataSource, valueList);
+        return this;
+    }
+
+    public PersistentTableConfigPo likePersistentTableConfigDataSource() {
+        this.queryWrapper.lambda().like(StrUtil.isNotEmpty(getPersistentTableConfigDataSource()), PersistentTableConfigPo::getPersistentTableConfigDataSource, getPersistentTableConfigDataSource());
+        return this;
+    }
+
+    public PersistentTableConfigPo likePersistentTableConfigDataSource(String value) {
+        this.setPersistentTableConfigDataSource(value);
+        this.queryWrapper.lambda().like(StrUtil.isNotEmpty(getPersistentTableConfigDataSource()), PersistentTableConfigPo::getPersistentTableConfigDataSource, getPersistentTableConfigDataSource());
+        return this;
+    }
+
+    public PersistentTableConfigPo orderByPersistentTableConfigDataSource(boolean isAsc) {
+        this.queryWrapper.lambda().orderBy(true, isAsc, PersistentTableConfigPo::getPersistentTableConfigDataSource);
+        return this;
+    }
+
+    public PersistentTableConfigPo orderByPersistentTableConfigDataSourceAsc() {
+        this.queryWrapper.lambda().orderBy(true, true, PersistentTableConfigPo::getPersistentTableConfigDataSource);
+        return this;
+    }
+
+    public PersistentTableConfigPo orderByPersistentTableConfigDataSourceDesc() {
+        this.queryWrapper.lambda().orderBy(true, false, PersistentTableConfigPo::getPersistentTableConfigDataSource);
         return this;
     }
 
@@ -428,11 +478,11 @@ public class PersistentTableConfigPo extends BasePoBean<PersistentTableConfigPo>
     }
 
     public PersistentTableConfigPo eqAuto() {
-        return this.eqAuthorityId().eqPersistentTableConfigCode().eqPersistentTableConfigDisplay().eqPersistentTableConfigMethod().eqPersistentTableConfigName().eqPersistentTableConfigType().eqPersistentTableId();
+        return this.eqAuthorityId().eqPersistentTableConfigCode().eqPersistentTableConfigDataSource().eqPersistentTableConfigDisplay().eqPersistentTableConfigMethod().eqPersistentTableConfigName().eqPersistentTableConfigType().eqPersistentTableId();
     }
 
     public PersistentTableConfigPo likeAuto() {
-        return this.eqAuthorityId().likePersistentTableConfigCode().likePersistentTableConfigMethod().likePersistentTableConfigName().likePersistentTableConfigType().eqPersistentTableId();
+        return this.eqAuthorityId().likePersistentTableConfigCode().likePersistentTableConfigDataSource().likePersistentTableConfigMethod().likePersistentTableConfigName().likePersistentTableConfigType().eqPersistentTableId();
     }
 
     public PersistentTableConfigPo baseQueryWrapper() {

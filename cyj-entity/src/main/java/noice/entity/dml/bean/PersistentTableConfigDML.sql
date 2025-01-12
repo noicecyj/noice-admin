@@ -15,6 +15,10 @@ create table if not exists data_user.t_persistent_table_config
         varchar(255)
         null
         comment '实体表格配置组件编码',
+    persistent_table_config_data_source
+        varchar(255)
+        null
+        comment '实体表格配置组件数据源',
     persistent_table_config_display
         tinyint(1)
         null
@@ -92,6 +96,21 @@ ALTER TABLE data_user.t_persistent_table_config
         varchar(255)
         null
         comment '实体表格配置组件编码';
+
+ALTER TABLE data_user.t_persistent_table_config
+    DROP persistent_table_config_data_source;
+
+ALTER TABLE data_user.t_persistent_table_config
+    ADD persistent_table_config_data_source
+        varchar(255)
+        null
+        comment '实体表格配置组件数据源';
+
+ALTER TABLE data_user.t_persistent_table_config
+    MODIFY persistent_table_config_data_source
+        varchar(255)
+        null
+        comment '实体表格配置组件数据源';
 
 ALTER TABLE data_user.t_persistent_table_config
     DROP persistent_table_config_display;
