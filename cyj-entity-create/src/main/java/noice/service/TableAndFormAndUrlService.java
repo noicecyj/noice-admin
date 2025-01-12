@@ -192,7 +192,7 @@ public class TableAndFormAndUrlService {
         sortCodeFormConfig.setPersistentFormConfigName("排序码");
         sortCodeFormConfig.setPersistentFormConfigMode("NumberPicker");
         sortCodeFormConfig.setPersistentFormConfigColSpan(12);
-        sortCodeFormConfig.setPersistentFormConfigEdit(true);
+        sortCodeFormConfig.setPersistentFormConfigEdit(false);
         sortCodeFormConfig.setPersistentFormConfigRequired(true);
         baseFormConfigDtoList.add(sortCodeFormConfig);
         FormConfigDto statusFormConfig = new FormConfigDto();
@@ -202,7 +202,7 @@ public class TableAndFormAndUrlService {
         statusFormConfig.setPersistentFormConfigDataSource("Dict#STATUS_TYPE");
         statusFormConfig.setPersistentFormConfigColSpan(12);
         statusFormConfig.setPersistentFormConfigDefaultValue("true");
-        statusFormConfig.setPersistentFormConfigEdit(true);
+        statusFormConfig.setPersistentFormConfigEdit(false);
         statusFormConfig.setPersistentFormConfigRequired(true);
         baseFormConfigDtoList.add(statusFormConfig);
         baseFormConfigRowDto.setFormConfigDtoList(baseFormConfigDtoList);

@@ -103,7 +103,7 @@ function DataForm(props: {
           placeholder={`请选择${item.persistentFormConfigName}`}
           key={item.id}
           initialValue={item.persistentFormConfigDefaultValue}
-          disabled={!item.persistentFormConfigEdit}
+          disabled={item.persistentFormConfigEdit}
           options={item.persistentFormConfigDataSource}
           required={item.persistentFormConfigRequired}
           rules={[{required: item.persistentFormConfigRequired, message: '请输入' + item.persistentFormConfigName}]}
@@ -116,7 +116,7 @@ function DataForm(props: {
           label={item.persistentFormConfigName}
           key={item.id}
           initialValue={item.persistentFormConfigDefaultValue}
-          disabled={!item.persistentFormConfigEdit}
+          disabled={item.persistentFormConfigEdit}
           required={item.persistentFormConfigRequired}
           readonly={entityState.readonly}
           rules={[{required: item.persistentFormConfigRequired, message: '请输入' + item.persistentFormConfigName}]}

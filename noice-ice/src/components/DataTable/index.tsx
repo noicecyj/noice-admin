@@ -39,8 +39,8 @@ function DataTable(props: {
         label: infoState.name,
         closable: true,
       }));
-      userDispatcher.updateActiveKey(infoState.code);
     }
+    userDispatcher.updateActiveKey(infoState.code);
   }, []);
 
   const {

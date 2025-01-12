@@ -14,11 +14,11 @@ export default createModel({
       userName: '123',
     },
     tabs: [{
-      key: 'index',
+      key: '',
       label: '首页',
       closable: false,
     }],
-    activeKey: 'index',
+    activeKey: '',
   } as ModelState,
   reducers: {
     updateCurrentUser(prevState: ModelState, payload: UserInfo) {
