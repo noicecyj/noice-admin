@@ -20,4 +20,7 @@ public class TableConfigDto {
 
     private String persistentTableConfigType;
 
+    private String persistentTableConfigDataSource;
+
+
 }

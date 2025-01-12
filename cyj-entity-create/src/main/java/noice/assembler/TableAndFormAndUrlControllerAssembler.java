@@ -54,6 +54,8 @@ public interface TableAndFormAndUrlControllerAssembler {
     @Mapping(target = "hideInTable", source = "dto.persistentTableConfigDisplay")
     @Mapping(target = "title", source = "dto.persistentTableConfigName")
     @Mapping(target = "valueType", source = "dto.persistentTableConfigType")
+//    @Mapping(target = "width", source = "dto.persistentTableConfigType", qualifiedByName = "typeToWidth")
+    @Mapping(target = "fieldProps", source = "dto.persistentTableConfigDataSource", qualifiedByName = "dataSourceToFieldProps")
     TableConfigVo dtoToVo(TableConfigDto dto);
 
     List<TableConfigVo> dtoTableListToVoTableList(List<TableConfigDto> dtoList);

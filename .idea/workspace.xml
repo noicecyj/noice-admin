@@ -5,16 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/assembler/TableAndFormAndUrlServiceAssemblerComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/assembler/TableAndFormAndUrlServiceAssemblerComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity/src/main/java/noice/entity/dml/bean/PersistentTableConfigDML.sql" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity/src/main/java/noice/entity/dml/bean/PersistentTableConfigDML.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity/src/main/java/noice/entity/dto/bean/PersistentTableConfigDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity/src/main/java/noice/entity/dto/bean/PersistentTableConfigDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity/src/main/java/noice/entity/po/bean/PersistentTableConfigPo.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity/src/main/java/noice/entity/po/bean/PersistentTableConfigPo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity/src/main/java/noice/entity/vo/bean/PersistentTableConfigVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity/src/main/java/noice/entity/vo/bean/PersistentTableConfigVo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity/src/test/resources/history/entity/bean/dml/PersistentTableConfigDML.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity/src/test/resources/history/entity/bean/dml/PersistentTableConfigDML.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity/src/test/resources/history/entity/bean/dto/PersistentTableConfigDto.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity/src/test/resources/history/entity/bean/dto/PersistentTableConfigDto.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity/src/test/resources/history/entity/bean/po/PersistentTableConfigPo.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity/src/test/resources/history/entity/bean/po/PersistentTableConfigPo.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity/src/test/resources/history/entity/bean/vo/PersistentTableConfigVo.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity/src/test/resources/history/entity/bean/vo/PersistentTableConfigVo.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/entity/dto/TableConfigDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/entity/dto/TableConfigDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/entity/vo/TableConfigVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/entity/vo/TableConfigVo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -443,15 +435,7 @@
       <workItem from="1735529787253" duration="3809000" />
       <workItem from="1736139099532" duration="6520000" />
       <workItem from="1736606688646" duration="330000" />
-      <workItem from="1736607149615" duration="12090000" />
-    </task>
-    <task id="LOCAL-00183" summary="优化表单布局及字段逻辑">
-      <option name="closed" value="true" />
-      <created>1734022782855</created>
-      <option name="number" value="00183" />
-      <option name="presentableId" value="LOCAL-00183" />
-      <option name="project" value="LOCAL" />
-      <updated>1734022782855</updated>
+      <workItem from="1736607149615" duration="12506000" />
     </task>
     <task id="LOCAL-00184" summary="优化表单布局及字段逻辑">
       <option name="closed" value="true" />
@@ -837,7 +821,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736656072490</updated>
     </task>
-    <option name="localTasksCounter" value="232" />
+    <task id="LOCAL-00232" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1736660165357</created>
+      <option name="number" value="00232" />
+      <option name="presentableId" value="LOCAL-00232" />
+      <option name="project" value="LOCAL" />
+      <updated>1736660165357</updated>
+    </task>
+    <option name="localTasksCounter" value="233" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

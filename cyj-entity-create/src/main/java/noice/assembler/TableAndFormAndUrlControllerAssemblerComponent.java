@@ -4,6 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import noice.assembler.bean.CatalogDictionaryServiceAssembler;
+import noice.common.entity.dto.FieldPropsDTO;
 import noice.entity.dto.bean.CatalogDictionaryDto;
 import noice.entity.po.bean.CatalogDictionaryPo;
 import noice.entity.po.bean.CatalogPo;
@@ -88,6 +89,13 @@ public class TableAndFormAndUrlControllerAssemblerComponent {
             return false;
         }
         return defaultValue;
+    }
+
+    @Named("dataSourceToFieldProps")
+    public FieldPropsDTO dataSourceToFieldProps(String dataSourceCode) {
+        FieldPropsDTO fieldPropsDTO = new FieldPropsDTO();
+        fieldPropsDTO.setOptions(dataSourceToOptionList(dataSourceCode));
+        return fieldPropsDTO;
     }
 
 }
