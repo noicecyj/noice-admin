@@ -620,7 +620,7 @@ public class ServiceBeanMethodBuilder extends MethodBase {
             this.setMethodReturnType("List<OptionDTO<String>>");
             this.setMethodName("getOptions");
             this.setMethodAnnotationList();
-            this.setMethodReturnBody("return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new " + poName + "Dto()).eqAuto().getQueryWrapper()));");
+            this.setMethodReturnBody("return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new " + poName + "Dto()).getQueryWrapper()));");
             return this;
         }
 
