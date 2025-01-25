@@ -148,7 +148,7 @@ public class TableAndFormAndUrlService {
                 authorityPo.inAuthorityCode(formCodeList);
             }
             List<String> authorityId = authorityRepository.findList(authorityPo.getQueryWrapper()).stream().map(AuthorityPo::getId).toList();
-            List<PersistentFormConfigPo> persistentFormConfigPoList = persistentFormConfigRepository.findList(new PersistentFormConfigPo().eqPersistentFormId(persistentFormPo.getId()).inAuthorityId(authorityId).getQueryWrapper());
+            List<PersistentFormConfigPo> persistentFormConfigPoList = persistentFormConfigRepository.findList(new PersistentFormConfigPo().eqPersistentFormId(persistentFormPo.getId()).inAuthorityId(authorityId).orderBySortCode(true).getQueryWrapper());
             List<FormConfigDto> formConfigDtoList = tableAndFormAndUrlServiceAssembler.poFormListToDtoFormList(persistentFormConfigPoList);
             List<FormConfigRowDto> formConfigRowDtoList = setFormConfigRow(formConfigDtoList);
             formConfigRowDtoList.add(setBaseFormConfigRow());

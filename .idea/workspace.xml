@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-common/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-common/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,7 +180,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest">
+  <component name="RunManager" selected="Spring Boot.CyjEntityCreaterApplication">
     <configuration name="CyjEntityCreaterApplicationTest.PersistentBeanAspect" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cyj-entity-create" />
       <extension name="coverage">
@@ -439,23 +436,7 @@
       <workItem from="1736606688646" duration="330000" />
       <workItem from="1736607149615" duration="18428000" />
       <workItem from="1736735464809" duration="1939000" />
-      <workItem from="1737806623660" duration="2983000" />
-    </task>
-    <task id="LOCAL-00186" summary="优化表单布局及字段逻辑">
-      <option name="closed" value="true" />
-      <created>1734024346346</created>
-      <option name="number" value="00186" />
-      <option name="presentableId" value="LOCAL-00186" />
-      <option name="project" value="LOCAL" />
-      <updated>1734024346346</updated>
-    </task>
-    <task id="LOCAL-00187" summary="优化表单布局及字段逻辑">
-      <option name="closed" value="true" />
-      <created>1734075648076</created>
-      <option name="number" value="00187" />
-      <option name="presentableId" value="LOCAL-00187" />
-      <option name="project" value="LOCAL" />
-      <updated>1734075648076</updated>
+      <workItem from="1737806623660" duration="3678000" />
     </task>
     <task id="LOCAL-00188" summary="优化表单布局及字段逻辑">
       <option name="closed" value="true" />
@@ -833,7 +814,23 @@
       <option name="project" value="LOCAL" />
       <updated>1736667039714</updated>
     </task>
-    <option name="localTasksCounter" value="235" />
+    <task id="LOCAL-00235" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1737810907916</created>
+      <option name="number" value="00235" />
+      <option name="presentableId" value="LOCAL-00235" />
+      <option name="project" value="LOCAL" />
+      <updated>1737810907917</updated>
+    </task>
+    <task id="LOCAL-00236" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1737811011569</created>
+      <option name="number" value="00236" />
+      <option name="presentableId" value="LOCAL-00236" />
+      <option name="project" value="LOCAL" />
+      <updated>1737811011569</updated>
+    </task>
+    <option name="localTasksCounter" value="237" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -891,6 +888,17 @@
     <MESSAGE value="java&#10;添加UrlDto类及接口获取功能" />
     <MESSAGE value="优化表单布局及字段逻辑" />
     <option name="LAST_COMMIT_MESSAGE" value="优化表单布局及字段逻辑" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/assembler/TableAndFormAndUrlControllerAssemblerComponent.java</url>
+          <line>69</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -62,7 +62,7 @@ public class TableAndFormAndUrlControllerAssemblerComponent {
 
     @Named("dataSourceToOptionList")
     public List dataSourceToOptionList(String dataSourceCode) {
-        if (StrUtil.isEmpty(dataSourceCode)) {
+        if (StrUtil.isEmpty(dataSourceCode) || !dataSourceCode.contains("#")) {
             return null;
         }
         List<String> split = StrUtil.split(dataSourceCode, "#");
