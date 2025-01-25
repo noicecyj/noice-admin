@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/handler/bean/BeanServiceAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/handler/bean/BeanServiceAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/handler/bean/BeanServiceAspectInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/handler/bean/BeanServiceAspectInterface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -436,15 +438,7 @@
       <workItem from="1736606688646" duration="330000" />
       <workItem from="1736607149615" duration="18428000" />
       <workItem from="1736735464809" duration="1939000" />
-      <workItem from="1737806623660" duration="3678000" />
-    </task>
-    <task id="LOCAL-00188" summary="优化表单布局及字段逻辑">
-      <option name="closed" value="true" />
-      <created>1734075737458</created>
-      <option name="number" value="00188" />
-      <option name="presentableId" value="LOCAL-00188" />
-      <option name="project" value="LOCAL" />
-      <updated>1734075737458</updated>
+      <workItem from="1737806623660" duration="5847000" />
     </task>
     <task id="LOCAL-00189" summary="优化表单布局及字段逻辑">
       <option name="closed" value="true" />
@@ -830,7 +824,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737811011569</updated>
     </task>
-    <option name="localTasksCounter" value="237" />
+    <task id="LOCAL-00237" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1737812239359</created>
+      <option name="number" value="00237" />
+      <option name="presentableId" value="LOCAL-00237" />
+      <option name="project" value="LOCAL" />
+      <updated>1737812239359</updated>
+    </task>
+    <option name="localTasksCounter" value="238" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -888,17 +890,6 @@
     <MESSAGE value="java&#10;添加UrlDto类及接口获取功能" />
     <MESSAGE value="优化表单布局及字段逻辑" />
     <option name="LAST_COMMIT_MESSAGE" value="优化表单布局及字段逻辑" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/assembler/TableAndFormAndUrlControllerAssemblerComponent.java</url>
-          <line>69</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

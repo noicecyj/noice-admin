@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 
 public interface BeanRepositoryAspectInterface {
 
-    static final Logger logger = LoggerFactory.getLogger(BeanRepositoryAspectInterface.class);
+    Logger logger = LoggerFactory.getLogger(BeanRepositoryAspectInterface.class);
 
     default JSONObject addBefore(JSONObject param) {
         logger.debug("param:{}", param.toJSONString());

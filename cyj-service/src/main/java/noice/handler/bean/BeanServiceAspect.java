@@ -34,12 +34,17 @@ public class BeanServiceAspect {
         BeanServiceAspectInterface beanServiceAspectInterface = this.getMethodType(joinPoint);
         JSONObject param = checkParam(joinPoint);
         logger.debug("===================== bean Service addOneBefore start ====================");
-        JSONObject beforeInfo = beanServiceAspectInterface.addOneBefore(param);
+        JSONObject beforeInfo = null;
+        if (param != null) {
+            beforeInfo = beanServiceAspectInterface.addOneBefore(param);
+        }
         logger.debug("===================== bean Service addOneBefore end ====================");
         Object proceed = joinPoint.proceed();
         JSONObject result = checkReturn(proceed);
         logger.debug("===================== bean Service addOneAfter start ====================");
-        beanServiceAspectInterface.addOneAfter(param, result, ObjectUtil.isNotNull(beforeInfo) ? beforeInfo : new JSONObject());
+        if (param != null) {
+            beanServiceAspectInterface.addOneAfter(param, result, ObjectUtil.isNotNull(beforeInfo) ? beforeInfo : new JSONObject());
+        }
         logger.debug("===================== bean Service addOneAfter end ====================");
         return proceed;
     }
@@ -53,12 +58,17 @@ public class BeanServiceAspect {
         BeanServiceAspectInterface beanServiceAspectInterface = this.getMethodType(joinPoint);
         JSONObject param = checkParam(joinPoint);
         logger.debug("===================== bean Service deleteOneBefore start ====================");
-        JSONObject beforeInfo = beanServiceAspectInterface.deleteOneBefore(param);
+        JSONObject beforeInfo = null;
+        if (param != null) {
+            beforeInfo = beanServiceAspectInterface.deleteOneBefore(param);
+        }
         logger.debug("===================== bean Service deleteOneBefore end ====================");
         Object proceed = joinPoint.proceed();
         JSONObject result = checkReturn(proceed);
         logger.debug("===================== bean Service deleteOneAfter start ====================");
-        beanServiceAspectInterface.deleteOneAfter(param, result, ObjectUtil.isNotNull(beforeInfo) ? beforeInfo : new JSONObject());
+        if (param != null) {
+            beanServiceAspectInterface.deleteOneAfter(param, result, ObjectUtil.isNotNull(beforeInfo) ? beforeInfo : new JSONObject());
+        }
         logger.debug("===================== bean Service deleteOneAfter end ====================");
         return proceed;
     }
@@ -72,12 +82,17 @@ public class BeanServiceAspect {
         BeanServiceAspectInterface beanServiceAspectInterface = this.getMethodType(joinPoint);
         JSONObject param = checkParam(joinPoint);
         logger.debug("===================== bean Service updateOneBefore start ====================");
-        JSONObject beforeInfo = beanServiceAspectInterface.updateOneBefore(param);
+        JSONObject beforeInfo = null;
+        if (param != null) {
+            beforeInfo = beanServiceAspectInterface.updateOneBefore(param);
+        }
         logger.debug("===================== bean Service updateOneBefore end ====================");
         Object proceed = joinPoint.proceed();
         JSONObject result = checkReturn(proceed);
         logger.debug("===================== bean Service updateOneAfter start ====================");
-        beanServiceAspectInterface.updateOneAfter(param, result, ObjectUtil.isNotNull(beforeInfo) ? beforeInfo : new JSONObject());
+        if (param != null) {
+            beanServiceAspectInterface.updateOneAfter(param, result, ObjectUtil.isNotNull(beforeInfo) ? beforeInfo : new JSONObject());
+        }
         logger.debug("===================== bean Service updateOneAfter end ====================");
         return proceed;
     }
@@ -91,12 +106,17 @@ public class BeanServiceAspect {
         BeanServiceAspectInterface beanServiceAspectInterface = this.getMethodType(joinPoint);
         JSONObject param = checkParam(joinPoint);
         logger.debug("===================== bean Service findOneBefore start ====================");
-        JSONObject beforeInfo = beanServiceAspectInterface.findOneBefore(param);
+        JSONObject beforeInfo = null;
+        if (param != null) {
+            beforeInfo = beanServiceAspectInterface.findOneBefore(param);
+        }
         logger.debug("===================== bean Service findOneBefore end ====================");
         Object proceed = joinPoint.proceed();
         JSONObject result = checkReturn(proceed);
         logger.debug("===================== bean Service findOneAfter start ====================");
-        beanServiceAspectInterface.findOneAfter(param, result, ObjectUtil.isNotNull(beforeInfo) ? beforeInfo : new JSONObject());
+        if (param != null) {
+            beanServiceAspectInterface.findOneAfter(param, result, ObjectUtil.isNotNull(beforeInfo) ? beforeInfo : new JSONObject());
+        }
         logger.debug("===================== bean Service findOneAfter end ====================");
         return proceed;
     }
@@ -110,12 +130,17 @@ public class BeanServiceAspect {
         BeanServiceAspectInterface beanServiceAspectInterface = this.getMethodType(joinPoint);
         JSONObject param = checkParam(joinPoint);
         logger.debug("===================== bean Service findListBefore start ====================");
-        JSONObject beforeInfo = beanServiceAspectInterface.findListBefore(param);
+        JSONObject beforeInfo = null;
+        if (param != null) {
+            beforeInfo = beanServiceAspectInterface.findListBefore(param);
+        }
         logger.debug("===================== bean Service findListBefore end ====================");
         Object proceed = joinPoint.proceed();
         JSONObject result = checkReturn(proceed);
         logger.debug("===================== bean Service findListAfter start ====================");
-        beanServiceAspectInterface.findListAfter(param, result, ObjectUtil.isNotNull(beforeInfo) ? beforeInfo : new JSONObject());
+        if (param != null) {
+            beanServiceAspectInterface.findListAfter(param, result, ObjectUtil.isNotNull(beforeInfo) ? beforeInfo : new JSONObject());
+        }
         logger.debug("===================== bean Service findListAfter end ====================");
         return proceed;
     }
@@ -129,12 +154,17 @@ public class BeanServiceAspect {
         BeanServiceAspectInterface beanServiceAspectInterface = this.getMethodType(joinPoint);
         JSONObject param = checkParam(joinPoint);
         logger.debug("===================== bean Service findListBefore start ====================");
-        JSONObject beforeInfo = beanServiceAspectInterface.findPageBefore(param);
+        JSONObject beforeInfo = null;
+        if (param != null) {
+            beforeInfo = beanServiceAspectInterface.findPageBefore(param);
+        }
         logger.debug("===================== bean Service findListBefore end ====================");
         Object proceed = joinPoint.proceed();
         JSONObject result = checkReturn(proceed);
         logger.debug("===================== bean Service findListAfter start ====================");
-        beanServiceAspectInterface.findPageAfter(param, result, ObjectUtil.isNotNull(beforeInfo) ? beforeInfo : new JSONObject());
+        if (param != null) {
+            beanServiceAspectInterface.findPageAfter(param, result, ObjectUtil.isNotNull(beforeInfo) ? beforeInfo : new JSONObject());
+        }
         logger.debug("===================== bean Service findListAfter end ====================");
         return proceed;
     }
