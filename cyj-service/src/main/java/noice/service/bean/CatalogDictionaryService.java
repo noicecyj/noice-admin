@@ -85,7 +85,7 @@ public class CatalogDictionaryService implements BeanService<CatalogDictionaryDt
 
     @Override
     public List<OptionDTO<String>> getOptions() {
-        return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new CatalogDictionaryDto()).eqAuto().getQueryWrapper()));
+        return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new CatalogDictionaryDto()).getQueryWrapper()));
     }
 
 }

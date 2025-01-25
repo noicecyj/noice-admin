@@ -85,7 +85,7 @@ public class MenuService implements BeanService<MenuDto> {
 
     @Override
     public List<OptionDTO<String>> getOptions() {
-        return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new MenuDto()).eqAuto().getQueryWrapper()));
+        return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new MenuDto()).getQueryWrapper()));
     }
 
 }

@@ -85,7 +85,7 @@ public class SqlService implements BeanService<SqlDto> {
 
     @Override
     public List<OptionDTO<String>> getOptions() {
-        return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new SqlDto()).eqAuto().getQueryWrapper()));
+        return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new SqlDto()).getQueryWrapper()));
     }
 
 }

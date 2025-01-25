@@ -103,7 +103,7 @@ public class RoleService implements BeanService<RoleDto> {
 
     @Override
     public List<OptionDTO<String>> getOptions() {
-        return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new RoleDto()).eqAuto().getQueryWrapper()));
+        return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new RoleDto()).getQueryWrapper()));
     }
 
     public List<RoleDto> findListByUserIds(List<String> ids) {

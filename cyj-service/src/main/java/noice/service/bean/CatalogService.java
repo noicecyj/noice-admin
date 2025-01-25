@@ -85,7 +85,7 @@ public class CatalogService implements BeanService<CatalogDto> {
 
     @Override
     public List<OptionDTO<String>> getOptions() {
-        return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new CatalogDto()).eqAuto().getQueryWrapper()));
+        return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new CatalogDto()).getQueryWrapper()));
     }
 
 }

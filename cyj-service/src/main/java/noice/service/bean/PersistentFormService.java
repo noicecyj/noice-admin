@@ -85,7 +85,7 @@ public class PersistentFormService implements BeanService<PersistentFormDto> {
 
     @Override
     public List<OptionDTO<String>> getOptions() {
-        return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new PersistentFormDto()).eqAuto().getQueryWrapper()));
+        return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new PersistentFormDto()).getQueryWrapper()));
     }
 
 }

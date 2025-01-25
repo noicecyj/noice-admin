@@ -183,7 +183,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CyjEntityCreaterApplicationTest.menuBeanTest">
+  <component name="RunManager" selected="JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest">
     <configuration name="CyjEntityCreaterApplicationTest.PersistentBeanAspect" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cyj-entity-create" />
       <extension name="coverage">
@@ -293,8 +293,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest2" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest" />
+        <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest2" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.menuBeanTest" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.PersistentBeanAspect" />

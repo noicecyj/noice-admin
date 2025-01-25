@@ -85,7 +85,7 @@ public class WorkFlowService implements BeanService<WorkFlowDto> {
 
     @Override
     public List<OptionDTO<String>> getOptions() {
-        return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new WorkFlowDto()).eqAuto().getQueryWrapper()));
+        return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new WorkFlowDto()).getQueryWrapper()));
     }
 
 }

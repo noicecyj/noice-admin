@@ -85,7 +85,7 @@ public class AppServiceService implements BeanService<AppServiceDto> {
 
     @Override
     public List<OptionDTO<String>> getOptions() {
-        return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new AppServiceDto()).eqAuto().getQueryWrapper()));
+        return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new AppServiceDto()).getQueryWrapper()));
     }
 
 }

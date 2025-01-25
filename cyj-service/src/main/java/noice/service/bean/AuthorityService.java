@@ -94,7 +94,7 @@ public class AuthorityService implements BeanService<AuthorityDto> {
 
     @Override
     public List<OptionDTO<String>> getOptions() {
-        return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new AuthorityDto()).eqAuto().getQueryWrapper()));
+        return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new AuthorityDto()).getQueryWrapper()));
     }
 
     public List<AuthorityDto> findListByRoleIds(List<String> ids) {

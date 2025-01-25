@@ -85,7 +85,7 @@ public class PersistentTableSearchConfigService implements BeanService<Persisten
 
     @Override
     public List<OptionDTO<String>> getOptions() {
-        return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new PersistentTableSearchConfigDto()).eqAuto().getQueryWrapper()));
+        return assembler.poListToDtoOptionList(repository.findList(converter.dtoToPo(new PersistentTableSearchConfigDto()).getQueryWrapper()));
     }
 
 }
