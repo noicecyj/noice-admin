@@ -1,6 +1,5 @@
 package noice.service;
 
-import noice.assembler.bean.PersistentPropertyServiceAssembler;
 import noice.converter.bean.PersistentPropertyServiceConverter;
 import noice.converter.bean.PersistentServiceConverter;
 import noice.entity.dto.bean.PersistentDto;
@@ -31,8 +30,6 @@ public class OperateTableService {
     private PersistentServiceConverter persistentServiceConverter;
 
     private PersistentPropertyServiceConverter persistentPropertyServiceConverter;
-
-    private PersistentPropertyServiceAssembler persistentPropertyServiceAssembler;
 
     private PersistentRepository persistentRepository;
 
@@ -65,11 +62,6 @@ public class OperateTableService {
     @Autowired
     public void setPersistentPropertyServiceConverter(PersistentPropertyServiceConverter persistentPropertyServiceConverter) {
         this.persistentPropertyServiceConverter = persistentPropertyServiceConverter;
-    }
-
-    @Autowired
-    public void setPersistentPropertyServiceAssembler(PersistentPropertyServiceAssembler persistentPropertyServiceAssembler) {
-        this.persistentPropertyServiceAssembler = persistentPropertyServiceAssembler;
     }
 
     @Autowired
@@ -127,8 +119,11 @@ public class OperateTableService {
     }
 
     public boolean updateTable(PersistentDto dto) {
-        repository.updateTableName(dmlBeanTableUpdateNameBuilder.builder("t_" + dto.getPersistentCode(), "t_" + dto.getPersistentCode(), DATABASE).toString());
-        return true;
+        boolean updateTableComment = repository.updateTableComment(dmlBeanTableUpdateCommentBuilder
+                .builder("t_" + dto.getPersistentCode(), dto.getPersistentName(), DATABASE).toString());
+        boolean updateTableName = repository.updateTableName(dmlBeanTableUpdateNameBuilder
+                .builder("t_" + dto.getPersistentCode(), "t_" + dto.getPersistentCode(), DATABASE).toString());
+        return updateTableComment && updateTableName;
     }
 
     public boolean addColumn(PersistentPropertyDto dto) {

@@ -5,18 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑">
-      <change afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/entity/po/TablePo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/aspect/bean/PersistentServiceAspect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-common/src/main/java/noice/common/contants/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-common/src/main/java/noice/common/contants/Constant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/constant/CreateConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/constant/CreateConstant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/entity/TableColumnPo.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/entity/po/TableColumnPo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/builder/entity/dml/bean/DMLBeanTableBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/builder/entity/dml/bean/DMLBeanTableBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/factory/ClassFactoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/factory/ClassFactoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/mapper/OperateTableMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/mapper/OperateTableMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/repository/OperateTableRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/repository/OperateTableRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/service/OperateTableService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/service/OperateTableService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/handler/bean/BeanServiceAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/handler/bean/BeanServiceAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-ice/ice.config.mts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/ice.config.mts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,6 +79,9 @@
       </MavenImportingSettings>
     </option>
   </component>
+  <component name="MavenRunner">
+    <option name="skipTests" value="true" />
+  </component>
   <component name="OptimizeOnSaveOptions">
     <option name="myRunOnSave" value="true" />
   </component>
@@ -109,6 +102,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;JAR 应用程序.cyj-auth-0.0.1-SNAPSHOT.jar.executor&quot;: &quot;Debug&quot;,
     &quot;JUnit.CyjEntityCreaterApplicationTest.PersistentBeanAspect.executor&quot;: &quot;Debug&quot;,
     &quot;JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest.executor&quot;: &quot;Debug&quot;,
     &quot;JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest.executor&quot;: &quot;Debug&quot;,
@@ -116,6 +110,8 @@
     &quot;JUnit.CyjEntityCreaterApplicationTest.menuBeanTest.executor&quot;: &quot;Debug&quot;,
     &quot;Maven.cyj [clean].executor&quot;: &quot;Run&quot;,
     &quot;Maven.cyj [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.cyj [package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.cyj-auth [package].executor&quot;: &quot;Run&quot;,
     &quot;Maven.cyj-common [compile].executor&quot;: &quot;Run&quot;,
     &quot;Maven.cyj-common [deploy].executor&quot;: &quot;Run&quot;,
     &quot;Maven.cyj-entity [compile].executor&quot;: &quot;Run&quot;,
@@ -191,23 +187,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.CyjEntityCreaterApplication">
-    <configuration name="CyjEntityCreaterApplicationTest.PersistentBeanAspect" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="cyj-entity-create" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="noice.create.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="noice.create" />
-      <option name="MAIN_CLASS_NAME" value="noice.create.CyjEntityCreaterApplicationTest" />
-      <option name="METHOD_NAME" value="PersistentBeanAspect" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JAR 应用程序.cyj-auth-0.0.1-SNAPSHOT.jar">
     <configuration name="CyjEntityCreaterApplicationTest.createEntityBeanTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cyj-entity-create" />
       <extension name="coverage">
@@ -272,6 +252,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="cyj-auth-0.0.1-SNAPSHOT.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/cyj-auth/target/cyj-auth-0.0.1-SNAPSHOT.jar" />
+      <method v="2" />
+    </configuration>
     <configuration name="CyjAuthApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="cyj-auth" />
@@ -291,21 +275,21 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.PersistentBeanAspect" />
-      <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest" />
-      <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.menuBeanTest" />
       <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest" />
       <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest2" />
+      <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest" />
+      <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.menuBeanTest" />
+      <item itemvalue="JAR 应用程序.cyj-auth-0.0.1-SNAPSHOT.jar" />
       <item itemvalue="Spring Boot.CyjAuthApplication" />
       <item itemvalue="Spring Boot.CyjEntityCreaterApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JAR 应用程序.cyj-auth-0.0.1-SNAPSHOT.jar" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest2" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.menuBeanTest" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest" />
-        <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.PersistentBeanAspect" />
       </list>
     </recent_temporary>
   </component>
@@ -448,15 +432,7 @@
       <workItem from="1736607149615" duration="18428000" />
       <workItem from="1736735464809" duration="1939000" />
       <workItem from="1737806623660" duration="8123000" />
-      <workItem from="1737854251088" duration="7342000" />
-    </task>
-    <task id="LOCAL-00190" summary="优化表单布局及字段逻辑">
-      <option name="closed" value="true" />
-      <created>1734077943903</created>
-      <option name="number" value="00190" />
-      <option name="presentableId" value="LOCAL-00190" />
-      <option name="project" value="LOCAL" />
-      <updated>1734077943903</updated>
+      <workItem from="1737854251088" duration="12760000" />
     </task>
     <task id="LOCAL-00191" summary="优化表单布局及字段逻辑">
       <option name="closed" value="true" />
@@ -842,7 +818,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737813808041</updated>
     </task>
-    <option name="localTasksCounter" value="239" />
+    <task id="LOCAL-00239" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1737864851376</created>
+      <option name="number" value="00239" />
+      <option name="presentableId" value="LOCAL-00239" />
+      <option name="project" value="LOCAL" />
+      <updated>1737864851376</updated>
+    </task>
+    <option name="localTasksCounter" value="240" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

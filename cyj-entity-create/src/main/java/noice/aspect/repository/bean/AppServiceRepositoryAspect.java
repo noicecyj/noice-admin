@@ -1,4 +1,4 @@
-package noice.aspect.bean;
+package noice.aspect.repository.bean;
 
 import noice.handler.bean.BeanRepositoryAspectInterface;
 import org.springframework.stereotype.Component;

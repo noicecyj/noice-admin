@@ -13,27 +13,27 @@ export default defineConfig(() => ({
     proxy: {
         "/entityCreateApi": {
             enable: true,
-            target: "http://127.0.0.1:8100/cyj-entity-creater"
+            target: "http://123.249.114.102:8100/cyj-entity-creater"
         },
         "/dictionaryApi": {
             enable: true,
-            target: "http://127.0.0.1:8100/cyj-entity-creater"
+            target: "http://123.249.114.102:8100/cyj-entity-creater"
         },
         "/sqlApi": {
             enable: true,
-            target: "http://127.0.0.1:8100/cyj-entity-creater"
+            target: "http://123.249.114.102:8100/cyj-entity-creater"
         },
         "/workFlowApi": {
             enable: true,
-            target: "http://127.0.0.1:8100/cyj-workflow"
+            target: "http://123.249.114.102:8100/cyj-workflow"
         },
         "/userApi": {
             enable: true,
-            target: "http://127.0.0.1:8100/cyj-entity-creater"
+            target: "http://123.249.114.102:8100/cyj-entity-creater"
         },
         "/v1": {
             enable: true,
-            target: "http://127.0.0.1:8100"
+            target: "http://123.249.114.102:8100"
         }
     }
 }));

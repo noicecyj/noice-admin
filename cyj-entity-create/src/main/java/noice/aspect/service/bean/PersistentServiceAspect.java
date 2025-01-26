@@ -1,4 +1,4 @@
-package noice.aspect.bean;
+package noice.aspect.service.bean;
 
 import com.alibaba.fastjson2.JSONObject;
 import noice.entity.dto.bean.PersistentDto;
@@ -36,16 +36,16 @@ public class PersistentServiceAspect implements BeanServiceAspectInterface {
     @Override
     public void updateOneAfter(JSONObject param, JSONObject result, JSONObject beforeInfo) {
         BeanServiceAspectInterface.super.updateOneAfter(param, result, beforeInfo);
-        this.updateDefaultFormAndTable(param);
+        PersistentDto persistentDto = param.getObject(PARAM_BASE_DTO_BEAN, PersistentDto.class);
+        this.updateDefaultFormAndTable(persistentDto);
     }
 
     /**
      * 更新默认表单与表格
      *
-     * @param param 方法参数
+     * @param persistentDto 方法参数
      */
-    private void updateDefaultFormAndTable(JSONObject param) {
-        PersistentDto persistentDto = param.getObject(PARAM_BASE_DTO_BEAN, PersistentDto.class);
+    private void updateDefaultFormAndTable(PersistentDto persistentDto) {
         PersistentFormPo persistentFormPo = persistentFormRepository
                 .find(new PersistentFormPo().eqPersistentId(persistentDto.getId())
                         .eqPersistentFormType(DEFAULT_FORM).getQueryWrapper());
@@ -69,7 +69,7 @@ public class PersistentServiceAspect implements BeanServiceAspectInterface {
         }
     }
 
-    private void updateDBSQl() {
+    private void updateDBSQl(PersistentDto persistentDto) {
 
     }
 }
