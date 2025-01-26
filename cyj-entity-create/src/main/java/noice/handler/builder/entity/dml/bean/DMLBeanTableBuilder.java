@@ -43,6 +43,49 @@ public class DMLBeanTableBuilder {
     @EqualsAndHashCode(callSuper = true)
     @Component
     @Data
+    public static class DMLBeanTableUpdateCommentBuilder extends DMLBeanTableBuilder {
+
+        private String comment;
+
+        public DMLBeanTableUpdateCommentBuilder builder(String tableName, String comment, String dateBase) {
+            super.tableName = tableName;
+            super.dateBase = dateBase;
+            this.comment = comment;
+            return this;
+        }
+
+        @Override
+        public String toString() {
+            return "alter table " + getDateBase() + "." + getTableName() + " comment '" + getComment() + "';\n";
+        }
+
+    }
+
+    @EqualsAndHashCode(callSuper = true)
+    @Component
+    @Data
+    public static class DMLBeanTableUpdateNameBuilder extends DMLBeanTableBuilder {
+
+        private String oldTableName;
+        private String newTableName;
+
+        public DMLBeanTableUpdateNameBuilder builder(String oldTableName, String newTableName, String dateBase) {
+            this.oldTableName = oldTableName;
+            this.newTableName = newTableName;
+            super.dateBase = dateBase;
+            return this;
+        }
+
+        @Override
+        public String toString() {
+            return "rename table " + getTableName() + "." + getOldTableName() + " to " + getNewTableName() + ";\n";
+        }
+
+    }
+
+    @EqualsAndHashCode(callSuper = true)
+    @Component
+    @Data
     public static class DMLBeanTableAddBuilder extends DMLBeanTableBuilder {
 
         private List<PersistentPropertyPo> persistentPropertyPoList;

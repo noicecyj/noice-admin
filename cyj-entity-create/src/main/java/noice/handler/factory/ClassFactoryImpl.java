@@ -48,6 +48,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static noice.common.contants.Constant.DEFAULT_FORM;
+
 @Getter
 public abstract class ClassFactoryImpl implements ClassFactory {
 
@@ -477,7 +479,7 @@ public abstract class ClassFactoryImpl implements ClassFactory {
     }
 
     public void createFormAndTable(PersistentPo persistentPo, List<PersistentPropertyPo> persistentPropertyPoList) {
-        String formId = formCreate(persistentPo, "default_form", 2);
+        String formId = formCreate(persistentPo, DEFAULT_FORM, 2);
         for (PersistentPropertyPo persistentPropertyPo : persistentPropertyPoList) {
             formConfigCreate(persistentPropertyPo, formId);
         }

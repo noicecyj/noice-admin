@@ -2,7 +2,6 @@ package noice.constant;
 
 public class CreateConstant {
 
-    public static final String DATABASE = "data_user";
     public static final String ENTITY_PATH = "/cyj-entity/src/main/java/noice/entity/";
     public static final String HISTORY_ENTITY_PATH = "/cyj-entity/src/test/resources/history/entity/";
     public static final String MAPPER_PATH = "/cyj-mapper/src/main/java/noice/mapper/";

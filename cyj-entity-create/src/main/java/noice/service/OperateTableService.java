@@ -3,9 +3,9 @@ package noice.service;
 import noice.assembler.bean.PersistentPropertyServiceAssembler;
 import noice.converter.bean.PersistentPropertyServiceConverter;
 import noice.converter.bean.PersistentServiceConverter;
-import noice.entity.TableColumnPo;
 import noice.entity.dto.bean.PersistentDto;
 import noice.entity.dto.bean.PersistentPropertyDto;
+import noice.entity.po.TableColumnPo;
 import noice.entity.po.bean.PersistentPo;
 import noice.entity.po.bean.PersistentPropertyPo;
 import noice.handler.builder.entity.dml.bean.DMLBeanFieldAlterBuilder;
@@ -17,9 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
-import static noice.constant.CreateConstant.DATABASE;
+import static noice.common.contants.Constant.DATABASE;
 
 /**
  * @author Noice
@@ -43,6 +41,10 @@ public class OperateTableService {
     private DMLBeanTableBuilder.DMLBeanTableDropBuilder dmlBeanTableDropBuilder;
 
     private DMLBeanTableBuilder.DMLBeanTableAddBuilder dmlBeanTableAddBuilder;
+
+    private DMLBeanTableBuilder.DMLBeanTableUpdateNameBuilder dmlBeanTableUpdateNameBuilder;
+
+    private DMLBeanTableBuilder.DMLBeanTableUpdateCommentBuilder dmlBeanTableUpdateCommentBuilder;
 
     private DMLBeanFieldAlterBuilder.DMLBeanFieldDropAlterBuilder dmlBeanFieldDropAlterBuilder;
 
@@ -91,6 +93,16 @@ public class OperateTableService {
     }
 
     @Autowired
+    public void setDmlBeanTableUpdateNameBuilder(DMLBeanTableBuilder.DMLBeanTableUpdateNameBuilder dmlBeanTableUpdateNameBuilder) {
+        this.dmlBeanTableUpdateNameBuilder = dmlBeanTableUpdateNameBuilder;
+    }
+
+    @Autowired
+    public void setDmlBeanTableUpdateCommentBuilder(DMLBeanTableBuilder.DMLBeanTableUpdateCommentBuilder dmlBeanTableUpdateCommentBuilder) {
+        this.dmlBeanTableUpdateCommentBuilder = dmlBeanTableUpdateCommentBuilder;
+    }
+
+    @Autowired
     public void setDmlBeanFieldDropAlterBuilder(DMLBeanFieldAlterBuilder.DMLBeanFieldDropAlterBuilder dmlBeanFieldDropAlterBuilder) {
         this.dmlBeanFieldDropAlterBuilder = dmlBeanFieldDropAlterBuilder;
     }
@@ -115,8 +127,7 @@ public class OperateTableService {
     }
 
     public boolean updateTable(PersistentDto dto) {
-        List<PersistentPropertyPo> propertyRepositoryList = persistentPropertyRepository.findList(new PersistentPropertyPo().eqPersistentId(dto.getPersistentId()).getQueryWrapper());
-        propertyRepositoryList.forEach(persistentPropertyPo -> updateColumn(persistentPropertyServiceAssembler.poToDto(persistentPropertyPo)));
+        repository.updateTableName(dmlBeanTableUpdateNameBuilder.builder("t_" + dto.getPersistentCode(), "t_" + dto.getPersistentCode(), DATABASE).toString());
         return true;
     }
 

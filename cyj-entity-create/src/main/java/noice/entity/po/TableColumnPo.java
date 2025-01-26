@@ -1,4 +1,4 @@
-package noice.entity;
+package noice.entity.po;
 
 import lombok.Data;
 

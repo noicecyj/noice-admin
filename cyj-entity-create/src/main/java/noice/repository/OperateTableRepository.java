@@ -1,13 +1,15 @@
 package noice.repository;
 
 import com.baomidou.mybatisplus.extension.toolkit.SqlRunner;
-import noice.entity.TableColumnPo;
+import noice.entity.po.TableColumnPo;
 import noice.mapper.OperateTableMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
+
+import static noice.common.contants.Constant.DATABASE;
 
 /**
  * @author Noice
@@ -36,6 +38,14 @@ public class OperateTableRepository {
         return SQL_RUNNER.delete(sql);
     }
 
+    public boolean updateTableName(String sql) {
+        return SQL_RUNNER.update(sql);
+    }
+
+    public boolean updateTableComment(String sql) {
+        return SQL_RUNNER.update(sql);
+    }
+
     public boolean addColumn(String sql) {
         return SQL_RUNNER.update(sql);
     }
@@ -50,12 +60,12 @@ public class OperateTableRepository {
 
     public List<TableColumnPo> queryTableColumns(String persistentCode) {
         String tableName = "t_" + persistentCode;
-        return operateTableMapper.getTableColumns(tableName).stream().filter(tableColumnPo -> tableColumnPo.getCOLUMN_NAME().contains(persistentCode)).toList();
+        return operateTableMapper.getTableColumns(DATABASE, tableName).stream().filter(tableColumnPo -> tableColumnPo.getCOLUMN_NAME().contains(persistentCode)).toList();
     }
 
     public TableColumnPo queryTableColumn(String persistentCode, String persistentPropertyCode) {
         String tableName = "t_" + persistentCode;
-        return operateTableMapper.getTableColumn(tableName, persistentPropertyCode);
+        return operateTableMapper.getTableColumn(DATABASE, tableName, persistentPropertyCode);
     }
 
 }

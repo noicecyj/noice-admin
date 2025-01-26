@@ -25,10 +25,10 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Map;
 
+import static noice.common.contants.Constant.DATABASE;
 import static noice.constant.CreateConstant.CONTROLLER_ASSEMBLER_PATH;
 import static noice.constant.CreateConstant.CONTROLLER_CONVERTER_PATH;
 import static noice.constant.CreateConstant.CONTROLLER_PATH;
-import static noice.constant.CreateConstant.DATABASE;
 import static noice.constant.CreateConstant.ENTITY_PATH;
 import static noice.constant.CreateConstant.HISTORY_CONTROLLER_ASSEMBLER_PATH;
 import static noice.constant.CreateConstant.HISTORY_CONTROLLER_CONVERTER_PATH;

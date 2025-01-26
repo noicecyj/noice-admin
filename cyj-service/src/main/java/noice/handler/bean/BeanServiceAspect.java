@@ -19,6 +19,10 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Map;
 
+import static noice.common.contants.Constant.PARAM_BASE_DTO_BEAN;
+import static noice.common.contants.Constant.PARAM_LIST_STRING;
+import static noice.common.contants.Constant.PARAM_STRING;
+
 @Aspect
 @Component
 public class BeanServiceAspect {
@@ -175,11 +179,11 @@ public class BeanServiceAspect {
             return null;
         } else if (joinPoint.getArgs().length == 1) {
             if (joinPoint.getArgs()[0] instanceof List<?>) {
-                returnObj.put("param<List<String>>", JSONArray.from(joinPoint.getArgs()[0]));
+                returnObj.put(PARAM_LIST_STRING, JSONArray.from(joinPoint.getArgs()[0]));
             } else if (joinPoint.getArgs()[0] instanceof BaseDtoBean) {
-                returnObj.put("param<BaseDtoBean>", JSONObject.from(joinPoint.getArgs()[0]));
+                returnObj.put(PARAM_BASE_DTO_BEAN, JSONObject.from(joinPoint.getArgs()[0]));
             } else if (joinPoint.getArgs()[0] instanceof String) {
-                returnObj.put("param<String>", joinPoint.getArgs()[0]);
+                returnObj.put(PARAM_STRING, joinPoint.getArgs()[0]);
             }
         }
         return returnObj;

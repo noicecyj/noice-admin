@@ -25,7 +25,25 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static noice.constant.CreateConstant.*;
+import static noice.common.contants.Constant.DATABASE;
+import static noice.constant.CreateConstant.CONTROLLER_ASSEMBLER_PATH;
+import static noice.constant.CreateConstant.CONTROLLER_CONVERTER_PATH;
+import static noice.constant.CreateConstant.CONTROLLER_PATH;
+import static noice.constant.CreateConstant.ENTITY_PATH;
+import static noice.constant.CreateConstant.HISTORY_CONTROLLER_ASSEMBLER_PATH;
+import static noice.constant.CreateConstant.HISTORY_CONTROLLER_CONVERTER_PATH;
+import static noice.constant.CreateConstant.HISTORY_CONTROLLER_PATH;
+import static noice.constant.CreateConstant.HISTORY_ENTITY_PATH;
+import static noice.constant.CreateConstant.HISTORY_MAPPER_PATH;
+import static noice.constant.CreateConstant.HISTORY_REPOSITORY_PATH;
+import static noice.constant.CreateConstant.HISTORY_SERVICE_ASSEMBLER_PATH;
+import static noice.constant.CreateConstant.HISTORY_SERVICE_CONVERTER_PATH;
+import static noice.constant.CreateConstant.HISTORY_SERVICE_PATH;
+import static noice.constant.CreateConstant.MAPPER_PATH;
+import static noice.constant.CreateConstant.REPOSITORY_PATH;
+import static noice.constant.CreateConstant.SERVICE_ASSEMBLER_PATH;
+import static noice.constant.CreateConstant.SERVICE_CONVERTER_PATH;
+import static noice.constant.CreateConstant.SERVICE_PATH;
 
 @Component
 public class ClassRelationFactoryImpl extends ClassFactoryImpl {
