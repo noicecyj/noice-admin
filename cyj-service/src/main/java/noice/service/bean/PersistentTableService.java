@@ -44,7 +44,7 @@ public class PersistentTableService implements BeanService<PersistentTableDto> {
     }
 
     @Override
-    public int addOne(@NotNull PersistentTableDto dto) {
+    public String addOne(@NotNull PersistentTableDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 

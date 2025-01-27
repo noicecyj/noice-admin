@@ -98,7 +98,7 @@ public class UserService implements BeanService<UserDto> {
     }
 
     @Override
-    public int addOne(UserDto dto) {
+    public String addOne(UserDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -174,7 +174,7 @@ public class UserService implements BeanService<UserDto> {
     }
 
     @Override
-    public int addOne(UserDto dto) {
+    public String addOne(UserDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -271,7 +271,7 @@ public class UserService implements BeanService<UserDto> {
     }
 
     @Override
-    public int addOne(UserDto dto) {
+    public String addOne(UserDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -368,7 +368,7 @@ public class UserService implements BeanService<UserDto> {
     }
 
     @Override
-    public int addOne(UserDto dto) {
+    public String addOne(UserDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -466,7 +466,7 @@ public class UserService implements BeanService<UserDto> {
     }
 
     @Override
-    public int addOne(@NotNull UserDto dto) {
+    public String addOne(@NotNull UserDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -570,7 +570,7 @@ public class UserService implements BeanService<UserDto> {
     }
 
     @Override
-    public int addOne(@NotNull UserDto dto) {
+    public String addOne(@NotNull UserDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 

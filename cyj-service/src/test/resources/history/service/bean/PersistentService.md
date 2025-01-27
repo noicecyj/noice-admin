@@ -97,7 +97,7 @@ public class PersistentService implements BeanService<PersistentDto> {
     }
 
     @Override
-    public int addOne(PersistentDto dto) {
+    public String addOne(PersistentDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -247,7 +247,7 @@ public class PersistentService implements BeanService<PersistentDto> {
     }
 
     @Override
-    public int addOne(PersistentDto dto) {
+    public String addOne(PersistentDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -331,7 +331,7 @@ public class PersistentService implements BeanService<PersistentDto> {
     }
 
     @Override
-    public int addOne(PersistentDto dto) {
+    public String addOne(PersistentDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -415,7 +415,7 @@ public class PersistentService implements BeanService<PersistentDto> {
     }
 
     @Override
-    public int addOne(PersistentDto dto) {
+    public String addOne(PersistentDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -501,7 +501,7 @@ public class PersistentService implements BeanService<PersistentDto> {
     }
 
     @Override
-    public int addOne(@NotNull PersistentDto dto) {
+    public String addOne(@NotNull PersistentDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -596,7 +596,7 @@ public class PersistentService implements BeanService<PersistentDto> {
     }
 
     @Override
-    public int addOne(@NotNull PersistentDto dto) {
+    public String addOne(@NotNull PersistentDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 

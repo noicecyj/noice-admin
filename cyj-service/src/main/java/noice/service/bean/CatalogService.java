@@ -44,7 +44,7 @@ public class CatalogService implements BeanService<CatalogDto> {
     }
 
     @Override
-    public int addOne(@NotNull CatalogDto dto) {
+    public String addOne(@NotNull CatalogDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 

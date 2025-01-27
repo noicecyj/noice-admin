@@ -93,7 +93,7 @@ public class CatalogDictionaryService implements BeanService<CatalogDictionaryDt
     }
 
     @Override
-    public int addOne(CatalogDictionaryDto dto) {
+    public String addOne(CatalogDictionaryDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -160,7 +160,7 @@ public class CatalogDictionaryService implements BeanService<CatalogDictionaryDt
     }
 
     @Override
-    public int addOne(CatalogDictionaryDto dto) {
+    public String addOne(CatalogDictionaryDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -244,7 +244,7 @@ public class CatalogDictionaryService implements BeanService<CatalogDictionaryDt
     }
 
     @Override
-    public int addOne(CatalogDictionaryDto dto) {
+    public String addOne(CatalogDictionaryDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -336,7 +336,7 @@ public class CatalogDictionaryService implements BeanService<CatalogDictionaryDt
     }
 
     @Override
-    public int addOne(@NotNull CatalogDictionaryDto dto) {
+    public String addOne(@NotNull CatalogDictionaryDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -425,7 +425,7 @@ public class CatalogDictionaryService implements BeanService<CatalogDictionaryDt
     }
 
     @Override
-    public int addOne(@NotNull CatalogDictionaryDto dto) {
+    public String addOne(@NotNull CatalogDictionaryDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -516,7 +516,7 @@ public class CatalogDictionaryService implements BeanService<CatalogDictionaryDt
     }
 
     @Override
-    public int addOne(@NotNull CatalogDictionaryDto dto) {
+    public String addOne(@NotNull CatalogDictionaryDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 

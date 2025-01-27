@@ -97,7 +97,7 @@ public class AppServiceService implements BeanService<AppServiceDto> {
     }
 
     @Override
-    public int addOne(AppServiceDto dto) {
+    public String addOne(AppServiceDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -164,7 +164,7 @@ public class AppServiceService implements BeanService<AppServiceDto> {
     }
 
     @Override
-    public int addOne(AppServiceDto dto) {
+    public String addOne(AppServiceDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -248,7 +248,7 @@ public class AppServiceService implements BeanService<AppServiceDto> {
     }
 
     @Override
-    public int addOne(AppServiceDto dto) {
+    public String addOne(AppServiceDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -333,7 +333,7 @@ public class AppServiceService implements BeanService<AppServiceDto> {
     }
 
     @Override
-    public int addOne(@NotNull AppServiceDto dto) {
+    public String addOne(@NotNull AppServiceDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -424,7 +424,7 @@ public class AppServiceService implements BeanService<AppServiceDto> {
     }
 
     @Override
-    public int addOne(@NotNull AppServiceDto dto) {
+    public String addOne(@NotNull AppServiceDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 

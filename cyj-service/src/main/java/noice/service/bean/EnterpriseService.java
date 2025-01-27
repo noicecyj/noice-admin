@@ -44,7 +44,7 @@ public class EnterpriseService implements BeanService<EnterpriseDto> {
     }
 
     @Override
-    public int addOne(@NotNull EnterpriseDto dto) {
+    public String addOne(@NotNull EnterpriseDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 

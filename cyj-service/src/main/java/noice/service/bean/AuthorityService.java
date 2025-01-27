@@ -53,7 +53,7 @@ public class AuthorityService implements BeanService<AuthorityDto> {
     }
 
     @Override
-    public int addOne(@NotNull AuthorityDto dto) {
+    public String addOne(@NotNull AuthorityDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 

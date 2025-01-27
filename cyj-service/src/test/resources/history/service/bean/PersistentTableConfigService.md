@@ -81,7 +81,7 @@ public class PersistentTableConfigService implements BeanService<PersistentTable
     }
 
     @Override
-    public int addOne(PersistentTableConfigDto dto) {
+    public String addOne(PersistentTableConfigDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -165,7 +165,7 @@ public class PersistentTableConfigService implements BeanService<PersistentTable
     }
 
     @Override
-    public int addOne(PersistentTableConfigDto dto) {
+    public String addOne(PersistentTableConfigDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -249,7 +249,7 @@ public class PersistentTableConfigService implements BeanService<PersistentTable
     }
 
     @Override
-    public int addOne(PersistentTableConfigDto dto) {
+    public String addOne(PersistentTableConfigDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -334,7 +334,7 @@ public class PersistentTableConfigService implements BeanService<PersistentTable
     }
 
     @Override
-    public int addOne(@NotNull PersistentTableConfigDto dto) {
+    public String addOne(@NotNull PersistentTableConfigDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -425,7 +425,7 @@ public class PersistentTableConfigService implements BeanService<PersistentTable
     }
 
     @Override
-    public int addOne(@NotNull PersistentTableConfigDto dto) {
+    public String addOne(@NotNull PersistentTableConfigDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 

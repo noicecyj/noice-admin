@@ -94,7 +94,7 @@ public class CatalogService implements BeanService<CatalogDto> {
     }
 
     @Override
-    public int addOne(CatalogDto dto) {
+    public String addOne(CatalogDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -161,7 +161,7 @@ public class CatalogService implements BeanService<CatalogDto> {
     }
 
     @Override
-    public int addOne(CatalogDto dto) {
+    public String addOne(CatalogDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -245,7 +245,7 @@ public class CatalogService implements BeanService<CatalogDto> {
     }
 
     @Override
-    public int addOne(CatalogDto dto) {
+    public String addOne(CatalogDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -329,7 +329,7 @@ public class CatalogService implements BeanService<CatalogDto> {
     }
 
     @Override
-    public int addOne(CatalogDto dto) {
+    public String addOne(CatalogDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -414,7 +414,7 @@ public class CatalogService implements BeanService<CatalogDto> {
     }
 
     @Override
-    public int addOne(@NotNull CatalogDto dto) {
+    public String addOne(@NotNull CatalogDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -505,7 +505,7 @@ public class CatalogService implements BeanService<CatalogDto> {
     }
 
     @Override
-    public int addOne(@NotNull CatalogDto dto) {
+    public String addOne(@NotNull CatalogDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 

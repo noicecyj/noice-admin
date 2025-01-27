@@ -44,7 +44,7 @@ public class MenuService implements BeanService<MenuDto> {
     }
 
     @Override
-    public int addOne(@NotNull MenuDto dto) {
+    public String addOne(@NotNull MenuDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 

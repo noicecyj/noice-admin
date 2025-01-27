@@ -44,7 +44,7 @@ public class InterfaceService implements BeanService<InterfaceDto> {
     }
 
     @Override
-    public int addOne(@NotNull InterfaceDto dto) {
+    public String addOne(@NotNull InterfaceDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 

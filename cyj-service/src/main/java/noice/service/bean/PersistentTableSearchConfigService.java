@@ -44,7 +44,7 @@ public class PersistentTableSearchConfigService implements BeanService<Persisten
     }
 
     @Override
-    public int addOne(@NotNull PersistentTableSearchConfigDto dto) {
+    public String addOne(@NotNull PersistentTableSearchConfigDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 

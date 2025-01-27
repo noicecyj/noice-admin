@@ -21,7 +21,7 @@ public interface BeanService<DTO extends BaseDtoBean> {
 
     List<DTO> findList(DTO dto);
 
-    int addOne(DTO dto);
+    String addOne(DTO dto);
 
     int deleteOne(String id);
 

@@ -62,7 +62,7 @@ public class RoleService implements BeanService<RoleDto> {
     }
 
     @Override
-    public int addOne(@NotNull RoleDto dto) {
+    public String addOne(@NotNull RoleDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 

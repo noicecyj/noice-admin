@@ -44,7 +44,7 @@ public class PersistentPropertyService implements BeanService<PersistentProperty
     }
 
     @Override
-    public int addOne(@NotNull PersistentPropertyDto dto) {
+    public String addOne(@NotNull PersistentPropertyDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 

@@ -82,7 +82,7 @@ public class SqlService implements BeanService<SqlDto> {
     }
 
     @Override
-    public int addOne(SqlDto dto) {
+    public String addOne(SqlDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -166,7 +166,7 @@ public class SqlService implements BeanService<SqlDto> {
     }
 
     @Override
-    public int addOne(SqlDto dto) {
+    public String addOne(SqlDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -250,7 +250,7 @@ public class SqlService implements BeanService<SqlDto> {
     }
 
     @Override
-    public int addOne(SqlDto dto) {
+    public String addOne(SqlDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -335,7 +335,7 @@ public class SqlService implements BeanService<SqlDto> {
     }
 
     @Override
-    public int addOne(@NotNull SqlDto dto) {
+    public String addOne(@NotNull SqlDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -426,7 +426,7 @@ public class SqlService implements BeanService<SqlDto> {
     }
 
     @Override
-    public int addOne(@NotNull SqlDto dto) {
+    public String addOne(@NotNull SqlDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 

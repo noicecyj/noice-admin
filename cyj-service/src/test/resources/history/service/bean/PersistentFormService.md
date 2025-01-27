@@ -82,7 +82,7 @@ public class PersistentFormService implements BeanService<PersistentFormDto> {
     }
 
     @Override
-    public int addOne(PersistentFormDto dto) {
+    public String addOne(PersistentFormDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -166,7 +166,7 @@ public class PersistentFormService implements BeanService<PersistentFormDto> {
     }
 
     @Override
-    public int addOne(PersistentFormDto dto) {
+    public String addOne(PersistentFormDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -250,7 +250,7 @@ public class PersistentFormService implements BeanService<PersistentFormDto> {
     }
 
     @Override
-    public int addOne(PersistentFormDto dto) {
+    public String addOne(PersistentFormDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -335,7 +335,7 @@ public class PersistentFormService implements BeanService<PersistentFormDto> {
     }
 
     @Override
-    public int addOne(@NotNull PersistentFormDto dto) {
+    public String addOne(@NotNull PersistentFormDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -426,7 +426,7 @@ public class PersistentFormService implements BeanService<PersistentFormDto> {
     }
 
     @Override
-    public int addOne(@NotNull PersistentFormDto dto) {
+    public String addOne(@NotNull PersistentFormDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 

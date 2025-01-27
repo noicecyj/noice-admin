@@ -82,7 +82,7 @@ public class WorkFlowService implements BeanService<WorkFlowDto> {
     }
 
     @Override
-    public int addOne(WorkFlowDto dto) {
+    public String addOne(WorkFlowDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -166,7 +166,7 @@ public class WorkFlowService implements BeanService<WorkFlowDto> {
     }
 
     @Override
-    public int addOne(WorkFlowDto dto) {
+    public String addOne(WorkFlowDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -250,7 +250,7 @@ public class WorkFlowService implements BeanService<WorkFlowDto> {
     }
 
     @Override
-    public int addOne(WorkFlowDto dto) {
+    public String addOne(WorkFlowDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -335,7 +335,7 @@ public class WorkFlowService implements BeanService<WorkFlowDto> {
     }
 
     @Override
-    public int addOne(@NotNull WorkFlowDto dto) {
+    public String addOne(@NotNull WorkFlowDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
@@ -426,7 +426,7 @@ public class WorkFlowService implements BeanService<WorkFlowDto> {
     }
 
     @Override
-    public int addOne(@NotNull WorkFlowDto dto) {
+    public String addOne(@NotNull WorkFlowDto dto) {
         return repository.add(converter.dtoToPo(dto));
     }
 
