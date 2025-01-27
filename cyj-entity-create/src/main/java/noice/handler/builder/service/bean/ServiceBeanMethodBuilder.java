@@ -235,7 +235,7 @@ public class ServiceBeanMethodBuilder extends MethodBase {
         public ServiceBeanAddBuilder builder(PersistentPo persistentPo) {
             String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
             this.setMethodStatement(StatementEnum.PUBLIC);
-            this.setMethodReturnType("int");
+            this.setMethodReturnType("String");
             this.setMethodAnnotationList();
             this.setMethodName("addOne");
             this.setMethodParamSet(poName);
@@ -276,7 +276,7 @@ public class ServiceBeanMethodBuilder extends MethodBase {
 
         public ServiceBeanDeleteBuilder builder() {
             this.setMethodStatement(StatementEnum.PUBLIC);
-            this.setMethodReturnType("int");
+            this.setMethodReturnType("String");
             this.setMethodAnnotationList();
             this.setMethodName("deleteOne");
             this.setMethodParamSet();

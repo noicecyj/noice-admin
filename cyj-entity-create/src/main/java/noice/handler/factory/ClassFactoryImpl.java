@@ -256,8 +256,8 @@ public abstract class ClassFactoryImpl implements ClassFactory {
             authorityPo.setUpdatedBy("123123");
             authorityPo.setSortCode(1L);
             authorityPo.setStatus(true);
-            int authorityAdd = authorityRepository.add(authorityPo);
-            if (authorityAdd == 1) {
+            String authorityAdd = authorityRepository.add(authorityPo);
+            if (StrUtil.isNotEmpty(authorityAdd)) {
                 logger.info("{}:权限添加成功", tagName);
             } else {
                 logger.info("{}:权限添加失败", tagName);
@@ -302,8 +302,8 @@ public abstract class ClassFactoryImpl implements ClassFactory {
             persistentFormPo.setUpdatedBy("123123");
             persistentFormPo.setSortCode(1L);
             persistentFormPo.setStatus(true);
-            int persistentFormAdd = persistentFormRepository.add(persistentFormPo);
-            if (persistentFormAdd == 1) {
+            String persistentFormAdd = persistentFormRepository.add(persistentFormPo);
+            if (StrUtil.isNotEmpty(persistentFormAdd)) {
                 logger.info("{}:表单添加成功", tagName);
             } else {
                 logger.info("{}:表单添加失败", tagName);
@@ -346,8 +346,8 @@ public abstract class ClassFactoryImpl implements ClassFactory {
             persistentFormConfigPo.setUpdatedBy("123123");
             persistentFormConfigPo.setSortCode(1L);
             persistentFormConfigPo.setStatus(true);
-            int add = persistentFormConfigRepository.add(persistentFormConfigPo);
-            if (add == 1) {
+            String add = persistentFormConfigRepository.add(persistentFormConfigPo);
+            if (StrUtil.isNotEmpty(add)) {
                 logger.info("{}:表单字段添加成功", tagName);
             } else {
                 logger.info("{}:表单字段添加失败", tagName);
@@ -398,8 +398,8 @@ public abstract class ClassFactoryImpl implements ClassFactory {
             persistentTablePo.setUpdatedBy("123123");
             persistentTablePo.setSortCode(1L);
             persistentTablePo.setStatus(true);
-            int PersistentTableAdd = persistentTableRepository.add(persistentTablePo);
-            if (PersistentTableAdd == 1) {
+            String PersistentTableAdd = persistentTableRepository.add(persistentTablePo);
+            if (StrUtil.isNotEmpty(PersistentTableAdd)) {
                 logger.info("{}:表格添加成功", tagName);
             } else {
                 logger.info("{}:表格添加失败", tagName);
@@ -440,8 +440,8 @@ public abstract class ClassFactoryImpl implements ClassFactory {
             persistentTableConfigPo.setUpdatedBy("123123");
             persistentTableConfigPo.setSortCode(1L);
             persistentTableConfigPo.setStatus(true);
-            int add = persistentTableConfigRepository.add(persistentTableConfigPo);
-            if (add == 1) {
+            String add = persistentTableConfigRepository.add(persistentTableConfigPo);
+            if (StrUtil.isNotEmpty(add)) {
                 logger.info("{}:表格字段添加成功", tagName);
             } else {
                 logger.info("{}:表格字段添加失败", tagName);
@@ -532,8 +532,8 @@ public abstract class ClassFactoryImpl implements ClassFactory {
             interfacePo.setUpdatedBy("123123");
             interfacePo.setSortCode(1L);
             interfacePo.setStatus(true);
-            int add = interfaceRepository.add(interfacePo);
-            if (add == 1) {
+            String add = interfaceRepository.add(interfacePo);
+            if (StrUtil.isNotEmpty(add)) {
                 logger.info("{}:接口添加成功", name);
             } else {
                 logger.info("{}:接口添加失败", name);
@@ -584,15 +584,15 @@ public abstract class ClassFactoryImpl implements ClassFactory {
             menuPo.setUpdatedBy("123123");
             menuPo.setSortCode(1L);
             menuPo.setStatus(true);
-            int menuAdd = getMenuRepository().add(menuPo);
-            if (menuAdd == 1) {
-                logger.info(tagName + ":菜单添加成功");
+            String menuAdd = getMenuRepository().add(menuPo);
+            if (StrUtil.isNotEmpty(menuAdd)) {
+                logger.info("{}:菜单添加成功", tagName);
             } else {
-                logger.info(tagName + ":菜单添加失败");
+                logger.info("{}:菜单添加失败", tagName);
                 return null;
             }
         } else {
-            logger.info(tagName + ":菜单已存在");
+            logger.info("{}:菜单已存在", tagName);
         }
         return menuPo.getId();
     }

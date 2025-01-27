@@ -187,11 +187,12 @@ public class RepositoryBeanMethodBuilder extends MethodBase {
 
             public RepositoryBeanDeleteByIdBuilder builder() {
                 this.setMethodStatement(StatementEnum.PUBLIC);
-                this.setMethodReturnType("int");
+                this.setMethodReturnType("String");
                 this.setMethodAnnotationList();
+                this.setMethodBody();
                 this.setMethodName("delete");
                 this.setMethodParamSet();
-                this.setMethodReturnBody("return mapper.deleteById(id);");
+                this.setMethodReturnBody("return delete == 0 ? null : id;");
                 return this;
             }
 
@@ -199,6 +200,12 @@ public class RepositoryBeanMethodBuilder extends MethodBase {
                 List<String> methodParamSet = new ArrayList<>();
                 methodParamSet.add("String id");
                 super.setMethodParamSet(methodParamSet);
+            }
+
+            public void setMethodBody() {
+                List<String> methodBodyList = new ArrayList<>();
+                methodBodyList.add("int delete = mapper.deleteById(id);");
+                super.setMethodBody(methodBodyList);
             }
 
             public void setMethodAnnotationList() {
@@ -209,7 +216,17 @@ public class RepositoryBeanMethodBuilder extends MethodBase {
 
             @Override
             public String toString() {
-                return getString(getMethodAnnotationList(), getMethodStatement(), getMethodReturnType(), getMethodName(), getMethodParamSet(), getMethodReturnBody());
+                StringBuilder sb = new StringBuilder();
+                for (String methodAnnotation : getMethodAnnotationList()) {
+                    sb.append("    ").append(methodAnnotation).append("\n");
+                }
+                sb.append("    ").append(getMethodStatement().getStatement()).append(" ").append(getMethodReturnType()).append(" ").append(getMethodName()).append("(").append(String.join(", ", getMethodParamSet())).append(") {\n");
+                for (String methodBody : getMethodBody()) {
+                    sb.append("        ").append(methodBody).append("\n");
+                }
+                sb.append("        ").append(getMethodReturnBody()).append("\n");
+                sb.append("    }");
+                return sb.toString();
             }
 
         }
