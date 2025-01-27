@@ -150,16 +150,16 @@ public class PersistentServiceAspect implements BeanServiceAspectInterface {
                 .find(new PersistentFormPo().eqPersistentId(persistentDto.getId())
                         .eqPersistentFormType(DEFAULT_FORM).getQueryWrapper());
         if (persistentFormPo != null) {
-            int formDelete = persistentFormRepository.delete(persistentFormPo.getId());
-            if (formDelete > 0) {
+            String formDelete = persistentFormRepository.delete(persistentFormPo.getId());
+            if (StrUtil.isNotEmpty(formDelete)) {
                 logger.info("formDelete:{}", persistentFormPo);
             }
         }
         PersistentTablePo persistentTablePo = persistentTableRepository.find(new PersistentTablePo()
                 .eqPersistentId(persistentDto.getId()).getQueryWrapper());
         if (persistentTablePo != null) {
-            int tableDelete = persistentTableRepository.delete(persistentTablePo.getId());
-            if (tableDelete > 0) {
+            String tableDelete = persistentTableRepository.delete(persistentTablePo.getId());
+            if (StrUtil.isNotEmpty(tableDelete)) {
                 logger.info("tableDelete:{}", persistentTablePo);
             }
         }
