@@ -49,20 +49,20 @@ create table if not exists data_user.t_persistent_property
         comment '状态',
     created_date
         timestamp default CURRENT_TIMESTAMP
-        null
+        not null
         comment '创建时间',
     created_by
         varchar(255)
-        null
+        not null
         comment '创建人',
     updated_date
         timestamp default CURRENT_TIMESTAMP
-        null
+        not null
         on update CURRENT_TIMESTAMP
         comment '更新时间',
     updated_by
         varchar(255)
-        null
+        not null
         comment '更新人'
 )
     comment '实体属性';
