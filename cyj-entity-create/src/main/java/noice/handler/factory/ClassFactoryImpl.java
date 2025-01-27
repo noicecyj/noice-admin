@@ -197,9 +197,11 @@ public abstract class ClassFactoryImpl implements ClassFactory {
     }
 
     public List<PersistentPo> findOtoNById(String id) {
-        List<PersistentPropertyPo> propertyList = persistentPropertyRepository.findList(new PersistentPropertyPo().eqRelationPersistentId(id).orderByPersistentPropertyCodeAsc().getQueryWrapper());
+        List<PersistentPropertyPo> propertyList = persistentPropertyRepository.findList(new PersistentPropertyPo().eqRelationPersistentId(id)
+                .orderByPersistentPropertyCodeAsc().getQueryWrapper());
         //查询一对多关系
-        return propertyList.stream().map(persistentPropertyPo -> persistentRepository.find(persistentPropertyPo.getPersistentId())).collect(Collectors.toList());
+        return propertyList.stream().map(persistentPropertyPo -> persistentRepository.find(persistentPropertyPo.getPersistentId()))
+                .filter(persistentPo -> "Bean".equals(persistentPo.getPersistentType())).collect(Collectors.toList());
     }
 
     public List<PersistentPropertyPo> findByPersistentId(String id) {
