@@ -7,14 +7,12 @@ import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.PersistentServiceConverter;
 import noice.entity.dto.bean.PersistentDto;
 import noice.entity.po.bean.InterfacePo;
-import noice.entity.po.bean.PersistentPo;
 import noice.entity.po.bean.PersistentTablePo;
 import noice.entity.po.bean.PersistentFormPo;
 import noice.entity.po.bean.PersistentPropertyPo;
 import noice.handler.bean.BeanService;
 import noice.repository.bean.PersistentRepository;
 import noice.repository.bean.InterfaceRepository;
-import noice.repository.bean.PersistentRepository;
 import noice.repository.bean.PersistentTableRepository;
 import noice.repository.bean.PersistentFormRepository;
 import noice.repository.bean.PersistentPropertyRepository;
@@ -39,8 +37,6 @@ public class PersistentService implements BeanService<PersistentDto> {
     private PersistentServiceAssembler assembler;
 
     private InterfaceRepository interfaceRepository;
-
-    private PersistentRepository persistentRepository;
 
     private PersistentTableRepository persistentTableRepository;
 
@@ -69,11 +65,6 @@ public class PersistentService implements BeanService<PersistentDto> {
     }
 
     @Autowired
-    public void setPersistentRepository(PersistentRepository persistentRepository) {
-        this.persistentRepository = persistentRepository;
-    }
-
-    @Autowired
     public void setPersistentTableRepository(PersistentTableRepository persistentTableRepository) {
         this.persistentTableRepository = persistentTableRepository;
     }
@@ -96,7 +87,6 @@ public class PersistentService implements BeanService<PersistentDto> {
     @Override
     public String deleteOne(String id) {
         interfaceRepository.findList(new InterfacePo().eqPersistentId(id).getQueryWrapper()).forEach(po -> interfaceRepository.update(po.eqPersistentId(null)));
-        persistentRepository.findList(new PersistentPo().eqPersistentId(id).getQueryWrapper()).forEach(po -> persistentRepository.update(po.eqPersistentId(null)));
         persistentTableRepository.findList(new PersistentTablePo().eqPersistentId(id).getQueryWrapper()).forEach(po -> persistentTableRepository.update(po.eqPersistentId(null)));
         persistentFormRepository.findList(new PersistentFormPo().eqPersistentId(id).getQueryWrapper()).forEach(po -> persistentFormRepository.update(po.eqPersistentId(null)));
         persistentPropertyRepository.findList(new PersistentPropertyPo().eqPersistentId(id).getQueryWrapper()).forEach(po -> persistentPropertyRepository.update(po.eqPersistentId(null)));
