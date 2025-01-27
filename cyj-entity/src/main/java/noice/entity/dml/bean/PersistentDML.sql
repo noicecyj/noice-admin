@@ -9,19 +9,23 @@ create table if not exists data_user.t_persistent
         primary key,
     app_service_id
         varchar(36)
-        not null
+        null
         comment '服务id',
+    persistent_cascade
+        tinyint(1)
+        null
+        comment '实体是否级联删除',
     persistent_code
         varchar(255)
-        null
+        not null
         comment '实体编码',
     persistent_id
         varchar(36)
-        not null
+        null
         comment '实体id',
     persistent_name
         varchar(255)
-        null
+        not null
         comment '实体名称',
     persistent_type
         varchar(255)
@@ -37,20 +41,20 @@ create table if not exists data_user.t_persistent
         comment '状态',
     created_date
         timestamp default CURRENT_TIMESTAMP
-        not null
+        null
         comment '创建时间',
     created_by
         varchar(255)
-        not null
+        null
         comment '创建人',
     updated_date
         timestamp default CURRENT_TIMESTAMP
-        not null
+        null
         on update CURRENT_TIMESTAMP
         comment '更新时间',
     updated_by
         varchar(255)
-        not null
+        null
         comment '更新人'
 )
     comment '实体';
@@ -69,6 +73,21 @@ ALTER TABLE data_user.t_persistent
         varchar(36)
         not null
         comment '服务id';
+
+ALTER TABLE data_user.t_persistent
+    DROP persistent_cascade;
+
+ALTER TABLE data_user.t_persistent
+    ADD persistent_cascade
+        tinyint(1)
+        not null
+        comment '实体是否级联删除';
+
+ALTER TABLE data_user.t_persistent
+    MODIFY persistent_cascade
+        tinyint(1)
+        not null
+        comment '实体是否级联删除';
 
 ALTER TABLE data_user.t_persistent
     DROP persistent_code;
@@ -121,12 +140,12 @@ ALTER TABLE data_user.t_persistent
 ALTER TABLE data_user.t_persistent
     ADD persistent_type
         varchar(255)
-        null
+        not null
         comment '实体类型';
 
 ALTER TABLE data_user.t_persistent
     MODIFY persistent_type
         varchar(255)
-        null
+        not null
         comment '实体类型';
 

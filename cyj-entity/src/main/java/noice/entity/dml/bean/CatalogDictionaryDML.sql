@@ -9,15 +9,15 @@ create table if not exists data_user.t_catalog_dictionary
         primary key,
     catalog_dictionary_code
         varchar(255)
-        null
+        not null
         comment '字典编码',
     catalog_dictionary_name
         varchar(255)
-        null
+        not null
         comment '字典名称',
     catalog_id
         varchar(36)
-        not null
+        null
         comment '目录id',
     sort_code
         int default 1
@@ -29,20 +29,20 @@ create table if not exists data_user.t_catalog_dictionary
         comment '状态',
     created_date
         timestamp default CURRENT_TIMESTAMP
-        not null
+        null
         comment '创建时间',
     created_by
         varchar(255)
-        not null
+        null
         comment '创建人',
     updated_date
         timestamp default CURRENT_TIMESTAMP
-        not null
+        null
         on update CURRENT_TIMESTAMP
         comment '更新时间',
     updated_by
         varchar(255)
-        not null
+        null
         comment '更新人'
 )
     comment '目录字典';

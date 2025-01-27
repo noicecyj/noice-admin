@@ -6,9 +6,19 @@ import noice.assembler.bean.AuthorityServiceAssembler;
 import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.AuthorityServiceConverter;
 import noice.entity.dto.bean.AuthorityDto;
+import noice.entity.po.bean.PersistentTableSearchConfigPo;
+import noice.entity.po.bean.PersistentFormConfigPo;
+import noice.entity.po.bean.MenuPo;
+import noice.entity.po.bean.InterfacePo;
+import noice.entity.po.bean.PersistentTableConfigPo;
 import noice.entity.po.relation.RoleAuthorityPo;
 import noice.handler.bean.BeanService;
 import noice.repository.bean.AuthorityRepository;
+import noice.repository.bean.PersistentTableSearchConfigRepository;
+import noice.repository.bean.PersistentFormConfigRepository;
+import noice.repository.bean.MenuRepository;
+import noice.repository.bean.InterfaceRepository;
+import noice.repository.bean.PersistentTableConfigRepository;
 import noice.repository.relation.RoleAuthorityRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +40,16 @@ public class AuthorityService implements BeanService<AuthorityDto> {
 
     private AuthorityServiceAssembler assembler;
 
+    private PersistentTableSearchConfigRepository persistentTableSearchConfigRepository;
+
+    private PersistentFormConfigRepository persistentFormConfigRepository;
+
+    private MenuRepository menuRepository;
+
+    private InterfaceRepository interfaceRepository;
+
+    private PersistentTableConfigRepository persistentTableConfigRepository;
+
     private RoleAuthorityRepository roleAuthorityRepository;
 
     @Autowired
@@ -48,6 +68,31 @@ public class AuthorityService implements BeanService<AuthorityDto> {
     }
 
     @Autowired
+    public void setPersistentTableSearchConfigRepository(PersistentTableSearchConfigRepository persistentTableSearchConfigRepository) {
+        this.persistentTableSearchConfigRepository = persistentTableSearchConfigRepository;
+    }
+
+    @Autowired
+    public void setPersistentFormConfigRepository(PersistentFormConfigRepository persistentFormConfigRepository) {
+        this.persistentFormConfigRepository = persistentFormConfigRepository;
+    }
+
+    @Autowired
+    public void setMenuRepository(MenuRepository menuRepository) {
+        this.menuRepository = menuRepository;
+    }
+
+    @Autowired
+    public void setInterfaceRepository(InterfaceRepository interfaceRepository) {
+        this.interfaceRepository = interfaceRepository;
+    }
+
+    @Autowired
+    public void setPersistentTableConfigRepository(PersistentTableConfigRepository persistentTableConfigRepository) {
+        this.persistentTableConfigRepository = persistentTableConfigRepository;
+    }
+
+    @Autowired
     public void setRoleAuthorityRepository(RoleAuthorityRepository roleAuthorityRepository) {
         this.roleAuthorityRepository = roleAuthorityRepository;
     }
@@ -59,6 +104,11 @@ public class AuthorityService implements BeanService<AuthorityDto> {
 
     @Override
     public String deleteOne(String id) {
+        persistentTableSearchConfigRepository.findList(new PersistentTableSearchConfigPo().eqAuthorityId(id).getQueryWrapper()).forEach(po -> persistentTableSearchConfigRepository.update(po.eqAuthorityId(null)));
+        persistentFormConfigRepository.findList(new PersistentFormConfigPo().eqAuthorityId(id).getQueryWrapper()).forEach(po -> persistentFormConfigRepository.update(po.eqAuthorityId(null)));
+        menuRepository.findList(new MenuPo().eqAuthorityId(id).getQueryWrapper()).forEach(po -> menuRepository.update(po.eqAuthorityId(null)));
+        interfaceRepository.findList(new InterfacePo().eqAuthorityId(id).getQueryWrapper()).forEach(po -> interfaceRepository.update(po.eqAuthorityId(null)));
+        persistentTableConfigRepository.findList(new PersistentTableConfigPo().eqAuthorityId(id).getQueryWrapper()).forEach(po -> persistentTableConfigRepository.update(po.eqAuthorityId(null)));
         return repository.delete(id);
     }
 

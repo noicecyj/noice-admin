@@ -9,11 +9,11 @@ create table if not exists data_user.t_authority
         primary key,
     authority_code
         varchar(255)
-        null
+        not null
         comment '权限编码',
     authority_name
         varchar(255)
-        null
+        not null
         comment '权限名称',
     authority_type
         varchar(255)
@@ -29,20 +29,20 @@ create table if not exists data_user.t_authority
         comment '状态',
     created_date
         timestamp default CURRENT_TIMESTAMP
-        not null
+        null
         comment '创建时间',
     created_by
         varchar(255)
-        not null
+        null
         comment '创建人',
     updated_date
         timestamp default CURRENT_TIMESTAMP
-        not null
+        null
         on update CURRENT_TIMESTAMP
         comment '更新时间',
     updated_by
         varchar(255)
-        not null
+        null
         comment '更新人'
 )
     comment '权限';
@@ -83,12 +83,12 @@ ALTER TABLE data_user.t_authority
 ALTER TABLE data_user.t_authority
     ADD authority_type
         varchar(255)
-        null
+        not null
         comment '权限类型';
 
 ALTER TABLE data_user.t_authority
     MODIFY authority_type
         varchar(255)
-        null
+        not null
         comment '权限类型';
 

@@ -29,6 +29,9 @@ public class PersistentPo extends BasePoBean<PersistentPo> {
     @TableField("app_service_id")
     private String appServiceId;
 
+    @TableField("persistent_cascade")
+    private boolean persistentCascade;
+
     @TableField("persistent_code")
     private String persistentCode;
 
@@ -78,6 +81,22 @@ public class PersistentPo extends BasePoBean<PersistentPo> {
 
     public PersistentPo orderByAppServiceId(boolean isAsc) {
         this.queryWrapper.lambda().orderBy(true, isAsc, PersistentPo::getAppServiceId);
+        return this;
+    }
+
+    public PersistentPo selectPersistentCascade() {
+        this.queryWrapper.lambda().select(PersistentPo::isPersistentCascade);
+        return this;
+    }
+
+    public PersistentPo eqPersistentCascade() {
+        this.queryWrapper.lambda().eq(PersistentPo::isPersistentCascade, isPersistentCascade());
+        return this;
+    }
+
+    public PersistentPo eqPersistentCascade(boolean value) {
+        this.setPersistentCascade(value);
+        this.queryWrapper.lambda().eq(PersistentPo::isPersistentCascade, isPersistentCascade());
         return this;
     }
 
@@ -359,7 +378,7 @@ public class PersistentPo extends BasePoBean<PersistentPo> {
     }
 
     public PersistentPo eqAuto() {
-        return this.eqAppServiceId().eqPersistentCode().eqPersistentId().eqPersistentName().eqPersistentType();
+        return this.eqAppServiceId().eqPersistentCascade().eqPersistentCode().eqPersistentId().eqPersistentName().eqPersistentType();
     }
 
     public PersistentPo likeAuto() {

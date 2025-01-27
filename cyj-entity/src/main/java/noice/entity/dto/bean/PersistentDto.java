@@ -6,6 +6,7 @@ import noice.entity.po.bean.AppServicePo;
 import noice.entity.po.bean.PersistentPo;
 import noice.handler.dto.BaseDtoBean;
 
+
 /**
  * @author Noice
  */
@@ -18,6 +19,8 @@ public class PersistentDto extends BaseDtoBean {
     private String appServiceId;
 
     private AppServicePo appServicePo;
+
+    private boolean persistentCascade;
 
     private String persistentCode;
 

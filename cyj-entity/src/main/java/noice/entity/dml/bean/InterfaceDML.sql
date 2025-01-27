@@ -9,15 +9,15 @@ create table if not exists data_user.t_interface
         primary key,
     authority_id
         varchar(36)
-        not null
+        null
         comment '权限id',
     interface_code
         varchar(255)
-        null
+        not null
         comment '接口编码',
     interface_name
         varchar(255)
-        null
+        not null
         comment '接口名称',
     interface_path
         varchar(255)
@@ -29,7 +29,7 @@ create table if not exists data_user.t_interface
         comment '接口类型',
     persistent_id
         varchar(36)
-        not null
+        null
         comment '实体id',
     sort_code
         int default 1
@@ -41,20 +41,20 @@ create table if not exists data_user.t_interface
         comment '状态',
     created_date
         timestamp default CURRENT_TIMESTAMP
-        not null
+        null
         comment '创建时间',
     created_by
         varchar(255)
-        not null
+        null
         comment '创建人',
     updated_date
         timestamp default CURRENT_TIMESTAMP
-        not null
+        null
         on update CURRENT_TIMESTAMP
         comment '更新时间',
     updated_by
         varchar(255)
-        not null
+        null
         comment '更新人'
 )
     comment '接口';
@@ -110,13 +110,13 @@ ALTER TABLE data_user.t_interface
 ALTER TABLE data_user.t_interface
     ADD interface_path
         varchar(255)
-        null
+        not null
         comment '接口路径';
 
 ALTER TABLE data_user.t_interface
     MODIFY interface_path
         varchar(255)
-        null
+        not null
         comment '接口路径';
 
 ALTER TABLE data_user.t_interface
@@ -125,13 +125,13 @@ ALTER TABLE data_user.t_interface
 ALTER TABLE data_user.t_interface
     ADD interface_type
         varchar(255)
-        null
+        not null
         comment '接口类型';
 
 ALTER TABLE data_user.t_interface
     MODIFY interface_type
         varchar(255)
-        null
+        not null
         comment '接口类型';
 
 ALTER TABLE data_user.t_interface

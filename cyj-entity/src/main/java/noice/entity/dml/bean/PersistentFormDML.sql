@@ -9,11 +9,11 @@ create table if not exists data_user.t_persistent_form
         primary key,
     persistent_form_code
         varchar(255)
-        null
+        not null
         comment '实体表单编码',
     persistent_form_name
         varchar(255)
-        null
+        not null
         comment '实体表单名称',
     persistent_form_row
         int
@@ -25,7 +25,7 @@ create table if not exists data_user.t_persistent_form
         comment '实体表单类型',
     persistent_id
         varchar(36)
-        not null
+        null
         comment '实体id',
     sort_code
         int default 1
@@ -37,20 +37,20 @@ create table if not exists data_user.t_persistent_form
         comment '状态',
     created_date
         timestamp default CURRENT_TIMESTAMP
-        not null
+        null
         comment '创建时间',
     created_by
         varchar(255)
-        not null
+        null
         comment '创建人',
     updated_date
         timestamp default CURRENT_TIMESTAMP
-        not null
+        null
         on update CURRENT_TIMESTAMP
         comment '更新时间',
     updated_by
         varchar(255)
-        not null
+        null
         comment '更新人'
 )
     comment '实体表单';
@@ -91,13 +91,13 @@ ALTER TABLE data_user.t_persistent_form
 ALTER TABLE data_user.t_persistent_form
     ADD persistent_form_row
         int
-        null
+        not null
         comment '实体表单列数';
 
 ALTER TABLE data_user.t_persistent_form
     MODIFY persistent_form_row
         int
-        null
+        not null
         comment '实体表单列数';
 
 ALTER TABLE data_user.t_persistent_form
@@ -106,13 +106,13 @@ ALTER TABLE data_user.t_persistent_form
 ALTER TABLE data_user.t_persistent_form
     ADD persistent_form_type
         varchar(255)
-        null
+        not null
         comment '实体表单类型';
 
 ALTER TABLE data_user.t_persistent_form
     MODIFY persistent_form_type
         varchar(255)
-        null
+        not null
         comment '实体表单类型';
 
 ALTER TABLE data_user.t_persistent_form

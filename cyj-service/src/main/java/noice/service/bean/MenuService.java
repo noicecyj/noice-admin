@@ -6,7 +6,9 @@ import noice.assembler.bean.MenuServiceAssembler;
 import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.MenuServiceConverter;
 import noice.entity.dto.bean.MenuDto;
+import noice.entity.po.bean.MenuPo;
 import noice.handler.bean.BeanService;
+import noice.repository.bean.MenuRepository;
 import noice.repository.bean.MenuRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,8 @@ public class MenuService implements BeanService<MenuDto> {
 
     private MenuServiceAssembler assembler;
 
+    private MenuRepository menuRepository;
+
     @Autowired
     public void setRepository(MenuRepository repository) {
         this.repository = repository;
@@ -43,6 +47,11 @@ public class MenuService implements BeanService<MenuDto> {
         this.assembler = assembler;
     }
 
+    @Autowired
+    public void setMenuRepository(MenuRepository menuRepository) {
+        this.menuRepository = menuRepository;
+    }
+
     @Override
     public String addOne(@NotNull MenuDto dto) {
         return repository.add(converter.dtoToPo(dto));
@@ -50,6 +59,7 @@ public class MenuService implements BeanService<MenuDto> {
 
     @Override
     public String deleteOne(String id) {
+        menuRepository.findList(new MenuPo().eqMenuId(id).getQueryWrapper()).forEach(po -> menuRepository.update(po.eqMenuId(null)));
         return repository.delete(id);
     }
 

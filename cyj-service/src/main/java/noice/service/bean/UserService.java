@@ -59,7 +59,6 @@ public class UserService implements BeanService<UserDto> {
 
     @Override
     public String deleteOne(String id) {
-//        userRoleRepository.delete(new UserRolePo().eqUserId(id).getQueryWrapper());
         return repository.delete(id);
     }
 

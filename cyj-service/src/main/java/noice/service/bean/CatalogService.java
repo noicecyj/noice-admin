@@ -6,8 +6,10 @@ import noice.assembler.bean.CatalogServiceAssembler;
 import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.CatalogServiceConverter;
 import noice.entity.dto.bean.CatalogDto;
+import noice.entity.po.bean.CatalogDictionaryPo;
 import noice.handler.bean.BeanService;
 import noice.repository.bean.CatalogRepository;
+import noice.repository.bean.CatalogDictionaryRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,8 @@ public class CatalogService implements BeanService<CatalogDto> {
 
     private CatalogServiceAssembler assembler;
 
+    private CatalogDictionaryRepository catalogDictionaryRepository;
+
     @Autowired
     public void setRepository(CatalogRepository repository) {
         this.repository = repository;
@@ -43,6 +47,11 @@ public class CatalogService implements BeanService<CatalogDto> {
         this.assembler = assembler;
     }
 
+    @Autowired
+    public void setCatalogDictionaryRepository(CatalogDictionaryRepository catalogDictionaryRepository) {
+        this.catalogDictionaryRepository = catalogDictionaryRepository;
+    }
+
     @Override
     public String addOne(@NotNull CatalogDto dto) {
         return repository.add(converter.dtoToPo(dto));
@@ -50,6 +59,7 @@ public class CatalogService implements BeanService<CatalogDto> {
 
     @Override
     public String deleteOne(String id) {
+        catalogDictionaryRepository.findList(new CatalogDictionaryPo().eqCatalogId(id).getQueryWrapper()).forEach(po -> catalogDictionaryRepository.update(po.eqCatalogId(null)));
         return repository.delete(id);
     }
 

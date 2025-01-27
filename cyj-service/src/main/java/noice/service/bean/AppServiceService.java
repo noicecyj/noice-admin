@@ -59,7 +59,7 @@ public class AppServiceService implements BeanService<AppServiceDto> {
 
     @Override
     public String deleteOne(String id) {
-        persistentRepository.findList(new PersistentPo().eqAppServiceId(id).getQueryWrapper()).forEach(persistentPo -> persistentRepository.update(persistentPo.eqAppServiceId(null)));
+        persistentRepository.findList(new PersistentPo().eqAppServiceId(id).getQueryWrapper()).forEach(po -> persistentRepository.update(po.eqAppServiceId(null)));
         return repository.delete(id);
     }
 

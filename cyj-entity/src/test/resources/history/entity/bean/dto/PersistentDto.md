@@ -421,3 +421,40 @@ public class PersistentDto extends BaseDtoBean {
 
 }
 ```
+## 2025-01-27 22:13:52 noice 作者大大 曹元杰 天才 笔记本
+
+```java
+package noice.entity.dto.bean;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import noice.entity.po.bean.AppServicePo;
+import noice.entity.po.bean.PersistentPo;
+import noice.handler.dto.BaseDtoBean;
+
+/**
+ * @author Noice
+ */
+@EqualsAndHashCode(callSuper = true)
+@Data
+public class PersistentDto extends BaseDtoBean {
+
+    public static final String DTO = "Persistent";
+
+    private String appServiceId;
+
+    private AppServicePo appServicePo;
+
+    private String persistentCode;
+
+    private String persistentId;
+
+    private PersistentPo persistentPo;
+
+    private String persistentName;
+
+    private String persistentType;
+
+}
+```
+

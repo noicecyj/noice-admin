@@ -6,8 +6,12 @@ import noice.assembler.bean.PersistentTableServiceAssembler;
 import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.PersistentTableServiceConverter;
 import noice.entity.dto.bean.PersistentTableDto;
+import noice.entity.po.bean.PersistentTableConfigPo;
+import noice.entity.po.bean.PersistentTableSearchConfigPo;
 import noice.handler.bean.BeanService;
 import noice.repository.bean.PersistentTableRepository;
+import noice.repository.bean.PersistentTableConfigRepository;
+import noice.repository.bean.PersistentTableSearchConfigRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +32,10 @@ public class PersistentTableService implements BeanService<PersistentTableDto> {
 
     private PersistentTableServiceAssembler assembler;
 
+    private PersistentTableConfigRepository persistentTableConfigRepository;
+
+    private PersistentTableSearchConfigRepository persistentTableSearchConfigRepository;
+
     @Autowired
     public void setRepository(PersistentTableRepository repository) {
         this.repository = repository;
@@ -43,6 +51,16 @@ public class PersistentTableService implements BeanService<PersistentTableDto> {
         this.assembler = assembler;
     }
 
+    @Autowired
+    public void setPersistentTableConfigRepository(PersistentTableConfigRepository persistentTableConfigRepository) {
+        this.persistentTableConfigRepository = persistentTableConfigRepository;
+    }
+
+    @Autowired
+    public void setPersistentTableSearchConfigRepository(PersistentTableSearchConfigRepository persistentTableSearchConfigRepository) {
+        this.persistentTableSearchConfigRepository = persistentTableSearchConfigRepository;
+    }
+
     @Override
     public String addOne(@NotNull PersistentTableDto dto) {
         return repository.add(converter.dtoToPo(dto));
@@ -50,6 +68,8 @@ public class PersistentTableService implements BeanService<PersistentTableDto> {
 
     @Override
     public String deleteOne(String id) {
+        persistentTableConfigRepository.findList(new PersistentTableConfigPo().eqPersistentTableId(id).getQueryWrapper()).forEach(po -> persistentTableConfigRepository.update(po.eqPersistentTableId(null)));
+        persistentTableSearchConfigRepository.findList(new PersistentTableSearchConfigPo().eqPersistentTableId(id).getQueryWrapper()).forEach(po -> persistentTableSearchConfigRepository.update(po.eqPersistentTableId(null)));
         return repository.delete(id);
     }
 

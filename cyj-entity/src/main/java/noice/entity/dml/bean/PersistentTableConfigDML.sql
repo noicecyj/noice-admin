@@ -9,11 +9,11 @@ create table if not exists data_user.t_persistent_table_config
         primary key,
     authority_id
         varchar(36)
-        not null
+        null
         comment '权限id',
     persistent_table_config_code
         varchar(255)
-        null
+        not null
         comment '实体表格配置组件编码',
     persistent_table_config_data_source
         varchar(255)
@@ -29,7 +29,7 @@ create table if not exists data_user.t_persistent_table_config
         comment '实体表格配置组件方法',
     persistent_table_config_name
         varchar(255)
-        null
+        not null
         comment '实体表格配置组件名称',
     persistent_table_config_type
         varchar(255)
@@ -37,7 +37,7 @@ create table if not exists data_user.t_persistent_table_config
         comment '实体表格配置组件类型',
     persistent_table_id
         varchar(36)
-        not null
+        null
         comment '实体表格id',
     sort_code
         int default 1
@@ -49,20 +49,20 @@ create table if not exists data_user.t_persistent_table_config
         comment '状态',
     created_date
         timestamp default CURRENT_TIMESTAMP
-        not null
+        null
         comment '创建时间',
     created_by
         varchar(255)
-        not null
+        null
         comment '创建人',
     updated_date
         timestamp default CURRENT_TIMESTAMP
-        not null
+        null
         on update CURRENT_TIMESTAMP
         comment '更新时间',
     updated_by
         varchar(255)
-        not null
+        null
         comment '更新人'
 )
     comment '实体表格配置';
@@ -103,13 +103,13 @@ ALTER TABLE data_user.t_persistent_table_config
 ALTER TABLE data_user.t_persistent_table_config
     ADD persistent_table_config_data_source
         varchar(255)
-        null
+        not null
         comment '实体表格配置组件数据源';
 
 ALTER TABLE data_user.t_persistent_table_config
     MODIFY persistent_table_config_data_source
         varchar(255)
-        null
+        not null
         comment '实体表格配置组件数据源';
 
 ALTER TABLE data_user.t_persistent_table_config
@@ -118,13 +118,13 @@ ALTER TABLE data_user.t_persistent_table_config
 ALTER TABLE data_user.t_persistent_table_config
     ADD persistent_table_config_display
         tinyint(1)
-        null
+        not null
         comment '实体表格配置是否展示';
 
 ALTER TABLE data_user.t_persistent_table_config
     MODIFY persistent_table_config_display
         tinyint(1)
-        null
+        not null
         comment '实体表格配置是否展示';
 
 ALTER TABLE data_user.t_persistent_table_config
@@ -133,13 +133,13 @@ ALTER TABLE data_user.t_persistent_table_config
 ALTER TABLE data_user.t_persistent_table_config
     ADD persistent_table_config_method
         varchar(255)
-        null
+        not null
         comment '实体表格配置组件方法';
 
 ALTER TABLE data_user.t_persistent_table_config
     MODIFY persistent_table_config_method
         varchar(255)
-        null
+        not null
         comment '实体表格配置组件方法';
 
 ALTER TABLE data_user.t_persistent_table_config
@@ -163,13 +163,13 @@ ALTER TABLE data_user.t_persistent_table_config
 ALTER TABLE data_user.t_persistent_table_config
     ADD persistent_table_config_type
         varchar(255)
-        null
+        not null
         comment '实体表格配置组件类型';
 
 ALTER TABLE data_user.t_persistent_table_config
     MODIFY persistent_table_config_type
         varchar(255)
-        null
+        not null
         comment '实体表格配置组件类型';
 
 ALTER TABLE data_user.t_persistent_table_config

@@ -9,15 +9,15 @@ create table if not exists data_user.t_user
         primary key,
     enterprise_id
         varchar(36)
-        not null
+        null
         comment '企业id',
     user_code
         varchar(255)
-        null
+        not null
         comment '用户编码',
     user_name
         varchar(255)
-        null
+        not null
         comment '用户名称',
     user_password
         varchar(255)
@@ -33,20 +33,20 @@ create table if not exists data_user.t_user
         comment '状态',
     created_date
         timestamp default CURRENT_TIMESTAMP
-        not null
+        null
         comment '创建时间',
     created_by
         varchar(255)
-        not null
+        null
         comment '创建人',
     updated_date
         timestamp default CURRENT_TIMESTAMP
-        not null
+        null
         on update CURRENT_TIMESTAMP
         comment '更新时间',
     updated_by
         varchar(255)
-        not null
+        null
         comment '更新人'
 )
     comment '用户';
@@ -102,12 +102,12 @@ ALTER TABLE data_user.t_user
 ALTER TABLE data_user.t_user
     ADD user_password
         varchar(255)
-        null
+        not null
         comment '用户密码';
 
 ALTER TABLE data_user.t_user
     MODIFY user_password
         varchar(255)
-        null
+        not null
         comment '用户密码';
 

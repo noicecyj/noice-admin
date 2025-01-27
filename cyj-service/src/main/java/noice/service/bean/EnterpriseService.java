@@ -6,8 +6,10 @@ import noice.assembler.bean.EnterpriseServiceAssembler;
 import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.EnterpriseServiceConverter;
 import noice.entity.dto.bean.EnterpriseDto;
+import noice.entity.po.bean.UserPo;
 import noice.handler.bean.BeanService;
 import noice.repository.bean.EnterpriseRepository;
+import noice.repository.bean.UserRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,8 @@ public class EnterpriseService implements BeanService<EnterpriseDto> {
 
     private EnterpriseServiceAssembler assembler;
 
+    private UserRepository userRepository;
+
     @Autowired
     public void setRepository(EnterpriseRepository repository) {
         this.repository = repository;
@@ -43,6 +47,11 @@ public class EnterpriseService implements BeanService<EnterpriseDto> {
         this.assembler = assembler;
     }
 
+    @Autowired
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @Override
     public String addOne(@NotNull EnterpriseDto dto) {
         return repository.add(converter.dtoToPo(dto));
@@ -50,6 +59,7 @@ public class EnterpriseService implements BeanService<EnterpriseDto> {
 
     @Override
     public String deleteOne(String id) {
+        userRepository.findList(new UserPo().eqEnterpriseId(id).getQueryWrapper()).forEach(po -> userRepository.update(po.eqEnterpriseId(null)));
         return repository.delete(id);
     }
 

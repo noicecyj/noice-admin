@@ -9,11 +9,11 @@ create table if not exists data_user.t_menu
         primary key,
     authority_id
         varchar(36)
-        not null
+        null
         comment '权限id',
     menu_code
         varchar(255)
-        null
+        not null
         comment '菜单编码',
     menu_icon
         varchar(255)
@@ -21,11 +21,11 @@ create table if not exists data_user.t_menu
         comment '菜单图标',
     menu_id
         varchar(36)
-        not null
+        null
         comment '菜单id',
     menu_name
         varchar(255)
-        null
+        not null
         comment '菜单名称',
     menu_url
         varchar(255)
@@ -41,20 +41,20 @@ create table if not exists data_user.t_menu
         comment '状态',
     created_date
         timestamp default CURRENT_TIMESTAMP
-        not null
+        null
         comment '创建时间',
     created_by
         varchar(255)
-        not null
+        null
         comment '创建人',
     updated_date
         timestamp default CURRENT_TIMESTAMP
-        not null
+        null
         on update CURRENT_TIMESTAMP
         comment '更新时间',
     updated_by
         varchar(255)
-        not null
+        null
         comment '更新人'
 )
     comment '菜单';
@@ -95,13 +95,13 @@ ALTER TABLE data_user.t_menu
 ALTER TABLE data_user.t_menu
     ADD menu_icon
         varchar(255)
-        null
+        not null
         comment '菜单图标';
 
 ALTER TABLE data_user.t_menu
     MODIFY menu_icon
         varchar(255)
-        null
+        not null
         comment '菜单图标';
 
 ALTER TABLE data_user.t_menu
@@ -140,12 +140,12 @@ ALTER TABLE data_user.t_menu
 ALTER TABLE data_user.t_menu
     ADD menu_url
         varchar(255)
-        null
+        not null
         comment '菜单路径';
 
 ALTER TABLE data_user.t_menu
     MODIFY menu_url
         varchar(255)
-        null
+        not null
         comment '菜单路径';
 

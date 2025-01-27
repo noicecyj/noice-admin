@@ -9,15 +9,15 @@ create table if not exists data_user.t_persistent_table_search_config
         primary key,
     authority_id
         varchar(36)
-        not null
+        null
         comment '权限id',
     persistent_table_id
         varchar(36)
-        not null
+        null
         comment '实体表格id',
     persistent_table_search_config_code
         varchar(255)
-        null
+        not null
         comment '实体表格搜索配置编码',
     persistent_table_search_config_data_source
         varchar(255)
@@ -37,7 +37,7 @@ create table if not exists data_user.t_persistent_table_search_config
         comment '实体表格搜索配置类型',
     persistent_table_search_config_name
         varchar(255)
-        null
+        not null
         comment '实体表格搜索配置名称',
     sort_code
         int default 1
@@ -49,20 +49,20 @@ create table if not exists data_user.t_persistent_table_search_config
         comment '状态',
     created_date
         timestamp default CURRENT_TIMESTAMP
-        not null
+        null
         comment '创建时间',
     created_by
         varchar(255)
-        not null
+        null
         comment '创建人',
     updated_date
         timestamp default CURRENT_TIMESTAMP
-        not null
+        null
         on update CURRENT_TIMESTAMP
         comment '更新时间',
     updated_by
         varchar(255)
-        not null
+        null
         comment '更新人'
 )
     comment '实体表格搜索配置';
@@ -118,13 +118,13 @@ ALTER TABLE data_user.t_persistent_table_search_config
 ALTER TABLE data_user.t_persistent_table_search_config
     ADD persistent_table_search_config_data_source
         varchar(255)
-        null
+        not null
         comment '实体表格搜索配置数据源';
 
 ALTER TABLE data_user.t_persistent_table_search_config
     MODIFY persistent_table_search_config_data_source
         varchar(255)
-        null
+        not null
         comment '实体表格搜索配置数据源';
 
 ALTER TABLE data_user.t_persistent_table_search_config
@@ -133,13 +133,13 @@ ALTER TABLE data_user.t_persistent_table_search_config
 ALTER TABLE data_user.t_persistent_table_search_config
     ADD persistent_table_search_config_default_value
         varchar(255)
-        null
+        not null
         comment '实体表格搜索配置默认值';
 
 ALTER TABLE data_user.t_persistent_table_search_config
     MODIFY persistent_table_search_config_default_value
         varchar(255)
-        null
+        not null
         comment '实体表格搜索配置默认值';
 
 ALTER TABLE data_user.t_persistent_table_search_config
@@ -148,13 +148,13 @@ ALTER TABLE data_user.t_persistent_table_search_config
 ALTER TABLE data_user.t_persistent_table_search_config
     ADD persistent_table_search_config_display
         tinyint(1)
-        null
+        not null
         comment '实体表格搜索配置是否展示';
 
 ALTER TABLE data_user.t_persistent_table_search_config
     MODIFY persistent_table_search_config_display
         tinyint(1)
-        null
+        not null
         comment '实体表格搜索配置是否展示';
 
 ALTER TABLE data_user.t_persistent_table_search_config
@@ -163,13 +163,13 @@ ALTER TABLE data_user.t_persistent_table_search_config
 ALTER TABLE data_user.t_persistent_table_search_config
     ADD persistent_table_search_config_mode
         varchar(255)
-        null
+        not null
         comment '实体表格搜索配置类型';
 
 ALTER TABLE data_user.t_persistent_table_search_config
     MODIFY persistent_table_search_config_mode
         varchar(255)
-        null
+        not null
         comment '实体表格搜索配置类型';
 
 ALTER TABLE data_user.t_persistent_table_search_config

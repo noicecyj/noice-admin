@@ -9,11 +9,11 @@ create table if not exists data_user.t_sql
         primary key,
     sql_code
         varchar(255)
-        null
+        not null
         comment '查询编码',
     sql_name
         varchar(255)
-        null
+        not null
         comment '查询名称',
     sql_str
         varchar(255)
@@ -33,20 +33,20 @@ create table if not exists data_user.t_sql
         comment '状态',
     created_date
         timestamp default CURRENT_TIMESTAMP
-        not null
+        null
         comment '创建时间',
     created_by
         varchar(255)
-        not null
+        null
         comment '创建人',
     updated_date
         timestamp default CURRENT_TIMESTAMP
-        not null
+        null
         on update CURRENT_TIMESTAMP
         comment '更新时间',
     updated_by
         varchar(255)
-        not null
+        null
         comment '更新人'
 )
     comment '查询';
@@ -87,13 +87,13 @@ ALTER TABLE data_user.t_sql
 ALTER TABLE data_user.t_sql
     ADD sql_str
         varchar(255)
-        null
+        not null
         comment '查询语句';
 
 ALTER TABLE data_user.t_sql
     MODIFY sql_str
         varchar(255)
-        null
+        not null
         comment '查询语句';
 
 ALTER TABLE data_user.t_sql
@@ -102,12 +102,12 @@ ALTER TABLE data_user.t_sql
 ALTER TABLE data_user.t_sql
     ADD sql_type
         varchar(255)
-        null
+        not null
         comment '查询类型';
 
 ALTER TABLE data_user.t_sql
     MODIFY sql_type
         varchar(255)
-        null
+        not null
         comment '查询类型';
 
