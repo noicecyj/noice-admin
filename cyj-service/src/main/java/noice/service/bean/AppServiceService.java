@@ -6,8 +6,10 @@ import noice.assembler.bean.AppServiceServiceAssembler;
 import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.AppServiceServiceConverter;
 import noice.entity.dto.bean.AppServiceDto;
+import noice.entity.po.bean.PersistentPo;
 import noice.handler.bean.BeanService;
 import noice.repository.bean.AppServiceRepository;
+import noice.repository.bean.PersistentRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,8 @@ public class AppServiceService implements BeanService<AppServiceDto> {
 
     private AppServiceServiceAssembler assembler;
 
+    private PersistentRepository persistentRepository;
+
     @Autowired
     public void setRepository(AppServiceRepository repository) {
         this.repository = repository;
@@ -43,6 +47,11 @@ public class AppServiceService implements BeanService<AppServiceDto> {
         this.assembler = assembler;
     }
 
+    @Autowired
+    public void setPersistentRepository(PersistentRepository persistentRepository) {
+        this.persistentRepository = persistentRepository;
+    }
+
     @Override
     public String addOne(@NotNull AppServiceDto dto) {
         return repository.add(converter.dtoToPo(dto));
@@ -50,6 +59,7 @@ public class AppServiceService implements BeanService<AppServiceDto> {
 
     @Override
     public String deleteOne(String id) {
+        persistentRepository.findList(new PersistentPo().eqAppServiceId(id).getQueryWrapper()).forEach(persistentPo -> persistentRepository.update(persistentPo.eqAppServiceId(null)));
         return repository.delete(id);
     }
 

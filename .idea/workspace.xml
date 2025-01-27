@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑" />
+    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/816cf4cc-84bd-4b77-bb61-b4fcd51d574a.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/816cf4cc-84bd-4b77-bb61-b4fcd51d574a.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/aspect/service/bean/PersistentServiceAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/aspect/service/bean/PersistentServiceAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/AppServiceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/AppServiceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/PersistentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/PersistentService.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -184,7 +191,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest">
+  <component name="RunManager" selected="Spring Boot.CyjEntityCreaterApplication">
     <configuration name="CyjEntityCreaterApplicationTest.createEntityBeanTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cyj-entity-create" />
       <extension name="coverage">
@@ -432,30 +439,6 @@
       <workItem from="1737854251088" duration="12760000" />
       <workItem from="1737897654751" duration="5048000" />
       <workItem from="1737956976986" duration="5942000" />
-    </task>
-    <task id="LOCAL-00198" summary="优化表单布局及字段逻辑">
-      <option name="closed" value="true" />
-      <created>1734183254693</created>
-      <option name="number" value="00198" />
-      <option name="presentableId" value="LOCAL-00198" />
-      <option name="project" value="LOCAL" />
-      <updated>1734183254693</updated>
-    </task>
-    <task id="LOCAL-00199" summary="优化表单布局及字段逻辑">
-      <option name="closed" value="true" />
-      <created>1734239875828</created>
-      <option name="number" value="00199" />
-      <option name="presentableId" value="LOCAL-00199" />
-      <option name="project" value="LOCAL" />
-      <updated>1734239875829</updated>
-    </task>
-    <task id="LOCAL-00200" summary="优化表单布局及字段逻辑">
-      <option name="closed" value="true" />
-      <created>1734241487259</created>
-      <option name="number" value="00200" />
-      <option name="presentableId" value="LOCAL-00200" />
-      <option name="project" value="LOCAL" />
-      <updated>1734241487259</updated>
     </task>
     <task id="LOCAL-00201" summary="优化表单布局及字段逻辑">
       <option name="closed" value="true" />
@@ -825,7 +808,31 @@
       <option name="project" value="LOCAL" />
       <updated>1737964622315</updated>
     </task>
-    <option name="localTasksCounter" value="247" />
+    <task id="LOCAL-00247" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1737964810663</created>
+      <option name="number" value="00247" />
+      <option name="presentableId" value="LOCAL-00247" />
+      <option name="project" value="LOCAL" />
+      <updated>1737964810664</updated>
+    </task>
+    <task id="LOCAL-00248" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1737964850236</created>
+      <option name="number" value="00248" />
+      <option name="presentableId" value="LOCAL-00248" />
+      <option name="project" value="LOCAL" />
+      <updated>1737964850236</updated>
+    </task>
+    <task id="LOCAL-00249" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1737971253167</created>
+      <option name="number" value="00249" />
+      <option name="presentableId" value="LOCAL-00249" />
+      <option name="project" value="LOCAL" />
+      <updated>1737971253167</updated>
+    </task>
+    <option name="localTasksCounter" value="250" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -883,22 +890,6 @@
     <MESSAGE value="java&#10;添加UrlDto类及接口获取功能" />
     <MESSAGE value="优化表单布局及字段逻辑" />
     <option name="LAST_COMMIT_MESSAGE" value="优化表单布局及字段逻辑" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/aspect/service/bean/PersistentServiceAspect.java</url>
-          <line>113</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/aspect/service/bean/PersistentServiceAspect.java</url>
-          <line>82</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

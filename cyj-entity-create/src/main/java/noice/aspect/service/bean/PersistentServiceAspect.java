@@ -4,7 +4,6 @@ import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson2.JSONObject;
 import noice.entity.dto.bean.PersistentDto;
 import noice.entity.po.bean.PersistentFormPo;
-import noice.entity.po.bean.PersistentPropertyPo;
 import noice.entity.po.bean.PersistentTablePo;
 import noice.handler.bean.BeanServiceAspectInterface;
 import noice.repository.bean.PersistentFormRepository;
@@ -71,7 +70,6 @@ public class PersistentServiceAspect implements BeanServiceAspectInterface {
     public void deleteOneAfter(JSONObject param, JSONObject result, JSONObject beforeInfo) {
         BeanServiceAspectInterface.super.deleteOneAfter(param, result, beforeInfo);
         PersistentDto persistentDto = param.getObject(PARAM_BASE_DTO_BEAN, PersistentDto.class);
-        this.deleteDefaultFormAndTable(persistentDto);
         operateTableService.dropTable(persistentDto);
     }
 
@@ -131,36 +129,6 @@ public class PersistentServiceAspect implements BeanServiceAspectInterface {
             int tableUpdate = persistentTableRepository.update(persistentTablePo);
             if (tableUpdate > 0) {
                 logger.info("tableUpdate:{}", persistentTablePo);
-            }
-        }
-    }
-
-    /**
-     * 删除默认表单与表格
-     *
-     * @param persistentDto 方法参数
-     */
-    private void deleteDefaultFormAndTable(PersistentDto persistentDto) {
-        int delete = persistentPropertyRepository.delete(new PersistentPropertyPo()
-                .eqPersistentId(persistentDto.getId()).getQueryWrapper());
-        if (delete > 0) {
-            logger.info("delete:{}", persistentDto);
-        }
-        PersistentFormPo persistentFormPo = persistentFormRepository
-                .find(new PersistentFormPo().eqPersistentId(persistentDto.getId())
-                        .eqPersistentFormType(DEFAULT_FORM).getQueryWrapper());
-        if (persistentFormPo != null) {
-            String formDelete = persistentFormRepository.delete(persistentFormPo.getId());
-            if (StrUtil.isNotEmpty(formDelete)) {
-                logger.info("formDelete:{}", persistentFormPo);
-            }
-        }
-        PersistentTablePo persistentTablePo = persistentTableRepository.find(new PersistentTablePo()
-                .eqPersistentId(persistentDto.getId()).getQueryWrapper());
-        if (persistentTablePo != null) {
-            String tableDelete = persistentTableRepository.delete(persistentTablePo.getId());
-            if (StrUtil.isNotEmpty(tableDelete)) {
-                logger.info("tableDelete:{}", persistentTablePo);
             }
         }
     }

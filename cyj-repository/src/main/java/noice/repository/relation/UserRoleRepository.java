@@ -35,6 +35,10 @@ public class UserRoleRepository implements RelationRepository<UserRolePo> {
         return mapper.deleteById(id);
     }
 
+    public int delete(QueryWrapper<UserRolePo> baseQueryWrapper) {
+        return mapper.delete(baseQueryWrapper);
+    }
+
     @Override
     public long count(QueryWrapper<UserRolePo> baseQueryWrapper) {
         return mapper.selectCount(baseQueryWrapper);

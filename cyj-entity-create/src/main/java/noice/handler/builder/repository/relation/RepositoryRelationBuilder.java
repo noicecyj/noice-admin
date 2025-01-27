@@ -31,6 +31,8 @@ public class RepositoryRelationBuilder extends ClassBase {
 
     private RepositoryRelationMethodBuilder.RepositoryRelationDeleteBuilder repositoryRelationDeleteBuilder;
 
+    private RepositoryRelationMethodBuilder.RepositoryRelationDeleteWrapperBuilder repositoryRelationDeleteWrapperBuilder;
+
     private RepositoryRelationMethodBuilder.RepositoryRelationCountBuilder repositoryRelationCountBuilder;
 
     private RepositoryRelationMethodBuilder.RepositoryRelationFindBuilder.RepositoryRelationFindPoBuilder repositoryRelationFindPoBuilder;
@@ -64,6 +66,11 @@ public class RepositoryRelationBuilder extends ClassBase {
     @Autowired
     public void setRepositoryRelationDeleteBuilder(RepositoryRelationMethodBuilder.RepositoryRelationDeleteBuilder repositoryRelationDeleteBuilder) {
         this.repositoryRelationDeleteBuilder = repositoryRelationDeleteBuilder;
+    }
+
+    @Autowired
+    public void setRepositoryRelationDeleteWrapperBuilder(RepositoryRelationMethodBuilder.RepositoryRelationDeleteWrapperBuilder repositoryRelationDeleteWrapperBuilder) {
+        this.repositoryRelationDeleteWrapperBuilder = repositoryRelationDeleteWrapperBuilder;
     }
 
     @Autowired
@@ -151,6 +158,8 @@ public class RepositoryRelationBuilder extends ClassBase {
         sb.append(repositoryRelationAddBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");
         sb.append(repositoryRelationDeleteBuilder.builder()).append("\n");
+        sb.append("\n");
+        sb.append(repositoryRelationDeleteWrapperBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");
         sb.append(repositoryRelationCountBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");

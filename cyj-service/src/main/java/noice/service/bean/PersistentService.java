@@ -6,7 +6,9 @@ import noice.assembler.bean.PersistentServiceAssembler;
 import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.PersistentServiceConverter;
 import noice.entity.dto.bean.PersistentDto;
+import noice.entity.po.bean.PersistentPropertyPo;
 import noice.handler.bean.BeanService;
+import noice.repository.bean.PersistentPropertyRepository;
 import noice.repository.bean.PersistentRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,8 @@ public class PersistentService implements BeanService<PersistentDto> {
 
     private PersistentServiceAssembler assembler;
 
+    private PersistentPropertyRepository persistentPropertyRepository;
+
     @Autowired
     public void setRepository(PersistentRepository repository) {
         this.repository = repository;
@@ -43,6 +47,11 @@ public class PersistentService implements BeanService<PersistentDto> {
         this.assembler = assembler;
     }
 
+    @Autowired
+    public void setPersistentPropertyRepository(PersistentPropertyRepository persistentPropertyRepository) {
+        this.persistentPropertyRepository = persistentPropertyRepository;
+    }
+
     @Override
     public String addOne(@NotNull PersistentDto dto) {
         return repository.add(converter.dtoToPo(dto));
@@ -50,6 +59,7 @@ public class PersistentService implements BeanService<PersistentDto> {
 
     @Override
     public String deleteOne(String id) {
+        persistentPropertyRepository.delete(new PersistentPropertyPo().eqPersistentId(id).getQueryWrapper());
         return repository.delete(id);
     }
 

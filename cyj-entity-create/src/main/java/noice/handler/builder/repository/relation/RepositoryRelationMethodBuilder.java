@@ -7,6 +7,7 @@ import noice.entity.po.bean.PersistentPo;
 import noice.entity.po.bean.PersistentPropertyPo;
 import noice.handler.base.MethodBase;
 import noice.handler.base.enumType.StatementEnum;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -99,14 +100,7 @@ public class RepositoryRelationMethodBuilder extends MethodBase {
 
         @Override
         public String toString() {
-            StringBuilder sb = new StringBuilder();
-            for (String methodAnnotation : getMethodAnnotationList()) {
-                sb.append("    ").append(methodAnnotation).append("\n");
-            }
-            sb.append("    ").append(getMethodStatement().getStatement()).append(" ").append(getMethodReturnType()).append(" ").append(getMethodName()).append("(").append(String.join(", ", getMethodParamSet())).append(") {\n");
-            sb.append("        ").append(getMethodReturnBody()).append("\n");
-            sb.append("    }");
-            return sb.toString();
+            return getString(getMethodAnnotationList(), getMethodStatement(), getMethodReturnType(), getMethodName(), getMethodParamSet(), getMethodReturnBody());
         }
 
     }
@@ -118,11 +112,12 @@ public class RepositoryRelationMethodBuilder extends MethodBase {
 
         public RepositoryRelationDeleteBuilder builder() {
             this.setMethodStatement(StatementEnum.PUBLIC);
-            this.setMethodReturnType("int");
+            this.setMethodReturnType("String");
             this.setMethodAnnotationList();
+            this.setMethodBody();
             this.setMethodName("delete");
             this.setMethodParamSet();
-            this.setMethodReturnBody("return mapper.deleteById(id);");
+            this.setMethodReturnBody("return delete == 0 ? null : id;");
             return this;
         }
 
@@ -130,6 +125,12 @@ public class RepositoryRelationMethodBuilder extends MethodBase {
             List<String> methodParamSet = new ArrayList<>();
             methodParamSet.add("String id");
             super.setMethodParamSet(methodParamSet);
+        }
+
+        public void setMethodBody() {
+            List<String> methodBodyList = new ArrayList<>();
+            methodBodyList.add("int delete = mapper.deleteById(id);");
+            super.setMethodBody(methodBodyList);
         }
 
         public void setMethodAnnotationList() {
@@ -145,9 +146,47 @@ public class RepositoryRelationMethodBuilder extends MethodBase {
                 sb.append("    ").append(methodAnnotation).append("\n");
             }
             sb.append("    ").append(getMethodStatement().getStatement()).append(" ").append(getMethodReturnType()).append(" ").append(getMethodName()).append("(").append(String.join(", ", getMethodParamSet())).append(") {\n");
+            for (String methodBody : getMethodBody()) {
+                sb.append("        ").append(methodBody).append("\n");
+            }
             sb.append("        ").append(getMethodReturnBody()).append("\n");
             sb.append("    }");
             return sb.toString();
+        }
+
+    }
+
+    @EqualsAndHashCode(callSuper = true)
+    @Component
+    @Data
+    public static class RepositoryRelationDeleteWrapperBuilder extends RepositoryRelationMethodBuilder {
+
+        public RepositoryRelationDeleteBuilder.RepositoryRelationDeleteWrapperBuilder builder(PersistentPo persistentPo) {
+            String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
+            this.setMethodStatement(StatementEnum.PUBLIC);
+            this.setMethodReturnType("int");
+            this.setMethodAnnotationList();
+            this.setMethodName("delete");
+            this.setMethodParamSet(poName);
+            this.setMethodReturnBody("return mapper.delete(baseQueryWrapper);");
+            return this;
+        }
+
+        public void setMethodParamSet(String poName) {
+            List<String> methodParamSet = new ArrayList<>();
+            methodParamSet.add("QueryWrapper<" + poName + "Po> baseQueryWrapper");
+            super.setMethodParamSet(methodParamSet);
+        }
+
+        public void setMethodAnnotationList() {
+            List<String> methodAnnotationList = new ArrayList<>();
+            methodAnnotationList.add("@Override");
+            super.setMethodAnnotationList(methodAnnotationList);
+        }
+
+        @Override
+        public String toString() {
+            return getString(getMethodAnnotationList(), getMethodStatement(), getMethodReturnType(), getMethodName(), getMethodParamSet(), getMethodReturnBody());
         }
 
     }
@@ -182,14 +221,7 @@ public class RepositoryRelationMethodBuilder extends MethodBase {
 
         @Override
         public String toString() {
-            StringBuilder sb = new StringBuilder();
-            for (String methodAnnotation : getMethodAnnotationList()) {
-                sb.append("    ").append(methodAnnotation).append("\n");
-            }
-            sb.append("    ").append(getMethodStatement().getStatement()).append(" ").append(getMethodReturnType()).append(" ").append(getMethodName()).append("(").append(String.join(", ", getMethodParamSet())).append(") {\n");
-            sb.append("        ").append(getMethodReturnBody()).append("\n");
-            sb.append("    }");
-            return sb.toString();
+            return getString(getMethodAnnotationList(), getMethodStatement(), getMethodReturnType(), getMethodName(), getMethodParamSet(), getMethodReturnBody());
         }
 
     }
@@ -240,14 +272,7 @@ public class RepositoryRelationMethodBuilder extends MethodBase {
 
             @Override
             public String toString() {
-                StringBuilder sb = new StringBuilder();
-                for (String methodAnnotation : getMethodAnnotationList()) {
-                    sb.append("    ").append(methodAnnotation).append("\n");
-                }
-                sb.append("    ").append(getMethodStatement().getStatement()).append(" ").append(getMethodReturnType()).append(" ").append(getMethodName()).append("(").append(String.join(", ", getMethodParamSet())).append(") {\n");
-                sb.append("        ").append(getMethodReturnBody()).append("\n");
-                sb.append("    }");
-                return sb.toString();
+                return getString(getMethodAnnotationList(), getMethodStatement(), getMethodReturnType(), getMethodName(), getMethodParamSet(), getMethodReturnBody());
             }
 
         }
@@ -286,14 +311,7 @@ public class RepositoryRelationMethodBuilder extends MethodBase {
 
             @Override
             public String toString() {
-                StringBuilder sb = new StringBuilder();
-                for (String methodAnnotation : getMethodAnnotationList()) {
-                    sb.append("    ").append(methodAnnotation).append("\n");
-                }
-                sb.append("    ").append(getMethodStatement().getStatement()).append(" ").append(getMethodReturnType()).append(" ").append(getMethodName()).append("(").append(String.join(", ", getMethodParamSet())).append(") {\n");
-                sb.append("        ").append(getMethodReturnBody()).append("\n");
-                sb.append("    }");
-                return sb.toString();
+                return getString(getMethodAnnotationList(), getMethodStatement(), getMethodReturnType(), getMethodName(), getMethodParamSet(), getMethodReturnBody());
             }
 
         }
@@ -346,14 +364,7 @@ public class RepositoryRelationMethodBuilder extends MethodBase {
 
             @Override
             public String toString() {
-                StringBuilder sb = new StringBuilder();
-                for (String methodAnnotation : getMethodAnnotationList()) {
-                    sb.append("    ").append(methodAnnotation).append("\n");
-                }
-                sb.append("    ").append(getMethodStatement().getStatement()).append(" ").append(getMethodReturnType()).append(" ").append(getMethodName()).append("(").append(String.join(", ", getMethodParamSet())).append(") {\n");
-                sb.append("        ").append(getMethodReturnBody()).append("\n");
-                sb.append("    }");
-                return sb.toString();
+                return getString(getMethodAnnotationList(), getMethodStatement(), getMethodReturnType(), getMethodName(), getMethodParamSet(), getMethodReturnBody());
             }
 
         }
@@ -392,18 +403,23 @@ public class RepositoryRelationMethodBuilder extends MethodBase {
 
             @Override
             public String toString() {
-                StringBuilder sb = new StringBuilder();
-                for (String methodAnnotation : getMethodAnnotationList()) {
-                    sb.append("    ").append(methodAnnotation).append("\n");
-                }
-                sb.append("    ").append(getMethodStatement().getStatement()).append(" ").append(getMethodReturnType()).append(" ").append(getMethodName()).append("(").append(String.join(", ", getMethodParamSet())).append(") {\n");
-                sb.append("        ").append(getMethodReturnBody()).append("\n");
-                sb.append("    }");
-                return sb.toString();
+                return getString(getMethodAnnotationList(), getMethodStatement(), getMethodReturnType(), getMethodName(), getMethodParamSet(), getMethodReturnBody());
             }
 
         }
 
+    }
+
+    @NotNull
+    private static String getString(List<String> methodAnnotationList, StatementEnum methodStatement, String methodReturnType, String methodName, List<String> methodParamSet, String methodReturnBody) {
+        StringBuilder sb = new StringBuilder();
+        for (String methodAnnotation : methodAnnotationList) {
+            sb.append("    ").append(methodAnnotation).append("\n");
+        }
+        sb.append("    ").append(methodStatement.getStatement()).append(" ").append(methodReturnType).append(" ").append(methodName).append("(").append(String.join(", ", methodParamSet)).append(") {\n");
+        sb.append("        ").append(methodReturnBody).append("\n");
+        sb.append("    }");
+        return sb.toString();
     }
 
 }
