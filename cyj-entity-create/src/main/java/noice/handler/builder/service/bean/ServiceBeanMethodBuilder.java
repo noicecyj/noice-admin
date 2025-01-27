@@ -274,10 +274,15 @@ public class ServiceBeanMethodBuilder extends MethodBase {
     @Data
     public static class ServiceBeanDeleteBuilder extends ServiceBeanMethodBuilder {
 
-        public ServiceBeanDeleteBuilder builder() {
+        private List<PersistentPo> OtoN;
+
+        public ServiceBeanDeleteBuilder builder(PersistentPo persistentPo, List<PersistentPo> OtoN) {
+            String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
+            this.OtoN = OtoN;
             this.setMethodStatement(StatementEnum.PUBLIC);
             this.setMethodReturnType("String");
             this.setMethodAnnotationList();
+            this.setMethodBody(poName);
             this.setMethodName("deleteOne");
             this.setMethodParamSet();
             this.setMethodReturnBody("return repository.delete(id);");
@@ -288,6 +293,16 @@ public class ServiceBeanMethodBuilder extends MethodBase {
             List<String> methodParamSet = new ArrayList<>();
             methodParamSet.add("String id");
             super.setMethodParamSet(methodParamSet);
+        }
+
+        public void setMethodBody(String poName) {
+            List<String> methodBodyList = new ArrayList<>();
+            for (PersistentPo one : OtoN) {
+                String underOnePoName = StrUtil.toCamelCase(one.getPersistentCode());
+                String onePoName = StrUtil.upperFirst(underOnePoName);
+                methodBodyList.add(underOnePoName + "Repository.findList(new " + onePoName + "Po().eq" + poName + "Id(id).getQueryWrapper()).forEach(po -> " + underOnePoName + "Repository.update(po.eq" + poName + "Id(null)));");
+            }
+            this.setMethodBody(methodBodyList);
         }
 
         public void setMethodAnnotationList() {
@@ -303,7 +318,9 @@ public class ServiceBeanMethodBuilder extends MethodBase {
                 sb.append("    ").append(methodAnnotation).append("\n");
             }
             sb.append("    ").append(getMethodStatement().getStatement()).append(" ").append(getMethodReturnType()).append(" ").append(getMethodName()).append("(").append(String.join(", ", getMethodParamSet())).append(") {\n");
-            sb.append("        ").append(getMethodReturnBody()).append("\n");
+            for (String methodBody : getMethodBody()) {
+                sb.append("        ").append(methodBody).append("\n");
+            }
             sb.append("    }");
             return sb.toString();
         }

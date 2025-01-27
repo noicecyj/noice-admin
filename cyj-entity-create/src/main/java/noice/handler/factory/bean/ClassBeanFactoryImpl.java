@@ -170,18 +170,19 @@ public class ClassBeanFactoryImpl extends ClassFactoryImpl {
         String root = getRoot();
         for (PersistentPo persistentPo : super.findByType(BEAN)) {
             List<PersistentPropertyPo> persistentPropertyPoList = super.findByPersistentId(persistentPo.getId());
-            List<Map<String, PersistentPo>> poList = findNtoNAndRelationById(persistentPo.getId());
+            List<Map<String, PersistentPo>> NtoN = this.findNtoNAndRelationById(persistentPo.getId());
+            List<PersistentPo> OtoN = this.findOtoNById(persistentPo.getId());
             if (persistentPo.getStatus()) {
                 this.createEntityDML(root, persistentPo, persistentPropertyPoList);
                 this.createEntityPO(root, persistentPo, persistentPropertyPoList);
-                this.createEntityDTO(root, persistentPo, persistentPropertyPoList, poList);
-                this.createEntityVO(root, persistentPo, persistentPropertyPoList, poList);
+                this.createEntityDTO(root, persistentPo, persistentPropertyPoList, NtoN);
+                this.createEntityVO(root, persistentPo, persistentPropertyPoList, NtoN);
                 this.createMapper(root, persistentPo);
                 this.createConverter(root, persistentPo, persistentPropertyPoList);
-                this.createAssembler(root, persistentPo, persistentPropertyPoList, poList);
+                this.createAssembler(root, persistentPo, persistentPropertyPoList, NtoN);
                 this.createRepository(root, persistentPo, persistentPropertyPoList);
-                this.createService(root, persistentPo, persistentPropertyPoList, poList);
-                this.createController(root, persistentPo, poList);
+                this.createService(root, persistentPo, persistentPropertyPoList, NtoN, OtoN);
+                this.createController(root, persistentPo, NtoN);
             } else {
 //                deleteEntityDML(root, persistentPo, persistentPropertyPoList);
 //                deleteEntityPO(root, persistentPo, persistentPropertyPoList);
@@ -233,7 +234,7 @@ public class ClassBeanFactoryImpl extends ClassFactoryImpl {
 //        BeanUtils.deleteJavaFile(rootPath + ENTITY_PATH + "po/" + BEAN, poBeanBuilder.builder(persistentPo, persistentPropertyPoList).getClassName());
 //    }
 //
-//    private void deleteEntityDTO(String rootPath, PersistentPo persistentPo, List<PersistentPropertyPo> persistentPropertyPoList, List<Map<String, PersistentPo>> poList) {
+//    private void deleteEntityDTO(String rootPath, PersistentPo persistentPo, List<PersistentPropertyPo> persistentPropertyPoList, List<Map<String, PersistentPo>> NtoN) {
 //        BeanUtils.deleteJavaFile(rootPath + ENTITY_PATH + "dto/" + BEAN, dtoBeanBuilder.builder(persistentPo, persistentPropertyPoList, NtoNPoList).getClassName());
 //    }
 //
@@ -291,8 +292,8 @@ public class ClassBeanFactoryImpl extends ClassFactoryImpl {
         }
     }
 
-    private void createEntityDTO(String rootPath, PersistentPo persistentPo, List<PersistentPropertyPo> persistentPropertyPoList, List<Map<String, PersistentPo>> poList) {
-        dtoBeanBuilder.builder(persistentPo, persistentPropertyPoList, poList);
+    private void createEntityDTO(String rootPath, PersistentPo persistentPo, List<PersistentPropertyPo> persistentPropertyPoList, List<Map<String, PersistentPo>> NtoN) {
+        dtoBeanBuilder.builder(persistentPo, persistentPropertyPoList, NtoN);
         try {
             super.createAndSaveHistory(rootPath + ENTITY_PATH + "dto/" + BEAN, rootPath + HISTORY_ENTITY_PATH + BEAN + "/dto",
                     dtoBeanBuilder.getClassName(), dtoBeanBuilder.toString());
@@ -301,8 +302,8 @@ public class ClassBeanFactoryImpl extends ClassFactoryImpl {
         }
     }
 
-    private void createEntityVO(String rootPath, PersistentPo persistentPo, List<PersistentPropertyPo> persistentPropertyPoList, List<Map<String, PersistentPo>> poList) {
-        voBeanBuilder.builder(persistentPo, persistentPropertyPoList, poList);
+    private void createEntityVO(String rootPath, PersistentPo persistentPo, List<PersistentPropertyPo> persistentPropertyPoList, List<Map<String, PersistentPo>> NtoN) {
+        voBeanBuilder.builder(persistentPo, persistentPropertyPoList, NtoN);
         try {
             super.createAndSaveHistory(rootPath + ENTITY_PATH + "vo/" + BEAN, rootPath + HISTORY_ENTITY_PATH + BEAN + "/vo",
                     voBeanBuilder.getClassName(), voBeanBuilder.toString());
@@ -334,9 +335,9 @@ public class ClassBeanFactoryImpl extends ClassFactoryImpl {
         }
     }
 
-    private void createAssembler(String rootPath, PersistentPo persistentPo, List<PersistentPropertyPo> persistentPropertyPoList, List<Map<String, PersistentPo>> poList) {
-        assemblerServiceBeanBuilder.builder(persistentPo, persistentPropertyPoList, poList);
-        assemblerControllerBeanBuilder.builder(persistentPo, persistentPropertyPoList, poList);
+    private void createAssembler(String rootPath, PersistentPo persistentPo, List<PersistentPropertyPo> persistentPropertyPoList, List<Map<String, PersistentPo>> NtoN) {
+        assemblerServiceBeanBuilder.builder(persistentPo, persistentPropertyPoList, NtoN);
+        assemblerControllerBeanBuilder.builder(persistentPo, persistentPropertyPoList, NtoN);
         try {
             super.createAndSaveHistory(rootPath + SERVICE_ASSEMBLER_PATH + BEAN, rootPath + HISTORY_SERVICE_ASSEMBLER_PATH + BEAN,
                     assemblerServiceBeanBuilder.getClassName(), assemblerServiceBeanBuilder.toString());
@@ -357,8 +358,9 @@ public class ClassBeanFactoryImpl extends ClassFactoryImpl {
         }
     }
 
-    private void createService(String rootPath, PersistentPo persistentPo, List<PersistentPropertyPo> persistentPropertyPoList, List<Map<String, PersistentPo>> poList) {
-        serviceBeanBuilder.builder(persistentPo, persistentPropertyPoList, poList);
+    private void createService(String rootPath, PersistentPo persistentPo, List<PersistentPropertyPo> persistentPropertyPoList,
+                               List<Map<String, PersistentPo>> NtoN, List<PersistentPo> otoN) {
+        serviceBeanBuilder.builder(persistentPo, persistentPropertyPoList, NtoN, otoN);
         try {
             super.createAndSaveHistory(rootPath + SERVICE_PATH + BEAN, rootPath + HISTORY_SERVICE_PATH + BEAN,
                     serviceBeanBuilder.getClassName(), serviceBeanBuilder.toString());
@@ -367,9 +369,9 @@ public class ClassBeanFactoryImpl extends ClassFactoryImpl {
         }
     }
 
-    private void createController(String rootPath, PersistentPo persistentPo, List<Map<String, PersistentPo>> poList) {
+    private void createController(String rootPath, PersistentPo persistentPo, List<Map<String, PersistentPo>> NtoN) {
         AppServicePo appService = getAppService(persistentPo.getAppServiceId());
-        controllerBeanBuilder.builder(persistentPo, appService, poList);
+        controllerBeanBuilder.builder(persistentPo, appService, NtoN);
         try {
             super.createAndSaveHistory(rootPath + CONTROLLER_PATH + BEAN, rootPath + HISTORY_CONTROLLER_PATH + BEAN,
                     controllerBeanBuilder.getClassName(), controllerBeanBuilder.toString());

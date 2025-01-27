@@ -25,7 +25,9 @@ public class ServiceBeanBuilder extends ClassBase {
 
     private PersistentPo persistentPo;
 
-    private List<Map<String, PersistentPo>> poList;
+    private List<Map<String, PersistentPo>> NtoN;
+
+    private List<PersistentPo> OtoN;
 
     private List<PersistentPropertyPo> persistentPropertyPoList;
 
@@ -160,10 +162,12 @@ public class ServiceBeanBuilder extends ClassBase {
         this.persistentRepository = persistentRepository;
     }
 
-    public ServiceBeanBuilder builder(PersistentPo persistentPo, List<PersistentPropertyPo> persistentPropertyPoList, List<Map<String, PersistentPo>> poList) {
+    public ServiceBeanBuilder builder(PersistentPo persistentPo, List<PersistentPropertyPo> persistentPropertyPoList,
+                                      List<Map<String, PersistentPo>> NtoN, List<PersistentPo> OtoN) {
         String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
         this.persistentPo = persistentPo;
-        this.poList = poList;
+        this.NtoN = NtoN;
+        this.OtoN = OtoN;
         this.setClassName(poName + "Service");
         this.setClassType(ClassEnum.CLASS);
         this.setClassStatement(StatementEnum.PUBLIC);
@@ -184,12 +188,18 @@ public class ServiceBeanBuilder extends ClassBase {
         importPackageList.add("import noice.common.entity.dto.OptionDTO;");
         importPackageList.add("import noice.converter.bean." + poName + "ServiceConverter;");
         importPackageList.add("import noice.entity.dto.bean." + poName + "Dto;");
-        for (Map<String, PersistentPo> relationMap : getPoList()) {
+        for (PersistentPo one : getOtoN()) {
+            importPackageList.add("import noice.entity.po.bean." + StrUtil.upperFirst(StrUtil.toCamelCase(one.getPersistentCode())) + "Po;");
+        }
+        for (Map<String, PersistentPo> relationMap : getNtoN()) {
             importPackageList.add("import noice.entity.po.relation." + StrUtil.upperFirst(StrUtil.toCamelCase(relationMap.get("relation").getPersistentCode())) + "Po;");
         }
         importPackageList.add("import noice.handler.bean.BeanService;");
         importPackageList.add("import noice.repository.bean." + poName + "Repository;");
-        for (Map<String, PersistentPo> relationMap : getPoList()) {
+        for (PersistentPo one : getOtoN()) {
+            importPackageList.add("import noice.repository.bean." + StrUtil.upperFirst(StrUtil.toCamelCase(one.getPersistentCode())) + "Repository;");
+        }
+        for (Map<String, PersistentPo> relationMap : getNtoN()) {
             importPackageList.add("import noice.repository.relation." + StrUtil.upperFirst(StrUtil.toCamelCase(relationMap.get("relation").getPersistentCode())) + "Repository;");
         }
         importPackageList.add("import org.jetbrains.annotations.NotNull;");
@@ -232,7 +242,11 @@ public class ServiceBeanBuilder extends ClassBase {
         sb.append("\n");
         sb.append(serviceBeanFieldAssemblerBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");
-        for (Map<String, PersistentPo> relationMap : getPoList()) {
+        for (PersistentPo one : getOtoN()) {
+            sb.append(serviceBeanRelationFieldBuilder.builder(one)).append("\n");
+            sb.append("\n");
+        }
+        for (Map<String, PersistentPo> relationMap : getNtoN()) {
             sb.append(serviceBeanRelationFieldBuilder.builder(relationMap.get("relation"))).append("\n");
             sb.append("\n");
         }
@@ -242,13 +256,17 @@ public class ServiceBeanBuilder extends ClassBase {
         sb.append("\n");
         sb.append(serviceBeanSetAssemblerBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");
-        for (Map<String, PersistentPo> relationMap : getPoList()) {
+        for (PersistentPo one : getOtoN()) {
+            sb.append(serviceRelationSetRepositoryBuilder.builder(one)).append("\n");
+            sb.append("\n");
+        }
+        for (Map<String, PersistentPo> relationMap : getNtoN()) {
             sb.append(serviceRelationSetRepositoryBuilder.builder(relationMap.get("relation"))).append("\n");
             sb.append("\n");
         }
         sb.append(serviceBeanAddBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");
-        sb.append(serviceBeanDeleteBuilder.builder()).append("\n");
+        sb.append(serviceBeanDeleteBuilder.builder(getPersistentPo(), getOtoN())).append("\n");
         sb.append("\n");
         sb.append(serviceBeanUpdateBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");
@@ -264,7 +282,7 @@ public class ServiceBeanBuilder extends ClassBase {
         sb.append("\n");
         sb.append(serviceBeanGetOptionsBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");
-        for (Map<String, PersistentPo> poMap : getPoList()) {
+        for (Map<String, PersistentPo> poMap : getNtoN()) {
             sb.append(serviceBeanFindRelationBuilder.builder(getPersistentPo(), poMap.get("NtoN"), poMap.get("relation"))).append("\n");
             sb.append("\n");
         }

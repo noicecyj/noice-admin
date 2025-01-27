@@ -196,6 +196,12 @@ public abstract class ClassFactoryImpl implements ClassFactory {
         }).filter(Objects::nonNull).collect(Collectors.toList());
     }
 
+    public List<PersistentPo> findOtoNById(String id) {
+        //查询一对多关系
+        return persistentRepository.findList(new PersistentPo()
+                .eqPersistentType("Bean").eqPersistentId(id).orderByPersistentCodeAsc().getQueryWrapper());
+    }
+
     public List<PersistentPropertyPo> findByPersistentId(String id) {
         PersistentPropertyPo persistentPropertyPo = new PersistentPropertyPo();
         persistentPropertyPo.setPersistentId(id);
