@@ -29,8 +29,9 @@ public class SqlRepository implements BeanRepository<SqlPo> {
     }
 
     @Override
-    public int add(SqlPo po) {
-        return mapper.insert(po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+    public String add(SqlPo po) {
+        int insert = mapper.insert(po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+        return insert == 0 ? null : po.getId();
     }
 
     @Override

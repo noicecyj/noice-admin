@@ -29,8 +29,9 @@ public class WorkFlowRepository implements BeanRepository<WorkFlowPo> {
     }
 
     @Override
-    public int add(WorkFlowPo po) {
-        return mapper.insert(po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+    public String add(WorkFlowPo po) {
+        int insert = mapper.insert(po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+        return insert == 0 ? null : po.getId();
     }
 
     @Override

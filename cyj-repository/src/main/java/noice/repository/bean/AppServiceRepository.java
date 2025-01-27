@@ -29,8 +29,9 @@ public class AppServiceRepository implements BeanRepository<AppServicePo> {
     }
 
     @Override
-    public int add(AppServicePo po) {
-        return mapper.insert(po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+    public String add(AppServicePo po) {
+        int insert = mapper.insert(po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+        return insert == 0 ? null : po.getId();
     }
 
     @Override

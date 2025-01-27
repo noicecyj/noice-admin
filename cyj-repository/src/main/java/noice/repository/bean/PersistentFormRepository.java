@@ -29,8 +29,9 @@ public class PersistentFormRepository implements BeanRepository<PersistentFormPo
     }
 
     @Override
-    public int add(PersistentFormPo po) {
-        return mapper.insert(po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+    public String add(PersistentFormPo po) {
+        int insert = mapper.insert(po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+        return insert == 0 ? null : po.getId();
     }
 
     @Override

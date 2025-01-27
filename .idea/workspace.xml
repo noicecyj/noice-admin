@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/handler/bean/BeanRepositoryAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/handler/bean/BeanRepositoryAspect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/PersistentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/PersistentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/handler/bean/BeanServiceAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/handler/bean/BeanServiceAspect.java" afterDir="false" />
-    </list>
+    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -189,7 +184,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JAR 应用程序.cyj-auth-0.0.1-SNAPSHOT.jar">
+  <component name="RunManager" selected="JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest">
     <configuration name="CyjEntityCreaterApplicationTest.createEntityBeanTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cyj-entity-create" />
       <extension name="coverage">
@@ -287,8 +282,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JAR 应用程序.cyj-auth-0.0.1-SNAPSHOT.jar" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest" />
+        <item itemvalue="JAR 应用程序.cyj-auth-0.0.1-SNAPSHOT.jar" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest2" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.menuBeanTest" />
         <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest" />
@@ -437,14 +432,6 @@
       <workItem from="1737854251088" duration="12760000" />
       <workItem from="1737897654751" duration="5048000" />
       <workItem from="1737956976986" duration="5942000" />
-    </task>
-    <task id="LOCAL-00194" summary="优化表单布局及字段逻辑">
-      <option name="closed" value="true" />
-      <created>1734176564116</created>
-      <option name="number" value="00194" />
-      <option name="presentableId" value="LOCAL-00194" />
-      <option name="project" value="LOCAL" />
-      <updated>1734176564116</updated>
     </task>
     <task id="LOCAL-00195" summary="优化表单布局及字段逻辑">
       <option name="closed" value="true" />
@@ -830,7 +817,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737961322807</updated>
     </task>
-    <option name="localTasksCounter" value="243" />
+    <task id="LOCAL-00243" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1737963711162</created>
+      <option name="number" value="00243" />
+      <option name="presentableId" value="LOCAL-00243" />
+      <option name="project" value="LOCAL" />
+      <updated>1737963711162</updated>
+    </task>
+    <option name="localTasksCounter" value="244" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -901,11 +896,6 @@
           <url>file://$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/aspect/service/bean/PersistentServiceAspect.java</url>
           <line>82</line>
           <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/cyj-repository/src/main/java/noice/handler/bean/BeanRepositoryAspect.java</url>
-          <line>252</line>
-          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

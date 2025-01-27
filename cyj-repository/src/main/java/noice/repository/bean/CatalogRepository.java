@@ -29,8 +29,9 @@ public class CatalogRepository implements BeanRepository<CatalogPo> {
     }
 
     @Override
-    public int add(CatalogPo po) {
-        return mapper.insert(po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+    public String add(CatalogPo po) {
+        int insert = mapper.insert(po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+        return insert == 0 ? null : po.getId();
     }
 
     @Override

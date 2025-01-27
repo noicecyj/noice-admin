@@ -29,8 +29,9 @@ public class PersistentTableSearchConfigRepository implements BeanRepository<Per
     }
 
     @Override
-    public int add(PersistentTableSearchConfigPo po) {
-        return mapper.insert(po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+    public String add(PersistentTableSearchConfigPo po) {
+        int insert = mapper.insert(po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+        return insert == 0 ? null : po.getId();
     }
 
     @Override

@@ -29,8 +29,9 @@ public class CatalogDictionaryRepository implements BeanRepository<CatalogDictio
     }
 
     @Override
-    public int add(CatalogDictionaryPo po) {
-        return mapper.insert(po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+    public String add(CatalogDictionaryPo po) {
+        int insert = mapper.insert(po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+        return insert == 0 ? null : po.getId();
     }
 
     @Override

@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface BeanRepository<PO extends BasePoBean> {
 
-    int add(PO po);
+    String add(PO po);
 
     int addBatch(List<PO> poList);
 
