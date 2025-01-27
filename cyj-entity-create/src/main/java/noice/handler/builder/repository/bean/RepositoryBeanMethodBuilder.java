@@ -107,7 +107,17 @@ public class RepositoryBeanMethodBuilder extends MethodBase {
 
         @Override
         public String toString() {
-            return getString(getMethodAnnotationList(), getMethodStatement(), getMethodReturnType(), getMethodName(), getMethodParamSet(), getMethodReturnBody());
+            StringBuilder sb = new StringBuilder();
+            for (String methodAnnotation : getMethodAnnotationList()) {
+                sb.append("    ").append(methodAnnotation).append("\n");
+            }
+            sb.append("    ").append(getMethodStatement().getStatement()).append(" ").append(getMethodReturnType()).append(" ").append(getMethodName()).append("(").append(String.join(", ", getMethodParamSet())).append(") {\n");
+            for (String methodBody : getMethodBody()) {
+                sb.append("        ").append(methodBody).append("\n");
+            }
+            sb.append("        ").append(getMethodReturnBody()).append("\n");
+            sb.append("    }");
+            return sb.toString();
         }
 
     }
