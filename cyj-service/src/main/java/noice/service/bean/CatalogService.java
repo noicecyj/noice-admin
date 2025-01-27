@@ -49,7 +49,7 @@ public class CatalogService implements BeanService<CatalogDto> {
     }
 
     @Override
-    public int deleteOne(String id) {
+    public String deleteOne(String id) {
         return repository.delete(id);
     }
 

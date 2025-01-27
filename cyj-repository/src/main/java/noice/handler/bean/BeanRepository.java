@@ -15,7 +15,7 @@ public interface BeanRepository<PO extends BasePoBean> {
 
     int addBatch(List<PO> poList);
 
-    int delete(String id);
+    String delete(String id);
 
     int delete(QueryWrapper<PO> queryWrapper);
 

@@ -58,7 +58,7 @@ public class UserService implements BeanService<UserDto> {
     }
 
     @Override
-    public int deleteOne(String id) {
+    public String deleteOne(String id) {
         return repository.delete(id);
     }
 

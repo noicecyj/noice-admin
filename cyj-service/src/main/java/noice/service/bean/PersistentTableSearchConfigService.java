@@ -49,7 +49,7 @@ public class PersistentTableSearchConfigService implements BeanService<Persisten
     }
 
     @Override
-    public int deleteOne(String id) {
+    public String deleteOne(String id) {
         return repository.delete(id);
     }
 

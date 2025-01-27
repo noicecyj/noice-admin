@@ -58,7 +58,7 @@ public class AuthorityService implements BeanService<AuthorityDto> {
     }
 
     @Override
-    public int deleteOne(String id) {
+    public String deleteOne(String id) {
         return repository.delete(id);
     }
 

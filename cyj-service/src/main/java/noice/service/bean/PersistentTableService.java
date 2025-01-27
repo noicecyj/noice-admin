@@ -49,7 +49,7 @@ public class PersistentTableService implements BeanService<PersistentTableDto> {
     }
 
     @Override
-    public int deleteOne(String id) {
+    public String deleteOne(String id) {
         return repository.delete(id);
     }
 

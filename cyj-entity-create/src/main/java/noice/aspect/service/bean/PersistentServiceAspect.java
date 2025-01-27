@@ -1,5 +1,6 @@
 package noice.aspect.service.bean;
 
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson2.JSONObject;
 import noice.entity.dto.bean.PersistentDto;
 import noice.entity.po.bean.PersistentFormPo;
@@ -87,8 +88,8 @@ public class PersistentServiceAspect implements BeanServiceAspectInterface {
             persistentFormPo.setPersistentFormCode(persistentDto.getPersistentCode());
             persistentFormPo.setPersistentFormName(persistentDto.getPersistentName());
             persistentFormPo.setPersistentFormType(DEFAULT_FORM);
-            int formAdd = persistentFormRepository.add(persistentFormPo);
-            if (formAdd > 0) {
+            String formAdd = persistentFormRepository.add(persistentFormPo);
+            if (StrUtil.isNotEmpty(formAdd)) {
                 logger.info("formAdd:{}", persistentFormPo);
             }
         }
@@ -98,8 +99,8 @@ public class PersistentServiceAspect implements BeanServiceAspectInterface {
             persistentTablePo = new PersistentTablePo();
             persistentTablePo.setPersistentTableCode(persistentDto.getPersistentCode());
             persistentTablePo.setPersistentTableName(persistentDto.getPersistentName());
-            int tableAdd = persistentTableRepository.add(persistentTablePo);
-            if (tableAdd > 0) {
+            String tableAdd = persistentTableRepository.add(persistentTablePo);
+            if (StrUtil.isNotEmpty(tableAdd)) {
                 logger.info("tableAdd:{}", persistentTablePo);
             }
         }

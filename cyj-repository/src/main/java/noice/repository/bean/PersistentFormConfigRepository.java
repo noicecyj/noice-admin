@@ -41,8 +41,9 @@ public class PersistentFormConfigRepository implements BeanRepository<Persistent
     }
 
     @Override
-    public int delete(String id) {
-        return mapper.deleteById(id);
+    public String delete(String id) {
+        int delete = mapper.deleteById(id);
+        return delete == 0 ? null : id;
     }
 
     @Override

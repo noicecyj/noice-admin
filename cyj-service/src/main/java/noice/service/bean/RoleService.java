@@ -67,7 +67,7 @@ public class RoleService implements BeanService<RoleDto> {
     }
 
     @Override
-    public int deleteOne(String id) {
+    public String deleteOne(String id) {
         return repository.delete(id);
     }
 
