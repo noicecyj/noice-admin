@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/ice.config.mts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/ice.config.mts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/handler/bean/BeanServiceAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/handler/bean/BeanServiceAspect.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -275,11 +274,11 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest" />
-      <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest2" />
+      <item itemvalue="JAR 应用程序.cyj-auth-0.0.1-SNAPSHOT.jar" />
       <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest" />
       <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.menuBeanTest" />
-      <item itemvalue="JAR 应用程序.cyj-auth-0.0.1-SNAPSHOT.jar" />
+      <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest" />
+      <item itemvalue="JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest2" />
       <item itemvalue="Spring Boot.CyjAuthApplication" />
       <item itemvalue="Spring Boot.CyjEntityCreaterApplication" />
     </list>
@@ -433,14 +432,7 @@
       <workItem from="1736735464809" duration="1939000" />
       <workItem from="1737806623660" duration="8123000" />
       <workItem from="1737854251088" duration="12760000" />
-    </task>
-    <task id="LOCAL-00191" summary="优化表单布局及字段逻辑">
-      <option name="closed" value="true" />
-      <created>1734095220936</created>
-      <option name="number" value="00191" />
-      <option name="presentableId" value="LOCAL-00191" />
-      <option name="project" value="LOCAL" />
-      <updated>1734095220936</updated>
+      <workItem from="1737897654751" duration="5048000" />
     </task>
     <task id="LOCAL-00192" summary="优化表单布局及字段逻辑">
       <option name="closed" value="true" />
@@ -826,7 +818,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737864851376</updated>
     </task>
-    <option name="localTasksCounter" value="240" />
+    <task id="LOCAL-00240" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1737904048442</created>
+      <option name="number" value="00240" />
+      <option name="presentableId" value="LOCAL-00240" />
+      <option name="project" value="LOCAL" />
+      <updated>1737904048442</updated>
+    </task>
+    <option name="localTasksCounter" value="241" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

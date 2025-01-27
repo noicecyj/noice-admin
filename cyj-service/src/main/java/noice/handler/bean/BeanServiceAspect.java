@@ -35,19 +35,19 @@ public class BeanServiceAspect {
 
     @Around("addPoint()")
     public Object addCutAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        Map<String, BeanServiceAspectInterface> beanServiceAspectInterfaces = this.getMethodType(joinPoint);
+        Map<String, BeanServiceAspectInterface> beanServiceAspectInterfaceMap = this.getMethodType(joinPoint);
         JSONObject param = checkParam(joinPoint);
         logger.debug("===================== bean Service addOneBefore start ====================");
         JSONObject beforeInfo = new JSONObject();
         if (param != null) {
-            beanServiceAspectInterfaces.forEach((method, beanServiceAspectInterface) -> beforeInfo.put(method, beanServiceAspectInterface.addOneBefore(param)));
+            beanServiceAspectInterfaceMap.forEach((method, beanServiceAspectInterface) -> beforeInfo.put(method, beanServiceAspectInterface.addOneBefore(param)));
         }
         logger.debug("===================== bean Service addOneBefore end ====================");
         Object proceed = joinPoint.proceed();
         JSONObject result = checkReturn(proceed);
         logger.debug("===================== bean Service addOneAfter start ====================");
         if (param != null) {
-            beanServiceAspectInterfaces.forEach((method, beanServiceAspectInterface) -> beanServiceAspectInterface.addOneAfter(param, result, beforeInfo.getJSONObject(method)));
+            beanServiceAspectInterfaceMap.forEach((method, beanServiceAspectInterface) -> beanServiceAspectInterface.addOneAfter(param, result, beforeInfo.getJSONObject(method)));
         }
         logger.debug("===================== bean Service addOneAfter end ====================");
         return proceed;
@@ -59,19 +59,19 @@ public class BeanServiceAspect {
 
     @Around("deletePoint()")
     public Object deleteCutAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        Map<String, BeanServiceAspectInterface> beanServiceAspectInterfaces = this.getMethodType(joinPoint);
+        Map<String, BeanServiceAspectInterface> beanServiceAspectInterfaceMap = this.getMethodType(joinPoint);
         JSONObject param = checkParam(joinPoint);
         logger.debug("===================== bean Service deleteOneBefore start ====================");
         JSONObject beforeInfo = new JSONObject();
         if (param != null) {
-            beanServiceAspectInterfaces.forEach((method, beanServiceAspectInterface) -> beforeInfo.put(method, beanServiceAspectInterface.deleteOneBefore(param)));
+            beanServiceAspectInterfaceMap.forEach((method, beanServiceAspectInterface) -> beforeInfo.put(method, beanServiceAspectInterface.deleteOneBefore(param)));
         }
         logger.debug("===================== bean Service deleteOneBefore end ====================");
         Object proceed = joinPoint.proceed();
         JSONObject result = checkReturn(proceed);
         logger.debug("===================== bean Service deleteOneAfter start ====================");
         if (param != null) {
-            beanServiceAspectInterfaces.forEach((method, beanServiceAspectInterface) -> beanServiceAspectInterface.deleteOneAfter(param, result, beforeInfo.getJSONObject(method)));
+            beanServiceAspectInterfaceMap.forEach((method, beanServiceAspectInterface) -> beanServiceAspectInterface.deleteOneAfter(param, result, beforeInfo.getJSONObject(method)));
         }
         logger.debug("===================== bean Service deleteOneAfter end ====================");
         return proceed;
@@ -83,19 +83,19 @@ public class BeanServiceAspect {
 
     @Around("updatePoint()")
     public Object updateCutAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        Map<String, BeanServiceAspectInterface> beanServiceAspectInterfaces = this.getMethodType(joinPoint);
+        Map<String, BeanServiceAspectInterface> beanServiceAspectInterfaceMap = this.getMethodType(joinPoint);
         JSONObject param = checkParam(joinPoint);
         logger.debug("===================== bean Service updateOneBefore start ====================");
         JSONObject beforeInfo = new JSONObject();
         if (param != null) {
-            beanServiceAspectInterfaces.forEach((method, beanServiceAspectInterface) -> beforeInfo.put(method, beanServiceAspectInterface.updateOneBefore(param)));
+            beanServiceAspectInterfaceMap.forEach((method, beanServiceAspectInterface) -> beforeInfo.put(method, beanServiceAspectInterface.updateOneBefore(param)));
         }
         logger.debug("===================== bean Service updateOneBefore end ====================");
         Object proceed = joinPoint.proceed();
         JSONObject result = checkReturn(proceed);
         logger.debug("===================== bean Service updateOneAfter start ====================");
         if (param != null) {
-            beanServiceAspectInterfaces.forEach((method, beanServiceAspectInterface) -> beanServiceAspectInterface.updateOneAfter(param, result, beforeInfo.getJSONObject(method)));
+            beanServiceAspectInterfaceMap.forEach((method, beanServiceAspectInterface) -> beanServiceAspectInterface.updateOneAfter(param, result, beforeInfo.getJSONObject(method)));
         }
         logger.debug("===================== bean Service updateOneAfter end ====================");
         return proceed;
@@ -107,19 +107,19 @@ public class BeanServiceAspect {
 
     @Around("findPoint()")
     public Object findCutAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        Map<String, BeanServiceAspectInterface> beanServiceAspectInterfaces = this.getMethodType(joinPoint);
+        Map<String, BeanServiceAspectInterface> beanServiceAspectInterfaceMap = this.getMethodType(joinPoint);
         JSONObject param = checkParam(joinPoint);
         logger.debug("===================== bean Service findOneBefore start ====================");
         JSONObject beforeInfo = new JSONObject();
         if (param != null) {
-            beanServiceAspectInterfaces.forEach((method, beanServiceAspectInterface) -> beforeInfo.put(method, beanServiceAspectInterface.findOneBefore(param)));
+            beanServiceAspectInterfaceMap.forEach((method, beanServiceAspectInterface) -> beforeInfo.put(method, beanServiceAspectInterface.findOneBefore(param)));
         }
         logger.debug("===================== bean Service findOneBefore end ====================");
         Object proceed = joinPoint.proceed();
         JSONObject result = checkReturn(proceed);
         logger.debug("===================== bean Service findOneAfter start ====================");
         if (param != null) {
-            beanServiceAspectInterfaces.forEach((method, beanServiceAspectInterface) -> beanServiceAspectInterface.findOneAfter(param, result, beforeInfo.getJSONObject(method)));
+            beanServiceAspectInterfaceMap.forEach((method, beanServiceAspectInterface) -> beanServiceAspectInterface.findOneAfter(param, result, beforeInfo.getJSONObject(method)));
         }
         logger.debug("===================== bean Service findOneAfter end ====================");
         return proceed;
@@ -131,19 +131,19 @@ public class BeanServiceAspect {
 
     @Around("findListPoint()")
     public Object findListCutAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        Map<String, BeanServiceAspectInterface> beanServiceAspectInterfaces = this.getMethodType(joinPoint);
+        Map<String, BeanServiceAspectInterface> beanServiceAspectInterfaceMap = this.getMethodType(joinPoint);
         JSONObject param = checkParam(joinPoint);
         logger.debug("===================== bean Service findListBefore start ====================");
         JSONObject beforeInfo = new JSONObject();
         if (param != null) {
-            beanServiceAspectInterfaces.forEach((method, beanServiceAspectInterface) -> beforeInfo.put(method, beanServiceAspectInterface.findListBefore(param)));
+            beanServiceAspectInterfaceMap.forEach((method, beanServiceAspectInterface) -> beforeInfo.put(method, beanServiceAspectInterface.findListBefore(param)));
         }
         logger.debug("===================== bean Service findListBefore end ====================");
         Object proceed = joinPoint.proceed();
         JSONObject result = checkReturn(proceed);
         logger.debug("===================== bean Service findListAfter start ====================");
         if (param != null) {
-            beanServiceAspectInterfaces.forEach((method, beanServiceAspectInterface) -> beanServiceAspectInterface.findListAfter(param, result, beforeInfo.getJSONObject(method)));
+            beanServiceAspectInterfaceMap.forEach((method, beanServiceAspectInterface) -> beanServiceAspectInterface.findListAfter(param, result, beforeInfo.getJSONObject(method)));
         }
         logger.debug("===================== bean Service findListAfter end ====================");
         return proceed;
@@ -155,19 +155,19 @@ public class BeanServiceAspect {
 
     @Around("findPagePoint()")
     public Object findPageCutAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        Map<String, BeanServiceAspectInterface> beanServiceAspectInterfaces = this.getMethodType(joinPoint);
+        Map<String, BeanServiceAspectInterface> beanServiceAspectInterfaceMap = this.getMethodType(joinPoint);
         JSONObject param = checkParam(joinPoint);
         logger.debug("===================== bean Service findListBefore start ====================");
         JSONObject beforeInfo = new JSONObject();
         if (param != null) {
-            beanServiceAspectInterfaces.forEach((method, beanServiceAspectInterface) -> beforeInfo.put(method, beanServiceAspectInterface.findPageBefore(param)));
+            beanServiceAspectInterfaceMap.forEach((method, beanServiceAspectInterface) -> beforeInfo.put(method, beanServiceAspectInterface.findPageBefore(param)));
         }
         logger.debug("===================== bean Service findListBefore end ====================");
         Object proceed = joinPoint.proceed();
         JSONObject result = checkReturn(proceed);
         logger.debug("===================== bean Service findListAfter start ====================");
         if (param != null) {
-            beanServiceAspectInterfaces.forEach((method, beanServiceAspectInterface) -> beanServiceAspectInterface.findPageAfter(param, result, beforeInfo.getJSONObject(method)));
+            beanServiceAspectInterfaceMap.forEach((method, beanServiceAspectInterface) -> beanServiceAspectInterface.findPageAfter(param, result, beforeInfo.getJSONObject(method)));
         }
         logger.debug("===================== bean Service findListAfter end ====================");
         return proceed;
@@ -211,19 +211,19 @@ public class BeanServiceAspect {
         List<String> split = StrUtil.split(classFullName, ".");
         String name = split.get(split.size() - 1);
         logger.debug("signature:{}", name);
-        Map<String, BeanServiceAspectInterface> beanServiceAspectInterfaces = new TreeMap<>();
+        Map<String, BeanServiceAspectInterface> beanServiceAspectInterfaceMap = new TreeMap<>();
         Map<String, BeanServiceAspectInterface> beansOfType = SpringUtil.getBeansOfType(BeanServiceAspectInterface.class);
         beansOfType.forEach((method, beanServiceAspectInterface) -> {
             logger.debug("method:{}", method);
             logger.debug("beanServiceAspectInterface:{}", beanServiceAspectInterface);
-            if (method.contains(name)) {
-                beanServiceAspectInterfaces.put(method, beanServiceAspectInterface);
+            if (method.contains(name) && method.contains("ServiceAspect")) {
+                beanServiceAspectInterfaceMap.put(method, beanServiceAspectInterface);
             }
         });
-        if (beanServiceAspectInterfaces.isEmpty()) {
-            beanServiceAspectInterfaces.put("beanServiceAspectInterface", beansOfType.get("beanServiceAspectInterface"));
+        if (beanServiceAspectInterfaceMap.isEmpty()) {
+            beanServiceAspectInterfaceMap.put("beanServiceAspectInterface", beansOfType.get("beanServiceAspectInterface"));
         }
-        return beanServiceAspectInterfaces;
+        return beanServiceAspectInterfaceMap;
     }
 
 }

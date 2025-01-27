@@ -1,6 +1,5 @@
 package noice.handler.bean;
 
-import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import com.alibaba.fastjson2.JSONArray;
@@ -19,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 @Aspect
 @Component
@@ -32,19 +32,19 @@ public class BeanRepositoryAspect {
 
     @Around("addPoint()")
     public Object addCutAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        BeanRepositoryAspectInterface beanRepositoryAspectInterface = this.getMethodType(joinPoint);
+        Map<String, BeanRepositoryAspectInterface> beanRepositoryAspectInterfaceMap = this.getMethodType(joinPoint);
         JSONObject param = checkParam(joinPoint);
         logger.debug("===================== bean Repository addBefore start ====================");
-        JSONObject beforeInfo = null;
+        JSONObject beforeInfo = new JSONObject();
         if (param != null) {
-            beforeInfo = beanRepositoryAspectInterface.addBefore(param);
+            beanRepositoryAspectInterfaceMap.forEach((method, beanRepositoryAspectInterface) -> beforeInfo.put(method, beanRepositoryAspectInterface.addBefore(param)));
         }
         logger.debug("===================== bean Repository addBefore end ====================");
         Object proceed = joinPoint.proceed();
         JSONObject result = checkReturn(proceed);
         logger.debug("===================== bean Repository addAfter start ====================");
         if (param != null) {
-            beanRepositoryAspectInterface.addAfter(param, result, ObjectUtil.isNotNull(beforeInfo) ? beforeInfo : new JSONObject());
+            beanRepositoryAspectInterfaceMap.forEach((method, beanRepositoryAspectInterface) -> beanRepositoryAspectInterface.addAfter(param, result, beforeInfo.getJSONObject(method)));
         }
         logger.debug("===================== bean Repository addAfter end ====================");
         return proceed;
@@ -56,19 +56,19 @@ public class BeanRepositoryAspect {
 
     @Around("deletePoint()")
     public Object deleteCutAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        BeanRepositoryAspectInterface beanRepositoryAspectInterface = this.getMethodType(joinPoint);
+        Map<String, BeanRepositoryAspectInterface> beanRepositoryAspectInterfaceMap = this.getMethodType(joinPoint);
         JSONObject param = checkParam(joinPoint);
         logger.debug("===================== bean Repository deleteBefore start ====================");
-        JSONObject beforeInfo = null;
+        JSONObject beforeInfo = new JSONObject();
         if (param != null) {
-            beforeInfo = beanRepositoryAspectInterface.deleteBefore(param);
+            beanRepositoryAspectInterfaceMap.forEach((method, beanRepositoryAspectInterface) -> beforeInfo.put(method, beanRepositoryAspectInterface.deleteBefore(param)));
         }
         logger.debug("===================== bean Repository deleteBefore end ====================");
         Object proceed = joinPoint.proceed();
         JSONObject result = checkReturn(proceed);
         logger.debug("===================== bean Repository deleteAfter start ====================");
         if (param != null) {
-            beanRepositoryAspectInterface.deleteAfter(param, result, ObjectUtil.isNotNull(beforeInfo) ? beforeInfo : new JSONObject());
+            beanRepositoryAspectInterfaceMap.forEach((method, beanRepositoryAspectInterface) -> beanRepositoryAspectInterface.deleteAfter(param, result, beforeInfo.getJSONObject(method)));
         }
         logger.debug("===================== bean Repository deleteAfter end ====================");
         return proceed;
@@ -80,19 +80,19 @@ public class BeanRepositoryAspect {
 
     @Around("updatePoint()")
     public Object updateCutAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        BeanRepositoryAspectInterface beanRepositoryAspectInterface = this.getMethodType(joinPoint);
+        Map<String, BeanRepositoryAspectInterface> beanRepositoryAspectInterfaceMap = this.getMethodType(joinPoint);
         JSONObject param = checkParam(joinPoint);
         logger.debug("===================== bean Repository updateBefore start ====================");
-        JSONObject beforeInfo = null;
+        JSONObject beforeInfo = new JSONObject();
         if (param != null) {
-            beforeInfo = beanRepositoryAspectInterface.updateBefore(param);
+            beanRepositoryAspectInterfaceMap.forEach((method, beanRepositoryAspectInterface) -> beforeInfo.put(method, beanRepositoryAspectInterface.updateBefore(param)));
         }
         logger.debug("===================== bean Repository updateBefore end ====================");
         Object proceed = joinPoint.proceed();
         JSONObject result = checkReturn(proceed);
         logger.debug("===================== bean Repository updateAfter start ====================");
         if (param != null) {
-            beanRepositoryAspectInterface.updateAfter(param, result, ObjectUtil.isNotNull(beforeInfo) ? beforeInfo : new JSONObject());
+            beanRepositoryAspectInterfaceMap.forEach((method, beanRepositoryAspectInterface) -> beanRepositoryAspectInterface.updateAfter(param, result, beforeInfo.getJSONObject(method)));
         }
         logger.debug("===================== bean Repository updateAfter end ====================");
         return proceed;
@@ -104,19 +104,19 @@ public class BeanRepositoryAspect {
 
     @Around("countPoint()")
     public Object countCutAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        BeanRepositoryAspectInterface beanRepositoryAspectInterface = this.getMethodType(joinPoint);
+        Map<String, BeanRepositoryAspectInterface> beanRepositoryAspectInterfaceMap = this.getMethodType(joinPoint);
         JSONObject param = checkParam(joinPoint);
         logger.debug("===================== bean Repository countBefore start ====================");
-        JSONObject beforeInfo = null;
+        JSONObject beforeInfo = new JSONObject();
         if (param != null) {
-            beforeInfo = beanRepositoryAspectInterface.countBefore(param);
+            beanRepositoryAspectInterfaceMap.forEach((method, beanRepositoryAspectInterface) -> beforeInfo.put(method, beanRepositoryAspectInterface.countBefore(param)));
         }
         logger.debug("===================== bean Repository countBefore end ====================");
         Object proceed = joinPoint.proceed();
         JSONObject result = checkReturn(proceed);
         logger.debug("===================== bean Repository countAfter start ====================");
         if (param != null) {
-            beanRepositoryAspectInterface.countAfter(param, result, ObjectUtil.isNotNull(beforeInfo) ? beforeInfo : new JSONObject());
+            beanRepositoryAspectInterfaceMap.forEach((method, beanRepositoryAspectInterface) -> beanRepositoryAspectInterface.countAfter(param, result, beforeInfo.getJSONObject(method)));
         }
         logger.debug("===================== bean Repository countAfter end ====================");
         return proceed;
@@ -128,19 +128,19 @@ public class BeanRepositoryAspect {
 
     @Around("findPoint()")
     public Object findCutAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        BeanRepositoryAspectInterface beanRepositoryAspectInterface = this.getMethodType(joinPoint);
+        Map<String, BeanRepositoryAspectInterface> beanRepositoryAspectInterfaceMap = this.getMethodType(joinPoint);
         JSONObject param = checkParam(joinPoint);
         logger.debug("===================== bean Repository findBefore start ====================");
-        JSONObject beforeInfo = null;
+        JSONObject beforeInfo = new JSONObject();
         if (param != null) {
-            beforeInfo = beanRepositoryAspectInterface.findBefore(param);
+            beanRepositoryAspectInterfaceMap.forEach((method, beanRepositoryAspectInterface) -> beforeInfo.put(method, beanRepositoryAspectInterface.findBefore(param)));
         }
         logger.debug("===================== bean Repository findBefore end ====================");
         Object proceed = joinPoint.proceed();
         JSONObject result = checkReturn(proceed);
         logger.debug("===================== bean Repository findAfter start ====================");
         if (param != null) {
-            beanRepositoryAspectInterface.findAfter(param, result, ObjectUtil.isNotNull(beforeInfo) ? beforeInfo : new JSONObject());
+            beanRepositoryAspectInterfaceMap.forEach((method, beanRepositoryAspectInterface) -> beanRepositoryAspectInterface.findAfter(param, result, beforeInfo.getJSONObject(method)));
         }
         logger.debug("===================== bean Repository findAfter end ====================");
         return proceed;
@@ -152,19 +152,19 @@ public class BeanRepositoryAspect {
 
     @Around("findListPoint()")
     public Object findListCutAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        BeanRepositoryAspectInterface beanRepositoryAspectInterface = this.getMethodType(joinPoint);
+        Map<String, BeanRepositoryAspectInterface> beanRepositoryAspectInterfaceMap = this.getMethodType(joinPoint);
         JSONObject param = checkParam(joinPoint);
         logger.debug("===================== bean Repository findListBefore start ====================");
-        JSONObject beforeInfo = null;
+        JSONObject beforeInfo = new JSONObject();
         if (param != null) {
-            beforeInfo = beanRepositoryAspectInterface.findListBefore(param);
+            beanRepositoryAspectInterfaceMap.forEach((method, beanRepositoryAspectInterface) -> beforeInfo.put(method, beanRepositoryAspectInterface.findListBefore(param)));
         }
         logger.debug("===================== bean Repository findListBefore end ====================");
         Object proceed = joinPoint.proceed();
         JSONObject result = checkReturn(proceed);
         logger.debug("===================== bean Repository findListAfter start ====================");
         if (param != null) {
-            beanRepositoryAspectInterface.findListAfter(param, result, ObjectUtil.isNotNull(beforeInfo) ? beforeInfo : new JSONObject());
+            beanRepositoryAspectInterfaceMap.forEach((method, beanRepositoryAspectInterface) -> beanRepositoryAspectInterface.findListAfter(param, result, beforeInfo.getJSONObject(method)));
         }
         logger.debug("===================== bean Repository findListAfter end ====================");
         return proceed;
@@ -176,19 +176,19 @@ public class BeanRepositoryAspect {
 
     @Around("findPagePoint()")
     public Object findPageCutAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        BeanRepositoryAspectInterface beanRepositoryAspectInterface = this.getMethodType(joinPoint);
+        Map<String, BeanRepositoryAspectInterface> beanRepositoryAspectInterfaceMap = this.getMethodType(joinPoint);
         JSONObject param = checkParam(joinPoint);
         logger.debug("===================== bean Repository findListBefore start ====================");
-        JSONObject beforeInfo = null;
+        JSONObject beforeInfo = new JSONObject();
         if (param != null) {
-            beforeInfo = beanRepositoryAspectInterface.findPageBefore(param);
+            beanRepositoryAspectInterfaceMap.forEach((method, beanRepositoryAspectInterface) -> beforeInfo.put(method, beanRepositoryAspectInterface.findPageBefore(param)));
         }
         logger.debug("===================== bean Repository findListBefore end ====================");
         Object proceed = joinPoint.proceed();
         JSONObject result = checkReturn(proceed);
         logger.debug("===================== bean Repository findListAfter start ====================");
         if (param != null) {
-            beanRepositoryAspectInterface.findPageAfter(param, result, ObjectUtil.isNotNull(beforeInfo) ? beforeInfo : new JSONObject());
+            beanRepositoryAspectInterfaceMap.forEach((method, beanRepositoryAspectInterface) -> beanRepositoryAspectInterface.findPageAfter(param, result, beforeInfo.getJSONObject(method)));
         }
         logger.debug("===================== bean Repository findListAfter end ====================");
         return proceed;
@@ -238,18 +238,25 @@ public class BeanRepositoryAspect {
         return returnObj;
     }
 
-    private BeanRepositoryAspectInterface getMethodType(ProceedingJoinPoint joinPoint) {
+    private Map<String, BeanRepositoryAspectInterface> getMethodType(ProceedingJoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         String classFullName = signature.getMethod().getDeclaringClass().getName();
         List<String> split = StrUtil.split(classFullName, ".");
         String name = split.get(split.size() - 1);
         logger.debug("signature:{}", name);
+        Map<String, BeanRepositoryAspectInterface> beanRepositoryAspectInterfaceMap = new TreeMap<>();
         Map<String, BeanRepositoryAspectInterface> beansOfType = SpringUtil.getBeansOfType(BeanRepositoryAspectInterface.class);
-        BeanRepositoryAspectInterface beanRepositoryAspectInterface = beansOfType.get(StrUtil.lowerFirst(name) + "Aspect");
-        if (beanRepositoryAspectInterface == null) {
-            beanRepositoryAspectInterface = beansOfType.get("beanRepositoryAspectInterface");
+        beansOfType.forEach((method, beanRepositoryAspectInterface) -> {
+            logger.debug("method:{}", method);
+            logger.debug("beanRepositoryAspectInterface:{}", beanRepositoryAspectInterface);
+            if (method.contains(name) && method.contains("RepositoryAspect")) {
+                beanRepositoryAspectInterfaceMap.put(method, beanRepositoryAspectInterface);
+            }
+        });
+        if (beanRepositoryAspectInterfaceMap.isEmpty()) {
+            beanRepositoryAspectInterfaceMap.put("beanRepositoryAspectInterface", beansOfType.get("beanRepositoryAspectInterface"));
         }
-        return beanRepositoryAspectInterface;
+        return beanRepositoryAspectInterfaceMap;
     }
 
 }
