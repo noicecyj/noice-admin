@@ -115,6 +115,7 @@ public class DMLBeanTableBuilder {
             PersistentPropertyPo id = new PersistentPropertyPo();
             id.setPersistentPropertyCode("id");
             id.setPersistentPropertyType("id");
+            id.setPersistentPropertyNull(true);
             sb.append(dmlBeanFieldBuilder.builder(id));
             for (PersistentPropertyPo persistentPropertyPo : getPersistentPropertyPoList()) {
                 sb.append(dmlBeanFieldBuilder.builder(persistentPropertyPo));
@@ -123,12 +124,14 @@ public class DMLBeanTableBuilder {
             sortCode.setPersistentPropertyCode("sort_code");
             sortCode.setPersistentPropertyType("int");
             sortCode.setPersistentPropertyName("排序值");
+            sortCode.setPersistentPropertyNull(true);
             sortCode.setPersistentPropertyDefaultValue("1");
             sb.append(dmlBeanFieldBuilder.builder(sortCode));
             PersistentPropertyPo status = new PersistentPropertyPo();
             status.setPersistentPropertyCode("status");
             status.setPersistentPropertyType("boolean");
             status.setPersistentPropertyName("状态");
+            status.setPersistentPropertyNull(true);
             sb.append(dmlBeanFieldBuilder.builder(status));
             PersistentPropertyPo createdDate = new PersistentPropertyPo();
             createdDate.setPersistentPropertyCode("created_date");
