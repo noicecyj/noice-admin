@@ -23,7 +23,7 @@ public interface BeanService<DTO extends BaseDtoBean> {
 
     String addOne(DTO dto);
 
-    int deleteOne(String id);
+    String deleteOne(String id);
 
     int updateOne(DTO dto);
 
