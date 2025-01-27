@@ -59,9 +59,9 @@ public class DMLBeanFieldBuilder {
 
     public void setNullFlag(boolean nullFlag) {
         if (nullFlag) {
-            this.nullFlag = "null\n";
-        } else {
             this.nullFlag = "not null\n";
+        } else {
+            this.nullFlag = "null\n";
         }
     }
 
