@@ -78,11 +78,12 @@ public class RepositoryBeanMethodBuilder extends MethodBase {
         public RepositoryBeanAddOnceBuilder builder(PersistentPo persistentPo) {
             String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
             this.setMethodStatement(StatementEnum.PUBLIC);
-            this.setMethodReturnType("int");
+            this.setMethodReturnType("String");
             this.setMethodAnnotationList();
+            this.setMethodBody();
             this.setMethodName("add");
             this.setMethodParamSet(poName);
-            this.setMethodReturnBody("return mapper.insert(po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));");
+            this.setMethodReturnBody("return insert == 0 ? null : po.getId();");
             return this;
         }
 
@@ -90,6 +91,12 @@ public class RepositoryBeanMethodBuilder extends MethodBase {
             List<String> methodParamSet = new ArrayList<>();
             methodParamSet.add(poName + "Po po");
             super.setMethodParamSet(methodParamSet);
+        }
+
+        public void setMethodBody() {
+            List<String> methodBodyList = new ArrayList<>();
+            methodBodyList.add("int insert = mapper.insert(po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));");
+            super.setMethodBody(methodBodyList);
         }
 
         public void setMethodAnnotationList() {

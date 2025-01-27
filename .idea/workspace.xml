@@ -6,15 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/aspect/service/bean/PersistentServiceAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/aspect/service/bean/PersistentServiceAspect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/factory/bean/ClassBeanFactoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/factory/bean/ClassBeanFactoryImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/handler/bean/BeanRepositoryAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/handler/bean/BeanRepositoryAspect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/handler/bean/BeanRepositoryAspectInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/handler/bean/BeanRepositoryAspectInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/handler/relation/RelationRepositoryAspectInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/handler/relation/RelationRepositoryAspectInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/PersistentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/PersistentRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/handler/bean/BeanServiceAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/handler/bean/BeanServiceAspect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/handler/bean/BeanServiceAspectInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/handler/bean/BeanServiceAspectInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/handler/relation/RelationServiceAspectInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/handler/relation/RelationServiceAspectInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/ice.config.mts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/ice.config.mts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -442,15 +436,7 @@
       <workItem from="1737806623660" duration="8123000" />
       <workItem from="1737854251088" duration="12760000" />
       <workItem from="1737897654751" duration="5048000" />
-      <workItem from="1737956976986" duration="4178000" />
-    </task>
-    <task id="LOCAL-00193" summary="优化表单布局及字段逻辑">
-      <option name="closed" value="true" />
-      <created>1734146604882</created>
-      <option name="number" value="00193" />
-      <option name="presentableId" value="LOCAL-00193" />
-      <option name="project" value="LOCAL" />
-      <updated>1734146604882</updated>
+      <workItem from="1737956976986" duration="5942000" />
     </task>
     <task id="LOCAL-00194" summary="优化表单布局及字段逻辑">
       <option name="closed" value="true" />
@@ -836,7 +822,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737957569997</updated>
     </task>
-    <option name="localTasksCounter" value="242" />
+    <task id="LOCAL-00242" summary="优化表单布局及字段逻辑">
+      <option name="closed" value="true" />
+      <created>1737961322807</created>
+      <option name="number" value="00242" />
+      <option name="presentableId" value="LOCAL-00242" />
+      <option name="project" value="LOCAL" />
+      <updated>1737961322807</updated>
+    </task>
+    <option name="localTasksCounter" value="243" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -899,27 +893,19 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/cyj-repository/src/main/java/noice/handler/bean/BeanRepositoryAspect.java</url>
-          <line>142</line>
-          <properties>
-            <option name="lambda-ordinal" value="-1" />
-          </properties>
-          <option name="timeStamp" value="4" />
+          <url>file://$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/aspect/service/bean/PersistentServiceAspect.java</url>
+          <line>113</line>
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/cyj-repository/src/main/java/noice/handler/bean/BeanRepositoryAspectInterface.java</url>
-          <line>62</line>
-          <option name="timeStamp" value="5" />
+          <url>file://$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/aspect/service/bean/PersistentServiceAspect.java</url>
+          <line>82</line>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/cyj-repository/src/main/java/noice/handler/bean/BeanRepositoryAspect.java</url>
-          <line>134</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/cyj-service/src/main/java/noice/handler/bean/BeanServiceAspect.java</url>
-          <line>222</line>
-          <option name="timeStamp" value="7" />
+          <line>252</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

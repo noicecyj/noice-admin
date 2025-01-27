@@ -216,7 +216,7 @@ public class BeanServiceAspect {
         beansOfType.forEach((method, beanServiceAspectInterface) -> {
             logger.debug("method:{}", method);
             logger.debug("beanServiceAspectInterface:{}", beanServiceAspectInterface);
-            if (method.contains(name) && method.contains("ServiceAspect") && !method.contains("BeanServiceAspect")) {
+            if (method.contains(StrUtil.lowerFirst(name)) && method.contains("ServiceAspect") && !method.contains("BeanServiceAspect")) {
                 beanServiceAspectInterfaceMap.put(method, beanServiceAspectInterface);
             }
         });
