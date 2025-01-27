@@ -249,7 +249,7 @@ public class BeanRepositoryAspect {
         beansOfType.forEach((method, beanRepositoryAspectInterface) -> {
             logger.debug("method:{}", method);
             logger.debug("beanRepositoryAspectInterface:{}", beanRepositoryAspectInterface);
-            if (method.contains(name) && method.contains("RepositoryAspect")) {
+            if (method.contains(name) && method.contains("RepositoryAspect") && !method.contains("BeanRepositoryAspect")) {
                 beanRepositoryAspectInterfaceMap.put(method, beanRepositoryAspectInterface);
             }
         });

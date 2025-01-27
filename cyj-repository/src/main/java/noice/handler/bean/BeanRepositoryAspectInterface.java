@@ -16,7 +16,7 @@ public interface BeanRepositoryAspectInterface {
     default void addAfter(JSONObject param, JSONObject result, JSONObject beforeInfo) {
         logger.debug("param:{}", param.toJSONString());
         logger.debug("result:{}", result);
-        logger.debug("beforeInfo:{}", beforeInfo.toJSONString());
+        logger.debug("beforeInfo:{}", beforeInfo);
     }
 
     default JSONObject deleteBefore(JSONObject param) {
@@ -27,7 +27,7 @@ public interface BeanRepositoryAspectInterface {
     default void deleteAfter(JSONObject param, JSONObject result, JSONObject beforeInfo) {
         logger.debug("param:{}", param.toJSONString());
         logger.debug("result:{}", result);
-        logger.debug("beforeInfo:{}", beforeInfo.toJSONString());
+        logger.debug("beforeInfo:{}", beforeInfo);
     }
 
     default JSONObject updateBefore(JSONObject param) {
@@ -38,7 +38,7 @@ public interface BeanRepositoryAspectInterface {
     default void updateAfter(JSONObject param, JSONObject result, JSONObject beforeInfo) {
         logger.debug("param:{}", param.toJSONString());
         logger.debug("result:{}", result);
-        logger.debug("beforeInfo:{}", beforeInfo.toJSONString());
+        logger.debug("beforeInfo:{}", beforeInfo);
     }
 
     default JSONObject countBefore(JSONObject param) {
@@ -49,7 +49,7 @@ public interface BeanRepositoryAspectInterface {
     default void countAfter(JSONObject param, JSONObject result, JSONObject beforeInfo) {
         logger.debug("param:{}", param.toJSONString());
         logger.debug("result:{}", result);
-        logger.debug("beforeInfo:{}", beforeInfo.toJSONString());
+        logger.debug("beforeInfo:{}", beforeInfo);
     }
 
     default JSONObject findBefore(JSONObject param) {
@@ -60,7 +60,7 @@ public interface BeanRepositoryAspectInterface {
     default void findAfter(JSONObject param, JSONObject result, JSONObject beforeInfo) {
         logger.debug("param:{}", param.toJSONString());
         logger.debug("result:{}", result.toJSONString());
-        logger.debug("beforeInfo:{}", beforeInfo.toJSONString());
+        logger.debug("beforeInfo:{}", beforeInfo);
     }
 
     default JSONObject findListBefore(JSONObject param) {
@@ -71,7 +71,7 @@ public interface BeanRepositoryAspectInterface {
     default void findListAfter(JSONObject param, JSONObject result, JSONObject beforeInfo) {
         logger.debug("param:{}", param.toJSONString());
         logger.debug("result:{}", result.toJSONString());
-        logger.debug("beforeInfo:{}", beforeInfo.toJSONString());
+        logger.debug("beforeInfo:{}", beforeInfo);
     }
 
     default JSONObject findPageBefore(JSONObject param) {
@@ -82,7 +82,7 @@ public interface BeanRepositoryAspectInterface {
     default void findPageAfter(JSONObject param, JSONObject result, JSONObject beforeInfo) {
         logger.debug("param:{}", param.toJSONString());
         logger.debug("result:{}", result.toJSONString());
-        logger.debug("beforeInfo:{}", beforeInfo.toJSONString());
+        logger.debug("beforeInfo:{}", beforeInfo);
     }
 
 }

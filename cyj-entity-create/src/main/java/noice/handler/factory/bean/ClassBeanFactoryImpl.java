@@ -385,7 +385,7 @@ public class ClassBeanFactoryImpl extends ClassFactoryImpl {
         if (tableFlag == 0) {
             SqlRunner.db().insert(dmlBeanTableAddBuilder.builder(persistentPo, persistentPropertyPoList, DATABASE).toString());
         } else {
-            logger.info(tableName + ":已存在");
+            logger.info("{}:已存在", tableName);
         }
         for (PersistentPropertyPo po : persistentPropertyPoList) {
             String columnName = po.getPersistentPropertyCode();
@@ -393,7 +393,7 @@ public class ClassBeanFactoryImpl extends ClassFactoryImpl {
             if (columnFlag == 0) {
                 SqlRunner.db().insert(dmlBeanFieldAddAlterBuilder.builder(po, tableName, DATABASE).toString());
             } else {
-                logger.info(tableName + ":" + columnName + ":已存在");
+                logger.info("{}:{}:已存在", tableName, columnName);
             }
         }
     }
@@ -404,7 +404,7 @@ public class ClassBeanFactoryImpl extends ClassFactoryImpl {
         if (tableFlag == 1) {
             SqlRunner.db().insert(dmlBeanTableDropBuilder.builder(tableName, DATABASE).toString());
         } else {
-            logger.info(tableName + ":不存在");
+            logger.info("{}:不存在", tableName);
         }
         for (PersistentPropertyPo po : persistentPropertyPoList) {
             String columnName = po.getPersistentPropertyCode();
@@ -412,7 +412,7 @@ public class ClassBeanFactoryImpl extends ClassFactoryImpl {
             if (columnFlag == 1) {
                 SqlRunner.db().insert(dmlBeanFieldDropAlterBuilder.builder(po, tableName, DATABASE).toString());
             } else {
-                logger.info(tableName + ":" + columnName + ":不存在");
+                logger.info("{}:{}:不存在", tableName, columnName);
             }
         }
     }

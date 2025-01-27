@@ -16,7 +16,7 @@ public interface RelationServiceAspectInterface {
     default void getAfter(JSONObject param, JSONObject result, JSONObject beforeInfo) {
         logger.debug("param:{}", param.toJSONString());
         logger.debug("result:{}", result);
-        logger.debug("beforeInfo:{}", beforeInfo.toJSONString());
+        logger.debug("beforeInfo:{}", beforeInfo);
     }
 
     default JSONObject setBefore(JSONObject param) {
@@ -27,6 +27,6 @@ public interface RelationServiceAspectInterface {
     default void setAfter(JSONObject param, JSONObject result, JSONObject beforeInfo) {
         logger.debug("param:{}", param.toJSONString());
         logger.debug("result:{}", result);
-        logger.debug("beforeInfo:{}", beforeInfo.toJSONString());
+        logger.debug("beforeInfo:{}", beforeInfo);
     }
 }
