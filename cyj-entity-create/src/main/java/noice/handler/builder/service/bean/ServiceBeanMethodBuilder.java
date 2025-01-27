@@ -321,6 +321,7 @@ public class ServiceBeanMethodBuilder extends MethodBase {
             for (String methodBody : getMethodBody()) {
                 sb.append("        ").append(methodBody).append("\n");
             }
+            sb.append("        ").append(getMethodReturnBody()).append("\n");
             sb.append("    }");
             return sb.toString();
         }
