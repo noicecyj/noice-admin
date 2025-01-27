@@ -201,7 +201,7 @@ public abstract class ClassFactoryImpl implements ClassFactory {
                 .orderByPersistentPropertyCodeAsc().getQueryWrapper());
         //查询一对多关系
         return propertyList.stream().map(persistentPropertyPo -> persistentRepository.find(persistentPropertyPo.getPersistentId()))
-                .filter(persistentPo -> "Bean".equals(persistentPo.getPersistentType())).distinct().collect(Collectors.toList());
+                .filter(persistentPo -> "Bean".equals(persistentPo.getPersistentType()) && !id.equals(persistentPo.getId())).distinct().collect(Collectors.toList());
     }
 
     public List<PersistentPropertyPo> findByPersistentId(String id) {
