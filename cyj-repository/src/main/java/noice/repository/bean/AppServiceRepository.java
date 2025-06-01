@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static noice.common.contants.Constant.USER_ID;
 
@@ -41,9 +42,9 @@ public class AppServiceRepository implements BeanRepository<AppServicePo> {
     }
 
     @Override
-    public String delete(String id) {
-        int delete = mapper.deleteById(id);
-        return delete == 0 ? null : id;
+    public String delete(AppServicePo po) {
+        int delete = mapper.deleteById(po.getId());
+        return delete == 0 ? null : po.getId();
     }
 
     @Override
@@ -52,8 +53,8 @@ public class AppServiceRepository implements BeanRepository<AppServicePo> {
     }
 
     @Override
-    public int deleteBatch(List<String> ids) {
-        return mapper.deleteByIds(ids);
+    public int deleteBatch(List<AppServicePo> poList) {
+        return mapper.deleteByIds(poList.stream().map(AppServicePo::getId).collect(Collectors.toList()));
     }
 
     @Override

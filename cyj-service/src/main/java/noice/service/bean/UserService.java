@@ -6,6 +6,7 @@ import noice.assembler.bean.UserServiceAssembler;
 import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.UserServiceConverter;
 import noice.entity.dto.bean.UserDto;
+import noice.entity.po.bean.UserPo;
 import noice.entity.po.relation.UserRolePo;
 import noice.handler.bean.BeanService;
 import noice.repository.bean.UserRepository;
@@ -59,7 +60,7 @@ public class UserService implements BeanService<UserDto> {
 
     @Override
     public String deleteOne(String id) {
-        return repository.delete(id);
+        return repository.delete(new UserPo().eqId(id));
     }
 
     @Override

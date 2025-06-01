@@ -188,6 +188,7 @@ public class ServiceBeanBuilder extends ClassBase {
         importPackageList.add("import noice.common.entity.dto.OptionDTO;");
         importPackageList.add("import noice.converter.bean." + poName + "ServiceConverter;");
         importPackageList.add("import noice.entity.dto.bean." + poName + "Dto;");
+        importPackageList.add("import noice.entity.po.bean." + poName + "Po;");
         for (PersistentPo one : getOtoN()) {
             importPackageList.add("import noice.entity.po.bean." + StrUtil.upperFirst(StrUtil.toCamelCase(one.getPersistentCode())) + "Po;");
         }

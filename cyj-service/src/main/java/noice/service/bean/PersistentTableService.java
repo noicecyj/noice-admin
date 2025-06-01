@@ -7,10 +7,11 @@ import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.PersistentTableServiceConverter;
 import noice.entity.dto.bean.PersistentTableDto;
 import noice.entity.po.bean.PersistentTableConfigPo;
+import noice.entity.po.bean.PersistentTablePo;
 import noice.entity.po.bean.PersistentTableSearchConfigPo;
 import noice.handler.bean.BeanService;
-import noice.repository.bean.PersistentTableRepository;
 import noice.repository.bean.PersistentTableConfigRepository;
+import noice.repository.bean.PersistentTableRepository;
 import noice.repository.bean.PersistentTableSearchConfigRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +71,7 @@ public class PersistentTableService implements BeanService<PersistentTableDto> {
     public String deleteOne(String id) {
         persistentTableConfigRepository.findList(new PersistentTableConfigPo().eqPersistentTableId(id).getQueryWrapper()).forEach(po -> persistentTableConfigRepository.update(po.eqPersistentTableId(null)));
         persistentTableSearchConfigRepository.findList(new PersistentTableSearchConfigPo().eqPersistentTableId(id).getQueryWrapper()).forEach(po -> persistentTableSearchConfigRepository.update(po.eqPersistentTableId(null)));
-        return repository.delete(id);
+        return repository.delete(new PersistentTablePo().eqId(id));
     }
 
     @Override

@@ -6,6 +6,7 @@ import noice.assembler.bean.SqlServiceAssembler;
 import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.SqlServiceConverter;
 import noice.entity.dto.bean.SqlDto;
+import noice.entity.po.bean.SqlPo;
 import noice.handler.bean.BeanService;
 import noice.repository.bean.SqlRepository;
 import org.jetbrains.annotations.NotNull;
@@ -50,7 +51,7 @@ public class SqlService implements BeanService<SqlDto> {
 
     @Override
     public String deleteOne(String id) {
-        return repository.delete(id);
+        return repository.delete(new SqlPo().eqId(id));
     }
 
     @Override

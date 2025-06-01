@@ -285,7 +285,7 @@ public class ServiceBeanMethodBuilder extends MethodBase {
             this.setMethodBody(poName);
             this.setMethodName("deleteOne");
             this.setMethodParamSet();
-            this.setMethodReturnBody("return repository.delete(id);");
+            this.setMethodReturnBody("return repository.delete(new " + poName + "Po().eqId(id));");
             return this;
         }
 

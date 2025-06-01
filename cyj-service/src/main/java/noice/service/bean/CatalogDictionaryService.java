@@ -6,6 +6,7 @@ import noice.assembler.bean.CatalogDictionaryServiceAssembler;
 import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.CatalogDictionaryServiceConverter;
 import noice.entity.dto.bean.CatalogDictionaryDto;
+import noice.entity.po.bean.CatalogDictionaryPo;
 import noice.handler.bean.BeanService;
 import noice.repository.bean.CatalogDictionaryRepository;
 import org.jetbrains.annotations.NotNull;
@@ -50,7 +51,7 @@ public class CatalogDictionaryService implements BeanService<CatalogDictionaryDt
 
     @Override
     public String deleteOne(String id) {
-        return repository.delete(id);
+        return repository.delete(new CatalogDictionaryPo().eqId(id));
     }
 
     @Override

@@ -41,9 +41,9 @@ public class CatalogRepository implements BeanRepository<CatalogPo> {
     }
 
     @Override
-    public String delete(String id) {
-        int delete = mapper.deleteById(id);
-        return delete == 0 ? null : id;
+    public String delete(CatalogPo po) {
+        int delete = mapper.deleteById(po.getId());
+        return delete == 0 ? null : po.getId();
     }
 
     @Override
@@ -52,7 +52,7 @@ public class CatalogRepository implements BeanRepository<CatalogPo> {
     }
 
     @Override
-    public int deleteBatch(List<String> ids) {
+    public int deleteBatch(List<CatalogPo> ids) {
         return mapper.deleteByIds(ids);
     }
 

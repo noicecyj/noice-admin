@@ -6,6 +6,7 @@ import noice.assembler.bean.EnterpriseServiceAssembler;
 import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.EnterpriseServiceConverter;
 import noice.entity.dto.bean.EnterpriseDto;
+import noice.entity.po.bean.EnterprisePo;
 import noice.entity.po.bean.UserPo;
 import noice.handler.bean.BeanService;
 import noice.repository.bean.EnterpriseRepository;
@@ -60,7 +61,7 @@ public class EnterpriseService implements BeanService<EnterpriseDto> {
     @Override
     public String deleteOne(String id) {
         userRepository.findList(new UserPo().eqEnterpriseId(id).getQueryWrapper()).forEach(po -> userRepository.update(po.eqEnterpriseId(null)));
-        return repository.delete(id);
+        return repository.delete(new EnterprisePo().eqId(id));
     }
 
     @Override

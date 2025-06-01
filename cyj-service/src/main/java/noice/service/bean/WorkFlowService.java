@@ -6,6 +6,7 @@ import noice.assembler.bean.WorkFlowServiceAssembler;
 import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.WorkFlowServiceConverter;
 import noice.entity.dto.bean.WorkFlowDto;
+import noice.entity.po.bean.WorkFlowPo;
 import noice.handler.bean.BeanService;
 import noice.repository.bean.WorkFlowRepository;
 import org.jetbrains.annotations.NotNull;
@@ -50,7 +51,7 @@ public class WorkFlowService implements BeanService<WorkFlowDto> {
 
     @Override
     public String deleteOne(String id) {
-        return repository.delete(id);
+        return repository.delete(new WorkFlowPo().eqId(id));
     }
 
     @Override

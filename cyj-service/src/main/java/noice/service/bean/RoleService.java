@@ -6,12 +6,13 @@ import noice.assembler.bean.RoleServiceAssembler;
 import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.RoleServiceConverter;
 import noice.entity.dto.bean.RoleDto;
-import noice.entity.po.relation.UserRolePo;
+import noice.entity.po.bean.RolePo;
 import noice.entity.po.relation.RoleAuthorityPo;
+import noice.entity.po.relation.UserRolePo;
 import noice.handler.bean.BeanService;
 import noice.repository.bean.RoleRepository;
-import noice.repository.relation.UserRoleRepository;
 import noice.repository.relation.RoleAuthorityRepository;
+import noice.repository.relation.UserRoleRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,7 +69,7 @@ public class RoleService implements BeanService<RoleDto> {
 
     @Override
     public String deleteOne(String id) {
-        return repository.delete(id);
+        return repository.delete(new RolePo().eqId(id));
     }
 
     @Override

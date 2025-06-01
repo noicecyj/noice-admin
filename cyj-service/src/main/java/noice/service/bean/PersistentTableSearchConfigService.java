@@ -6,6 +6,7 @@ import noice.assembler.bean.PersistentTableSearchConfigServiceAssembler;
 import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.PersistentTableSearchConfigServiceConverter;
 import noice.entity.dto.bean.PersistentTableSearchConfigDto;
+import noice.entity.po.bean.PersistentTableSearchConfigPo;
 import noice.handler.bean.BeanService;
 import noice.repository.bean.PersistentTableSearchConfigRepository;
 import org.jetbrains.annotations.NotNull;
@@ -50,7 +51,7 @@ public class PersistentTableSearchConfigService implements BeanService<Persisten
 
     @Override
     public String deleteOne(String id) {
-        return repository.delete(id);
+        return repository.delete(new PersistentTableSearchConfigPo().eqId(id));
     }
 
     @Override

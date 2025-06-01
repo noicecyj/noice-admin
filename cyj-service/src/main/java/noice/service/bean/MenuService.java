@@ -6,6 +6,7 @@ import noice.assembler.bean.MenuServiceAssembler;
 import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.MenuServiceConverter;
 import noice.entity.dto.bean.MenuDto;
+import noice.entity.po.bean.MenuPo;
 import noice.handler.bean.BeanService;
 import noice.repository.bean.MenuRepository;
 import org.jetbrains.annotations.NotNull;
@@ -50,7 +51,7 @@ public class MenuService implements BeanService<MenuDto> {
 
     @Override
     public String deleteOne(String id) {
-        return repository.delete(id);
+        return repository.delete(new MenuPo().eqId(id));
     }
 
     @Override

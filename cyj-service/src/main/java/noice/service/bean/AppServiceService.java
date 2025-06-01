@@ -6,6 +6,7 @@ import noice.assembler.bean.AppServiceServiceAssembler;
 import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.AppServiceServiceConverter;
 import noice.entity.dto.bean.AppServiceDto;
+import noice.entity.po.bean.AppServicePo;
 import noice.entity.po.bean.PersistentPo;
 import noice.handler.bean.BeanService;
 import noice.repository.bean.AppServiceRepository;
@@ -60,7 +61,7 @@ public class AppServiceService implements BeanService<AppServiceDto> {
     @Override
     public String deleteOne(String id) {
         persistentRepository.findList(new PersistentPo().eqAppServiceId(id).getQueryWrapper()).forEach(po -> persistentRepository.update(po.eqAppServiceId(null)));
-        return repository.delete(id);
+        return repository.delete(new AppServicePo().eqId(id));
     }
 
     @Override

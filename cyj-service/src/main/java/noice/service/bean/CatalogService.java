@@ -7,9 +7,10 @@ import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.CatalogServiceConverter;
 import noice.entity.dto.bean.CatalogDto;
 import noice.entity.po.bean.CatalogDictionaryPo;
+import noice.entity.po.bean.CatalogPo;
 import noice.handler.bean.BeanService;
-import noice.repository.bean.CatalogRepository;
 import noice.repository.bean.CatalogDictionaryRepository;
+import noice.repository.bean.CatalogRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,7 +61,7 @@ public class CatalogService implements BeanService<CatalogDto> {
     @Override
     public String deleteOne(String id) {
         catalogDictionaryRepository.findList(new CatalogDictionaryPo().eqCatalogId(id).getQueryWrapper()).forEach(po -> catalogDictionaryRepository.update(po.eqCatalogId(null)));
-        return repository.delete(id);
+        return repository.delete(new CatalogPo().eqId(id));
     }
 
     @Override

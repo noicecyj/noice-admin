@@ -7,15 +7,16 @@ import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.PersistentServiceConverter;
 import noice.entity.dto.bean.PersistentDto;
 import noice.entity.po.bean.InterfacePo;
-import noice.entity.po.bean.PersistentTablePo;
 import noice.entity.po.bean.PersistentFormPo;
+import noice.entity.po.bean.PersistentPo;
 import noice.entity.po.bean.PersistentPropertyPo;
+import noice.entity.po.bean.PersistentTablePo;
 import noice.handler.bean.BeanService;
-import noice.repository.bean.PersistentRepository;
 import noice.repository.bean.InterfaceRepository;
-import noice.repository.bean.PersistentTableRepository;
 import noice.repository.bean.PersistentFormRepository;
 import noice.repository.bean.PersistentPropertyRepository;
+import noice.repository.bean.PersistentRepository;
+import noice.repository.bean.PersistentTableRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -90,7 +91,7 @@ public class PersistentService implements BeanService<PersistentDto> {
         persistentTableRepository.findList(new PersistentTablePo().eqPersistentId(id).getQueryWrapper()).forEach(po -> persistentTableRepository.update(po.eqPersistentId(null)));
         persistentFormRepository.findList(new PersistentFormPo().eqPersistentId(id).getQueryWrapper()).forEach(po -> persistentFormRepository.update(po.eqPersistentId(null)));
         persistentPropertyRepository.findList(new PersistentPropertyPo().eqPersistentId(id).getQueryWrapper()).forEach(po -> persistentPropertyRepository.update(po.eqPersistentId(null)));
-        return repository.delete(id);
+        return repository.delete(new PersistentPo().eqId(id));
     }
 
     @Override

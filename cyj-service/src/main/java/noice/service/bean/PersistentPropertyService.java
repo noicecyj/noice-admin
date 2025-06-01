@@ -6,6 +6,7 @@ import noice.assembler.bean.PersistentPropertyServiceAssembler;
 import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.PersistentPropertyServiceConverter;
 import noice.entity.dto.bean.PersistentPropertyDto;
+import noice.entity.po.bean.PersistentPropertyPo;
 import noice.handler.bean.BeanService;
 import noice.repository.bean.PersistentPropertyRepository;
 import org.jetbrains.annotations.NotNull;
@@ -50,7 +51,7 @@ public class PersistentPropertyService implements BeanService<PersistentProperty
 
     @Override
     public String deleteOne(String id) {
-        return repository.delete(id);
+        return repository.delete(new PersistentPropertyPo().eqId(id));
     }
 
     @Override

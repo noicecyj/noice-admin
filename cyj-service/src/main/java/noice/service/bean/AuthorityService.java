@@ -6,19 +6,20 @@ import noice.assembler.bean.AuthorityServiceAssembler;
 import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.AuthorityServiceConverter;
 import noice.entity.dto.bean.AuthorityDto;
-import noice.entity.po.bean.PersistentTableSearchConfigPo;
-import noice.entity.po.bean.PersistentFormConfigPo;
-import noice.entity.po.bean.MenuPo;
+import noice.entity.po.bean.AuthorityPo;
 import noice.entity.po.bean.InterfacePo;
+import noice.entity.po.bean.MenuPo;
+import noice.entity.po.bean.PersistentFormConfigPo;
 import noice.entity.po.bean.PersistentTableConfigPo;
+import noice.entity.po.bean.PersistentTableSearchConfigPo;
 import noice.entity.po.relation.RoleAuthorityPo;
 import noice.handler.bean.BeanService;
 import noice.repository.bean.AuthorityRepository;
-import noice.repository.bean.PersistentTableSearchConfigRepository;
-import noice.repository.bean.PersistentFormConfigRepository;
-import noice.repository.bean.MenuRepository;
 import noice.repository.bean.InterfaceRepository;
+import noice.repository.bean.MenuRepository;
+import noice.repository.bean.PersistentFormConfigRepository;
 import noice.repository.bean.PersistentTableConfigRepository;
+import noice.repository.bean.PersistentTableSearchConfigRepository;
 import noice.repository.relation.RoleAuthorityRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,7 +110,7 @@ public class AuthorityService implements BeanService<AuthorityDto> {
         menuRepository.findList(new MenuPo().eqAuthorityId(id).getQueryWrapper()).forEach(po -> menuRepository.update(po.eqAuthorityId(null)));
         interfaceRepository.findList(new InterfacePo().eqAuthorityId(id).getQueryWrapper()).forEach(po -> interfaceRepository.update(po.eqAuthorityId(null)));
         persistentTableConfigRepository.findList(new PersistentTableConfigPo().eqAuthorityId(id).getQueryWrapper()).forEach(po -> persistentTableConfigRepository.update(po.eqAuthorityId(null)));
-        return repository.delete(id);
+        return repository.delete(new AuthorityPo().eqId(id));
     }
 
     @Override

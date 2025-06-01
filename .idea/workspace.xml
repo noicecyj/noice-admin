@@ -4,7 +4,58 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑" />
+    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化表单布局及字段逻辑">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/816cf4cc-84bd-4b77-bb61-b4fcd51d574a.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/816cf4cc-84bd-4b77-bb61-b4fcd51d574a.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-common/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-common/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-converter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-converter/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/builder/repository/bean/RepositoryBeanBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/builder/repository/bean/RepositoryBeanBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/builder/repository/bean/RepositoryBeanMethodBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/builder/repository/bean/RepositoryBeanMethodBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/builder/repository/relation/RepositoryRelationMethodBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/builder/repository/relation/RepositoryRelationMethodBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/builder/service/bean/ServiceBeanBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/builder/service/bean/ServiceBeanBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/builder/service/bean/ServiceBeanMethodBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-entity-create/src/main/java/noice/handler/builder/service/bean/ServiceBeanMethodBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/handler/bean/BeanRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/handler/bean/BeanRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/AppServiceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/AppServiceRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/AuthorityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/AuthorityRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/CatalogDictionaryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/CatalogDictionaryRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/CatalogRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/CatalogRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/EnterpriseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/EnterpriseRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/InterfaceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/InterfaceRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/MenuRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/MenuRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/PersistentFormConfigRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/PersistentFormConfigRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/PersistentFormRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/PersistentFormRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/PersistentPropertyRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/PersistentPropertyRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/PersistentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/PersistentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/PersistentTableConfigRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/PersistentTableConfigRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/PersistentTableRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/PersistentTableRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/PersistentTableSearchConfigRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/PersistentTableSearchConfigRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/RoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/RoleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/SqlRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/SqlRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/WorkFlowRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/WorkFlowRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/AppServiceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/AppServiceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/AuthorityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/AuthorityService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/CatalogDictionaryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/CatalogDictionaryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/CatalogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/CatalogService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/EnterpriseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/EnterpriseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/InterfaceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/InterfaceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/MenuService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/MenuService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/PersistentFormConfigService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/PersistentFormConfigService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/PersistentFormService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/PersistentFormService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/PersistentPropertyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/PersistentPropertyService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/PersistentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/PersistentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/PersistentTableConfigService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/PersistentTableConfigService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/PersistentTableSearchConfigService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/PersistentTableSearchConfigService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/PersistentTableService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/PersistentTableService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/RoleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/SqlService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/SqlService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/WorkFlowService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-service/src/main/java/noice/service/bean/WorkFlowService.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,7 +95,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/noicecyj/noice-admin.git&quot;,
-    &quot;accountId&quot;: &quot;ecab4680-b11b-4b2b-a652-fcfa6e4f1a60&quot;
+    &quot;accountId&quot;: &quot;c55a91eb-0bca-4495-8ebc-275354e5a373&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
@@ -83,7 +134,7 @@
     <option name="myRunOnSave" value="true" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
@@ -111,7 +162,11 @@
     &quot;Maven.cyj-auth [package].executor&quot;: &quot;Run&quot;,
     &quot;Maven.cyj-common [compile].executor&quot;: &quot;Run&quot;,
     &quot;Maven.cyj-common [deploy].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.cyj-common [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.cyj-common [package].executor&quot;: &quot;Run&quot;,
     &quot;Maven.cyj-entity [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.cyj-entity [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.cyj-entity [package].executor&quot;: &quot;Run&quot;,
     &quot;Notification.DisplayName-DoNotAsk-Database detector&quot;: &quot;数据库检测器&quot;,
     &quot;Notification.DoNotAsk-Database detector&quot;: &quot;true&quot;,
     &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
@@ -125,7 +180,7 @@
     &quot;Spring Boot.CyjEntityCreaterApplication.executor&quot;: &quot;Debug&quot;,
     &quot;com.dong.plugin.gui.FormatDialog&quot;: &quot;true&quot;,
     &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;github&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/noice-admin/热插拔技术方案/img.png&quot;,
@@ -134,10 +189,10 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;库&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
     &quot;ts.external.directory.path&quot;: &quot;D:\\noice-admin\\noice-ice\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
@@ -184,7 +239,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest">
+  <component name="RunManager" selected="Spring Boot.CyjEntityCreaterApplication">
     <configuration name="CyjEntityCreaterApplicationTest.createEntityBeanTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cyj-entity-create" />
       <extension name="coverage">
@@ -293,8 +348,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.153" />
-        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.153" />
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.25410.129" />
+        <option value="bundled-js-predefined-d6986cc7102b-6a121458b545-JavaScript-IU-251.25410.129" />
       </set>
     </attachedChunks>
   </component>
@@ -432,6 +487,12 @@
       <workItem from="1737854251088" duration="12760000" />
       <workItem from="1737897654751" duration="5048000" />
       <workItem from="1737956976986" duration="5942000" />
+      <workItem from="1748708705640" duration="2461000" />
+      <workItem from="1748737474516" duration="425000" />
+      <workItem from="1748741622518" duration="4000" />
+      <workItem from="1748762653568" duration="6171000" />
+      <workItem from="1748793957859" duration="96000" />
+      <workItem from="1748794219884" duration="602000" />
     </task>
     <task id="LOCAL-00206" summary="优化表单布局及字段逻辑">
       <option name="closed" value="true" />
@@ -883,6 +944,17 @@
     <MESSAGE value="java&#10;添加UrlDto类及接口获取功能" />
     <MESSAGE value="优化表单布局及字段逻辑" />
     <option name="LAST_COMMIT_MESSAGE" value="优化表单布局及字段逻辑" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/cyj-repository/src/main/java/noice/repository/bean/EnterpriseRepository.java</url>
+          <line>56</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

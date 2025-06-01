@@ -6,6 +6,7 @@ import noice.assembler.bean.InterfaceServiceAssembler;
 import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.InterfaceServiceConverter;
 import noice.entity.dto.bean.InterfaceDto;
+import noice.entity.po.bean.InterfacePo;
 import noice.handler.bean.BeanService;
 import noice.repository.bean.InterfaceRepository;
 import org.jetbrains.annotations.NotNull;
@@ -50,7 +51,7 @@ public class InterfaceService implements BeanService<InterfaceDto> {
 
     @Override
     public String deleteOne(String id) {
-        return repository.delete(id);
+        return repository.delete(new InterfacePo().eqId(id));
     }
 
     @Override

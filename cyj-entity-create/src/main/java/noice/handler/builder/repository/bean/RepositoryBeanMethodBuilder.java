@@ -185,26 +185,27 @@ public class RepositoryBeanMethodBuilder extends MethodBase {
         @Data
         public static class RepositoryBeanDeleteByIdBuilder extends RepositoryBeanMethodBuilder {
 
-            public RepositoryBeanDeleteByIdBuilder builder() {
+            public RepositoryBeanDeleteByIdBuilder builder(PersistentPo persistentPo) {
+                String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
                 this.setMethodStatement(StatementEnum.PUBLIC);
                 this.setMethodReturnType("String");
                 this.setMethodAnnotationList();
                 this.setMethodBody();
                 this.setMethodName("delete");
-                this.setMethodParamSet();
-                this.setMethodReturnBody("return delete == 0 ? null : id;");
+                this.setMethodParamSet(poName);
+                this.setMethodReturnBody("return delete == 0 ? null : po.getId();");
                 return this;
             }
 
-            public void setMethodParamSet() {
+            public void setMethodParamSet(String poName) {
                 List<String> methodParamSet = new ArrayList<>();
-                methodParamSet.add("String id");
+                methodParamSet.add(poName + "Po po");
                 super.setMethodParamSet(methodParamSet);
             }
 
             public void setMethodBody() {
                 List<String> methodBodyList = new ArrayList<>();
-                methodBodyList.add("int delete = mapper.deleteById(id);");
+                methodBodyList.add("int delete = mapper.deleteById(po.getId());");
                 super.setMethodBody(methodBodyList);
             }
 
@@ -271,19 +272,20 @@ public class RepositoryBeanMethodBuilder extends MethodBase {
         @Data
         public static class RepositoryBeanDeleteByIdsBuilder extends RepositoryBeanMethodBuilder {
 
-            public RepositoryBeanDeleteByIdsBuilder builder() {
+            public RepositoryBeanDeleteByIdsBuilder builder(PersistentPo persistentPo) {
+                String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
                 this.setMethodStatement(StatementEnum.PUBLIC);
                 this.setMethodReturnType("int");
                 this.setMethodAnnotationList();
                 this.setMethodName("deleteBatch");
-                this.setMethodParamSet();
-                this.setMethodReturnBody("return mapper.deleteByIds(ids);");
+                this.setMethodParamSet(poName);
+                this.setMethodReturnBody("return mapper.deleteByIds(poList.stream().map(" + poName + "Po::getId).collect(Collectors.toList()));");
                 return this;
             }
 
-            public void setMethodParamSet() {
+            public void setMethodParamSet(String poName) {
                 List<String> methodParamSet = new ArrayList<>();
-                methodParamSet.add("List<String> ids");
+                methodParamSet.add("List<" + poName + "Po> poList");
                 super.setMethodParamSet(methodParamSet);
             }
 

@@ -15,11 +15,11 @@ public interface BeanRepository<PO extends BasePoBean> {
 
     int addBatch(List<PO> poList);
 
-    String delete(String id);
+    String delete(PO po);
 
     int delete(QueryWrapper<PO> queryWrapper);
 
-    int deleteBatch(List<String> ids);
+    int deleteBatch(List<PO> poList);
 
     int update(PO po);
 

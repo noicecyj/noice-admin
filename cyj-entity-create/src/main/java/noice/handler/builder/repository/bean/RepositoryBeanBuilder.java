@@ -177,6 +177,7 @@ public class RepositoryBeanBuilder extends ClassBase {
         importPackageList.add("import org.springframework.stereotype.Repository;");
         importPackageList.add("");
         importPackageList.add("import java.util.List;");
+        importPackageList.add("import java.util.stream.Collectors;");
         importPackageList.add("");
         importPackageList.add("import static noice.common.contants.Constant.USER_ID;");
     }
@@ -219,11 +220,11 @@ public class RepositoryBeanBuilder extends ClassBase {
         sb.append("\n");
         sb.append(repositoryBeanAddsBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");
-        sb.append(repositoryBeanDeleteByIdBuilder.builder()).append("\n");
+        sb.append(repositoryBeanDeleteByIdBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");
         sb.append(repositoryBeanDeleteWrapperBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");
-        sb.append(repositoryBeanDeleteByIdsBuilder.builder()).append("\n");
+        sb.append(repositoryBeanDeleteByIdsBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");
         sb.append(repositoryBeanUpdateOneBuilder.builder(getPersistentPo())).append("\n");
         sb.append("\n");

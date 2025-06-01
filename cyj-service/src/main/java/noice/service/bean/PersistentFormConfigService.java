@@ -6,6 +6,7 @@ import noice.assembler.bean.PersistentFormConfigServiceAssembler;
 import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.PersistentFormConfigServiceConverter;
 import noice.entity.dto.bean.PersistentFormConfigDto;
+import noice.entity.po.bean.PersistentFormConfigPo;
 import noice.handler.bean.BeanService;
 import noice.repository.bean.PersistentFormConfigRepository;
 import org.jetbrains.annotations.NotNull;
@@ -50,7 +51,7 @@ public class PersistentFormConfigService implements BeanService<PersistentFormCo
 
     @Override
     public String deleteOne(String id) {
-        return repository.delete(id);
+        return repository.delete(new PersistentFormConfigPo().eqId(id));
     }
 
     @Override

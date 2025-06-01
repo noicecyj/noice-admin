@@ -7,9 +7,10 @@ import noice.common.entity.dto.OptionDTO;
 import noice.converter.bean.PersistentFormServiceConverter;
 import noice.entity.dto.bean.PersistentFormDto;
 import noice.entity.po.bean.PersistentFormConfigPo;
+import noice.entity.po.bean.PersistentFormPo;
 import noice.handler.bean.BeanService;
-import noice.repository.bean.PersistentFormRepository;
 import noice.repository.bean.PersistentFormConfigRepository;
+import noice.repository.bean.PersistentFormRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,7 +61,7 @@ public class PersistentFormService implements BeanService<PersistentFormDto> {
     @Override
     public String deleteOne(String id) {
         persistentFormConfigRepository.findList(new PersistentFormConfigPo().eqPersistentFormId(id).getQueryWrapper()).forEach(po -> persistentFormConfigRepository.update(po.eqPersistentFormId(null)));
-        return repository.delete(id);
+        return repository.delete(new PersistentFormPo().eqId(id));
     }
 
     @Override

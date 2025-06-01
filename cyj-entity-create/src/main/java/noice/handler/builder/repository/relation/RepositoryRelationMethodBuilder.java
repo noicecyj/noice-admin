@@ -117,7 +117,7 @@ public class RepositoryRelationMethodBuilder extends MethodBase {
             this.setMethodBody();
             this.setMethodName("delete");
             this.setMethodParamSet();
-            this.setMethodReturnBody("return delete == 0 ? null : id;");
+            this.setMethodReturnBody("return delete == 0 ? null : po.getId();");
             return this;
         }
 
@@ -129,7 +129,7 @@ public class RepositoryRelationMethodBuilder extends MethodBase {
 
         public void setMethodBody() {
             List<String> methodBodyList = new ArrayList<>();
-            methodBodyList.add("int delete = mapper.deleteById(id);");
+            methodBodyList.add("int delete = mapper.deleteById(po.getId());");
             super.setMethodBody(methodBodyList);
         }
 
