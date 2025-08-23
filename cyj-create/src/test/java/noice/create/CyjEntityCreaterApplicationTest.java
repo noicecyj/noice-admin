@@ -3,16 +3,12 @@ package noice.create;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import noice.entity.auth.dto.bean.CatalogDictionaryDto;
+import noice.entity.auth.vo.bean.CatalogDictionaryVo;
+import noice.entity.auth.vo.bean.CatalogVo;
 import noice.entity.dto.LoginDto;
-import noice.entity.dto.bean.AppServiceDto;
-import noice.entity.dto.bean.CatalogDictionaryDto;
-import noice.entity.po.bean.AppServicePo;
-import noice.entity.vo.bean.AppServiceVo;
-import noice.entity.vo.bean.CatalogDictionaryVo;
-import noice.entity.vo.bean.CatalogVo;
 import noice.handler.factory.bean.ClassBeanFactoryImpl;
 import noice.handler.factory.relation.ClassRelationFactoryImpl;
 import noice.service.LoginService;
@@ -71,10 +67,10 @@ public class CyjEntityCreaterApplicationTest extends AbstractJUnit4SpringContext
 //                .listToTree(menuPoList, "menuUrl", "menuParentUrl");
 //        logger.info(JSON.toJSONString(maps));
 //    }
-    @Autowired
-    private AppServiceRepository appServiceRepository;
-    @Autowired
-    private AppServiceService appServiceService;
+//    @Autowired
+//    private AppServiceRepository appServiceRepository;
+//    @Autowired
+//    private AppServiceService appServiceService;
     @Autowired
     private CatalogDictionaryService catalogDictionaryService;
     @Autowired
@@ -178,15 +174,15 @@ public class CyjEntityCreaterApplicationTest extends AbstractJUnit4SpringContext
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
     }
 
-    @Test
-    @Transactional
-    public void PersistentBeanQuery() {
-        AppServicePo appServicePo = new AppServicePo();
-        appServicePo.setAppServiceName("服务");
-        appServicePo.setStatus(true);
-        IPage<AppServicePo> page = appServiceRepository.findPage(new Page<>(-1, 10), appServicePo);
-        logger.info(JSON.toJSONString(page.getRecords()));
-    }
+//    @Test
+//    @Transactional
+//    public void PersistentBeanQuery() {
+//        AppServicePo appServicePo = new AppServicePo();
+//        appServicePo.setAppServiceName("服务");
+//        appServicePo.setStatus(true);
+//        IPage<AppServicePo> page = appServiceRepository.findPage(new Page<>(-1, 10), appServicePo);
+//        logger.info(JSON.toJSONString(page.getRecords()));
+//    }
 
     @Test
     @Transactional
@@ -228,17 +224,17 @@ public class CyjEntityCreaterApplicationTest extends AbstractJUnit4SpringContext
 //        logger.info(res);
 //    }
 
-    @Test
-    @Transactional
-    public void PersistentServiceQuery() {
-        AppServiceDto appServiceDto = new AppServiceDto();
-        appServiceDto.setAppServiceName("服务");
-        appServiceDto.setStatus(true);
-        appServiceDto.setCurrent(-1);
-        appServiceDto.setPageSize(10);
-        IPage<AppServiceDto> page = appServiceService.findPage(appServiceDto);
-        logger.info(JSON.toJSONString(page.getRecords()));
-    }
+//    @Test
+//    @Transactional
+//    public void PersistentServiceQuery() {
+//        AppServiceDto appServiceDto = new AppServiceDto();
+//        appServiceDto.setAppServiceName("服务");
+//        appServiceDto.setStatus(true);
+//        appServiceDto.setCurrent(-1);
+//        appServiceDto.setPageSize(10);
+//        IPage<AppServiceDto> page = appServiceService.findPage(appServiceDto);
+//        logger.info(JSON.toJSONString(page.getRecords()));
+//    }
 
     @Test
     @Transactional
@@ -259,26 +255,26 @@ public class CyjEntityCreaterApplicationTest extends AbstractJUnit4SpringContext
         logger.info(JSON.toJSONString(one));
     }
 
-    @Test
-    @Transactional
-    public void test() throws Exception {
-        AppServiceVo appServiceVo = new AppServiceVo();
-        appServiceVo.setAppServiceName("服务");
-//        appServiceVo.setAppServiceCode("user");
-        appServiceVo.setStatus(true);
-        appServiceVo.setCurrent(-1);
-        appServiceVo.setPageSize(10);
-        String jsonString = JSON.toJSONString(appServiceVo);
-        JSONObject object = JSON.parseObject(jsonString);
-        object.put("asdasd", "123123");
+//    @Test
+//    @Transactional
+//    public void test() throws Exception {
+//        AppServiceVo appServiceVo = new AppServiceVo();
+//        appServiceVo.setAppServiceName("服务");
 
-        mockMvc.perform(MockMvcRequestBuilders
-                        .post("/entityCreateApi/AppService/page")
-                        .content(object.toJSONString())
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print());
-    }
-
+    /// /        appServiceVo.setAppServiceCode("user");
+//        appServiceVo.setStatus(true);
+//        appServiceVo.setCurrent(-1);
+//        appServiceVo.setPageSize(10);
+//        String jsonString = JSON.toJSONString(appServiceVo);
+//        JSONObject object = JSON.parseObject(jsonString);
+//        object.put("asdasd", "123123");
+//
+//        mockMvc.perform(MockMvcRequestBuilders
+//                        .post("/entityCreateApi/AppService/page")
+//                        .content(object.toJSONString())
+//                        .contentType(MediaType.APPLICATION_JSON))
+//                .andDo(print());
+//    }
     @Test
     @Transactional
     public void test2() throws Exception {
@@ -319,15 +315,15 @@ public class CyjEntityCreaterApplicationTest extends AbstractJUnit4SpringContext
                 .andDo(print());
     }
 
-    @Test
-    @Transactional
-    public void PersistentBeanAspect() {
-        AppServicePo appServicePo = new AppServicePo();
-        appServicePo.setAppServiceApi("123123");
-        appServicePo.setAppServiceCode("123123");
-        appServicePo.setAppServiceName("123123");
-        appServiceRepository.add(appServicePo);
-    }
+//    @Test
+//    @Transactional
+//    public void PersistentBeanAspect() {
+//        AppServicePo appServicePo = new AppServicePo();
+//        appServicePo.setAppServiceApi("123123");
+//        appServicePo.setAppServiceCode("123123");
+//        appServicePo.setAppServiceName("123123");
+//        appServiceRepository.add(appServicePo);
+//    }
 
 }
 
