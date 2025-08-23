@@ -7,8 +7,8 @@ package noice.converter.relation;
 import noice.entity.dto.relation.RoleAuthorityDto;
 import noice.entity.vo.relation.RoleAuthorityVo;
 import noice.handler.converter.relation.BaseRelationConverter;
-import noice.repository.bean.AuthorityRepository;
-import noice.repository.bean.RoleRepository;
+import noice.repository.auth.bean.AuthorityRepository;
+import noice.repository.auth.bean.RoleRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -40,8 +40,8 @@ package noice.converter.relation;
 import noice.entity.dto.relation.RoleAuthorityDto;
 import noice.entity.vo.relation.RoleAuthorityVo;
 import noice.handler.converter.relation.BaseRelationConverter;
-import noice.repository.bean.AuthorityRepository;
-import noice.repository.bean.RoleRepository;
+import noice.repository.auth.bean.AuthorityRepository;
+import noice.repository.auth.bean.RoleRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -72,8 +72,8 @@ package noice.converter.relation;
 import noice.entity.dto.relation.RoleAuthorityDto;
 import noice.entity.vo.relation.RoleAuthorityVo;
 import noice.handler.converter.relation.BaseRelationConverter;
-import noice.repository.bean.AuthorityRepository;
-import noice.repository.bean.RoleRepository;
+import noice.repository.auth.bean.AuthorityRepository;
+import noice.repository.auth.bean.RoleRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

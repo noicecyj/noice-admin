@@ -3,8 +3,8 @@
 ```java
 package noice.assembler.relation;
 
-import noice.assembler.bean.AuthorityServiceAssembler;
-import noice.assembler.bean.RoleServiceAssembler;
+import noice.assembler.auth.bean.AuthorityServiceAssembler;
+import noice.assembler.auth.bean.RoleServiceAssembler;
 import noice.entity.dto.relation.RoleAuthorityDto;
 import noice.entity.vo.relation.RoleAuthorityVo;
 import noice.handler.assembler.relation.BaseRelationAssembler;
@@ -33,8 +33,8 @@ public interface RoleAuthorityControllerAssembler {
 ```java
 package noice.assembler.relation;
 
-import noice.assembler.bean.AuthorityServiceAssembler;
-import noice.assembler.bean.RoleServiceAssembler;
+import noice.assembler.auth.bean.AuthorityServiceAssembler;
+import noice.assembler.auth.bean.RoleServiceAssembler;
 import noice.entity.dto.relation.RoleAuthorityDto;
 import noice.entity.vo.relation.RoleAuthorityVo;
 import noice.handler.assembler.relation.BaseRelationAssembler;
@@ -63,8 +63,8 @@ public interface RoleAuthorityControllerAssembler {
 ```java
 package noice.assembler.relation;
 
-import noice.assembler.bean.AuthorityServiceAssembler;
-import noice.assembler.bean.RoleServiceAssembler;
+import noice.assembler.auth.bean.AuthorityServiceAssembler;
+import noice.assembler.auth.bean.RoleServiceAssembler;
 import noice.entity.dto.relation.RoleAuthorityDto;
 import noice.entity.vo.relation.RoleAuthorityVo;
 import noice.handler.assembler.relation.BaseRelationAssembler;

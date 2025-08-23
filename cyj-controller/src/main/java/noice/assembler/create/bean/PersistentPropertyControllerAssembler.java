@@ -1,0 +1,29 @@
+package noice.assembler.create.bean;
+
+import noice.assembler.craete.bean.PersistentServiceAssembler;
+import noice.entity.create.dto.bean.PersistentPropertyDto;
+import noice.entity.create.vo.bean.PersistentPropertyVo;
+import noice.handler.assembler.bean.BaseBeanAssembler;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.springframework.context.annotation.Primary;
+
+import java.util.List;
+import java.util.Set;
+
+/**
+ * @author Noice
+ */
+@Primary
+@Mapper(componentModel = "spring", config = BaseBeanAssembler.class, uses = {PersistentServiceAssembler.class})
+public interface PersistentPropertyControllerAssembler {
+
+    @Mapping(target = "persistentDto", source = "dto.persistentPo")
+    @Mapping(target = "relationPersistentDto", source = "dto.relationPersistentPo")
+    PersistentPropertyVo dtoToVo(PersistentPropertyDto dto);
+
+    List<PersistentPropertyVo> dtoListToVoList(List<PersistentPropertyDto> dtoList);
+
+    Set<PersistentPropertyVo> dtoSetToVoSet(Set<PersistentPropertyDto> dtoList);
+
+}

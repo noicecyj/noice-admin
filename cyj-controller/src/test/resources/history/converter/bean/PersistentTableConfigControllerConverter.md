@@ -11,7 +11,6 @@ package noice.converter.bean;
 import noice.entity.dto.bean.PersistentTableConfigDto;
 import noice.entity.vo.bean.PersistentTableConfigVo;
 import noice.handler.converter.bean.BaseBeanConverter;
-import noice.repository.bean.PersistentTableRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -33,6 +32,7 @@ public interface PersistentTableConfigControllerConverter {
 
 }
 ```
+
 ## 2024-12-13 15:41:51 noice 作者大大 曹元杰 天才 笔记本
 
 ```java
@@ -41,8 +41,7 @@ package noice.converter.bean;
 import noice.entity.dto.bean.PersistentTableConfigDto;
 import noice.entity.vo.bean.PersistentTableConfigVo;
 import noice.handler.converter.bean.BaseBeanConverter;
-import noice.repository.bean.AuthorityRepository;
-import noice.repository.bean.PersistentTableRepository;
+import noice.repository.auth.bean.AuthorityRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

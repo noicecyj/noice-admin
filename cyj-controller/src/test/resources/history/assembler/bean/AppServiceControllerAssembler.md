@@ -3,8 +3,6 @@
 ```java
 package noice.assembler.bean;
 
-import noice.entity.dto.bean.AppServiceDto;
-import noice.entity.vo.bean.AppServiceVo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
 import org.mapstruct.Mapper;
 
@@ -28,8 +26,6 @@ public interface AppServiceControllerAssembler {
 ```java
 package noice.assembler.bean;
 
-import noice.entity.dto.bean.AppServiceDto;
-import noice.entity.vo.bean.AppServiceVo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
 import org.mapstruct.Mapper;
 
@@ -47,13 +43,12 @@ public interface AppServiceControllerAssembler {
 
 }
 ```
+
 ## 2024-12-06 16:10:58 noice 作者大大 曹元杰 天才 笔记本
 
 ```java
 package noice.assembler.bean;
 
-import noice.entity.dto.bean.AppServiceDto;
-import noice.entity.vo.bean.AppServiceVo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -82,8 +77,6 @@ public interface AppServiceControllerAssembler {
 ```java
 package noice.assembler.bean;
 
-import noice.entity.dto.bean.AppServiceDto;
-import noice.entity.vo.bean.AppServiceVo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
 import org.mapstruct.Mapper;
 

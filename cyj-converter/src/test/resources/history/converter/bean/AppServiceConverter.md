@@ -3,9 +3,6 @@
 ```java
 package noice.converter.bean;
 
-import noice.entity.dto.bean.AppServiceDto;
-import noice.entity.po.bean.AppServicePo;
-import noice.entity.vo.bean.AppServiceVo;
 import org.mapstruct.Mapper;
 
 /**

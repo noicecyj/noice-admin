@@ -3,6 +3,7 @@
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.CatalogServiceAssembler;
 import noice.entity.dto.bean.CatalogDictionaryDto;
 import noice.entity.vo.bean.CatalogDictionaryVo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
@@ -35,7 +36,7 @@ package noice.assembler.bean;
 import noice.entity.dto.bean.CatalogDictionaryDto;
 import noice.entity.vo.bean.CatalogDictionaryVo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
-import noice.repository.bean.CatalogRepository;
+import noice.repository.auth.bean.CatalogRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -60,6 +61,7 @@ public interface CatalogDictionaryControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.CatalogServiceAssembler;
 import noice.entity.dto.bean.CatalogDictionaryDto;
 import noice.entity.vo.bean.CatalogDictionaryVo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
@@ -81,11 +83,13 @@ public interface CatalogDictionaryControllerAssembler {
 
 }
 ```
+
 ## 2024-12-06 10:38:36 noice 作者大大 曹元杰 天才 笔记本
 
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.CatalogServiceAssembler;
 import noice.entity.dto.bean.CatalogDictionaryDto;
 import noice.entity.vo.bean.CatalogDictionaryVo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
@@ -116,6 +120,7 @@ public interface CatalogDictionaryControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.CatalogServiceAssembler;
 import noice.entity.dto.bean.CatalogDictionaryDto;
 import noice.entity.vo.bean.CatalogDictionaryVo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
@@ -147,6 +152,7 @@ public interface CatalogDictionaryControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.CatalogServiceAssembler;
 import noice.entity.dto.bean.CatalogDictionaryDto;
 import noice.entity.vo.bean.CatalogDictionaryVo;
 import noice.handler.assembler.bean.BaseBeanAssembler;

@@ -2,12 +2,12 @@ package noice.controller.relation;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import noice.assembler.relation.UserRoleControllerAssembler;
+import noice.assembler.auth.relation.UserRoleControllerAssembler;
 import noice.common.entity.vo.ResultVO;
-import noice.converter.relation.UserRoleControllerConverter;
+import noice.converter.auth.relation.UserRoleControllerConverter;
 import noice.entity.vo.relation.UserRoleVo;
 import noice.handler.relation.RelationController;
-import noice.service.relation.UserRoleService;
+import noice.service.auth.relation.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;

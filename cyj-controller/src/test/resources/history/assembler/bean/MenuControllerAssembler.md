@@ -8,6 +8,8 @@
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.AuthorityServiceAssembler;
+import noice.assembler.auth.bean.MenuServiceAssembler;
 import noice.entity.dto.bean.MenuDto;
 import noice.entity.vo.bean.MenuVo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
@@ -30,11 +32,14 @@ public interface MenuControllerAssembler {
 
 }
 ```
+
 ## 2024-12-06 10:38:36 noice 作者大大 曹元杰 天才 笔记本
 
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.AuthorityServiceAssembler;
+import noice.assembler.auth.bean.MenuServiceAssembler;
 import noice.entity.dto.bean.MenuDto;
 import noice.entity.vo.bean.MenuVo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
@@ -66,6 +71,8 @@ public interface MenuControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.AuthorityServiceAssembler;
+import noice.assembler.auth.bean.MenuServiceAssembler;
 import noice.entity.dto.bean.MenuDto;
 import noice.entity.vo.bean.MenuVo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
@@ -98,6 +105,8 @@ public interface MenuControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.AuthorityServiceAssembler;
+import noice.assembler.auth.bean.MenuServiceAssembler;
 import noice.entity.dto.bean.MenuDto;
 import noice.entity.vo.bean.MenuVo;
 import noice.handler.assembler.bean.BaseBeanAssembler;

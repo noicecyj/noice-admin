@@ -1,0 +1,29 @@
+package noice.converter.create.bean;
+
+import noice.entity.create.dto.bean.PersistentPropertyDto;
+import noice.entity.create.vo.bean.PersistentPropertyVo;
+import noice.handler.converter.bean.BaseBeanConverter;
+import noice.repository.create.bean.PersistentRepository;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.springframework.context.annotation.Primary;
+
+import java.util.List;
+import java.util.Set;
+
+/**
+ * @author Noice
+ */
+@Primary
+@Mapper(componentModel = "spring", config = BaseBeanConverter.class, uses = {PersistentRepository.class})
+public interface PersistentPropertyControllerConverter {
+
+    @Mapping(target = "persistentPo", source = "vo.persistentId")
+    @Mapping(target = "relationPersistentPo", source = "vo.relationPersistentId")
+    PersistentPropertyDto voToDto(PersistentPropertyVo vo);
+
+    List<PersistentPropertyDto> voListToDtoList(List<PersistentPropertyVo> voList);
+
+    Set<PersistentPropertyDto> voSetToDtoSet(Set<PersistentPropertyVo> voSet);
+
+}

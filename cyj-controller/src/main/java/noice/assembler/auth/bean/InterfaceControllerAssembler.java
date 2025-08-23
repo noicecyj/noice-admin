@@ -1,0 +1,29 @@
+package noice.assembler.auth.bean;
+
+import noice.assembler.craete.bean.PersistentServiceAssembler;
+import noice.entity.auth.dto.bean.InterfaceDto;
+import noice.entity.auth.vo.bean.InterfaceVo;
+import noice.handler.assembler.bean.BaseBeanAssembler;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.springframework.context.annotation.Primary;
+
+import java.util.List;
+import java.util.Set;
+
+/**
+ * @author Noice
+ */
+@Primary
+@Mapper(componentModel = "spring", config = BaseBeanAssembler.class, uses = {AuthorityServiceAssembler.class, PersistentServiceAssembler.class})
+public interface InterfaceControllerAssembler {
+
+    @Mapping(target = "authorityDto", source = "dto.authorityPo")
+    @Mapping(target = "persistentDto", source = "dto.persistentPo")
+    InterfaceVo dtoToVo(InterfaceDto dto);
+
+    List<InterfaceVo> dtoListToVoList(List<InterfaceDto> dtoList);
+
+    Set<InterfaceVo> dtoSetToVoSet(Set<InterfaceDto> dtoList);
+
+}

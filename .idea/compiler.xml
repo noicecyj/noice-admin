@@ -9,12 +9,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="cyj-auth" />
         <module name="cyj-converter" />
-        <module name="cyj-entity-create" />
         <module name="cyj-mapper" />
         <module name="cyj-controller" />
         <module name="cyj-common" />
         <module name="cyj-repository" />
         <module name="cyj-service" />
+        <module name="cyj-create" />
         <module name="cyj-entity" />
       </profile>
     </annotationProcessing>
@@ -29,10 +29,10 @@
       <module name="cyj-common" options="-parameters" />
       <module name="cyj-controller" options="-parameters" />
       <module name="cyj-converter" options="-parameters" />
+      <module name="cyj-create" options="-parameters" />
       <module name="cyj-dictionary" options="-parameters" />
       <module name="cyj-discovery" options="-parameters" />
       <module name="cyj-entity" options="-parameters" />
-      <module name="cyj-entity-create" options="-parameters" />
       <module name="cyj-entity-creater" options="-parameters" />
       <module name="cyj-log" options="-parameters" />
       <module name="cyj-mapper" options="-parameters" />

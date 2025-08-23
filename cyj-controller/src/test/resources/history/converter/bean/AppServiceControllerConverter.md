@@ -3,8 +3,6 @@
 ```java
 package noice.converter.bean;
 
-import noice.entity.dto.bean.AppServiceDto;
-import noice.entity.vo.bean.AppServiceVo;
 import noice.handler.converter.bean.BaseBeanConverter;
 import org.mapstruct.Mapper;
 
@@ -28,8 +26,6 @@ public interface AppServiceControllerConverter {
 ```java
 package noice.converter.bean;
 
-import noice.entity.dto.bean.AppServiceDto;
-import noice.entity.vo.bean.AppServiceVo;
 import noice.handler.converter.bean.BaseBeanConverter;
 import org.mapstruct.Mapper;
 
@@ -53,8 +49,6 @@ public interface AppServiceControllerConverter {
 ```java
 package noice.converter.bean;
 
-import noice.entity.dto.bean.AppServiceDto;
-import noice.entity.vo.bean.AppServiceVo;
 import noice.handler.converter.bean.BaseBeanConverter;
 import org.mapstruct.Mapper;
 

@@ -6,7 +6,7 @@ package noice.converter.bean;
 import noice.entity.dto.bean.CatalogDictionaryDto;
 import noice.entity.vo.bean.CatalogDictionaryVo;
 import noice.handler.converter.bean.BaseBeanConverter;
-import noice.repository.bean.CatalogRepository;
+import noice.repository.auth.bean.CatalogRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -34,7 +34,7 @@ package noice.converter.bean;
 import noice.entity.dto.bean.CatalogDictionaryDto;
 import noice.entity.vo.bean.CatalogDictionaryVo;
 import noice.handler.converter.bean.BaseBeanConverter;
-import noice.repository.bean.CatalogRepository;
+import noice.repository.auth.bean.CatalogRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -62,7 +62,7 @@ package noice.converter.bean;
 import noice.entity.dto.bean.CatalogDictionaryDto;
 import noice.entity.vo.bean.CatalogDictionaryVo;
 import noice.handler.converter.bean.BaseBeanConverter;
-import noice.repository.bean.CatalogRepository;
+import noice.repository.auth.bean.CatalogRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -81,6 +81,7 @@ public interface CatalogDictionaryControllerConverter {
 
 }
 ```
+
 ## 2024-12-13 15:41:48 noice 作者大大 曹元杰 天才 笔记本
 
 ```java
@@ -89,7 +90,7 @@ package noice.converter.bean;
 import noice.entity.dto.bean.CatalogDictionaryDto;
 import noice.entity.vo.bean.CatalogDictionaryVo;
 import noice.handler.converter.bean.BaseBeanConverter;
-import noice.repository.bean.CatalogRepository;
+import noice.repository.auth.bean.CatalogRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

@@ -1,0 +1,26 @@
+package noice.converter.auth.bean;
+
+
+import noice.entity.auth.dto.bean.SqlDto;
+import noice.entity.auth.vo.bean.SqlVo;
+import noice.handler.converter.bean.BaseBeanConverter;
+import org.mapstruct.Mapper;
+import org.springframework.context.annotation.Primary;
+
+import java.util.List;
+import java.util.Set;
+
+/**
+ * @author Noice
+ */
+@Primary
+@Mapper(componentModel = "spring", config = BaseBeanConverter.class)
+public interface SqlControllerConverter {
+
+    SqlDto voToDto(SqlVo vo);
+
+    List<SqlDto> voListToDtoList(List<SqlVo> voList);
+
+    Set<SqlDto> voSetToDtoSet(Set<SqlVo> voSet);
+
+}

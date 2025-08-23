@@ -6,8 +6,6 @@ package noice.converter.bean;
 import noice.entity.dto.bean.PersistentDto;
 import noice.entity.vo.bean.PersistentVo;
 import noice.handler.converter.bean.BaseBeanConverter;
-import noice.repository.bean.AppServiceRepository;
-import noice.repository.bean.PersistentRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -38,8 +36,6 @@ package noice.converter.bean;
 import noice.entity.dto.bean.PersistentDto;
 import noice.entity.vo.bean.PersistentVo;
 import noice.handler.converter.bean.BaseBeanConverter;
-import noice.repository.bean.AppServiceRepository;
-import noice.repository.bean.PersistentRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -70,8 +66,6 @@ package noice.converter.bean;
 import noice.entity.dto.bean.PersistentDto;
 import noice.entity.vo.bean.PersistentVo;
 import noice.handler.converter.bean.BaseBeanConverter;
-import noice.repository.bean.AppServiceRepository;
-import noice.repository.bean.PersistentRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -91,6 +85,7 @@ public interface PersistentControllerConverter {
 
 }
 ```
+
 ## 2024-12-13 15:41:49 noice 作者大大 曹元杰 天才 笔记本
 
 ```java
@@ -99,8 +94,6 @@ package noice.converter.bean;
 import noice.entity.dto.bean.PersistentDto;
 import noice.entity.vo.bean.PersistentVo;
 import noice.handler.converter.bean.BaseBeanConverter;
-import noice.repository.bean.AppServiceRepository;
-import noice.repository.bean.PersistentRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

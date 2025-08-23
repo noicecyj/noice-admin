@@ -2,6 +2,7 @@
 
 ```java
 ```
+
 ## 2024-10-18 22:36:11 noice 作者大大 曹元杰 天才 笔记本
 
 ```java
@@ -10,8 +11,7 @@ package noice.converter.bean;
 import noice.entity.dto.bean.InterfaceDto;
 import noice.entity.vo.bean.InterfaceVo;
 import noice.handler.converter.bean.BaseBeanConverter;
-import noice.repository.bean.AuthorityRepository;
-import noice.repository.bean.PersistentRepository;
+import noice.repository.auth.bean.AuthorityRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -43,7 +43,7 @@ package noice.converter.bean;
 import noice.entity.dto.bean.InterfaceDto;
 import noice.entity.vo.bean.InterfaceVo;
 import noice.handler.converter.bean.BaseBeanConverter;
-import noice.repository.bean.AuthorityRepository;
+import noice.repository.auth.bean.AuthorityRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -74,8 +74,7 @@ package noice.converter.bean;
 import noice.entity.dto.bean.InterfaceDto;
 import noice.entity.vo.bean.InterfaceVo;
 import noice.handler.converter.bean.BaseBeanConverter;
-import noice.repository.bean.AuthorityRepository;
-import noice.repository.bean.PersistentRepository;
+import noice.repository.auth.bean.AuthorityRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

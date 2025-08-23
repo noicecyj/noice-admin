@@ -1,0 +1,25 @@
+package noice.assembler.auth.bean;
+
+import noice.entity.auth.dto.bean.CatalogDto;
+import noice.entity.auth.vo.bean.CatalogVo;
+import noice.handler.assembler.bean.BaseBeanAssembler;
+import org.mapstruct.Mapper;
+import org.springframework.context.annotation.Primary;
+
+import java.util.List;
+import java.util.Set;
+
+/**
+ * @author Noice
+ */
+@Primary
+@Mapper(componentModel = "spring", config = BaseBeanAssembler.class)
+public interface CatalogControllerAssembler {
+
+    CatalogVo dtoToVo(CatalogDto dto);
+
+    List<CatalogVo> dtoListToVoList(List<CatalogDto> dtoList);
+
+    Set<CatalogVo> dtoSetToVoSet(Set<CatalogDto> dtoList);
+
+}

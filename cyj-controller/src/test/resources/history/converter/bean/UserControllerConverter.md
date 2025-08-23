@@ -130,7 +130,7 @@ package noice.converter.bean;
 import noice.entity.dto.bean.UserDto;
 import noice.entity.vo.bean.UserVo;
 import noice.handler.converter.bean.BaseBeanConverter;
-import noice.repository.bean.EnterpriseRepository;
+import noice.repository.auth.bean.EnterpriseRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -149,6 +149,7 @@ public interface UserControllerConverter {
 
 }
 ```
+
 ## 2024-12-13 15:41:52 noice 作者大大 曹元杰 天才 笔记本
 
 ```java
@@ -157,7 +158,7 @@ package noice.converter.bean;
 import noice.entity.dto.bean.UserDto;
 import noice.entity.vo.bean.UserVo;
 import noice.handler.converter.bean.BaseBeanConverter;
-import noice.repository.bean.EnterpriseRepository;
+import noice.repository.auth.bean.EnterpriseRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

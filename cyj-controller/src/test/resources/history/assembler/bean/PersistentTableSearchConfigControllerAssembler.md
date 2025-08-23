@@ -32,11 +32,13 @@ public interface PersistentTableSearchConfigControllerAssembler {
 
 }
 ```
+
 ## 2024-12-06 10:38:37 noice 作者大大 曹元杰 天才 笔记本
 
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.AuthorityServiceAssembler;
 import noice.entity.dto.bean.PersistentTableSearchConfigDto;
 import noice.entity.vo.bean.PersistentTableSearchConfigVo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
@@ -68,6 +70,7 @@ public interface PersistentTableSearchConfigControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.AuthorityServiceAssembler;
 import noice.entity.dto.bean.PersistentTableSearchConfigDto;
 import noice.entity.vo.bean.PersistentTableSearchConfigVo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
@@ -100,6 +103,7 @@ public interface PersistentTableSearchConfigControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.AuthorityServiceAssembler;
 import noice.entity.dto.bean.PersistentTableSearchConfigDto;
 import noice.entity.vo.bean.PersistentTableSearchConfigVo;
 import noice.handler.assembler.bean.BaseBeanAssembler;

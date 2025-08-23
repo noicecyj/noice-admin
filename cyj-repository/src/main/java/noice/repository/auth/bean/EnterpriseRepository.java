@@ -1,0 +1,116 @@
+package noice.repository.auth.bean;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import noice.common.contants.UserContext;
+import noice.entity.auth.po.bean.EnterprisePo;
+import noice.handler.bean.BeanRepository;
+import noice.mapper.auth.bean.EnterpriseMapper;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static noice.common.contants.Constant.USER_ID;
+
+/**
+ * @author Noice
+ */
+@Repository
+@SuppressWarnings("unused")
+public class EnterpriseRepository implements BeanRepository<EnterprisePo> {
+
+    private EnterpriseMapper mapper;
+
+    @Autowired
+    public void setMapper(EnterpriseMapper mapper) {
+        this.mapper = mapper;
+    }
+
+    @Override
+    public String add(EnterprisePo po) {
+        int insert = mapper.insert(po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+        return insert == 0 ? null : po.getId();
+    }
+
+    @Override
+    public int addBatch(List<EnterprisePo> poList) {
+        poList.forEach(po -> po.eqCreatedBy(UserContext.getUser().getString(USER_ID)).eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+        return mapper.insert(poList, 100).size();
+    }
+
+    @Override
+    public String delete(EnterprisePo po) {
+        int delete = mapper.deleteById(po.getId());
+        return delete == 0 ? null : po.getId();
+    }
+
+    @Override
+    public int delete(QueryWrapper<EnterprisePo> baseQueryWrapper) {
+        return mapper.delete(baseQueryWrapper);
+    }
+
+    @Override
+    public int deleteBatch(List<EnterprisePo> poList) {
+        return mapper.deleteByIds(poList.stream().map(EnterprisePo::getId).collect(Collectors.toList()));
+    }
+
+    @Override
+    public int update(EnterprisePo po) {
+        return mapper.updateById(po.eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+    }
+
+    @Override
+    public boolean insertOrUpdate(EnterprisePo po) {
+        return mapper.insertOrUpdate(po.eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+    }
+
+    @Override
+    public int updateBatch(List<EnterprisePo> poList) {
+        poList.forEach(po -> po.eqUpdatedBy(UserContext.getUser().getString(USER_ID)));
+        return mapper.updateById(poList, 100).size();
+    }
+
+    @Override
+    public long count(QueryWrapper<EnterprisePo> baseQueryWrapper) {
+        return mapper.selectCount(baseQueryWrapper);
+    }
+
+    @Override
+    public EnterprisePo find(String id) {
+        return mapper.selectById(id);
+    }
+
+    @Override
+    public EnterprisePo find(QueryWrapper<EnterprisePo> baseQueryWrapper) {
+        return mapper.selectOne(baseQueryWrapper);
+    }
+
+    @Override
+    public List<EnterprisePo> findList(List<String> ids) {
+        return mapper.selectByIds(ids);
+    }
+
+    @Override
+    public List<EnterprisePo> findList(QueryWrapper<EnterprisePo> baseQueryWrapper) {
+        return mapper.selectList(baseQueryWrapper);
+    }
+
+    @Override
+    public List<EnterprisePo> findAll() {
+        return mapper.selectList(new EnterprisePo().getQueryWrapper());
+    }
+
+    @Override
+    public IPage<EnterprisePo> findPage(IPage<EnterprisePo> page, QueryWrapper<EnterprisePo> baseQueryWrapper) {
+        return mapper.selectPage(page, baseQueryWrapper);
+    }
+
+    @Override
+    public IPage<EnterprisePo> findPage(IPage<EnterprisePo> page, @NotNull EnterprisePo po) {
+        return findPage(page, po.baseQueryWrapper().likeAuto().getQueryWrapper());
+    }
+
+}

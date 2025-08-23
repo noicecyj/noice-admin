@@ -4,7 +4,7 @@
 package noice.converter.bean;
 
 import noice.entity.dto.bean.AuthorityDto;
-import noice.entity.po.bean.AuthorityPo;
+import noice.entity.auth.po.bean.AuthorityPo;
 import noice.entity.vo.bean.AuthorityVo;
 import org.mapstruct.Mapper;
 

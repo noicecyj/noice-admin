@@ -1,0 +1,29 @@
+package noice.assembler.auth.bean;
+
+
+import noice.entity.auth.dto.bean.MenuDto;
+import noice.entity.auth.vo.bean.MenuVo;
+import noice.handler.assembler.bean.BaseBeanAssembler;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.springframework.context.annotation.Primary;
+
+import java.util.List;
+import java.util.Set;
+
+/**
+ * @author Noice
+ */
+@Primary
+@Mapper(componentModel = "spring", config = BaseBeanAssembler.class, uses = {AuthorityServiceAssembler.class, MenuServiceAssembler.class})
+public interface MenuControllerAssembler {
+
+    @Mapping(target = "authorityDto", source = "dto.authorityPo")
+    @Mapping(target = "menuDto", source = "dto.menuPo")
+    MenuVo dtoToVo(MenuDto dto);
+
+    List<MenuVo> dtoListToVoList(List<MenuDto> dtoList);
+
+    Set<MenuVo> dtoSetToVoSet(Set<MenuDto> dtoList);
+
+}

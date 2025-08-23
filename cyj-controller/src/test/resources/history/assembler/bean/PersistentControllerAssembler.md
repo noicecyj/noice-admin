@@ -34,8 +34,6 @@ package noice.assembler.bean;
 import noice.entity.dto.bean.PersistentDto;
 import noice.entity.vo.bean.PersistentVo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
-import noice.repository.bean.AppServiceRepository;
-import noice.repository.bean.PersistentRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -83,6 +81,7 @@ public interface PersistentControllerAssembler {
 
 }
 ```
+
 ## 2024-12-06 10:38:37 noice 作者大大 曹元杰 天才 笔记本
 
 ```java

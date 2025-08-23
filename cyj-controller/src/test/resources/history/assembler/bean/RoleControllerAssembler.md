@@ -81,6 +81,8 @@ public interface RoleControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.AuthorityServiceAssembler;
+import noice.assembler.auth.bean.UserServiceAssembler;
 import noice.entity.dto.bean.AuthorityDto;
 import noice.entity.dto.bean.UserDto;
 import noice.entity.dto.bean.RoleDto;
@@ -112,11 +114,14 @@ public interface RoleControllerAssembler {
 
 }
 ```
+
 ## 2024-10-11 18:47:48 noice 作者大大 曹元杰 天才 笔记本
 
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.AuthorityServiceAssembler;
+import noice.assembler.auth.bean.UserServiceAssembler;
 import noice.entity.dto.bean.AuthorityDto;
 import noice.entity.dto.bean.RoleDto;
 import noice.entity.dto.bean.UserDto;
@@ -154,6 +159,8 @@ public interface RoleControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.AuthorityServiceAssembler;
+import noice.assembler.auth.bean.UserServiceAssembler;
 import noice.entity.dto.bean.AuthorityDto;
 import noice.entity.dto.bean.RoleDto;
 import noice.entity.dto.bean.UserDto;
@@ -191,6 +198,8 @@ public interface RoleControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.AuthorityServiceAssembler;
+import noice.assembler.auth.bean.UserServiceAssembler;
 import noice.entity.dto.bean.AuthorityDto;
 import noice.entity.dto.bean.RoleDto;
 import noice.entity.dto.bean.UserDto;
@@ -228,6 +237,8 @@ public interface RoleControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.AuthorityServiceAssembler;
+import noice.assembler.auth.bean.UserServiceAssembler;
 import noice.entity.dto.bean.AuthorityDto;
 import noice.entity.dto.bean.RoleDto;
 import noice.entity.dto.bean.UserDto;
@@ -265,6 +276,8 @@ public interface RoleControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.AuthorityServiceAssembler;
+import noice.assembler.auth.bean.UserServiceAssembler;
 import noice.entity.dto.bean.AuthorityDto;
 import noice.entity.dto.bean.RoleDto;
 import noice.entity.dto.bean.UserDto;
@@ -302,6 +315,8 @@ public interface RoleControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.AuthorityServiceAssembler;
+import noice.assembler.auth.bean.UserServiceAssembler;
 import noice.entity.dto.bean.AuthorityDto;
 import noice.entity.dto.bean.RoleDto;
 import noice.entity.dto.bean.UserDto;
@@ -339,6 +354,8 @@ public interface RoleControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.AuthorityServiceAssembler;
+import noice.assembler.auth.bean.UserServiceAssembler;
 import noice.entity.dto.bean.AuthorityDto;
 import noice.entity.dto.bean.RoleDto;
 import noice.entity.dto.bean.UserDto;
@@ -376,6 +393,8 @@ public interface RoleControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.AuthorityServiceAssembler;
+import noice.assembler.auth.bean.UserServiceAssembler;
 import noice.entity.dto.bean.AuthorityDto;
 import noice.entity.dto.bean.RoleDto;
 import noice.entity.dto.bean.UserDto;
@@ -413,6 +432,8 @@ public interface RoleControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.AuthorityServiceAssembler;
+import noice.assembler.auth.bean.UserServiceAssembler;
 import noice.entity.dto.bean.UserDto;
 import noice.entity.dto.bean.AuthorityDto;
 import noice.entity.dto.bean.RoleDto;
@@ -450,6 +471,8 @@ public interface RoleControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.AuthorityServiceAssembler;
+import noice.assembler.auth.bean.UserServiceAssembler;
 import noice.entity.dto.bean.UserDto;
 import noice.entity.dto.bean.AuthorityDto;
 import noice.entity.dto.bean.RoleDto;
@@ -488,6 +511,8 @@ public interface RoleControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.AuthorityServiceAssembler;
+import noice.assembler.auth.bean.UserServiceAssembler;
 import noice.entity.dto.bean.UserDto;
 import noice.entity.dto.bean.AuthorityDto;
 import noice.entity.dto.bean.RoleDto;

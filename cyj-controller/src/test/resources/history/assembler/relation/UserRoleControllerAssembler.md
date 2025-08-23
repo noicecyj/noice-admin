@@ -3,8 +3,8 @@
 ```java
 package noice.assembler.relation;
 
-import noice.assembler.bean.RoleServiceAssembler;
-import noice.assembler.bean.UserServiceAssembler;
+import noice.assembler.auth.bean.RoleServiceAssembler;
+import noice.assembler.auth.bean.UserServiceAssembler;
 import noice.entity.dto.relation.UserRoleDto;
 import noice.entity.vo.relation.UserRoleVo;
 import noice.handler.assembler.relation.BaseRelationAssembler;
@@ -33,8 +33,8 @@ public interface UserRoleControllerAssembler {
 ```java
 package noice.assembler.relation;
 
-import noice.assembler.bean.RoleServiceAssembler;
-import noice.assembler.bean.UserServiceAssembler;
+import noice.assembler.auth.bean.RoleServiceAssembler;
+import noice.assembler.auth.bean.UserServiceAssembler;
 import noice.entity.dto.relation.UserRoleDto;
 import noice.entity.vo.relation.UserRoleVo;
 import noice.handler.assembler.relation.BaseRelationAssembler;
@@ -63,8 +63,8 @@ public interface UserRoleControllerAssembler {
 ```java
 package noice.assembler.relation;
 
-import noice.assembler.bean.RoleServiceAssembler;
-import noice.assembler.bean.UserServiceAssembler;
+import noice.assembler.auth.bean.RoleServiceAssembler;
+import noice.assembler.auth.bean.UserServiceAssembler;
 import noice.entity.dto.relation.UserRoleDto;
 import noice.entity.vo.relation.UserRoleVo;
 import noice.handler.assembler.relation.BaseRelationAssembler;

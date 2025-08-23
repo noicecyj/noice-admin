@@ -1,0 +1,30 @@
+package noice.assembler.create.bean;
+
+import noice.assembler.auth.bean.AuthorityServiceAssembler;
+import noice.assembler.craete.bean.PersistentFormServiceAssembler;
+import noice.entity.create.dto.bean.PersistentFormConfigDto;
+import noice.entity.create.vo.bean.PersistentFormConfigVo;
+import noice.handler.assembler.bean.BaseBeanAssembler;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.springframework.context.annotation.Primary;
+
+import java.util.List;
+import java.util.Set;
+
+/**
+ * @author Noice
+ */
+@Primary
+@Mapper(componentModel = "spring", config = BaseBeanAssembler.class, uses = {AuthorityServiceAssembler.class, PersistentFormServiceAssembler.class})
+public interface PersistentFormConfigControllerAssembler {
+
+    @Mapping(target = "authorityDto", source = "dto.authorityPo")
+    @Mapping(target = "persistentFormDto", source = "dto.persistentFormPo")
+    PersistentFormConfigVo dtoToVo(PersistentFormConfigDto dto);
+
+    List<PersistentFormConfigVo> dtoListToVoList(List<PersistentFormConfigDto> dtoList);
+
+    Set<PersistentFormConfigVo> dtoSetToVoSet(Set<PersistentFormConfigDto> dtoList);
+
+}

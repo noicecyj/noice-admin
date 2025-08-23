@@ -11,8 +11,8 @@ package noice.converter.bean;
 import noice.entity.dto.bean.MenuDto;
 import noice.entity.vo.bean.MenuVo;
 import noice.handler.converter.bean.BaseBeanConverter;
-import noice.repository.bean.AuthorityRepository;
-import noice.repository.bean.MenuRepository;
+import noice.repository.auth.bean.AuthorityRepository;
+import noice.repository.auth.bean.MenuRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -32,6 +32,7 @@ public interface MenuControllerConverter {
 
 }
 ```
+
 ## 2024-12-13 15:41:49 noice 作者大大 曹元杰 天才 笔记本
 
 ```java
@@ -40,8 +41,8 @@ package noice.converter.bean;
 import noice.entity.dto.bean.MenuDto;
 import noice.entity.vo.bean.MenuVo;
 import noice.handler.converter.bean.BaseBeanConverter;
-import noice.repository.bean.AuthorityRepository;
-import noice.repository.bean.MenuRepository;
+import noice.repository.auth.bean.AuthorityRepository;
+import noice.repository.auth.bean.MenuRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

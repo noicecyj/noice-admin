@@ -55,6 +55,7 @@ public interface UserControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.EnterpriseServiceAssembler;
 import noice.entity.dto.bean.UserDto;
 import noice.entity.vo.bean.UserVo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
@@ -76,11 +77,14 @@ public interface UserControllerAssembler {
 
 }
 ```
+
 ## 2024-12-06 10:38:37 noice 作者大大 曹元杰 天才 笔记本
 
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.EnterpriseServiceAssembler;
+import noice.assembler.auth.bean.RoleServiceAssembler;
 import noice.entity.dto.bean.RoleDto;
 import noice.entity.dto.bean.UserDto;
 import noice.entity.vo.bean.UserVo;
@@ -117,6 +121,8 @@ public interface UserControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.EnterpriseServiceAssembler;
+import noice.assembler.auth.bean.RoleServiceAssembler;
 import noice.entity.dto.bean.RoleDto;
 import noice.entity.dto.bean.UserDto;
 import noice.entity.vo.bean.UserVo;
@@ -154,6 +160,8 @@ public interface UserControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.EnterpriseServiceAssembler;
+import noice.assembler.auth.bean.RoleServiceAssembler;
 import noice.entity.dto.bean.RoleDto;
 import noice.entity.dto.bean.UserDto;
 import noice.entity.vo.bean.UserVo;

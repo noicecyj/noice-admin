@@ -75,11 +75,13 @@ public interface AuthorityControllerAssembler {
 
 }
 ```
+
 ## 2024-10-11 18:47:39 noice 作者大大 曹元杰 天才 笔记本
 
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.RoleServiceAssembler;
 import noice.entity.dto.bean.AuthorityDto;
 import noice.entity.dto.bean.RoleDto;
 import noice.entity.vo.bean.AuthorityVo;
@@ -114,6 +116,7 @@ public interface AuthorityControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.RoleServiceAssembler;
 import noice.entity.dto.bean.AuthorityDto;
 import noice.entity.dto.bean.RoleDto;
 import noice.entity.vo.bean.AuthorityVo;
@@ -148,6 +151,7 @@ public interface AuthorityControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.RoleServiceAssembler;
 import noice.entity.dto.bean.AuthorityDto;
 import noice.entity.dto.bean.RoleDto;
 import noice.entity.vo.bean.AuthorityVo;
@@ -182,6 +186,7 @@ public interface AuthorityControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.RoleServiceAssembler;
 import noice.entity.dto.bean.AuthorityDto;
 import noice.entity.dto.bean.RoleDto;
 import noice.entity.vo.bean.AuthorityVo;
@@ -216,6 +221,7 @@ public interface AuthorityControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.RoleServiceAssembler;
 import noice.entity.dto.bean.AuthorityDto;
 import noice.entity.dto.bean.RoleDto;
 import noice.entity.vo.bean.AuthorityVo;
@@ -250,6 +256,7 @@ public interface AuthorityControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.RoleServiceAssembler;
 import noice.entity.dto.bean.AuthorityDto;
 import noice.entity.dto.bean.RoleDto;
 import noice.entity.vo.bean.AuthorityVo;
@@ -284,6 +291,7 @@ public interface AuthorityControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.RoleServiceAssembler;
 import noice.entity.dto.bean.AuthorityDto;
 import noice.entity.dto.bean.RoleDto;
 import noice.entity.vo.bean.AuthorityVo;
@@ -318,6 +326,7 @@ public interface AuthorityControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.RoleServiceAssembler;
 import noice.entity.dto.bean.AuthorityDto;
 import noice.entity.dto.bean.RoleDto;
 import noice.entity.vo.bean.AuthorityVo;
@@ -352,6 +361,7 @@ public interface AuthorityControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.RoleServiceAssembler;
 import noice.entity.dto.bean.RoleDto;
 import noice.entity.dto.bean.AuthorityDto;
 import noice.entity.vo.bean.AuthorityVo;
@@ -386,6 +396,7 @@ public interface AuthorityControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.RoleServiceAssembler;
 import noice.entity.dto.bean.RoleDto;
 import noice.entity.dto.bean.AuthorityDto;
 import noice.entity.vo.bean.AuthorityVo;
@@ -421,6 +432,7 @@ public interface AuthorityControllerAssembler {
 ```java
 package noice.assembler.bean;
 
+import noice.assembler.auth.bean.RoleServiceAssembler;
 import noice.entity.dto.bean.RoleDto;
 import noice.entity.dto.bean.AuthorityDto;
 import noice.entity.vo.bean.AuthorityVo;

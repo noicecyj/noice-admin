@@ -29,7 +29,7 @@
 
     <modules>
         <module>cyj-common</module>
-        <module>cyj-entity-create</module>
+        <module>cyj-create</module>
         <module>cyj-auth</module>
         <module>cyj-controller</module>
         <module>cyj-service</module>
