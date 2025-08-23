@@ -1,13 +1,14 @@
-package noice.controller.bean;
+package noice.controller.auth.bean;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotNull;
-import noice.assembler.create.bean.PersistentFormConfigControllerAssembler;
+import noice.assembler.auth.bean.InterfaceControllerAssembler;
 import noice.common.entity.vo.ResultVO;
-import noice.converter.create.bean.PersistentFormConfigControllerConverter;
-import noice.entity.vo.bean.PersistentFormConfigVo;
+import noice.converter.auth.bean.InterfaceControllerConverter;
+import noice.entity.auth.vo.bean.InterfaceVo;
 import noice.handler.bean.BeanController;
+import noice.service.auth.bean.InterfaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,70 +24,70 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentFormConfig")
-@Tag(name = "PersistentFormConfig")
-public class PersistentFormConfigController implements BeanController<PersistentFormConfigVo> {
+@RequestMapping("entityCreateApi/Interface")
+@Tag(name = "Interface")
+public class InterfaceController implements BeanController<InterfaceVo> {
 
-    private PersistentFormConfigService service;
+    private InterfaceService service;
 
-    private PersistentFormConfigControllerConverter converter;
+    private InterfaceControllerConverter converter;
 
-    private PersistentFormConfigControllerAssembler assembler;
+    private InterfaceControllerAssembler assembler;
 
     @Autowired
-    public void setService(PersistentFormConfigService service) {
+    public void setService(InterfaceService service) {
         this.service = service;
     }
 
     @Autowired
-    public void setConverter(PersistentFormConfigControllerConverter converter) {
+    public void setConverter(InterfaceControllerConverter converter) {
         this.converter = converter;
     }
 
     @Autowired
-    public void setAssembler(PersistentFormConfigControllerAssembler assembler) {
+    public void setAssembler(InterfaceControllerAssembler assembler) {
         this.assembler = assembler;
     }
 
-    @Operation(summary = "实体表单配置_添加")
+    @Operation(summary = "接口_添加")
     @PostMapping(value = "add")
     @Override
-    public ResultVO add(@RequestBody PersistentFormConfigVo vo) {
+    public ResultVO add(@RequestBody InterfaceVo vo) {
         return ResultVO.success(service.addOne(converter.voToDto(vo)));
     }
 
-    @Operation(summary = "实体表单配置_删除")
+    @Operation(summary = "接口_删除")
     @PostMapping(value = "delete")
     @Override
     public ResultVO delete(@RequestParam("id") @NotNull String id) {
         return ResultVO.success(service.deleteOne(id));
     }
 
-    @Operation(summary = "实体表单配置_更新")
+    @Operation(summary = "接口_更新")
     @PostMapping(value = "update")
     @Override
-    public ResultVO update(@RequestBody PersistentFormConfigVo vo) {
+    public ResultVO update(@RequestBody InterfaceVo vo) {
         return ResultVO.success(service.updateOne(converter.voToDto(vo)));
     }
 
-    @Operation(summary = "实体表单配置_id查询")
+    @Operation(summary = "接口_id查询")
     @PostMapping(value = "get")
     @Override
     public ResultVO get(@RequestParam("id") @NotNull String id) {
         return ResultVO.success(assembler.dtoToVo(service.findOne(id)));
     }
 
-    @Operation(summary = "实体表单配置_ids查询")
+    @Operation(summary = "接口_ids查询")
     @PostMapping(value = "getList")
     @Override
     public ResultVO getList(@RequestBody List<String> ids) {
         return ResultVO.success(assembler.dtoListToVoList(service.findList(ids)));
     }
 
-    @Operation(summary = "实体表单配置_分页查询所有")
+    @Operation(summary = "接口_分页查询所有")
     @PostMapping(value = "page")
     @Override
-    public ResultVO page(@RequestBody PersistentFormConfigVo vo) {
+    public ResultVO page(@RequestBody InterfaceVo vo) {
         return ResultVO.success(service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto)));
     }
 

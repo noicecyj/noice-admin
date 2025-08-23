@@ -4,11 +4,12 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-noice.entity.create.po.bean.PersistentPo;
-import noice.entity.po.bean.PersistentPropertyPo;
+import noice.entity.create.po.bean.PersistentPo;
+import noice.entity.create.po.bean.PersistentPropertyPo;
 import noice.handler.base.ClassBase;
 import noice.handler.base.enumType.ClassEnum;
 import noice.handler.base.enumType.StatementEnum;
+import noice.repository.create.bean.PersistentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,7 +1,7 @@
 package noice.converter.craete.bean;
 
-import noice.entity.dto.bean.PersistentFormConfigDto;
-import noice.entity.po.bean.PersistentFormConfigPo;
+import noice.entity.create.dto.bean.PersistentFormConfigDto;
+import noice.entity.create.po.bean.PersistentFormConfigPo;
 import noice.handler.converter.bean.BaseBeanConverter;
 import org.mapstruct.Mapper;
 import org.springframework.context.annotation.Primary;

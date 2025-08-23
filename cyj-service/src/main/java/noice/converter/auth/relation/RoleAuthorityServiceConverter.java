@@ -1,7 +1,8 @@
 package noice.converter.auth.relation;
 
-import noice.entity.dto.relation.RoleAuthorityDto;
-import noice.entity.po.relation.RoleAuthorityPo;
+
+import noice.entity.auth.dto.relation.RoleAuthorityDto;
+import noice.entity.auth.po.relation.RoleAuthorityPo;
 import noice.handler.converter.relation.BaseRelationConverter;
 import org.mapstruct.Mapper;
 

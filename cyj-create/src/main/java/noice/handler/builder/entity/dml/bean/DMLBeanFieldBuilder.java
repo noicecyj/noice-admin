@@ -2,7 +2,7 @@ package noice.handler.builder.entity.dml.bean;
 
 import cn.hutool.core.util.StrUtil;
 import lombok.Data;
-noice.entity.create.po.bean.PersistentPropertyPo;
+import noice.entity.create.po.bean.PersistentPropertyPo;
 import org.springframework.stereotype.Component;
 
 @Component

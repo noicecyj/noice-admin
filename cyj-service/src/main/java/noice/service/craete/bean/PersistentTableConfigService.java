@@ -2,10 +2,13 @@ package noice.service.craete.bean;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import noice.assembler.craete.bean.PersistentTableConfigServiceAssembler;
 import noice.common.entity.dto.OptionDTO;
-import noice.entity.dto.bean.PersistentTableConfigDto;
-import noice.entity.po.bean.PersistentTableConfigPo;
+import noice.converter.craete.bean.PersistentTableConfigServiceConverter;
+import noice.entity.create.dto.bean.PersistentTableConfigDto;
+import noice.entity.create.po.bean.PersistentTableConfigPo;
 import noice.handler.bean.BeanService;
+import noice.repository.create.bean.PersistentTableConfigRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

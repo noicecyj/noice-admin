@@ -3,8 +3,7 @@ package noice.handler.builder.controller.relation;
 import cn.hutool.core.util.StrUtil;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-noice.entity.create.po.bean.AppServicePo;
-noice.entity.create.po.bean.PersistentPo;
+import noice.entity.create.po.bean.PersistentPo;
 import noice.handler.base.ClassBase;
 import noice.handler.base.enumType.ClassEnum;
 import noice.handler.base.enumType.StatementEnum;
@@ -78,7 +77,7 @@ public class ControllerRelationBuilder extends ClassBase {
         this.controllerRelationGetMethodBuilder = controllerRelationGetMethodBuilder;
     }
 
-    public ControllerRelationBuilder builder(PersistentPo persistentPo, AppServicePo appServicePo) {
+    public ControllerRelationBuilder builder(PersistentPo persistentPo) {
         String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
         this.setClassName(poName + "Controller");
         this.setClassType(ClassEnum.CLASS);
@@ -86,7 +85,7 @@ public class ControllerRelationBuilder extends ClassBase {
         this.setPackageName("package noice.controller.relation;");
         this.setClassNote();
         this.setImportList(poName);
-        this.setClassAnnotationList(poName, appServicePo.getAppServiceApi());
+//        this.setClassAnnotationList(poName);
         this.setExtendsClassName("implements RelationController<" + poName + "Vo>");
         this.setPersistentPo(persistentPo);
         return this;

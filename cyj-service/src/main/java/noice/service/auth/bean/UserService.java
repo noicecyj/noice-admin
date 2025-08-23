@@ -7,6 +7,7 @@ import noice.common.entity.dto.OptionDTO;
 import noice.converter.auth.bean.UserServiceConverter;
 import noice.entity.auth.dto.bean.UserDto;
 import noice.entity.auth.po.bean.UserPo;
+import noice.entity.auth.po.relation.UserRolePo;
 import noice.handler.bean.BeanService;
 import noice.repository.auth.bean.UserRepository;
 import noice.repository.auth.relation.UserRoleRepository;

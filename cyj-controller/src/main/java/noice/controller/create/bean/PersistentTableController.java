@@ -1,14 +1,14 @@
-package noice.controller.bean;
+package noice.controller.create.bean;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotNull;
-import noice.assembler.auth.bean.RoleControllerAssembler;
+import noice.assembler.create.bean.PersistentTableControllerAssembler;
 import noice.common.entity.vo.ResultVO;
-import noice.converter.auth.bean.RoleControllerConverter;
-import noice.entity.vo.bean.RoleVo;
+import noice.converter.create.bean.PersistentTableControllerConverter;
+import noice.entity.create.vo.bean.PersistentTableVo;
 import noice.handler.bean.BeanController;
-import noice.service.auth.bean.RoleService;
+import noice.service.craete.bean.PersistentTableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,83 +24,71 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Role")
-@Tag(name = "Role")
-public class RoleController implements BeanController<RoleVo> {
+@RequestMapping("entityCreateApi/PersistentTable")
+@Tag(name = "PersistentTable")
+public class PersistentTableController implements BeanController<PersistentTableVo> {
 
-    private RoleService service;
+    private PersistentTableService service;
 
-    private RoleControllerConverter converter;
+    private PersistentTableControllerConverter converter;
 
-    private RoleControllerAssembler assembler;
+    private PersistentTableControllerAssembler assembler;
 
     @Autowired
-    public void setService(RoleService service) {
+    public void setService(PersistentTableService service) {
         this.service = service;
     }
 
     @Autowired
-    public void setConverter(RoleControllerConverter converter) {
+    public void setConverter(PersistentTableControllerConverter converter) {
         this.converter = converter;
     }
 
     @Autowired
-    public void setAssembler(RoleControllerAssembler assembler) {
+    public void setAssembler(PersistentTableControllerAssembler assembler) {
         this.assembler = assembler;
     }
 
-    @Operation(summary = "角色_添加")
+    @Operation(summary = "实体表格_添加")
     @PostMapping(value = "add")
     @Override
-    public ResultVO add(@RequestBody RoleVo vo) {
+    public ResultVO add(@RequestBody PersistentTableVo vo) {
         return ResultVO.success(service.addOne(converter.voToDto(vo)));
     }
 
-    @Operation(summary = "角色_删除")
+    @Operation(summary = "实体表格_删除")
     @PostMapping(value = "delete")
     @Override
     public ResultVO delete(@RequestParam("id") @NotNull String id) {
         return ResultVO.success(service.deleteOne(id));
     }
 
-    @Operation(summary = "角色_更新")
+    @Operation(summary = "实体表格_更新")
     @PostMapping(value = "update")
     @Override
-    public ResultVO update(@RequestBody RoleVo vo) {
+    public ResultVO update(@RequestBody PersistentTableVo vo) {
         return ResultVO.success(service.updateOne(converter.voToDto(vo)));
     }
 
-    @Operation(summary = "角色_id查询")
+    @Operation(summary = "实体表格_id查询")
     @PostMapping(value = "get")
     @Override
     public ResultVO get(@RequestParam("id") @NotNull String id) {
         return ResultVO.success(assembler.dtoToVo(service.findOne(id)));
     }
 
-    @Operation(summary = "角色_ids查询")
+    @Operation(summary = "实体表格_ids查询")
     @PostMapping(value = "getList")
     @Override
     public ResultVO getList(@RequestBody List<String> ids) {
         return ResultVO.success(assembler.dtoListToVoList(service.findList(ids)));
     }
 
-    @Operation(summary = "角色_分页查询所有")
+    @Operation(summary = "实体表格_分页查询所有")
     @PostMapping(value = "page")
     @Override
-    public ResultVO page(@RequestBody RoleVo vo) {
+    public ResultVO page(@RequestBody PersistentTableVo vo) {
         return ResultVO.success(service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto)));
-    }
-
-    @Operation(summary = "UserIds查询")
-    @PostMapping(value = "getListByUserIds")
-    public ResultVO getListByUserIds(@RequestBody List<String> ids) {
-        return ResultVO.success(assembler.dtoListToVoList(service.findListByUserIds(ids)));
-    }
-
-    @Operation(summary = "AuthorityIds查询")
-    @PostMapping(value = "getListByAuthorityIds")
-    public ResultVO getListByAuthorityIds(@RequestBody List<String> ids) {
-        return ResultVO.success(assembler.dtoListToVoList(service.findListByAuthorityIds(ids)));
     }
 
 }

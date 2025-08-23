@@ -1,7 +1,8 @@
 package noice.assembler.auth.relation;
 
-import noice.entity.dto.relation.RoleAuthorityDto;
-import noice.entity.po.relation.RoleAuthorityPo;
+
+import noice.entity.auth.dto.relation.RoleAuthorityDto;
+import noice.entity.auth.po.relation.RoleAuthorityPo;
 import noice.handler.assembler.relation.BaseRelationAssembler;
 import noice.repository.auth.bean.AuthorityRepository;
 import noice.repository.auth.bean.RoleRepository;

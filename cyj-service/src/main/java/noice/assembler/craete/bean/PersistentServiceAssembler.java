@@ -1,9 +1,10 @@
 package noice.assembler.craete.bean;
 
 import noice.common.entity.dto.OptionDTO;
-import noice.entity.dto.bean.PersistentDto;
-import noice.entity.po.bean.PersistentPo;
+import noice.entity.create.dto.bean.PersistentDto;
+import noice.entity.create.po.bean.PersistentPo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
+import noice.repository.create.bean.PersistentRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.context.annotation.Primary;
@@ -15,10 +16,9 @@ import java.util.Set;
  * @author Noice
  */
 @Primary
-@Mapper(componentModel = "spring", config = BaseBeanAssembler.class, uses = {AppServiceRepository.class, PersistentRepository.class})
+@Mapper(componentModel = "spring", config = BaseBeanAssembler.class, uses = {PersistentRepository.class})
 public interface PersistentServiceAssembler {
 
-    @Mapping(target = "appServicePo", source = "po.appServiceId")
     @Mapping(target = "persistentPo", source = "po.persistentId")
     PersistentDto poToDto(PersistentPo po);
 

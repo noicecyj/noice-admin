@@ -2,10 +2,13 @@ package noice.aspect.service.bean;
 
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson2.JSONObject;
-import noice.entity.dto.bean.PersistentDto;
+import noice.entity.create.dto.bean.PersistentDto;
 import noice.entity.create.po.bean.PersistentFormPo;
 import noice.entity.create.po.bean.PersistentTablePo;
 import noice.handler.bean.BeanServiceAspectInterface;
+import noice.repository.create.bean.PersistentFormRepository;
+import noice.repository.create.bean.PersistentPropertyRepository;
+import noice.repository.create.bean.PersistentTableRepository;
 import noice.service.OperateTableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -2,7 +2,7 @@ package noice.handler.builder.entity.dml.relation;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-noice.entity.create.po.bean.PersistentPropertyPo;
+import noice.entity.create.po.bean.PersistentPropertyPo;
 import org.springframework.stereotype.Component;
 
 @Component

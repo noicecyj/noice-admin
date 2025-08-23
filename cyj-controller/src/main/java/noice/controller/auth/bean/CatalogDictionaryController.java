@@ -1,13 +1,14 @@
-package noice.controller.bean;
+package noice.controller.auth.bean;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotNull;
-import noice.assembler.create.bean.PersistentFormControllerAssembler;
+import noice.assembler.auth.bean.CatalogDictionaryControllerAssembler;
 import noice.common.entity.vo.ResultVO;
-import noice.converter.create.bean.PersistentFormControllerConverter;
-import noice.entity.vo.bean.PersistentFormVo;
+import noice.converter.auth.bean.CatalogDictionaryControllerConverter;
+import noice.entity.auth.vo.bean.CatalogDictionaryVo;
 import noice.handler.bean.BeanController;
+import noice.service.auth.bean.CatalogDictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,70 +24,70 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentForm")
-@Tag(name = "PersistentForm")
-public class PersistentFormController implements BeanController<PersistentFormVo> {
+@RequestMapping("dictionaryApi/CatalogDictionary")
+@Tag(name = "CatalogDictionary")
+public class CatalogDictionaryController implements BeanController<CatalogDictionaryVo> {
 
-    private PersistentFormService service;
+    private CatalogDictionaryService service;
 
-    private PersistentFormControllerConverter converter;
+    private CatalogDictionaryControllerConverter converter;
 
-    private PersistentFormControllerAssembler assembler;
+    private CatalogDictionaryControllerAssembler assembler;
 
     @Autowired
-    public void setService(PersistentFormService service) {
+    public void setService(CatalogDictionaryService service) {
         this.service = service;
     }
 
     @Autowired
-    public void setConverter(PersistentFormControllerConverter converter) {
+    public void setConverter(CatalogDictionaryControllerConverter converter) {
         this.converter = converter;
     }
 
     @Autowired
-    public void setAssembler(PersistentFormControllerAssembler assembler) {
+    public void setAssembler(CatalogDictionaryControllerAssembler assembler) {
         this.assembler = assembler;
     }
 
-    @Operation(summary = "实体表单_添加")
+    @Operation(summary = "目录字典_添加")
     @PostMapping(value = "add")
     @Override
-    public ResultVO add(@RequestBody PersistentFormVo vo) {
+    public ResultVO add(@RequestBody CatalogDictionaryVo vo) {
         return ResultVO.success(service.addOne(converter.voToDto(vo)));
     }
 
-    @Operation(summary = "实体表单_删除")
+    @Operation(summary = "目录字典_删除")
     @PostMapping(value = "delete")
     @Override
     public ResultVO delete(@RequestParam("id") @NotNull String id) {
         return ResultVO.success(service.deleteOne(id));
     }
 
-    @Operation(summary = "实体表单_更新")
+    @Operation(summary = "目录字典_更新")
     @PostMapping(value = "update")
     @Override
-    public ResultVO update(@RequestBody PersistentFormVo vo) {
+    public ResultVO update(@RequestBody CatalogDictionaryVo vo) {
         return ResultVO.success(service.updateOne(converter.voToDto(vo)));
     }
 
-    @Operation(summary = "实体表单_id查询")
+    @Operation(summary = "目录字典_id查询")
     @PostMapping(value = "get")
     @Override
     public ResultVO get(@RequestParam("id") @NotNull String id) {
         return ResultVO.success(assembler.dtoToVo(service.findOne(id)));
     }
 
-    @Operation(summary = "实体表单_ids查询")
+    @Operation(summary = "目录字典_ids查询")
     @PostMapping(value = "getList")
     @Override
     public ResultVO getList(@RequestBody List<String> ids) {
         return ResultVO.success(assembler.dtoListToVoList(service.findList(ids)));
     }
 
-    @Operation(summary = "实体表单_分页查询所有")
+    @Operation(summary = "目录字典_分页查询所有")
     @PostMapping(value = "page")
     @Override
-    public ResultVO page(@RequestBody PersistentFormVo vo) {
+    public ResultVO page(@RequestBody CatalogDictionaryVo vo) {
         return ResultVO.success(service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto)));
     }
 

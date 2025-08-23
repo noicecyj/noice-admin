@@ -1,7 +1,7 @@
 package noice.assembler;
 
+import noice.entity.auth.po.bean.MenuPo;
 import noice.entity.dto.TreeMenuDto;
-import noice.entity.po.bean.MenuPo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
 import noice.repository.auth.bean.AuthorityRepository;
 import noice.repository.auth.bean.MenuRepository;

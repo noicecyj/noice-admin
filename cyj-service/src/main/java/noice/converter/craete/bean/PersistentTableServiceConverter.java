@@ -1,7 +1,8 @@
 package noice.converter.craete.bean;
 
-import noice.entity.dto.bean.PersistentTableDto;
-import noice.entity.po.bean.PersistentTablePo;
+
+import noice.entity.create.dto.bean.PersistentTableDto;
+import noice.entity.create.po.bean.PersistentTablePo;
 import noice.handler.converter.bean.BaseBeanConverter;
 import org.mapstruct.Mapper;
 import org.springframework.context.annotation.Primary;

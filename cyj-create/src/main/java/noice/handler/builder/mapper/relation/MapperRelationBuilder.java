@@ -3,7 +3,7 @@ package noice.handler.builder.mapper.relation;
 import cn.hutool.core.util.StrUtil;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-noice.entity.create.po.bean.PersistentPo;
+import noice.entity.create.po.bean.PersistentPo;
 import noice.handler.base.ClassBase;
 import noice.handler.base.enumType.ClassEnum;
 import noice.handler.base.enumType.StatementEnum;

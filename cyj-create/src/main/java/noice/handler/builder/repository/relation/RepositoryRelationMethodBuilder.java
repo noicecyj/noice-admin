@@ -3,8 +3,8 @@ package noice.handler.builder.repository.relation;
 import cn.hutool.core.util.StrUtil;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-noice.entity.create.po.bean.PersistentPo;
-import noice.entity.po.bean.PersistentPropertyPo;
+import noice.entity.create.po.bean.PersistentPo;
+import noice.entity.create.po.bean.PersistentPropertyPo;
 import noice.handler.base.MethodBase;
 import noice.handler.base.enumType.StatementEnum;
 import org.jetbrains.annotations.NotNull;
@@ -19,6 +19,18 @@ import java.util.List;
 public class RepositoryRelationMethodBuilder extends MethodBase {
 
     private List<PersistentPropertyPo> persistentPropertyPoList;
+
+    @NotNull
+    private static String getString(List<String> methodAnnotationList, StatementEnum methodStatement, String methodReturnType, String methodName, List<String> methodParamSet, String methodReturnBody) {
+        StringBuilder sb = new StringBuilder();
+        for (String methodAnnotation : methodAnnotationList) {
+            sb.append("    ").append(methodAnnotation).append("\n");
+        }
+        sb.append("    ").append(methodStatement.getStatement()).append(" ").append(methodReturnType).append(" ").append(methodName).append("(").append(String.join(", ", methodParamSet)).append(") {\n");
+        sb.append("        ").append(methodReturnBody).append("\n");
+        sb.append("    }");
+        return sb.toString();
+    }
 
     @EqualsAndHashCode(callSuper = true)
     @Component
@@ -408,18 +420,6 @@ public class RepositoryRelationMethodBuilder extends MethodBase {
 
         }
 
-    }
-
-    @NotNull
-    private static String getString(List<String> methodAnnotationList, StatementEnum methodStatement, String methodReturnType, String methodName, List<String> methodParamSet, String methodReturnBody) {
-        StringBuilder sb = new StringBuilder();
-        for (String methodAnnotation : methodAnnotationList) {
-            sb.append("    ").append(methodAnnotation).append("\n");
-        }
-        sb.append("    ").append(methodStatement.getStatement()).append(" ").append(methodReturnType).append(" ").append(methodName).append("(").append(String.join(", ", methodParamSet)).append(") {\n");
-        sb.append("        ").append(methodReturnBody).append("\n");
-        sb.append("    }");
-        return sb.toString();
     }
 
 }

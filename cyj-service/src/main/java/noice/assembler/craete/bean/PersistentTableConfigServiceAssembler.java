@@ -1,10 +1,11 @@
 package noice.assembler.craete.bean;
 
 import noice.common.entity.dto.OptionDTO;
-import noice.entity.dto.bean.PersistentTableConfigDto;
-import noice.entity.po.bean.PersistentTableConfigPo;
+import noice.entity.create.dto.bean.PersistentTableConfigDto;
+import noice.entity.create.po.bean.PersistentTableConfigPo;
 import noice.handler.assembler.bean.BaseBeanAssembler;
 import noice.repository.auth.bean.AuthorityRepository;
+import noice.repository.create.bean.PersistentTableRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.context.annotation.Primary;

@@ -1,9 +1,8 @@
 package noice.handler.factory.bean;
 
 import com.baomidou.mybatisplus.extension.toolkit.SqlRunner;
-import noice.entity.po.bean.AppServicePo;
-import noice.entity.po.bean.PersistentPo;
-import noice.entity.po.bean.PersistentPropertyPo;
+import noice.entity.create.po.bean.PersistentPo;
+import noice.entity.create.po.bean.PersistentPropertyPo;
 import noice.handler.builder.assembler.bean.AssemblerBeanBuilder;
 import noice.handler.builder.controller.bean.ControllerBeanBuilder;
 import noice.handler.builder.converter.bean.ConverterBeanBuilder;
@@ -28,11 +27,9 @@ import java.util.Map;
 import static noice.common.contants.Constant.DATABASE;
 import static noice.constant.CreateConstant.CONTROLLER_ASSEMBLER_PATH;
 import static noice.constant.CreateConstant.CONTROLLER_CONVERTER_PATH;
-import static noice.constant.CreateConstant.CONTROLLER_PATH;
 import static noice.constant.CreateConstant.ENTITY_PATH;
 import static noice.constant.CreateConstant.HISTORY_CONTROLLER_ASSEMBLER_PATH;
 import static noice.constant.CreateConstant.HISTORY_CONTROLLER_CONVERTER_PATH;
-import static noice.constant.CreateConstant.HISTORY_CONTROLLER_PATH;
 import static noice.constant.CreateConstant.HISTORY_ENTITY_PATH;
 import static noice.constant.CreateConstant.HISTORY_MAPPER_PATH;
 import static noice.constant.CreateConstant.HISTORY_REPOSITORY_PATH;
@@ -182,7 +179,7 @@ public class ClassBeanFactoryImpl extends ClassFactoryImpl {
                 this.createAssembler(root, persistentPo, persistentPropertyPoList, NtoN);
                 this.createRepository(root, persistentPo, persistentPropertyPoList);
                 this.createService(root, persistentPo, persistentPropertyPoList, NtoN, OtoN);
-                this.createController(root, persistentPo, NtoN);
+//                this.createController(root, persistentPo, NtoN);
             } else {
 //                deleteEntityDML(root, persistentPo, persistentPropertyPoList);
 //                deleteEntityPO(root, persistentPo, persistentPropertyPoList);
@@ -369,16 +366,16 @@ public class ClassBeanFactoryImpl extends ClassFactoryImpl {
         }
     }
 
-    private void createController(String rootPath, PersistentPo persistentPo, List<Map<String, PersistentPo>> NtoN) {
-        AppServicePo appService = getAppService(persistentPo.getAppServiceId());
-        controllerBeanBuilder.builder(persistentPo, appService, NtoN);
-        try {
-            super.createAndSaveHistory(rootPath + CONTROLLER_PATH + BEAN, rootPath + HISTORY_CONTROLLER_PATH + BEAN,
-                    controllerBeanBuilder.getClassName(), controllerBeanBuilder.toString());
-        } catch (Exception e) {
-            logger.error(e.getLocalizedMessage());
-        }
-    }
+//    private void createController(String rootPath, PersistentPo persistentPo, List<Map<String, PersistentPo>> NtoN) {
+//        AppServicePo appService = getAppService(persistentPo.getAppServiceId());
+//        controllerBeanBuilder.builder(persistentPo, appService, NtoN);
+//        try {
+//            super.createAndSaveHistory(rootPath + CONTROLLER_PATH + BEAN, rootPath + HISTORY_CONTROLLER_PATH + BEAN,
+//                    controllerBeanBuilder.getClassName(), controllerBeanBuilder.toString());
+//        } catch (Exception e) {
+//            logger.error(e.getLocalizedMessage());
+//        }
+//    }
 
 
     private void createDataDML(PersistentPo persistentPo, List<PersistentPropertyPo> persistentPropertyPoList) {

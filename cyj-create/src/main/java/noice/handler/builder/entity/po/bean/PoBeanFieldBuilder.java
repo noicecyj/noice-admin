@@ -3,7 +3,7 @@ package noice.handler.builder.entity.po.bean;
 import cn.hutool.core.util.StrUtil;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-noice.entity.create.po.bean.PersistentPropertyPo;
+import noice.entity.create.po.bean.PersistentPropertyPo;
 import noice.handler.base.FieldBase;
 import noice.handler.base.enumType.StatementEnum;
 import org.springframework.stereotype.Component;

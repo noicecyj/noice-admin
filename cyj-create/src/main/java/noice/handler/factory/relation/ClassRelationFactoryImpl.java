@@ -2,9 +2,8 @@ package noice.handler.factory.relation;
 
 import com.baomidou.mybatisplus.extension.toolkit.SqlRunner;
 import noice.common.utils.BeanUtils;
-import noice.entity.po.bean.AppServicePo;
-import noice.entity.po.bean.PersistentPo;
-import noice.entity.po.bean.PersistentPropertyPo;
+import noice.entity.create.po.bean.PersistentPo;
+import noice.entity.create.po.bean.PersistentPropertyPo;
 import noice.handler.builder.assembler.relation.AssemblerRelationBuilder;
 import noice.handler.builder.controller.relation.ControllerRelationBuilder;
 import noice.handler.builder.converter.relation.ConverterRelationBuilder;
@@ -28,11 +27,9 @@ import java.util.List;
 import static noice.common.contants.Constant.DATABASE;
 import static noice.constant.CreateConstant.CONTROLLER_ASSEMBLER_PATH;
 import static noice.constant.CreateConstant.CONTROLLER_CONVERTER_PATH;
-import static noice.constant.CreateConstant.CONTROLLER_PATH;
 import static noice.constant.CreateConstant.ENTITY_PATH;
 import static noice.constant.CreateConstant.HISTORY_CONTROLLER_ASSEMBLER_PATH;
 import static noice.constant.CreateConstant.HISTORY_CONTROLLER_CONVERTER_PATH;
-import static noice.constant.CreateConstant.HISTORY_CONTROLLER_PATH;
 import static noice.constant.CreateConstant.HISTORY_ENTITY_PATH;
 import static noice.constant.CreateConstant.HISTORY_MAPPER_PATH;
 import static noice.constant.CreateConstant.HISTORY_REPOSITORY_PATH;
@@ -179,7 +176,7 @@ public class ClassRelationFactoryImpl extends ClassFactoryImpl {
                 createAssembler(root, persistentPo, persistentPropertyPoList);
                 createRepository(root, persistentPo, persistentPropertyPoList);
                 createService(root, persistentPo, persistentPropertyPoList);
-                createController(root, persistentPo);
+//                createController(root, persistentPo);
             } else {
 //                deleteEntityDML(root, persistentPo, persistentPropertyPoList);
 //                deleteEntityPO(root, persistentPo, persistentPropertyPoList);
@@ -250,10 +247,10 @@ public class ClassRelationFactoryImpl extends ClassFactoryImpl {
         BeanUtils.deleteJavaFile(rootPath + SERVICE_PATH + RELATION, serviceRelationBuilder.builder(persistentPo, persistentPropertyPoList).getClassName());
     }
 
-    public void deleteController(String rootPath, PersistentPo persistentPo) {
-        AppServicePo appService = getAppService(persistentPo.getAppServiceId());
-        BeanUtils.deleteJavaFile(rootPath + CONTROLLER_PATH + RELATION, controllerRelationBuilder.builder(persistentPo, appService).getClassName());
-    }
+//    public void deleteController(String rootPath, PersistentPo persistentPo) {
+//        AppServicePo appService = getAppService(persistentPo.getAppServiceId());
+//        BeanUtils.deleteJavaFile(rootPath + CONTROLLER_PATH + RELATION, controllerRelationBuilder.builder(persistentPo, appService).getClassName());
+//    }
 
     public void createEntityDML(String rootPath, PersistentPo persistentPo, List<PersistentPropertyPo> persistentPropertyPoList) {
         dmlRelationBuilder.builder(persistentPo, persistentPropertyPoList, DATABASE);
@@ -352,16 +349,16 @@ public class ClassRelationFactoryImpl extends ClassFactoryImpl {
         }
     }
 
-    public void createController(String rootPath, PersistentPo persistentPo) {
-        AppServicePo appService = getAppService(persistentPo.getAppServiceId());
-        controllerRelationBuilder.builder(persistentPo, appService);
-        try {
-            super.createAndSaveHistory(rootPath + CONTROLLER_PATH + RELATION, rootPath + HISTORY_CONTROLLER_PATH + RELATION,
-                    controllerRelationBuilder.getClassName(), controllerRelationBuilder.toString());
-        } catch (Exception e) {
-            logger.error(e.getLocalizedMessage());
-        }
-    }
+//    public void createController(String rootPath, PersistentPo persistentPo) {
+//        AppServicePo appService = getAppService(persistentPo.getAppServiceId());
+//        controllerRelationBuilder.builder(persistentPo, appService);
+//        try {
+//            super.createAndSaveHistory(rootPath + CONTROLLER_PATH + RELATION, rootPath + HISTORY_CONTROLLER_PATH + RELATION,
+//                    controllerRelationBuilder.getClassName(), controllerRelationBuilder.toString());
+//        } catch (Exception e) {
+//            logger.error(e.getLocalizedMessage());
+//        }
+//    }
 
 //    public void createRelationInterface(PersistentPo persistentPo) {
 //        AppServicePo appService = getAppService(persistentPo.getAppServiceId());

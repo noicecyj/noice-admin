@@ -6,24 +6,30 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.Getter;
 import noice.common.utils.BeanUtils;
 import noice.entity.auth.po.bean.AuthorityPo;
-noice.entity.create.po.bean.AppServicePo;
-import noice.entity.po.bean.CatalogDictionaryPo;
-import noice.entity.po.bean.InterfacePo;
-import noice.entity.po.bean.MenuPo;
-import noice.entity.po.bean.PersistentFormConfigPo;
-import noice.entity.po.bean.PersistentFormPo;
-import noice.entity.po.bean.PersistentPo;
-import noice.entity.po.bean.PersistentPropertyPo;
-import noice.entity.po.bean.PersistentTableConfigPo;
-import noice.entity.po.bean.PersistentTablePo;
-import noice.entity.po.bean.RolePo;
-import noice.entity.po.relation.RoleAuthorityPo;
+import noice.entity.auth.po.bean.CatalogDictionaryPo;
+import noice.entity.auth.po.bean.InterfacePo;
+import noice.entity.auth.po.bean.MenuPo;
+import noice.entity.auth.po.bean.RolePo;
+import noice.entity.auth.po.relation.RoleAuthorityPo;
+import noice.entity.create.po.bean.PersistentFormConfigPo;
+import noice.entity.create.po.bean.PersistentFormPo;
+import noice.entity.create.po.bean.PersistentPo;
+import noice.entity.create.po.bean.PersistentPropertyPo;
+import noice.entity.create.po.bean.PersistentTableConfigPo;
+import noice.entity.create.po.bean.PersistentTablePo;
 import noice.repository.auth.bean.AuthorityRepository;
 import noice.repository.auth.bean.CatalogDictionaryRepository;
 import noice.repository.auth.bean.InterfaceRepository;
 import noice.repository.auth.bean.MenuRepository;
 import noice.repository.auth.bean.RoleRepository;
 import noice.repository.auth.relation.RoleAuthorityRepository;
+import noice.repository.create.bean.PersistentFormConfigRepository;
+import noice.repository.create.bean.PersistentFormRepository;
+import noice.repository.create.bean.PersistentPropertyRepository;
+import noice.repository.create.bean.PersistentRepository;
+import noice.repository.create.bean.PersistentTableConfigRepository;
+import noice.repository.create.bean.PersistentTableRepository;
+import noice.repository.create.bean.PersistentTableSearchConfigRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,8 +60,6 @@ public abstract class ClassFactoryImpl implements ClassFactory {
     private PersistentRepository persistentRepository;
 
     private PersistentPropertyRepository persistentPropertyRepository;
-
-    private AppServiceRepository appServiceRepository;
 
     private AuthorityRepository authorityRepository;
 
@@ -140,11 +144,6 @@ public abstract class ClassFactoryImpl implements ClassFactory {
     }
 
     @Autowired
-    public void setAppServiceRepository(AppServiceRepository appServiceRepository) {
-        this.appServiceRepository = appServiceRepository;
-    }
-
-    @Autowired
     public void setCatalogDictionaryRepository(CatalogDictionaryRepository catalogDictionaryRepository) {
         this.catalogDictionaryRepository = catalogDictionaryRepository;
     }
@@ -206,10 +205,6 @@ public abstract class ClassFactoryImpl implements ClassFactory {
         CatalogDictionaryPo catalogDictionaryPo = new CatalogDictionaryPo();
         catalogDictionaryPo.setCatalogDictionaryName("BACK_END");
         return catalogDictionaryRepository.find(catalogDictionaryPo.eqCatalogDictionaryName().getQueryWrapper()).getCatalogDictionaryCode();
-    }
-
-    public AppServicePo getAppService(String id) {
-        return appServiceRepository.find(id);
     }
 
     public void createAndSaveHistory(String path, String historyPath, String className, String fileString) throws IOException {
@@ -556,19 +551,19 @@ public abstract class ClassFactoryImpl implements ClassFactory {
         }
     }
 
-    public void createMenu() {
-        String indexMenuId = this.createMenuType(null, null, "index", "首页", "0");
-        List<AppServicePo> appServicePoList = getAppServiceRepository().findList(new AppServicePo().getQueryWrapper());
-        for (AppServicePo appServicePo : appServicePoList) {
-            String appServiceMenuId = this.createMenuType(null, appServicePo, appServicePo.getAppServiceCode(), appServicePo.getAppServiceName(), indexMenuId);
-            List<PersistentPo> persistentPoList = getPersistentRepository().findList(new PersistentPo().eqAppServiceId(appServicePo.getId()).getQueryWrapper());
-            for (PersistentPo persistentPo : persistentPoList) {
-                this.createMenuType(persistentPo, appServicePo, persistentPo.getPersistentCode(), persistentPo.getPersistentName(), appServiceMenuId);
-            }
-        }
-    }
+//    public void createMenu() {
+//        String indexMenuId = this.createMenuType(null, null, "index", "首页", "0");
+//        List<AppServicePo> appServicePoList = getAppServiceRepository().findList(new AppServicePo().getQueryWrapper());
+//        for (AppServicePo appServicePo : appServicePoList) {
+//            String appServiceMenuId = this.createMenuType(null, appServicePo, appServicePo.getAppServiceCode(), appServicePo.getAppServiceName(), indexMenuId);
+//            List<PersistentPo> persistentPoList = getPersistentRepository().findList(new PersistentPo().eqAppServiceId(appServicePo.getId()).getQueryWrapper());
+//            for (PersistentPo persistentPo : persistentPoList) {
+//                this.createMenuType(persistentPo, appServicePo, persistentPo.getPersistentCode(), persistentPo.getPersistentName(), appServiceMenuId);
+//            }
+//        }
+//    }
 
-    public String createMenuType(PersistentPo persistentPo, AppServicePo appService, String tagCode, String tagName, String pid) {
+    public String createMenuType(PersistentPo persistentPo, String tagCode, String tagName, String pid) {
         String authorityId = authorityCreate(tagCode, tagName, "menu");
         MenuPo menuPo = new MenuPo();
         menuPo = getMenuRepository().find(menuPo.eqMenuCode(tagCode).eqMenuName(tagName).getQueryWrapper());
@@ -576,7 +571,7 @@ public abstract class ClassFactoryImpl implements ClassFactory {
             menuPo = new MenuPo().eqMenuCode(tagCode).eqMenuName(tagName).eqMenuId(pid);
             menuPo.setAuthorityId(authorityId);
             menuPo.setMenuUrl("/");
-            if (ObjectUtil.isNotNull(persistentPo) && ObjectUtil.isNotNull(appService)) {
+            if (ObjectUtil.isNotNull(persistentPo)) {
                 String poName = StrUtil.upperFirst(StrUtil.toCamelCase(persistentPo.getPersistentCode()));
                 menuPo.setMenuUrl("/" + poName);
             }

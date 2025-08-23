@@ -1,14 +1,14 @@
-package noice.controller.bean;
+package noice.controller.auth.bean;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotNull;
-import noice.assembler.auth.bean.MenuControllerAssembler;
+import noice.assembler.auth.bean.CatalogControllerAssembler;
 import noice.common.entity.vo.ResultVO;
-import noice.converter.auth.bean.MenuControllerConverter;
-import noice.entity.vo.bean.MenuVo;
+import noice.converter.auth.bean.CatalogControllerConverter;
+import noice.entity.auth.vo.bean.CatalogVo;
 import noice.handler.bean.BeanController;
-import noice.service.auth.bean.MenuService;
+import noice.service.auth.bean.CatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,70 +24,70 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Menu")
-@Tag(name = "Menu")
-public class MenuController implements BeanController<MenuVo> {
+@RequestMapping("dictionaryApi/Catalog")
+@Tag(name = "Catalog")
+public class CatalogController implements BeanController<CatalogVo> {
 
-    private MenuService service;
+    private CatalogService service;
 
-    private MenuControllerConverter converter;
+    private CatalogControllerConverter converter;
 
-    private MenuControllerAssembler assembler;
+    private CatalogControllerAssembler assembler;
 
     @Autowired
-    public void setService(MenuService service) {
+    public void setService(CatalogService service) {
         this.service = service;
     }
 
     @Autowired
-    public void setConverter(MenuControllerConverter converter) {
+    public void setConverter(CatalogControllerConverter converter) {
         this.converter = converter;
     }
 
     @Autowired
-    public void setAssembler(MenuControllerAssembler assembler) {
+    public void setAssembler(CatalogControllerAssembler assembler) {
         this.assembler = assembler;
     }
 
-    @Operation(summary = "菜单_添加")
+    @Operation(summary = "目录_添加")
     @PostMapping(value = "add")
     @Override
-    public ResultVO add(@RequestBody MenuVo vo) {
+    public ResultVO add(@RequestBody CatalogVo vo) {
         return ResultVO.success(service.addOne(converter.voToDto(vo)));
     }
 
-    @Operation(summary = "菜单_删除")
+    @Operation(summary = "目录_删除")
     @PostMapping(value = "delete")
     @Override
     public ResultVO delete(@RequestParam("id") @NotNull String id) {
         return ResultVO.success(service.deleteOne(id));
     }
 
-    @Operation(summary = "菜单_更新")
+    @Operation(summary = "目录_更新")
     @PostMapping(value = "update")
     @Override
-    public ResultVO update(@RequestBody MenuVo vo) {
+    public ResultVO update(@RequestBody CatalogVo vo) {
         return ResultVO.success(service.updateOne(converter.voToDto(vo)));
     }
 
-    @Operation(summary = "菜单_id查询")
+    @Operation(summary = "目录_id查询")
     @PostMapping(value = "get")
     @Override
     public ResultVO get(@RequestParam("id") @NotNull String id) {
         return ResultVO.success(assembler.dtoToVo(service.findOne(id)));
     }
 
-    @Operation(summary = "菜单_ids查询")
+    @Operation(summary = "目录_ids查询")
     @PostMapping(value = "getList")
     @Override
     public ResultVO getList(@RequestBody List<String> ids) {
         return ResultVO.success(assembler.dtoListToVoList(service.findList(ids)));
     }
 
-    @Operation(summary = "菜单_分页查询所有")
+    @Operation(summary = "目录_分页查询所有")
     @PostMapping(value = "page")
     @Override
-    public ResultVO page(@RequestBody MenuVo vo) {
+    public ResultVO page(@RequestBody CatalogVo vo) {
         return ResultVO.success(service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto)));
     }
 

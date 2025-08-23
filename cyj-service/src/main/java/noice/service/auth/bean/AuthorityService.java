@@ -9,6 +9,7 @@ import noice.entity.auth.dto.bean.AuthorityDto;
 import noice.entity.auth.po.bean.AuthorityPo;
 import noice.entity.auth.po.bean.InterfacePo;
 import noice.entity.auth.po.bean.MenuPo;
+import noice.entity.auth.po.relation.RoleAuthorityPo;
 import noice.entity.create.po.bean.PersistentFormConfigPo;
 import noice.entity.create.po.bean.PersistentTableConfigPo;
 import noice.entity.create.po.bean.PersistentTableSearchConfigPo;

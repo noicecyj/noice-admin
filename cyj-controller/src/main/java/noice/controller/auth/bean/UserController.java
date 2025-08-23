@@ -1,4 +1,4 @@
-package noice.controller.bean;
+package noice.controller.auth.bean;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import noice.assembler.auth.bean.UserControllerAssembler;
 import noice.common.entity.vo.ResultVO;
 import noice.converter.auth.bean.UserControllerConverter;
-import noice.entity.vo.bean.UserVo;
+import noice.entity.auth.vo.bean.UserVo;
 import noice.handler.bean.BeanController;
 import noice.service.auth.bean.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

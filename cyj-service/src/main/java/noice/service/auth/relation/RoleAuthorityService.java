@@ -2,7 +2,7 @@ package noice.service.auth.relation;
 
 import noice.assembler.auth.relation.RoleAuthorityServiceAssembler;
 import noice.converter.auth.relation.RoleAuthorityServiceConverter;
-import noice.entity.dto.relation.RoleAuthorityDto;
+import noice.entity.auth.dto.relation.RoleAuthorityDto;
 import noice.handler.relation.RelationService;
 import noice.repository.auth.relation.RoleAuthorityRepository;
 import org.springframework.beans.factory.annotation.Autowired;

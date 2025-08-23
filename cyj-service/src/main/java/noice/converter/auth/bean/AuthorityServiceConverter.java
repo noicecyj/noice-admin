@@ -1,7 +1,7 @@
 package noice.converter.auth.bean;
 
+import noice.entity.auth.dto.bean.AuthorityDto;
 import noice.entity.auth.po.bean.AuthorityPo;
-import noice.entity.dto.bean.AuthorityDto;
 import noice.handler.converter.bean.BaseBeanConverter;
 import org.mapstruct.Mapper;
 import org.springframework.context.annotation.Primary;

@@ -1,14 +1,14 @@
-package noice.controller.bean;
+package noice.controller.create.bean;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotNull;
-import noice.assembler.auth.bean.CatalogDictionaryControllerAssembler;
+import noice.assembler.create.bean.PersistentFormConfigControllerAssembler;
 import noice.common.entity.vo.ResultVO;
-import noice.converter.auth.bean.CatalogDictionaryControllerConverter;
-import noice.entity.vo.bean.CatalogDictionaryVo;
+import noice.converter.create.bean.PersistentFormConfigControllerConverter;
+import noice.entity.create.vo.bean.PersistentFormConfigVo;
 import noice.handler.bean.BeanController;
-import noice.service.auth.bean.CatalogDictionaryService;
+import noice.service.craete.bean.PersistentFormConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,70 +24,70 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("dictionaryApi/CatalogDictionary")
-@Tag(name = "CatalogDictionary")
-public class CatalogDictionaryController implements BeanController<CatalogDictionaryVo> {
+@RequestMapping("entityCreateApi/PersistentFormConfig")
+@Tag(name = "PersistentFormConfig")
+public class PersistentFormConfigController implements BeanController<PersistentFormConfigVo> {
 
-    private CatalogDictionaryService service;
+    private PersistentFormConfigService service;
 
-    private CatalogDictionaryControllerConverter converter;
+    private PersistentFormConfigControllerConverter converter;
 
-    private CatalogDictionaryControllerAssembler assembler;
+    private PersistentFormConfigControllerAssembler assembler;
 
     @Autowired
-    public void setService(CatalogDictionaryService service) {
+    public void setService(PersistentFormConfigService service) {
         this.service = service;
     }
 
     @Autowired
-    public void setConverter(CatalogDictionaryControllerConverter converter) {
+    public void setConverter(PersistentFormConfigControllerConverter converter) {
         this.converter = converter;
     }
 
     @Autowired
-    public void setAssembler(CatalogDictionaryControllerAssembler assembler) {
+    public void setAssembler(PersistentFormConfigControllerAssembler assembler) {
         this.assembler = assembler;
     }
 
-    @Operation(summary = "目录字典_添加")
+    @Operation(summary = "实体表单配置_添加")
     @PostMapping(value = "add")
     @Override
-    public ResultVO add(@RequestBody CatalogDictionaryVo vo) {
+    public ResultVO add(@RequestBody PersistentFormConfigVo vo) {
         return ResultVO.success(service.addOne(converter.voToDto(vo)));
     }
 
-    @Operation(summary = "目录字典_删除")
+    @Operation(summary = "实体表单配置_删除")
     @PostMapping(value = "delete")
     @Override
     public ResultVO delete(@RequestParam("id") @NotNull String id) {
         return ResultVO.success(service.deleteOne(id));
     }
 
-    @Operation(summary = "目录字典_更新")
+    @Operation(summary = "实体表单配置_更新")
     @PostMapping(value = "update")
     @Override
-    public ResultVO update(@RequestBody CatalogDictionaryVo vo) {
+    public ResultVO update(@RequestBody PersistentFormConfigVo vo) {
         return ResultVO.success(service.updateOne(converter.voToDto(vo)));
     }
 
-    @Operation(summary = "目录字典_id查询")
+    @Operation(summary = "实体表单配置_id查询")
     @PostMapping(value = "get")
     @Override
     public ResultVO get(@RequestParam("id") @NotNull String id) {
         return ResultVO.success(assembler.dtoToVo(service.findOne(id)));
     }
 
-    @Operation(summary = "目录字典_ids查询")
+    @Operation(summary = "实体表单配置_ids查询")
     @PostMapping(value = "getList")
     @Override
     public ResultVO getList(@RequestBody List<String> ids) {
         return ResultVO.success(assembler.dtoListToVoList(service.findList(ids)));
     }
 
-    @Operation(summary = "目录字典_分页查询所有")
+    @Operation(summary = "实体表单配置_分页查询所有")
     @PostMapping(value = "page")
     @Override
-    public ResultVO page(@RequestBody CatalogDictionaryVo vo) {
+    public ResultVO page(@RequestBody PersistentFormConfigVo vo) {
         return ResultVO.success(service.findPage(converter.voToDto(vo)).convert(dto -> assembler.dtoToVo(dto)));
     }
 
