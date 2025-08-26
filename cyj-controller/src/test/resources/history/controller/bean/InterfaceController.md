@@ -30,7 +30,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Interface")
+@RequestMapping("api/Interface")
 @Tag(name = "Interface")
 public class InterfaceController implements BeanController<InterfaceVo> {
 
@@ -123,7 +123,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Interface")
+@RequestMapping("api/Interface")
 @Tag(name = "Interface")
 public class InterfaceController implements BeanController<InterfaceVo> {
 
@@ -220,7 +220,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Interface")
+@RequestMapping("api/Interface")
 @Tag(name = "Interface")
 public class InterfaceController implements BeanController<InterfaceVo> {
 
@@ -320,7 +320,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Interface")
+@RequestMapping("api/Interface")
 @Tag(name = "Interface")
 public class InterfaceController implements BeanController<InterfaceVo> {
 
@@ -434,7 +434,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Interface")
+@RequestMapping("api/Interface")
 @Tag(name = "Interface")
 public class InterfaceController implements BeanController<InterfaceVo> {
 
@@ -550,7 +550,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Interface")
+@RequestMapping("api/Interface")
 @Tag(name = "Interface")
 public class InterfaceController implements BeanController<InterfaceVo> {
 
@@ -665,7 +665,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Interface")
+@RequestMapping("api/Interface")
 @Tag(name = "Interface")
 public class InterfaceController implements BeanController<InterfaceVo> {
 
@@ -773,7 +773,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Interface")
+@RequestMapping("api/Interface")
 @Tag(name = "Interface")
 public class InterfaceController implements BeanController<InterfaceVo> {
 
@@ -883,7 +883,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Interface")
+@RequestMapping("api/Interface")
 @Tag(name = "Interface")
 public class InterfaceController implements BeanController<InterfaceVo> {
 
@@ -993,7 +993,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Interface")
+@RequestMapping("api/Interface")
 @Tag(name = "Interface")
 public class InterfaceController implements BeanController<InterfaceVo> {
 

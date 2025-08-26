@@ -43,10 +43,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @EqualsAndHashCode(callSuper = true)
 @Data
 @TestPropertySource(properties = {"spring.config.location=classpath:application-test.yml"})
-@SpringBootTest(classes = CyjEntityCreaterApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class CyjEntityCreaterApplicationTest extends AbstractJUnit4SpringContextTests {
+@SpringBootTest(classes = CyjEntityCreateApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class CyjEntityCreateApplicationTest extends AbstractJUnit4SpringContextTests {
 
-    private static final Logger logger = LoggerFactory.getLogger(CyjEntityCreaterApplicationTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(CyjEntityCreateApplicationTest.class);
 
     @Autowired
     public WebApplicationContext wac;
@@ -270,7 +270,7 @@ public class CyjEntityCreaterApplicationTest extends AbstractJUnit4SpringContext
 //        object.put("asdasd", "123123");
 //
 //        mockMvc.perform(MockMvcRequestBuilders
-//                        .post("/entityCreateApi/AppService/page")
+//                        .post("/api/AppService/page")
 //                        .content(object.toJSONString())
 //                        .contentType(MediaType.APPLICATION_JSON))
 //                .andDo(print());
@@ -289,7 +289,7 @@ public class CyjEntityCreaterApplicationTest extends AbstractJUnit4SpringContext
         object.put("asdasd", "123123");
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .post("/dictionaryApi/Catalog/page")
+                        .post("/api/Catalog/page")
                         .content(object.toJSONString())
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print());
@@ -309,7 +309,7 @@ public class CyjEntityCreaterApplicationTest extends AbstractJUnit4SpringContext
         object.put("asdasd", "123123");
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .post("/dictionaryApi/CatalogDictionary/page")
+                        .post("/api/CatalogDictionary/page")
                         .content(object.toJSONString())
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print());

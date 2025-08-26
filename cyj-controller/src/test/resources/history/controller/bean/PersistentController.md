@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Persistent")
+@RequestMapping("api/Persistent")
 @Tag(name = "Persistent")
 public class PersistentController extends BaseBeanControllerImpl<PersistentService, PersistentServiceConverter, PersistentPo, PersistentDto, PersistentVo> {
 
@@ -69,7 +69,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Persistent")
+@RequestMapping("api/Persistent")
 @Tag(name = "Persistent")
 public class PersistentController implements BeanController<PersistentVo> {
 
@@ -161,7 +161,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Persistent")
+@RequestMapping("api/Persistent")
 @Tag(name = "Persistent")
 public class PersistentController implements BeanController<PersistentVo> {
 
@@ -257,7 +257,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Persistent")
+@RequestMapping("api/Persistent")
 @Tag(name = "Persistent")
 public class PersistentController implements BeanController<PersistentVo> {
 
@@ -356,7 +356,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Persistent")
+@RequestMapping("api/Persistent")
 @Tag(name = "Persistent")
 public class PersistentController implements BeanController<PersistentVo> {
 
@@ -469,7 +469,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Persistent")
+@RequestMapping("api/Persistent")
 @Tag(name = "Persistent")
 public class PersistentController implements BeanController<PersistentVo> {
 
@@ -583,7 +583,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Persistent")
+@RequestMapping("api/Persistent")
 @Tag(name = "Persistent")
 public class PersistentController implements BeanController<PersistentVo> {
 
@@ -697,7 +697,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Persistent")
+@RequestMapping("api/Persistent")
 @Tag(name = "Persistent")
 public class PersistentController implements BeanController<PersistentVo> {
 
@@ -806,7 +806,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Persistent")
+@RequestMapping("api/Persistent")
 @Tag(name = "Persistent")
 public class PersistentController implements BeanController<PersistentVo> {
 
@@ -915,7 +915,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Persistent")
+@RequestMapping("api/Persistent")
 @Tag(name = "Persistent")
 public class PersistentController implements BeanController<PersistentVo> {
 

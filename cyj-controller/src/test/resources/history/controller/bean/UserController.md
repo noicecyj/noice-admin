@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/User")
+@RequestMapping("api/User")
 @Tag(name = "User")
 public class UserController extends BaseBeanControllerImpl<UserService, UserServiceConverter, UserPo, UserDto, UserVo> {
 
@@ -73,7 +73,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/User")
+@RequestMapping("api/User")
 @Tag(name = "User")
 public class UserController implements BeanController<UserVo> {
 
@@ -176,7 +176,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/User")
+@RequestMapping("api/User")
 @Tag(name = "User")
 public class UserController implements BeanController<UserVo> {
 
@@ -275,7 +275,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/User")
+@RequestMapping("api/User")
 @Tag(name = "User")
 public class UserController implements BeanController<UserVo> {
 
@@ -378,7 +378,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/User")
+@RequestMapping("api/User")
 @Tag(name = "User")
 public class UserController implements BeanController<UserVo> {
 
@@ -484,7 +484,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/User")
+@RequestMapping("api/User")
 @Tag(name = "User")
 public class UserController implements BeanController<UserVo> {
 
@@ -604,7 +604,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/User")
+@RequestMapping("api/User")
 @Tag(name = "User")
 public class UserController implements BeanController<UserVo> {
 
@@ -726,7 +726,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/User")
+@RequestMapping("api/User")
 @Tag(name = "User")
 public class UserController implements BeanController<UserVo> {
 
@@ -847,7 +847,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/User")
+@RequestMapping("api/User")
 @Tag(name = "User")
 public class UserController implements BeanController<UserVo> {
 
@@ -961,7 +961,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/User")
+@RequestMapping("api/User")
 @Tag(name = "User")
 public class UserController implements BeanController<UserVo> {
 
@@ -1077,7 +1077,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/User")
+@RequestMapping("api/User")
 @Tag(name = "User")
 public class UserController implements BeanController<UserVo> {
 
@@ -1193,7 +1193,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/User")
+@RequestMapping("api/User")
 @Tag(name = "User")
 public class UserController implements BeanController<UserVo> {
 

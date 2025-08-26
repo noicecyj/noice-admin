@@ -11,10 +11,10 @@
 2023-11-24 00:25:06.992 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
 2023-11-24 00:25:07.085 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
 2023-11-24 00:25:07.085 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4806 ms
-2023-11-24 00:25:07.462 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2023-11-24 00:25:07.462 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-create/target/classes/config.properties]
 2023-11-24 00:25:07.487 [main] INFO  com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@55c1ced9
 2023-11-24 00:25:08.282 [main] INFO  c.g.y.a.MybatisPlusJoinAutoConfiguration - MPJSqlInjector init
-2023-11-24 00:25:11.384 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2023-11-24 00:25:11.384 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-create/target/classes/config.properties]
 2023-11-24 00:25:12.881 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
 2023-11-24 00:25:17.910 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses Jersey
 2023-11-24 00:25:18.085 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
@@ -40,10 +40,10 @@
 2023-11-24 00:25:19.903 [main] INFO  com.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
 2023-11-24 00:25:19.906 [main] INFO  com.netflix.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
 2023-11-24 00:25:19.909 [main] INFO  com.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1700756719908 with initial instances count: 0
-2023-11-24 00:25:19.918 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application CYJ-ENTITY-CREATER with eureka with status UP
+2023-11-24 00:25:19.918 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application cyj-create with eureka with status UP
 2023-11-24 00:25:19.920 [main] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1700756719920, current=UP, previous=STARTING]
-2023-11-24 00:25:19.926 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0: registering service...
-2023-11-24 00:25:20.074 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - registration status: 204
+2023-11-24 00:25:19.926 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_cyj-create/NOICE:cyj-create:0: registering service...
+2023-11-24 00:25:20.074 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_cyj-create/NOICE:cyj-create:0 - registration status: 204
 2023-11-24 00:25:20.210 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - Started CyjEntityCreaterApplicationTest in 20.234 seconds (JVM running for 22.856)
 2023-11-24 00:25:20.529 [main] WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - idleTimeout is close to or more than maxLifetime, disabling it.
 2023-11-24 00:25:20.530 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
@@ -53,17 +53,17 @@
 2023-11-24 00:25:23.530 [main] INFO  com.example.cyjcommon.aspect.BaseAspect - BaseAspect.doAfterReturning:AppServiceDto(appServiceName=null, appServiceApi=null, appServicePath=null, appServicePort=null, appServiceCode=null, appServiceTruePath=null)
 2023-11-24 00:25:23.530 [main] INFO  com.example.cyjcommon.aspect.BaseAspect - BaseAspect.doAfter:AppServiceDto(appServiceName=null, appServiceApi=null, appServicePath=null, appServicePort=null, appServiceCode=null, appServiceTruePath=null)
 2023-11-24 00:25:23.530 [main] INFO  com.example.cyjcommon.aspect.BaseAspect - BaseAspect.doAroundAfter:AppServiceDto(appServiceName=null, appServiceApi=null, appServicePath=null, appServicePort=null, appServiceCode=null, appServiceTruePath=null)
-2023-11-24 00:25:23.619 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - byAppServiceIdTest.appServicePoPage:{"current":10,"optimizeCountSql":true,"orders":[],"pages":0,"records":[{"appServiceApi":"sqlApi","appServiceCode":"cyj-query","appServiceName":"查询服务","appServicePath":"C:\\Users\\noice\\IdeaProjects\\noice-admin\\cyj-query\\src\\main\\java\\com\\example\\cyjquery","appServiceTruePath":"cyj-entity-creater","createdBy":"","createdDate":1670765950000,"id":"17d6157d-1ca1-452e-bc4f-dec67d7a6db9","sortCode":40,"status":1,"updatedBy":"","updatedDate":1670765950000},{"appServiceApi":"dictionaryApi","appServiceCode":"cyj-dictionary","appServiceName":"数据服务","appServicePath":"C:\\Users\\noice\\IdeaProjects\\noice-admin\\cyj-dictionary\\src\\main\\java\\com\\example\\cyjdictionary","appServiceTruePath":"cyj-entity-creater","createdBy":"","createdDate":1670765950000,"id":"5e398def-1513-4bcc-8f9a-560756e13237","sortCode":30,"status":1,"updatedBy":"","updatedDate":1670765950000},{"appServiceApi":"workFlowApi","appServiceCode":"cyj-workflow","appServiceName":"流程服务","appServicePath":"C:\\Users\\noice\\IdeaProjects\\noice-admin\\cyj-workflow\\src\\main\\java\\com\\example\\cyjworkflow","appServicePort":"8060","appServiceTruePath":"cyj-workflow","createdBy":"","createdDate":1670765950000,"id":"8f8fbe4f-5a57-42b7-a577-86492ed79426","sortCode":50,"status":1,"updatedBy":"123123","updatedDate":1670765950000},{"appServiceApi":"entityCreateApi","appServiceCode":"cyj-entity-creater","appServiceName":"开发服务","appServicePath":"C:\\Users\\noice\\IdeaProjects\\noice-admin\\cyj-entity-creater\\src\\main\\java\\com\\example\\cyjentitycreater","appServicePort":"8020","appServiceTruePath":"cyj-entity-creater","createdBy":"","createdDate":1670765950000,"id":"a646a940-09ee-4186-8c8c-8c3d79b24d9f","sortCode":20,"status":1,"updatedBy":"","updatedDate":1670765950000},{"appServiceApi":"userApi","appServiceCode":"cyj-user","appServiceName":"用户服务","appServicePath":"C:\\Users\\noice\\IdeaProjects\\noice-admin\\cyj-user\\src\\main\\java\\com\\example\\cyjuser","appServiceTruePath":"cyj-entity-creater","createdBy":"123123","createdDate":1674665103000,"id":"d9d7c8dc42f365f0d67dfe60d93d141f","sortCode":51,"status":1,"updatedBy":"","updatedDate":1674665103000}],"searchCount":true,"size":-1,"total":0}
-2023-11-24 00:25:23.634 [SpringContextShutdownHook] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Unregistering application CYJ-ENTITY-CREATER with eureka with status DOWN
+2023-11-24 00:25:23.619 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - byAppServiceIdTest.appServicePoPage:{"current":10,"optimizeCountSql":true,"orders":[],"pages":0,"records":[{"appServiceApi":"sqlApi","appServiceCode":"cyj-query","appServiceName":"查询服务","appServicePath":"C:\\Users\\noice\\IdeaProjects\\noice-admin\\cyj-query\\src\\main\\java\\com\\example\\cyjquery","appServiceTruePath":"cyj-create","createdBy":"","createdDate":1670765950000,"id":"17d6157d-1ca1-452e-bc4f-dec67d7a6db9","sortCode":40,"status":1,"updatedBy":"","updatedDate":1670765950000},{"appServiceApi":"dictionaryApi","appServiceCode":"cyj-dictionary","appServiceName":"数据服务","appServicePath":"C:\\Users\\noice\\IdeaProjects\\noice-admin\\cyj-dictionary\\src\\main\\java\\com\\example\\cyjdictionary","appServiceTruePath":"cyj-create","createdBy":"","createdDate":1670765950000,"id":"5e398def-1513-4bcc-8f9a-560756e13237","sortCode":30,"status":1,"updatedBy":"","updatedDate":1670765950000},{"appServiceApi":"workFlowApi","appServiceCode":"cyj-workflow","appServiceName":"流程服务","appServicePath":"C:\\Users\\noice\\IdeaProjects\\noice-admin\\cyj-workflow\\src\\main\\java\\com\\example\\cyjworkflow","appServicePort":"8060","appServiceTruePath":"cyj-workflow","createdBy":"","createdDate":1670765950000,"id":"8f8fbe4f-5a57-42b7-a577-86492ed79426","sortCode":50,"status":1,"updatedBy":"123123","updatedDate":1670765950000},{"appServiceApi":"entityCreateApi","appServiceCode":"cyj-create","appServiceName":"开发服务","appServicePath":"C:\\Users\\noice\\IdeaProjects\\noice-admin\\cyj-create\\src\\main\\java\\com\\example\\cyjentitycreater","appServicePort":"8020","appServiceTruePath":"cyj-create","createdBy":"","createdDate":1670765950000,"id":"a646a940-09ee-4186-8c8c-8c3d79b24d9f","sortCode":20,"status":1,"updatedBy":"","updatedDate":1670765950000},{"appServiceApi":"userApi","appServiceCode":"cyj-user","appServiceName":"用户服务","appServicePath":"C:\\Users\\noice\\IdeaProjects\\noice-admin\\cyj-user\\src\\main\\java\\com\\example\\cyjuser","appServiceTruePath":"cyj-create","createdBy":"123123","createdDate":1674665103000,"id":"d9d7c8dc42f365f0d67dfe60d93d141f","sortCode":51,"status":1,"updatedBy":"","updatedDate":1674665103000}],"searchCount":true,"size":-1,"total":0}
+2023-11-24 00:25:23.634 [SpringContextShutdownHook] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Unregistering application cyj-create with eureka with status DOWN
 2023-11-24 00:25:23.635 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1700756723635, current=DOWN, previous=UP]
-2023-11-24 00:25:23.635 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0: registering service...
-2023-11-24 00:25:23.672 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - registration status: 204
+2023-11-24 00:25:23.635 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_cyj-create/NOICE:cyj-create:0: registering service...
+2023-11-24 00:25:23.672 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_cyj-create/NOICE:cyj-create:0 - registration status: 204
 2023-11-24 00:25:23.852 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
 2023-11-24 00:25:23.860 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2023-11-24 00:25:25.409 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
 2023-11-24 00:25:25.413 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
 2023-11-24 00:25:28.422 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Unregistering ...
-2023-11-24 00:25:28.471 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - deregister  status: 200
+2023-11-24 00:25:28.471 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_cyj-create/NOICE:cyj-create:0 - deregister  status: 200
 2023-11-24 00:25:28.486 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
 2023-11-24 01:52:58.555 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
 2023-11-24 01:52:59.664 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - No active profile set, falling back to default profiles: default
@@ -78,10 +78,10 @@
 2023-11-24 01:53:03.415 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
 2023-11-24 01:53:03.498 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
 2023-11-24 01:53:03.498 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3823 ms
-2023-11-24 01:53:03.833 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2023-11-24 01:53:03.833 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-create/target/classes/config.properties]
 2023-11-24 01:53:03.863 [main] INFO  com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@642c6461
 2023-11-24 01:53:04.507 [main] INFO  c.g.y.a.MybatisPlusJoinAutoConfiguration - MPJSqlInjector init
-2023-11-24 01:53:07.129 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2023-11-24 01:53:07.129 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-create/target/classes/config.properties]
 2023-11-24 01:53:08.209 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
 2023-11-24 01:53:12.426 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses Jersey
 2023-11-24 01:53:12.588 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
@@ -107,10 +107,10 @@
 2023-11-24 01:53:14.306 [main] INFO  com.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
 2023-11-24 01:53:14.310 [main] INFO  com.netflix.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
 2023-11-24 01:53:14.313 [main] INFO  com.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1700761994312 with initial instances count: 0
-2023-11-24 01:53:14.321 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application CYJ-ENTITY-CREATER with eureka with status UP
+2023-11-24 01:53:14.321 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application cyj-create with eureka with status UP
 2023-11-24 01:53:14.321 [main] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1700761994321, current=UP, previous=STARTING]
-2023-11-24 01:53:14.324 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0: registering service...
-2023-11-24 01:53:14.443 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - registration status: 204
+2023-11-24 01:53:14.324 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_cyj-create/NOICE:cyj-create:0: registering service...
+2023-11-24 01:53:14.443 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_cyj-create/NOICE:cyj-create:0 - registration status: 204
 2023-11-24 01:53:14.601 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - Started CyjEntityCreaterApplicationTest in 16.85 seconds (JVM running for 19.07)
 2023-11-24 01:53:14.641 [main] WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - idleTimeout is close to or more than maxLifetime, disabling it.
 2023-11-24 01:53:14.642 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
@@ -663,16 +663,16 @@ public class MenuAspectHandler {
 
 }
 2023-11-24 01:53:18.767 [main] INFO  o.s.test.context.transaction.TransactionContext - Rolled back transaction for test: [DefaultTestContext@65f095f8 testClass = CyjEntityCreaterApplicationTest, testInstance = CyjEntityCreaterApplicationTest(wac=org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@79e18e38, started on Fri Nov 24 01:52:59 CST 2023, parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@59e32960, mockMvc=null, persistentCustomServiceImpl=com.example.cyjentitycreater.service.bean.custom.PersistentCustomServiceImpl@7cb4fc46, persistentService=com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl@64b6d6dd, appServiceService=com.example.cyjentitycreater.service.bean.auto.AppServiceServiceImpl@1181a376, persistentRepository=com.example.cyjentitycreater.repository.bean.PersistentRepository@ef09e1, menuCustomService=com.example.cyjentitycreater.service.bean.custom.MenuCustomServiceImpl@5b628376), testMethod = beanBuilderTest@CyjEntityCreaterApplicationTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@59af0466 testClass = CyjEntityCreaterApplicationTest, locations = '{}', classes = '{class com.example.cyjentitycreater.CyjEntityCreaterApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}', contextCustomizers = set[org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@797badd3, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@221af3c0, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@7fe8ea47, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@2357d90a, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@5579bb86], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> false]]
-2023-11-24 01:53:18.775 [SpringContextShutdownHook] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Unregistering application CYJ-ENTITY-CREATER with eureka with status DOWN
+2023-11-24 01:53:18.775 [SpringContextShutdownHook] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Unregistering application cyj-create with eureka with status DOWN
 2023-11-24 01:53:18.775 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1700761998775, current=DOWN, previous=UP]
-2023-11-24 01:53:18.776 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0: registering service...
-2023-11-24 01:53:18.814 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - registration status: 204
+2023-11-24 01:53:18.776 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_cyj-create/NOICE:cyj-create:0: registering service...
+2023-11-24 01:53:18.814 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_cyj-create/NOICE:cyj-create:0 - registration status: 204
 2023-11-24 01:53:18.951 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
 2023-11-24 01:53:18.956 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2023-11-24 01:53:19.541 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
 2023-11-24 01:53:19.543 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
 2023-11-24 01:53:22.555 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Unregistering ...
-2023-11-24 01:53:22.601 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - deregister  status: 200
+2023-11-24 01:53:22.601 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_cyj-create/NOICE:cyj-create:0 - deregister  status: 200
 2023-11-24 01:53:22.611 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
 2023-11-24 01:54:48.690 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
 2023-11-24 01:54:49.541 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - No active profile set, falling back to default profiles: default
@@ -687,10 +687,10 @@ public class MenuAspectHandler {
 2023-11-24 01:54:53.194 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
 2023-11-24 01:54:53.275 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
 2023-11-24 01:54:53.275 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3727 ms
-2023-11-24 01:54:53.568 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2023-11-24 01:54:53.568 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-create/target/classes/config.properties]
 2023-11-24 01:54:53.592 [main] INFO  com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@642c6461
 2023-11-24 01:54:54.225 [main] INFO  c.g.y.a.MybatisPlusJoinAutoConfiguration - MPJSqlInjector init
-2023-11-24 01:54:56.889 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2023-11-24 01:54:56.889 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-create/target/classes/config.properties]
 2023-11-24 01:54:57.779 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
 2023-11-24 01:55:01.859 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses Jersey
 2023-11-24 01:55:02.051 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
@@ -716,10 +716,10 @@ public class MenuAspectHandler {
 2023-11-24 01:55:03.837 [main] INFO  com.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
 2023-11-24 01:55:03.839 [main] INFO  com.netflix.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
 2023-11-24 01:55:03.843 [main] INFO  com.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1700762103842 with initial instances count: 0
-2023-11-24 01:55:03.853 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application CYJ-ENTITY-CREATER with eureka with status UP
+2023-11-24 01:55:03.853 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application cyj-create with eureka with status UP
 2023-11-24 01:55:03.854 [main] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1700762103854, current=UP, previous=STARTING]
-2023-11-24 01:55:03.857 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0: registering service...
-2023-11-24 01:55:03.973 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - registration status: 204
+2023-11-24 01:55:03.857 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_cyj-create/NOICE:cyj-create:0: registering service...
+2023-11-24 01:55:03.973 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_cyj-create/NOICE:cyj-create:0 - registration status: 204
 2023-11-24 01:55:04.136 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - Started CyjEntityCreaterApplicationTest in 16.085 seconds (JVM running for 17.544)
 2023-11-24 01:55:04.170 [main] WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - idleTimeout is close to or more than maxLifetime, disabling it.
 2023-11-24 01:55:04.170 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
@@ -860,7 +860,7 @@ public class PersistentTableConfigAspectHandler {
     }
 
 }
-2023-11-24 01:55:07.556 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-entity-creater\src\main\java\com\example\cyjentitycreater/service/bean/aspect/PersistentTableConfigAspectHandler.java
+2023-11-24 01:55:07.556 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-create\src\main\java\com\example\cyjentitycreater/service/bean/aspect/PersistentTableConfigAspectHandler.java
 2023-11-24 01:55:07.602 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
 package com.example.cyjentitycreater.service.bean.aspect;
 
@@ -893,7 +893,7 @@ public class PersistentFormConfigAspectHandler {
     }
 
 }
-2023-11-24 01:55:07.604 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-entity-creater\src\main\java\com\example\cyjentitycreater/service/bean/aspect/PersistentFormConfigAspectHandler.java
+2023-11-24 01:55:07.604 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-create\src\main\java\com\example\cyjentitycreater/service/bean/aspect/PersistentFormConfigAspectHandler.java
 2023-11-24 01:55:07.645 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
 package com.example.cyjentitycreater.service.bean.aspect;
 
@@ -958,7 +958,7 @@ public class PersistentTableAspectHandler {
     }
 
 }
-2023-11-24 01:55:07.685 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-entity-creater\src\main\java\com\example\cyjentitycreater/service/bean/aspect/PersistentTableAspectHandler.java
+2023-11-24 01:55:07.685 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-create\src\main\java\com\example\cyjentitycreater/service/bean/aspect/PersistentTableAspectHandler.java
 2023-11-24 01:55:07.725 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
 package com.example.cyjentitycreater.service.bean.aspect;
 
@@ -991,7 +991,7 @@ public class PropertyAspectHandler {
     }
 
 }
-2023-11-24 01:55:07.726 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-entity-creater\src\main\java\com\example\cyjentitycreater/service/bean/aspect/PropertyAspectHandler.java
+2023-11-24 01:55:07.726 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-create\src\main\java\com\example\cyjentitycreater/service/bean/aspect/PropertyAspectHandler.java
 2023-11-24 01:55:07.767 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
 package com.example.cyjentitycreater.service.bean.aspect;
 
@@ -1024,7 +1024,7 @@ public class PersistentAspectHandler {
     }
 
 }
-2023-11-24 01:55:07.768 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-entity-creater\src\main\java\com\example\cyjentitycreater/service/bean/aspect/PersistentAspectHandler.java
+2023-11-24 01:55:07.768 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-create\src\main\java\com\example\cyjentitycreater/service/bean/aspect/PersistentAspectHandler.java
 2023-11-24 01:55:07.847 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
 package com.example.cyjuser.service.bean.aspect;
 
@@ -1091,7 +1091,7 @@ public class PersistentTableSearchConfigAspectHandler {
     }
 
 }
-2023-11-24 01:55:07.888 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-entity-creater\src\main\java\com\example\cyjentitycreater/service/bean/aspect/PersistentTableSearchConfigAspectHandler.java
+2023-11-24 01:55:07.888 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-create\src\main\java\com\example\cyjentitycreater/service/bean/aspect/PersistentTableSearchConfigAspectHandler.java
 2023-11-24 01:55:07.931 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
 package com.example.cyjuser.service.bean.aspect;
 
@@ -1157,7 +1157,7 @@ public class PersistentFormAspectHandler {
     }
 
 }
-2023-11-24 01:55:07.976 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-entity-creater\src\main\java\com\example\cyjentitycreater/service/bean/aspect/PersistentFormAspectHandler.java
+2023-11-24 01:55:07.976 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-create\src\main\java\com\example\cyjentitycreater/service/bean/aspect/PersistentFormAspectHandler.java
 2023-11-24 01:55:08.051 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - beanBuilderTest.serviceAspectBeanBuilder:
 package com.example.cyjworkflow.service.bean.aspect;
 
@@ -1290,18 +1290,18 @@ public class MenuAspectHandler {
     }
 
 }
-2023-11-24 01:55:08.172 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-entity-creater\src\main\java\com\example\cyjentitycreater/service/bean/aspect/MenuAspectHandler.java
+2023-11-24 01:55:08.172 [main] INFO  com.example.cyjcommon.utils.BeanUtils - 生成文件,路径为：C:\Users\noice\IdeaProjects\noice-admin\cyj-create\src\main\java\com\example\cyjentitycreater/service/bean/aspect/MenuAspectHandler.java
 2023-11-24 01:55:08.253 [main] INFO  o.s.test.context.transaction.TransactionContext - Rolled back transaction for test: [DefaultTestContext@65f095f8 testClass = CyjEntityCreaterApplicationTest, testInstance = CyjEntityCreaterApplicationTest(wac=org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@79e18e38, started on Fri Nov 24 01:54:49 CST 2023, parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@59e32960, mockMvc=null, persistentCustomServiceImpl=com.example.cyjentitycreater.service.bean.custom.PersistentCustomServiceImpl@7cb4fc46, persistentService=com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl@64b6d6dd, appServiceService=com.example.cyjentitycreater.service.bean.auto.AppServiceServiceImpl@1181a376, persistentRepository=com.example.cyjentitycreater.repository.bean.PersistentRepository@ef09e1, menuCustomService=com.example.cyjentitycreater.service.bean.custom.MenuCustomServiceImpl@5b628376), testMethod = beanBuilderTest@CyjEntityCreaterApplicationTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@59af0466 testClass = CyjEntityCreaterApplicationTest, locations = '{}', classes = '{class com.example.cyjentitycreater.CyjEntityCreaterApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}', contextCustomizers = set[org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@797badd3, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@221af3c0, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@7fe8ea47, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@2357d90a, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@5579bb86], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> false]]
-2023-11-24 01:55:08.259 [SpringContextShutdownHook] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Unregistering application CYJ-ENTITY-CREATER with eureka with status DOWN
+2023-11-24 01:55:08.259 [SpringContextShutdownHook] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Unregistering application cyj-create with eureka with status DOWN
 2023-11-24 01:55:08.259 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1700762108259, current=DOWN, previous=UP]
-2023-11-24 01:55:08.260 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0: registering service...
-2023-11-24 01:55:08.305 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - registration status: 204
+2023-11-24 01:55:08.260 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_cyj-create/NOICE:cyj-create:0: registering service...
+2023-11-24 01:55:08.305 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_cyj-create/NOICE:cyj-create:0 - registration status: 204
 2023-11-24 01:55:08.475 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
 2023-11-24 01:55:08.481 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2023-11-24 01:55:09.090 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
 2023-11-24 01:55:09.092 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
 2023-11-24 01:55:12.109 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Unregistering ...
-2023-11-24 01:55:12.158 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - deregister  status: 200
+2023-11-24 01:55:12.158 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_cyj-create/NOICE:cyj-create:0 - deregister  status: 200
 2023-11-24 01:55:12.173 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
 2023-11-24 01:57:13.662 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
 2023-11-24 01:57:14.498 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - No active profile set, falling back to default profiles: default
@@ -1316,10 +1316,10 @@ public class MenuAspectHandler {
 2023-11-24 01:57:18.171 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
 2023-11-24 01:57:18.243 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
 2023-11-24 01:57:18.243 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3738 ms
-2023-11-24 01:57:18.537 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2023-11-24 01:57:18.537 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-create/target/classes/config.properties]
 2023-11-24 01:57:18.563 [main] INFO  com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@12567179
 2023-11-24 01:57:19.225 [main] INFO  c.g.y.a.MybatisPlusJoinAutoConfiguration - MPJSqlInjector init
-2023-11-24 01:57:21.826 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2023-11-24 01:57:21.826 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-create/target/classes/config.properties]
 2023-11-24 01:57:22.832 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
 2023-11-24 01:57:27.009 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses Jersey
 2023-11-24 01:57:27.160 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
@@ -1345,10 +1345,10 @@ public class MenuAspectHandler {
 2023-11-24 01:57:28.883 [main] INFO  com.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
 2023-11-24 01:57:28.886 [main] INFO  com.netflix.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
 2023-11-24 01:57:28.889 [main] INFO  com.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1700762248888 with initial instances count: 0
-2023-11-24 01:57:28.896 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application CYJ-ENTITY-CREATER with eureka with status UP
+2023-11-24 01:57:28.896 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application cyj-create with eureka with status UP
 2023-11-24 01:57:28.897 [main] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1700762248896, current=UP, previous=STARTING]
-2023-11-24 01:57:28.899 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0: registering service...
-2023-11-24 01:57:29.008 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - registration status: 204
+2023-11-24 01:57:28.899 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_cyj-create/NOICE:cyj-create:0: registering service...
+2023-11-24 01:57:29.008 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_cyj-create/NOICE:cyj-create:0 - registration status: 204
 2023-11-24 01:57:29.190 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - Started CyjEntityCreaterApplicationTest in 16.359 seconds (JVM running for 18.908)
 2023-11-24 01:57:29.220 [main] WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - idleTimeout is close to or more than maxLifetime, disabling it.
 2023-11-24 01:57:29.220 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
@@ -1405,16 +1405,16 @@ public class RoleAuthorityAspectHandler {
 
 }
 2023-11-24 01:57:32.720 [main] INFO  o.s.test.context.transaction.TransactionContext - Rolled back transaction for test: [DefaultTestContext@65f095f8 testClass = CyjEntityCreaterApplicationTest, testInstance = CyjEntityCreaterApplicationTest(wac=org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@79e18e38, started on Fri Nov 24 01:57:14 CST 2023, parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@59e32960, mockMvc=null, persistentCustomServiceImpl=com.example.cyjentitycreater.service.bean.custom.PersistentCustomServiceImpl@6f914212, persistentService=com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl@22726bc7, appServiceService=com.example.cyjentitycreater.service.bean.auto.AppServiceServiceImpl@294a150c, persistentRepository=com.example.cyjentitycreater.repository.bean.PersistentRepository@2fef413c, menuCustomService=com.example.cyjentitycreater.service.bean.custom.MenuCustomServiceImpl@4a0b1701), testMethod = relationBuilderTest@CyjEntityCreaterApplicationTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@59af0466 testClass = CyjEntityCreaterApplicationTest, locations = '{}', classes = '{class com.example.cyjentitycreater.CyjEntityCreaterApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}', contextCustomizers = set[org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@797badd3, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@221af3c0, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@7fe8ea47, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@2357d90a, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@5579bb86], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> false]]
-2023-11-24 01:57:32.727 [SpringContextShutdownHook] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Unregistering application CYJ-ENTITY-CREATER with eureka with status DOWN
+2023-11-24 01:57:32.727 [SpringContextShutdownHook] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Unregistering application cyj-create with eureka with status DOWN
 2023-11-24 01:57:32.727 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1700762252727, current=DOWN, previous=UP]
-2023-11-24 01:57:32.727 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0: registering service...
-2023-11-24 01:57:32.770 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - registration status: 204
+2023-11-24 01:57:32.727 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_cyj-create/NOICE:cyj-create:0: registering service...
+2023-11-24 01:57:32.770 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_cyj-create/NOICE:cyj-create:0 - registration status: 204
 2023-11-24 01:57:32.894 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
 2023-11-24 01:57:32.900 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2023-11-24 01:57:34.078 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
 2023-11-24 01:57:34.082 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
 2023-11-24 01:57:37.091 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Unregistering ...
-2023-11-24 01:57:37.137 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - deregister  status: 200
+2023-11-24 01:57:37.137 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_cyj-create/NOICE:cyj-create:0 - deregister  status: 200
 2023-11-24 01:57:37.151 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
 2023-11-24 02:00:49.182 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
 2023-11-24 02:00:50.023 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - No active profile set, falling back to default profiles: default
@@ -1429,10 +1429,10 @@ public class RoleAuthorityAspectHandler {
 2023-11-24 02:00:53.740 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
 2023-11-24 02:00:53.826 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
 2023-11-24 02:00:53.827 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3799 ms
-2023-11-24 02:00:54.103 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2023-11-24 02:00:54.103 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-create/target/classes/config.properties]
 2023-11-24 02:00:54.124 [main] INFO  com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@12567179
 2023-11-24 02:00:54.805 [main] INFO  c.g.y.a.MybatisPlusJoinAutoConfiguration - MPJSqlInjector init
-2023-11-24 02:00:57.439 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-entity-creater/target/classes/config.properties]
+2023-11-24 02:00:57.439 [main] INFO  com.netflix.config.sources.URLConfigurationSource - URLs to be used as dynamic configuration source: [file:/C:/Users/noice/IdeaProjects/noice-admin/cyj-create/target/classes/config.properties]
 2023-11-24 02:00:58.450 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
 2023-11-24 02:01:02.644 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses Jersey
 2023-11-24 02:01:02.823 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
@@ -1458,10 +1458,10 @@ public class RoleAuthorityAspectHandler {
 2023-11-24 02:01:04.473 [main] INFO  com.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
 2023-11-24 02:01:04.475 [main] INFO  com.netflix.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
 2023-11-24 02:01:04.480 [main] INFO  com.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1700762464479 with initial instances count: 0
-2023-11-24 02:01:04.492 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application CYJ-ENTITY-CREATER with eureka with status UP
+2023-11-24 02:01:04.492 [main] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Registering application cyj-create with eureka with status UP
 2023-11-24 02:01:04.494 [main] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1700762464494, current=UP, previous=STARTING]
-2023-11-24 02:01:04.497 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0: registering service...
-2023-11-24 02:01:04.640 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - registration status: 204
+2023-11-24 02:01:04.497 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_cyj-create/NOICE:cyj-create:0: registering service...
+2023-11-24 02:01:04.640 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_cyj-create/NOICE:cyj-create:0 - registration status: 204
 2023-11-24 02:01:04.818 [main] INFO  c.e.c.CyjEntityCreaterApplicationTest - Started CyjEntityCreaterApplicationTest in 16.309 seconds (JVM running for 18.087)
 2023-11-24 02:01:04.859 [main] WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - idleTimeout is close to or more than maxLifetime, disabling it.
 2023-11-24 02:01:04.860 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
@@ -1519,14 +1519,14 @@ public class RoleAuthorityAspectHandler {
 
 }
 2023-11-24 02:01:08.117 [main] INFO  o.s.test.context.transaction.TransactionContext - Rolled back transaction for test: [DefaultTestContext@65f095f8 testClass = CyjEntityCreaterApplicationTest, testInstance = CyjEntityCreaterApplicationTest(wac=org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@79e18e38, started on Fri Nov 24 02:00:50 CST 2023, parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@59e32960, mockMvc=null, persistentCustomServiceImpl=com.example.cyjentitycreater.service.bean.custom.PersistentCustomServiceImpl@6f914212, persistentService=com.example.cyjentitycreater.service.bean.auto.PersistentServiceImpl@22726bc7, appServiceService=com.example.cyjentitycreater.service.bean.auto.AppServiceServiceImpl@294a150c, persistentRepository=com.example.cyjentitycreater.repository.bean.PersistentRepository@2fef413c, menuCustomService=com.example.cyjentitycreater.service.bean.custom.MenuCustomServiceImpl@4a0b1701), testMethod = relationBuilderTest@CyjEntityCreaterApplicationTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@59af0466 testClass = CyjEntityCreaterApplicationTest, locations = '{}', classes = '{class com.example.cyjentitycreater.CyjEntityCreaterApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}', contextCustomizers = set[org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@797badd3, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@221af3c0, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@7fe8ea47, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@2357d90a, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@5579bb86], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> false]]
-2023-11-24 02:01:08.123 [SpringContextShutdownHook] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Unregistering application CYJ-ENTITY-CREATER with eureka with status DOWN
+2023-11-24 02:01:08.123 [SpringContextShutdownHook] INFO  o.s.c.n.e.serviceregistry.EurekaServiceRegistry - Unregistering application cyj-create with eureka with status DOWN
 2023-11-24 02:01:08.124 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1700762468124, current=DOWN, previous=UP]
-2023-11-24 02:01:08.124 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0: registering service...
-2023-11-24 02:01:08.166 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - registration status: 204
+2023-11-24 02:01:08.124 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_cyj-create/NOICE:cyj-create:0: registering service...
+2023-11-24 02:01:08.166 [DiscoveryClient-InstanceInfoReplicator-0] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_cyj-create/NOICE:cyj-create:0 - registration status: 204
 2023-11-24 02:01:08.325 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
 2023-11-24 02:01:08.332 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2023-11-24 02:01:09.729 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
 2023-11-24 02:01:09.734 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
 2023-11-24 02:01:12.742 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Unregistering ...
-2023-11-24 02:01:12.790 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_CYJ-ENTITY-CREATER/NOICE:cyj-entity-creater:0 - deregister  status: 200
+2023-11-24 02:01:12.790 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - DiscoveryClient_cyj-create/NOICE:cyj-create:0 - deregister  status: 200
 2023-11-24 02:01:12.808 [SpringContextShutdownHook] INFO  com.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient

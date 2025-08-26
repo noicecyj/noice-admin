@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("dictionaryApi/Catalog")
+@RequestMapping("api/Catalog")
 @Tag(name = "Catalog")
 public class CatalogController extends BaseBeanControllerImpl<CatalogService, CatalogServiceConverter, CatalogPo, CatalogDto, CatalogVo> {
 
@@ -68,7 +68,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("dictionaryApi/Catalog")
+@RequestMapping("api/Catalog")
 @Tag(name = "Catalog")
 public class CatalogController implements BeanController<CatalogVo> {
 
@@ -169,7 +169,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("dictionaryApi/Catalog")
+@RequestMapping("api/Catalog")
 @Tag(name = "Catalog")
 public class CatalogController implements BeanController<CatalogVo> {
 
@@ -262,7 +262,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("dictionaryApi/Catalog")
+@RequestMapping("api/Catalog")
 @Tag(name = "Catalog")
 public class CatalogController implements BeanController<CatalogVo> {
 
@@ -359,7 +359,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("dictionaryApi/Catalog")
+@RequestMapping("api/Catalog")
 @Tag(name = "Catalog")
 public class CatalogController implements BeanController<CatalogVo> {
 
@@ -459,7 +459,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("dictionaryApi/Catalog")
+@RequestMapping("api/Catalog")
 @Tag(name = "Catalog")
 public class CatalogController implements BeanController<CatalogVo> {
 
@@ -573,7 +573,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("dictionaryApi/Catalog")
+@RequestMapping("api/Catalog")
 @Tag(name = "Catalog")
 public class CatalogController implements BeanController<CatalogVo> {
 
@@ -689,7 +689,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("dictionaryApi/Catalog")
+@RequestMapping("api/Catalog")
 @Tag(name = "Catalog")
 public class CatalogController implements BeanController<CatalogVo> {
 
@@ -804,7 +804,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("dictionaryApi/Catalog")
+@RequestMapping("api/Catalog")
 @Tag(name = "Catalog")
 public class CatalogController implements BeanController<CatalogVo> {
 
@@ -912,7 +912,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("dictionaryApi/Catalog")
+@RequestMapping("api/Catalog")
 @Tag(name = "Catalog")
 public class CatalogController implements BeanController<CatalogVo> {
 
@@ -1022,7 +1022,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("dictionaryApi/Catalog")
+@RequestMapping("api/Catalog")
 @Tag(name = "Catalog")
 public class CatalogController implements BeanController<CatalogVo> {
 
@@ -1132,7 +1132,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("dictionaryApi/Catalog")
+@RequestMapping("api/Catalog")
 @Tag(name = "Catalog")
 public class CatalogController implements BeanController<CatalogVo> {
 

@@ -24,7 +24,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("sqlApi/Sql")
+@RequestMapping("api/Sql")
 @Tag(name = "Sql")
 public class SqlController implements BeanController<SqlVo> {
 

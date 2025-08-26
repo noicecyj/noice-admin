@@ -24,7 +24,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentTable")
+@RequestMapping("api/PersistentTable")
 @Tag(name = "PersistentTable")
 public class PersistentTableController implements BeanController<PersistentTableVo> {
 

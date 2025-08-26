@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("sqlApi/Sql")
+@RequestMapping("api/Sql")
 @Tag(name = "Sql")
 public class SqlController extends BaseBeanControllerImpl<SqlService, SqlConverter, SqlPo, SqlDto, SqlVo> {
 
@@ -70,7 +70,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("sqlApi/Sql")
+@RequestMapping("api/Sql")
 @Tag(name = "Sql")
 public class SqlController implements BeanController<SqlVo> {
 
@@ -163,7 +163,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("sqlApi/Sql")
+@RequestMapping("api/Sql")
 @Tag(name = "Sql")
 public class SqlController implements BeanController<SqlVo> {
 
@@ -260,7 +260,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("sqlApi/Sql")
+@RequestMapping("api/Sql")
 @Tag(name = "Sql")
 public class SqlController implements BeanController<SqlVo> {
 
@@ -360,7 +360,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("sqlApi/Sql")
+@RequestMapping("api/Sql")
 @Tag(name = "Sql")
 public class SqlController implements BeanController<SqlVo> {
 
@@ -474,7 +474,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("sqlApi/Sql")
+@RequestMapping("api/Sql")
 @Tag(name = "Sql")
 public class SqlController implements BeanController<SqlVo> {
 
@@ -590,7 +590,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("sqlApi/Sql")
+@RequestMapping("api/Sql")
 @Tag(name = "Sql")
 public class SqlController implements BeanController<SqlVo> {
 
@@ -705,7 +705,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("sqlApi/Sql")
+@RequestMapping("api/Sql")
 @Tag(name = "Sql")
 public class SqlController implements BeanController<SqlVo> {
 
@@ -813,7 +813,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("sqlApi/Sql")
+@RequestMapping("api/Sql")
 @Tag(name = "Sql")
 public class SqlController implements BeanController<SqlVo> {
 
@@ -923,7 +923,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("sqlApi/Sql")
+@RequestMapping("api/Sql")
 @Tag(name = "Sql")
 public class SqlController implements BeanController<SqlVo> {
 
@@ -1033,7 +1033,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("sqlApi/Sql")
+@RequestMapping("api/Sql")
 @Tag(name = "Sql")
 public class SqlController implements BeanController<SqlVo> {
 

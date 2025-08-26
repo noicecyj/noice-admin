@@ -24,7 +24,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("dictionaryApi/CatalogDictionary")
+@RequestMapping("api/CatalogDictionary")
 @Tag(name = "CatalogDictionary")
 public class CatalogDictionaryController implements BeanController<CatalogDictionaryVo> {
 

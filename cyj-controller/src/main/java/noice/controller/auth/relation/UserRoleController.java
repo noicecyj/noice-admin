@@ -22,7 +22,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/UserRole")
+@RequestMapping("api/UserRole")
 @Tag(name = "UserRole")
 public class UserRoleController implements RelationController<UserRoleVo> {
 

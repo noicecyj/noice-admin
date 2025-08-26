@@ -24,7 +24,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Menu")
+@RequestMapping("api/Menu")
 @Tag(name = "Menu")
 public class MenuController implements BeanController<MenuVo> {
 

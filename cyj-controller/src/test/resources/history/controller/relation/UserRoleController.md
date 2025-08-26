@@ -25,7 +25,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/UserRole")
+@RequestMapping("api/UserRole")
 @Tag(name = "UserRole")
 public class UserRoleController implements RelationController<UserRoleVo> {
     //******************************代码生成方法，请勿改动*************************************//
@@ -98,7 +98,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/UserRole")
+@RequestMapping("api/UserRole")
 @Tag(name = "UserRole")
 public class UserRoleController implements RelationController<UserRoleVo> {
 

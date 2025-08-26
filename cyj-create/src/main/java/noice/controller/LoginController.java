@@ -24,7 +24,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/v1")
+@RequestMapping("api/v1")
 @Tag(name = "Login")
 public class LoginController {
 

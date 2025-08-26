@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/TableAndFormAndUrl")
+@RequestMapping("api/TableAndFormAndUrl")
 @Tag(name = "TableAndFormAndUrl", description = "表单和表格相关接口")
 public class TableAndFormAndUrlController {
 

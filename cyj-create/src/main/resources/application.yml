@@ -4,7 +4,7 @@ spring:
   #  main:
   #    web-application-type: reactive
   application:
-    name: cyj-entity-creater
+    name: cyj-create
   cloud:
     nacos:
       discovery:

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Menu")
+@RequestMapping("api/Menu")
 @Tag(name = "Menu")
 public class MenuController extends BaseBeanControllerImpl<MenuService, MenuConverter, MenuPo, MenuDto, MenuVo> {
 
@@ -70,7 +70,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Menu")
+@RequestMapping("api/Menu")
 @Tag(name = "Menu")
 public class MenuController implements BeanController<MenuVo> {
 
@@ -163,7 +163,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Menu")
+@RequestMapping("api/Menu")
 @Tag(name = "Menu")
 public class MenuController implements BeanController<MenuVo> {
 
@@ -260,7 +260,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Menu")
+@RequestMapping("api/Menu")
 @Tag(name = "Menu")
 public class MenuController implements BeanController<MenuVo> {
 
@@ -360,7 +360,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Menu")
+@RequestMapping("api/Menu")
 @Tag(name = "Menu")
 public class MenuController implements BeanController<MenuVo> {
 
@@ -474,7 +474,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Menu")
+@RequestMapping("api/Menu")
 @Tag(name = "Menu")
 public class MenuController implements BeanController<MenuVo> {
 
@@ -590,7 +590,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Menu")
+@RequestMapping("api/Menu")
 @Tag(name = "Menu")
 public class MenuController implements BeanController<MenuVo> {
 
@@ -705,7 +705,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Menu")
+@RequestMapping("api/Menu")
 @Tag(name = "Menu")
 public class MenuController implements BeanController<MenuVo> {
 
@@ -813,7 +813,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Menu")
+@RequestMapping("api/Menu")
 @Tag(name = "Menu")
 public class MenuController implements BeanController<MenuVo> {
 
@@ -923,7 +923,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Menu")
+@RequestMapping("api/Menu")
 @Tag(name = "Menu")
 public class MenuController implements BeanController<MenuVo> {
 
@@ -1033,7 +1033,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/Menu")
+@RequestMapping("api/Menu")
 @Tag(name = "Menu")
 public class MenuController implements BeanController<MenuVo> {
 

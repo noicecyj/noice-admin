@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Authority")
+@RequestMapping("api/Authority")
 @Tag(name = "Authority")
 public class AuthorityController extends BaseBeanControllerImpl<AuthorityService, AuthorityServiceConverter, AuthorityPo, AuthorityDto, AuthorityVo> {
 
@@ -73,7 +73,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Authority")
+@RequestMapping("api/Authority")
 @Tag(name = "Authority")
 public class AuthorityController implements BeanController<AuthorityVo> {
 
@@ -170,7 +170,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Authority")
+@RequestMapping("api/Authority")
 @Tag(name = "Authority")
 public class AuthorityController implements BeanController<AuthorityVo> {
 
@@ -269,7 +269,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Authority")
+@RequestMapping("api/Authority")
 @Tag(name = "Authority")
 public class AuthorityController implements BeanController<AuthorityVo> {
 
@@ -372,7 +372,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Authority")
+@RequestMapping("api/Authority")
 @Tag(name = "Authority")
 public class AuthorityController implements BeanController<AuthorityVo> {
 
@@ -478,7 +478,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Authority")
+@RequestMapping("api/Authority")
 @Tag(name = "Authority")
 public class AuthorityController implements BeanController<AuthorityVo> {
 
@@ -598,7 +598,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Authority")
+@RequestMapping("api/Authority")
 @Tag(name = "Authority")
 public class AuthorityController implements BeanController<AuthorityVo> {
 
@@ -720,7 +720,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Authority")
+@RequestMapping("api/Authority")
 @Tag(name = "Authority")
 public class AuthorityController implements BeanController<AuthorityVo> {
 
@@ -841,7 +841,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Authority")
+@RequestMapping("api/Authority")
 @Tag(name = "Authority")
 public class AuthorityController implements BeanController<AuthorityVo> {
 
@@ -955,7 +955,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Authority")
+@RequestMapping("api/Authority")
 @Tag(name = "Authority")
 public class AuthorityController implements BeanController<AuthorityVo> {
 
@@ -1071,7 +1071,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Authority")
+@RequestMapping("api/Authority")
 @Tag(name = "Authority")
 public class AuthorityController implements BeanController<AuthorityVo> {
 
@@ -1187,7 +1187,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Authority")
+@RequestMapping("api/Authority")
 @Tag(name = "Authority")
 public class AuthorityController implements BeanController<AuthorityVo> {
 

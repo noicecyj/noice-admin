@@ -24,7 +24,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentForm")
+@RequestMapping("api/PersistentForm")
 @Tag(name = "PersistentForm")
 public class PersistentFormController implements BeanController<PersistentFormVo> {
 

@@ -15,10 +15,10 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableFeignClients
 @EntityScan("noice")
 @ComponentScan("noice")
-public class CyjEntityCreaterApplication {
+public class CyjEntityCreateApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CyjEntityCreaterApplication.class, args);
+        SpringApplication.run(CyjEntityCreateApplication.class, args);
     }
 
     @Bean

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentForm")
+@RequestMapping("api/PersistentForm")
 @Tag(name = "PersistentForm")
 public class PersistentFormController extends BaseBeanControllerImpl<PersistentFormService, PersistentFormConverter, PersistentFormPo, PersistentFormDto, PersistentFormVo> {
 
@@ -68,7 +68,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentForm")
+@RequestMapping("api/PersistentForm")
 @Tag(name = "PersistentForm")
 public class PersistentFormController implements BeanController<PersistentFormVo> {
 
@@ -160,7 +160,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentForm")
+@RequestMapping("api/PersistentForm")
 @Tag(name = "PersistentForm")
 public class PersistentFormController implements BeanController<PersistentFormVo> {
 
@@ -256,7 +256,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentForm")
+@RequestMapping("api/PersistentForm")
 @Tag(name = "PersistentForm")
 public class PersistentFormController implements BeanController<PersistentFormVo> {
 
@@ -354,7 +354,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentForm")
+@RequestMapping("api/PersistentForm")
 @Tag(name = "PersistentForm")
 public class PersistentFormController implements BeanController<PersistentFormVo> {
 
@@ -467,7 +467,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentForm")
+@RequestMapping("api/PersistentForm")
 @Tag(name = "PersistentForm")
 public class PersistentFormController implements BeanController<PersistentFormVo> {
 
@@ -581,7 +581,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentForm")
+@RequestMapping("api/PersistentForm")
 @Tag(name = "PersistentForm")
 public class PersistentFormController implements BeanController<PersistentFormVo> {
 
@@ -695,7 +695,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentForm")
+@RequestMapping("api/PersistentForm")
 @Tag(name = "PersistentForm")
 public class PersistentFormController implements BeanController<PersistentFormVo> {
 
@@ -801,7 +801,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentForm")
+@RequestMapping("api/PersistentForm")
 @Tag(name = "PersistentForm")
 public class PersistentFormController implements BeanController<PersistentFormVo> {
 
@@ -910,7 +910,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentForm")
+@RequestMapping("api/PersistentForm")
 @Tag(name = "PersistentForm")
 public class PersistentFormController implements BeanController<PersistentFormVo> {
 
@@ -1017,7 +1017,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentForm")
+@RequestMapping("api/PersistentForm")
 @Tag(name = "PersistentForm")
 public class PersistentFormController implements BeanController<PersistentFormVo> {
 

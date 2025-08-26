@@ -25,7 +25,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/RoleAuthority")
+@RequestMapping("api/RoleAuthority")
 @Tag(name = "RoleAuthority")
 public class RoleAuthorityController implements RelationController<RoleAuthorityVo> {
 
@@ -99,7 +99,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/RoleAuthority")
+@RequestMapping("api/RoleAuthority")
 @Tag(name = "RoleAuthority")
 public class RoleAuthorityController implements RelationController<RoleAuthorityVo> {
 

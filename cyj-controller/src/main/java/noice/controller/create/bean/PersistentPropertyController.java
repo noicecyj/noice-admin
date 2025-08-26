@@ -24,7 +24,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentProperty")
+@RequestMapping("api/PersistentProperty")
 @Tag(name = "PersistentProperty")
 public class PersistentPropertyController implements BeanController<PersistentPropertyVo> {
 

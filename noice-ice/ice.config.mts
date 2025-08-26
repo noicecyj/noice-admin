@@ -6,34 +6,34 @@ import auth from '@ice/plugin-auth';
 // The project config, see https://v3.ice.work/docs/guide/basic/config
 const minify = process.env.NODE_ENV === 'production' ? 'swc' : false;
 export default defineConfig(() => ({
-    ssg: false,
-    minify,
-    plugins: [request(), store(), auth()],
-    compileDependencies: false,
-    proxy: {
-        "/entityCreateApi": {
-            enable: true,
-            target: "http://127.0.0.1:8100/cyj-entity-creater"
-        },
-        "/dictionaryApi": {
-            enable: true,
-            target: "http://127.0.0.1:8100/cyj-entity-creater"
-        },
-        "/sqlApi": {
-            enable: true,
-            target: "http://127.0.0.1:8100/cyj-entity-creater"
-        },
-        "/workFlowApi": {
-            enable: true,
-            target: "http://127.0.0.1:8100/cyj-workflow"
-        },
-        "/userApi": {
-            enable: true,
-            target: "http://127.0.0.1:8100/cyj-entity-creater"
-        },
-        "/v1": {
-            enable: true,
-            target: "http://127.0.0.1:8100"
-        }
+  ssg: false,
+  minify,
+  plugins: [request(), store(), auth()],
+  compileDependencies: false,
+  proxy: {
+    "/entityCreateApi": {
+      enable: true,
+      target: "http://127.0.0.1:8100/cyj-create"
+    },
+    "/dictionaryApi": {
+      enable: true,
+      target: "http://127.0.0.1:8100/cyj-create"
+    },
+    "/sqlApi": {
+      enable: true,
+      target: "http://127.0.0.1:8100/cyj-create"
+    },
+    "/workFlowApi": {
+      enable: true,
+      target: "http://127.0.0.1:8100/cyj-workflow"
+    },
+    "/userApi": {
+      enable: true,
+      target: "http://127.0.0.1:8100/cyj-create"
+    },
+    "/v1": {
+      enable: true,
+      target: "http://127.0.0.1:8100"
     }
+  }
 }));

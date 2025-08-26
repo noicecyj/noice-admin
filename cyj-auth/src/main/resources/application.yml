@@ -27,14 +27,14 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: cyj-entity-creater
-          uri: lb://cyj-entity-creater
+        - id: cyj-create
+          uri: lb://cyj-create
           predicates:
-            - Path=/entityCreateApi/**,/userApi/**
+            - Path=/api/**
         - id: cyj-workflow
           uri: lb://cyj-workflow
           predicates:
-            - Path=/workflowApi/**
+            - Path=/api/**
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://123.249.114.102:3306/data_user?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentTableSearchConfig")
+@RequestMapping("api/PersistentTableSearchConfig")
 @Tag(name = "PersistentTableSearchConfig")
 public class PersistentTableSearchConfigController extends BaseBeanControllerImpl<PersistentTableSearchConfigService, PersistentTableSearchConfigConverter, PersistentTableSearchConfigPo, PersistentTableSearchConfigDto, PersistentTableSearchConfigVo> {
 
@@ -68,7 +68,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentTableSearchConfig")
+@RequestMapping("api/PersistentTableSearchConfig")
 @Tag(name = "PersistentTableSearchConfig")
 public class PersistentTableSearchConfigController implements BeanController<PersistentTableSearchConfigVo> {
 
@@ -159,7 +159,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentTableSearchConfig")
+@RequestMapping("api/PersistentTableSearchConfig")
 @Tag(name = "PersistentTableSearchConfig")
 public class PersistentTableSearchConfigController implements BeanController<PersistentTableSearchConfigVo> {
 
@@ -254,7 +254,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentTableSearchConfig")
+@RequestMapping("api/PersistentTableSearchConfig")
 @Tag(name = "PersistentTableSearchConfig")
 public class PersistentTableSearchConfigController implements BeanController<PersistentTableSearchConfigVo> {
 
@@ -352,7 +352,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentTableSearchConfig")
+@RequestMapping("api/PersistentTableSearchConfig")
 @Tag(name = "PersistentTableSearchConfig")
 public class PersistentTableSearchConfigController implements BeanController<PersistentTableSearchConfigVo> {
 
@@ -464,7 +464,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentTableSearchConfig")
+@RequestMapping("api/PersistentTableSearchConfig")
 @Tag(name = "PersistentTableSearchConfig")
 public class PersistentTableSearchConfigController implements BeanController<PersistentTableSearchConfigVo> {
 
@@ -578,7 +578,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentTableSearchConfig")
+@RequestMapping("api/PersistentTableSearchConfig")
 @Tag(name = "PersistentTableSearchConfig")
 public class PersistentTableSearchConfigController implements BeanController<PersistentTableSearchConfigVo> {
 
@@ -691,7 +691,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentTableSearchConfig")
+@RequestMapping("api/PersistentTableSearchConfig")
 @Tag(name = "PersistentTableSearchConfig")
 public class PersistentTableSearchConfigController implements BeanController<PersistentTableSearchConfigVo> {
 
@@ -798,7 +798,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentTableSearchConfig")
+@RequestMapping("api/PersistentTableSearchConfig")
 @Tag(name = "PersistentTableSearchConfig")
 public class PersistentTableSearchConfigController implements BeanController<PersistentTableSearchConfigVo> {
 
@@ -907,7 +907,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentTableSearchConfig")
+@RequestMapping("api/PersistentTableSearchConfig")
 @Tag(name = "PersistentTableSearchConfig")
 public class PersistentTableSearchConfigController implements BeanController<PersistentTableSearchConfigVo> {
 
@@ -1016,7 +1016,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentTableSearchConfig")
+@RequestMapping("api/PersistentTableSearchConfig")
 @Tag(name = "PersistentTableSearchConfig")
 public class PersistentTableSearchConfigController implements BeanController<PersistentTableSearchConfigVo> {
 

@@ -24,7 +24,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Enterprise")
+@RequestMapping("api/Enterprise")
 @Tag(name = "Enterprise")
 public class EnterpriseController implements BeanController<EnterpriseVo> {
 

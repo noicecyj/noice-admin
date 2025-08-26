@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("dictionaryApi/CatalogDictionary")
+@RequestMapping("api/CatalogDictionary")
 @Tag(name = "CatalogDictionary")
 public class CatalogDictionaryController extends BaseBeanControllerImpl<CatalogDictionaryService, CatalogDictionaryServiceConverter, CatalogDictionaryPo, CatalogDictionaryDto, CatalogDictionaryVo> {
 
@@ -68,7 +68,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("dictionaryApi/CatalogDictionary")
+@RequestMapping("api/CatalogDictionary")
 @Tag(name = "CatalogDictionary")
 public class CatalogDictionaryController implements BeanController<CatalogDictionaryVo> {
 
@@ -169,7 +169,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("dictionaryApi/CatalogDictionary")
+@RequestMapping("api/CatalogDictionary")
 @Tag(name = "CatalogDictionary")
 public class CatalogDictionaryController implements BeanController<CatalogDictionaryVo> {
 
@@ -262,7 +262,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("dictionaryApi/CatalogDictionary")
+@RequestMapping("api/CatalogDictionary")
 @Tag(name = "CatalogDictionary")
 public class CatalogDictionaryController implements BeanController<CatalogDictionaryVo> {
 
@@ -359,7 +359,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("dictionaryApi/CatalogDictionary")
+@RequestMapping("api/CatalogDictionary")
 @Tag(name = "CatalogDictionary")
 public class CatalogDictionaryController implements BeanController<CatalogDictionaryVo> {
 
@@ -459,7 +459,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("dictionaryApi/CatalogDictionary")
+@RequestMapping("api/CatalogDictionary")
 @Tag(name = "CatalogDictionary")
 public class CatalogDictionaryController implements BeanController<CatalogDictionaryVo> {
 
@@ -573,7 +573,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("dictionaryApi/CatalogDictionary")
+@RequestMapping("api/CatalogDictionary")
 @Tag(name = "CatalogDictionary")
 public class CatalogDictionaryController implements BeanController<CatalogDictionaryVo> {
 
@@ -689,7 +689,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("dictionaryApi/CatalogDictionary")
+@RequestMapping("api/CatalogDictionary")
 @Tag(name = "CatalogDictionary")
 public class CatalogDictionaryController implements BeanController<CatalogDictionaryVo> {
 
@@ -804,7 +804,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("dictionaryApi/CatalogDictionary")
+@RequestMapping("api/CatalogDictionary")
 @Tag(name = "CatalogDictionary")
 public class CatalogDictionaryController implements BeanController<CatalogDictionaryVo> {
 
@@ -912,7 +912,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("dictionaryApi/CatalogDictionary")
+@RequestMapping("api/CatalogDictionary")
 @Tag(name = "CatalogDictionary")
 public class CatalogDictionaryController implements BeanController<CatalogDictionaryVo> {
 
@@ -1022,7 +1022,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("dictionaryApi/CatalogDictionary")
+@RequestMapping("api/CatalogDictionary")
 @Tag(name = "CatalogDictionary")
 public class CatalogDictionaryController implements BeanController<CatalogDictionaryVo> {
 
@@ -1132,7 +1132,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("dictionaryApi/CatalogDictionary")
+@RequestMapping("api/CatalogDictionary")
 @Tag(name = "CatalogDictionary")
 public class CatalogDictionaryController implements BeanController<CatalogDictionaryVo> {
 

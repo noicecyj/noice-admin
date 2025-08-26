@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentProperty")
+@RequestMapping("api/PersistentProperty")
 @Tag(name = "PersistentProperty")
 public class PersistentPropertyController extends BaseBeanControllerImpl<PersistentPropertyService, PersistentPropertyServiceConverter, PersistentPropertyPo, PersistentPropertyDto, PersistentPropertyVo> {
 
@@ -70,7 +70,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentProperty")
+@RequestMapping("api/PersistentProperty")
 @Tag(name = "PersistentProperty")
 public class PersistentPropertyController implements BeanController<PersistentPropertyVo> {
 
@@ -162,7 +162,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentProperty")
+@RequestMapping("api/PersistentProperty")
 @Tag(name = "PersistentProperty")
 public class PersistentPropertyController implements BeanController<PersistentPropertyVo> {
 
@@ -258,7 +258,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentProperty")
+@RequestMapping("api/PersistentProperty")
 @Tag(name = "PersistentProperty")
 public class PersistentPropertyController implements BeanController<PersistentPropertyVo> {
 
@@ -357,7 +357,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentProperty")
+@RequestMapping("api/PersistentProperty")
 @Tag(name = "PersistentProperty")
 public class PersistentPropertyController implements BeanController<PersistentPropertyVo> {
 
@@ -470,7 +470,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentProperty")
+@RequestMapping("api/PersistentProperty")
 @Tag(name = "PersistentProperty")
 public class PersistentPropertyController implements BeanController<PersistentPropertyVo> {
 
@@ -585,7 +585,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentProperty")
+@RequestMapping("api/PersistentProperty")
 @Tag(name = "PersistentProperty")
 public class PersistentPropertyController implements BeanController<PersistentPropertyVo> {
 
@@ -698,7 +698,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentProperty")
+@RequestMapping("api/PersistentProperty")
 @Tag(name = "PersistentProperty")
 public class PersistentPropertyController implements BeanController<PersistentPropertyVo> {
 
@@ -804,7 +804,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentProperty")
+@RequestMapping("api/PersistentProperty")
 @Tag(name = "PersistentProperty")
 public class PersistentPropertyController implements BeanController<PersistentPropertyVo> {
 
@@ -912,7 +912,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentProperty")
+@RequestMapping("api/PersistentProperty")
 @Tag(name = "PersistentProperty")
 public class PersistentPropertyController implements BeanController<PersistentPropertyVo> {
 
@@ -1019,7 +1019,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentProperty")
+@RequestMapping("api/PersistentProperty")
 @Tag(name = "PersistentProperty")
 public class PersistentPropertyController implements BeanController<PersistentPropertyVo> {
 

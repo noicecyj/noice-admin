@@ -3,7 +3,7 @@
 /cyj-controller/target/
 /cyj-converter/target/
 /cyj-entity/target/
-/cyj-entity-create/target/
+/cyj-create/target/
 /cyj-mapper/target/
 /cyj-repository/target/
 /cyj-service/target/

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController
-@RequestMapping("sqlApi/operateTable")
+@RequestMapping("api/operateTable")
 @Tag(name = "OperateTable")
 public class OperateTableController {
 

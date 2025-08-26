@@ -15,7 +15,7 @@ INSERT INTO data_user.t_persistent_table_config (id, persistent_table_config_nam
                                                  persistent_table_config_method, persistent_table_id, sort_code, status,
                                                  created_date, created_by, updated_date, updated_by)
 VALUES ('046db5fb-61a9-47e8-8f62-af21fe7a9de8', '实体生成全部代码', 'persistentCreateAllCode', 1, 'title',
-        '/entityCreateApi/generateAllJavaFile', '3c604eac-ca0c-49a3-a49e-d8c0447e2f45', 2, 1, '2023-01-24 16:43:24',
+        '/api/generateAllJavaFile', '3c604eac-ca0c-49a3-a49e-d8c0447e2f45', 2, 1, '2023-01-24 16:43:24',
         null, '2023-01-24 16:43:24', null);
 INSERT INTO data_user.t_persistent_table_config (id, persistent_table_config_name, persistent_table_config_code,
                                                  persistent_table_config_display, persistent_table_config_type,
@@ -157,7 +157,7 @@ INSERT INTO data_user.t_persistent_table_config (id, persistent_table_config_nam
                                                  persistent_table_config_method, persistent_table_id, sort_code, status,
                                                  created_date, created_by, updated_date, updated_by)
 VALUES ('5cd2f657-4046-4c6e-8b5f-1e6ddf608781', '实体生成代码', 'persistentCreateCode', 1, 'operation',
-        '/entityCreateApi/generateJavaFile', '3c604eac-ca0c-49a3-a49e-d8c0447e2f45', 1, 1, '2023-01-23 21:39:50', null,
+        '/api/generateJavaFile', '3c604eac-ca0c-49a3-a49e-d8c0447e2f45', 1, 1, '2023-01-23 21:39:50', null,
         '2023-01-23 21:39:50', null);
 INSERT INTO data_user.t_persistent_table_config (id, persistent_table_config_name, persistent_table_config_code,
                                                  persistent_table_config_display, persistent_table_config_type,

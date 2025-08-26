@@ -35,7 +35,7 @@ public class TokenFilter extends OncePerRequestFilter {
         String requestPath = request.getRequestURI();
 
         // 如果请求的是登录接口，不进行Token验证
-        if (requestPath.equals("/userApi/v1/login") && request.getMethod().equals(RequestMethod.POST.name())) {
+        if (requestPath.equals("/api/v1/login") && request.getMethod().equals(RequestMethod.POST.name())) {
             filterChain.doFilter(request, response);
             return;
         }

@@ -24,7 +24,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Role")
+@RequestMapping("api/Role")
 @Tag(name = "Role")
 public class RoleController implements BeanController<RoleVo> {
 

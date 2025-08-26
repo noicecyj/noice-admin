@@ -1,7 +1,7 @@
 INSERT INTO data_user.t_menu (id, sort_code, status, created_date, created_by, updated_date, updated_by, menu_code,
                               menu_name, menu_url, menu_icon, authority_id, menu_id)
 VALUES ('2CA1B5BB-D3CB-22F1-5D34-8D8AF61C768B', 1, 1, '2023-10-23 22:18:19', '123123', '2023-10-23 22:18:19', '123123',
-        'cyj-entity-creater', '开发服务', '/cyj-entity-creater', null, '7C708726-85DD-DE07-4536-57848C9D99B7',
+        'cyj-create', '开发服务', '/cyj-create', null, '7C708726-85DD-DE07-4536-57848C9D99B7',
         '516D8D80-90FA-A084-F497-54E568C98FD5');
 INSERT INTO data_user.t_menu (id, sort_code, status, created_date, created_by, updated_date, updated_by, menu_code,
                               menu_name, menu_url, menu_icon, authority_id, menu_id)
@@ -10,47 +10,47 @@ VALUES ('516D8D80-90FA-A084-F497-54E568C98FD5', 1, 1, '2023-10-23 22:18:20', '12
 INSERT INTO data_user.t_menu (id, sort_code, status, created_date, created_by, updated_date, updated_by, menu_code,
                               menu_name, menu_url, menu_icon, authority_id, menu_id)
 VALUES ('A922E141-6320-7439-BE40-A13BC9597BEB', 2, 1, '2023-10-23 22:18:19', '123123', '2023-10-23 22:18:19', '123123',
-        'app_service', '服务', '/cyj-entity-creater/AppService', null, 'A8C606E1-000A-A715-43CC-DD4585C54281',
+        'app_service', '服务', '/cyj-create/AppService', null, 'A8C606E1-000A-A715-43CC-DD4585C54281',
         '2CA1B5BB-D3CB-22F1-5D34-8D8AF61C768B');
 INSERT INTO data_user.t_menu (id, sort_code, status, created_date, created_by, updated_date, updated_by, menu_code,
                               menu_name, menu_url, menu_icon, authority_id, menu_id)
 VALUES ('61860C01-5E50-BC22-7EE0-73D853B79CC4', 3, 1, '2023-10-23 22:18:19', '123123', '2023-10-23 22:18:19', '123123',
-        'property', '属性', '/cyj-entity-creater/Property', null, '7B520BDF-5159-45E4-AE2F-E2D23FD10928',
+        'property', '属性', '/cyj-create/Property', null, '7B520BDF-5159-45E4-AE2F-E2D23FD10928',
         '2CA1B5BB-D3CB-22F1-5D34-8D8AF61C768B');
 INSERT INTO data_user.t_menu (id, sort_code, status, created_date, created_by, updated_date, updated_by, menu_code,
                               menu_name, menu_url, menu_icon, authority_id, menu_id)
 VALUES ('8FD9CAA9-1D3E-1EF3-378E-A65F46726EA4', 4, 1, '2023-10-23 22:18:19', '123123', '2023-10-23 22:18:19', '123123',
-        'persistent', '实体', '/cyj-entity-creater/Persistent', null, '9B40A6C3-4B2B-49F4-91A8-D569F38C466D',
+        'persistent', '实体', '/cyj-create/Persistent', null, '9B40A6C3-4B2B-49F4-91A8-D569F38C466D',
         '2CA1B5BB-D3CB-22F1-5D34-8D8AF61C768B');
 INSERT INTO data_user.t_menu (id, sort_code, status, created_date, created_by, updated_date, updated_by, menu_code,
                               menu_name, menu_url, menu_icon, authority_id, menu_id)
 VALUES ('2655E787-B2DC-325B-53B5-7670256D5FBE', 5, 1, '2023-10-23 22:18:19', '123123', '2023-10-23 22:18:19', '123123',
-        'persistent_form', '实体表单', '/cyj-entity-creater/PersistentForm', null,
+        'persistent_form', '实体表单', '/cyj-create/PersistentForm', null,
         '4D9A1CC1-A144-317C-A9B8-8A7E19375BF9', '2CA1B5BB-D3CB-22F1-5D34-8D8AF61C768B');
 INSERT INTO data_user.t_menu (id, sort_code, status, created_date, created_by, updated_date, updated_by, menu_code,
                               menu_name, menu_url, menu_icon, authority_id, menu_id)
 VALUES ('9C21A957-9A7E-FFC9-1C0D-D96C490E82DD', 6, 1, '2023-10-23 22:18:19', '123123', '2023-10-23 22:18:19', '123123',
-        'persistent_form_config', '实体表单配置', '/cyj-entity-creater/PersistentFormConfig', null,
+        'persistent_form_config', '实体表单配置', '/cyj-create/PersistentFormConfig', null,
         '18B0E863-56C8-2791-DE6F-644993ABFA14', '2CA1B5BB-D3CB-22F1-5D34-8D8AF61C768B');
 INSERT INTO data_user.t_menu (id, sort_code, status, created_date, created_by, updated_date, updated_by, menu_code,
                               menu_name, menu_url, menu_icon, authority_id, menu_id)
 VALUES ('86FDA2B2-9B1C-CD5E-CE80-63C3872F698E', 7, 1, '2023-10-23 22:18:19', '123123', '2023-10-23 22:18:19', '123123',
-        'persistent_table', '实体表格', '/cyj-entity-creater/PersistentTable', null,
+        'persistent_table', '实体表格', '/cyj-create/PersistentTable', null,
         '0C770CBD-6E3B-B70A-8120-FDE3D967DAF6', '2CA1B5BB-D3CB-22F1-5D34-8D8AF61C768B');
 INSERT INTO data_user.t_menu (id, sort_code, status, created_date, created_by, updated_date, updated_by, menu_code,
                               menu_name, menu_url, menu_icon, authority_id, menu_id)
 VALUES ('BD982144-EEE6-9E06-C969-AD6CD3B3D334', 8, 1, '2023-10-23 22:18:19', '123123', '2023-10-23 22:18:19', '123123',
-        'persistent_table_config', '实体表格配置', '/cyj-entity-creater/PersistentTableConfig', null,
+        'persistent_table_config', '实体表格配置', '/cyj-create/PersistentTableConfig', null,
         '21075556-C231-00C1-D2D7-66C6FB8284A1', '2CA1B5BB-D3CB-22F1-5D34-8D8AF61C768B');
 INSERT INTO data_user.t_menu (id, sort_code, status, created_date, created_by, updated_date, updated_by, menu_code,
                               menu_name, menu_url, menu_icon, authority_id, menu_id)
 VALUES ('F029F267-8D1D-D334-D4F8-95BAAC544812', 9, 1, '2023-10-23 22:18:19', '123123', '2023-10-23 22:18:19', '123123',
-        'persistent_table_search_config', '实体表格搜索配置', '/cyj-entity-creater/PersistentTableSearchConfig', null,
+        'persistent_table_search_config', '实体表格搜索配置', '/cyj-create/PersistentTableSearchConfig', null,
         'B0274545-6264-752E-7817-BDAFE8EE695D', '2CA1B5BB-D3CB-22F1-5D34-8D8AF61C768B');
 INSERT INTO data_user.t_menu (id, sort_code, status, created_date, created_by, updated_date, updated_by, menu_code,
                               menu_name, menu_url, menu_icon, authority_id, menu_id)
 VALUES ('43D9E306-5217-CBE1-F160-CFCDA6BA88D5', 10, 1, '2023-10-23 22:18:19', '123123', '2023-10-23 22:18:19', '123123',
-        'menu', '菜单', '/cyj-entity-creater/Menu', null, 'E9404F59-180C-8256-75E4-149A6BBC3B1C',
+        'menu', '菜单', '/cyj-create/Menu', null, 'E9404F59-180C-8256-75E4-149A6BBC3B1C',
         '2CA1B5BB-D3CB-22F1-5D34-8D8AF61C768B');
 INSERT INTO data_user.t_menu (id, sort_code, status, created_date, created_by, updated_date, updated_by, menu_code,
                               menu_name, menu_url, menu_icon, authority_id, menu_id)

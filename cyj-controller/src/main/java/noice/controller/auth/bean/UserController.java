@@ -24,7 +24,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/User")
+@RequestMapping("api/User")
 @Tag(name = "User")
 public class UserController implements BeanController<UserVo> {
 

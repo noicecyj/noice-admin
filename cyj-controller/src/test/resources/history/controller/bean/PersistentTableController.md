@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentTable")
+@RequestMapping("api/PersistentTable")
 @Tag(name = "PersistentTable")
 public class PersistentTableController extends BaseBeanControllerImpl<PersistentTableService, PersistentTableConverter, PersistentTablePo, PersistentTableDto, PersistentTableVo> {
 
@@ -67,7 +67,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentTable")
+@RequestMapping("api/PersistentTable")
 @Tag(name = "PersistentTable")
 public class PersistentTableController implements BeanController<PersistentTableVo> {
 
@@ -158,7 +158,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentTable")
+@RequestMapping("api/PersistentTable")
 @Tag(name = "PersistentTable")
 public class PersistentTableController implements BeanController<PersistentTableVo> {
 
@@ -254,7 +254,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentTable")
+@RequestMapping("api/PersistentTable")
 @Tag(name = "PersistentTable")
 public class PersistentTableController implements BeanController<PersistentTableVo> {
 
@@ -352,7 +352,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentTable")
+@RequestMapping("api/PersistentTable")
 @Tag(name = "PersistentTable")
 public class PersistentTableController implements BeanController<PersistentTableVo> {
 
@@ -465,7 +465,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentTable")
+@RequestMapping("api/PersistentTable")
 @Tag(name = "PersistentTable")
 public class PersistentTableController implements BeanController<PersistentTableVo> {
 
@@ -579,7 +579,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentTable")
+@RequestMapping("api/PersistentTable")
 @Tag(name = "PersistentTable")
 public class PersistentTableController implements BeanController<PersistentTableVo> {
 
@@ -692,7 +692,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentTable")
+@RequestMapping("api/PersistentTable")
 @Tag(name = "PersistentTable")
 public class PersistentTableController implements BeanController<PersistentTableVo> {
 
@@ -799,7 +799,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentTable")
+@RequestMapping("api/PersistentTable")
 @Tag(name = "PersistentTable")
 public class PersistentTableController implements BeanController<PersistentTableVo> {
 
@@ -907,7 +907,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentTable")
+@RequestMapping("api/PersistentTable")
 @Tag(name = "PersistentTable")
 public class PersistentTableController implements BeanController<PersistentTableVo> {
 
@@ -1016,7 +1016,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/PersistentTable")
+@RequestMapping("api/PersistentTable")
 @Tag(name = "PersistentTable")
 public class PersistentTableController implements BeanController<PersistentTableVo> {
 

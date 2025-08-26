@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Enterprise")
+@RequestMapping("api/Enterprise")
 @Tag(name = "Enterprise")
 public class EnterpriseController extends BaseBeanControllerImpl<EnterpriseService, EnterpriseConverter, EnterprisePo, EnterpriseDto, EnterpriseVo> {
 
@@ -70,7 +70,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Enterprise")
+@RequestMapping("api/Enterprise")
 @Tag(name = "Enterprise")
 public class EnterpriseController implements BeanController<EnterpriseVo> {
 
@@ -163,7 +163,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Enterprise")
+@RequestMapping("api/Enterprise")
 @Tag(name = "Enterprise")
 public class EnterpriseController implements BeanController<EnterpriseVo> {
 
@@ -260,7 +260,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Enterprise")
+@RequestMapping("api/Enterprise")
 @Tag(name = "Enterprise")
 public class EnterpriseController implements BeanController<EnterpriseVo> {
 
@@ -360,7 +360,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Enterprise")
+@RequestMapping("api/Enterprise")
 @Tag(name = "Enterprise")
 public class EnterpriseController implements BeanController<EnterpriseVo> {
 
@@ -474,7 +474,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Enterprise")
+@RequestMapping("api/Enterprise")
 @Tag(name = "Enterprise")
 public class EnterpriseController implements BeanController<EnterpriseVo> {
 
@@ -590,7 +590,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Enterprise")
+@RequestMapping("api/Enterprise")
 @Tag(name = "Enterprise")
 public class EnterpriseController implements BeanController<EnterpriseVo> {
 
@@ -705,7 +705,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Enterprise")
+@RequestMapping("api/Enterprise")
 @Tag(name = "Enterprise")
 public class EnterpriseController implements BeanController<EnterpriseVo> {
 
@@ -813,7 +813,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Enterprise")
+@RequestMapping("api/Enterprise")
 @Tag(name = "Enterprise")
 public class EnterpriseController implements BeanController<EnterpriseVo> {
 
@@ -923,7 +923,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Enterprise")
+@RequestMapping("api/Enterprise")
 @Tag(name = "Enterprise")
 public class EnterpriseController implements BeanController<EnterpriseVo> {
 
@@ -1033,7 +1033,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Enterprise")
+@RequestMapping("api/Enterprise")
 @Tag(name = "Enterprise")
 public class EnterpriseController implements BeanController<EnterpriseVo> {
 

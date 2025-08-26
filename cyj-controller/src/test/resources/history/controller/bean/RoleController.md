@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Role")
+@RequestMapping("api/Role")
 @Tag(name = "Role")
 public class RoleController extends BaseBeanControllerImpl<RoleService, RoleServiceConverter, RolePo, RoleDto, RoleVo> {
 
@@ -73,7 +73,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Role")
+@RequestMapping("api/Role")
 @Tag(name = "Role")
 public class RoleController implements BeanController<RoleVo> {
 
@@ -170,7 +170,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Role")
+@RequestMapping("api/Role")
 @Tag(name = "Role")
 public class RoleController implements BeanController<RoleVo> {
 
@@ -275,7 +275,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Role")
+@RequestMapping("api/Role")
 @Tag(name = "Role")
 public class RoleController implements BeanController<RoleVo> {
 
@@ -384,7 +384,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Role")
+@RequestMapping("api/Role")
 @Tag(name = "Role")
 public class RoleController implements BeanController<RoleVo> {
 
@@ -496,7 +496,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Role")
+@RequestMapping("api/Role")
 @Tag(name = "Role")
 public class RoleController implements BeanController<RoleVo> {
 
@@ -622,7 +622,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Role")
+@RequestMapping("api/Role")
 @Tag(name = "Role")
 public class RoleController implements BeanController<RoleVo> {
 
@@ -750,7 +750,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Role")
+@RequestMapping("api/Role")
 @Tag(name = "Role")
 public class RoleController implements BeanController<RoleVo> {
 
@@ -877,7 +877,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Role")
+@RequestMapping("api/Role")
 @Tag(name = "Role")
 public class RoleController implements BeanController<RoleVo> {
 
@@ -997,7 +997,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Role")
+@RequestMapping("api/Role")
 @Tag(name = "Role")
 public class RoleController implements BeanController<RoleVo> {
 
@@ -1119,7 +1119,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Role")
+@RequestMapping("api/Role")
 @Tag(name = "Role")
 public class RoleController implements BeanController<RoleVo> {
 
@@ -1241,7 +1241,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Role")
+@RequestMapping("api/Role")
 @Tag(name = "Role")
 public class RoleController implements BeanController<RoleVo> {
 

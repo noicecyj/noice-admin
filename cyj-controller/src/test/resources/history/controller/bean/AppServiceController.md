@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/AppService")
+@RequestMapping("api/AppService")
 @Tag(name = "AppService")
 public class AppServiceController extends BaseBeanControllerImpl<AppServiceService, AppServiceServiceConverter, AppServicePo, AppServiceDto, AppServiceVo> {
 
@@ -64,7 +64,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/AppService")
+@RequestMapping("api/AppService")
 @Tag(name = "AppService")
 public class AppServiceController implements BeanController<AppServiceVo> {
 
@@ -153,7 +153,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/AppService")
+@RequestMapping("api/AppService")
 @Tag(name = "AppService")
 public class AppServiceController implements BeanController<AppServiceVo> {
 
@@ -249,7 +249,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/AppService")
+@RequestMapping("api/AppService")
 @Tag(name = "AppService")
 public class AppServiceController implements BeanController<AppServiceVo> {
 
@@ -357,7 +357,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/AppService")
+@RequestMapping("api/AppService")
 @Tag(name = "AppService")
 public class AppServiceController implements BeanController<AppServiceVo> {
 
@@ -469,7 +469,7 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/AppService")
+@RequestMapping("api/AppService")
 @Tag(name = "AppService")
 public class AppServiceController implements BeanController<AppServiceVo> {
 
@@ -580,7 +580,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/AppService")
+@RequestMapping("api/AppService")
 @Tag(name = "AppService")
 public class AppServiceController implements BeanController<AppServiceVo> {
 
@@ -684,7 +684,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/AppService")
+@RequestMapping("api/AppService")
 @Tag(name = "AppService")
 public class AppServiceController implements BeanController<AppServiceVo> {
 
@@ -790,7 +790,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/AppService")
+@RequestMapping("api/AppService")
 @Tag(name = "AppService")
 public class AppServiceController implements BeanController<AppServiceVo> {
 
@@ -896,7 +896,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("entityCreateApi/AppService")
+@RequestMapping("api/AppService")
 @Tag(name = "AppService")
 public class AppServiceController implements BeanController<AppServiceVo> {
 

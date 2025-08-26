@@ -24,7 +24,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("userApi/Authority")
+@RequestMapping("api/Authority")
 @Tag(name = "Authority")
 public class AuthorityController implements BeanController<AuthorityVo> {
 

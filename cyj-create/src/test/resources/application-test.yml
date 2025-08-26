@@ -2,7 +2,7 @@ server:
   port: 8020
 spring:
   application:
-    name: cyj-entity-creater
+    name: cyj-create
   cloud:
     nacos:
       discovery:
