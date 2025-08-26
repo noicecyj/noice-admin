@@ -4,69 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化自动生成代码">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/816cf4cc-84bd-4b77-bb61-b4fcd51d574a.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/816cf4cc-84bd-4b77-bb61-b4fcd51d574a.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-auth/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-auth/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-common/src/main/java/noice/common/dml/bean/t_app_service.sql" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-common/src/main/java/noice/common/dml/bean/t_app_service.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-common/src/main/java/noice/common/dml/bean/t_authority.sql" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-common/src/main/java/noice/common/dml/bean/t_authority.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-common/src/main/java/noice/common/dml/bean/t_menu.sql" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-common/src/main/java/noice/common/dml/bean/t_menu.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-common/src/main/java/noice/common/dml/bean/t_persistent_table_config.sql" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-common/src/main/java/noice/common/dml/bean/t_persistent_table_config.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/auth/bean/AuthorityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/auth/bean/AuthorityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/auth/bean/CatalogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/auth/bean/CatalogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/auth/bean/CatalogDictionaryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/auth/bean/CatalogDictionaryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/auth/bean/EnterpriseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/auth/bean/EnterpriseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/auth/bean/InterfaceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/auth/bean/InterfaceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/auth/bean/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/auth/bean/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/auth/bean/RoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/auth/bean/RoleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/auth/bean/SqlController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/auth/bean/SqlController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/auth/bean/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/auth/bean/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/auth/relation/RoleAuthorityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/auth/relation/RoleAuthorityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/auth/relation/UserRoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/auth/relation/UserRoleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/create/bean/PersistentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/create/bean/PersistentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/create/bean/PersistentFormConfigController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/create/bean/PersistentFormConfigController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/create/bean/PersistentFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/create/bean/PersistentFormController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/create/bean/PersistentPropertyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/create/bean/PersistentPropertyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/create/bean/PersistentTableConfigController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/create/bean/PersistentTableConfigController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/create/bean/PersistentTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/create/bean/PersistentTableController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/create/bean/PersistentTableSearchConfigController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/main/java/noice/controller/create/bean/PersistentTableSearchConfigController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/AppServiceController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/AppServiceController.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/AuthorityController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/AuthorityController.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/CatalogController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/CatalogController.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/CatalogDictionaryController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/CatalogDictionaryController.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/EnterpriseController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/EnterpriseController.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/InterfaceController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/InterfaceController.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/MenuController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/MenuController.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentController.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentFormConfigController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentFormConfigController.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentFormController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentFormController.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentPropertyController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentPropertyController.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentTableConfigController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentTableConfigController.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentTableController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentTableController.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentTableSearchConfigController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/PersistentTableSearchConfigController.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/RoleController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/RoleController.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/SqlController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/SqlController.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/UserController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/bean/UserController.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/relation/RoleAuthorityController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/relation/RoleAuthorityController.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/relation/UserRoleController.md" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-controller/src/test/resources/history/controller/relation/UserRoleController.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-create/log/cyj-entity-creater-2023-11-17.0.log" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/log/cyj-entity-creater-2023-11-17.0.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-create/log/cyj-entity-creater.log" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/log/cyj-entity-creater.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-create/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-create/src/main/java/noice/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/java/noice/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-create/src/main/java/noice/controller/OperateTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/java/noice/controller/OperateTableController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-create/src/main/java/noice/controller/TableAndFormAndUrlController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/java/noice/controller/TableAndFormAndUrlController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-create/src/main/java/noice/create/CyjEntityCreaterApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/java/noice/create/CyjEntityCreateApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-create/src/main/java/noice/handler/TokenFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/java/noice/handler/TokenFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-create/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-create/src/main/resources/logback-spring.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/resources/logback-spring.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-create/src/test/java/noice/create/CyjEntityCreaterApplicationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/test/java/noice/create/CyjEntityCreateApplicationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-create/src/test/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/test/resources/application-test.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/access_log.2023-11-28.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/access_log.2023-11-28.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/ice.config.mts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/ice.config.mts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/services/formAndTableAndUrl.ts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/services/formAndTableAndUrl.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-ice/src/services/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-ice/src/services/user.ts" afterDir="false" />
-    </list>
+    <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化自动生成代码" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -510,15 +448,7 @@
       <workItem from="1750600079167" duration="4076000" />
       <workItem from="1750770450875" duration="6547000" />
       <workItem from="1755934699839" duration="15118000" />
-      <workItem from="1756221188548" duration="2283000" />
-    </task>
-    <task id="LOCAL-00209" summary="优化表单布局及字段逻辑">
-      <option name="closed" value="true" />
-      <created>1734587316032</created>
-      <option name="number" value="00209" />
-      <option name="presentableId" value="LOCAL-00209" />
-      <option name="project" value="LOCAL" />
-      <updated>1734587316032</updated>
+      <workItem from="1756221188548" duration="3169000" />
     </task>
     <task id="LOCAL-00210" summary="优化表单布局及字段逻辑">
       <option name="closed" value="true" />
@@ -904,7 +834,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755942563583</updated>
     </task>
-    <option name="localTasksCounter" value="258" />
+    <task id="LOCAL-00258" summary="优化自动生成代码">
+      <option name="closed" value="true" />
+      <created>1756223487363</created>
+      <option name="number" value="00258" />
+      <option name="presentableId" value="LOCAL-00258" />
+      <option name="project" value="LOCAL" />
+      <updated>1756223487363</updated>
+    </task>
+    <option name="localTasksCounter" value="259" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
