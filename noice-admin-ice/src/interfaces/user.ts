@@ -1,16 +1,19 @@
 export interface UserInfo {
-  name: string;
-  avatar: string;
-  userid: string;
-  userType: 'admin' | 'user';
+  id: string;
+  userName: string;
+  userCode: string;
+}
+
+export interface UserAuth {
+  authKey?: boolean;
 }
 
 export interface LoginParams {
-  username: string;
+  userName: string;
   password: string;
 }
 
 export interface LoginResult {
   success?: boolean;
-  userType?: 'user' | 'admin' | 'guest';
+  token?: string;
 }

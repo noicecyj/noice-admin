@@ -5,9 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化自动生成代码">
+      <change afterPath="$PROJECT_DIR$/noice-admin-ice/src/components/DataForm/PageFormSelect/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-admin-ice/src/components/DataForm/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-admin-ice/src/components/DataTable/index.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-admin-ice/src/components/DataTable/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-admin-ice/src/components/PageModel/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-admin-ice/src/interfaces/common.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-admin-ice/src/models/entity.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-admin-ice/src/services/formAndTableAndUrl.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-admin-ice/src/services/init.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-admin-ice/.idea/MarsCodeWorkspaceAppSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/.idea/MarsCodeWorkspaceAppSettings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-admin-ice/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-admin-ice/ice.config.mts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/ice.config.mts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-admin-ice/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-admin-ice/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/app.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/interfaces/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/interfaces/user.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/models/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/models/user.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/pages/form/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/pages/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/pages/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/pages/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/pages/list/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/pages/login/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/pages/login/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/pages/success/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/services/form.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/services/list.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/services/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/services/user.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/store.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -203,6 +229,18 @@
       <set>
         <option value="SpringBootApplicationConfigurationType" />
       </set>
+    </option>
+    <option name="configurationStatuses">
+      <map>
+        <entry key="SpringBootApplicationConfigurationType">
+          <value>
+            <map>
+              <entry key="CyjAuthApplication" value="STOPPED" />
+              <entry key="CyjEntityCreateApplication" value="STOPPED" />
+            </map>
+          </value>
+        </entry>
+      </map>
     </option>
   </component>
   <component name="RunManager" selected="Spring Boot.CyjEntityCreateApplication">
@@ -463,7 +501,7 @@
       <workItem from="1750770450875" duration="6547000" />
       <workItem from="1755934699839" duration="15118000" />
       <workItem from="1756221188548" duration="3169000" />
-      <workItem from="1756563777839" duration="3740000" />
+      <workItem from="1756563777839" duration="16127000" />
     </task>
     <task id="LOCAL-00210" summary="优化表单布局及字段逻辑">
       <option name="closed" value="true" />

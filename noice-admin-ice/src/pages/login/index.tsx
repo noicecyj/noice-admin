@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { definePageConfig, history, useAuth } from 'ice';
-import { message, Alert } from 'antd';
+import { Alert, message } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { ProFormCheckbox, ProFormText, LoginForm } from '@ant-design/pro-form';
+import { LoginForm, ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
 import styles from './index.module.css';
 import type { LoginParams, LoginResult } from '@/interfaces/user';
-import { login, fetchUserInfo } from '@/services/user';
+import { fetchUserInfo, login } from '@/services/user';
 import store from '@/store';
+import cookie from 'react-cookies';
 import logo from '@/assets/logo.png';
 
 const LoginMessage: React.FC<{
@@ -30,18 +31,27 @@ const Login: React.FC = () => {
   const [, setAuth] = useAuth();
 
   async function updateUserInfo() {
-    const userInfo = await fetchUserInfo();
-    userDispatcher.updateCurrentUser(userInfo);
+    debugger
+    if (!!loginResult) {
+      cookie.save('token', loginResult.token || '', { path: '/' });
+      const userInfo = await fetchUserInfo();
+      userDispatcher.updateCurrentUser(userInfo);
+    } else {
+      console.error('Token is not available');
+    }
   }
 
   async function handleSubmit(values: LoginParams) {
     try {
       const result = await login(values);
-      if (result.success) {
+      debugger
+      if (result.data?.success) {
+
         message.success('登录成功！');
+        setLoginResult(result.data);
         setAuth({
-          admin: result.userType === 'admin',
-          user: result.userType === 'user',
+          admin: true,
+          user: true,
         });
         await updateUserInfo();
         const urlParams = new URL(window.location.href).searchParams;
@@ -49,18 +59,17 @@ const Login: React.FC = () => {
         return;
       }
       console.log(result);
-      // 如果失败去设置用户错误信息，显示提示信息
-      setLoginResult(result);
     } catch (error) {
       message.error('登录失败，请重试！');
       console.log(error);
     }
   }
+
   return (
     <div className={styles.container}>
       <LoginForm
         title="ICE Pro"
-        logo={<img alt="logo" src={logo} />}
+        logo={<img alt="logo" src={logo}/>}
         subTitle="基于 ice.js 3 开箱即用的中后台模板"
         onFinish={async (values) => {
           await handleSubmit(values as LoginParams);
@@ -72,10 +81,10 @@ const Login: React.FC = () => {
           />
         )}
         <ProFormText
-          name="username"
+          name="userName"
           fieldProps={{
             size: 'large',
-            prefix: <UserOutlined className={'prefixIcon'} />,
+            prefix: <UserOutlined className={'prefixIcon'}/>,
           }}
           placeholder={'用户名: admin or user'}
           rules={[
@@ -89,7 +98,7 @@ const Login: React.FC = () => {
           name="password"
           fieldProps={{
             size: 'large',
-            prefix: <LockOutlined className={'prefixIcon'} />,
+            prefix: <LockOutlined className={'prefixIcon'}/>,
           }}
           placeholder={'密码: ice'}
           rules={[

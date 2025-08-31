@@ -1,43 +1,52 @@
-import { Outlet, Link, useLocation } from 'ice';
+import {Link, Outlet, useLocation} from 'ice';
 import ProLayout from '@ant-design/pro-layout';
-import { asideMenuConfig } from '@/menuConfig';
+// import {asideMenuConfig} from '@/menuConfig';
 import AvatarDropdown from '@/components/AvatarDropdown';
-import store from '@/store';
 import logo from '@/assets/logo.png';
 import styles from './layout.module.css';
-import Footer from '@/components/Footer';
+import store from '@/store';
+import React from 'react';
+import {getUserMenu} from "@/services/user";
 
 export default function Layout() {
   const location = useLocation();
+
   const [userState] = store.useModel('user');
 
+  const userInfo = userState.currentUser;
   if (['/login'].includes(location.pathname)) {
-    return <Outlet />;
+    return <Outlet/>;
   }
 
   return (
     <ProLayout
-      menu={{ defaultOpenAll: true }}
       className={styles.layout}
-      logo={<img src={logo} alt="logo" />}
+      logo={<img src={logo} alt="logo"/>}
       title="ICE Pro"
       location={{
         pathname: location.pathname,
       }}
       layout="mix"
-      rightContentRender={() => (
-        <AvatarDropdown avatar={userState.currentUser.avatar} name={userState.currentUser.name} />
+      actionsRender={() => (
+        <AvatarDropdown name={userInfo?.userName || "123"} avatar={""}/>
       )}
-      menuDataRender={() => asideMenuConfig}
+      menu={{
+        request: async () => {
+          const userMenu = await getUserMenu();
+          return userMenu.data;
+        },
+      }}
       menuItemRender={(item, defaultDom) => {
         if (!item.path) {
           return defaultDom;
         }
         return <Link to={item.path}>{defaultDom}</Link>;
       }}
-      footerRender={() => <Footer />}
+      onPageChange={(location: Location) => {
+        console.log('location', location);
+      }}
     >
-      <Outlet />
+      <Outlet/>
     </ProLayout>
   );
 }

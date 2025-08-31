@@ -1,4 +1,4 @@
-import { defineConfig } from '@ice/app';
+import {defineConfig} from '@ice/app';
 import request from '@ice/plugin-request';
 import store from '@ice/plugin-store';
 import auth from '@ice/plugin-auth';
@@ -10,4 +10,14 @@ export default defineConfig(() => ({
   minify,
   plugins: [request(), store(), auth()],
   compileDependencies: false,
+  proxy: {
+    "/api": {
+      enable: true,
+      target: "http://127.0.0.1:8100/cyj-create"
+    },
+    "/v1": {
+      enable: true,
+      target: "http://127.0.0.1:8100"
+    }
+  }
 }));
