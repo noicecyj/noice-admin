@@ -26,6 +26,7 @@ import java.util.List;
 @Mapper(componentModel = "spring", config = BaseBeanAssembler.class, uses = {TableAndFormAndUrlControllerAssemblerComponent.class})
 public interface TableAndFormAndUrlControllerAssembler {
 
+    @Mapping(target = "formVoList", source = "dto.formDtoList")
     @Mapping(target = "formConfigRowVoList", source = "dto.formConfigRowDtoList")
     FormVo dtoToVo(FormDto dto);
 
@@ -46,6 +47,7 @@ public interface TableAndFormAndUrlControllerAssembler {
 
     List<FormConfigVo> dtotFormListToVoFormList(List<FormConfigDto> dtoList);
 
+    @Mapping(target = "tableVoList", source = "dto.tableDtoList")
     @Mapping(target = "tableConfigVoList", source = "dto.tableConfigDtoList")
     TableVo dtoToVo(TableDto dto);
 

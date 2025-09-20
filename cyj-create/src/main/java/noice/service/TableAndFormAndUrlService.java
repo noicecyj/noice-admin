@@ -137,7 +137,7 @@ public class TableAndFormAndUrlService {
                     TableDto table = getTable(subPersistentPo.getPersistentCode());
                     tableDtoList.add(table);
                 }
-                tableDto.setSubTableDtoList(tableDtoList);
+                tableDto.setTableDtoList(tableDtoList);
             }
             return tableDto;
         }

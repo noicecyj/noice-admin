@@ -18,6 +18,6 @@ public class TableDto {
 
     private List<TableConfigDto> tableConfigDtoList;
 
-    private List<TableDto> subTableDtoList;
+    private List<TableDto> tableDtoList;
 
 }

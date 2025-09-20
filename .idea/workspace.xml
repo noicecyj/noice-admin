@@ -5,25 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化自动生成代码">
-      <change afterPath="$PROJECT_DIR$/noice-admin-ice/src/pages/Catalog/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-admin-ice/src/pages/Catalog/models/Catalog.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-admin-ice/src/pages/Catalog/models/CatalogDictionary.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-admin-ice/src/pages/Catalog/store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/816cf4cc-84bd-4b77-bb61-b4fcd51d574a.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/816cf4cc-84bd-4b77-bb61-b4fcd51d574a.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cyj-create/src/main/java/noice/assembler/TableAndFormAndUrlControllerAssembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/java/noice/assembler/TableAndFormAndUrlControllerAssembler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-create/src/main/java/noice/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/java/noice/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-create/src/main/java/noice/controller/TableAndFormAndUrlController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/java/noice/controller/TableAndFormAndUrlController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-create/src/main/java/noice/entity/dto/FormDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/java/noice/entity/dto/FormDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cyj-create/src/main/java/noice/entity/dto/TableDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/java/noice/entity/dto/TableDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-create/src/main/java/noice/entity/vo/FormVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/java/noice/entity/vo/FormVo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cyj-create/src/main/java/noice/entity/vo/TableVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/java/noice/entity/vo/TableVo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cyj-create/src/main/java/noice/service/TableAndFormAndUrlService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/java/noice/service/TableAndFormAndUrlService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-admin-ice/.idea/MarsCodeWorkspaceAppSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/.idea/MarsCodeWorkspaceAppSettings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/components/DataTable/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/components/DataTable/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/components/PageModel/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/components/PageModel/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/pages/Catalog/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/pages/Catalog/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/services/formAndTableAndUrl.ts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/services/formAndTableAndUrl.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -493,15 +481,7 @@
       <workItem from="1756221188548" duration="3169000" />
       <workItem from="1756563777839" duration="19641000" />
       <workItem from="1757144007006" duration="4854000" />
-      <workItem from="1758357098750" duration="4533000" />
-    </task>
-    <task id="LOCAL-00210" summary="优化表单布局及字段逻辑">
-      <option name="closed" value="true" />
-      <created>1734591620836</created>
-      <option name="number" value="00210" />
-      <option name="presentableId" value="LOCAL-00210" />
-      <option name="project" value="LOCAL" />
-      <updated>1734591620836</updated>
+      <workItem from="1758357098750" duration="10615000" />
     </task>
     <task id="LOCAL-00211" summary="优化表单布局及字段逻辑">
       <option name="closed" value="true" />
@@ -887,7 +867,15 @@
       <option name="project" value="LOCAL" />
       <updated>1756223487363</updated>
     </task>
-    <option name="localTasksCounter" value="259" />
+    <task id="LOCAL-00259" summary="优化自动生成代码">
+      <option name="closed" value="true" />
+      <created>1758375884126</created>
+      <option name="number" value="00259" />
+      <option name="presentableId" value="LOCAL-00259" />
+      <option name="project" value="LOCAL" />
+      <updated>1758375884126</updated>
+    </task>
+    <option name="localTasksCounter" value="260" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
