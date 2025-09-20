@@ -22,4 +22,6 @@ public class FormVo {
 
     private List<FormConfigRowVo> formConfigRowVoList;
 
+    private List<FormVo> formVoList;
+
 }

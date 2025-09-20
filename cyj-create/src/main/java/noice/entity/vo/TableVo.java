@@ -18,4 +18,6 @@ public class TableVo {
 
     private List<TableConfigVo> tableConfigVoList;
 
+    private List<TableVo> subTableVoList;
+
 }

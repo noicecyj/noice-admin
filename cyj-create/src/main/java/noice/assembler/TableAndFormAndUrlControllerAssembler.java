@@ -49,6 +49,10 @@ public interface TableAndFormAndUrlControllerAssembler {
     @Mapping(target = "tableConfigVoList", source = "dto.tableConfigDtoList")
     TableVo dtoToVo(TableDto dto);
 
+    List<TableVo> dtoTableListToVoList(List<TableDto> dtoList);
+
+    List<FormVo> dtoFormListToVoList(List<FormDto> dtoList);
+
     @Mapping(target = "key", source = "dto.persistentTableConfigCode")
     @Mapping(target = "dataIndex", source = "dto.persistentTableConfigCode")
     @Mapping(target = "hideInTable", source = "dto.persistentTableConfigDisplay")

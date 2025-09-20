@@ -8,6 +8,8 @@ function PageModel(props: {
   form: any,
   infoState: any,
   infoDispatchers: any
+  subInfoState?: [any],
+  subInfoDispatchers?: [any],
 }) {
 
   const {
@@ -16,6 +18,8 @@ function PageModel(props: {
     form,
     infoState,
     infoDispatchers,
+    subInfoState,
+    subInfoDispatchers,
   } = props;
 
   return (
@@ -25,6 +29,8 @@ function PageModel(props: {
         url={url.data}
         infoState={infoState}
         infoDispatchers={infoDispatchers}
+        subInfoState={subInfoState}
+        subInfoDispatchers={subInfoDispatchers}
       />
       <DataForm
         url={url.data}

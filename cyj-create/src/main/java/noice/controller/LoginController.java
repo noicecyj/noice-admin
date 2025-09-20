@@ -6,10 +6,8 @@ import noice.assembler.TreeMenuControllerAssembler;
 import noice.assembler.auth.bean.UserControllerAssembler;
 import noice.common.entity.vo.ResultVO;
 import noice.converter.LoginControllerConverter;
-import noice.entity.auth.vo.bean.UserVo;
 import noice.entity.vo.LoginResultVo;
 import noice.entity.vo.LoginVo;
-import noice.entity.vo.TreeMenuVo;
 import noice.service.LoginService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -35,7 +31,6 @@ public class LoginController {
     private UserControllerAssembler userControllerAssembler;
 
     private TreeMenuControllerAssembler treeMenuControllerAssembler;
-
 
     @Autowired
     public void setUserControllerAssembler(UserControllerAssembler userControllerAssembler) {
@@ -80,15 +75,13 @@ public class LoginController {
     @Operation(summary = "获取用户信息")
     @GetMapping(value = "getUserInfo")
     public ResultVO getUserInfo() {
-        UserVo userVo = userControllerAssembler.dtoToVo(service.getUserInfo());
-        return ResultVO.success(userVo);
+        return ResultVO.success(userControllerAssembler.dtoToVo(service.getUserInfo()));
     }
 
     @Operation(summary = "获取用户菜单")
     @GetMapping(value = "getUserMenu")
     public ResultVO getUserMenu() {
-        List<TreeMenuVo> treeMenuVoList = treeMenuControllerAssembler.treeDtoListToTreeVoList(service.getUserMenu());
-        return ResultVO.success(treeMenuVoList);
+        return ResultVO.success(treeMenuControllerAssembler.treeDtoListToTreeVoList(service.getUserMenu()));
     }
 
 }

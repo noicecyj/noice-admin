@@ -5,35 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化自动生成代码">
-      <change afterPath="$PROJECT_DIR$/noice-admin-ice/src/components/DataForm/PageFormSelect/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-admin-ice/src/components/DataForm/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-admin-ice/src/components/DataTable/index.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-admin-ice/src/components/DataTable/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-admin-ice/src/components/PageModel/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-admin-ice/src/interfaces/common.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-admin-ice/src/models/entity.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-admin-ice/src/services/formAndTableAndUrl.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/noice-admin-ice/src/services/init.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-admin-ice/src/pages/Catalog/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-admin-ice/src/pages/Catalog/models/Catalog.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-admin-ice/src/pages/Catalog/models/CatalogDictionary.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noice-admin-ice/src/pages/Catalog/store.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/816cf4cc-84bd-4b77-bb61-b4fcd51d574a.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/816cf4cc-84bd-4b77-bb61-b4fcd51d574a.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-create/src/main/java/noice/assembler/TableAndFormAndUrlControllerAssembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/java/noice/assembler/TableAndFormAndUrlControllerAssembler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-create/src/main/java/noice/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/java/noice/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-create/src/main/java/noice/controller/TableAndFormAndUrlController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/java/noice/controller/TableAndFormAndUrlController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-create/src/main/java/noice/entity/dto/FormDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/java/noice/entity/dto/FormDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-create/src/main/java/noice/entity/dto/TableDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/java/noice/entity/dto/TableDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-create/src/main/java/noice/entity/vo/FormVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/java/noice/entity/vo/FormVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-create/src/main/java/noice/entity/vo/TableVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/java/noice/entity/vo/TableVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-create/src/main/java/noice/service/TableAndFormAndUrlService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/java/noice/service/TableAndFormAndUrlService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/noice-admin-ice/.idea/MarsCodeWorkspaceAppSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/.idea/MarsCodeWorkspaceAppSettings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-admin-ice/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-admin-ice/ice.config.mts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/ice.config.mts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-admin-ice/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-admin-ice/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/app.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/interfaces/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/interfaces/user.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/models/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/models/user.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/pages/form/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/pages/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/pages/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/pages/list/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/pages/login/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/pages/login/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/pages/success/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/services/form.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/services/list.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/services/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/services/user.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/components/DataTable/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/components/DataTable/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/components/PageModel/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/components/PageModel/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,7 +163,7 @@
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "D:\\noice-admin\\noice-ice\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "C:\\Users\\matebookGT14\\IdeaProjects\\noice-admin\\noice-admin-ice\\node_modules\\typescript\\lib",
     "two.files.diff.last.used.file": "C:/Users/matebookGT14/IdeaProjects/noice-admin/noice-ice/package.json",
     "vue.rearranger.settings.migration": "true"
   },
@@ -352,8 +342,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.25557.131" />
-        <option value="bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-IU-252.25557.131" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26199.169" />
+        <option value="bundled-js-predefined-d6986cc7102b-9c94529fcfe0-JavaScript-IU-252.26199.169" />
       </set>
     </attachedChunks>
   </component>
@@ -501,7 +491,9 @@
       <workItem from="1750770450875" duration="6547000" />
       <workItem from="1755934699839" duration="15118000" />
       <workItem from="1756221188548" duration="3169000" />
-      <workItem from="1756563777839" duration="16127000" />
+      <workItem from="1756563777839" duration="19641000" />
+      <workItem from="1757144007006" duration="4854000" />
+      <workItem from="1758357098750" duration="4533000" />
     </task>
     <task id="LOCAL-00210" summary="优化表单布局及字段逻辑">
       <option name="closed" value="true" />

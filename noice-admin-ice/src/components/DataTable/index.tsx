@@ -1,10 +1,10 @@
-import type {ActionType} from '@ant-design/pro-components';
-import {ProTable} from '@ant-design/pro-components';
-import React, {ReactNode, useEffect, useRef} from 'react';
+import type { ActionType } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
+import React, { ReactNode, useEffect, useRef } from 'react';
 import store from "@/store";
-import {ProColumns} from "@ant-design/pro-table/lib";
-import {Button, Popconfirm, Tabs} from "antd";
-import {history} from "ice";
+import { ProColumns } from "@ant-design/pro-table/lib";
+import { Button, Popconfirm, Tabs } from "antd";
+import { history } from "ice";
 
 function DataTable(props: {
   table: {
@@ -19,6 +19,8 @@ function DataTable(props: {
   },
   infoState: any,
   infoDispatchers: any
+  subInfoState?: [any],
+  subInfoDispatchers?: [any],
 }) {
   const actionRef = useRef<ActionType>();
 
@@ -82,7 +84,6 @@ function DataTable(props: {
       </Button>,
       <Popconfirm
         title="删除"
-        description="是否确认删除？"
         onConfirm={async () => {
           await entityDispatcher.remove({
             id: record.id,
@@ -122,7 +123,7 @@ function DataTable(props: {
     const newPanes = userState.tabs?.filter((pane) => pane.key !== targetKey);
     if (newPanes?.length && targetKey === userState.activeKey) {
       // @ts-ignore
-      const {key} = newPanes[targetIndex === newPanes.length ? targetIndex - 1 : targetIndex];
+      const { key } = newPanes[targetIndex === newPanes.length ? targetIndex - 1 : targetIndex];
       userDispatcher.updateActiveKey(key);
     }
     userDispatcher.updateTabs(newPanes);

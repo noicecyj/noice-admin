@@ -22,4 +22,6 @@ public class FormDto {
 
     private List<FormConfigRowDto> formConfigRowDtoList;
 
+    private List<FormDto> formDtoList;
+
 }

@@ -129,6 +129,16 @@ public class TableAndFormAndUrlService {
             statusCol.setPersistentTableConfigDisplay(false);
             tableConfigDtoList.add(statusCol);
             tableDto.setTableConfigDtoList(tableConfigDtoList);
+            List<TableDto> tableDtoList = new ArrayList<>();
+            PersistentPo persistentPo = persistentRepository.find(persistentTablePo.getId());
+            if (ObjectUtil.isNotNull(persistentPo)) {
+                List<PersistentPo> list = persistentRepository.findList(new PersistentPo().eqPersistentId(persistentPo.getId()).getQueryWrapper());
+                for (PersistentPo subPersistentPo : list) {
+                    TableDto table = getTable(subPersistentPo.getPersistentCode());
+                    tableDtoList.add(table);
+                }
+                tableDto.setSubTableDtoList(tableDtoList);
+            }
             return tableDto;
         }
     }
@@ -153,6 +163,16 @@ public class TableAndFormAndUrlService {
             List<FormConfigRowDto> formConfigRowDtoList = setFormConfigRow(formConfigDtoList);
             formConfigRowDtoList.add(setBaseFormConfigRow());
             formDto.setFormConfigRowDtoList(formConfigRowDtoList);
+            List<FormDto> formDtoList = new ArrayList<>();
+            PersistentPo persistentPo = persistentRepository.find(persistentFormPo.getId());
+            if (ObjectUtil.isNotNull(persistentPo)) {
+                List<PersistentPo> list = persistentRepository.findList(new PersistentPo().eqPersistentId(persistentPo.getId()).getQueryWrapper());
+                for (PersistentPo subPersistentPo : list) {
+                    FormDto form = getForm(subPersistentPo.getPersistentCode());
+                    formDtoList.add(form);
+                }
+                formDto.setFormDtoList(formDtoList);
+            }
             return formDto;
         }
     }
