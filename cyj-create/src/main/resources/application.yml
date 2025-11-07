@@ -8,9 +8,9 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 123.249.114.102:8848 #这个地址是nacos的地址
+        server-addr: 192.168.71.62:8848 #这个地址是nacos的地址
       config:
-        server-addr: 123.249.114.102:8848   #配置中心地址
+        server-addr: 192.168.71.62:8848   #配置中心地址
         group: DEFAULT_GROUP
         file-extension: yaml
         enabled: true
@@ -19,7 +19,7 @@ spring:
           enabled: false
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://123.249.114.102:3306/data_user?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    url: jdbc:mysql://192.168.71.62:3306/data_user?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: root
     password: 68762306
     hikari:
@@ -37,7 +37,10 @@ spring:
       platform: mysql
   data:
     redis:
-      host: 123.249.114.102
+      host: 192.168.71.62
+      port: 6379
+      password: 68762306  # Redis 6.0认证必需
+      database: 0
       jedis:
         pool:
           max-active: 10  # 连接池中最大连接数（默认8）

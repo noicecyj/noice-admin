@@ -5,13 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化自动生成代码">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-create/src/main/java/noice/assembler/TableAndFormAndUrlControllerAssembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/java/noice/assembler/TableAndFormAndUrlControllerAssembler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-create/src/main/java/noice/entity/dto/TableDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/java/noice/entity/dto/TableDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-create/src/main/java/noice/entity/vo/TableVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/java/noice/entity/vo/TableVo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-create/src/main/java/noice/service/TableAndFormAndUrlService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/java/noice/service/TableAndFormAndUrlService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/pages/Catalog/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/pages/Catalog/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/services/formAndTableAndUrl.ts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/services/formAndTableAndUrl.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-auth/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-auth/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-create/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyj-create/src/test/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/test/resources/application-test.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,67 +104,68 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "JAR 应用程序.cyj-auth-0.0.1-SNAPSHOT.jar.executor": "Debug",
-    "JUnit.CyjEntityCreaterApplicationTest.PersistentBeanAspect.executor": "Debug",
-    "JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest.executor": "Debug",
-    "JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest.executor": "Debug",
-    "JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest2.executor": "Debug",
-    "JUnit.CyjEntityCreaterApplicationTest.menuBeanTest.executor": "Debug",
-    "Maven.cyj [clean].executor": "Run",
-    "Maven.cyj [compile].executor": "Run",
-    "Maven.cyj [package].executor": "Run",
-    "Maven.cyj-auth [package].executor": "Run",
-    "Maven.cyj-common [compile].executor": "Run",
-    "Maven.cyj-common [deploy].executor": "Run",
-    "Maven.cyj-common [install].executor": "Run",
-    "Maven.cyj-common [package].executor": "Run",
-    "Maven.cyj-entity [compile].executor": "Run",
-    "Maven.cyj-entity [install].executor": "Run",
-    "Maven.cyj-entity [package].executor": "Run",
-    "Notification.DisplayName-DoNotAsk-Database detector": "数据库检测器",
-    "Notification.DoNotAsk-Database detector": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.CyjAuthApplication.executor": "Debug",
-    "Spring Boot.CyjEntityCreateApplication.executor": "Debug",
-    "Spring Boot.CyjEntityCreaterApplication.executor": "Debug",
-    "com.dong.plugin.gui.FormatDialog": "true",
-    "extract.method.default.visibility": "private",
-    "git-widget-placeholder": "noice-admin2.0",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/matebookGT14/IdeaProjects/noice-admin/cyj-service/src/main/java/noice/assembler/craete",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "库",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "C:\\Users\\matebookGT14\\IdeaProjects\\noice-admin\\noice-admin-ice\\node_modules\\typescript\\lib",
-    "two.files.diff.last.used.file": "C:/Users/matebookGT14/IdeaProjects/noice-admin/noice-ice/package.json",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;JAR 应用程序.cyj-auth-0.0.1-SNAPSHOT.jar.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.CyjEntityCreaterApplicationTest.PersistentBeanAspect.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.CyjEntityCreaterApplicationTest.createEntityBeanTest.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.CyjEntityCreaterApplicationTest.createEntityRelationTest2.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.CyjEntityCreaterApplicationTest.menuBeanTest.executor&quot;: &quot;Debug&quot;,
+    &quot;Maven.cyj [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.cyj [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.cyj [package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.cyj-auth [package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.cyj-common [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.cyj-common [deploy].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.cyj-common [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.cyj-common [package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.cyj-entity [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.cyj-entity [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.cyj-entity [package].executor&quot;: &quot;Run&quot;,
+    &quot;Notification.DisplayName-DoNotAsk-Database detector&quot;: &quot;数据库检测器&quot;,
+    &quot;Notification.DoNotAsk-Database detector&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.CyjAuthApplication.executor&quot;: &quot;Debug&quot;,
+    &quot;Spring Boot.CyjEntityCreateApplication.executor&quot;: &quot;Debug&quot;,
+    &quot;Spring Boot.CyjEntityCreaterApplication.executor&quot;: &quot;Debug&quot;,
+    &quot;com.dong.plugin.gui.FormatDialog&quot;: &quot;true&quot;,
+    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;noice-admin2.0&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/matebookGT14/IdeaProjects/noice-admin/cyj-service/src/main/java/noice/assembler/craete&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;库&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\matebookGT14\\IdeaProjects\\noice-admin\\noice-admin-ice\\node_modules\\typescript\\lib&quot;,
+    &quot;two.files.diff.last.used.file&quot;: &quot;C:/Users/matebookGT14/IdeaProjects/noice-admin/noice-ice/package.json&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql",
-      "redis"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;redis&quot;,
+      &quot;mysql&quot;
     ],
-    "com.intellij.ide.scratch.LRUPopupBuilder$1/SQL 方言": [
-      "MySQL"
+    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/SQL 方言&quot;: [
+      &quot;MySQL&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -213,7 +214,6 @@
         <entry key="SpringBootApplicationConfigurationType">
           <value>
             <map>
-              <entry key="CyjAuthApplication" value="STOPPED" />
               <entry key="CyjEntityCreateApplication" value="STOPPED" />
             </map>
           </value>
@@ -319,19 +319,19 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CyjEntityCreateApplicationTest.createEntityBeanTest" />
         <item itemvalue="JAR 应用程序.cyj-auth-0.0.1-SNAPSHOT.jar" />
-        <item itemvalue="JUnit.CyjEntityCreateApplicationTest.createEntityRelationTest2" />
         <item itemvalue="JUnit.CyjEntityCreateApplicationTest.menuBeanTest" />
         <item itemvalue="JUnit.CyjEntityCreateApplicationTest.createEntityRelationTest" />
+        <item itemvalue="JUnit.CyjEntityCreateApplicationTest.createEntityRelationTest2" />
+        <item itemvalue="JUnit.CyjEntityCreateApplicationTest.createEntityBeanTest" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26199.169" />
-        <option value="bundled-js-predefined-d6986cc7102b-9c94529fcfe0-JavaScript-IU-252.26199.169" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.27397.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.27397.103" />
       </set>
     </attachedChunks>
   </component>
@@ -482,6 +482,8 @@
       <workItem from="1756563777839" duration="19641000" />
       <workItem from="1757144007006" duration="4854000" />
       <workItem from="1758357098750" duration="10615000" />
+      <workItem from="1762434512657" duration="3466000" />
+      <workItem from="1762522267337" duration="811000" />
     </task>
     <task id="LOCAL-00211" summary="优化表单布局及字段逻辑">
       <option name="closed" value="true" />
