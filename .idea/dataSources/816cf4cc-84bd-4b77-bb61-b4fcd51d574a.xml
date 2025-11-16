@@ -2,6 +2,7 @@
 <dataSource name="data_user@123.249.114.102">
   <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.53">
     <root id="1">
+      <DefaultAuthPlugin>caching_sha2_password</DefaultAuthPlugin>
       <DefaultCasing>exact</DefaultCasing>
       <DefaultEngine>InnoDB</DefaultEngine>
       <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
@@ -1066,7 +1067,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <AutoIntrospectionLevel>3</AutoIntrospectionLevel>
       <Current>1</Current>
       <LastIntrospectionLevel>3</LastIntrospectionLevel>
-      <LastIntrospectionLocalTimestamp>2025-09-06.08:18:08</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2025-11-02.01:17:28</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="290" parent="1" name="information_schema">
@@ -1086,24 +1087,22 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </schema>
     <user id="295" parent="1" name="debian-sys-maint">
       <Host>localhost</Host>
-      <Plugin>caching_sha2_password</Plugin>
     </user>
     <user id="296" parent="1" name="mysql.infoschema">
       <CanLogin>0</CanLogin>
       <Host>localhost</Host>
-      <Plugin>caching_sha2_password</Plugin>
     </user>
     <user id="297" parent="1" name="mysql.session">
       <CanLogin>0</CanLogin>
       <Host>localhost</Host>
-      <Plugin>caching_sha2_password</Plugin>
     </user>
     <user id="298" parent="1" name="mysql.sys">
       <CanLogin>0</CanLogin>
       <Host>localhost</Host>
-      <Plugin>caching_sha2_password</Plugin>
     </user>
-    <user id="299" parent="1" name="root"/>
+    <user id="299" parent="1" name="root">
+      <Plugin>mysql_native_password</Plugin>
+    </user>
     <table id="300" parent="289" name="t_app_service">
       <Comment>服务</Comment>
       <DetailsLevel>3</DetailsLevel>

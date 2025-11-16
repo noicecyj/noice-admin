@@ -7,11 +7,12 @@
     <list default="true" id="0563c699-8e63-4739-86bb-38ac1bc4d6c8" name="更改" comment="优化自动生成代码">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/816cf4cc-84bd-4b77-bb61-b4fcd51d574a.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/816cf4cc-84bd-4b77-bb61-b4fcd51d574a.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-auth/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-auth/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-create/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyj-create/src/test/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/cyj-create/src/test/resources/application-test.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-admin-ice/ice.config.mts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/ice.config.mts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/components/AvatarDropdown/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/components/AvatarDropdown/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/pages/login/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/pages/login/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noice-admin-ice/src/services/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/noice-admin-ice/src/services/user.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -214,6 +215,7 @@
         <entry key="SpringBootApplicationConfigurationType">
           <value>
             <map>
+              <entry key="CyjAuthApplication" value="STOPPED" />
               <entry key="CyjEntityCreateApplication" value="STOPPED" />
             </map>
           </value>
@@ -484,6 +486,10 @@
       <workItem from="1758357098750" duration="10615000" />
       <workItem from="1762434512657" duration="3466000" />
       <workItem from="1762522267337" duration="811000" />
+      <workItem from="1762863992556" duration="233000" />
+      <workItem from="1762864272961" duration="2581000" />
+      <workItem from="1763208747026" duration="35000" />
+      <workItem from="1763271880533" duration="14445000" />
     </task>
     <task id="LOCAL-00211" summary="优化表单布局及字段逻辑">
       <option name="closed" value="true" />

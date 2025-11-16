@@ -6,18 +6,18 @@ import auth from '@ice/plugin-auth';
 // The project config, see https://v3.ice.work/docs/guide/basic/config
 const minify = process.env.NODE_ENV === 'production' ? 'swc' : false;
 export default defineConfig(() => ({
-  ssg: false,
-  minify,
-  plugins: [request(), store(), auth()],
-  compileDependencies: false,
-  proxy: {
-    "/api": {
-      enable: true,
-      target: "http://127.0.0.1:8100/cyj-create"
-    },
-    "/v1": {
-      enable: true,
-      target: "http://127.0.0.1:8100"
+    ssg: false,
+    minify,
+    plugins: [request(), store(), auth()],
+    compileDependencies: false,
+    proxy: {
+        "/api": {
+            enable: true,
+            target: "http://192.168.71.62:8100/cyj-create"
+        },
+        "/v1": {
+            enable: true,
+            target: "http://192.168.71.62:8100"
+        }
     }
-  }
 }));
