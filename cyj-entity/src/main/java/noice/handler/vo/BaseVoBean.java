@@ -18,6 +18,8 @@ public class BaseVoBean {
 
     private String id;
 
+    private String parentId;
+
     @NotNull
     private Boolean status;
 

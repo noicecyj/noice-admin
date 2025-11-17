@@ -6,6 +6,9 @@ function PageModel(props: {
   url: any,
   table: any,
   form: any,
+  subUrl?: any,
+  subTable?: any,
+  subForm?: any,
   infoState: any,
   infoDispatchers: any
   subInfoState?: [any],
@@ -16,6 +19,9 @@ function PageModel(props: {
     url,
     table,
     form,
+    subUrl,
+    subTable,
+    subForm,
     infoState,
     infoDispatchers,
     subInfoState,
@@ -27,6 +33,8 @@ function PageModel(props: {
       <DataTable
         table={table.data}
         url={url.data}
+        subUrl={subUrl?.data}
+        subTable={subTable?.data}
         infoState={infoState}
         infoDispatchers={infoDispatchers}
         subInfoState={subInfoState}

@@ -18,7 +18,8 @@ import java.util.Set;
 @Mapper(componentModel = "spring", config = BaseBeanConverter.class, uses = {CatalogRepository.class})
 public interface CatalogDictionaryControllerConverter {
 
-    @Mapping(target = "catalogPo", source = "vo.catalogId")
+    @Mapping(target = "catalogPo", source = "vo.parentId")
+    @Mapping(target = "catalogId", source = "vo.parentId")
     CatalogDictionaryDto voToDto(CatalogDictionaryVo vo);
 
     List<CatalogDictionaryDto> voListToDtoList(List<CatalogDictionaryVo> voList);
